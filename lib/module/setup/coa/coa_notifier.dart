@@ -53,6 +53,7 @@ class CoaNotifier extends ChangeNotifier {
     "Pasiva",
     "Pendapatan",
     "Biaya",
+    "Pos Administrative",
   ];
 
   String? golongan;

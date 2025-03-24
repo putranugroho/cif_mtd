@@ -16,6 +16,7 @@ import 'package:accounting/module/menu/menu_notifier.dart';
 import 'package:accounting/module/menu/menu_widget.dart';
 import 'package:accounting/module/pejabat/pejabat_page.dart';
 import 'package:accounting/module/setup/coa/coa_page.dart';
+import 'package:accounting/module/setup/jabatan/jabatan_page.dart';
 import 'package:accounting/module/setup/kantor/kantor_page.dart';
 import 'package:accounting/module/setup/laporan/laporan_setup_page.dart';
 import 'package:accounting/module/setup/level/level_page.dart';
@@ -297,11 +298,13 @@ class MenuPage extends StatelessWidget {
                                                                                                                                   ? ClosingEomPage()
                                                                                                                                   : value.page == 28
                                                                                                                                       ? PerusahaanPage()
-                                                                                                                                      : value.page == 30
-                                                                                                                                          ? PejabatPage()
-                                                                                                                                          : value.page == 31
-                                                                                                                                              ? LevelPage()
-                                                                                                                                              : Container())
+                                                                                                                                      : value.page == 29
+                                                                                                                                          ? JabatanPage()
+                                                                                                                                          : value.page == 30
+                                                                                                                                              ? PejabatPage()
+                                                                                                                                              : value.page == 31
+                                                                                                                                                  ? LevelPage()
+                                                                                                                                                  : Container())
             ],
           ),
         )),

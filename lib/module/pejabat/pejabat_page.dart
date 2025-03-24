@@ -414,6 +414,30 @@ class PejabatPage extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(height: 16),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Email",
+                                        style: const TextStyle(fontSize: 12),
+                                      ),
+                                      const SizedBox(width: 5),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  TextFormField(
+                                    textInputAction: TextInputAction.done,
+                                    controller: value.noHp,
+                                    maxLines: 1,
+                                    decoration: InputDecoration(
+                                      hintText: "Email",
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
                                   ButtonPrimary(
                                     onTap: () {},
                                     name: "Simpan",

@@ -339,241 +339,6 @@ class CoaPage extends StatelessWidget {
                                       ),
                                     ),
                                     child: Text(
-                                      "Tampilkan",
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                margin: EdgeInsets.symmetric(vertical: 16),
-                                height: 1,
-                                color: Colors.grey[200],
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 50,
-                                    child: Text(
-                                      "Flag",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Container(
-                                    width: 50,
-                                    child: Text(
-                                      "Type",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Container(
-                                    width: 100,
-                                    child: Text(
-                                      "No SBB",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Container(
-                                    width: 100,
-                                    child: Text(
-                                      "No BB",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Container(
-                                    width: 50,
-                                    child: Text(
-                                      "CC",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Expanded(child: Text("Keterangan"))
-                                ],
-                              ),
-                              Container(
-                                margin: EdgeInsets.symmetric(vertical: 16),
-                                height: 1,
-                                color: Colors.grey[200],
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Expanded(
-                                  child: ListView.builder(
-                                      itemCount: value.list.length,
-                                      shrinkWrap: true,
-                                      physics: ClampingScrollPhysics(),
-                                      itemBuilder: (context, i) {
-                                        final data = value.list[i];
-                                        return Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  width: 50,
-                                                  child: Checkbox(
-                                                      activeColor: colorPrimary,
-                                                      value: value
-                                                              .listAdd.isEmpty
-                                                          ? false
-                                                          : value.listAdd
-                                                                  .where((e) =>
-                                                                      e == data)
-                                                                  .isNotEmpty
-                                                              ? true
-                                                              : false,
-                                                      onChanged: (e) =>
-                                                          value.pilihCoa(data)),
-                                                ),
-                                                SizedBox(
-                                                  width: 8,
-                                                ),
-                                                Container(
-                                                  width: 50,
-                                                  child: Text(
-                                                    "${data.typePosting}",
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 8,
-                                                ),
-                                                Container(
-                                                  width: 100,
-                                                  child: Text(
-                                                    "${data.nosbb}",
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 8,
-                                                ),
-                                                Container(
-                                                  width: 100,
-                                                  child: Text(
-                                                    "${data.nobb}",
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 8,
-                                                ),
-                                                Container(
-                                                  width: 50,
-                                                  child: Text(
-                                                    "",
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 8,
-                                                ),
-                                                Expanded(
-                                                    child:
-                                                        Text("${data.namaSbb}"))
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                          ],
-                                        );
-                                      })),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Container(
-                                margin: EdgeInsets.symmetric(vertical: 16),
-                                height: 1,
-                                color: Colors.grey[200],
-                              ),
-                              Row(
-                                children: [
-                                  Checkbox(
-                                    value: value.seluruhKantor,
-                                    onChanged: (e) => value.gantiseluruh(),
-                                    activeColor: colorPrimary,
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text(
-                                    "Pilih Semua",
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                  Spacer(),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12, vertical: 8),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: colorPrimary,
-                                      border: Border.all(
-                                        width: 2,
-                                        color: colorPrimary,
-                                      ),
-                                    ),
-                                    child: Text(
-                                      "Filter",
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12, vertical: 8),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: colorPrimary,
-                                      border: Border.all(
-                                        width: 2,
-                                        color: colorPrimary,
-                                      ),
-                                    ),
-                                    child: Text(
                                       "Proses",
                                       textAlign: TextAlign.center,
                                       style: const TextStyle(
@@ -588,9 +353,244 @@ class CoaPage extends StatelessWidget {
                                 height: 1,
                                 color: Colors.grey[200],
                               ),
-                              SizedBox(
-                                height: 8,
-                              ),
+                              // Row(
+                              //   children: [
+                              //     Container(
+                              //       width: 50,
+                              //       child: Text(
+                              //         "Flag",
+                              //         style: TextStyle(
+                              //           fontSize: 12,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     SizedBox(
+                              //       width: 8,
+                              //     ),
+                              //     Container(
+                              //       width: 50,
+                              //       child: Text(
+                              //         "Type",
+                              //         style: TextStyle(
+                              //           fontSize: 12,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     SizedBox(
+                              //       width: 8,
+                              //     ),
+                              //     Container(
+                              //       width: 100,
+                              //       child: Text(
+                              //         "No SBB",
+                              //         style: TextStyle(
+                              //           fontSize: 12,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     SizedBox(
+                              //       width: 8,
+                              //     ),
+                              //     Container(
+                              //       width: 100,
+                              //       child: Text(
+                              //         "No BB",
+                              //         style: TextStyle(
+                              //           fontSize: 12,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     SizedBox(
+                              //       width: 8,
+                              //     ),
+                              //     Container(
+                              //       width: 50,
+                              //       child: Text(
+                              //         "CC",
+                              //         style: TextStyle(
+                              //           fontSize: 12,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     SizedBox(
+                              //       width: 8,
+                              //     ),
+                              //     Expanded(child: Text("Keterangan"))
+                              //   ],
+                              // ),
+                              // Container(
+                              //   margin: EdgeInsets.symmetric(vertical: 16),
+                              //   height: 1,
+                              //   color: Colors.grey[200],
+                              // ),
+                              // SizedBox(
+                              //   height: 8,
+                              // ),
+                              // Expanded(
+                              //     child: ListView.builder(
+                              //         itemCount: value.list.length,
+                              //         shrinkWrap: true,
+                              //         physics: ClampingScrollPhysics(),
+                              //         itemBuilder: (context, i) {
+                              //           final data = value.list[i];
+                              //           return Column(
+                              //             crossAxisAlignment:
+                              //                 CrossAxisAlignment.start,
+                              //             children: [
+                              //               Row(
+                              //                 children: [
+                              //                   Container(
+                              //                     width: 50,
+                              //                     child: Checkbox(
+                              //                         activeColor: colorPrimary,
+                              //                         value: value
+                              //                                 .listAdd.isEmpty
+                              //                             ? false
+                              //                             : value.listAdd
+                              //                                     .where((e) =>
+                              //                                         e == data)
+                              //                                     .isNotEmpty
+                              //                                 ? true
+                              //                                 : false,
+                              //                         onChanged: (e) =>
+                              //                             value.pilihCoa(data)),
+                              //                   ),
+                              //                   SizedBox(
+                              //                     width: 8,
+                              //                   ),
+                              //                   Container(
+                              //                     width: 50,
+                              //                     child: Text(
+                              //                       "${data.typePosting}",
+                              //                       style: TextStyle(
+                              //                         fontSize: 12,
+                              //                       ),
+                              //                     ),
+                              //                   ),
+                              //                   SizedBox(
+                              //                     width: 8,
+                              //                   ),
+                              //                   Container(
+                              //                     width: 100,
+                              //                     child: Text(
+                              //                       "${data.nosbb}",
+                              //                       style: TextStyle(
+                              //                         fontSize: 12,
+                              //                       ),
+                              //                     ),
+                              //                   ),
+                              //                   SizedBox(
+                              //                     width: 8,
+                              //                   ),
+                              //                   Container(
+                              //                     width: 100,
+                              //                     child: Text(
+                              //                       "${data.nobb}",
+                              //                       style: TextStyle(
+                              //                         fontSize: 12,
+                              //                       ),
+                              //                     ),
+                              //                   ),
+                              //                   SizedBox(
+                              //                     width: 8,
+                              //                   ),
+                              //                   Container(
+                              //                     width: 50,
+                              //                     child: Text(
+                              //                       "",
+                              //                       style: TextStyle(
+                              //                         fontSize: 12,
+                              //                       ),
+                              //                     ),
+                              //                   ),
+                              //                   SizedBox(
+                              //                     width: 8,
+                              //                   ),
+                              //                   Expanded(
+                              //                       child:
+                              //                           Text("${data.namaSbb}"))
+                              //                 ],
+                              //               ),
+                              //               SizedBox(
+                              //                 height: 8,
+                              //               ),
+                              //             ],
+                              //           );
+                              //         })),
+                              // SizedBox(
+                              //   height: 8,
+                              // ),
+                              // Container(
+                              //   margin: EdgeInsets.symmetric(vertical: 16),
+                              //   height: 1,
+                              //   color: Colors.grey[200],
+                              // ),
+                              // Row(
+                              //   children: [
+                              //     Checkbox(
+                              //       value: value.seluruhKantor,
+                              //       onChanged: (e) => value.gantiseluruh(),
+                              //       activeColor: colorPrimary,
+                              //     ),
+                              //     SizedBox(
+                              //       width: 8,
+                              //     ),
+                              //     Text(
+                              //       "Pilih Semua",
+                              //       style: TextStyle(fontSize: 12),
+                              //     ),
+                              //     Spacer(),
+                              //     Container(
+                              //       padding: const EdgeInsets.symmetric(
+                              //           horizontal: 12, vertical: 8),
+                              //       decoration: BoxDecoration(
+                              //         borderRadius: BorderRadius.circular(8),
+                              //         color: colorPrimary,
+                              //         border: Border.all(
+                              //           width: 2,
+                              //           color: colorPrimary,
+                              //         ),
+                              //       ),
+                              //       child: Text(
+                              //         "Filter",
+                              //         textAlign: TextAlign.center,
+                              //         style: const TextStyle(
+                              //           color: Colors.white,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     SizedBox(
+                              //       width: 8,
+                              //     ),
+                              //     Container(
+                              //       padding: const EdgeInsets.symmetric(
+                              //           horizontal: 12, vertical: 8),
+                              //       decoration: BoxDecoration(
+                              //         borderRadius: BorderRadius.circular(8),
+                              //         color: colorPrimary,
+                              //         border: Border.all(
+                              //           width: 2,
+                              //           color: colorPrimary,
+                              //         ),
+                              //       ),
+                              //       child: Text(
+                              //         "Proses",
+                              //         textAlign: TextAlign.center,
+                              //         style: const TextStyle(
+                              //           color: Colors.white,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
+                              // Container(
+                              //   margin: EdgeInsets.symmetric(vertical: 16),
+                              //   height: 1,
+                              //   color: Colors.grey[200],
+                              // ),
+                              // SizedBox(
+                              //   height: 8,
+                              // ),
                             ],
                           ),
                         )
