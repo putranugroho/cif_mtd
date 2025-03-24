@@ -15,9 +15,9 @@ class PerusahaanNotifier extends ChangeNotifier {
         provinsi: "JAWA TENGAH",
         kodePos: "52419",
         npwp: "000288282882882",
-        dirut: "Edi Kurniawan",
-        dirKeuangan: "Bambang Hari Nugroho",
-        dirOperasi: "Bambang Hari Nugroho");
+        dirut: "",
+        dirKeuangan: "",
+        dirOperasi: "");
     kodePerusahaan.text = perusahaanModel!.kodePt;
     namaPerusahaan.text = perusahaanModel!.namaPt;
     alamat.text = perusahaanModel!.alamat;
