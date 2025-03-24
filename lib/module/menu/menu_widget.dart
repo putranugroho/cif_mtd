@@ -31,32 +31,151 @@ class MenuSetupWidget extends StatelessWidget {
         ),
       ),
       children: [
-        InkWell(
-          onTap: () => value.gantimenu(1),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+        ExpansionTile(
+          tilePadding: EdgeInsets.zero,
+          childrenPadding: EdgeInsets.zero,
+          shape: Border(),
+          expandedAlignment: Alignment.centerLeft,
+          collapsedIconColor: Colors.white,
+          expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+          title: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               children: [
-                Image.asset(
-                  ImageAssets.building,
-                  height: 30,
-                  color: value.page == 1 ? Colors.white : Colors.white70,
-                ),
+                Image.asset(ImageAssets.building,
+                    height: 30, color: Colors.white),
                 SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Kantor",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: value.page == 1 ? Colors.white : Colors.white70,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.white),
                 )
               ],
             ),
           ),
+          children: [
+            InkWell(
+              onTap: () => value.gantimenu(1),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                decoration: BoxDecoration(),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Image.asset(
+                      ImageAssets.building,
+                      height: 30,
+                      color: value.page == 1 ? Colors.white : Colors.white70,
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Text(
+                      "Data Kantor",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: value.page == 1 ? Colors.white : Colors.white70,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () => value.gantimenu(29),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                decoration: BoxDecoration(),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Image.asset(
+                      ImageAssets.group,
+                      height: 30,
+                      color: value.page == 29 ? Colors.white : Colors.white70,
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Text(
+                      "Data Jabatan",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: value.page == 29 ? Colors.white : Colors.white70,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () => value.gantimenu(30),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                decoration: BoxDecoration(),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Image.asset(
+                      ImageAssets.user,
+                      height: 30,
+                      color: value.page == 30 ? Colors.white : Colors.white70,
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Text(
+                      "Data Pejabat",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: value.page == 30 ? Colors.white : Colors.white70,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () => value.gantimenu(31),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                decoration: BoxDecoration(),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Image.asset(
+                      ImageAssets.user,
+                      height: 30,
+                      color: value.page == 31 ? Colors.white : Colors.white70,
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Text(
+                      "Data Level",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: value.page == 31 ? Colors.white : Colors.white70,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
         InkWell(
           onTap: () => value.gantimenu(2),

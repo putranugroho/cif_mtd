@@ -426,7 +426,97 @@ class CoaPage extends StatelessWidget {
                               SizedBox(
                                 height: 8,
                               ),
-                              Expanded(child: ListView()),
+                              Expanded(
+                                  child: ListView.builder(
+                                      itemCount: value.list.length,
+                                      shrinkWrap: true,
+                                      physics: ClampingScrollPhysics(),
+                                      itemBuilder: (context, i) {
+                                        final data = value.list[i];
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  width: 50,
+                                                  child: Checkbox(
+                                                      activeColor: colorPrimary,
+                                                      value: value
+                                                              .listAdd.isEmpty
+                                                          ? false
+                                                          : value.listAdd
+                                                                  .where((e) =>
+                                                                      e == data)
+                                                                  .isNotEmpty
+                                                              ? true
+                                                              : false,
+                                                      onChanged: (e) =>
+                                                          value.pilihCoa(data)),
+                                                ),
+                                                SizedBox(
+                                                  width: 8,
+                                                ),
+                                                Container(
+                                                  width: 50,
+                                                  child: Text(
+                                                    "${data.typePosting}",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 8,
+                                                ),
+                                                Container(
+                                                  width: 100,
+                                                  child: Text(
+                                                    "${data.nosbb}",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 8,
+                                                ),
+                                                Container(
+                                                  width: 100,
+                                                  child: Text(
+                                                    "${data.nobb}",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 8,
+                                                ),
+                                                Container(
+                                                  width: 50,
+                                                  child: Text(
+                                                    "",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 8,
+                                                ),
+                                                Expanded(
+                                                    child:
+                                                        Text("${data.namaSbb}"))
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                          ],
+                                        );
+                                      })),
                               SizedBox(
                                 height: 8,
                               ),
@@ -664,28 +754,80 @@ class CoaPage extends StatelessWidget {
                                             const SizedBox(
                                               height: 8,
                                             ),
-                                            TextFormField(
-                                              textInputAction:
-                                                  TextInputAction.done,
-                                              controller: value.noBb,
-                                              maxLines: 1,
-                                              // inputFormatters: [
-                                              //   FilteringTextInputFormatter.digitsOnly
-                                              // ],
-                                              validator: (e) {
-                                                if (e!.isEmpty) {
-                                                  return "Wajib diisi";
-                                                } else {
-                                                  return null;
-                                                }
-                                              },
-                                              decoration: InputDecoration(
-                                                hintText: "Nomor Header",
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  width: 100,
+                                                  child: TextFormField(
+                                                    onChanged: (e) {
+                                                      if (e.length == 3) {
+                                                        value.updateHeader();
+                                                      }
+                                                    },
+                                                    textInputAction:
+                                                        TextInputAction.done,
+                                                    controller: value.noHeader,
+                                                    maxLines: 1,
+                                                    maxLength: 3,
+                                                    // inputFormatters: [
+                                                    //   FilteringTextInputFormatter.digitsOnly
+                                                    // ],
+                                                    validator: (e) {
+                                                      if (e!.isEmpty) {
+                                                        return "Wajib diisi";
+                                                      } else {
+                                                        return null;
+                                                      }
+                                                    },
+                                                    decoration: InputDecoration(
+                                                      hintText: "Nomor Header",
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6),
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                                SizedBox(
+                                                  width: 16,
+                                                ),
+                                                Expanded(
+                                                  child: TextFormField(
+                                                    textInputAction:
+                                                        TextInputAction.done,
+                                                    controller:
+                                                        value.resulttext,
+                                                    maxLines: 1,
+                                                    readOnly: true,
+                                                    // inputFormatters: [
+                                                    //   FilteringTextInputFormatter.digitsOnly
+                                                    // ],
+                                                    validator: (e) {
+                                                      if (e!.isEmpty) {
+                                                        return "Wajib diisi";
+                                                      } else {
+                                                        return null;
+                                                      }
+                                                    },
+                                                    decoration: InputDecoration(
+                                                      hintText: "Nomor Header",
+                                                      filled: true,
+                                                      fillColor:
+                                                          Colors.grey[200],
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
                                             ),
                                             const SizedBox(height: 16),
                                             Row(
@@ -868,30 +1010,88 @@ class CoaPage extends StatelessWidget {
                                                 const SizedBox(
                                                   height: 8,
                                                 ),
-                                                TextFormField(
-                                                  textInputAction:
-                                                      TextInputAction.done,
-                                                  controller: value.noBb,
-                                                  maxLines: 1,
-                                                  // inputFormatters: [
-                                                  //   FilteringTextInputFormatter.digitsOnly
-                                                  // ],
-                                                  validator: (e) {
-                                                    if (e!.isEmpty) {
-                                                      return "Wajib diisi";
-                                                    } else {
-                                                      return null;
-                                                    }
-                                                  },
-                                                  decoration: InputDecoration(
-                                                    hintText:
-                                                        "Nomor Buku Besar",
-                                                    border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      width: 100,
+                                                      child: TextFormField(
+                                                        textInputAction:
+                                                            TextInputAction
+                                                                .done,
+                                                        controller: value.noBb,
+                                                        maxLength: 3,
+                                                        maxLines: 1,
+                                                        onChanged: (e) {
+                                                          if (e.length == 3) {
+                                                            value.updatebb();
+                                                          }
+                                                        },
+                                                        // inputFormatters: [
+                                                        //   FilteringTextInputFormatter.digitsOnly
+                                                        // ],
+                                                        validator: (e) {
+                                                          if (e!.isEmpty) {
+                                                            return "Wajib diisi";
+                                                          } else {
+                                                            return null;
+                                                          }
+                                                        },
+                                                        decoration:
+                                                            InputDecoration(
+                                                          hintText:
+                                                              "Nomor Buku Besar",
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        6),
+                                                          ),
+                                                        ),
+                                                      ),
                                                     ),
-                                                  ),
+                                                    SizedBox(
+                                                      width: 16,
+                                                    ),
+                                                    Expanded(
+                                                      child: TextFormField(
+                                                        textInputAction:
+                                                            TextInputAction
+                                                                .done,
+                                                        controller:
+                                                            value.resulttext,
+                                                        readOnly: true,
+                                                        maxLines: 1,
+                                                        // inputFormatters: [
+                                                        //   FilteringTextInputFormatter.digitsOnly
+                                                        // ],
+                                                        validator: (e) {
+                                                          if (e!.isEmpty) {
+                                                            return "Wajib diisi";
+                                                          } else {
+                                                            return null;
+                                                          }
+                                                        },
+                                                        decoration:
+                                                            InputDecoration(
+                                                          fillColor:
+                                                              Colors.grey[200],
+                                                          filled: true,
+                                                          hintText:
+                                                              "Nomor Buku Besar",
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        6),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
                                                 ),
                                                 const SizedBox(height: 16),
                                                 Row(
@@ -1205,32 +1405,92 @@ class CoaPage extends StatelessWidget {
                                                     const SizedBox(
                                                       height: 8,
                                                     ),
-                                                    TextFormField(
-                                                      textInputAction:
-                                                          TextInputAction.done,
-                                                      controller: value.noSbb,
-                                                      maxLines: 1,
-                                                      // inputFormatters: [
-                                                      //   FilteringTextInputFormatter.digitsOnly
-                                                      // ],
-                                                      validator: (e) {
-                                                        if (e!.isEmpty) {
-                                                          return "Wajib diisi";
-                                                        } else {
-                                                          return null;
-                                                        }
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        hintText:
-                                                            "Nomor Sub Buku Besar",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                    Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Container(
+                                                          width: 100,
+                                                          child: TextFormField(
+                                                            textInputAction:
+                                                                TextInputAction
+                                                                    .done,
+                                                            controller:
+                                                                value.noSbb,
+                                                            maxLines: 1,
+                                                            onChanged: (e) {
+                                                              if (e.length ==
+                                                                  6) {
+                                                                value
+                                                                    .updateSbb();
+                                                              }
+                                                            },
+                                                            maxLength: 6,
+                                                            // inputFormatters: [
+                                                            //   FilteringTextInputFormatter.digitsOnly
+                                                            // ],
+                                                            validator: (e) {
+                                                              if (e!.isEmpty) {
+                                                                return "Wajib diisi";
+                                                              } else {
+                                                                return null;
+                                                              }
+                                                            },
+                                                            decoration:
+                                                                InputDecoration(
+                                                              hintText:
+                                                                  "Nomor Sub Buku Besar",
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            6),
+                                                              ),
+                                                            ),
+                                                          ),
                                                         ),
-                                                      ),
+                                                        SizedBox(
+                                                          width: 16,
+                                                        ),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            textInputAction:
+                                                                TextInputAction
+                                                                    .done,
+                                                            controller: value
+                                                                .resulttext,
+                                                            maxLines: 1,
+                                                            readOnly: true,
+                                                            // inputFormatters: [
+                                                            //   FilteringTextInputFormatter.digitsOnly
+                                                            // ],
+                                                            validator: (e) {
+                                                              if (e!.isEmpty) {
+                                                                return "Wajib diisi";
+                                                              } else {
+                                                                return null;
+                                                              }
+                                                            },
+                                                            decoration:
+                                                                InputDecoration(
+                                                              hintText:
+                                                                  "Nomor Header",
+                                                              filled: true,
+                                                              fillColor: Colors
+                                                                  .grey[200],
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            6),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
                                                     ),
                                                     const SizedBox(height: 16),
                                                     Row(

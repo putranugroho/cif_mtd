@@ -14,9 +14,11 @@ import 'package:accounting/module/master/otorisasi/otorisasi_master_page.dart';
 import 'package:accounting/module/master/users/users_page.dart';
 import 'package:accounting/module/menu/menu_notifier.dart';
 import 'package:accounting/module/menu/menu_widget.dart';
+import 'package:accounting/module/pejabat/pejabat_page.dart';
 import 'package:accounting/module/setup/coa/coa_page.dart';
 import 'package:accounting/module/setup/kantor/kantor_page.dart';
 import 'package:accounting/module/setup/laporan/laporan_setup_page.dart';
+import 'package:accounting/module/setup/level/level_page.dart';
 import 'package:accounting/module/setup/penyusutan/penyusutan_page.dart';
 import 'package:accounting/module/setup/perusahaan/perusahaan_page.dart';
 import 'package:accounting/module/setup/setup_transaksi/setup_transaksi_page.dart';
@@ -295,7 +297,11 @@ class MenuPage extends StatelessWidget {
                                                                                                                                   ? ClosingEomPage()
                                                                                                                                   : value.page == 28
                                                                                                                                       ? PerusahaanPage()
-                                                                                                                                      : Container())
+                                                                                                                                      : value.page == 30
+                                                                                                                                          ? PejabatPage()
+                                                                                                                                          : value.page == 31
+                                                                                                                                              ? LevelPage()
+                                                                                                                                              : Container())
             ],
           ),
         )),

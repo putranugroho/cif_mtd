@@ -72,12 +72,39 @@ class CoaNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool seluruhKantor = false;
-  gantiseluruh() {
-    seluruhKantor = !seluruhKantor;
+  updateHeader() {
+    result = noHeader.text + "0000000";
+    resulttext.text = result;
     notifyListeners();
   }
 
+  updatebb() {
+    result = header!.nobb.substring(0, 3) + noBb.text.trim() + "0000";
+    resulttext.text = result;
+    notifyListeners();
+  }
+
+  updateSbb() {
+    result = header!.nobb.substring(0, 3) +
+        bukuBesar!.nosbb.substring(3, 6) +
+        noSbb.text.trim();
+    resulttext.text = result;
+    notifyListeners();
+  }
+
+  String result = "0000000000";
+  bool seluruhKantor = false;
+  gantiseluruh() {
+    seluruhKantor = !seluruhKantor;
+    if (seluruhKantor) {
+      pilihSemua();
+    } else {
+      listAdd.clear();
+    }
+    notifyListeners();
+  }
+
+  TextEditingController resulttext = TextEditingController();
   TextEditingController noBb = TextEditingController();
   TextEditingController noKantor = TextEditingController();
   TextEditingController noHeader = TextEditingController();
@@ -128,6 +155,26 @@ class CoaNotifier extends ChangeNotifier {
   }
 
   List<CoaModel> list = [];
+  List<CoaModel> listAdd = [];
+
+  pilihCoa(CoaModel value) {
+    if (listAdd.isEmpty) {
+      listAdd.add(value);
+    } else {
+      if (listAdd.where((e) => e == value).isNotEmpty) {
+        listAdd.remove(value);
+      } else {
+        listAdd.add(value);
+      }
+    }
+    notifyListeners();
+  }
+
+  pilihSemua() async {
+    listAdd.addAll(list);
+    notifyListeners();
+  }
+
   List<Map<String, dynamic>> data = [
     {
       "gol_acc": "1",
