@@ -16,8 +16,10 @@ import 'package:accounting/module/menu/menu_notifier.dart';
 import 'package:accounting/module/menu/menu_widget.dart';
 import 'package:accounting/module/pejabat/pejabat_page.dart';
 import 'package:accounting/module/setup/coa/coa_page.dart';
+import 'package:accounting/module/setup/golongan_aset/golongan_aset_page.dart';
 import 'package:accounting/module/setup/jabatan/jabatan_page.dart';
 import 'package:accounting/module/setup/kantor/kantor_page.dart';
+import 'package:accounting/module/setup/kelompok_aset/kelompok_aset_page.dart';
 import 'package:accounting/module/setup/laporan/laporan_setup_page.dart';
 import 'package:accounting/module/setup/level/level_page.dart';
 import 'package:accounting/module/setup/pajak/setup_pajak_page.dart';
@@ -52,7 +54,7 @@ class MenuPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 280,
+                width: 300,
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(color: colorPrimary),
                 child: ListView(
@@ -307,7 +309,11 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                   ? LevelPage()
                                                                                                                                                   : value.page == 32
                                                                                                                                                       ? SetupPajakPage()
-                                                                                                                                                      : Container())
+                                                                                                                                                      : value.page == 33
+                                                                                                                                                          ? KelompokAsetPage()
+                                                                                                                                                          : value.page == 34
+                                                                                                                                                              ? GolonganAsetPage()
+                                                                                                                                                              : Container())
             ],
           ),
         )),
