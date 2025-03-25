@@ -20,6 +20,7 @@ import 'package:accounting/module/setup/jabatan/jabatan_page.dart';
 import 'package:accounting/module/setup/kantor/kantor_page.dart';
 import 'package:accounting/module/setup/laporan/laporan_setup_page.dart';
 import 'package:accounting/module/setup/level/level_page.dart';
+import 'package:accounting/module/setup/pajak/setup_pajak_page.dart';
 import 'package:accounting/module/setup/penyusutan/penyusutan_page.dart';
 import 'package:accounting/module/setup/perusahaan/perusahaan_page.dart';
 import 'package:accounting/module/setup/setup_transaksi/setup_transaksi_page.dart';
@@ -304,7 +305,9 @@ class MenuPage extends StatelessWidget {
                                                                                                                                               ? PejabatPage()
                                                                                                                                               : value.page == 31
                                                                                                                                                   ? LevelPage()
-                                                                                                                                                  : Container())
+                                                                                                                                                  : value.page == 32
+                                                                                                                                                      ? SetupPajakPage()
+                                                                                                                                                      : Container())
             ],
           ),
         )),

@@ -175,7 +175,6 @@ class MenuSetupWidget extends StatelessWidget {
                 ),
               ),
             ),
-            
           ],
         ),
         InkWell(
@@ -232,33 +231,93 @@ class MenuSetupWidget extends StatelessWidget {
             ),
           ),
         ),
-        InkWell(
-          onTap: () => value.gantimenu(4),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
-            child: Row(
-              children: [
-                Image.asset(
-                  ImageAssets.setting,
-                  height: 30,
-                  color: value.page == 4 ? Colors.white : Colors.white70,
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "Transaksi",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: value.page == 4 ? Colors.white : Colors.white70,
+        ExpansionTile(
+            tilePadding: EdgeInsets.zero,
+            childrenPadding: EdgeInsets.zero,
+            shape: Border(),
+            expandedAlignment: Alignment.centerLeft,
+            collapsedIconColor: Colors.white,
+            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            title: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  Image.asset(ImageAssets.setting,
+                      height: 30, color: Colors.white),
+                  SizedBox(
+                    width: 16,
                   ),
-                )
-              ],
+                  Text(
+                    "Transaksi",
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  )
+                ],
+              ),
             ),
-          ),
-        ),
+            children: [
+              InkWell(
+                onTap: () => value.gantimenu(4),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.bill,
+                        height: 30,
+                        color: value.page == 4 ? Colors.white : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Setup Transaksi",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 4 ? Colors.white : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(32),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.bill,
+                        height: 30,
+                        color: value.page == 32 ? Colors.white : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Pajak",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 32 ? Colors.white : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ]),
         InkWell(
           onTap: () => value.gantimenu(5),
           child: Container(

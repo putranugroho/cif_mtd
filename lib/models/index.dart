@@ -1,9 +1,12 @@
 export 'jabatan_model.dart';
 export 'kantor_model.dart';
 export 'perusahaan_model.dart';
+export 'setup_pajak_model.dart';
 export 'level_model.dart';
 export 'pejabat_model.dart';
+export 'setup_trans_model.dart';
 export 'coa_model.dart';
+export 'menu_model.dart';
 import 'package:quiver/core.dart';
 
 T? checkOptional<T>(Optional<T?>? optional, T? Function()? def) {
