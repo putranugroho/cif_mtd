@@ -916,13 +916,13 @@ class BankPage extends StatelessWidget {
                                             ),
                                           ),
                                           const SizedBox(height: 16),
-                                          ButtonPrimary(
-                                            onTap: () {},
-                                            name: "Simpan",
-                                          )
                                         ],
                                       )
                                     : SizedBox(),
+                                ButtonPrimary(
+                                  onTap: () {},
+                                  name: "Simpan",
+                                )
                               ],
                             ))
                           ],

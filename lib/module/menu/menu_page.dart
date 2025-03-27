@@ -7,6 +7,7 @@ import 'package:accounting/module/inventaris/otorisasi/otorisasi_inventaris_page
 import 'package:accounting/module/inventaris/penempatan/penempatan_page.dart';
 import 'package:accounting/module/inventaris/pengadaan/pengadaan_page.dart';
 import 'package:accounting/module/inventaris/revaluasi/revaluasi_page.dart';
+import 'package:accounting/module/master/ao/ao_page.dart';
 import 'package:accounting/module/master/bank/bank_page.dart';
 import 'package:accounting/module/master/customer/customer_page.dart';
 import 'package:accounting/module/master/laporan/laporan_master_page.dart';
@@ -313,7 +314,9 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                           ? KelompokAsetPage()
                                                                                                                                                           : value.page == 34
                                                                                                                                                               ? GolonganAsetPage()
-                                                                                                                                                              : Container())
+                                                                                                                                                              : value.page == 35
+                                                                                                                                                                  ? AoPage()
+                                                                                                                                                                  : Container())
             ],
           ),
         )),

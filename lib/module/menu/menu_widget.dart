@@ -551,6 +551,33 @@ class MenuMasterWidget extends StatelessWidget {
           ),
         ),
         InkWell(
+          onTap: () => value.gantimenu(35),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.group,
+                  height: 30,
+                  color: value.page == 35 ? Colors.white : Colors.white70,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "AO / Marketing",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 35 ? Colors.white : Colors.white70,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
           onTap: () => value.gantimenu(9),
           child: Container(
             width: MediaQuery.of(context).size.width,
