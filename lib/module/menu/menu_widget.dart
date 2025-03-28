@@ -178,6 +178,33 @@ class MenuSetupWidget extends StatelessWidget {
           ],
         ),
         InkWell(
+          onTap: () => value.gantimenu(36),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.calendar,
+                  height: 30,
+                  color: value.page == 36 ? Colors.white : Colors.white70,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Hari Kerja",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 36 ? Colors.white : Colors.white70,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
           onTap: () => value.gantimenu(2),
           child: Container(
             width: MediaQuery.of(context).size.width,
@@ -762,7 +789,7 @@ class MenuInventarisWidget extends StatelessWidget {
                   width: 16,
                 ),
                 Text(
-                  "Jual/Beli",
+                  "Jual/Hapus",
                   style: TextStyle(
                     fontSize: 16,
                     color: value.page == 14 ? Colors.white : Colors.white70,

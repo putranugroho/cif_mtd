@@ -433,6 +433,54 @@ class UsersPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
+                                      "Group Hari Kerja",
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    const Text(
+                                      "*",
+                                      style: TextStyle(fontSize: 8),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                DropdownSearch<AktivasiModel>(
+                                  popupProps:
+                                      const PopupPropsMultiSelection.menu(
+                                    showSearchBox:
+                                        true, // Aktifkan fitur pencarian
+                                  ),
+                                  selectedItem: value.aktivasiModel,
+                                  items: value.listHariKerja,
+                                  itemAsString: (e) =>
+                                      "(${e.kdAktivasi}) - ${e.nmAktivasi}",
+                                  onChanged: (e) {
+                                    value.pilihHariKerja(e!);
+                                  },
+                                  dropdownDecoratorProps:
+                                      DropDownDecoratorProps(
+                                    baseStyle: TextStyle(fontSize: 16),
+                                    textAlignVertical: TextAlignVertical.center,
+                                    dropdownSearchDecoration: InputDecoration(
+                                      hintText: "Pilih Group Hari Kerja",
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(
+                                          width: 1,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
                                       "Level User",
                                       style: const TextStyle(fontSize: 12),
                                     ),

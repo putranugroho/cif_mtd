@@ -15,8 +15,35 @@ class UsersNotifier extends ChangeNotifier {
     for (Map<String, dynamic> i in coa) {
       listCoa.add(CoaModel.fromJson(i));
     }
+    for (Map<String, dynamic> i in hariKerja) {
+      listHariKerja.add(AktivasiModel.fromJson(i));
+    }
     notifyListeners();
   }
+
+  List<AktivasiModel> listHariKerja = [];
+  AktivasiModel? aktivasiModel;
+  pilihHariKerja(AktivasiModel value) {
+    aktivasiModel = value;
+    notifyListeners();
+  }
+
+  List<Map<String, dynamic>> hariKerja = [
+    {
+      "kd_aktivasi": "100001",
+      "nm_aktivasi": "Regu 1",
+      "hari": "['Senin','Selasa','Rabu']",
+      "jam_mulai": "10:00:00",
+      "jam_selesai": "17:00:00"
+    },
+    {
+      "kd_aktivasi": "100002",
+      "nm_aktivasi": "Regu 2",
+      "hari": "['Kamis','Jumat','Sabtu']",
+      "jam_mulai": "08:00:00",
+      "jam_selesai": "17:00:00"
+    },
+  ];
 
   bool dialog = false;
   tambah() {

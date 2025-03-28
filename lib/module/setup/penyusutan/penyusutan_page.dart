@@ -2,7 +2,10 @@ import 'package:accounting/module/setup/penyusutan/penyusutan_notifier.dart';
 import 'package:accounting/utils/button_custom.dart';
 import 'package:accounting/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
+import '../../../utils/currency_formatted.dart';
 
 class PenyusutanPage extends StatelessWidget {
   const PenyusutanPage({super.key});
@@ -86,6 +89,45 @@ class PenyusutanPage extends StatelessWidget {
                     SizedBox(
                       height: 16,
                     ),
+                    Row(
+                      children: [
+                        Text(
+                          "Nilai Akhir",
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                        const SizedBox(width: 5),
+                        const Text(
+                          "*",
+                          style: TextStyle(fontSize: 8),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    TextFormField(
+                      textInputAction: TextInputAction.done,
+                      controller: value.nilai,
+                      maxLines: 1,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        CurrencyInputFormatter(),
+                      ],
+                      validator: (e) {
+                        if (e!.isEmpty) {
+                          return "Wajib diisi";
+                        } else {
+                          return null;
+                        }
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Nilai Akhir",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                     Row(
                       children: [
                         ButtonPrimary(

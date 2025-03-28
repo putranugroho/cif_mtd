@@ -16,6 +16,7 @@ import 'package:accounting/module/master/users/users_page.dart';
 import 'package:accounting/module/menu/menu_notifier.dart';
 import 'package:accounting/module/menu/menu_widget.dart';
 import 'package:accounting/module/pejabat/pejabat_page.dart';
+import 'package:accounting/module/setup/aktivasi/aktivasi_page.dart';
 import 'package:accounting/module/setup/coa/coa_page.dart';
 import 'package:accounting/module/setup/golongan_aset/golongan_aset_page.dart';
 import 'package:accounting/module/setup/jabatan/jabatan_page.dart';
@@ -296,26 +297,26 @@ class MenuPage extends StatelessWidget {
                                                                                                                       ? OtorisasiTransaksiPage()
                                                                                                                       : value.page == 25
                                                                                                                           ? LaporanTransaksiPage()
-                                                                                                                          : value.page == 26
-                                                                                                                              ? AktivasiUsers()
-                                                                                                                              : value.page == 27
-                                                                                                                                  ? ClosingEomPage()
-                                                                                                                                  : value.page == 28
-                                                                                                                                      ? PerusahaanPage()
-                                                                                                                                      : value.page == 29
-                                                                                                                                          ? JabatanPage()
-                                                                                                                                          : value.page == 30
-                                                                                                                                              ? PejabatPage()
-                                                                                                                                              : value.page == 31
-                                                                                                                                                  ? LevelPage()
-                                                                                                                                                  : value.page == 32
-                                                                                                                                                      ? SetupPajakPage()
-                                                                                                                                                      : value.page == 33
-                                                                                                                                                          ? KelompokAsetPage()
-                                                                                                                                                          : value.page == 34
-                                                                                                                                                              ? GolonganAsetPage()
-                                                                                                                                                              : value.page == 35
-                                                                                                                                                                  ? AoPage()
+                                                                                                                          : value.page == 27
+                                                                                                                              ? ClosingEomPage()
+                                                                                                                              : value.page == 28
+                                                                                                                                  ? PerusahaanPage()
+                                                                                                                                  : value.page == 29
+                                                                                                                                      ? JabatanPage()
+                                                                                                                                      : value.page == 30
+                                                                                                                                          ? PejabatPage()
+                                                                                                                                          : value.page == 31
+                                                                                                                                              ? LevelPage()
+                                                                                                                                              : value.page == 32
+                                                                                                                                                  ? SetupPajakPage()
+                                                                                                                                                  : value.page == 33
+                                                                                                                                                      ? KelompokAsetPage()
+                                                                                                                                                      : value.page == 34
+                                                                                                                                                          ? GolonganAsetPage()
+                                                                                                                                                          : value.page == 35
+                                                                                                                                                              ? AoPage()
+                                                                                                                                                              : value.page == 36
+                                                                                                                                                                  ? AktivasiPage()
                                                                                                                                                                   : Container())
             ],
           ),

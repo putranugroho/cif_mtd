@@ -416,7 +416,8 @@ class BanyakTransaksiPage extends StatelessWidget {
                                         ),
                                         Row(
                                           children: [
-                                            Expanded(
+                                            Container(
+                                              width: 230,
                                               child: DropdownSearch<CoaModel>(
                                                 popupProps:
                                                     const PopupPropsMultiSelection
@@ -496,12 +497,6 @@ class BanyakTransaksiPage extends StatelessWidget {
                                         const SizedBox(height: 16),
                                       ],
                                     )),
-                                    SizedBox(
-                                      width: 16,
-                                    ),
-                                    SizedBox(
-                                      width: 150,
-                                    ),
                                     Expanded(
                                         child: Column(
                                       crossAxisAlignment:
@@ -527,7 +522,7 @@ class BanyakTransaksiPage extends StatelessWidget {
                                         TextFormField(
                                           textInputAction: TextInputAction.done,
                                           controller: value.nominal,
-                                          onChanged: (e){
+                                          onChanged: (e) {
                                             value.changeTotal();
                                           },
                                           maxLines: 1,
@@ -828,7 +823,12 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    Expanded(child: Text("Selisih")),
+                                    Container(
+                                        width: 570,
+                                        child: Text(
+                                          "Selisih",
+                                          textAlign: TextAlign.end,
+                                        )),
                                     SizedBox(
                                       width: 16,
                                     ),
@@ -849,7 +849,6 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 const SizedBox(
                                   height: 16,
                                 ),
-                               
                                 ButtonPrimary(
                                   onTap: () {},
                                   name: "Simpan",

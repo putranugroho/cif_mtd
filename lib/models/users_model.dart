@@ -10,6 +10,7 @@ class UsersModel {
     required this.userid,
     required this.pass,
     required this.namauser,
+    required this.kdAktivasi,
     required this.kodePt,
     required this.kodeKantor,
     required this.kodeInduk,
@@ -31,6 +32,7 @@ class UsersModel {
   final String userid;
   final String pass;
   final String namauser;
+  final String kdAktivasi;
   final String kodePt;
   final String kodeKantor;
   final String kodeInduk;
@@ -52,6 +54,7 @@ class UsersModel {
     userid: json['userid'].toString(),
     pass: json['pass'].toString(),
     namauser: json['namauser'].toString(),
+    kdAktivasi: json['kd_aktivasi'].toString(),
     kodePt: json['kode_pt'].toString(),
     kodeKantor: json['kode_kantor'].toString(),
     kodeInduk: json['kode_induk'].toString(),
@@ -74,6 +77,7 @@ class UsersModel {
     'userid': userid,
     'pass': pass,
     'namauser': namauser,
+    'kd_aktivasi': kdAktivasi,
     'kode_pt': kodePt,
     'kode_kantor': kodeKantor,
     'kode_induk': kodeInduk,
@@ -96,6 +100,7 @@ class UsersModel {
     userid: userid,
     pass: pass,
     namauser: namauser,
+    kdAktivasi: kdAktivasi,
     kodePt: kodePt,
     kodeKantor: kodeKantor,
     kodeInduk: kodeInduk,
@@ -119,6 +124,7 @@ class UsersModel {
     String? userid,
     String? pass,
     String? namauser,
+    String? kdAktivasi,
     String? kodePt,
     String? kodeKantor,
     String? kodeInduk,
@@ -139,6 +145,7 @@ class UsersModel {
     userid: userid ?? this.userid,
     pass: pass ?? this.pass,
     namauser: namauser ?? this.namauser,
+    kdAktivasi: kdAktivasi ?? this.kdAktivasi,
     kodePt: kodePt ?? this.kodePt,
     kodeKantor: kodeKantor ?? this.kodeKantor,
     kodeInduk: kodeInduk ?? this.kodeInduk,
@@ -159,8 +166,8 @@ class UsersModel {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is UsersModel && userid == other.userid && pass == other.pass && namauser == other.namauser && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && tglexp == other.tglexp && lvluser == other.lvluser && terminalId == other.terminalId && aksesKasir == other.aksesKasir && sbbKasir == other.sbbKasir && namaSbb == other.namaSbb && fhoto1 == other.fhoto1 && fhoto2 == other.fhoto2 && fhoto3 == other.fhoto3 && levelOtor == other.levelOtor && bedaKantor == other.bedaKantor && minOtor == other.minOtor && maxOtor == other.maxOtor;
+    || other is UsersModel && userid == other.userid && pass == other.pass && namauser == other.namauser && kdAktivasi == other.kdAktivasi && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && tglexp == other.tglexp && lvluser == other.lvluser && terminalId == other.terminalId && aksesKasir == other.aksesKasir && sbbKasir == other.sbbKasir && namaSbb == other.namaSbb && fhoto1 == other.fhoto1 && fhoto2 == other.fhoto2 && fhoto3 == other.fhoto3 && levelOtor == other.levelOtor && bedaKantor == other.bedaKantor && minOtor == other.minOtor && maxOtor == other.maxOtor;
 
   @override
-  int get hashCode => userid.hashCode ^ pass.hashCode ^ namauser.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ tglexp.hashCode ^ lvluser.hashCode ^ terminalId.hashCode ^ aksesKasir.hashCode ^ sbbKasir.hashCode ^ namaSbb.hashCode ^ fhoto1.hashCode ^ fhoto2.hashCode ^ fhoto3.hashCode ^ levelOtor.hashCode ^ bedaKantor.hashCode ^ minOtor.hashCode ^ maxOtor.hashCode;
+  int get hashCode => userid.hashCode ^ pass.hashCode ^ namauser.hashCode ^ kdAktivasi.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ tglexp.hashCode ^ lvluser.hashCode ^ terminalId.hashCode ^ aksesKasir.hashCode ^ sbbKasir.hashCode ^ namaSbb.hashCode ^ fhoto1.hashCode ^ fhoto2.hashCode ^ fhoto3.hashCode ^ levelOtor.hashCode ^ bedaKantor.hashCode ^ minOtor.hashCode ^ maxOtor.hashCode;
 }

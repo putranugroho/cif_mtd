@@ -11,4 +11,6 @@ class PenyusutanNotifier extends ChangeNotifier {
     metode = value;
     notifyListeners();
   }
+
+  TextEditingController nilai = TextEditingController(text: "0");
 }
