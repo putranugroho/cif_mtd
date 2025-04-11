@@ -43,6 +43,7 @@ class KantorPage extends StatelessWidget {
                               ),
                             ),
                           ),
+                          
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(

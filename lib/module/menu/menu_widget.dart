@@ -248,6 +248,94 @@ class MenuSetupWidget extends StatelessWidget {
                     width: 16,
                   ),
                   Text(
+                    "SBB Khusus",
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  )
+                ],
+              ),
+            ),
+            children: [
+              InkWell(
+                onTap: () => value.gantimenu(47),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.list,
+                        height: 30,
+                        color: value.page == 47 ? Colors.white : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Golongan SBB Khusus",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 47 ? Colors.white : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(37),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.list,
+                        height: 30,
+                        color: value.page == 37 ? Colors.white : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Setup SBB Khusus",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 37 ? Colors.white : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ]),
+
+        ExpansionTile(
+            tilePadding: EdgeInsets.zero,
+            childrenPadding: EdgeInsets.zero,
+            shape: Border(),
+            expandedAlignment: Alignment.centerLeft,
+            collapsedIconColor: Colors.white,
+            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            title: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  Image.asset(ImageAssets.trend,
+                      height: 30, color: Colors.white),
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Text(
                     "Penyusutan",
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   )
@@ -437,7 +525,34 @@ class MenuSetupWidget extends StatelessWidget {
               ),
             ]),
         InkWell(
-          onTap: () => value.gantimenu(5),
+          onTap: () => value.gantimenu(38),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.eom,
+                  height: 30,
+                  color: value.page == 38 ? Colors.white : Colors.white70,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Closing EOM",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 38 ? Colors.white : Colors.white70,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () => value.gantimenu(39),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -445,24 +560,51 @@ class MenuSetupWidget extends StatelessWidget {
             child: Row(
               children: [
                 Image.asset(
-                  ImageAssets.report,
+                  ImageAssets.click,
                   height: 30,
-                  color: value.page == 5 ? Colors.white : Colors.white70,
+                  color: value.page == 39 ? Colors.white : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
                 ),
                 Text(
-                  "Laporan",
+                  "Otorisasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 5 ? Colors.white : Colors.white70,
+                    color: value.page == 39 ? Colors.white : Colors.white70,
                   ),
                 )
               ],
             ),
           ),
         ),
+        // InkWell(
+        //   onTap: () => value.gantimenu(5),
+        //   child: Container(
+        //     width: MediaQuery.of(context).size.width,
+        //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        //     decoration: BoxDecoration(),
+        //     child: Row(
+        //       children: [
+        //         Image.asset(
+        //           ImageAssets.report,
+        //           height: 30,
+        //           color: value.page == 5 ? Colors.white : Colors.white70,
+        //         ),
+        //         SizedBox(
+        //           width: 16,
+        //         ),
+        //         Text(
+        //           "Laporan",
+        //           style: TextStyle(
+        //             fontSize: 16,
+        //             color: value.page == 5 ? Colors.white : Colors.white70,
+        //           ),
+        //         )
+        //       ],
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
@@ -631,33 +773,33 @@ class MenuMasterWidget extends StatelessWidget {
             ),
           ),
         ),
-        InkWell(
-          onTap: () => value.gantimenu(10),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
-            child: Row(
-              children: [
-                Image.asset(
-                  ImageAssets.report,
-                  height: 30,
-                  color: value.page == 10 ? Colors.white : Colors.white70,
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "Laporan",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: value.page == 10 ? Colors.white : Colors.white70,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
+        // InkWell(
+        //   onTap: () => value.gantimenu(10),
+        //   child: Container(
+        //     width: MediaQuery.of(context).size.width,
+        //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        //     decoration: BoxDecoration(),
+        //     child: Row(
+        //       children: [
+        //         Image.asset(
+        //           ImageAssets.report,
+        //           height: 30,
+        //           color: value.page == 10 ? Colors.white : Colors.white70,
+        //         ),
+        //         SizedBox(
+        //           width: 16,
+        //         ),
+        //         Text(
+        //           "Laporan",
+        //           style: TextStyle(
+        //             fontSize: 16,
+        //             color: value.page == 10 ? Colors.white : Colors.white70,
+        //           ),
+        //         )
+        //       ],
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
@@ -826,33 +968,33 @@ class MenuInventarisWidget extends StatelessWidget {
             ),
           ),
         ),
-        InkWell(
-          onTap: () => value.gantimenu(16),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
-            child: Row(
-              children: [
-                Image.asset(
-                  ImageAssets.report,
-                  height: 30,
-                  color: value.page == 16 ? Colors.white : Colors.white70,
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "Laporan",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: value.page == 16 ? Colors.white : Colors.white70,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
+        // InkWell(
+        //   onTap: () => value.gantimenu(16),
+        //   child: Container(
+        //     width: MediaQuery.of(context).size.width,
+        //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        //     decoration: BoxDecoration(),
+        //     child: Row(
+        //       children: [
+        //         Image.asset(
+        //           ImageAssets.report,
+        //           height: 30,
+        //           color: value.page == 16 ? Colors.white : Colors.white70,
+        //         ),
+        //         SizedBox(
+        //           width: 16,
+        //         ),
+        //         Text(
+        //           "Laporan",
+        //           style: TextStyle(
+        //             fontSize: 16,
+        //             color: value.page == 16 ? Colors.white : Colors.white70,
+        //           ),
+        //         )
+        //       ],
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
@@ -934,6 +1076,33 @@ class MenuTransaksiWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     color: value.page == 18 ? Colors.white : Colors.white70,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () => value.gantimenu(23),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.calendar,
+                  height: 30,
+                  color: value.page == 23 ? Colors.white : Colors.white70,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Back date",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 23 ? Colors.white : Colors.white70,
                   ),
                 )
               ],
@@ -1049,7 +1218,7 @@ class MenuTransaksiWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(23),
+          onTap: () => value.gantimenu(24),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -1057,18 +1226,18 @@ class MenuTransaksiWidget extends StatelessWidget {
             child: Row(
               children: [
                 Image.asset(
-                  ImageAssets.calendar,
+                  ImageAssets.bill,
                   height: 30,
-                  color: value.page == 23 ? Colors.white : Colors.white70,
+                  color: value.page == 24 ? Colors.white : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
                 ),
                 Text(
-                  "Back date",
+                  "Rekonsiliasi Harian",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 23 ? Colors.white : Colors.white70,
+                    color: value.page == 24 ? Colors.white : Colors.white70,
                   ),
                 )
               ],
@@ -1102,33 +1271,285 @@ class MenuTransaksiWidget extends StatelessWidget {
             ),
           ),
         ),
-        InkWell(
-          onTap: () => value.gantimenu(25),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
-            child: Row(
-              children: [
-                Image.asset(
-                  ImageAssets.report,
-                  height: 30,
-                  color: value.page == 25 ? Colors.white : Colors.white70,
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "Laporan",
-                  style: TextStyle(
-                    fontSize: 16,
+        ExpansionTile(
+            tilePadding: EdgeInsets.zero,
+            childrenPadding: EdgeInsets.zero,
+            shape: Border(),
+            expandedAlignment: Alignment.centerLeft,
+            collapsedIconColor: Colors.white,
+            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            title: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  Image.asset(
+                    ImageAssets.report,
+                    height: 30,
                     color: value.page == 25 ? Colors.white : Colors.white70,
                   ),
-                )
-              ],
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    "Laporan",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: value.page == 25 ? Colors.white : Colors.white70,
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        ),
+            children: [
+              InkWell(
+                onTap: () => value.gantimenu(40),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 40 ? Colors.white : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Satu Transaksi",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 40 ? Colors.white : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(41),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 41 ? Colors.white : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Banyak Transaksi",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 41 ? Colors.white : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(42),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 42 ? Colors.white : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Back date",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 42 ? Colors.white : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(43),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 43 ? Colors.white : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Jurnal",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 43 ? Colors.white : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(44),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 44 ? Colors.white : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Neraca Berjalan",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 44 ? Colors.white : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(45),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 45 ? Colors.white : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Neraca Periode",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 45 ? Colors.white : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(46),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 46 ? Colors.white : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Laba Rugi Berjalan",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 46 ? Colors.white : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(48),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 48 ? Colors.white : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "GL",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 48 ? Colors.white : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ]),
       ],
     );
   }

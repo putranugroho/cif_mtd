@@ -259,7 +259,7 @@ class BanyakTransaksiPage extends StatelessWidget {
                 child: value.dialog
                     ? Container(
                         padding: EdgeInsets.all(20),
-                        width: 1200,
+                        width: 1180,
                         decoration: BoxDecoration(color: Colors.white),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -1,6 +1,4 @@
 import 'package:accounting/models/index.dart';
-import 'package:accounting/module/inventaris/otorisasi/otorisasi_inventaris_notifier.dart';
-import 'package:accounting/module/master/otorisasi/otorisasi_master_notifier.dart';
 import 'package:accounting/module/setup_otorisasi/setup_otorisasi_notifier.dart';
 import 'package:accounting/utils/button_custom.dart';
 import 'package:flutter/material.dart';
@@ -8,16 +6,16 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-import '../../../utils/colors.dart';
+import '../../utils/colors.dart';
 
-class OtorisasiInventarisPage extends StatelessWidget {
-  const OtorisasiInventarisPage({super.key});
+class SetupOtorisasiPage extends StatelessWidget {
+  const SetupOtorisasiPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => OtorisasiInventarisNotifier(context: context),
-      child: Consumer<OtorisasiInventarisNotifier>(
+      create: (_) => SetupOtorisasiNotifier(context: context),
+      child: Consumer<SetupOtorisasiNotifier>(
         builder: (context, value, child) => SafeArea(
             child: Scaffold(
           body: Stack(
@@ -36,7 +34,7 @@ class OtorisasiInventarisPage extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "Inventaris Otorisasi",
+                              "Setup Otorisasi",
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -114,6 +112,7 @@ class OtorisasiInventarisPage extends StatelessWidget {
                                         )))),
                             GridColumn(
                                 columnName: 'data',
+                                width: 500,
                                 label: Container(
                                     padding: EdgeInsets.all(6),
                                     color: colorPrimary,
@@ -298,12 +297,12 @@ class OtorisasiInventarisPage extends StatelessWidget {
 }
 
 class DetailDataSource extends DataGridSource {
-  DetailDataSource(OtorisasiInventarisNotifier value) {
+  DetailDataSource(SetupOtorisasiNotifier value) {
     tindakanNotifier = value;
     buildRowData(value.list);
   }
 
-  OtorisasiInventarisNotifier? tindakanNotifier;
+  SetupOtorisasiNotifier? tindakanNotifier;
 
   List<DataGridRow> _laporanData = [];
   @override

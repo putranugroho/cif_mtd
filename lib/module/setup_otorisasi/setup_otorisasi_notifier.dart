@@ -1,10 +1,10 @@
 import 'package:accounting/models/index.dart';
 import 'package:flutter/material.dart';
 
-class OtorisasiMasterNotifier extends ChangeNotifier {
+class SetupOtorisasiNotifier extends ChangeNotifier {
   final BuildContext context;
 
-  OtorisasiMasterNotifier({required this.context}) {
+  SetupOtorisasiNotifier({required this.context}) {
     for (Map<String, dynamic> i in data) {
       list.add(OtorisasiModel.fromJson(i));
     }
@@ -27,11 +27,18 @@ class OtorisasiMasterNotifier extends ChangeNotifier {
 
   List<Map<String, dynamic>> data = [
     {
-      "modul": "Input - Customer",
+      "modul": "Input - Data Kantor",
       "user": "Edi Kurniawan",
-      "tanggal": "6 April 2025, 11:22",
+      "tanggal": "6 April 2025, 11:00",
+      "data": "Kantor 2",
+      "status": "PENDING"
+    },
+    {
+      "modul": "Perubahan - Data Kantor",
+      "user": "Edi Kurniawan",
+      "tanggal": "6 April 2025, 11:15",
       "data":
-          "No Sif : 100000021\nNama Sif : Rio Abdi Perkasa\nGolongan Customer : Customer\nBidang Usaha : Logistik",
+          "Kode Kantor : 100011 >< 100001,\nNama Kantor : PT TEGUH AMAN LESTARI >< TEGUH AMAN LESTARI",
       "status": "PENDING"
     },
   ];

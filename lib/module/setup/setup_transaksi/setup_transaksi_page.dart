@@ -536,6 +536,57 @@ class SetupTransaksiPage extends StatelessWidget {
                                 SizedBox(
                                   height: 16,
                                 ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Flag Hutang / Piutang",
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    Spacer(),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Row(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Radio(
+                                          value: "H",
+                                          groupValue: "Hutang",
+                                          onChanged: (e) {},
+                                          activeColor: colorPrimary,
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text("Hutang")
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: 32,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Radio(
+                                          value: "P",
+                                          groupValue: "Hutang",
+                                          onChanged: (e) {},
+                                          activeColor: colorPrimary,
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text("Piutang")
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
                                 ButtonPrimary(
                                   onTap: () {},
                                   name: "Simpan",

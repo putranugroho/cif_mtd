@@ -23,6 +23,7 @@ class TransaksiModel {
     required this.kodeInduk,
     required this.kodeAoDebet,
     required this.kodeAoCredit,
+    required this.status,
   });
 
   final String tglTrans;
@@ -41,6 +42,7 @@ class TransaksiModel {
   final String kodeInduk;
   final String kodeAoDebet;
   final String kodeAoCredit;
+  final String status;
 
   factory TransaksiModel.fromJson(Map<String,dynamic> json) => TransaksiModel(
     tglTrans: json['tgl_trans'].toString(),
@@ -58,7 +60,8 @@ class TransaksiModel {
     kodeKantor: json['kode_kantor'].toString(),
     kodeInduk: json['kode_induk'].toString(),
     kodeAoDebet: json['kode_ao_debet'].toString(),
-    kodeAoCredit: json['kode_ao_credit'].toString()
+    kodeAoCredit: json['kode_ao_credit'].toString(),
+    status: json['status'].toString()
   );
   
   Map<String, dynamic> toJson() => {
@@ -77,7 +80,8 @@ class TransaksiModel {
     'kode_kantor': kodeKantor,
     'kode_induk': kodeInduk,
     'kode_ao_debet': kodeAoDebet,
-    'kode_ao_credit': kodeAoCredit
+    'kode_ao_credit': kodeAoCredit,
+    'status': status
   };
 
   TransaksiModel clone() => TransaksiModel(
@@ -96,7 +100,8 @@ class TransaksiModel {
     kodeKantor: kodeKantor,
     kodeInduk: kodeInduk,
     kodeAoDebet: kodeAoDebet,
-    kodeAoCredit: kodeAoCredit
+    kodeAoCredit: kodeAoCredit,
+    status: status
   );
 
 
@@ -116,7 +121,8 @@ class TransaksiModel {
     String? kodeKantor,
     String? kodeInduk,
     String? kodeAoDebet,
-    String? kodeAoCredit
+    String? kodeAoCredit,
+    String? status
   }) => TransaksiModel(
     tglTrans: tglTrans ?? this.tglTrans,
     transUser: transUser ?? this.transUser,
@@ -134,12 +140,13 @@ class TransaksiModel {
     kodeInduk: kodeInduk ?? this.kodeInduk,
     kodeAoDebet: kodeAoDebet ?? this.kodeAoDebet,
     kodeAoCredit: kodeAoCredit ?? this.kodeAoCredit,
+    status: status ?? this.status,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is TransaksiModel && tglTrans == other.tglTrans && transUser == other.transUser && kodeTrans == other.kodeTrans && debetAcc == other.debetAcc && namaDebet == other.namaDebet && creditAcc == other.creditAcc && namaCredit == other.namaCredit && nomorDok == other.nomorDok && nomorRef == other.nomorRef && nominal == other.nominal && keterangan == other.keterangan && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && kodeAoDebet == other.kodeAoDebet && kodeAoCredit == other.kodeAoCredit;
+    || other is TransaksiModel && tglTrans == other.tglTrans && transUser == other.transUser && kodeTrans == other.kodeTrans && debetAcc == other.debetAcc && namaDebet == other.namaDebet && creditAcc == other.creditAcc && namaCredit == other.namaCredit && nomorDok == other.nomorDok && nomorRef == other.nomorRef && nominal == other.nominal && keterangan == other.keterangan && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && kodeAoDebet == other.kodeAoDebet && kodeAoCredit == other.kodeAoCredit && status == other.status;
 
   @override
-  int get hashCode => tglTrans.hashCode ^ transUser.hashCode ^ kodeTrans.hashCode ^ debetAcc.hashCode ^ namaDebet.hashCode ^ creditAcc.hashCode ^ namaCredit.hashCode ^ nomorDok.hashCode ^ nomorRef.hashCode ^ nominal.hashCode ^ keterangan.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ kodeAoDebet.hashCode ^ kodeAoCredit.hashCode;
+  int get hashCode => tglTrans.hashCode ^ transUser.hashCode ^ kodeTrans.hashCode ^ debetAcc.hashCode ^ namaDebet.hashCode ^ creditAcc.hashCode ^ namaCredit.hashCode ^ nomorDok.hashCode ^ nomorRef.hashCode ^ nominal.hashCode ^ keterangan.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ kodeAoDebet.hashCode ^ kodeAoCredit.hashCode ^ status.hashCode;
 }

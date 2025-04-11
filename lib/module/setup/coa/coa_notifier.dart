@@ -32,9 +32,9 @@ class CoaNotifier extends ChangeNotifier {
     // noHeader.text = header!.nosbb;
     notifyListeners();
   }
+  CoaModel? bukuBesar;
 
   CoaModel? header;
-  CoaModel? bukuBesar;
   bool dialog = false;
 
   tambah() {
@@ -105,6 +105,8 @@ class CoaNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  TextEditingController limitdebet = TextEditingController();
+  TextEditingController limitkredit = TextEditingController();
   TextEditingController resulttext = TextEditingController();
   TextEditingController noBb = TextEditingController();
   TextEditingController noKantor = TextEditingController();

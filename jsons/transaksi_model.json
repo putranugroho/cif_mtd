@@ -14,5 +14,6 @@
     "kode_kantor": "",
     "kode_induk": "",
     "kode_ao_debet": "",
-    "kode_ao_credit": ""
+    "kode_ao_credit": "",
+    "status": ""
 }

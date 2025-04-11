@@ -1,12 +1,14 @@
 import 'package:accounting/module/aktivasi_users/aktivasi_users.dart';
 import 'package:accounting/module/closing_eom/closing_eom_page.dart';
 import 'package:accounting/module/dashboard/dashboard_page.dart';
+import 'package:accounting/module/gl/gl_page.dart';
 import 'package:accounting/module/inventaris/jual_beli/jual_beli_page.dart';
 import 'package:accounting/module/inventaris/laporan/laporan_inventaris_page.dart';
 import 'package:accounting/module/inventaris/otorisasi/otorisasi_inventaris_page.dart';
 import 'package:accounting/module/inventaris/penempatan/penempatan_page.dart';
 import 'package:accounting/module/inventaris/pengadaan/pengadaan_page.dart';
 import 'package:accounting/module/inventaris/revaluasi/revaluasi_page.dart';
+import 'package:accounting/module/jurnal/jurnal_page.dart';
 import 'package:accounting/module/master/ao/ao_page.dart';
 import 'package:accounting/module/master/bank/bank_page.dart';
 import 'package:accounting/module/master/customer/customer_page.dart';
@@ -15,6 +17,7 @@ import 'package:accounting/module/master/otorisasi/otorisasi_master_page.dart';
 import 'package:accounting/module/master/users/users_page.dart';
 import 'package:accounting/module/menu/menu_notifier.dart';
 import 'package:accounting/module/menu/menu_widget.dart';
+import 'package:accounting/module/neraca/neraca_berjalan_page.dart';
 import 'package:accounting/module/pejabat/pejabat_page.dart';
 import 'package:accounting/module/setup/aktivasi/aktivasi_page.dart';
 import 'package:accounting/module/setup/coa/coa_page.dart';
@@ -27,7 +30,11 @@ import 'package:accounting/module/setup/level/level_page.dart';
 import 'package:accounting/module/setup/pajak/setup_pajak_page.dart';
 import 'package:accounting/module/setup/penyusutan/penyusutan_page.dart';
 import 'package:accounting/module/setup/perusahaan/perusahaan_page.dart';
+import 'package:accounting/module/setup/sbb_khsus/sbb_khusus_page.dart';
+import 'package:accounting/module/setup/sbb_khsus/tambah_kelompok_sbb_khusus_page.dart';
 import 'package:accounting/module/setup/setup_transaksi/setup_transaksi_page.dart';
+import 'package:accounting/module/setup_closing_eom/setup_closing_eom_page.dart';
+import 'package:accounting/module/setup_otorisasi/setup_otorisasi_page.dart';
 import 'package:accounting/module/transaksi/back_date/back_date_page.dart';
 import 'package:accounting/module/transaksi/bank/bank_transaksi_page.dart';
 import 'package:accounting/module/transaksi/banyak_transaksi/banyak_transaksi_page.dart';
@@ -41,6 +48,8 @@ import 'package:accounting/utils/colors.dart';
 import 'package:accounting/utils/images_path.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../neraca/neraca_periode_page.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
@@ -56,7 +65,7 @@ class MenuPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 300,
+                width: 330,
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(color: colorPrimary),
                 child: ListView(
@@ -317,7 +326,23 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                               ? AoPage()
                                                                                                                                                               : value.page == 36
                                                                                                                                                                   ? AktivasiPage()
-                                                                                                                                                                  : Container())
+                                                                                                                                                                  : value.page == 37
+                                                                                                                                                                      ? SbbKhususPage()
+                                                                                                                                                                      : value.page == 38
+                                                                                                                                                                          ? SetupClosingEomPage()
+                                                                                                                                                                          : value.page == 39
+                                                                                                                                                                              ? SetupOtorisasiPage()
+                                                                                                                                                                              : value.page == 43
+                                                                                                                                                                                  ? JurnalPage()
+                                                                                                                                                                                  : value.page == 44
+                                                                                                                                                                                      ? NeracaBerjalanPage()
+                                                                                                                                                                                      : value.page == 45
+                                                                                                                                                                                          ? NeracaPeriodePage()
+                                                                                                                                                                                          : value.page == 47
+                                                                                                                                                                                              ? TambahKelompokSbbKhususPage()
+                                                                                                                                                                                              : value.page == 48
+                                                                                                                                                                                                  ? GlPage()
+                                                                                                                                                                                                  : Container())
             ],
           ),
         )),

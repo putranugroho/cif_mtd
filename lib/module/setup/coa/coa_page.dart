@@ -2,6 +2,7 @@ import 'package:accounting/models/index.dart';
 import 'package:accounting/module/setup/coa/coa_notifier.dart';
 import 'package:accounting/utils/button_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -1540,127 +1541,142 @@ class CoaPage extends StatelessWidget {
                                                       ),
                                                     ),
                                                     const SizedBox(height: 16),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                            child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .stretch,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Limit Debet",
+                                                                  style: const TextStyle(
+                                                                      fontSize:
+                                                                          12),
+                                                                ),
+                                                                const SizedBox(
+                                                                    width: 5),
+                                                                const Text(
+                                                                  "*",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          8),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 8,
+                                                            ),
+                                                            TextFormField(
+                                                              textInputAction:
+                                                                  TextInputAction
+                                                                      .done,
+                                                              controller: value
+                                                                  .limitdebet,
+                                                              maxLines: 1,
+                                                              inputFormatters: [
+                                                                FilteringTextInputFormatter
+                                                                    .digitsOnly
+                                                              ],
+                                                              validator: (e) {
+                                                                if (e!
+                                                                    .isEmpty) {
+                                                                  return "Wajib diisi";
+                                                                } else {
+                                                                  return null;
+                                                                }
+                                                              },
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                hintText:
+                                                                    "Limit Debet",
+                                                                border:
+                                                                    OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              6),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                                height: 16),
+                                                          ],
+                                                        )),
+                                                        SizedBox(
+                                                          width: 16,
+                                                        ),
+                                                        Expanded(
+                                                            child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .stretch,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Limit Kredit",
+                                                                  style: const TextStyle(
+                                                                      fontSize:
+                                                                          12),
+                                                                ),
+                                                                const SizedBox(
+                                                                    width: 5),
+                                                                const Text(
+                                                                  "*",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          8),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 8,
+                                                            ),
+                                                            TextFormField(
+                                                              textInputAction:
+                                                                  TextInputAction
+                                                                      .done,
+                                                              controller: value
+                                                                  .limitdebet,
+                                                              maxLines: 1,
+                                                              inputFormatters: [
+                                                                FilteringTextInputFormatter
+                                                                    .digitsOnly
+                                                              ],
+                                                              validator: (e) {
+                                                                if (e!
+                                                                    .isEmpty) {
+                                                                  return "Wajib diisi";
+                                                                } else {
+                                                                  return null;
+                                                                }
+                                                              },
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                hintText:
+                                                                    "Limit Kredit",
+                                                                border:
+                                                                    OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              6),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                                height: 16),
+                                                          ],
+                                                        )),
+                                                      ],
+                                                    )
                                                   ],
                                                 )
                                               : SizedBox(),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "SBB Khusus",
-                                        style: const TextStyle(fontSize: 12),
-                                      ),
-                                      const SizedBox(width: 5),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(16),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                          width: 1,
-                                          color: Colors.grey,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(16)),
-                                    child: StaggeredGrid.count(
-                                      crossAxisCount: 3,
-                                      mainAxisSpacing: 12,
-                                      crossAxisSpacing: 12,
-                                      axisDirection: AxisDirection.down,
-                                      children: value.listSBBKhusus
-                                          .map((e) => Container(
-                                                child: Row(
-                                                  children: [
-                                                    Checkbox(
-                                                        activeColor:
-                                                            colorPrimary,
-                                                        value: value
-                                                                .listSbbTambahanKhusus
-                                                                .isEmpty
-                                                            ? false
-                                                            : value.listSbbTambahanKhusus
-                                                                    .where(
-                                                                        (f) =>
-                                                                            f ==
-                                                                            e)
-                                                                    .isNotEmpty
-                                                                ? true
-                                                                : false,
-                                                        onChanged: (g) => value
-                                                            .pilihSbbKhusus(e)),
-                                                    SizedBox(
-                                                      width: 8,
-                                                    ),
-                                                    Text(
-                                                      "$e",
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ))
-                                          .toList(),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(16),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                          width: 1,
-                                          color: Colors.grey,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(16)),
-                                    child: StaggeredGrid.count(
-                                      crossAxisCount: 3,
-                                      mainAxisSpacing: 12,
-                                      crossAxisSpacing: 12,
-                                      axisDirection: AxisDirection.down,
-                                      children: value.listSBBKhusus2
-                                          .map((e) => Container(
-                                                child: Row(
-                                                  children: [
-                                                    Checkbox(
-                                                        activeColor:
-                                                            colorPrimary,
-                                                        value: value
-                                                                .listSbbTambahanKhusus
-                                                                .isEmpty
-                                                            ? false
-                                                            : value.listSbbTambahanKhusus
-                                                                    .where(
-                                                                        (f) =>
-                                                                            f ==
-                                                                            e)
-                                                                    .isNotEmpty
-                                                                ? true
-                                                                : false,
-                                                        onChanged: (g) => value
-                                                            .pilihSbbKhusus(e)),
-                                                    SizedBox(
-                                                      width: 8,
-                                                    ),
-                                                    Text(
-                                                      "$e",
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ))
-                                          .toList(),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 16,
-                                  ),
                                   ButtonPrimary(
                                     onTap: () {},
                                     name: "Simpan",
