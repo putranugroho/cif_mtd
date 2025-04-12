@@ -347,8 +347,8 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                   : value.page == 48
                                                                                                                                                                                                       ? GlPage()
                                                                                                                                                                                                       : value.page == 49
-                                                                                                                                                                                                      ? LabaRugiPeriodePage()
-                                                                                                                                                                                                      : Container())
+                                                                                                                                                                                                          ? LabaRugiPeriodePage()
+                                                                                                                                                                                                          : Container())
             ],
           ),
         )),
