@@ -137,18 +137,6 @@ class GlPage extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.stretch,
                                         children: [
-                                          Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 20, vertical: 8),
-                                            child: Text(
-                                              "${data.namaBb}",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 4,
-                                          ),
                                           ListView.builder(
                                               itemCount: data.sbbItem.length,
                                               shrinkWrap: true,
@@ -163,8 +151,8 @@ class GlPage extends StatelessWidget {
                                                     Container(
                                                       padding:
                                                           EdgeInsets.symmetric(
-                                                              horizontal: 20,
-                                                              vertical: 8),
+                                                        horizontal: 20,
+                                                      ),
                                                       child: Row(
                                                         children: [
                                                           Container(
@@ -175,7 +163,7 @@ class GlPage extends StatelessWidget {
                                                               child: Text(
                                                                   "${a.namaSbb}")),
                                                           Text(
-                                                            "${FormatCurrency.oCcy.format(int.parse(a.saldo))}",
+                                                            "${FormatCurrency.oCcyDecimal.format(a.saldo)}",
                                                             textAlign:
                                                                 TextAlign.end,
                                                           ),
@@ -191,12 +179,26 @@ class GlPage extends StatelessWidget {
                                             ),
                                             child: Row(
                                               children: [
-                                                Expanded(child: Text("")),
-                                                Text(
-                                                  "${FormatCurrency.oCcy.format(data.sbbItem.map((e) => int.parse(e.saldo)).reduce((a, b) => a + b))}",
+                                                Expanded(
+                                                    child: Text(
+                                                  "${data.namaBb}",
                                                   textAlign: TextAlign.end,
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.bold,
+                                                  ),
+                                                )),
+                                                SizedBox(
+                                                  width: 100,
+                                                ),
+                                                SizedBox(
+                                                  width: 200,
+                                                  child: Text(
+                                                    "${FormatCurrency.oCcyDecimal.format(data.sbbItem.map((e) => e.saldo).reduce((a, b) => a + b))}",
+                                                    textAlign: TextAlign.end,
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
                                                   ),
                                                 ),
                                               ],

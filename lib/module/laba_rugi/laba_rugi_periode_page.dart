@@ -1,4 +1,6 @@
-import 'package:accounting/module/neraca/neraca_berjalan_notiifer.dart';
+import 'package:accounting/module/laba_rugi/laba_rugi_berjalan_notifier.dart';
+import 'package:accounting/module/laba_rugi/laba_rugi_periode_notifier.dart';
+
 import 'package:accounting/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -6,16 +8,15 @@ import 'package:provider/provider.dart';
 
 import '../../utils/colors.dart';
 import '../../utils/images_path.dart';
-import 'neraca_periode_notifier.dart';
 
-class NeracaPeriodePage extends StatelessWidget {
-  const NeracaPeriodePage({super.key});
+class LabaRugiPeriodePage extends StatelessWidget {
+  const LabaRugiPeriodePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => NeracaPeriodeNotifier(context: context),
-      child: Consumer<NeracaPeriodeNotifier>(
+      create: (_) => LabaRugiPeriodeNotifier(context: context),
+      child: Consumer<LabaRugiPeriodeNotifier>(
         builder: (context, value, child) => SafeArea(
             child: Scaffold(
           body: Column(
@@ -30,7 +31,7 @@ class NeracaPeriodePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Text(
-                            "Neraca Periode",
+                            "Laba Rugi Periode",
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -152,13 +153,13 @@ class NeracaPeriodePage extends StatelessWidget {
                       Expanded(
                           child: ListView.builder(
                               itemCount: value.list
-                                  .where((e) => e.typePosting == "AKTIVA")
+                                  .where((e) => e.typePosting == "BIAYA")
                                   .length,
                               shrinkWrap: true,
                               physics: ClampingScrollPhysics(),
                               itemBuilder: (context, i) {
                                 final data = value.list
-                                    .where((e) => e.typePosting == "AKTIVA")
+                                    .where((e) => e.typePosting == "BIAYA")
                                     .toList()[i];
                                 return Column(
                                   crossAxisAlignment:
@@ -255,13 +256,13 @@ class NeracaPeriodePage extends StatelessWidget {
                       Expanded(
                           child: ListView.builder(
                               itemCount: value.list
-                                  .where((e) => e.typePosting == "PASIVA")
+                                  .where((e) => e.typePosting == "PENDAPATAN")
                                   .length,
                               shrinkWrap: true,
                               physics: ClampingScrollPhysics(),
                               itemBuilder: (context, i) {
                                 final data = value.list
-                                    .where((e) => e.typePosting == "PASIVA")
+                                    .where((e) => e.typePosting == "PENDAPATAN")
                                     .toList()[i];
                                 return Column(
                                   crossAxisAlignment:
@@ -382,7 +383,7 @@ class NeracaPeriodePage extends StatelessWidget {
                       child: Container(
                         margin: EdgeInsets.only(right: 16),
                         child: Text(
-                          "TOTAL AKTIVA",
+                          "TOTAL BIAYA",
                           textAlign: TextAlign.end,
                           style: TextStyle(fontSize: 12),
                         ),
@@ -409,7 +410,7 @@ class NeracaPeriodePage extends StatelessWidget {
                       child: Container(
                         margin: EdgeInsets.only(right: 16),
                         child: Text(
-                          "TOTAL PASIVA",
+                          "TOTAL PENDAPATAN",
                           textAlign: TextAlign.end,
                           style: TextStyle(fontSize: 12),
                         ),

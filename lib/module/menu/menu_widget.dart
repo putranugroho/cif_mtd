@@ -1519,6 +1519,37 @@ class MenuTransaksiWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
+                onTap: () => value.gantimenu(49),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 49 ? Colors.white : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Laba Rugi Periode",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 49 ? Colors.white : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
                 onTap: () => value.gantimenu(48),
                 child: Container(
                   width: MediaQuery.of(context).size.width,

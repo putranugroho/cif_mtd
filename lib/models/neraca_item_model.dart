@@ -16,13 +16,13 @@ class NeracaItemModel {
   final String nosbb;
   final String namaSbb;
   final String typePosting;
-  final String saldo;
+  final double saldo;
 
   factory NeracaItemModel.fromJson(Map<String,dynamic> json) => NeracaItemModel(
     nosbb: json['nosbb'].toString(),
     namaSbb: json['nama_sbb'].toString(),
     typePosting: json['type_posting'].toString(),
-    saldo: json['saldo'].toString()
+    saldo: (json['saldo'] as num).toDouble()
   );
   
   Map<String, dynamic> toJson() => {
@@ -44,7 +44,7 @@ class NeracaItemModel {
     String? nosbb,
     String? namaSbb,
     String? typePosting,
-    String? saldo
+    double? saldo
   }) => NeracaItemModel(
     nosbb: nosbb ?? this.nosbb,
     namaSbb: namaSbb ?? this.namaSbb,

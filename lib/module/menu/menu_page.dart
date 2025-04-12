@@ -9,6 +9,8 @@ import 'package:accounting/module/inventaris/penempatan/penempatan_page.dart';
 import 'package:accounting/module/inventaris/pengadaan/pengadaan_page.dart';
 import 'package:accounting/module/inventaris/revaluasi/revaluasi_page.dart';
 import 'package:accounting/module/jurnal/jurnal_page.dart';
+import 'package:accounting/module/laba_rugi/laba_rugi_berjalan_page.dart';
+import 'package:accounting/module/laba_rugi/laba_rugi_periode_page.dart';
 import 'package:accounting/module/master/ao/ao_page.dart';
 import 'package:accounting/module/master/bank/bank_page.dart';
 import 'package:accounting/module/master/customer/customer_page.dart';
@@ -338,11 +340,15 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                       ? NeracaBerjalanPage()
                                                                                                                                                                                       : value.page == 45
                                                                                                                                                                                           ? NeracaPeriodePage()
-                                                                                                                                                                                          : value.page == 47
-                                                                                                                                                                                              ? TambahKelompokSbbKhususPage()
-                                                                                                                                                                                              : value.page == 48
-                                                                                                                                                                                                  ? GlPage()
-                                                                                                                                                                                                  : Container())
+                                                                                                                                                                                          : value.page == 46
+                                                                                                                                                                                              ? LabaRugiBerjalanPage()
+                                                                                                                                                                                              : value.page == 47
+                                                                                                                                                                                                  ? TambahKelompokSbbKhususPage()
+                                                                                                                                                                                                  : value.page == 48
+                                                                                                                                                                                                      ? GlPage()
+                                                                                                                                                                                                      : value.page == 49
+                                                                                                                                                                                                      ? LabaRugiPeriodePage()
+                                                                                                                                                                                                      : Container())
             ],
           ),
         )),
