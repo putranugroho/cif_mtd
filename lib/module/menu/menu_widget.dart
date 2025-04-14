@@ -1000,6 +1000,93 @@ class MenuInventarisWidget extends StatelessWidget {
   }
 }
 
+class MenuHutangPiutangWidget extends StatelessWidget {
+  final MenuNotifier value;
+  const MenuHutangPiutangWidget({super.key, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      tilePadding: EdgeInsets.zero,
+      childrenPadding: EdgeInsets.zero,
+      shape: Border(),
+      expandedAlignment: Alignment.centerLeft,
+      collapsedIconColor: Colors.white,
+      expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+      title: Container(
+        child: Row(
+          children: [
+            Image.asset(ImageAssets.bill, height: 30, color: Colors.white),
+            SizedBox(
+              width: 16,
+            ),
+            Text(
+              "Kelola Hutang/Piutang",
+              style: TextStyle(fontSize: 16, color: Colors.white),
+            )
+          ],
+        ),
+      ),
+      children: [
+        InkWell(
+          onTap: () => value.gantimenu(21),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.debt,
+                  height: 30,
+                  color: value.page == 21 ? Colors.white : Colors.white70,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Hutang",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 21 ? Colors.white : Colors.white70,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () => value.gantimenu(22),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.rupiahs,
+                  height: 30,
+                  color: value.page == 22 ? Colors.white : Colors.white70,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Piutang",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 22 ? Colors.white : Colors.white70,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class MenuTransaksiWidget extends StatelessWidget {
   final MenuNotifier value;
   const MenuTransaksiWidget({super.key, required this.value});
@@ -1164,7 +1251,7 @@ class MenuTransaksiWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(21),
+          onTap: () => value.gantimenu(52),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -1174,7 +1261,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.debt,
                   height: 30,
-                  color: value.page == 21 ? Colors.white : Colors.white70,
+                  color: value.page == 52 ? Colors.white : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -1183,7 +1270,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Hutang",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 21 ? Colors.white : Colors.white70,
+                    color: value.page == 52 ? Colors.white : Colors.white70,
                   ),
                 )
               ],
@@ -1191,7 +1278,7 @@ class MenuTransaksiWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(22),
+          onTap: () => value.gantimenu(53),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -1201,7 +1288,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.rupiahs,
                   height: 30,
-                  color: value.page == 22 ? Colors.white : Colors.white70,
+                  color: value.page == 53 ? Colors.white : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -1210,7 +1297,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Piutang",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 22 ? Colors.white : Colors.white70,
+                    color: value.page == 53 ? Colors.white : Colors.white70,
                   ),
                 )
               ],
@@ -1272,6 +1359,68 @@ class MenuTransaksiWidget extends StatelessWidget {
                           fontSize: 16,
                           color:
                               value.page == 50 ? Colors.white : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(51),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 51 ? Colors.white : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Hutang",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 51 ? Colors.white : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(52),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 52 ? Colors.white : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Piutang",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 52 ? Colors.white : Colors.white70,
                         ),
                       )
                     ],

@@ -1,0 +1,22 @@
+{
+    "no_invoice": "INV10000001",
+    "jns_invoice": "1",
+    "no_sif": "100011",
+    "nm_sif": "PT GLOBAL TEKNOLOGI INDONESIA",
+    "tgl_invoice": "2025-04-07",
+    "nilai_invoice": "120000000",
+    "ppn": "0",
+    "pph": "0",
+    "tgl_jt_tempo": "2025-04-30",
+    "bertahap": "N",
+    "jumlah_tahap": "",
+    "tgl_bayar": "",
+    "nilai_bayar": "",
+    "status_invoice": "A",
+    "kode_pt": "001",
+    "kode_kantor": "10011",
+    "kode_induk": "",
+    "kode_ao": "",
+    "no_referensi": "INV10000001",
+    "saldo": "120000000"
+}

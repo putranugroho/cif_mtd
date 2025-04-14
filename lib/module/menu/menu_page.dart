@@ -22,6 +22,8 @@ import 'package:accounting/module/menu/menu_widget.dart';
 import 'package:accounting/module/neraca/neraca_berjalan_page.dart';
 import 'package:accounting/module/pejabat/pejabat_page.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_bank_page.dart';
+import 'package:accounting/module/rekonsiliasi/rekonsiliasi_hutang_page.dart';
+import 'package:accounting/module/rekonsiliasi/rekonsiliasi_piutang_page.dart';
 import 'package:accounting/module/setup/aktivasi/aktivasi_page.dart';
 import 'package:accounting/module/setup/coa/coa_page.dart';
 import 'package:accounting/module/setup/golongan_aset/golongan_aset_page.dart';
@@ -119,6 +121,10 @@ class MenuPage extends StatelessWidget {
                       height: 24,
                     ),
                     MenuTransaksiWidget(value: value),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    MenuHutangPiutangWidget(value: value),
                     SizedBox(
                       height: 32,
                     ),
@@ -350,8 +356,12 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                       : value.page == 49
                                                                                                                                                                                                           ? LabaRugiPeriodePage()
                                                                                                                                                                                                           : value.page == 50
-                                                                                                                                                                                                          ? RekonsiliasiBankPage()
-                                                                                                                                                                                                          : Container())
+                                                                                                                                                                                                              ? RekonsiliasiBankPage()
+                                                                                                                                                                                                              : value.page == 51
+                                                                                                                                                                                                                  ? RekonsiliasiHutangPage()
+                                                                                                                                                                                                                  : value.page == 52
+                                                                                                                                                                                                                      ? RekonsiliasiPiutangPage()
+                                                                                                                                                                                                                      : Container())
             ],
           ),
         )),
