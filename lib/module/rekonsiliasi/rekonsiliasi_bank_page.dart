@@ -1,4 +1,3 @@
-import 'package:accounting/module/neraca/neraca_berjalan_notiifer.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_bank_notifier.dart';
 import 'package:accounting/utils/button_custom.dart';
 import 'package:accounting/utils/format_currency.dart';
@@ -8,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/colors.dart';
-import '../../utils/currency_formatted.dart';
+
 import '../../utils/images_path.dart';
 
 class RekonsiliasiBankPage extends StatelessWidget {

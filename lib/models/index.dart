@@ -19,6 +19,7 @@ export 'rekon_bank_model.dart';
 export 'bank_model.dart';
 export 'aktivasi_model.dart';
 export 'level_model.dart';
+export 'rekon_aset_model.dart';
 export 'golongan_sbb_khusus_model.dart';
 export 'pejabat_model.dart';
 export 'otorisasi_model.dart';

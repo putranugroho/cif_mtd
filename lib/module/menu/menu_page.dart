@@ -21,6 +21,7 @@ import 'package:accounting/module/menu/menu_notifier.dart';
 import 'package:accounting/module/menu/menu_widget.dart';
 import 'package:accounting/module/neraca/neraca_berjalan_page.dart';
 import 'package:accounting/module/pejabat/pejabat_page.dart';
+import 'package:accounting/module/rekonsiliasi/rekonsiliasi_aset_page.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_bank_page.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_hutang_page.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_piutang_page.dart';
@@ -361,7 +362,9 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                   ? RekonsiliasiHutangPage()
                                                                                                                                                                                                                   : value.page == 52
                                                                                                                                                                                                                       ? RekonsiliasiPiutangPage()
-                                                                                                                                                                                                                      : Container())
+                                                                                                                                                                                                                      : value.page == 53
+                                                                                                                                                                                                                          ? RekonsiliasiAsetPage()
+                                                                                                                                                                                                                          : Container())
             ],
           ),
         )),
