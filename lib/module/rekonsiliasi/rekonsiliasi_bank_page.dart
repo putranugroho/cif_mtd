@@ -1,0 +1,731 @@
+import 'package:accounting/module/neraca/neraca_berjalan_notiifer.dart';
+import 'package:accounting/module/rekonsiliasi/rekonsiliasi_bank_notifier.dart';
+import 'package:accounting/utils/button_custom.dart';
+import 'package:accounting/utils/format_currency.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../../utils/colors.dart';
+import '../../utils/currency_formatted.dart';
+import '../../utils/images_path.dart';
+
+class RekonsiliasiBankPage extends StatelessWidget {
+  const RekonsiliasiBankPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => RekonsiliasiBankNotifier(context: context),
+      child: Consumer<RekonsiliasiBankNotifier>(
+        builder: (context, value, child) => SafeArea(
+            child: Scaffold(
+          backgroundColor: Colors.white,
+          body: Stack(
+            children: [
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Text(
+                                  "Rekonsiliasi Bank",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
+                                color: colorPrimary,
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  ImageAssets.excel,
+                                  height: 15,
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  "Download to Excel",
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.white),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(right: 16),
+                            width: 80,
+                            child: Text("NO SBB"),
+                          ),
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.only(right: 16),
+                              child: Text("KETERANGAN"),
+                            ),
+                          ),
+                          Container(
+                            width: 180,
+                            margin: EdgeInsets.only(right: 16),
+                            child: Text(
+                              "SALDO GL",
+                              textAlign: TextAlign.end,
+                            ),
+                          ),
+                          Container(
+                            width: 150,
+                            margin: EdgeInsets.only(right: 16),
+                            child: Text(
+                              "SELISIH",
+                              textAlign: TextAlign.end,
+                            ),
+                          ),
+                          Container(
+                            width: 180,
+                            margin: EdgeInsets.only(right: 16),
+                            child: Text(
+                              "SALDO BANK",
+                              textAlign: TextAlign.end,
+                            ),
+                          ),
+                          Container(
+                            width: 180,
+                            margin: EdgeInsets.only(right: 16),
+                            child: Text(
+                              "TANGGAL BANK",
+                              textAlign: TextAlign.start,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 8),
+                      height: 1,
+                      color: Colors.grey,
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                                child: ListView.builder(
+                                    itemCount: value.list
+                                        .where((e) => e.typePosting == "AKTIVA")
+                                        .length,
+                                    shrinkWrap: true,
+                                    physics: ClampingScrollPhysics(),
+                                    itemBuilder: (context, i) {
+                                      final data = value.list
+                                          .where(
+                                              (e) => e.typePosting == "AKTIVA")
+                                          .toList()[i];
+                                      return Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          ListView.builder(
+                                              itemCount: data.sbbItem.length,
+                                              shrinkWrap: true,
+                                              physics: ClampingScrollPhysics(),
+                                              itemBuilder: (context, b) {
+                                                final a = data.sbbItem[b];
+                                                return Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .stretch,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () {
+                                                        value.edit(a);
+                                                      },
+                                                      child: Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                vertical: 2),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: a.saldo -
+                                                                      a.saldoSistem !=
+                                                                  0.00
+                                                              ? Colors.red[800]
+                                                              : Colors.white,
+                                                        ),
+                                                        child: Row(
+                                                          children: [
+                                                            Container(
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      right:
+                                                                          16),
+                                                              width: 80,
+                                                              child: Text(
+                                                                "${a.nosbb}",
+                                                                style: TextStyle(
+                                                                    color: a.saldo - a.saldoSistem !=
+                                                                            0.00
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
+                                                                    fontSize:
+                                                                        12),
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              child: Container(
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        right:
+                                                                            16),
+                                                                child: Text(
+                                                                  "${a.namaSbb}",
+                                                                  style: TextStyle(
+                                                                      color: a.saldo - a.saldoSistem !=
+                                                                              0.00
+                                                                          ? Colors
+                                                                              .white
+                                                                          : Colors
+                                                                              .black,
+                                                                      fontSize:
+                                                                          12),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              width: 180,
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      right:
+                                                                          16),
+                                                              child: Text(
+                                                                "${FormatCurrency.oCcyDecimal.format(a.saldo)}",
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .end,
+                                                                style: TextStyle(
+                                                                    color: a.saldo - a.saldoSistem !=
+                                                                            0.00
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
+                                                                    fontSize:
+                                                                        12),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              width: 150,
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      right:
+                                                                          16),
+                                                              child: Text(
+                                                                "${FormatCurrency.oCcyDecimal.format(a.saldo - a.saldoSistem)}",
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .end,
+                                                                style: TextStyle(
+                                                                    color: a.saldo - a.saldoSistem !=
+                                                                            0.00
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
+                                                                    fontSize:
+                                                                        12),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              width: 180,
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      right:
+                                                                          16),
+                                                              child: Text(
+                                                                "${FormatCurrency.oCcyDecimal.format(a.saldoSistem)}",
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .end,
+                                                                style: TextStyle(
+                                                                    color: a.saldo - a.saldoSistem !=
+                                                                            0.00
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
+                                                                    fontSize:
+                                                                        12),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              width: 180,
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      right:
+                                                                          16),
+                                                              child: Text(
+                                                                "${DateFormat('dd MMM y HH:mm').format(DateTime.parse(a.tglTransaksi))}",
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .start,
+                                                                style: TextStyle(
+                                                                    color: a.saldo - a.saldoSistem !=
+                                                                            0.00
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
+                                                                    fontSize:
+                                                                        12),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 4,
+                                                    )
+                                                  ],
+                                                );
+                                              }),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 80,
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                      right: 16),
+                                                  child: Text(
+                                                    "${data.namaBb}",
+                                                    textAlign: TextAlign.end,
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 12),
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 180,
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                child: Text(
+                                                  "${FormatCurrency.oCcyDecimal.format(data.sbbItem.map((e) => e.saldo).reduce((a, b) => a + b))}",
+                                                  textAlign: TextAlign.end,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 150,
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                child: Text(
+                                                  "${FormatCurrency.oCcyDecimal.format(data.sbbItem.map((e) => e.saldo - e.saldoSistem).reduce((a, b) => a + b))}",
+                                                  textAlign: TextAlign.end,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 180,
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                child: Text(
+                                                  "${FormatCurrency.oCcyDecimal.format(data.sbbItem.map((e) => e.saldoSistem).reduce((a, b) => a + b))}",
+                                                  textAlign: TextAlign.end,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 180,
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          )
+                                        ],
+                                      );
+                                    })),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 8),
+                      height: 1,
+                      color: Colors.grey,
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(right: 16),
+                            width: 80,
+                            child: Text(""),
+                          ),
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.only(right: 16),
+                              child: Text(
+                                "TOTAL",
+                                textAlign: TextAlign.end,
+                                style: TextStyle(fontSize: 12),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 180,
+                            margin: EdgeInsets.only(right: 16),
+                            child: Text(
+                              "${formatRounded(value.totalAktiva)}",
+                              textAlign: TextAlign.end,
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                          Container(
+                            width: 150,
+                            margin: EdgeInsets.only(right: 16),
+                            child: Text(
+                              "${formatRounded(value.totalAktiva - value.totalSistem)}",
+                              textAlign: TextAlign.end,
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                          Container(
+                            width: 180,
+                            margin: EdgeInsets.only(right: 16),
+                            child: Text(
+                              "${formatRounded(value.totalSistem)}",
+                              textAlign: TextAlign.end,
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                          Container(
+                            width: 180,
+                            margin: EdgeInsets.only(right: 16),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 80,
+                    )
+                  ],
+                ),
+              ),
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: value.dialog
+                    ? Container(
+                        color: Colors.black.withOpacity(0.5),
+                      )
+                    : SizedBox(),
+              ),
+              Positioned(
+                  top: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: value.dialog
+                      ? Container(
+                          width: 600,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                          ),
+                          padding: EdgeInsets.all(20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      "Bank Rekonsiliasi",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () => value.tutup(),
+                                    child: Container(
+                                      width: 40,
+                                      height: 40,
+                                      padding: EdgeInsets.all(4),
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey[200],
+                                          shape: BoxShape.circle),
+                                      child: Icon(Icons.close),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 32,
+                              ),
+                              Text(
+                                "No. SBB",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              TextField(
+                                readOnly: true,
+                                controller: value.nosbb,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.grey[200],
+                                  hintText: "Akun SBB",
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                "Nama Akun",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              TextField(
+                                readOnly: true,
+                                controller: value.akun,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.grey[200],
+                                  hintText: "Akun SBB",
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                "Saldo GL",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              TextField(
+                                readOnly: true,
+                                controller: value.saldo,
+                                textAlign: TextAlign.end,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.grey[200],
+                                  hintText: "Saldo GL",
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                "Saldo Bank",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              TextField(
+                                controller: value.nominal,
+                                keyboardType: TextInputType.numberWithOptions(
+                                  decimal: true,
+                                  signed: false,
+                                ),
+                                textAlign: TextAlign.end,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'^\d+\.?\d{0,2}')),
+                                ],
+                                onChanged: (e) => value.onChangeTotal(),
+                                decoration: InputDecoration(
+                                  hintText: "Nominal",
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                "Selisih",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              TextField(
+                                readOnly: true,
+                                textAlign: TextAlign.end,
+                                controller: value.selisih,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.grey[200],
+                                  hintText: "Selisih",
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              Row(
+                                children: [
+                                  Expanded(
+                                      child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Text(
+                                        "Tanggal Transaksi",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          value.pilihTanggalBuka();
+                                        },
+                                        child: TextField(
+                                          enabled: false,
+                                          controller: value.tglTransaksiText,
+                                          decoration: InputDecoration(
+                                            filled: true,
+                                            fillColor: Colors.grey[200],
+                                            hintText: "Tanggal Transaksi",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 16),
+                                    ],
+                                  )),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Expanded(
+                                      child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Text(
+                                        "Jam Transaksi",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          value.pilihJam();
+                                        },
+                                        child: TextField(
+                                          enabled: false,
+                                          controller: value.jamMulai,
+                                          decoration: InputDecoration(
+                                            filled: true,
+                                            fillColor: Colors.grey[200],
+                                            hintText: "Pilih Jam",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 16),
+                                    ],
+                                  ))
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  ButtonPrimary(
+                                    onTap: () {},
+                                    name: "Simpan",
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      : SizedBox())
+            ],
+          ),
+        )),
+      ),
+    );
+  }
+}

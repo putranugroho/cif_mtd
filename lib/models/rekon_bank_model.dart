@@ -1,0 +1,61 @@
+import 'package:flutter/foundation.dart';
+import 'package:quiver/core.dart';
+
+import 'index.dart';
+
+@immutable
+class RekonBankModel {
+
+  const RekonBankModel({
+    required this.nobb,
+    required this.namaBb,
+    required this.typePosting,
+    required this.sbbItem,
+  });
+
+  final String nobb;
+  final String namaBb;
+  final String typePosting;
+  final List<RekonBankItemModel> sbbItem;
+
+  factory RekonBankModel.fromJson(Map<String,dynamic> json) => RekonBankModel(
+    nobb: json['nobb'].toString(),
+    namaBb: json['nama_bb'].toString(),
+    typePosting: json['type_posting'].toString(),
+    sbbItem: (json['sbb_item'] as List? ?? []).map((e) => RekonBankItemModel.fromJson(e as Map<String, dynamic>)).toList()
+  );
+  
+  Map<String, dynamic> toJson() => {
+    'nobb': nobb,
+    'nama_bb': namaBb,
+    'type_posting': typePosting,
+    'sbb_item': sbbItem.map((e) => e.toJson()).toList()
+  };
+
+  RekonBankModel clone() => RekonBankModel(
+    nobb: nobb,
+    namaBb: namaBb,
+    typePosting: typePosting,
+    sbbItem: sbbItem.map((e) => e.clone()).toList()
+  );
+
+
+  RekonBankModel copyWith({
+    String? nobb,
+    String? namaBb,
+    String? typePosting,
+    List<RekonBankItemModel>? sbbItem
+  }) => RekonBankModel(
+    nobb: nobb ?? this.nobb,
+    namaBb: namaBb ?? this.namaBb,
+    typePosting: typePosting ?? this.typePosting,
+    sbbItem: sbbItem ?? this.sbbItem,
+  );
+
+  @override
+  bool operator ==(Object other) => identical(this, other)
+    || other is RekonBankModel && nobb == other.nobb && namaBb == other.namaBb && typePosting == other.typePosting && sbbItem == other.sbbItem;
+
+  @override
+  int get hashCode => nobb.hashCode ^ namaBb.hashCode ^ typePosting.hashCode ^ sbbItem.hashCode;
+}

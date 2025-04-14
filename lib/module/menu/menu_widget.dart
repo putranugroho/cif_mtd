@@ -1217,33 +1217,68 @@ class MenuTransaksiWidget extends StatelessWidget {
             ),
           ),
         ),
-        InkWell(
-          onTap: () => value.gantimenu(24),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
-            child: Row(
-              children: [
-                Image.asset(
-                  ImageAssets.bill,
-                  height: 30,
-                  color: value.page == 24 ? Colors.white : Colors.white70,
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "Rekonsiliasi Harian",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: value.page == 24 ? Colors.white : Colors.white70,
+        ExpansionTile(
+            tilePadding: EdgeInsets.zero,
+            childrenPadding: EdgeInsets.zero,
+            shape: Border(),
+            expandedAlignment: Alignment.centerLeft,
+            collapsedIconColor: Colors.white,
+            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            title: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  Image.asset(
+                    ImageAssets.bill,
+                    height: 30,
+                    color: Colors.white70,
                   ),
-                )
-              ],
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    "Rekonsiliasi Harian",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white70,
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        ),
+            children: [
+              InkWell(
+                onTap: () => value.gantimenu(50),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 50 ? Colors.white : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Bank",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 50 ? Colors.white : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ]),
         InkWell(
           onTap: () => value.gantimenu(24),
           child: Container(
