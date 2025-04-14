@@ -534,7 +534,7 @@ class NeracaPeriodeNotifier extends ChangeNotifier {
           "nosbb": "0190501",
           "nama_sbb": "Persediaan Materai",
           "type_posting": "",
-          "saldo": 2625.00
+          "saldo": 2625.00,
         },
         {
           "nosbb": "0190504",

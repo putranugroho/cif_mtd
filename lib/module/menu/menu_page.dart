@@ -24,6 +24,8 @@ import 'package:accounting/module/pejabat/pejabat_page.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_aset_page.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_bank_page.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_hutang_page.dart';
+import 'package:accounting/module/rekonsiliasi/rekonsiliasi_perantara_page.dart';
+import 'package:accounting/module/rekonsiliasi/rekonsiliasi_perantara_pasiva_page.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_piutang_page.dart';
 import 'package:accounting/module/setup/aktivasi/aktivasi_page.dart';
 import 'package:accounting/module/setup/coa/coa_page.dart';
@@ -364,7 +366,11 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                       ? RekonsiliasiPiutangPage()
                                                                                                                                                                                                                       : value.page == 53
                                                                                                                                                                                                                           ? RekonsiliasiAsetPage()
-                                                                                                                                                                                                                          : Container())
+                                                                                                                                                                                                                          : value.page == 55
+                                                                                                                                                                                                                              ? RekonsiliasiPerantaraPage()
+                                                                                                                                                                                                                              : value.page == 56
+                                                                                                                                                                                                                                  ? RekonsiliasiPerantaraPasivaPage()
+                                                                                                                                                                                                                                  : Container())
             ],
           ),
         )),

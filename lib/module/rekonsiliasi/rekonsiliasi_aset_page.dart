@@ -74,7 +74,7 @@ class RekonsiliasiAsetPage extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(right: 16),
                         width: 120,
-                        child: Text("KODE ASET"),
+                        child: Text("NO. ASET"),
                       ),
                       Container(
                         width: 120,
