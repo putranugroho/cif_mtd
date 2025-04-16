@@ -106,8 +106,6 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     }
   ];
 
-  List<CoaModel> listCoa = [];
-
   TextEditingController namaSbbAset = TextEditingController();
   TextEditingController namaTransaksi = TextEditingController();
   CoaModel? sbbAset;
@@ -163,6 +161,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     },
   ];
 
+  List<CoaModel> listCoa = [];
   List<Map<String, dynamic>> coa = [
     {
       "gol_acc": "1",

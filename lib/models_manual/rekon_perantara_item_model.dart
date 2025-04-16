@@ -1,7 +1,6 @@
+import 'package:accounting/models_manual/rekon_perantara_transaksi_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:quiver/core.dart';
-
-import 'index.dart';
 
 @immutable
 class RekonPerantaraItemModel {

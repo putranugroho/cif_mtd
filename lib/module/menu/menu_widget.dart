@@ -1197,6 +1197,33 @@ class MenuTransaksiWidget extends StatelessWidget {
           ),
         ),
         InkWell(
+          onTap: () => value.gantimenu(57),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.report,
+                  height: 30,
+                  color: value.page == 57 ? Colors.white : Colors.white70,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Perantara Aktiva/Pasiva",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 57 ? Colors.white : Colors.white70,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
           onTap: () => value.gantimenu(19),
           child: Container(
             width: MediaQuery.of(context).size.width,
@@ -1217,6 +1244,33 @@ class MenuTransaksiWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     color: value.page == 19 ? Colors.white : Colors.white70,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () => value.gantimenu(59),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.rupiahs,
+                  height: 30,
+                  color: value.page == 59 ? Colors.white : Colors.white70,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Bayar/Pendapatan dimuka",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 59 ? Colors.white : Colors.white70,
                   ),
                 )
               ],
@@ -1251,7 +1305,7 @@ class MenuTransaksiWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(52),
+          onTap: () => value.gantimenu(58),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -1261,43 +1315,16 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.debt,
                   height: 30,
-                  color: value.page == 52 ? Colors.white : Colors.white70,
+                  color: value.page == 58 ? Colors.white : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
                 ),
                 Text(
-                  "Hutang",
+                  "Hutang/Piutang",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 52 ? Colors.white : Colors.white70,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-        InkWell(
-          onTap: () => value.gantimenu(53),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
-            child: Row(
-              children: [
-                Image.asset(
-                  ImageAssets.rupiahs,
-                  height: 30,
-                  color: value.page == 53 ? Colors.white : Colors.white70,
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "Piutang",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: value.page == 53 ? Colors.white : Colors.white70,
+                    color: value.page == 58 ? Colors.white : Colors.white70,
                   ),
                 )
               ],
@@ -1385,7 +1412,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         width: 16,
                       ),
                       Text(
-                        "Hutang",
+                        "Hutang/Piutang",
                         style: TextStyle(
                           fontSize: 16,
                           color:
@@ -1396,37 +1423,37 @@ class MenuTransaksiWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              InkWell(
-                onTap: () => value.gantimenu(52),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Image.asset(
-                        ImageAssets.report,
-                        height: 30,
-                        color: value.page == 52 ? Colors.white : Colors.white70,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "Piutang",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color:
-                              value.page == 52 ? Colors.white : Colors.white70,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+              // InkWell(
+              //   onTap: () => value.gantimenu(52),
+              //   child: Container(
+              //     width: MediaQuery.of(context).size.width,
+              //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              //     decoration: BoxDecoration(),
+              //     child: Row(
+              //       children: [
+              //         SizedBox(
+              //           width: 16,
+              //         ),
+              //         Image.asset(
+              //           ImageAssets.report,
+              //           height: 30,
+              //           color: value.page == 52 ? Colors.white : Colors.white70,
+              //         ),
+              //         SizedBox(
+              //           width: 16,
+              //         ),
+              //         Text(
+              //           "Piutang",
+              //           style: TextStyle(
+              //             fontSize: 16,
+              //             color:
+              //                 value.page == 52 ? Colors.white : Colors.white70,
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //   ),
+              // ),
               InkWell(
                 onTap: () => value.gantimenu(53),
                 child: Container(
@@ -1509,42 +1536,11 @@ class MenuTransaksiWidget extends StatelessWidget {
                         width: 16,
                       ),
                       Text(
-                        "Perantara Aktiva",
+                        "Perantara Aktiva/Pasiva",
                         style: TextStyle(
                           fontSize: 16,
                           color:
                               value.page == 55 ? Colors.white : Colors.white70,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () => value.gantimenu(56),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Image.asset(
-                        ImageAssets.report,
-                        height: 30,
-                        color: value.page == 56 ? Colors.white : Colors.white70,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "Perantara Pasiva",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color:
-                              value.page == 56 ? Colors.white : Colors.white70,
                         ),
                       )
                     ],

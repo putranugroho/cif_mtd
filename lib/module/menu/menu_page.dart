@@ -1,4 +1,4 @@
-import 'package:accounting/module/aktivasi_users/aktivasi_users.dart';
+import 'package:accounting/module/aktivasi_users/aktivasi_users_page.dart';
 import 'package:accounting/module/closing_eom/closing_eom_page.dart';
 import 'package:accounting/module/dashboard/dashboard_page.dart';
 import 'package:accounting/module/gl/gl_page.dart';
@@ -21,6 +21,8 @@ import 'package:accounting/module/menu/menu_notifier.dart';
 import 'package:accounting/module/menu/menu_widget.dart';
 import 'package:accounting/module/neraca/neraca_berjalan_page.dart';
 import 'package:accounting/module/pejabat/pejabat_page.dart';
+import 'package:accounting/module/perantara/perantara_aktiva_page.dart';
+import 'package:accounting/module/perantara/perantara_pasiva_page.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_aset_page.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_bank_page.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_hutang_page.dart';
@@ -46,12 +48,14 @@ import 'package:accounting/module/setup_otorisasi/setup_otorisasi_page.dart';
 import 'package:accounting/module/transaksi/back_date/back_date_page.dart';
 import 'package:accounting/module/transaksi/bank/bank_transaksi_page.dart';
 import 'package:accounting/module/transaksi/banyak_transaksi/banyak_transaksi_page.dart';
+import 'package:accounting/module/transaksi/bayar_dimuka/bayar_dimuka_page.dart';
 import 'package:accounting/module/transaksi/hutang/hutang_page.dart';
 import 'package:accounting/module/transaksi/kas_kecil/kas_kecil_page.dart';
 import 'package:accounting/module/transaksi/laporan/laporan_transaksi_page.dart';
 import 'package:accounting/module/transaksi/otorisasi/otorisasi_transaksi_page.dart';
 import 'package:accounting/module/transaksi/piutang/piutang_page.dart';
 import 'package:accounting/module/transaksi/satu_transaksi/satu_transaksi_page.dart';
+import 'package:accounting/module/transaksi/transaksi_hutang/transaksi_hutang_page.dart';
 import 'package:accounting/utils/colors.dart';
 import 'package:accounting/utils/images_path.dart';
 import 'package:flutter/material.dart';
@@ -318,59 +322,65 @@ class MenuPage extends StatelessWidget {
                                                                                                                       ? OtorisasiTransaksiPage()
                                                                                                                       : value.page == 25
                                                                                                                           ? LaporanTransaksiPage()
-                                                                                                                          : value.page == 27
-                                                                                                                              ? ClosingEomPage()
-                                                                                                                              : value.page == 28
-                                                                                                                                  ? PerusahaanPage()
-                                                                                                                                  : value.page == 29
-                                                                                                                                      ? JabatanPage()
-                                                                                                                                      : value.page == 30
-                                                                                                                                          ? PejabatPage()
-                                                                                                                                          : value.page == 31
-                                                                                                                                              ? LevelPage()
-                                                                                                                                              : value.page == 32
-                                                                                                                                                  ? SetupPajakPage()
-                                                                                                                                                  : value.page == 33
-                                                                                                                                                      ? KelompokAsetPage()
-                                                                                                                                                      : value.page == 34
-                                                                                                                                                          ? GolonganAsetPage()
-                                                                                                                                                          : value.page == 35
-                                                                                                                                                              ? AoPage()
-                                                                                                                                                              : value.page == 36
-                                                                                                                                                                  ? AktivasiPage()
-                                                                                                                                                                  : value.page == 37
-                                                                                                                                                                      ? SbbKhususPage()
-                                                                                                                                                                      : value.page == 38
-                                                                                                                                                                          ? SetupClosingEomPage()
-                                                                                                                                                                          : value.page == 39
-                                                                                                                                                                              ? SetupOtorisasiPage()
-                                                                                                                                                                              : value.page == 43
-                                                                                                                                                                                  ? JurnalPage()
-                                                                                                                                                                                  : value.page == 44
-                                                                                                                                                                                      ? NeracaBerjalanPage()
-                                                                                                                                                                                      : value.page == 45
-                                                                                                                                                                                          ? NeracaPeriodePage()
-                                                                                                                                                                                          : value.page == 46
-                                                                                                                                                                                              ? LabaRugiBerjalanPage()
-                                                                                                                                                                                              : value.page == 47
-                                                                                                                                                                                                  ? TambahKelompokSbbKhususPage()
-                                                                                                                                                                                                  : value.page == 48
-                                                                                                                                                                                                      ? GlPage()
-                                                                                                                                                                                                      : value.page == 49
-                                                                                                                                                                                                          ? LabaRugiPeriodePage()
-                                                                                                                                                                                                          : value.page == 50
-                                                                                                                                                                                                              ? RekonsiliasiBankPage()
-                                                                                                                                                                                                              : value.page == 51
-                                                                                                                                                                                                                  ? RekonsiliasiHutangPage()
-                                                                                                                                                                                                                  : value.page == 52
-                                                                                                                                                                                                                      ? RekonsiliasiPiutangPage()
-                                                                                                                                                                                                                      : value.page == 53
-                                                                                                                                                                                                                          ? RekonsiliasiAsetPage()
-                                                                                                                                                                                                                          : value.page == 55
-                                                                                                                                                                                                                              ? RekonsiliasiPerantaraPage()
-                                                                                                                                                                                                                              : value.page == 56
-                                                                                                                                                                                                                                  ? RekonsiliasiPerantaraPasivaPage()
-                                                                                                                                                                                                                                  : Container())
+                                                                                                                          : value.page == 26
+                                                                                                                              ? AktivasiUsersPage()
+                                                                                                                              : value.page == 27
+                                                                                                                                  ? ClosingEomPage()
+                                                                                                                                  : value.page == 28
+                                                                                                                                      ? PerusahaanPage()
+                                                                                                                                      : value.page == 29
+                                                                                                                                          ? JabatanPage()
+                                                                                                                                          : value.page == 30
+                                                                                                                                              ? PejabatPage()
+                                                                                                                                              : value.page == 31
+                                                                                                                                                  ? LevelPage()
+                                                                                                                                                  : value.page == 32
+                                                                                                                                                      ? SetupPajakPage()
+                                                                                                                                                      : value.page == 33
+                                                                                                                                                          ? KelompokAsetPage()
+                                                                                                                                                          : value.page == 34
+                                                                                                                                                              ? GolonganAsetPage()
+                                                                                                                                                              : value.page == 35
+                                                                                                                                                                  ? AoPage()
+                                                                                                                                                                  : value.page == 36
+                                                                                                                                                                      ? AktivasiPage()
+                                                                                                                                                                      : value.page == 37
+                                                                                                                                                                          ? SbbKhususPage()
+                                                                                                                                                                          : value.page == 38
+                                                                                                                                                                              ? SetupClosingEomPage()
+                                                                                                                                                                              : value.page == 39
+                                                                                                                                                                                  ? SetupOtorisasiPage()
+                                                                                                                                                                                  : value.page == 43
+                                                                                                                                                                                      ? JurnalPage()
+                                                                                                                                                                                      : value.page == 44
+                                                                                                                                                                                          ? NeracaBerjalanPage()
+                                                                                                                                                                                          : value.page == 45
+                                                                                                                                                                                              ? NeracaPeriodePage()
+                                                                                                                                                                                              : value.page == 46
+                                                                                                                                                                                                  ? LabaRugiBerjalanPage()
+                                                                                                                                                                                                  : value.page == 47
+                                                                                                                                                                                                      ? TambahKelompokSbbKhususPage()
+                                                                                                                                                                                                      : value.page == 48
+                                                                                                                                                                                                          ? GlPage()
+                                                                                                                                                                                                          : value.page == 49
+                                                                                                                                                                                                              ? LabaRugiPeriodePage()
+                                                                                                                                                                                                              : value.page == 50
+                                                                                                                                                                                                                  ? RekonsiliasiBankPage()
+                                                                                                                                                                                                                  : value.page == 51
+                                                                                                                                                                                                                      ? RekonsiliasiHutangPage()
+                                                                                                                                                                                                                      : value.page == 52
+                                                                                                                                                                                                                          ? RekonsiliasiPiutangPage()
+                                                                                                                                                                                                                          : value.page == 53
+                                                                                                                                                                                                                              ? RekonsiliasiAsetPage()
+                                                                                                                                                                                                                              : value.page == 55
+                                                                                                                                                                                                                                  ? RekonsiliasiPerantaraPage()
+                                                                                                                                                                                                                                  : value.page == 57
+                                                                                                                                                                                                                                      ? PerantaraAktivaPage()
+                                                                                                                                                                                                                                      : value.page == 58
+                                                                                                                                                                                                                                          ? TransaksiHutangPage()
+                                                                                                                                                                                                                                          : value.page == 59
+                                                                                                                                                                                                                                              ? BayarDimukaPage()
+                                                                                                                                                                                                                                              : Container())
             ],
           ),
         )),

@@ -1138,6 +1138,25 @@ class CoaPage extends StatelessWidget {
                                                   ),
                                                 ),
                                                 const SizedBox(height: 16),
+                                                Row(
+                                                  children: [
+                                                    Text("Akun Perantara "),
+                                                    SizedBox(
+                                                      width: 8,
+                                                    ),
+                                                    Checkbox(
+                                                        activeColor:
+                                                            colorPrimary,
+                                                        value: value.perantara,
+                                                        onChanged: (e) {
+                                                          value
+                                                              .gantiperantara();
+                                                        })
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 16,
+                                                ),
                                               ],
                                             )
                                           : value.jnsAcc == "Sub Buku Besar"
@@ -1673,7 +1692,7 @@ class CoaPage extends StatelessWidget {
                                                           ],
                                                         )),
                                                       ],
-                                                    )
+                                                    ),
                                                   ],
                                                 )
                                               : SizedBox(),

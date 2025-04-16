@@ -1,6 +1,8 @@
 import 'package:accounting/models/index.dart';
 import 'package:flutter/material.dart';
 
+import '../../models_manual/rekon_perantara_model.dart';
+
 class RekonsiliasiPerantaraPasivaNotifier extends ChangeNotifier {
   final BuildContext context;
 

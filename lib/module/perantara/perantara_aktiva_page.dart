@@ -11,8 +11,8 @@ import '../../utils/colors.dart';
 import '../../utils/currency_formatted.dart';
 import '../../utils/format_currency.dart';
 
-class RekonsiliasiPerantaraPage extends StatelessWidget {
-  const RekonsiliasiPerantaraPage({super.key});
+class PerantaraAktivaPage extends StatelessWidget {
+  const PerantaraAktivaPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -146,6 +146,17 @@ class RekonsiliasiPerantaraPage extends StatelessWidget {
                               margin: EdgeInsets.only(right: 16),
                               child: Text(
                                 "SALDO",
+                                textAlign: TextAlign.end,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: 120,
+                              margin: EdgeInsets.only(right: 16),
+                              child: Text(
+                                "AKSI",
                                 textAlign: TextAlign.end,
                                 style: TextStyle(
                                   fontSize: 12,
@@ -290,6 +301,41 @@ class RekonsiliasiPerantaraPage extends StatelessWidget {
                                                                     ),
                                                                   ),
                                                                 ),
+                                                                InkWell(
+                                                                  onTap: () {
+                                                                    value
+                                                                        .tambah(
+                                                                            a);
+                                                                  },
+                                                                  child: Container(
+                                                                      width: 120,
+                                                                      margin: EdgeInsets.only(right: 16),
+                                                                      child: Container(
+                                                                        padding: EdgeInsets.symmetric(
+                                                                            horizontal:
+                                                                                16,
+                                                                            vertical:
+                                                                                4),
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color:
+                                                                              colorPrimary,
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(16),
+                                                                        ),
+                                                                        child:
+                                                                            Text(
+                                                                          "Tambah Trans.",
+                                                                          style:
+                                                                              TextStyle(
+                                                                            fontSize:
+                                                                                12,
+                                                                            color:
+                                                                                Colors.white,
+                                                                          ),
+                                                                        ),
+                                                                      )),
+                                                                ),
                                                               ],
                                                             ),
                                                           ),
@@ -369,6 +415,9 @@ class RekonsiliasiPerantaraPage extends StatelessWidget {
                                                                                       ),
                                                                                     ),
                                                                                   ),
+                                                                                  SizedBox(
+                                                                                    width: 136,
+                                                                                  )
                                                                                 ],
                                                                               ),
                                                                             ),
@@ -522,6 +571,41 @@ class RekonsiliasiPerantaraPage extends StatelessWidget {
                                                                     ),
                                                                   ),
                                                                 ),
+                                                                InkWell(
+                                                                  onTap: () {
+                                                                    value
+                                                                        .tambah(
+                                                                            a);
+                                                                  },
+                                                                  child: Container(
+                                                                      width: 120,
+                                                                      margin: EdgeInsets.only(right: 16),
+                                                                      child: Container(
+                                                                        padding: EdgeInsets.symmetric(
+                                                                            horizontal:
+                                                                                16,
+                                                                            vertical:
+                                                                                4),
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color:
+                                                                              colorPrimary,
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(16),
+                                                                        ),
+                                                                        child:
+                                                                            Text(
+                                                                          "Tambah Trans.",
+                                                                          style:
+                                                                              TextStyle(
+                                                                            fontSize:
+                                                                                12,
+                                                                            color:
+                                                                                Colors.white,
+                                                                          ),
+                                                                        ),
+                                                                      )),
+                                                                ),
                                                               ],
                                                             ),
                                                           ),
@@ -612,6 +696,9 @@ class RekonsiliasiPerantaraPage extends StatelessWidget {
                                                                                       ),
                                                                                     ),
                                                                                   ),
+                                                                                  SizedBox(
+                                                                                    width: 136,
+                                                                                  )
                                                                                 ],
                                                                               ),
                                                                             ),

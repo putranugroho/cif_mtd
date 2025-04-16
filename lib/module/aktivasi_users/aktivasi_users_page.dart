@@ -1,6 +1,4 @@
 import 'package:accounting/module/aktivasi_users/aktivasi_users_notifier.dart';
-import 'package:accounting/module/closing_eom/closing_eom_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -9,14 +7,14 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import '../../models/users_model.dart';
 import '../../utils/colors.dart';
 
-class ClosingEomPage extends StatelessWidget {
-  const ClosingEomPage({super.key});
+class AktivasiUsersPage extends StatelessWidget {
+  const AktivasiUsersPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => ClosingEomNotifier(context: context),
-      child: Consumer<ClosingEomNotifier>(
+      create: (_) => AktivasiUsersNotifier(context: context),
+      child: Consumer<AktivasiUsersNotifier>(
         builder: (context, value, child) => SafeArea(
             child: Scaffold(
           body: Column(
@@ -28,7 +26,7 @@ class ClosingEomPage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        "Closing EOM",
+                        "Aktivasi Users",
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -55,13 +53,13 @@ class ClosingEomPage extends StatelessWidget {
                     source: DetailDataSource(value),
                     columns: <GridColumn>[
                       GridColumn(
-                          width: 100,
-                          columnName: 'status',
+                          width: 50,
+                          columnName: 'no',
                           label: Container(
                               padding: EdgeInsets.all(6),
                               color: colorPrimary,
                               alignment: Alignment.center,
-                              child: Text('Status',
+                              child: Text('No',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w300,
                                     fontSize: 12,
@@ -115,28 +113,20 @@ class ClosingEomPage extends StatelessWidget {
                                     fontWeight: FontWeight.w300,
                                     color: Colors.white,
                                   )))),
+                      GridColumn(
+                          columnName: 'action',
+                          label: Container(
+                              color: colorPrimary,
+                              padding: EdgeInsets.all(6),
+                              alignment: Alignment.center,
+                              child: Text('Action',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w300,
+                                    color: Colors.white,
+                                  )))),
                     ],
                   ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                    border: Border(
-                        top: BorderSide(
-                  width: 1,
-                  color: Colors.grey,
-                ))),
-                child: Row(
-                  children: [
-                    Expanded(child: SizedBox()),
-                    ButtonPrimary(
-                      onTap: () {
-                        value.konfirmasi();
-                      },
-                      name: "Lanjutkan",
-                    )
-                  ],
                 ),
               )
             ],
@@ -148,12 +138,12 @@ class ClosingEomPage extends StatelessWidget {
 }
 
 class DetailDataSource extends DataGridSource {
-  DetailDataSource(ClosingEomNotifier value) {
+  DetailDataSource(AktivasiUsersNotifier value) {
     tindakanNotifier = value;
     buildRowData(value.listData);
   }
 
-  ClosingEomNotifier? tindakanNotifier;
+  AktivasiUsersNotifier? tindakanNotifier;
 
   List<DataGridRow> _laporanData = [];
   @override
@@ -163,7 +153,7 @@ class DetailDataSource extends DataGridSource {
     _laporanData = list
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
-                DataGridCell(columnName: 'status', value: (index++).toString()),
+                DataGridCell(columnName: 'no', value: (index++).toString()),
                 DataGridCell(columnName: 'userid', value: data.userid),
                 DataGridCell(columnName: 'namauser', value: data.namauser),
                 DataGridCell(columnName: 'tglexp', value: data.tglexp),
@@ -174,6 +164,7 @@ class DetailDataSource extends DataGridSource {
                         : data.lvluser == "S"
                             ? "Supervisor"
                             : "User"),
+                DataGridCell(columnName: 'action', value: data.userid),
               ],
             ))
         .toList();
@@ -206,36 +197,6 @@ class DetailDataSource extends DataGridSource {
                 ),
               ),
             ),
-          );
-        } else if (e.columnName == 'status') {
-          return Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-                width: 100,
-                child: int.parse(e.value) % 2 == 0
-                    ? Container(
-                        width: 20,
-                        height: 20,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.green,
-                            border: Border.all(
-                              width: 1,
-                              color: Colors.grey,
-                            )),
-                      )
-                    : Container(
-                        width: 20,
-                        height: 20,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.grey,
-                            border: Border.all(
-                              width: 1,
-                              color: Colors.grey,
-                            )),
-                      )),
           );
         } else {
           return Container(

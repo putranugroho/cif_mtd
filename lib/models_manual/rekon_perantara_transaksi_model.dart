@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:quiver/core.dart';
 
-import 'index.dart';
-
 @immutable
 class RekonPerantaraTransaksiModel {
   RekonPerantaraTransaksiModel({

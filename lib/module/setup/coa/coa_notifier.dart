@@ -32,6 +32,7 @@ class CoaNotifier extends ChangeNotifier {
     // noHeader.text = header!.nosbb;
     notifyListeners();
   }
+
   CoaModel? bukuBesar;
 
   CoaModel? header;
@@ -90,6 +91,12 @@ class CoaNotifier extends ChangeNotifier {
         bukuBesar!.nosbb.substring(3, 6) +
         noSbb.text.trim();
     resulttext.text = result;
+    notifyListeners();
+  }
+
+  var perantara = false;
+  gantiperantara() {
+    perantara = !perantara;
     notifyListeners();
   }
 

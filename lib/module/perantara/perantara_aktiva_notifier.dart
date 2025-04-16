@@ -3,10 +3,10 @@ import 'package:accounting/models_manual/rekon_perantara_item_model.dart';
 import 'package:accounting/models_manual/rekon_perantara_model.dart';
 import 'package:flutter/material.dart';
 
-class RekonsiliasiPerantaraNotifier extends ChangeNotifier {
+class PerantaraAktivaNotifier extends ChangeNotifier {
   final BuildContext context;
 
-  RekonsiliasiPerantaraNotifier({required this.context}) {
+  PerantaraAktivaNotifier({required this.context}) {
     for (Map<String, dynamic> i in data) {
       list.add(RekonPerantaraModel.fromJson(i));
     }

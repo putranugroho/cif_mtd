@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../models/rekon_perantara_item_model.dart';
 import '../../utils/colors.dart';
 import '../../utils/format_currency.dart';
 import '../../utils/images_path.dart';
@@ -80,6 +79,7 @@ class RekonsiliasiPerantaraPasivaPage extends StatelessWidget {
                         margin: EdgeInsets.only(right: 16),
                         child: Text(
                           "ACC. DEBET",
+                          style: TextStyle(fontSize: 12),
                         ),
                       ),
                       Container(
@@ -87,12 +87,16 @@ class RekonsiliasiPerantaraPasivaPage extends StatelessWidget {
                         margin: EdgeInsets.only(right: 16),
                         child: Text(
                           "ACC. KREDIT",
+                          style: TextStyle(fontSize: 12),
                         ),
                       ),
                       Expanded(
                         child: Container(
                           margin: EdgeInsets.only(right: 16),
-                          child: Text("KETERANGAN"),
+                          child: Text(
+                            "KETERANGAN",
+                            style: TextStyle(fontSize: 12),
+                          ),
                         ),
                       ),
                       Container(
@@ -101,6 +105,7 @@ class RekonsiliasiPerantaraPasivaPage extends StatelessWidget {
                         child: Text(
                           "DEBET",
                           textAlign: TextAlign.end,
+                          style: TextStyle(fontSize: 12),
                         ),
                       ),
                       Container(
@@ -109,6 +114,7 @@ class RekonsiliasiPerantaraPasivaPage extends StatelessWidget {
                         child: Text(
                           "KREDIT",
                           textAlign: TextAlign.end,
+                          style: TextStyle(fontSize: 12),
                         ),
                       ),
                       Container(
@@ -117,6 +123,7 @@ class RekonsiliasiPerantaraPasivaPage extends StatelessWidget {
                         child: Text(
                           "SALDO",
                           textAlign: TextAlign.end,
+                          style: TextStyle(fontSize: 12),
                         ),
                       ),
                     ],
@@ -158,11 +165,27 @@ class RekonsiliasiPerantaraPasivaPage extends StatelessWidget {
                                                     horizontal: 20),
                                                 child: Row(
                                                   children: [
-                                                    Expanded(
+                                                    Container(
+                                                      width: 360,
+                                                      margin: EdgeInsets.only(
+                                                          right: 16),
                                                       child: Text(
                                                         "(${a.nosbb}) - ${a.namaSbb}",
                                                         textAlign:
-                                                            TextAlign.start,
+                                                            TextAlign.end,
+                                                        style: TextStyle(
+                                                            fontSize: 12),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        margin: EdgeInsets.only(
+                                                            right: 16),
+                                                        child: Text(
+                                                          "",
+                                                          style: TextStyle(
+                                                              fontSize: 12),
+                                                        ),
                                                       ),
                                                     ),
                                                     Container(
@@ -171,6 +194,8 @@ class RekonsiliasiPerantaraPasivaPage extends StatelessWidget {
                                                           right: 16),
                                                       child: Text(
                                                         "",
+                                                        style: TextStyle(
+                                                            fontSize: 12),
                                                         textAlign:
                                                             TextAlign.end,
                                                       ),
@@ -183,6 +208,8 @@ class RekonsiliasiPerantaraPasivaPage extends StatelessWidget {
                                                         "${FormatCurrency.oCcyDecimal.format(a.saldo)}",
                                                         textAlign:
                                                             TextAlign.end,
+                                                        style: TextStyle(
+                                                            fontSize: 12),
                                                       ),
                                                     ),
                                                     Container(
@@ -193,6 +220,8 @@ class RekonsiliasiPerantaraPasivaPage extends StatelessWidget {
                                                         "${FormatCurrency.oCcyDecimal.format(a.saldo)}",
                                                         textAlign:
                                                             TextAlign.end,
+                                                        style: TextStyle(
+                                                            fontSize: 12),
                                                       ),
                                                     ),
                                                   ],
@@ -238,7 +267,10 @@ class RekonsiliasiPerantaraPasivaPage extends StatelessWidget {
                                                                       "(${d.creditAcc}) - ${d.namaCredit}",
                                                                       textAlign:
                                                                           TextAlign
-                                                                              .end,
+                                                                              .start,
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              12),
                                                                     ),
                                                                   ),
                                                                   Expanded(
@@ -247,8 +279,13 @@ class RekonsiliasiPerantaraPasivaPage extends StatelessWidget {
                                                                       margin: EdgeInsets.only(
                                                                           right:
                                                                               16),
-                                                                      child: Text(
-                                                                          ""),
+                                                                      child:
+                                                                          Text(
+                                                                        "",
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                12),
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                   Container(
@@ -261,6 +298,9 @@ class RekonsiliasiPerantaraPasivaPage extends StatelessWidget {
                                                                       textAlign:
                                                                           TextAlign
                                                                               .end,
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              12),
                                                                     ),
                                                                   ),
                                                                   Container(
@@ -273,6 +313,9 @@ class RekonsiliasiPerantaraPasivaPage extends StatelessWidget {
                                                                       textAlign:
                                                                           TextAlign
                                                                               .end,
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              12),
                                                                     ),
                                                                   ),
                                                                   Container(
@@ -285,6 +328,9 @@ class RekonsiliasiPerantaraPasivaPage extends StatelessWidget {
                                                                       textAlign:
                                                                           TextAlign
                                                                               .end,
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              12),
                                                                     ),
                                                                   ),
                                                                 ],

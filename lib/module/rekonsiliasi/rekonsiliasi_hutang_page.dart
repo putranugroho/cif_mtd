@@ -38,6 +38,38 @@ class RekonsiliasiHutangPage extends StatelessWidget {
                           ],
                         ),
                       ),
+                      Row(
+                        children: [
+                          Radio(
+                              value: "HUTANG",
+                              activeColor: colorPrimary,
+                              groupValue: value.jenis,
+                              onChanged: (e) {
+                                value.pilihJenis("HUTANG");
+                              }),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text("Hutang"),
+                          SizedBox(
+                            width: 24,
+                          ),
+                          Radio(
+                              value: "PIUTANG",
+                              activeColor: colorPrimary,
+                              groupValue: value.jenis,
+                              onChanged: (e) {
+                                value.pilihJenis("PIUTANG");
+                              }),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text("Piutang"),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
                       Container(
                         padding:
                             EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -124,474 +156,1007 @@ class RekonsiliasiHutangPage extends StatelessWidget {
                   height: 1,
                   color: Colors.grey,
                 ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      ListView.builder(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          itemCount: value.list
-                              .where((e) => e.statusInvoice == "A")
-                              .length,
-                          shrinkWrap: true,
-                          physics: ClampingScrollPhysics(),
-                          itemBuilder: (context, b) {
-                            final a = value.list
-                                .where((e) => e.statusInvoice == "A")
-                                .toList()[b];
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    // value.edit(a);
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(vertical: 2),
-                                    decoration: BoxDecoration(),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(right: 16),
-                                          width: 100,
-                                          child: Text(
-                                            "${a.statusInvoice == "A" ? "Aktif" : a.statusInvoice == "L" ? "Lunas" : a.statusInvoice == "M" ? "Macet" : "Hapus"}",
-                                            style: TextStyle(fontSize: 12),
+                value.jenis == "HUTANG"
+                    ? Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            ListView.builder(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                itemCount: value.list
+                                    .where((e) => e.statusInvoice == "A")
+                                    .length,
+                                shrinkWrap: true,
+                                physics: ClampingScrollPhysics(),
+                                itemBuilder: (context, b) {
+                                  final a = value.list
+                                      .where((e) => e.statusInvoice == "A")
+                                      .toList()[b];
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          // value.edit(a);
+                                        },
+                                        child: Container(
+                                          padding:
+                                              EdgeInsets.symmetric(vertical: 2),
+                                          decoration: BoxDecoration(),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                width: 100,
+                                                child: Text(
+                                                  "${a.statusInvoice == "A" ? "Aktif" : a.statusInvoice == "L" ? "Lunas" : a.statusInvoice == "M" ? "Macet" : "Hapus"}",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                width: 120,
+                                                child: Text(
+                                                  "${a.noInvoice}",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                width: 120,
+                                                child: Text(
+                                                  "${a.tglInvoice}",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                width: 150,
+                                                child: Text(
+                                                  "${a.tglJtTempo}",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                      right: 16),
+                                                  child: Text(
+                                                    "${a.nmSif}",
+                                                    style:
+                                                        TextStyle(fontSize: 12),
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 180,
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                child: Text(
+                                                  "${FormatCurrency.oCcyDecimal.format(int.parse(a.nilaiInvoice))}",
+                                                  textAlign: TextAlign.end,
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 120,
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                child: Text(
+                                                  "${DateFormat('dd MMM y HH:mm').format(DateTime.parse(a.tglInvoice))}",
+                                                  textAlign: TextAlign.start,
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(right: 16),
-                                          width: 120,
-                                          child: Text(
-                                            "${a.noInvoice}",
-                                            style: TextStyle(fontSize: 12),
-                                          ),
+                                      ),
+                                      SizedBox(
+                                        height: 4,
+                                      )
+                                    ],
+                                  );
+                                }),
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: 8),
+                              height: 1,
+                              color: Colors.grey,
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(right: 16),
+                                    width: 100,
+                                    child: Text(""),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 16),
+                                      child: Text(
+                                        "TOTAL HUTANG AKTIF",
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(right: 16),
-                                          width: 120,
-                                          child: Text(
-                                            "${a.tglInvoice}",
-                                            style: TextStyle(fontSize: 12),
-                                          ),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(right: 16),
-                                          width: 150,
-                                          child: Text(
-                                            "${a.tglJtTempo}",
-                                            style: TextStyle(fontSize: 12),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            margin: EdgeInsets.only(right: 16),
-                                            child: Text(
-                                              "${a.nmSif}",
-                                              style: TextStyle(fontSize: 12),
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 180,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
-                                            "${FormatCurrency.oCcyDecimal.format(int.parse(a.nilaiInvoice))}",
-                                            textAlign: TextAlign.end,
-                                            style: TextStyle(fontSize: 12),
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 120,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
-                                            "${DateFormat('dd MMM y HH:mm').format(DateTime.parse(a.tglInvoice))}",
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(fontSize: 12),
-                                          ),
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 4,
-                                )
-                              ],
-                            );
-                          }),
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 8),
-                        height: 1,
-                        color: Colors.grey,
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 16),
-                              width: 100,
-                              child: Text(""),
-                            ),
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.only(right: 16),
-                                child: Text(
-                                  "TOTAL HUTANG AKTIF",
-                                  textAlign: TextAlign.end,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 180,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "${FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "A").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)))}",
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 120,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "",
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 16),
-                              width: 100,
-                              child: Text(""),
-                            ),
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.only(right: 16),
-                                child: Text(
-                                  "(0290101) - HUTANG SUPPLIER AKTIF",
-                                  textAlign: TextAlign.end,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 180,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "${FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "A").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)))}",
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 120,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "",
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 16),
-                              width: 100,
-                              child: Text(""),
-                            ),
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.only(right: 16),
-                                child: Text(
-                                  "SELISIH",
-                                  textAlign: TextAlign.end,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 180,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "${FormatCurrency.oCcyDecimal.format(0)}",
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 120,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "",
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      ListView.builder(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          itemCount: value.list
-                              .where((e) => e.statusInvoice == "M")
-                              .length,
-                          shrinkWrap: true,
-                          physics: ClampingScrollPhysics(),
-                          itemBuilder: (context, b) {
-                            final a = value.list
-                                .where((e) => e.statusInvoice == "M")
-                                .toList()[b];
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    // value.edit(a);
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(vertical: 2),
-                                    decoration: BoxDecoration(),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(right: 16),
-                                          width: 100,
-                                          child: Text(
-                                            "${a.statusInvoice == "A" ? "Aktif" : a.statusInvoice == "L" ? "Lunas" : a.statusInvoice == "M" ? "Macet" : "Hapus"}",
-                                            style: TextStyle(fontSize: 12),
-                                          ),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(right: 16),
-                                          width: 120,
-                                          child: Text(
-                                            "${a.noInvoice}",
-                                            style: TextStyle(fontSize: 12),
-                                          ),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(right: 16),
-                                          width: 120,
-                                          child: Text(
-                                            "${a.tglInvoice}",
-                                            style: TextStyle(fontSize: 12),
-                                          ),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(right: 16),
-                                          width: 150,
-                                          child: Text(
-                                            "${a.tglJtTempo}",
-                                            style: TextStyle(fontSize: 12),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            margin: EdgeInsets.only(right: 16),
-                                            child: Text(
-                                              "${a.nmSif}",
-                                              style: TextStyle(fontSize: 12),
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 180,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
-                                            "${FormatCurrency.oCcyDecimal.format(int.parse(a.nilaiInvoice))}",
-                                            textAlign: TextAlign.end,
-                                            style: TextStyle(fontSize: 12),
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 120,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
-                                            "${DateFormat('dd MMM y HH:mm').format(DateTime.parse(a.tglInvoice))}",
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(fontSize: 12),
-                                          ),
-                                        ),
-                                      ],
+                                  Container(
+                                    width: 180,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "${FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "A").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)))}",
+                                      textAlign: TextAlign.end,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 4,
-                                )
-                              ],
-                            );
-                          }),
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 8),
-                        height: 1,
-                        color: Colors.grey,
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 16),
-                              width: 100,
-                              child: Text(""),
-                            ),
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.only(right: 16),
-                                child: Text(
-                                  "TOTAL HUTANG MACET",
-                                  textAlign: TextAlign.end,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
+                                  Container(
+                                    width: 120,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "",
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
                             ),
                             Container(
-                              width: 180,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "${FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)))}",
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(right: 16),
+                                    width: 100,
+                                    child: Text(""),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 16),
+                                      child: Text(
+                                        "(0290101) - HUTANG SUPPLIER AKTIF",
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 180,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "${FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "A").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)))}",
+                                      textAlign: TextAlign.end,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 120,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "",
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             Container(
-                              width: 120,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "",
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(right: 16),
+                                    width: 100,
+                                    child: Text(""),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 16),
+                                      child: Text(
+                                        "SELISIH",
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 180,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "${FormatCurrency.oCcyDecimal.format(0)}",
+                                      textAlign: TextAlign.end,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 120,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "",
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            ListView.builder(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                itemCount: value.list
+                                    .where((e) => e.statusInvoice == "M")
+                                    .length,
+                                shrinkWrap: true,
+                                physics: ClampingScrollPhysics(),
+                                itemBuilder: (context, b) {
+                                  final a = value.list
+                                      .where((e) => e.statusInvoice == "M")
+                                      .toList()[b];
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          // value.edit(a);
+                                        },
+                                        child: Container(
+                                          padding:
+                                              EdgeInsets.symmetric(vertical: 2),
+                                          decoration: BoxDecoration(),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                width: 100,
+                                                child: Text(
+                                                  "${a.statusInvoice == "A" ? "Aktif" : a.statusInvoice == "L" ? "Lunas" : a.statusInvoice == "M" ? "Macet" : "Hapus"}",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                width: 120,
+                                                child: Text(
+                                                  "${a.noInvoice}",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                width: 120,
+                                                child: Text(
+                                                  "${a.tglInvoice}",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                width: 150,
+                                                child: Text(
+                                                  "${a.tglJtTempo}",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                      right: 16),
+                                                  child: Text(
+                                                    "${a.nmSif}",
+                                                    style:
+                                                        TextStyle(fontSize: 12),
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 180,
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                child: Text(
+                                                  "${FormatCurrency.oCcyDecimal.format(int.parse(a.nilaiInvoice))}",
+                                                  textAlign: TextAlign.end,
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 120,
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                child: Text(
+                                                  "${DateFormat('dd MMM y HH:mm').format(DateTime.parse(a.tglInvoice))}",
+                                                  textAlign: TextAlign.start,
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 4,
+                                      )
+                                    ],
+                                  );
+                                }),
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: 8),
+                              height: 1,
+                              color: Colors.grey,
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(right: 16),
+                                    width: 100,
+                                    child: Text(""),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 16),
+                                      child: Text(
+                                        "TOTAL HUTANG MACET",
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 180,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "${FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)))}",
+                                      textAlign: TextAlign.end,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 120,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "",
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(right: 16),
+                                    width: 100,
+                                    child: Text(""),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 16),
+                                      child: Text(
+                                        "(0290102) - HUTANG SUPPLIER MACET",
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 180,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "${FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - 185000)}",
+                                      textAlign: TextAlign.end,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 120,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "",
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(right: 16),
+                                    width: 100,
+                                    child: Text(""),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 16),
+                                      child: Text(
+                                        "SELISIH",
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 180,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "${FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - ((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - 185000))}",
+                                      textAlign: TextAlign.end,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 120,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "",
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            ListView.builder(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                itemCount: value.listPiutang
+                                    .where((e) => e.statusInvoice == "A")
+                                    .length,
+                                shrinkWrap: true,
+                                physics: ClampingScrollPhysics(),
+                                itemBuilder: (context, b) {
+                                  final a = value.listPiutang
+                                      .where((e) => e.statusInvoice == "A")
+                                      .toList()[b];
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          // value.edit(a);
+                                        },
+                                        child: Container(
+                                          padding:
+                                              EdgeInsets.symmetric(vertical: 2),
+                                          decoration: BoxDecoration(),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                width: 100,
+                                                child: Text(
+                                                  "${a.statusInvoice == "A" ? "Aktif" : a.statusInvoice == "L" ? "Lunas" : a.statusInvoice == "M" ? "Macet" : "Hapus"}",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                width: 120,
+                                                child: Text(
+                                                  "${a.noInvoice}",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                width: 120,
+                                                child: Text(
+                                                  "${a.tglInvoice}",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                width: 150,
+                                                child: Text(
+                                                  "${a.tglJtTempo}",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                      right: 16),
+                                                  child: Text(
+                                                    "${a.nmSif}",
+                                                    style:
+                                                        TextStyle(fontSize: 12),
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 180,
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                child: Text(
+                                                  "${FormatCurrency.oCcyDecimal.format(int.parse(a.nilaiInvoice))}",
+                                                  textAlign: TextAlign.end,
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 120,
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                child: Text(
+                                                  "${DateFormat('dd MMM y HH:mm').format(DateTime.parse(a.tglInvoice))}",
+                                                  textAlign: TextAlign.start,
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 4,
+                                      )
+                                    ],
+                                  );
+                                }),
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: 8),
+                              height: 1,
+                              color: Colors.grey,
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(right: 16),
+                                    width: 100,
+                                    child: Text(""),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 16),
+                                      child: Text(
+                                        "TOTAL PIUTANG AKTIF",
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 180,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "${FormatCurrency.oCcyDecimal.format((value.listPiutang.where((e) => e.statusInvoice == "A").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)))}",
+                                      textAlign: TextAlign.end,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 120,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "",
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(right: 16),
+                                    width: 100,
+                                    child: Text(""),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 16),
+                                      child: Text(
+                                        "(0290101) - PIUTANG AKTIF",
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 180,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "${FormatCurrency.oCcyDecimal.format((value.listPiutang.where((e) => e.statusInvoice == "A").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)))}",
+                                      textAlign: TextAlign.end,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 120,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "",
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(right: 16),
+                                    width: 100,
+                                    child: Text(""),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 16),
+                                      child: Text(
+                                        "SELISIH",
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 180,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "${FormatCurrency.oCcyDecimal.format(0)}",
+                                      textAlign: TextAlign.end,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 120,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "",
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            ListView.builder(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                itemCount: value.listPiutang
+                                    .where((e) => e.statusInvoice == "M")
+                                    .length,
+                                shrinkWrap: true,
+                                physics: ClampingScrollPhysics(),
+                                itemBuilder: (context, b) {
+                                  final a = value.listPiutang
+                                      .where((e) => e.statusInvoice == "M")
+                                      .toList()[b];
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          // value.edit(a);
+                                        },
+                                        child: Container(
+                                          padding:
+                                              EdgeInsets.symmetric(vertical: 2),
+                                          decoration: BoxDecoration(),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                width: 100,
+                                                child: Text(
+                                                  "${a.statusInvoice == "A" ? "Aktif" : a.statusInvoice == "L" ? "Lunas" : a.statusInvoice == "M" ? "Macet" : "Hapus"}",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                width: 120,
+                                                child: Text(
+                                                  "${a.noInvoice}",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                width: 120,
+                                                child: Text(
+                                                  "${a.tglInvoice}",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                width: 150,
+                                                child: Text(
+                                                  "${a.tglJtTempo}",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                      right: 16),
+                                                  child: Text(
+                                                    "${a.nmSif}",
+                                                    style:
+                                                        TextStyle(fontSize: 12),
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 180,
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                child: Text(
+                                                  "${FormatCurrency.oCcyDecimal.format(int.parse(a.nilaiInvoice))}",
+                                                  textAlign: TextAlign.end,
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 120,
+                                                margin:
+                                                    EdgeInsets.only(right: 16),
+                                                child: Text(
+                                                  "${DateFormat('dd MMM y HH:mm').format(DateTime.parse(a.tglInvoice))}",
+                                                  textAlign: TextAlign.start,
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 4,
+                                      )
+                                    ],
+                                  );
+                                }),
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: 8),
+                              height: 1,
+                              color: Colors.grey,
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(right: 16),
+                                    width: 100,
+                                    child: Text(""),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 16),
+                                      child: Text(
+                                        "TOTAL PIUTANG MACET",
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 180,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "${FormatCurrency.oCcyDecimal.format((value.listPiutang.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)))}",
+                                      textAlign: TextAlign.end,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 120,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "",
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(right: 16),
+                                    width: 100,
+                                    child: Text(""),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 16),
+                                      child: Text(
+                                        "(0290102) - PIUTANG MACET",
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 180,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "${FormatCurrency.oCcyDecimal.format((value.listPiutang.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - 185000)}",
+                                      textAlign: TextAlign.end,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 120,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "",
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(right: 16),
+                                    width: 100,
+                                    child: Text(""),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 16),
+                                      child: Text(
+                                        "SELISIH",
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 180,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "${FormatCurrency.oCcyDecimal.format((value.listPiutang.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - ((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - 185000))}",
+                                      textAlign: TextAlign.end,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 120,
+                                    margin: EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      "",
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 16),
-                              width: 100,
-                              child: Text(""),
-                            ),
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.only(right: 16),
-                                child: Text(
-                                  "(0290102) - HUTANG SUPPLIER MACET",
-                                  textAlign: TextAlign.end,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 180,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "${FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - 185000)}",
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 120,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "",
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 16),
-                              width: 100,
-                              child: Text(""),
-                            ),
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.only(right: 16),
-                                child: Text(
-                                  "SELISIH",
-                                  textAlign: TextAlign.end,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 180,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "${FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - ((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - 185000))}",
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 120,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "",
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 SizedBox(
                   height: 80,
                 )
