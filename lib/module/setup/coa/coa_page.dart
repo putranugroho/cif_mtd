@@ -1140,6 +1140,61 @@ class CoaPage extends StatelessWidget {
                                                 const SizedBox(height: 16),
                                                 Row(
                                                   children: [
+                                                    Text("Hutang dan Piutang "),
+                                                    SizedBox(
+                                                      width: 8,
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Radio(
+                                                        activeColor:
+                                                            colorPrimary,
+                                                        value: "HUTANG",
+                                                        groupValue:
+                                                            value.hutangPiutang,
+                                                        onChanged: (e) {
+                                                          value
+                                                              .gantiHutangPiutang(
+                                                                  "HUTANG");
+                                                        }),
+                                                    SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    Text("Hutang"),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 4,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Radio(
+                                                        activeColor:
+                                                            colorPrimary,
+                                                        value: "PIUTANG",
+                                                        groupValue:
+                                                            value.hutangPiutang,
+                                                        onChanged: (e) {
+                                                          value
+                                                              .gantiHutangPiutang(
+                                                                  "PIUTANG");
+                                                        }),
+                                                    SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    Text("Piutang"),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 16,
+                                                ),
+                                                Row(
+                                                  children: [
                                                     Text("Akun Perantara "),
                                                     SizedBox(
                                                       width: 8,

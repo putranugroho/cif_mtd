@@ -17,6 +17,7 @@ export 'golongan_aset_model.dart';
 export 'kelompok_aset_model.dart';
 export 'piutang_hutang_model.dart';
 export 'rekon_bank_model.dart';
+export 'pembayaran_hutang_piutang_model.dart';
 export 'bank_model.dart';
 export 'aktivasi_model.dart';
 export 'level_model.dart';

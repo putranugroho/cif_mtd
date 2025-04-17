@@ -16,5 +16,6 @@
     "kode_pt": "",
     "kode_kantor": "",
     "kode_induk": "",
-    "kode_ao": ""
+    "kode_ao": "",
+    "item_pembayaran": "$[]pembayaran_hutang_piutang_model"
 }

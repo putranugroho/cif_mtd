@@ -4,9 +4,12 @@ import 'package:accounting/utils/button_custom.dart';
 import 'package:accounting/utils/colors.dart';
 import 'package:accounting/utils/format_currency.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+
+import '../../../utils/currency_formatted.dart';
 
 class TransaksiHutangPage extends StatelessWidget {
   const TransaksiHutangPage({super.key});
@@ -139,6 +142,34 @@ class TransaksiHutangPage extends StatelessWidget {
                                     children: [
                                       Container(
                                         width: 300,
+                                        child: Text("Jenis Invoice "),
+                                      ),
+                                      Container(
+                                        width: 16,
+                                        child: Text(": "),
+                                      ),
+                                      Expanded(
+                                          child: TextFormField(
+                                        readOnly: true,
+                                        controller: value.jenis,
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.grey[300],
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                          ),
+                                        ),
+                                      )),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 24,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 300,
                                         child: Text("Tanggal Invoice "),
                                       ),
                                       Container(
@@ -183,31 +214,158 @@ class TransaksiHutangPage extends StatelessWidget {
                                   SizedBox(
                                     height: 24,
                                   ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        width: 300,
-                                        child: Text("Nominal Tagihan"),
-                                      ),
-                                      Container(
-                                        width: 16,
-                                        child: Text(": "),
-                                      ),
-                                      Expanded(
-                                          child: TextFormField(
-                                        readOnly: true,
-                                        controller: value.tagihan,
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.grey[300],
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                          ),
+                                  value.piutangHutangModel != null
+                                      ? value.piutangHutangModel!.bertahap ==
+                                              "Y"
+                                          ? Row(
+                                              children: [
+                                                Container(
+                                                  width: 300,
+                                                  child:
+                                                      Text("Nominal Tagihan"),
+                                                ),
+                                                Container(
+                                                  width: 16,
+                                                  child: Text(": "),
+                                                ),
+                                                Expanded(
+                                                    child: TextFormField(
+                                                  readOnly: true,
+                                                  controller: value.tagihan,
+                                                  decoration: InputDecoration(
+                                                    fillColor: Colors.grey[300],
+                                                    filled: true,
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                )),
+                                                SizedBox(
+                                                  width: 32,
+                                                ),
+                                                Container(
+                                                  width: 300,
+                                                  child: Text("Tahapan Ke"),
+                                                ),
+                                                Container(
+                                                  width: 16,
+                                                  child: Text(": "),
+                                                ),
+                                                Expanded(
+                                                    child: TextFormField(
+                                                  readOnly: true,
+                                                  controller: value.tahap,
+                                                  decoration: InputDecoration(
+                                                    fillColor: Colors.grey[300],
+                                                    filled: true,
+                                                    suffixIcon: value
+                                                                .piutangHutangModel !=
+                                                            null
+                                                        ? value.piutangHutangModel!
+                                                                    .bertahap ==
+                                                                "Y"
+                                                            ? IconButton(
+                                                                onPressed: () {
+                                                                  value
+                                                                      .rincianBertahap();
+                                                                },
+                                                                icon: Icon(Icons
+                                                                    .visibility))
+                                                            : SizedBox()
+                                                        : SizedBox(),
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                )),
+                                              ],
+                                            )
+                                          : Row(
+                                              children: [
+                                                Container(
+                                                  width: 300,
+                                                  child:
+                                                      Text("Nominal Tagihan"),
+                                                ),
+                                                Container(
+                                                  width: 16,
+                                                  child: Text(": "),
+                                                ),
+                                                Expanded(
+                                                    child: TextFormField(
+                                                  readOnly: true,
+                                                  controller: value.tagihan,
+                                                  decoration: InputDecoration(
+                                                    fillColor: Colors.grey[300],
+                                                    filled: true,
+                                                    suffixIcon: value
+                                                                .piutangHutangModel !=
+                                                            null
+                                                        ? value.piutangHutangModel!
+                                                                    .bertahap ==
+                                                                "Y"
+                                                            ? IconButton(
+                                                                onPressed: () {
+                                                                  value
+                                                                      .rincianBertahap();
+                                                                },
+                                                                icon: Icon(Icons
+                                                                    .visibility))
+                                                            : SizedBox()
+                                                        : SizedBox(),
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                )),
+                                              ],
+                                            )
+                                      : Row(
+                                          children: [
+                                            Container(
+                                              width: 300,
+                                              child: Text("Nominal Tagihan"),
+                                            ),
+                                            Container(
+                                              width: 16,
+                                              child: Text(": "),
+                                            ),
+                                            Expanded(
+                                                child: TextFormField(
+                                              readOnly: true,
+                                              controller: value.tagihan,
+                                              decoration: InputDecoration(
+                                                fillColor: Colors.grey[300],
+                                                filled: true,
+                                                suffixIcon: value
+                                                            .piutangHutangModel !=
+                                                        null
+                                                    ? value.piutangHutangModel!
+                                                                .bertahap ==
+                                                            "Y"
+                                                        ? IconButton(
+                                                            onPressed: () {
+                                                              value
+                                                                  .rincianBertahap();
+                                                            },
+                                                            icon: Icon(Icons
+                                                                .visibility))
+                                                        : SizedBox()
+                                                    : SizedBox(),
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                              ),
+                                            )),
+                                          ],
                                         ),
-                                      )),
-                                    ],
-                                  ),
                                   SizedBox(
                                     height: 24,
                                   ),
@@ -223,7 +381,49 @@ class TransaksiHutangPage extends StatelessWidget {
                                       ),
                                       Expanded(
                                           child: TextFormField(
+                                        onChanged: (e) {
+                                          value.gantinominal();
+                                        },
+                                        controller: value.nominal,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          CurrencyInputFormatter(),
+                                        ],
                                         decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                          ),
+                                        ),
+                                      )),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 24,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 300,
+                                        child: Text("Sisa Pembayaran"),
+                                      ),
+                                      Container(
+                                        width: 16,
+                                        child: Text(": "),
+                                      ),
+                                      Expanded(
+                                          child: TextFormField(
+                                        readOnly: true,
+                                        controller: value.sisa,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          CurrencyInputFormatter(),
+                                        ],
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.grey[300],
+                                          filled: true,
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(6),
@@ -349,184 +549,665 @@ class TransaksiHutangPage extends StatelessWidget {
                                   SizedBox(
                                     height: 24,
                                   ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 300,
+                                        child: Text("Akun Sisa Pembayaran"),
+                                      ),
+                                      Container(
+                                        width: 16,
+                                        child: Text(": "),
+                                      ),
+                                      Expanded(
+                                        child: TypeAheadField<NeracaItemModel>(
+                                          controller: value.namaSbbDebet,
+                                          suggestionsCallback: (search) =>
+                                              value.cariAkun(search),
+                                          builder:
+                                              (context, controller, focusNode) {
+                                            return TextField(
+                                                controller: controller,
+                                                focusNode: focusNode,
+                                                autofocus: true,
+                                                decoration: InputDecoration(
+                                                  border: OutlineInputBorder(),
+                                                  labelText: 'Cari Akun Sisa Pembayaran',
+                                                ));
+                                          },
+                                          itemBuilder: (context, city) {
+                                            return ListTile(
+                                              title: Text(city.namaSbb),
+                                              // subtitle: Text(city.nmSif),
+                                            );
+                                          },
+                                          onSelected: (city) {
+                                            value.pilihCoaDebet(city);
+                                          },
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 16,
+                                      ),
+                                      Container(
+                                          width: 150,
+                                          child: TextFormField(
+                                            controller: value.noSbbDebet,
+                                            decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                              ),
+                                            ),
+                                          )),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 24,
+                                  ),
                                 ],
                               )
                             : Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                          width: 30,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Checkbox(
-                                              activeColor: colorPrimary,
-                                              value: value.semua,
-                                              onChanged: (e) {
-                                                value.pilihSemua();
-                                              })),
-                                      Container(
-                                        width: 26,
-                                        margin: EdgeInsets.only(right: 16),
-                                        child: Text(
-                                          "No. ",
+                                  Container(
+                                    padding: EdgeInsets.all(20),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                      width: 1,
+                                      color: Colors.grey,
+                                    )),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Text(
+                                          "Hutang",
                                           style: TextStyle(
-                                            fontSize: 12,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                      ),
-                                      Container(
-                                        width: 150,
-                                        margin: EdgeInsets.only(right: 16),
-                                        child: Text(
-                                          "Status",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
+                                        SizedBox(
+                                          height: 16,
                                         ),
-                                      ),
-                                      Container(
-                                        width: 150,
-                                        margin: EdgeInsets.only(right: 16),
-                                        child: Text(
-                                          "No. Invoice",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 26,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "No. ",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 80,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "Status",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 120,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "No. Invoice",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 100,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "Tgl. Invoice",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 120,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "Nominal Tagihan",
+                                                textAlign: TextAlign.end,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 120,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "Nominal Bayar",
+                                                textAlign: TextAlign.end,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 120,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "Sisa",
+                                                textAlign: TextAlign.end,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 80,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "Bertahap",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 120,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "Tgl. Jatuh Tempo",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                      Container(
-                                        width: 200,
-                                        margin: EdgeInsets.only(right: 16),
-                                        child: Text(
-                                          "Nominal Tagihan",
-                                          textAlign: TextAlign.end,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
+                                        Container(
+                                          margin:
+                                              EdgeInsets.symmetric(vertical: 8),
+                                          height: 1,
+                                          color: Colors.grey,
                                         ),
-                                      ),
-                                      Container(
-                                        width: 150,
-                                        margin: EdgeInsets.only(right: 16),
-                                        child: Text(
-                                          "Tgl. Invoice",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                        ListView.builder(
+                                            shrinkWrap: true,
+                                            physics: ClampingScrollPhysics(),
+                                            itemCount: value.list
+                                                .where((e) =>
+                                                    e.nmSif
+                                                        .toLowerCase()
+                                                        .contains(value
+                                                            .customerSupplierModel!
+                                                            .nmSif
+                                                            .toLowerCase()) &&
+                                                    e.jnsInvoice == "1")
+                                                .length,
+                                            itemBuilder: (context, b) {
+                                              final data = value.list
+                                                  .where((e) =>
+                                                      e.nmSif
+                                                          .toLowerCase()
+                                                          .contains(value
+                                                              .customerSupplierModel!
+                                                              .nmSif
+                                                              .toLowerCase()) &&
+                                                      e.jnsInvoice == "1")
+                                                  .toList()[b];
+                                              var no = b + 1;
+                                              return Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () {
+                                                      value.pilihInvoice(data);
+                                                    },
+                                                    child: Row(
+                                                      children: [
+                                                        Container(
+                                                          width: 26,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            "${no}. ",
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 80,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            "${data.statusInvoice == "A" ? "Aktif" : "Macet"}",
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 120,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            "${data.noInvoice}",
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 100,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            "${DateFormat('dd MMM y').format(DateTime.parse(data.tglInvoice))}",
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 120,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            "${FormatCurrency.oCcy.format(int.parse(data.nilaiInvoice))}",
+                                                            textAlign:
+                                                                TextAlign.end,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 120,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            "${FormatCurrency.oCcy.format(int.parse(data.nilaiBayar))}",
+                                                            textAlign:
+                                                                TextAlign.end,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 120,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            "${FormatCurrency.oCcy.format(int.parse(data.nilaiInvoice) - int.parse(data.nilaiBayar))}",
+                                                            textAlign:
+                                                                TextAlign.end,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 80,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            "${data.bertahap}",
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 120,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            data.bertahap == "N"
+                                                                ? "${DateFormat('dd MM y').format(DateTime.parse(data.tglJtTempo))}"
+                                                                : "",
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 16,
+                                                  )
+                                                ],
+                                              );
+                                            })
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 16,
                                   ),
                                   Container(
-                                    margin: EdgeInsets.symmetric(vertical: 8),
-                                    height: 1,
-                                    color: Colors.grey,
-                                  ),
-                                  ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: value.list
-                                          .where((e) => e.nmSif
-                                              .toLowerCase()
-                                              .contains(value
-                                                  .customerSupplierModel!.nmSif
-                                                  .toLowerCase()))
-                                          .length,
-                                      physics: ClampingScrollPhysics(),
-                                      itemBuilder: (context, i) {
-                                        final data = value.list
-                                            .where((e) => e.nmSif
-                                                .toLowerCase()
-                                                .contains(value
-                                                    .customerSupplierModel!
-                                                    .nmSif
-                                                    .toLowerCase()))
-                                            .toList()[i];
-                                        var no = i + 1;
-                                        return Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
+                                    padding: EdgeInsets.all(20),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                      width: 1,
+                                      color: Colors.grey,
+                                    )),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Text(
+                                          "Piutang",
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 16,
+                                        ),
+                                        Row(
                                           children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                    width: 30,
-                                                    margin: EdgeInsets.only(
-                                                        right: 16),
-                                                    child: Checkbox(
-                                                        activeColor:
-                                                            colorPrimary,
-                                                        value: value
-                                                            .listCustomerInvoice[i],
-                                                        onChanged: (e) {
-                                                          value
-                                                              .pilihCustomerInvoice(
-                                                                  i);
-                                                        })),
-                                                Container(
-                                                  width: 26,
-                                                  margin: EdgeInsets.only(
-                                                      right: 16),
-                                                  child: Text(
-                                                    "${no}. ",
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
+                                            Container(
+                                              width: 26,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "No. ",
+                                                style: TextStyle(
+                                                  fontSize: 12,
                                                 ),
-                                                Container(
-                                                  width: 150,
-                                                  margin: EdgeInsets.only(
-                                                      right: 16),
-                                                  child: Text(
-                                                    "${data.statusInvoice == "A" ? "Aktif" : data.statusInvoice == "M" ? "Macet" : "Lunas"}",
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: 150,
-                                                  margin: EdgeInsets.only(
-                                                      right: 16),
-                                                  child: Text(
-                                                    "${data.noInvoice}",
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: 200,
-                                                  margin: EdgeInsets.only(
-                                                      right: 16),
-                                                  child: Text(
-                                                    "${FormatCurrency.oCcy.format(int.parse(data.nilaiInvoice))}",
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                    ),
-                                                    textAlign: TextAlign.end,
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: 150,
-                                                  margin: EdgeInsets.only(
-                                                      right: 16),
-                                                  child: Text(
-                                                    "${DateFormat('dd MMM y').format(DateTime.parse(data.tglInvoice))}",
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
+                                              ),
                                             ),
-                                            SizedBox(
-                                              height: 16,
-                                            )
+                                            Container(
+                                              width: 80,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "Status",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 120,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "No. Invoice",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 100,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "Tgl. Invoice",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 120,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "Nominal Tagihan",
+                                                textAlign: TextAlign.end,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 120,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "Nominal Bayar",
+                                                textAlign: TextAlign.end,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 120,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "Sisa",
+                                                textAlign: TextAlign.end,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 80,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "Bertahap",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 120,
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text(
+                                                "Tgl. Jatuh Tempo",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
                                           ],
-                                        );
-                                      })
+                                        ),
+                                        Container(
+                                          margin:
+                                              EdgeInsets.symmetric(vertical: 8),
+                                          height: 1,
+                                          color: Colors.grey,
+                                        ),
+                                        ListView.builder(
+                                            shrinkWrap: true,
+                                            physics: ClampingScrollPhysics(),
+                                            itemCount: value.list
+                                                .where((e) =>
+                                                    e.nmSif
+                                                        .toLowerCase()
+                                                        .contains(value
+                                                            .customerSupplierModel!
+                                                            .nmSif
+                                                            .toLowerCase()) &&
+                                                    e.jnsInvoice == "2")
+                                                .length,
+                                            itemBuilder: (context, b) {
+                                              final data = value.list
+                                                  .where((e) =>
+                                                      e.nmSif
+                                                          .toLowerCase()
+                                                          .contains(value
+                                                              .customerSupplierModel!
+                                                              .nmSif
+                                                              .toLowerCase()) &&
+                                                      e.jnsInvoice == "2")
+                                                  .toList()[b];
+                                              var no = b + 1;
+                                              return Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () {
+                                                      value.pilihInvoice(data);
+                                                    },
+                                                    child: Row(
+                                                      children: [
+                                                        Container(
+                                                          width: 26,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            "${no}. ",
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 80,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            "${data.statusInvoice == "A" ? "Aktif" : "Macet"}",
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 120,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            "${data.noInvoice}",
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 100,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            "${DateFormat('dd MMM y').format(DateTime.parse(data.tglInvoice))}",
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 120,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            "${FormatCurrency.oCcy.format(int.parse(data.nilaiInvoice))}",
+                                                            textAlign:
+                                                                TextAlign.end,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 120,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            "${FormatCurrency.oCcy.format(int.parse(data.nilaiBayar))}",
+                                                            textAlign:
+                                                                TextAlign.end,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 120,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            "${FormatCurrency.oCcy.format(int.parse(data.nilaiInvoice) - int.parse(data.nilaiBayar))}",
+                                                            textAlign:
+                                                                TextAlign.end,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 80,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            "${data.bertahap}",
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 120,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Text(
+                                                            data.bertahap == "N"
+                                                                ? "${DateFormat('dd MM y').format(DateTime.parse(data.tglJtTempo))}"
+                                                                : "",
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 16,
+                                                  )
+                                                ],
+                                              );
+                                            })
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 16,
+                                  )
                                 ],
                               )
                       ],

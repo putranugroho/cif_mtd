@@ -1,6 +1,7 @@
 import 'package:accounting/models/index.dart';
 import 'package:accounting/utils/format_currency.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../models/piutang_hutang_model.dart';
 
@@ -65,9 +66,21 @@ class TransaksiHutangNotifier extends ChangeNotifier {
     }
   }
 
+  gantinominal() {
+    sisa.text = FormatCurrency.oCcy
+        .format(int.parse(nominal.text.replaceAll(",", "")) -
+            int.parse(piutangHutangModel!.nilaiInvoice))
+        .replaceAll(".", ",");
+    notifyListeners();
+  }
+
+  TextEditingController sisa = TextEditingController();
+  TextEditingController nominal = TextEditingController();
   TextEditingController namaSbbDebet = TextEditingController();
   TextEditingController tagihan = TextEditingController();
+  TextEditingController jenis = TextEditingController();
   TextEditingController noSbbDebet = TextEditingController();
+  TextEditingController tahap = TextEditingController();
   TextEditingController namaSbbKredit = TextEditingController();
   TextEditingController noSbbKredit = TextEditingController();
   pilihCoaDebet(NeracaItemModel value) {
@@ -86,13 +99,147 @@ class TransaksiHutangNotifier extends ChangeNotifier {
   pilihInvoice(PiutangHutangModel value) {
     pencarianInvoice = true;
     piutangHutangModel = value;
+    jenis.text = piutangHutangModel!.jnsInvoice == "1" ? "Hutang" : "Piutang";
     noInvoice.text = piutangHutangModel!.noInvoice;
     tglInvoice.text = piutangHutangModel!.tglInvoice;
     customer.text = piutangHutangModel!.nmSif;
-    tagihan.text = FormatCurrency.oCcy
-        .format(int.parse(piutangHutangModel!.nilaiInvoice))
-        .replaceAll(".", ",");
+    tahap.text = ((piutangHutangModel!.itemPembayaran.length) + 1).toString();
+    tagihan.text = piutangHutangModel!.bertahap == "Y"
+        ? FormatCurrency.oCcy
+            .format(int.parse(piutangHutangModel!.nilaiInvoice) /
+                int.parse(piutangHutangModel!.jumlahTahap))
+            .replaceAll(".", ",")
+        : FormatCurrency.oCcy
+            .format(int.parse(piutangHutangModel!.nilaiInvoice))
+            .replaceAll(".", ",");
     notifyListeners();
+  }
+
+  rincianBertahap() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              width: 600,
+              decoration: BoxDecoration(color: Colors.white),
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                          child: Text(
+                        "Rincian Pembayaran",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          width: 30,
+                          height: 30,
+                          decoration: BoxDecoration(
+                              color: Colors.grey[300], shape: BoxShape.circle),
+                          child: Icon(
+                            Icons.close,
+                            size: 15,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  ListView.builder(
+                      itemCount: int.parse(piutangHutangModel!.jumlahTahap),
+                      shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
+                      itemBuilder: (context, i) {
+                        var no = i + 1;
+                        double tagihan =
+                            int.parse(piutangHutangModel!.nilaiInvoice) /
+                                int.parse(piutangHutangModel!.jumlahTahap);
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  width: 26,
+                                  child: Text(
+                                    "$no. ",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: 100,
+                                  child: Text(
+                                    "${DateFormat('dd MMM y').format(
+                                      DateTime(
+                                          int.parse(DateFormat('y').format(
+                                            DateTime.parse(
+                                                piutangHutangModel!.tglInvoice),
+                                          )),
+                                          int.parse(DateFormat('MM').format(
+                                                DateTime.parse(
+                                                    piutangHutangModel!
+                                                        .tglInvoice),
+                                              )) +
+                                              i,
+                                          int.parse(DateFormat('dd').format(
+                                            DateTime.parse(
+                                                piutangHutangModel!.tglInvoice),
+                                          ))),
+                                    )}",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                    child: Text(
+                                  "${FormatCurrency.oCcy.format(tagihan.toInt())}",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                )),
+                                Icon(
+                                  (i + 1) <=
+                                          (piutangHutangModel!
+                                              .itemPembayaran.length)
+                                      ? Icons.check_circle
+                                      : Icons.warning,
+                                  color: (i + 1) <=
+                                          (piutangHutangModel!
+                                              .itemPembayaran.length)
+                                      ? Colors.green
+                                      : Colors.orange,
+                                  size: 15,
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 8,
+                            )
+                          ],
+                        );
+                      })
+                ],
+              ),
+            ),
+          );
+        });
   }
 
   List<CustomerSupplierModel> listcustomer = [];
@@ -164,12 +311,13 @@ class TransaksiHutangNotifier extends ChangeNotifier {
       "bertahap": "N",
       "jumlah_tahap": "",
       "tgl_bayar": "",
-      "nilai_bayar": "",
+      "nilai_bayar": "0",
       "status_invoice": "A",
       "kode_pt": "001",
       "kode_kantor": "10011",
       "kode_induk": "",
-      "kode_ao": ""
+      "kode_ao": "",
+      "item_pembayaran": []
     },
     {
       "no_invoice": "INV10000002",
@@ -184,12 +332,34 @@ class TransaksiHutangNotifier extends ChangeNotifier {
       "bertahap": "Y",
       "jumlah_tahap": "12",
       "tgl_bayar": "",
-      "nilai_bayar": "",
+      "nilai_bayar": "2000000",
       "status_invoice": "A",
       "kode_pt": "001",
       "kode_kantor": "10011",
       "kode_induk": "",
-      "kode_ao": ""
+      "kode_ao": "",
+      "item_pembayaran": [
+        {
+          "no_invoice": "INV10000002",
+          "jns_invoice": "2",
+          "jumlah_tahap": "12",
+          "ke": "1",
+          "nilai_tahap": "1000000",
+          "nilai_bayar": "1000000",
+          "tgl_jt_tempo": "2025-05-30",
+          "status_bayar": "1"
+        },
+        {
+          "no_invoice": "INV10000002",
+          "jns_invoice": "2",
+          "jumlah_tahap": "12",
+          "ke": "2",
+          "nilai_tahap": "1000000",
+          "nilai_bayar": "1000000",
+          "tgl_jt_tempo": "2025-06-30",
+          "status_bayar": "1"
+        },
+      ]
     }
   ];
 

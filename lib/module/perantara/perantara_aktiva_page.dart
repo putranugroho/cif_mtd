@@ -1071,6 +1071,50 @@ class PerantaraAktivaPage extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
+                                        "Sisa Saldo",
+                                        style: const TextStyle(fontSize: 12),
+                                      ),
+                                      const SizedBox(width: 5),
+                                      const Text(
+                                        "*",
+                                        style: TextStyle(fontSize: 8),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  TextFormField(
+                                    readOnly: true,
+                                    textInputAction: TextInputAction.done,
+                                    controller: value.sisaSaldo,
+                                    maxLines: 1,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      CurrencyInputFormatter(),
+                                    ],
+                                    validator: (e) {
+                                      if (e!.isEmpty) {
+                                        return "Wajib diisi";
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                    decoration: InputDecoration(
+                                      hintText: "Sisa Saldo",
+                                      filled: true,
+                                      fillColor: Colors.grey[200],
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
                                         "Nominal",
                                         style: const TextStyle(fontSize: 12),
                                       ),
@@ -1462,6 +1506,50 @@ class PerantaraAktivaPage extends StatelessWidget {
                                     ],
                                   ),
                                   const SizedBox(height: 16),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Sisa Saldo",
+                                        style: const TextStyle(fontSize: 12),
+                                      ),
+                                      const SizedBox(width: 5),
+                                      const Text(
+                                        "*",
+                                        style: TextStyle(fontSize: 8),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  TextFormField(
+                                    readOnly: true,
+                                    textInputAction: TextInputAction.done,
+                                    controller: value.sisaSaldo,
+                                    maxLines: 1,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      CurrencyInputFormatter(),
+                                    ],
+                                    validator: (e) {
+                                      if (e!.isEmpty) {
+                                        return "Wajib diisi";
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                    decoration: InputDecoration(
+                                      hintText: "Sisa Saldo",
+                                      filled: true,
+                                      fillColor: Colors.grey[200],
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
                                   Row(
                                     children: [
                                       Text(

@@ -25,6 +25,7 @@ class PiutangHutangModel {
     required this.kodeKantor,
     required this.kodeInduk,
     required this.kodeAo,
+    required this.itemPembayaran,
   });
 
   final String noInvoice;
@@ -45,6 +46,7 @@ class PiutangHutangModel {
   final String kodeKantor;
   final String kodeInduk;
   final String kodeAo;
+  final List<PembayaranHutangPiutangModel> itemPembayaran;
 
   factory PiutangHutangModel.fromJson(Map<String,dynamic> json) => PiutangHutangModel(
     noInvoice: json['no_invoice'].toString(),
@@ -64,7 +66,8 @@ class PiutangHutangModel {
     kodePt: json['kode_pt'].toString(),
     kodeKantor: json['kode_kantor'].toString(),
     kodeInduk: json['kode_induk'].toString(),
-    kodeAo: json['kode_ao'].toString()
+    kodeAo: json['kode_ao'].toString(),
+    itemPembayaran: (json['item_pembayaran'] as List? ?? []).map((e) => PembayaranHutangPiutangModel.fromJson(e as Map<String, dynamic>)).toList()
   );
   
   Map<String, dynamic> toJson() => {
@@ -85,7 +88,8 @@ class PiutangHutangModel {
     'kode_pt': kodePt,
     'kode_kantor': kodeKantor,
     'kode_induk': kodeInduk,
-    'kode_ao': kodeAo
+    'kode_ao': kodeAo,
+    'item_pembayaran': itemPembayaran.map((e) => e.toJson()).toList()
   };
 
   PiutangHutangModel clone() => PiutangHutangModel(
@@ -106,7 +110,8 @@ class PiutangHutangModel {
     kodePt: kodePt,
     kodeKantor: kodeKantor,
     kodeInduk: kodeInduk,
-    kodeAo: kodeAo
+    kodeAo: kodeAo,
+    itemPembayaran: itemPembayaran.map((e) => e.clone()).toList()
   );
 
 
@@ -128,7 +133,8 @@ class PiutangHutangModel {
     String? kodePt,
     String? kodeKantor,
     String? kodeInduk,
-    String? kodeAo
+    String? kodeAo,
+    List<PembayaranHutangPiutangModel>? itemPembayaran
   }) => PiutangHutangModel(
     noInvoice: noInvoice ?? this.noInvoice,
     jnsInvoice: jnsInvoice ?? this.jnsInvoice,
@@ -148,12 +154,13 @@ class PiutangHutangModel {
     kodeKantor: kodeKantor ?? this.kodeKantor,
     kodeInduk: kodeInduk ?? this.kodeInduk,
     kodeAo: kodeAo ?? this.kodeAo,
+    itemPembayaran: itemPembayaran ?? this.itemPembayaran,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is PiutangHutangModel && noInvoice == other.noInvoice && jnsInvoice == other.jnsInvoice && noSif == other.noSif && nmSif == other.nmSif && tglInvoice == other.tglInvoice && nilaiInvoice == other.nilaiInvoice && ppn == other.ppn && pph == other.pph && tglJtTempo == other.tglJtTempo && bertahap == other.bertahap && jumlahTahap == other.jumlahTahap && tglBayar == other.tglBayar && nilaiBayar == other.nilaiBayar && statusInvoice == other.statusInvoice && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && kodeAo == other.kodeAo;
+    || other is PiutangHutangModel && noInvoice == other.noInvoice && jnsInvoice == other.jnsInvoice && noSif == other.noSif && nmSif == other.nmSif && tglInvoice == other.tglInvoice && nilaiInvoice == other.nilaiInvoice && ppn == other.ppn && pph == other.pph && tglJtTempo == other.tglJtTempo && bertahap == other.bertahap && jumlahTahap == other.jumlahTahap && tglBayar == other.tglBayar && nilaiBayar == other.nilaiBayar && statusInvoice == other.statusInvoice && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && kodeAo == other.kodeAo && itemPembayaran == other.itemPembayaran;
 
   @override
-  int get hashCode => noInvoice.hashCode ^ jnsInvoice.hashCode ^ noSif.hashCode ^ nmSif.hashCode ^ tglInvoice.hashCode ^ nilaiInvoice.hashCode ^ ppn.hashCode ^ pph.hashCode ^ tglJtTempo.hashCode ^ bertahap.hashCode ^ jumlahTahap.hashCode ^ tglBayar.hashCode ^ nilaiBayar.hashCode ^ statusInvoice.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ kodeAo.hashCode;
+  int get hashCode => noInvoice.hashCode ^ jnsInvoice.hashCode ^ noSif.hashCode ^ nmSif.hashCode ^ tglInvoice.hashCode ^ nilaiInvoice.hashCode ^ ppn.hashCode ^ pph.hashCode ^ tglJtTempo.hashCode ^ bertahap.hashCode ^ jumlahTahap.hashCode ^ tglBayar.hashCode ^ nilaiBayar.hashCode ^ statusInvoice.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ kodeAo.hashCode ^ itemPembayaran.hashCode;
 }

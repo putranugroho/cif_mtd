@@ -95,6 +95,17 @@ class CoaNotifier extends ChangeNotifier {
   }
 
   var perantara = false;
+  List<String> listHutang = [
+    "HUTANG",
+    "PIUTANG",
+  ];
+  String? hutangPiutang = "HUTANG";
+
+  gantiHutangPiutang(String value) {
+    hutangPiutang = value;
+    notifyListeners();
+  }
+
   gantiperantara() {
     perantara = !perantara;
     notifyListeners();

@@ -1,6 +1,7 @@
 import 'package:accounting/models/index.dart';
 import 'package:accounting/models_manual/rekon_perantara_item_model.dart';
 import 'package:accounting/models_manual/rekon_perantara_model.dart';
+import 'package:accounting/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 
 class PerantaraAktivaNotifier extends ChangeNotifier {
@@ -52,6 +53,10 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
     namaSbbpenyusutan.text = value.nosbb;
     namaSbbKredit.text = value.namaSbb;
     keterangan.text = value.typePosting;
+    sisaSaldo.text = FormatCurrency.oCcy
+        .format(
+            double.parse(value.itemTransaksi.last.sisaSaldo.toString()).toInt())
+        .replaceAll(".", ",");
 
     notifyListeners();
   }
@@ -70,6 +75,8 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
   TextEditingController nomorRef = TextEditingController();
   TextEditingController namaSbbAset = TextEditingController();
   TextEditingController namaTransaksi = TextEditingController();
+  TextEditingController sisaSaldo = TextEditingController();
+  TextEditingController sisaPembayaran = TextEditingController();
   CoaModel? sbbAset;
   pilihSbbAset(CoaModel value) {
     sbbAset = value;

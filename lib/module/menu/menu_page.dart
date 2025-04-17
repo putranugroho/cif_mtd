@@ -29,6 +29,7 @@ import 'package:accounting/module/rekonsiliasi/rekonsiliasi_hutang_page.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_perantara_page.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_perantara_pasiva_page.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_piutang_page.dart';
+import 'package:accounting/module/rekonsiliasi/rekonsiliasi_transaksi_pending_page.dart';
 import 'package:accounting/module/setup/aktivasi/aktivasi_page.dart';
 import 'package:accounting/module/setup/coa/coa_page.dart';
 import 'package:accounting/module/setup/golongan_aset/golongan_aset_page.dart';
@@ -372,15 +373,17 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                           ? RekonsiliasiPiutangPage()
                                                                                                                                                                                                                           : value.page == 53
                                                                                                                                                                                                                               ? RekonsiliasiAsetPage()
-                                                                                                                                                                                                                              : value.page == 55
-                                                                                                                                                                                                                                  ? RekonsiliasiPerantaraPage()
-                                                                                                                                                                                                                                  : value.page == 57
-                                                                                                                                                                                                                                      ? PerantaraAktivaPage()
-                                                                                                                                                                                                                                      : value.page == 58
-                                                                                                                                                                                                                                          ? TransaksiHutangPage()
-                                                                                                                                                                                                                                          : value.page == 59
-                                                                                                                                                                                                                                              ? BayarDimukaPage()
-                                                                                                                                                                                                                                              : Container())
+                                                                                                                                                                                                                              : value.page == 54
+                                                                                                                                                                                                                                  ? RekonsiliasiTransaksiPendingPage()
+                                                                                                                                                                                                                                  : value.page == 55
+                                                                                                                                                                                                                                      ? RekonsiliasiPerantaraPage()
+                                                                                                                                                                                                                                      : value.page == 57
+                                                                                                                                                                                                                                          ? PerantaraAktivaPage()
+                                                                                                                                                                                                                                          : value.page == 58
+                                                                                                                                                                                                                                              ? TransaksiHutangPage()
+                                                                                                                                                                                                                                              : value.page == 59
+                                                                                                                                                                                                                                                  ? BayarDimukaPage()
+                                                                                                                                                                                                                                                  : Container())
             ],
           ),
         )),
