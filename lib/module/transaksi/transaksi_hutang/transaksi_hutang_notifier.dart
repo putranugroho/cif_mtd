@@ -67,10 +67,15 @@ class TransaksiHutangNotifier extends ChangeNotifier {
   }
 
   gantinominal() {
-    sisa.text = FormatCurrency.oCcy
-        .format(int.parse(nominal.text.replaceAll(",", "")) -
-            int.parse(piutangHutangModel!.nilaiInvoice))
-        .replaceAll(".", ",");
+    sisa.text = piutangHutangModel!.bertahap == "Y"
+        ? FormatCurrency.oCcy.format(
+            int.parse(nominal.text.replaceAll(",", "")) -
+                (int.parse(piutangHutangModel!.nilaiInvoice) /
+                    int.parse(piutangHutangModel!.jumlahTahap)))
+        : FormatCurrency.oCcy
+            .format(int.parse(nominal.text.replaceAll(",", "")) -
+                int.parse(piutangHutangModel!.nilaiInvoice))
+            .replaceAll(".", ",");
     notifyListeners();
   }
 

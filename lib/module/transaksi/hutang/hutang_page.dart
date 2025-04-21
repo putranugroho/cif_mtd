@@ -712,7 +712,7 @@ class HutangPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      "Kode Transaksi",
+                                      "Akun Hutang",
                                       style: const TextStyle(fontSize: 12),
                                     ),
                                     const SizedBox(width: 5),
@@ -743,7 +743,7 @@ class HutangPage extends StatelessWidget {
                                     baseStyle: TextStyle(fontSize: 16),
                                     textAlignVertical: TextAlignVertical.center,
                                     dropdownSearchDecoration: InputDecoration(
-                                      hintText: "Pilih Setup Transaksi",
+                                      hintText: "Pilih Akun Hutang",
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(8),
                                         borderSide: BorderSide(
