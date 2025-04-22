@@ -1,9 +1,19 @@
 {
-    "gol_acc": "",
-    "jns_acc": "",
-    "nobb": "",
-    "nosbb": "",
-    "nama_sbb": "",
-    "type_posting": "",
-    "sbb_khusus": ""
+    "id": 1,
+    "gol_acc": "1",
+    "jns_acc": "A",
+    "nobb": "1000000000",
+    "nosbb": "1000000000",
+    "nama_sbb": "KAS INDUK",
+    "type_posting": "N",
+    "sbb_khusus": "",
+    "createddate": "2025-04-2216: 21: 52",
+    "is_deleted": "N",
+    "kode_pt": "001",
+    "kode_kantor": "1001",
+    "limit_debet": "0",
+    "limit_kredit": "0",
+    "akun_perantara": "N",
+    "hutang": "N",
+    "piutang": "N"
 }

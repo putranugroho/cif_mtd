@@ -1783,7 +1783,7 @@ class CoaPage extends StatelessWidget {
                                                                     TextInputAction
                                                                         .done,
                                                                 controller: value
-                                                                    .limitdebet,
+                                                                    .limitkredit,
                                                                 maxLines: 1,
                                                                 inputFormatters: [
                                                                   FilteringTextInputFormatter
@@ -1878,7 +1878,7 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(
                     columnName: 'type_posting', value: data.typePosting),
                 DataGridCell(columnName: 'sbb_khusus', value: data.sbbKhusus),
-                DataGridCell(columnName: 'action', value: data.nosbb),
+                DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
         .toList();
@@ -1892,22 +1892,27 @@ class DetailDataSource extends DataGridSource {
           return Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: 300,
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: colorPrimary,
-                border: Border.all(
-                  width: 2,
+            child: InkWell(
+              onTap: () {
+                tindakanNotifier!.edit(e.value);
+              },
+              child: Container(
+                width: 300,
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
+                  border: Border.all(
+                    width: 2,
+                    color: colorPrimary,
+                  ),
                 ),
-              ),
-              child: Text(
-                "Aksi",
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
+                child: Text(
+                  "Aksi",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

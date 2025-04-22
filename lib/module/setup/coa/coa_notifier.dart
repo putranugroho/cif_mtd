@@ -4,6 +4,7 @@ import 'package:accounting/models/index.dart';
 import 'package:accounting/network/network.dart';
 import 'package:accounting/repository/SetupRepository.dart';
 import 'package:accounting/utils/dialog_loading.dart';
+import 'package:accounting/utils/format_currency.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
@@ -101,13 +102,13 @@ class CoaNotifier extends ChangeNotifier {
   }
 
   updateHeader() {
-    result = noHeader.text + "0000000";
+    result = noHeader.text + "000000000";
     resulttext.text = result;
     notifyListeners();
   }
 
   updatebb() {
-    result = header!.nobb.substring(0, 3) + noBb.text.trim() + "0000";
+    result = header!.nobb.substring(0, 3) + noBb.text.trim() + "000000";
     resulttext.text = result;
     notifyListeners();
   }
@@ -151,6 +152,44 @@ class CoaNotifier extends ChangeNotifier {
     if (keyForm.currentState!.validate()) {
       if (editData) {
         DialogCustom().showLoading(context);
+        var data = {
+          "id": coaModel!.id,
+          "kode_pt": "001",
+          "kode_kantor": "1001",
+          "gol_acc":
+              "${golongan == "Aktiva" ? "1" : golongan == "Pasiva" ? "2" : golongan == "Pendapatan" ? "3" : golongan == "Biaya" ? "4" : "5"}",
+          "jns_acc":
+              "${jnsAcc == "Header" ? "A" : jnsAcc == "Buku Besar" ? "B" : jnsAcc == "Sub Buku Besar" ? "C" : "C"}",
+          "nobb":
+              "${jnsAcc == "Header" ? resulttext.text.trim() : jnsAcc == "Buku Besar" ? header!.nosbb : bukuBesar!.nosbb}",
+          "nosbb": "${resulttext.text.trim()}",
+          "nama_sbb": "${namaSbb.text.trim()}",
+          "type_posting": "N",
+          "sbb_khusus": "",
+          "limit_debet":
+              "${limitdebet.text.isEmpty ? "0" : limitdebet.text.replaceAll(",", "")}",
+          "limit_kredit":
+              "${limitkredit.text.isEmpty ? "0" : limitkredit.text.replaceAll(",", "")}",
+          "akun_perantara": "${perantara ? "Y" : "N"}",
+          "hutang":
+              "${hutangPiutang == null ? "N" : hutangPiutang == "HUTANG" ? "Y" : "N"}",
+          "piutang":
+              "${hutangPiutang == null ? "N" : hutangPiutang == "PIUTANG" ? "Y" : "N"}",
+        };
+        print(jsonEncode(data));
+        Setuprepository.setup(
+                token, NetworkURL.editMasterGl(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'].toString().toLowerCase().contains("success")) {
+            informationDialog(context, "Information", value['message']);
+            clear();
+            getMasterGl();
+            notifyListeners();
+          } else {
+            informationDialog(context, "Warning", value['message'][0]);
+          }
+        });
       } else {
         DialogCustom().showLoading(context);
         var data = {
@@ -161,7 +200,7 @@ class CoaNotifier extends ChangeNotifier {
           "jns_acc":
               "${jnsAcc == "Header" ? "A" : jnsAcc == "Buku Besar" ? "B" : jnsAcc == "Sub Buku Besar" ? "C" : "C"}",
           "nobb":
-              "${jnsAcc == "Header" ? resulttext.text.trim() : jnsAcc == "Buku Besar" ? header!.nobb : bukuBesar!.nobb}",
+              "${jnsAcc == "Header" ? resulttext.text.trim() : jnsAcc == "Buku Besar" ? header!.nosbb : bukuBesar!.nosbb}",
           "nosbb": "${resulttext.text.trim()}",
           "nama_sbb": "${namaSbb.text.trim()}",
           "type_posting": "N",
@@ -190,6 +229,51 @@ class CoaNotifier extends ChangeNotifier {
         });
       }
     }
+  }
+
+  CoaModel? coaModel;
+  edit(String id) {
+    coaModel = list.where((e) => e.id == int.parse(id)).first;
+    header = list.where((e) => e.nobb == coaModel!.nobb).first;
+    golongan = coaModel!.golAcc == "1"
+        ? "Aktiva"
+        : coaModel!.golAcc == "2"
+            ? "Pasiva"
+            : coaModel!.golAcc == "3"
+                ? "Pendapatan"
+                : coaModel!.golAcc == "4"
+                    ? "Biaya"
+                    : "Pos Administrative";
+    jnsAcc = coaModel!.jnsAcc == "A"
+        ? "Header"
+        : coaModel!.jnsAcc == "B"
+            ? "Buku Besar"
+            : "Sub Buku Besar";
+    bukuBesar = list.where((e) => e.nobb == coaModel!.nobb).isNotEmpty
+        ? list.where((e) => e.nobb == coaModel!.nobb).first
+        : null;
+    limitdebet.text = FormatCurrency.oCcy
+        .format(int.parse(coaModel!.limitDebet))
+        .replaceAll(".", ",");
+    limitkredit.text = FormatCurrency.oCcy
+        .format(int.parse(coaModel!.limitKredit))
+        .replaceAll(".", ",");
+    noBb.text = bukuBesar != null ? bukuBesar!.nobb : "";
+    noSbb.text = coaModel!.nosbb
+        .substring(coaModel!.nosbb.length - 6, coaModel!.nosbb.length);
+    namaSbb.text = coaModel!.namaSbb;
+    resulttext.text = coaModel!.nosbb;
+    noHeader.text = header!.nobb;
+    perantara = coaModel!.akunPerantara == "Y" ? true : false;
+    hutangPiutang = coaModel!.hutang == "Y"
+        ? "HUTANG"
+        : coaModel!.piutang == "Y"
+            ? "PIUTANG"
+            : "";
+
+    dialog = true;
+    editData = true;
+    notifyListeners();
   }
 
   gantiperantara() {
