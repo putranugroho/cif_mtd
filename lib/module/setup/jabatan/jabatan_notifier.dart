@@ -1,17 +1,60 @@
+import 'dart:convert';
+
 import 'package:accounting/models/index.dart';
+import 'package:accounting/repository/SetupRepository.dart';
+import 'package:accounting/utils/dialog_loading.dart';
+import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
+
+import '../../../network/network.dart';
+import '../../../utils/button_custom.dart';
 
 class JabatanNotifier extends ChangeNotifier {
   final BuildContext context;
 
   JabatanNotifier({required this.context}) {
-    for (Map<String, dynamic> i in jabatan) {
-      listJabatan.add(JabatanModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in json) {
-      list.add(LevelModel.fromJson(i));
-    }
+    getLevel();
     notifyListeners();
+  }
+
+  var isLoading = true;
+  Future getLevel() async {
+    list.clear();
+    isLoading = true;
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getLevelJabatan(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          list.add(LevelModel.fromJson(i));
+        }
+        getJabatan();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  Future getJabatan() async {
+    isLoading = true;
+    listJabatan.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getjabatan(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listJabatan.add(JabatanModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
   }
 
   bool dialog = false;
@@ -25,43 +68,159 @@ class JabatanNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  JabatanModel? jabatanModel;
+  confirm() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: 500,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Anda yakin menghapus ${jabatanModel!.namaJabatan}?",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ButtonSecondary(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        name: "Tidak",
+                      )),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                          child: ButtonPrimary(
+                        onTap: () {
+                          Navigator.pop(context);
+                          remove();
+                        },
+                        name: "Ya",
+                      )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  remove() {
+    DialogCustom().showLoading(context);
+    var data = {
+      "kode_pt": "001",
+      "kode_kantor": "1001",
+      "lvl_jabatan": levelModel!.lvlJabatan,
+      "kode_jabatan": kode.text.trim(),
+      "nama_jabatan": nama.text.trim(),
+    };
+    Setuprepository.setup(token, NetworkURL.deletedJabatan(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        getLevel();
+        clear();
+        dialog = false;
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message']);
+      }
+    });
+  }
+
+  edit(String kodes) {
+    jabatanModel = listJabatan.where((e) => e.kodeJabatan == kodes).first;
+    kode.text = jabatanModel!.kodeJabatan;
+    nama.text = jabatanModel!.namaJabatan;
+    levelModel =
+        list.where((e) => e.lvlJabatan == jabatanModel!.lvlJabatan).first;
+    dialog = true;
+    editData = true;
+    notifyListeners();
+  }
+
   TextEditingController kode = TextEditingController();
   TextEditingController nama = TextEditingController();
+  final keyForm = GlobalKey<FormState>();
+  var editData = false;
+  cek() {
+    if (keyForm.currentState!.validate()) {
+      if (editData) {
+        DialogCustom().showLoading(context);
+        var data = {
+          "kode_pt": "001",
+          "kode_kantor": "1001",
+          "lvl_jabatan": levelModel!.lvlJabatan,
+          "kode_jabatan": kode.text.trim(),
+          "nama_jabatan": nama.text.trim(),
+        };
+        Setuprepository.setup(
+                token, NetworkURL.updatedJabatan(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'].toString().toLowerCase().contains("success")) {
+            informationDialog(context, "Information", value['message']);
+            getJabatan();
+            clear();
+            notifyListeners();
+          } else {
+            informationDialog(context, "Warning", value['message']);
+          }
+        });
+      } else {
+        DialogCustom().showLoading(context);
+        var data = {
+          "kode_pt": "001",
+          "kode_kantor": "1001",
+          "lvl_jabatan": levelModel!.lvlJabatan,
+          "kode_jabatan": kode.text.trim(),
+          "nama_jabatan": nama.text.trim(),
+        };
+        Setuprepository.setup(token, NetworkURL.addJabatan(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'].toString().toLowerCase().contains("success")) {
+            informationDialog(context, "Information", value['message']);
+            getJabatan();
+            clear();
+            notifyListeners();
+          } else {
+            informationDialog(context, "Warning", value['message']);
+          }
+        });
+      }
+    }
+  }
+
+  clear() {
+    kode.clear();
+    editData = false;
+    dialog = false;
+    nama.clear();
+    notifyListeners();
+  }
 
   List<JabatanModel> listJabatan = [];
 
-  List<Map<String, dynamic>> jabatan = [
-    {
-      "kode_jabatan": "0001",
-      "nama_jabatan": "Direktur Utama",
-      "lvl_jabatan": "2",
-    },
-    {
-      "kode_jabatan": "0002",
-      "nama_jabatan": "Komisaris",
-      "lvl_jabatan": "1",
-    },
-    {
-      "kode_jabatan": "0003",
-      "nama_jabatan": "Direktur",
-      "lvl_jabatan": "2",
-    }
-  ];
   List<LevelModel> list = [];
   LevelModel? levelModel;
   pilihLevel(LevelModel value) {
     levelModel = value;
     notifyListeners();
   }
-
-  List<Map<String, dynamic>> json = [
-    {"lvl_jabatan": "1", "kel_jabatan": "Komisaris"},
-    {"lvl_jabatan": "2", "kel_jabatan": "Direksi"},
-    {"lvl_jabatan": "3", "kel_jabatan": "GM"},
-    {"lvl_jabatan": "4", "kel_jabatan": "Kep. Cabang"},
-    {"lvl_jabatan": "5", "kel_jabatan": "Manager"},
-    {"lvl_jabatan": "6", "kel_jabatan": "Kep. Ranting"},
-    {"lvl_jabatan": "7", "kel_jabatan": "Kabag"},
-    {"lvl_jabatan": "8", "kel_jabatan": "Supervisor"},
-  ];
 }

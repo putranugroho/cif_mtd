@@ -42,7 +42,7 @@ class NetworkURL {
   }
 
   static String updateLevelJabatan() {
-    return "$url/leveljabatan/updated";
+    return "$url/leveljabatan/update";
   }
 
   static String deletedLevelJabatan() {
@@ -58,7 +58,7 @@ class NetworkURL {
   }
 
   static String updatedJabatan() {
-    return "$url/jabatan/updated";
+    return "$url/jabatan/update";
   }
 
   static String deletedJabatan() {
@@ -74,10 +74,26 @@ class NetworkURL {
   }
 
   static String updatedPejabat() {
-    return "$url/pejabat/updated";
+    return "$url/pejabat/update";
   }
 
   static String deletedPejabat() {
     return "$url/pejabat/deleted";
+  }
+
+  static String getMasterGl() {
+    return "$url/mastergl";
+  }
+
+  static String addMasterGl() {
+    return "$url/mastergl/add";
+  }
+
+  static String editMasterGl() {
+    return "$url/mastergl/update";
+  }
+
+  static String deleteMasterGl() {
+    return "$url/mastergl/deleted";
   }
 }

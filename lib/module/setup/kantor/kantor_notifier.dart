@@ -7,6 +7,8 @@ import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/button_custom.dart';
+
 class KantorNotifier extends ChangeNotifier {
   final BuildContext context;
 
@@ -129,39 +131,147 @@ class KantorNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  var editData = false;
+
+  confirm() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: 500,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Anda yakin menghapus ${kantorModel!.namaKantor}?",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ButtonSecondary(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        name: "Tidak",
+                      )),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                          child: ButtonPrimary(
+                        onTap: () {
+                          Navigator.pop(context);
+                          remove();
+                        },
+                        name: "Ya",
+                      )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  remove() {
+    DialogCustom().showLoading(context);
+    var json = {
+      "kode_pt": "${perusahaanModel!.kodePt}",
+      "kode_kantor": "${kantorModel!.kodeKantor}",
+    };
+    Setuprepository.deleteKantor(
+            token, NetworkURL.deletedKantor(), jsonEncode(json))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'] == "success") {
+        getKantor();
+        clear();
+        dialog = false;
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message']);
+      }
+    });
+  }
+
   cek() {
     if (keyForm.currentState!.validate()) {
-      DialogCustom().showLoading(context);
-      var json = {
-        "kode_pt": "${perusahaanModel!.kodePt}",
-        "kode_kantor": "${kode.text}",
-        "kode_induk": "${kantorModel == null ? "" : kantorModel!.kodeKantor}",
-        "nama_kantor": "${nama.text}",
-        "status_kantor":
-            "${status == "Pusat" ? "P" : status == "Cabang" ? "C" : status == "Anak Cabang" ? "D" : "E"}",
-        "alamat": "${alamat.text}",
-        "kelurahan": "${kelurahan.text}",
-        "kecamatan": "${kecamatan.text}",
-        "kota": "${kota.text}",
-        "provinsi": "${provinsi.text}",
-        "kode_pos": "${kodepos.text}",
-        "telp": "${notelp.text.isEmpty ? "" : notelp.text}",
-        "fax": "${fax.text.isEmpty ? "" : fax.text}",
-      };
-      Setuprepository.insertKantor(
-              token, NetworkURL.addKantor(), jsonEncode(json))
-          .then((value) {
-        Navigator.pop(context);
-        if (value['status'] == "success") {
-          informationDialog(context, "Information", value['message']);
-          getKantor();
-          clear();
-          dialog = false;
-          notifyListeners();
-        } else {
-          informationDialog(context, "Warning", value['message']);
-        }
-      });
+      if (editData) {
+        DialogCustom().showLoading(context);
+        var json = {
+          "kode_pt": "${perusahaanModel!.kodePt}",
+          "kode_kantor": "${kantorModel!.kodeKantor}",
+          "kode_induk": "${kantorModel == null ? "" : kantorModel!.kodeKantor}",
+          "nama_kantor": "${nama.text}",
+          "status_kantor":
+              "${status == "Pusat" ? "P" : status == "Cabang" ? "C" : status == "Anak Cabang" ? "D" : "E"}",
+          "alamat": "${alamat.text}",
+          "kelurahan": "${kelurahan.text}",
+          "kecamatan": "${kecamatan.text}",
+          "kota": "${kota.text}",
+          "provinsi": "${provinsi.text}",
+          "kode_pos": "${kodepos.text}",
+          "telp": "${notelp.text.isEmpty ? "" : notelp.text}",
+          "fax": "${fax.text.isEmpty ? "" : fax.text}",
+        };
+        Setuprepository.insertKantor(
+                token, NetworkURL.updateKantor(), jsonEncode(json))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'] == "success") {
+            getKantor();
+            clear();
+            dialog = false;
+            informationDialog(context, "Information", value['message']);
+            notifyListeners();
+          } else {
+            informationDialog(context, "Warning", value['message']);
+          }
+        });
+      } else {
+        DialogCustom().showLoading(context);
+        var json = {
+          "kode_pt": "${perusahaanModel!.kodePt}",
+          "kode_kantor": "${kode.text}",
+          "kode_induk": "${kantorModel == null ? "" : kantorModel!.kodeKantor}",
+          "nama_kantor": "${nama.text}",
+          "status_kantor":
+              "${status == "Pusat" ? "P" : status == "Cabang" ? "C" : status == "Anak Cabang" ? "D" : "E"}",
+          "alamat": "${alamat.text}",
+          "kelurahan": "${kelurahan.text}",
+          "kecamatan": "${kecamatan.text}",
+          "kota": "${kota.text}",
+          "provinsi": "${provinsi.text}",
+          "kode_pos": "${kodepos.text}",
+          "telp": "${notelp.text.isEmpty ? "" : notelp.text}",
+          "fax": "${fax.text.isEmpty ? "" : fax.text}",
+        };
+        Setuprepository.insertKantor(
+                token, NetworkURL.addKantor(), jsonEncode(json))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'] == "success") {
+            informationDialog(context, "Information", value['message']);
+            getKantor();
+            clear();
+            dialog = false;
+            notifyListeners();
+          } else {
+            informationDialog(context, "Warning", value['message']);
+          }
+        });
+      }
     }
   }
 }

@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../utils/colors.dart';
+import '../../utils/pro_shimmer.dart';
 
 class PejabatPage extends StatelessWidget {
   const PejabatPage({super.key});
@@ -69,97 +70,119 @@ class PejabatPage extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: Container(
-                        padding: EdgeInsets.all(20),
-                        height: MediaQuery.of(context).size.height,
-                        child: SfDataGrid(
-                          headerRowHeight: 40,
-                          defaultColumnWidth: 180,
-                          frozenColumnsCount: 1,
+                      child: value.isLoading
+                          ? Container(
+                              padding: const EdgeInsets.all(16),
+                              child: const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ProShimmer(height: 10, width: 200),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  ProShimmer(height: 10, width: 120),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  ProShimmer(height: 10, width: 100),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Container(
+                              padding: EdgeInsets.all(20),
+                              height: MediaQuery.of(context).size.height,
+                              child: SfDataGrid(
+                                headerRowHeight: 40,
+                                defaultColumnWidth: 180,
+                                frozenColumnsCount: 1,
 
-                          // controller: value.dataGridController,
-                          gridLinesVisibility: GridLinesVisibility.both,
-                          headerGridLinesVisibility: GridLinesVisibility.both,
-                          selectionMode: SelectionMode.single,
+                                // controller: value.dataGridController,
+                                gridLinesVisibility: GridLinesVisibility.both,
+                                headerGridLinesVisibility:
+                                    GridLinesVisibility.both,
+                                selectionMode: SelectionMode.single,
 
-                          source: DetailDataSource(value),
-                          columns: <GridColumn>[
-                            GridColumn(
-                                width: 50,
-                                columnName: 'no',
-                                label: Container(
-                                    padding: EdgeInsets.all(6),
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    child: Text('No',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 12,
-                                          color: Colors.white,
-                                        )))),
-                            GridColumn(
-                                columnName: 'nik',
-                                label: Container(
-                                    padding: EdgeInsets.all(6),
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    child: Text('NIK',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                          fontSize: 12,
-                                        )))),
-                            GridColumn(
-                                columnName: 'nama',
-                                label: Container(
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
-                            GridColumn(
-                                columnName: 'hp',
-                                label: Container(
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('No. HP',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
-                            GridColumn(
-                                columnName: 'jabatan',
-                                label: Container(
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Jabatan',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
-                            GridColumn(
-                                columnName: 'action',
-                                label: Container(
-                                    color: colorPrimary,
-                                    padding: EdgeInsets.all(6),
-                                    alignment: Alignment.center,
-                                    child: Text('Action',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
-                          ],
-                        ),
-                      ),
+                                source: DetailDataSource(value),
+                                columns: <GridColumn>[
+                                  GridColumn(
+                                      width: 50,
+                                      columnName: 'no',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('No',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 12,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'nik',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('NIK',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'nama',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Nama',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'hp',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('No. HP',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'jabatan',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Jabatan',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'action',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          padding: EdgeInsets.all(6),
+                                          alignment: Alignment.center,
+                                          child: Text('Action',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                ],
+                              ),
+                            ),
                     )
                   ],
                 ),
@@ -184,267 +207,253 @@ class PejabatPage extends StatelessWidget {
                           width: 600,
                           decoration: BoxDecoration(color: Colors.white),
                           padding: EdgeInsets.all(20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      "Tambah Pejabat",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
+                          child: Form(
+                            key: value.keyForm,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        "Tambah Pejabat",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  InkWell(
-                                    onTap: () => value.tutup(),
-                                    child: Container(
-                                      width: 40,
-                                      height: 40,
-                                      padding: EdgeInsets.all(4),
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey[200],
-                                          shape: BoxShape.circle),
-                                      child: Icon(Icons.close),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                height: 32,
-                              ),
-                              Expanded(
-                                  child: ListView(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Kantor",
-                                        style: const TextStyle(fontSize: 12),
+                                    InkWell(
+                                      onTap: () => value.tutup(),
+                                      child: Container(
+                                        width: 40,
+                                        height: 40,
+                                        padding: EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey[200],
+                                            shape: BoxShape.circle),
+                                        child: Icon(Icons.close),
                                       ),
-                                      const SizedBox(width: 5),
-                                      const Text(
-                                        "*",
-                                        style: TextStyle(fontSize: 8),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  DropdownSearch<KantorModel>(
-                                    popupProps:
-                                        const PopupPropsMultiSelection.menu(
-                                      showSearchBox:
-                                          true, // Aktifkan fitur pencarian
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 32,
+                                ),
+                                Expanded(
+                                    child: ListView(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Kantor",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
                                     ),
-                                    selectedItem: value.kantorModel,
-                                    items: value.listKantor,
-                                    itemAsString: (e) => "${e.namaKantor}",
-                                    onChanged: (e) {
-                                      value.pilihKantor(e!);
-                                    },
-                                    dropdownDecoratorProps:
-                                        DropDownDecoratorProps(
-                                      baseStyle: TextStyle(fontSize: 16),
-                                      textAlignVertical:
-                                          TextAlignVertical.center,
-                                      dropdownSearchDecoration: InputDecoration(
-                                        hintText: "Pilih Kantor",
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          borderSide: BorderSide(
-                                            width: 1,
-                                            color: Colors.grey,
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    DropdownSearch<KantorModel>(
+                                      popupProps:
+                                          const PopupPropsMultiSelection.menu(
+                                        showSearchBox:
+                                            true, // Aktifkan fitur pencarian
+                                      ),
+                                      selectedItem: value.kantorModel,
+                                      items: value.listKantor,
+                                      itemAsString: (e) => "${e.namaKantor}",
+                                      onChanged: (e) {
+                                        value.pilihKantor(e!);
+                                      },
+                                      dropdownDecoratorProps:
+                                          DropDownDecoratorProps(
+                                        baseStyle: TextStyle(fontSize: 16),
+                                        textAlignVertical:
+                                            TextAlignVertical.center,
+                                        dropdownSearchDecoration:
+                                            InputDecoration(
+                                          hintText: "Pilih Kantor",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            borderSide: BorderSide(
+                                              width: 1,
+                                              color: Colors.grey,
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Jabatan",
-                                        style: const TextStyle(fontSize: 12),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      const Text(
-                                        "*",
-                                        style: TextStyle(fontSize: 8),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  DropdownSearch<JabatanModel>(
-                                    popupProps:
-                                        const PopupPropsMultiSelection.menu(
-                                      showSearchBox:
-                                          true, // Aktifkan fitur pencarian
+                                    const SizedBox(height: 16),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Jabatan",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
                                     ),
-                                    selectedItem: value.jabatanModel,
-                                    items: value.listJabatan,
-                                    itemAsString: (e) => "${e.namaJabatan}",
-                                    onChanged: (e) {
-                                      value.pilihJabatan(e!);
-                                    },
-                                    dropdownDecoratorProps:
-                                        DropDownDecoratorProps(
-                                      baseStyle: TextStyle(fontSize: 16),
-                                      textAlignVertical:
-                                          TextAlignVertical.center,
-                                      dropdownSearchDecoration: InputDecoration(
-                                        hintText: "Pilih Jabatan",
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          borderSide: BorderSide(
-                                            width: 1,
-                                            color: Colors.grey,
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    DropdownSearch<JabatanModel>(
+                                      popupProps:
+                                          const PopupPropsMultiSelection.menu(
+                                        showSearchBox:
+                                            true, // Aktifkan fitur pencarian
+                                      ),
+                                      selectedItem: value.jabatanModel,
+                                      items: value.listJabatan,
+                                      itemAsString: (e) => "${e.namaJabatan}",
+                                      onChanged: (e) {
+                                        value.pilihJabatan(e!);
+                                      },
+                                      dropdownDecoratorProps:
+                                          DropDownDecoratorProps(
+                                        baseStyle: TextStyle(fontSize: 16),
+                                        textAlignVertical:
+                                            TextAlignVertical.center,
+                                        dropdownSearchDecoration:
+                                            InputDecoration(
+                                          hintText: "Pilih Jabatan",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            borderSide: BorderSide(
+                                              width: 1,
+                                              color: Colors.grey,
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "No Identitas",
-                                        style: const TextStyle(fontSize: 12),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      const Text(
-                                        "*",
-                                        style: TextStyle(fontSize: 8),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  TextFormField(
-                                    textInputAction: TextInputAction.done,
-                                    controller: value.nik,
-                                    maxLines: 1,
-                                    maxLength: 16,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly
-                                    ],
-                                    validator: (e) {
-                                      if (e!.isEmpty) {
-                                        return "Wajib diisi";
-                                      } else {
-                                        return null;
-                                      }
-                                    },
-                                    decoration: InputDecoration(
-                                      hintText: "No. Identitas",
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(6),
+                                    const SizedBox(height: 16),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "No Identitas",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TextFormField(
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.nik,
+                                      maxLines: 1,
+                                      maxLength: 16,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly
+                                      ],
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "No. Identitas",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Nama ",
-                                        style: const TextStyle(fontSize: 12),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      const Text(
-                                        "*",
-                                        style: TextStyle(fontSize: 8),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  TextFormField(
-                                    textInputAction: TextInputAction.done,
-                                    controller: value.nama,
-                                    maxLines: 1,
-                                    validator: (e) {
-                                      if (e!.isEmpty) {
-                                        return "Wajib diisi";
-                                      } else {
-                                        return null;
-                                      }
-                                    },
-                                    decoration: InputDecoration(
-                                      hintText: "Nama",
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(6),
+                                    const SizedBox(height: 16),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Nama ",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TextFormField(
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.nama,
+                                      maxLines: 1,
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "Nama",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "No. HP",
-                                        style: const TextStyle(fontSize: 12),
-                                      ),
-                                      const SizedBox(width: 5),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  TextFormField(
-                                    textInputAction: TextInputAction.done,
-                                    controller: value.noHp,
-                                    maxLines: 1,
-                                    maxLength: 16,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly
-                                    ],
-                                    decoration: InputDecoration(
-                                      hintText: "No. HP",
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(6),
+                                    const SizedBox(height: 16),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "No. HP",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: 5),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TextFormField(
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.noHp,
+                                      maxLines: 1,
+                                      maxLength: 16,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly
+                                      ],
+                                      decoration: InputDecoration(
+                                        hintText: "No. HP",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Email",
-                                        style: const TextStyle(fontSize: 12),
-                                      ),
-                                      const SizedBox(width: 5),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  TextFormField(
-                                    textInputAction: TextInputAction.done,
-                                    controller: value.noHp,
-                                    maxLines: 1,
-                                    decoration: InputDecoration(
-                                      hintText: "Email",
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(6),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  ButtonPrimary(
-                                    onTap: () {},
-                                    name: "Simpan",
-                                  )
-                                ],
-                              ))
-                            ],
+                                    const SizedBox(height: 16),
+                                    ButtonPrimary(
+                                      onTap: () {
+                                        value.cek();
+                                      },
+                                      name: "Simpan",
+                                    )
+                                  ],
+                                ))
+                              ],
+                            ),
                           ),
                         )
                       : SizedBox())

@@ -1,14 +1,40 @@
+import 'dart:convert';
+
 import 'package:accounting/models/index.dart';
+import 'package:accounting/network/network.dart';
+import 'package:accounting/repository/SetupRepository.dart';
+import 'package:accounting/utils/dialog_loading.dart';
+import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
 class CoaNotifier extends ChangeNotifier {
   final BuildContext context;
 
   CoaNotifier({required this.context}) {
-    for (Map<String, dynamic> i in data) {
-      list.add(CoaModel.fromJson(i));
-    }
+    getMasterGl();
     notifyListeners();
+  }
+  var isLoading = true;
+  Future getMasterGl() async {
+    var data = {
+      "kode_pt": "001",
+    };
+    isLoading = true;
+    list.clear();
+    notifyListeners();
+    Setuprepository.setup(token, NetworkURL.getMasterGl(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          list.add(CoaModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
   }
 
   pilihHeader(CoaModel value) {
@@ -99,11 +125,71 @@ class CoaNotifier extends ChangeNotifier {
     "HUTANG",
     "PIUTANG",
   ];
-  String? hutangPiutang = "HUTANG";
+  String? hutangPiutang;
 
   gantiHutangPiutang(String value) {
     hutangPiutang = value;
     notifyListeners();
+  }
+
+  clear() {
+    dialog = false;
+    editData = false;
+    hutangPiutang = null;
+    perantara = false;
+    resulttext.clear();
+    noBb.clear();
+    noSbb.clear();
+    namaSbb.clear();
+    golongan = null;
+    notifyListeners();
+  }
+
+  final keyForm = GlobalKey<FormState>();
+  var editData = false;
+  cek() {
+    if (keyForm.currentState!.validate()) {
+      if (editData) {
+        DialogCustom().showLoading(context);
+      } else {
+        DialogCustom().showLoading(context);
+        var data = {
+          "kode_pt": "001",
+          "kode_kantor": "1001",
+          "gol_acc":
+              "${golongan == "Aktiva" ? "1" : golongan == "Pasiva" ? "2" : golongan == "Pendapatan" ? "3" : golongan == "Biaya" ? "4" : "5"}",
+          "jns_acc":
+              "${jnsAcc == "Header" ? "A" : jnsAcc == "Buku Besar" ? "B" : jnsAcc == "Sub Buku Besar" ? "C" : "C"}",
+          "nobb":
+              "${jnsAcc == "Header" ? resulttext.text.trim() : jnsAcc == "Buku Besar" ? header!.nobb : bukuBesar!.nobb}",
+          "nosbb": "${resulttext.text.trim()}",
+          "nama_sbb": "${namaSbb.text.trim()}",
+          "type_posting": "N",
+          "sbb_khusus": "",
+          "limit_debet":
+              "${limitdebet.text.isEmpty ? "0" : limitdebet.text.replaceAll(",", "")}",
+          "limit_kredit":
+              "${limitkredit.text.isEmpty ? "0" : limitkredit.text.replaceAll(",", "")}",
+          "akun_perantara": "${perantara ? "Y" : "N"}",
+          "hutang":
+              "${hutangPiutang == null ? "N" : hutangPiutang == "HUTANG" ? "Y" : "N"}",
+          "piutang":
+              "${hutangPiutang == null ? "N" : hutangPiutang == "PIUTANG" ? "Y" : "N"}",
+        };
+        Setuprepository.setup(token, NetworkURL.addMasterGl(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'].toString().toLowerCase().contains("success")) {
+            informationDialog(context, "Information", value['message']);
+            clear();
+            getMasterGl();
+            notifyListeners();
+          } else {
+            informationDialog(context, "Warning", value['message'][0]);
+          }
+        });
+      }
+    }
   }
 
   gantiperantara() {
