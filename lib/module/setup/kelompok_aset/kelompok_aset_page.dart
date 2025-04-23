@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../../utils/colors.dart';
+import '../../../utils/pro_shimmer.dart';
 
 class KelompokAsetPage extends StatelessWidget {
   const KelompokAsetPage({super.key});
@@ -69,73 +70,95 @@ class KelompokAsetPage extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: Container(
-                        padding: EdgeInsets.all(20),
-                        height: MediaQuery.of(context).size.height,
-                        child: SfDataGrid(
-                          headerRowHeight: 40,
-                          defaultColumnWidth: 180,
-                          frozenColumnsCount: 1,
+                      child: value.isLoading
+                          ? Container(
+                              padding: const EdgeInsets.all(16),
+                              child: const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ProShimmer(height: 10, width: 200),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  ProShimmer(height: 10, width: 120),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  ProShimmer(height: 10, width: 100),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Container(
+                              padding: EdgeInsets.all(20),
+                              height: MediaQuery.of(context).size.height,
+                              child: SfDataGrid(
+                                headerRowHeight: 40,
+                                defaultColumnWidth: 180,
+                                frozenColumnsCount: 1,
 
-                          // controller: value.dataGridController,
-                          gridLinesVisibility: GridLinesVisibility.both,
-                          headerGridLinesVisibility: GridLinesVisibility.both,
-                          selectionMode: SelectionMode.single,
+                                // controller: value.dataGridController,
+                                gridLinesVisibility: GridLinesVisibility.both,
+                                headerGridLinesVisibility:
+                                    GridLinesVisibility.both,
+                                selectionMode: SelectionMode.single,
 
-                          source: DetailDataSource(value),
-                          columns: <GridColumn>[
-                            GridColumn(
-                                width: 50,
-                                columnName: 'no',
-                                label: Container(
-                                    padding: EdgeInsets.all(6),
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    child: Text('No',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 12,
-                                          color: Colors.white,
-                                        )))),
-                            GridColumn(
-                                columnName: 'level',
-                                label: Container(
-                                    padding: EdgeInsets.all(6),
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    child: Text('Level Jabatan',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                          fontSize: 12,
-                                        )))),
-                            GridColumn(
-                                columnName: 'jabatan',
-                                label: Container(
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Kelompok Jabatan',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
-                            GridColumn(
-                                columnName: 'action',
-                                label: Container(
-                                    color: colorPrimary,
-                                    padding: EdgeInsets.all(6),
-                                    alignment: Alignment.center,
-                                    child: Text('Action',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
-                          ],
-                        ),
-                      ),
+                                source: DetailDataSource(value),
+                                columns: <GridColumn>[
+                                  GridColumn(
+                                      width: 50,
+                                      columnName: 'no',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('No',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 12,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'kode',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Kode Kelompok',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'nama',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Nama Kelompok',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'action',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          padding: EdgeInsets.all(6),
+                                          alignment: Alignment.center,
+                                          child: Text('Action',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                ],
+                              ),
+                            ),
                     )
                   ],
                 ),
@@ -156,122 +179,142 @@ class KelompokAsetPage extends StatelessWidget {
                 bottom: 0,
                 right: 0,
                 child: value.dialog
-                    ? Container(
-                        padding: EdgeInsets.all(20),
-                        width: 600,
-                        decoration: BoxDecoration(color: Colors.white),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    "Tambah Kelompok Aset",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                    ? Form(
+                        key: value.keyForm,
+                        child: Container(
+                          padding: EdgeInsets.all(20),
+                          width: 600,
+                          decoration: BoxDecoration(color: Colors.white),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                               value.editData ? "Ubah / Hapus Kelompok Aset" :       "Tambah Kelompok Aset",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                InkWell(
-                                  onTap: () => value.tutup(),
-                                  child: Container(
-                                    width: 40,
-                                    height: 40,
-                                    padding: EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey[200],
-                                        shape: BoxShape.circle),
-                                    child: Icon(Icons.close),
+                                  InkWell(
+                                    onTap: () => value.tutup(),
+                                    child: Container(
+                                      width: 40,
+                                      height: 40,
+                                      padding: EdgeInsets.all(4),
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey[200],
+                                          shape: BoxShape.circle),
+                                      child: Icon(Icons.close),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 32,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Kode",
+                                    style: const TextStyle(fontSize: 12),
                                   ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 32,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Kode",
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                                const SizedBox(width: 5),
-                                const Text(
-                                  "*",
-                                  style: TextStyle(fontSize: 8),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            TextFormField(
-                              textInputAction: TextInputAction.done,
-                              controller: value.kode,
-                              maxLines: 1,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              validator: (e) {
-                                if (e!.isEmpty) {
-                                  return "Wajib diisi";
-                                } else {
-                                  return null;
-                                }
-                              },
-                              decoration: InputDecoration(
-                                hintText: "Kode Kelompok",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(6),
+                                  const SizedBox(width: 5),
+                                  const Text(
+                                    "*",
+                                    style: TextStyle(fontSize: 8),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              TextFormField(
+                                textInputAction: TextInputAction.done,
+                                controller: value.kode,
+                                maxLines: 1,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                validator: (e) {
+                                  if (e!.isEmpty) {
+                                    return "Wajib diisi";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  hintText: "Kode Kelompok",
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              children: [
-                                Text(
-                                  "Nama Kelompok",
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                                const SizedBox(width: 5),
-                                const Text(
-                                  "*",
-                                  style: TextStyle(fontSize: 8),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            TextFormField(
-                              textInputAction: TextInputAction.done,
-                              controller: value.nama,
-                              maxLines: 1,
-                              // inputFormatters: [
-                              //   FilteringTextInputFormatter.digitsOnly
-                              // ],
-                              validator: (e) {
-                                if (e!.isEmpty) {
-                                  return "Wajib diisi";
-                                } else {
-                                  return null;
-                                }
-                              },
-                              decoration: InputDecoration(
-                                hintText: "Nama Kelompok",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(6),
+                              const SizedBox(height: 16),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Nama Kelompok",
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                  const SizedBox(width: 5),
+                                  const Text(
+                                    "*",
+                                    style: TextStyle(fontSize: 8),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              TextFormField(
+                                textInputAction: TextInputAction.done,
+                                controller: value.nama,
+                                maxLines: 1,
+                                // inputFormatters: [
+                                //   FilteringTextInputFormatter.digitsOnly
+                                // ],
+                                validator: (e) {
+                                  if (e!.isEmpty) {
+                                    return "Wajib diisi";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  hintText: "Nama Kelompok",
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(height: 16),
-                            ButtonPrimary(
-                              onTap: () {},
-                              name: "Simpan",
-                            )
-                          ],
+                              const SizedBox(height: 16),
+                              ButtonPrimary(
+                                onTap: () {
+                                  value.cek();
+                                },
+                                name: "Simpan",
+                              ),
+                              value.editData
+                                  ? Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        const SizedBox(height: 16),
+                                        ButtonPrimary(
+                                          onTap: () {
+                                            value.confirm();
+                                          },
+                                          name: "Hapus",
+                                        ),
+                                      ],
+                                    )
+                                  : SizedBox()
+                            ],
+                          ),
                         ),
                       )
                     : SizedBox(),
@@ -302,8 +345,8 @@ class DetailDataSource extends DataGridSource {
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
                 DataGridCell(columnName: 'kode', value: data.kodeKelompok),
-                DataGridCell(columnName: 'nama', value: data.namaKelompok),
-                DataGridCell(columnName: 'action', value: data.kodeKelompok),
+                DataGridCell(columnName: 'nama', value: data.namaKelompokn),
+                DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
         .toList();
@@ -317,22 +360,27 @@ class DetailDataSource extends DataGridSource {
           return Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: 300,
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: colorPrimary,
-                border: Border.all(
-                  width: 2,
+            child: InkWell(
+              onTap: () {
+                tindakanNotifier!.edit(e.value);
+              },
+              child: Container(
+                width: 300,
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
+                  border: Border.all(
+                    width: 2,
+                    color: colorPrimary,
+                  ),
                 ),
-              ),
-              child: Text(
-                "Aksi",
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
+                child: Text(
+                  "Aksi",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

@@ -411,7 +411,7 @@ class PengadaanPage extends StatelessWidget {
                                                       value.kelompokAsetModel,
                                                   items: value.listKelompok,
                                                   itemAsString: (e) =>
-                                                      "${e.namaKelompok}",
+                                                      "${e.namaKelompokn}",
                                                   onChanged: (e) {
                                                     value.pilihKelompok(e!);
                                                   },

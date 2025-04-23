@@ -33,6 +33,7 @@ class LevelNotifier extends ChangeNotifier {
       if (editData) {
         DialogCustom().showLoading(context);
         var data = {
+          "id": levelModel!.id,
           "kode_pt": "001",
           "kode_kantor": "1001",
           "lvl_jabatan": "${level.text.trim()}",
@@ -49,7 +50,7 @@ class LevelNotifier extends ChangeNotifier {
             clear();
             notifyListeners();
           } else {
-            isLoading = false;
+            informationDialog(context, "Warning", value['message'][0]);
             notifyListeners();
           }
         });
@@ -72,7 +73,7 @@ class LevelNotifier extends ChangeNotifier {
             clear();
             notifyListeners();
           } else {
-            isLoading = false;
+           informationDialog(context, "Warning", value['message'][0]);
             notifyListeners();
           }
         });
@@ -90,7 +91,7 @@ class LevelNotifier extends ChangeNotifier {
   LevelModel? levelModel;
   edit(String id) {
     editData = true;
-    levelModel = list.where((e) => e.lvlJabatan == id.toString()).first;
+    levelModel = list.where((e) => e.id == int.parse(id)).first;
     level.text = levelModel!.lvlJabatan;
     jabatan.text = levelModel!.kelJabatan;
     dialog = true;
@@ -155,9 +156,7 @@ class LevelNotifier extends ChangeNotifier {
   remove() {
     DialogCustom().showLoading(context);
     var data = {
-      "kode_pt": "001",
-      "kode_kantor": "1001",
-      "lvl_jabatan": "${levelModel!.lvlJabatan}",
+      "id": levelModel!.id,
     };
     Setuprepository.setup(
             token, NetworkURL.deletedLevelJabatan(), jsonEncode(data))

@@ -1,6 +1,6 @@
-const xpassword = "satkom@2345790!!";
-const xusername = "satkom@234";
 const token = "715f8ab555438f985b579844ea227767";
+const xusername = "core@2023";
+const xpassword = "corevalue@20231234";
 
 const dev = false;
 
@@ -95,5 +95,61 @@ class NetworkURL {
 
   static String deleteMasterGl() {
     return "$url/mastergl/deleted";
+  }
+
+  static String getMetodePenyusutan() {
+    return "$url/metode_penyusutan";
+  }
+
+  static String editMetodePenyusutan() {
+    return "$url/metode_penyusutan/update";
+  }
+
+  static String getKelompokAset() {
+    return "$url/kelompokaset";
+  }
+
+  static String addKelompokAset() {
+    return "$url/kelompokaset/add";
+  }
+
+  static String editKelompokAset() {
+    return "$url/kelompokaset/update";
+  }
+
+  static String deleteKelompokAset() {
+    return "$url/kelompokaset/deleted";
+  }
+
+  static String getGolonganSbb() {
+    return "$url/golongansbb";
+  }
+
+  static String addGolonganSbb() {
+    return "$url/golongansbb/add";
+  }
+
+  static String editGolonganSbb() {
+    return "$url/golongansbb/update";
+  }
+
+  static String deleteGolonganSbb() {
+    return "$url/golongansbb/deleted";
+  }
+
+  static String getProvinsi() {
+    return "$url2/provinsi";
+  }
+
+  static String getKota(String id) {
+    return "$url2/kota?id=$id";
+  }
+
+  static String getKecamatan(String id) {
+    return "$url2/kecamatan?id=$id";
+  }
+
+  static String getKelurahan(String id) {
+    return "$url2/kelurahan?id=$id";
   }
 }

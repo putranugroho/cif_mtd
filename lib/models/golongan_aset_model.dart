@@ -7,6 +7,7 @@ import 'index.dart';
 class GolonganAsetModel {
 
   const GolonganAsetModel({
+    required this.id,
     required this.kodeGolongan,
     required this.namaGolongan,
     required this.masaSusut,
@@ -21,6 +22,7 @@ class GolonganAsetModel {
     required this.sbbBiayaPerbaikan,
   });
 
+  final int id;
   final String kodeGolongan;
   final String namaGolongan;
   final String masaSusut;
@@ -35,6 +37,7 @@ class GolonganAsetModel {
   final String sbbBiayaPerbaikan;
 
   factory GolonganAsetModel.fromJson(Map<String,dynamic> json) => GolonganAsetModel(
+    id: json['id'] as int,
     kodeGolongan: json['kode_golongan'].toString(),
     namaGolongan: json['nama_golongan'].toString(),
     masaSusut: json['masa_susut'].toString(),
@@ -50,6 +53,7 @@ class GolonganAsetModel {
   );
   
   Map<String, dynamic> toJson() => {
+    'id': id,
     'kode_golongan': kodeGolongan,
     'nama_golongan': namaGolongan,
     'masa_susut': masaSusut,
@@ -65,6 +69,7 @@ class GolonganAsetModel {
   };
 
   GolonganAsetModel clone() => GolonganAsetModel(
+    id: id,
     kodeGolongan: kodeGolongan,
     namaGolongan: namaGolongan,
     masaSusut: masaSusut,
@@ -81,6 +86,7 @@ class GolonganAsetModel {
 
 
   GolonganAsetModel copyWith({
+    int? id,
     String? kodeGolongan,
     String? namaGolongan,
     String? masaSusut,
@@ -94,6 +100,7 @@ class GolonganAsetModel {
     String? sbbLabaJual,
     String? sbbBiayaPerbaikan
   }) => GolonganAsetModel(
+    id: id ?? this.id,
     kodeGolongan: kodeGolongan ?? this.kodeGolongan,
     namaGolongan: namaGolongan ?? this.namaGolongan,
     masaSusut: masaSusut ?? this.masaSusut,
@@ -110,8 +117,8 @@ class GolonganAsetModel {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is GolonganAsetModel && kodeGolongan == other.kodeGolongan && namaGolongan == other.namaGolongan && masaSusut == other.masaSusut && nilaiDeclining == other.nilaiDeclining && sbbAset == other.sbbAset && sbbPenyusutan == other.sbbPenyusutan && sbbBiayaPenyusutan == other.sbbBiayaPenyusutan && sbbRugiRevaluasi == other.sbbRugiRevaluasi && sbbLabaRevaluasi == other.sbbLabaRevaluasi && sbbRugiJual == other.sbbRugiJual && sbbLabaJual == other.sbbLabaJual && sbbBiayaPerbaikan == other.sbbBiayaPerbaikan;
+    || other is GolonganAsetModel && id == other.id && kodeGolongan == other.kodeGolongan && namaGolongan == other.namaGolongan && masaSusut == other.masaSusut && nilaiDeclining == other.nilaiDeclining && sbbAset == other.sbbAset && sbbPenyusutan == other.sbbPenyusutan && sbbBiayaPenyusutan == other.sbbBiayaPenyusutan && sbbRugiRevaluasi == other.sbbRugiRevaluasi && sbbLabaRevaluasi == other.sbbLabaRevaluasi && sbbRugiJual == other.sbbRugiJual && sbbLabaJual == other.sbbLabaJual && sbbBiayaPerbaikan == other.sbbBiayaPerbaikan;
 
   @override
-  int get hashCode => kodeGolongan.hashCode ^ namaGolongan.hashCode ^ masaSusut.hashCode ^ nilaiDeclining.hashCode ^ sbbAset.hashCode ^ sbbPenyusutan.hashCode ^ sbbBiayaPenyusutan.hashCode ^ sbbRugiRevaluasi.hashCode ^ sbbLabaRevaluasi.hashCode ^ sbbRugiJual.hashCode ^ sbbLabaJual.hashCode ^ sbbBiayaPerbaikan.hashCode;
+  int get hashCode => id.hashCode ^ kodeGolongan.hashCode ^ namaGolongan.hashCode ^ masaSusut.hashCode ^ nilaiDeclining.hashCode ^ sbbAset.hashCode ^ sbbPenyusutan.hashCode ^ sbbBiayaPenyusutan.hashCode ^ sbbRugiRevaluasi.hashCode ^ sbbLabaRevaluasi.hashCode ^ sbbRugiJual.hashCode ^ sbbLabaJual.hashCode ^ sbbBiayaPerbaikan.hashCode;
 }

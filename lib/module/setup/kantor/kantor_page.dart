@@ -229,7 +229,9 @@ class KantorPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        "Tambah Kantor",
+                                        value.editData
+                                            ? "Ubah / Hapus Kantor"
+                                            : "Tambah Kantor",
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -814,7 +816,22 @@ class KantorPage extends StatelessWidget {
                                         value.cek();
                                       },
                                       name: "Simpan",
-                                    )
+                                    ),
+                                    value.editData
+                                        ? Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              const SizedBox(height: 16),
+                                              ButtonPrimary(
+                                                onTap: () {
+                                                  value.confirm();
+                                                },
+                                                name: "Hapus",
+                                              ),
+                                            ],
+                                          )
+                                        : SizedBox()
                                   ]),
                                 ),
                               ],
@@ -860,7 +877,7 @@ class DetailDataSource extends DataGridSource {
                             : data.statusKantor == "D"
                                 ? "Anak Cabang"
                                 : "Gudang"),
-                DataGridCell(columnName: 'action', value: data.kodeKantor),
+                DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
         .toList();
@@ -874,22 +891,27 @@ class DetailDataSource extends DataGridSource {
           return Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: 300,
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: colorPrimary,
-                border: Border.all(
-                  width: 2,
+            child: InkWell(
+              onTap: () {
+                tindakanNotifier!.edit(e.value);
+              },
+              child: Container(
+                width: 300,
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
+                  border: Border.all(
+                    width: 2,
+                    color: colorPrimary,
+                  ),
                 ),
-              ),
-              child: Text(
-                "Aksi",
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
+                child: Text(
+                  "Aksi",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

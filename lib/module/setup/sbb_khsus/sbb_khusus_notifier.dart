@@ -6,14 +6,14 @@ class SbbKhususNotifier extends ChangeNotifier {
   final BuildContext context;
 
   SbbKhususNotifier({required this.context}) {
-    for (Map<String, dynamic> i in data) {
-      list.add(CoaModel.fromJson(i));
-    }
-    for (var i = 0; i < list.where((e) => e.jnsAcc == "C").length; i++) {
-      final data = list.where((e) => e.jnsAcc == "C").toList()[i];
-      listSbb.add(TextEditingController(text: data.nosbb));
-      listNama.add(TextEditingController(text: data.namaSbb));
-    }
+    // for (Map<String, dynamic> i in data) {
+    //   list.add(CoaModel.fromJson(i));
+    // }
+    // for (var i = 0; i < list.where((e) => e.jnsAcc == "C").length; i++) {
+    //   final data = list.where((e) => e.jnsAcc == "C").toList()[i];
+    //   listSbb.add(TextEditingController(text: data.nosbb));
+    //   listNama.add(TextEditingController(text: data.namaSbb));
+    // }
     notifyListeners();
   }
 
@@ -82,52 +82,4 @@ class SbbKhususNotifier extends ChangeNotifier {
     listSbb.add(TextEditingController(text: ""));
     notifyListeners();
   }
-
-  List<Map<String, dynamic>> data = [
-    {
-      "gol_acc": "1",
-      "jns_acc": "A",
-      "nobb": "10000000",
-      "nosbb": "10000000",
-      "nama_sbb": "Kas",
-      "type_posting": "N",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "B",
-      "nobb": "10000000",
-      "nosbb": "10001000",
-      "nama_sbb": "Kas",
-      "type_posting": "N",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001001",
-      "nama_sbb": "Kas Besar",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001002",
-      "nama_sbb": "Kas Kecil",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001003",
-      "nama_sbb": "Kas Transaksi",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-  ];
 }

@@ -640,7 +640,9 @@ class CoaPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        "Tambah Chart of Account",
+                                        value.editData
+                                            ? "Ubah / Hapus Chart of Account"
+                                            : "Tambah Chart of Account",
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -1428,9 +1430,7 @@ class CoaPage extends StatelessWidget {
                                                                   ? value.list
                                                                       .where((e) =>
                                                                           e.jnsAcc ==
-                                                                              "B" &&
-                                                                          e.nobb ==
-                                                                              value.header!.nobb)
+                                                                          "B")
                                                                       .toList()
                                                                   : [],
                                                               itemAsString: (e) =>

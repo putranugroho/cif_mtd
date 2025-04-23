@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/currency_formatted.dart';
+import '../../../utils/pro_shimmer.dart';
 
 class PenyusutanPage extends StatelessWidget {
   const PenyusutanPage({super.key});
@@ -40,105 +41,128 @@ class PenyusutanPage extends StatelessWidget {
                 height: 16,
               ),
               Expanded(
-                  child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 16),
-                      height: 1,
-                      color: Colors.grey,
-                    ),
-                    Text(
-                      "Ganti Metode Penyusutan",
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      children: [
-                        Radio(
-                            value: 0,
-                            activeColor: colorPrimary,
-                            groupValue: value.metode,
-                            onChanged: (e) {
-                              value.gantimetode(0);
-                            }),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Text("Straight Line"),
-                        SizedBox(
-                          width: 24,
-                        ),
-                        Radio(
-                            value: 1,
-                            activeColor: colorPrimary,
-                            groupValue: value.metode,
-                            onChanged: (e) {
-                              value.gantimetode(1);
-                            }),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Text("Double Declining"),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Nilai Akhir",
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                        const SizedBox(width: 5),
-                        const Text(
-                          "*",
-                          style: TextStyle(fontSize: 8),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    TextFormField(
-                      textInputAction: TextInputAction.done,
-                      controller: value.nilai,
-                      maxLines: 1,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        CurrencyInputFormatter(),
-                      ],
-                      validator: (e) {
-                        if (e!.isEmpty) {
-                          return "Wajib diisi";
-                        } else {
-                          return null;
-                        }
-                      },
-                      decoration: InputDecoration(
-                        hintText: "Nilai Akhir",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        ButtonPrimary(
-                          onTap: () {},
-                          name: "Simpan",
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ))
+                  child: value.isLoading
+                      ? Container(
+                          padding: const EdgeInsets.all(16),
+                          child: const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ProShimmer(height: 10, width: 200),
+                              SizedBox(
+                                height: 4,
+                              ),
+                              ProShimmer(height: 10, width: 120),
+                              SizedBox(
+                                height: 4,
+                              ),
+                              ProShimmer(height: 10, width: 100),
+                              SizedBox(
+                                height: 4,
+                              ),
+                            ],
+                          ),
+                        )
+                      : Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.symmetric(vertical: 16),
+                                height: 1,
+                                color: Colors.grey,
+                              ),
+                              Text(
+                                "Ganti Metode Penyusutan",
+                                style: TextStyle(fontSize: 12),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Row(
+                                children: [
+                                  Radio(
+                                      value: 1,
+                                      activeColor: colorPrimary,
+                                      groupValue: value.metode,
+                                      onChanged: (e) {
+                                        value.gantimetode(1);
+                                      }),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text("Straight Line"),
+                                  SizedBox(
+                                    width: 24,
+                                  ),
+                                  Radio(
+                                      value: 2,
+                                      activeColor: colorPrimary,
+                                      groupValue: value.metode,
+                                      onChanged: (e) {
+                                        value.gantimetode(2);
+                                      }),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text("Double Declining"),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Nilai Akhir",
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                  const SizedBox(width: 5),
+                                  const Text(
+                                    "*",
+                                    style: TextStyle(fontSize: 8),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              TextFormField(
+                                textInputAction: TextInputAction.done,
+                                controller: value.nilai,
+                                maxLines: 1,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  CurrencyInputFormatter(),
+                                ],
+                                validator: (e) {
+                                  if (e!.isEmpty) {
+                                    return "Wajib diisi";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  hintText: "Nilai Akhir",
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              Row(
+                                children: [
+                                  ButtonPrimary(
+                                    onTap: () {
+                                      value.cek();
+                                    },
+                                    name: "Simpan",
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ))
             ],
           ),
         )),

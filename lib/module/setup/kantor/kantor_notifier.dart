@@ -65,6 +65,31 @@ class KantorNotifier extends ChangeNotifier {
     });
   }
 
+  KantorModel? kantor;
+
+  edit(String id) {
+    dialog = true;
+    editData = true;
+    kantor = list.where((e) => e.id == int.parse(id)).first;
+    provinsi.text = kantor!.provinsi;
+    kota.text = kantor!.kota;
+    kecamatan.text = kantor!.kecamatan;
+    kelurahan.text = kantor!.kelurahan;
+    alamat.text = kantor!.alamat;
+    status = kantor!.statusKantor == "A"
+        ? "Pusat"
+        : kantor!.statusKantor == "B"
+            ? "Cabang"
+            : kantor!.statusKantor == "C"
+                ? "Anak Cabang"
+                : "Outlet/Gudang";
+    kantorModel = list.where((e) => e.kodePt == kantor!.kodePt).first;
+    nama.text = kantor!.namaKantor;
+    notelp.text = kantor!.telp;
+    fax.text = kantor!.fax;
+    notifyListeners();
+  }
+
   var isLoading = true;
   bool dialog = false;
   tambah() {
@@ -268,7 +293,7 @@ class KantorNotifier extends ChangeNotifier {
             dialog = false;
             notifyListeners();
           } else {
-            informationDialog(context, "Warning", value['message']);
+            informationDialog(context, "Warning", value['message'][0]);
           }
         });
       }

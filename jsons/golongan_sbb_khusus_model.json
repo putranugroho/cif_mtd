@@ -1,5 +1,7 @@
 {
-    "kode_sbb_khusus" : "", 
-    "nama_sbb_khusus" : "", 
-    "coa_satu" : ""
+    "id": 1,
+    "kode_golongan": "",
+    "nama_golongan": "",
+    "lebih_satu_akun": "",
+    "kode_pt": ""
 }

@@ -7,6 +7,7 @@ import 'index.dart';
 class KantorModel {
 
   const KantorModel({
+    required this.id,
     required this.kodePt,
     required this.kodeKantor,
     required this.kodeInduk,
@@ -22,6 +23,7 @@ class KantorModel {
     required this.fax,
   });
 
+  final int id;
   final String kodePt;
   final String kodeKantor;
   final String kodeInduk;
@@ -37,6 +39,7 @@ class KantorModel {
   final dynamic fax;
 
   factory KantorModel.fromJson(Map<String,dynamic> json) => KantorModel(
+    id: json['id'] as int,
     kodePt: json['kode_pt'].toString(),
     kodeKantor: json['kode_kantor'].toString(),
     kodeInduk: json['kode_induk'].toString(),
@@ -53,6 +56,7 @@ class KantorModel {
   );
   
   Map<String, dynamic> toJson() => {
+    'id': id,
     'kode_pt': kodePt,
     'kode_kantor': kodeKantor,
     'kode_induk': kodeInduk,
@@ -69,6 +73,7 @@ class KantorModel {
   };
 
   KantorModel clone() => KantorModel(
+    id: id,
     kodePt: kodePt,
     kodeKantor: kodeKantor,
     kodeInduk: kodeInduk,
@@ -86,6 +91,7 @@ class KantorModel {
 
 
   KantorModel copyWith({
+    int? id,
     String? kodePt,
     String? kodeKantor,
     String? kodeInduk,
@@ -100,6 +106,7 @@ class KantorModel {
     dynamic? telp,
     dynamic? fax
   }) => KantorModel(
+    id: id ?? this.id,
     kodePt: kodePt ?? this.kodePt,
     kodeKantor: kodeKantor ?? this.kodeKantor,
     kodeInduk: kodeInduk ?? this.kodeInduk,
@@ -117,8 +124,8 @@ class KantorModel {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is KantorModel && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && namaKantor == other.namaKantor && statusKantor == other.statusKantor && alamat == other.alamat && kelurahan == other.kelurahan && kecamatan == other.kecamatan && kota == other.kota && provinsi == other.provinsi && kodePos == other.kodePos && telp == other.telp && fax == other.fax;
+    || other is KantorModel && id == other.id && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && namaKantor == other.namaKantor && statusKantor == other.statusKantor && alamat == other.alamat && kelurahan == other.kelurahan && kecamatan == other.kecamatan && kota == other.kota && provinsi == other.provinsi && kodePos == other.kodePos && telp == other.telp && fax == other.fax;
 
   @override
-  int get hashCode => kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ namaKantor.hashCode ^ statusKantor.hashCode ^ alamat.hashCode ^ kelurahan.hashCode ^ kecamatan.hashCode ^ kota.hashCode ^ provinsi.hashCode ^ kodePos.hashCode ^ telp.hashCode ^ fax.hashCode;
+  int get hashCode => id.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ namaKantor.hashCode ^ statusKantor.hashCode ^ alamat.hashCode ^ kelurahan.hashCode ^ kecamatan.hashCode ^ kota.hashCode ^ provinsi.hashCode ^ kodePos.hashCode ^ telp.hashCode ^ fax.hashCode;
 }

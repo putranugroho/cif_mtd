@@ -191,7 +191,7 @@ class LevelPage extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      "Tambah Level Jabatan",
+                                   value.editData ? "Ubah / Hapus Level Jabatan" :  "Tambah Level Jabatan",
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -345,7 +345,7 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'no', value: (index++).toString()),
                 DataGridCell(columnName: 'level', value: data.lvlJabatan),
                 DataGridCell(columnName: 'jabatan', value: data.kelJabatan),
-                DataGridCell(columnName: 'action', value: data.lvlJabatan),
+                DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
         .toList();

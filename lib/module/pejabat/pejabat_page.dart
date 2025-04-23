@@ -216,7 +216,9 @@ class PejabatPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        "Tambah Pejabat",
+                                        value.editData
+                                            ? "Ubah / Hapus Pejabat"
+                                            : "Tambah Pejabat",
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,

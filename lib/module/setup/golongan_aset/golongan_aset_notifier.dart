@@ -7,15 +7,15 @@ class GolonganAsetNotifier extends ChangeNotifier {
   final BuildContext context;
 
   GolonganAsetNotifier({required this.context}) {
-    for (Map<String, dynamic> i in json) {
-      list.add(KelompokAsetModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in data) {
-      listData.add(GolonganAsetModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in coa) {
-      listCoa.add(CoaModel.fromJson(i));
-    }
+    // for (Map<String, dynamic> i in json) {
+    //   list.add(KelompokAsetModel.fromJson(i));
+    // }
+    // for (Map<String, dynamic> i in data) {
+    //   listData.add(GolonganAsetModel.fromJson(i));
+    // }
+    // for (Map<String, dynamic> i in coa) {
+    //   listCoa.add(CoaModel.fromJson(i));
+    // }
     notifyListeners();
   }
 

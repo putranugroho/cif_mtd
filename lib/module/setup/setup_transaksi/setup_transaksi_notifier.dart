@@ -5,12 +5,12 @@ class SetupTransaksiNotifier extends ChangeNotifier {
   final BuildContext context;
 
   SetupTransaksiNotifier({required this.context}) {
-    for (Map<String, dynamic> i in data) {
-      list.add(CoaModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in json) {
-      listData.add(SetupTransModel.fromJson(i));
-    }
+    // for (Map<String, dynamic> i in data) {
+    //   list.add(CoaModel.fromJson(i));
+    // }
+    // for (Map<String, dynamic> i in json) {
+    //   listData.add(SetupTransModel.fromJson(i));
+    // }
     notifyListeners();
   }
 

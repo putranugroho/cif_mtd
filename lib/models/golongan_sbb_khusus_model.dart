@@ -7,48 +7,62 @@ import 'index.dart';
 class GolonganSbbKhususModel {
 
   const GolonganSbbKhususModel({
-    required this.kodeSbbKhusus,
-    required this.namaSbbKhusus,
-    required this.coaSatu,
+    required this.id,
+    required this.kodeGolongan,
+    required this.namaGolongan,
+    required this.lebihSatuAkun,
+    required this.kodePt,
   });
 
-  final String kodeSbbKhusus;
-  final String namaSbbKhusus;
-  final String coaSatu;
+  final int id;
+  final String kodeGolongan;
+  final String namaGolongan;
+  final String lebihSatuAkun;
+  final String kodePt;
 
   factory GolonganSbbKhususModel.fromJson(Map<String,dynamic> json) => GolonganSbbKhususModel(
-    kodeSbbKhusus: json['kode_sbb_khusus'].toString(),
-    namaSbbKhusus: json['nama_sbb_khusus'].toString(),
-    coaSatu: json['coa_satu'].toString()
+    id: json['id'] as int,
+    kodeGolongan: json['kode_golongan'].toString(),
+    namaGolongan: json['nama_golongan'].toString(),
+    lebihSatuAkun: json['lebih_satu_akun'].toString(),
+    kodePt: json['kode_pt'].toString()
   );
   
   Map<String, dynamic> toJson() => {
-    'kode_sbb_khusus': kodeSbbKhusus,
-    'nama_sbb_khusus': namaSbbKhusus,
-    'coa_satu': coaSatu
+    'id': id,
+    'kode_golongan': kodeGolongan,
+    'nama_golongan': namaGolongan,
+    'lebih_satu_akun': lebihSatuAkun,
+    'kode_pt': kodePt
   };
 
   GolonganSbbKhususModel clone() => GolonganSbbKhususModel(
-    kodeSbbKhusus: kodeSbbKhusus,
-    namaSbbKhusus: namaSbbKhusus,
-    coaSatu: coaSatu
+    id: id,
+    kodeGolongan: kodeGolongan,
+    namaGolongan: namaGolongan,
+    lebihSatuAkun: lebihSatuAkun,
+    kodePt: kodePt
   );
 
 
   GolonganSbbKhususModel copyWith({
-    String? kodeSbbKhusus,
-    String? namaSbbKhusus,
-    String? coaSatu
+    int? id,
+    String? kodeGolongan,
+    String? namaGolongan,
+    String? lebihSatuAkun,
+    String? kodePt
   }) => GolonganSbbKhususModel(
-    kodeSbbKhusus: kodeSbbKhusus ?? this.kodeSbbKhusus,
-    namaSbbKhusus: namaSbbKhusus ?? this.namaSbbKhusus,
-    coaSatu: coaSatu ?? this.coaSatu,
+    id: id ?? this.id,
+    kodeGolongan: kodeGolongan ?? this.kodeGolongan,
+    namaGolongan: namaGolongan ?? this.namaGolongan,
+    lebihSatuAkun: lebihSatuAkun ?? this.lebihSatuAkun,
+    kodePt: kodePt ?? this.kodePt,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is GolonganSbbKhususModel && kodeSbbKhusus == other.kodeSbbKhusus && namaSbbKhusus == other.namaSbbKhusus && coaSatu == other.coaSatu;
+    || other is GolonganSbbKhususModel && id == other.id && kodeGolongan == other.kodeGolongan && namaGolongan == other.namaGolongan && lebihSatuAkun == other.lebihSatuAkun && kodePt == other.kodePt;
 
   @override
-  int get hashCode => kodeSbbKhusus.hashCode ^ namaSbbKhusus.hashCode ^ coaSatu.hashCode;
+  int get hashCode => id.hashCode ^ kodeGolongan.hashCode ^ namaGolongan.hashCode ^ lebihSatuAkun.hashCode ^ kodePt.hashCode;
 }

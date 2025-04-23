@@ -200,7 +200,7 @@ class JabatanNotifier extends ChangeNotifier {
             clear();
             notifyListeners();
           } else {
-            informationDialog(context, "Warning", value['message']);
+            informationDialog(context, "Warning", value['message'][0]);
           }
         });
       }
