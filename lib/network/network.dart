@@ -136,6 +136,9 @@ class NetworkURL {
   static String deleteGolonganSbb() {
     return "$url/golongansbb/deleted";
   }
+  static String getInqueryGL() {
+    return "$url/mastergl/inquery";
+  }
 
   static String getProvinsi() {
     return "$url2/provinsi";

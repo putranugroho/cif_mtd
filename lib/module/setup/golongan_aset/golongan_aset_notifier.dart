@@ -1,7 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:accounting/models/index.dart';
+import 'package:accounting/repository/SetupRepository.dart';
 import 'package:flutter/material.dart';
+
+import '../../../network/network.dart';
 
 class GolonganAsetNotifier extends ChangeNotifier {
   final BuildContext context;
@@ -16,8 +20,53 @@ class GolonganAsetNotifier extends ChangeNotifier {
     // for (Map<String, dynamic> i in coa) {
     //   listCoa.add(CoaModel.fromJson(i));
     // }
+    getInquery();
+    getGolonganAset();
     notifyListeners();
   }
+
+  List<Map<String, dynamic>> extractJnsAccB(List<dynamic> items) {
+    List<Map<String, dynamic>> result = [];
+
+    for (var item in items) {
+      if (item['jns_acc'] == 'B') {
+        result.add(item as Map<String, dynamic>);
+      }
+
+      if (item['items'] != null && item['items'] is List) {
+        result.addAll(extractJnsAccB(item['items']));
+      }
+    }
+
+    return result;
+  }
+
+  var isLoading = true;
+  var isLoadingInquery = true;
+  List<InqueryGlModel> listGl = [];
+  Future getInquery() async {
+    isLoadingInquery = true;
+    listGl.clear();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        final List<Map<String, dynamic>> jnsAccBItems =
+            extractJnsAccB(value['data']);
+        for (Map<String, dynamic> i in jnsAccBItems) {
+          listGl.add(InqueryGlModel.fromJson(i));
+        }
+        print(listGl.length);
+        isLoadingInquery = false;
+        notifyListeners();
+      } else {
+        isLoadingInquery = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  Future getGolonganAset() async {}
 
   TextEditingController kode = TextEditingController();
   TextEditingController nama = TextEditingController();

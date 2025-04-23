@@ -34,6 +34,7 @@ export 'setup_trans_model.dart';
 export 'coa_model.dart';
 export 'ao_model.dart';
 export 'inventaris_model.dart';
+export 'inquery_gl_model.dart';
 export 'customer_supplier_model.dart';
 export 'menu_model.dart';
 export 'transaksi_model.dart';

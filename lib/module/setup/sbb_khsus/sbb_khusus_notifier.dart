@@ -1,35 +1,98 @@
+import 'dart:convert';
+
+import 'package:accounting/models/index.dart';
+import 'package:accounting/repository/SetupRepository.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/coa_model.dart';
+import '../../../models/inquery_gl_model.dart';
+import '../../../network/network.dart';
 
 class SbbKhususNotifier extends ChangeNotifier {
   final BuildContext context;
 
   SbbKhususNotifier({required this.context}) {
-    // for (Map<String, dynamic> i in data) {
-    //   list.add(CoaModel.fromJson(i));
-    // }
-    // for (var i = 0; i < list.where((e) => e.jnsAcc == "C").length; i++) {
-    //   final data = list.where((e) => e.jnsAcc == "C").toList()[i];
-    //   listSbb.add(TextEditingController(text: data.nosbb));
-    //   listNama.add(TextEditingController(text: data.namaSbb));
-    // }
+    getInquery();
+    getGolonganSbb();
+    notifyListeners();
+  }
+  var isLoading = true;
+  List<GolonganSbbKhususModel> listGolongan = [];
+  GolonganSbbKhususModel? golonganSbbKhususModel;
+  pilihGolongan(GolonganSbbKhususModel value) {
+    golonganSbbKhususModel = value;
     notifyListeners();
   }
 
-  List<TextEditingController> listSbb = [];
-  List<TextEditingController> listNama = [];
-  List<CoaModel> list = [];
-  List<CoaModel> listAdd = [];
-  CoaModel? coaModel;
-  pilihCoa(CoaModel value) {
-    if (listAdd.isEmpty) {
-      listAdd.add(value);
-    } else {
-      if (listAdd.where((e) => e == value).isNotEmpty) {
-        listAdd.remove(value);
+  Future getGolonganSbb() async {
+    isLoading = true;
+    listGolongan.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getGolonganSbb(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listGolongan.add(GolonganSbbKhususModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
       } else {
-        listAdd.add(value);
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  List<Map<String, dynamic>> extractJnsAccB(List<dynamic> items) {
+    List<Map<String, dynamic>> result = [];
+
+    for (var item in items) {
+      if (item['jns_acc'] == 'B') {
+        result.add(item as Map<String, dynamic>);
+      }
+
+      if (item['items'] != null && item['items'] is List) {
+        result.addAll(extractJnsAccB(item['items']));
+      }
+    }
+
+    return result;
+  }
+
+  var isLoadingInquery = true;
+  List<InqueryGlModel> listGl = [];
+  List<InqueryGlModel> listGlAdd = [];
+  Future getInquery() async {
+    isLoadingInquery = true;
+    listGl.clear();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        final List<Map<String, dynamic>> jnsAccBItems =
+            extractJnsAccB(value['data']);
+        for (Map<String, dynamic> i in jnsAccBItems) {
+          listGl.add(InqueryGlModel.fromJson(i));
+        }
+        print(listGl.length);
+        isLoadingInquery = false;
+        notifyListeners();
+      } else {
+        isLoadingInquery = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  pilihCoa(InqueryGlModel value) {
+    if (listGlAdd.isEmpty) {
+      listGlAdd.add(value);
+    } else {
+      if (listGlAdd.where((e) => e == value).isNotEmpty) {
+        listGlAdd.remove(value);
+      } else {
+        listGlAdd.add(value);
       }
       notifyListeners();
     }
@@ -48,9 +111,9 @@ class SbbKhususNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  delete(int index) {
-    listSbb.removeAt(index);
-    listNama.removeAt(index);
+  InqueryGlModel? inqueryGlModel;
+  pilihSbbSatu(InqueryGlModel value) {
+    inqueryGlModel = value;
     notifyListeners();
   }
 
@@ -62,24 +125,5 @@ class SbbKhususNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<String> listSbbTambahanKhusus = [];
-
-  List<String> listSBBKhusus = [
-    "Arus Kas",
-    "LR Berjalan",
-    "LR Tahun Lalu",
-  ];
-
-  String? sbbKhusus;
-  pilihSbbKhusus(String value) {
-    sbbKhusus = value;
-    notifyListeners();
-  }
-
   CoaModel? bukuBesar;
-
-  tambahParameter() {
-    listSbb.add(TextEditingController(text: ""));
-    notifyListeners();
-  }
 }
