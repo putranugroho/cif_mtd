@@ -205,7 +205,9 @@ class JabatanPage extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                    value.editData ? "Ubah / Hapus Jabatan":  "Tambah  Jabatan",
+                                      value.editData
+                                          ? "Ubah / Hapus Jabatan"
+                                          : "Tambah  Jabatan",
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,

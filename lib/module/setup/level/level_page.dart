@@ -191,7 +191,9 @@ class LevelPage extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                   value.editData ? "Ubah / Hapus Level Jabatan" :  "Tambah Level Jabatan",
+                                      value.editData
+                                          ? "Ubah / Hapus Level Jabatan"
+                                          : "Tambah Level Jabatan",
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,

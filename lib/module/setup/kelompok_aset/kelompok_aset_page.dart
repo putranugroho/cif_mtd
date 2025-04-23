@@ -192,7 +192,9 @@ class KelompokAsetPage extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                               value.editData ? "Ubah / Hapus Kelompok Aset" :       "Tambah Kelompok Aset",
+                                      value.editData
+                                          ? "Ubah / Hapus Kelompok Aset"
+                                          : "Tambah Kelompok Aset",
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
