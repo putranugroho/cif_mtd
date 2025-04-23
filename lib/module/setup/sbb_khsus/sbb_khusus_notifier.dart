@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:accounting/models/index.dart';
 import 'package:accounting/repository/SetupRepository.dart';
+import 'package:accounting/utils/dialog_loading.dart';
+import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/coa_model.dart';
@@ -24,6 +26,27 @@ class SbbKhususNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<SbbKhususModel> list = [];
+  Future getSbbKhusus() async {
+    isLoading = true;
+    list.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getSbbKhusus(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          list.add(SbbKhususModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
   Future getGolonganSbb() async {
     isLoading = true;
     listGolongan.clear();
@@ -35,8 +58,7 @@ class SbbKhususNotifier extends ChangeNotifier {
         for (Map<String, dynamic> i in value['data']) {
           listGolongan.add(GolonganSbbKhususModel.fromJson(i));
         }
-        isLoading = false;
-        notifyListeners();
+        getSbbKhusus();
       } else {
         isLoading = false;
         notifyListeners();
@@ -85,6 +107,8 @@ class SbbKhususNotifier extends ChangeNotifier {
     });
   }
 
+  edit(String kode) {}
+
   pilihCoa(InqueryGlModel value) {
     if (listGlAdd.isEmpty) {
       listGlAdd.add(value);
@@ -126,4 +150,38 @@ class SbbKhususNotifier extends ChangeNotifier {
   }
 
   CoaModel? bukuBesar;
+
+  cek() {
+    DialogCustom().showLoading(context);
+    List<Map<String, dynamic>> json = [];
+    for (var i = 0; i < listGlAdd.length; i++) {
+      json.add({
+        "id": listGlAdd[i].id,
+        "gol_acc": "${listGlAdd[i].golAcc}",
+        "jns_acc": "${listGlAdd[i].jnsAcc}",
+        "nobb": "${listGlAdd[i].nobb}",
+        "nosbb": "${listGlAdd[i].nosbb}",
+        "nama_sbb": "${listGlAdd[i].namaSbb}",
+        "type_posting": "${listGlAdd[i].typePosting}",
+        "kode_golongan": "${golonganSbbKhususModel!.kodeGolongan}",
+        "kode_pt": "${golonganSbbKhususModel!.kodePt}",
+        "sbb_khusus": ""
+      });
+    }
+    var data = {"data": json};
+    // print(jsonEncode(data));
+    Setuprepository.setup(token, NetworkURL.addSbbKhusus(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        informationDialog(context, "Information", value['message']);
+        listGlAdd.clear();
+        dialog = false;
+        getSbbKhusus();
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message'][0]);
+      }
+    });
+  }
 }

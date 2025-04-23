@@ -136,8 +136,25 @@ class NetworkURL {
   static String deleteGolonganSbb() {
     return "$url/golongansbb/deleted";
   }
+
   static String getInqueryGL() {
     return "$url/mastergl/inquery";
+  }
+
+  static String getSbbKhusus() {
+    return "$url/sbbkhusus";
+  }
+
+  static String addSbbKhusus() {
+    return "$url/sbbkhusus/add";
+  }
+
+  static String editSbbKhusus() {
+    return "$url/sbbkhusus/update";
+  }
+
+  static String deleteSbbKhusus() {
+    return "$url/sbbkhusus/deleted";
   }
 
   static String getProvinsi() {
