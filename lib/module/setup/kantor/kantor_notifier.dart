@@ -75,15 +75,20 @@ class KantorNotifier extends ChangeNotifier {
     kota.text = kantor!.kota;
     kecamatan.text = kantor!.kecamatan;
     kelurahan.text = kantor!.kelurahan;
+    kode.text = kantor!.kodeKantor;
     alamat.text = kantor!.alamat;
-    status = kantor!.statusKantor == "A"
+    kodepos.text = kantor!.kodePos;
+    status = kantor!.statusKantor == "P"
         ? "Pusat"
-        : kantor!.statusKantor == "B"
+        : kantor!.statusKantor == "C"
             ? "Cabang"
-            : kantor!.statusKantor == "C"
+            : kantor!.statusKantor == "D"
                 ? "Anak Cabang"
                 : "Outlet/Gudang";
-    kantorModel = list.where((e) => e.kodePt == kantor!.kodePt).first;
+    kantorModel =
+        list.where((e) => e.kodeKantor == kantor!.kodeInduk).isNotEmpty
+            ? list.where((e) => e.kodeKantor == kantor!.kodeInduk).first
+            : null;
     nama.text = kantor!.namaKantor;
     notelp.text = kantor!.telp;
     fax.text = kantor!.fax;
@@ -236,8 +241,9 @@ class KantorNotifier extends ChangeNotifier {
       if (editData) {
         DialogCustom().showLoading(context);
         var json = {
+          "id": kantor!.id,
           "kode_pt": "${perusahaanModel!.kodePt}",
-          "kode_kantor": "${kantorModel!.kodeKantor}",
+          "kode_kantor": "${kantor!.kodeKantor}",
           "kode_induk": "${kantorModel == null ? "" : kantorModel!.kodeKantor}",
           "nama_kantor": "${nama.text}",
           "status_kantor":
@@ -251,6 +257,7 @@ class KantorNotifier extends ChangeNotifier {
           "telp": "${notelp.text.isEmpty ? "" : notelp.text}",
           "fax": "${fax.text.isEmpty ? "" : fax.text}",
         };
+        print(jsonEncode(json));
         Setuprepository.insertKantor(
                 token, NetworkURL.updateKantor(), jsonEncode(json))
             .then((value) {

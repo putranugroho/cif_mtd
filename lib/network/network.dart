@@ -26,7 +26,7 @@ class NetworkURL {
   }
 
   static String updateKantor() {
-    return "$url/kantor/updated";
+    return "$url/kantor/update";
   }
 
   static String deletedKantor() {
