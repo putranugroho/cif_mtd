@@ -61,6 +61,7 @@ class PenyusutanNotifier extends ChangeNotifier {
       "id": metodePenyusutanModel!.id,
       "metode_penyusutan": "$metode",
       "nilai_akhir": "${nilai.text}",
+      "declining": "${declining.text}",
     };
     Setuprepository.setup(
             token, NetworkURL.editMetodePenyusutan(), jsonEncode(data))
