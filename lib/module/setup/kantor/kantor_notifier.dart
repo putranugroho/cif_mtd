@@ -127,7 +127,6 @@ class KantorNotifier extends ChangeNotifier {
   final keyForm = GlobalKey<FormState>();
 
   List<String> listStatus = [
-    "Pusat",
     "Cabang",
     "Anak Cabang",
     "Outlet/Gudang",

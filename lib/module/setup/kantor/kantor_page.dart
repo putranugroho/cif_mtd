@@ -313,74 +313,53 @@ class KantorPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 8,
                                     ),
-                                    value.status == "Anak Cabang"
-                                        ? DropdownSearch<KantorModel>(
-                                            popupProps:
-                                                const PopupPropsMultiSelection
-                                                    .menu(
-                                              showSearchBox:
-                                                  true, // Aktifkan fitur pencarian
-                                            ),
-                                            selectedItem: value.kantorModel,
-                                            items: value.list,
-                                            itemAsString: (e) =>
-                                                "${e.namaKantor}",
-                                            onChanged: (e) {
-                                              value.pilihKantor(e!);
-                                            },
-                                            dropdownDecoratorProps:
-                                                DropDownDecoratorProps(
-                                              baseStyle:
-                                                  TextStyle(fontSize: 16),
-                                              textAlignVertical:
-                                                  TextAlignVertical.center,
-                                              dropdownSearchDecoration:
-                                                  InputDecoration(
-                                                hintText: "Pilih Kantor",
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  borderSide: BorderSide(
-                                                    width: 1,
-                                                    color: Colors.grey,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        : DropdownSearch<PerusahaanModel>(
-                                            popupProps:
-                                                const PopupPropsMultiSelection
-                                                    .menu(
-                                              showSearchBox:
-                                                  true, // Aktifkan fitur pencarian
-                                            ),
-                                            selectedItem: value.perusahaanModel,
-                                            items: value.listPerusahaan,
-                                            itemAsString: (e) => "${e.namaPt}",
-                                            onChanged: (e) {
-                                              value.pilihPerusahaan(e!);
-                                            },
-                                            dropdownDecoratorProps:
-                                                DropDownDecoratorProps(
-                                              baseStyle:
-                                                  TextStyle(fontSize: 16),
-                                              textAlignVertical:
-                                                  TextAlignVertical.center,
-                                              dropdownSearchDecoration:
-                                                  InputDecoration(
-                                                hintText: "Pilih Perusahaan",
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  borderSide: BorderSide(
-                                                    width: 1,
-                                                    color: Colors.grey,
-                                                  ),
-                                                ),
-                                              ),
+                                    DropdownSearch<KantorModel>(
+                                      popupProps:
+                                          const PopupPropsMultiSelection.menu(
+                                        showSearchBox:
+                                            true, // Aktifkan fitur pencarian
+                                      ),
+                                      selectedItem: value.kantorModel,
+                                      items: value.status == "Cabang"
+                                          ? value.list
+                                              .where(
+                                                  (e) => e.statusKantor == "P")
+                                              .toList()
+                                          : value.status == "Anak Cabang"
+                                              ? value.list
+                                                  .where((e) =>
+                                                      e.statusKantor == "C" ||
+                                                      e.statusKantor == "P")
+                                                  .toList()
+                                              : value.list
+                                                  .where((e) =>
+                                                      e.statusKantor == "D" ||
+                                                      e.statusKantor == "C" ||
+                                                      e.statusKantor == "P")
+                                                  .toList(),
+                                      itemAsString: (e) => "${e.namaKantor}",
+                                      onChanged: (e) {
+                                        value.pilihKantor(e!);
+                                      },
+                                      dropdownDecoratorProps:
+                                          DropDownDecoratorProps(
+                                        baseStyle: TextStyle(fontSize: 16),
+                                        textAlignVertical:
+                                            TextAlignVertical.center,
+                                        dropdownSearchDecoration:
+                                            InputDecoration(
+                                          hintText: "Pilih Kantor",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            borderSide: BorderSide(
+                                              width: 1,
+                                              color: Colors.grey,
                                             ),
                                           ),
+                                        ),
+                                      ),
+                                    ),
                                     const SizedBox(height: 16),
                                     Row(
                                       children: [
