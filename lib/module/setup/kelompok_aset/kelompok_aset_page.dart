@@ -235,6 +235,7 @@ class KelompokAsetPage extends StatelessWidget {
                                 height: 8,
                               ),
                               TextFormField(
+                                readOnly: value.editData ? true : false,
                                 textInputAction: TextInputAction.done,
                                 controller: value.kode,
                                 maxLines: 1,
@@ -249,6 +250,8 @@ class KelompokAsetPage extends StatelessWidget {
                                   }
                                 },
                                 decoration: InputDecoration(
+                                  filled: value.editData ? true : false,
+                                  fillColor: Colors.grey[200],
                                   hintText: "Kode Kelompok",
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6),

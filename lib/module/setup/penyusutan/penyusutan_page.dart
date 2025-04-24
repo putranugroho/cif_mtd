@@ -150,52 +150,60 @@ class PenyusutanPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              Row(
-                                children: [
-                                  Text(
-                                    "Nilai Declining (%)",
-                                    style: const TextStyle(fontSize: 12),
-                                  ),
-                                  const SizedBox(width: 5),
-                                  const Text(
-                                    "*",
-                                    style: TextStyle(fontSize: 8),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              TextFormField(
-                                textInputAction: TextInputAction.done,
-                                controller: value.declining,
-                                maxLines: 1,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r'^\d+\.?\d{0,2}')),
-                                ],
-                                validator: (e) {
-                                  if (e!.isEmpty) {
-                                    return "Wajib diisi";
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                decoration: InputDecoration(
-                                  hintText: "Nilai Declining",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                "Berdampak apabila metode penyusutan Double Declining ",
-                                style: TextStyle(
-                                  fontSize: 10,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
+                              value.metode == 2
+                                  ? Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Nilai Declining (%)",
+                                              style:
+                                                  const TextStyle(fontSize: 12),
+                                            ),
+                                            const SizedBox(width: 5),
+                                            const Text(
+                                              "*",
+                                              style: TextStyle(fontSize: 8),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        TextFormField(
+                                          textInputAction: TextInputAction.done,
+                                          controller: value.declining,
+                                          maxLines: 1,
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter.allow(
+                                                RegExp(r'^\d+\.?\d{0,2}')),
+                                          ],
+                                          validator: (e) {
+                                            if (e!.isEmpty) {
+                                              return "Wajib diisi";
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                          decoration: InputDecoration(
+                                            hintText: "Nilai Declining",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          "Berdampak apabila metode penyusutan Double Declining ",
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 16),
+                                      ],
+                                    )
+                                  : SizedBox(),
                               Row(
                                 children: [
                                   ButtonPrimary(
