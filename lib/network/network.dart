@@ -197,6 +197,22 @@ class NetworkURL {
     return "$url/setuptrans/deleted";
   }
 
+  static String getusers() {
+    return "$url/users";
+  }
+
+  static String addusers() {
+    return "$url/users/add";
+  }
+
+  static String editusers() {
+    return "$url/users/update";
+  }
+
+  static String deleteusers() {
+    return "$url/users/deleted";
+  }
+
   static String getProvinsi() {
     return "$url2/provinsi";
   }

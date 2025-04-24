@@ -7,6 +7,7 @@ import 'index.dart';
 class UsersModel {
 
   const UsersModel({
+    required this.id,
     required this.userid,
     required this.pass,
     required this.namauser,
@@ -29,6 +30,7 @@ class UsersModel {
     required this.maxOtor,
   });
 
+  final int id;
   final String userid;
   final String pass;
   final String namauser;
@@ -51,6 +53,7 @@ class UsersModel {
   final String maxOtor;
 
   factory UsersModel.fromJson(Map<String,dynamic> json) => UsersModel(
+    id: json['id'] as int,
     userid: json['userid'].toString(),
     pass: json['pass'].toString(),
     namauser: json['namauser'].toString(),
@@ -74,6 +77,7 @@ class UsersModel {
   );
   
   Map<String, dynamic> toJson() => {
+    'id': id,
     'userid': userid,
     'pass': pass,
     'namauser': namauser,
@@ -97,6 +101,7 @@ class UsersModel {
   };
 
   UsersModel clone() => UsersModel(
+    id: id,
     userid: userid,
     pass: pass,
     namauser: namauser,
@@ -121,6 +126,7 @@ class UsersModel {
 
 
   UsersModel copyWith({
+    int? id,
     String? userid,
     String? pass,
     String? namauser,
@@ -142,6 +148,7 @@ class UsersModel {
     String? minOtor,
     String? maxOtor
   }) => UsersModel(
+    id: id ?? this.id,
     userid: userid ?? this.userid,
     pass: pass ?? this.pass,
     namauser: namauser ?? this.namauser,
@@ -166,8 +173,8 @@ class UsersModel {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is UsersModel && userid == other.userid && pass == other.pass && namauser == other.namauser && kdAktivasi == other.kdAktivasi && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && tglexp == other.tglexp && lvluser == other.lvluser && terminalId == other.terminalId && aksesKasir == other.aksesKasir && sbbKasir == other.sbbKasir && namaSbb == other.namaSbb && fhoto1 == other.fhoto1 && fhoto2 == other.fhoto2 && fhoto3 == other.fhoto3 && levelOtor == other.levelOtor && bedaKantor == other.bedaKantor && minOtor == other.minOtor && maxOtor == other.maxOtor;
+    || other is UsersModel && id == other.id && userid == other.userid && pass == other.pass && namauser == other.namauser && kdAktivasi == other.kdAktivasi && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && tglexp == other.tglexp && lvluser == other.lvluser && terminalId == other.terminalId && aksesKasir == other.aksesKasir && sbbKasir == other.sbbKasir && namaSbb == other.namaSbb && fhoto1 == other.fhoto1 && fhoto2 == other.fhoto2 && fhoto3 == other.fhoto3 && levelOtor == other.levelOtor && bedaKantor == other.bedaKantor && minOtor == other.minOtor && maxOtor == other.maxOtor;
 
   @override
-  int get hashCode => userid.hashCode ^ pass.hashCode ^ namauser.hashCode ^ kdAktivasi.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ tglexp.hashCode ^ lvluser.hashCode ^ terminalId.hashCode ^ aksesKasir.hashCode ^ sbbKasir.hashCode ^ namaSbb.hashCode ^ fhoto1.hashCode ^ fhoto2.hashCode ^ fhoto3.hashCode ^ levelOtor.hashCode ^ bedaKantor.hashCode ^ minOtor.hashCode ^ maxOtor.hashCode;
+  int get hashCode => id.hashCode ^ userid.hashCode ^ pass.hashCode ^ namauser.hashCode ^ kdAktivasi.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ tglexp.hashCode ^ lvluser.hashCode ^ terminalId.hashCode ^ aksesKasir.hashCode ^ sbbKasir.hashCode ^ namaSbb.hashCode ^ fhoto1.hashCode ^ fhoto2.hashCode ^ fhoto3.hashCode ^ levelOtor.hashCode ^ bedaKantor.hashCode ^ minOtor.hashCode ^ maxOtor.hashCode;
 }

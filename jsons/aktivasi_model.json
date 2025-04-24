@@ -1,7 +1,9 @@
 {
+    "id": 1,
     "kd_aktivasi": "",
     "nm_aktivasi": "",
     "hari": "",
     "jam_mulai": "",
-    "jam_selesai": ""
+    "jam_selesai": "",
+    "createdDate": ""
 }

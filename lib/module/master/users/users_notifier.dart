@@ -6,18 +6,18 @@ class UsersNotifier extends ChangeNotifier {
   final BuildContext context;
 
   UsersNotifier({required this.context}) {
-    for (Map<String, dynamic> i in menu) {
-      listMenu.add(MenuModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in data) {
-      listData.add(UsersModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in coa) {
-      listCoa.add(CoaModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in hariKerja) {
-      listHariKerja.add(AktivasiModel.fromJson(i));
-    }
+    // for (Map<String, dynamic> i in menu) {
+    //   listMenu.add(MenuModel.fromJson(i));
+    // }
+    // for (Map<String, dynamic> i in data) {
+    //   listData.add(UsersModel.fromJson(i));
+    // }
+    // for (Map<String, dynamic> i in coa) {
+    //   listCoa.add(CoaModel.fromJson(i));
+    // }
+    // for (Map<String, dynamic> i in hariKerja) {
+    //   listHariKerja.add(AktivasiModel.fromJson(i));
+    // }
     notifyListeners();
   }
 
