@@ -1,6 +1,7 @@
 {
     "id": 1,
     "metode_penyusutan": "1",
-    "nilai_akhir": 100,
-    "kode_pt": "001"
+    "nilai_akhir": 1,
+    "kode_pt": "001",
+    "declining": "0"
 }

@@ -34,6 +34,7 @@ class PenyusutanNotifier extends ChangeNotifier {
         metodePenyusutanModel = list[0];
         metode = int.parse(metodePenyusutanModel!.metodePenyusutan);
         nilai.text = metodePenyusutanModel!.nilaiAkhir.toString();
+        declining.text = metodePenyusutanModel!.declining.toString();
         isLoading = false;
         notifyListeners();
       } else {
@@ -52,6 +53,7 @@ class PenyusutanNotifier extends ChangeNotifier {
   }
 
   TextEditingController nilai = TextEditingController(text: "0");
+  TextEditingController declining = TextEditingController(text: "0");
 
   cek() {
     DialogCustom().showLoading(context);
@@ -64,7 +66,7 @@ class PenyusutanNotifier extends ChangeNotifier {
             token, NetworkURL.editMetodePenyusutan(), jsonEncode(data))
         .then((value) {
       Navigator.pop(context);
-      if (value['status'].toString().toLowerCase().contains("success")) {        
+      if (value['status'].toString().toLowerCase().contains("success")) {
         informationDialog(context, "Information", value['message']);
         notifyListeners();
       } else {
