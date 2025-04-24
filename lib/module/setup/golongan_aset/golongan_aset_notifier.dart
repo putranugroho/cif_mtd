@@ -26,7 +26,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
     dialog = false;
     kode.clear();
     nama.clear();
-    masa.clear();
+    masasusut.clear();
     nilai.clear();
     sbbAset = null;
     sbbpenyusutan = null;
@@ -59,6 +59,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
           if (value['status'].toString().toLowerCase().contains("success")) {
             clear();
             getGolonganAset();
+            getInqueryAll();
             informationDialog(context, "Information", value['message']);
           } else {
             informationDialog(context, "Warning", value['message'][0]);
@@ -84,6 +85,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
           if (value['status'].toString().toLowerCase().contains("success")) {
             clear();
             getGolonganAset();
+            getInqueryAll();
             informationDialog(context, "Information", value['message']);
           } else {
             informationDialog(context, "Warning", value['message'][0]);
