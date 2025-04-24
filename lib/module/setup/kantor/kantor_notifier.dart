@@ -217,8 +217,7 @@ class KantorNotifier extends ChangeNotifier {
   remove() {
     DialogCustom().showLoading(context);
     var json = {
-      "kode_pt": "${perusahaanModel!.kodePt}",
-      "kode_kantor": "${kantorModel!.kodeKantor}",
+      "id": kantor!.id,
     };
     Setuprepository.deleteKantor(
             token, NetworkURL.deletedKantor(), jsonEncode(json))
@@ -243,7 +242,7 @@ class KantorNotifier extends ChangeNotifier {
         var json = {
           "id": kantor!.id,
           "kode_pt": "${perusahaanModel!.kodePt}",
-          "kode_kantor": "${kantor!.kodeKantor}",
+          "kode_kantor": "${kode.text}",
           "kode_induk": "${kantorModel == null ? "" : kantorModel!.kodeKantor}",
           "nama_kantor": "${nama.text}",
           "status_kantor":

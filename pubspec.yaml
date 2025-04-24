@@ -40,6 +40,8 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   shared_preferences: ^2.0.7
   image_cropping: ^0.0.9
+  
+  time_picker_spinner: any
 
 
 

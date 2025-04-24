@@ -212,6 +212,21 @@ class NetworkURL {
   static String deleteusers() {
     return "$url/users/deleted";
   }
+  static String getAktivasi() {
+    return "$url/aktivasi";
+  }
+
+  static String addAktivasi() {
+    return "$url/aktivasi/add";
+  }
+
+  static String editAktivasi() {
+    return "$url/aktivasi/update";
+  }
+
+  static String deleteAktivasi() {
+    return "$url/aktivasi/deleted";
+  }
 
   static String getProvinsi() {
     return "$url2/provinsi";

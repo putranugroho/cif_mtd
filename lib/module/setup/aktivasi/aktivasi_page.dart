@@ -384,28 +384,34 @@ class AktivasiPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 8,
                                     ),
-                                    TextFormField(
-                                      enabled: false,
-                                      textInputAction: TextInputAction.done,
-
-                                      maxLines: 1,
-                                      // inputFormatters: [
-                                      //   FilteringTextInputFormatter.digitsOnly
-                                      // ],
-                                      validator: (e) {
-                                        if (e!.isEmpty) {
-                                          return "Wajib diisi";
-                                        } else {
-                                          return null;
-                                        }
+                                    InkWell(
+                                      onTap: () {
+                                        value.pilihJamMulai();
                                       },
-                                      decoration: InputDecoration(
-                                        hintText: "jam Masuk",
-                                        fillColor: Colors.grey[200],
-                                        filled: true,
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                      child: TextFormField(
+                                        enabled: false,
+                                        controller: value.jamMulai,
+                                        textInputAction: TextInputAction.done,
+
+                                        maxLines: 1,
+                                        // inputFormatters: [
+                                        //   FilteringTextInputFormatter.digitsOnly
+                                        // ],
+                                        validator: (e) {
+                                          if (e!.isEmpty) {
+                                            return "Wajib diisi";
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                        decoration: InputDecoration(
+                                          hintText: "jam Masuk",
+                                          fillColor: Colors.grey[200],
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -436,28 +442,33 @@ class AktivasiPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 8,
                                     ),
-                                    TextFormField(
-                                      enabled: false,
-                                      textInputAction: TextInputAction.done,
-
-                                      maxLines: 1,
-                                      // inputFormatters: [
-                                      //   FilteringTextInputFormatter.digitsOnly
-                                      // ],
-                                      validator: (e) {
-                                        if (e!.isEmpty) {
-                                          return "Wajib diisi";
-                                        } else {
-                                          return null;
-                                        }
+                                    InkWell(
+                                      onTap: () {
+                                        value.pilihJamSelesai();
                                       },
-                                      decoration: InputDecoration(
-                                        hintText: "Jam Pulang",
-                                        fillColor: Colors.grey[200],
-                                        filled: true,
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                      child: TextFormField(
+                                        enabled: false,
+                                        textInputAction: TextInputAction.done,
+                                        controller: value.jamSelesai,
+                                        maxLines: 1,
+                                        // inputFormatters: [
+                                        //   FilteringTextInputFormatter.digitsOnly
+                                        // ],
+                                        validator: (e) {
+                                          if (e!.isEmpty) {
+                                            return "Wajib diisi";
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                        decoration: InputDecoration(
+                                          hintText: "Jam Pulang",
+                                          fillColor: Colors.grey[200],
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                          ),
                                         ),
                                       ),
                                     ),
