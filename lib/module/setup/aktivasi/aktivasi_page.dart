@@ -196,293 +196,328 @@ class AktivasiPage extends StatelessWidget {
                         padding: EdgeInsets.all(20),
                         width: 600,
                         decoration: BoxDecoration(color: Colors.white),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    "Tambah Aktivasi",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                        child: Form(
+                          key: value.keyForm,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      value.editData
+                                          ? "Ubah / Hapus Aktivasi"
+                                          : "Tambah Aktivasi",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                InkWell(
-                                  onTap: () => value.tutup(),
-                                  child: Container(
-                                    width: 40,
-                                    height: 40,
-                                    padding: EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey[200],
-                                        shape: BoxShape.circle),
-                                    child: Icon(Icons.close),
+                                  InkWell(
+                                    onTap: () => value.tutup(),
+                                    child: Container(
+                                      width: 40,
+                                      height: 40,
+                                      padding: EdgeInsets.all(4),
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey[200],
+                                          shape: BoxShape.circle),
+                                      child: Icon(Icons.close),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 32,
+                              ),
+                              Expanded(
+                                  child: ListView(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Kode Aktivasi",
+                                        style: const TextStyle(fontSize: 12),
+                                      ),
+                                      const SizedBox(width: 5),
+                                      const Text(
+                                        "*",
+                                        style: TextStyle(fontSize: 8),
+                                      ),
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 32,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Kode Aktivasi",
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                                const SizedBox(width: 5),
-                                const Text(
-                                  "*",
-                                  style: TextStyle(fontSize: 8),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            TextFormField(
-                              textInputAction: TextInputAction.done,
-                              controller: value.kode,
-                              maxLines: 1,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              validator: (e) {
-                                if (e!.isEmpty) {
-                                  return "Wajib diisi";
-                                } else {
-                                  return null;
-                                }
-                              },
-                              decoration: InputDecoration(
-                                hintText: "Kode Aktivasi",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              children: [
-                                Text(
-                                  "Nama Kelompok",
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                                const SizedBox(width: 5),
-                                const Text(
-                                  "*",
-                                  style: TextStyle(fontSize: 8),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            TextFormField(
-                              textInputAction: TextInputAction.done,
-                              controller: value.nama,
-                              maxLines: 1,
-                              // inputFormatters: [
-                              //   FilteringTextInputFormatter.digitsOnly
-                              // ],
-                              validator: (e) {
-                                if (e!.isEmpty) {
-                                  return "Wajib diisi";
-                                } else {
-                                  return null;
-                                }
-                              },
-                              decoration: InputDecoration(
-                                hintText: "Nama Kelompok",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              children: [
-                                Text(
-                                  "Hari",
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                                const SizedBox(width: 5),
-                                const Text(
-                                  "*",
-                                  style: TextStyle(fontSize: 8),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            ListView(
-                              shrinkWrap: true,
-                              physics: ClampingScrollPhysics(),
-                              children: value.listHari
-                                  .map((e) => Column(
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  TextFormField(
+                                    textInputAction: TextInputAction.done,
+                                    controller: value.kode,
+                                    maxLines: 1,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    validator: (e) {
+                                      if (e!.isEmpty) {
+                                        return "Wajib diisi";
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                    decoration: InputDecoration(
+                                      hintText: "Kode Aktivasi",
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Nama Kelompok",
+                                        style: const TextStyle(fontSize: 12),
+                                      ),
+                                      const SizedBox(width: 5),
+                                      const Text(
+                                        "*",
+                                        style: TextStyle(fontSize: 8),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  TextFormField(
+                                    textInputAction: TextInputAction.done,
+                                    controller: value.nama,
+                                    maxLines: 1,
+                                    // inputFormatters: [
+                                    //   FilteringTextInputFormatter.digitsOnly
+                                    // ],
+                                    validator: (e) {
+                                      if (e!.isEmpty) {
+                                        return "Wajib diisi";
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                    decoration: InputDecoration(
+                                      hintText: "Nama Kelompok",
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Hari",
+                                        style: const TextStyle(fontSize: 12),
+                                      ),
+                                      const SizedBox(width: 5),
+                                      const Text(
+                                        "*",
+                                        style: TextStyle(fontSize: 8),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  ListView(
+                                    shrinkWrap: true,
+                                    physics: ClampingScrollPhysics(),
+                                    children: value.listHari
+                                        .map((e) => Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Checkbox(
+                                                        activeColor:
+                                                            colorPrimary,
+                                                        value: value.listHariAdd
+                                                                .isEmpty
+                                                            ? false
+                                                            : value.listHariAdd
+                                                                    .where(
+                                                                        (f) =>
+                                                                            f ==
+                                                                            e)
+                                                                    .isNotEmpty
+                                                                ? true
+                                                                : false,
+                                                        onChanged: (g) =>
+                                                            value.pilihHari(e)),
+                                                    SizedBox(
+                                                      width: 8,
+                                                    ),
+                                                    Text(
+                                                      "$e",
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                )
+                                              ],
+                                            ))
+                                        .toList(),
+                                  ),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                          child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.stretch,
                                         children: [
                                           Row(
                                             children: [
-                                              Checkbox(
-                                                  activeColor: colorPrimary,
-                                                  value: value
-                                                          .listHariAdd.isEmpty
-                                                      ? false
-                                                      : value.listHariAdd
-                                                              .where(
-                                                                  (f) => f == e)
-                                                              .isNotEmpty
-                                                          ? true
-                                                          : false,
-                                                  onChanged: (g) =>
-                                                      value.pilihHari(e)),
-                                              SizedBox(
-                                                width: 8,
-                                              ),
                                               Text(
-                                                "$e",
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                ),
+                                                "Jam Masuk",
+                                                style: const TextStyle(
+                                                    fontSize: 12),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              const Text(
+                                                "*",
+                                                style: TextStyle(fontSize: 8),
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 8,
-                                          )
-                                        ],
-                                      ))
-                                  .toList(),
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                    child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Jam Masuk",
-                                          style: const TextStyle(fontSize: 12),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        const Text(
-                                          "*",
-                                          style: TextStyle(fontSize: 8),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        value.pilihJamMulai();
-                                      },
-                                      child: TextFormField(
-                                        enabled: false,
-                                        controller: value.jamMulai,
-                                        textInputAction: TextInputAction.done,
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              value.pilihJamMulai();
+                                            },
+                                            child: TextFormField(
+                                              enabled: false,
+                                              controller: value.jamMulai,
+                                              textInputAction:
+                                                  TextInputAction.done,
 
-                                        maxLines: 1,
-                                        // inputFormatters: [
-                                        //   FilteringTextInputFormatter.digitsOnly
-                                        // ],
-                                        validator: (e) {
-                                          if (e!.isEmpty) {
-                                            return "Wajib diisi";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          hintText: "jam Masuk",
-                                          fillColor: Colors.grey[200],
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                              maxLines: 1,
+                                              // inputFormatters: [
+                                              //   FilteringTextInputFormatter.digitsOnly
+                                              // ],
+                                              validator: (e) {
+                                                if (e!.isEmpty) {
+                                                  return "Wajib diisi";
+                                                } else {
+                                                  return null;
+                                                }
+                                              },
+                                              decoration: InputDecoration(
+                                                hintText: "jam Masuk",
+                                                fillColor: Colors.grey[200],
+                                                filled: true,
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                              ),
+                                            ),
                                           ),
-                                        ),
+                                          const SizedBox(height: 16),
+                                        ],
+                                      )),
+                                      SizedBox(
+                                        width: 16,
                                       ),
-                                    ),
-                                    const SizedBox(height: 16),
-                                  ],
-                                )),
-                                SizedBox(
-                                  width: 16,
-                                ),
-                                Expanded(
-                                    child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Jam Pulang",
-                                          style: const TextStyle(fontSize: 12),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        const Text(
-                                          "*",
-                                          style: TextStyle(fontSize: 8),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        value.pilihJamSelesai();
-                                      },
-                                      child: TextFormField(
-                                        enabled: false,
-                                        textInputAction: TextInputAction.done,
-                                        controller: value.jamSelesai,
-                                        maxLines: 1,
-                                        // inputFormatters: [
-                                        //   FilteringTextInputFormatter.digitsOnly
-                                        // ],
-                                        validator: (e) {
-                                          if (e!.isEmpty) {
-                                            return "Wajib diisi";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          hintText: "Jam Pulang",
-                                          fillColor: Colors.grey[200],
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                      Expanded(
+                                          child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Jam Pulang",
+                                                style: const TextStyle(
+                                                    fontSize: 12),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              const Text(
+                                                "*",
+                                                style: TextStyle(fontSize: 8),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 16),
-                                  ],
-                                )),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-                            ButtonPrimary(
-                              onTap: () {},
-                              name: "Simpan",
-                            )
-                          ],
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              value.pilihJamSelesai();
+                                            },
+                                            child: TextFormField(
+                                              enabled: false,
+                                              textInputAction:
+                                                  TextInputAction.done,
+                                              controller: value.jamSelesai,
+                                              maxLines: 1,
+                                              // inputFormatters: [
+                                              //   FilteringTextInputFormatter.digitsOnly
+                                              // ],
+                                              validator: (e) {
+                                                if (e!.isEmpty) {
+                                                  return "Wajib diisi";
+                                                } else {
+                                                  return null;
+                                                }
+                                              },
+                                              decoration: InputDecoration(
+                                                hintText: "Jam Pulang",
+                                                fillColor: Colors.grey[200],
+                                                filled: true,
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 16),
+                                        ],
+                                      )),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 16),
+                                  ButtonPrimary(
+                                    onTap: () {
+                                      value.cek();
+                                    },
+                                    name: "Simpan",
+                                  ),
+                                  value.editData
+                                      ? Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            const SizedBox(height: 16),
+                                            ButtonPrimary(
+                                              onTap: () {
+                                                value.confirm();
+                                              },
+                                              name: "Hapus",
+                                            ),
+                                          ],
+                                        )
+                                      : SizedBox()
+                                ],
+                              ))
+                            ],
+                          ),
                         ),
                       )
                     : SizedBox(),
@@ -523,7 +558,7 @@ class DetailDataSource extends DataGridSource {
                         .replaceAll("'", "")),
                 DataGridCell(columnName: 'jam_mulai', value: data.jamMulai),
                 DataGridCell(columnName: 'jam_selesai', value: data.jamSelesai),
-                DataGridCell(columnName: 'action', value: data.kdAktivasi),
+                DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
         .toList();
@@ -537,22 +572,27 @@ class DetailDataSource extends DataGridSource {
           return Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: 300,
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: colorPrimary,
-                border: Border.all(
-                  width: 2,
+            child: InkWell(
+              onTap: () {
+                tindakanNotifier!.edit(e.value);
+              },
+              child: Container(
+                width: 300,
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
+                  border: Border.all(
+                    width: 2,
+                    color: colorPrimary,
+                  ),
                 ),
-              ),
-              child: Text(
-                "Aksi",
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
+                child: Text(
+                  "Aksi",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

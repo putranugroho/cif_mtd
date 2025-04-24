@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:accounting/models/index.dart';
 import 'package:accounting/repository/SetupRepository.dart';
 import 'package:accounting/utils/button_custom.dart';
+import 'package:accounting/utils/dialog_loading.dart';
+import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -16,6 +18,103 @@ class AktivasiNotifier extends ChangeNotifier {
   AktivasiNotifier({required this.context}) {
     getAktivasi();
     notifyListeners();
+  }
+
+  final keyForm = GlobalKey<FormState>();
+  var editData = false;
+
+  clear() {
+    dialog = false;
+    editData = false;
+    kode.clear();
+    nama.clear();
+    listHariAdd.clear();
+    jamMulai.clear();
+    jamSelesai.clear();
+    notifyListeners();
+  }
+
+  AktivasiModel? aktivasiModel;
+
+  edit(String id) {
+    dialog = true;
+    editData = true;
+    listHariAdd.clear();
+    aktivasiModel = list.where((e) => e.id == int.parse(id)).first;
+    kode.text = aktivasiModel!.kdAktivasi;
+    nama.text = aktivasiModel!.nmAktivasi;
+    jamMulai.text = aktivasiModel!.jamMulai;
+    jamSelesai.text = aktivasiModel!.jamSelesai;
+
+    List<String> hariList = jsonEncode(aktivasiModel!.hari)
+        .toString()
+        .replaceAll('[', '')
+        .replaceAll("\"", "")
+        .replaceAll(']', '')
+        .split(',')
+        .map((e) => e.trim())
+        .toList();
+    print(hariList.length);
+    for (var i = 0; i < hariList.length; i++) {
+      listHariAdd.add(hariList[i]);
+    }
+    notifyListeners();
+  }
+
+  cek() {
+    if (keyForm.currentState!.validate()) {
+      if (editData) {
+        DialogCustom().showLoading(context);
+        var data = {
+          "id": aktivasiModel!.id,
+          "kode_pt": "001",
+          "kd_aktivasi": "${kode.text}",
+          "nm_aktivasi": "${nama.text}",
+          "hari": "${listHariAdd}",
+          "jam_mulai": "${jamMulai.text}",
+          "jam_selesai": "${jamSelesai.text}",
+        };
+
+        Setuprepository.setup(
+                token, NetworkURL.editAktivasi(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'].toString().toLowerCase().contains("success")) {
+            informationDialog(context, "Information", value['message']);
+            clear();
+            getAktivasi();
+            notifyListeners();
+          } else {
+            informationDialog(context, "Information", value['message'][0]);
+            notifyListeners();
+          }
+        });
+      } else {
+        DialogCustom().showLoading(context);
+        var data = {
+          "kode_pt": "001",
+          "kd_aktivasi": "${kode.text}",
+          "nm_aktivasi": "${nama.text}",
+          "hari": "${listHariAdd}",
+          "jam_mulai": "${jamMulai.text}",
+          "jam_selesai": "${jamSelesai.text}",
+        };
+
+        Setuprepository.setup(token, NetworkURL.addAktivasi(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'].toString().toLowerCase().contains("success")) {
+            informationDialog(context, "Information", value['message']);
+            clear();
+            getAktivasi();
+            notifyListeners();
+          } else {
+            informationDialog(context, "Information", value['message'][0]);
+            notifyListeners();
+          }
+        });
+      }
+    }
   }
 
   var isLoading = true;
@@ -48,6 +147,76 @@ class AktivasiNotifier extends ChangeNotifier {
   tutup() {
     dialog = false;
     notifyListeners();
+  }
+
+  confirm() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: 500,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Anda yakin menghapus ${aktivasiModel!.nmAktivasi}?",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ButtonSecondary(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        name: "Tidak",
+                      )),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                          child: ButtonPrimary(
+                        onTap: () {
+                          Navigator.pop(context);
+                          remove();
+                        },
+                        name: "Ya",
+                      )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  remove() {
+    DialogCustom().showLoading(context);
+    var data = {
+      "id": aktivasiModel!.id,
+    };
+    Setuprepository.setup(token, NetworkURL.deleteAktivasi(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        getAktivasi();
+        clear();
+
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message'][0]);
+      }
+    });
   }
 
   TextEditingController kode = TextEditingController();
