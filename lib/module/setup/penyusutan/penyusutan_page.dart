@@ -153,7 +153,7 @@ class PenyusutanPage extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    "Nilai Declining",
+                                    "Nilai Declining (%)",
                                     style: const TextStyle(fontSize: 12),
                                   ),
                                   const SizedBox(width: 5),
@@ -171,7 +171,8 @@ class PenyusutanPage extends StatelessWidget {
                                 controller: value.declining,
                                 maxLines: 1,
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly,
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'^\d+\.?\d{0,2}')),
                                 ],
                                 validator: (e) {
                                   if (e!.isEmpty) {
@@ -181,7 +182,7 @@ class PenyusutanPage extends StatelessWidget {
                                   }
                                 },
                                 decoration: InputDecoration(
-                                  hintText: "Nilai Akhir",
+                                  hintText: "Nilai Declining",
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6),
                                   ),

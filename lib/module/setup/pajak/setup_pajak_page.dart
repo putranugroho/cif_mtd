@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../utils/button_custom.dart';
 import '../../../utils/decimal_format_input.dart';
+import '../../../utils/pro_shimmer.dart';
 
 class SetupPajakPage extends StatelessWidget {
   const SetupPajakPage({super.key});
@@ -40,152 +41,178 @@ class SetupPajakPage extends StatelessWidget {
                 height: 16,
               ),
               Expanded(
-                  child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 16),
-                      height: 1,
-                      color: Colors.grey,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "PPN%",
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                        const SizedBox(width: 5),
-                        const Text(
-                          "*",
-                          style: TextStyle(fontSize: 8),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    TextFormField(
-                      textInputAction: TextInputAction.done,
-                      controller: value.ppn,
-                      maxLines: 1,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d+\.?\d{0,2}')),
-                      ],
-                      keyboardType: TextInputType.numberWithOptions(
-                        decimal: true,
-                        signed: false,
-                      ),
-                      validator: (e) {
-                        if (e!.isEmpty) {
-                          return "Wajib diisi";
-                        } else {
-                          return null;
-                        }
-                      },
-                      decoration: InputDecoration(
-                        hintText: "PPN",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Text(
-                          "Nilai Maksimal Kena PPN",
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                        const SizedBox(width: 5),
-                        const Text(
-                          "*",
-                          style: TextStyle(fontSize: 8),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    TextFormField(
-                      textInputAction: TextInputAction.done,
-                      controller: value.maksPpn,
-                      maxLines: 1,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        CurrencyInputFormatter(),
-                      ],
-                      validator: (e) {
-                        if (e!.isEmpty) {
-                          return "Wajib diisi";
-                        } else {
-                          return null;
-                        }
-                      },
-                      decoration: InputDecoration(
-                        hintText: "Nilai Maks",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Text(
-                          "PPH 23%",
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                        const SizedBox(width: 5),
-                        const Text(
-                          "*",
-                          style: TextStyle(fontSize: 8),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    TextFormField(
-                      textInputAction: TextInputAction.done,
-                      controller: value.pph23,
-                      maxLines: 1,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d+\.?\d{0,2}')),
-                      ],
-                      keyboardType: TextInputType.numberWithOptions(
-                        decimal: true,
-                        signed: false,
-                      ),
-                      validator: (e) {
-                        if (e!.isEmpty) {
-                          return "Wajib diisi";
-                        } else {
-                          return null;
-                        }
-                      },
-                      decoration: InputDecoration(
-                        hintText: "PPH",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        ButtonPrimary(
-                          onTap: () {},
-                          name: "Simpan",
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ))
+                  child: value.isLoading
+                      ? Container(
+                          padding: const EdgeInsets.all(16),
+                          child: const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ProShimmer(height: 10, width: 200),
+                              SizedBox(
+                                height: 4,
+                              ),
+                              ProShimmer(height: 10, width: 120),
+                              SizedBox(
+                                height: 4,
+                              ),
+                              ProShimmer(height: 10, width: 100),
+                              SizedBox(
+                                height: 4,
+                              ),
+                            ],
+                          ),
+                        )
+                      : Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Form(
+                            key: value.keyForm,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.symmetric(vertical: 16),
+                                  height: 1,
+                                  color: Colors.grey,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "PPN (%)",
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    const Text(
+                                      "*",
+                                      style: TextStyle(fontSize: 8),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                TextFormField(
+                                  textInputAction: TextInputAction.done,
+                                  controller: value.ppn,
+                                  maxLines: 1,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'^\d+\.?\d{0,2}')),
+                                  ],
+                                  keyboardType: TextInputType.numberWithOptions(
+                                    decimal: true,
+                                    signed: false,
+                                  ),
+                                  validator: (e) {
+                                    if (e!.isEmpty) {
+                                      return "Wajib diisi";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: "PPN",
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Nilai maksimal tidak kena PPN",
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    const Text(
+                                      "*",
+                                      style: TextStyle(fontSize: 8),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                TextFormField(
+                                  textInputAction: TextInputAction.done,
+                                  controller: value.maksPpn,
+                                  maxLines: 1,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    CurrencyInputFormatter(),
+                                  ],
+                                  validator: (e) {
+                                    if (e!.isEmpty) {
+                                      return "Wajib diisi";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: "Nilai Maks",
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "PPH 23 (%)",
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    const Text(
+                                      "*",
+                                      style: TextStyle(fontSize: 8),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                TextFormField(
+                                  textInputAction: TextInputAction.done,
+                                  controller: value.pph23,
+                                  maxLines: 1,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'^\d+\.?\d{0,2}')),
+                                  ],
+                                  keyboardType: TextInputType.numberWithOptions(
+                                    decimal: true,
+                                    signed: false,
+                                  ),
+                                  validator: (e) {
+                                    if (e!.isEmpty) {
+                                      return "Wajib diisi";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: "PPH",
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                Row(
+                                  children: [
+                                    ButtonPrimary(
+                                      onTap: () {
+                                        value.cek();
+                                      },
+                                      name: "Simpan",
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ))
             ],
           ),
         )),

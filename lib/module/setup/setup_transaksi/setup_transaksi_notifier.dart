@@ -7,6 +7,8 @@ import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/button_custom.dart';
+
 class SetupTransaksiNotifier extends ChangeNotifier {
   final BuildContext context;
 
@@ -142,6 +144,76 @@ class SetupTransaksiNotifier extends ChangeNotifier {
         });
       }
     }
+  }
+
+  confirm() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: 500,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Anda yakin menghapus (${setupTransModel!.kdTrans}) ${setupTransModel!.namaTrans}?",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ButtonSecondary(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        name: "Tidak",
+                      )),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                          child: ButtonPrimary(
+                        onTap: () {
+                          Navigator.pop(context);
+                          remove();
+                        },
+                        name: "Ya",
+                      )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  remove() {
+    DialogCustom().showLoading(context);
+    var data = {
+      "id": setupTransModel!.id,
+    };
+    Setuprepository.setup(
+            token, NetworkURL.deleteSetupTrans(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        getSetupTrans();
+        clear();
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message'][0]);
+      }
+    });
   }
 
   clear() {

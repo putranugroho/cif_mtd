@@ -121,6 +121,22 @@ class NetworkURL {
     return "$url/kelompokaset/deleted";
   }
 
+  static String getGolonganAset() {
+    return "$url/golonganaset";
+  }
+
+  static String addGolonganAset() {
+    return "$url/golonganaset/add";
+  }
+
+  static String editGolonganAset() {
+    return "$url/golonganaset/update";
+  }
+
+  static String deleteGolonganAset() {
+    return "$url/golonganaset/deleted";
+  }
+
   static String getGolonganSbb() {
     return "$url/golongansbb";
   }
@@ -159,6 +175,14 @@ class NetworkURL {
 
   static String getSetupTrans() {
     return "$url/setuptrans";
+  }
+
+  static String getSetupPajak() {
+    return "$url/setuppajak";
+  }
+
+  static String editSetupPajak() {
+    return "$url/setuppajak/update";
   }
 
   static String addSetupTrans() {
