@@ -115,7 +115,7 @@ class AktivasiPage extends StatelessWidget {
                                     color: colorPrimary,
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(6),
-                                    child: Text('Nama Aktivasi',
+                                    child: Text('Nama Kelompok',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -268,7 +268,7 @@ class AktivasiPage extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  "Nama Aktivasi",
+                                  "Nama Kelompok",
                                   style: const TextStyle(fontSize: 12),
                                 ),
                                 const SizedBox(width: 5),
@@ -296,7 +296,7 @@ class AktivasiPage extends StatelessWidget {
                                 }
                               },
                               decoration: InputDecoration(
-                                hintText: "Nama Aktivasi",
+                                hintText: "Nama Kelompok",
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(6),
                                 ),
@@ -506,7 +506,8 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(
                     columnName: 'hari',
                     value: data.hari
-                        .replaceAll("[", '').replaceAll(",", ", ")
+                        .replaceAll("[", '')
+                        .replaceAll(",", ", ")
                         .replaceAll("]", "")
                         .replaceAll("'", "")),
                 DataGridCell(columnName: 'jam_mulai', value: data.jamMulai),

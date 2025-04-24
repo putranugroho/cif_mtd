@@ -152,36 +152,42 @@ class SbbKhususNotifier extends ChangeNotifier {
   CoaModel? bukuBesar;
 
   cek() {
-    DialogCustom().showLoading(context);
     List<Map<String, dynamic>> json = [];
-    for (var i = 0; i < listGlAdd.length; i++) {
-      json.add({
-        "id": listGlAdd[i].id,
-        "gol_acc": "${listGlAdd[i].golAcc}",
-        "jns_acc": "${listGlAdd[i].jnsAcc}",
-        "nobb": "${listGlAdd[i].nobb}",
-        "nosbb": "${listGlAdd[i].nosbb}",
-        "nama_sbb": "${listGlAdd[i].namaSbb}",
-        "type_posting": "${listGlAdd[i].typePosting}",
-        "kode_golongan": "${golonganSbbKhususModel!.kodeGolongan}",
-        "kode_pt": "${golonganSbbKhususModel!.kodePt}",
-        "sbb_khusus": ""
+    if (listGlAdd.length == 0) {
+      informationDialog(context, "Warning", "Harap memilih Sub Buku Besar!!");
+    } else {
+      DialogCustom().showLoading(context);
+      for (var i = 0; i < listGlAdd.length; i++) {
+        print("listGlAdd${i}");
+        print(listGlAdd[i]);
+        json.add({
+          "id": listGlAdd[i].id,
+          "gol_acc": "${listGlAdd[i].golAcc}",
+          "jns_acc": "${listGlAdd[i].jnsAcc}",
+          "nobb": "${listGlAdd[i].nobb}",
+          "nosbb": "${listGlAdd[i].nosbb}",
+          "nama_sbb": "${listGlAdd[i].namaSbb}",
+          "type_posting": "${listGlAdd[i].typePosting}",
+          "kode_golongan": "${golonganSbbKhususModel!.kodeGolongan}",
+          "kode_pt": "${golonganSbbKhususModel!.kodePt}",
+          "sbb_khusus": ""
+        });
+      }
+      var data = {"data": json};
+      // print(jsonEncode(data));
+      Setuprepository.setup(token, NetworkURL.addSbbKhusus(), jsonEncode(data))
+          .then((value) {
+        Navigator.pop(context);
+        if (value['status'].toString().toLowerCase().contains("success")) {
+          informationDialog(context, "Information", value['message']);
+          listGlAdd.clear();
+          dialog = false;
+          getSbbKhusus();
+          notifyListeners();
+        } else {
+          informationDialog(context, "Warning", value['message'][0]);
+        }
       });
     }
-    var data = {"data": json};
-    // print(jsonEncode(data));
-    Setuprepository.setup(token, NetworkURL.addSbbKhusus(), jsonEncode(data))
-        .then((value) {
-      Navigator.pop(context);
-      if (value['status'].toString().toLowerCase().contains("success")) {
-        informationDialog(context, "Information", value['message']);
-        listGlAdd.clear();
-        dialog = false;
-        getSbbKhusus();
-        notifyListeners();
-      } else {
-        informationDialog(context, "Warning", value['message'][0]);
-      }
-    });
   }
 }

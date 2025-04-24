@@ -344,7 +344,7 @@ class PejabatPage extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          "No Identitas",
+                                          "Nomor Induk Pegawai",
                                           style: const TextStyle(fontSize: 12),
                                         ),
                                         const SizedBox(width: 5),
@@ -361,10 +361,6 @@ class PejabatPage extends StatelessWidget {
                                       textInputAction: TextInputAction.done,
                                       controller: value.nik,
                                       maxLines: 1,
-                                      maxLength: 16,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.digitsOnly
-                                      ],
                                       validator: (e) {
                                         if (e!.isEmpty) {
                                           return "Wajib diisi";
@@ -373,7 +369,7 @@ class PejabatPage extends StatelessWidget {
                                         }
                                       },
                                       decoration: InputDecoration(
-                                        hintText: "No. Identitas",
+                                        hintText: "Nomor Induk Pegawai",
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(6),

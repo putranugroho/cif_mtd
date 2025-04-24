@@ -304,7 +304,9 @@ class KantorPage extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          "Pilih Kantor",
+                                          value.status != "Cabang"
+                                              ? "Pilih Kantor Cabang"
+                                              : "Pilih Kantor",
                                           style: const TextStyle(fontSize: 12),
                                         ),
                                         const SizedBox(width: 5),
@@ -364,7 +366,9 @@ class KantorPage extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          "Kode Kantor",
+                                          value.status != "Cabang"
+                                              ? "Kode Kantor Cabang"
+                                              : "Kode Kantor",
                                           style: const TextStyle(fontSize: 12),
                                         ),
                                         const SizedBox(width: 5),
@@ -403,7 +407,9 @@ class KantorPage extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          "Nama Kantor",
+                                          value.status != "Cabang"
+                                              ? "Nama Kantor Cabang"
+                                              : "Nama Kantor",
                                           style: const TextStyle(fontSize: 12),
                                         ),
                                         const SizedBox(width: 5),
@@ -660,7 +666,7 @@ class KantorPage extends StatelessWidget {
                                                     }
                                                   },
                                                   decoration: InputDecoration(
-                                                    hintText: "Kelurahan",
+                                                    hintText: "Kode Pos",
                                                     border: OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(

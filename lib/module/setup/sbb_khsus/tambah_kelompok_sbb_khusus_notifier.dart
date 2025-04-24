@@ -108,7 +108,8 @@ class TambahKelompokSbbKhususNotifier extends ChangeNotifier {
             clear();
             notifyListeners();
           } else {
-            informationDialog(context, "Warning", value['message'][0]);
+            informationDialog(
+                context, "Warning", value['message'][0]['message']);
             notifyListeners();
           }
         });

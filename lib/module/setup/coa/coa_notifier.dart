@@ -40,8 +40,11 @@ class CoaNotifier extends ChangeNotifier {
 
   pilihHeader(CoaModel value) {
     header = value;
-    jnsAcc == "Sub Buku Besar" ? () {} : noBb.text = value.nobb;
+    // jnsAcc == "Sub Buku Besar" ? () {} : noBb.text = value.nobb;
     noHeader.text = header!.nosbb;
+    if (noBb.text != "") {
+      updatebb();
+    }
     notifyListeners();
   }
 
@@ -53,9 +56,12 @@ class CoaNotifier extends ChangeNotifier {
 
   pilihBB(CoaModel value) {
     bukuBesar = value;
-
-    noSbb.text = value.nosbb;
     noBb.text = value.nosbb;
+
+    if (noSbb.text != "") {
+      updateSbb();
+    }
+    // noSbb.text = value.nosbb;
     // noHeader.text = header!.nosbb;
     notifyListeners();
   }
@@ -114,9 +120,7 @@ class CoaNotifier extends ChangeNotifier {
   }
 
   updateSbb() {
-    result = header!.nobb.substring(0, 3) +
-        bukuBesar!.nosbb.substring(3, 6) +
-        noSbb.text.trim();
+    result = bukuBesar!.nosbb.substring(0, 6) + noSbb.text.trim();
     resulttext.text = result;
     notifyListeners();
   }

@@ -87,6 +87,8 @@ class KantorNotifier extends ChangeNotifier {
     nama.text = kantor!.namaKantor;
     notelp.text = kantor!.telp;
     fax.text = kantor!.fax;
+    kode.text = kantor!.kodeKantor;
+    kodepos.text = kantor!.kodePos;
     notifyListeners();
   }
 
