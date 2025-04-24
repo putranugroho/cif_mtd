@@ -1,9 +1,13 @@
 {
+    "id": 1,
     "kd_trans": "",
     "nama_trans": "",
+    "kode_pt": "",
     "gl_deb": "",
     "nama_deb": "",
     "gl_kre": "",
     "nama_kre": "",
-    "modul": ""
+    "modul": "",
+    "hutang_piutang": "",
+    "createdDate": ""
 }

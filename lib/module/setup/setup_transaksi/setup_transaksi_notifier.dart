@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 import 'package:accounting/models/index.dart';
+import 'package:accounting/network/network.dart';
+import 'package:accounting/repository/SetupRepository.dart';
+import 'package:accounting/utils/dialog_loading.dart';
+import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
 class SetupTransaksiNotifier extends ChangeNotifier {
@@ -11,10 +17,227 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     // for (Map<String, dynamic> i in json) {
     //   listData.add(SetupTransModel.fromJson(i));
     // }
+
+    getSetupTrans();
+    // getInquery();
+    getInqueryAll();
     notifyListeners();
   }
 
-  List<CoaModel> list = [];
+  Future getInqueryAll() async {
+    list.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        final List<Map<String, dynamic>> jnsAccBItems =
+            extractJnsAccB(value['data']);
+        list =
+            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        notifyListeners();
+      }
+    });
+  }
+
+  List<Map<String, dynamic>> extractJnsAccB(List<dynamic> rawData) {
+    List<Map<String, dynamic>> result = [];
+
+    void traverse(List<dynamic> items) {
+      for (var item in items) {
+        if (item is Map<String, dynamic>) {
+          if (item['jns_acc'] == 'C') {
+            result.add(item);
+          }
+
+          if (item.containsKey('items') && item['items'] is List) {
+            traverse(item['items']);
+          }
+        }
+      }
+    }
+
+    traverse(rawData);
+    return result;
+  }
+
+  String? hutang = "0";
+  pilihHutangPiutang(String value) {
+    hutang = value;
+    notifyListeners();
+  }
+
+  SetupTransModel? setupTransModel;
+  edit(String id) {
+    setupTransModel = listData.where((e) => e.id == int.parse(id)).first;
+    dialog = true;
+    editData = true;
+    kodeTransaksi.text = setupTransModel!.kdTrans;
+    namaTransaksi.text = setupTransModel!.namaTrans;
+    nosbbdeb.text = setupTransModel!.namaDeb;
+    nossbcre.text = setupTransModel!.namaKre;
+    inqueryGlModeldeb =
+        list.where((e) => e.nosbb == setupTransModel!.glDeb).first;
+    inqueryGlModelcre =
+        list.where((e) => e.nosbb == setupTransModel!.glKre).first;
+    namaSbbDeb.text = setupTransModel!.glDeb;
+    namaSbbCre.text = setupTransModel!.glKre;
+    modul = setupTransModel!.modul;
+    hutang = setupTransModel!.hutangPiutang;
+    notifyListeners();
+  }
+
+  var editData = false;
+  final keyForm = GlobalKey<FormState>();
+  cek() {
+    if (keyForm.currentState!.validate()) {
+      if (editData) {
+        DialogCustom().showLoading(context);
+        var data = {
+          "id": setupTransModel!.id,
+          "kode_pt": "001",
+          "kd_trans": kodeTransaksi.text.trim(),
+          "nama_trans": namaTransaksi.text.trim(),
+          "gl_deb": namaSbbDeb.text.trim(),
+          "gl_kre": namaSbbCre.text.trim(),
+          "modul": modul,
+          "hutang_piutang": hutang,
+        };
+        Setuprepository.setup(
+                token, NetworkURL.editSetupTrans(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'].toString().toLowerCase().contains("success")) {
+            clear();
+            getSetupTrans();
+            informationDialog(context, "Information", value['message']);
+          } else {
+            clear();
+            informationDialog(context, "Information", value['message'][0]);
+          }
+        });
+      } else {
+        DialogCustom().showLoading(context);
+        var data = {
+          "kode_pt": "001",
+          "kd_trans": kodeTransaksi.text.trim(),
+          "nama_trans": namaTransaksi.text.trim(),
+          "gl_deb": namaSbbDeb.text.trim(),
+          "gl_kre": namaSbbCre.text.trim(),
+          "modul": modul,
+          "hutang_piutang": hutang,
+        };
+        Setuprepository.setup(
+                token, NetworkURL.addSetupTrans(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'].toString().toLowerCase().contains("success")) {
+            clear();
+            getSetupTrans();
+            informationDialog(context, "Information", value['message']);
+          } else {
+            clear();
+            informationDialog(context, "Information", value['message'][0]);
+          }
+        });
+      }
+    }
+  }
+
+  clear() {
+    dialog = false;
+    editData = false;
+    inqueryGlModelcre = null;
+    hutang = "0";
+    inqueryGlModeldeb = null;
+    namaSbbCre.clear();
+    namaSbbDeb.clear();
+    kodeTransaksi.clear();
+    namaTransaksi.clear();
+    notifyListeners();
+  }
+
+  pilihAkunDeb(InqueryGlModel value) {
+    inqueryGlModeldeb = value;
+    nosbbdeb.text = value.namaSbb;
+    namaSbbDeb.text = value.nosbb;
+    notifyListeners();
+  }
+
+  pilihAkunCre(InqueryGlModel value) {
+    inqueryGlModelcre = value;
+    nossbcre.text = value.namaSbb;
+    namaSbbCre.text = value.nosbb;
+    notifyListeners();
+  }
+
+  InqueryGlModel? inqueryGlModeldeb;
+  InqueryGlModel? inqueryGlModelcre;
+  var isLoadingInquery = true;
+  List<InqueryGlModel> listGl = [];
+  TextEditingController nosbbdeb = TextEditingController();
+  TextEditingController nossbcre = TextEditingController();
+  Future<List<InqueryGlModel>> getInquery(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      isLoadingInquery = true;
+      listGl.clear();
+      notifyListeners();
+
+      var data = {"kode_pt": "001"};
+
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.getInqueryGL(),
+          jsonEncode(data),
+        );
+
+        if (response['status'].toString().toLowerCase().contains("success")) {
+          final List<Map<String, dynamic>> jnsAccBItems =
+              extractJnsAccB(response['data']);
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .toList();
+        }
+        notifyListeners();
+      } catch (e) {
+        print("Error: $e");
+      } finally {
+        isLoadingInquery = false;
+        notifyListeners();
+      }
+    } else {
+      listGl.clear(); // clear on short query
+    }
+
+    return listGl;
+  }
+
+  var isLoading = true;
+  Future getSetupTrans() async {
+    isLoading = true;
+    listData.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getSetupTrans(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listData.add(SetupTransModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  List<InqueryGlModel> list = [];
   CoaModel? coaModelDeb;
   pilihDeb(CoaModel value) {
     coaModelDeb = value;
@@ -68,103 +291,4 @@ class SetupTransaksiNotifier extends ChangeNotifier {
   }
 
   List<SetupTransModel> listData = [];
-  List<Map<String, dynamic>> json = [
-    {
-      "kd_trans": "1222",
-      "nama_trans": "SETORAN KLIRING/PEMINDAHAN",
-      "gl_deb": "10001002",
-      "nama_deb": "Kas Kecil",
-      "gl_kre": "10001001",
-      "nama_kre": "Kas Besar",
-      "modul": "backoffice",
-    },
-    {
-      "kd_trans": "1288",
-      "nama_trans": "DEBET SBB CREDIT TABUNGAN",
-      "gl_deb": "10001002",
-      "nama_deb": "Kas Kecil",
-      "gl_kre": "10001001",
-      "nama_kre": "Kas Besar",
-      "modul": "backoffice",
-    },
-    {
-      "kd_trans": "2100",
-      "nama_trans": "BIAYA - BIAYA",
-      "gl_deb": "10001002",
-      "nama_deb": "Kas Kecil",
-      "gl_kre": "10001001",
-      "nama_kre": "Kas Besar",
-      "modul": "backoffice",
-    },
-  ];
-  List<Map<String, dynamic>> menu = [
-    {
-      "modul": "TRANSAKSI",
-      "menu": "TRANSAKSI",
-      "submenu": "SATU TRANSAKSI",
-    },
-    {
-      "modul": "TRANSAKSI",
-      "menu": "TRANSAKSI",
-      "submenu": "BANYAK TRANSAKSI",
-    },
-    {
-      "modul": "TRANSAKSI",
-      "menu": "TRANSAKSI",
-      "submenu": "PIUTANG",
-    },
-    {
-      "modul": "TRANSAKSI",
-      "menu": "TRANSAKSI",
-      "submenu": "HUTANG",
-    },
-  ];
-
-  List<Map<String, dynamic>> data = [
-    {
-      "gol_acc": "1",
-      "jns_acc": "A",
-      "nobb": "10000000",
-      "nosbb": "10000000",
-      "nama_sbb": "Kas",
-      "type_posting": "N",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "B",
-      "nobb": "10000000",
-      "nosbb": "10001000",
-      "nama_sbb": "Kas",
-      "type_posting": "N",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001001",
-      "nama_sbb": "Kas Besar",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001002",
-      "nama_sbb": "Kas Kecil",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001003",
-      "nama_sbb": "Kas Transaksi",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-  ];
 }

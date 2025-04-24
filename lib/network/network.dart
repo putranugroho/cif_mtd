@@ -157,6 +157,22 @@ class NetworkURL {
     return "$url/sbbkhusus/deleted";
   }
 
+  static String getSetupTrans() {
+    return "$url/setuptrans";
+  }
+
+  static String addSetupTrans() {
+    return "$url/setuptrans/add";
+  }
+
+  static String editSetupTrans() {
+    return "$url/setuptrans/update";
+  }
+
+  static String deleteSetupTrans() {
+    return "$url/setuptrans/deleted";
+  }
+
   static String getProvinsi() {
     return "$url2/provinsi";
   }
