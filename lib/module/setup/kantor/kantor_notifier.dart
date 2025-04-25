@@ -156,6 +156,7 @@ class KantorNotifier extends ChangeNotifier {
     kantorModel = null;
     kode.clear();
     nama.clear();
+    noKantor.clear();
     alamat.clear();
     provinsi.clear();
     kota.clear();

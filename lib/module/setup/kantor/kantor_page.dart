@@ -472,7 +472,7 @@ class KantorPage extends StatelessWidget {
                                             decoration: InputDecoration(
                                               filled: true,
                                               fillColor: Colors.grey[200],
-                                              hintText: "Nomor Header",
+                                              hintText: "Nomor Kantor",
                                               border: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(6),
