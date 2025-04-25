@@ -1,6 +1,7 @@
 import 'package:accounting/models/index.dart';
 import 'package:accounting/module/setup/coa/coa_notifier.dart';
 import 'package:accounting/utils/button_custom.dart';
+import 'package:accounting/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -10,6 +11,7 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/pro_shimmer.dart';
+import '../../../utils/currency_formatted.dart';
 
 class CoaPage extends StatelessWidget {
   const CoaPage({super.key});
@@ -1719,7 +1721,8 @@ class CoaPage extends StatelessWidget {
                                                                 maxLines: 1,
                                                                 inputFormatters: [
                                                                   FilteringTextInputFormatter
-                                                                      .digitsOnly
+                                                                      .digitsOnly,
+                                                                  CurrencyInputFormatter(),
                                                                 ],
                                                                 validator: (e) {
                                                                   if (e!
@@ -1784,7 +1787,8 @@ class CoaPage extends StatelessWidget {
                                                                 maxLines: 1,
                                                                 inputFormatters: [
                                                                   FilteringTextInputFormatter
-                                                                      .digitsOnly
+                                                                      .digitsOnly,
+                                                                  CurrencyInputFormatter(),
                                                                 ],
                                                                 validator: (e) {
                                                                   if (e!

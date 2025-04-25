@@ -73,6 +73,7 @@ class KantorNotifier extends ChangeNotifier {
     kantor = list.where((e) => e.id == int.parse(id)).first;
     provinsi.text = kantor!.provinsi;
     kota.text = kantor!.kota;
+    noKantor.text = kantor!.kodeKantor;
     kecamatan.text = kantor!.kecamatan;
     kelurahan.text = kantor!.kelurahan;
     kode.text = kantor!.kodeKantor;
@@ -100,6 +101,7 @@ class KantorNotifier extends ChangeNotifier {
   var isLoading = true;
   bool dialog = false;
   tambah() {
+    clear();
     dialog = true;
     notifyListeners();
   }
@@ -113,6 +115,7 @@ class KantorNotifier extends ChangeNotifier {
 
   pilihKantor(KantorModel value) {
     kantorModel = value;
+    noKantor.text = value!.kodeKantor;
     notifyListeners();
   }
 
@@ -122,6 +125,7 @@ class KantorNotifier extends ChangeNotifier {
   }
 
   TextEditingController kode = TextEditingController();
+  TextEditingController noKantor = TextEditingController();
   TextEditingController nama = TextEditingController();
   TextEditingController alamat = TextEditingController();
   TextEditingController provinsi = TextEditingController();
@@ -148,6 +152,7 @@ class KantorNotifier extends ChangeNotifier {
   List<KantorModel> list = [];
 
   clear() {
+    editData = false;
     kantorModel = null;
     kode.clear();
     nama.clear();

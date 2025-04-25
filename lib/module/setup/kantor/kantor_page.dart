@@ -304,71 +304,7 @@ class KantorPage extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          value.status != "Cabang"
-                                              ? "Pilih Kantor Cabang"
-                                              : "Pilih Kantor",
-                                          style: const TextStyle(fontSize: 12),
-                                        ),
-                                        const SizedBox(width: 5),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    DropdownSearch<KantorModel>(
-                                      popupProps:
-                                          const PopupPropsMultiSelection.menu(
-                                        showSearchBox:
-                                            true, // Aktifkan fitur pencarian
-                                      ),
-                                      selectedItem: value.kantorModel,
-                                      items: value.status == "Cabang"
-                                          ? value.list
-                                              .where(
-                                                  (e) => e.statusKantor == "P")
-                                              .toList()
-                                          : value.status == "Anak Cabang"
-                                              ? value.list
-                                                  .where((e) =>
-                                                      e.statusKantor == "C" ||
-                                                      e.statusKantor == "P")
-                                                  .toList()
-                                              : value.list
-                                                  .where((e) =>
-                                                      e.statusKantor == "D" ||
-                                                      e.statusKantor == "C" ||
-                                                      e.statusKantor == "P")
-                                                  .toList(),
-                                      itemAsString: (e) => "${e.namaKantor}",
-                                      onChanged: (e) {
-                                        value.pilihKantor(e!);
-                                      },
-                                      dropdownDecoratorProps:
-                                          DropDownDecoratorProps(
-                                        baseStyle: TextStyle(fontSize: 16),
-                                        textAlignVertical:
-                                            TextAlignVertical.center,
-                                        dropdownSearchDecoration:
-                                            InputDecoration(
-                                          hintText: "Pilih Kantor",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            borderSide: BorderSide(
-                                              width: 1,
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 16),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          value.status != "Cabang"
-                                              ? "Kode Kantor Cabang"
-                                              : "Kode Kantor",
+                                          "Kode Kantor",
                                           style: const TextStyle(fontSize: 12),
                                         ),
                                         const SizedBox(width: 5),
@@ -407,9 +343,7 @@ class KantorPage extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          value.status != "Cabang"
-                                              ? "Nama Kantor Cabang"
-                                              : "Nama Kantor",
+                                          "Nama Kantor",
                                           style: const TextStyle(fontSize: 12),
                                         ),
                                         const SizedBox(width: 5),
@@ -442,6 +376,112 @@ class KantorPage extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(height: 16),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          value.status != "Cabang"
+                                              ? "Pilih Kantor Cabang"
+                                              : "Pilih Kantor Induk",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: 5),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: DropdownSearch<KantorModel>(
+                                            popupProps:
+                                                const PopupPropsMultiSelection
+                                                    .menu(
+                                              showSearchBox:
+                                                  true, // Aktifkan fitur pencarian
+                                            ),
+                                            selectedItem: value.kantorModel,
+                                            items: value.status == "Cabang"
+                                                ? value.list
+                                                    .where((e) =>
+                                                        e.statusKantor == "P")
+                                                    .toList()
+                                                : value.status == "Anak Cabang"
+                                                    ? value.list
+                                                        .where((e) =>
+                                                            e.statusKantor ==
+                                                                "C" ||
+                                                            e.statusKantor ==
+                                                                "P")
+                                                        .toList()
+                                                    : value.list
+                                                        .where((e) =>
+                                                            e.statusKantor ==
+                                                                "D" ||
+                                                            e.statusKantor ==
+                                                                "C" ||
+                                                            e.statusKantor ==
+                                                                "P")
+                                                        .toList(),
+                                            itemAsString: (e) =>
+                                                "${e.namaKantor}",
+                                            onChanged: (e) {
+                                              value.pilihKantor(e!);
+                                            },
+                                            dropdownDecoratorProps:
+                                                DropDownDecoratorProps(
+                                              baseStyle:
+                                                  TextStyle(fontSize: 16),
+                                              textAlignVertical:
+                                                  TextAlignVertical.center,
+                                              dropdownSearchDecoration:
+                                                  InputDecoration(
+                                                hintText: "Pilih Kantor",
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  borderSide: BorderSide(
+                                                    width: 1,
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 16),
+                                        Container(
+                                          width: 150,
+                                          child: TextFormField(
+                                            // enabled: false,
+                                            readOnly: true,
+                                            textInputAction:
+                                                TextInputAction.done,
+                                            controller: value.noKantor,
+                                            maxLines: 1,
+                                            // inputFormatters: [
+                                            //   FilteringTextInputFormatter.digitsOnly
+                                            // ],
+                                            validator: (e) {
+                                              if (e!.isEmpty) {
+                                                return "Wajib diisi";
+                                              } else {
+                                                return null;
+                                              }
+                                            },
+                                            decoration: InputDecoration(
+                                              filled: true,
+                                              fillColor: Colors.grey[200],
+                                              hintText: "Nomor Header",
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                     Row(
                                       children: [
                                         Text(
@@ -654,6 +694,7 @@ class KantorPage extends StatelessWidget {
                                                       TextInputAction.done,
                                                   controller: value.kodepos,
                                                   maxLines: 1,
+                                                  maxLength: 5,
                                                   inputFormatters: [
                                                     FilteringTextInputFormatter
                                                         .digitsOnly
@@ -686,6 +727,10 @@ class KantorPage extends StatelessWidget {
                                           style: const TextStyle(fontSize: 12),
                                         ),
                                         const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
                                       ],
                                     ),
                                     const SizedBox(
@@ -729,6 +774,10 @@ class KantorPage extends StatelessWidget {
                                                       fontSize: 12),
                                                 ),
                                                 const SizedBox(width: 5),
+                                                const Text(
+                                                  "*",
+                                                  style: TextStyle(fontSize: 8),
+                                                ),
                                               ],
                                             ),
                                             const SizedBox(
@@ -743,6 +792,13 @@ class KantorPage extends StatelessWidget {
                                                 FilteringTextInputFormatter
                                                     .digitsOnly
                                               ],
+                                              validator: (e) {
+                                                if (e!.isEmpty) {
+                                                  return "Wajib diisi";
+                                                } else {
+                                                  return null;
+                                                }
+                                              },
                                               decoration: InputDecoration(
                                                 hintText: "No. Telp",
                                                 border: OutlineInputBorder(
@@ -764,7 +820,7 @@ class KantorPage extends StatelessWidget {
                                             Row(
                                               children: [
                                                 Text(
-                                                  "No. Tax",
+                                                  "No. Fax",
                                                   style: const TextStyle(
                                                       fontSize: 12),
                                                 ),

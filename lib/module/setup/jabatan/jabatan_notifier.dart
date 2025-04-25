@@ -208,9 +208,10 @@ class JabatanNotifier extends ChangeNotifier {
   }
 
   clear() {
-    kode.clear();
     editData = false;
     dialog = false;
+    levelModel = null;
+    kode.clear();
     nama.clear();
     notifyListeners();
   }

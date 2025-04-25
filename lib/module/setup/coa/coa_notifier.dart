@@ -72,6 +72,7 @@ class CoaNotifier extends ChangeNotifier {
   bool dialog = false;
 
   tambah() {
+    clear();
     dialog = true;
     notifyListeners();
   }

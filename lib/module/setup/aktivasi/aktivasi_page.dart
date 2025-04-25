@@ -103,7 +103,7 @@ class AktivasiPage extends StatelessWidget {
                                     padding: EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Kode Aktivasi',
+                                    child: Text('Kode Kelompok',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -237,7 +237,7 @@ class AktivasiPage extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
-                                        "Kode Aktivasi",
+                                        "Kode Kelompok",
                                         style: const TextStyle(fontSize: 12),
                                       ),
                                       const SizedBox(width: 5),
@@ -265,7 +265,7 @@ class AktivasiPage extends StatelessWidget {
                                       }
                                     },
                                     decoration: InputDecoration(
-                                      hintText: "Kode Aktivasi",
+                                      hintText: "Kode Kelompok",
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(6),
                                       ),

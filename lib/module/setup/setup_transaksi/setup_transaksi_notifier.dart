@@ -220,10 +220,13 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     dialog = false;
     editData = false;
     inqueryGlModelcre = null;
-    hutang = "0";
     inqueryGlModeldeb = null;
-    namaSbbCre.clear();
+    hutang = "0";
+    modul = "0";
+    nosbbdeb.clear();
+    nossbcre.clear();
     namaSbbDeb.clear();
+    namaSbbCre.clear();
     kodeTransaksi.clear();
     namaTransaksi.clear();
     notifyListeners();
@@ -319,6 +322,7 @@ class SetupTransaksiNotifier extends ChangeNotifier {
 
   bool dialog = false;
   tambah() {
+    clear();
     dialog = true;
     notifyListeners();
   }

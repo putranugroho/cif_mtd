@@ -126,6 +126,7 @@ class SbbKhususNotifier extends ChangeNotifier {
 
   var dialog = false;
   tambah() {
+    golonganSbbKhususModel = null;
     dialog = true;
     notifyListeners();
   }
@@ -153,6 +154,9 @@ class SbbKhususNotifier extends ChangeNotifier {
 
   cek() {
     List<Map<String, dynamic>> json = [];
+    print("listGlAdd");
+    print(listGlAdd);
+    print(listGlAdd.length);
     if (listGlAdd.length == 0) {
       informationDialog(context, "Warning", "Harap memilih Sub Buku Besar!!");
     } else {
