@@ -8,68 +8,61 @@ class SandiBankModel {
 
   const SandiBankModel({
     required this.id,
-    required this.sandiBic,
-    required this.namaBank,
-    required this.namaBankSingkat,
-    required this.kodeBank,
-    required this.kodeKantor,
+    required this.namaLjk,
+    required this.jenis,
+    required this.kategori,
+    required this.sandi,
   });
 
   final int id;
-  final String sandiBic;
-  final String namaBank;
-  final String namaBankSingkat;
-  final String kodeBank;
-  final String kodeKantor;
+  final String namaLjk;
+  final String jenis;
+  final String kategori;
+  final String sandi;
 
   factory SandiBankModel.fromJson(Map<String,dynamic> json) => SandiBankModel(
     id: json['id'] as int,
-    sandiBic: json['sandi_bic'].toString(),
-    namaBank: json['nama_bank'].toString(),
-    namaBankSingkat: json['nama_bank_singkat'].toString(),
-    kodeBank: json['kode_bank'].toString(),
-    kodeKantor: json['kode_kantor'].toString()
+    namaLjk: json['nama_ljk'].toString(),
+    jenis: json['jenis'].toString(),
+    kategori: json['kategori'].toString(),
+    sandi: json['sandi'].toString()
   );
   
   Map<String, dynamic> toJson() => {
     'id': id,
-    'sandi_bic': sandiBic,
-    'nama_bank': namaBank,
-    'nama_bank_singkat': namaBankSingkat,
-    'kode_bank': kodeBank,
-    'kode_kantor': kodeKantor
+    'nama_ljk': namaLjk,
+    'jenis': jenis,
+    'kategori': kategori,
+    'sandi': sandi
   };
 
   SandiBankModel clone() => SandiBankModel(
     id: id,
-    sandiBic: sandiBic,
-    namaBank: namaBank,
-    namaBankSingkat: namaBankSingkat,
-    kodeBank: kodeBank,
-    kodeKantor: kodeKantor
+    namaLjk: namaLjk,
+    jenis: jenis,
+    kategori: kategori,
+    sandi: sandi
   );
 
 
   SandiBankModel copyWith({
     int? id,
-    String? sandiBic,
-    String? namaBank,
-    String? namaBankSingkat,
-    String? kodeBank,
-    String? kodeKantor
+    String? namaLjk,
+    String? jenis,
+    String? kategori,
+    String? sandi
   }) => SandiBankModel(
     id: id ?? this.id,
-    sandiBic: sandiBic ?? this.sandiBic,
-    namaBank: namaBank ?? this.namaBank,
-    namaBankSingkat: namaBankSingkat ?? this.namaBankSingkat,
-    kodeBank: kodeBank ?? this.kodeBank,
-    kodeKantor: kodeKantor ?? this.kodeKantor,
+    namaLjk: namaLjk ?? this.namaLjk,
+    jenis: jenis ?? this.jenis,
+    kategori: kategori ?? this.kategori,
+    sandi: sandi ?? this.sandi,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is SandiBankModel && id == other.id && sandiBic == other.sandiBic && namaBank == other.namaBank && namaBankSingkat == other.namaBankSingkat && kodeBank == other.kodeBank && kodeKantor == other.kodeKantor;
+    || other is SandiBankModel && id == other.id && namaLjk == other.namaLjk && jenis == other.jenis && kategori == other.kategori && sandi == other.sandi;
 
   @override
-  int get hashCode => id.hashCode ^ sandiBic.hashCode ^ namaBank.hashCode ^ namaBankSingkat.hashCode ^ kodeBank.hashCode ^ kodeKantor.hashCode;
+  int get hashCode => id.hashCode ^ namaLjk.hashCode ^ jenis.hashCode ^ kategori.hashCode ^ sandi.hashCode;
 }

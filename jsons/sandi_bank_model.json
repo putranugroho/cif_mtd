@@ -1,8 +1,7 @@
 {
     "id": 1,
-    "sandi_bic": "1",
-    "nama_bank": "1",
-    "nama_bank_singkat": "1",
-    "kode_bank": "1",
-    "kode_kantor": "1"
+    "nama_ljk": "PT BANK RAKYAT INDONESIA (PERSERO), Tbk",
+    "jenis": "BANK UMUM",
+    "kategori": "KONVENSIONAL",
+    "sandi": "002"
 }

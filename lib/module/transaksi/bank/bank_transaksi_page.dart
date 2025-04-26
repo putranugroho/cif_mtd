@@ -283,7 +283,7 @@ class BankTransaksiPage extends StatelessWidget {
                                         ),
                                         selectedItem: value.sandiBankModel,
                                         items: value.listBank,
-                                        itemAsString: (e) => "${e.namaBank}",
+                                        itemAsString: (e) => "${e.namaLjk}",
                                         onChanged: (e) {
                                           value.pilihSandi(e!);
                                         },
@@ -373,7 +373,7 @@ class BankTransaksiPage extends StatelessWidget {
                                         itemCount: value.list
                                             .where((e) =>
                                                 e.kodeBank ==
-                                                value.sandiBankModel!.kodeBank)
+                                                value.sandiBankModel!.sandi)
                                             .length,
                                         shrinkWrap: true,
                                         physics: ClampingScrollPhysics(),

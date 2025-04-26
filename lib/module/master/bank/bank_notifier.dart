@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:accounting/models/index.dart';
+import 'package:accounting/repository/SetupRepository.dart';
+import 'package:accounting/utils/dialog_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../../../network/network.dart';
 
 class BankNotifier extends ChangeNotifier {
   final BuildContext context;
@@ -15,7 +21,165 @@ class BankNotifier extends ChangeNotifier {
     // for (Map<String, dynamic> i in bankJson) {
     //   listBank.add(SandiBankModel.fromJson(i));
     // }
+    getBank();
+
+    getInqueryAll();
     notifyListeners();
+  }
+
+  List<InqueryGlModel> listGl = [];
+  Future getInqueryAll() async {
+    listGl.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        final List<Map<String, dynamic>> jnsAccBItems =
+            extractJnsAccB(value['data']);
+        listGl =
+            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        notifyListeners();
+      }
+    });
+  }
+
+  pilihAkunDeb(InqueryGlModel value) {
+    inqueryGlModeldeb = value;
+    nosbbdeb.text = value.namaSbb;
+    namaSbbDeb.text = value.nosbb;
+    notifyListeners();
+  }
+
+  TextEditingController namaSbbDeb = TextEditingController();
+  InqueryGlModel? inqueryGlModeldeb;
+  TextEditingController nosbbdeb = TextEditingController();
+  TextEditingController nossbcre = TextEditingController();
+
+  var isLoadingInquery = false;
+  Future<List<InqueryGlModel>> getInquery(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      isLoadingInquery = true;
+      listGl.clear();
+      notifyListeners();
+
+      var data = {"kode_pt": "001"};
+
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.getInqueryGL(),
+          jsonEncode(data),
+        );
+
+        if (response['status'].toString().toLowerCase().contains("success")) {
+          final List<Map<String, dynamic>> jnsAccBItems =
+              extractJnsAccB(response['data']);
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .toList();
+        }
+        notifyListeners();
+      } catch (e) {
+        print("Error: $e");
+      } finally {
+        isLoadingInquery = false;
+        notifyListeners();
+      }
+    } else {
+      listGl.clear(); // clear on short query
+    }
+
+    return listGl;
+  }
+
+  List<SandiBankModel> listSandi = [];
+
+  Future<List<SandiBankModel>> getSandiBank(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      isLoadingInquery = true;
+      listSandi.clear();
+      notifyListeners();
+
+      var data = {"kode_pt": "001"};
+
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.getSandiBank(),
+          jsonEncode(data),
+        );
+
+        if (response['status'].toString().toLowerCase().contains("success")) {
+          final jnsAccBItems =
+              (response['data'] as List).cast<Map<String, dynamic>>();
+
+          List<SandiBankModel> allItems =
+              jnsAccBItems.map((e) => SandiBankModel.fromJson(e)).toList();
+
+          listSandi = allItems
+              .where((item) =>
+                  item.namaLjk.toLowerCase().contains(query.toLowerCase()))
+              .toList();
+        }
+        notifyListeners();
+      } catch (e) {
+        print("Error: $e");
+      } finally {
+        isLoadingInquery = false;
+        notifyListeners();
+      }
+    } else {
+      listSandi.clear(); // clear on short query
+    }
+
+    return listSandi;
+  }
+
+  List<Map<String, dynamic>> extractJnsAccB(List<dynamic> rawData) {
+    List<Map<String, dynamic>> result = [];
+
+    void traverse(List<dynamic> items) {
+      for (var item in items) {
+        if (item is Map<String, dynamic>) {
+          if (item['jns_acc'] == 'C') {
+            result.add(item);
+          }
+
+          if (item.containsKey('items') && item['items'] is List) {
+            traverse(item['items']);
+          }
+        }
+      }
+    }
+
+    traverse(rawData);
+    return result;
+  }
+
+  List<BankModel> list = [];
+  var isLoading = true;
+  Future getBank() async {
+    isLoading = true;
+    list.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getBank(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          list.add(BankModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
   }
 
   bool dialog = false;
@@ -164,7 +328,7 @@ class BankNotifier extends ChangeNotifier {
     },
   ];
 
-  List<BankModel> list = [];
+  // List<BankModel> list = [];
   List<Map<String, dynamic>> json = [
     {
       "kode_bank": "10001",
@@ -192,38 +356,44 @@ class BankNotifier extends ChangeNotifier {
 
   TextEditingController kodeBank = TextEditingController();
   TextEditingController namaRek = TextEditingController();
+  TextEditingController namaBank = TextEditingController();
   List<SandiBankModel> listBank = [];
   SandiBankModel? sandiBankModel;
   pilihSandi(SandiBankModel value) {
     sandiBankModel = value;
-    kodeBank.text = sandiBankModel!.kodeBank;
+    namaBank.text = value.namaLjk;
+    kodeBank.text = sandiBankModel!.sandi;
     notifyListeners();
   }
 
-  List<Map<String, dynamic>> bankJson = [
-    {
-      "id": 1,
-      "sandi_bic": "AGTBIDJA",
-      "nama_bank": "PT. BANK RAYA INDONESIA, TBK",
-      "nama_bank_singkat": "BANK RAYA",
-      "kode_bank": "494",
-      "kode_kantor": "0014"
-    },
-    {
-      "id": 83,
-      "sandi_bic": "CENAIDJA",
-      "nama_bank": "PT. BANK CENTRAL ASIA Tbk.",
-      "nama_bank_singkat": "BCA",
-      "kode_bank": "014",
-      "kode_kantor": "0397"
-    },
-    {
-      "id": 43,
-      "sandi_bic": "BMRIIDJA",
-      "nama_bank": "PT. BANK MANDIRI (PERSERO) TBK",
-      "nama_bank_singkat": "BANK MANDIRI",
-      "kode_bank": "008",
-      "kode_kantor": "0017"
-    },
-  ];
+  final keyForm = GlobalKey<FormState>();
+  cek() {
+    if (keyForm.currentState!.validate()) {
+      DialogCustom().showLoading(context);
+      var data = {
+        "kode_bank": "${kodeBank.text.trim()}",
+        "nm_bank": "${sandiBankModel!.namaLjk}",
+        "no_rek": "${noRek.text}",
+        "kd_rek":
+            "${rekening == "Tabungan" ? "10" : rekening == "Giro" ? "20" : "30"}",
+        "nosbb": "${inqueryGlModeldeb!.nosbb}",
+        "nama_sbb": "${inqueryGlModeldeb!.namaSbb}",
+        "nominal": "${nilai.text.trim().replaceAll(",", '')}",
+        "jw": "${saldoEOM.text}",
+        "tglbuka":
+            "${tglBuka == null ? "" : DateFormat('y-MM-dd').format(tglBuka!)}",
+        "tgljtempo":
+            "${tglJatuhTempo == null ? "" : DateFormat('y-MM-dd').format(tglJatuhTempo!)}",
+        "saldoeom": "${saldoEOM.text.replaceAll(",", "")}",
+        "kode_pt": "001",
+        "kode_kantor": "",
+        "kode_induk": ""
+      };
+      Setuprepository.setup(token, NetworkURL.addBank(), jsonEncode(data))
+          .then((value) {
+        if (value['status'].toString().toLowerCase().contains("success")) {
+        } else {}
+      });
+    }
+  }
 }

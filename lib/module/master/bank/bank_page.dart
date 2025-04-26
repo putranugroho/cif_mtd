@@ -3,6 +3,7 @@ import 'package:accounting/module/master/bank/bank_notifier.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -274,36 +275,32 @@ class BankPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Expanded(
-                                      child: DropdownSearch<SandiBankModel>(
-                                        popupProps:
-                                            const PopupPropsMultiSelection.menu(
-                                          showSearchBox:
-                                              true, // Aktifkan fitur pencarian
-                                        ),
-                                        selectedItem: value.sandiBankModel,
-                                        items: value.listBank,
-                                        itemAsString: (e) => "${e.namaBank}",
-                                        onChanged: (e) {
-                                          value.pilihSandi(e!);
+                                      child: TypeAheadField<SandiBankModel>(
+                                        controller: value.namaBank,
+                                        suggestionsCallback: (search) =>
+                                            value.getSandiBank(search),
+                                        builder:
+                                            (context, controller, focusNode) {
+                                          return TextField(
+                                              controller: controller,
+                                              focusNode: focusNode,
+                                              autofocus: true,
+                                              decoration: InputDecoration(
+                                                border: OutlineInputBorder(),
+                                                labelText: 'Cari Bank',
+                                              ));
                                         },
-                                        dropdownDecoratorProps:
-                                            DropDownDecoratorProps(
-                                          baseStyle: TextStyle(fontSize: 16),
-                                          textAlignVertical:
-                                              TextAlignVertical.center,
-                                          dropdownSearchDecoration:
-                                              InputDecoration(
-                                            hintText: "Pilih Sandi Bank",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              borderSide: BorderSide(
-                                                width: 1,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                        itemBuilder: (context, city) {
+                                          return ListTile(
+                                            title: Text(city.namaLjk),
+                                            subtitle:
+                                                Text("Sandi : ${city.sandi}"),
+                                          );
+                                        },
+                                        onSelected: (city) {
+                                          // value.selectInvoice(city);
+                                          value.pilihSandi(city);
+                                        },
                                       ),
                                     ),
                                     SizedBox(
@@ -515,7 +512,7 @@ class BankPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      "Pilih SBB ",
+                                      "Pilih SBB",
                                       style: const TextStyle(fontSize: 12),
                                     ),
                                     const SizedBox(width: 5),
@@ -531,38 +528,31 @@ class BankPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Expanded(
-                                      child: DropdownSearch<CoaModel>(
-                                        popupProps:
-                                            const PopupPropsMultiSelection.menu(
-                                          showSearchBox:
-                                              true, // Aktifkan fitur pencarian
-                                        ),
-                                        selectedItem: value.sbbAset,
-                                        items: value.listCoa
-                                            .where((e) => e.jnsAcc == "C")
-                                            .toList(),
-                                        itemAsString: (e) => "${e.namaSbb}",
-                                        onChanged: (e) {
-                                          value.pilihSbbAset(e!);
+                                      child: TypeAheadField<InqueryGlModel>(
+                                        controller: value.nosbbdeb,
+                                        suggestionsCallback: (search) =>
+                                            value.getInquery(search),
+                                        builder:
+                                            (context, controller, focusNode) {
+                                          return TextField(
+                                              controller: controller,
+                                              focusNode: focusNode,
+                                              autofocus: true,
+                                              decoration: InputDecoration(
+                                                border: OutlineInputBorder(),
+                                                labelText: 'Cari Akun',
+                                              ));
                                         },
-                                        dropdownDecoratorProps:
-                                            DropDownDecoratorProps(
-                                          baseStyle: TextStyle(fontSize: 16),
-                                          textAlignVertical:
-                                              TextAlignVertical.center,
-                                          dropdownSearchDecoration:
-                                              InputDecoration(
-                                            hintText: "Pilih SBB Aset",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              borderSide: BorderSide(
-                                                width: 1,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                        itemBuilder: (context, city) {
+                                          return ListTile(
+                                            title: Text(city.nosbb),
+                                            subtitle: Text(city.namaSbb),
+                                          );
+                                        },
+                                        onSelected: (city) {
+                                          // value.selectInvoice(city);
+                                          value.pilihAkunDeb(city);
+                                        },
                                       ),
                                     ),
                                     SizedBox(
@@ -574,7 +564,7 @@ class BankPage extends StatelessWidget {
                                         // enabled: false,
                                         readOnly: true,
                                         textInputAction: TextInputAction.done,
-                                        controller: value.namaSbbAset,
+                                        controller: value.namaSbbDeb,
                                         maxLines: 1,
                                         // inputFormatters: [
                                         //   FilteringTextInputFormatter.digitsOnly
@@ -589,17 +579,19 @@ class BankPage extends StatelessWidget {
                                         decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Colors.grey[200],
-                                          hintText: "Nomor SBB",
+                                          hintText: "Nomor Debet",
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),
-                                    ),
+                                    )
                                   ],
                                 ),
-                                const SizedBox(height: 16),
+                                SizedBox(
+                                  height: 16,
+                                ),
                                 Row(
                                   children: [
                                     Text(

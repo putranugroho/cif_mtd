@@ -236,36 +236,36 @@ class BankTransaksiNotifier extends ChangeNotifier {
   SandiBankModel? sandiBankModel;
   pilihSandi(SandiBankModel value) {
     sandiBankModel = value;
-    kodeBank.text = sandiBankModel!.kodeBank;
-    if (list.where((e) => e.kodeBank == sandiBankModel!.kodeBank).isNotEmpty) {
-      for (var i = 0;
-          i < list.where((e) => e.kodeBank == sandiBankModel!.kodeBank).length;
-          i++) {
-        final data = list
-            .where((e) => e.kodeBank == sandiBankModel!.kodeBank)
-            .toList()[i];
-        int selisih =
-            (int.parse(data.nominal) - - (i == 0 ? 900000 : 700000)) - int.parse(data.nominal);
-        listBankController.add(TextEditingController(text: data.nmBank));
-        listNoSBB.add(TextEditingController(text: data.nosbb));
-        listSaldo.add(TextEditingController(
-          text: FormatCurrency.oCcy
-              .format(int.parse(data.nominal))
-              .replaceAll(".", ","),
-        ));
-        listAmount.add(TextEditingController(
-          text: FormatCurrency.oCcy
-              .format(int.parse(data.nominal) - (i == 0 ? 900000 : 700000))
-              .replaceAll(".", ","),
-        ));
-        listSelisih.add(TextEditingController(
-            text: FormatCurrency.oCcy.format(selisih).replaceAll(".", ",")));
-      }
-      notifyListeners();
-    } else {
-      informationDialog(context, "Warning",
-          "Belum memiliki akun bank ${sandiBankModel!.namaBank}");
-    }
+    // kodeBank.text = sandiBankModel!.kodeBank;
+    // if (list.where((e) => e.kodeBank == sandiBankModel!.kodeBank).isNotEmpty) {
+    //   for (var i = 0;
+    //       i < list.where((e) => e.kodeBank == sandiBankModel!.kodeBank).length;
+    //       i++) {
+    //     final data = list
+    //         .where((e) => e.kodeBank == sandiBankModel!.kodeBank)
+    //         .toList()[i];
+    //     int selisih =
+    //         (int.parse(data.nominal) - - (i == 0 ? 900000 : 700000)) - int.parse(data.nominal);
+    //     listBankController.add(TextEditingController(text: data.nmBank));
+    //     listNoSBB.add(TextEditingController(text: data.nosbb));
+    //     listSaldo.add(TextEditingController(
+    //       text: FormatCurrency.oCcy
+    //           .format(int.parse(data.nominal))
+    //           .replaceAll(".", ","),
+    //     ));
+    //     listAmount.add(TextEditingController(
+    //       text: FormatCurrency.oCcy
+    //           .format(int.parse(data.nominal) - (i == 0 ? 900000 : 700000))
+    //           .replaceAll(".", ","),
+    //     ));
+    //     listSelisih.add(TextEditingController(
+    //         text: FormatCurrency.oCcy.format(selisih).replaceAll(".", ",")));
+    //   }
+    //   notifyListeners();
+    // } else {
+    //   informationDialog(context, "Warning",
+    //       "Belum memiliki akun bank ${sandiBankModel!.namaBank}");
+    // }
     notifyListeners();
   }
 

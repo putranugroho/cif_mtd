@@ -212,6 +212,7 @@ class NetworkURL {
   static String deleteusers() {
     return "$url/users/deleted";
   }
+
   static String getAktivasi() {
     return "$url/aktivasi";
   }
@@ -226,6 +227,26 @@ class NetworkURL {
 
   static String deleteAktivasi() {
     return "$url/aktivasi/deleted";
+  }
+
+  static String getBank() {
+    return "$url/bank";
+  }
+
+  static String getSandiBank() {
+    return "$url/sandi-bank";
+  }
+
+  static String addBank() {
+    return "$url/bank/add";
+  }
+
+  static String editBank() {
+    return "$url/bank/update";
+  }
+
+  static String deleteBank() {
+    return "$url/bank/deleted";
   }
 
   static String getProvinsi() {
