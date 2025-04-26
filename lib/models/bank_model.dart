@@ -22,6 +22,8 @@ class BankModel {
     required this.kodePt,
     required this.kodeKantor,
     required this.kodeInduk,
+    required this.createddate,
+    required this.isDeleted,
   });
 
   final int id;
@@ -39,6 +41,8 @@ class BankModel {
   final String kodePt;
   final String kodeKantor;
   final String kodeInduk;
+  final String createddate;
+  final String isDeleted;
 
   factory BankModel.fromJson(Map<String,dynamic> json) => BankModel(
     id: json['id'] as int,
@@ -55,7 +59,9 @@ class BankModel {
     saldoeom: json['saldoeom'].toString(),
     kodePt: json['kode_pt'].toString(),
     kodeKantor: json['kode_kantor'].toString(),
-    kodeInduk: json['kode_induk'].toString()
+    kodeInduk: json['kode_induk'].toString(),
+    createddate: json['createddate'].toString(),
+    isDeleted: json['is_deleted'].toString()
   );
   
   Map<String, dynamic> toJson() => {
@@ -73,7 +79,9 @@ class BankModel {
     'saldoeom': saldoeom,
     'kode_pt': kodePt,
     'kode_kantor': kodeKantor,
-    'kode_induk': kodeInduk
+    'kode_induk': kodeInduk,
+    'createddate': createddate,
+    'is_deleted': isDeleted
   };
 
   BankModel clone() => BankModel(
@@ -91,7 +99,9 @@ class BankModel {
     saldoeom: saldoeom,
     kodePt: kodePt,
     kodeKantor: kodeKantor,
-    kodeInduk: kodeInduk
+    kodeInduk: kodeInduk,
+    createddate: createddate,
+    isDeleted: isDeleted
   );
 
 
@@ -110,7 +120,9 @@ class BankModel {
     String? saldoeom,
     String? kodePt,
     String? kodeKantor,
-    String? kodeInduk
+    String? kodeInduk,
+    String? createddate,
+    String? isDeleted
   }) => BankModel(
     id: id ?? this.id,
     kodeBank: kodeBank ?? this.kodeBank,
@@ -127,12 +139,14 @@ class BankModel {
     kodePt: kodePt ?? this.kodePt,
     kodeKantor: kodeKantor ?? this.kodeKantor,
     kodeInduk: kodeInduk ?? this.kodeInduk,
+    createddate: createddate ?? this.createddate,
+    isDeleted: isDeleted ?? this.isDeleted,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is BankModel && id == other.id && kodeBank == other.kodeBank && nmBank == other.nmBank && noRek == other.noRek && kdRek == other.kdRek && nosbb == other.nosbb && namaSbb == other.namaSbb && nominal == other.nominal && jw == other.jw && tglbuka == other.tglbuka && tgljtempo == other.tgljtempo && saldoeom == other.saldoeom && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk;
+    || other is BankModel && id == other.id && kodeBank == other.kodeBank && nmBank == other.nmBank && noRek == other.noRek && kdRek == other.kdRek && nosbb == other.nosbb && namaSbb == other.namaSbb && nominal == other.nominal && jw == other.jw && tglbuka == other.tglbuka && tgljtempo == other.tgljtempo && saldoeom == other.saldoeom && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && createddate == other.createddate && isDeleted == other.isDeleted;
 
   @override
-  int get hashCode => id.hashCode ^ kodeBank.hashCode ^ nmBank.hashCode ^ noRek.hashCode ^ kdRek.hashCode ^ nosbb.hashCode ^ namaSbb.hashCode ^ nominal.hashCode ^ jw.hashCode ^ tglbuka.hashCode ^ tgljtempo.hashCode ^ saldoeom.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode;
+  int get hashCode => id.hashCode ^ kodeBank.hashCode ^ nmBank.hashCode ^ noRek.hashCode ^ kdRek.hashCode ^ nosbb.hashCode ^ namaSbb.hashCode ^ nominal.hashCode ^ jw.hashCode ^ tglbuka.hashCode ^ tgljtempo.hashCode ^ saldoeom.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ createddate.hashCode ^ isDeleted.hashCode;
 }

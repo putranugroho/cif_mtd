@@ -15,7 +15,7 @@ class BankNotifier extends ChangeNotifier {
 
   BankNotifier({required this.context}) {
     getBank();
-    getInqueryAll();
+    // getInqueryAll();
     notifyListeners();
   }
 
@@ -340,6 +340,7 @@ class BankNotifier extends ChangeNotifier {
           "kode_kantor": "",
           "kode_induk": ""
         };
+        // print(jsonEncode(data));
         Setuprepository.setup(token, NetworkURL.editBank(), jsonEncode(data))
             .then((value) {
           Navigator.pop(context);

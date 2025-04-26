@@ -14,14 +14,14 @@ class SandiBankModel {
     required this.sandi,
   });
 
-  final int id;
+  final String id;
   final String namaLjk;
   final String jenis;
   final String kategori;
   final String sandi;
 
   factory SandiBankModel.fromJson(Map<String,dynamic> json) => SandiBankModel(
-    id: json['id'] as int,
+    id: json['id'].toString(),
     namaLjk: json['nama_ljk'].toString(),
     jenis: json['jenis'].toString(),
     kategori: json['kategori'].toString(),
@@ -46,7 +46,7 @@ class SandiBankModel {
 
 
   SandiBankModel copyWith({
-    int? id,
+    String? id,
     String? namaLjk,
     String? jenis,
     String? kategori,
