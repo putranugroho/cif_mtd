@@ -14,17 +14,7 @@ class BankNotifier extends ChangeNotifier {
   final BuildContext context;
 
   BankNotifier({required this.context}) {
-    // for (Map<String, dynamic> i in json) {
-    //   list.add(BankModel.fromJson(i));
-    // }
-    // for (Map<String, dynamic> i in coa) {
-    //   listCoa.add(CoaModel.fromJson(i));
-    // }
-    // for (Map<String, dynamic> i in bankJson) {
-    //   listBank.add(SandiBankModel.fromJson(i));
-    // }
     getBank();
-
     getInqueryAll();
     notifyListeners();
   }
