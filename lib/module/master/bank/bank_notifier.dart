@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:accounting/models/index.dart';
 import 'package:accounting/repository/SetupRepository.dart';
 import 'package:accounting/utils/dialog_loading.dart';
+import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -391,8 +392,13 @@ class BankNotifier extends ChangeNotifier {
       };
       Setuprepository.setup(token, NetworkURL.addBank(), jsonEncode(data))
           .then((value) {
+        Navigator.pop(context);
         if (value['status'].toString().toLowerCase().contains("success")) {
-        } else {}
+          getBank();
+          informationDialog(context, "Information", value['message']);
+        } else {
+          informationDialog(context, "Warning", value['message']);
+        }
       });
     }
   }
