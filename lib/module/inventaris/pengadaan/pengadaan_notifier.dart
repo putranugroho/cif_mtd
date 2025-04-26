@@ -11,15 +11,7 @@ class PengadaanNotifier extends ChangeNotifier {
     for (Map<String, dynamic> i in data) {
       list.add(InventarisModel.fromJson(i));
     }
-    for (Map<String, dynamic> i in golongan) {
-      listGolongan.add(GolonganAsetModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in kelompok) {
-      listKelompok.add(KelompokAsetModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in kantor) {
-      listkantor.add(KantorModel.fromJson(i));
-    }
+
     notifyListeners();
   }
 
@@ -106,34 +98,6 @@ class PengadaanNotifier extends ChangeNotifier {
     golonganAsetModel = value;
     notifyListeners();
   }
-
-  List<Map<String, dynamic>> golongan = [
-    {
-      "kode_golongan": "001",
-      "nama_golongan": "Kendaraan",
-      "masa_susut": "10",
-      "nilai_declining": "",
-      "sbb_aset": "100100000002",
-      "sbb_penyusutan": "100100000002",
-      "sbb_biaya_penyusutan": "100100000002",
-      "sbb_rugi_revaluasi": "100100000002",
-      "sbb_laba_revaluasi": "100100000002",
-      "sbb_rugi_jual": "100100000002",
-      "sbb_laba_jual": "100100000002",
-      "sbb_biaya_perbaikan": "100100000002",
-    },
-  ];
-
-  List<Map<String, dynamic>> kelompok = [
-    {
-      "kode_kelompok": "1",
-      "nama_kelompok": "TRANSPORTASI",
-    },
-    {
-      "kode_kelompok": "2",
-      "nama_kelompok": "BERGERAK",
-    },
-  ];
 
   DateTime? tglTransaksi;
   Future piihTanggalBeli() async {
@@ -290,24 +254,6 @@ class PengadaanNotifier extends ChangeNotifier {
     }
   }
 
-  List<Map<String, dynamic>> kantor = [
-    {
-      "kode_pt": "10001",
-      "kode_kantor": "100011",
-      "kode_induk": "",
-      "nama_kantor": "PT TEGUH AMAN LESTARI ",
-      "status_kantor": "P",
-      "alamat": "Trasa Coworking Space",
-      "kelurahan": "PROCOT",
-      "kecamatan": "SLAWI",
-      "kota": "KABUPATEN TEGAL",
-      "provinsi": "JAWA TENGAH",
-      "kode_pos": "52419",
-      "telp": null,
-      "fax": null
-    }
-  ];
-
   List<KantorModel> listkantor = [];
   KantorModel? kantorModel;
   pilihKantor(KantorModel value) {
@@ -318,6 +264,7 @@ class PengadaanNotifier extends ChangeNotifier {
   List<InventarisModel> list = [];
   List<Map<String, dynamic>> data = [
     {
+      "id": 1,
       "kdaset": "100001",
       "ket": "NMAX 100 CC150",
       "kode_kelompok": "1",

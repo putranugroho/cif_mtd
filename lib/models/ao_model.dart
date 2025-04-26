@@ -7,6 +7,7 @@ import 'index.dart';
 class AoModel {
 
   const AoModel({
+    required this.id,
     required this.kdAo,
     required this.nmAo,
     required this.kodePt,
@@ -14,6 +15,7 @@ class AoModel {
     required this.kodeInduk,
   });
 
+  final int id;
   final String kdAo;
   final String nmAo;
   final String kodePt;
@@ -21,6 +23,7 @@ class AoModel {
   final String kodeInduk;
 
   factory AoModel.fromJson(Map<String,dynamic> json) => AoModel(
+    id: json['id'] as int,
     kdAo: json['kd_ao'].toString(),
     nmAo: json['nm_ao'].toString(),
     kodePt: json['kode_pt'].toString(),
@@ -29,6 +32,7 @@ class AoModel {
   );
   
   Map<String, dynamic> toJson() => {
+    'id': id,
     'kd_ao': kdAo,
     'nm_ao': nmAo,
     'kode_pt': kodePt,
@@ -37,6 +41,7 @@ class AoModel {
   };
 
   AoModel clone() => AoModel(
+    id: id,
     kdAo: kdAo,
     nmAo: nmAo,
     kodePt: kodePt,
@@ -46,12 +51,14 @@ class AoModel {
 
 
   AoModel copyWith({
+    int? id,
     String? kdAo,
     String? nmAo,
     String? kodePt,
     String? kodeKantor,
     String? kodeInduk
   }) => AoModel(
+    id: id ?? this.id,
     kdAo: kdAo ?? this.kdAo,
     nmAo: nmAo ?? this.nmAo,
     kodePt: kodePt ?? this.kodePt,
@@ -61,8 +68,8 @@ class AoModel {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is AoModel && kdAo == other.kdAo && nmAo == other.nmAo && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk;
+    || other is AoModel && id == other.id && kdAo == other.kdAo && nmAo == other.nmAo && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk;
 
   @override
-  int get hashCode => kdAo.hashCode ^ nmAo.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode;
+  int get hashCode => id.hashCode ^ kdAo.hashCode ^ nmAo.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode;
 }

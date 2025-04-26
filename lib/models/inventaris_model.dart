@@ -7,6 +7,7 @@ import 'index.dart';
 class InventarisModel {
 
   const InventarisModel({
+    required this.id,
     required this.kdaset,
     required this.ket,
     required this.kodeKelompok,
@@ -54,6 +55,7 @@ class InventarisModel {
     required this.sbbBiayaPerbaikan,
   });
 
+  final int id;
   final String kdaset;
   final String ket;
   final String kodeKelompok;
@@ -101,6 +103,7 @@ class InventarisModel {
   final String sbbBiayaPerbaikan;
 
   factory InventarisModel.fromJson(Map<String,dynamic> json) => InventarisModel(
+    id: json['id'] as int,
     kdaset: json['kdaset'].toString(),
     ket: json['ket'].toString(),
     kodeKelompok: json['kode_kelompok'].toString(),
@@ -149,6 +152,7 @@ class InventarisModel {
   );
   
   Map<String, dynamic> toJson() => {
+    'id': id,
     'kdaset': kdaset,
     'ket': ket,
     'kode_kelompok': kodeKelompok,
@@ -197,6 +201,7 @@ class InventarisModel {
   };
 
   InventarisModel clone() => InventarisModel(
+    id: id,
     kdaset: kdaset,
     ket: ket,
     kodeKelompok: kodeKelompok,
@@ -246,6 +251,7 @@ class InventarisModel {
 
 
   InventarisModel copyWith({
+    int? id,
     String? kdaset,
     String? ket,
     String? kodeKelompok,
@@ -292,6 +298,7 @@ class InventarisModel {
     String? sbbLabaJual,
     String? sbbBiayaPerbaikan
   }) => InventarisModel(
+    id: id ?? this.id,
     kdaset: kdaset ?? this.kdaset,
     ket: ket ?? this.ket,
     kodeKelompok: kodeKelompok ?? this.kodeKelompok,
@@ -341,8 +348,8 @@ class InventarisModel {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is InventarisModel && kdaset == other.kdaset && ket == other.ket && kodeKelompok == other.kodeKelompok && namaKelompok == other.namaKelompok && kodeGolongan == other.kodeGolongan && namaGolongan == other.namaGolongan && nodokBeli == other.nodokBeli && tglBeli == other.tglBeli && tglTerima == other.tglTerima && habeli == other.habeli && disc == other.disc && biaya == other.biaya && haper == other.haper && nilaiResidu == other.nilaiResidu && ppnBeli == other.ppnBeli && tglJual == other.tglJual && nodokJual == other.nodokJual && hajual == other.hajual && ppnJual == other.ppnJual && margin == other.margin && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && lokasi == other.lokasi && kota == other.kota && masasusut == other.masasusut && blnMulaiSusut == other.blnMulaiSusut && kdkondisi == other.kdkondisi && kondisi == other.kondisi && satuanAset == other.satuanAset && nilaiDeclining == other.nilaiDeclining && perbaikan == other.perbaikan && stsasr == other.stsasr && nopolis == other.nopolis && nilaiRevaluasi == other.nilaiRevaluasi && nik == other.nik && namaPejabat == other.namaPejabat && sbbAset == other.sbbAset && sbbPenyusutan == other.sbbPenyusutan && sbbBiayaPenyusutan == other.sbbBiayaPenyusutan && sbbRugiRevaluasi == other.sbbRugiRevaluasi && sbbLabaRevaluasi == other.sbbLabaRevaluasi && sbbRugiJual == other.sbbRugiJual && sbbLabaJual == other.sbbLabaJual && sbbBiayaPerbaikan == other.sbbBiayaPerbaikan;
+    || other is InventarisModel && id == other.id && kdaset == other.kdaset && ket == other.ket && kodeKelompok == other.kodeKelompok && namaKelompok == other.namaKelompok && kodeGolongan == other.kodeGolongan && namaGolongan == other.namaGolongan && nodokBeli == other.nodokBeli && tglBeli == other.tglBeli && tglTerima == other.tglTerima && habeli == other.habeli && disc == other.disc && biaya == other.biaya && haper == other.haper && nilaiResidu == other.nilaiResidu && ppnBeli == other.ppnBeli && tglJual == other.tglJual && nodokJual == other.nodokJual && hajual == other.hajual && ppnJual == other.ppnJual && margin == other.margin && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && lokasi == other.lokasi && kota == other.kota && masasusut == other.masasusut && blnMulaiSusut == other.blnMulaiSusut && kdkondisi == other.kdkondisi && kondisi == other.kondisi && satuanAset == other.satuanAset && nilaiDeclining == other.nilaiDeclining && perbaikan == other.perbaikan && stsasr == other.stsasr && nopolis == other.nopolis && nilaiRevaluasi == other.nilaiRevaluasi && nik == other.nik && namaPejabat == other.namaPejabat && sbbAset == other.sbbAset && sbbPenyusutan == other.sbbPenyusutan && sbbBiayaPenyusutan == other.sbbBiayaPenyusutan && sbbRugiRevaluasi == other.sbbRugiRevaluasi && sbbLabaRevaluasi == other.sbbLabaRevaluasi && sbbRugiJual == other.sbbRugiJual && sbbLabaJual == other.sbbLabaJual && sbbBiayaPerbaikan == other.sbbBiayaPerbaikan;
 
   @override
-  int get hashCode => kdaset.hashCode ^ ket.hashCode ^ kodeKelompok.hashCode ^ namaKelompok.hashCode ^ kodeGolongan.hashCode ^ namaGolongan.hashCode ^ nodokBeli.hashCode ^ tglBeli.hashCode ^ tglTerima.hashCode ^ habeli.hashCode ^ disc.hashCode ^ biaya.hashCode ^ haper.hashCode ^ nilaiResidu.hashCode ^ ppnBeli.hashCode ^ tglJual.hashCode ^ nodokJual.hashCode ^ hajual.hashCode ^ ppnJual.hashCode ^ margin.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ lokasi.hashCode ^ kota.hashCode ^ masasusut.hashCode ^ blnMulaiSusut.hashCode ^ kdkondisi.hashCode ^ kondisi.hashCode ^ satuanAset.hashCode ^ nilaiDeclining.hashCode ^ perbaikan.hashCode ^ stsasr.hashCode ^ nopolis.hashCode ^ nilaiRevaluasi.hashCode ^ nik.hashCode ^ namaPejabat.hashCode ^ sbbAset.hashCode ^ sbbPenyusutan.hashCode ^ sbbBiayaPenyusutan.hashCode ^ sbbRugiRevaluasi.hashCode ^ sbbLabaRevaluasi.hashCode ^ sbbRugiJual.hashCode ^ sbbLabaJual.hashCode ^ sbbBiayaPerbaikan.hashCode;
+  int get hashCode => id.hashCode ^ kdaset.hashCode ^ ket.hashCode ^ kodeKelompok.hashCode ^ namaKelompok.hashCode ^ kodeGolongan.hashCode ^ namaGolongan.hashCode ^ nodokBeli.hashCode ^ tglBeli.hashCode ^ tglTerima.hashCode ^ habeli.hashCode ^ disc.hashCode ^ biaya.hashCode ^ haper.hashCode ^ nilaiResidu.hashCode ^ ppnBeli.hashCode ^ tglJual.hashCode ^ nodokJual.hashCode ^ hajual.hashCode ^ ppnJual.hashCode ^ margin.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ lokasi.hashCode ^ kota.hashCode ^ masasusut.hashCode ^ blnMulaiSusut.hashCode ^ kdkondisi.hashCode ^ kondisi.hashCode ^ satuanAset.hashCode ^ nilaiDeclining.hashCode ^ perbaikan.hashCode ^ stsasr.hashCode ^ nopolis.hashCode ^ nilaiRevaluasi.hashCode ^ nik.hashCode ^ namaPejabat.hashCode ^ sbbAset.hashCode ^ sbbPenyusutan.hashCode ^ sbbBiayaPenyusutan.hashCode ^ sbbRugiRevaluasi.hashCode ^ sbbLabaRevaluasi.hashCode ^ sbbRugiJual.hashCode ^ sbbLabaJual.hashCode ^ sbbBiayaPerbaikan.hashCode;
 }

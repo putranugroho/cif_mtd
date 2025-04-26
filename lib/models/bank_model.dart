@@ -7,6 +7,7 @@ import 'index.dart';
 class BankModel {
 
   const BankModel({
+    required this.id,
     required this.kodeBank,
     required this.nmBank,
     required this.noRek,
@@ -23,6 +24,7 @@ class BankModel {
     required this.kodeInduk,
   });
 
+  final int id;
   final String kodeBank;
   final String nmBank;
   final String noRek;
@@ -39,6 +41,7 @@ class BankModel {
   final String kodeInduk;
 
   factory BankModel.fromJson(Map<String,dynamic> json) => BankModel(
+    id: json['id'] as int,
     kodeBank: json['kode_bank'].toString(),
     nmBank: json['nm_bank'].toString(),
     noRek: json['no_rek'].toString(),
@@ -56,6 +59,7 @@ class BankModel {
   );
   
   Map<String, dynamic> toJson() => {
+    'id': id,
     'kode_bank': kodeBank,
     'nm_bank': nmBank,
     'no_rek': noRek,
@@ -73,6 +77,7 @@ class BankModel {
   };
 
   BankModel clone() => BankModel(
+    id: id,
     kodeBank: kodeBank,
     nmBank: nmBank,
     noRek: noRek,
@@ -91,6 +96,7 @@ class BankModel {
 
 
   BankModel copyWith({
+    int? id,
     String? kodeBank,
     String? nmBank,
     String? noRek,
@@ -106,6 +112,7 @@ class BankModel {
     String? kodeKantor,
     String? kodeInduk
   }) => BankModel(
+    id: id ?? this.id,
     kodeBank: kodeBank ?? this.kodeBank,
     nmBank: nmBank ?? this.nmBank,
     noRek: noRek ?? this.noRek,
@@ -124,8 +131,8 @@ class BankModel {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is BankModel && kodeBank == other.kodeBank && nmBank == other.nmBank && noRek == other.noRek && kdRek == other.kdRek && nosbb == other.nosbb && namaSbb == other.namaSbb && nominal == other.nominal && jw == other.jw && tglbuka == other.tglbuka && tgljtempo == other.tgljtempo && saldoeom == other.saldoeom && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk;
+    || other is BankModel && id == other.id && kodeBank == other.kodeBank && nmBank == other.nmBank && noRek == other.noRek && kdRek == other.kdRek && nosbb == other.nosbb && namaSbb == other.namaSbb && nominal == other.nominal && jw == other.jw && tglbuka == other.tglbuka && tgljtempo == other.tgljtempo && saldoeom == other.saldoeom && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk;
 
   @override
-  int get hashCode => kodeBank.hashCode ^ nmBank.hashCode ^ noRek.hashCode ^ kdRek.hashCode ^ nosbb.hashCode ^ namaSbb.hashCode ^ nominal.hashCode ^ jw.hashCode ^ tglbuka.hashCode ^ tgljtempo.hashCode ^ saldoeom.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode;
+  int get hashCode => id.hashCode ^ kodeBank.hashCode ^ nmBank.hashCode ^ noRek.hashCode ^ kdRek.hashCode ^ nosbb.hashCode ^ namaSbb.hashCode ^ nominal.hashCode ^ jw.hashCode ^ tglbuka.hashCode ^ tgljtempo.hashCode ^ saldoeom.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode;
 }

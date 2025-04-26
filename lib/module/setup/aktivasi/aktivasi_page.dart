@@ -507,7 +507,7 @@ class AktivasiPage extends StatelessWidget {
                                             const SizedBox(height: 16),
                                             ButtonPrimary(
                                               onTap: () {
-                                                value.confirm();
+                                              value.confirm();
                                               },
                                               name: "Hapus",
                                             ),
