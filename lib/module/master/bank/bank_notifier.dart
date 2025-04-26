@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:accounting/models/index.dart';
 import 'package:accounting/repository/SetupRepository.dart';
 import 'package:accounting/utils/dialog_loading.dart';
+import 'package:accounting/utils/format_currency.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -281,73 +282,6 @@ class BankNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Map<String, dynamic>> coa = [
-    {
-      "gol_acc": "1",
-      "jns_acc": "A",
-      "nobb": "10000000",
-      "nosbb": "10000000",
-      "nama_sbb": "Kas",
-      "type_posting": "N",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "B",
-      "nobb": "10000000",
-      "nosbb": "10001000",
-      "nama_sbb": "Kas",
-      "type_posting": "N",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001001",
-      "nama_sbb": "Kas Besar",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001002",
-      "nama_sbb": "Kas Kecil",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001003",
-      "nama_sbb": "Kas Transaksi",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-  ];
-
-  // List<BankModel> list = [];
-  List<Map<String, dynamic>> json = [
-    {
-      "kode_bank": "10001",
-      "nm_bank": "BANK MANDIRI",
-      "no_rek": "30000112333",
-      "kd_rek": "10",
-      "nosbb": "100100000006",
-      "nama_sbb": "BANK MANDIRI",
-      "nominal": "10000000",
-      "jw": "",
-      "tglbuka": "",
-      "tgljtempo": "",
-      "saldoeom": "",
-      "kode_pt": "001",
-      "kode_kantor": "10001",
-      "kode_induk": ""
-    }
-  ];
   var search = false;
   cariRekening() async {
     search = true;
@@ -368,38 +302,115 @@ class BankNotifier extends ChangeNotifier {
   }
 
   final keyForm = GlobalKey<FormState>();
+  var editData = false;
+  BankModel? bankModel;
+  edit(String id) {
+    bankModel = list.where((e) => e.id == int.parse(id)).first;
+    kodeBank.text = bankModel!.kodeBank;
+    namaBank.text = bankModel!.nmBank;
+    noRek.text = bankModel!.noRek;
+    rekening = bankModel!.kdRek == "10"
+        ? "Tabungan"
+        : bankModel!.kdRek == "20"
+            ? "Giro"
+            : "Deposito";
+    nosbbdeb.text = bankModel!.nosbb;
+    namaSbbDeb.text = bankModel!.namaSbb;
+    nilai.text = FormatCurrency.oCcy
+        .format(int.parse(bankModel!.nominal))
+        .replaceAll(".", ",");
+    saldoEOM.text = bankModel!.jw;
+    tglBukaRekening.text = bankModel!.tglbuka;
+    tglJatuhTempoRekening.text = bankModel!.tgljtempo;
+    saldoEOM.text = bankModel!.saldoeom;
+    notifyListeners();
+  }
+
   cek() {
     if (keyForm.currentState!.validate()) {
-      DialogCustom().showLoading(context);
-      var data = {
-        "kode_bank": "${kodeBank.text.trim()}",
-        "nm_bank": "${sandiBankModel!.namaLjk}",
-        "no_rek": "${noRek.text}",
-        "kd_rek":
-            "${rekening == "Tabungan" ? "10" : rekening == "Giro" ? "20" : "30"}",
-        "nosbb": "${inqueryGlModeldeb!.nosbb}",
-        "nama_sbb": "${inqueryGlModeldeb!.namaSbb}",
-        "nominal": "${nilai.text.trim().replaceAll(",", '')}",
-        "jw": "${saldoEOM.text}",
-        "tglbuka":
-            "${tglBuka == null ? "" : DateFormat('y-MM-dd').format(tglBuka!)}",
-        "tgljtempo":
-            "${tglJatuhTempo == null ? "" : DateFormat('y-MM-dd').format(tglJatuhTempo!)}",
-        "saldoeom": "${saldoEOM.text.replaceAll(",", "")}",
-        "kode_pt": "001",
-        "kode_kantor": "",
-        "kode_induk": ""
-      };
-      Setuprepository.setup(token, NetworkURL.addBank(), jsonEncode(data))
-          .then((value) {
-        Navigator.pop(context);
-        if (value['status'].toString().toLowerCase().contains("success")) {
-          getBank();
-          informationDialog(context, "Information", value['message']);
-        } else {
-          informationDialog(context, "Warning", value['message']);
-        }
-      });
+      if (editData) {
+        DialogCustom().showLoading(context);
+        var data = {
+          "id": "${bankModel!.id}",
+          "kode_bank": "${kodeBank.text.trim()}",
+          "nm_bank": "${sandiBankModel!.namaLjk}",
+          "no_rek": "${noRek.text}",
+          "kd_rek":
+              "${rekening == "Tabungan" ? "10" : rekening == "Giro" ? "20" : "30"}",
+          "nosbb": "${inqueryGlModeldeb!.nosbb}",
+          "nama_sbb": "${inqueryGlModeldeb!.namaSbb}",
+          "nominal": "${nilai.text.trim().replaceAll(",", '')}",
+          "jw": "${saldoEOM.text}",
+          "tglbuka":
+              "${tglBuka == null ? "" : DateFormat('y-MM-dd').format(tglBuka!)}",
+          "tgljtempo":
+              "${tglJatuhTempo == null ? "" : DateFormat('y-MM-dd').format(tglJatuhTempo!)}",
+          "saldoeom": "${saldoEOM.text.replaceAll(",", "")}",
+          "kode_pt": "001",
+          "kode_kantor": "",
+          "kode_induk": ""
+        };
+        Setuprepository.setup(token, NetworkURL.editBank(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'].toString().toLowerCase().contains("success")) {
+            getBank();
+            clear();
+            informationDialog(context, "Information", value['message']);
+          } else {
+            informationDialog(context, "Warning", value['message']);
+          }
+        });
+      } else {
+        DialogCustom().showLoading(context);
+        var data = {
+          "kode_bank": "${kodeBank.text.trim()}",
+          "nm_bank": "${sandiBankModel!.namaLjk}",
+          "no_rek": "${noRek.text}",
+          "kd_rek":
+              "${rekening == "Tabungan" ? "10" : rekening == "Giro" ? "20" : "30"}",
+          "nosbb": "${inqueryGlModeldeb!.nosbb}",
+          "nama_sbb": "${inqueryGlModeldeb!.namaSbb}",
+          "nominal": "${nilai.text.trim().replaceAll(",", '')}",
+          "jw": "${saldoEOM.text}",
+          "tglbuka":
+              "${tglBuka == null ? "" : DateFormat('y-MM-dd').format(tglBuka!)}",
+          "tgljtempo":
+              "${tglJatuhTempo == null ? "" : DateFormat('y-MM-dd').format(tglJatuhTempo!)}",
+          "saldoeom": "${saldoEOM.text.replaceAll(",", "")}",
+          "kode_pt": "001",
+          "kode_kantor": "",
+          "kode_induk": ""
+        };
+        Setuprepository.setup(token, NetworkURL.addBank(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'].toString().toLowerCase().contains("success")) {
+            getBank();
+            clear();
+            informationDialog(context, "Information", value['message']);
+          } else {
+            informationDialog(context, "Warning", value['message']);
+          }
+        });
+      }
     }
+  }
+
+  clear() async {
+    dialog = false;
+    editData = false;
+    kodeBank.clear();
+    namaBank.clear();
+    noRek.clear();
+    rekening = "Tabungan";
+    nosbbdeb.clear();
+    namaSbbDeb.clear();
+    nilai.clear();
+    saldoEOM.clear();
+    tglBukaRekening.clear();
+    tglJatuhTempoRekening.clear();
+    saldoEOM.clear();
+    notifyListeners();
   }
 }
