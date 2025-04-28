@@ -261,6 +261,22 @@ class NetworkURL {
     return "$url/aomarketing/deleted";
   }
 
+  static String getHutangPiutang() {
+    return "$url/hutangpiutang";
+  }
+
+  static String addHutangPiutang() {
+    return "$url/hutangpiutang/add";
+  }
+
+  static String editHutangPiutang() {
+    return "$url/hutangpiutang/update";
+  }
+
+  static String deleteHutangPiutang() {
+    return "$url/hutangpiutang/deleted";
+  }
+
   static String getBank() {
     return "$url/bank";
   }

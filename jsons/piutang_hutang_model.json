@@ -1,4 +1,5 @@
 {
+    "id": 1,
     "no_invoice": "",
     "jns_invoice": "",
     "no_sif": "",
@@ -13,9 +14,12 @@
     "tgl_bayar": "",
     "nilai_bayar": "",
     "status_invoice": "",
+    "no_sbb": "",
+    "nama_sbb": "",
     "kode_pt": "",
     "kode_kantor": "",
     "kode_induk": "",
+    "keterangan": "",
     "kode_ao": "",
     "item_pembayaran": "$[]pembayaran_hutang_piutang_model"
 }
