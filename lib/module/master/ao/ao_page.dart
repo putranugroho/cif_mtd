@@ -161,118 +161,140 @@ class AoPage extends StatelessWidget {
                         padding: EdgeInsets.all(20),
                         width: 600,
                         decoration: BoxDecoration(color: Colors.white),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Row(
+                        child: FocusTraversalGroup(
+                          child: Form(
+                            key: value.keyForm,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                Expanded(
-                                  child: Text(
-                                    "Tambah AO / Marketing",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        "Tambah AO / Marketing",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () => value.tutup(),
+                                      child: Container(
+                                        width: 40,
+                                        height: 40,
+                                        padding: EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey[200],
+                                            shape: BoxShape.circle),
+                                        child: Icon(Icons.close),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 32,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Kode",
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    const Text(
+                                      "*",
+                                      style: TextStyle(fontSize: 8),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                TextFormField(
+                                  textInputAction: TextInputAction.done,
+                                  controller: value.kd,
+                                  maxLines: 1,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
+                                  validator: (e) {
+                                    if (e!.isEmpty) {
+                                      return "Wajib diisi";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: "Input Kode ",
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6),
                                     ),
                                   ),
                                 ),
-                                InkWell(
-                                  onTap: () => value.tutup(),
-                                  child: Container(
-                                    width: 40,
-                                    height: 40,
-                                    padding: EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey[200],
-                                        shape: BoxShape.circle),
-                                    child: Icon(Icons.close),
+                                const SizedBox(height: 16),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Nama ",
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    const Text(
+                                      "*",
+                                      style: TextStyle(fontSize: 8),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                TextFormField(
+                                  textInputAction: TextInputAction.done,
+                                  controller: value.nm,
+                                  maxLines: 1,
+                                  // inputFormatters: [
+                                  //   FilteringTextInputFormatter.digitsOnly
+                                  // ],
+                                  validator: (e) {
+                                    if (e!.isEmpty) {
+                                      return "Wajib diisi";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: "Input Nama",
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
                                   ),
-                                )
+                                ),
+                                const SizedBox(height: 16),
+                                ButtonPrimary(
+                                  onTap: () {
+                                    value.cek();
+                                  },
+                                  name: "Simpan",
+                                ),
+                                value.editData
+                                    ? Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          const SizedBox(height: 16),
+                                          ButtonPrimary(
+                                            onTap: () {
+                                              value.confirm();
+                                            },
+                                            name: "Hapus",
+                                          ),
+                                        ],
+                                      )
+                                    : SizedBox()
                               ],
                             ),
-                            SizedBox(
-                              height: 32,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Kode",
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                                const SizedBox(width: 5),
-                                const Text(
-                                  "*",
-                                  style: TextStyle(fontSize: 8),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            TextFormField(
-                              textInputAction: TextInputAction.done,
-                              controller: value.kd,
-                              maxLines: 1,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              validator: (e) {
-                                if (e!.isEmpty) {
-                                  return "Wajib diisi";
-                                } else {
-                                  return null;
-                                }
-                              },
-                              decoration: InputDecoration(
-                                hintText: "Input Kode ",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              children: [
-                                Text(
-                                  "Nama ",
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                                const SizedBox(width: 5),
-                                const Text(
-                                  "*",
-                                  style: TextStyle(fontSize: 8),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            TextFormField(
-                              textInputAction: TextInputAction.done,
-                              controller: value.nm,
-                              maxLines: 1,
-                              // inputFormatters: [
-                              //   FilteringTextInputFormatter.digitsOnly
-                              // ],
-                              validator: (e) {
-                                if (e!.isEmpty) {
-                                  return "Wajib diisi";
-                                } else {
-                                  return null;
-                                }
-                              },
-                              decoration: InputDecoration(
-                                hintText: "Input Nama",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            ButtonPrimary(
-                              onTap: () {},
-                              name: "Simpan",
-                            )
-                          ],
+                          ),
                         ),
                       )
                     : SizedBox(),
@@ -302,9 +324,9 @@ class DetailDataSource extends DataGridSource {
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(columnName: 'kode', value: data.kdAo),
-                DataGridCell(columnName: 'nama', value: data.nmAo),
-                DataGridCell(columnName: 'action', value: data.kdAo),
+                DataGridCell(columnName: 'kode', value: data.kode),
+                DataGridCell(columnName: 'nama', value: data.nama),
+                DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
         .toList();
@@ -318,22 +340,27 @@ class DetailDataSource extends DataGridSource {
           return Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: 300,
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: colorPrimary,
-                border: Border.all(
-                  width: 2,
+            child: InkWell(
+              onTap: () {
+                tindakanNotifier!.edit(e.value);
+              },
+              child: Container(
+                width: 300,
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
+                  border: Border.all(
+                    width: 2,
+                    color: colorPrimary,
+                  ),
                 ),
-              ),
-              child: Text(
-                "Aksi",
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
+                child: Text(
+                  "Aksi",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

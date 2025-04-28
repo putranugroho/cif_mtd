@@ -791,7 +791,7 @@ class BackDatePage extends StatelessWidget {
                                   ),
                                   selectedItem: value.aoModel,
                                   items: value.listAo,
-                                  itemAsString: (e) => "${e.nmAo}",
+                                  itemAsString: (e) => "${e.nama}",
                                   onChanged: (e) {
                                     value.pilihAoModelDebet(e!);
                                   },
@@ -832,7 +832,7 @@ class BackDatePage extends StatelessWidget {
                                   ),
                                   selectedItem: value.aoModelKRedit,
                                   items: value.listAo,
-                                  itemAsString: (e) => "${e.nmAo}",
+                                  itemAsString: (e) => "${e.nama}",
                                   onChanged: (e) {
                                     value.pilihAoModelKredit(e!);
                                   },

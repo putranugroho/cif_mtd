@@ -692,33 +692,7 @@ class MenuMasterWidget extends StatelessWidget {
             ),
           ),
         ),
-        InkWell(
-          onTap: () => value.gantimenu(8),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
-            child: Row(
-              children: [
-                Image.asset(
-                  ImageAssets.user,
-                  height: 30,
-                  color: value.page == 8 ? Colors.white : Colors.white70,
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "Customer/Supplier",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: value.page == 8 ? Colors.white : Colors.white70,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
+
         InkWell(
           onTap: () => value.gantimenu(35),
           child: Container(
@@ -1028,6 +1002,33 @@ class MenuHutangPiutangWidget extends StatelessWidget {
         ),
       ),
       children: [
+        InkWell(
+          onTap: () => value.gantimenu(8),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.user,
+                  height: 30,
+                  color: value.page == 8 ? Colors.white : Colors.white70,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Customer/Supplier",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 8 ? Colors.white : Colors.white70,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
         InkWell(
           onTap: () => value.gantimenu(21),
           child: Container(

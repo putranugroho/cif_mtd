@@ -9,14 +9,14 @@ class BankTransaksiNotifier extends ChangeNotifier {
   final BuildContext context;
 
   BankTransaksiNotifier({required this.context}) {
-    for (Map<String, dynamic> i in json) {
-      list.add(BankModel.fromJson(i));
-    }
+    // for (Map<String, dynamic> i in json) {
+    //   list.add(BankModel.fromJson(i));
+    // }
 
-    for (Map<String, dynamic> i in bankJson) {
-      listBank.add(SandiBankModel.fromJson(i));
-    }
-    notifyListeners();
+    // for (Map<String, dynamic> i in bankJson) {
+    //   listBank.add(SandiBankModel.fromJson(i));
+    // }
+    // notifyListeners();
   }
 
   bool dialog = false;

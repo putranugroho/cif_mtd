@@ -802,7 +802,7 @@ class PiutangPage extends StatelessWidget {
                                   ),
                                   selectedItem: value.aoModel,
                                   items: value.listAo,
-                                  itemAsString: (e) => "${e.nmAo}",
+                                  itemAsString: (e) => "${e.nama}",
                                   onChanged: (e) {
                                     value.pilihAo(e!);
                                   },

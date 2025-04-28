@@ -6,18 +6,6 @@ class HutangNotifier extends ChangeNotifier {
   final BuildContext context;
 
   HutangNotifier({required this.context}) {
-    for (Map<String, dynamic> i in data) {
-      list.add(PiutangHutangModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in json) {
-      listCustomer.add(CustomerSupplierModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in ao) {
-      listAo.add(AoModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in jsonKode) {
-      listData.add(SetupTransModel.fromJson(i));
-    }
     notifyListeners();
   }
   var dialog = false;

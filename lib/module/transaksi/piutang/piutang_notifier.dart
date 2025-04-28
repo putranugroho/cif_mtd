@@ -5,18 +5,6 @@ class PiutangNotifier extends ChangeNotifier {
   final BuildContext context;
 
   PiutangNotifier({required this.context}) {
-    for (Map<String, dynamic> i in data) {
-      list.add(PiutangHutangModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in json) {
-      listCustomer.add(CustomerSupplierModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in ao) {
-      listAo.add(AoModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in jsonKode) {
-      listData.add(SetupTransModel.fromJson(i));
-    }
     notifyListeners();
   }
 

@@ -755,7 +755,7 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                       value.aoModelKRedit,
                                                   items: value.listAo,
                                                   itemAsString: (e) =>
-                                                      "${e.nmAo}",
+                                                      "${e.nama}",
                                                   onChanged: (e) {
                                                     value
                                                         .pilihAoModelKredit(e!);

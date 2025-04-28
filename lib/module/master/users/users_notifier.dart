@@ -1,23 +1,19 @@
+import 'dart:convert';
+
 import 'package:accounting/models/index.dart';
+import 'package:accounting/repository/SetupRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../../../network/network.dart';
 
 class UsersNotifier extends ChangeNotifier {
   final BuildContext context;
 
   UsersNotifier({required this.context}) {
-    // for (Map<String, dynamic> i in menu) {
-    //   listMenu.add(MenuModel.fromJson(i));
-    // }
-    // for (Map<String, dynamic> i in data) {
-    //   listData.add(UsersModel.fromJson(i));
-    // }
-    // for (Map<String, dynamic> i in coa) {
-    //   listCoa.add(CoaModel.fromJson(i));
-    // }
-    // for (Map<String, dynamic> i in hariKerja) {
-    //   listHariKerja.add(AktivasiModel.fromJson(i));
-    // }
+    getAktivasi();
+    getInqueryAll();
+    getKantor();
     notifyListeners();
   }
 
@@ -28,22 +24,84 @@ class UsersNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Map<String, dynamic>> hariKerja = [
-    {
-      "kd_aktivasi": "100001",
-      "nm_aktivasi": "Regu 1",
-      "hari": "['Senin','Selasa','Rabu']",
-      "jam_mulai": "10:00:00",
-      "jam_selesai": "17:00:00"
-    },
-    {
-      "kd_aktivasi": "100002",
-      "nm_aktivasi": "Regu 2",
-      "hari": "['Kamis','Jumat','Sabtu']",
-      "jam_mulai": "08:00:00",
-      "jam_selesai": "17:00:00"
-    },
-  ];
+  List<Map<String, dynamic>> extractJnsAccB(List<dynamic> rawData) {
+    List<Map<String, dynamic>> result = [];
+
+    void traverse(List<dynamic> items) {
+      for (var item in items) {
+        if (item is Map<String, dynamic>) {
+          if (item['jns_acc'] == 'C') {
+            result.add(item);
+          }
+
+          if (item.containsKey('items') && item['items'] is List) {
+            traverse(item['items']);
+          }
+        }
+      }
+    }
+
+    traverse(rawData);
+    return result;
+  }
+
+  List<InqueryGlModel> listGl = [];
+  Future getInqueryAll() async {
+    listGl.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        final List<Map<String, dynamic>> jnsAccBItems =
+            extractJnsAccB(value['data']);
+        listGl =
+            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        notifyListeners();
+      }
+    });
+  }
+
+  var isLoading = true;
+  Future getAktivasi() async {
+    isLoading = true;
+    listHariKerja.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getAktivasi(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listHariKerja.add(AktivasiModel.fromJson(i));
+        }
+        getUsers();
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  getUsers() async {
+    isLoading = true;
+    listData.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getusers(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listData.add(UsersModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
 
   bool dialog = false;
   tambah() {
@@ -134,6 +192,11 @@ class UsersNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  pilihKantor(KantorModel value) {
+    kantor = value;
+    notifyListeners();
+  }
+
   List<CoaModel> listCoa = [];
 
   TextEditingController namaSbbAset = TextEditingController();
@@ -156,6 +219,31 @@ class UsersNotifier extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  List<KantorModel> list = [];
+  Future getKantor() async {
+    list.clear();
+    isLoading = true;
+    var data = {
+      "kode_pt": "001",
+    };
+    notifyListeners();
+    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data))
+        .then((value) {
+      if (value['status'] == "Success") {
+        for (Map<String, dynamic> i in value['data']) {
+          list.add(KantorModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  KantorModel? kantor;
 
   pilihMenu(MenuModel value) {
     if (listMenuAdd.isEmpty) {
@@ -199,75 +287,4 @@ class UsersNotifier extends ChangeNotifier {
   ];
 
   List<UsersModel> listData = [];
-  List<Map<String, dynamic>> data = [
-    {
-      "userid": "edicybereye",
-      "pass": "123123",
-      "namauser": "Edi Kurniawan",
-      "kode_pt": "001",
-      "kode_kantor": "1001",
-      "kode_induk": "",
-      "tglexp": "2025-12-30",
-      "lvluser": "A",
-      "terminal_id": "",
-      "akses_kasir": "N",
-      "sbb_kasir": "",
-      "nama_sbb": "",
-      "fhoto_1": "",
-      "fhoto_2": "",
-      "fhoto_3": "",
-      "level_otor": "1",
-      "beda_kantor": "Y",
-      "min_otor": "10000000",
-      "max_otor": "20000000"
-    },
-  ];
-
-  List<Map<String, dynamic>> coa = [
-    {
-      "gol_acc": "1",
-      "jns_acc": "A",
-      "nobb": "10000000",
-      "nosbb": "10000000",
-      "nama_sbb": "Kas",
-      "type_posting": "N",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "B",
-      "nobb": "10000000",
-      "nosbb": "10001000",
-      "nama_sbb": "Kas",
-      "type_posting": "N",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001001",
-      "nama_sbb": "Kas Besar",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001002",
-      "nama_sbb": "Kas Kecil",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001003",
-      "nama_sbb": "Kas Transaksi",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-  ];
 }

@@ -229,6 +229,38 @@ class NetworkURL {
     return "$url/aktivasi/deleted";
   }
 
+  static String getCustomer() {
+    return "$url/customerssupplier";
+  }
+
+  static String addCustomer() {
+    return "$url/customerssupplier/add";
+  }
+
+  static String editCustomer() {
+    return "$url/customerssupplier/update";
+  }
+
+  static String deleteCustomer() {
+    return "$url/customerssupplier/deleted";
+  }
+
+  static String getAoMarketing() {
+    return "$url/aomarketing";
+  }
+
+  static String addAoMarketing() {
+    return "$url/aomarketing/add";
+  }
+
+  static String editAoMarketing() {
+    return "$url/aomarketing/update";
+  }
+
+  static String deleteAoMarketing() {
+    return "$url/aomarketing/deleted";
+  }
+
   static String getBank() {
     return "$url/bank";
   }

@@ -8,24 +8,24 @@ class AoModel {
 
   const AoModel({
     required this.id,
-    required this.kdAo,
-    required this.nmAo,
+    required this.kode,
+    required this.nama,
     required this.kodePt,
     required this.kodeKantor,
     required this.kodeInduk,
   });
 
   final int id;
-  final String kdAo;
-  final String nmAo;
+  final String kode;
+  final String nama;
   final String kodePt;
   final String kodeKantor;
   final String kodeInduk;
 
   factory AoModel.fromJson(Map<String,dynamic> json) => AoModel(
     id: json['id'] as int,
-    kdAo: json['kd_ao'].toString(),
-    nmAo: json['nm_ao'].toString(),
+    kode: json['kode'].toString(),
+    nama: json['nama'].toString(),
     kodePt: json['kode_pt'].toString(),
     kodeKantor: json['kode_kantor'].toString(),
     kodeInduk: json['kode_induk'].toString()
@@ -33,8 +33,8 @@ class AoModel {
   
   Map<String, dynamic> toJson() => {
     'id': id,
-    'kd_ao': kdAo,
-    'nm_ao': nmAo,
+    'kode': kode,
+    'nama': nama,
     'kode_pt': kodePt,
     'kode_kantor': kodeKantor,
     'kode_induk': kodeInduk
@@ -42,8 +42,8 @@ class AoModel {
 
   AoModel clone() => AoModel(
     id: id,
-    kdAo: kdAo,
-    nmAo: nmAo,
+    kode: kode,
+    nama: nama,
     kodePt: kodePt,
     kodeKantor: kodeKantor,
     kodeInduk: kodeInduk
@@ -52,15 +52,15 @@ class AoModel {
 
   AoModel copyWith({
     int? id,
-    String? kdAo,
-    String? nmAo,
+    String? kode,
+    String? nama,
     String? kodePt,
     String? kodeKantor,
     String? kodeInduk
   }) => AoModel(
     id: id ?? this.id,
-    kdAo: kdAo ?? this.kdAo,
-    nmAo: nmAo ?? this.nmAo,
+    kode: kode ?? this.kode,
+    nama: nama ?? this.nama,
     kodePt: kodePt ?? this.kodePt,
     kodeKantor: kodeKantor ?? this.kodeKantor,
     kodeInduk: kodeInduk ?? this.kodeInduk,
@@ -68,8 +68,8 @@ class AoModel {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is AoModel && id == other.id && kdAo == other.kdAo && nmAo == other.nmAo && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk;
+    || other is AoModel && id == other.id && kode == other.kode && nama == other.nama && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk;
 
   @override
-  int get hashCode => id.hashCode ^ kdAo.hashCode ^ nmAo.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode;
+  int get hashCode => id.hashCode ^ kode.hashCode ^ nama.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode;
 }
