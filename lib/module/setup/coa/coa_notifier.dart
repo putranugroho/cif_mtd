@@ -134,9 +134,7 @@ class CoaNotifier extends ChangeNotifier {
   String? hutangPiutang;
 
   gantiHutangPiutang(String value) {
-    print(hutangPiutang);
-    print(value);
-    notifyListeners();
+   
     if (hutangPiutang == value) {
       hutangPiutang = null;
     } else {
