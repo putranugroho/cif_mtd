@@ -529,14 +529,23 @@ class PiutangPage extends StatelessWidget {
                                                                   Text("$no. "),
                                                             ),
                                                             Expanded(
-                                                                child:
-                                                                    TextFormField(
-                                                              enabled: false,
-                                                              decoration: InputDecoration(
-                                                                  border:
-                                                                      OutlineInputBorder(),
-                                                                  hintText:
-                                                                      "Tanggal Jatuh Tempo"),
+                                                                child: InkWell(
+                                                              onTap: () {
+                                                                value
+                                                                    .pilihJthTempo(
+                                                                        i);
+                                                              },
+                                                              child:
+                                                                  TextFormField(
+                                                                enabled: false,
+                                                                controller: value
+                                                                    .listTglJatuhTempo[i],
+                                                                decoration: InputDecoration(
+                                                                    border:
+                                                                        OutlineInputBorder(),
+                                                                    hintText:
+                                                                        "Tanggal Jatuh Tempo"),
+                                                              ),
                                                             )),
                                                             SizedBox(
                                                               width: 16,
@@ -544,7 +553,17 @@ class PiutangPage extends StatelessWidget {
                                                             Expanded(
                                                                 child:
                                                                     TextFormField(
-                                                              enabled: false,
+                                                              onChanged: (e) {
+                                                                value
+                                                                    .changeCalculate();
+                                                              },
+                                                              inputFormatters: [
+                                                                FilteringTextInputFormatter
+                                                                    .digitsOnly,
+                                                                CurrencyInputFormatter(),
+                                                              ],
+                                                              controller: value
+                                                                  .listNominal[i],
                                                               decoration: InputDecoration(
                                                                   border:
                                                                       OutlineInputBorder(),
@@ -600,7 +619,7 @@ class PiutangPage extends StatelessWidget {
                                                   ),
                                                   Expanded(
                                                       child: Text(
-                                                    "Rp. 0",
+                                                    "Rp. ${FormatCurrency.oCcy.format(value.selisih)}",
                                                     textAlign: TextAlign.start,
                                                   )),
                                                   SizedBox(

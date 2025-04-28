@@ -45,9 +45,7 @@ class HutangNotifier extends ChangeNotifier {
       isLoadingInquery = true;
       listGl.clear();
       notifyListeners();
-
       var data = {"kode_pt": "001"};
-
       try {
         final response = await Setuprepository.setup(
           token,
@@ -73,7 +71,7 @@ class HutangNotifier extends ChangeNotifier {
         notifyListeners();
       }
     } else {
-      listGl.clear(); // clear on short query
+      listGl.clear(); 
     }
 
     return listGl;
@@ -96,7 +94,6 @@ class HutangNotifier extends ChangeNotifier {
           if (item['jns_acc'] == 'C') {
             result.add(item);
           }
-
           if (item.containsKey('items') && item['items'] is List) {
             traverse(item['items']);
           }
@@ -165,6 +162,52 @@ class HutangNotifier extends ChangeNotifier {
           .format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
+  }
+
+  Future pilihJthTempo(int index) async {
+    var pickedendDate = (await showDatePicker(
+      context: context,
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) + 10,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+    ));
+    if (pickedendDate != null) {
+      // tglTransaksi = pickedendDate;
+      listTglJatuhTempo[index].text = DateFormat("y-MM-dd")
+          .format(DateTime.parse(pickedendDate.toString()));
+      notifyListeners();
+    }
+  }
+
+  int selisih = 0;
+
+  changeCalculate() async {
+    var tempobayar = listNominal
+        .map((e) => int.parse(e.text.replaceAll(",", "")))
+        .reduce((a, b) => a + b);
+    selisih = int.parse(nilaiInvoice.text.replaceAll(",", "")) - tempobayar;
+    notifyListeners();
   }
 
   Future pilihTanggalJatuhTempo() async {
@@ -312,8 +355,10 @@ class HutangNotifier extends ChangeNotifier {
           "kode_ao": customerSupplierModel!.kodeAo,
         };
         Setuprepository.setup(
-                token, NetworkURL.editHutangPiutang(), jsonEncode(data))
-            .then((value) {
+          token,
+          NetworkURL.editHutangPiutang(),
+          jsonEncode(data),
+        ).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getHutangPiutang();
@@ -480,6 +525,7 @@ class HutangNotifier extends ChangeNotifier {
   remove(int index) {
     listTglJatuhTempo.removeAt(index);
     listNominal.removeAt(index);
+    changeCalculate();
     notifyListeners();
   }
 

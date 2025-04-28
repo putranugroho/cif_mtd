@@ -529,22 +529,44 @@ class HutangPage extends StatelessWidget {
                                                                   Text("$no. "),
                                                             ),
                                                             Expanded(
+                                                              child: InkWell(
+                                                                onTap: () {
+                                                                  value
+                                                                      .pilihJthTempo(
+                                                                          i);
+                                                                },
                                                                 child:
                                                                     TextFormField(
-                                                              enabled: false,
-                                                              decoration: InputDecoration(
-                                                                  border:
-                                                                      OutlineInputBorder(),
-                                                                  hintText:
-                                                                      "Tanggal Jatuh Tempo"),
-                                                            )),
+                                                                  enabled:
+                                                                      false,
+                                                                  controller:
+                                                                      value.listTglJatuhTempo[
+                                                                          i],
+                                                                  decoration: InputDecoration(
+                                                                      border:
+                                                                          OutlineInputBorder(),
+                                                                      hintText:
+                                                                          "Tanggal Jatuh Tempo"),
+                                                                ),
+                                                              ),
+                                                            ),
                                                             SizedBox(
                                                               width: 16,
                                                             ),
                                                             Expanded(
                                                                 child:
                                                                     TextFormField(
-                                                              enabled: false,
+                                                              onChanged: (e) {
+                                                                value
+                                                                    .changeCalculate();
+                                                              },
+                                                              controller: value
+                                                                  .listNominal[i],
+                                                              inputFormatters: [
+                                                                FilteringTextInputFormatter
+                                                                    .digitsOnly,
+                                                                CurrencyInputFormatter(),
+                                                              ],
                                                               decoration: InputDecoration(
                                                                   border:
                                                                       OutlineInputBorder(),
@@ -600,7 +622,7 @@ class HutangPage extends StatelessWidget {
                                                   ),
                                                   Expanded(
                                                       child: Text(
-                                                    "Rp. 0",
+                                                    "Rp. ${FormatCurrency.oCcy.format(value.selisih)}",
                                                     textAlign: TextAlign.start,
                                                   )),
                                                   SizedBox(

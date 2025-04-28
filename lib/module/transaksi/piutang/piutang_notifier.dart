@@ -45,9 +45,7 @@ class PiutangNotifier extends ChangeNotifier {
       isLoadingInquery = true;
       listGl.clear();
       notifyListeners();
-
       var data = {"kode_pt": "001"};
-
       try {
         final response = await Setuprepository.setup(
           token,
@@ -87,16 +85,60 @@ class PiutangNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  int selisih = 0;
+
+  Future pilihJthTempo(int index) async {
+    var pickedendDate = (await showDatePicker(
+      context: context,
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) + 10,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+    ));
+    if (pickedendDate != null) {
+      // tglTransaksi = pickedendDate;
+      listTglJatuhTempo[index].text = DateFormat("y-MM-dd")
+          .format(DateTime.parse(pickedendDate.toString()));
+      notifyListeners();
+    }
+  }
+
+  changeCalculate() async {
+    var tempobayar = listNominal
+        .map((e) => int.parse(e.text.replaceAll(",", "")))
+        .reduce((a, b) => a + b);
+    selisih = int.parse(nilaiInvoice.text.replaceAll(",", "")) - tempobayar;
+    notifyListeners();
+  }
+
   List<Map<String, dynamic>> extractJnsAccB(List<dynamic> rawData) {
     List<Map<String, dynamic>> result = [];
-
     void traverse(List<dynamic> items) {
       for (var item in items) {
         if (item is Map<String, dynamic>) {
           if (item['jns_acc'] == 'C') {
             result.add(item);
           }
-
           if (item.containsKey('items') && item['items'] is List) {
             traverse(item['items']);
           }
