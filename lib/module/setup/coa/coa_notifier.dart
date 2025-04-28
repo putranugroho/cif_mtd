@@ -142,11 +142,17 @@ class CoaNotifier extends ChangeNotifier {
     dialog = false;
     editData = false;
     hutangPiutang = null;
+    jnsAcc = null;
     perantara = false;
     resulttext.clear();
+    header = null;
+    noHeader.clear();
     noBb.clear();
+    bukuBesar = null;
     noSbb.clear();
     namaSbb.clear();
+    limitdebet.clear();
+    limitkredit.clear();
     golongan = null;
     notifyListeners();
   }

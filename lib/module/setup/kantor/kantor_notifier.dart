@@ -154,6 +154,7 @@ class KantorNotifier extends ChangeNotifier {
   clear() {
     editData = false;
     kantorModel = null;
+    status = null;
     kode.clear();
     nama.clear();
     noKantor.clear();

@@ -394,6 +394,12 @@ class KantorPage extends StatelessWidget {
                                       children: [
                                         Expanded(
                                           child: DropdownSearch<KantorModel>(
+                                            validator: (value) {
+                                              if (value == null) {
+                                                return 'Wajib diisi';
+                                              }
+                                              return null;
+                                            },
                                             popupProps:
                                                 const PopupPropsMultiSelection
                                                     .menu(
@@ -462,13 +468,6 @@ class KantorPage extends StatelessWidget {
                                             // inputFormatters: [
                                             //   FilteringTextInputFormatter.digitsOnly
                                             // ],
-                                            validator: (e) {
-                                              if (e!.isEmpty) {
-                                                return "Wajib diisi";
-                                              } else {
-                                                return null;
-                                              }
-                                            },
                                             decoration: InputDecoration(
                                               filled: true,
                                               fillColor: Colors.grey[200],

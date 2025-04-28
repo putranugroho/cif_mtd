@@ -55,6 +55,7 @@ class TambahKelompokSbbKhususNotifier extends ChangeNotifier {
     kode.clear();
     nama.clear();
     dialog = false;
+    satu = false;
     editData = false;
     notifyListeners();
   }

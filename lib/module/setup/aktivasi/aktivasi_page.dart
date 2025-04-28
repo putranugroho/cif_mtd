@@ -206,8 +206,8 @@ class AktivasiPage extends StatelessWidget {
                                   Expanded(
                                     child: Text(
                                       value.editData
-                                          ? "Ubah / Hapus Aktivasi"
-                                          : "Tambah Aktivasi",
+                                          ? "Ubah / Hapus Kelompok"
+                                          : "Tambah Kelompok",
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -507,7 +507,7 @@ class AktivasiPage extends StatelessWidget {
                                             const SizedBox(height: 16),
                                             ButtonPrimary(
                                               onTap: () {
-                                              value.confirm();
+                                                value.confirm();
                                               },
                                               name: "Hapus",
                                             ),
