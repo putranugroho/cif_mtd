@@ -157,7 +157,7 @@ class SbbKhususNotifier extends ChangeNotifier {
     print("listGlAdd");
     print(listGlAdd);
     print(listGlAdd.length);
-    if (listGlAdd.length == 0) {
+    if (golonganSbbKhususModel!.lebihSatuAkun == "Y" && listGlAdd.length == 0) {
       informationDialog(context, "Warning", "Harap memilih Sub Buku Besar!!");
     } else {
       DialogCustom().showLoading(context);
