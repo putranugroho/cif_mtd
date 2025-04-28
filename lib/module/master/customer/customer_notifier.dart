@@ -5,6 +5,7 @@ import 'package:accounting/repository/SetupRepository.dart';
 import 'package:flutter/material.dart';
 
 import '../../../network/network.dart';
+import '../../../utils/button_custom.dart';
 import '../../../utils/dialog_loading.dart';
 import '../../../utils/informationdialog.dart';
 
@@ -12,12 +13,33 @@ class CustomerNotifier extends ChangeNotifier {
   final BuildContext context;
 
   CustomerNotifier({required this.context}) {
-    getCustomers();
+    getAoMarketing();
     notifyListeners();
   }
 
-  List<CustomerSupplierModel> list = [];
+  List<AoModel> listAoModel = [];
   var isLoading = true;
+  getAoMarketing() async {
+    isLoading = true;
+    listAoModel.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listAoModel.add(AoModel.fromJson(i));
+        }
+        getCustomers();
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  List<CustomerSupplierModel> list = [];
   getCustomers() async {
     isLoading = true;
     list.clear();
@@ -106,7 +128,8 @@ class CustomerNotifier extends ChangeNotifier {
           "kontak3": "${kontak3.text.trim()}",
           "hp3": "${hp3.text.trim()}",
           "email3": "${email3.text.trim()}",
-          "keterangan3": "${keterangan3.text.trim()}"
+          "keterangan3": "${keterangan3.text.trim()}",
+          "kode_ao": "${aoModel!.kode}"
         };
         // print(jsonEncode(data));
         Setuprepository.setup(
@@ -124,7 +147,7 @@ class CustomerNotifier extends ChangeNotifier {
       } else {
         DialogCustom().showLoading(context);
         var data = {
-          "kode_pt": "${customerSupplierModel!.kodePt}",
+          "kode_pt": "${aoModel!.kodePt}",
           "no_sif": "${noSif.text.trim()}",
           "nm_sif": "${namaSif.text.trim()}",
           "gol_cust":
@@ -151,9 +174,10 @@ class CustomerNotifier extends ChangeNotifier {
           "kontak3": "${kontak3.text.trim()}",
           "hp3": "${hp3.text.trim()}",
           "email3": "${email3.text.trim()}",
-          "keterangan3": "${keterangan3.text.trim()}"
+          "keterangan3": "${keterangan3.text.trim()}",
+          "kode_ao": "${aoModel!.kode}"
         };
-        Setuprepository.setup(token, NetworkURL.addBank(), jsonEncode(data))
+        Setuprepository.setup(token, NetworkURL.addCustomer(), jsonEncode(data))
             .then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
@@ -166,6 +190,115 @@ class CustomerNotifier extends ChangeNotifier {
         });
       }
     }
+  }
+
+  confirm() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: 500,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Anda yakin menghapus ${customerSupplierModel!.nmSif}?",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ButtonSecondary(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        name: "Tidak",
+                      )),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                          child: ButtonPrimary(
+                        onTap: () {
+                          Navigator.pop(context);
+                          remove();
+                        },
+                        name: "Ya",
+                      )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  remove() {
+    DialogCustom().showLoading(context);
+    var data = {
+      "id": customerSupplierModel!.id,
+    };
+    Setuprepository.setup(token, NetworkURL.deleteCustomer(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        getCustomers();
+        clear();
+
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message'][0]);
+      }
+    });
+  }
+
+  edit(String id) {
+    dialog = true;
+    editData = true;
+    customerSupplierModel = list.where((e) => e.id == int.parse(id)).first;
+    aoModel =
+        listAoModel.where((e) => e.kode == customerSupplierModel!.kodeAo).first;
+    noSif.text = customerSupplierModel!.noSif;
+    namaSif.text = customerSupplierModel!.nmSif;
+    golCust = customerSupplierModel!.golCust == "1"
+        ? "Customer"
+        : customerSupplierModel!.golCust == "2"
+            ? "Supplier"
+            : "Customer dan Supplier";
+    bidangUsaha.text = customerSupplierModel!.bidangUsaha;
+    alamat.text = customerSupplierModel!.alamat;
+    kelurahan.text = customerSupplierModel!.kelurahan;
+    kecamatan.text = customerSupplierModel!.kecamatan;
+    kota.text = customerSupplierModel!.kota;
+    provinsi.text = customerSupplierModel!.provinsi;
+    kodepos.text = customerSupplierModel!.kdpos;
+    npwp.text = customerSupplierModel!.npwp;
+    pkp = customerSupplierModel!.pkp == "Y" ? true : false;
+    notelp.text = customerSupplierModel!.noTelp;
+    email.text = customerSupplierModel!.email;
+    kontak1.text = customerSupplierModel!.kontak1;
+    hp1.text = customerSupplierModel!.hp1;
+    email1.text = customerSupplierModel!.email1;
+    keterangan1.text = customerSupplierModel!.keterangan1;
+    kontak2.text = customerSupplierModel!.kontak2;
+    hp2.text = customerSupplierModel!.hp2;
+    email2.text = customerSupplierModel!.email2;
+    keterangan2.text = customerSupplierModel!.keterangan2;
+    kontak3.text = customerSupplierModel!.kontak3;
+    hp3.text = customerSupplierModel!.hp3;
+    email3.text = customerSupplierModel!.email3;
+    keterangan3.text = customerSupplierModel!.keterangan3;
+    notifyListeners();
   }
 
   bool dialog = false;
@@ -208,7 +341,7 @@ class CustomerNotifier extends ChangeNotifier {
     "Supplier",
     "Customer dan Supplier",
   ];
-  String? golCust;
+  String? golCust = "Customer";
   pilihGolCust(String value) {
     golCust = value;
     notifyListeners();
@@ -229,7 +362,7 @@ class CustomerNotifier extends ChangeNotifier {
   }
 
   pilihAoModelKredit(AoModel value) {
-    aoModelKRedit = value;
+    aoModel = value;
     notifyListeners();
   }
 }
