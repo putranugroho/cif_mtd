@@ -157,26 +157,42 @@ class SbbKhususNotifier extends ChangeNotifier {
     print("listGlAdd");
     print(listGlAdd);
     print(listGlAdd.length);
-    if (listGlAdd.length == 0) {
+    if (golonganSbbKhususModel!.lebihSatuAkun == "Y" && listGlAdd.length == 0) {
       informationDialog(context, "Warning", "Harap memilih Sub Buku Besar!!");
     } else {
       DialogCustom().showLoading(context);
-      for (var i = 0; i < listGlAdd.length; i++) {
-        print("listGlAdd${i}");
-        print(listGlAdd[i]);
+      if (golonganSbbKhususModel!.lebihSatuAkun == "Y") {
+        for (var i = 0; i < listGlAdd.length; i++) {
+          print("listGlAdd${i}");
+          print(listGlAdd[i]);
+          json.add({
+            "id": listGlAdd[i].id,
+            "gol_acc": "${listGlAdd[i].golAcc}",
+            "jns_acc": "${listGlAdd[i].jnsAcc}",
+            "nobb": "${listGlAdd[i].nobb}",
+            "nosbb": "${listGlAdd[i].nosbb}",
+            "nama_sbb": "${listGlAdd[i].namaSbb}",
+            "type_posting": "${listGlAdd[i].typePosting}",
+            "kode_golongan": "${golonganSbbKhususModel!.kodeGolongan}",
+            "kode_pt": "${golonganSbbKhususModel!.kodePt}",
+            "sbb_khusus": ""
+          });
+        }
+      } else {
         json.add({
-          "id": listGlAdd[i].id,
-          "gol_acc": "${listGlAdd[i].golAcc}",
-          "jns_acc": "${listGlAdd[i].jnsAcc}",
-          "nobb": "${listGlAdd[i].nobb}",
-          "nosbb": "${listGlAdd[i].nosbb}",
-          "nama_sbb": "${listGlAdd[i].namaSbb}",
-          "type_posting": "${listGlAdd[i].typePosting}",
+          "id": inqueryGlModel!.id,
+          "gol_acc": "${inqueryGlModel!.golAcc}",
+          "jns_acc": "${inqueryGlModel!.jnsAcc}",
+          "nobb": "${inqueryGlModel!.nobb}",
+          "nosbb": "${inqueryGlModel!.nosbb}",
+          "nama_sbb": "${inqueryGlModel!.namaSbb}",
+          "type_posting": "${inqueryGlModel!.typePosting}",
           "kode_golongan": "${golonganSbbKhususModel!.kodeGolongan}",
           "kode_pt": "${golonganSbbKhususModel!.kodePt}",
           "sbb_khusus": ""
         });
       }
+
       var data = {"data": json};
       // print(jsonEncode(data));
       Setuprepository.setup(token, NetworkURL.addSbbKhusus(), jsonEncode(data))
