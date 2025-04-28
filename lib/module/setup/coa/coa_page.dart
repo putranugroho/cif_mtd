@@ -1199,46 +1199,88 @@ class CoaPage extends StatelessWidget {
                                                   SizedBox(
                                                     height: 8,
                                                   ),
-                                                  Row(
-                                                    children: [
-                                                      Radio(
-                                                          activeColor:
-                                                              colorPrimary,
-                                                          value: "HUTANG",
-                                                          groupValue: value
-                                                              .hutangPiutang,
-                                                          onChanged: (e) {
-                                                            value
-                                                                .gantiHutangPiutang(
-                                                                    "HUTANG");
-                                                          }),
-                                                      SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Text("Hutang"),
-                                                    ],
+                                                  InkWell(
+                                                    onTap: () {
+                                                      value.gantiHutangPiutang(
+                                                          "HUTANG");
+                                                    },
+                                                    child: Row(
+                                                      children: [
+                                                        Container(
+                                                          width: 16,
+                                                          height: 16,
+                                                          padding:
+                                                              EdgeInsets.all(2),
+                                                          decoration: BoxDecoration(
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                              color:
+                                                                  Colors.white,
+                                                              border: Border.all(
+                                                                  width: 2,
+                                                                  color: Colors
+                                                                      .grey)),
+                                                          child:
+                                                              value.hutangPiutang ==
+                                                                      "HUTANG"
+                                                                  ? Container(
+                                                                      decoration: BoxDecoration(
+                                                                          shape: BoxShape
+                                                                              .circle,
+                                                                          color:
+                                                                              colorPrimary),
+                                                                    )
+                                                                  : SizedBox(),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 8,
+                                                        ),
+                                                        Text("Hutang"),
+                                                      ],
+                                                    ),
                                                   ),
                                                   SizedBox(
                                                     height: 4,
                                                   ),
-                                                  Row(
-                                                    children: [
-                                                      Radio(
-                                                          activeColor:
-                                                              colorPrimary,
-                                                          value: "PIUTANG",
-                                                          groupValue: value
-                                                              .hutangPiutang,
-                                                          onChanged: (e) {
-                                                            value
-                                                                .gantiHutangPiutang(
-                                                                    "PIUTANG");
-                                                          }),
-                                                      SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Text("Piutang"),
-                                                    ],
+                                                  InkWell(
+                                                    onTap: () {
+                                                      value.gantiHutangPiutang(
+                                                          "PIUTANG");
+                                                    },
+                                                    child: Row(
+                                                      children: [
+                                                        Container(
+                                                          width: 16,
+                                                          height: 16,
+                                                          padding:
+                                                              EdgeInsets.all(2),
+                                                          decoration: BoxDecoration(
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                              color:
+                                                                  Colors.white,
+                                                              border: Border.all(
+                                                                  width: 2,
+                                                                  color: Colors
+                                                                      .grey)),
+                                                          child:
+                                                              value.hutangPiutang ==
+                                                                      "PIUTANG"
+                                                                  ? Container(
+                                                                      decoration: BoxDecoration(
+                                                                          shape: BoxShape
+                                                                              .circle,
+                                                                          color:
+                                                                              colorPrimary),
+                                                                    )
+                                                                  : SizedBox(),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 8,
+                                                        ),
+                                                        Text("Piutang"),
+                                                      ],
+                                                    ),
                                                   ),
                                                   SizedBox(
                                                     height: 16,
