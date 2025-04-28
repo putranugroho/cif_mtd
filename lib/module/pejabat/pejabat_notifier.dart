@@ -99,6 +99,23 @@ class PejabatNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  PejabatModel? pejabatModel;
+  edit(String value) {
+    print(value);
+    pejabatModel = list.where((e) => e.nik == value).first;
+    nik.text = pejabatModel!.nik;
+    nama.text = pejabatModel!.namaPejabat;
+    noHp.text = pejabatModel!.noHpPejabat;
+    kantorModel =
+        listKantor.where((e) => e.kodeKantor == pejabatModel!.kodeKantor).first;
+    jabatanModel = listJabatan
+        .where((e) => e.kodeJabatan == pejabatModel!.kodeJabatan)
+        .first;
+    dialog = true;
+    editData = true;
+    notifyListeners();
+  }
+
   TextEditingController nik = TextEditingController();
   TextEditingController nama = TextEditingController();
   TextEditingController noHp = TextEditingController();
