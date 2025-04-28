@@ -22,6 +22,8 @@ class SbbKhususNotifier extends ChangeNotifier {
   List<GolonganSbbKhususModel> listGolongan = [];
   GolonganSbbKhususModel? golonganSbbKhususModel;
   pilihGolongan(GolonganSbbKhususModel value) {
+    inqueryGlModel = null;
+    listGlAdd.clear();
     golonganSbbKhususModel = value;
     notifyListeners();
   }
@@ -107,7 +109,14 @@ class SbbKhususNotifier extends ChangeNotifier {
     });
   }
 
-  edit(String kode) {}
+  var editData = false;
+  edit(String kode) {
+    golonganSbbKhususModel =
+        listGolongan.where((e) => e.kodeGolongan == kode).first;
+    dialog = true;
+    editData = true;
+    notifyListeners();
+  }
 
   pilihCoa(InqueryGlModel value) {
     if (listGlAdd.isEmpty) {
@@ -157,7 +166,7 @@ class SbbKhususNotifier extends ChangeNotifier {
     print("listGlAdd");
     print(listGlAdd);
     print(listGlAdd.length);
-    if (golonganSbbKhususModel!.lebihSatuAkun == "Y" && listGlAdd.length == 0) {
+    if (inqueryGlModel == null && listGlAdd.length == 0) {
       informationDialog(context, "Warning", "Harap memilih Sub Buku Besar!!");
     } else {
       DialogCustom().showLoading(context);
@@ -205,7 +214,7 @@ class SbbKhususNotifier extends ChangeNotifier {
           getSbbKhusus();
           notifyListeners();
         } else {
-          informationDialog(context, "Warning", value['message'][0]);
+          informationDialog(context, "Warning", value['message']);
         }
       });
     }

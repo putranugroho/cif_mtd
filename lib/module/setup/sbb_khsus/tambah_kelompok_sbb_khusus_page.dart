@@ -40,7 +40,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "Kelompok SBB Khusus",
+                              "Golongan SBB Khusus",
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -61,7 +61,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                 ),
                               ),
                               child: Text(
-                                "Tambah Kelompok SBB Khusus",
+                                "Tambah Golongan SBB Khusus",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   color: Colors.white,
@@ -210,8 +210,8 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                   Expanded(
                                     child: Text(
                                       value.editData
-                                          ? "Ubah / Hapus Kelompok SBB Khusus"
-                                          : "Tambah Kelompok SBB Khusus",
+                                          ? "Ubah / Hapus Golongan SBB Khusus"
+                                          : "Tambah Golongan SBB Khusus",
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -238,7 +238,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    "Kode Kelompok",
+                                    "Kode Golongan",
                                     style: const TextStyle(fontSize: 12),
                                   ),
                                   const SizedBox(width: 5),
@@ -264,7 +264,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                   }
                                 },
                                 decoration: InputDecoration(
-                                  hintText: "Kode Kelompok",
+                                  hintText: "Kode Golongan",
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6),
                                   ),
@@ -274,7 +274,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    "Nama Kelompok SBB Khusus",
+                                    "Nama Golongan SBB Khusus",
                                     style: const TextStyle(fontSize: 12),
                                   ),
                                   const SizedBox(width: 5),
@@ -302,7 +302,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                   }
                                 },
                                 decoration: InputDecoration(
-                                  hintText: "Nama Kelompok",
+                                  hintText: "Nama Golongan",
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6),
                                   ),
