@@ -208,7 +208,7 @@ class HutangNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
+    var data = {"kode_pt": "001", "jns_invoice": "1"};
     Setuprepository.setup(
             token, NetworkURL.getHutangPiutang(), jsonEncode(data))
         .then((value) {
