@@ -7,15 +7,18 @@ import 'package:accounting/utils/format_currency.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:scroll_date_picker/scroll_date_picker.dart';
 
 import '../../../network/network.dart';
+import '../../../utils/button_custom.dart';
 
 class BankNotifier extends ChangeNotifier {
   final BuildContext context;
 
   BankNotifier({required this.context}) {
     getBank();
-    // getInqueryAll();
+    getInqueryAll();
+    getSandiBankAll();
     notifyListeners();
   }
 
@@ -34,6 +37,38 @@ class BankNotifier extends ChangeNotifier {
         notifyListeners();
       }
     });
+  }
+
+  Future getSandiBankAll() async {
+    isLoadingInquery = true;
+    listSandi.clear();
+    notifyListeners();
+
+    var data = {"kode_pt": "001"};
+
+    try {
+      final response = await Setuprepository.setup(
+        token,
+        NetworkURL.getSandiBank(),
+        jsonEncode(data),
+      );
+
+      if (response['status'].toString().toLowerCase().contains("success")) {
+        final jnsAccBItems =
+            (response['data'] as List).cast<Map<String, dynamic>>();
+
+        List<SandiBankModel> allItems =
+            jnsAccBItems.map((e) => SandiBankModel.fromJson(e)).toList();
+
+        listSandi = allItems.toList();
+      }
+      notifyListeners();
+    } catch (e) {
+      print("Error: $e");
+    } finally {
+      isLoadingInquery = false;
+      notifyListeners();
+    }
   }
 
   pilihAkunDeb(InqueryGlModel value) {
@@ -279,6 +314,76 @@ class BankNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  confirm() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: 500,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Anda yakin menghapus ${bankModel!.nmBank} - ${bankModel!.nmRek}?",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ButtonSecondary(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        name: "Tidak",
+                      )),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                          child: ButtonPrimary(
+                        onTap: () {
+                          Navigator.pop(context);
+                          remove();
+                        },
+                        name: "Ya",
+                      )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  remove() {
+    DialogCustom().showLoading(context);
+    var data = {
+      "id": bankModel!.id,
+    };
+    Setuprepository.setup(token, NetworkURL.deleteBank(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        getBank();
+        clear();
+
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message'][0]);
+      }
+    });
+  }
+
   TextEditingController kodeBank = TextEditingController();
   TextEditingController namaRek = TextEditingController();
   TextEditingController namaBank = TextEditingController();
@@ -293,10 +398,17 @@ class BankNotifier extends ChangeNotifier {
 
   final keyForm = GlobalKey<FormState>();
   var editData = false;
+  TextEditingController cabang = TextEditingController();
   BankModel? bankModel;
   edit(String id) {
+    dialog = true;
+    editData = true;
     bankModel = list.where((e) => e.id == int.parse(id)).first;
+    sandiBankModel =
+        listSandi.where((e) => e.sandi == bankModel!.kodeBank).first;
     kodeBank.text = bankModel!.kodeBank;
+    cabang.text = bankModel!.cabang;
+    namaRek.text = bankModel!.nmRek;
     namaBank.text = bankModel!.nmBank;
     noRek.text = bankModel!.noRek;
     rekening = bankModel!.kdRek == "10"
@@ -324,11 +436,13 @@ class BankNotifier extends ChangeNotifier {
           "id": "${bankModel!.id}",
           "kode_bank": "${kodeBank.text.trim()}",
           "nm_bank": "${sandiBankModel!.namaLjk}",
+          "nm_rek": "${namaRek.text.trim()}",
+          "cabang": "${cabang.text.trim()}",
           "no_rek": "${noRek.text}",
           "kd_rek":
               "${rekening == "Tabungan" ? "10" : rekening == "Giro" ? "20" : "30"}",
-          "nosbb": "${inqueryGlModeldeb!.nosbb}",
-          "nama_sbb": "${inqueryGlModeldeb!.namaSbb}",
+          "nosbb": "${nosbbdeb.text.trim()}",
+          "nama_sbb": "${namaSbbDeb.text.trim()}",
           "nominal": "${nilai.text.trim().replaceAll(",", '')}",
           "jw": "${saldoEOM.text}",
           "tglbuka":
@@ -357,7 +471,9 @@ class BankNotifier extends ChangeNotifier {
         var data = {
           "kode_bank": "${kodeBank.text.trim()}",
           "nm_bank": "${sandiBankModel!.namaLjk}",
+          "nm_rek": "${namaRek.text.trim()}",
           "no_rek": "${noRek.text}",
+          "cabang": "${cabang.text}",
           "kd_rek":
               "${rekening == "Tabungan" ? "10" : rekening == "Giro" ? "20" : "30"}",
           "nosbb": "${inqueryGlModeldeb!.nosbb}",

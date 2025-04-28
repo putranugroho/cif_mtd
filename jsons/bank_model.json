@@ -2,7 +2,9 @@
     "id": 2,
     "kode_bank": "008",
     "nm_bank": "PT BANK MANDIRI (PERSERO), Tbk",
+    "nm_rek": "PT BANK MANDIRI (PERSERO), Tbk",
     "no_rek": "12300000046",
+    "cabang": "12300000046",
     "kd_rek": "10",
     "nosbb": "200100000001",
     "nama_sbb": "Giro Bank Mandiri",
@@ -14,6 +16,6 @@
     "kode_pt": "001",
     "kode_kantor": "",
     "kode_induk": "",
-    "createddate": "2025-04-27 00: 28: 28",
+    "createddate": "2025-04-27 00:28:28",
     "is_deleted": "N"
 }
