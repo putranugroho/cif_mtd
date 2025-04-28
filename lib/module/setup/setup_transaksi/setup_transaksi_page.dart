@@ -553,57 +553,82 @@ class SetupTransaksiPage extends StatelessWidget {
                                   ),
                                   Row(
                                     children: [
-                                      Text(
-                                        "Flag Hutang / Piutang",
-                                        style: const TextStyle(fontSize: 12),
+                                      Text("Hutang dan Piutang "),
+                                      SizedBox(
+                                        width: 8,
                                       ),
-                                      const SizedBox(width: 5),
-                                      Spacer(),
                                     ],
                                   ),
-                                  const SizedBox(
+                                  SizedBox(
                                     height: 8,
                                   ),
-                                  Row(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Radio(
-                                            value: "1",
-                                            groupValue: value.hutang,
-                                            onChanged: (e) {
-                                              value.pilihHutangPiutang("1");
-                                            },
-                                            activeColor: colorPrimary,
-                                          ),
-                                          SizedBox(
-                                            width: 8,
-                                          ),
-                                          Text("Hutang")
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 32,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                            value: "2",
-                                            groupValue: value.hutang,
-                                            onChanged: (e) {
-                                              value.pilihHutangPiutang("2");
-                                            },
-                                            activeColor: colorPrimary,
-                                          ),
-                                          SizedBox(
-                                            width: 8,
-                                          ),
-                                          Text("Piutang")
-                                        ],
-                                      ),
-                                    ],
+                                  InkWell(
+                                    onTap: () {
+                                      value.gantiHutangPiutang("HUTANG");
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 16,
+                                          height: 16,
+                                          padding: EdgeInsets.all(2),
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Colors.white,
+                                              border: Border.all(
+                                                  width: 2,
+                                                  color: Colors.grey)),
+                                          child: value.hutangPiutang == "HUTANG"
+                                              ? Container(
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: colorPrimary),
+                                                )
+                                              : SizedBox(),
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text("Hutang"),
+                                      ],
+                                    ),
                                   ),
-                                  const SizedBox(
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      value.gantiHutangPiutang("PIUTANG");
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 16,
+                                          height: 16,
+                                          padding: EdgeInsets.all(2),
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Colors.white,
+                                              border: Border.all(
+                                                  width: 2,
+                                                  color: Colors.grey)),
+                                          child: value.hutangPiutang ==
+                                                  "PIUTANG"
+                                              ? Container(
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: colorPrimary),
+                                                )
+                                              : SizedBox(),
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text("Piutang"),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
                                     height: 16,
                                   ),
                                   ButtonPrimary(

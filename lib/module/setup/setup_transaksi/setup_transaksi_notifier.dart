@@ -63,9 +63,19 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     return result;
   }
 
-  String? hutang = "0";
-  pilihHutangPiutang(String value) {
-    hutang = value;
+  var perantara = false;
+  List<String> listHutang = [
+    "HUTANG",
+    "PIUTANG",
+  ];
+  String? hutangPiutang;
+
+  gantiHutangPiutang(String value) {
+    if (hutangPiutang == value) {
+      hutangPiutang = null;
+    } else {
+      hutangPiutang = value;
+    }
     notifyListeners();
   }
 
@@ -85,7 +95,7 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     namaSbbDeb.text = setupTransModel!.glDeb;
     namaSbbCre.text = setupTransModel!.glKre;
     modul = setupTransModel!.modul;
-    hutang = setupTransModel!.hutangPiutang;
+    hutangPiutang = setupTransModel!.hutangPiutang;
     notifyListeners();
   }
 
@@ -103,7 +113,7 @@ class SetupTransaksiNotifier extends ChangeNotifier {
           "gl_deb": namaSbbDeb.text.trim(),
           "gl_kre": namaSbbCre.text.trim(),
           "modul": modul,
-          "hutang_piutang": hutang,
+          "hutang_piutang": hutangPiutang,
         };
         Setuprepository.setup(
                 token, NetworkURL.editSetupTrans(), jsonEncode(data))
@@ -127,7 +137,7 @@ class SetupTransaksiNotifier extends ChangeNotifier {
           "gl_deb": namaSbbDeb.text.trim(),
           "gl_kre": namaSbbCre.text.trim(),
           "modul": modul,
-          "hutang_piutang": hutang,
+          "hutang_piutang": hutangPiutang,
         };
         Setuprepository.setup(
                 token, NetworkURL.addSetupTrans(), jsonEncode(data))
@@ -221,7 +231,7 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     editData = false;
     inqueryGlModelcre = null;
     inqueryGlModeldeb = null;
-    hutang = "0";
+    hutangPiutang = null;
     modul = "0";
     nosbbdeb.clear();
     nossbcre.clear();
