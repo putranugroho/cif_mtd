@@ -8,18 +8,18 @@ class SatuTransaksiNotifier extends ChangeNotifier {
   final BuildContext context;
 
   SatuTransaksiNotifier({required this.context}) {
-    for (Map<String, dynamic> i in coa) {
-      listCoa.add(CoaModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in data) {
-      listData.add(TransaksiModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in ao) {
-      listAo.add(AoModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in json) {
-      listKodeTransaksi.add(SetupTransModel.fromJson(i));
-    }
+    // for (Map<String, dynamic> i in coa) {
+    //   listCoa.add(CoaModel.fromJson(i));
+    // }
+    // for (Map<String, dynamic> i in data) {
+    //   listData.add(TransaksiModel.fromJson(i));
+    // }
+    // for (Map<String, dynamic> i in ao) {
+    //   listAo.add(AoModel.fromJson(i));
+    // }
+    // for (Map<String, dynamic> i in json) {
+    //   listKodeTransaksi.add(SetupTransModel.fromJson(i));
+    // }
     notifyListeners();
   }
 

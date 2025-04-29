@@ -541,7 +541,7 @@ class MenuSetupWidget extends StatelessWidget {
                   width: 16,
                 ),
                 Text(
-                  "Closing EOM",
+                  "Back Date",
                   style: TextStyle(
                     fontSize: 16,
                     color: value.page == 38 ? Colors.white : Colors.white70,

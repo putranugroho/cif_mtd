@@ -7,6 +7,7 @@ import 'index.dart';
 class PejabatModel {
 
   const PejabatModel({
+    required this.id,
     required this.kodeKantor,
     required this.kodeInduk,
     required this.nik,
@@ -16,6 +17,7 @@ class PejabatModel {
     required this.namaJabatan,
   });
 
+  final int id;
   final String kodeKantor;
   final String kodeInduk;
   final String nik;
@@ -25,6 +27,7 @@ class PejabatModel {
   final String namaJabatan;
 
   factory PejabatModel.fromJson(Map<String,dynamic> json) => PejabatModel(
+    id: json['id'] as int,
     kodeKantor: json['kode_kantor'].toString(),
     kodeInduk: json['kode_induk'].toString(),
     nik: json['nik'].toString(),
@@ -35,6 +38,7 @@ class PejabatModel {
   );
   
   Map<String, dynamic> toJson() => {
+    'id': id,
     'kode_kantor': kodeKantor,
     'kode_induk': kodeInduk,
     'nik': nik,
@@ -45,6 +49,7 @@ class PejabatModel {
   };
 
   PejabatModel clone() => PejabatModel(
+    id: id,
     kodeKantor: kodeKantor,
     kodeInduk: kodeInduk,
     nik: nik,
@@ -56,6 +61,7 @@ class PejabatModel {
 
 
   PejabatModel copyWith({
+    int? id,
     String? kodeKantor,
     String? kodeInduk,
     String? nik,
@@ -64,6 +70,7 @@ class PejabatModel {
     String? kodeJabatan,
     String? namaJabatan
   }) => PejabatModel(
+    id: id ?? this.id,
     kodeKantor: kodeKantor ?? this.kodeKantor,
     kodeInduk: kodeInduk ?? this.kodeInduk,
     nik: nik ?? this.nik,
@@ -75,8 +82,8 @@ class PejabatModel {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is PejabatModel && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && nik == other.nik && namaPejabat == other.namaPejabat && noHpPejabat == other.noHpPejabat && kodeJabatan == other.kodeJabatan && namaJabatan == other.namaJabatan;
+    || other is PejabatModel && id == other.id && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && nik == other.nik && namaPejabat == other.namaPejabat && noHpPejabat == other.noHpPejabat && kodeJabatan == other.kodeJabatan && namaJabatan == other.namaJabatan;
 
   @override
-  int get hashCode => kodeKantor.hashCode ^ kodeInduk.hashCode ^ nik.hashCode ^ namaPejabat.hashCode ^ noHpPejabat.hashCode ^ kodeJabatan.hashCode ^ namaJabatan.hashCode;
+  int get hashCode => id.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ nik.hashCode ^ namaPejabat.hashCode ^ noHpPejabat.hashCode ^ kodeJabatan.hashCode ^ namaJabatan.hashCode;
 }

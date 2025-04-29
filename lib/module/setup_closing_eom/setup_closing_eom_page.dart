@@ -25,7 +25,7 @@ class SetupClosingEomPage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        "Setup Closing EOM",
+                        "Setup Back Date",
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -40,46 +40,61 @@ class SetupClosingEomPage extends StatelessWidget {
                 children: [
                   Container(
                     padding: EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          "Batas berapa bulan closing",
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        TextFormField(
-                          textInputAction: TextInputAction.done,
-                          controller: value.closing,
-                          maxLines: 1,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          validator: (e) {
-                            if (e!.isEmpty) {
-                              return "Wajib diisi";
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration: InputDecoration(
-                            hintText: "Kode Transaksi",
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        Row(
+                    child: FocusTraversalGroup(
+                      child: Form(
+                        key: value.keyForm,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            ButtonPrimary(
-                              onTap: () {},
-                              name: "Simpan",
+                            Text(
+                              "Back Date s/d Bulan (Tahun Lalu)",
                             ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                value.showDate();
+                              },
+                              child: TextFormField(
+                                enabled: false,
+                                textInputAction: TextInputAction.done,
+                                controller: value.closingDate,
+                                maxLines: 1,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                validator: (e) {
+                                  if (e!.isEmpty) {
+                                    return "Wajib diisi";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  hintText: "Kode Transaksi",
+                                  fillColor: Colors.grey[300],
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                ButtonPrimary(
+                                  onTap: () {
+                                    value.cek();
+                                  },
+                                  name: "Simpan",
+                                ),
+                              ],
+                            )
                           ],
-                        )
-                      ],
+                        ),
+                      ),
                     ),
                   )
                 ],

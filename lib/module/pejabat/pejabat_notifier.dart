@@ -7,6 +7,7 @@ import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../network/network.dart';
+import '../../utils/button_custom.dart';
 
 class PejabatNotifier extends ChangeNotifier {
   final BuildContext context;
@@ -99,10 +100,78 @@ class PejabatNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  confirm() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: 500,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Anda yakin menghapus ${pejabatModel!.namaPejabat}?",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ButtonSecondary(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        name: "Tidak",
+                      )),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                          child: ButtonPrimary(
+                        onTap: () {
+                          Navigator.pop(context);
+                          remove();
+                        },
+                        name: "Ya",
+                      )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  remove() {
+    DialogCustom().showLoading(context);
+    var data = {"id": pejabatModel!.id};
+    Setuprepository.setup(token, NetworkURL.deletedPejabat(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        getPejabat();
+        clear();
+        dialog = false;
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message']);
+      }
+    });
+  }
+
   PejabatModel? pejabatModel;
   edit(String value) {
     print(value);
-    pejabatModel = list.where((e) => e.nik == value).first;
+    pejabatModel = list.where((e) => e.id == int.parse(value)).first;
     nik.text = pejabatModel!.nik;
     nama.text = pejabatModel!.namaPejabat;
     noHp.text = pejabatModel!.noHpPejabat;
@@ -126,6 +195,7 @@ class PejabatNotifier extends ChangeNotifier {
       if (editData) {
         DialogCustom().showLoading(context);
         var data = {
+          "id": pejabatModel!.id,
           "kode_pt": "${kantorModel!.kodePt}",
           "kode_kantor": "${kantorModel!.kodeKantor}",
           "kode_induk": "${kantorModel!.kodeInduk}",

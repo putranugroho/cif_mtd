@@ -447,7 +447,22 @@ class PejabatPage extends StatelessWidget {
                                         value.cek();
                                       },
                                       name: "Simpan",
-                                    )
+                                    ),
+                                    value.editData
+                                        ? Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              const SizedBox(height: 16),
+                                              ButtonPrimary(
+                                                onTap: () {
+                                                  value.confirm();
+                                                },
+                                                name: "Hapus",
+                                              ),
+                                            ],
+                                          )
+                                        : SizedBox()
                                   ],
                                 ))
                               ],
@@ -484,7 +499,7 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'nama', value: data.namaPejabat),
                 DataGridCell(columnName: 'hp', value: data.noHpPejabat),
                 DataGridCell(columnName: 'jabatan', value: data.namaJabatan),
-                DataGridCell(columnName: 'action', value: data.nik),
+                DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
         .toList();

@@ -6,16 +6,16 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
   final BuildContext context;
 
   BanyakTransaksiNotifier({required this.context}) {
-    for (Map<String, dynamic> i in coa) {
-      listCoa.add(CoaModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in data) {
-      listData.add(TransaksiModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in ao) {
-      listAo.add(AoModel.fromJson(i));
-    }
-    listAmount.add(TextEditingController(text: "0"));
+    // for (Map<String, dynamic> i in coa) {
+    //   listCoa.add(CoaModel.fromJson(i));
+    // }
+    // for (Map<String, dynamic> i in data) {
+    //   listData.add(TransaksiModel.fromJson(i));
+    // }
+    // for (Map<String, dynamic> i in ao) {
+    //   listAo.add(AoModel.fromJson(i));
+    // }
+    // listAmount.add(TextEditingController(text: "0"));
     notifyListeners();
   }
 

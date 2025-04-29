@@ -1,7 +1,10 @@
 import 'package:accounting/utils/button_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:scroll_date_picker/scroll_date_picker.dart';
 
 import '../../models/users_model.dart';
+import '../../utils/colors.dart';
 
 class ClosingEomNotifier extends ChangeNotifier {
   final BuildContext context;
@@ -11,6 +14,85 @@ class ClosingEomNotifier extends ChangeNotifier {
       listData.add(UsersModel.fromJson(i));
     }
     notifyListeners();
+  }
+
+  TextEditingController closingDate = TextEditingController();
+  DateTime now = DateTime.now();
+  showDate() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(builder: (context, setState) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+              child: Container(
+                width: 500,
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Pilih Periode",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Container(
+                      height: 100,
+                      child: ScrollDatePicker(
+                          maximumDate: DateTime(int.parse(
+                                  DateFormat('y').format(DateTime.now())) +
+                              50),
+                          options:
+                              DatePickerOptions(backgroundColor: Colors.white),
+                          viewType: [
+                            DatePickerViewType.month,
+                            DatePickerViewType.year,
+                          ],
+                          selectedDate: now,
+                          onDateTimeChanged: (e) {
+                            setState(() {
+                              now = e;
+                              closingDate.text =
+                                  DateFormat('MMMM y').format(now);
+                              notifyListeners();
+                            });
+                          }),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+
+                        notifyListeners();
+                      },
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                        decoration: BoxDecoration(
+                            color: colorPrimary,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Text(
+                          "Simpan",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          });
+        });
   }
 
   konfirmasi() async {

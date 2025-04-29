@@ -34,6 +34,7 @@ export 'otorisasi_model.dart';
 export 'setup_trans_model.dart';
 export 'coa_model.dart';
 export 'ao_model.dart';
+export 'closing_eom_setup_model.dart';
 export 'inventaris_model.dart';
 export 'inquery_gl_model.dart';
 export 'customer_supplier_model.dart';

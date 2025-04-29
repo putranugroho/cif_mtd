@@ -212,7 +212,7 @@ class SbbKhususNotifier extends ChangeNotifier {
       }
 
       var data = {"data": json};
-      // print(jsonEncode(data));
+      print(jsonEncode(data));
       Setuprepository.setup(token, NetworkURL.addSbbKhusus(), jsonEncode(data))
           .then((value) {
         Navigator.pop(context);

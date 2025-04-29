@@ -297,6 +297,18 @@ class NetworkURL {
     return "$url/bank/deleted";
   }
 
+  static String getClosingEom() {
+    return "$url/closingeomsetup";
+  }
+
+  static String addClosingEom() {
+    return "$url/closingeomsetup/add";
+  }
+
+  static String editClosingEom() {
+    return "$url/closingeomsetup/update";
+  }
+
   static String getProvinsi() {
     return "$url2/provinsi";
   }
