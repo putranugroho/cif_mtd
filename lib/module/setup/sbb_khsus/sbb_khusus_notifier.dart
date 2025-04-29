@@ -109,13 +109,8 @@ class SbbKhususNotifier extends ChangeNotifier {
     });
   }
 
-  var editData = false;
   edit(String kode) {
-    golonganSbbKhususModel =
-        listGolongan.where((e) => e.kodeGolongan == kode).first;
-    dialog = true;
-    editData = true;
-    notifyListeners();
+    
   }
 
   pilihCoa(InqueryGlModel value) {
@@ -166,7 +161,7 @@ class SbbKhususNotifier extends ChangeNotifier {
     print("listGlAdd");
     print(listGlAdd);
     print(listGlAdd.length);
-    if (inqueryGlModel == null && listGlAdd.length == 0) {
+    if (inqueryGlModel == null || listGlAdd.length == 0) {
       informationDialog(context, "Warning", "Harap memilih Sub Buku Besar!!");
     } else {
       DialogCustom().showLoading(context);
