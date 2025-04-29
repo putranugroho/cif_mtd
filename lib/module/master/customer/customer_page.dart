@@ -700,9 +700,10 @@ class CustomerPage extends StatelessWidget {
                                     ),
                                     Row(
                                       children: [
-                                        Checkbox(
+                                        Radio(
                                             activeColor: colorPrimary,
                                             value: true,
+                                            groupValue: value.pkp,
                                             onChanged: (e) {
                                               value.pilihPkp(true);
                                             }),
@@ -713,9 +714,10 @@ class CustomerPage extends StatelessWidget {
                                         SizedBox(
                                           width: 24,
                                         ),
-                                        Checkbox(
+                                        Radio(
                                             activeColor: colorPrimary,
                                             value: false,
+                                            groupValue: value.pkp,
                                             onChanged: (e) {
                                               value.pilihPkp(false);
                                             }),
@@ -728,45 +730,57 @@ class CustomerPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "NPWP",
-                                          style: const TextStyle(fontSize: 12),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        const Text(
-                                          "*",
-                                          style: TextStyle(fontSize: 8),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    TextFormField(
-                                      textInputAction: TextInputAction.done,
-                                      controller: value.npwp,
-                                      maxLines: 1,
-                                      // inputFormatters: [
-                                      //   FilteringTextInputFormatter.digitsOnly
-                                      // ],
-                                      validator: (e) {
-                                        if (e!.isEmpty) {
-                                          return "Wajib diisi";
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                      decoration: InputDecoration(
-                                        hintText: "NPWP",
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 16),
+                                    value.pkp
+                                        ? Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "NPWP",
+                                                    style: const TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                  const Text(
+                                                    "*",
+                                                    style:
+                                                        TextStyle(fontSize: 8),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              TextFormField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: value.npwp,
+                                                maxLines: 1,
+                                                // inputFormatters: [
+                                                //   FilteringTextInputFormatter.digitsOnly
+                                                // ],
+                                                validator: (e) {
+                                                  if (e!.isEmpty) {
+                                                    return "Wajib diisi";
+                                                  } else {
+                                                    return null;
+                                                  }
+                                                },
+                                                decoration: InputDecoration(
+                                                  hintText: "NPWP",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 16),
+                                            ],
+                                          )
+                                        : SizedBox(),
                                     Row(
                                       children: [
                                         Expanded(
@@ -847,13 +861,13 @@ class CustomerPage extends StatelessWidget {
                                               // inputFormatters: [
                                               //   FilteringTextInputFormatter.digitsOnly
                                               // ],
-                                              validator: (e) {
-                                                if (e!.isEmpty) {
-                                                  return "Wajib diisi";
-                                                } else {
-                                                  return null;
-                                                }
-                                              },
+                                              // validator: (e) {
+                                              //   if (e!.isEmpty) {
+                                              //     return "Wajib diisi";
+                                              //   } else {
+                                              //     return null;
+                                              //   }
+                                              // },
                                               decoration: InputDecoration(
                                                 hintText:
                                                     "Email Customer / Supplier",
@@ -1003,13 +1017,13 @@ class CustomerPage extends StatelessWidget {
                                               // inputFormatters: [
                                               //   FilteringTextInputFormatter.digitsOnly
                                               // ],
-                                              validator: (e) {
-                                                if (e!.isEmpty) {
-                                                  return "Wajib diisi";
-                                                } else {
-                                                  return null;
-                                                }
-                                              },
+                                              // validator: (e) {
+                                              //   if (e!.isEmpty) {
+                                              //     return "Wajib diisi";
+                                              //   } else {
+                                              //     return null;
+                                              //   }
+                                              // },
                                               decoration: InputDecoration(
                                                 hintText: "Email 1",
                                                 border: OutlineInputBorder(
@@ -1378,50 +1392,156 @@ class CustomerPage extends StatelessWidget {
                                       height: 1,
                                       color: Colors.grey[300],
                                     ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "AO ${value.golCust}",
-                                          style: const TextStyle(fontSize: 12),
-                                        ),
-                                        const SizedBox(width: 5),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    DropdownSearch<AoModel>(
-                                      popupProps:
-                                          const PopupPropsMultiSelection.menu(
-                                        showSearchBox:
-                                            true, // Aktifkan fitur pencarian
-                                      ),
-                                      selectedItem: value.aoModel,
-                                      items: value.listAoModel,
-                                      itemAsString: (e) => "${e.nama}",
-                                      onChanged: (e) {
-                                        value.pilihAoModelKredit(e!);
-                                      },
-                                      dropdownDecoratorProps:
-                                          DropDownDecoratorProps(
-                                        baseStyle: TextStyle(fontSize: 16),
-                                        textAlignVertical:
-                                            TextAlignVertical.center,
-                                        dropdownSearchDecoration:
-                                            InputDecoration(
-                                          hintText: "Pilih AO ${value.golCust}",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            borderSide: BorderSide(
-                                              width: 1,
-                                              color: Colors.grey,
-                                            ),
+                                    value.golCust != "Customer dan Supplier"
+                                        ? Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "AO ${value.golCust}",
+                                                    style: const TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              DropdownSearch<AoModel>(
+                                                popupProps:
+                                                    const PopupPropsMultiSelection
+                                                        .menu(
+                                                  showSearchBox:
+                                                      true, // Aktifkan fitur pencarian
+                                                ),
+                                                selectedItem: value.aoModel,
+                                                items: value.listAoModel,
+                                                itemAsString: (e) =>
+                                                    "${e.nama}",
+                                                onChanged: (e) {
+                                                  value.pilihAoModelKredit(e!);
+                                                },
+                                                dropdownDecoratorProps:
+                                                    DropDownDecoratorProps(
+                                                  baseStyle:
+                                                      TextStyle(fontSize: 16),
+                                                  textAlignVertical:
+                                                      TextAlignVertical.center,
+                                                  dropdownSearchDecoration:
+                                                      InputDecoration(
+                                                    hintText:
+                                                        "Pilih AO ${value.golCust}",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                        width: 1,
+                                                        color: Colors.grey,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 16),
+                                            ],
+                                          )
+                                        : Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "AO ${value.golCust}",
+                                                    style: const TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              DropdownSearch<AoModel>(
+                                                popupProps:
+                                                    const PopupPropsMultiSelection
+                                                        .menu(
+                                                  showSearchBox:
+                                                      true, // Aktifkan fitur pencarian
+                                                ),
+                                                selectedItem: value.aoModel,
+                                                items: value.listAoModel,
+                                                itemAsString: (e) =>
+                                                    "${e.nama}",
+                                                onChanged: (e) {
+                                                  value.pilihAoModelKredit(e!);
+                                                },
+                                                dropdownDecoratorProps:
+                                                    DropDownDecoratorProps(
+                                                  baseStyle:
+                                                      TextStyle(fontSize: 16),
+                                                  textAlignVertical:
+                                                      TextAlignVertical.center,
+                                                  dropdownSearchDecoration:
+                                                      InputDecoration(
+                                                    hintText:
+                                                        "Pilih AO Customer",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                        width: 1,
+                                                        color: Colors.grey,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 16),
+                                              DropdownSearch<AoModel>(
+                                                popupProps:
+                                                    const PopupPropsMultiSelection
+                                                        .menu(
+                                                  showSearchBox:
+                                                      true, // Aktifkan fitur pencarian
+                                                ),
+                                                selectedItem: value.aoModel,
+                                                items: value.listAoModel,
+                                                itemAsString: (e) =>
+                                                    "${e.nama}",
+                                                onChanged: (e) {
+                                                  value.pilihAoModelKredit(e!);
+                                                },
+                                                dropdownDecoratorProps:
+                                                    DropDownDecoratorProps(
+                                                  baseStyle:
+                                                      TextStyle(fontSize: 16),
+                                                  textAlignVertical:
+                                                      TextAlignVertical.center,
+                                                  dropdownSearchDecoration:
+                                                      InputDecoration(
+                                                    hintText:
+                                                        "Pilih AO Supplier",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                        width: 1,
+                                                        color: Colors.grey,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 16),
+                                            ],
                                           ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 16),
                                     ButtonPrimary(
                                       onTap: () {
                                         value.cek();

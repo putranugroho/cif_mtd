@@ -167,7 +167,7 @@ class UsersPage extends StatelessWidget {
                                     color: colorPrimary,
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(6),
-                                    child: Text('Beda Kantor',
+                                    child: Text('Akses Beda Kantor',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -394,7 +394,7 @@ class UsersPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      "Tanggal Batas Akses",
+                                      "Tanggal Masa Berlaku",
                                       style: const TextStyle(fontSize: 12),
                                     ),
                                     const SizedBox(width: 5),
@@ -422,7 +422,7 @@ class UsersPage extends StatelessWidget {
                                       }
                                     },
                                     decoration: InputDecoration(
-                                      hintText: "Tanggal Batas Akses",
+                                      hintText: "Tanggal Masa Berlaku",
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(6),
                                       ),
@@ -525,34 +525,34 @@ class UsersPage extends StatelessWidget {
                                 const SizedBox(
                                   height: 16,
                                 ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Terminal ID",
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
-                                    const SizedBox(width: 5),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                TextFormField(
-                                  textInputAction: TextInputAction.done,
-                                  maxLines: 1,
-                                  decoration: InputDecoration(
-                                    hintText: "Input Terminal ID",
-                                    suffixIcon: InkWell(
-                                        onTap: () {},
-                                        child: Icon(Icons.search)),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(6),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 16,
-                                ),
+                                // Row(
+                                //   children: [
+                                //     Text(
+                                //       "Terminal ID",
+                                //       style: const TextStyle(fontSize: 12),
+                                //     ),
+                                //     const SizedBox(width: 5),
+                                //   ],
+                                // ),
+                                // const SizedBox(
+                                //   height: 8,
+                                // ),
+                                // TextFormField(
+                                //   textInputAction: TextInputAction.done,
+                                //   maxLines: 1,
+                                //   decoration: InputDecoration(
+                                //     hintText: "Input Terminal ID",
+                                //     suffixIcon: InkWell(
+                                //         onTap: () {},
+                                //         child: Icon(Icons.search)),
+                                //     border: OutlineInputBorder(
+                                //       borderRadius: BorderRadius.circular(6),
+                                //     ),
+                                //   ),
+                                // ),
+                                // const SizedBox(
+                                //   height: 16,
+                                // ),
                                 Row(
                                   children: [
                                     Text(
@@ -706,7 +706,7 @@ class UsersPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      "Beda Kantor",
+                                      "Akses Beda Kantor",
                                       style: const TextStyle(fontSize: 12),
                                     ),
                                     const SizedBox(width: 5),
@@ -730,7 +730,7 @@ class UsersPage extends StatelessWidget {
                                     SizedBox(
                                       width: 8,
                                     ),
-                                    Text("Sesama Kantor"),
+                                    Text("Tidak"),
                                     SizedBox(
                                       width: 24,
                                     ),
@@ -743,7 +743,7 @@ class UsersPage extends StatelessWidget {
                                     SizedBox(
                                       width: 8,
                                     ),
-                                    Text("Beda Kantor"),
+                                    Text("Ya"),
                                   ],
                                 ),
                                 const SizedBox(

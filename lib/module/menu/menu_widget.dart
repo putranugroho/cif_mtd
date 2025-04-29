@@ -1322,7 +1322,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   width: 16,
                 ),
                 Text(
-                  "Bank",
+                  "Saldo Bank",
                   style: TextStyle(
                     fontSize: 16,
                     color: value.page == 20 ? Colors.white : Colors.white70,

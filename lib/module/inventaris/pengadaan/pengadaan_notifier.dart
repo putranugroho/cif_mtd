@@ -92,11 +92,56 @@ class PengadaanNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<String> listPenempatan = ["Kantor", "Karyawan"];
+  String? penempatanModel = "Kantor";
+  pilihPenempatan(String value) {
+    penempatanModel = value;
+    notifyListeners();
+  }
+
+  List<String> listSatuan = ["Pcs", "Unit", "Set"];
+  String? satuanModel = "Pcs";
+  pilihSatuan(String value) {
+    satuanModel = value;
+    notifyListeners();
+  }
+
   List<GolonganAsetModel> listGolongan = [];
   GolonganAsetModel? golonganAsetModel;
   pilihGolongan(GolonganAsetModel value) {
     golonganAsetModel = value;
     notifyListeners();
+  }
+
+  DateTime? tglBuka = DateTime.now();
+
+  Future pilihTanggalBuka() async {
+    var pickedendDate = (await showDatePicker(
+      context: context,
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) + 1,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      firstDate: DateTime(1950),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) + 10,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+    ));
+    if (pickedendDate != null) {
+      tglTransaksi = pickedendDate;
+      tglbeli.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
+      notifyListeners();
+    }
   }
 
   DateTime? tglTransaksi;
