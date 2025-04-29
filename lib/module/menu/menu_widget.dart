@@ -552,6 +552,33 @@ class MenuSetupWidget extends StatelessWidget {
           ),
         ),
         InkWell(
+          onTap: () => value.gantimenu(60),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.eom,
+                  height: 30,
+                  color: value.page == 60 ? Colors.white : Colors.white70,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Level User",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 60 ? Colors.white : Colors.white70,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
           onTap: () => value.gantimenu(39),
           child: Container(
             width: MediaQuery.of(context).size.width,

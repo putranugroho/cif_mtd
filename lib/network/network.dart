@@ -309,6 +309,26 @@ class NetworkURL {
     return "$url/closingeomsetup/update";
   }
 
+  static String getModul() {
+    return "$url/modul";
+  }
+
+  static String getLevelUsers() {
+    return "$url/leveluser";
+  }
+
+  static String addLevelUsers() {
+    return "$url/leveluser/add";
+  }
+
+  static String editLevelUsers() {
+    return "$url/leveluser/update";
+  }
+
+  static String deletdLevelUsers() {
+    return "$url/leveluser/deleted";
+  }
+
   static String getProvinsi() {
     return "$url2/provinsi";
   }

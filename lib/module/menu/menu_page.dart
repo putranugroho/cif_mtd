@@ -11,6 +11,7 @@ import 'package:accounting/module/inventaris/revaluasi/revaluasi_page.dart';
 import 'package:accounting/module/jurnal/jurnal_page.dart';
 import 'package:accounting/module/laba_rugi/laba_rugi_berjalan_page.dart';
 import 'package:accounting/module/laba_rugi/laba_rugi_periode_page.dart';
+import 'package:accounting/module/level_user/level_user_page.dart';
 import 'package:accounting/module/master/ao/ao_page.dart';
 import 'package:accounting/module/master/bank/bank_page.dart';
 import 'package:accounting/module/master/customer/customer_page.dart';
@@ -383,7 +384,9 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                                               ? TransaksiHutangPage()
                                                                                                                                                                                                                                               : value.page == 59
                                                                                                                                                                                                                                                   ? BayarDimukaPage()
-                                                                                                                                                                                                                                                  : Container())
+                                                                                                                                                                                                                                                  : value.page == 60
+                                                                                                                                                                                                                                                      ? LevelUserPage()
+                                                                                                                                                                                                                                                      : Container())
             ],
           ),
         )),
