@@ -34,10 +34,92 @@ class LevelUserNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  Set<String> selectedModuls = {}; // nama modul
+  Set<String> selectedMenus = {}; // nama menu
+  Set<String> selectedSubmenus = {}; // nama submenu
+
+  void toggleModul(ModulModel modul, bool selected) {
+    if (selected) {
+      selectedModuls.add(modul.modul);
+      for (var menu in modul.menu) {
+        selectedMenus.add(menu.menu);
+        for (var submenu in menu.submenu) {
+          selectedSubmenus.add(submenu.submenu);
+        }
+      }
+    } else {
+      selectedModuls.remove(modul.modul);
+      for (var menu in modul.menu) {
+        selectedMenus.remove(menu.menu);
+        for (var submenu in menu.submenu) {
+          selectedSubmenus.remove(submenu.submenu);
+        }
+      }
+    }
+    notifyListeners();
+  }
+
+  void toggleMenu(
+      ModulModel modul, ItemCategoryModulModel menu, bool selected) {
+    if (selected) {
+      selectedMenus.add(menu.menu);
+      for (var submenu in menu.submenu) {
+        selectedSubmenus.add(submenu.submenu);
+      }
+    } else {
+      selectedMenus.remove(menu.menu);
+      for (var submenu in menu.submenu) {
+        selectedSubmenus.remove(submenu.submenu);
+      }
+    }
+
+    // Cek apakah semua menu di modul terpilih
+    bool allMenusSelected =
+        modul.menu.every((m) => selectedMenus.contains(m.menu));
+    if (allMenusSelected) {
+      selectedModuls.add(modul.modul);
+    } else {
+      selectedModuls.remove(modul.modul);
+    }
+
+    notifyListeners();
+  }
+
+  void toggleSubmenu(ModulModel modul, ItemCategoryModulModel menu,
+      ItemModulModel submenu, bool selected) {
+    if (selected) {
+      selectedSubmenus.add(submenu.submenu);
+    } else {
+      selectedSubmenus.remove(submenu.submenu);
+    }
+
+    // Cek apakah semua submenu di menu terpilih
+    bool allSubmenusSelected =
+        menu.submenu.every((s) => selectedSubmenus.contains(s.submenu));
+    if (allSubmenusSelected) {
+      selectedMenus.add(menu.menu);
+    } else {
+      selectedMenus.remove(menu.menu);
+    }
+
+    // Cek apakah semua menu di modul terpilih
+    bool allMenusSelected =
+        modul.menu.every((m) => selectedMenus.contains(m.menu));
+    if (allMenusSelected) {
+      selectedModuls.add(modul.modul);
+    } else {
+      selectedModuls.remove(modul.modul);
+    }
+
+    notifyListeners();
+  }
+
   TextEditingController levelUsers = TextEditingController();
   var isLoading = true;
   List<ModulModel> listModul = [];
   List<ModulModel> listModulAdd = [];
+  List<ItemCategoryModulModel> listMenuAdd = [];
+  List<ItemModulModel> listSubmenu = [];
   pilihModul(ModulModel value) async {
     if (listModulAdd.isEmpty) {
       listModulAdd.add(value);

@@ -233,115 +233,207 @@ class LevelUserPage extends StatelessWidget {
                               SizedBox(
                                 height: 32,
                               ),
-                              Row(
+                              Expanded(
+                                  child: ListView(
                                 children: [
-                                  Text(
-                                    "Level User",
-                                    style: const TextStyle(fontSize: 12),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Level User",
+                                        style: const TextStyle(fontSize: 12),
+                                      ),
+                                      const SizedBox(width: 5),
+                                      const Text(
+                                        "*",
+                                        style: TextStyle(fontSize: 8),
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(width: 5),
-                                  const Text(
-                                    "*",
-                                    style: TextStyle(fontSize: 8),
+                                  const SizedBox(
+                                    height: 8,
                                   ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              TextFormField(
-                                textInputAction: TextInputAction.done,
-                                controller: value.levelUsers,
-                                validator: (e) {
-                                  if (e!.isEmpty) {
-                                    return "Wajib diisi";
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                decoration: InputDecoration(
-                                  hintText: "Level Users",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6),
+                                  TextFormField(
+                                    textInputAction: TextInputAction.done,
+                                    controller: value.levelUsers,
+                                    validator: (e) {
+                                      if (e!.isEmpty) {
+                                        return "Wajib diisi";
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                    decoration: InputDecoration(
+                                      hintText: "Level Users",
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              Row(
-                                children: [
-                                  Text(
-                                    "Pilih Modul",
-                                    style: const TextStyle(fontSize: 12),
+                                  const SizedBox(height: 16),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Pilih Modul",
+                                        style: const TextStyle(fontSize: 12),
+                                      ),
+                                      const SizedBox(width: 5),
+                                      const Text(
+                                        "*",
+                                        style: TextStyle(fontSize: 8),
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(width: 5),
-                                  const Text(
-                                    "*",
-                                    style: TextStyle(fontSize: 8),
+                                  const SizedBox(
+                                    height: 8,
                                   ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              ListView.builder(
-                                  itemCount: value.listModul.length,
-                                  shrinkWrap: true,
-                                  physics: ClampingScrollPhysics(),
-                                  itemBuilder: (context, i) {
-                                    final data = value.listModul[i];
-                                    return Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Row(
+                                  ListView.builder(
+                                      itemCount: value.listModul.length,
+                                      shrinkWrap: true,
+                                      physics: ClampingScrollPhysics(),
+                                      itemBuilder: (context, i) {
+                                        final data = value.listModul[i];
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
                                           children: [
-                                            Checkbox(
-                                                activeColor: colorPrimary,
-                                                value: value
-                                                        .listModulAdd.isNotEmpty
-                                                    ? value.listModulAdd
-                                                            .where((e) =>
-                                                                e == data)
-                                                            .isNotEmpty
-                                                        ? true
-                                                        : false
-                                                    : false,
-                                                onChanged: (e) {
-                                                  value.pilihModul(data);
+                                            Row(
+                                              children: [
+                                                Checkbox(
+                                                    activeColor: colorPrimary,
+                                                    value: value.selectedModuls
+                                                        .contains(data.modul),
+                                                    onChanged: (checked) =>
+                                                        value.toggleModul(
+                                                            data, checked!)),
+                                                SizedBox(
+                                                  width: 16,
+                                                ),
+                                                Expanded(
+                                                    child:
+                                                        Text("${data.modul}"))
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 4,
+                                            ),
+                                            ListView.builder(
+                                                itemCount: data.menu.length,
+                                                shrinkWrap: true,
+                                                physics:
+                                                    ClampingScrollPhysics(),
+                                                itemBuilder: (context, b) {
+                                                  final a = data.menu[b];
+                                                  return Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .stretch,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 16,
+                                                          ),
+                                                          Checkbox(
+                                                              value: value
+                                                                  .selectedMenus
+                                                                  .contains(
+                                                                      a.menu),
+                                                              onChanged: (checked) =>
+                                                                  value.toggleMenu(
+                                                                      data,
+                                                                      a,
+                                                                      checked!)),
+                                                          SizedBox(
+                                                            width: 16,
+                                                          ),
+                                                          Expanded(
+                                                              child: Text(
+                                                                  "${a.menu}"))
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 8,
+                                                      ),
+                                                      ListView.builder(
+                                                          itemCount:
+                                                              a.submenu.length,
+                                                          shrinkWrap: true,
+                                                          physics:
+                                                              ClampingScrollPhysics(),
+                                                          itemBuilder:
+                                                              (context, d) {
+                                                            final c =
+                                                                a.submenu[d];
+                                                            return Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .stretch,
+                                                              children: [
+                                                                Row(
+                                                                  children: [
+                                                                    SizedBox(
+                                                                      width: 32,
+                                                                    ),
+                                                                    Checkbox(
+                                                                        value: value
+                                                                            .selectedSubmenus
+                                                                            .contains(c
+                                                                                .submenu),
+                                                                        onChanged: (checked) => value.toggleSubmenu(
+                                                                            data,
+                                                                            a,
+                                                                            c,
+                                                                            checked!)),
+                                                                    SizedBox(
+                                                                      width: 16,
+                                                                    ),
+                                                                    Expanded(
+                                                                        child: Text(
+                                                                            "${c.keterangan}"))
+                                                                  ],
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 8,
+                                                                ),
+                                                              ],
+                                                            );
+                                                          }),
+                                                      SizedBox(
+                                                        height: 8,
+                                                      )
+                                                    ],
+                                                  );
                                                 }),
                                             SizedBox(
-                                              width: 16,
+                                              height: 16,
                                             ),
                                           ],
-                                        ),
-                                        SizedBox(
-                                          height: 16,
+                                        );
+                                      }),
+                                  const SizedBox(height: 16),
+                                  ButtonPrimary(
+                                    onTap: () {
+                                      value.cek();
+                                    },
+                                    name: "Simpan",
+                                  ),
+                                  value.editData
+                                      ? Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            const SizedBox(height: 16),
+                                            ButtonPrimary(
+                                              onTap: () {
+                                                // value.confirm();
+                                              },
+                                              name: "Hapus",
+                                            ),
+                                          ],
                                         )
-                                      ],
-                                    );
-                                  }),
-                              const SizedBox(height: 16),
-                              ButtonPrimary(
-                                onTap: () {
-                                  value.cek();
-                                },
-                                name: "Simpan",
-                              ),
-                              value.editData
-                                  ? Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        const SizedBox(height: 16),
-                                        ButtonPrimary(
-                                          onTap: () {
-                                            // value.confirm();
-                                          },
-                                          name: "Hapus",
-                                        ),
-                                      ],
-                                    )
-                                  : SizedBox()
+                                      : SizedBox()
+                                ],
+                              ))
                             ],
                           ),
                         ),
