@@ -123,11 +123,7 @@ class JabatanNotifier extends ChangeNotifier {
   remove() {
     DialogCustom().showLoading(context);
     var data = {
-      "kode_pt": "001",
-      "kode_kantor": "1001",
-      "lvl_jabatan": levelModel!.lvlJabatan,
-      "kode_jabatan": kode.text.trim(),
-      "nama_jabatan": nama.text.trim(),
+      "id": jabatanModel!.id,
     };
     Setuprepository.setup(token, NetworkURL.deletedJabatan(), jsonEncode(data))
         .then((value) {
@@ -164,6 +160,7 @@ class JabatanNotifier extends ChangeNotifier {
       if (editData) {
         DialogCustom().showLoading(context);
         var data = {
+          "id": jabatanModel!.id,
           "kode_pt": "001",
           "kode_kantor": "1001",
           "lvl_jabatan": levelModel!.lvlJabatan,
