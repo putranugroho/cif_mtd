@@ -60,7 +60,10 @@ class MenuSetupWidget extends StatelessWidget {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                decoration: BoxDecoration(),
+                decoration: BoxDecoration(
+                  color: value.page == 1 ? Colors.white : Colors.transparent,
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: Row(
                   children: [
                     SizedBox(
@@ -69,7 +72,7 @@ class MenuSetupWidget extends StatelessWidget {
                     Image.asset(
                       ImageAssets.building,
                       height: 30,
-                      color: value.page == 1 ? Colors.white : Colors.white70,
+                      color: value.page == 1 ? Colors.black : Colors.white70,
                     ),
                     SizedBox(
                       width: 16,
@@ -78,7 +81,7 @@ class MenuSetupWidget extends StatelessWidget {
                       "Data Kantor",
                       style: TextStyle(
                         fontSize: 16,
-                        color: value.page == 1 ? Colors.white : Colors.white70,
+                        color: value.page == 1 ? Colors.black : Colors.white70,
                       ),
                     )
                   ],
@@ -90,7 +93,10 @@ class MenuSetupWidget extends StatelessWidget {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                decoration: BoxDecoration(),
+                decoration: BoxDecoration(
+                  color: value.page == 31 ? Colors.white : Colors.transparent,
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: Row(
                   children: [
                     SizedBox(
@@ -99,7 +105,7 @@ class MenuSetupWidget extends StatelessWidget {
                     Image.asset(
                       ImageAssets.user,
                       height: 30,
-                      color: value.page == 31 ? Colors.white : Colors.white70,
+                      color: value.page == 31 ? Colors.black : Colors.white70,
                     ),
                     SizedBox(
                       width: 16,
@@ -108,7 +114,7 @@ class MenuSetupWidget extends StatelessWidget {
                       "Data Level",
                       style: TextStyle(
                         fontSize: 16,
-                        color: value.page == 31 ? Colors.white : Colors.white70,
+                        color: value.page == 31 ? Colors.black : Colors.white70,
                       ),
                     )
                   ],
@@ -120,7 +126,10 @@ class MenuSetupWidget extends StatelessWidget {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                decoration: BoxDecoration(),
+                decoration: BoxDecoration(
+                  color: value.page == 29 ? Colors.white : Colors.transparent,
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: Row(
                   children: [
                     SizedBox(
@@ -129,7 +138,7 @@ class MenuSetupWidget extends StatelessWidget {
                     Image.asset(
                       ImageAssets.group,
                       height: 30,
-                      color: value.page == 29 ? Colors.white : Colors.white70,
+                      color: value.page == 29 ? Colors.black : Colors.white70,
                     ),
                     SizedBox(
                       width: 16,
@@ -138,7 +147,7 @@ class MenuSetupWidget extends StatelessWidget {
                       "Data Jabatan",
                       style: TextStyle(
                         fontSize: 16,
-                        color: value.page == 29 ? Colors.white : Colors.white70,
+                        color: value.page == 29 ? Colors.black : Colors.white70,
                       ),
                     )
                   ],
@@ -150,7 +159,10 @@ class MenuSetupWidget extends StatelessWidget {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                decoration: BoxDecoration(),
+                decoration: BoxDecoration(
+                  color: value.page == 30 ? Colors.white : Colors.transparent,
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: Row(
                   children: [
                     SizedBox(
@@ -159,7 +171,7 @@ class MenuSetupWidget extends StatelessWidget {
                     Image.asset(
                       ImageAssets.user,
                       height: 30,
-                      color: value.page == 30 ? Colors.white : Colors.white70,
+                      color: value.page == 30 ? Colors.black : Colors.white70,
                     ),
                     SizedBox(
                       width: 16,
@@ -168,7 +180,7 @@ class MenuSetupWidget extends StatelessWidget {
                       "Data Pejabat",
                       style: TextStyle(
                         fontSize: 16,
-                        color: value.page == 30 ? Colors.white : Colors.white70,
+                        color: value.page == 30 ? Colors.black : Colors.white70,
                       ),
                     )
                   ],
@@ -182,13 +194,16 @@ class MenuSetupWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 36 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.calendar,
                   height: 30,
-                  color: value.page == 36 ? Colors.white : Colors.white70,
+                  color: value.page == 36 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -197,7 +212,7 @@ class MenuSetupWidget extends StatelessWidget {
                   "Hari Kerja",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 36 ? Colors.white : Colors.white70,
+                    color: value.page == 36 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -209,13 +224,16 @@ class MenuSetupWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 2 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.accounting,
                   height: 30,
-                  color: value.page == 2 ? Colors.white : Colors.white70,
+                  color: value.page == 2 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -224,7 +242,7 @@ class MenuSetupWidget extends StatelessWidget {
                   "Chart of Account",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 2 ? Colors.white : Colors.white70,
+                    color: value.page == 2 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -260,7 +278,10 @@ class MenuSetupWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 47 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -269,7 +290,7 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.list,
                         height: 30,
-                        color: value.page == 47 ? Colors.white : Colors.white70,
+                        color: value.page == 47 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -279,7 +300,7 @@ class MenuSetupWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 47 ? Colors.white : Colors.white70,
+                              value.page == 47 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -291,7 +312,10 @@ class MenuSetupWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 37 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -300,7 +324,7 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.list,
                         height: 30,
-                        color: value.page == 37 ? Colors.white : Colors.white70,
+                        color: value.page == 37 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -310,7 +334,7 @@ class MenuSetupWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 37 ? Colors.white : Colors.white70,
+                              value.page == 37 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -348,7 +372,10 @@ class MenuSetupWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 3 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -357,7 +384,7 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.trend,
                         height: 30,
-                        color: value.page == 3 ? Colors.white : Colors.white70,
+                        color: value.page == 3 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -367,7 +394,7 @@ class MenuSetupWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 3 ? Colors.white : Colors.white70,
+                              value.page == 3 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -379,7 +406,10 @@ class MenuSetupWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 33 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -388,7 +418,7 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.trend,
                         height: 30,
-                        color: value.page == 33 ? Colors.white : Colors.white70,
+                        color: value.page == 33 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -398,7 +428,7 @@ class MenuSetupWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 33 ? Colors.white : Colors.white70,
+                              value.page == 33 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -410,7 +440,10 @@ class MenuSetupWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 34 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -419,7 +452,7 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.trend,
                         height: 30,
-                        color: value.page == 34 ? Colors.white : Colors.white70,
+                        color: value.page == 34 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -429,7 +462,7 @@ class MenuSetupWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 34 ? Colors.white : Colors.white70,
+                              value.page == 34 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -466,7 +499,10 @@ class MenuSetupWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 4 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -475,7 +511,7 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.bill,
                         height: 30,
-                        color: value.page == 4 ? Colors.white : Colors.white70,
+                        color: value.page == 4 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -485,7 +521,7 @@ class MenuSetupWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 4 ? Colors.white : Colors.white70,
+                              value.page == 4 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -497,7 +533,10 @@ class MenuSetupWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 32 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -506,7 +545,7 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.bill,
                         height: 30,
-                        color: value.page == 32 ? Colors.white : Colors.white70,
+                        color: value.page == 32 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -516,7 +555,7 @@ class MenuSetupWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 32 ? Colors.white : Colors.white70,
+                              value.page == 32 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -529,13 +568,16 @@ class MenuSetupWidget extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 38 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.eom,
                   height: 30,
-                  color: value.page == 38 ? Colors.white : Colors.white70,
+                  color: value.page == 38 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -544,7 +586,7 @@ class MenuSetupWidget extends StatelessWidget {
                   "Back Date",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 38 ? Colors.white : Colors.white70,
+                    color: value.page == 38 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -556,13 +598,16 @@ class MenuSetupWidget extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 60 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.eom,
                   height: 30,
-                  color: value.page == 60 ? Colors.white : Colors.white70,
+                  color: value.page == 60 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -571,7 +616,7 @@ class MenuSetupWidget extends StatelessWidget {
                   "Level User",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 60 ? Colors.white : Colors.white70,
+                    color: value.page == 60 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -583,13 +628,16 @@ class MenuSetupWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 39 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.click,
                   height: 30,
-                  color: value.page == 39 ? Colors.white : Colors.white70,
+                  color: value.page == 39 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -598,7 +646,7 @@ class MenuSetupWidget extends StatelessWidget {
                   "Otorisasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 39 ? Colors.white : Colors.white70,
+                    color: value.page == 39 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -610,13 +658,16 @@ class MenuSetupWidget extends StatelessWidget {
         //   child: Container(
         //     width: MediaQuery.of(context).size.width,
         //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        //     decoration: BoxDecoration(),
+        //     decoration: BoxDecoration(
+        //   color: value.page ==  ? Colors.white : Colors.transparent,
+        //   borderRadius: BorderRadius.circular(8),
+        // ),
         //     child: Row(
         //       children: [
         //         Image.asset(
         //           ImageAssets.report,
         //           height: 30,
-        //           color: value.page == 5 ? Colors.white : Colors.white70,
+        //           color: value.page == 5 ? Colors.black : Colors.white70,
         //         ),
         //         SizedBox(
         //           width: 16,
@@ -625,7 +676,7 @@ class MenuSetupWidget extends StatelessWidget {
         //           "Laporan",
         //           style: TextStyle(
         //             fontSize: 16,
-        //             color: value.page == 5 ? Colors.white : Colors.white70,
+        //             color: value.page == 5 ? Colors.black : Colors.white70,
         //           ),
         //         )
         //       ],
@@ -670,13 +721,16 @@ class MenuMasterWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 6 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.group,
                   height: 30,
-                  color: value.page == 6 ? Colors.white : Colors.white70,
+                  color: value.page == 6 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -685,7 +739,7 @@ class MenuMasterWidget extends StatelessWidget {
                   "Users",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 6 ? Colors.white : Colors.white70,
+                    color: value.page == 6 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -697,13 +751,16 @@ class MenuMasterWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 7 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.bank,
                   height: 30,
-                  color: value.page == 7 ? Colors.white : Colors.white70,
+                  color: value.page == 7 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -712,7 +769,7 @@ class MenuMasterWidget extends StatelessWidget {
                   "Bank",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 7 ? Colors.white : Colors.white70,
+                    color: value.page == 7 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -725,13 +782,16 @@ class MenuMasterWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 35 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.group,
                   height: 30,
-                  color: value.page == 35 ? Colors.white : Colors.white70,
+                  color: value.page == 35 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -740,7 +800,7 @@ class MenuMasterWidget extends StatelessWidget {
                   "AO / Marketing",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 35 ? Colors.white : Colors.white70,
+                    color: value.page == 35 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -752,13 +812,16 @@ class MenuMasterWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 9 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.click,
                   height: 30,
-                  color: value.page == 9 ? Colors.white : Colors.white70,
+                  color: value.page == 9 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -767,7 +830,7 @@ class MenuMasterWidget extends StatelessWidget {
                   "Otorisasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 9 ? Colors.white : Colors.white70,
+                    color: value.page == 9 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -779,13 +842,16 @@ class MenuMasterWidget extends StatelessWidget {
         //   child: Container(
         //     width: MediaQuery.of(context).size.width,
         //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        //     decoration: BoxDecoration(),
+        //     decoration: BoxDecoration(
+        //   color: value.page ==  ? Colors.white : Colors.transparent,
+        //   borderRadius: BorderRadius.circular(8),
+        // ),
         //     child: Row(
         //       children: [
         //         Image.asset(
         //           ImageAssets.report,
         //           height: 30,
-        //           color: value.page == 10 ? Colors.white : Colors.white70,
+        //           color: value.page == 10 ? Colors.black : Colors.white70,
         //         ),
         //         SizedBox(
         //           width: 16,
@@ -794,7 +860,7 @@ class MenuMasterWidget extends StatelessWidget {
         //           "Laporan",
         //           style: TextStyle(
         //             fontSize: 16,
-        //             color: value.page == 10 ? Colors.white : Colors.white70,
+        //             color: value.page == 10 ? Colors.black : Colors.white70,
         //           ),
         //         )
         //       ],
@@ -839,13 +905,16 @@ class MenuInventarisWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 11 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.cart,
                   height: 30,
-                  color: value.page == 11 ? Colors.white : Colors.white70,
+                  color: value.page == 11 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -854,7 +923,7 @@ class MenuInventarisWidget extends StatelessWidget {
                   "Pengadaan",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 11 ? Colors.white : Colors.white70,
+                    color: value.page == 11 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -866,13 +935,16 @@ class MenuInventarisWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 12 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.placement,
                   height: 30,
-                  color: value.page == 12 ? Colors.white : Colors.white70,
+                  color: value.page == 12 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -881,7 +953,7 @@ class MenuInventarisWidget extends StatelessWidget {
                   "Penempatan",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 12 ? Colors.white : Colors.white70,
+                    color: value.page == 12 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -893,13 +965,16 @@ class MenuInventarisWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 13 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.audit,
                   height: 30,
-                  color: value.page == 13 ? Colors.white : Colors.white70,
+                  color: value.page == 13 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -908,7 +983,7 @@ class MenuInventarisWidget extends StatelessWidget {
                   "Revaluasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 13 ? Colors.white : Colors.white70,
+                    color: value.page == 13 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -920,13 +995,16 @@ class MenuInventarisWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 14 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.carts,
                   height: 30,
-                  color: value.page == 14 ? Colors.white : Colors.white70,
+                  color: value.page == 14 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -935,7 +1013,7 @@ class MenuInventarisWidget extends StatelessWidget {
                   "Jual/Hapus",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 14 ? Colors.white : Colors.white70,
+                    color: value.page == 14 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -947,13 +1025,16 @@ class MenuInventarisWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 15 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.click,
                   height: 30,
-                  color: value.page == 15 ? Colors.white : Colors.white70,
+                  color: value.page == 15 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -962,7 +1043,7 @@ class MenuInventarisWidget extends StatelessWidget {
                   "Otorisasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 15 ? Colors.white : Colors.white70,
+                    color: value.page == 15 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -974,13 +1055,16 @@ class MenuInventarisWidget extends StatelessWidget {
         //   child: Container(
         //     width: MediaQuery.of(context).size.width,
         //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        //     decoration: BoxDecoration(),
+        //     decoration: BoxDecoration(
+        //   color: value.page ==  ? Colors.white : Colors.transparent,
+        //   borderRadius: BorderRadius.circular(8),
+        // ),
         //     child: Row(
         //       children: [
         //         Image.asset(
         //           ImageAssets.report,
         //           height: 30,
-        //           color: value.page == 16 ? Colors.white : Colors.white70,
+        //           color: value.page == 16 ? Colors.black : Colors.white70,
         //         ),
         //         SizedBox(
         //           width: 16,
@@ -989,7 +1073,7 @@ class MenuInventarisWidget extends StatelessWidget {
         //           "Laporan",
         //           style: TextStyle(
         //             fontSize: 16,
-        //             color: value.page == 16 ? Colors.white : Colors.white70,
+        //             color: value.page == 16 ? Colors.black : Colors.white70,
         //           ),
         //         )
         //       ],
@@ -1034,13 +1118,16 @@ class MenuHutangPiutangWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 8 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.user,
                   height: 30,
-                  color: value.page == 8 ? Colors.white : Colors.white70,
+                  color: value.page == 8 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -1049,7 +1136,7 @@ class MenuHutangPiutangWidget extends StatelessWidget {
                   "Customer/Supplier",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 8 ? Colors.white : Colors.white70,
+                    color: value.page == 8 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -1061,13 +1148,16 @@ class MenuHutangPiutangWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 21 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.debt,
                   height: 30,
-                  color: value.page == 21 ? Colors.white : Colors.white70,
+                  color: value.page == 21 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -1076,7 +1166,7 @@ class MenuHutangPiutangWidget extends StatelessWidget {
                   "Hutang",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 21 ? Colors.white : Colors.white70,
+                    color: value.page == 21 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -1088,13 +1178,16 @@ class MenuHutangPiutangWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 22 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.rupiahs,
                   height: 30,
-                  color: value.page == 22 ? Colors.white : Colors.white70,
+                  color: value.page == 22 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -1103,7 +1196,7 @@ class MenuHutangPiutangWidget extends StatelessWidget {
                   "Piutang",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 22 ? Colors.white : Colors.white70,
+                    color: value.page == 22 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -1148,13 +1241,16 @@ class MenuTransaksiWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 17 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.report,
                   height: 30,
-                  color: value.page == 17 ? Colors.white : Colors.white70,
+                  color: value.page == 17 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -1163,7 +1259,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Satu Transaksi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 17 ? Colors.white : Colors.white70,
+                    color: value.page == 17 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -1175,13 +1271,16 @@ class MenuTransaksiWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 18 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.report,
                   height: 30,
-                  color: value.page == 18 ? Colors.white : Colors.white70,
+                  color: value.page == 18 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -1190,7 +1289,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Banyak Transaksi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 18 ? Colors.white : Colors.white70,
+                    color: value.page == 18 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -1202,13 +1301,16 @@ class MenuTransaksiWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 23 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.calendar,
                   height: 30,
-                  color: value.page == 23 ? Colors.white : Colors.white70,
+                  color: value.page == 23 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -1217,7 +1319,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Back date",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 23 ? Colors.white : Colors.white70,
+                    color: value.page == 23 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -1229,13 +1331,16 @@ class MenuTransaksiWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 57 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.report,
                   height: 30,
-                  color: value.page == 57 ? Colors.white : Colors.white70,
+                  color: value.page == 57 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -1244,7 +1349,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Perantara Aktiva/Pasiva",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 57 ? Colors.white : Colors.white70,
+                    color: value.page == 57 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -1256,13 +1361,16 @@ class MenuTransaksiWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 19 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.rupiah,
                   height: 30,
-                  color: value.page == 19 ? Colors.white : Colors.white70,
+                  color: value.page == 19 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -1271,7 +1379,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Kas Kecil",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 19 ? Colors.white : Colors.white70,
+                    color: value.page == 19 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -1283,13 +1391,16 @@ class MenuTransaksiWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 59 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.rupiahs,
                   height: 30,
-                  color: value.page == 59 ? Colors.white : Colors.white70,
+                  color: value.page == 59 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -1298,7 +1409,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Bayar/Pendapatan dimuka",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 59 ? Colors.white : Colors.white70,
+                    color: value.page == 59 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -1310,13 +1421,16 @@ class MenuTransaksiWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 20 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.bank,
                   height: 30,
-                  color: value.page == 20 ? Colors.white : Colors.white70,
+                  color: value.page == 20 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -1325,7 +1439,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Saldo Bank",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 20 ? Colors.white : Colors.white70,
+                    color: value.page == 20 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -1337,13 +1451,16 @@ class MenuTransaksiWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 58 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.debt,
                   height: 30,
-                  color: value.page == 58 ? Colors.white : Colors.white70,
+                  color: value.page == 58 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -1352,7 +1469,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Hutang/Piutang",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 58 ? Colors.white : Colors.white70,
+                    color: value.page == 58 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -1394,7 +1511,10 @@ class MenuTransaksiWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 50 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -1403,7 +1523,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 50 ? Colors.white : Colors.white70,
+                        color: value.page == 50 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -1413,7 +1533,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 50 ? Colors.white : Colors.white70,
+                              value.page == 50 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -1425,7 +1545,10 @@ class MenuTransaksiWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 51 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -1434,7 +1557,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 51 ? Colors.white : Colors.white70,
+                        color: value.page == 51 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -1444,7 +1567,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 51 ? Colors.white : Colors.white70,
+                              value.page == 51 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -1456,7 +1579,10 @@ class MenuTransaksiWidget extends StatelessWidget {
               //   child: Container(
               //     width: MediaQuery.of(context).size.width,
               //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              //     decoration: BoxDecoration(),
+              //     decoration: BoxDecoration(
+              //   color: value.page ==  ? Colors.white : Colors.transparent,
+              //   borderRadius: BorderRadius.circular(8),
+              // ),
               //     child: Row(
               //       children: [
               //         SizedBox(
@@ -1465,7 +1591,7 @@ class MenuTransaksiWidget extends StatelessWidget {
               //         Image.asset(
               //           ImageAssets.report,
               //           height: 30,
-              //           color: value.page == 52 ? Colors.white : Colors.white70,
+              //           color: value.page == 52 ? Colors.black : Colors.white70,
               //         ),
               //         SizedBox(
               //           width: 16,
@@ -1475,7 +1601,7 @@ class MenuTransaksiWidget extends StatelessWidget {
               //           style: TextStyle(
               //             fontSize: 16,
               //             color:
-              //                 value.page == 52 ? Colors.white : Colors.white70,
+              //                 value.page == 52 ? Colors.black : Colors.white70,
               //           ),
               //         )
               //       ],
@@ -1487,7 +1613,10 @@ class MenuTransaksiWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 53 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -1496,7 +1625,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 53 ? Colors.white : Colors.white70,
+                        color: value.page == 53 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -1506,7 +1635,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 53 ? Colors.white : Colors.white70,
+                              value.page == 53 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -1518,7 +1647,10 @@ class MenuTransaksiWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 54 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -1527,7 +1659,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 54 ? Colors.white : Colors.white70,
+                        color: value.page == 54 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -1537,7 +1669,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 54 ? Colors.white : Colors.white70,
+                              value.page == 54 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -1549,7 +1681,10 @@ class MenuTransaksiWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 55 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -1558,7 +1693,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 55 ? Colors.white : Colors.white70,
+                        color: value.page == 55 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -1568,7 +1703,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 55 ? Colors.white : Colors.white70,
+                              value.page == 55 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -1581,13 +1716,16 @@ class MenuTransaksiWidget extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: value.page == 24 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Image.asset(
                   ImageAssets.click,
                   height: 30,
-                  color: value.page == 24 ? Colors.white : Colors.white70,
+                  color: value.page == 24 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
@@ -1596,7 +1734,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Otorisasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 24 ? Colors.white : Colors.white70,
+                    color: value.page == 24 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
@@ -1617,7 +1755,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   Image.asset(
                     ImageAssets.report,
                     height: 30,
-                    color: value.page == 25 ? Colors.white : Colors.white70,
+                    color: value.page == 25 ? Colors.black : Colors.white70,
                   ),
                   SizedBox(
                     width: 16,
@@ -1626,7 +1764,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                     "Laporan",
                     style: TextStyle(
                       fontSize: 16,
-                      color: value.page == 25 ? Colors.white : Colors.white70,
+                      color: value.page == 25 ? Colors.black : Colors.white70,
                     ),
                   )
                 ],
@@ -1638,7 +1776,10 @@ class MenuTransaksiWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 40 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -1647,7 +1788,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 40 ? Colors.white : Colors.white70,
+                        color: value.page == 40 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -1657,7 +1798,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 40 ? Colors.white : Colors.white70,
+                              value.page == 40 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -1669,7 +1810,10 @@ class MenuTransaksiWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 41 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -1678,7 +1822,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 41 ? Colors.white : Colors.white70,
+                        color: value.page == 41 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -1688,7 +1832,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 41 ? Colors.white : Colors.white70,
+                              value.page == 41 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -1700,7 +1844,10 @@ class MenuTransaksiWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 42 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -1709,7 +1856,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 42 ? Colors.white : Colors.white70,
+                        color: value.page == 42 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -1719,7 +1866,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 42 ? Colors.white : Colors.white70,
+                              value.page == 42 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -1731,7 +1878,10 @@ class MenuTransaksiWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 43 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -1740,7 +1890,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 43 ? Colors.white : Colors.white70,
+                        color: value.page == 43 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -1750,7 +1900,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 43 ? Colors.white : Colors.white70,
+                              value.page == 43 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -1762,7 +1912,10 @@ class MenuTransaksiWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 44 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -1771,7 +1924,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 44 ? Colors.white : Colors.white70,
+                        color: value.page == 44 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -1781,7 +1934,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 44 ? Colors.white : Colors.white70,
+                              value.page == 44 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -1793,7 +1946,10 @@ class MenuTransaksiWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 45 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -1802,7 +1958,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 45 ? Colors.white : Colors.white70,
+                        color: value.page == 45 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -1812,7 +1968,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 45 ? Colors.white : Colors.white70,
+                              value.page == 45 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -1824,7 +1980,10 @@ class MenuTransaksiWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 46 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -1833,7 +1992,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 46 ? Colors.white : Colors.white70,
+                        color: value.page == 46 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -1843,7 +2002,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 46 ? Colors.white : Colors.white70,
+                              value.page == 46 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -1855,7 +2014,10 @@ class MenuTransaksiWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 49 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -1864,7 +2026,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 49 ? Colors.white : Colors.white70,
+                        color: value.page == 49 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -1874,7 +2036,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 49 ? Colors.white : Colors.white70,
+                              value.page == 49 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],
@@ -1886,7 +2048,10 @@ class MenuTransaksiWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    color: value.page == 48 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Row(
                     children: [
                       SizedBox(
@@ -1895,7 +2060,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 48 ? Colors.white : Colors.white70,
+                        color: value.page == 48 ? Colors.black : Colors.white70,
                       ),
                       SizedBox(
                         width: 16,
@@ -1905,7 +2070,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color:
-                              value.page == 48 ? Colors.white : Colors.white70,
+                              value.page == 48 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],

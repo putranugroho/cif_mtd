@@ -52,6 +52,7 @@ class ButtonPrimary extends StatelessWidget {
           "$name",
           textAlign: TextAlign.center,
           style: const TextStyle(
+            fontSize: 18,
             color: Colors.white,
           ),
         ),
@@ -73,17 +74,23 @@ class ButtonPrimaryNoRounded extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              width: 2,
+              color: Colors.red,
+            ),
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-              Colors.red[900] ?? Colors.transparent,
-              Colors.red,
-            ])),
+                  Colors.red[900] ?? Colors.transparent,
+                  Colors.red,
+                ])),
         child: Text(
           "$name",
           textAlign: TextAlign.center,
           style: const TextStyle(
+            fontSize: 18,
             color: Colors.white,
           ),
         ),
