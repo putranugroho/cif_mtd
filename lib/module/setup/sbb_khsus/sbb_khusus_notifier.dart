@@ -14,7 +14,7 @@ class SbbKhususNotifier extends ChangeNotifier {
   final BuildContext context;
 
   SbbKhususNotifier({required this.context}) {
-    getInquery();
+    getInqueryAll();
     getGolonganSbb();
     notifyListeners();
   }
@@ -87,32 +87,46 @@ class SbbKhususNotifier extends ChangeNotifier {
   var isLoadingInquery = true;
   List<InqueryGlModel> listGl = [];
   List<InqueryGlModel> listGlAdd = [];
-  Future getInquery() async {
-    isLoadingInquery = true;
+  Future getInqueryAll() async {
     listGl.clear();
+    notifyListeners();
     var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
         .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         final List<Map<String, dynamic>> jnsAccBItems =
             extractJnsAccB(value['data']);
-        for (Map<String, dynamic> i in jnsAccBItems) {
-          listGl.add(InqueryGlModel.fromJson(i));
-        }
-        print(listGl.length);
-        isLoadingInquery = false;
-        notifyListeners();
-      } else {
-        isLoadingInquery = false;
+        listGl =
+            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         notifyListeners();
       }
     });
   }
 
+  SbbKhususModel? sbbKhususModel;
   edit(String kode) {
-    
+    listGlAdd.clear();
+    inqueryGlModel = null;
+    notifyListeners();
+    golonganSbbKhususModel =
+        listGolongan.where((e) => e.kodeGolongan == kode).first;
+    sbbKhususModel = list.where((e) => e.kodeGolongan == kode).first;
+    for (var i = 0; i < sbbKhususModel!.items.length; i++) {
+      var nosbb = sbbKhususModel!.items[i].nosbb;
+
+      var result = listGl
+          .expand((e) => e.items) // kumpulkan semua items dari semua e
+          .firstWhere(
+              (f) => f.nosbb == nosbb); // ambil item pertama yang nosbb cocok
+      listGlAdd.add(result);
+    }
+    inqueryGlModel = listGlAdd.first;
+    dialog = true;
+    editData = true;
+    notifyListeners();
   }
 
+  var editData = false;
   pilihCoa(InqueryGlModel value) {
     if (listGlAdd.isEmpty) {
       listGlAdd.add(value);
