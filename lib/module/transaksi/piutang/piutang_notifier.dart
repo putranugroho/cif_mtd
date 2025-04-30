@@ -501,6 +501,7 @@ class PiutangNotifier extends ChangeNotifier {
   }
 
   tutup() {
+    clear();
     dialog = false;
     notifyListeners();
   }

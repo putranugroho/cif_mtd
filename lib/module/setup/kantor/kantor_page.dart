@@ -270,6 +270,12 @@ class KantorPage extends StatelessWidget {
                                       height: 8,
                                     ),
                                     DropdownSearch<String>(
+                                      validator: (value) {
+                                        if (value == null) {
+                                          return 'Wajib diisi';
+                                        }
+                                        return null;
+                                      },
                                       popupProps:
                                           const PopupPropsMultiSelection.menu(
                                         showSearchBox:
@@ -379,9 +385,7 @@ class KantorPage extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          value.status != "Cabang"
-                                              ? "Pilih Kantor Cabang"
-                                              : "Pilih Kantor Induk",
+                                          "Pilih Kantor Induk",
                                           style: const TextStyle(fontSize: 12),
                                         ),
                                         const SizedBox(width: 5),
@@ -481,6 +485,7 @@ class KantorPage extends StatelessWidget {
                                         ),
                                       ],
                                     ),
+                                    const SizedBox(height: 16),
                                     Row(
                                       children: [
                                         Text(
@@ -863,7 +868,7 @@ class KantorPage extends StatelessWidget {
                                                 CrossAxisAlignment.stretch,
                                             children: [
                                               const SizedBox(height: 16),
-                                              ButtonPrimary(
+                                              ButtonDanger(
                                                 onTap: () {
                                                   value.confirm();
                                                 },

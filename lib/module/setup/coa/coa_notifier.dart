@@ -134,7 +134,6 @@ class CoaNotifier extends ChangeNotifier {
   String? hutangPiutang;
 
   gantiHutangPiutang(String value) {
-   
     if (hutangPiutang == value) {
       hutangPiutang = null;
     } else {
@@ -281,12 +280,11 @@ class CoaNotifier extends ChangeNotifier {
     limitkredit.text = FormatCurrency.oCcy
         .format(int.parse(coaModel!.limitKredit))
         .replaceAll(".", ",");
-    noBb.text = bukuBesar != null ? bukuBesar!.nosbb : "";
-    noSbb.text = coaModel!.nosbb
-        .substring(coaModel!.nosbb.length - 6, coaModel!.nosbb.length);
+    noBb.text = coaModel!.nosbb.substring(3, 6);
+    noSbb.text = coaModel!.nosbb.substring(6, 12);
     namaSbb.text = coaModel!.namaSbb;
     resulttext.text = coaModel!.nosbb;
-    noHeader.text = header!.nobb;
+    noHeader.text = header!.nobb.substring(0, 3);
     perantara = coaModel!.akunPerantara == "Y" ? true : false;
     hutangPiutang = coaModel!.hutang == "Y"
         ? "HUTANG"

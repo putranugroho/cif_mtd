@@ -71,7 +71,7 @@ class HutangNotifier extends ChangeNotifier {
         notifyListeners();
       }
     } else {
-      listGl.clear(); 
+      listGl.clear();
     }
 
     return listGl;
@@ -504,6 +504,7 @@ class HutangNotifier extends ChangeNotifier {
   }
 
   tutup() {
+    clear();
     dialog = false;
     notifyListeners();
   }

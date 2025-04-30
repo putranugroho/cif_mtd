@@ -15,6 +15,7 @@ class PenyusutanNotifier extends ChangeNotifier {
     getMetodePenyusutan();
   }
   var isLoading = true;
+  final keyForm = GlobalKey<FormState>();
   List<MetodePenyusutanModel> list = [];
   MetodePenyusutanModel? metodePenyusutanModel;
   Future getMetodePenyusutan() async {
@@ -56,24 +57,26 @@ class PenyusutanNotifier extends ChangeNotifier {
   TextEditingController declining = TextEditingController(text: "0");
 
   cek() {
-    DialogCustom().showLoading(context);
-    var data = {
-      "id": metodePenyusutanModel!.id,
-      "metode_penyusutan": "$metode",
-      "nilai_akhir": "${nilai.text}",
-      "declining": "${metode == 2 ? declining.text : 0}",
-    };
-    Setuprepository.setup(
-            token, NetworkURL.editMetodePenyusutan(), jsonEncode(data))
-        .then((value) {
-      Navigator.pop(context);
-      if (value['status'].toString().toLowerCase().contains("success")) {
-        informationDialog(context, "Information", value['message']);
-        notifyListeners();
-      } else {
-        informationDialog(context, "Warning", value['message'][0]);
-        notifyListeners();
-      }
-    });
+    if (keyForm.currentState!.validate()) {
+      DialogCustom().showLoading(context);
+      var data = {
+        "id": metodePenyusutanModel!.id,
+        "metode_penyusutan": "$metode",
+        "nilai_akhir": "${nilai.text}",
+        "declining": "${metode == 2 ? declining.text : 0}",
+      };
+      Setuprepository.setup(
+              token, NetworkURL.editMetodePenyusutan(), jsonEncode(data))
+          .then((value) {
+        Navigator.pop(context);
+        if (value['status'].toString().toLowerCase().contains("success")) {
+          informationDialog(context, "Information", value['message']);
+          notifyListeners();
+        } else {
+          informationDialog(context, "Warning", value['message'][0]);
+          notifyListeners();
+        }
+      });
+    }
   }
 }

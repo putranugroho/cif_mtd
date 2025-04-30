@@ -172,6 +172,13 @@ class AoNotifier extends ChangeNotifier {
         });
   }
 
+  List<String> listPenempatan = ["Customer", "Supplier", "Customer / Supplier"];
+  String? penempatanModel = "Customer";
+  pilihPenempatan(String value) {
+    penempatanModel = value;
+    notifyListeners();
+  }
+
   remove() {
     DialogCustom().showLoading(context);
     var data = {

@@ -319,10 +319,6 @@ class BanyakTransaksiPage extends StatelessWidget {
                                           textInputAction: TextInputAction.done,
                                           controller: value.nomorDok,
                                           maxLines: 1,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly
-                                          ],
                                           validator: (e) {
                                             if (e!.isEmpty) {
                                               return "Wajib diisi";
@@ -365,10 +361,6 @@ class BanyakTransaksiPage extends StatelessWidget {
                                           textInputAction: TextInputAction.done,
                                           controller: value.nomorRef,
                                           maxLines: 1,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly
-                                          ],
                                           validator: (e) {
                                             if (e!.isEmpty) {
                                               return "Wajib diisi";
@@ -400,7 +392,7 @@ class BanyakTransaksiPage extends StatelessWidget {
                                         Row(
                                           children: [
                                             Text(
-                                              "Pilih Debet Akun",
+                                              "Pilih Akun",
                                               style:
                                                   const TextStyle(fontSize: 12),
                                             ),
@@ -409,6 +401,30 @@ class BanyakTransaksiPage extends StatelessWidget {
                                               "*",
                                               style: TextStyle(fontSize: 8),
                                             ),
+                                            SizedBox(
+                                              width: 16,
+                                            ),
+                                            Radio(
+                                                value: false,
+                                                groupValue: value.akun,
+                                                onChanged: (e) =>
+                                                    value.gantiakun(false)),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Text("Debet"),
+                                            SizedBox(
+                                              width: 24,
+                                            ),
+                                            Radio(
+                                                value: true,
+                                                groupValue: value.akun,
+                                                onChanged: (e) =>
+                                                    value.gantiakun(true)),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Text("Credit"),
                                           ],
                                         ),
                                         const SizedBox(
@@ -554,7 +570,7 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      "Kredit Akun",
+                                      "Pilih Akun Lawan",
                                       style: const TextStyle(fontSize: 12),
                                     ),
                                     const SizedBox(width: 5),

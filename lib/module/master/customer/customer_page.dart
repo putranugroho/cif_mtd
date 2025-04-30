@@ -758,9 +758,10 @@ class CustomerPage extends StatelessWidget {
                                                     TextInputAction.done,
                                                 controller: value.npwp,
                                                 maxLines: 1,
-                                                // inputFormatters: [
-                                                //   FilteringTextInputFormatter.digitsOnly
-                                                // ],
+                                                inputFormatters: [
+                                                  FilteringTextInputFormatter
+                                                      .digitsOnly
+                                                ],
                                                 validator: (e) {
                                                   if (e!.isEmpty) {
                                                     return "Wajib diisi";
@@ -810,9 +811,10 @@ class CustomerPage extends StatelessWidget {
                                                   TextInputAction.done,
                                               controller: value.notelp,
                                               maxLines: 1,
-                                              // inputFormatters: [
-                                              //   FilteringTextInputFormatter.digitsOnly
-                                              // ],
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
+                                              ],
                                               validator: (e) {
                                                 if (e!.isEmpty) {
                                                   return "Wajib diisi";
@@ -967,9 +969,10 @@ class CustomerPage extends StatelessWidget {
                                                   TextInputAction.done,
                                               controller: value.hp1,
                                               maxLines: 1,
-                                              // inputFormatters: [
-                                              //   FilteringTextInputFormatter.digitsOnly
-                                              // ],
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
+                                              ],
                                               validator: (e) {
                                                 if (e!.isEmpty) {
                                                   return "Wajib diisi";
@@ -1147,6 +1150,10 @@ class CustomerPage extends StatelessWidget {
                                                   TextInputAction.done,
                                               controller: value.hp2,
                                               maxLines: 1,
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
+                                              ],
                                               decoration: InputDecoration(
                                                 hintText: "HP Kontak 2",
                                                 border: OutlineInputBorder(
@@ -1293,10 +1300,10 @@ class CustomerPage extends StatelessWidget {
                                                   TextInputAction.done,
                                               controller: value.hp3,
                                               maxLines: 1,
-                                              // inputFormatters: [
-                                              //   FilteringTextInputFormatter.digitsOnly
-                                              // ],
-
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
+                                              ],
                                               decoration: InputDecoration(
                                                 hintText: "HP Kontak 3",
                                                 border: OutlineInputBorder(
@@ -1379,19 +1386,7 @@ class CustomerPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    Container(
-                                      margin:
-                                          EdgeInsets.symmetric(vertical: 16),
-                                      height: 1,
-                                      color: Colors.grey[300],
-                                    ),
-                                    Text("AO / Marketing"),
-                                    Container(
-                                      margin:
-                                          EdgeInsets.symmetric(vertical: 16),
-                                      height: 1,
-                                      color: Colors.grey[300],
-                                    ),
+                                    const SizedBox(height: 16),
                                     value.golCust != "Customer dan Supplier"
                                         ? Column(
                                             crossAxisAlignment:
@@ -1456,7 +1451,7 @@ class CustomerPage extends StatelessWidget {
                                               Row(
                                                 children: [
                                                   Text(
-                                                    "AO ${value.golCust}",
+                                                    "AO Customer",
                                                     style: const TextStyle(
                                                         fontSize: 12),
                                                   ),
@@ -1503,6 +1498,19 @@ class CustomerPage extends StatelessWidget {
                                                 ),
                                               ),
                                               const SizedBox(height: 16),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "AO Supplier",
+                                                    style: const TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
                                               DropdownSearch<AoModel>(
                                                 popupProps:
                                                     const PopupPropsMultiSelection
@@ -1554,7 +1562,7 @@ class CustomerPage extends StatelessWidget {
                                                 CrossAxisAlignment.stretch,
                                             children: [
                                               const SizedBox(height: 16),
-                                              ButtonPrimary(
+                                              ButtonDanger(
                                                 onTap: () {
                                                   value.confirm();
                                                 },

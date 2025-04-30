@@ -475,7 +475,7 @@ class PejabatPage extends StatelessWidget {
                                                 CrossAxisAlignment.stretch,
                                             children: [
                                               const SizedBox(height: 16),
-                                              ButtonPrimaryNoRounded(
+                                              ButtonDanger(
                                                 onTap: () {
                                                   value.confirm();
                                                 },

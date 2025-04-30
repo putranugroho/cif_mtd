@@ -178,12 +178,28 @@ class PenyusutanPage extends StatelessWidget {
                                             FilteringTextInputFormatter.allow(
                                                 RegExp(r'^\d+\.?\d{0,2}')),
                                           ],
+                                          keyboardType:
+                                              TextInputType.numberWithOptions(
+                                            decimal: true,
+                                            signed: false,
+                                          ),
                                           validator: (e) {
-                                            if (e!.isEmpty) {
+                                            if (e == null || e.isEmpty) {
                                               return "Wajib diisi";
-                                            } else {
-                                              return null;
                                             }
+
+                                            final valueAsDouble =
+                                                double.tryParse(
+                                                    e.replaceAll(",", "."));
+                                            if (valueAsDouble == null) {
+                                              return "Format tidak valid";
+                                            }
+
+                                            if (valueAsDouble > 100) {
+                                              return "Tidak boleh lebih dari 100%";
+                                            }
+
+                                            return null;
                                           },
                                           decoration: InputDecoration(
                                             hintText: "Nilai Declining",

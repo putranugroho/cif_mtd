@@ -404,10 +404,6 @@ class SatuTransaksiPage extends StatelessWidget {
                                           textInputAction: TextInputAction.done,
                                           controller: value.nomorDok,
                                           maxLines: 1,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly
-                                          ],
                                           validator: (e) {
                                             if (e!.isEmpty) {
                                               return "Wajib diisi";
@@ -450,10 +446,6 @@ class SatuTransaksiPage extends StatelessWidget {
                                           textInputAction: TextInputAction.done,
                                           controller: value.nomorRef,
                                           maxLines: 1,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly
-                                          ],
                                           validator: (e) {
                                             if (e!.isEmpty) {
                                               return "Wajib diisi";

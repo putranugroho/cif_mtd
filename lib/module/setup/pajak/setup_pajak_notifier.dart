@@ -20,6 +20,13 @@ class SetupPajakNotifier extends ChangeNotifier {
   SetupPajakModel? setupPajakModel;
   final keyForm = GlobalKey<FormState>();
 
+  var editData = false;
+  edit() {
+    editData = !editData;
+    getSetupPajak();
+    notifyListeners();
+  }
+
   cek() {
     if (keyForm.currentState!.validate()) {
       DialogCustom().showLoading(context);
@@ -35,9 +42,11 @@ class SetupPajakNotifier extends ChangeNotifier {
           .then((value) {
         Navigator.pop(context);
         if (value['status'].toString().toLowerCase().contains("success")) {
+          editData = !editData;
           informationDialog(context, "Information", value['message']);
           notifyListeners();
         } else {
+          editData = !editData;
           informationDialog(context, "Warning", value['message'][0]);
           notifyListeners();
         }

@@ -94,6 +94,7 @@ class SetupPajakPage extends StatelessWidget {
                                   textInputAction: TextInputAction.done,
                                   controller: value.ppn,
                                   maxLines: 1,
+                                  readOnly: !value.editData,
                                   inputFormatters: [
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'^\d+\.?\d{0,2}')),
@@ -103,13 +104,25 @@ class SetupPajakPage extends StatelessWidget {
                                     signed: false,
                                   ),
                                   validator: (e) {
-                                    if (e!.isEmpty) {
+                                    if (e == null || e.isEmpty) {
                                       return "Wajib diisi";
-                                    } else {
-                                      return null;
                                     }
+
+                                    final valueAsDouble =
+                                        double.tryParse(e.replaceAll(",", "."));
+                                    if (valueAsDouble == null) {
+                                      return "Format tidak valid";
+                                    }
+
+                                    if (valueAsDouble > 100) {
+                                      return "Tidak boleh lebih dari 100%";
+                                    }
+
+                                    return null;
                                   },
                                   decoration: InputDecoration(
+                                    filled: !value.editData,
+                                    fillColor: Colors.grey[200],
                                     hintText: "PPN",
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(6),
@@ -137,6 +150,7 @@ class SetupPajakPage extends StatelessWidget {
                                   textInputAction: TextInputAction.done,
                                   controller: value.maksPpn,
                                   maxLines: 1,
+                                  readOnly: !value.editData,
                                   inputFormatters: [
                                     FilteringTextInputFormatter.digitsOnly,
                                     CurrencyInputFormatter(),
@@ -149,6 +163,8 @@ class SetupPajakPage extends StatelessWidget {
                                     }
                                   },
                                   decoration: InputDecoration(
+                                    filled: !value.editData,
+                                    fillColor: Colors.grey[200],
                                     hintText: "Nilai Maks",
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(6),
@@ -176,6 +192,7 @@ class SetupPajakPage extends StatelessWidget {
                                   textInputAction: TextInputAction.done,
                                   controller: value.pph23,
                                   maxLines: 1,
+                                  readOnly: !value.editData,
                                   inputFormatters: [
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'^\d+\.?\d{0,2}')),
@@ -185,13 +202,25 @@ class SetupPajakPage extends StatelessWidget {
                                     signed: false,
                                   ),
                                   validator: (e) {
-                                    if (e!.isEmpty) {
+                                    if (e == null || e.isEmpty) {
                                       return "Wajib diisi";
-                                    } else {
-                                      return null;
                                     }
+
+                                    final valueAsDouble =
+                                        double.tryParse(e.replaceAll(",", "."));
+                                    if (valueAsDouble == null) {
+                                      return "Format tidak valid";
+                                    }
+
+                                    if (valueAsDouble > 100) {
+                                      return "Tidak boleh lebih dari 100%";
+                                    }
+
+                                    return null;
                                   },
                                   decoration: InputDecoration(
+                                    filled: !value.editData,
+                                    fillColor: Colors.grey[200],
                                     hintText: "PPH",
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(6),
@@ -199,16 +228,37 @@ class SetupPajakPage extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(height: 16),
-                                Row(
-                                  children: [
-                                    ButtonPrimary(
-                                      onTap: () {
-                                        value.cek();
-                                      },
-                                      name: "Simpan",
-                                    ),
-                                  ],
-                                )
+                                value.editData
+                                    ? Expanded(
+                                        child: Row(
+                                          children: [
+                                            ButtonPrimary(
+                                              onTap: () {
+                                                value.cek();
+                                              },
+                                              name: "Simpan",
+                                            ),
+                                            const SizedBox(height: 16),
+                                            ButtonDanger(
+                                              onTap: () {
+                                                value.edit();
+                                              },
+                                              name: "Cancel",
+                                            ),
+                                            const SizedBox(height: 16),
+                                          ],
+                                        ),
+                                      )
+                                    : Row(
+                                        children: [
+                                          ButtonPrimary(
+                                            onTap: () {
+                                              value.edit();
+                                            },
+                                            name: "Edit",
+                                          ),
+                                        ],
+                                      )
                               ],
                             ),
                           ),

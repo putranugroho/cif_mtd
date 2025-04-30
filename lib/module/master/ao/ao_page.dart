@@ -2,6 +2,7 @@ import 'package:accounting/models/index.dart';
 import 'package:accounting/module/master/ao/ao_notifier.dart';
 import 'package:accounting/module/setup/level/level_notifier.dart';
 import 'package:accounting/utils/button_custom.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -117,6 +118,18 @@ class AoPage extends StatelessWidget {
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(6),
                                     child: Text('Nama',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                columnName: 'cs',
+                                label: Container(
+                                    color: colorPrimary,
+                                    padding: EdgeInsets.all(6),
+                                    alignment: Alignment.center,
+                                    child: Text('Customer / Supplier',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -271,6 +284,53 @@ class AoPage extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(height: 16),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Customer / Supplier",
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    const Text(
+                                      "*",
+                                      style: TextStyle(fontSize: 8),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                DropdownSearch<String>(
+                                  popupProps:
+                                      const PopupPropsMultiSelection.menu(
+                                    showSearchBox:
+                                        true, // Aktifkan fitur pencarian
+                                  ),
+                                  selectedItem: value.penempatanModel,
+                                  items: value.listPenempatan,
+                                  itemAsString: (e) => "${e}",
+                                  onChanged: (e) {
+                                    value.pilihPenempatan(e!);
+                                  },
+                                  dropdownDecoratorProps:
+                                      DropDownDecoratorProps(
+                                    baseStyle: TextStyle(fontSize: 16),
+                                    textAlignVertical: TextAlignVertical.center,
+                                    dropdownSearchDecoration: InputDecoration(
+                                      hintText: "Pilih Kantor / Karyawan",
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(
+                                          width: 1,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
                                 ButtonPrimary(
                                   onTap: () {
                                     value.cek();
@@ -283,7 +343,7 @@ class AoPage extends StatelessWidget {
                                             CrossAxisAlignment.stretch,
                                         children: [
                                           const SizedBox(height: 16),
-                                          ButtonPrimary(
+                                          ButtonDanger(
                                             onTap: () {
                                               value.confirm();
                                             },
@@ -326,6 +386,7 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'no', value: (index++).toString()),
                 DataGridCell(columnName: 'kode', value: data.kode),
                 DataGridCell(columnName: 'nama', value: data.nama),
+                DataGridCell(columnName: 'cs', value: data.id.toString()),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
@@ -336,7 +397,7 @@ class DetailDataSource extends DataGridSource {
   DataGridRowAdapter buildRow(DataGridRow row) {
     return DataGridRowAdapter(
       cells: row.getCells().map<Widget>((e) {
-        if (e.columnName == 'action') {
+        if (e.columnName == 'action' || e.columnName == 'cs') {
           return Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),

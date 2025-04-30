@@ -145,6 +145,12 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool akun = false;
+  gantiakun(bool value) {
+    akun = value;
+    notifyListeners();
+  }
+
   List<AoModel> listAo = [];
   AoModel? aoModel;
   AoModel? aoModelKRedit;

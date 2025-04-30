@@ -61,7 +61,7 @@ class PiutangPage extends StatelessWidget {
                                 ),
                               ),
                               child: Text(
-                                "Tambah Transaksi",
+                                "Tambah Data Piutang",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   color: Colors.white,
@@ -219,7 +219,9 @@ class PiutangPage extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    "Tambah Transaksi",
+                                    value.editData
+                                        ? "Ubah / Hapus Data Piutang"
+                                        : "Tambah Data Piutang",
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,

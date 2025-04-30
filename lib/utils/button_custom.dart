@@ -61,10 +61,10 @@ class ButtonPrimary extends StatelessWidget {
   }
 }
 
-class ButtonPrimaryNoRounded extends StatelessWidget {
+class ButtonDanger extends StatelessWidget {
   final String? name;
   final Function onTap;
-  const ButtonPrimaryNoRounded({Key? key, this.name, required this.onTap})
+  const ButtonDanger({Key? key, this.name, required this.onTap})
       : super(key: key);
 
   @override

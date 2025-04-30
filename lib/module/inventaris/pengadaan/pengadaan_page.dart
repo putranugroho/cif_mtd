@@ -537,10 +537,6 @@ class PengadaanPage extends StatelessWidget {
                                                               TextInputAction
                                                                   .done,
                                                           maxLines: 1,
-                                                          inputFormatters: [
-                                                            FilteringTextInputFormatter
-                                                                .digitsOnly
-                                                          ],
                                                           validator: (e) {
                                                             if (e!.isEmpty) {
                                                               return "Wajib diisi";
@@ -1108,6 +1104,10 @@ class PengadaanPage extends StatelessWidget {
                                                               TextInputAction
                                                                   .done,
                                                           maxLines: 1,
+                                                          inputFormatters: [
+                                                            FilteringTextInputFormatter
+                                                                .digitsOnly,
+                                                          ],
                                                           decoration:
                                                               InputDecoration(
                                                             hintText:
@@ -1148,6 +1148,10 @@ class PengadaanPage extends StatelessWidget {
                                                               TextInputAction
                                                                   .done,
                                                           maxLines: 1,
+                                                          inputFormatters: [
+                                                            FilteringTextInputFormatter
+                                                                .digitsOnly,
+                                                          ],
                                                           decoration:
                                                               InputDecoration(
                                                             hintText:

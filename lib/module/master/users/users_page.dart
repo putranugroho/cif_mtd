@@ -705,95 +705,118 @@ class UsersPage extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    Text(
-                                      "Akses Beda Kantor",
-                                      style: const TextStyle(fontSize: 12),
+                                    Expanded(
+                                        child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Akses Beda Kantor",
+                                              style:
+                                                  const TextStyle(fontSize: 12),
+                                            ),
+                                            const SizedBox(width: 5),
+                                            const Text(
+                                              "*",
+                                              style: TextStyle(fontSize: 8),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Radio(
+                                                value: false,
+                                                activeColor: colorPrimary,
+                                                groupValue: value.bedaKantor,
+                                                onChanged: (e) => value
+                                                    .pilihBedaKantor(false)),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Text("Tidak"),
+                                            SizedBox(
+                                              width: 24,
+                                            ),
+                                            Radio(
+                                                value: true,
+                                                activeColor: colorPrimary,
+                                                groupValue: value.bedaKantor,
+                                                onChanged: (e) => value
+                                                    .pilihBedaKantor(true)),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Text("Ya"),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 16,
+                                        ),
+                                      ],
+                                    )),
+                                    SizedBox(
+                                      width: 16,
                                     ),
-                                    const SizedBox(width: 5),
-                                    const Text(
-                                      "*",
-                                      style: TextStyle(fontSize: 8),
-                                    ),
+                                    Expanded(
+                                        child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Akses Kasir",
+                                              style:
+                                                  const TextStyle(fontSize: 12),
+                                            ),
+                                            const SizedBox(width: 5),
+                                            const Text(
+                                              "*",
+                                              style: TextStyle(fontSize: 8),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Radio(
+                                                value: false,
+                                                activeColor: colorPrimary,
+                                                groupValue: value.aksesKasir,
+                                                onChanged: (e) => value
+                                                    .pilihAksesKasir(false)),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Text("Tidak"),
+                                            SizedBox(
+                                              width: 24,
+                                            ),
+                                            Radio(
+                                                value: true,
+                                                activeColor: colorPrimary,
+                                                groupValue: value.aksesKasir,
+                                                onChanged: (e) => value
+                                                    .pilihAksesKasir(true)),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Text("Ya"),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 16,
+                                        ),
+                                      ],
+                                    )),
                                   ],
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  children: [
-                                    Radio(
-                                        value: false,
-                                        activeColor: colorPrimary,
-                                        groupValue: value.bedaKantor,
-                                        onChanged: (e) =>
-                                            value.pilihBedaKantor(false)),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text("Tidak"),
-                                    SizedBox(
-                                      width: 24,
-                                    ),
-                                    Radio(
-                                        value: true,
-                                        activeColor: colorPrimary,
-                                        groupValue: value.bedaKantor,
-                                        onChanged: (e) =>
-                                            value.pilihBedaKantor(true)),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text("Ya"),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Akses Kasir",
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
-                                    const SizedBox(width: 5),
-                                    const Text(
-                                      "*",
-                                      style: TextStyle(fontSize: 8),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  children: [
-                                    Radio(
-                                        value: false,
-                                        activeColor: colorPrimary,
-                                        groupValue: value.aksesKasir,
-                                        onChanged: (e) =>
-                                            value.pilihAksesKasir(false)),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text("Tidak"),
-                                    SizedBox(
-                                      width: 24,
-                                    ),
-                                    Radio(
-                                        value: true,
-                                        activeColor: colorPrimary,
-                                        groupValue: value.aksesKasir,
-                                        onChanged: (e) =>
-                                            value.pilihAksesKasir(true)),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text("Ya"),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 16,
                                 ),
                                 value.aksesKasir
                                     ? Column(
