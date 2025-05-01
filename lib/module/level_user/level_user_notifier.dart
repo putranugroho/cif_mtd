@@ -238,40 +238,89 @@ class LevelUserNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  void togglePermissionBySubmenu(String modul, String menu, String submenu,
+      String permission, bool? value) {
+    var index = menuAccessList.indexWhere(
+        (e) => e.modul == modul && e.menu == menu && e.submenu == submenu);
+
+    if (index == -1) {
+      // kalau belum ada, tambahkan default dulu
+      menuAccessList.add(MenuAccess(
+        modul: modul,
+        menu: menu,
+        submenu: submenu,
+      ));
+      index = menuAccessList.length - 1;
+    }
+
+    switch (permission) {
+      case 'view':
+        menuAccessList[index].view = value ?? false;
+        break;
+      case 'input':
+        menuAccessList[index].input = value ?? false;
+        break;
+      case 'edit':
+        menuAccessList[index].edit = value ?? false;
+        break;
+      case 'delete':
+        menuAccessList[index].delete = value ?? false;
+        break;
+    }
+
+    // auto update isSelected
+    if (!menuAccessList[index].view &&
+        !menuAccessList[index].input &&
+        !menuAccessList[index].edit &&
+        !menuAccessList[index].delete) {
+      menuAccessList[index].isSelected = false;
+    } else {
+      menuAccessList[index].isSelected = true;
+    }
+
+    notifyListeners();
+  }
+
   pilihMenu(ItemCategoryModulModel value) async {
     itemCategoryModulModel = value;
     listView.clear();
     listinput.clear();
     listedit.clear();
     listdelete.clear();
+    // menuAccessList.clear();
     notifyListeners();
 
-    for (var i = 0; i < levelUser!.moduls.length; i++) {
-      String currentSubmenu = levelUser!.moduls[i].submenu;
-      print(currentSubmenu);
+    for (var i = 0; i < itemCategoryModulModel!.submenu.length; i++) {
+      String currentSubmenu = itemCategoryModulModel!.submenu[i].submenu;
+
       // cek apakah sudah ada di menuAccessList
-      var existing = menuAccessList.firstWhere(
+      var indexExisting = menuAccessList.indexWhere(
         (e) =>
             e.modul == modulModel!.modul &&
             e.menu == itemCategoryModulModel!.menu &&
             e.submenu == currentSubmenu,
-        orElse: () => MenuAccess(
+      );
+
+      if (indexExisting == -1) {
+        // belum ada → tambahkan default
+        menuAccessList.add(MenuAccess(
           modul: modulModel!.modul,
           menu: itemCategoryModulModel!.menu,
           submenu: currentSubmenu,
-        ),
-      );
+        ));
 
-      // jika belum ada (orElse return object baru), tambahkan ke list
-      if (!menuAccessList.contains(existing)) {
-        menuAccessList.add(existing);
+        listView.add(false);
+        listinput.add(false);
+        listedit.add(false);
+        listdelete.add(false);
+      } else {
+        // sudah ada → gunakan data yg sudah tersimpan
+        var existing = menuAccessList[indexExisting];
+        listView.add(existing.view);
+        listinput.add(existing.input);
+        listedit.add(existing.edit);
+        listdelete.add(existing.delete);
       }
-
-      // update checkbox status list
-      listView.add(existing.view);
-      listinput.add(existing.input);
-      listedit.add(existing.edit);
-      listdelete.add(existing.delete);
     }
 
     notifyListeners();
@@ -306,6 +355,33 @@ class LevelUserNotifier extends ChangeNotifier {
     editData = false;
     editModul = true;
     levelUser = list.where((e) => e.idLevel == id).first;
+    menuAccessList.clear();
+
+    // Isi ulang menuAccessList dari levelUser.moduls
+    for (var m in levelUser!.moduls) {
+      menuAccessList.add(MenuAccess(
+        modul: m.modul,
+        menu: m.menu,
+        submenu: m.submenu,
+        isSelected: true,
+        view: m.view == "Y",
+        input: m.input == "Y",
+        edit: m.edit == "Y",
+        delete: m.delete == "Y",
+      ));
+    }
+    // for (var i = 0; i < levelUser!.moduls.length; i++) {
+    //   menuAccessList.add(MenuAccess(
+    //     modul: levelUser!.moduls[i].modul,
+    //     menu: levelUser!.moduls[i].menu,
+    //     submenu: levelUser!.moduls[i].submenu,
+    //     isSelected: true,
+    //     delete: levelUser!.moduls[i].delete == "Y" ? true : false,
+    //     edit: levelUser!.moduls[i].edit == "Y" ? true : false,
+    //     view: levelUser!.moduls[i].view == "Y" ? true : false,
+    //     input: levelUser!.moduls[i].input == "Y" ? true : false,
+    //   ));
+    // }
     notifyListeners();
   }
 
@@ -314,19 +390,7 @@ class LevelUserNotifier extends ChangeNotifier {
     editData = true;
     editModul = false;
     levelUser = list.where((e) => e.idLevel == id).first;
-    levelUsers.text = levelUser!.levelUser;
-    for (var i = 0; i < levelUser!.moduls.length; i++) {
-      menuAccessList.add(MenuAccess(
-        modul: levelUser!.moduls[i].modul,
-        menu: levelUser!.moduls[i].menu,
-        submenu: levelUser!.moduls[i].submenu,
-        isSelected: true,
-        delete: levelUser!.moduls[i].delete == "Y" ? true : false,
-        edit: levelUser!.moduls[i].edit == "Y" ? true : false,
-        view: levelUser!.moduls[i].view == "Y" ? true : false,
-        input: levelUser!.moduls[i].input == "Y" ? true : false,
-      ));
-    }
+
     notifyListeners();
   }
 

@@ -478,84 +478,101 @@ class LevelUserPage extends StatelessWidget {
                                                           ),
                                                         ),
                                                         Container(
-                                                          width: 80,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
-                                                          child: Checkbox(
-                                                            activeColor:
-                                                                colorPrimary,
-                                                            value: value
-                                                                .menuAccessList[
-                                                                    i]
-                                                                .view,
-                                                            onChanged: (val) =>
+                                                            width: 80,
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    right: 16),
+                                                            child: Checkbox(
+                                                              activeColor:
+                                                                  colorPrimary,
+                                                              value: menuAccess
+                                                                  .view,
+                                                              onChanged:
+                                                                  (val) => value
+                                                                      .togglePermissionBySubmenu(
                                                                 value
-                                                                    .togglePermission(
-                                                                        i,
-                                                                        'view',
-                                                                        val),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          width: 80,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
-                                                          child: Checkbox(
-                                                            activeColor:
-                                                                colorPrimary,
-                                                            value: value
-                                                                .menuAccessList[
-                                                                    i]
-                                                                .input,
-                                                            onChanged: (val) =>
+                                                                    .modulModel!
+                                                                    .modul,
                                                                 value
-                                                                    .togglePermission(
-                                                                        i,
-                                                                        'input',
-                                                                        val),
-                                                          ),
-                                                        ),
+                                                                    .itemCategoryModulModel!
+                                                                    .menu,
+                                                                data.submenu,
+                                                                'view',
+                                                                val,
+                                                              ),
+                                                            )),
                                                         Container(
-                                                          width: 80,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
-                                                          child: Checkbox(
-                                                            activeColor:
-                                                                colorPrimary,
-                                                            value: value
-                                                                .menuAccessList[
-                                                                    i]
-                                                                .edit,
-                                                            onChanged: (val) =>
+                                                            width: 80,
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    right: 16),
+                                                            child: Checkbox(
+                                                              activeColor:
+                                                                  colorPrimary,
+                                                              value: menuAccess
+                                                                  .input,
+                                                              onChanged:
+                                                                  (val) => value
+                                                                      .togglePermissionBySubmenu(
                                                                 value
-                                                                    .togglePermission(
-                                                                        i,
-                                                                        'edit',
-                                                                        val),
-                                                          ),
-                                                        ),
+                                                                    .modulModel!
+                                                                    .modul,
+                                                                value
+                                                                    .itemCategoryModulModel!
+                                                                    .menu,
+                                                                data.submenu,
+                                                                'input',
+                                                                val,
+                                                              ),
+                                                            )),
                                                         Container(
-                                                          width: 80,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
-                                                          child: Checkbox(
-                                                            activeColor:
-                                                                colorPrimary,
-                                                            value: value
-                                                                .menuAccessList[
-                                                                    i]
-                                                                .delete,
-                                                            onChanged: (val) =>
-                                                                value.togglePermission(
-                                                                    i,
-                                                                    'delete',
-                                                                    val),
-                                                          ),
-                                                        ),
+                                                            width: 80,
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    right: 16),
+                                                            child: Checkbox(
+                                                              activeColor:
+                                                                  colorPrimary,
+                                                              value: menuAccess
+                                                                  .edit,
+                                                              onChanged:
+                                                                  (val) => value
+                                                                      .togglePermissionBySubmenu(
+                                                                value
+                                                                    .modulModel!
+                                                                    .modul,
+                                                                value
+                                                                    .itemCategoryModulModel!
+                                                                    .menu,
+                                                                data.submenu,
+                                                                'edit',
+                                                                val,
+                                                              ),
+                                                            )),
+                                                        Container(
+                                                            width: 80,
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    right: 16),
+                                                            child: Checkbox(
+                                                              activeColor:
+                                                                  colorPrimary,
+                                                              value: menuAccess
+                                                                  .delete,
+                                                              onChanged:
+                                                                  (val) => value
+                                                                      .togglePermissionBySubmenu(
+                                                                value
+                                                                    .modulModel!
+                                                                    .modul,
+                                                                value
+                                                                    .itemCategoryModulModel!
+                                                                    .menu,
+                                                                data.submenu,
+                                                                'delete',
+                                                                val,
+                                                              ),
+                                                            )),
                                                       ],
                                                     ),
                                                     SizedBox(
@@ -659,146 +676,6 @@ class LevelUserPage extends StatelessWidget {
                                         ),
                                       ),
                                       const SizedBox(height: 16),
-                                      // Row(
-                                      //   children: [
-                                      //     Text(
-                                      //       "Pilih Modul",
-                                      //       style: const TextStyle(fontSize: 12),
-                                      //     ),
-                                      //     const SizedBox(width: 5),
-                                      //     const Text(
-                                      //       "*",
-                                      //       style: TextStyle(fontSize: 8),
-                                      //     ),
-                                      //   ],
-                                      // ),
-                                      // const SizedBox(
-                                      //   height: 8,
-                                      // ),
-                                      // ListView.builder(
-                                      //     itemCount: value.listModul.length,
-                                      //     shrinkWrap: true,
-                                      //     physics: ClampingScrollPhysics(),
-                                      //     itemBuilder: (context, i) {
-                                      //       final data = value.listModul[i];
-                                      //       return Column(
-                                      //         crossAxisAlignment:
-                                      //             CrossAxisAlignment.stretch,
-                                      //         children: [
-                                      //           Row(
-                                      //             children: [
-                                      //               Checkbox(
-                                      //                   activeColor: colorPrimary,
-                                      //                   value: value.selectedModuls
-                                      //                       .contains(data.modul),
-                                      //                   onChanged: (checked) =>
-                                      //                       value.toggleModul(
-                                      //                           data, checked!)),
-                                      //               SizedBox(
-                                      //                 width: 16,
-                                      //               ),
-                                      //               Expanded(
-                                      //                   child:
-                                      //                       Text("${data.modul}"))
-                                      //             ],
-                                      //           ),
-                                      //           SizedBox(
-                                      //             height: 4,
-                                      //           ),
-                                      //           ListView.builder(
-                                      //               itemCount: data.menu.length,
-                                      //               shrinkWrap: true,
-                                      //               physics:
-                                      //                   ClampingScrollPhysics(),
-                                      //               itemBuilder: (context, b) {
-                                      //                 final a = data.menu[b];
-                                      //                 return Column(
-                                      //                   crossAxisAlignment:
-                                      //                       CrossAxisAlignment
-                                      //                           .stretch,
-                                      //                   children: [
-                                      //                     Row(
-                                      //                       children: [
-                                      //                         SizedBox(
-                                      //                           width: 16,
-                                      //                         ),
-                                      //                         Checkbox(
-                                      //                             value: value
-                                      //                                 .selectedMenus
-                                      //                                 .contains(
-                                      //                                     a.menu),
-                                      //                             onChanged: (checked) =>
-                                      //                                 value.toggleMenu(
-                                      //                                     data,
-                                      //                                     a,
-                                      //                                     checked!)),
-                                      //                         SizedBox(
-                                      //                           width: 16,
-                                      //                         ),
-                                      //                         Expanded(
-                                      //                             child: Text(
-                                      //                                 "${a.menu}"))
-                                      //                       ],
-                                      //                     ),
-                                      //                     SizedBox(
-                                      //                       height: 8,
-                                      //                     ),
-                                      //                     ListView.builder(
-                                      //                         itemCount:
-                                      //                             a.submenu.length,
-                                      //                         shrinkWrap: true,
-                                      //                         physics:
-                                      //                             ClampingScrollPhysics(),
-                                      //                         itemBuilder:
-                                      //                             (context, d) {
-                                      //                           final c =
-                                      //                               a.submenu[d];
-                                      //                           return Column(
-                                      //                             crossAxisAlignment:
-                                      //                                 CrossAxisAlignment
-                                      //                                     .stretch,
-                                      //                             children: [
-                                      //                               Row(
-                                      //                                 children: [
-                                      //                                   SizedBox(
-                                      //                                     width: 32,
-                                      //                                   ),
-                                      //                                   Checkbox(
-                                      //                                       value: value
-                                      //                                           .selectedSubmenus
-                                      //                                           .contains(c
-                                      //                                               .submenu),
-                                      //                                       onChanged: (checked) => value.toggleSubmenu(
-                                      //                                           data,
-                                      //                                           a,
-                                      //                                           c,
-                                      //                                           checked!)),
-                                      //                                   SizedBox(
-                                      //                                     width: 16,
-                                      //                                   ),
-                                      //                                   Expanded(
-                                      //                                       child: Text(
-                                      //                                           "${c.keterangan}"))
-                                      //                                 ],
-                                      //                               ),
-                                      //                               SizedBox(
-                                      //                                 height: 8,
-                                      //                               ),
-                                      //                             ],
-                                      //                           );
-                                      //                         }),
-                                      //                     SizedBox(
-                                      //                       height: 8,
-                                      //                     )
-                                      //                   ],
-                                      //                 );
-                                      //               }),
-                                      //           SizedBox(
-                                      //             height: 16,
-                                      //           ),
-                                      //         ],
-                                      //       );
-                                      //     }),
                                       const SizedBox(height: 16),
                                       ButtonPrimary(
                                         onTap: () {
