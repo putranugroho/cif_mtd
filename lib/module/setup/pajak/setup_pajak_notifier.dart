@@ -27,6 +27,18 @@ class SetupPajakNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  var rincianData = false;
+  rincian() {
+    rincianData = !rincianData;
+    notifyListeners();
+  }
+
+  bool akun = false;
+  gantiakun(bool value) {
+    akun = value;
+    notifyListeners();
+  }
+
   cek() {
     if (keyForm.currentState!.validate()) {
       DialogCustom().showLoading(context);
