@@ -325,6 +325,10 @@ class NetworkURL {
     return "$url/leveluser/update";
   }
 
+  static String editLevelUsersModul() {
+    return "$url/leveluser/updatemodul";
+  }
+
   static String deletdLevelUsers() {
     return "$url/leveluser/deleted";
   }

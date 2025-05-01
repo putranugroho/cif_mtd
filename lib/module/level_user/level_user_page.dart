@@ -72,109 +72,97 @@ class LevelUserPage extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                        child: value.isLoading
-                            ? Container(
-                                padding: const EdgeInsets.all(16),
-                                child: const Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ProShimmer(height: 10, width: 200),
-                                    SizedBox(
-                                      height: 4,
-                                    ),
-                                    ProShimmer(height: 10, width: 120),
-                                    SizedBox(
-                                      height: 4,
-                                    ),
-                                    ProShimmer(height: 10, width: 100),
-                                    SizedBox(
-                                      height: 4,
-                                    ),
-                                  ],
-                                ),
-                              )
-                            : SizedBox()
-                        // : Container(
-                        //     padding: EdgeInsets.all(20),
-                        //     height: MediaQuery.of(context).size.height,
-                        //     child: SfDataGrid(
-                        //       headerRowHeight: 40,
-                        //       defaultColumnWidth: 180,
-                        //       frozenColumnsCount: 1,
+                      child: value.isLoading
+                          ? Container(
+                              padding: const EdgeInsets.all(16),
+                              child: const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ProShimmer(height: 10, width: 200),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  ProShimmer(height: 10, width: 120),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  ProShimmer(height: 10, width: 100),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Container(
+                              padding: EdgeInsets.all(20),
+                              height: MediaQuery.of(context).size.height,
+                              child: SfDataGrid(
+                                headerRowHeight: 40,
+                                defaultColumnWidth: 180,
+                                frozenColumnsCount: 1,
 
-                        //       // controller: value.dataGridController,
-                        //       gridLinesVisibility: GridLinesVisibility.both,
-                        //       headerGridLinesVisibility:
-                        //           GridLinesVisibility.both,
-                        //       selectionMode: SelectionMode.single,
+                                // controller: value.dataGridController,
+                                gridLinesVisibility: GridLinesVisibility.both,
+                                headerGridLinesVisibility:
+                                    GridLinesVisibility.both,
+                                selectionMode: SelectionMode.single,
 
-                        //       source: DetailDataSource(value),
-                        //       columns: <GridColumn>[
-                        //         GridColumn(
-                        //             width: 50,
-                        //             columnName: 'no',
-                        //             label: Container(
-                        //                 padding: EdgeInsets.all(6),
-                        //                 color: colorPrimary,
-                        //                 alignment: Alignment.center,
-                        //                 child: Text('No',
-                        //                     style: TextStyle(
-                        //                       fontWeight: FontWeight.w300,
-                        //                       fontSize: 12,
-                        //                       color: Colors.white,
-                        //                     )))),
-                        //         GridColumn(
-                        //             columnName: 'kode',
-                        //             label: Container(
-                        //                 color: colorPrimary,
-                        //                 alignment: Alignment.center,
-                        //                 padding: EdgeInsets.all(6),
-                        //                 child: Text('Kode jabatan',
-                        //                     style: TextStyle(
-                        //                       fontSize: 12,
-                        //                       fontWeight: FontWeight.w300,
-                        //                       color: Colors.white,
-                        //                     )))),
-                        //         GridColumn(
-                        //             columnName: 'jabatan',
-                        //             label: Container(
-                        //                 color: colorPrimary,
-                        //                 alignment: Alignment.center,
-                        //                 padding: EdgeInsets.all(6),
-                        //                 child: Text('Jabatan',
-                        //                     style: TextStyle(
-                        //                       fontSize: 12,
-                        //                       fontWeight: FontWeight.w300,
-                        //                       color: Colors.white,
-                        //                     )))),
-                        //         GridColumn(
-                        //             columnName: 'level',
-                        //             label: Container(
-                        //                 padding: EdgeInsets.all(6),
-                        //                 color: colorPrimary,
-                        //                 alignment: Alignment.center,
-                        //                 child: Text('Level Jabatan',
-                        //                     style: TextStyle(
-                        //                       fontWeight: FontWeight.w300,
-                        //                       color: Colors.white,
-                        //                       fontSize: 12,
-                        //                     )))),
-                        //         GridColumn(
-                        //             columnName: 'action',
-                        //             label: Container(
-                        //                 color: colorPrimary,
-                        //                 padding: EdgeInsets.all(6),
-                        //                 alignment: Alignment.center,
-                        //                 child: Text('Action',
-                        //                     style: TextStyle(
-                        //                       fontSize: 12,
-                        //                       fontWeight: FontWeight.w300,
-                        //                       color: Colors.white,
-                        //                     )))),
-                        //       ],
-                        //     ),
-                        //   ),
-                        )
+                                source: DetailDataSource(value),
+                                columns: <GridColumn>[
+                                  GridColumn(
+                                      width: 50,
+                                      columnName: 'no',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('No',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 12,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'level_user',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Level User',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'modul',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Modul',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      width: 240,
+                                      columnName: 'action',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          padding: EdgeInsets.all(6),
+                                          alignment: Alignment.center,
+                                          child: Text('Action',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                ],
+                              ),
+                            ),
+                    )
                   ],
                 ),
               ),
@@ -194,250 +182,631 @@ class LevelUserPage extends StatelessWidget {
                 bottom: 0,
                 right: 0,
                 child: value.dialog
-                    ? Container(
-                        padding: EdgeInsets.all(20),
-                        width: 600,
-                        decoration: BoxDecoration(color: Colors.white),
-                        child: Form(
-                          key: value.keyForm,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      value.editData
-                                          ? "Ubah / Hapus Level User"
-                                          : "Tambah Level User",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () => value.tutup(),
-                                    child: Container(
-                                      width: 40,
-                                      height: 40,
-                                      padding: EdgeInsets.all(4),
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey[200],
-                                          shape: BoxShape.circle),
-                                      child: Icon(Icons.close),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                height: 32,
-                              ),
-                              Expanded(
-                                  child: ListView(
-                                children: [
-                                  Row(
+                    ? value.editModul
+                        ? Container(
+                            width: 600,
+                            padding: EdgeInsets.all(20),
+                            decoration: BoxDecoration(color: Colors.white),
+                            child: FocusTraversalGroup(
+                              child: Form(
+                                  key: value.keyForm,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
                                     children: [
-                                      Text(
-                                        "Level User",
-                                        style: const TextStyle(fontSize: 12),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              "Tambah / Ubah Modul User",
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () => value.tutup(),
+                                            child: Container(
+                                              width: 40,
+                                              height: 40,
+                                              padding: EdgeInsets.all(4),
+                                              decoration: BoxDecoration(
+                                                  color: Colors.grey[200],
+                                                  shape: BoxShape.circle),
+                                              child: Icon(Icons.close),
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                      const SizedBox(width: 5),
-                                      const Text(
-                                        "*",
-                                        style: TextStyle(fontSize: 8),
+                                      SizedBox(
+                                        height: 32,
                                       ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  TextFormField(
-                                    textInputAction: TextInputAction.done,
-                                    controller: value.levelUsers,
-                                    validator: (e) {
-                                      if (e!.isEmpty) {
-                                        return "Wajib diisi";
-                                      } else {
-                                        return null;
-                                      }
-                                    },
-                                    decoration: InputDecoration(
-                                      hintText: "Level Users",
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(6),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Pilih Modul",
-                                        style: const TextStyle(fontSize: 12),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      const Text(
-                                        "*",
-                                        style: TextStyle(fontSize: 8),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  ListView.builder(
-                                      itemCount: value.listModul.length,
-                                      shrinkWrap: true,
-                                      physics: ClampingScrollPhysics(),
-                                      itemBuilder: (context, i) {
-                                        final data = value.listModul[i];
-                                        return Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Checkbox(
-                                                    activeColor: colorPrimary,
-                                                    value: value.selectedModuls
-                                                        .contains(data.modul),
-                                                    onChanged: (checked) =>
-                                                        value.toggleModul(
-                                                            data, checked!)),
-                                                SizedBox(
-                                                  width: 16,
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                              child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Modul",
+                                                    style: const TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                  const Text(
+                                                    "*",
+                                                    style:
+                                                        TextStyle(fontSize: 8),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              DropdownSearch<ModulModel>(
+                                                popupProps:
+                                                    const PopupPropsMultiSelection
+                                                        .menu(
+                                                  showSearchBox:
+                                                      true, // Aktifkan fitur pencarian
                                                 ),
-                                                Expanded(
-                                                    child:
-                                                        Text("${data.modul}"))
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 4,
-                                            ),
-                                            ListView.builder(
-                                                itemCount: data.menu.length,
-                                                shrinkWrap: true,
-                                                physics:
-                                                    ClampingScrollPhysics(),
-                                                itemBuilder: (context, b) {
-                                                  final a = data.menu[b];
-                                                  return Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .stretch,
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          SizedBox(
-                                                            width: 16,
-                                                          ),
-                                                          Checkbox(
-                                                              value: value
-                                                                  .selectedMenus
-                                                                  .contains(
-                                                                      a.menu),
-                                                              onChanged: (checked) =>
-                                                                  value.toggleMenu(
-                                                                      data,
-                                                                      a,
-                                                                      checked!)),
-                                                          SizedBox(
-                                                            width: 16,
-                                                          ),
-                                                          Expanded(
-                                                              child: Text(
-                                                                  "${a.menu}"))
-                                                        ],
+                                                selectedItem: value.modulModel,
+                                                items: value.listModul,
+                                                itemAsString: (e) =>
+                                                    "${e.modul}",
+                                                onChanged: (e) {
+                                                  value.pilihModul(e!);
+                                                },
+                                                dropdownDecoratorProps:
+                                                    DropDownDecoratorProps(
+                                                  baseStyle:
+                                                      TextStyle(fontSize: 16),
+                                                  textAlignVertical:
+                                                      TextAlignVertical.center,
+                                                  dropdownSearchDecoration:
+                                                      InputDecoration(
+                                                    hintText: "Pilih Modul",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                        width: 1,
+                                                        color: Colors.grey,
                                                       ),
-                                                      SizedBox(
-                                                        height: 8,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 16),
+                                            ],
+                                          )),
+                                          SizedBox(
+                                            width: 16,
+                                          ),
+                                          Expanded(
+                                              child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Menu Akses",
+                                                    style: const TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                  const Text(
+                                                    "*",
+                                                    style:
+                                                        TextStyle(fontSize: 8),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              DropdownSearch<
+                                                  ItemCategoryModulModel>(
+                                                popupProps:
+                                                    const PopupPropsMultiSelection
+                                                        .menu(
+                                                  showSearchBox:
+                                                      true, // Aktifkan fitur pencarian
+                                                ),
+                                                selectedItem: value
+                                                    .itemCategoryModulModel,
+                                                items: value.modulModel == null
+                                                    ? []
+                                                    : value.modulModel!.menu,
+                                                itemAsString: (e) =>
+                                                    "${e.menu}",
+                                                onChanged: (e) {
+                                                  value.pilihMenu(e!);
+                                                },
+                                                dropdownDecoratorProps:
+                                                    DropDownDecoratorProps(
+                                                  baseStyle:
+                                                      TextStyle(fontSize: 16),
+                                                  textAlignVertical:
+                                                      TextAlignVertical.center,
+                                                  dropdownSearchDecoration:
+                                                      InputDecoration(
+                                                    hintText: value
+                                                                .modulModel ==
+                                                            null
+                                                        ? "Silahkan pilih Modul "
+                                                        : "Pilih Menu Akses",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                        width: 1,
+                                                        color: Colors.grey,
                                                       ),
-                                                      ListView.builder(
-                                                          itemCount:
-                                                              a.submenu.length,
-                                                          shrinkWrap: true,
-                                                          physics:
-                                                              ClampingScrollPhysics(),
-                                                          itemBuilder:
-                                                              (context, d) {
-                                                            final c =
-                                                                a.submenu[d];
-                                                            return Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .stretch,
-                                                              children: [
-                                                                Row(
-                                                                  children: [
-                                                                    SizedBox(
-                                                                      width: 32,
-                                                                    ),
-                                                                    Checkbox(
-                                                                        value: value
-                                                                            .selectedSubmenus
-                                                                            .contains(c
-                                                                                .submenu),
-                                                                        onChanged: (checked) => value.toggleSubmenu(
-                                                                            data,
-                                                                            a,
-                                                                            c,
-                                                                            checked!)),
-                                                                    SizedBox(
-                                                                      width: 16,
-                                                                    ),
-                                                                    Expanded(
-                                                                        child: Text(
-                                                                            "${c.keterangan}"))
-                                                                  ],
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 8,
-                                                                ),
-                                                              ],
-                                                            );
-                                                          }),
-                                                      SizedBox(
-                                                        height: 8,
-                                                      )
-                                                    ],
-                                                  );
-                                                }),
-                                            SizedBox(
-                                              height: 16,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 16),
+                                            ],
+                                          )),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 16,
+                                      ),
+                                      Text(
+                                        "Pilih Akses Menu",
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                      SizedBox(
+                                        height: 16,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(right: 16),
+                                            width: 30,
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              margin:
+                                                  EdgeInsets.only(right: 16),
+                                              child: Text("Menu"),
                                             ),
-                                          ],
-                                        );
-                                      }),
-                                  const SizedBox(height: 16),
-                                  ButtonPrimary(
-                                    onTap: () {
-                                      value.cek();
-                                    },
-                                    name: "Simpan",
+                                          ),
+                                          Container(
+                                            width: 80,
+                                            margin: EdgeInsets.only(right: 16),
+                                            child: Text("View"),
+                                          ),
+                                          Container(
+                                            width: 80,
+                                            margin: EdgeInsets.only(right: 16),
+                                            child: Text("Input"),
+                                          ),
+                                          Container(
+                                            width: 80,
+                                            margin: EdgeInsets.only(right: 16),
+                                            child: Text("Edit"),
+                                          ),
+                                          Container(
+                                            width: 80,
+                                            margin: EdgeInsets.only(right: 16),
+                                            child: Text("Delete"),
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        margin:
+                                            EdgeInsets.symmetric(vertical: 8),
+                                        height: 1,
+                                        color: Colors.grey,
+                                      ),
+                                      value.itemCategoryModulModel == null
+                                          ? SizedBox()
+                                          : ListView.builder(
+                                              itemCount: value
+                                                  .itemCategoryModulModel!
+                                                  .submenu
+                                                  .length,
+                                              shrinkWrap: true,
+                                              physics: ClampingScrollPhysics(),
+                                              itemBuilder: (context, i) {
+                                                final data = value
+                                                    .itemCategoryModulModel!
+                                                    .submenu[i];
+                                                return Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .stretch,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          width: 30,
+                                                          child: Checkbox(
+                                                            activeColor:
+                                                                colorPrimary,
+                                                            value: value
+                                                                .menuAccessList[
+                                                                    i]
+                                                                .isSelected,
+                                                            onChanged: (val) =>
+                                                                value
+                                                                    .toggleMenu(
+                                                                        i, val),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          child: Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    right: 16),
+                                                            child: Text(
+                                                                "${data.keterangan}"),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 80,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Checkbox(
+                                                            activeColor:
+                                                                colorPrimary,
+                                                            value: value
+                                                                .menuAccessList[
+                                                                    i]
+                                                                .view,
+                                                            onChanged: (val) =>
+                                                                value
+                                                                    .togglePermission(
+                                                                        i,
+                                                                        'view',
+                                                                        val),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 80,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Checkbox(
+                                                            activeColor:
+                                                                colorPrimary,
+                                                            value: value
+                                                                .menuAccessList[
+                                                                    i]
+                                                                .input,
+                                                            onChanged: (val) =>
+                                                                value
+                                                                    .togglePermission(
+                                                                        i,
+                                                                        'input',
+                                                                        val),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 80,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Checkbox(
+                                                            activeColor:
+                                                                colorPrimary,
+                                                            value: value
+                                                                .menuAccessList[
+                                                                    i]
+                                                                .edit,
+                                                            onChanged: (val) =>
+                                                                value
+                                                                    .togglePermission(
+                                                                        i,
+                                                                        'edit',
+                                                                        val),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: 80,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 16),
+                                                          child: Checkbox(
+                                                            activeColor:
+                                                                colorPrimary,
+                                                            value: value
+                                                                .menuAccessList[
+                                                                    i]
+                                                                .delete,
+                                                            onChanged: (val) =>
+                                                                value.togglePermission(
+                                                                    i,
+                                                                    'delete',
+                                                                    val),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 8,
+                                                    )
+                                                  ],
+                                                );
+                                              }),
+                                      SizedBox(
+                                        height: 16,
+                                      ),
+                                      Row(
+                                        children: [
+                                          ButtonPrimary(
+                                            onTap: () {
+                                              value.simpanModul();
+                                            },
+                                            name: "Simpan",
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  )),
+                            ),
+                          )
+                        : Container(
+                            padding: EdgeInsets.all(20),
+                            width: 600,
+                            decoration: BoxDecoration(color: Colors.white),
+                            child: Form(
+                              key: value.keyForm,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          value.editData
+                                              ? "Ubah / Hapus Level User"
+                                              : "Tambah Level User",
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () => value.tutup(),
+                                        child: Container(
+                                          width: 40,
+                                          height: 40,
+                                          padding: EdgeInsets.all(4),
+                                          decoration: BoxDecoration(
+                                              color: Colors.grey[200],
+                                              shape: BoxShape.circle),
+                                          child: Icon(Icons.close),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                  value.editData
-                                      ? Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            const SizedBox(height: 16),
-                                            ButtonPrimary(
-                                              onTap: () {
-                                                // value.confirm();
-                                              },
-                                              name: "Hapus",
-                                            ),
-                                          ],
-                                        )
-                                      : SizedBox()
+                                  SizedBox(
+                                    height: 32,
+                                  ),
+                                  Expanded(
+                                      child: ListView(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "Level User",
+                                            style:
+                                                const TextStyle(fontSize: 12),
+                                          ),
+                                          const SizedBox(width: 5),
+                                          const Text(
+                                            "*",
+                                            style: TextStyle(fontSize: 8),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      TextFormField(
+                                        textInputAction: TextInputAction.done,
+                                        controller: value.levelUsers,
+                                        validator: (e) {
+                                          if (e!.isEmpty) {
+                                            return "Wajib diisi";
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                        decoration: InputDecoration(
+                                          hintText: "Level Users",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      // Row(
+                                      //   children: [
+                                      //     Text(
+                                      //       "Pilih Modul",
+                                      //       style: const TextStyle(fontSize: 12),
+                                      //     ),
+                                      //     const SizedBox(width: 5),
+                                      //     const Text(
+                                      //       "*",
+                                      //       style: TextStyle(fontSize: 8),
+                                      //     ),
+                                      //   ],
+                                      // ),
+                                      // const SizedBox(
+                                      //   height: 8,
+                                      // ),
+                                      // ListView.builder(
+                                      //     itemCount: value.listModul.length,
+                                      //     shrinkWrap: true,
+                                      //     physics: ClampingScrollPhysics(),
+                                      //     itemBuilder: (context, i) {
+                                      //       final data = value.listModul[i];
+                                      //       return Column(
+                                      //         crossAxisAlignment:
+                                      //             CrossAxisAlignment.stretch,
+                                      //         children: [
+                                      //           Row(
+                                      //             children: [
+                                      //               Checkbox(
+                                      //                   activeColor: colorPrimary,
+                                      //                   value: value.selectedModuls
+                                      //                       .contains(data.modul),
+                                      //                   onChanged: (checked) =>
+                                      //                       value.toggleModul(
+                                      //                           data, checked!)),
+                                      //               SizedBox(
+                                      //                 width: 16,
+                                      //               ),
+                                      //               Expanded(
+                                      //                   child:
+                                      //                       Text("${data.modul}"))
+                                      //             ],
+                                      //           ),
+                                      //           SizedBox(
+                                      //             height: 4,
+                                      //           ),
+                                      //           ListView.builder(
+                                      //               itemCount: data.menu.length,
+                                      //               shrinkWrap: true,
+                                      //               physics:
+                                      //                   ClampingScrollPhysics(),
+                                      //               itemBuilder: (context, b) {
+                                      //                 final a = data.menu[b];
+                                      //                 return Column(
+                                      //                   crossAxisAlignment:
+                                      //                       CrossAxisAlignment
+                                      //                           .stretch,
+                                      //                   children: [
+                                      //                     Row(
+                                      //                       children: [
+                                      //                         SizedBox(
+                                      //                           width: 16,
+                                      //                         ),
+                                      //                         Checkbox(
+                                      //                             value: value
+                                      //                                 .selectedMenus
+                                      //                                 .contains(
+                                      //                                     a.menu),
+                                      //                             onChanged: (checked) =>
+                                      //                                 value.toggleMenu(
+                                      //                                     data,
+                                      //                                     a,
+                                      //                                     checked!)),
+                                      //                         SizedBox(
+                                      //                           width: 16,
+                                      //                         ),
+                                      //                         Expanded(
+                                      //                             child: Text(
+                                      //                                 "${a.menu}"))
+                                      //                       ],
+                                      //                     ),
+                                      //                     SizedBox(
+                                      //                       height: 8,
+                                      //                     ),
+                                      //                     ListView.builder(
+                                      //                         itemCount:
+                                      //                             a.submenu.length,
+                                      //                         shrinkWrap: true,
+                                      //                         physics:
+                                      //                             ClampingScrollPhysics(),
+                                      //                         itemBuilder:
+                                      //                             (context, d) {
+                                      //                           final c =
+                                      //                               a.submenu[d];
+                                      //                           return Column(
+                                      //                             crossAxisAlignment:
+                                      //                                 CrossAxisAlignment
+                                      //                                     .stretch,
+                                      //                             children: [
+                                      //                               Row(
+                                      //                                 children: [
+                                      //                                   SizedBox(
+                                      //                                     width: 32,
+                                      //                                   ),
+                                      //                                   Checkbox(
+                                      //                                       value: value
+                                      //                                           .selectedSubmenus
+                                      //                                           .contains(c
+                                      //                                               .submenu),
+                                      //                                       onChanged: (checked) => value.toggleSubmenu(
+                                      //                                           data,
+                                      //                                           a,
+                                      //                                           c,
+                                      //                                           checked!)),
+                                      //                                   SizedBox(
+                                      //                                     width: 16,
+                                      //                                   ),
+                                      //                                   Expanded(
+                                      //                                       child: Text(
+                                      //                                           "${c.keterangan}"))
+                                      //                                 ],
+                                      //                               ),
+                                      //                               SizedBox(
+                                      //                                 height: 8,
+                                      //                               ),
+                                      //                             ],
+                                      //                           );
+                                      //                         }),
+                                      //                     SizedBox(
+                                      //                       height: 8,
+                                      //                     )
+                                      //                   ],
+                                      //                 );
+                                      //               }),
+                                      //           SizedBox(
+                                      //             height: 16,
+                                      //           ),
+                                      //         ],
+                                      //       );
+                                      //     }),
+                                      const SizedBox(height: 16),
+                                      ButtonPrimary(
+                                        onTap: () {
+                                          value.cek();
+                                        },
+                                        name: "Simpan",
+                                      ),
+                                      value.editData
+                                          ? Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: [
+                                                const SizedBox(height: 16),
+                                                ButtonPrimary(
+                                                  onTap: () {
+                                                    // value.confirm();
+                                                  },
+                                                  name: "Hapus",
+                                                ),
+                                              ],
+                                            )
+                                          : SizedBox()
+                                    ],
+                                  ))
                                 ],
-                              ))
-                            ],
-                          ),
-                        ),
-                      )
+                              ),
+                            ),
+                          )
                     : SizedBox(),
               )
             ],
@@ -451,7 +820,7 @@ class LevelUserPage extends StatelessWidget {
 class DetailDataSource extends DataGridSource {
   DetailDataSource(LevelUserNotifier value) {
     tindakanNotifier = value;
-    // buildRowData(value.list);
+    buildRowData(value.list);
   }
 
   LevelUserNotifier? tindakanNotifier;
@@ -459,16 +828,16 @@ class DetailDataSource extends DataGridSource {
   List<DataGridRow> _laporanData = [];
   @override
   List<DataGridRow> get rows => _laporanData;
-  void buildRowData(List<JabatanModel> list) {
+  void buildRowData(List<LevelUser> list) {
     int index = 1;
     _laporanData = list
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(columnName: 'kode', value: data.kodeJabatan),
-                DataGridCell(columnName: 'jabatan', value: data.namaJabatan),
-                DataGridCell(columnName: 'level', value: data.kelJabatan),
-                DataGridCell(columnName: 'action', value: data.kodeJabatan),
+                DataGridCell(columnName: 'level_user', value: data.levelUser),
+                DataGridCell(
+                    columnName: 'modul', value: "${data.moduls.length} Modul"),
+                DataGridCell(columnName: 'action', value: data.idLevel),
               ],
             ))
         .toList();
@@ -482,29 +851,62 @@ class DetailDataSource extends DataGridSource {
           return Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: () {
-                // tindakanNotifier!.edit(e.value);
-              },
-              child: Container(
-                width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: colorPrimary,
-                  border: Border.all(
-                    width: 2,
-                    color: colorPrimary,
+            child: Row(
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      tindakanNotifier!.edit(e.value);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: colorPrimary,
+                        border: Border.all(
+                          width: 2,
+                          color: colorPrimary,
+                        ),
+                      ),
+                      child: Text(
+                        "Ubah / Hapus",
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-                child: Text(
-                  "Aksi",
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.white,
+                SizedBox(
+                  width: 8,
+                ),
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      tindakanNotifier!.editModuls(e.value);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: colorPrimary,
+                        border: Border.all(
+                          width: 2,
+                          color: colorPrimary,
+                        ),
+                      ),
+                      child: Text(
+                        "Edit Modul",
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
           );
         } else {

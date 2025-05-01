@@ -178,7 +178,7 @@ class LevelPage extends StatelessWidget {
                 bottom: 0,
                 right: 0,
                 child: value.dialog
-                    ? Container(
+                    ?  Container(
                         padding: EdgeInsets.all(20),
                         width: 600,
                         decoration: BoxDecoration(color: Colors.white),
