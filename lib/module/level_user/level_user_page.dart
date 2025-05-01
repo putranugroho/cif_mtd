@@ -423,6 +423,27 @@ class LevelUserPage extends StatelessWidget {
                                                 final data = value
                                                     .itemCategoryModulModel!
                                                     .submenu[i];
+                                                final menuAccess = value
+                                                    .menuAccessList
+                                                    .firstWhere(
+                                                  (e) =>
+                                                      e.modul ==
+                                                          value.modulModel!
+                                                              .modul &&
+                                                      e.menu ==
+                                                          value
+                                                              .itemCategoryModulModel!
+                                                              .menu &&
+                                                      e.submenu == data.submenu,
+                                                  orElse: () => MenuAccess(
+                                                      modul: value
+                                                          .modulModel!.modul,
+                                                      menu: value
+                                                          .itemCategoryModulModel!
+                                                          .menu,
+                                                      submenu: data.submenu),
+                                                );
+
                                                 return Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment
@@ -438,14 +459,13 @@ class LevelUserPage extends StatelessWidget {
                                                           child: Checkbox(
                                                             activeColor:
                                                                 colorPrimary,
-                                                            value: value
-                                                                .menuAccessList[
-                                                                    i]
+                                                            value: menuAccess
                                                                 .isSelected,
                                                             onChanged: (val) =>
-                                                                value
-                                                                    .toggleMenu(
-                                                                        i, val),
+                                                                value.toggleMenu(
+                                                                    i,
+                                                                    val,
+                                                                    data.submenu),
                                                           ),
                                                         ),
                                                         Expanded(

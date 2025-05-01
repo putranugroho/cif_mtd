@@ -36,8 +36,11 @@ class LevelUserNotifier extends ChangeNotifier {
   ItemCategoryModulModel? itemCategoryModulModel;
   List<MenuAccess> menuAccessList = [];
 
-  void toggleMenu(int index, bool? value) {
+  void toggleMenu(int index, bool? value, String submenu) {
     menuAccessList[index].isSelected = value ?? false;
+    menuAccessList[index].menu = itemCategoryModulModel!.menu;
+    menuAccessList[index].modul = modulModel!.modul;
+    menuAccessList[index].submenu = submenu;
     menuAccessList[index].view = value ?? false;
     menuAccessList[index].input = value ?? false;
     menuAccessList[index].edit = value ?? false;
@@ -45,81 +48,35 @@ class LevelUserNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  piliview(int index) {
-    listView[index] = !listView[index];
-    addModule(itemCategoryModulModel!.submenu[index], index);
-    notifyListeners();
-  }
-
-  pilihinput(int index) {
-    listinput[index] = !listinput[index];
-    addModule(itemCategoryModulModel!.submenu[index], index);
-    notifyListeners();
-  }
-
-  pilihedit(int index) {
-    listedit[index] = !listedit[index];
-    addModule(itemCategoryModulModel!.submenu[index], index);
-    notifyListeners();
-  }
-
-  pilihdelete(int index) {
-    listdelete[index] = !listdelete[index];
-    addModule(itemCategoryModulModel!.submenu[index], index);
-    notifyListeners();
-  }
-
-  Map<String, ItemCategoryModulModel> submenuToMenuMap = {};
-  addModule(ItemModulModel value, int index) {
-    var currentMenu = submenuToMenuMap[value.submenu];
-
-    if (currentMenu == null) {
-      print("Menu not found for submenu ${value.submenu}");
-      return;
-    }
-
-    if (listTmp.isEmpty) {
-      listTmp.add(LevelUserModul(
-        modul: modulModel!.modul,
-        menu: currentMenu.menu, // <- pakai dari mapping!
-        submenu: value.submenu,
-        view: listView[index] ? "Y" : "N",
-        input: listinput[index] ? "Y" : "N",
-        edit: listedit[index] ? "Y" : "N",
-        delete: listdelete[index] ? "Y" : "N",
-      ));
-      print("Tambah");
-    } else {
-      if (listTmp
-          .where((e) =>
-              e.modul == modulModel!.modul &&
-              e.menu == currentMenu.menu &&
-              e.submenu == value.submenu)
-          .isNotEmpty) {
-        listTmp.removeWhere((e) =>
-            e.modul == modulModel!.modul &&
-            e.menu == currentMenu.menu &&
-            e.submenu == value.submenu);
-        print("Remove");
-      } else {
-        listTmp.add(LevelUserModul(
-          modul: modulModel!.modul,
-          menu: currentMenu.menu,
-          submenu: value.submenu,
-          view: listView[index] ? "Y" : "N",
-          input: listinput[index] ? "Y" : "N",
-          edit: listedit[index] ? "Y" : "N",
-          delete: listdelete[index] ? "Y" : "N",
-        ));
-        print("Tambah");
-      }
-    }
-
-    notifyListeners();
-  }
-
   simpanModul() {
-    print(menuAccessList);
+    // print(jsonEncode(menuAccessList));
+    DialogCustom().showLoading(context);
+    List<LevelUserModul> listtmp = [];
+    for (var i = 0; i < menuAccessList.length; i++) {
+      listtmp.add(LevelUserModul(
+          modul: menuAccessList[i].modul,
+          menu: menuAccessList[i].menu,
+          submenu: menuAccessList[i].submenu,
+          view: menuAccessList[i].view ? "Y" : "N",
+          input: menuAccessList[i].input ? "Y" : "N",
+          edit: menuAccessList[i].edit ? "Y" : "N",
+          delete: menuAccessList[i].delete ? "Y" : "N"));
+    }
+    notifyListeners();
+    var data = {"id": levelUser!.idLevel, "modul": listtmp};
+    print(jsonEncode(data));
+    Setuprepository.setup(
+            token, NetworkURL.editLevelUsersModul(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        getLevelusers();
+        informationDialog(context, "Information", value['message']);
+      } else {
+        informationDialog(context, "Warning", value['message']);
+        notifyListeners();
+      }
+    });
   }
 
   cek() {
@@ -287,19 +244,60 @@ class LevelUserNotifier extends ChangeNotifier {
     listinput.clear();
     listedit.clear();
     listdelete.clear();
-    menuAccessList.clear();
     notifyListeners();
-    for (var i = 0; i < itemCategoryModulModel!.submenu.length; i++) {
-      menuAccessList.add(MenuAccess(
-          menuName: "${itemCategoryModulModel!.submenu[i].keterangan}"));
-      listView.add(false);
-      listinput.add(false);
-      listedit.add(false);
-      listdelete.add(false);
-      // submenuToMenuMap[itemCategoryModulModel!.submenu[i].submenu] = value;
+
+    for (var i = 0; i < levelUser!.moduls.length; i++) {
+      String currentSubmenu = levelUser!.moduls[i].submenu;
+      print(currentSubmenu);
+      // cek apakah sudah ada di menuAccessList
+      var existing = menuAccessList.firstWhere(
+        (e) =>
+            e.modul == modulModel!.modul &&
+            e.menu == itemCategoryModulModel!.menu &&
+            e.submenu == currentSubmenu,
+        orElse: () => MenuAccess(
+          modul: modulModel!.modul,
+          menu: itemCategoryModulModel!.menu,
+          submenu: currentSubmenu,
+        ),
+      );
+
+      // jika belum ada (orElse return object baru), tambahkan ke list
+      if (!menuAccessList.contains(existing)) {
+        menuAccessList.add(existing);
+      }
+
+      // update checkbox status list
+      listView.add(existing.view);
+      listinput.add(existing.input);
+      listedit.add(existing.edit);
+      listdelete.add(existing.delete);
     }
+
     notifyListeners();
   }
+
+  // pilihMenu(ItemCategoryModulModel value) async {
+  //   itemCategoryModulModel = value;
+  //   listView.clear();
+  //   listinput.clear();
+  //   listedit.clear();
+  //   listdelete.clear();
+  //   notifyListeners();
+  //   for (var i = 0; i < itemCategoryModulModel!.submenu.length; i++) {
+  //     menuAccessList.add(MenuAccess(
+  //       modul: modulModel!.modul,
+  //       menu: itemCategoryModulModel!.menu,
+  //       submenu: itemCategoryModulModel!.submenu[i].submenu,
+  //     ));
+  //     listView.add(false);
+  //     listinput.add(false);
+  //     listedit.add(false);
+  //     listdelete.add(false);
+  //     // submenuToMenuMap[itemCategoryModulModel!.submenu[i].submenu] = value;
+  //   }
+  //   notifyListeners();
+  // }
 
   LevelUser? levelUser;
 
@@ -317,6 +315,18 @@ class LevelUserNotifier extends ChangeNotifier {
     editModul = false;
     levelUser = list.where((e) => e.idLevel == id).first;
     levelUsers.text = levelUser!.levelUser;
+    for (var i = 0; i < levelUser!.moduls.length; i++) {
+      menuAccessList.add(MenuAccess(
+        modul: levelUser!.moduls[i].modul,
+        menu: levelUser!.moduls[i].menu,
+        submenu: levelUser!.moduls[i].submenu,
+        isSelected: true,
+        delete: levelUser!.moduls[i].delete == "Y" ? true : false,
+        edit: levelUser!.moduls[i].edit == "Y" ? true : false,
+        view: levelUser!.moduls[i].view == "Y" ? true : false,
+        input: levelUser!.moduls[i].input == "Y" ? true : false,
+      ));
+    }
     notifyListeners();
   }
 
@@ -362,7 +372,10 @@ class LevelUserNotifier extends ChangeNotifier {
 }
 
 class MenuAccess {
-  String menuName;
+  String modul;
+  String menu;
+  String submenu;
+
   bool isSelected;
   bool view;
   bool input;
@@ -370,7 +383,9 @@ class MenuAccess {
   bool delete;
 
   MenuAccess({
-    required this.menuName,
+    required this.modul,
+    required this.menu,
+    required this.submenu,
     this.isSelected = false,
     this.view = false,
     this.input = false,
