@@ -1413,7 +1413,12 @@ class CustomerPage extends StatelessWidget {
                                                       true, // Aktifkan fitur pencarian
                                                 ),
                                                 selectedItem: value.aoModel,
-                                                items: value.listAoModel,
+                                                items: value.listAoModel
+                                                    .where((e) =>
+                                                        e.golCust ==
+                                                            "${value.golCust == "Customer" ? "1" : "2"}" ||
+                                                        e.golCust == "3")
+                                                    .toList(),
                                                 itemAsString: (e) =>
                                                     "${e.nama}",
                                                 onChanged: (e) {
@@ -1469,7 +1474,11 @@ class CustomerPage extends StatelessWidget {
                                                       true, // Aktifkan fitur pencarian
                                                 ),
                                                 selectedItem: value.aoModel,
-                                                items: value.listAoModel,
+                                                items: value.listAoModel
+                                                    .where((e) =>
+                                                        e.golCust == "1" ||
+                                                        e.golCust == "3")
+                                                    .toList(),
                                                 itemAsString: (e) =>
                                                     "${e.nama}",
                                                 onChanged: (e) {
@@ -1519,7 +1528,11 @@ class CustomerPage extends StatelessWidget {
                                                       true, // Aktifkan fitur pencarian
                                                 ),
                                                 selectedItem: value.aoModel,
-                                                items: value.listAoModel,
+                                                items: value.listAoModel
+                                                    .where((e) =>
+                                                        e.golCust == "2" ||
+                                                        e.golCust == "3")
+                                                    .toList(),
                                                 itemAsString: (e) =>
                                                     "${e.nama}",
                                                 onChanged: (e) {
