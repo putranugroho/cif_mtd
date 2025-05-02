@@ -7,6 +7,7 @@ import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
+import '../../../repository/wilayah_repository.dart';
 import '../../../utils/button_custom.dart';
 
 class KantorNotifier extends ChangeNotifier {
@@ -14,7 +15,109 @@ class KantorNotifier extends ChangeNotifier {
 
   KantorNotifier({required this.context}) {
     getPerusahaan();
+    getProvinsi();
   }
+
+  List<ProvinsiModel> listProvinsi = [];
+  ProvinsiModel? provinsiModel;
+  List<KotaModel> listKota = [];
+  KotaModel? kotaModal;
+  List<KecamatanModel> listKecamatan = [];
+  KecamatanModel? kecamatanModel;
+  List<KelurahanModel> listKelurahan = [];
+  KelurahanModel? kelurahanModel;
+  Future getProvinsi() async {
+    WilayahRepository.getProvinsi(NetworkURL.getProvinsi()).then((value) {
+      for (var i = 0; i < value.length; i++) {
+        listProvinsi.add(ProvinsiModel(
+            id: value[i]['id'].toString(), name: value[i]['name']));
+      }
+      notifyListeners();
+    });
+  }
+
+  pilihProvinsi(ProvinsiModel value) {
+    provinsiModel = value;
+    kotaModal = null;
+    kecamatanModel = null;
+    kelurahanModel = null;
+    listKota.clear();
+    listKecamatan.clear();
+    listKelurahan.clear();
+    getKota();
+    notifyListeners();
+  }
+
+  getKota() async {
+    listKota.clear();
+    notifyListeners();
+    WilayahRepository.getKota(NetworkURL.getKota(provinsiModel!.id.toString()))
+        .then((value) {
+      for (var i = 0; i < value.length; i++) {
+        listKota.add(KotaModel(
+            id: value[i]['id'],
+            name: value[i]['name'],
+            provinceId: provinsiModel!.id));
+      }
+
+      notifyListeners();
+    });
+  }
+
+  pilihKota(KotaModel value) {
+    kotaModal = value;
+    kecamatanModel = null;
+    kelurahanModel = null;
+    listKecamatan.clear();
+    listKelurahan.clear();
+    getKecamatan();
+    notifyListeners();
+  }
+
+  getKecamatan() async {
+    listKecamatan.clear();
+    notifyListeners();
+    WilayahRepository.getKota(NetworkURL.getKecamatan(kotaModal!.id.toString()))
+        .then((value) {
+      for (var i = 0; i < value.length; i++) {
+        listKecamatan.add(KecamatanModel(
+            id: value[i]['id'],
+            name: value[i]['name'],
+            regencyId: kotaModal!.id));
+      }
+
+      notifyListeners();
+    });
+  }
+
+  pilihKecamatan(KecamatanModel value) {
+    kecamatanModel = value;
+    kelurahanModel = null;
+    listKelurahan.clear();
+    getKelurahan();
+    notifyListeners();
+  }
+
+  getKelurahan() async {
+    listKelurahan.clear();
+    notifyListeners();
+    WilayahRepository.getKelurahan(NetworkURL.getKelurahan(kecamatanModel!.id))
+        .then((value) {
+      for (var i = 0; i < value.length; i++) {
+        listKelurahan.add(KelurahanModel(
+            id: value[i]['id'],
+            name: value[i]['name'],
+            districtId: kecamatanModel!.id));
+      }
+      notifyListeners();
+    });
+  }
+
+  pilihKelurahan(KelurahanModel value) async {
+    kelurahanModel = value;
+    notifyListeners();
+  }
+
   List<PerusahaanModel> listPerusahaan = [];
   PerusahaanModel? perusahaanModel;
   Future getPerusahaan() async {
@@ -71,11 +174,51 @@ class KantorNotifier extends ChangeNotifier {
     dialog = true;
     editData = true;
     kantor = list.where((e) => e.id == int.parse(id)).first;
-    provinsi.text = kantor!.provinsi;
-    kota.text = kantor!.kota;
-    noKantor.text = kantor!.kodeKantor;
-    kecamatan.text = kantor!.kecamatan;
-    kelurahan.text = kantor!.kelurahan;
+    provinsiModel = listProvinsi.where((e) => e.name == kantor!.provinsi).first;
+    listKota.clear();
+    notifyListeners();
+    WilayahRepository.getKota(NetworkURL.getKota(provinsiModel!.id.toString()))
+        .then((value) {
+      for (var i = 0; i < value.length; i++) {
+        listKota.add(KotaModel(
+            id: value[i]['id'],
+            name: value[i]['name'],
+            provinceId: provinsiModel!.id));
+      }
+      kotaModal = listKota.where((e) => e.name == kantor!.kota).first;
+      listKecamatan.clear();
+      notifyListeners();
+      WilayahRepository.getKota(
+              NetworkURL.getKecamatan(kotaModal!.id.toString()))
+          .then((valuess) {
+        for (var i = 0; i < valuess.length; i++) {
+          listKecamatan.add(KecamatanModel(
+              id: valuess[i]['id'],
+              name: valuess[i]['name'],
+              regencyId: kotaModal!.id));
+        }
+        kecamatanModel =
+            listKecamatan.where((e) => e.name == kantor!.kecamatan).first;
+        listKelurahan.clear();
+        notifyListeners();
+        WilayahRepository.getKelurahan(
+                NetworkURL.getKelurahan(kecamatanModel!.id))
+            .then((e) {
+          for (var i = 0; i < e.length; i++) {
+            listKelurahan.add(KelurahanModel(
+                id: e[i]['id'],
+                name: e[i]['name'],
+                districtId: kecamatanModel!.id));
+          }
+          kelurahanModel =
+              listKelurahan.where((e) => e.name == kantor!.kelurahan).first;
+        });
+        notifyListeners();
+      });
+
+      notifyListeners();
+    });
+
     kode.text = kantor!.kodeKantor;
     alamat.text = kantor!.alamat;
     kodepos.text = kantor!.kodePos;
@@ -255,10 +398,10 @@ class KantorNotifier extends ChangeNotifier {
           "status_kantor":
               "${status == "Pusat" ? "P" : status == "Cabang" ? "C" : status == "Anak Cabang" ? "D" : "E"}",
           "alamat": "${alamat.text}",
-          "kelurahan": "${kelurahan.text}",
-          "kecamatan": "${kecamatan.text}",
-          "kota": "${kota.text}",
-          "provinsi": "${provinsi.text}",
+          "kelurahan": "${kelurahanModel!.name}",
+          "kecamatan": "${kecamatanModel!.name}",
+          "kota": "${kotaModal!.name}",
+          "provinsi": "${provinsiModel!.name}",
           "kode_pos": "${kodepos.text}",
           "telp": "${notelp.text.isEmpty ? "" : notelp.text}",
           "fax": "${fax.text.isEmpty ? "" : fax.text}",
@@ -288,10 +431,10 @@ class KantorNotifier extends ChangeNotifier {
           "status_kantor":
               "${status == "Pusat" ? "P" : status == "Cabang" ? "C" : status == "Anak Cabang" ? "D" : "E"}",
           "alamat": "${alamat.text}",
-          "kelurahan": "${kelurahan.text}",
-          "kecamatan": "${kecamatan.text}",
-          "kota": "${kota.text}",
-          "provinsi": "${provinsi.text}",
+          "kelurahan": "${kelurahanModel!.name}",
+          "kecamatan": "${kecamatanModel!.name}",
+          "kota": "${kotaModal!.name}",
+          "provinsi": "${provinsiModel!.name}",
           "kode_pos": "${kodepos.text}",
           "telp": "${notelp.text.isEmpty ? "" : notelp.text}",
           "fax": "${fax.text.isEmpty ? "" : fax.text}",

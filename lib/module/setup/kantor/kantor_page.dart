@@ -486,82 +486,100 @@ class KantorPage extends StatelessWidget {
                                       ],
                                     ),
                                     const SizedBox(height: 16),
-                                    Row(
+                                    const SizedBox(height: 16),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
                                       children: [
                                         Text(
                                           "Provinsi",
                                           style: const TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
-                                          "*",
-                                          style: TextStyle(fontSize: 8),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        DropdownSearch<ProvinsiModel>(
+                                          popupProps:
+                                              const PopupPropsMultiSelection
+                                                  .menu(
+                                            showSearchBox:
+                                                true, // Aktifkan fitur pencarian
+                                          ),
+                                          selectedItem: value.provinsiModel,
+                                          items: value.listProvinsi,
+                                          itemAsString: (e) => "${e.name}",
+                                          onChanged: (e) {
+                                            value.pilihProvinsi(e!);
+                                          },
+                                          dropdownDecoratorProps:
+                                              DropDownDecoratorProps(
+                                            baseStyle: TextStyle(fontSize: 16),
+                                            textAlignVertical:
+                                                TextAlignVertical.center,
+                                            dropdownSearchDecoration:
+                                                InputDecoration(
+                                              hintText: "Pilih Provinsi",
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                borderSide: BorderSide(
+                                                  width: 1,
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    TextFormField(
-                                      textInputAction: TextInputAction.done,
-                                      controller: value.provinsi,
-                                      maxLines: 1,
-                                      // inputFormatters: [
-                                      //   FilteringTextInputFormatter.digitsOnly
-                                      // ],
-                                      validator: (e) {
-                                        if (e!.isEmpty) {
-                                          return "Wajib diisi";
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                      decoration: InputDecoration(
-                                        hintText: "Provinsi",
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                        ),
-                                      ),
                                     ),
                                     const SizedBox(height: 16),
-                                    Row(
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
                                       children: [
                                         Text(
-                                          "Kota / Kabupaten",
+                                          "Kota",
                                           style: const TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
-                                          "*",
-                                          style: TextStyle(fontSize: 8),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        DropdownSearch<KotaModel>(
+                                          popupProps:
+                                              const PopupPropsMultiSelection
+                                                  .menu(
+                                            showSearchBox:
+                                                true, // Aktifkan fitur pencarian
+                                          ),
+                                          enabled: value.listKota.isNotEmpty
+                                              ? true
+                                              : false,
+                                          selectedItem: value.kotaModal,
+                                          items: value.listKota,
+                                          itemAsString: (e) => "${e.name}",
+                                          onChanged: (e) {
+                                            value.pilihKota(e!);
+                                          },
+                                          dropdownDecoratorProps:
+                                              DropDownDecoratorProps(
+                                            baseStyle: TextStyle(fontSize: 16),
+                                            textAlignVertical:
+                                                TextAlignVertical.center,
+                                            dropdownSearchDecoration:
+                                                InputDecoration(
+                                              hintText: "Pilih Kota",
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                borderSide: BorderSide(
+                                                  width: 1,
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    TextFormField(
-                                      textInputAction: TextInputAction.done,
-                                      controller: value.kota,
-                                      maxLines: 1,
-                                      // inputFormatters: [
-                                      //   FilteringTextInputFormatter.digitsOnly
-                                      // ],
-                                      validator: (e) {
-                                        if (e!.isEmpty) {
-                                          return "Wajib diisi";
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                      decoration: InputDecoration(
-                                        hintText: "Kota / Kabupaten",
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                        ),
-                                      ),
                                     ),
                                     const SizedBox(height: 16),
                                     Row(
@@ -569,108 +587,125 @@ class KantorPage extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                            child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "Kecamatan",
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Text(
+                                                "Kecamatan",
+                                                style: const TextStyle(
+                                                    fontSize: 12),
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              DropdownSearch<KecamatanModel>(
+                                                popupProps:
+                                                    const PopupPropsMultiSelection
+                                                        .menu(
+                                                  showSearchBox:
+                                                      true, // Aktifkan fitur pencarian
                                                 ),
-                                                const SizedBox(width: 5),
-                                                const Text(
-                                                  "*",
-                                                  style: TextStyle(fontSize: 8),
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              height: 8,
-                                            ),
-                                            TextFormField(
-                                              textInputAction:
-                                                  TextInputAction.done,
-                                              controller: value.kecamatan,
-                                              maxLines: 1,
-                                              // inputFormatters: [
-                                              //   FilteringTextInputFormatter.digitsOnly
-                                              // ],
-                                              validator: (e) {
-                                                if (e!.isEmpty) {
-                                                  return "Wajib diisi";
-                                                } else {
-                                                  return null;
-                                                }
-                                              },
-                                              decoration: InputDecoration(
-                                                hintText: "Kecamatan",
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                enabled: value.listKecamatan
+                                                        .isNotEmpty
+                                                    ? true
+                                                    : false,
+                                                selectedItem:
+                                                    value.kecamatanModel,
+                                                items: value.listKecamatan,
+                                                itemAsString: (e) =>
+                                                    "${e.name}",
+                                                onChanged: (e) {
+                                                  value.pilihKecamatan(e!);
+                                                },
+                                                dropdownDecoratorProps:
+                                                    DropDownDecoratorProps(
+                                                  baseStyle:
+                                                      TextStyle(fontSize: 16),
+                                                  textAlignVertical:
+                                                      TextAlignVertical.center,
+                                                  dropdownSearchDecoration:
+                                                      InputDecoration(
+                                                    hintText: "Pilih Kecamatan",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                        width: 1,
+                                                        color: Colors.grey,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        )),
-                                        SizedBox(
-                                          width: 16,
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 32,
                                         ),
                                         Expanded(
-                                            child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "Kelurahan",
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Text(
+                                                "Kelurahan",
+                                                style: const TextStyle(
+                                                    fontSize: 12),
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              DropdownSearch<KelurahanModel>(
+                                                popupProps:
+                                                    const PopupPropsMultiSelection
+                                                        .menu(
+                                                  showSearchBox:
+                                                      true, // Aktifkan fitur pencarian
                                                 ),
-                                                const SizedBox(width: 5),
-                                                const Text(
-                                                  "*",
-                                                  style: TextStyle(fontSize: 8),
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              height: 8,
-                                            ),
-                                            TextFormField(
-                                              textInputAction:
-                                                  TextInputAction.done,
-                                              controller: value.kelurahan,
-
-                                              maxLines: 1,
-                                              // inputFormatters: [
-                                              //   FilteringTextInputFormatter.digitsOnly
-                                              // ],
-                                              validator: (e) {
-                                                if (e!.isEmpty) {
-                                                  return "Wajib diisi";
-                                                } else {
-                                                  return null;
-                                                }
-                                              },
-                                              decoration: InputDecoration(
-                                                hintText: "Kelurahan",
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                enabled: value.listKelurahan
+                                                        .isNotEmpty
+                                                    ? true
+                                                    : false,
+                                                selectedItem:
+                                                    value.kelurahanModel,
+                                                items: value.listKelurahan,
+                                                itemAsString: (e) =>
+                                                    "${e.name}",
+                                                onChanged: (e) {
+                                                  value.pilihKelurahan(e!);
+                                                },
+                                                dropdownDecoratorProps:
+                                                    DropDownDecoratorProps(
+                                                  baseStyle:
+                                                      TextStyle(fontSize: 16),
+                                                  textAlignVertical:
+                                                      TextAlignVertical.center,
+                                                  dropdownSearchDecoration:
+                                                      InputDecoration(
+                                                    hintText: "Pilih Kelurahan",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      borderSide: BorderSide(
+                                                        width: 1,
+                                                        color: Colors.grey,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        )),
-                                        SizedBox(
-                                          width: 16,
+                                            ],
+                                          ),
                                         ),
-                                        Container(
-                                            width: 100,
+                                        const SizedBox(
+                                          width: 32,
+                                        ),
+                                        SizedBox(
+                                            width: 140,
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.stretch,
@@ -694,15 +729,11 @@ class KantorPage extends StatelessWidget {
                                                   height: 8,
                                                 ),
                                                 TextFormField(
-                                                  textInputAction:
-                                                      TextInputAction.done,
-                                                  controller: value.kodepos,
-                                                  maxLines: 1,
-                                                  maxLength: 5,
                                                   inputFormatters: [
                                                     FilteringTextInputFormatter
                                                         .digitsOnly
                                                   ],
+                                                  controller: value.kodepos,
                                                   validator: (e) {
                                                     if (e!.isEmpty) {
                                                       return "Wajib diisi";
@@ -719,8 +750,9 @@ class KantorPage extends StatelessWidget {
                                                     ),
                                                   ),
                                                 ),
+                                                const SizedBox(height: 16),
                                               ],
-                                            ))
+                                            )),
                                       ],
                                     ),
                                     const SizedBox(height: 16),
