@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../../network/network.dart';
+import '../../../utils/dialog_loading.dart';
+import '../../../utils/informationdialog.dart';
 
 class UsersNotifier extends ChangeNotifier {
   final BuildContext context;
@@ -14,7 +16,118 @@ class UsersNotifier extends ChangeNotifier {
     getAktivasi();
     getInqueryAll();
     getKantor();
+    getLevelUsers();
     notifyListeners();
+  }
+
+  UsersModel? users;
+  var editData = false;
+  edit(String id) {
+    users = listData.where((e) => e.id == int.parse(id)).first;
+    notifyListeners();
+  }
+
+  InqueryGlModel? inqueryGlModel;
+  // var aksesKasir = false;
+  final keyForm = GlobalKey<FormState>();
+  cek() {
+    if (keyForm.currentState!.validate()) {
+      if (editData) {
+        DialogCustom().showLoading(context);
+        var data = {
+          "id": users!.id,
+          "userid": "${userid.text}",
+          "pass": "${pass.text}",
+          "namauser": "${namauser.text}",
+          "kd_aktivasi": "${aktivasiModel!.kdAktivasi}",
+          "kode_pt": "${kantor!.kodePt}",
+          "kode_kantor": "${kantor!.kodeKantor}",
+          "kode_induk": "${kantor!.kodeInduk}",
+          "tglexp": "${tglexp.text}",
+          "lvluser": "${levelUser!.idLevel}",
+          "terminal_id": "",
+          "akses_kasir": "${aksesKasir ? "N" : "Y"}",
+          "sbb_kasir": "${inqueryGlModel!.nosbb}",
+          "nama_sbb": "${inqueryGlModel!.namaSbb}",
+          "fhoto_1": "",
+          "fhoto_2": "",
+          "fhoto_3": "",
+          "level_otor": "${levelOtor}",
+          "beda_kantor": "${bedaKantor ? "Y" : "N"}",
+          "min_otor": "${minotor.text.trim().replaceAll(",", "")}",
+          "max_otor": "${maxotor.text.trim().replaceAll(",", "")}",
+        };
+        Setuprepository.setup(token, NetworkURL.editusers(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'].toString().toLowerCase().contains("success")) {
+            informationDialog(context, "Information", value['message']);
+            getUsers();
+            clear();
+            notifyListeners();
+          } else {
+            informationDialog(context, "Warning", value['message']);
+          }
+        });
+      } else {
+        DialogCustom().showLoading(context);
+        var data = {
+          "userid": "${userid.text}",
+          "pass": "${pass.text}",
+          "namauser": "${namauser.text}",
+          "kd_aktivasi": "${aktivasiModel!.kdAktivasi}",
+          "kode_pt": "${kantor!.kodePt}",
+          "kode_kantor": "${kantor!.kodeKantor}",
+          "kode_induk": "${kantor!.kodeInduk}",
+          "tglexp": "${tglexp.text}",
+          "lvluser": "${levelUser!.idLevel}",
+          "terminal_id": "",
+          "akses_kasir": "${aksesKasir ? "N" : "Y"}",
+          "sbb_kasir": "${inqueryGlModel!.nosbb}",
+          "nama_sbb": "${inqueryGlModel!.namaSbb}",
+          "fhoto_1": "",
+          "fhoto_2": "",
+          "fhoto_3": "",
+          "level_otor": "${levelOtor}",
+          "beda_kantor": "${bedaKantor ? "Y" : "N"}",
+          "min_otor": "${minotor.text.trim().replaceAll(",", "")}",
+          "max_otor": "${maxotor.text.trim().replaceAll(",", "")}",
+        };
+        Setuprepository.setup(token, NetworkURL.addusers(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'].toString().toLowerCase().contains("success")) {
+            informationDialog(context, "Information", value['message']);
+            getUsers();
+            clear();
+            notifyListeners();
+          } else {
+            informationDialog(context, "Warning", value['message'][0]);
+          }
+        });
+      }
+    }
+  }
+
+  List<LevelUser> listUsers = [];
+  Future getLevelUsers() async {
+    isLoading = true;
+    listUsers.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getLevelUsers(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listUsers.add(LevelUser.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
   }
 
   List<AktivasiModel> listHariKerja = [];
@@ -114,23 +227,29 @@ class UsersNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  clear() {
+    dialog = false;
+    editData = false;
+    userid.clear();
+    pass.clear();
+    namauser.clear();
+    tglexp.clear();
+    levelotor.clear();
+    minotor.clear();
+    maxotor.clear();
+    notifyListeners();
+  }
+
   TextEditingController userid = TextEditingController();
   TextEditingController pass = TextEditingController();
   TextEditingController namauser = TextEditingController();
   TextEditingController tglexp = TextEditingController();
-
   TextEditingController levelotor = TextEditingController();
   TextEditingController minotor = TextEditingController();
   TextEditingController maxotor = TextEditingController();
 
-  String? levelUser;
-  List<String> listLevelUsers = [
-    "Administrator",
-    "Supervisor",
-    "User",
-  ];
-
-  pilihLevel(String value) {
+  LevelUser? levelUser;
+  pilihLevel(LevelUser value) {
     levelUser = value;
     notifyListeners();
   }
