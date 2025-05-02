@@ -5,6 +5,7 @@ import 'package:accounting/utils/button_custom.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -255,7 +256,10 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                 textInputAction: TextInputAction.done,
                                 controller: value.kode,
                                 maxLines: 1,
-                                inputFormatters: [],
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[a-zA-Z0-9]'))
+                                ],
                                 validator: (e) {
                                   if (e!.isEmpty) {
                                     return "Wajib diisi";

@@ -219,6 +219,7 @@ class UsersNotifier extends ChangeNotifier {
 
   bool dialog = false;
   tambah() {
+    clear();
     dialog = true;
     notifyListeners();
   }
@@ -235,7 +236,7 @@ class UsersNotifier extends ChangeNotifier {
     pass.clear();
     namauser.clear();
     tglexp.clear();
-    levelotor.clear();
+    levelOtor = null;
     minotor.clear();
     maxotor.clear();
     notifyListeners();
@@ -245,7 +246,7 @@ class UsersNotifier extends ChangeNotifier {
   TextEditingController pass = TextEditingController();
   TextEditingController namauser = TextEditingController();
   TextEditingController tglexp = TextEditingController();
-  TextEditingController levelotor = TextEditingController();
+  // TextEditingController levelotor = TextEditingController();
   TextEditingController minotor = TextEditingController();
   TextEditingController maxotor = TextEditingController();
 
@@ -331,11 +332,20 @@ class UsersNotifier extends ChangeNotifier {
     }
   }
 
+  bool otorisasi = false;
+  gantiotorisasi() {
+    clearOtor();
+    otorisasi = !otorisasi;
+    notifyListeners();
+  }
+
   clearOtor() {
     levelOtor = null;
     levelSelected = false;
+    minotor.clear();
+    maxotor.clear();
     dropdownKey = UniqueKey();
-    print("clearOtor called. New key: $dropdownKey");
+    // print("clearOtor called. New key: $dropdownKey");
     notifyListeners();
   }
 

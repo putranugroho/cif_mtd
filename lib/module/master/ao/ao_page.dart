@@ -211,7 +211,7 @@ class AoPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      "Kode",
+                                      "Kode AO / Marketing",
                                       style: const TextStyle(fontSize: 12),
                                     ),
                                     const SizedBox(width: 5),
@@ -229,7 +229,8 @@ class AoPage extends StatelessWidget {
                                   controller: value.kd,
                                   maxLines: 1,
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[a-zA-Z0-9]'))
                                   ],
                                   validator: (e) {
                                     if (e!.isEmpty) {
@@ -287,7 +288,7 @@ class AoPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      "Customer / Supplier",
+                                      "Tipe Customer / Supplier",
                                       style: const TextStyle(fontSize: 12),
                                     ),
                                     const SizedBox(width: 5),

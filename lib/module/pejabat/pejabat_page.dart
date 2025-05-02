@@ -273,6 +273,9 @@ class PejabatPage extends StatelessWidget {
                                         }
                                       },
                                       decoration: InputDecoration(
+                                        suffixIcon: IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(Icons.search)),
                                         hintText: "Nomor Induk Pegawai",
                                         border: OutlineInputBorder(
                                           borderRadius:
@@ -298,6 +301,7 @@ class PejabatPage extends StatelessWidget {
                                       height: 8,
                                     ),
                                     TextFormField(
+                                      readOnly: true,
                                       textInputAction: TextInputAction.done,
                                       controller: value.nama,
                                       maxLines: 1,
@@ -309,6 +313,8 @@ class PejabatPage extends StatelessWidget {
                                         }
                                       },
                                       decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.grey[200],
                                         hintText: "Nama",
                                         border: OutlineInputBorder(
                                           borderRadius:

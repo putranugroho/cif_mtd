@@ -1168,7 +1168,7 @@ class PengadaanPage extends StatelessWidget {
                                                                   icon: Icon(Icons
                                                                       .search)),
                                                               hintText:
-                                                                  "Silahkan Masukkan NIK",
+                                                                  "Silahkan Masukkan NIP",
                                                               border:
                                                                   OutlineInputBorder(
                                                                 borderRadius:

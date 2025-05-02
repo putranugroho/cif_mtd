@@ -3,6 +3,7 @@ import 'package:accounting/models/index.dart';
 import 'package:accounting/module/master/users/users_notifier.dart';
 import 'package:accounting/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -539,93 +540,6 @@ class UsersPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 16,
                                     ),
-                                    // Row(
-                                    //   children: [
-                                    //     Text(
-                                    //       "Terminal ID",
-                                    //       style: const TextStyle(fontSize: 12),
-                                    //     ),
-                                    //     const SizedBox(width: 5),
-                                    //   ],
-                                    // ),
-                                    // const SizedBox(
-                                    //   height: 8,
-                                    // ),
-                                    // TextFormField(
-                                    //   textInputAction: TextInputAction.done,
-                                    //   maxLines: 1,
-                                    //   decoration: InputDecoration(
-                                    //     hintText: "Input Terminal ID",
-                                    //     suffixIcon: InkWell(
-                                    //         onTap: () {},
-                                    //         child: Icon(Icons.search)),
-                                    //     border: OutlineInputBorder(
-                                    //       borderRadius: BorderRadius.circular(6),
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                    // const SizedBox(
-                                    //   height: 16,
-                                    // ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Level Otorisasi",
-                                          style: const TextStyle(fontSize: 12),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        const Text(
-                                          "*",
-                                          style: TextStyle(fontSize: 8),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    DropdownSearch<String>(
-                                      key: value.dropdownKey,
-                                      popupProps: const PopupProps.menu(
-                                        showSearchBox: true,
-                                      ),
-                                      selectedItem: value.levelSelected
-                                          ? value.levelOtor
-                                          : null,
-                                      items: value.listLevelOtor,
-                                      itemAsString: (e) => "${e}",
-                                      onChanged: (e) {
-                                        value.pilihLevelOtor(e!);
-                                      },
-                                      dropdownDecoratorProps:
-                                          DropDownDecoratorProps(
-                                        baseStyle: TextStyle(fontSize: 16),
-                                        textAlignVertical:
-                                            TextAlignVertical.center,
-                                        dropdownSearchDecoration:
-                                            InputDecoration(
-                                          hintText: "Pilih Level Otorisasi",
-                                          suffixIcon: value.levelSelected
-                                              ? IconButton(
-                                                  onPressed: () {
-                                                    value.clearOtor();
-                                                  },
-                                                  icon: Icon(Icons.close),
-                                                )
-                                              : SizedBox(),
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            borderSide: BorderSide(
-                                              width: 1,
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 16,
-                                    ),
                                     Row(
                                       children: [
                                         Expanded(
@@ -636,122 +550,253 @@ class UsersPage extends StatelessWidget {
                                             Row(
                                               children: [
                                                 Text(
-                                                  "Minimal Otorisasi",
+                                                  "Akses Otorisasi",
                                                   style: const TextStyle(
                                                       fontSize: 12),
                                                 ),
-                                                const SizedBox(width: 5),
-                                                const Text(
-                                                  "*",
-                                                  style: TextStyle(fontSize: 8),
-                                                ),
+                                                Spacer(),
+                                                CupertinoSwitch(
+                                                    activeColor: colorPrimary,
+                                                    value: value.otorisasi,
+                                                    onChanged: (e) {
+                                                      value.gantiotorisasi();
+                                                    })
                                               ],
                                             ),
                                             const SizedBox(
-                                              height: 8,
+                                              height: 16,
                                             ),
-                                            TextFormField(
-                                              textInputAction:
-                                                  TextInputAction.done,
-                                              maxLines: 1,
-                                              readOnly: !value.levelSelected,
-                                              controller: value.minotor,
-                                              inputFormatters: [
-                                                FilteringTextInputFormatter
-                                                    .digitsOnly,
-                                                CurrencyInputFormatter(),
-                                              ],
-                                              validator: (e) {
-                                                if (e!.isEmpty) {
-                                                  return "Wajib diisi";
-                                                } else {
-                                                  return null;
-                                                }
-                                              },
-                                              decoration: InputDecoration(
-                                                filled: !value.levelSelected
-                                                    ? true
-                                                    : false,
-                                                fillColor: Colors.grey[200],
-                                                hintText: "Minimal Otorisasi",
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(height: 16),
                                           ],
                                         )),
                                         SizedBox(
                                           width: 16,
                                         ),
-                                        Expanded(
-                                            child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "Maksimal Otorisasi",
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
-                                                ),
-                                                const SizedBox(width: 5),
-                                                const Text(
-                                                  "*",
-                                                  style: TextStyle(fontSize: 8),
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              height: 8,
-                                            ),
-                                            TextFormField(
-                                              textInputAction:
-                                                  TextInputAction.done,
-                                              maxLines: 1,
-                                              readOnly: !value.levelSelected,
-                                              controller: value.maxotor,
-                                              inputFormatters: [
-                                                FilteringTextInputFormatter
-                                                    .digitsOnly,
-                                                CurrencyInputFormatter(),
-                                              ],
-                                              validator: (e) {
-                                                if (e!.isEmpty) {
-                                                  return "Wajib diisi";
-                                                } else {
-                                                  if (int.parse(e.replaceAll(
-                                                          ",", "")) <=
-                                                      int.parse(value
-                                                          .minotor.text
-                                                          .replaceAll(
-                                                              ",", ""))) {
-                                                    return "Nilai maksimal otorisasi tidak boleh lebih kecil dari minimal otorisasi";
-                                                  } else {
-                                                    return null;
-                                                  }
-                                                }
-                                              },
-                                              decoration: InputDecoration(
-                                                filled: !value.levelSelected
-                                                    ? true
-                                                    : false,
-                                                fillColor: Colors.grey[200],
-                                                hintText: "Maksimal Otorisasi",
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(height: 16),
-                                          ],
-                                        ))
+                                        value.otorisasi
+                                            ? Expanded(
+                                                child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "Level Otorisasi",
+                                                        style: const TextStyle(
+                                                            fontSize: 12),
+                                                      ),
+                                                      const SizedBox(width: 5),
+                                                      const Text(
+                                                        "*",
+                                                        style: TextStyle(
+                                                            fontSize: 8),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  DropdownSearch<String>(
+                                                    key: value.dropdownKey,
+                                                    popupProps:
+                                                        const PopupProps.menu(
+                                                      showSearchBox: true,
+                                                    ),
+                                                    selectedItem:
+                                                        value.levelSelected
+                                                            ? value.levelOtor
+                                                            : null,
+                                                    items: value.listLevelOtor,
+                                                    itemAsString: (e) => "${e}",
+                                                    onChanged: (e) {
+                                                      value.pilihLevelOtor(e!);
+                                                    },
+                                                    dropdownDecoratorProps:
+                                                        DropDownDecoratorProps(
+                                                      baseStyle: TextStyle(
+                                                          fontSize: 16),
+                                                      textAlignVertical:
+                                                          TextAlignVertical
+                                                              .center,
+                                                      dropdownSearchDecoration:
+                                                          InputDecoration(
+                                                        hintText:
+                                                            "Pilih Level Otorisasi",
+                                                        suffixIcon: value
+                                                                .levelSelected
+                                                            ? IconButton(
+                                                                onPressed: () {
+                                                                  value
+                                                                      .clearOtor();
+                                                                },
+                                                                icon: Icon(Icons
+                                                                    .close),
+                                                              )
+                                                            : SizedBox(),
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                          borderSide:
+                                                              BorderSide(
+                                                            width: 1,
+                                                            color: Colors.grey,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ))
+                                            : SizedBox(),
                                       ],
                                     ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    value.otorisasi
+                                        ? Row(
+                                            children: [
+                                              Expanded(
+                                                  child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "Minimal Otorisasi",
+                                                        style: const TextStyle(
+                                                            fontSize: 12),
+                                                      ),
+                                                      const SizedBox(width: 5),
+                                                      const Text(
+                                                        "*",
+                                                        style: TextStyle(
+                                                            fontSize: 8),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  TextFormField(
+                                                    textInputAction:
+                                                        TextInputAction.done,
+                                                    maxLines: 1,
+                                                    readOnly:
+                                                        !value.levelSelected,
+                                                    controller: value.minotor,
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .digitsOnly,
+                                                      CurrencyInputFormatter(),
+                                                    ],
+                                                    validator: (e) {
+                                                      if (e!.isEmpty) {
+                                                        return "Wajib diisi";
+                                                      } else {
+                                                        return null;
+                                                      }
+                                                    },
+                                                    decoration: InputDecoration(
+                                                      filled:
+                                                          !value.levelSelected
+                                                              ? true
+                                                              : false,
+                                                      fillColor:
+                                                          Colors.grey[200],
+                                                      hintText:
+                                                          "Minimal Otorisasi",
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 16),
+                                                ],
+                                              )),
+                                              SizedBox(
+                                                width: 16,
+                                              ),
+                                              Expanded(
+                                                  child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "Maksimal Otorisasi",
+                                                        style: const TextStyle(
+                                                            fontSize: 12),
+                                                      ),
+                                                      const SizedBox(width: 5),
+                                                      const Text(
+                                                        "*",
+                                                        style: TextStyle(
+                                                            fontSize: 8),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  TextFormField(
+                                                    textInputAction:
+                                                        TextInputAction.done,
+                                                    maxLines: 1,
+                                                    readOnly:
+                                                        !value.levelSelected,
+                                                    controller: value.maxotor,
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .digitsOnly,
+                                                      CurrencyInputFormatter(),
+                                                    ],
+                                                    validator: (e) {
+                                                      if (e!.isEmpty) {
+                                                        return "Wajib diisi";
+                                                      } else {
+                                                        if (int.parse(
+                                                                e.replaceAll(
+                                                                    ",", "")) <=
+                                                            int.parse(value
+                                                                .minotor.text
+                                                                .replaceAll(
+                                                                    ",", ""))) {
+                                                          return "Harus lebih besar dari minimal otorisasi";
+                                                        } else {
+                                                          return null;
+                                                        }
+                                                      }
+                                                    },
+                                                    decoration: InputDecoration(
+                                                      filled:
+                                                          !value.levelSelected
+                                                              ? true
+                                                              : false,
+                                                      fillColor:
+                                                          Colors.grey[200],
+                                                      hintText:
+                                                          "Maksimal Otorisasi",
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 16),
+                                                ],
+                                              ))
+                                            ],
+                                          )
+                                        : SizedBox(),
                                     Row(
                                       children: [
                                         Expanded(
@@ -984,7 +1029,6 @@ class UsersPage extends StatelessWidget {
                                             ],
                                           )
                                         : SizedBox(),
-
                                     ButtonPrimary(
                                       onTap: () {
                                         value.cek();

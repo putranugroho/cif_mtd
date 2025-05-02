@@ -221,7 +221,7 @@ class KelompokAsetPage extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    "Kode",
+                                    "Kode Kelompok",
                                     style: const TextStyle(fontSize: 12),
                                   ),
                                   const SizedBox(width: 5),
@@ -240,7 +240,8 @@ class KelompokAsetPage extends StatelessWidget {
                                 controller: value.kode,
                                 maxLines: 1,
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[a-zA-Z0-9]'))
                                 ],
                                 validator: (e) {
                                   if (e!.isEmpty) {
