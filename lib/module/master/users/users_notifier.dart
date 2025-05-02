@@ -83,8 +83,9 @@ class UsersNotifier extends ChangeNotifier {
           "lvluser": "${levelUser!.idLevel}",
           "terminal_id": "",
           "akses_kasir": "${aksesKasir ? "N" : "Y"}",
-          "sbb_kasir": "${inqueryGlModel!.nosbb}",
-          "nama_sbb": "${inqueryGlModel!.namaSbb}",
+          "sbb_kasir": "${inqueryGlModel == null ? "" : inqueryGlModel!.nosbb}",
+          "nama_sbb":
+              "${inqueryGlModel == null ? "" : inqueryGlModel!.namaSbb}",
           "fhoto_1": "",
           "fhoto_2": "",
           "fhoto_3": "",
@@ -255,19 +256,64 @@ class UsersNotifier extends ChangeNotifier {
   }
 
   DateTime? tglBuka = DateTime.now();
+  Future<List<InqueryGlModel>> getInquery(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      listGl.clear();
+      notifyListeners();
+
+      var data = {"kode_pt": "001"};
+
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.getInqueryGL(),
+          jsonEncode(data),
+        );
+
+        if (response['status'].toString().toLowerCase().contains("success")) {
+          final List<Map<String, dynamic>> jnsAccBItems =
+              extractJnsAccB(response['data']);
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .toList();
+        }
+        notifyListeners();
+      } catch (e) {
+        print("Error: $e");
+      } finally {
+        notifyListeners();
+      }
+    } else {
+      listGl.clear(); // clear on short query
+    }
+
+    return listGl;
+  }
 
   Future pilihTanggalBuka() async {
     var pickedendDate = (await showDatePicker(
       context: context,
       initialDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) + 1,
+          int.parse(DateFormat('y').format(DateTime.now())),
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
           int.parse(DateFormat('dd').format(
+                DateTime.now(),
+              )) +
+              1),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
             DateTime.now(),
-          ))),
-      firstDate: DateTime(1950),
+          )),
+          int.parse(DateFormat('dd').format(
+                DateTime.now(),
+              )) +
+              1),
       lastDate: DateTime(
           int.parse(DateFormat('y').format(DateTime.now())) + 10,
           int.parse(DateFormat('MM').format(
@@ -320,11 +366,14 @@ class UsersNotifier extends ChangeNotifier {
 
   List<CoaModel> listCoa = [];
 
-  TextEditingController namaSbbAset = TextEditingController();
+  TextEditingController namasbb = TextEditingController();
+  TextEditingController nossbb = TextEditingController();
   CoaModel? sbbAset;
-  pilihSbbAset(CoaModel value) {
-    sbbAset = value;
-    namaSbbAset.text = value.nosbb;
+  pilihSbbAset(InqueryGlModel value) {
+    inqueryGlModel = value;
+    nossbb.text = value.nosbb;
+
+    namasbb.text = value.namaSbb;
     notifyListeners();
   }
 

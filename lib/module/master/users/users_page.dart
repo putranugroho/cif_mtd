@@ -5,6 +5,7 @@ import 'package:accounting/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -418,7 +419,7 @@ class UsersPage extends StatelessWidget {
                                       child: TextFormField(
                                         enabled: false,
                                         textInputAction: TextInputAction.done,
-                                        // controller: value.tglBukaRekening,
+                                        controller: value.tglexp,
                                         maxLines: 1,
                                         validator: (e) {
                                           if (e!.isEmpty) {
@@ -512,7 +513,7 @@ class UsersPage extends StatelessWidget {
                                       ),
                                       selectedItem: value.levelUser,
                                       items: value.listUsers,
-                                      itemAsString: (e) => "${e}",
+                                      itemAsString: (e) => "${e.levelUser}",
                                       onChanged: (e) {
                                         value.pilihLevel(e!);
                                       },
@@ -878,51 +879,44 @@ class UsersPage extends StatelessWidget {
                                               Row(
                                                 children: [
                                                   Expanded(
-                                                    child: DropdownSearch<
-                                                        CoaModel>(
-                                                      popupProps:
-                                                          const PopupPropsMultiSelection
-                                                              .menu(
-                                                        showSearchBox:
-                                                            true, // Aktifkan fitur pencarian
-                                                      ),
-                                                      selectedItem:
-                                                          value.sbbAset,
-                                                      items: value.listCoa
-                                                          .where((e) =>
-                                                              e.jnsAcc == "C")
-                                                          .toList(),
-                                                      itemAsString: (e) =>
-                                                          "${e.namaSbb}",
-                                                      onChanged: (e) {
-                                                        value.pilihSbbAset(e!);
+                                                    child: TypeAheadField<
+                                                        InqueryGlModel>(
+                                                      controller: value.nossbb,
+                                                      suggestionsCallback:
+                                                          (search) =>
+                                                              value.getInquery(
+                                                                  search),
+                                                      builder: (context,
+                                                          controller,
+                                                          focusNode) {
+                                                        return TextField(
+                                                            controller:
+                                                                controller,
+                                                            focusNode:
+                                                                focusNode,
+                                                            autofocus: true,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(),
+                                                              labelText:
+                                                                  'Cari Akun',
+                                                            ));
                                                       },
-                                                      dropdownDecoratorProps:
-                                                          DropDownDecoratorProps(
-                                                        baseStyle: TextStyle(
-                                                            fontSize: 16),
-                                                        textAlignVertical:
-                                                            TextAlignVertical
-                                                                .center,
-                                                        dropdownSearchDecoration:
-                                                            InputDecoration(
-                                                          hintText:
-                                                              "Pilih SBB Aset",
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              width: 1,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
+                                                      itemBuilder:
+                                                          (context, city) {
+                                                        return ListTile(
+                                                          title:
+                                                              Text(city.nosbb),
+                                                          subtitle: Text(
+                                                              city.namaSbb),
+                                                        );
+                                                      },
+                                                      onSelected: (city) {
+                                                        // value.selectInvoice(city);
+                                                        value
+                                                            .pilihSbbAset(city);
+                                                      },
                                                     ),
                                                   ),
                                                   SizedBox(
@@ -935,8 +929,7 @@ class UsersPage extends StatelessWidget {
                                                       readOnly: true,
                                                       textInputAction:
                                                           TextInputAction.done,
-                                                      controller:
-                                                          value.namaSbbAset,
+                                                      controller: value.namasbb,
                                                       maxLines: 1,
                                                       // inputFormatters: [
                                                       //   FilteringTextInputFormatter.digitsOnly
@@ -953,7 +946,7 @@ class UsersPage extends StatelessWidget {
                                                         filled: true,
                                                         fillColor:
                                                             Colors.grey[200],
-                                                        hintText: "Nomor SBB",
+                                                        hintText: "Nomor Akun",
                                                         border:
                                                             OutlineInputBorder(
                                                           borderRadius:
@@ -962,89 +955,16 @@ class UsersPage extends StatelessWidget {
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(height: 16),
-                                            ],
-                                          )
-                                        : SizedBox(),
-                                    Container(
-                                      margin:
-                                          EdgeInsets.symmetric(vertical: 16),
-                                      height: 1,
-                                      color: Colors.grey[300],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Expanded(child: Text("MODUL USER")),
-                                        Checkbox(
-                                            activeColor: colorPrimary,
-                                            value: value.semua,
-                                            onChanged: (e) =>
-                                                value.pilihSemua()),
-                                        SizedBox(
-                                          width: 8,
-                                        ),
-                                        Text(
-                                          "Pilih Semua",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Container(
-                                      margin:
-                                          EdgeInsets.symmetric(vertical: 16),
-                                      height: 1,
-                                      color: Colors.grey[300],
-                                    ),
-                                    ListView.builder(
-                                        itemCount: value.listMenu.length,
-                                        shrinkWrap: true,
-                                        physics: ClampingScrollPhysics(),
-                                        itemBuilder: (context, i) {
-                                          final data = value.listMenu[i];
-                                          return Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Checkbox(
-                                                      activeColor: colorPrimary,
-                                                      value: value.listMenuAdd
-                                                              .isEmpty
-                                                          ? false
-                                                          : value.listMenuAdd
-                                                                  .where((e) =>
-                                                                      e == data)
-                                                                  .isNotEmpty
-                                                              ? true
-                                                              : false,
-                                                      onChanged: (e) => value
-                                                          .pilihMenu(data)),
-                                                  SizedBox(
-                                                    width: 8,
-                                                  ),
-                                                  Expanded(
-                                                      child:
-                                                          Text("${data.menu}")),
-                                                  Expanded(
-                                                      child: Text(
-                                                          "${data.submenu}"))
+                                                  )
                                                 ],
                                               ),
                                               SizedBox(
-                                                height: 8,
-                                              )
+                                                height: 16,
+                                              ),
                                             ],
-                                          );
-                                        }),
-                                    SizedBox(
-                                      height: 16,
-                                    ),
+                                          )
+                                        : SizedBox(),
+
                                     ButtonPrimary(
                                       onTap: () {
                                         value.cek();

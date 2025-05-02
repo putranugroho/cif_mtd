@@ -137,7 +137,7 @@ class LevelPage extends StatelessWidget {
                                           color: colorPrimary,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
-                                          child: Text('Kelompok Level',
+                                          child: Text('Nama Level',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -192,8 +192,8 @@ class LevelPage extends StatelessWidget {
                                   Expanded(
                                     child: Text(
                                       value.editData
-                                          ? "Ubah / Hapus Level"
-                                          : "Tambah Level",
+                                          ? "Ubah / Hapus Level "
+                                          : "Tambah Level ",
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -258,7 +258,7 @@ class LevelPage extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    "Kelompok Level",
+                                    "Nama Level",
                                     style: const TextStyle(fontSize: 12),
                                   ),
                                   const SizedBox(width: 5),
@@ -286,7 +286,7 @@ class LevelPage extends StatelessWidget {
                                   }
                                 },
                                 decoration: InputDecoration(
-                                  hintText: "Kelompok Level",
+                                  hintText: "Nama Level",
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6),
                                   ),

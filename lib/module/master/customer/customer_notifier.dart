@@ -5,6 +5,7 @@ import 'package:accounting/repository/SetupRepository.dart';
 import 'package:flutter/material.dart';
 
 import '../../../network/network.dart';
+import '../../../repository/wilayah_repository.dart';
 import '../../../utils/button_custom.dart';
 import '../../../utils/dialog_loading.dart';
 import '../../../utils/informationdialog.dart';
@@ -14,6 +15,7 @@ class CustomerNotifier extends ChangeNotifier {
 
   CustomerNotifier({required this.context}) {
     getAoMarketing();
+    getProvinsi();
     notifyListeners();
   }
 
@@ -108,10 +110,10 @@ class CustomerNotifier extends ChangeNotifier {
               "${golCust == "Customer" ? 1 : golCust == "Supplier" ? 2 : 3}",
           "bidang_usaha": "${bidangUsaha.text}",
           "alamat": "${alamat.text.trim()}",
-          "kelurahan": "${kelurahan.text.trim()}",
-          "kecamatan": "${kecamatan.text.trim()}",
-          "kota": "${kota.text.trim()}",
-          "provinsi": "${provinsi.text.trim()}",
+          "kelurahan": "${kelurahanModel!.name}",
+          "kecamatan": "${kecamatanModel!.name}",
+          "kota": "${kotaModal!.name}",
+          "provinsi": "${provinsiModel!.name}",
           "kdpos": "${kodepos.text.trim()}",
           "npwp": "${npwp.text.trim()}",
           "pkp": "${pkp ? "Y" : "N"}",
@@ -129,7 +131,9 @@ class CustomerNotifier extends ChangeNotifier {
           "hp3": "${hp3.text.trim()}",
           "email3": "${email3.text.trim()}",
           "keterangan3": "${keterangan3.text.trim()}",
-          "kode_ao": "${aoModel!.kode}"
+          "kode_ao_customer": "${aoModel == null ? null : aoModel!.kode}",
+          "kode_ao_supplier":
+              "${aoModelKRedit == null ? null : aoModelKRedit!.kode}",
         };
         // print(jsonEncode(data));
         Setuprepository.setup(
@@ -154,10 +158,10 @@ class CustomerNotifier extends ChangeNotifier {
               "${golCust == "Customer" ? 1 : golCust == "Supplier" ? 2 : 3}",
           "bidang_usaha": "${bidangUsaha.text}",
           "alamat": "${alamat.text.trim()}",
-          "kelurahan": "${kelurahan.text.trim()}",
-          "kecamatan": "${kecamatan.text.trim()}",
-          "kota": "${kota.text.trim()}",
-          "provinsi": "${provinsi.text.trim()}",
+          "kelurahan": "${kelurahanModel!.name}",
+          "kecamatan": "${kecamatanModel!.name}",
+          "kota": "${kotaModal!.name}",
+          "provinsi": "${provinsiModel!.name}",
           "kdpos": "${kodepos.text.trim()}",
           "npwp": "${npwp.text.trim()}",
           "pkp": "${pkp ? "Y" : "N"}",
@@ -175,7 +179,9 @@ class CustomerNotifier extends ChangeNotifier {
           "hp3": "${hp3.text.trim()}",
           "email3": "${email3.text.trim()}",
           "keterangan3": "${keterangan3.text.trim()}",
-          "kode_ao": "${aoModel!.kode}"
+          "kode_ao_customer": "${aoModel == null ? null : aoModel!.kode}",
+          "kode_ao_supplier":
+              "${aoModelKRedit == null ? null : aoModelKRedit!.kode}",
         };
         Setuprepository.setup(token, NetworkURL.addCustomer(), jsonEncode(data))
             .then((value) {
@@ -263,11 +269,15 @@ class CustomerNotifier extends ChangeNotifier {
   }
 
   edit(String id) {
-    dialog = true;
-    editData = true;
+    DialogCustom().showLoading(context);
+
     customerSupplierModel = list.where((e) => e.id == int.parse(id)).first;
-    aoModel =
-        listAoModel.where((e) => e.kode == customerSupplierModel!.kodeAo).first;
+    aoModel = listAoModel
+        .where((e) => e.kode == customerSupplierModel!.kodeAoCustomer)
+        .first;
+    aoModelKRedit = listAoModel
+        .where((e) => e.kode == customerSupplierModel!.kodeAoSupplier)
+        .first;
     noSif.text = customerSupplierModel!.noSif;
     namaSif.text = customerSupplierModel!.nmSif;
     golCust = customerSupplierModel!.golCust == "1"
@@ -277,10 +287,59 @@ class CustomerNotifier extends ChangeNotifier {
             : "Customer dan Supplier";
     bidangUsaha.text = customerSupplierModel!.bidangUsaha;
     alamat.text = customerSupplierModel!.alamat;
-    kelurahan.text = customerSupplierModel!.kelurahan;
-    kecamatan.text = customerSupplierModel!.kecamatan;
-    kota.text = customerSupplierModel!.kota;
-    provinsi.text = customerSupplierModel!.provinsi;
+    provinsiModel = listProvinsi
+        .where((e) => e.name == customerSupplierModel!.provinsi)
+        .first;
+    listKota.clear();
+    notifyListeners();
+    WilayahRepository.getKota(NetworkURL.getKota(provinsiModel!.id.toString()))
+        .then((value) {
+      for (var i = 0; i < value.length; i++) {
+        listKota.add(KotaModel(
+            id: value[i]['id'],
+            name: value[i]['name'],
+            provinceId: provinsiModel!.id));
+      }
+      kotaModal =
+          listKota.where((e) => e.name == customerSupplierModel!.kota).first;
+      listKecamatan.clear();
+      notifyListeners();
+      WilayahRepository.getKota(
+              NetworkURL.getKecamatan(kotaModal!.id.toString()))
+          .then((valuess) {
+        for (var i = 0; i < valuess.length; i++) {
+          listKecamatan.add(KecamatanModel(
+              id: valuess[i]['id'],
+              name: valuess[i]['name'],
+              regencyId: kotaModal!.id));
+        }
+        kecamatanModel = listKecamatan
+            .where((e) => e.name == customerSupplierModel!.kecamatan)
+            .first;
+        listKelurahan.clear();
+        notifyListeners();
+        WilayahRepository.getKelurahan(
+                NetworkURL.getKelurahan(kecamatanModel!.id))
+            .then((e) {
+          Navigator.pop(context);
+          for (var i = 0; i < e.length; i++) {
+            listKelurahan.add(KelurahanModel(
+                id: e[i]['id'],
+                name: e[i]['name'],
+                districtId: kecamatanModel!.id));
+          }
+          kelurahanModel = listKelurahan
+              .where((e) => e.name == customerSupplierModel!.kelurahan)
+              .first;
+          dialog = true;
+          editData = true;
+          notifyListeners();
+        });
+      });
+
+      notifyListeners();
+    });
+
     kodepos.text = customerSupplierModel!.kdpos;
     npwp.text = customerSupplierModel!.npwp;
     pkp = customerSupplierModel!.pkp == "Y" ? true : false;
@@ -347,6 +406,106 @@ class CustomerNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<ProvinsiModel> listProvinsi = [];
+  ProvinsiModel? provinsiModel;
+  List<KotaModel> listKota = [];
+  KotaModel? kotaModal;
+  List<KecamatanModel> listKecamatan = [];
+  KecamatanModel? kecamatanModel;
+  List<KelurahanModel> listKelurahan = [];
+  KelurahanModel? kelurahanModel;
+  Future getProvinsi() async {
+    WilayahRepository.getProvinsi(NetworkURL.getProvinsi()).then((value) {
+      for (var i = 0; i < value.length; i++) {
+        listProvinsi.add(ProvinsiModel(
+            id: value[i]['id'].toString(), name: value[i]['name']));
+      }
+      notifyListeners();
+    });
+  }
+
+  pilihProvinsi(ProvinsiModel value) {
+    provinsiModel = value;
+    kotaModal = null;
+    kecamatanModel = null;
+    kelurahanModel = null;
+    listKota.clear();
+    listKecamatan.clear();
+    listKelurahan.clear();
+    getKota();
+    notifyListeners();
+  }
+
+  getKota() async {
+    listKota.clear();
+    notifyListeners();
+    WilayahRepository.getKota(NetworkURL.getKota(provinsiModel!.id.toString()))
+        .then((value) {
+      for (var i = 0; i < value.length; i++) {
+        listKota.add(KotaModel(
+            id: value[i]['id'],
+            name: value[i]['name'],
+            provinceId: provinsiModel!.id));
+      }
+
+      notifyListeners();
+    });
+  }
+
+  pilihKota(KotaModel value) {
+    kotaModal = value;
+    kecamatanModel = null;
+    kelurahanModel = null;
+    listKecamatan.clear();
+    listKelurahan.clear();
+    getKecamatan();
+    notifyListeners();
+  }
+
+  getKecamatan() async {
+    listKecamatan.clear();
+    notifyListeners();
+    WilayahRepository.getKota(NetworkURL.getKecamatan(kotaModal!.id.toString()))
+        .then((value) {
+      for (var i = 0; i < value.length; i++) {
+        listKecamatan.add(KecamatanModel(
+            id: value[i]['id'],
+            name: value[i]['name'],
+            regencyId: kotaModal!.id));
+      }
+
+      notifyListeners();
+    });
+  }
+
+  pilihKecamatan(KecamatanModel value) {
+    kecamatanModel = value;
+    kelurahanModel = null;
+    listKelurahan.clear();
+    getKelurahan();
+    notifyListeners();
+  }
+
+  getKelurahan() async {
+    listKelurahan.clear();
+    notifyListeners();
+    WilayahRepository.getKelurahan(NetworkURL.getKelurahan(kecamatanModel!.id))
+        .then((value) {
+      for (var i = 0; i < value.length; i++) {
+        listKelurahan.add(KelurahanModel(
+            id: value[i]['id'],
+            name: value[i]['name'],
+            districtId: kecamatanModel!.id));
+      }
+      notifyListeners();
+    });
+  }
+
+  pilihKelurahan(KelurahanModel value) async {
+    kelurahanModel = value;
+    notifyListeners();
+  }
+
   bool pkp = false;
   pilihPkp(bool value) {
     pkp = value;
@@ -362,7 +521,7 @@ class CustomerNotifier extends ChangeNotifier {
   }
 
   pilihAoModelKredit(AoModel value) {
-    aoModel = value;
+    aoModelKRedit = value;
     notifyListeners();
   }
 }

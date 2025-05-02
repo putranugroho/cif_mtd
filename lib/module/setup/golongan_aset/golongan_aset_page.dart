@@ -469,7 +469,7 @@ class GolonganAsetPage extends StatelessWidget {
                                         child: TypeAheadField<InqueryGlModel>(
                                           controller: value.namasbbaset,
                                           suggestionsCallback: (search) =>
-                                              value.getInquery(search),
+                                              value.getInquerySbbAset(search),
                                           builder:
                                               (context, controller, focusNode) {
                                             return TextField(
@@ -552,7 +552,7 @@ class GolonganAsetPage extends StatelessWidget {
                                         child: TypeAheadField<InqueryGlModel>(
                                           controller: value.namasbbpenyusutan,
                                           suggestionsCallback: (search) =>
-                                              value.getInquery(search),
+                                              value.getInquerySbbPenyusutan(search),
                                           builder:
                                               (context, controller, focusNode) {
                                             return TextField(
@@ -635,7 +635,7 @@ class GolonganAsetPage extends StatelessWidget {
                                         child: TypeAheadField<InqueryGlModel>(
                                           controller: value.namasbbrugijual,
                                           suggestionsCallback: (search) =>
-                                              value.getInquery(search),
+                                              value.getInquerySbbPenyusutan(search),
                                           builder:
                                               (context, controller, focusNode) {
                                             return TextField(
@@ -718,7 +718,7 @@ class GolonganAsetPage extends StatelessWidget {
                                         child: TypeAheadField<InqueryGlModel>(
                                           controller: value.namasbblabajual,
                                           suggestionsCallback: (search) =>
-                                              value.getInquery(search),
+                                              value.getInquerySbbLabaJual(search),
                                           builder:
                                               (context, controller, focusNode) {
                                             return TextField(

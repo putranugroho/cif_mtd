@@ -352,7 +352,7 @@ class HutangNotifier extends ChangeNotifier {
           "kode_pt": "001",
           "kode_kantor": "",
           "kode_induk": "",
-          "kode_ao": customerSupplierModel!.kodeAo,
+          "kode_ao": customerSupplierModel!.kodeAoSupplier,
         };
         Setuprepository.setup(
           token,
@@ -392,7 +392,7 @@ class HutangNotifier extends ChangeNotifier {
           "kode_pt": "001",
           "kode_kantor": "",
           "kode_induk": "",
-          "kode_ao": customerSupplierModel!.kodeAo,
+          "kode_ao": customerSupplierModel!.kodeAoSupplier,
         };
         Setuprepository.setup(
                 token, NetworkURL.addHutangPiutang(), jsonEncode(data))

@@ -35,7 +35,8 @@ class CustomerSupplierModel {
     required this.hp3,
     required this.email3,
     required this.keterangan3,
-    required this.kodeAo,
+    required this.kodeAoCustomer,
+    required this.kodeAoSupplier,
   });
 
   final int id;
@@ -66,7 +67,8 @@ class CustomerSupplierModel {
   final String hp3;
   final String email3;
   final String keterangan3;
-  final String kodeAo;
+  final String kodeAoCustomer;
+  final String kodeAoSupplier;
 
   factory CustomerSupplierModel.fromJson(Map<String,dynamic> json) => CustomerSupplierModel(
     id: json['id'] as int,
@@ -97,7 +99,8 @@ class CustomerSupplierModel {
     hp3: json['hp3'].toString(),
     email3: json['email3'].toString(),
     keterangan3: json['keterangan3'].toString(),
-    kodeAo: json['kode_ao'].toString()
+    kodeAoCustomer: json['kode_ao_customer'].toString(),
+    kodeAoSupplier: json['kode_ao_supplier'].toString()
   );
   
   Map<String, dynamic> toJson() => {
@@ -129,7 +132,8 @@ class CustomerSupplierModel {
     'hp3': hp3,
     'email3': email3,
     'keterangan3': keterangan3,
-    'kode_ao': kodeAo
+    'kode_ao_customer': kodeAoCustomer,
+    'kode_ao_supplier': kodeAoSupplier
   };
 
   CustomerSupplierModel clone() => CustomerSupplierModel(
@@ -161,7 +165,8 @@ class CustomerSupplierModel {
     hp3: hp3,
     email3: email3,
     keterangan3: keterangan3,
-    kodeAo: kodeAo
+    kodeAoCustomer: kodeAoCustomer,
+    kodeAoSupplier: kodeAoSupplier
   );
 
 
@@ -194,7 +199,8 @@ class CustomerSupplierModel {
     String? hp3,
     String? email3,
     String? keterangan3,
-    String? kodeAo
+    String? kodeAoCustomer,
+    String? kodeAoSupplier
   }) => CustomerSupplierModel(
     id: id ?? this.id,
     kodePt: kodePt ?? this.kodePt,
@@ -224,13 +230,14 @@ class CustomerSupplierModel {
     hp3: hp3 ?? this.hp3,
     email3: email3 ?? this.email3,
     keterangan3: keterangan3 ?? this.keterangan3,
-    kodeAo: kodeAo ?? this.kodeAo,
+    kodeAoCustomer: kodeAoCustomer ?? this.kodeAoCustomer,
+    kodeAoSupplier: kodeAoSupplier ?? this.kodeAoSupplier,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is CustomerSupplierModel && id == other.id && kodePt == other.kodePt && noSif == other.noSif && nmSif == other.nmSif && golCust == other.golCust && bidangUsaha == other.bidangUsaha && alamat == other.alamat && kelurahan == other.kelurahan && kecamatan == other.kecamatan && kota == other.kota && provinsi == other.provinsi && kdpos == other.kdpos && npwp == other.npwp && pkp == other.pkp && noTelp == other.noTelp && email == other.email && kontak1 == other.kontak1 && hp1 == other.hp1 && email1 == other.email1 && keterangan1 == other.keterangan1 && kontak2 == other.kontak2 && hp2 == other.hp2 && email2 == other.email2 && keterangan2 == other.keterangan2 && kontak3 == other.kontak3 && hp3 == other.hp3 && email3 == other.email3 && keterangan3 == other.keterangan3 && kodeAo == other.kodeAo;
+    || other is CustomerSupplierModel && id == other.id && kodePt == other.kodePt && noSif == other.noSif && nmSif == other.nmSif && golCust == other.golCust && bidangUsaha == other.bidangUsaha && alamat == other.alamat && kelurahan == other.kelurahan && kecamatan == other.kecamatan && kota == other.kota && provinsi == other.provinsi && kdpos == other.kdpos && npwp == other.npwp && pkp == other.pkp && noTelp == other.noTelp && email == other.email && kontak1 == other.kontak1 && hp1 == other.hp1 && email1 == other.email1 && keterangan1 == other.keterangan1 && kontak2 == other.kontak2 && hp2 == other.hp2 && email2 == other.email2 && keterangan2 == other.keterangan2 && kontak3 == other.kontak3 && hp3 == other.hp3 && email3 == other.email3 && keterangan3 == other.keterangan3 && kodeAoCustomer == other.kodeAoCustomer && kodeAoSupplier == other.kodeAoSupplier;
 
   @override
-  int get hashCode => id.hashCode ^ kodePt.hashCode ^ noSif.hashCode ^ nmSif.hashCode ^ golCust.hashCode ^ bidangUsaha.hashCode ^ alamat.hashCode ^ kelurahan.hashCode ^ kecamatan.hashCode ^ kota.hashCode ^ provinsi.hashCode ^ kdpos.hashCode ^ npwp.hashCode ^ pkp.hashCode ^ noTelp.hashCode ^ email.hashCode ^ kontak1.hashCode ^ hp1.hashCode ^ email1.hashCode ^ keterangan1.hashCode ^ kontak2.hashCode ^ hp2.hashCode ^ email2.hashCode ^ keterangan2.hashCode ^ kontak3.hashCode ^ hp3.hashCode ^ email3.hashCode ^ keterangan3.hashCode ^ kodeAo.hashCode;
+  int get hashCode => id.hashCode ^ kodePt.hashCode ^ noSif.hashCode ^ nmSif.hashCode ^ golCust.hashCode ^ bidangUsaha.hashCode ^ alamat.hashCode ^ kelurahan.hashCode ^ kecamatan.hashCode ^ kota.hashCode ^ provinsi.hashCode ^ kdpos.hashCode ^ npwp.hashCode ^ pkp.hashCode ^ noTelp.hashCode ^ email.hashCode ^ kontak1.hashCode ^ hp1.hashCode ^ email1.hashCode ^ keterangan1.hashCode ^ kontak2.hashCode ^ hp2.hashCode ^ email2.hashCode ^ keterangan2.hashCode ^ kontak3.hashCode ^ hp3.hashCode ^ email3.hashCode ^ keterangan3.hashCode ^ kodeAoCustomer.hashCode ^ kodeAoSupplier.hashCode;
 }

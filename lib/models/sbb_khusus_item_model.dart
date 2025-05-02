@@ -9,6 +9,7 @@ class SbbKhususItemModel {
   const SbbKhususItemModel({
     required this.id,
     required this.kodePt,
+    required this.idGolongan,
     required this.kodeGolongan,
     required this.nosbb,
     required this.namaSbb,
@@ -18,6 +19,7 @@ class SbbKhususItemModel {
 
   final int id;
   final String kodePt;
+  final String idGolongan;
   final String kodeGolongan;
   final String nosbb;
   final String namaSbb;
@@ -27,6 +29,7 @@ class SbbKhususItemModel {
   factory SbbKhususItemModel.fromJson(Map<String,dynamic> json) => SbbKhususItemModel(
     id: json['id'] as int,
     kodePt: json['kode_pt'].toString(),
+    idGolongan: json['id_golongan'].toString(),
     kodeGolongan: json['kode_golongan'].toString(),
     nosbb: json['nosbb'].toString(),
     namaSbb: json['nama_sbb'].toString(),
@@ -37,6 +40,7 @@ class SbbKhususItemModel {
   Map<String, dynamic> toJson() => {
     'id': id,
     'kode_pt': kodePt,
+    'id_golongan': idGolongan,
     'kode_golongan': kodeGolongan,
     'nosbb': nosbb,
     'nama_sbb': namaSbb,
@@ -47,6 +51,7 @@ class SbbKhususItemModel {
   SbbKhususItemModel clone() => SbbKhususItemModel(
     id: id,
     kodePt: kodePt,
+    idGolongan: idGolongan,
     kodeGolongan: kodeGolongan,
     nosbb: nosbb,
     namaSbb: namaSbb,
@@ -58,6 +63,7 @@ class SbbKhususItemModel {
   SbbKhususItemModel copyWith({
     int? id,
     String? kodePt,
+    String? idGolongan,
     String? kodeGolongan,
     String? nosbb,
     String? namaSbb,
@@ -66,6 +72,7 @@ class SbbKhususItemModel {
   }) => SbbKhususItemModel(
     id: id ?? this.id,
     kodePt: kodePt ?? this.kodePt,
+    idGolongan: idGolongan ?? this.idGolongan,
     kodeGolongan: kodeGolongan ?? this.kodeGolongan,
     nosbb: nosbb ?? this.nosbb,
     namaSbb: namaSbb ?? this.namaSbb,
@@ -75,8 +82,8 @@ class SbbKhususItemModel {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is SbbKhususItemModel && id == other.id && kodePt == other.kodePt && kodeGolongan == other.kodeGolongan && nosbb == other.nosbb && namaSbb == other.namaSbb && createddate == other.createddate && isDeleted == other.isDeleted;
+    || other is SbbKhususItemModel && id == other.id && kodePt == other.kodePt && idGolongan == other.idGolongan && kodeGolongan == other.kodeGolongan && nosbb == other.nosbb && namaSbb == other.namaSbb && createddate == other.createddate && isDeleted == other.isDeleted;
 
   @override
-  int get hashCode => id.hashCode ^ kodePt.hashCode ^ kodeGolongan.hashCode ^ nosbb.hashCode ^ namaSbb.hashCode ^ createddate.hashCode ^ isDeleted.hashCode;
+  int get hashCode => id.hashCode ^ kodePt.hashCode ^ idGolongan.hashCode ^ kodeGolongan.hashCode ^ nosbb.hashCode ^ namaSbb.hashCode ^ createddate.hashCode ^ isDeleted.hashCode;
 }

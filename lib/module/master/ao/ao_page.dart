@@ -386,7 +386,13 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'no', value: (index++).toString()),
                 DataGridCell(columnName: 'kode', value: data.kode),
                 DataGridCell(columnName: 'nama', value: data.nama),
-                DataGridCell(columnName: 'cs', value: data.id.toString()),
+                DataGridCell(
+                    columnName: 'cs',
+                    value: data.golCust == "1"
+                        ? "Customer"
+                        : data.golCust == "2"
+                            ? "Supplier"
+                            : "Customer / Supplier"),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
@@ -397,7 +403,7 @@ class DetailDataSource extends DataGridSource {
   DataGridRowAdapter buildRow(DataGridRow row) {
     return DataGridRowAdapter(
       cells: row.getCells().map<Widget>((e) {
-        if (e.columnName == 'action' || e.columnName == 'cs') {
+        if (e.columnName == 'action') {
           return Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),

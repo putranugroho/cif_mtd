@@ -130,6 +130,7 @@ class SbbKhususNotifier extends ChangeNotifier {
   pilihCoa(InqueryGlModel value) {
     if (listGlAdd.isEmpty) {
       listGlAdd.add(value);
+      inqueryGlModel = listGlAdd.first;
     } else {
       if (listGlAdd.where((e) => e == value).isNotEmpty) {
         listGlAdd.remove(value);
@@ -156,7 +157,10 @@ class SbbKhususNotifier extends ChangeNotifier {
 
   InqueryGlModel? inqueryGlModel;
   pilihSbbSatu(InqueryGlModel value) {
+    listGlAdd.remove(value);
     inqueryGlModel = value;
+    listGlAdd.add(value);
+
     notifyListeners();
   }
 
@@ -173,7 +177,7 @@ class SbbKhususNotifier extends ChangeNotifier {
   cek() {
     List<Map<String, dynamic>> json = [];
     print("listGlAdd");
-    print(listGlAdd);
+    print(inqueryGlModel);
     print(listGlAdd.length);
     if (inqueryGlModel == null || listGlAdd.length == 0) {
       informationDialog(context, "Warning", "Harap memilih Sub Buku Besar!!");
@@ -191,7 +195,7 @@ class SbbKhususNotifier extends ChangeNotifier {
             "nosbb": "${listGlAdd[i].nosbb}",
             "nama_sbb": "${listGlAdd[i].namaSbb}",
             "type_posting": "${listGlAdd[i].typePosting}",
-            "kode_golongan": "${golonganSbbKhususModel!.kodeGolongan}",
+            "id_golongan": "${golonganSbbKhususModel!.id}",
             "kode_pt": "${golonganSbbKhususModel!.kodePt}",
             "sbb_khusus": ""
           });
@@ -205,7 +209,7 @@ class SbbKhususNotifier extends ChangeNotifier {
           "nosbb": "${inqueryGlModel!.nosbb}",
           "nama_sbb": "${inqueryGlModel!.namaSbb}",
           "type_posting": "${inqueryGlModel!.typePosting}",
-          "kode_golongan": "${golonganSbbKhususModel!.kodeGolongan}",
+          "id_golongan": "${golonganSbbKhususModel!.id}",
           "kode_pt": "${golonganSbbKhususModel!.kodePt}",
           "sbb_khusus": ""
         });

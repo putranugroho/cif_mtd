@@ -351,7 +351,7 @@ class PiutangNotifier extends ChangeNotifier {
           "kode_pt": "001",
           "kode_kantor": "",
           "kode_induk": "",
-          "kode_ao": customerSupplierModel!.kodeAo,
+          "kode_ao": customerSupplierModel!.kodeAoCustomer,
         };
         Setuprepository.setup(
                 token, NetworkURL.editHutangPiutang(), jsonEncode(data))
@@ -389,7 +389,7 @@ class PiutangNotifier extends ChangeNotifier {
           "kode_pt": "001",
           "kode_kantor": "",
           "kode_induk": "",
-          "kode_ao": customerSupplierModel!.kodeAo,
+          "kode_ao": customerSupplierModel!.kodeAoCustomer,
         };
         Setuprepository.setup(
                 token, NetworkURL.addHutangPiutang(), jsonEncode(data))
