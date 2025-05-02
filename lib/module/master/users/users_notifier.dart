@@ -76,9 +76,9 @@ class UsersNotifier extends ChangeNotifier {
           "pass": "${pass.text}",
           "namauser": "${namauser.text}",
           "kd_aktivasi": "${aktivasiModel!.kdAktivasi}",
-          "kode_pt": "${kantor!.kodePt}",
-          "kode_kantor": "${kantor!.kodeKantor}",
-          "kode_induk": "${kantor!.kodeInduk}",
+          "kode_pt": "${kantor == null ? "001" : kantor!.kodePt}",
+          "kode_kantor": "${kantor == null ? "001" : kantor!.kodeKantor}",
+          "kode_induk": "${kantor == null ? "001" : kantor!.kodeInduk}",
           "tglexp": "${tglexp.text}",
           "lvluser": "${levelUser!.idLevel}",
           "terminal_id": "",
@@ -330,6 +330,16 @@ class UsersNotifier extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  clearOtor() {
+    levelOtor = null;
+    levelSelected = false;
+    dropdownKey = UniqueKey();
+    print("clearOtor called. New key: $dropdownKey");
+    notifyListeners();
+  }
+
+  Key dropdownKey = UniqueKey();
 
   String? levelOtor;
   List<String> listLevelOtor = [

@@ -584,12 +584,13 @@ class UsersPage extends StatelessWidget {
                                       height: 8,
                                     ),
                                     DropdownSearch<String>(
-                                      popupProps:
-                                          const PopupPropsMultiSelection.menu(
-                                        showSearchBox:
-                                            true, // Aktifkan fitur pencarian
+                                      key: value.dropdownKey,
+                                      popupProps: const PopupProps.menu(
+                                        showSearchBox: true,
                                       ),
-                                      selectedItem: value.levelOtor,
+                                      selectedItem: value.levelSelected
+                                          ? value.levelOtor
+                                          : null,
                                       items: value.listLevelOtor,
                                       itemAsString: (e) => "${e}",
                                       onChanged: (e) {
@@ -603,6 +604,14 @@ class UsersPage extends StatelessWidget {
                                         dropdownSearchDecoration:
                                             InputDecoration(
                                           hintText: "Pilih Level Otorisasi",
+                                          suffixIcon: value.levelSelected
+                                              ? IconButton(
+                                                  onPressed: () {
+                                                    value.clearOtor();
+                                                  },
+                                                  icon: Icon(Icons.close),
+                                                )
+                                              : SizedBox(),
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8),
@@ -646,6 +655,7 @@ class UsersPage extends StatelessWidget {
                                                   TextInputAction.done,
                                               maxLines: 1,
                                               readOnly: !value.levelSelected,
+                                              controller: value.minotor,
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
                                                     .digitsOnly,
@@ -703,6 +713,7 @@ class UsersPage extends StatelessWidget {
                                                   TextInputAction.done,
                                               maxLines: 1,
                                               readOnly: !value.levelSelected,
+                                              controller: value.maxotor,
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
                                                     .digitsOnly,
