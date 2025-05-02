@@ -64,173 +64,176 @@ class PenyusutanPage extends StatelessWidget {
                         )
                       : Container(
                           padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.symmetric(vertical: 16),
-                                height: 1,
-                                color: Colors.grey,
-                              ),
-                              Text(
-                                "Ganti Metode Penyusutan",
-                                style: TextStyle(fontSize: 12),
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Row(
-                                children: [
-                                  Radio(
-                                      value: 1,
-                                      activeColor: colorPrimary,
-                                      groupValue: value.metode,
-                                      onChanged: (e) {
-                                        value.gantimetode(1);
-                                      }),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text("Straight Line"),
-                                  SizedBox(
-                                    width: 24,
-                                  ),
-                                  Radio(
-                                      value: 2,
-                                      activeColor: colorPrimary,
-                                      groupValue: value.metode,
-                                      onChanged: (e) {
-                                        value.gantimetode(2);
-                                      }),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text("Double Declining"),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 16,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "Nilai Akhir",
-                                    style: const TextStyle(fontSize: 12),
-                                  ),
-                                  const SizedBox(width: 5),
-                                  const Text(
-                                    "*",
-                                    style: TextStyle(fontSize: 8),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              TextFormField(
-                                textInputAction: TextInputAction.done,
-                                controller: value.nilai,
-                                maxLines: 1,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly,
-                                  CurrencyInputFormatter(),
-                                ],
-                                validator: (e) {
-                                  if (e!.isEmpty) {
-                                    return "Wajib diisi";
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                decoration: InputDecoration(
-                                  hintText: "Nilai Akhir",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6),
+                          child: Form(
+                            key: value.keyForm,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.symmetric(vertical: 16),
+                                  height: 1,
+                                  color: Colors.grey,
+                                ),
+                                Text(
+                                  "Ganti Metode Penyusutan",
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Row(
+                                  children: [
+                                    Radio(
+                                        value: 1,
+                                        activeColor: colorPrimary,
+                                        groupValue: value.metode,
+                                        onChanged: (e) {
+                                          value.gantimetode(1);
+                                        }),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text("Straight Line"),
+                                    SizedBox(
+                                      width: 24,
+                                    ),
+                                    Radio(
+                                        value: 2,
+                                        activeColor: colorPrimary,
+                                        groupValue: value.metode,
+                                        onChanged: (e) {
+                                          value.gantimetode(2);
+                                        }),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text("Double Declining"),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Nilai Akhir",
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    const Text(
+                                      "*",
+                                      style: TextStyle(fontSize: 8),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                TextFormField(
+                                  textInputAction: TextInputAction.done,
+                                  controller: value.nilai,
+                                  maxLines: 1,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    CurrencyInputFormatter(),
+                                  ],
+                                  validator: (e) {
+                                    if (e!.isEmpty) {
+                                      return "Wajib diisi";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: "Nilai Akhir",
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 16),
-                              value.metode == 2
-                                  ? Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "Nilai Declining (%)",
-                                              style:
-                                                  const TextStyle(fontSize: 12),
-                                            ),
-                                            const SizedBox(width: 5),
-                                            const Text(
-                                              "*",
-                                              style: TextStyle(fontSize: 8),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-                                        TextFormField(
-                                          textInputAction: TextInputAction.done,
-                                          controller: value.declining,
-                                          maxLines: 1,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter.allow(
-                                                RegExp(r'^\d+\.?\d{0,2}')),
-                                          ],
-                                          keyboardType:
-                                              TextInputType.numberWithOptions(
-                                            decimal: true,
-                                            signed: false,
+                                const SizedBox(height: 16),
+                                value.metode == 2
+                                    ? Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Nilai Declining (%)",
+                                                style:
+                                                    const TextStyle(fontSize: 12),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              const Text(
+                                                "*",
+                                                style: TextStyle(fontSize: 8),
+                                              ),
+                                            ],
                                           ),
-                                          validator: (e) {
-                                            if (e == null || e.isEmpty) {
-                                              return "Wajib diisi";
-                                            }
-
-                                            final valueAsDouble =
-                                                double.tryParse(
-                                                    e.replaceAll(",", "."));
-                                            if (valueAsDouble == null) {
-                                              return "Format tidak valid";
-                                            }
-
-                                            if (valueAsDouble > 100) {
-                                              return "Tidak boleh lebih dari 100%";
-                                            }
-
-                                            return null;
-                                          },
-                                          decoration: InputDecoration(
-                                            hintText: "Nilai Declining",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          TextFormField(
+                                            textInputAction: TextInputAction.done,
+                                            controller: value.declining,
+                                            maxLines: 1,
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp(r'^\d+\.?\d{0,2}')),
+                                            ],
+                                            keyboardType:
+                                                TextInputType.numberWithOptions(
+                                              decimal: true,
+                                              signed: false,
+                                            ),
+                                            validator: (e) {
+                                              if (e == null || e.isEmpty) {
+                                                return "Wajib diisi";
+                                              }
+                            
+                                              final valueAsDouble =
+                                                  double.tryParse(
+                                                      e.replaceAll(",", "."));
+                                              if (valueAsDouble == null) {
+                                                return "Format tidak valid";
+                                              }
+                            
+                                              if (valueAsDouble > 100) {
+                                                return "Tidak boleh lebih dari 100%";
+                                              }
+                            
+                                              return null;
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Nilai Declining",
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          "Berdampak apabila metode penyusutan Double Declining ",
-                                          style: TextStyle(
-                                            fontSize: 10,
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            "Berdampak apabila metode penyusutan Double Declining ",
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(height: 16),
-                                      ],
-                                    )
-                                  : SizedBox(),
-                              Row(
-                                children: [
-                                  ButtonPrimary(
-                                    onTap: () {
-                                      value.cek();
-                                    },
-                                    name: "Simpan",
-                                  ),
-                                ],
-                              )
-                            ],
+                                          const SizedBox(height: 16),
+                                        ],
+                                      )
+                                    : SizedBox(),
+                                Row(
+                                  children: [
+                                    ButtonPrimary(
+                                      onTap: () {
+                                        value.cek();
+                                      },
+                                      name: "Simpan",
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ))
             ],

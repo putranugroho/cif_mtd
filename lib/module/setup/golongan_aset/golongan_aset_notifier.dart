@@ -62,7 +62,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
             getInqueryAll();
             informationDialog(context, "Information", value['message']);
           } else {
-            informationDialog(context, "Warning", value['message'][0]);
+            informationDialog(context, "Warning", value['message']);
           }
         });
       } else {
@@ -88,7 +88,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
             getInqueryAll();
             informationDialog(context, "Information", value['message']);
           } else {
-            informationDialog(context, "Warning", value['message'][0]);
+            informationDialog(context, "Warning", value['message']);
           }
         });
       }
@@ -157,12 +157,12 @@ class GolonganAsetNotifier extends ChangeNotifier {
         clear();
         informationDialog(context, "Information", value['message']);
       } else {
-        informationDialog(context, "Warning", value['message'][0]);
+        informationDialog(context, "Warning", value['message']);
       }
     });
   }
 
-  Future<List<InqueryGlModel>> getInquery(String query) async {
+  Future<List<InqueryGlModel>> getInquerySbbAset(String query) async {
     if (query.isNotEmpty && query.length > 2) {
       isLoadingInquery = true;
       listGl.clear();
@@ -183,8 +183,95 @@ class GolonganAsetNotifier extends ChangeNotifier {
           listGl = jnsAccBItems
               .map((item) => InqueryGlModel.fromJson(item))
               .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+                  model.golAcc == "1" &&
+                  (model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                      model.namaSbb
+                          .toLowerCase()
+                          .contains(query.toLowerCase())))
+              .toList();
+        }
+        notifyListeners();
+      } catch (e) {
+        print("Error: $e");
+      } finally {
+        isLoadingInquery = false;
+        notifyListeners();
+      }
+    } else {
+      listGl.clear(); // clear on short query
+    }
+
+    return listGl;
+  }
+
+  Future<List<InqueryGlModel>> getInquerySbbPenyusutan(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      isLoadingInquery = true;
+      listGl.clear();
+      notifyListeners();
+
+      var data = {"kode_pt": "001"};
+
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.getInqueryGL(),
+          jsonEncode(data),
+        );
+
+        if (response['status'].toString().toLowerCase().contains("success")) {
+          final List<Map<String, dynamic>> jnsAccBItems =
+              extractJnsAccB(response['data']);
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.golAcc == "4" &&
+                  (model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                      model.namaSbb
+                          .toLowerCase()
+                          .contains(query.toLowerCase())))
+              .toList();
+        }
+        notifyListeners();
+      } catch (e) {
+        print("Error: $e");
+      } finally {
+        isLoadingInquery = false;
+        notifyListeners();
+      }
+    } else {
+      listGl.clear(); // clear on short query
+    }
+
+    return listGl;
+  }
+
+  Future<List<InqueryGlModel>> getInquerySbbLabaJual(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      isLoadingInquery = true;
+      listGl.clear();
+      notifyListeners();
+
+      var data = {"kode_pt": "001"};
+
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.getInqueryGL(),
+          jsonEncode(data),
+        );
+
+        if (response['status'].toString().toLowerCase().contains("success")) {
+          final List<Map<String, dynamic>> jnsAccBItems =
+              extractJnsAccB(response['data']);
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.golAcc == "3" &&
+                  (model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                      model.namaSbb
+                          .toLowerCase()
+                          .contains(query.toLowerCase())))
               .toList();
         }
         notifyListeners();

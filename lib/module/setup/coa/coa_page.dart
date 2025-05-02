@@ -808,9 +808,10 @@ class CoaPage extends StatelessWidget {
                                                           value.noHeader,
                                                       maxLines: 1,
                                                       maxLength: 3,
-                                                      // inputFormatters: [
-                                                      //   FilteringTextInputFormatter.digitsOnly
-                                                      // ],
+                                                      inputFormatters: [
+                                                        FilteringTextInputFormatter
+                                                            .digitsOnly
+                                                      ],
                                                       validator: (e) {
                                                         if (e!.isEmpty) {
                                                           return "Wajib diisi";
@@ -1077,9 +1078,10 @@ class CoaPage extends StatelessWidget {
                                                               value.updatebb();
                                                             }
                                                           },
-                                                          // inputFormatters: [
-                                                          //   FilteringTextInputFormatter.digitsOnly
-                                                          // ],
+                                                          inputFormatters: [
+                                                            FilteringTextInputFormatter
+                                                                .digitsOnly
+                                                          ],
                                                           validator: (e) {
                                                             if (e!.isEmpty) {
                                                               return "Wajib diisi";
@@ -1602,9 +1604,10 @@ class CoaPage extends StatelessWidget {
                                                                 }
                                                               },
                                                               maxLength: 6,
-                                                              // inputFormatters: [
-                                                              //   FilteringTextInputFormatter.digitsOnly
-                                                              // ],
+                                                              inputFormatters: [
+                                                                FilteringTextInputFormatter
+                                                                    .digitsOnly
+                                                              ],
                                                               validator: (e) {
                                                                 if (e!
                                                                     .isEmpty) {

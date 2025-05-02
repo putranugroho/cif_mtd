@@ -205,7 +205,9 @@ class SbbKhususPage extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    "Tambah SBB Khusus",
+                                    value.editData
+                                        ? "Ubah / Hapus SBB Khusus"
+                                        : "Tambah SBB Khusus",
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,

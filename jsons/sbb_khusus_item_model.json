@@ -1,6 +1,7 @@
 {
     "id": 1,
     "kode_pt": "001",
+    "id_golongan": "AR",
     "kode_golongan": "AR",
     "nosbb": "100100000001",
     "nama_sbb": "KAS KANTOR",
