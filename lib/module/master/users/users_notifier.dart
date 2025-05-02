@@ -297,14 +297,23 @@ class UsersNotifier extends ChangeNotifier {
     var pickedendDate = (await showDatePicker(
       context: context,
       initialDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) + 1,
+          int.parse(DateFormat('y').format(DateTime.now())),
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
           int.parse(DateFormat('dd').format(
+                DateTime.now(),
+              )) +
+              1),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
             DateTime.now(),
-          ))),
-      firstDate: DateTime(1950),
+          )),
+          int.parse(DateFormat('dd').format(
+                DateTime.now(),
+              )) +
+              1),
       lastDate: DateTime(
           int.parse(DateFormat('y').format(DateTime.now())) + 10,
           int.parse(DateFormat('MM').format(

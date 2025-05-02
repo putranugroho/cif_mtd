@@ -52,6 +52,11 @@ class AoNotifier extends ChangeNotifier {
           "kode_pt": aoModel!.kodePt,
           "kode_kantor": aoModel!.kodeKantor,
           "kode_induk": aoModel!.kodeInduk,
+          "gol_cust": penempatanModel == "Customer"
+              ? "1"
+              : penempatanModel == "Supplier"
+                  ? "2"
+                  : "3",
         };
         print(jsonEncode(data));
         Setuprepository.setup(
@@ -72,6 +77,11 @@ class AoNotifier extends ChangeNotifier {
           "kode": kd.text.trim(),
           "nama": nm.text.trim(),
           "kode_pt": "001",
+          "gol_cust": penempatanModel == "Customer"
+              ? "1"
+              : penempatanModel == "Supplier"
+                  ? "2"
+                  : "3",
           "kode_kantor": "",
           "kode_induk": "",
         };
@@ -117,6 +127,11 @@ class AoNotifier extends ChangeNotifier {
     aoModel = list.where((e) => e.id == int.parse(id)).first;
     kd.text = aoModel!.kode;
     nm.text = aoModel!.nama;
+    penempatanModel = aoModel!.golCust == "1"
+        ? "Customer"
+        : aoModel!.golCust == "2"
+            ? "Supplier"
+            : "Customer / Supplier";
     notifyListeners();
   }
 
