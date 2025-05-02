@@ -712,7 +712,16 @@ class UsersPage extends StatelessWidget {
                                                 if (e!.isEmpty) {
                                                   return "Wajib diisi";
                                                 } else {
-                                                  return null;
+                                                  if (int.parse(e.replaceAll(
+                                                          ",", "")) <=
+                                                      int.parse(value
+                                                          .minotor.text
+                                                          .replaceAll(
+                                                              ",", ""))) {
+                                                    return "Nilai maksimal otorisasi tidak boleh lebih kecil dari minimal otorisasi";
+                                                  } else {
+                                                    return null;
+                                                  }
                                                 }
                                               },
                                               decoration: InputDecoration(
