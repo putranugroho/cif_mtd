@@ -228,7 +228,7 @@ class PejabatNotifier extends ChangeNotifier {
     kantorModel =
         listKantor.where((e) => e.kodeKantor == pejabatModel!.kodeKantor).first;
     jabatanModel = listJabatan
-        .where((e) => e.kodeJabatan == pejabatModel!.kodeJabatan)
+        .where((e) => e.id == int.parse(pejabatModel!.idJabatan))
         .first;
     dialog = true;
     editData = true;
@@ -252,7 +252,7 @@ class PejabatNotifier extends ChangeNotifier {
           "nik": "${nik.text.trim()}",
           "nama_pejabat": "${nama.text.trim()}",
           "no_hp_pejabat": "${noHp.text.trim()}",
-          "kode_jabatan": "${jabatanModel!.kodeJabatan}",
+          "id_jabatan": "${jabatanModel!.id}",
         };
         Setuprepository.setup(
                 token, NetworkURL.updatedPejabat(), jsonEncode(data))
@@ -276,7 +276,7 @@ class PejabatNotifier extends ChangeNotifier {
           "nik": "${nik.text.trim()}",
           "nama_pejabat": "${nama.text.trim()}",
           "no_hp_pejabat": "${noHp.text.trim()}",
-          "kode_jabatan": "${jabatanModel!.kodeJabatan}",
+          "id_jabatan": "${jabatanModel!.id}",
         };
         Setuprepository.setup(token, NetworkURL.addPejabat(), jsonEncode(data))
             .then((value) {

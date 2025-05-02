@@ -764,15 +764,9 @@ class PengadaanPage extends StatelessWidget {
                                                             textInputAction:
                                                                 TextInputAction
                                                                     .done,
-                                                            // controller: value.tglBukaRekening,
+                                                            controller:
+                                                                value.tglbeli,
                                                             maxLines: 1,
-                                                            // validator: (e) {
-                                                            //   if (e!.isEmpty) {
-                                                            //     return "Wajib diisi";
-                                                            //   } else {
-                                                            //     return null;
-                                                            //   }
-                                                            // },
                                                             decoration:
                                                                 InputDecoration(
                                                               hintText:
@@ -823,13 +817,14 @@ class PengadaanPage extends StatelessWidget {
                                                         ),
                                                         InkWell(
                                                           onTap: () => value
-                                                              .pilihTanggalBuka(),
+                                                              .pilihTanggalTerima(),
                                                           child: TextFormField(
                                                             enabled: false,
                                                             textInputAction:
                                                                 TextInputAction
                                                                     .done,
-                                                            // controller: value.tglBukaRekening,
+                                                            controller:
+                                                                value.tglterima,
                                                             maxLines: 1,
                                                             // validator: (e) {
                                                             //   if (e!.isEmpty) {

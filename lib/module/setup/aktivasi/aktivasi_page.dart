@@ -398,7 +398,7 @@ class AktivasiPage extends StatelessWidget {
                                           ),
                                           InkWell(
                                             onTap: () {
-                                              value.pilihJamMulai();
+                                              value.selectTime(context);
                                             },
                                             child: TextFormField(
                                               enabled: false,
@@ -458,7 +458,7 @@ class AktivasiPage extends StatelessWidget {
                                           ),
                                           InkWell(
                                             onTap: () {
-                                              value.pilihJamSelesai();
+                                              value.selectEndTime(context);
                                             },
                                             child: TextFormField(
                                               enabled: false,

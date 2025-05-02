@@ -141,11 +141,14 @@ class JabatanNotifier extends ChangeNotifier {
   }
 
   edit(String kodes) {
-    jabatanModel = listJabatan.where((e) => e.kodeJabatan == kodes).first;
+    jabatanModel = listJabatan.where((e) => e.id == int.parse(kodes)).first;
     kode.text = jabatanModel!.kodeJabatan;
     nama.text = jabatanModel!.namaJabatan;
-    levelModel =
-        list.where((e) => e.lvlJabatan == jabatanModel!.lvlJabatan).first;
+    levelModel = jabatanModel!.idLevel == null
+        ? null
+        : list.where((e) => e.id == int.parse(jabatanModel!.idLevel)).isNotEmpty
+            ? list.where((e) => e.id == int.parse(jabatanModel!.idLevel)).first
+            : null;
     dialog = true;
     editData = true;
     notifyListeners();
@@ -163,10 +166,11 @@ class JabatanNotifier extends ChangeNotifier {
           "id": jabatanModel!.id,
           "kode_pt": "001",
           "kode_kantor": "1001",
-          "lvl_jabatan": levelModel!.lvlJabatan,
+          "id_level": levelModel!.id.toString(),
           "kode_jabatan": kode.text.trim(),
           "nama_jabatan": nama.text.trim(),
         };
+        print(jsonEncode(data));
         Setuprepository.setup(
                 token, NetworkURL.updatedJabatan(), jsonEncode(data))
             .then((value) {
@@ -185,7 +189,7 @@ class JabatanNotifier extends ChangeNotifier {
         var data = {
           "kode_pt": "001",
           "kode_kantor": "1001",
-          "lvl_jabatan": levelModel!.lvlJabatan,
+          "id_level": levelModel!.id.toString(),
           "kode_jabatan": kode.text.trim(),
           "nama_jabatan": nama.text.trim(),
         };

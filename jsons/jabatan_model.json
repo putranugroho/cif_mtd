@@ -2,6 +2,6 @@
     "id": 1,
     "kode_jabatan": "",
     "nama_jabatan": "",
-    "lvl_jabatan": "",
+    "id_level": null,
     "kel_jabatan": ""
 }

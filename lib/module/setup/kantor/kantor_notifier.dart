@@ -171,8 +171,7 @@ class KantorNotifier extends ChangeNotifier {
   KantorModel? kantor;
 
   edit(String id) {
-    dialog = true;
-    editData = true;
+    DialogCustom().showLoading(context);
     kantor = list.where((e) => e.id == int.parse(id)).first;
     provinsiModel = listProvinsi.where((e) => e.name == kantor!.provinsi).first;
     listKota.clear();
@@ -204,6 +203,7 @@ class KantorNotifier extends ChangeNotifier {
         WilayahRepository.getKelurahan(
                 NetworkURL.getKelurahan(kecamatanModel!.id))
             .then((e) {
+          Navigator.pop(context);
           for (var i = 0; i < e.length; i++) {
             listKelurahan.add(KelurahanModel(
                 id: e[i]['id'],
@@ -212,8 +212,10 @@ class KantorNotifier extends ChangeNotifier {
           }
           kelurahanModel =
               listKelurahan.where((e) => e.name == kantor!.kelurahan).first;
+          dialog = true;
+          editData = true;
+          notifyListeners();
         });
-        notifyListeners();
       });
 
       notifyListeners();
@@ -327,7 +329,7 @@ class KantorNotifier extends ChangeNotifier {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "Anda yakin menghapus ${kantorModel!.namaKantor}?",
+                    "Anda yakin menghapus ${kantor!.namaKantor}?",
                     style: TextStyle(
                       fontSize: 16,
                     ),

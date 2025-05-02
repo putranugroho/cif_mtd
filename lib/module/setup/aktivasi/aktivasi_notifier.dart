@@ -85,7 +85,7 @@ class AktivasiNotifier extends ChangeNotifier {
             getAktivasi();
             notifyListeners();
           } else {
-            informationDialog(context, "Information", value['message'][0]);
+            informationDialog(context, "Information", value['message']);
             notifyListeners();
           }
         });
@@ -109,12 +109,40 @@ class AktivasiNotifier extends ChangeNotifier {
             getAktivasi();
             notifyListeners();
           } else {
-            informationDialog(context, "Information", value['message'][0]);
+            informationDialog(context, "Information", value['message']);
             notifyListeners();
           }
         });
       }
     }
+  }
+
+  // TextEditingController _controller = TextEditingController();
+
+  Future<void> selectTime(BuildContext context) async {
+    TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    if (pickedTime != null) {
+      jamMulai.text =
+          '${pickedTime.hour.toString().padLeft(2, '0')}:${pickedTime.minute.toString().padLeft(2, '0')}';
+    }
+    notifyListeners();
+  }
+
+  Future<void> selectEndTime(BuildContext context) async {
+    TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    if (pickedTime != null) {
+      jamSelesai.text =
+          '${pickedTime.hour.toString().padLeft(2, '0')}:${pickedTime.minute.toString().padLeft(2, '0')}';
+    }
+    notifyListeners();
   }
 
   var isLoading = true;
@@ -141,6 +169,13 @@ class AktivasiNotifier extends ChangeNotifier {
   bool dialog = false;
   tambah() {
     dialog = true;
+
+    editData = false;
+    kode.clear();
+    nama.clear();
+    listHariAdd.clear();
+    jamMulai.clear();
+    jamSelesai.clear();
     notifyListeners();
   }
 

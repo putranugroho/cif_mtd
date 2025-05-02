@@ -249,16 +249,17 @@ class CoaNotifier extends ChangeNotifier {
   CoaModel? coaModel;
   edit(String id) {
     coaModel = list.where((e) => e.id == int.parse(id)).first;
-    // print(coaModel!.nobb);
+    print(coaModel!.nosbb);
+    print(coaModel!.namaSbb);
     // print(
     //     list.where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "B").length);
-    bukuBesar = list
-            .where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "B")
+    bukuBesar = coaModel;
+    print(bukuBesar!.namaSbb);
+    header = list
+            .where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "A")
             .isNotEmpty
-        ? list.where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "B").first
+        ? list.where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "A").first
         : null;
-    header =
-        list.where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "A").first;
     golongan = coaModel!.golAcc == "1"
         ? "Aktiva"
         : coaModel!.golAcc == "2"
@@ -280,11 +281,15 @@ class CoaNotifier extends ChangeNotifier {
     limitkredit.text = FormatCurrency.oCcy
         .format(int.parse(coaModel!.limitKredit))
         .replaceAll(".", ",");
-    noBb.text = coaModel!.nosbb.substring(3, 6);
+    noBb.text = coaModel!.nosbb.substring(0, 3);
     noSbb.text = coaModel!.nosbb.substring(6, 12);
     namaSbb.text = coaModel!.namaSbb;
     resulttext.text = coaModel!.nosbb;
-    noHeader.text = header!.nobb.substring(0, 3);
+    noHeader.text = list
+            .where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "A")
+            .isNotEmpty
+        ? header!.nobb.substring(0, 3)
+        : "";
     perantara = coaModel!.akunPerantara == "Y" ? true : false;
     hutangPiutang = coaModel!.hutang == "Y"
         ? "HUTANG"

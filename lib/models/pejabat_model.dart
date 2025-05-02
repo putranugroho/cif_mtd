@@ -13,6 +13,7 @@ class PejabatModel {
     required this.nik,
     required this.namaPejabat,
     required this.noHpPejabat,
+    required this.idJabatan,
     required this.kodeJabatan,
     required this.namaJabatan,
   });
@@ -23,6 +24,7 @@ class PejabatModel {
   final String nik;
   final String namaPejabat;
   final String noHpPejabat;
+  final String idJabatan;
   final String kodeJabatan;
   final String namaJabatan;
 
@@ -33,6 +35,7 @@ class PejabatModel {
     nik: json['nik'].toString(),
     namaPejabat: json['nama_pejabat'].toString(),
     noHpPejabat: json['no_hp_pejabat'].toString(),
+    idJabatan: json['id_jabatan'].toString(),
     kodeJabatan: json['kode_jabatan'].toString(),
     namaJabatan: json['nama_jabatan'].toString()
   );
@@ -44,6 +47,7 @@ class PejabatModel {
     'nik': nik,
     'nama_pejabat': namaPejabat,
     'no_hp_pejabat': noHpPejabat,
+    'id_jabatan': idJabatan,
     'kode_jabatan': kodeJabatan,
     'nama_jabatan': namaJabatan
   };
@@ -55,6 +59,7 @@ class PejabatModel {
     nik: nik,
     namaPejabat: namaPejabat,
     noHpPejabat: noHpPejabat,
+    idJabatan: idJabatan,
     kodeJabatan: kodeJabatan,
     namaJabatan: namaJabatan
   );
@@ -67,6 +72,7 @@ class PejabatModel {
     String? nik,
     String? namaPejabat,
     String? noHpPejabat,
+    String? idJabatan,
     String? kodeJabatan,
     String? namaJabatan
   }) => PejabatModel(
@@ -76,14 +82,15 @@ class PejabatModel {
     nik: nik ?? this.nik,
     namaPejabat: namaPejabat ?? this.namaPejabat,
     noHpPejabat: noHpPejabat ?? this.noHpPejabat,
+    idJabatan: idJabatan ?? this.idJabatan,
     kodeJabatan: kodeJabatan ?? this.kodeJabatan,
     namaJabatan: namaJabatan ?? this.namaJabatan,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is PejabatModel && id == other.id && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && nik == other.nik && namaPejabat == other.namaPejabat && noHpPejabat == other.noHpPejabat && kodeJabatan == other.kodeJabatan && namaJabatan == other.namaJabatan;
+    || other is PejabatModel && id == other.id && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && nik == other.nik && namaPejabat == other.namaPejabat && noHpPejabat == other.noHpPejabat && idJabatan == other.idJabatan && kodeJabatan == other.kodeJabatan && namaJabatan == other.namaJabatan;
 
   @override
-  int get hashCode => id.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ nik.hashCode ^ namaPejabat.hashCode ^ noHpPejabat.hashCode ^ kodeJabatan.hashCode ^ namaJabatan.hashCode;
+  int get hashCode => id.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ nik.hashCode ^ namaPejabat.hashCode ^ noHpPejabat.hashCode ^ idJabatan.hashCode ^ kodeJabatan.hashCode ^ namaJabatan.hashCode;
 }

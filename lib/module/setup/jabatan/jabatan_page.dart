@@ -405,7 +405,7 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'kode', value: data.kodeJabatan),
                 DataGridCell(columnName: 'jabatan', value: data.namaJabatan),
                 DataGridCell(columnName: 'level', value: data.kelJabatan),
-                DataGridCell(columnName: 'action', value: data.kodeJabatan),
+                DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
         .toList();

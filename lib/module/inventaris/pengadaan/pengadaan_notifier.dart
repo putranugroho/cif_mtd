@@ -1,18 +1,66 @@
+import 'dart:convert';
+
 import 'package:accounting/models/index.dart';
 import 'package:accounting/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
 
+import '../../../network/network.dart';
+import '../../../repository/SetupRepository.dart';
+
 class PengadaanNotifier extends ChangeNotifier {
   final BuildContext context;
 
   PengadaanNotifier({required this.context}) {
-    for (Map<String, dynamic> i in data) {
-      list.add(InventarisModel.fromJson(i));
-    }
+    getKelompokAset();
 
+    getGolonganAset();
     notifyListeners();
+  }
+
+  List<GolonganAsetModel> listGolongan = [];
+  Future getGolonganAset() async {
+    isLoading = true;
+    listGolongan.clear();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getGolonganAset(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listGolongan.add(GolonganAsetModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  var isLoading = true;
+  List<KelompokAsetModel> listKelompok = [];
+  Future getKelompokAset() async {
+    isLoading = true;
+    listKelompok.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getKelompokAset(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listKelompok.add(KelompokAsetModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        // informationDialog(context, "Warning", value['message'][0]);
+
+        isLoading = false;
+        notifyListeners();
+      }
+    });
   }
 
   int currentStep = 0;
@@ -85,7 +133,7 @@ class PengadaanNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<KelompokAsetModel> listKelompok = [];
+  // List<KelompokAsetModel> listKelompok = [];
   KelompokAsetModel? kelompokAsetModel;
   pilihKelompok(KelompokAsetModel value) {
     kelompokAsetModel = value;
@@ -106,7 +154,7 @@ class PengadaanNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<GolonganAsetModel> listGolongan = [];
+  // List<GolonganAsetModel> listGolongan = [];
   GolonganAsetModel? golonganAsetModel;
   pilihGolongan(GolonganAsetModel value) {
     golonganAsetModel = value;
