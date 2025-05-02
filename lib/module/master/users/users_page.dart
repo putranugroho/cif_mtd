@@ -304,7 +304,7 @@ class UsersPage extends StatelessWidget {
                                         }
                                       },
                                       decoration: InputDecoration(
-                                        hintText: "Nama User  ",
+                                        hintText: "Nama User",
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(6),
@@ -373,7 +373,7 @@ class UsersPage extends StatelessWidget {
                                     ),
                                     TextFormField(
                                       textInputAction: TextInputAction.done,
-                                      controller: value.userid,
+                                      controller: value.pass,
                                       maxLines: 1,
                                       obscureText: true,
                                       // inputFormatters: [
@@ -387,7 +387,7 @@ class UsersPage extends StatelessWidget {
                                         }
                                       },
                                       decoration: InputDecoration(
-                                        hintText: "Password  ",
+                                        hintText: "Password",
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(6),
@@ -601,7 +601,7 @@ class UsersPage extends StatelessWidget {
                                             TextAlignVertical.center,
                                         dropdownSearchDecoration:
                                             InputDecoration(
-                                          hintText: "Pilih Level Otor",
+                                          hintText: "Pilih Level Otorisasi",
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8),
@@ -644,6 +644,7 @@ class UsersPage extends StatelessWidget {
                                               textInputAction:
                                                   TextInputAction.done,
                                               maxLines: 1,
+                                              readOnly: !value.levelSelected,
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
                                                     .digitsOnly,
@@ -657,6 +658,10 @@ class UsersPage extends StatelessWidget {
                                                 }
                                               },
                                               decoration: InputDecoration(
+                                                filled: !value.levelSelected
+                                                    ? true
+                                                    : false,
+                                                fillColor: Colors.grey[200],
                                                 hintText: "Minimal Otorisasi",
                                                 border: OutlineInputBorder(
                                                   borderRadius:
@@ -696,6 +701,7 @@ class UsersPage extends StatelessWidget {
                                               textInputAction:
                                                   TextInputAction.done,
                                               maxLines: 1,
+                                              readOnly: !value.levelSelected,
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
                                                     .digitsOnly,
@@ -709,6 +715,10 @@ class UsersPage extends StatelessWidget {
                                                 }
                                               },
                                               decoration: InputDecoration(
+                                                filled: !value.levelSelected
+                                                    ? true
+                                                    : false,
+                                                fillColor: Colors.grey[200],
                                                 hintText: "Maksimal Otorisasi",
                                                 border: OutlineInputBorder(
                                                   borderRadius:

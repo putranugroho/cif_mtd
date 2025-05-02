@@ -14,7 +14,7 @@ class PengadaanNotifier extends ChangeNotifier {
 
   PengadaanNotifier({required this.context}) {
     getKelompokAset();
-
+    getMetodePenyusutan();
     getGolonganAset();
     notifyListeners();
   }
@@ -61,6 +61,39 @@ class PengadaanNotifier extends ChangeNotifier {
         notifyListeners();
       }
     });
+  }
+
+  int metode = 0;
+
+  List<MetodePenyusutanModel> listPenyusutan = [];
+  MetodePenyusutanModel? metodePenyusutanModel;
+  Future getMetodePenyusutan() async {
+    isLoading = true;
+    listPenyusutan.clear();
+    var data = {
+      "kode_pt": "001",
+    };
+    notifyListeners();
+    Setuprepository.setup(
+            token, NetworkURL.getMetodePenyusutan(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listPenyusutan.add(MetodePenyusutanModel.fromJson(i));
+        }
+        metodePenyusutanModel = listPenyusutan[0];
+        metode = int.parse(metodePenyusutanModel!.metodePenyusutan);
+        // nilai.text = metodePenyusutanModel!.nilaiAkhir.toString();
+        // nilai.text = metodePenyusutanModel!.declining.toString();
+        print(metode);
+        isLoading = false;
+        notifyListeners();
+      } else {
+        // informationDialog(context, "Warning", value['message'][0]);
+        notifyListeners();
+      }
+    });
+    notifyListeners();
   }
 
   int currentStep = 0;
@@ -112,6 +145,7 @@ class PengadaanNotifier extends ChangeNotifier {
   TextEditingController biaya = TextEditingController(text: "0");
   TextEditingController nilaiPenyusutan = TextEditingController();
   TextEditingController ppn = TextEditingController(text: "0");
+  TextEditingController pph = TextEditingController(text: "0");
   int total = 0;
   onChange() {
     total = int.parse(hargaBeli.text.replaceAll(",", "")) -

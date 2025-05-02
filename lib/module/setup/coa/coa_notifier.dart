@@ -104,6 +104,12 @@ class CoaNotifier extends ChangeNotifier {
   ];
   String? jnsAcc;
   pilihJenis(String value) {
+    resulttext.clear();
+    header = null;
+    noHeader.clear();
+    noBb.clear();
+    bukuBesar = null;
+    noSbb.clear();
     jnsAcc = value;
     notifyListeners();
   }

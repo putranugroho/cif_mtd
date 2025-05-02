@@ -297,7 +297,7 @@ class PengadaanPage extends StatelessWidget {
                                       Container(
                                           margin:
                                               const EdgeInsets.only(top: 16.0),
-                                          child: value.currentStep == 4
+                                          child: value.currentStep == 3
                                               ? Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.end,
@@ -401,6 +401,12 @@ class PengadaanPage extends StatelessWidget {
                                                 ),
                                                 DropdownSearch<
                                                     KelompokAsetModel>(
+                                                  validator: (value) {
+                                                    if (value == null) {
+                                                      return 'Wajib diisi';
+                                                    }
+                                                    return null;
+                                                  },
                                                   popupProps:
                                                       const PopupPropsMultiSelection
                                                           .menu(
@@ -462,6 +468,12 @@ class PengadaanPage extends StatelessWidget {
                                                 ),
                                                 DropdownSearch<
                                                     GolonganAsetModel>(
+                                                  validator: (value) {
+                                                    if (value == null) {
+                                                      return 'Wajib diisi';
+                                                    }
+                                                    return null;
+                                                  },
                                                   popupProps:
                                                       const PopupPropsMultiSelection
                                                           .menu(
@@ -592,6 +604,12 @@ class PengadaanPage extends StatelessWidget {
                                                           height: 8,
                                                         ),
                                                         DropdownSearch<String>(
+                                                          validator: (value) {
+                                                            if (value == null) {
+                                                              return 'Wajib diisi';
+                                                            }
+                                                            return null;
+                                                          },
                                                           popupProps:
                                                               const PopupPropsMultiSelection
                                                                   .menu(
@@ -888,6 +906,12 @@ class PengadaanPage extends StatelessWidget {
                                                   height: 8,
                                                 ),
                                                 DropdownSearch<String>(
+                                                  validator: (value) {
+                                                    if (value == null) {
+                                                      return 'Wajib diisi';
+                                                    }
+                                                    return null;
+                                                  },
                                                   popupProps:
                                                       const PopupPropsMultiSelection
                                                           .menu(
@@ -936,6 +960,85 @@ class PengadaanPage extends StatelessWidget {
                                                                 .stretch,
                                                         children: [
                                                           Row(
+                                                            children: [
+                                                              Text(
+                                                                "Kantor",
+                                                                style:
+                                                                    const TextStyle(
+                                                                        fontSize:
+                                                                            12),
+                                                              ),
+                                                              const SizedBox(
+                                                                  width: 5),
+                                                              const Text(
+                                                                "*",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        8),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 8,
+                                                          ),
+                                                          DropdownSearch<
+                                                              KantorModel>(
+                                                            validator: (value) {
+                                                              if (value ==
+                                                                  null) {
+                                                                return 'Wajib diisi';
+                                                              }
+                                                              return null;
+                                                            },
+                                                            popupProps:
+                                                                const PopupPropsMultiSelection
+                                                                    .menu(
+                                                              showSearchBox:
+                                                                  true, // Aktifkan fitur pencarian
+                                                            ),
+                                                            selectedItem: value
+                                                                .kantorModel,
+                                                            items: value
+                                                                .listkantor,
+                                                            itemAsString: (e) =>
+                                                                "${e}",
+                                                            onChanged: (e) {
+                                                              value.pilihKantor(
+                                                                  e!);
+                                                            },
+                                                            dropdownDecoratorProps:
+                                                                DropDownDecoratorProps(
+                                                              baseStyle:
+                                                                  TextStyle(
+                                                                      fontSize:
+                                                                          16),
+                                                              textAlignVertical:
+                                                                  TextAlignVertical
+                                                                      .center,
+                                                              dropdownSearchDecoration:
+                                                                  InputDecoration(
+                                                                hintText:
+                                                                    "Pilih Kantor",
+                                                                border:
+                                                                    OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8),
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    width: 1,
+                                                                    color: Colors
+                                                                        .grey,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 16,
+                                                          ),
+                                                          Row(
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
                                                                     .start,
@@ -960,6 +1063,15 @@ class PengadaanPage extends StatelessWidget {
                                                                         TextInputAction
                                                                             .done,
                                                                     maxLines: 1,
+                                                                    validator:
+                                                                        (e) {
+                                                                      if (e!
+                                                                          .isEmpty) {
+                                                                        return "Wajib diisi";
+                                                                      } else {
+                                                                        return null;
+                                                                      }
+                                                                    },
                                                                     decoration:
                                                                         InputDecoration(
                                                                       hintText:
@@ -999,6 +1111,15 @@ class PengadaanPage extends StatelessWidget {
                                                                         TextInputAction
                                                                             .done,
                                                                     maxLines: 1,
+                                                                    validator:
+                                                                        (e) {
+                                                                      if (e!
+                                                                          .isEmpty) {
+                                                                        return "Wajib diisi";
+                                                                      } else {
+                                                                        return null;
+                                                                      }
+                                                                    },
                                                                     decoration:
                                                                         InputDecoration(
                                                                       hintText:
@@ -1059,6 +1180,62 @@ class PengadaanPage extends StatelessWidget {
                                                           ),
                                                           const SizedBox(
                                                               height: 16),
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Nama Karyawan",
+                                                                style:
+                                                                    const TextStyle(
+                                                                        fontSize:
+                                                                            12),
+                                                              ),
+                                                              const SizedBox(
+                                                                  width: 5),
+                                                              const Text(
+                                                                "*",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        8),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 8,
+                                                          ),
+                                                          TextFormField(
+                                                            textInputAction:
+                                                                TextInputAction
+                                                                    .done,
+                                                            maxLines: 1,
+                                                            readOnly: true,
+                                                            // inputFormatters: [
+                                                            //   FilteringTextInputFormatter.digitsOnly
+                                                            // ],
+                                                            validator: (e) {
+                                                              if (e!.isEmpty) {
+                                                                return "Wajib diisi";
+                                                              } else {
+                                                                return null;
+                                                              }
+                                                            },
+                                                            decoration:
+                                                                InputDecoration(
+                                                              filled: true,
+                                                              fillColor: Colors
+                                                                  .grey[200],
+                                                              hintText:
+                                                                  "Nama Karyawan",
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            6),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              height: 16),
                                                         ],
                                                       ),
                                               ],
@@ -1086,50 +1263,6 @@ class PengadaanPage extends StatelessWidget {
                                                               .stretch,
                                                       children: [
                                                         Text(
-                                                          "Masa Susut",
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 12),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 8,
-                                                        ),
-                                                        TextFormField(
-                                                          textInputAction:
-                                                              TextInputAction
-                                                                  .done,
-                                                          maxLines: 1,
-                                                          inputFormatters: [
-                                                            FilteringTextInputFormatter
-                                                                .digitsOnly,
-                                                          ],
-                                                          decoration:
-                                                              InputDecoration(
-                                                            hintText:
-                                                                "Masa Susut",
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          6),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                            height: 16),
-                                                      ],
-                                                    )),
-                                                    SizedBox(
-                                                      width: 16,
-                                                    ),
-                                                    Expanded(
-                                                        child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .stretch,
-                                                      children: [
-                                                        Text(
                                                           "Nilai Akhir",
                                                           style:
                                                               const TextStyle(
@@ -1143,6 +1276,13 @@ class PengadaanPage extends StatelessWidget {
                                                               TextInputAction
                                                                   .done,
                                                           maxLines: 1,
+                                                          validator: (e) {
+                                                            if (e!.isEmpty) {
+                                                              return "Wajib diisi";
+                                                            } else {
+                                                              return null;
+                                                            }
+                                                          },
                                                           inputFormatters: [
                                                             FilteringTextInputFormatter
                                                                 .digitsOnly,
@@ -1163,7 +1303,61 @@ class PengadaanPage extends StatelessWidget {
                                                         const SizedBox(
                                                             height: 16),
                                                       ],
-                                                    ))
+                                                    )),
+                                                    SizedBox(
+                                                      width: 16,
+                                                    ),
+                                                    value.metode == 1
+                                                        ? Expanded(
+                                                            child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .stretch,
+                                                            children: [
+                                                              Text(
+                                                                "Masa Susut",
+                                                                style:
+                                                                    const TextStyle(
+                                                                        fontSize:
+                                                                            12),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 8,
+                                                              ),
+                                                              TextFormField(
+                                                                textInputAction:
+                                                                    TextInputAction
+                                                                        .done,
+                                                                maxLines: 1,
+                                                                validator: (e) {
+                                                                  if (e!
+                                                                      .isEmpty) {
+                                                                    return "Wajib diisi";
+                                                                  } else {
+                                                                    return null;
+                                                                  }
+                                                                },
+                                                                inputFormatters: [
+                                                                  FilteringTextInputFormatter
+                                                                      .digitsOnly,
+                                                                ],
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  hintText:
+                                                                      "Masa Susut",
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(6),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              const SizedBox(
+                                                                  height: 16),
+                                                            ],
+                                                          ))
+                                                        : const SizedBox(),
                                                   ],
                                                 ),
                                                 Row(
@@ -1258,6 +1452,9 @@ class PengadaanPage extends StatelessWidget {
                                                     if (e!.isEmpty) {
                                                       return "Wajib diisi";
                                                     } else {
+                                                      if (e == "0") {
+                                                        return "Wajib diisi";
+                                                      }
                                                       return null;
                                                     }
                                                   },
@@ -1420,7 +1617,7 @@ class PengadaanPage extends StatelessWidget {
                                                           Row(
                                                             children: [
                                                               Text(
-                                                                "Nominal Pajak",
+                                                                "PPN",
                                                                 style:
                                                                     const TextStyle(
                                                                         fontSize:
@@ -1475,6 +1672,62 @@ class PengadaanPage extends StatelessWidget {
                                                           ),
                                                           const SizedBox(
                                                               height: 16),
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "PPH",
+                                                                style:
+                                                                    const TextStyle(
+                                                                        fontSize:
+                                                                            12),
+                                                              ),
+                                                              const SizedBox(
+                                                                  width: 5),
+                                                              const Text(
+                                                                "*",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        8),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 8,
+                                                          ),
+                                                          TextFormField(
+                                                            textInputAction:
+                                                                TextInputAction
+                                                                    .done,
+                                                            controller:
+                                                                value.pph,
+                                                            maxLines: 1,
+                                                            onChanged: (e) =>
+                                                                value
+                                                                    .onChange(),
+                                                            inputFormatters: [
+                                                              FilteringTextInputFormatter
+                                                                  .digitsOnly,
+                                                              CurrencyInputFormatter(),
+                                                            ],
+                                                            validator: (e) {
+                                                              if (e!.isEmpty) {
+                                                                return "Wajib diisi";
+                                                              } else {
+                                                                return null;
+                                                              }
+                                                            },
+                                                            decoration:
+                                                                InputDecoration(
+                                                              hintText: "PPH",
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            6),
+                                                              ),
+                                                            ),
+                                                          ),
                                                         ],
                                                       )
                                                     : SizedBox(),

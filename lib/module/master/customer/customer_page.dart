@@ -240,7 +240,7 @@ class CustomerPage extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          "No Customer / Supplier",
+                                          "Kode Customer / Supplier",
                                           style: const TextStyle(fontSize: 12),
                                         ),
                                         const SizedBox(width: 5),
@@ -257,9 +257,10 @@ class CustomerPage extends StatelessWidget {
                                       textInputAction: TextInputAction.done,
                                       controller: value.noSif,
                                       maxLines: 1,
-                                      // inputFormatters: [
-                                      //   FilteringTextInputFormatter.digitsOnly
-                                      // ],
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'[a-zA-Z0-9]'))
+                                      ],
                                       validator: (e) {
                                         if (e!.isEmpty) {
                                           return "Wajib diisi";
@@ -268,7 +269,7 @@ class CustomerPage extends StatelessWidget {
                                         }
                                       },
                                       decoration: InputDecoration(
-                                        hintText: "No. Customer / Supplier  ",
+                                        hintText: "Kode Customer / Supplier  ",
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(6),

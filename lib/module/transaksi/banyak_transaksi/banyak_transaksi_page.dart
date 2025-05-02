@@ -459,8 +459,7 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                       TextAlignVertical.center,
                                                   dropdownSearchDecoration:
                                                       InputDecoration(
-                                                    hintText:
-                                                        "Pilih Debet Akun",
+                                                    hintText: "Pilih Akun",
                                                     border: OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -642,8 +641,7 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                             .center,
                                                     dropdownSearchDecoration:
                                                         InputDecoration(
-                                                      hintText:
-                                                          "Pilih Kredit Akun",
+                                                      hintText: "Pilih Akun",
                                                       border:
                                                           OutlineInputBorder(
                                                         borderRadius:

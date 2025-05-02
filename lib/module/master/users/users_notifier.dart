@@ -294,7 +294,9 @@ class UsersNotifier extends ChangeNotifier {
     "5",
   ];
 
+  var levelSelected = false;
   pilihLevelOtor(String value) {
+    levelSelected = true;
     levelOtor = value;
     notifyListeners();
   }

@@ -36,7 +36,7 @@ class LevelPage extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "Level Jabatan",
+                              "Data Level",
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -57,7 +57,7 @@ class LevelPage extends StatelessWidget {
                                 ),
                               ),
                               child: Text(
-                                "Tambah Level Jabatan",
+                                "Tambah Data Level",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   color: Colors.white,
@@ -125,19 +125,19 @@ class LevelPage extends StatelessWidget {
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Level Jabatan',
+                                          child: Text('Level',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
                                                 fontSize: 12,
                                               )))),
                                   GridColumn(
-                                      columnName: 'jabatan',
+                                      columnName: 'kelompok',
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
-                                          child: Text('Kelompok Jabatan',
+                                          child: Text('Kelompok Level',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -178,7 +178,7 @@ class LevelPage extends StatelessWidget {
                 bottom: 0,
                 right: 0,
                 child: value.dialog
-                    ?  Container(
+                    ? Container(
                         padding: EdgeInsets.all(20),
                         width: 600,
                         decoration: BoxDecoration(color: Colors.white),
@@ -192,8 +192,8 @@ class LevelPage extends StatelessWidget {
                                   Expanded(
                                     child: Text(
                                       value.editData
-                                          ? "Ubah / Hapus Level Jabatan"
-                                          : "Tambah Level Jabatan",
+                                          ? "Ubah / Hapus Level"
+                                          : "Tambah Level",
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -248,7 +248,7 @@ class LevelPage extends StatelessWidget {
                                   }
                                 },
                                 decoration: InputDecoration(
-                                  hintText: "Level Jabatan",
+                                  hintText: "Level",
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6),
                                   ),
@@ -258,7 +258,7 @@ class LevelPage extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    "Jabatan",
+                                    "Kelompok Level",
                                     style: const TextStyle(fontSize: 12),
                                   ),
                                   const SizedBox(width: 5),
@@ -286,7 +286,7 @@ class LevelPage extends StatelessWidget {
                                   }
                                 },
                                 decoration: InputDecoration(
-                                  hintText: "Jabatan",
+                                  hintText: "Kelompok Level",
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6),
                                   ),

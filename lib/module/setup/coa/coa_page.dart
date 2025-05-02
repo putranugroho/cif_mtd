@@ -808,9 +808,10 @@ class CoaPage extends StatelessWidget {
                                                           value.noHeader,
                                                       maxLines: 1,
                                                       maxLength: 3,
-                                                      // inputFormatters: [
-                                                      //   FilteringTextInputFormatter.digitsOnly
-                                                      // ],
+                                                      inputFormatters: [
+                                                        FilteringTextInputFormatter
+                                                            .digitsOnly
+                                                      ],
                                                       validator: (e) {
                                                         if (e!.isEmpty) {
                                                           return "Wajib diisi";
@@ -842,9 +843,10 @@ class CoaPage extends StatelessWidget {
                                                           value.resulttext,
                                                       maxLines: 1,
                                                       readOnly: true,
-                                                      // inputFormatters: [
-                                                      //   FilteringTextInputFormatter.digitsOnly
-                                                      // ],
+                                                      inputFormatters: [
+                                                        FilteringTextInputFormatter
+                                                            .digitsOnly
+                                                      ],
                                                       validator: (e) {
                                                         if (e!.isEmpty) {
                                                           return "Wajib diisi";
@@ -1007,9 +1009,10 @@ class CoaPage extends StatelessWidget {
                                                           controller:
                                                               value.noHeader,
                                                           maxLines: 1,
-                                                          // inputFormatters: [
-                                                          //   FilteringTextInputFormatter.digitsOnly
-                                                          // ],
+                                                          inputFormatters: [
+                                                            FilteringTextInputFormatter
+                                                                .digitsOnly
+                                                          ],
                                                           validator: (e) {
                                                             if (e!.isEmpty) {
                                                               return "Wajib diisi";
@@ -1077,9 +1080,10 @@ class CoaPage extends StatelessWidget {
                                                               value.updatebb();
                                                             }
                                                           },
-                                                          // inputFormatters: [
-                                                          //   FilteringTextInputFormatter.digitsOnly
-                                                          // ],
+                                                          inputFormatters: [
+                                                            FilteringTextInputFormatter
+                                                                .digitsOnly
+                                                          ],
                                                           validator: (e) {
                                                             if (e!.isEmpty) {
                                                               return "Wajib diisi";
@@ -1113,9 +1117,10 @@ class CoaPage extends StatelessWidget {
                                                               value.resulttext,
                                                           readOnly: true,
                                                           maxLines: 1,
-                                                          // inputFormatters: [
-                                                          //   FilteringTextInputFormatter.digitsOnly
-                                                          // ],
+                                                          inputFormatters: [
+                                                            FilteringTextInputFormatter
+                                                                .digitsOnly
+                                                          ],
                                                           validator: (e) {
                                                             if (e!.isEmpty) {
                                                               return "Wajib diisi";
@@ -1524,9 +1529,10 @@ class CoaPage extends StatelessWidget {
                                                               controller:
                                                                   value.noBb,
                                                               maxLines: 1,
-                                                              // inputFormatters: [
-                                                              //   FilteringTextInputFormatter.digitsOnly
-                                                              // ],
+                                                              inputFormatters: [
+                                                                FilteringTextInputFormatter
+                                                                    .digitsOnly
+                                                              ],
                                                               validator: (e) {
                                                                 if (e!
                                                                     .isEmpty) {
@@ -1602,9 +1608,10 @@ class CoaPage extends StatelessWidget {
                                                                 }
                                                               },
                                                               maxLength: 6,
-                                                              // inputFormatters: [
-                                                              //   FilteringTextInputFormatter.digitsOnly
-                                                              // ],
+                                                              inputFormatters: [
+                                                                FilteringTextInputFormatter
+                                                                    .digitsOnly
+                                                              ],
                                                               validator: (e) {
                                                                 if (e!
                                                                     .isEmpty) {
@@ -1640,9 +1647,10 @@ class CoaPage extends StatelessWidget {
                                                                   .resulttext,
                                                               maxLines: 1,
                                                               readOnly: true,
-                                                              // inputFormatters: [
-                                                              //   FilteringTextInputFormatter.digitsOnly
-                                                              // ],
+                                                              inputFormatters: [
+                                                                FilteringTextInputFormatter
+                                                                    .digitsOnly
+                                                              ],
                                                               validator: (e) {
                                                                 if (e!
                                                                     .isEmpty) {
