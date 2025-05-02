@@ -319,8 +319,8 @@ class CoaNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  TextEditingController limitdebet = TextEditingController();
-  TextEditingController limitkredit = TextEditingController();
+  TextEditingController limitdebet = TextEditingController(text: "0");
+  TextEditingController limitkredit = TextEditingController(text: "0");
   TextEditingController resulttext = TextEditingController();
   TextEditingController noBb = TextEditingController();
   TextEditingController noKantor = TextEditingController();

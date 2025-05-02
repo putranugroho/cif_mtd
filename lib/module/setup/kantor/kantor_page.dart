@@ -750,12 +750,17 @@ class KantorPage extends StatelessWidget {
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
+                                                    maxLength: 5,
                                                     controller: value.kodepos,
                                                     validator: (e) {
                                                       if (e!.isEmpty) {
                                                         return "Wajib diisi";
                                                       } else {
-                                                        return null;
+                                                        if (e.length < 5) {
+                                                          return "Wajib 5 digit";
+                                                        } else {
+                                                          return null;
+                                                        }
                                                       }
                                                     },
                                                     decoration: InputDecoration(

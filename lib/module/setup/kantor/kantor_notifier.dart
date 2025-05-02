@@ -260,7 +260,7 @@ class KantorNotifier extends ChangeNotifier {
 
   pilihKantor(KantorModel value) {
     kantorModel = value;
-    noKantor.text = value!.kodeKantor;
+    noKantor.text = value.kodeKantor;
     notifyListeners();
   }
 
@@ -291,6 +291,7 @@ class KantorNotifier extends ChangeNotifier {
   String? status = "Cabang";
   pilihStatus(String value) {
     status = value;
+    kantorModel = null;
     notifyListeners();
   }
 

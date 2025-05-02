@@ -1766,14 +1766,6 @@ class CoaPage extends StatelessWidget {
                                                                       .digitsOnly,
                                                                   CurrencyInputFormatter(),
                                                                 ],
-                                                                validator: (e) {
-                                                                  if (e!
-                                                                      .isEmpty) {
-                                                                    return "Wajib diisi";
-                                                                  } else {
-                                                                    return null;
-                                                                  }
-                                                                },
                                                                 decoration:
                                                                     InputDecoration(
                                                                   hintText:
@@ -1832,14 +1824,6 @@ class CoaPage extends StatelessWidget {
                                                                       .digitsOnly,
                                                                   CurrencyInputFormatter(),
                                                                 ],
-                                                                validator: (e) {
-                                                                  if (e!
-                                                                      .isEmpty) {
-                                                                    return "Wajib diisi";
-                                                                  } else {
-                                                                    return null;
-                                                                  }
-                                                                },
                                                                 decoration:
                                                                     InputDecoration(
                                                                   hintText:
