@@ -9,13 +9,13 @@ class RevaluasiNotifier extends ChangeNotifier {
   final BuildContext context;
 
   RevaluasiNotifier({required this.context}) {
-    for (Map<String, dynamic> i in data) {
-      list.add(InventarisModel.fromJson(i));
-    }
+    // for (Map<String, dynamic> i in data) {
+    //   list.add(InventarisModel.fromJson(i));
+    // }
 
-    for (Map<String, dynamic> i in kantor) {
-      listkantor.add(KantorModel.fromJson(i));
-    }
+    // for (Map<String, dynamic> i in kantor) {
+    //   listkantor.add(KantorModel.fromJson(i));
+    // }
     notifyListeners();
   }
 

@@ -9,13 +9,13 @@ class JualBeliNotifier extends ChangeNotifier {
   final BuildContext context;
 
   JualBeliNotifier({required this.context}) {
-    for (Map<String, dynamic> i in data) {
-      list.add(InventarisModel.fromJson(i));
-    }
+    // for (Map<String, dynamic> i in data) {
+    //   list.add(InventarisModel.fromJson(i));
+    // }
 
-    for (Map<String, dynamic> i in kantor) {
-      listkantor.add(KantorModel.fromJson(i));
-    }
+    // for (Map<String, dynamic> i in kantor) {
+    //   listkantor.add(KantorModel.fromJson(i));
+    // }
     notifyListeners();
   }
 
