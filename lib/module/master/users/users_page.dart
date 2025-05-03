@@ -1083,10 +1083,14 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'beda_kantor', value: data.bedaKantor),
                 DataGridCell(
                     columnName: 'min_otor',
-                    value: FormatCurrency.oCcy.format(int.parse(data.minOtor))),
+                    value: data.minOtor == ""
+                        ? ""
+                        : FormatCurrency.oCcy.format(int.parse(data.minOtor))),
                 DataGridCell(
                     columnName: 'max_otor',
-                    value: FormatCurrency.oCcy.format(int.parse(data.maxOtor))),
+                    value: data.maxOtor == ""
+                        ? ""
+                        : FormatCurrency.oCcy.format(int.parse(data.maxOtor))),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))

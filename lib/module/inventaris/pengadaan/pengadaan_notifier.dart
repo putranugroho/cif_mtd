@@ -2,12 +2,14 @@ import 'dart:convert';
 
 import 'package:accounting/models/index.dart';
 import 'package:accounting/utils/colors.dart';
+import 'package:accounting/utils/dialog_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
 
 import '../../../network/network.dart';
 import '../../../repository/SetupRepository.dart';
+import '../../../utils/format_currency.dart';
 
 class PengadaanNotifier extends ChangeNotifier {
   final BuildContext context;
@@ -16,8 +18,58 @@ class PengadaanNotifier extends ChangeNotifier {
     getKelompokAset();
     getMetodePenyusutan();
     getGolonganAset();
+    getKantor();
+    getSetupPajak();
     notifyListeners();
   }
+  SetupPajakModel? setupPajakModel;
+  List<SetupPajakModel> listPajak = [];
+
+  Future getSetupPajak() async {
+    isLoading = true;
+    listPajak.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getSetupPajak(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listPajak.add(SetupPajakModel.fromJson(i));
+        }
+        setupPajakModel = listPajak[0];
+
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  List<KantorModel> listKantor = [];
+  Future getKantor() async {
+    listKantor.clear();
+
+    var data = {
+      "kode_pt": "001",
+    };
+    notifyListeners();
+    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data))
+        .then((value) {
+      if (value['status'] == "Success") {
+        for (Map<String, dynamic> i in value['data']) {
+          listKantor.add(KantorModel.fromJson(i));
+        }
+
+        notifyListeners();
+      } else {
+        notifyListeners();
+      }
+    });
+  }
+
+  KantorModel? kantor;
 
   List<GolonganAsetModel> listGolongan = [];
   Future getGolonganAset() async {
@@ -83,7 +135,7 @@ class PengadaanNotifier extends ChangeNotifier {
         }
         metodePenyusutanModel = listPenyusutan[0];
         metode = int.parse(metodePenyusutanModel!.metodePenyusutan);
-        // nilai.text = metodePenyusutanModel!.nilaiAkhir.toString();
+        nilaiPenyusutan.text = metodePenyusutanModel!.nilaiAkhir.toString();
         // nilai.text = metodePenyusutanModel!.declining.toString();
         print(metode);
         isLoading = false;
@@ -148,6 +200,9 @@ class PengadaanNotifier extends ChangeNotifier {
   TextEditingController pph = TextEditingController(text: "0");
   int total = 0;
   onChange() {
+    subtotal = int.parse(hargaBeli.text.replaceAll(",", "")) -
+        int.parse(discount.text.replaceAll(",", "")) +
+        int.parse(biaya.text.replaceAll(",", ""));
     total = int.parse(hargaBeli.text.replaceAll(",", "")) -
         int.parse(discount.text.replaceAll(",", "")) +
         int.parse(biaya.text.replaceAll(",", ""));
@@ -155,8 +210,40 @@ class PengadaanNotifier extends ChangeNotifier {
   }
 
   bool pajak = false;
+  int subtotal = 0;
   gantipajak(bool value) {
     pajak = value;
+    if (pajak) {
+      ppn.text = (((int.parse(hargaBeli.text.replaceAll(",", "")) -
+                      int.parse(discount.text.replaceAll(",", "")) +
+                      int.parse(biaya.text.replaceAll(",", ""))) *
+                  double.parse(setupPajakModel!.ppn)) /
+              100)
+          .toInt()
+          .toString();
+      pph.text = (((int.parse(hargaBeli.text.replaceAll(",", "")) -
+                      int.parse(discount.text.replaceAll(",", "")) +
+                      int.parse(biaya.text.replaceAll(",", ""))) *
+                  double.parse(setupPajakModel!.pph23)) /
+              100)
+          .toInt()
+          .toString();
+      subtotal = int.parse(hargaBeli.text.replaceAll(",", "")) -
+          int.parse(discount.text.replaceAll(",", "")) +
+          int.parse(biaya.text.replaceAll(",", ""));
+      total = (int.parse(hargaBeli.text.replaceAll(",", "")) -
+              int.parse(discount.text.replaceAll(",", "")) +
+              int.parse(biaya.text.replaceAll(",", "")) +
+              (int.parse(ppn.text.replaceAll(",", "")))) -
+          int.parse(pph.text.replaceAll(",", ""));
+      notifyListeners();
+    } else {
+      ppn.text = "0";
+      pph.text = "0";
+      total = int.parse(hargaBeli.text.replaceAll(",", "")) -
+          int.parse(discount.text.replaceAll(",", "")) +
+          int.parse(biaya.text.replaceAll(",", ""));
+    }
     notifyListeners();
   }
 
@@ -201,16 +288,23 @@ class PengadaanNotifier extends ChangeNotifier {
     var pickedendDate = (await showDatePicker(
       context: context,
       initialDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) + 1,
+          int.parse(DateFormat('y').format(DateTime.now())),
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
           int.parse(DateFormat('dd').format(
             DateTime.now(),
           ))),
-      firstDate: DateTime(1950),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) - 10,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
       lastDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) + 10,
+          int.parse(DateFormat('y').format(DateTime.now())),
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
@@ -265,6 +359,64 @@ class PengadaanNotifier extends ChangeNotifier {
     }
   }
 
+  TextEditingController masasusut = TextEditingController();
+  cek() {
+    DialogCustom().showLoading(context);
+
+    var data = {
+      "kdaset": noaset.text,
+      "ket": keterangan.text,
+      "kode_kelompok": kelompokAsetModel!.kodeKelompok,
+      "nama_kelompok": kelompokAsetModel!.namaKelompokn,
+      "kode_golongan": golonganAsetModel!.kodeGolongan,
+      "nama_golongan": golonganAsetModel!.namaGolongan,
+      "nodok_beli": noDok.text,
+      "tgl_beli": tglbeli.text,
+      "tgl_terima": tglterima.text,
+      "habeli": hargaBeli.text,
+      "disc": discount.text,
+      "biaya": biaya.text,
+      "haper": subtotal,
+      "nilai_residu": nilaiPenyusutan.text,
+      "ppn_beli": ppn.text,
+      "pph": pph.text,
+      "tgl_jual": "",
+      "nodok_jual": "",
+      "hajual": "",
+      "ppn_jual": "",
+      "margin": "",
+      "kode_pt": kantor!.kodePt,
+      "kode_kantor": kantor!.kodeKantor,
+      "kode_induk": kantor!.kodeInduk,
+      "lokasi": lokasi.text.trim(),
+      "kota": kota.text,
+      "masasusut": masasusut.text,
+      "bln_mulai_susut": blnPenyusutan.text,
+      "kdkondisi": "",
+      "kondisi": "",
+      "satuan_aset": satuan!,
+      "nilai_declining": nilaiPenyusutan.text,
+      "perbaikan": "",
+      "stsasr": 'N',
+      "nopolis": "",
+      "nilai_revaluasi": "",
+      "nik": "",
+      "nama_pejabat": "",
+      "sbb_aset": golonganAsetModel!.sbbAset,
+      "sbb_penyusutan": golonganAsetModel!.sbbPenyusutan,
+      "sbb_biaya_penyusutan": golonganAsetModel!.sbbBiayaPenyusutan,
+      "sbb_rugi_revaluasi": golonganAsetModel!.sbbRugiRevaluasi,
+      "sbb_laba_revaluasi": golonganAsetModel!.sbbLabaRevaluasi,
+      "sbb_rugi_jual": golonganAsetModel!.sbbRugiJual,
+      "sbb_laba_jual": golonganAsetModel!.sbbLabaJual,
+      "sbb_biaya_perbaikan": golonganAsetModel!.sbbBiayaPerbaikan,
+    };
+  }
+
+  TextEditingController noDok = TextEditingController();
+  TextEditingController noaset = TextEditingController();
+  TextEditingController namaaset = TextEditingController();
+  TextEditingController keterangan = TextEditingController();
   TextEditingController blnPenyusutan = TextEditingController();
   DateTime now = DateTime.now();
   showDate() async {
@@ -293,6 +445,10 @@ class PengadaanNotifier extends ChangeNotifier {
                     Container(
                       height: 100,
                       child: ScrollDatePicker(
+                          minimumDate: DateTime(
+                              int.parse(DateFormat('y').format(tglTransaksi!)),
+                              int.parse(
+                                  DateFormat('MM').format(tglTransaksi!))),
                           maximumDate: DateTime(int.parse(
                                   DateFormat('y').format(DateTime.now())) +
                               50),
@@ -349,29 +505,21 @@ class PengadaanNotifier extends ChangeNotifier {
     var pickedendDate = (await showDatePicker(
       context: context,
       initialDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('y').format(tglTransaksi!)),
           int.parse(DateFormat('MM').format(
-            DateTime.now(),
+            tglTransaksi!,
           )),
           int.parse(DateFormat('dd').format(
-            DateTime.now(),
+            tglTransaksi!,
           ))),
       firstDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) - 10,
-          int.parse(DateFormat('MM').format(
-            DateTime.now(),
-          )),
-          int.parse(DateFormat('dd').format(
-            DateTime.now(),
-          ))),
+          int.parse(DateFormat('y').format(tglTransaksi!)),
+          int.parse(DateFormat('MM').format(tglTransaksi!)),
+          int.parse(DateFormat('dd').format(tglTransaksi!))),
       lastDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) - 10,
-          int.parse(DateFormat('MM').format(
-            DateTime.now(),
-          )),
-          int.parse(DateFormat('dd').format(
-            DateTime.now(),
-          ))),
+          int.parse(DateFormat('y').format(DateTime.now())) + 10,
+          int.parse(DateFormat('MM').format(tglTransaksi!)),
+          int.parse(DateFormat('dd').format(tglTransaksi!))),
     ));
     if (pickedendDate != null) {
       tglTransaksis = pickedendDate;
@@ -384,9 +532,13 @@ class PengadaanNotifier extends ChangeNotifier {
   List<KantorModel> listkantor = [];
   KantorModel? kantorModel;
   pilihKantor(KantorModel value) {
-    kantorModel = value;
+    kantor = value;
+
     notifyListeners();
   }
+
+  TextEditingController lokasi = TextEditingController();
+  TextEditingController kota = TextEditingController();
 
   List<InventarisModel> list = [];
   List<Map<String, dynamic>> data = [
