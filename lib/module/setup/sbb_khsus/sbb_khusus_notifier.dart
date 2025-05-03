@@ -146,6 +146,7 @@ class SbbKhususNotifier extends ChangeNotifier {
   var dialog = false;
   tambah() {
     golonganSbbKhususModel = null;
+    editData = false;
     dialog = true;
     notifyListeners();
   }

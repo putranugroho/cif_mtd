@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:accounting/models/index.dart';
 import 'package:accounting/repository/SetupRepository.dart';
+import 'package:accounting/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -24,6 +25,30 @@ class UsersNotifier extends ChangeNotifier {
   var editData = false;
   edit(String id) {
     users = listData.where((e) => e.id == int.parse(id)).first;
+    dialog = true;
+    editData = true;
+    userid.text = users!.userid;
+    pass.text = users!.pass;
+    namauser.text = users!.namauser;
+    tglexp.text = users!.tglexp;
+    minotor.text = FormatCurrency.oCcy
+        .format(int.parse(users!.minOtor))
+        .replaceAll(".", ",");
+    maxotor.text = FormatCurrency.oCcy
+        .format(int.parse(users!.maxOtor))
+        .replaceAll(".", ",");
+    aksesKasir = users!.aksesKasir == "Y" ? true : false;
+    bedaKantor = users!.bedaKantor == "Y" ? true : false;
+    levelUser = listUsers.where((e) => e.idLevel == users!.lvluser).first;
+    levelOtor = listLevelOtor.where((e) => e == users!.levelOtor).first;
+    inqueryGlModel = users!.sbbKasir == ""
+        ? null
+        : listGl.where((e) => e.nosbb == users!.sbbKasir).first;
+    nossbb.text = users!.sbbKasir == "" ? "" : inqueryGlModel!.nosbb;
+    namasbb.text = users!.sbbKasir == "" ? "" : inqueryGlModel!.namaSbb;
+    otorisasi = users!.levelOtor != "0" ? true : false;
+    aktivasiModel =
+        listHariKerja.where((e) => e.kdAktivasi == users!.kdAktivasi).first;
     notifyListeners();
   }
 
@@ -40,9 +65,9 @@ class UsersNotifier extends ChangeNotifier {
           "pass": "${pass.text}",
           "namauser": "${namauser.text}",
           "kd_aktivasi": "${aktivasiModel!.kdAktivasi}",
-          "kode_pt": "${kantor!.kodePt}",
-          "kode_kantor": "${kantor!.kodeKantor}",
-          "kode_induk": "${kantor!.kodeInduk}",
+          "kode_pt": "${kantor == null ? "001" : kantor!.kodePt}",
+          "kode_kantor": "${kantor == null ? "001" : kantor!.kodeKantor}",
+          "kode_induk": "${kantor == null ? "001" : kantor!.kodeInduk}",
           "tglexp": "${tglexp.text}",
           "lvluser": "${levelUser!.idLevel}",
           "terminal_id": "",
@@ -220,6 +245,7 @@ class UsersNotifier extends ChangeNotifier {
   bool dialog = false;
   tambah() {
     clear();
+    editData = false;
     dialog = true;
     notifyListeners();
   }
@@ -246,7 +272,6 @@ class UsersNotifier extends ChangeNotifier {
   TextEditingController pass = TextEditingController();
   TextEditingController namauser = TextEditingController();
   TextEditingController tglexp = TextEditingController();
-  // TextEditingController levelotor = TextEditingController();
   TextEditingController minotor = TextEditingController();
   TextEditingController maxotor = TextEditingController();
 
