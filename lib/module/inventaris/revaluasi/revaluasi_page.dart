@@ -60,7 +60,7 @@ class RevaluasiPage extends StatelessWidget {
                             },
                             controlsBuilder: (context, detail) => Container(
                                 margin: const EdgeInsets.only(top: 16.0),
-                                child: value.currentStep == 4
+                                child: value.currentStep == 1
                                     ? Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
@@ -125,7 +125,7 @@ class RevaluasiPage extends StatelessWidget {
                                           )),
                             steps: [
                               Step(
-                                  title: Text("Inquery Inventaris"),
+                                  title: Text("Inquery Data Inventaris"),
                                   content: Form(
                                       key: value.formStep[0],
                                       child: Column(
@@ -135,7 +135,7 @@ class RevaluasiPage extends StatelessWidget {
                                           Row(
                                             children: [
                                               Text(
-                                                "Aset",
+                                                "Pilih Aset / Inventaris",
                                                 style: const TextStyle(
                                                     fontSize: 12),
                                               ),
@@ -226,9 +226,106 @@ class RevaluasiPage extends StatelessWidget {
                                                           .stretch,
                                                   children: [
                                                     Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          "Kelompok",
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 12),
+                                                        ),
+                                                        const SizedBox(
+                                                            width: 5),
+                                                        const Text(
+                                                          "*",
+                                                          style: TextStyle(
+                                                              fontSize: 8),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    TextFormField(
+                                                      controller: value.noaset,
+                                                      textInputAction:
+                                                          TextInputAction.done,
+                                                      maxLines: 1,
+                                                      readOnly: true,
+                                                      validator: (e) {
+                                                        if (e!.isEmpty) {
+                                                          return "Wajib diisi";
+                                                        } else {
+                                                          return null;
+                                                        }
+                                                      },
+                                                      decoration:
+                                                          InputDecoration(
+                                                        filled: true,
+                                                        fillColor:
+                                                            Colors.grey[200],
+                                                        hintText:
+                                                            "Kelompok Aset",
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(6),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 16,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          "Golongan",
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 12),
+                                                        ),
+                                                        const SizedBox(
+                                                            width: 5),
+                                                        const Text(
+                                                          "*",
+                                                          style: TextStyle(
+                                                              fontSize: 8),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    TextFormField(
+                                                      controller: value.noaset,
+                                                      textInputAction:
+                                                          TextInputAction.done,
+                                                      maxLines: 1,
+                                                      readOnly: true,
+                                                      validator: (e) {
+                                                        if (e!.isEmpty) {
+                                                          return "Wajib diisi";
+                                                        } else {
+                                                          return null;
+                                                        }
+                                                      },
+                                                      decoration:
+                                                          InputDecoration(
+                                                        filled: true,
+                                                        fillColor:
+                                                            Colors.grey[200],
+                                                        hintText:
+                                                            "Golongan Aset",
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(6),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(height: 16),
+                                                    Row(
                                                       children: [
                                                         Expanded(
                                                             child: Column(
@@ -236,25 +333,51 @@ class RevaluasiPage extends StatelessWidget {
                                                               CrossAxisAlignment
                                                                   .stretch,
                                                           children: [
-                                                            Text(
-                                                              "Lokasi",
-                                                              style:
-                                                                  const TextStyle(
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Nomor Aset",
+                                                                  style: const TextStyle(
                                                                       fontSize:
                                                                           12),
+                                                                ),
+                                                                const SizedBox(
+                                                                    width: 5),
+                                                                const Text(
+                                                                  "*",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          8),
+                                                                ),
+                                                              ],
                                                             ),
-                                                            SizedBox(
+                                                            const SizedBox(
                                                               height: 8,
                                                             ),
                                                             TextFormField(
+                                                              controller:
+                                                                  value.noaset,
                                                               textInputAction:
                                                                   TextInputAction
                                                                       .done,
                                                               maxLines: 1,
+                                                              readOnly: true,
+                                                              validator: (e) {
+                                                                if (e!
+                                                                    .isEmpty) {
+                                                                  return "Wajib diisi";
+                                                                } else {
+                                                                  return null;
+                                                                }
+                                                              },
                                                               decoration:
                                                                   InputDecoration(
+                                                                filled: true,
+                                                                fillColor:
+                                                                    Colors.grey[
+                                                                        200],
                                                                 hintText:
-                                                                    "Lokasi",
+                                                                    "Nomor Aset",
                                                                 border:
                                                                     OutlineInputBorder(
                                                                   borderRadius:
@@ -277,25 +400,221 @@ class RevaluasiPage extends StatelessWidget {
                                                               CrossAxisAlignment
                                                                   .stretch,
                                                           children: [
-                                                            Text(
-                                                              "Kota",
-                                                              style:
-                                                                  const TextStyle(
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Satuan",
+                                                                  style: const TextStyle(
                                                                       fontSize:
                                                                           12),
+                                                                ),
+                                                                const SizedBox(
+                                                                    width: 5),
+                                                                const Text(
+                                                                  "*",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          8),
+                                                                ),
+                                                              ],
                                                             ),
-                                                            SizedBox(
+                                                            const SizedBox(
+                                                              height: 8,
+                                                            ),
+                                                            TextFormField(
+                                                              controller:
+                                                                  value.noaset,
+                                                              textInputAction:
+                                                                  TextInputAction
+                                                                      .done,
+                                                              maxLines: 1,
+                                                              readOnly: true,
+                                                              validator: (e) {
+                                                                if (e!
+                                                                    .isEmpty) {
+                                                                  return "Wajib diisi";
+                                                                } else {
+                                                                  return null;
+                                                                }
+                                                              },
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                filled: true,
+                                                                fillColor:
+                                                                    Colors.grey[
+                                                                        200],
+                                                                hintText:
+                                                                    "Satuan",
+                                                                border:
+                                                                    OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              6),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 16,
+                                                            ),
+                                                          ],
+                                                        )),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          "Keterangan",
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 12),
+                                                        ),
+                                                        const SizedBox(
+                                                            width: 5),
+                                                        const Text(
+                                                          "*",
+                                                          style: TextStyle(
+                                                              fontSize: 8),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    TextFormField(
+                                                      textInputAction:
+                                                          TextInputAction.done,
+                                                      controller:
+                                                          value.keterangan,
+                                                      maxLines: 1,
+                                                      readOnly: true,
+                                                      validator: (e) {
+                                                        if (e!.isEmpty) {
+                                                          return "Wajib diisi";
+                                                        } else {
+                                                          return null;
+                                                        }
+                                                      },
+                                                      decoration:
+                                                          InputDecoration(
+                                                        filled: true,
+                                                        fillColor:
+                                                            Colors.grey[200],
+                                                        hintText: "Keterangan",
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(6),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(height: 16),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          "Nomor Dokumen Pembelian",
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 12),
+                                                        ),
+                                                        const SizedBox(
+                                                            width: 5),
+                                                        const Text(
+                                                          "*",
+                                                          style: TextStyle(
+                                                              fontSize: 8),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    TextFormField(
+                                                      controller: value.noDok,
+                                                      textInputAction:
+                                                          TextInputAction.done,
+                                                      maxLines: 1,
+                                                      readOnly: true,
+                                                      validator: (e) {
+                                                        if (e!.isEmpty) {
+                                                          return "Wajib diisi";
+                                                        } else {
+                                                          return null;
+                                                        }
+                                                      },
+                                                      decoration:
+                                                          InputDecoration(
+                                                        filled: true,
+                                                        fillColor:
+                                                            Colors.grey[200],
+                                                        hintText:
+                                                            "Nomor Dokumen Pembelian",
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(6),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(height: 16),
+                                                    Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Expanded(
+                                                            child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .stretch,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Tanggal Beli",
+                                                                  style: const TextStyle(
+                                                                      fontSize:
+                                                                          12),
+                                                                ),
+                                                                const SizedBox(
+                                                                    width: 5),
+                                                                const Text(
+                                                                  "*",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          8),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            const SizedBox(
                                                               height: 8,
                                                             ),
                                                             TextFormField(
                                                               textInputAction:
                                                                   TextInputAction
                                                                       .done,
+                                                              controller: value
+                                                                  .keterangan,
                                                               maxLines: 1,
+                                                              readOnly: true,
+                                                              validator: (e) {
+                                                                if (e!
+                                                                    .isEmpty) {
+                                                                  return "Wajib diisi";
+                                                                } else {
+                                                                  return null;
+                                                                }
+                                                              },
                                                               decoration:
                                                                   InputDecoration(
+                                                                filled: true,
+                                                                fillColor:
+                                                                    Colors.grey[
+                                                                        200],
                                                                 hintText:
-                                                                    "Kota",
+                                                                    "Tanggal Beli",
                                                                 border:
                                                                     OutlineInputBorder(
                                                                   borderRadius:
@@ -308,38 +627,269 @@ class RevaluasiPage extends StatelessWidget {
                                                             const SizedBox(
                                                                 height: 16),
                                                           ],
-                                                        ))
+                                                        )),
+                                                        SizedBox(
+                                                          width: 16,
+                                                        ),
+                                                        Expanded(
+                                                            child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .stretch,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Tanggal Terima",
+                                                                  style: const TextStyle(
+                                                                      fontSize:
+                                                                          12),
+                                                                ),
+                                                                const SizedBox(
+                                                                    width: 5),
+                                                                const Text(
+                                                                  "*",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          8),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 8,
+                                                            ),
+                                                            TextFormField(
+                                                              textInputAction:
+                                                                  TextInputAction
+                                                                      .done,
+                                                              controller: value
+                                                                  .keterangan,
+                                                              maxLines: 1,
+                                                              readOnly: true,
+                                                              validator: (e) {
+                                                                if (e!
+                                                                    .isEmpty) {
+                                                                  return "Wajib diisi";
+                                                                } else {
+                                                                  return null;
+                                                                }
+                                                              },
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                filled: true,
+                                                                fillColor:
+                                                                    Colors.grey[
+                                                                        200],
+                                                                hintText:
+                                                                    "Tanggal Terima",
+                                                                border:
+                                                                    OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              6),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                                height: 16),
+                                                          ],
+                                                        )),
                                                       ],
                                                     ),
-                                                    Text(
-                                                      "Karyawan",
-                                                      style: const TextStyle(
-                                                          fontSize: 12),
+                                                  ],
+                                                )
+                                              : SizedBox()
+                                        ],
+                                      ))),
+                              Step(
+                                  title: Text(
+                                    "Revaluasi",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  content: Form(
+                                    key: value.formStep[1],
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Nilai Buku",
+                                              style:
+                                                  const TextStyle(fontSize: 12),
+                                            ),
+                                            const SizedBox(width: 5),
+                                            const Text(
+                                              "*",
+                                              style: TextStyle(fontSize: 8),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        TextFormField(
+                                          textInputAction: TextInputAction.done,
+                                          maxLines: 1,
+                                          readOnly: true,
+                                          decoration: InputDecoration(
+                                            filled: true,
+                                            fillColor: Colors.grey[200],
+                                            hintText: "Nilai Buku",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 16),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                                child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: [
+                                                Text(
+                                                  "Nilai Barang",
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  maxLines: 1,
+                                                  readOnly: true,
+                                                  validator: (e) {
+                                                    if (e!.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  controller: value.lokasi,
+                                                  decoration: InputDecoration(
+                                                    fillColor: Colors.grey[200],
+                                                    filled: true,
+                                                    hintText: "Nilai Barang",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
                                                     ),
-                                                    SizedBox(
-                                                      height: 8,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 16),
+                                              ],
+                                            )),
+                                            SizedBox(
+                                              width: 16,
+                                            ),
+                                            Expanded(
+                                                child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: [
+                                                Text(
+                                                  "Pajak",
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  maxLines: 1,
+                                                  readOnly: true,
+                                                  controller: value.kota,
+                                                  validator: (e) {
+                                                    if (e!.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    fillColor: Colors.grey[200],
+                                                    filled: true,
+                                                    hintText: "Pajak",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
                                                     ),
-                                                    TextFormField(
-                                                      textInputAction:
-                                                          TextInputAction.done,
-                                                      maxLines: 1,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        suffixIcon: IconButton(
-                                                            onPressed: () {},
-                                                            icon: Icon(
-                                                                Icons.search)),
-                                                        hintText:
-                                                            "Silahkan Masukkan NIK",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
-                                                        ),
-                                                      ),
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 16),
+                                              ],
+                                            )),
+                                            SizedBox(
+                                              width: 16,
+                                            ),
+                                            Expanded(
+                                                child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: [
+                                                Text(
+                                                  "PPH",
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  maxLines: 1,
+                                                  readOnly: true,
+                                                  validator: (e) {
+                                                    if (e!.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  controller: value.lokasi,
+                                                  decoration: InputDecoration(
+                                                    fillColor: Colors.grey[200],
+                                                    filled: true,
+                                                    hintText: "PPH",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
                                                     ),
-                                                    const SizedBox(height: 16),
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 16),
+                                              ],
+                                            ))
+                                          ],
+                                        ),
+                                        Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .stretch,
+                                                  children: [
                                                     Row(
                                                       children: [
                                                         Text(
@@ -396,6 +946,16 @@ class RevaluasiPage extends StatelessWidget {
                                                       ),
                                                     ),
                                                     const SizedBox(height: 16),
+                                                  ],
+                                                ),
+                                              ),
+                                              const SizedBox(width: 16),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .stretch,
+                                                  children: [
                                                     Row(
                                                       children: [
                                                         Text(
@@ -447,112 +1007,95 @@ class RevaluasiPage extends StatelessWidget {
                                                       ),
                                                     ),
                                                     const SizedBox(height: 16),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          "Tanggal Revaluasi",
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 12),
-                                                        ),
-                                                        const SizedBox(
-                                                            width: 5),
-                                                        const Text(
-                                                          "*",
-                                                          style: TextStyle(
-                                                              fontSize: 8),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 8,
-                                                    ),
-                                                    InkWell(
-                                                      onTap: () => value
-                                                          .piihTanggalBeli(),
-                                                      child: TextFormField(
-                                                        enabled: false,
-                                                        textInputAction:
-                                                            TextInputAction
-                                                                .done,
-                                                        controller:
-                                                            value.tglbeli,
-                                                        maxLines: 1,
-                                                        validator: (e) {
-                                                          if (e!.isEmpty) {
-                                                            return "Wajib diisi";
-                                                          } else {
-                                                            return null;
-                                                          }
-                                                        },
-                                                        decoration:
-                                                            InputDecoration(
-                                                          hintText:
-                                                              "Tanggal Revaluasi",
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        6),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    const SizedBox(height: 16),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          "Pihak Revaluasi",
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 12),
-                                                        ),
-                                                        const SizedBox(
-                                                            width: 5),
-                                                        const Text(
-                                                          "*",
-                                                          style: TextStyle(
-                                                              fontSize: 8),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 8,
-                                                    ),
-                                                    TextFormField(
-                                                      textInputAction:
-                                                          TextInputAction.done,
-                                                      maxLines: 1,
-                                                      validator: (e) {
-                                                        if (e!.isEmpty) {
-                                                          return "Wajib diisi";
-                                                        } else {
-                                                          return null;
-                                                        }
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        hintText:
-                                                            "Pihak Revaluasi",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    const SizedBox(height: 16),
-                                                    ButtonPrimary(
-                                                      onTap: () {},
-                                                      name: "Simpan",
-                                                    )
                                                   ],
-                                                )
-                                              : SizedBox()
-                                        ],
-                                      ))),
+                                                ),
+                                              )
+                                            ]),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Tanggal Revaluasi",
+                                              style:
+                                                  const TextStyle(fontSize: 12),
+                                            ),
+                                            const SizedBox(width: 5),
+                                            const Text(
+                                              "*",
+                                              style: TextStyle(fontSize: 8),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        InkWell(
+                                          onTap: () => value.piihTanggalBeli(),
+                                          child: TextFormField(
+                                            enabled: false,
+                                            textInputAction:
+                                                TextInputAction.done,
+                                            controller: value.tglbeli,
+                                            maxLines: 1,
+                                            validator: (e) {
+                                              if (e!.isEmpty) {
+                                                return "Wajib diisi";
+                                              } else {
+                                                return null;
+                                              }
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Tanggal Revaluasi",
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 16),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Pihak Revaluasi",
+                                              style:
+                                                  const TextStyle(fontSize: 12),
+                                            ),
+                                            const SizedBox(width: 5),
+                                            const Text(
+                                              "*",
+                                              style: TextStyle(fontSize: 8),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        TextFormField(
+                                          textInputAction: TextInputAction.done,
+                                          maxLines: 1,
+                                          validator: (e) {
+                                            if (e!.isEmpty) {
+                                              return "Wajib diisi";
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                          decoration: InputDecoration(
+                                            hintText: "Pihak Revaluasi",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 16),
+                                        ButtonPrimary(
+                                          onTap: () {},
+                                          name: "Simpan",
+                                        )
+                                      ],
+                                    ),
+                                  )),
                             ])
                       ],
                     ))

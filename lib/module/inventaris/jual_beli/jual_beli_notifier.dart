@@ -18,9 +18,6 @@ class JualBeliNotifier extends ChangeNotifier {
     // }
     notifyListeners();
   }
-
-  TextEditingController nominal = TextEditingController();
-
   int currentStep = 0;
   void onStepContinue() {
     if ((currentStep + 1) <= formStep.length) {
@@ -44,41 +41,14 @@ class JualBeliNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<String> listStatusBarang = [
-    "Baik",
-    "Baik dengan catatan",
-    "Cacat",
-    "Rusak",
-    "Dalam Proses",
-    "Beda Spesifikasi",
-    "Beda Kualitas",
-    "Lainnya",
-  ];
-  String? statusBarang;
-  pilihStatusBarang(String value) {
-    statusBarang = value;
-    notifyListeners();
-  }
-
-  List<String> listJenis = [
-    "Jual",
-    "Hapus",
-  ];
-
-  String? jenis;
-  pilihJenis(String value) {
-    jenis = value;
-    notifyListeners();
-  }
-
-  TextEditingController alasan = TextEditingController();
-
   final List<GlobalKey<FormState>> formStep = [
     GlobalKey<FormState>(),
     GlobalKey<FormState>(),
     GlobalKey<FormState>(),
     GlobalKey<FormState>(),
   ];
+
+  cek() {}
 
   bool dialog = false;
   tambah() {
@@ -99,6 +69,7 @@ class JualBeliNotifier extends ChangeNotifier {
   TextEditingController biaya = TextEditingController(text: "0");
   TextEditingController nilaiPenyusutan = TextEditingController();
   TextEditingController ppn = TextEditingController(text: "0");
+  TextEditingController pph = TextEditingController(text: "0");
   int total = 0;
   onChange() {
     total = int.parse(hargaBeli.text.replaceAll(",", "")) -
@@ -113,11 +84,56 @@ class JualBeliNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<String> listPilih = ["Jual", "Hapus"];
+  String? pilihModel = "Jual";
+  pilihPilih(String value) {
+    pilihModel = value;
+    notifyListeners();
+  }
+
   String? satuan = "Unit";
 
   gantiSatuan(String value) {
     satuan = value;
     notifyListeners();
+  }
+
+  DateTime? tglBuka = DateTime.now();
+
+  Future pilihTanggalBuka() async {
+    var pickedendDate = (await showDatePicker(
+      context: context,
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) - 10,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+    ));
+    if (pickedendDate != null) {
+      tglTransaksi = pickedendDate;
+      tglbeli.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
+      notifyListeners();
+    }
   }
 
   DateTime? tglTransaksi;
@@ -238,6 +254,35 @@ class JualBeliNotifier extends ChangeNotifier {
         });
   }
 
+  DateTime? tglTransaksis;
+  Future pilihTanggalTerima() async {
+    var pickedendDate = (await showDatePicker(
+      context: context,
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(tglTransaksi!)),
+          int.parse(DateFormat('MM').format(
+            tglTransaksi!,
+          )),
+          int.parse(DateFormat('dd').format(
+            tglTransaksi!,
+          ))),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(tglTransaksi!)),
+          int.parse(DateFormat('MM').format(tglTransaksi!)),
+          int.parse(DateFormat('dd').format(tglTransaksi!))),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) + 10,
+          int.parse(DateFormat('MM').format(tglTransaksi!)),
+          int.parse(DateFormat('dd').format(tglTransaksi!))),
+    ));
+    if (pickedendDate != null) {
+      tglTransaksis = pickedendDate;
+      tglterima.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
+      notifyListeners();
+    }
+  }
+
   List<Map<String, dynamic>> kantor = [
     {
       "kode_pt": "10001",
@@ -256,6 +301,11 @@ class JualBeliNotifier extends ChangeNotifier {
     }
   ];
 
+  TextEditingController noDok = TextEditingController();
+  TextEditingController noaset = TextEditingController();
+  TextEditingController namaaset = TextEditingController();
+  TextEditingController keterangan = TextEditingController();
+
   List<KantorModel> listkantor = [];
   KantorModel? kantorModel;
   pilihKantor(KantorModel value) {
@@ -268,7 +318,6 @@ class JualBeliNotifier extends ChangeNotifier {
   TextEditingController lokasi = TextEditingController();
   TextEditingController kota = TextEditingController();
   TextEditingController nik = TextEditingController();
-  TextEditingController picReval = TextEditingController();
 
   List<InventarisModel> list = [];
   InventarisModel? inventarisModel;
@@ -279,9 +328,6 @@ class JualBeliNotifier extends ChangeNotifier {
     lokasi.text = inventarisModel!.lokasi;
     kota.text = inventarisModel!.kota;
     nik.text = inventarisModel!.nik;
-    biaya.text = FormatCurrency.oCcy
-        .format(int.parse(inventarisModel!.haper))
-        .replaceAll(".", ",");
     notifyListeners();
   }
 

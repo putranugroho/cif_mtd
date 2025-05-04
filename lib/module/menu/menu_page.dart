@@ -22,6 +22,7 @@ import 'package:accounting/module/menu/menu_notifier.dart';
 import 'package:accounting/module/menu/menu_widget.dart';
 import 'package:accounting/module/neraca/neraca_berjalan_page.dart';
 import 'package:accounting/module/pejabat/pejabat_page.dart';
+import 'package:accounting/module/pembayaran_hutang/pembayaran_hutang_page.dart';
 import 'package:accounting/module/perantara/perantara_aktiva_page.dart';
 import 'package:accounting/module/perantara/perantara_pasiva_page.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_aset_page.dart';
@@ -381,7 +382,7 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                                       : value.page == 57
                                                                                                                                                                                                                                           ? PerantaraAktivaPage()
                                                                                                                                                                                                                                           : value.page == 58
-                                                                                                                                                                                                                                              ? TransaksiHutangPage()
+                                                                                                                                                                                                                                              ? PembayaranHutangPage()
                                                                                                                                                                                                                                               : value.page == 59
                                                                                                                                                                                                                                                   ? BayarDimukaPage()
                                                                                                                                                                                                                                                   : value.page == 60

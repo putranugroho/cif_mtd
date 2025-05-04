@@ -1447,13 +1447,13 @@ class PengadaanPage extends StatelessWidget {
                                                       enabled: false,
                                                       controller:
                                                           value.blnPenyusutan,
-                                                      validator: (e) {
-                                                        if (e!.isEmpty) {
-                                                          return "Wajib diisi";
-                                                        } else {
-                                                          return null;
-                                                        }
-                                                      },
+                                                      // validator: (e) {
+                                                      //   if (e!.isEmpty) {
+                                                      //     return "Wajib diisi";
+                                                      //   } else {
+                                                      //     return null;
+                                                      //   }
+                                                      // },
                                                       decoration:
                                                           InputDecoration(
                                                         hintText:
