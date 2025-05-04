@@ -843,7 +843,7 @@ class RekonsiliasiTransaksiPendingPage extends StatelessWidget {
 class DetailDataSource extends DataGridSource {
   DetailDataSource(SatuTransaksiNotifier value) {
     tindakanNotifier = value;
-    buildRowData(value.listData);
+    // buildRowData(value.listData);
   }
 
   SatuTransaksiNotifier? tindakanNotifier;

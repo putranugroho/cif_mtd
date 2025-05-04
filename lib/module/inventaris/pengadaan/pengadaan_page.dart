@@ -279,7 +279,9 @@ class PengadaanPage extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    "Tambah Pengadaan",
+                                    value.editData
+                                        ? "Ubah Pengadaan"
+                                        : "Tambah Pengadaan",
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
