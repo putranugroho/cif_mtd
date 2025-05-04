@@ -10,6 +10,7 @@ import 'package:scroll_date_picker/scroll_date_picker.dart';
 import '../../../network/network.dart';
 import '../../../repository/SetupRepository.dart';
 import '../../../utils/format_currency.dart';
+import '../../../utils/informationdialog.dart';
 
 class PengadaanNotifier extends ChangeNotifier {
   final BuildContext context;
@@ -371,15 +372,15 @@ class PengadaanNotifier extends ChangeNotifier {
       "kode_golongan": golonganAsetModel!.kodeGolongan,
       "nama_golongan": golonganAsetModel!.namaGolongan,
       "nodok_beli": noDok.text,
-      "tgl_beli": tglbeli.text,
-      "tgl_terima": tglterima.text,
-      "habeli": hargaBeli.text,
-      "disc": discount.text,
-      "biaya": biaya.text,
+      "tgl_beli": DateFormat('y-MM-dd').format(tglTransaksi!),
+      "tgl_terima": DateFormat('y-MM-dd').format(tglTransaksis!),
+      "habeli": hargaBeli.text.replaceAll(",", ""),
+      "disc": discount.text.replaceAll(",", ""),
+      "biaya": biaya.text.replaceAll(",", ""),
       "haper": subtotal,
-      "nilai_residu": nilaiPenyusutan.text,
-      "ppn_beli": ppn.text,
-      "pph": pph.text,
+      "nilai_residu": nilaiPenyusutan.text.replaceAll(",", ""),
+      "ppn_beli": ppn.text.replaceAll(",", ""),
+      "pph": pph.text.replaceAll(",", ""),
       "tgl_jual": "",
       "nodok_jual": "",
       "hajual": "",
@@ -395,7 +396,7 @@ class PengadaanNotifier extends ChangeNotifier {
       "kdkondisi": "",
       "kondisi": "",
       "satuan_aset": satuan!,
-      "nilai_declining": nilaiPenyusutan.text,
+      "nilai_declining": nilaiPenyusutan.text.replaceAll(",", ""),
       "perbaikan": "",
       "stsasr": 'N',
       "nopolis": "",
@@ -411,6 +412,52 @@ class PengadaanNotifier extends ChangeNotifier {
       "sbb_laba_jual": golonganAsetModel!.sbbLabaJual,
       "sbb_biaya_perbaikan": golonganAsetModel!.sbbBiayaPerbaikan,
     };
+    Setuprepository.setup(token, NetworkURL.addusers(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        clear();
+        dialog = false;
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message']);
+      }
+    });
+  }
+
+  List<InventarisModel> list = [];
+
+  getInventaris() async {
+    isLoading = true;
+    list.clear();
+    notifyListeners();
+    var data = {"kdoe_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getInventaris(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          list.add(InventarisModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  var editData = false;
+  clear() {
+    dialog = false;
+    editData = false;
+    noDok.clear();
+    noaset.clear();
+    namaaset.clear();
+    keterangan.clear();
+    blnPenyusutan.clear();
+    notifyListeners();
   }
 
   TextEditingController noDok = TextEditingController();
@@ -540,7 +587,6 @@ class PengadaanNotifier extends ChangeNotifier {
   TextEditingController lokasi = TextEditingController();
   TextEditingController kota = TextEditingController();
 
-  List<InventarisModel> list = [];
   List<Map<String, dynamic>> data = [
     {
       "id": 1,

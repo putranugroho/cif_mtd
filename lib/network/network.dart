@@ -69,6 +69,22 @@ class NetworkURL {
     return "$url/pejabat";
   }
 
+  static String getInventaris() {
+    return "$url/inventaris";
+  }
+
+  static String addInventaris() {
+    return "$url/inventaris/add";
+  }
+
+  static String editInventaris() {
+    return "$url/inventaris/update";
+  }
+
+  static String deleteInventaris() {
+    return "$url/inventaris/deleted";
+  }
+
   static String addPejabat() {
     return "$url/pejabat/add";
   }
