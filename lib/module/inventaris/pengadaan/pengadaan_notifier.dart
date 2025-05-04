@@ -21,11 +21,35 @@ class PengadaanNotifier extends ChangeNotifier {
     getGolonganAset();
     getKantor();
     getSetupPajak();
+    hargaBeli.addListener(() {
+      if (_isFormatting) return;
+      _isFormatting = true;
+
+      // Hapus semua non-digit
+      String rawNumber = hargaBeli.text.replaceAll(RegExp(r'[^0-9]'), '');
+
+      if (rawNumber.isEmpty) {
+        _isFormatting = false;
+        hargaBeli.value = hargaBeli.value.copyWith(text: '');
+        return;
+      }
+
+      double number = double.tryParse(rawNumber) ?? 0;
+
+      String formatted = currencyFormatter.format(number);
+
+      hargaBeli.value = hargaBeli.value.copyWith(
+        text: formatted,
+        selection: TextSelection.collapsed(offset: formatted.length),
+      );
+
+      _isFormatting = false;
+    });
     notifyListeners();
   }
   SetupPajakModel? setupPajakModel;
   List<SetupPajakModel> listPajak = [];
-
+  var _isFormatting = true;
   Future getSetupPajak() async {
     isLoading = true;
     listPajak.clear();
@@ -428,6 +452,9 @@ class PengadaanNotifier extends ChangeNotifier {
 
   List<InventarisModel> list = [];
 
+//contoh decimal sparator currency
+  final currencyFormatter =
+      NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 2);
   getInventaris() async {
     isLoading = true;
     list.clear();
@@ -466,85 +493,83 @@ class PengadaanNotifier extends ChangeNotifier {
   TextEditingController keterangan = TextEditingController();
   TextEditingController blnPenyusutan = TextEditingController();
   DateTime now = DateTime.now();
-  showDate() async {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return StatefulBuilder(builder: (context, setState) {
-            return Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-              child: Container(
-                width: 500,
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "Pilih Periode",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+  void showDate() async {
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(builder: (context, setStateDialog) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Container(
+              width: 500,
+              padding: EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    "Pilih Periode",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Container(
-                      height: 100,
-                      child: ScrollDatePicker(
-                          minimumDate: DateTime(
-                              int.parse(DateFormat('y').format(tglTransaksi!)),
-                              int.parse(
-                                  DateFormat('MM').format(tglTransaksi!))),
-                          maximumDate: DateTime(int.parse(
-                                  DateFormat('y').format(DateTime.now())) +
-                              50),
-                          options:
-                              DatePickerOptions(backgroundColor: Colors.white),
-                          viewType: [
-                            DatePickerViewType.month,
-                            DatePickerViewType.year,
-                          ],
-                          selectedDate: now,
-                          onDateTimeChanged: (e) {
-                            setState(() {
-                              now = e;
-                              blnPenyusutan.text =
-                                  DateFormat('MMMM y').format(now);
-                              notifyListeners();
-                            });
-                          }),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-
-                        notifyListeners();
+                  ),
+                  SizedBox(height: 16),
+                  Container(
+                    height: 100,
+                    child: ScrollDatePicker(
+                      minimumDate: DateTime(
+                        tglTransaksi!.year,
+                        tglTransaksi!.month,
+                      ),
+                      maximumDate: DateTime(DateTime.now().year + 50),
+                      options: DatePickerOptions(backgroundColor: Colors.white),
+                      viewType: [
+                        DatePickerViewType.month,
+                        DatePickerViewType.year,
+                      ],
+                      selectedDate: now,
+                      onDateTimeChanged: (e) {
+                        setStateDialog(() {
+                          now = e;
+                          blnPenyusutan.text = DateFormat('MMMM y').format(now);
+                        });
+                        notifyListeners(); // if ChangeNotifier is needed
                       },
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                        decoration: BoxDecoration(
-                            color: colorPrimary,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Text(
-                          "Simpan",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                      blnPenyusutan.text = DateFormat('MMMM y').format(now);
+                      notifyListeners(); // if ChangeNotifier is needed
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.blue, // replace with your colorPrimary
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        "Simpan",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            );
-          });
+            ),
+          );
         });
+      },
+    );
   }
 
   DateTime? tglTransaksis;

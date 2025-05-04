@@ -1507,10 +1507,12 @@ class PengadaanPage extends StatelessWidget {
                                                     maxLines: 1,
                                                     onChanged: (e) =>
                                                         value.onChange(),
+                                                    keyboardType: TextInputType
+                                                        .numberWithOptions(
+                                                            decimal: true),
                                                     inputFormatters: [
                                                       FilteringTextInputFormatter
-                                                          .digitsOnly,
-                                                      CurrencyInputFormatter(),
+                                                          .digitsOnly
                                                     ],
                                                     validator: (e) {
                                                       if (e!.isEmpty) {
