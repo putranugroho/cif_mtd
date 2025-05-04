@@ -1203,7 +1203,7 @@ class PengadaanPage extends StatelessWidget {
                                                                   .stretch,
                                                           children: [
                                                             Text(
-                                                              "Karyawan",
+                                                              "Nama Karyawan",
                                                               style:
                                                                   const TextStyle(
                                                                       fontSize:
@@ -1225,7 +1225,7 @@ class PengadaanPage extends StatelessWidget {
                                                                     icon: Icon(Icons
                                                                         .search)),
                                                                 hintText:
-                                                                    "Silahkan Masukkan NIP",
+                                                                    "Silahkan Masukkan Nama Karyawan",
                                                                 border:
                                                                     OutlineInputBorder(
                                                                   borderRadius:
@@ -1240,7 +1240,7 @@ class PengadaanPage extends StatelessWidget {
                                                             Row(
                                                               children: [
                                                                 Text(
-                                                                  "Nama Karyawan",
+                                                                  "NIP Karyawan",
                                                                   style: const TextStyle(
                                                                       fontSize:
                                                                           12),
@@ -1282,7 +1282,7 @@ class PengadaanPage extends StatelessWidget {
                                                                     Colors.grey[
                                                                         200],
                                                                 hintText:
-                                                                    "Nama Karyawan",
+                                                                    "NIP Karyawan",
                                                                 border:
                                                                     OutlineInputBorder(
                                                                   borderRadius:

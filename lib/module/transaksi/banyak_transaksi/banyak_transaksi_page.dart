@@ -435,6 +435,12 @@ class BanyakTransaksiPage extends StatelessWidget {
                                             Container(
                                               width: 230,
                                               child: DropdownSearch<CoaModel>(
+                                                validator: (value) {
+                                                  if (value == null) {
+                                                    return 'Wajib diisi';
+                                                  }
+                                                  return null;
+                                                },
                                                 popupProps:
                                                     const PopupPropsMultiSelection
                                                         .menu(
@@ -542,9 +548,8 @@ class BanyakTransaksiPage extends StatelessWidget {
                                           },
                                           maxLines: 1,
                                           inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly,
-                                            CurrencyInputFormatter(),
+                                            FilteringTextInputFormatter.allow(
+                                                RegExp(r'^\d+\.?\d{0,2}')),
                                           ],
                                           validator: (e) {
                                             if (e!.isEmpty) {
@@ -569,7 +574,7 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      "Pilih Akun Lawan",
+                                      "Input Transaksi Lawan",
                                       style: const TextStyle(fontSize: 12),
                                     ),
                                     const SizedBox(width: 5),
@@ -614,6 +619,12 @@ class BanyakTransaksiPage extends StatelessWidget {
                                             children: [
                                               Expanded(
                                                 child: DropdownSearch<CoaModel>(
+                                                  validator: (value) {
+                                                    if (value == null) {
+                                                      return 'Wajib diisi';
+                                                    }
+                                                    return null;
+                                                  },
                                                   popupProps:
                                                       const PopupPropsMultiSelection
                                                           .menu(
@@ -733,8 +744,8 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                       value.listAmount[i],
                                                   inputFormatters: [
                                                     FilteringTextInputFormatter
-                                                        .digitsOnly,
-                                                    CurrencyInputFormatter()
+                                                        .allow(RegExp(
+                                                            r'^\d+\.?\d{0,2}')),
                                                   ],
                                                   validator: (e) {
                                                     if (e!.isEmpty) {

@@ -486,6 +486,12 @@ class SatuTransaksiPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: DropdownSearch<CoaModel>(
+                                        validator: (value) {
+                                          if (value == null) {
+                                            return 'Wajib diisi';
+                                          }
+                                          return null;
+                                        },
                                         popupProps:
                                             const PopupPropsMultiSelection.menu(
                                           showSearchBox:
@@ -574,6 +580,12 @@ class SatuTransaksiPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: DropdownSearch<CoaModel>(
+                                        validator: (value) {
+                                          if (value == null) {
+                                            return 'Wajib diisi';
+                                          }
+                                          return null;
+                                        },
                                         popupProps:
                                             const PopupPropsMultiSelection.menu(
                                           showSearchBox:
@@ -663,8 +675,8 @@ class SatuTransaksiPage extends StatelessWidget {
                                   controller: value.nominal,
                                   maxLines: 1,
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly,
-                                    CurrencyInputFormatter(),
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'^\d+\.?\d{0,2}')),
                                   ],
                                   validator: (e) {
                                     if (e!.isEmpty) {

@@ -40,13 +40,13 @@ class UsersNotifier extends ChangeNotifier {
     aksesKasir = users!.aksesKasir == "Y" ? true : false;
     bedaKantor = users!.bedaKantor == "Y" ? true : false;
     levelUser = listUsers.where((e) => e.idLevel == users!.lvluser).first;
+    otorisasi = users!.levelOtor != "0" ? true : false;
     levelOtor = listLevelOtor.where((e) => e == users!.levelOtor).first;
     inqueryGlModel = users!.sbbKasir == ""
         ? null
         : listGl.where((e) => e.nosbb == users!.sbbKasir).first;
     nossbb.text = users!.sbbKasir == "" ? "" : inqueryGlModel!.nosbb;
     namasbb.text = users!.sbbKasir == "" ? "" : inqueryGlModel!.namaSbb;
-    otorisasi = users!.levelOtor != "0" ? true : false;
     aktivasiModel =
         listHariKerja.where((e) => e.kdAktivasi == users!.kdAktivasi).first;
     notifyListeners();
@@ -134,6 +134,8 @@ class UsersNotifier extends ChangeNotifier {
       }
     }
   }
+
+  confirm() async {}
 
   List<LevelUser> listUsers = [];
   Future getLevelUsers() async {
@@ -258,11 +260,16 @@ class UsersNotifier extends ChangeNotifier {
   clear() {
     dialog = false;
     editData = false;
+    aktivasiModel = null;
+    levelUser = null;
+    otorisasi = false;
     userid.clear();
     pass.clear();
     namauser.clear();
     tglexp.clear();
     levelOtor = null;
+    bedaKantor = false;
+    aksesKasir = false;
     minotor.clear();
     maxotor.clear();
     notifyListeners();

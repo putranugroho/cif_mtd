@@ -248,7 +248,9 @@ class UsersPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        "Tambah User",
+                                        value.editData
+                                            ? "Ubah / Hapus Users"
+                                            : "Tambah User",
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -1034,7 +1036,22 @@ class UsersPage extends StatelessWidget {
                                         value.cek();
                                       },
                                       name: "Simpan",
-                                    )
+                                    ),
+                                    value.editData
+                                        ? Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              const SizedBox(height: 16),
+                                              ButtonDanger(
+                                                onTap: () {
+                                                  value.confirm();
+                                                },
+                                                name: "Hapus",
+                                              ),
+                                            ],
+                                          )
+                                        : SizedBox()
                                   ],
                                 ))
                               ],

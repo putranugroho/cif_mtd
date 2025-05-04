@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
 
+import '../../../network/network.dart';
+import '../../../repository/SetupRepository.dart';
+import '../../../utils/format_currency.dart';
+
 class PenempatanNotifier extends ChangeNotifier {
   final BuildContext context;
 
@@ -48,6 +52,8 @@ class PenempatanNotifier extends ChangeNotifier {
     GlobalKey<FormState>(),
   ];
 
+  cek() {}
+
   bool dialog = false;
   tambah() {
     dialog = true;
@@ -67,6 +73,7 @@ class PenempatanNotifier extends ChangeNotifier {
   TextEditingController biaya = TextEditingController(text: "0");
   TextEditingController nilaiPenyusutan = TextEditingController();
   TextEditingController ppn = TextEditingController(text: "0");
+  TextEditingController pph = TextEditingController(text: "0");
   int total = 0;
   onChange() {
     total = int.parse(hargaBeli.text.replaceAll(",", "")) -
@@ -81,11 +88,56 @@ class PenempatanNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<String> listPenempatan = ["Kantor", "Karyawan"];
+  String? penempatanModel = "Kantor";
+  pilihPenempatan(String value) {
+    penempatanModel = value;
+    notifyListeners();
+  }
+
   String? satuan = "Unit";
 
   gantiSatuan(String value) {
     satuan = value;
     notifyListeners();
+  }
+
+  DateTime? tglBuka = DateTime.now();
+
+  Future pilihTanggalBuka() async {
+    var pickedendDate = (await showDatePicker(
+      context: context,
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) - 10,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+    ));
+    if (pickedendDate != null) {
+      tglTransaksi = pickedendDate;
+      tglbeli.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
+      notifyListeners();
+    }
   }
 
   DateTime? tglTransaksi;
@@ -206,6 +258,35 @@ class PenempatanNotifier extends ChangeNotifier {
         });
   }
 
+  DateTime? tglTransaksis;
+  Future pilihTanggalTerima() async {
+    var pickedendDate = (await showDatePicker(
+      context: context,
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(tglTransaksi!)),
+          int.parse(DateFormat('MM').format(
+            tglTransaksi!,
+          )),
+          int.parse(DateFormat('dd').format(
+            tglTransaksi!,
+          ))),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(tglTransaksi!)),
+          int.parse(DateFormat('MM').format(tglTransaksi!)),
+          int.parse(DateFormat('dd').format(tglTransaksi!))),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) + 10,
+          int.parse(DateFormat('MM').format(tglTransaksi!)),
+          int.parse(DateFormat('dd').format(tglTransaksi!))),
+    ));
+    if (pickedendDate != null) {
+      tglTransaksis = pickedendDate;
+      tglterima.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
+      notifyListeners();
+    }
+  }
+
   List<Map<String, dynamic>> kantor = [
     {
       "kode_pt": "10001",
@@ -223,6 +304,11 @@ class PenempatanNotifier extends ChangeNotifier {
       "fax": null
     }
   ];
+
+  TextEditingController noDok = TextEditingController();
+  TextEditingController noaset = TextEditingController();
+  TextEditingController namaaset = TextEditingController();
+  TextEditingController keterangan = TextEditingController();
 
   List<KantorModel> listkantor = [];
   KantorModel? kantorModel;

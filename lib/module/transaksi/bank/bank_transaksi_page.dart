@@ -38,7 +38,7 @@ class BankTransaksiPage extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "Bank Rekonsiliasi",
+                              "Rekonsiliasi Saldo Bank",
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -100,24 +100,24 @@ class BankTransaksiPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
-                                columnName: 'kodeBank',
+                                columnName: 'nmBank',
                                 label: Container(
                                     padding: EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Kode Bank',
+                                    child: Text('Nama Bank',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
                                           fontSize: 12,
                                         )))),
                             GridColumn(
-                                columnName: 'nmBank',
+                                columnName: 'ktrBank',
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(6),
-                                    child: Text('Nama Bank',
+                                    child: Text('Kantor Bank',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -136,24 +136,36 @@ class BankTransaksiPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
-                                columnName: 'kdRek',
+                                columnName: 'nmRek',
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(6),
-                                    child: Text('Kode Rekening',
+                                    child: Text('Nama Rekening',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
                                         )))),
                             GridColumn(
-                                columnName: 'nosbb',
+                                columnName: 'saldoBank',
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(6),
-                                    child: Text('No. SBB',
+                                    child: Text('Saldo Bank',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                columnName: 'saldoSbb',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Saldo SBB',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -172,12 +184,12 @@ class BankTransaksiPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
-                                columnName: 'nominal',
+                                columnName: 'nosbb',
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(6),
-                                    child: Text('Nominal',
+                                    child: Text('No. SBB',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -229,7 +241,7 @@ class BankTransaksiPage extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    "Bank Rekonsiliasi",
+                                    "Rekonsiliasi Saldo Bank",
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -554,19 +566,22 @@ class DetailDataSource extends DataGridSource {
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(columnName: 'kodeBank', value: data.kodeBank),
+                // DataGridCell(columnName: 'kodeBank', value: data.kodeBank),
                 DataGridCell(columnName: 'nmBank', value: data.nmBank),
+                DataGridCell(columnName: 'ktrBank', value: data.nmBank),
                 DataGridCell(columnName: 'noRek', value: data.noRek),
-                DataGridCell(
-                    columnName: 'kdRek',
-                    value: data.kdRek == "10"
-                        ? "Tabungan"
-                        : data.kdRek == "20"
-                            ? "Giro"
-                            : "Deposito"),
+                DataGridCell(columnName: 'nmRek', value: data.noRek),
+                // DataGridCell(
+                //     columnName: 'kdRek',
+                //     value: data.kdRek == "10"
+                //         ? "Tabungan"
+                //         : data.kdRek == "20"
+                //             ? "Giro"
+                //             : "Deposito"),
+                DataGridCell(columnName: 'saldoBank', value: data.nominal),
+                DataGridCell(columnName: 'saldoSbb', value: data.nominal),
                 DataGridCell(columnName: 'nosbb', value: data.nosbb),
                 DataGridCell(columnName: 'namaSbb', value: data.namaSbb),
-                DataGridCell(columnName: 'nominal', value: data.nominal),
                 DataGridCell(columnName: 'action', value: data.noRek),
               ],
             ))
