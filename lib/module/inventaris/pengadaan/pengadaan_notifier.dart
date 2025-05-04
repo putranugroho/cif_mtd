@@ -21,27 +21,38 @@ class PengadaanNotifier extends ChangeNotifier {
     getGolonganAset();
     getKantor();
     getSetupPajak();
+
     hargaBeli.addListener(() {
       if (_isFormatting) return;
       _isFormatting = true;
 
-      // Hapus semua non-digit
-      String rawNumber = hargaBeli.text.replaceAll(RegExp(r'[^0-9]'), '');
+      String currentText = hargaBeli.text;
 
-      if (rawNumber.isEmpty) {
-        _isFormatting = false;
-        hargaBeli.value = hargaBeli.value.copyWith(text: '');
-        return;
+      // Remove all except digits, dot, comma
+      String cleanedText = currentText.replaceAll(RegExp(r'[^0-9.,]'), '');
+
+      // Replace dot with comma (so user can input either)
+      cleanedText = cleanedText.replaceAll('.', ',');
+
+      // Replace comma with dot for parsing (since double.parse needs dot)
+      String parseableText = cleanedText.replaceAll(',', '.');
+
+      double? value = double.tryParse(parseableText);
+
+      if (value != null) {
+        String formatted = currencyFormatter.format(value);
+
+        hargaBeli.value = hargaBeli.value.copyWith(
+          text: formatted,
+          selection: TextSelection.collapsed(offset: formatted.length),
+        );
+      } else {
+        // if cannot parse, fallback to empty or keep last valid
+        hargaBeli.value = hargaBeli.value.copyWith(
+          text: '',
+          selection: TextSelection.collapsed(offset: 0),
+        );
       }
-
-      double number = double.tryParse(rawNumber) ?? 0;
-
-      String formatted = currencyFormatter.format(number);
-
-      hargaBeli.value = hargaBeli.value.copyWith(
-        text: formatted,
-        selection: TextSelection.collapsed(offset: formatted.length),
-      );
 
       _isFormatting = false;
     });
@@ -454,7 +465,7 @@ class PengadaanNotifier extends ChangeNotifier {
 
 //contoh decimal sparator currency
   final currencyFormatter =
-      NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 2);
+      NumberFormat.currency(symbol: 'Rp ', decimalDigits: 2);
   getInventaris() async {
     isLoading = true;
     list.clear();
