@@ -21,46 +21,12 @@ class PengadaanNotifier extends ChangeNotifier {
     getGolonganAset();
     getKantor();
     getSetupPajak();
-
-    hargaBeli.addListener(() {
-      if (_isFormatting) return;
-      _isFormatting = true;
-
-      String currentText = hargaBeli.text;
-
-      // Remove all except digits, dot, comma
-      String cleanedText = currentText.replaceAll(RegExp(r'[^0-9.,]'), '');
-
-      // Replace dot with comma (so user can input either)
-      cleanedText = cleanedText.replaceAll('.', ',');
-
-      // Replace comma with dot for parsing (since double.parse needs dot)
-      String parseableText = cleanedText.replaceAll(',', '.');
-
-      double? value = double.tryParse(parseableText);
-
-      if (value != null) {
-        String formatted = currencyFormatter.format(value);
-
-        hargaBeli.value = hargaBeli.value.copyWith(
-          text: formatted,
-          selection: TextSelection.collapsed(offset: formatted.length),
-        );
-      } else {
-        // if cannot parse, fallback to empty or keep last valid
-        hargaBeli.value = hargaBeli.value.copyWith(
-          text: '',
-          selection: TextSelection.collapsed(offset: 0),
-        );
-      }
-
-      _isFormatting = false;
-    });
+    getInventaris();
     notifyListeners();
   }
   SetupPajakModel? setupPajakModel;
   List<SetupPajakModel> listPajak = [];
-  var _isFormatting = true;
+
   Future getSetupPajak() async {
     isLoading = true;
     listPajak.clear();
@@ -397,68 +363,137 @@ class PengadaanNotifier extends ChangeNotifier {
 
   TextEditingController masasusut = TextEditingController();
   cek() {
-    DialogCustom().showLoading(context);
+    if (editData) {
+      DialogCustom().showLoading(context);
 
-    var data = {
-      "kdaset": noaset.text,
-      "ket": keterangan.text,
-      "kode_kelompok": kelompokAsetModel!.kodeKelompok,
-      "nama_kelompok": kelompokAsetModel!.namaKelompokn,
-      "kode_golongan": golonganAsetModel!.kodeGolongan,
-      "nama_golongan": golonganAsetModel!.namaGolongan,
-      "nodok_beli": noDok.text,
-      "tgl_beli": DateFormat('y-MM-dd').format(tglTransaksi!),
-      "tgl_terima": DateFormat('y-MM-dd').format(tglTransaksis!),
-      "habeli": hargaBeli.text.replaceAll(",", ""),
-      "disc": discount.text.replaceAll(",", ""),
-      "biaya": biaya.text.replaceAll(",", ""),
-      "haper": subtotal,
-      "nilai_residu": nilaiPenyusutan.text.replaceAll(",", ""),
-      "ppn_beli": ppn.text.replaceAll(",", ""),
-      "pph": pph.text.replaceAll(",", ""),
-      "tgl_jual": "",
-      "nodok_jual": "",
-      "hajual": "",
-      "ppn_jual": "",
-      "margin": "",
-      "kode_pt": kantor!.kodePt,
-      "kode_kantor": kantor!.kodeKantor,
-      "kode_induk": kantor!.kodeInduk,
-      "lokasi": lokasi.text.trim(),
-      "kota": kota.text,
-      "masasusut": masasusut.text,
-      "bln_mulai_susut": blnPenyusutan.text,
-      "kdkondisi": "",
-      "kondisi": "",
-      "satuan_aset": satuan!,
-      "nilai_declining": nilaiPenyusutan.text.replaceAll(",", ""),
-      "perbaikan": "",
-      "stsasr": 'N',
-      "nopolis": "",
-      "nilai_revaluasi": "",
-      "nik": "",
-      "nama_pejabat": "",
-      "sbb_aset": golonganAsetModel!.sbbAset,
-      "sbb_penyusutan": golonganAsetModel!.sbbPenyusutan,
-      "sbb_biaya_penyusutan": golonganAsetModel!.sbbBiayaPenyusutan,
-      "sbb_rugi_revaluasi": golonganAsetModel!.sbbRugiRevaluasi,
-      "sbb_laba_revaluasi": golonganAsetModel!.sbbLabaRevaluasi,
-      "sbb_rugi_jual": golonganAsetModel!.sbbRugiJual,
-      "sbb_laba_jual": golonganAsetModel!.sbbLabaJual,
-      "sbb_biaya_perbaikan": golonganAsetModel!.sbbBiayaPerbaikan,
-    };
-    Setuprepository.setup(token, NetworkURL.addusers(), jsonEncode(data))
-        .then((value) {
-      Navigator.pop(context);
-      if (value['status'].toString().toLowerCase().contains("success")) {
-        clear();
-        dialog = false;
-        informationDialog(context, "Information", value['message']);
-        notifyListeners();
-      } else {
-        informationDialog(context, "Warning", value['message']);
-      }
-    });
+      var data = {
+        "id": inventarisModel!.id,
+        "kdaset": noaset.text,
+        "namaaset": namaaset.text,
+        "ket": keterangan.text,
+        "kode_kelompok": kelompokAsetModel!.kodeKelompok,
+        "nama_kelompok": kelompokAsetModel!.namaKelompokn,
+        "kode_golongan": golonganAsetModel!.kodeGolongan,
+        "nama_golongan": golonganAsetModel!.namaGolongan,
+        "nodok_beli": noDok.text,
+        "tgl_beli": DateFormat('y-MM-dd').format(tglTransaksi!),
+        "tgl_terima": DateFormat('y-MM-dd').format(tglTransaksis!),
+        "habeli": hargaBeli.text.replaceAll(",", ""),
+        "disc": discount.text.replaceAll(",", ""),
+        "biaya": biaya.text.replaceAll(",", ""),
+        "haper": subtotal,
+        "nilai_residu": nilaiPenyusutan.text.replaceAll(",", ""),
+        "ppn_beli": ppn.text.replaceAll(",", ""),
+        "pph": pph.text.replaceAll(",", ""),
+        "tgl_jual": "",
+        "nodok_jual": "",
+        "hajual": "",
+        "ppn_jual": "",
+        "margin": "",
+        "kode_pt": kantor!.kodePt,
+        "kode_kantor": kantor!.kodeKantor,
+        "kode_induk": kantor!.kodeInduk,
+        "lokasi": lokasi.text.trim(),
+        "kota": kota.text,
+        "masasusut": masasusut.text,
+        "bln_mulai_susut": blnPenyusutan.text,
+        "kdkondisi": "",
+        "kondisi": "",
+        "satuan_aset": satuan!,
+        "nilai_declining": nilaiPenyusutan.text.replaceAll(",", ""),
+        "perbaikan": "",
+        "stsasr": 'N',
+        "nopolis": "",
+        "nilai_revaluasi": "",
+        "nik": "",
+        "nama_pejabat": "",
+        "sbb_aset": golonganAsetModel!.sbbAset,
+        "sbb_penyusutan": golonganAsetModel!.sbbPenyusutan,
+        "sbb_biaya_penyusutan": golonganAsetModel!.sbbBiayaPenyusutan,
+        "sbb_rugi_revaluasi": golonganAsetModel!.sbbRugiRevaluasi,
+        "sbb_laba_revaluasi": golonganAsetModel!.sbbLabaRevaluasi,
+        "sbb_rugi_jual": golonganAsetModel!.sbbRugiJual,
+        "sbb_laba_jual": golonganAsetModel!.sbbLabaJual,
+        "sbb_biaya_perbaikan": golonganAsetModel!.sbbBiayaPerbaikan,
+      };
+      Setuprepository.setup(
+              token, NetworkURL.editInventaris(), jsonEncode(data))
+          .then((value) {
+        Navigator.pop(context);
+        if (value['status'].toString().toLowerCase().contains("success")) {
+          clear();
+          dialog = false;
+          informationDialog(context, "Information", value['message']);
+          notifyListeners();
+        } else {
+          informationDialog(context, "Warning", value['message']);
+        }
+      });
+    } else {
+      DialogCustom().showLoading(context);
+
+      var data = {
+        "kdaset": noaset.text,
+        "ket": keterangan.text,
+        "namaaset": namaaset.text,
+        "kode_kelompok": kelompokAsetModel!.kodeKelompok,
+        "nama_kelompok": kelompokAsetModel!.namaKelompokn,
+        "kode_golongan": golonganAsetModel!.kodeGolongan,
+        "nama_golongan": golonganAsetModel!.namaGolongan,
+        "nodok_beli": noDok.text,
+        "tgl_beli": DateFormat('y-MM-dd').format(tglTransaksi!),
+        "tgl_terima": DateFormat('y-MM-dd').format(tglTransaksis!),
+        "habeli": hargaBeli.text.replaceAll(",", ""),
+        "disc": discount.text.replaceAll(",", ""),
+        "biaya": biaya.text.replaceAll(",", ""),
+        "haper": subtotal,
+        "nilai_residu": nilaiPenyusutan.text.replaceAll(",", ""),
+        "ppn_beli": ppn.text.replaceAll(",", ""),
+        "pph": pph.text.replaceAll(",", ""),
+        "tgl_jual": "",
+        "nodok_jual": "",
+        "hajual": "",
+        "ppn_jual": "",
+        "margin": "",
+        "kode_pt": kantor!.kodePt,
+        "kode_kantor": kantor!.kodeKantor,
+        "kode_induk": kantor!.kodeInduk,
+        "lokasi": lokasi.text.trim(),
+        "kota": kota.text,
+        "masasusut": masasusut.text,
+        "bln_mulai_susut": blnPenyusutan.text,
+        "kdkondisi": "",
+        "kondisi": "",
+        "satuan_aset": satuan!,
+        "nilai_declining": nilaiPenyusutan.text.replaceAll(",", ""),
+        "perbaikan": "",
+        "stsasr": 'N',
+        "nopolis": "",
+        "nilai_revaluasi": "",
+        "nik": "",
+        "nama_pejabat": "",
+        "sbb_aset": golonganAsetModel!.sbbAset,
+        "sbb_penyusutan": golonganAsetModel!.sbbPenyusutan,
+        "sbb_biaya_penyusutan": golonganAsetModel!.sbbBiayaPenyusutan,
+        "sbb_rugi_revaluasi": golonganAsetModel!.sbbRugiRevaluasi,
+        "sbb_laba_revaluasi": golonganAsetModel!.sbbLabaRevaluasi,
+        "sbb_rugi_jual": golonganAsetModel!.sbbRugiJual,
+        "sbb_laba_jual": golonganAsetModel!.sbbLabaJual,
+        "sbb_biaya_perbaikan": golonganAsetModel!.sbbBiayaPerbaikan,
+      };
+      Setuprepository.setup(token, NetworkURL.addInventaris(), jsonEncode(data))
+          .then((value) {
+        Navigator.pop(context);
+        if (value['status'].toString().toLowerCase().contains("success")) {
+          clear();
+          dialog = false;
+          informationDialog(context, "Information", value['message']);
+          notifyListeners();
+        } else {
+          informationDialog(context, "Warning", value['message']);
+        }
+      });
+    }
   }
 
   List<InventarisModel> list = [];
@@ -470,7 +505,7 @@ class PengadaanNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kdoe_pt": "001"};
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getInventaris(), jsonEncode(data))
         .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
@@ -486,7 +521,62 @@ class PengadaanNotifier extends ChangeNotifier {
     });
   }
 
+  InventarisModel? inventarisModel;
   var editData = false;
+  edit(String id) async {
+    inventarisModel = list.where((e) => e.id == int.parse(id)).first;
+    dialog = true;
+    editData = true;
+    noaset.text = inventarisModel!.kdaset;
+    namaaset.text = inventarisModel!.namaaset;
+    keterangan.text = inventarisModel!.ket;
+    pajak = inventarisModel!.ppnBeli != "0" ? true : false;
+
+    satuan = listSatuan.where((e) => e == inventarisModel!.satuanAset).first;
+    kantor = listKantor
+        .where((e) =>
+            e.kodePt == inventarisModel!.kodePt &&
+            e.kodeKantor == inventarisModel!.kodeKantor)
+        .first;
+    kelompokAsetModel = listKelompok
+        .where((e) => e.kodeKelompok == inventarisModel!.kodeKelompok)
+        .first;
+    golonganAsetModel = listGolongan
+        .where((e) => e.kodeGolongan == inventarisModel!.kodeGolongan)
+        .first;
+    lokasi.text = inventarisModel!.lokasi;
+    kota.text = inventarisModel!.kota;
+    noDok.text = inventarisModel!.nodokBeli;
+    tglbeli.text = inventarisModel!.tglBeli;
+    tglterima.text = inventarisModel!.tglTerima;
+    masasusut.text = inventarisModel!.masasusut;
+    blnPenyusutan.text = inventarisModel!.blnMulaiSusut;
+    tglTransaksi = DateTime.parse(inventarisModel!.tglBeli);
+    tglTransaksis = DateTime.parse(inventarisModel!.tglTerima);
+    hargaBeli.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.habeli))
+        .replaceAll(".", ",");
+    discount.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.disc))
+        .replaceAll(".", ",");
+    biaya.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.biaya))
+        .replaceAll(".", ",");
+    subtotal = int.parse(inventarisModel!.haper);
+    nilaiPenyusutan.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.nilaiResidu))
+        .replaceAll(".", ",");
+    ppn.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.ppnBeli))
+        .replaceAll(".", ",");
+    pph.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.pph))
+        .replaceAll(".", ",");
+    total = (subtotal + int.parse(ppn.text.replaceAll(",", ""))) -
+        int.parse(pph.text.replaceAll(",", ""));
+    notifyListeners();
+  }
+
   clear() {
     dialog = false;
     editData = false;
@@ -622,55 +712,4 @@ class PengadaanNotifier extends ChangeNotifier {
 
   TextEditingController lokasi = TextEditingController();
   TextEditingController kota = TextEditingController();
-
-  List<Map<String, dynamic>> data = [
-    {
-      "id": 1,
-      "kdaset": "100001",
-      "ket": "NMAX 100 CC150",
-      "kode_kelompok": "1",
-      "nama_kelompok": "TRANSPORTASI",
-      "kode_golongan": "001",
-      "nama_golongan": "Kendaraan",
-      "nodok_beli": "10000101",
-      "tgl_beli": "2025-03-01",
-      "tgl_terima": "2025-03-07",
-      "habeli": "24000000",
-      "disc": "500000",
-      "biaya": "150000",
-      "haper": "23650000",
-      "nilai_residu": "1",
-      "ppn_beli": "0",
-      "tgl_jual": "",
-      "nodok_jual": "",
-      "hajual": "",
-      "ppn_jual": "",
-      "margin": "",
-      "kode_pt": "",
-      "kode_kantor": "",
-      "kode_induk": "",
-      "lokasi": "",
-      "kota": "",
-      "masasusut": "10",
-      "bln_mulai_susut": "2025-12-01",
-      "kdkondisi": "",
-      "kondisi": "",
-      "satuan_aset": "",
-      "nilai_declining": "",
-      "perbaikan": "",
-      "stsasr": "",
-      "nopolis": "",
-      "nilai_revaluasi": "",
-      "nik": "",
-      "nama_pejabat": "",
-      "sbb_aset": "",
-      "sbb_penyusutan": "",
-      "sbb_biaya_penyusutan": "",
-      "sbb_rugi_revaluasi": "",
-      "sbb_laba_revaluasi": "",
-      "sbb_rugi_jual": "",
-      "sbb_laba_jual": "",
-      "sbb_biaya_perbaikan": ""
-    },
-  ];
 }

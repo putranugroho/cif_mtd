@@ -31,17 +31,24 @@ class UsersNotifier extends ChangeNotifier {
     pass.text = users!.pass;
     namauser.text = users!.namauser;
     tglexp.text = users!.tglexp;
-    minotor.text = FormatCurrency.oCcy
-        .format(int.parse(users!.minOtor))
-        .replaceAll(".", ",");
-    maxotor.text = FormatCurrency.oCcy
-        .format(int.parse(users!.maxOtor))
-        .replaceAll(".", ",");
+    minotor.text = users!.minOtor == ""
+        ? ""
+        : FormatCurrency.oCcy
+            .format(int.parse(users!.minOtor))
+            .replaceAll(".", ",");
+    maxotor.text = users!.maxOtor == ""
+        ? ""
+        : FormatCurrency.oCcy
+            .format(int.parse(users!.maxOtor))
+            .replaceAll(".", ",");
     aksesKasir = users!.aksesKasir == "Y" ? true : false;
     bedaKantor = users!.bedaKantor == "Y" ? true : false;
     levelUser = listUsers.where((e) => e.idLevel == users!.lvluser).first;
     otorisasi = users!.levelOtor != "0" ? true : false;
-    levelOtor = listLevelOtor.where((e) => e == users!.levelOtor).first;
+    levelSelected = users!.levelOtor != "0" ? true : false;
+    levelOtor = users!.levelOtor == "null"
+        ? ""
+        : listLevelOtor.where((e) => e == users!.levelOtor).first;
     inqueryGlModel = users!.sbbKasir == ""
         ? null
         : listGl.where((e) => e.nosbb == users!.sbbKasir).first;
@@ -71,9 +78,10 @@ class UsersNotifier extends ChangeNotifier {
           "tglexp": "${tglexp.text}",
           "lvluser": "${levelUser!.idLevel}",
           "terminal_id": "",
-          "akses_kasir": "${aksesKasir ? "N" : "Y"}",
-          "sbb_kasir": "${inqueryGlModel!.nosbb}",
-          "nama_sbb": "${inqueryGlModel!.namaSbb}",
+          "akses_kasir": "${aksesKasir ? "Y" : "N"}",
+          "sbb_kasir": "${inqueryGlModel == null ? "" : inqueryGlModel!.nosbb}",
+          "nama_sbb":
+              "${inqueryGlModel == null ? "" : inqueryGlModel!.namaSbb}",
           "fhoto_1": "",
           "fhoto_2": "",
           "fhoto_3": "",
@@ -107,7 +115,7 @@ class UsersNotifier extends ChangeNotifier {
           "tglexp": "${tglexp.text}",
           "lvluser": "${levelUser!.idLevel}",
           "terminal_id": "",
-          "akses_kasir": "${aksesKasir ? "N" : "Y"}",
+          "akses_kasir": "${aksesKasir ? "Y" : "N"}",
           "sbb_kasir": "${inqueryGlModel == null ? "" : inqueryGlModel!.nosbb}",
           "nama_sbb":
               "${inqueryGlModel == null ? "" : inqueryGlModel!.namaSbb}",
