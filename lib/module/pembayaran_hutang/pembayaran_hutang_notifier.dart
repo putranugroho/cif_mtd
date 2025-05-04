@@ -8,9 +8,25 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   var isLoading = false;
   final keyForm = GlobalKey<FormState>();
 
+  int transaksi = 1;
+
+  List<TextEditingController> listAmount = [];
+
+  tambahTransaksi() {
+    transaksi++;
+    listAmount.add(TextEditingController(text: "0"));
+    notifyListeners();
+  }
+
   bool akun = false;
   gantiakun(bool value) {
     akun = value;
+    notifyListeners();
+  }
+
+  bool kelebihan = false;
+  gantikelebihan() {
+    kelebihan = !kelebihan;
     notifyListeners();
   }
 
