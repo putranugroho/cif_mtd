@@ -135,19 +135,18 @@ class PembayaranHutangPage extends StatelessWidget {
                                 height: 8,
                               ),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Customer / Supplier",
-                                        style: const TextStyle(fontSize: 16),
+                                  Container(
+                                    height: 40,
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "Customer / Supplier",
+                                      textAlign: TextAlign.start,
+                                      style: const TextStyle(
+                                        fontSize: 16,
                                       ),
-                                      const SizedBox(width: 5),
-                                      const Text(
-                                        "*",
-                                        style: TextStyle(fontSize: 8),
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 16,
@@ -156,6 +155,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                       child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.stretch,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Container(
                                         height: 40,
@@ -226,19 +226,24 @@ class PembayaranHutangPage extends StatelessWidget {
                                 height: 8,
                               ),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "No Kontrak / Invoice",
-                                        style: const TextStyle(fontSize: 16),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      const Text(
-                                        "*",
-                                        style: TextStyle(fontSize: 8),
-                                      ),
-                                    ],
+                                  Container(
+                                    height: 40,
+                                    alignment: Alignment.center,
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "No Kontrak / Invoice",
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -276,9 +281,13 @@ class PembayaranHutangPage extends StatelessWidget {
                                   SizedBox(
                                     width: 16,
                                   ),
-                                  Text(
-                                    "Nilai",
-                                    style: const TextStyle(fontSize: 16),
+                                  Container(
+                                    height: 40,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "Nilai",
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -316,9 +325,13 @@ class PembayaranHutangPage extends StatelessWidget {
                                   SizedBox(
                                     width: 16,
                                   ),
-                                  Text(
-                                    "Tgl Kontrak",
-                                    style: const TextStyle(fontSize: 16),
+                                  Container(
+                                    height: 40,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "Tgl Kontrak",
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -361,19 +374,24 @@ class PembayaranHutangPage extends StatelessWidget {
                                 height: 8,
                               ),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Keterangan",
-                                        style: const TextStyle(fontSize: 16),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      const Text(
-                                        "*",
-                                        style: TextStyle(fontSize: 8),
-                                      ),
-                                    ],
+                                  Container(
+                                    height: 40,
+                                    alignment: Alignment.center,
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Keterangan",
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 16,
@@ -417,19 +435,24 @@ class PembayaranHutangPage extends StatelessWidget {
                                 color: Colors.grey,
                               ),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Cara Bayar",
-                                        style: const TextStyle(fontSize: 16),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      const Text(
-                                        "*",
-                                        style: TextStyle(fontSize: 8),
-                                      ),
-                                    ],
+                                  Container(
+                                    height: 40,
+                                    alignment: Alignment.center,
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Cara Bayar",
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 16,
@@ -441,7 +464,10 @@ class PembayaranHutangPage extends StatelessWidget {
                                   SizedBox(
                                     width: 8,
                                   ),
-                                  Text("Transfer"),
+                                  Container(
+                                      height: 40,
+                                      alignment: Alignment.center,
+                                      child: Text("Transfer")),
                                   SizedBox(
                                     width: 24,
                                   ),
@@ -452,22 +478,29 @@ class PembayaranHutangPage extends StatelessWidget {
                                   SizedBox(
                                     width: 8,
                                   ),
-                                  Text("Tunai"),
+                                  Container(
+                                      height: 40,
+                                      alignment: Alignment.center,
+                                      child: Text("Tunai")),
                                   SizedBox(
                                     width: 16,
                                   ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Sub Buku Besar",
-                                        style: const TextStyle(fontSize: 16),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      const Text(
-                                        "*",
-                                        style: TextStyle(fontSize: 8),
-                                      ),
-                                    ],
+                                  Container(
+                                    height: 40,
+                                    alignment: Alignment.center,
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Sub Buku Besar",
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -511,19 +544,24 @@ class PembayaranHutangPage extends StatelessWidget {
                                 height: 8,
                               ),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Nilai Pembayaran",
-                                        style: const TextStyle(fontSize: 16),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      const Text(
-                                        "*",
-                                        style: TextStyle(fontSize: 8),
-                                      ),
-                                    ],
+                                  Container(
+                                    height: 40,
+                                    alignment: Alignment.center,
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Nilai Pembayaran",
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -561,9 +599,13 @@ class PembayaranHutangPage extends StatelessWidget {
                                   SizedBox(
                                     width: 16,
                                   ),
-                                  Text(
-                                    "Tgl Bayar",
-                                    style: const TextStyle(fontSize: 16),
+                                  Container(
+                                    height: 40,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "Tgl Bayar",
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -601,9 +643,13 @@ class PembayaranHutangPage extends StatelessWidget {
                                   SizedBox(
                                     width: 16,
                                   ),
-                                  Text(
-                                    "No Dok",
-                                    style: const TextStyle(fontSize: 16),
+                                  Container(
+                                    height: 40,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "No Dok",
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 8,
