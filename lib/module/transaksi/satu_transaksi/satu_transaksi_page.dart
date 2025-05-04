@@ -1,10 +1,11 @@
 import 'package:accounting/models/index.dart';
 import 'package:accounting/module/setup/golongan_aset/golongan_aset_notifier.dart';
 import 'package:accounting/module/transaksi/satu_transaksi/satu_transaksi_notifier.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart' as a;
 
 import 'package:accounting/utils/button_custom.dart';
 import 'package:accounting/utils/currency_formatted.dart';
-import 'package:accounting/utils/format_currency.dart';
+// import 'package:accounting/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +15,8 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../../utils/colors.dart';
+import '../../../utils/format_currency.dart';
+// import '../../../utils/format_baru.dart';
 
 class SatuTransaksiPage extends StatelessWidget {
   const SatuTransaksiPage({super.key});
@@ -654,9 +657,17 @@ class SatuTransaksiPage extends StatelessWidget {
                                   textInputAction: TextInputAction.done,
                                   controller: value.nominal,
                                   maxLines: 1,
+                                  keyboardType: TextInputType.numberWithOptions(
+                                      decimal: true),
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'^\d+\.?\d{0,2}')),
+                                    a.CurrencyInputFormatter(
+                                      leadingSymbol: 'Rp ',
+                                      useSymbolPadding: true,
+                                      thousandSeparator:
+                                          a.ThousandSeparator.Period,
+                                      mantissaLength: 2, // jumlah angka desimal
+                                      // decimalSeparator: DecimalSeparator.Comma,
+                                    ),
                                   ],
                                   validator: (e) {
                                     if (e!.isEmpty) {

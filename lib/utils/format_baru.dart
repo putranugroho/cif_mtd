@@ -2,33 +2,50 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class CurrencyInputFormatters extends TextInputFormatter {
-  final NumberFormat currencyFormatter =
-      NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 2);
+  final NumberFormat currencyFormat = NumberFormat.currency(
+    locale: 'en_US', // <-- gunakan en_US untuk comma ribuan, dot decimal
+    symbol: 'Rp ',
+    decimalDigits: 2,
+  );
 
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    String newText = newValue.text;
+    String text = newValue.text;
 
-    // Remove all except digits, comma, dot
-    String cleanedText = newText.replaceAll(RegExp(r'[^0-9.,]'), '');
+    // 1️⃣ Hapus simbol mata uang
+    text = text.replaceAll(currencyFormat.currencySymbol, '');
 
-    // Replace dot with comma (for Indonesian decimal)
-    cleanedText = cleanedText.replaceAll('.', ',');
+    // 2️⃣ Hapus spasi
+    text = text.replaceAll(' ', '');
 
-    // For parsing double → replace comma with dot
-    String parseable = cleanedText.replaceAll(',', '.');
+    // 3️⃣ Hapus comma ribuan (karena akan di-reformat nanti)
+    text = text.replaceAll(',', '');
 
-    double? value = double.tryParse(parseable);
-
-    if (value != null) {
-      String formatted = currencyFormatter.format(value);
-      return TextEditingValue(
-        text: formatted,
-        selection: TextSelection.collapsed(offset: formatted.length),
-      );
-    } else {
-      return oldValue;
+    if (text.isEmpty) {
+      return newValue.copyWith(text: '');
     }
+
+    double? value = double.tryParse(text);
+    if (value == null) {
+      return oldValue; // kalau parsing gagal, tetap pakai oldValue
+    }
+
+    String newText = currencyFormat.format(value);
+
+    // Hitung posisi cursor baru
+    int selectionIndex =
+        newText.length - (oldValue.text.length - oldValue.selection.end);
+
+    if (selectionIndex > newText.length) {
+      selectionIndex = newText.length;
+    } else if (selectionIndex < 0) {
+      selectionIndex = 0;
+    }
+
+    return TextEditingValue(
+      text: newText,
+      selection: TextSelection.collapsed(offset: selectionIndex),
+    );
   }
 }
