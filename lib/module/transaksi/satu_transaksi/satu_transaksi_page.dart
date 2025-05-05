@@ -381,6 +381,25 @@ class SatuTransaksiPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        value.cancelKode();
+                                      },
+                                      child: Container(
+                                        width: 30,
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: colorPrimary),
+                                        child: Icon(
+                                          Icons.close,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    )
                                   ],
                                 ),
                                 const SizedBox(height: 16),

@@ -266,6 +266,18 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  cancelKode() async {
+    inqueryGlModelcre = null;
+    inqueryGlModelcre = null;
+    setupTransModel = null;
+    namaTransaksi.clear();
+    namaSbbCre.clear();
+    nossbcre.clear();
+    nosbbdeb.clear();
+    namaSbbDeb.clear();
+    notifyListeners();
+  }
+
   pilihAoModelKredit(AoModel value) {
     aoModelKRedit = value;
     notifyListeners();
