@@ -246,7 +246,10 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     nomorDok.clear();
     nomorRef.clear();
     sbbAset = null;
-    namaSbbAset.clear();
+    namaSbbCre.clear();
+    nossbcre.clear();
+    nosbbdeb.clear();
+    namaSbbDeb.clear();
     sbbpenyusutan = null;
     nominal.clear();
     keterangan.clear();

@@ -183,6 +183,7 @@ class PengadaanNotifier extends ChangeNotifier {
   bool dialog = false;
   tambah() {
     clear();
+    currentStep = 0;
     dialog = true;
     notifyListeners();
   }
@@ -526,6 +527,7 @@ class PengadaanNotifier extends ChangeNotifier {
   var editData = false;
   edit(String id) async {
     inventarisModel = list.where((e) => e.id == int.parse(id)).first;
+    currentStep = 0;
     dialog = true;
     editData = true;
     noaset.text = inventarisModel!.kdaset;

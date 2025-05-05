@@ -517,6 +517,8 @@ class SatuTransaksiPage extends StatelessWidget {
                                           return TextField(
                                               controller: controller,
                                               focusNode: focusNode,
+                                              enabled:
+                                                  value.setupTransModel == null,
                                               autofocus: true,
                                               decoration: InputDecoration(
                                                 border: OutlineInputBorder(),
@@ -600,6 +602,8 @@ class SatuTransaksiPage extends StatelessWidget {
                                           return TextField(
                                               controller: controller,
                                               focusNode: focusNode,
+                                              enabled:
+                                                  value.setupTransModel == null,
                                               autofocus: true,
                                               decoration: InputDecoration(
                                                 border: OutlineInputBorder(),
