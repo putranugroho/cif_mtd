@@ -182,6 +182,7 @@ class PengadaanNotifier extends ChangeNotifier {
 
   bool dialog = false;
   tambah() {
+    clear();
     dialog = true;
     notifyListeners();
   }
@@ -580,11 +581,26 @@ class PengadaanNotifier extends ChangeNotifier {
   clear() {
     dialog = false;
     editData = false;
+    kelompokAsetModel = null;
+    golonganAsetModel = null;
+    kantor = null;
     noDok.clear();
     noaset.clear();
     namaaset.clear();
     keterangan.clear();
     blnPenyusutan.clear();
+    tglbeli.clear();
+    tglterima.clear();
+    lokasi.clear();
+    kota.clear();
+    nilaiPenyusutan.clear();
+    hargaBeli.text = "0";
+    discount.text = "0";
+    biaya.text = "0";
+    ppn.text = "0";
+    pph.text = "0";
+    subtotal = 0;
+    total = 0;
     notifyListeners();
   }
 

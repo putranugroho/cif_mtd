@@ -44,8 +44,8 @@ class UsersNotifier extends ChangeNotifier {
     aksesKasir = users!.aksesKasir == "Y" ? true : false;
     bedaKantor = users!.bedaKantor == "Y" ? true : false;
     levelUser = listUsers.where((e) => e.idLevel == users!.lvluser).first;
-    otorisasi = users!.levelOtor != "0" ? true : false;
-    levelSelected = users!.levelOtor != "0" ? true : false;
+    otorisasi = users!.levelOtor == "null" ? false : true;
+    levelSelected = users!.levelOtor == "null" ? false : true;
     levelOtor = users!.levelOtor == "null"
         ? ""
         : listLevelOtor.where((e) => e == users!.levelOtor).first;

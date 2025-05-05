@@ -486,6 +486,7 @@ class SatuTransaksiPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: DropdownSearch<CoaModel>(
+                                        enabled: value.setupTransModel == null,
                                         validator: (value) {
                                           if (value == null) {
                                             return 'Wajib diisi';
@@ -580,6 +581,7 @@ class SatuTransaksiPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: DropdownSearch<CoaModel>(
+                                        enabled: value.setupTransModel == null,
                                         validator: (value) {
                                           if (value == null) {
                                             return 'Wajib diisi';
@@ -709,6 +711,7 @@ class SatuTransaksiPage extends StatelessWidget {
                                 ),
                                 TextFormField(
                                   textInputAction: TextInputAction.done,
+                                  controller: value.keterangan,
                                   decoration: InputDecoration(
                                     hintText: "Keterangan Transaksi",
                                     border: OutlineInputBorder(

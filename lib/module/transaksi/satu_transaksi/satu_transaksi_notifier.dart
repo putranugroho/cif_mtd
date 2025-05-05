@@ -72,9 +72,11 @@ class SatuTransaksiNotifier extends ChangeNotifier {
   TextEditingController tglTransaksiText = TextEditingController();
   TextEditingController nomorDok = TextEditingController();
   TextEditingController nomorRef = TextEditingController();
+  TextEditingController keterangan = TextEditingController();
 
   bool dialog = false;
   tambah() {
+    clear();
     dialog = true;
     notifyListeners();
   }
@@ -82,6 +84,20 @@ class SatuTransaksiNotifier extends ChangeNotifier {
   tutup() {
     dialog = false;
     notifyListeners();
+  }
+
+  clear() {
+    setupTransModel = null;
+    namaTransaksi.clear();
+    nomorDok.clear();
+    nomorRef.clear();
+    sbbAset = null;
+    namaSbbAset.clear();
+    sbbpenyusutan = null;
+    nominal.clear();
+    keterangan.clear();
+    aoModel = null;
+    aoModelKRedit = null;
   }
 
   List<TransaksiModel> listData = [];

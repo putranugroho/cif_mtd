@@ -279,7 +279,9 @@ class PengadaanPage extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    "Tambah Pengadaan",
+                                    value.editData
+                                        ? "Ubah / Hapus Pengadaan"
+                                        : "Tambah Pengadaan",
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -1540,7 +1542,8 @@ class PengadaanPage extends StatelessWidget {
                                                       if (e!.isEmpty) {
                                                         return "Wajib diisi";
                                                       } else {
-                                                        if (e == "0") {
+                                                        if (int.tryParse(e) ==
+                                                            0) {
                                                           return "Wajib diisi";
                                                         }
                                                         return null;
