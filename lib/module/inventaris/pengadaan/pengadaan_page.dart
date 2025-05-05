@@ -4,7 +4,7 @@ import 'package:accounting/module/setup/golongan_aset/golongan_aset_notifier.dar
 
 import 'package:accounting/utils/button_custom.dart';
 import 'package:accounting/utils/currency_formatted.dart';
-import 'package:accounting/utils/format_baru.dart';
+// import 'package:accounting/utils/format_baru.dart';
 import 'package:accounting/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
@@ -280,7 +280,7 @@ class PengadaanPage extends StatelessWidget {
                                 Expanded(
                                   child: Text(
                                     value.editData
-                                        ? "Ubah / Hapus Pengadaan"
+                                        ? "Ubah Pengadaan"
                                         : "Tambah Pengadaan",
                                     style: TextStyle(
                                       fontSize: 18,

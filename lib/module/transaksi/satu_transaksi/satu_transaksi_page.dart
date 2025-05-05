@@ -1,18 +1,22 @@
 import 'package:accounting/models/index.dart';
 import 'package:accounting/module/setup/golongan_aset/golongan_aset_notifier.dart';
 import 'package:accounting/module/transaksi/satu_transaksi/satu_transaksi_notifier.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart' as a;
 
 import 'package:accounting/utils/button_custom.dart';
 import 'package:accounting/utils/currency_formatted.dart';
-import 'package:accounting/utils/format_currency.dart';
+// import 'package:accounting/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../../utils/colors.dart';
+import '../../../utils/format_currency.dart';
+// import '../../../utils/format_baru.dart';
 
 class SatuTransaksiPage extends StatelessWidget {
   const SatuTransaksiPage({super.key});
@@ -320,7 +324,7 @@ class SatuTransaksiPage extends StatelessWidget {
                                               true, // Aktifkan fitur pencarian
                                         ),
                                         selectedItem: value.setupTransModel,
-                                        items: value.listKodeTransaksi,
+                                        items: value.listData,
                                         itemAsString: (e) => "${e.namaTrans}",
                                         onChanged: (e) {
                                           value.pilihTransModel(e!);
@@ -377,6 +381,25 @@ class SatuTransaksiPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        value.cancelKode();
+                                      },
+                                      child: Container(
+                                        width: 30,
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: colorPrimary),
+                                        child: Icon(
+                                          Icons.close,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    )
                                   ],
                                 ),
                                 const SizedBox(height: 16),
@@ -485,45 +508,31 @@ class SatuTransaksiPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Expanded(
-                                      child: DropdownSearch<CoaModel>(
-                                        enabled: value.setupTransModel == null,
-                                        validator: (value) {
-                                          if (value == null) {
-                                            return 'Wajib diisi';
-                                          }
-                                          return null;
+                                      child: TypeAheadField<InqueryGlModel>(
+                                        controller: value.nosbbdeb,
+                                        suggestionsCallback: (search) =>
+                                            value.getInquery(search),
+                                        builder:
+                                            (context, controller, focusNode) {
+                                          return TextField(
+                                              controller: controller,
+                                              focusNode: focusNode,
+                                              autofocus: true,
+                                              decoration: InputDecoration(
+                                                border: OutlineInputBorder(),
+                                                labelText: 'Cari Akun',
+                                              ));
                                         },
-                                        popupProps:
-                                            const PopupPropsMultiSelection.menu(
-                                          showSearchBox:
-                                              true, // Aktifkan fitur pencarian
-                                        ),
-                                        selectedItem: value.sbbAset,
-                                        items: value.listCoa
-                                            .where((e) => e.jnsAcc == "C")
-                                            .toList(),
-                                        itemAsString: (e) => "${e.namaSbb}",
-                                        onChanged: (e) {
-                                          value.pilihSbbAset(e!);
+                                        itemBuilder: (context, city) {
+                                          return ListTile(
+                                            title: Text(city.nosbb),
+                                            subtitle: Text(city.namaSbb),
+                                          );
                                         },
-                                        dropdownDecoratorProps:
-                                            DropDownDecoratorProps(
-                                          baseStyle: TextStyle(fontSize: 16),
-                                          textAlignVertical:
-                                              TextAlignVertical.center,
-                                          dropdownSearchDecoration:
-                                              InputDecoration(
-                                            hintText: "Pilih Debet Akun",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              borderSide: BorderSide(
-                                                width: 1,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                        onSelected: (city) {
+                                          // value.selectInvoice(city);
+                                          value.pilihAkunDeb(city);
+                                        },
                                       ),
                                     ),
                                     SizedBox(
@@ -535,7 +544,7 @@ class SatuTransaksiPage extends StatelessWidget {
                                         // enabled: false,
                                         readOnly: true,
                                         textInputAction: TextInputAction.done,
-                                        controller: value.namaSbbAset,
+                                        controller: value.namaSbbDeb,
                                         maxLines: 1,
                                         // inputFormatters: [
                                         //   FilteringTextInputFormatter.digitsOnly
@@ -550,17 +559,19 @@ class SatuTransaksiPage extends StatelessWidget {
                                         decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Colors.grey[200],
-                                          hintText: "Nomor SBB",
+                                          hintText: "Nomor Debet",
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),
-                                    ),
+                                    )
                                   ],
                                 ),
-                                const SizedBox(height: 16),
+                                SizedBox(
+                                  height: 16,
+                                ),
                                 Row(
                                   children: [
                                     Text(
@@ -580,45 +591,31 @@ class SatuTransaksiPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Expanded(
-                                      child: DropdownSearch<CoaModel>(
-                                        enabled: value.setupTransModel == null,
-                                        validator: (value) {
-                                          if (value == null) {
-                                            return 'Wajib diisi';
-                                          }
-                                          return null;
+                                      child: TypeAheadField<InqueryGlModel>(
+                                        controller: value.nossbcre,
+                                        suggestionsCallback: (search) =>
+                                            value.getInquery(search),
+                                        builder:
+                                            (context, controller, focusNode) {
+                                          return TextField(
+                                              controller: controller,
+                                              focusNode: focusNode,
+                                              autofocus: true,
+                                              decoration: InputDecoration(
+                                                border: OutlineInputBorder(),
+                                                labelText: 'Cari Akun',
+                                              ));
                                         },
-                                        popupProps:
-                                            const PopupPropsMultiSelection.menu(
-                                          showSearchBox:
-                                              true, // Aktifkan fitur pencarian
-                                        ),
-                                        selectedItem: value.sbbpenyusutan,
-                                        items: value.listCoa
-                                            .where((e) => e.jnsAcc == "C")
-                                            .toList(),
-                                        itemAsString: (e) => "${e.namaSbb}",
-                                        onChanged: (e) {
-                                          value.pilihSbbpenyusutan(e!);
+                                        itemBuilder: (context, city) {
+                                          return ListTile(
+                                            title: Text(city.nosbb),
+                                            subtitle: Text(city.namaSbb),
+                                          );
                                         },
-                                        dropdownDecoratorProps:
-                                            DropDownDecoratorProps(
-                                          baseStyle: TextStyle(fontSize: 16),
-                                          textAlignVertical:
-                                              TextAlignVertical.center,
-                                          dropdownSearchDecoration:
-                                              InputDecoration(
-                                            hintText: "Pilih Kredit Akun",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              borderSide: BorderSide(
-                                                width: 1,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                        onSelected: (city) {
+                                          // value.selectInvoice(city);
+                                          value.pilihAkunCre(city);
+                                        },
                                       ),
                                     ),
                                     SizedBox(
@@ -630,7 +627,7 @@ class SatuTransaksiPage extends StatelessWidget {
                                         // enabled: false,
                                         readOnly: true,
                                         textInputAction: TextInputAction.done,
-                                        controller: value.namaSbbpenyusutan,
+                                        controller: value.namaSbbCre,
                                         maxLines: 1,
                                         // inputFormatters: [
                                         //   FilteringTextInputFormatter.digitsOnly
@@ -645,15 +642,18 @@ class SatuTransaksiPage extends StatelessWidget {
                                         decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Colors.grey[200],
-                                          hintText: "Nomor SBB",
+                                          hintText: "Nomor Kredit",
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),
-                                    ),
+                                    )
                                   ],
+                                ),
+                                SizedBox(
+                                  height: 16,
                                 ),
                                 const SizedBox(height: 16),
                                 Row(
@@ -676,9 +676,17 @@ class SatuTransaksiPage extends StatelessWidget {
                                   textInputAction: TextInputAction.done,
                                   controller: value.nominal,
                                   maxLines: 1,
+                                  keyboardType: TextInputType.numberWithOptions(
+                                      decimal: true),
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'^\d+\.?\d{0,2}')),
+                                    a.CurrencyInputFormatter(
+                                      leadingSymbol: 'Rp ',
+                                      useSymbolPadding: true,
+                                      thousandSeparator:
+                                          a.ThousandSeparator.Period,
+                                      mantissaLength: 2, // jumlah angka desimal
+                                      // decimalSeparator: DecimalSeparator.Comma,
+                                    ),
                                   ],
                                   validator: (e) {
                                     if (e!.isEmpty) {
@@ -834,7 +842,7 @@ class SatuTransaksiPage extends StatelessWidget {
 class DetailDataSource extends DataGridSource {
   DetailDataSource(SatuTransaksiNotifier value) {
     tindakanNotifier = value;
-    buildRowData(value.listData);
+    // buildRowData(value.listData);
   }
 
   SatuTransaksiNotifier? tindakanNotifier;
