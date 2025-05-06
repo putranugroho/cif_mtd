@@ -2,6 +2,7 @@ import 'package:accounting/module/aktivasi_users/aktivasi_users_page.dart';
 import 'package:accounting/module/closing_eom/closing_eom_page.dart';
 import 'package:accounting/module/dashboard/dashboard_page.dart';
 import 'package:accounting/module/gl/gl_page.dart';
+import 'package:accounting/module/hutang_piutang/hutang_piutang_page.dart';
 import 'package:accounting/module/inventaris/jual_beli/jual_beli_page.dart';
 import 'package:accounting/module/inventaris/laporan/laporan_inventaris_page.dart';
 import 'package:accounting/module/inventaris/otorisasi/otorisasi_inventaris_page.dart';
@@ -387,7 +388,15 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                                                   ? BayarDimukaPage()
                                                                                                                                                                                                                                                   : value.page == 60
                                                                                                                                                                                                                                                       ? LevelUserPage()
-                                                                                                                                                                                                                                                      : Container())
+                                                                                                                                                                                                                                                      : value.page == 61
+                                                                                                                                                                                                                                                          ? HutangPiutangPage(tipe: 1, jenis: 1)
+                                                                                                                                                                                                                                                          : value.page == 62
+                                                                                                                                                                                                                                                              ? HutangPiutangPage(tipe: 2, jenis: 1)
+                                                                                                                                                                                                                                                              : value.page == 63
+                                                                                                                                                                                                                                                                  ? HutangPiutangPage(tipe: 1, jenis: 2)
+                                                                                                                                                                                                                                                                  : value.page == 64
+                                                                                                                                                                                                                                                                      ? HutangPiutangPage(tipe: 2, jenis: 2)
+                                                                                                                                                                                                                                                                      : Container())
             ],
           ),
         )),

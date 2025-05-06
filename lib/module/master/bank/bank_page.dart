@@ -722,6 +722,7 @@ class BankPage extends StatelessWidget {
                                                             TextInputAction
                                                                 .done,
                                                         maxLines: 1,
+                                                        controller: value.noBilyet,
                                                         validator: (e) {
                                                           if (e!.isEmpty) {
                                                             return "Wajib diisi";
@@ -779,7 +780,7 @@ class BankPage extends StatelessWidget {
                                                             TextInputAction
                                                                 .done,
                                                         controller:
-                                                            value.saldoEOM,
+                                                            value.jangkaWaktu,
                                                         maxLines: 1,
                                                         inputFormatters: [
                                                           FilteringTextInputFormatter

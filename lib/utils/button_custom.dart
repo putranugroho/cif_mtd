@@ -52,7 +52,7 @@ class ButtonPrimary extends StatelessWidget {
           "$name",
           textAlign: TextAlign.center,
           style: const TextStyle(
-            fontSize: 18,
+            fontSize: 12,
             color: Colors.white,
           ),
         ),
