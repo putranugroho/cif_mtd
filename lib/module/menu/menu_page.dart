@@ -44,6 +44,7 @@ import 'package:accounting/module/setup/level/level_page.dart';
 import 'package:accounting/module/setup/pajak/setup_pajak_page.dart';
 import 'package:accounting/module/setup/penyusutan/penyusutan_page.dart';
 import 'package:accounting/module/setup/perusahaan/perusahaan_page.dart';
+import 'package:accounting/module/setup/sbb_hutang_piutang/sbb_hutang_piutang_page.dart';
 import 'package:accounting/module/setup/sbb_khsus/sbb_khusus_page.dart';
 import 'package:accounting/module/setup/sbb_khsus/tambah_kelompok_sbb_khusus_page.dart';
 import 'package:accounting/module/setup/setup_transaksi/setup_transaksi_page.dart';
@@ -396,7 +397,9 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                                                                   ? HutangPiutangPage(tipe: 1, jenis: 2)
                                                                                                                                                                                                                                                                   : value.page == 64
                                                                                                                                                                                                                                                                       ? HutangPiutangPage(tipe: 2, jenis: 2)
-                                                                                                                                                                                                                                                                      : Container())
+                                                                                                                                                                                                                                                                      : value.page == 65
+                                                                                                                                                                                                                                                                          ? SbbHutangPiutangPage()
+                                                                                                                                                                                                                                                                          : Container())
             ],
           ),
         )),

@@ -562,6 +562,40 @@ class MenuSetupWidget extends StatelessWidget {
                   ),
                 ),
               ),
+              InkWell(
+                onTap: () => value.gantimenu(65),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: value.page == 65 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.bill,
+                        height: 30,
+                        color: value.page == 65 ? Colors.black : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Hutang / Piutang",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 65 ? Colors.black : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
             ]),
         InkWell(
           onTap: () => value.gantimenu(38),
@@ -1180,7 +1214,12 @@ class MenuHutangPiutangWidget extends StatelessWidget {
                 value.gantimenu(61);
               },
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 16),
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                decoration: BoxDecoration(
+                  color: value.page == 61 ? Colors.white : Colors.transparent,
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: Row(
                   children: [
                     SizedBox(
@@ -1210,7 +1249,12 @@ class MenuHutangPiutangWidget extends StatelessWidget {
                 value.gantimenu(62);
               },
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 16),
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                decoration: BoxDecoration(
+                  color: value.page == 62 ? Colors.white : Colors.transparent,
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: Row(
                   children: [
                     SizedBox(
@@ -1272,7 +1316,12 @@ class MenuHutangPiutangWidget extends StatelessWidget {
             InkWell(
               onTap: () => value.gantimenu(63),
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 16),
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                decoration: BoxDecoration(
+                  color: value.page == 63 ? Colors.white : Colors.transparent,
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: Row(
                   children: [
                     SizedBox(
@@ -1300,7 +1349,12 @@ class MenuHutangPiutangWidget extends StatelessWidget {
             InkWell(
               onTap: () => value.gantimenu(64),
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 16),
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                decoration: BoxDecoration(
+                  color: value.page == 64 ? Colors.white : Colors.transparent,
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: Row(
                   children: [
                     SizedBox(

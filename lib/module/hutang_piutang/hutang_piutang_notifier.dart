@@ -181,7 +181,9 @@ class HutangPiutangNotifier extends ChangeNotifier {
 
   hitungPembayaran() {
     if (nilaitransaksi.text.isEmpty) {
-      informationDialog(context, "Warning", "Input nilai transaksi");
+      informationDialog(context, "Warning", "Input Nilai Transaksi");
+    } else if (jangkawaktu.text.isEmpty) {
+      informationDialog(context, "Warning", "Input Jangka Waktu");
     } else {
       listTglJthTempo.clear();
       listNilaiTransaksi.clear();

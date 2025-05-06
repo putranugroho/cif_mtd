@@ -36,14 +36,29 @@ class HutangPiutangPage extends StatelessWidget {
                       child: Row(
                         children: [
                           Expanded(
-                            child: Text(
-                              jenis == 1 ? "Kelola Hutang" : "Kelola Piutang",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                              child: Row(
+                            children: [
+                              Text(
+                                jenis == 1 ? "Kelola Hutang" : "Kelola Piutang",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                          ),
+                              SizedBox(
+                                width: 6,
+                              ),
+                              Text(
+                                tipe == 1
+                                    ? "Bayar Sekaligus"
+                                    : "Bayar Berjangka",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          )),
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
