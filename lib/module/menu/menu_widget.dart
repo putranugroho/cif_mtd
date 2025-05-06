@@ -1143,15 +1143,14 @@ class MenuHutangPiutangWidget extends StatelessWidget {
             ),
           ),
         ),
-        InkWell(
-          onTap: () => value.gantimenu(21),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(
-              color: value.page == 21 ? Colors.white : Colors.transparent,
-              borderRadius: BorderRadius.circular(8),
-            ),
+        ExpansionTile(
+          tilePadding: EdgeInsets.zero,
+          childrenPadding: EdgeInsets.zero,
+          shape: Border(),
+          expandedAlignment: Alignment.centerLeft,
+          collapsedIconColor: Colors.white,
+          expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+          title: Container(
             child: Row(
               children: [
                 Image.asset(
@@ -1172,6 +1171,139 @@ class MenuHutangPiutangWidget extends StatelessWidget {
               ],
             ),
           ),
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Image.asset(
+                    ImageAssets.report,
+                    height: 30,
+                    color: value.page == 50 ? Colors.black : Colors.white70,
+                  ),
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    "Bayar Sekaligus",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: value.page == 50 ? Colors.black : Colors.white70,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Image.asset(
+                    ImageAssets.report,
+                    height: 30,
+                    color: value.page == 50 ? Colors.black : Colors.white70,
+                  ),
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    "Bayar Berjangka",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: value.page == 50 ? Colors.black : Colors.white70,
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+        ExpansionTile(
+          tilePadding: EdgeInsets.zero,
+          childrenPadding: EdgeInsets.zero,
+          shape: Border(),
+          expandedAlignment: Alignment.centerLeft,
+          collapsedIconColor: Colors.white,
+          expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+          title: Container(
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.rupiahs,
+                  height: 30,
+                  color: value.page == 22 ? Colors.black : Colors.white70,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Piutang",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 22 ? Colors.black : Colors.white70,
+                  ),
+                )
+              ],
+            ),
+          ),
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Image.asset(
+                    ImageAssets.report,
+                    height: 30,
+                    color: value.page == 50 ? Colors.black : Colors.white70,
+                  ),
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    "Bayar Sekaligus",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: value.page == 50 ? Colors.black : Colors.white70,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Image.asset(
+                    ImageAssets.report,
+                    height: 30,
+                    color: value.page == 50 ? Colors.black : Colors.white70,
+                  ),
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    "Bayar Berjangka",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: value.page == 50 ? Colors.black : Colors.white70,
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
         ),
         InkWell(
           onTap: () => value.gantimenu(22),

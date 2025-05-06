@@ -185,6 +185,25 @@ class PengadaanNotifier extends ChangeNotifier {
     clear();
     currentStep = 0;
     dialog = true;
+    editData = false;
+    penempatanModel = "Kantor";
+    kelompokAsetModel = null;
+    golonganAsetModel = null;
+    nodok.clear();
+    noaset.clear();
+    namaaset.clear();
+    keterangan.clear();
+    noDok.clear();
+    tglbeli.clear();
+    tglterima.clear();
+    hargaBeli.text = "0";
+    discount.text = "0";
+    biaya.text = "0";
+    nilaiPenyusutan.text = metodePenyusutanModel!.nilaiAkhir.toString();
+    ppn.text = "0";
+    pph.text = "0";
+    subtotal = 0;
+    total = 0;
     notifyListeners();
   }
 

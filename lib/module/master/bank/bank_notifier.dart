@@ -229,9 +229,16 @@ class BankNotifier extends ChangeNotifier {
           int.parse(DateFormat('dd').format(
             DateTime.now(),
           ))),
-      firstDate: DateTime(1950),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) - 10,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
       lastDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) + 10,
+          int.parse(DateFormat('y').format(DateTime.now())),
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
@@ -251,22 +258,17 @@ class BankNotifier extends ChangeNotifier {
     var pickedendDate = (await showDatePicker(
       context: context,
       initialDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())),
-          int.parse(DateFormat('MM').format(
-            DateTime.now(),
-          )),
-          int.parse(DateFormat('dd').format(
-            DateTime.now(),
-          ))),
-      firstDate: DateTime(1950),
+          int.parse(DateFormat('y').format(tglBuka!)),
+          int.parse(DateFormat('MM').format(tglBuka!)),
+          int.parse(DateFormat('dd').format(tglBuka!)) + 10),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(tglBuka!)),
+          int.parse(DateFormat('MM').format(tglBuka!)),
+          int.parse(DateFormat('dd').format(tglBuka!)) + 10),
       lastDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) + 10,
-          int.parse(DateFormat('MM').format(
-            DateTime.now(),
-          )),
-          int.parse(DateFormat('dd').format(
-            DateTime.now(),
-          ))),
+          int.parse(DateFormat('y').format(tglBuka!)) + 10,
+          int.parse(DateFormat('MM').format(tglBuka!)),
+          int.parse(DateFormat('dd').format(tglBuka!))),
     ));
     if (pickedendDate != null) {
       tglJatuhTempo = pickedendDate;
@@ -278,6 +280,7 @@ class BankNotifier extends ChangeNotifier {
 
   TextEditingController nilai = TextEditingController();
   TextEditingController saldoEOM = TextEditingController();
+  TextEditingController jangkaWaktu = TextEditingController();
   TextEditingController noRek = TextEditingController();
   TextEditingController tglBukaRekening = TextEditingController();
   TextEditingController tglJatuhTempoRekening = TextEditingController();
@@ -387,6 +390,7 @@ class BankNotifier extends ChangeNotifier {
   TextEditingController kodeBank = TextEditingController();
   TextEditingController namaRek = TextEditingController();
   TextEditingController namaBank = TextEditingController();
+  TextEditingController noBilyet = TextEditingController();
   List<SandiBankModel> listBank = [];
   SandiBankModel? sandiBankModel;
   pilihSandi(SandiBankModel value) {
@@ -408,6 +412,7 @@ class BankNotifier extends ChangeNotifier {
         listSandi.where((e) => e.sandi == bankModel!.kodeBank).first;
     kodeBank.text = bankModel!.kodeBank;
     cabang.text = bankModel!.cabang;
+    noBilyet.text = bankModel!.noBilyet;
     namaRek.text = bankModel!.nmRek;
     namaBank.text = bankModel!.nmBank;
     noRek.text = bankModel!.noRek;
@@ -421,7 +426,7 @@ class BankNotifier extends ChangeNotifier {
     nilai.text = FormatCurrency.oCcy
         .format(int.parse(bankModel!.nominal))
         .replaceAll(".", ",");
-    saldoEOM.text = bankModel!.jw;
+    jangkaWaktu.text = bankModel!.jw;
     tglBukaRekening.text = bankModel!.tglbuka;
     tglJatuhTempoRekening.text = bankModel!.tgljtempo;
     saldoEOM.text = bankModel!.saldoeom;
@@ -438,13 +443,14 @@ class BankNotifier extends ChangeNotifier {
           "nm_bank": "${sandiBankModel!.namaLjk}",
           "nm_rek": "${namaRek.text.trim()}",
           "cabang": "${cabang.text.trim()}",
+          "no_bilyet": "${noBilyet.text.trim()}",
           "no_rek": "${noRek.text}",
           "kd_rek":
               "${rekening == "Tabungan" ? "10" : rekening == "Giro" ? "20" : "30"}",
           "nosbb": "${nosbbdeb.text.trim()}",
           "nama_sbb": "${namaSbbDeb.text.trim()}",
           "nominal": "${nilai.text.trim().replaceAll(",", '')}",
-          "jw": "${saldoEOM.text}",
+          "jw": "${jangkaWaktu.text}",
           "tglbuka":
               "${tglBuka == null ? "" : DateFormat('y-MM-dd').format(tglBuka!)}",
           "tgljtempo":
@@ -473,13 +479,14 @@ class BankNotifier extends ChangeNotifier {
           "nm_bank": "${sandiBankModel!.namaLjk}",
           "nm_rek": "${namaRek.text.trim()}",
           "no_rek": "${noRek.text}",
+          "no_bilyet": "${noBilyet.text.trim()}",
           "cabang": "${cabang.text}",
           "kd_rek":
               "${rekening == "Tabungan" ? "10" : rekening == "Giro" ? "20" : "30"}",
           "nosbb": "${inqueryGlModeldeb!.nosbb}",
           "nama_sbb": "${inqueryGlModeldeb!.namaSbb}",
           "nominal": "${nilai.text.trim().replaceAll(",", '')}",
-          "jw": "${saldoEOM.text}",
+          "jw": "${jangkaWaktu.text}",
           "tglbuka":
               "${tglBuka == null ? "" : DateFormat('y-MM-dd').format(tglBuka!)}",
           "tgljtempo":
