@@ -151,7 +151,7 @@ class CustomerNotifier extends ChangeNotifier {
       } else {
         DialogCustom().showLoading(context);
         var data = {
-          "kode_pt": "${aoModel!.kodePt}",
+          "kode_pt": "001",
           "no_sif": "${noSif.text.trim()}",
           "nm_sif": "${namaSif.text.trim()}",
           "gol_cust":

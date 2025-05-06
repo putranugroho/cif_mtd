@@ -92,9 +92,13 @@ class HutangPiutangNotifier extends ChangeNotifier {
           for (Map<String, dynamic> i in response['data']) {
             listCs.add(CustomerSupplierModel.fromJson(i));
           }
-          listCs
-              .where((model) =>
-                  model.nmSif.toLowerCase().contains(query.toLowerCase()))
+          return listCs
+              .where((model) => jenis == 1
+                  ? (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
+                      (model.golCust == "1" || model.golCust == "3"))
+                  : (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
+                          model.golCust == "2" ||
+                      model.golCust == "3"))
               .toList();
         }
         notifyListeners();
@@ -148,6 +152,9 @@ class HutangPiutangNotifier extends ChangeNotifier {
         for (Map<String, dynamic> i in value['data']) {
           list.add(CustomerSupplierModel.fromJson(i));
         }
+        jenis == 1
+            ? list.where((e) => e.golCust == "1" || e.golCust == "3").toList()
+            : list.where((e) => e.golCust == "2" || e.golCust == "3").toList();
         isLoading = false;
         notifyListeners();
       } else {
