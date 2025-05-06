@@ -18,6 +18,7 @@ import 'package:accounting/module/master/bank/bank_page.dart';
 import 'package:accounting/module/master/customer/customer_page.dart';
 import 'package:accounting/module/master/laporan/laporan_master_page.dart';
 import 'package:accounting/module/master/otorisasi/otorisasi_master_page.dart';
+import 'package:accounting/module/master/terminal/terminal_page.dart';
 import 'package:accounting/module/master/users/users_page.dart';
 import 'package:accounting/module/menu/menu_notifier.dart';
 import 'package:accounting/module/menu/menu_widget.dart';
@@ -399,7 +400,9 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                                                                       ? HutangPiutangPage(tipe: 2, jenis: 2)
                                                                                                                                                                                                                                                                       : value.page == 65
                                                                                                                                                                                                                                                                           ? SbbHutangPiutangPage()
-                                                                                                                                                                                                                                                                          : Container())
+                                                                                                                                                                                                                                                                          : value.page == 66
+                                                                                                                                                                                                                                                                              ? TerminalPage()
+                                                                                                                                                                                                                                                                              : Container())
             ],
           ),
         )),

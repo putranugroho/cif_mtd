@@ -871,6 +871,36 @@ class MenuMasterWidget extends StatelessWidget {
             ),
           ),
         ),
+        InkWell(
+          onTap: () => value.gantimenu(66),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color: value.page == 66 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.click,
+                  height: 30,
+                  color: value.page == 66 ? Colors.black : Colors.white70,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Terminal ID",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 66 ? Colors.black : Colors.white70,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
         // InkWell(
         //   onTap: () => value.gantimenu(10),
         //   child: Container(
