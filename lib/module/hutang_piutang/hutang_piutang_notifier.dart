@@ -214,47 +214,56 @@ class HutangPiutangNotifier extends ChangeNotifier {
       listNilaiPPN.clear();
       listNilaiPPH.clear();
       notifyListeners();
-      double nilai = double.parse(nilaitransaksi.text
-              .replaceAll("Rp ", "")
-              .replaceAll(".", "")
-              .replaceAll(",", ".")) /
-          double.parse(jangkawaktu.text);
-      double ppn = double.parse(nilaippn.text
-              .replaceAll("Rp ", "")
-              .replaceAll(".", "")
-              .replaceAll(",", ".")) /
-          double.parse(jangkawaktu.text);
-      double pph = double.parse(nilaipph.text
-              .replaceAll("Rp ", "")
-              .replaceAll(".", "")
-              .replaceAll(",", ".")) /
-          double.parse(jangkawaktu.text);
-      for (var i = 0; i < int.parse(jangkawaktu.text); i++) {
+
+      int periode = int.parse(jangkawaktu.text);
+
+      double totalNilai = double.parse(nilaitransaksi.text
+          .replaceAll("Rp ", "")
+          .replaceAll(".", "")
+          .replaceAll(",", "."));
+      double totalPPN = double.parse(nilaippn.text
+          .replaceAll("Rp ", "")
+          .replaceAll(".", "")
+          .replaceAll(",", "."));
+      double totalPPH = double.parse(nilaipph.text
+          .replaceAll("Rp ", "")
+          .replaceAll(".", "")
+          .replaceAll(",", "."));
+
+      List<int> nilaiList =
+          List.generate(periode - 1, (i) => (totalNilai / periode).floor());
+      List<int> ppnList =
+          List.generate(periode - 1, (i) => (totalPPN / periode).floor());
+      List<int> pphList =
+          List.generate(periode - 1, (i) => (totalPPH / periode).floor());
+
+      // Elemen terakhir adalah sisa
+      int nilaiLast = totalNilai.round() - nilaiList.reduce((a, b) => a + b);
+      int ppnLast = totalPPN.round() - ppnList.reduce((a, b) => a + b);
+      int pphLast = totalPPH.round() - pphList.reduce((a, b) => a + b);
+
+      for (var i = 0; i < periode; i++) {
         listTglJthTempo.add(TextEditingController(
             text:
                 "${DateFormat('dd-MMM-y').format(DateTime(int.parse(DateFormat('y').format(tglJthTempoPertama!)), int.parse(DateFormat('MM').format(tglJthTempoPertama!)) + i, int.parse(DateFormat('dd').format(tglJthTempoPertama!))))}"));
 
+        int nilai = (i == periode - 1) ? nilaiLast : nilaiList[i];
         listNilaiTransaksi.add(TextEditingController(
             text: FormatCurrency.oCcyDecimal.format(nilai)));
+
         if (pphppn) {
+          int ppn = (i == periode - 1) ? ppnLast : ppnList[i];
+          int pph = (i == periode - 1) ? pphLast : pphList[i];
           listNilaiPPN.add(TextEditingController(
               text: FormatCurrency.oCcyDecimal.format(ppn)));
           listNilaiPPH.add(TextEditingController(
               text: FormatCurrency.oCcyDecimal.format(pph)));
         } else {
-          if ((i + 1) == int.parse(jangkawaktu.text)) {
+          if (i == periode - 1) {
             listNilaiPPN.add(TextEditingController(
-                text: FormatCurrency.oCcyDecimal.format(double.parse(nilaippn
-                    .text
-                    .replaceAll("Rp ", "")
-                    .replaceAll(".", "")
-                    .replaceAll(",", ".")))));
+                text: FormatCurrency.oCcyDecimal.format(totalPPN.round())));
             listNilaiPPH.add(TextEditingController(
-                text: FormatCurrency.oCcyDecimal.format(double.parse(nilaipph
-                    .text
-                    .replaceAll("Rp ", "")
-                    .replaceAll(".", "")
-                    .replaceAll(",", ".")))));
+                text: FormatCurrency.oCcyDecimal.format(totalPPH.round())));
           } else {
             listNilaiPPN.add(TextEditingController(
                 text: FormatCurrency.oCcyDecimal.format(0)));
@@ -263,6 +272,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
           }
         }
       }
+
       notifyListeners();
     }
   }
