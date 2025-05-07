@@ -4,6 +4,7 @@ import 'package:accounting/utils/format_currency.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'adjusted_rounding.dart';
 
 import '../../models/customer_supplier_model.dart';
 import '../../models/setup_pajak_model.dart';
@@ -66,6 +67,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
   CustomerSupplierModel? customerSupplierModel;
   void pilihCustomerSupplier(CustomerSupplierModel value) async {
     customerSupplierModel = value;
+    customersupplier.text = customerSupplierModel!.nmSif;
     ao.text = customerSupplierModel!.kodeAoCustomer;
     alamat.text = customerSupplierModel!.alamat;
     notifyListeners();
@@ -178,6 +180,28 @@ class HutangPiutangNotifier extends ChangeNotifier {
   List<TextEditingController> listNilaiTransaksi = [];
   List<TextEditingController> listNilaiPPN = [];
   List<TextEditingController> listNilaiPPH = [];
+
+  List<int> pembulatanDenganPenyesuaian(
+      List<double> nilaiAsli, double totalTarget) {
+    List<int> nilaiBulatan = nilaiAsli.map((e) => e.round()).toList();
+    int totalBulatan = nilaiBulatan.fold(0, (a, b) => a + b);
+    int selisih = totalTarget.round() - totalBulatan;
+
+    // Penyesuaian nilai berdasarkan selisih
+    while (selisih != 0) {
+      for (int i = 0; i < nilaiBulatan.length && selisih != 0; i++) {
+        if (selisih > 0) {
+          nilaiBulatan[i]++;
+          selisih--;
+        } else if (selisih < 0 && nilaiBulatan[i] > 0) {
+          nilaiBulatan[i]--;
+          selisih++;
+        }
+      }
+    }
+
+    return nilaiBulatan;
+  }
 
   hitungPembayaran() {
     if (nilaitransaksi.text.isEmpty) {
