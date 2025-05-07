@@ -428,7 +428,22 @@ class SbbKhususPage extends StatelessWidget {
                                             name: "Simpan",
                                           ),
                                         ],
-                                      )
+                                      ),
+                                      value.editData
+                                          ? Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: [
+                                                const SizedBox(height: 16),
+                                                ButtonDanger(
+                                                  onTap: () {
+                                                    // value.confirm();
+                                                  },
+                                                  name: "Hapus",
+                                                ),
+                                              ],
+                                            )
+                                          : SizedBox()
                                     ],
                                   )
                                 : SizedBox()

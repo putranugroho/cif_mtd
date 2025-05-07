@@ -1,22 +1,41 @@
+import 'dart:convert';
+
 import 'package:accounting/models/index.dart';
+import 'package:accounting/repository/SetupRepository.dart';
+import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/format_currency.dart';
 import 'package:accounting/utils/informationdialog.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:collection/collection.dart';
+
+import '../../../network/network.dart';
+import '../../../utils/button_custom.dart';
 
 class BankTransaksiNotifier extends ChangeNotifier {
   final BuildContext context;
 
   BankTransaksiNotifier({required this.context}) {
-    // for (Map<String, dynamic> i in json) {
-    //   list.add(BankModel.fromJson(i));
-    // }
+    getBank();
+    // getInqueryAll();
+    notifyListeners();
+  }
 
-    // for (Map<String, dynamic> i in bankJson) {
-    //   listBank.add(SandiBankModel.fromJson(i));
-    // }
-    // notifyListeners();
+  List<InqueryGlModel> listGl = [];
+  Future getInqueryAll() async {
+    listGl.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        final List<Map<String, dynamic>> jnsAccBItems =
+            extractJnsAccB(value['data']);
+        listGl =
+            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        notifyListeners();
+      }
+    });
   }
 
   bool dialog = false;
@@ -178,8 +197,89 @@ class BankTransaksiNotifier extends ChangeNotifier {
     },
   ];
 
-  List<BankModel> list = [];
+  var isLoadingInquery = false;
+  Future<List<InqueryGlModel>> getInquery(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      isLoadingInquery = true;
+      listGl.clear();
+      notifyListeners();
 
+      var data = {"kode_pt": "001"};
+
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.getInqueryGL(),
+          jsonEncode(data),
+        );
+
+        if (response['status'].toString().toLowerCase().contains("success")) {
+          final List<Map<String, dynamic>> jnsAccBItems =
+              extractJnsAccB(response['data']);
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .toList();
+        }
+        notifyListeners();
+      } catch (e) {
+        print("Error: $e");
+      } finally {
+        isLoadingInquery = false;
+        notifyListeners();
+      }
+    } else {
+      listGl.clear(); // clear on short query
+    }
+
+    return listGl;
+  }
+
+  List<Map<String, dynamic>> extractJnsAccB(List<dynamic> rawData) {
+    List<Map<String, dynamic>> result = [];
+
+    void traverse(List<dynamic> items) {
+      for (var item in items) {
+        if (item is Map<String, dynamic>) {
+          if (item['jns_acc'] == 'C') {
+            result.add(item);
+          }
+
+          if (item.containsKey('items') && item['items'] is List) {
+            traverse(item['items']);
+          }
+        }
+      }
+    }
+
+    traverse(rawData);
+    return result;
+  }
+
+  var isLoading = true;
+  Future getBank() async {
+    isLoading = true;
+    list.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getBank(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          list.add(BankModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  List<BankModel> list = [];
   BankModel? bankModel;
   pilihBank(BankModel value) {
     bankModel = value;
@@ -232,7 +332,7 @@ class BankTransaksiNotifier extends ChangeNotifier {
 
   TextEditingController kodeBank = TextEditingController();
   TextEditingController namaRek = TextEditingController();
-  List<SandiBankModel> listBank = [];
+  // List<SandiBankModel> listBank = [];
   SandiBankModel? sandiBankModel;
   pilihSandi(SandiBankModel value) {
     sandiBankModel = value;

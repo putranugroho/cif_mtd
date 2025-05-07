@@ -337,6 +337,12 @@ class CustomerPage extends StatelessWidget {
                                       height: 8,
                                     ),
                                     DropdownSearch<String>(
+                                      validator: (value) {
+                                        if (value == null) {
+                                          return 'Wajib diisi';
+                                        }
+                                        return null;
+                                      },
                                       popupProps:
                                           const PopupPropsMultiSelection.menu(
                                         showSearchBox:
@@ -423,6 +429,12 @@ class CustomerPage extends StatelessWidget {
                                           height: 8,
                                         ),
                                         DropdownSearch<ProvinsiModel>(
+                                          validator: (value) {
+                                            if (value == null) {
+                                              return 'Wajib diisi';
+                                            }
+                                            return null;
+                                          },
                                           popupProps:
                                               const PopupPropsMultiSelection
                                                   .menu(
@@ -469,6 +481,12 @@ class CustomerPage extends StatelessWidget {
                                           height: 8,
                                         ),
                                         DropdownSearch<KotaModel>(
+                                          validator: (value) {
+                                            if (value == null) {
+                                              return 'Wajib diisi';
+                                            }
+                                            return null;
+                                          },
                                           popupProps:
                                               const PopupPropsMultiSelection
                                                   .menu(
@@ -524,6 +542,12 @@ class CustomerPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               DropdownSearch<KecamatanModel>(
+                                                validator: (value) {
+                                                  if (value == null) {
+                                                    return 'Wajib diisi';
+                                                  }
+                                                  return null;
+                                                },
                                                 popupProps:
                                                     const PopupPropsMultiSelection
                                                         .menu(

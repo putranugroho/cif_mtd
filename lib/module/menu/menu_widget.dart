@@ -1505,6 +1505,36 @@ class MenuTransaksiWidget extends StatelessWidget {
           ),
         ),
         InkWell(
+          onTap: () => value.gantimenu(67),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color: value.page == 67 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.report,
+                  height: 30,
+                  color: value.page == 67 ? Colors.black : Colors.white70,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Pembatalan Transaksi",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 67 ? Colors.black : Colors.white70,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
           onTap: () => value.gantimenu(23),
           child: Container(
             width: MediaQuery.of(context).size.width,

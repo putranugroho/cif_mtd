@@ -345,7 +345,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                         const SizedBox(
                                           height: 16,
                                         ),
-                                        ButtonPrimary(
+                                        ButtonDanger(
                                           onTap: () {
                                             value.confirm();
                                           },

@@ -287,17 +287,17 @@ class BankTransaksiPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Expanded(
-                                      child: DropdownSearch<SandiBankModel>(
+                                      child: DropdownSearch<BankModel>(
                                         popupProps:
                                             const PopupPropsMultiSelection.menu(
                                           showSearchBox:
                                               true, // Aktifkan fitur pencarian
                                         ),
-                                        selectedItem: value.sandiBankModel,
-                                        items: value.listBank,
-                                        itemAsString: (e) => "${e.namaLjk}",
+                                        selectedItem: value.bankModel,
+                                        items: value.list.toList(),
+                                        itemAsString: (e) => "${e.nmBank}",
                                         onChanged: (e) {
-                                          value.pilihSandi(e!);
+                                          value.pilihBank(e!);
                                         },
                                         dropdownDecoratorProps:
                                             DropDownDecoratorProps(

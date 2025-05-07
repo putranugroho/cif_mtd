@@ -55,8 +55,8 @@ class KelompokAsetNotifier extends ChangeNotifier {
   bool dialog = false;
   var editData = false;
   tambah() {
+    clear();
     dialog = true;
-    editData = false;
     notifyListeners();
   }
 

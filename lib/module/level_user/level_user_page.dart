@@ -689,7 +689,7 @@ class LevelUserPage extends StatelessWidget {
                                                   CrossAxisAlignment.stretch,
                                               children: [
                                                 const SizedBox(height: 16),
-                                                ButtonPrimary(
+                                                ButtonDanger(
                                                   onTap: () {
                                                     // value.confirm();
                                                   },

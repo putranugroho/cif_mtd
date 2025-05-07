@@ -970,7 +970,7 @@ class HutangPage extends StatelessWidget {
                                               SizedBox(
                                                 height: 16,
                                               ),
-                                              ButtonPrimary(
+                                              ButtonDanger(
                                                 onTap: () {
                                                   value.confirm();
                                                 },

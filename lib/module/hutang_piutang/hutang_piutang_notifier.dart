@@ -116,23 +116,60 @@ class HutangPiutangNotifier extends ChangeNotifier {
     return listCs;
   }
 
+  DateTime? tglKontrak = DateTime.now();
   DateTime? tglJthTempoPertama = DateTime.now();
+
+  Future pilihTanggalKontrak() async {
+    var pickedendDate = (await showDatePicker(
+      context: context,
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) - 10,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+    ));
+    if (pickedendDate != null) {
+      tglKontrak = pickedendDate;
+      tanggalKontrak.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
+      notifyListeners();
+    }
+  }
 
   Future pilihTanggalJatuhTempoPertama() async {
     var pickedendDate = (await showDatePicker(
       context: context,
       initialDate: DateTime(
-          int.parse(DateFormat('y').format(tglJthTempoPertama!)),
-          int.parse(DateFormat('MM').format(tglJthTempoPertama!)),
-          int.parse(DateFormat('dd').format(tglJthTempoPertama!))),
+          int.parse(DateFormat('y').format(tglKontrak!)),
+          int.parse(DateFormat('MM').format(tglKontrak!)),
+          int.parse(DateFormat('dd').format(tglKontrak!)) + 1),
       firstDate: DateTime(
-          int.parse(DateFormat('y').format(tglJthTempoPertama!)) - 10,
-          int.parse(DateFormat('MM').format(tglJthTempoPertama!)),
-          int.parse(DateFormat('dd').format(tglJthTempoPertama!))),
+          int.parse(DateFormat('y').format(tglKontrak!)),
+          int.parse(DateFormat('MM').format(tglKontrak!)),
+          int.parse(DateFormat('dd').format(tglKontrak!)) + 1),
       lastDate: DateTime(
-          int.parse(DateFormat('y').format(tglJthTempoPertama!)) + 10,
-          int.parse(DateFormat('MM').format(tglJthTempoPertama!)),
-          int.parse(DateFormat('dd').format(tglJthTempoPertama!))),
+          int.parse(DateFormat('y').format(tglKontrak!)) + 1,
+          int.parse(DateFormat('MM').format(tglKontrak!)),
+          int.parse(DateFormat('dd').format(tglKontrak!))),
     ));
     if (pickedendDate != null) {
       tglJthTempoPertama = pickedendDate;
@@ -303,14 +340,15 @@ class HutangPiutangNotifier extends ChangeNotifier {
   TextEditingController nilaippn = TextEditingController();
   TextEditingController nilaipph = TextEditingController();
   TextEditingController tglJatuhTempoPertama = TextEditingController();
+  TextEditingController tanggalKontrak = TextEditingController();
 
-  var tagihanbulanan = false;
+  var tagihanbulanan = true;
   gantitagitahnbulanan() {
     tagihanbulanan = !tagihanbulanan;
     notifyListeners();
   }
 
-  var pphppn = false;
+  var pphppn = true;
   gantipphppn() {
     pphppn = !pphppn;
     notifyListeners();

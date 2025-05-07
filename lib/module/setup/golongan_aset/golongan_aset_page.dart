@@ -551,8 +551,8 @@ class GolonganAsetPage extends StatelessWidget {
                                       Expanded(
                                         child: TypeAheadField<InqueryGlModel>(
                                           controller: value.namasbbpenyusutan,
-                                          suggestionsCallback: (search) =>
-                                              value.getInquerySbbPenyusutan(search),
+                                          suggestionsCallback: (search) => value
+                                              .getInquerySbbPenyusutan(search),
                                           builder:
                                               (context, controller, focusNode) {
                                             return TextField(
@@ -634,8 +634,8 @@ class GolonganAsetPage extends StatelessWidget {
                                       Expanded(
                                         child: TypeAheadField<InqueryGlModel>(
                                           controller: value.namasbbrugijual,
-                                          suggestionsCallback: (search) =>
-                                              value.getInquerySbbPenyusutan(search),
+                                          suggestionsCallback: (search) => value
+                                              .getInquerySbbPenyusutan(search),
                                           builder:
                                               (context, controller, focusNode) {
                                             return TextField(
@@ -717,8 +717,8 @@ class GolonganAsetPage extends StatelessWidget {
                                       Expanded(
                                         child: TypeAheadField<InqueryGlModel>(
                                           controller: value.namasbblabajual,
-                                          suggestionsCallback: (search) =>
-                                              value.getInquerySbbLabaJual(search),
+                                          suggestionsCallback: (search) => value
+                                              .getInquerySbbLabaJual(search),
                                           builder:
                                               (context, controller, focusNode) {
                                             return TextField(
@@ -793,7 +793,7 @@ class GolonganAsetPage extends StatelessWidget {
                                             SizedBox(
                                               height: 16,
                                             ),
-                                            ButtonPrimary(
+                                            ButtonDanger(
                                               onTap: () {
                                                 value.confirm();
                                               },

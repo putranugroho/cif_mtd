@@ -722,7 +722,8 @@ class BankPage extends StatelessWidget {
                                                             TextInputAction
                                                                 .done,
                                                         maxLines: 1,
-                                                        controller: value.noBilyet,
+                                                        controller:
+                                                            value.noBilyet,
                                                         validator: (e) {
                                                           if (e!.isEmpty) {
                                                             return "Wajib diisi";
@@ -949,7 +950,7 @@ class BankPage extends StatelessWidget {
                                               Row(
                                                 children: [
                                                   Text(
-                                                    "Nominal End of Month",
+                                                    "ARO",
                                                     style: const TextStyle(
                                                         fontSize: 12),
                                                   ),
@@ -964,31 +965,34 @@ class BankPage extends StatelessWidget {
                                               const SizedBox(
                                                 height: 8,
                                               ),
-                                              TextFormField(
-                                                textInputAction:
-                                                    TextInputAction.done,
-                                                controller: value.saldoEOM,
-                                                maxLines: 1,
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly,
-                                                  CurrencyInputFormatter(),
-                                                ],
-                                                validator: (e) {
-                                                  if (e!.isEmpty) {
-                                                    return "Wajib diisi";
-                                                  } else {
-                                                    return null;
-                                                  }
-                                                },
-                                                decoration: InputDecoration(
-                                                  hintText: "Saldo EOM",
-                                                  border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            6),
+                                              Row(
+                                                children: [
+                                                  Radio(
+                                                      activeColor: colorPrimary,
+                                                      value: true,
+                                                      groupValue: value.aro,
+                                                      onChanged: (e) {
+                                                        value.pilihAro(true);
+                                                      }),
+                                                  SizedBox(
+                                                    width: 8,
                                                   ),
-                                                ),
+                                                  Text("Ya"),
+                                                  SizedBox(
+                                                    width: 24,
+                                                  ),
+                                                  Radio(
+                                                      activeColor: colorPrimary,
+                                                      value: false,
+                                                      groupValue: value.aro,
+                                                      onChanged: (e) {
+                                                        value.pilihAro(false);
+                                                      }),
+                                                  SizedBox(
+                                                    width: 8,
+                                                  ),
+                                                  Text("Tidak"),
+                                                ],
                                               ),
                                               const SizedBox(height: 16),
                                             ],
@@ -1008,7 +1012,7 @@ class BankPage extends StatelessWidget {
                                               SizedBox(
                                                 height: 16,
                                               ),
-                                              ButtonPrimary(
+                                              ButtonDanger(
                                                 onTap: () {
                                                   value.confirm();
                                                 },

@@ -211,7 +211,14 @@ class BankNotifier extends ChangeNotifier {
 
   bool dialog = false;
   tambah() {
+    clear();
     dialog = true;
+    notifyListeners();
+  }
+
+  bool aro = false;
+  pilihAro(bool value) {
+    aro = value;
     notifyListeners();
   }
 
