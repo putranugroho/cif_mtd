@@ -1,14 +1,14 @@
 {
-    "id": 1,
-    "no_akses": "",
-    "akses_id": "",
-    "kode_Kantor": "",
-    "nama_kantor": "",
-    "type": "",
-    "lokasi": "",
-    "alamat": "",
-    "keterangan": "",
-    "kode_pt": "",
-    "createddate": "",
-    "is_deleted": ""
+    "id": 4,
+    "no_akses": "EDIMOBILE",
+    "akses_id": "114.10.65.183",
+    "type": "WIFI",
+    "lokasi": "Karyawan",
+    "alamat": "Jl. Kh Muchidin No. 8 Karanglo",
+    "keterangan": "Rumah Edi",
+    "kode_pt": "001",
+    "createddate": "2025-05-09 23: 50: 10",
+    "is_deleted": "N",
+    "kode_kantor": "200",
+    "nama_kantor": "Kantor pusat"
 }

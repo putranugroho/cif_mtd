@@ -38,7 +38,7 @@ class AksesPointNotifier extends ChangeNotifier {
           "alamat": "${alamat.text}",
           "keterangan": "${keterangan.text}",
         };
-        Setuprepository.setup(
+        Setuprepository.updatesetup(
                 token,
                 NetworkURL.editAksesPoint(aksesPointModel!.id),
                 jsonEncode(data))
@@ -107,8 +107,11 @@ class AksesPointNotifier extends ChangeNotifier {
     editData = true;
     noAkses.text = aksesPointModel!.noAkses;
     aksesId.text = aksesPointModel!.aksesId;
-    // kantor =
-    //     list.where((e) => e.kodeKantor == aksesPointModel!.kodeKantor).first;
+    print(aksesPointModel!.kodeKantor);
+    print(aksesPointModel!.id);
+
+    kantor =
+        list.where((e) => e.kodeKantor == aksesPointModel!.kodeKantor).first;
     lokasi = aksesPointModel!.lokasi;
     akses = aksesPointModel!.type;
     alamat.text = aksesPointModel!.alamat;

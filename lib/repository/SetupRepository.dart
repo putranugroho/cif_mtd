@@ -167,4 +167,31 @@ class Setuprepository {
       return jsonDecode(response.data);
     }
   }
+
+  static Future<dynamic> updatesetup(
+    String token,
+    String url,
+    String json,
+  ) async {
+    Dio dio = Dio();
+    // dio.options.headers['x-username'] = xusername;
+    dio.options.headers['api-key'] = "123";
+    dio.options.headers['Content-Type'] = "application/json";
+    // dio.options.headers['x-password'] = xpassword;
+    if (kDebugMode) {
+      print("ENDPOINT URL : $url");
+    }
+    final response = await dio.put(url, data: json);
+    if (kDebugMode) {
+      print("RESPONSE STATUS CODE : ${response.statusCode}");
+    }
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print("RESPONSE DATA LOGIN : ${response.data}");
+      }
+      return jsonDecode(response.data);
+    } else {
+      return jsonDecode(response.data);
+    }
+  }
 }
