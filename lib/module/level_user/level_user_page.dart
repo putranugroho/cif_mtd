@@ -184,7 +184,7 @@ class LevelUserPage extends StatelessWidget {
                 child: value.dialog
                     ? value.editModul
                         ? Container(
-                            width: 600,
+                            width: 700,
                             padding: EdgeInsets.all(20),
                             decoration: BoxDecoration(color: Colors.white),
                             child: FocusTraversalGroup(
@@ -349,17 +349,9 @@ class LevelUserPage extends StatelessWidget {
                                       ),
                                       Row(
                                         children: [
-                                          Container(
-                                            margin: EdgeInsets.only(right: 16),
-                                            width: 30,
-                                          ),
-                                          Container(
-                                            width: 20,
-                                            margin: EdgeInsets.only(right: 16),
-                                            child: Text(" "),
-                                          ),
                                           Expanded(
                                             child: Container(
+                                              width: 80,
                                               margin:
                                                   EdgeInsets.only(right: 16),
                                               child: Text("Menu"),
@@ -583,7 +575,7 @@ class LevelUserPage extends StatelessWidget {
                           )
                         : Container(
                             padding: EdgeInsets.all(20),
-                            width: 600,
+                            width: 700,
                             decoration: BoxDecoration(color: Colors.white),
                             child: Form(
                               key: value.keyForm,
@@ -720,41 +712,39 @@ class LevelUserPage extends StatelessWidget {
                                   Row(
                                     children: [
                                       Container(
-                                        margin: EdgeInsets.only(right: 16),
-                                        width: 30,
-                                      ),
-                                      Container(
+                                        width: 80,
                                         margin: EdgeInsets.only(right: 16),
                                         child: Text("Modul"),
                                       ),
                                       Expanded(
                                         child: Container(
+                                          width: 80,
                                           margin: EdgeInsets.only(right: 16),
                                           child: Text("Menu"),
                                         ),
                                       ),
                                       Container(
-                                        width: 80,
+                                        width: 60,
                                         margin: EdgeInsets.only(right: 16),
                                         child: Text("View"),
                                       ),
                                       Container(
-                                        width: 80,
+                                        width: 60,
                                         margin: EdgeInsets.only(right: 16),
                                         child: Text("Input"),
                                       ),
                                       Container(
-                                        width: 80,
+                                        width: 60,
                                         margin: EdgeInsets.only(right: 16),
                                         child: Text("Edit"),
                                       ),
                                       Container(
-                                        width: 80,
+                                        width: 60,
                                         margin: EdgeInsets.only(right: 16),
                                         child: Text("Delete"),
                                       ),
                                       Container(
-                                        width: 80,
+                                        width: 60,
                                         margin: EdgeInsets.only(right: 16),
                                         child: Text("Hapus"),
                                       ),
