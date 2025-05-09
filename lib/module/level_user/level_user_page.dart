@@ -198,7 +198,7 @@ class LevelUserPage extends StatelessWidget {
                                         children: [
                                           Expanded(
                                             child: Text(
-                                              "Tambah / Ubah Modul User",
+                                              "Tambah / Ubah Akses Menu",
                                               style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold,
@@ -224,6 +224,57 @@ class LevelUserPage extends StatelessWidget {
                                       ),
                                       Row(
                                         children: [
+                                          Expanded(
+                                              child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Level User",
+                                                    style: const TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                  const Text(
+                                                    "*",
+                                                    style:
+                                                        TextStyle(fontSize: 8),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              TextFormField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: value.levelUsers,
+                                                readOnly: true,
+                                                validator: (e) {
+                                                  if (e!.isEmpty) {
+                                                    return "Wajib diisi";
+                                                  } else {
+                                                    return null;
+                                                  }
+                                                },
+                                                decoration: InputDecoration(
+                                                  filled: true,
+                                                  fillColor: Colors.grey[200],
+                                                  hintText: "Level Users",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          )),
+                                          SizedBox(
+                                            width: 16,
+                                          ),
                                           Expanded(
                                               child: Column(
                                             crossAxisAlignment:
@@ -282,79 +333,6 @@ class LevelUserPage extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                              const SizedBox(height: 16),
-                                            ],
-                                          )),
-                                          SizedBox(
-                                            width: 16,
-                                          ),
-                                          Expanded(
-                                              child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "Menu Akses",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
-                                                  ),
-                                                  const SizedBox(width: 5),
-                                                  const Text(
-                                                    "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(
-                                                height: 8,
-                                              ),
-                                              DropdownSearch<
-                                                  ItemCategoryModulModel>(
-                                                popupProps:
-                                                    const PopupPropsMultiSelection
-                                                        .menu(
-                                                  showSearchBox:
-                                                      true, // Aktifkan fitur pencarian
-                                                ),
-                                                selectedItem: value
-                                                    .itemCategoryModulModel,
-                                                items: value.modulModel == null
-                                                    ? []
-                                                    : value.modulModel!.menu,
-                                                itemAsString: (e) =>
-                                                    "${e.menu}",
-                                                onChanged: (e) {
-                                                  value.pilihMenu(e!);
-                                                },
-                                                dropdownDecoratorProps:
-                                                    DropDownDecoratorProps(
-                                                  baseStyle:
-                                                      TextStyle(fontSize: 16),
-                                                  textAlignVertical:
-                                                      TextAlignVertical.center,
-                                                  dropdownSearchDecoration:
-                                                      InputDecoration(
-                                                    hintText: value
-                                                                .modulModel ==
-                                                            null
-                                                        ? "Silahkan pilih Modul "
-                                                        : "Pilih Menu Akses",
-                                                    border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                      borderSide: BorderSide(
-                                                        width: 1,
-                                                        color: Colors.grey,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(height: 16),
                                             ],
                                           )),
                                         ],
@@ -374,6 +352,11 @@ class LevelUserPage extends StatelessWidget {
                                           Container(
                                             margin: EdgeInsets.only(right: 16),
                                             width: 30,
+                                          ),
+                                          Container(
+                                            width: 20,
+                                            margin: EdgeInsets.only(right: 16),
+                                            child: Text(" "),
                                           ),
                                           Expanded(
                                             child: Container(
@@ -611,9 +594,7 @@ class LevelUserPage extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          value.editData
-                                              ? "Ubah / Hapus Level User"
-                                              : "Tambah Level User",
+                                          "Lihat / Hapus Level User",
                                           style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
@@ -637,69 +618,320 @@ class LevelUserPage extends StatelessWidget {
                                   SizedBox(
                                     height: 32,
                                   ),
-                                  Expanded(
-                                      child: ListView(
+                                  Row(
                                     children: [
-                                      Row(
+                                      Expanded(
+                                          child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
                                         children: [
-                                          Text(
-                                            "Level User",
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Level User",
+                                                style: const TextStyle(
+                                                    fontSize: 12),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              const Text(
+                                                "*",
+                                                style: TextStyle(fontSize: 8),
+                                              ),
+                                            ],
                                           ),
-                                          const SizedBox(width: 5),
-                                          const Text(
-                                            "*",
-                                            style: TextStyle(fontSize: 8),
+                                          const SizedBox(
+                                            height: 8,
                                           ),
+                                          TextFormField(
+                                            textInputAction:
+                                                TextInputAction.done,
+                                            controller: value.levelUsers,
+                                            readOnly: true,
+                                            validator: (e) {
+                                              if (e!.isEmpty) {
+                                                return "Wajib diisi";
+                                              } else {
+                                                return null;
+                                              }
+                                            },
+                                            decoration: InputDecoration(
+                                              filled: true,
+                                              fillColor: Colors.grey[200],
+                                              hintText: "Level Users",
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                              ),
+                                            ),
+                                          ),
+                                          //     DropdownSearch<ModulModel>(
+                                          //       popupProps:
+                                          //           const PopupPropsMultiSelection
+                                          //               .menu(
+                                          //         showSearchBox:
+                                          //             true, // Aktifkan fitur pencarian
+                                          //       ),
+                                          //       selectedItem: value.modulModel,
+                                          //       items: value.listModul,
+                                          //       itemAsString: (e) =>
+                                          //           "${e.modul}",
+                                          //       onChanged: (e) {
+                                          //         value.pilihModul(e!);
+                                          //       },
+                                          //       dropdownDecoratorProps:
+                                          //           DropDownDecoratorProps(
+                                          //         baseStyle:
+                                          //             TextStyle(fontSize: 16),
+                                          //         textAlignVertical:
+                                          //             TextAlignVertical.center,
+                                          //         dropdownSearchDecoration:
+                                          //             InputDecoration(
+                                          //           hintText: "Pilih Modul",
+                                          //           border: OutlineInputBorder(
+                                          //             borderRadius:
+                                          //                 BorderRadius.circular(
+                                          //                     8),
+                                          //             borderSide: BorderSide(
+                                          //               width: 1,
+                                          //               color: Colors.grey,
+                                          //             ),
+                                          //           ),
+                                          //         ),
+                                          //       ),
+                                          //     ),
+                                          //     const SizedBox(height: 16),
                                         ],
+                                      )),
+                                      SizedBox(
+                                        width: 16,
                                       ),
-                                      const SizedBox(
-                                        height: 8,
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                  Text(
+                                    "Akses Modul dan Menu",
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(right: 16),
+                                        width: 30,
                                       ),
-                                      TextFormField(
-                                        textInputAction: TextInputAction.done,
-                                        controller: value.levelUsers,
-                                        validator: (e) {
-                                          if (e!.isEmpty) {
-                                            return "Wajib diisi";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          hintText: "Level Users",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                          ),
+                                      Container(
+                                        margin: EdgeInsets.only(right: 16),
+                                        child: Text("Modul"),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          margin: EdgeInsets.only(right: 16),
+                                          child: Text("Menu"),
                                         ),
                                       ),
-                                      const SizedBox(height: 16),
-                                      const SizedBox(height: 16),
-                                      ButtonPrimary(
-                                        onTap: () {
-                                          value.cek();
-                                        },
-                                        name: "Simpan",
+                                      Container(
+                                        width: 80,
+                                        margin: EdgeInsets.only(right: 16),
+                                        child: Text("View"),
                                       ),
-                                      value.editData
-                                          ? Column(
+                                      Container(
+                                        width: 80,
+                                        margin: EdgeInsets.only(right: 16),
+                                        child: Text("Input"),
+                                      ),
+                                      Container(
+                                        width: 80,
+                                        margin: EdgeInsets.only(right: 16),
+                                        child: Text("Edit"),
+                                      ),
+                                      Container(
+                                        width: 80,
+                                        margin: EdgeInsets.only(right: 16),
+                                        child: Text("Delete"),
+                                      ),
+                                      Container(
+                                        width: 80,
+                                        margin: EdgeInsets.only(right: 16),
+                                        child: Text("Hapus"),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.symmetric(vertical: 8),
+                                    height: 1,
+                                    color: Colors.grey,
+                                  ),
+                                  value.itemCategoryModulModel == null
+                                      ? SizedBox()
+                                      : ListView.builder(
+                                          itemCount: value
+                                              .itemCategoryModulModel!
+                                              .submenu
+                                              .length,
+                                          shrinkWrap: true,
+                                          physics: ClampingScrollPhysics(),
+                                          itemBuilder: (context, i) {
+                                            final data = value
+                                                .itemCategoryModulModel!
+                                                .submenu[i];
+                                            final menuAccess =
+                                                value.menuAccessList.firstWhere(
+                                              (e) =>
+                                                  e.modul ==
+                                                      value.modulModel!.modul &&
+                                                  e.menu ==
+                                                      value
+                                                          .itemCategoryModulModel!
+                                                          .menu &&
+                                                  e.submenu == data.submenu,
+                                              orElse: () => MenuAccess(
+                                                  modul:
+                                                      value.modulModel!.modul,
+                                                  menu: value
+                                                      .itemCategoryModulModel!
+                                                      .menu,
+                                                  submenu: data.submenu),
+                                            );
+
+                                            return Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.stretch,
                                               children: [
-                                                const SizedBox(height: 16),
-                                                ButtonDanger(
-                                                  onTap: () {
-                                                    // value.confirm();
-                                                  },
-                                                  name: "Hapus",
+                                                Row(
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          right: 16),
+                                                      width: 30,
+                                                      child: Checkbox(
+                                                        activeColor:
+                                                            colorPrimary,
+                                                        value: menuAccess
+                                                            .isSelected,
+                                                        onChanged: (val) =>
+                                                            value.toggleMenu(
+                                                                i,
+                                                                val,
+                                                                data.submenu),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(
+                                                        margin: EdgeInsets.only(
+                                                            right: 16),
+                                                        child: Text(
+                                                            "${data.keterangan}"),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                        width: 80,
+                                                        margin: EdgeInsets.only(
+                                                            right: 16),
+                                                        child: Checkbox(
+                                                          activeColor:
+                                                              colorPrimary,
+                                                          value:
+                                                              menuAccess.view,
+                                                          onChanged: (val) => value
+                                                              .togglePermissionBySubmenu(
+                                                            value.modulModel!
+                                                                .modul,
+                                                            value
+                                                                .itemCategoryModulModel!
+                                                                .menu,
+                                                            data.submenu,
+                                                            'view',
+                                                            val,
+                                                          ),
+                                                        )),
+                                                    Container(
+                                                        width: 80,
+                                                        margin: EdgeInsets.only(
+                                                            right: 16),
+                                                        child: Checkbox(
+                                                          activeColor:
+                                                              colorPrimary,
+                                                          value:
+                                                              menuAccess.input,
+                                                          onChanged: (val) => value
+                                                              .togglePermissionBySubmenu(
+                                                            value.modulModel!
+                                                                .modul,
+                                                            value
+                                                                .itemCategoryModulModel!
+                                                                .menu,
+                                                            data.submenu,
+                                                            'input',
+                                                            val,
+                                                          ),
+                                                        )),
+                                                    Container(
+                                                        width: 80,
+                                                        margin: EdgeInsets.only(
+                                                            right: 16),
+                                                        child: Checkbox(
+                                                          activeColor:
+                                                              colorPrimary,
+                                                          value:
+                                                              menuAccess.edit,
+                                                          onChanged: (val) => value
+                                                              .togglePermissionBySubmenu(
+                                                            value.modulModel!
+                                                                .modul,
+                                                            value
+                                                                .itemCategoryModulModel!
+                                                                .menu,
+                                                            data.submenu,
+                                                            'edit',
+                                                            val,
+                                                          ),
+                                                        )),
+                                                    Container(
+                                                        width: 80,
+                                                        margin: EdgeInsets.only(
+                                                            right: 16),
+                                                        child: Checkbox(
+                                                          activeColor:
+                                                              colorPrimary,
+                                                          value:
+                                                              menuAccess.delete,
+                                                          onChanged: (val) => value
+                                                              .togglePermissionBySubmenu(
+                                                            value.modulModel!
+                                                                .modul,
+                                                            value
+                                                                .itemCategoryModulModel!
+                                                                .menu,
+                                                            data.submenu,
+                                                            'delete',
+                                                            val,
+                                                          ),
+                                                        )),
+                                                  ],
                                                 ),
+                                                SizedBox(
+                                                  height: 8,
+                                                )
                                               ],
-                                            )
-                                          : SizedBox()
+                                            );
+                                          }),
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                  Row(
+                                    children: [
+                                      ButtonDanger(
+                                        onTap: () {
+                                          // value.simpanModul();
+                                        },
+                                        name: "Hapus Level User",
+                                      )
                                     ],
-                                  ))
+                                  )
                                 ],
                               ),
                             ),
@@ -753,7 +985,7 @@ class DetailDataSource extends DataGridSource {
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                      tindakanNotifier!.edit(e.value);
+                      tindakanNotifier!.editModuls(e.value);
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
@@ -766,7 +998,7 @@ class DetailDataSource extends DataGridSource {
                         ),
                       ),
                       child: Text(
-                        "Ubah / Hapus",
+                        "Akses Menu",
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.white,
@@ -781,7 +1013,7 @@ class DetailDataSource extends DataGridSource {
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                      tindakanNotifier!.editModuls(e.value);
+                      tindakanNotifier!.edit(e.value);
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
@@ -794,7 +1026,7 @@ class DetailDataSource extends DataGridSource {
                         ),
                       ),
                       child: Text(
-                        "Edit Modul",
+                        "Ubah / Hapus",
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.white,
