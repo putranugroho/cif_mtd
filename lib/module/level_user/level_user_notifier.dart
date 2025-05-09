@@ -356,10 +356,6 @@ class LevelUserNotifier extends ChangeNotifier {
     editModul = true;
     levelUser = list.where((e) => e.idLevel == id).first;
     levelUsers.text = levelUser!.levelUser;
-    print("levelUser!.toJson()");
-    print(levelUser!.levelUser);
-    print("list");
-    print(list);
     menuAccessList.clear();
 
     // Isi ulang menuAccessList dari levelUser.moduls
