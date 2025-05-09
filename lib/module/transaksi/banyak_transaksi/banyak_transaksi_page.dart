@@ -340,8 +340,12 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                   width: 8,
                                                 ),
                                                 Text("Credit"),
-                                                SizedBox(
-                                                  width: 24,
+                                                const SizedBox(width: 150),
+                                                Checkbox(
+                                                  activeColor: colorPrimary,
+                                                  value: value.backDate,
+                                                  onChanged: (e) =>
+                                                      value.gantibackDate(),
                                                 ),
                                                 Text(
                                                   "Transaksi Back Date",
@@ -352,13 +356,6 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                 const Text(
                                                   "*",
                                                   style: TextStyle(fontSize: 8),
-                                                ),
-                                                const SizedBox(width: 16),
-                                                Checkbox(
-                                                  activeColor: colorPrimary,
-                                                  value: value.backDate,
-                                                  onChanged: (e) =>
-                                                      value.gantibackDate(),
                                                 ),
                                                 const SizedBox(width: 8),
                                                 Expanded(
@@ -399,20 +396,20 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                 )
                                               ],
                                             ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
                                           ],
                                         )),
                                     SizedBox(
                                       width: 32,
                                     ),
-                                    Expanded(child: SizedBox())
                                   ],
                                 ),
-                                const SizedBox(height: 16),
                                 Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                        width: 382,
+                                        width: 368,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -455,8 +452,8 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                     },
                                                   ),
                                                 ),
-                                                const SizedBox(
-                                                  height: 8,
+                                                SizedBox(
+                                                  width: 16,
                                                 ),
                                                 Container(
                                                   width: 150,
@@ -494,11 +491,15 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                 )
                                               ],
                                             ),
+                                            const SizedBox(height: 16),
                                           ],
                                         )),
-                                    SizedBox(
-                                      width: 32,
-                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 16),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
                                     Container(
                                         width: 382,
                                         child: Column(
