@@ -1270,209 +1270,35 @@ class MenuHutangPiutangWidget extends StatelessWidget {
             ),
           ),
         ),
-        ExpansionTile(
-          tilePadding: EdgeInsets.zero,
-          childrenPadding: EdgeInsets.zero,
-          shape: Border(),
-          expandedAlignment: Alignment.centerLeft,
-          collapsedIconColor: Colors.white,
-          expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-          title: Container(
+        InkWell(
+          onTap: () => value.gantimenu(61),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color: value.page == 8 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
-                SizedBox(
-                  width: 16,
-                ),
-                Image.asset(
-                  ImageAssets.debt,
-                  height: 30,
-                  color: value.page == 21 ? Colors.black : Colors.white70,
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "Hutang",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: value.page == 21 ? Colors.black : Colors.white70,
-                  ),
-                )
-              ],
-            ),
-          ),
-          children: [
-            InkWell(
-              onTap: () {
-                value.gantimenu(61);
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                decoration: BoxDecoration(
-                  color: value.page == 61 ? Colors.white : Colors.transparent,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 32,
-                    ),
-                    Image.asset(
-                      ImageAssets.report,
-                      height: 30,
-                      color: value.page == 61 ? Colors.black : Colors.white70,
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Text(
-                      "Bayar Sekaligus",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: value.page == 61 ? Colors.black : Colors.white70,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                value.gantimenu(62);
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                decoration: BoxDecoration(
-                  color: value.page == 62 ? Colors.white : Colors.transparent,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 32,
-                    ),
-                    Image.asset(
-                      ImageAssets.report,
-                      height: 30,
-                      color: value.page == 62 ? Colors.black : Colors.white70,
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Text(
-                      "Bayar Berjangka",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: value.page == 62 ? Colors.black : Colors.white70,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
-        ExpansionTile(
-          tilePadding: EdgeInsets.zero,
-          childrenPadding: EdgeInsets.zero,
-          shape: Border(),
-          expandedAlignment: Alignment.centerLeft,
-          collapsedIconColor: Colors.white,
-          expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-          title: Container(
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 16,
-                ),
                 Image.asset(
                   ImageAssets.rupiahs,
                   height: 30,
-                  color: value.page == 22 ? Colors.black : Colors.white70,
+                  color: value.page == 61 ? Colors.black : Colors.white70,
                 ),
                 SizedBox(
                   width: 16,
                 ),
                 Text(
-                  "Piutang",
+                  "Hutang / Piutang",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 22 ? Colors.black : Colors.white70,
+                    color: value.page == 61 ? Colors.black : Colors.white70,
                   ),
                 )
               ],
             ),
           ),
-          children: [
-            InkWell(
-              onTap: () => value.gantimenu(63),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                decoration: BoxDecoration(
-                  color: value.page == 63 ? Colors.white : Colors.transparent,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 32,
-                    ),
-                    Image.asset(
-                      ImageAssets.report,
-                      height: 30,
-                      color: value.page == 63 ? Colors.black : Colors.white70,
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Text(
-                      "Bayar Sekaligus",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: value.page == 63 ? Colors.black : Colors.white70,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () => value.gantimenu(64),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                decoration: BoxDecoration(
-                  color: value.page == 64 ? Colors.white : Colors.transparent,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 32,
-                    ),
-                    Image.asset(
-                      ImageAssets.report,
-                      height: 30,
-                      color: value.page == 64 ? Colors.black : Colors.white70,
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Text(
-                      "Bayar Berjangka",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: value.page == 64 ? Colors.black : Colors.white70,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            )
-          ],
         ),
       ],
     );
@@ -1598,36 +1424,6 @@ class MenuTransaksiWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(23),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(
-              color: value.page == 23 ? Colors.white : Colors.transparent,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                Image.asset(
-                  ImageAssets.calendar,
-                  height: 30,
-                  color: value.page == 23 ? Colors.black : Colors.white70,
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "Back date",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: value.page == 23 ? Colors.black : Colors.white70,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-        InkWell(
           onTap: () => value.gantimenu(57),
           child: Container(
             width: MediaQuery.of(context).size.width,
@@ -1657,36 +1453,139 @@ class MenuTransaksiWidget extends StatelessWidget {
             ),
           ),
         ),
-        InkWell(
-          onTap: () => value.gantimenu(19),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(
-              color: value.page == 19 ? Colors.white : Colors.transparent,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                Image.asset(
-                  ImageAssets.rupiah,
-                  height: 30,
-                  color: value.page == 19 ? Colors.black : Colors.white70,
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "Kas Kecil",
-                  style: TextStyle(
-                    fontSize: 16,
+        ExpansionTile(
+            tilePadding: EdgeInsets.zero,
+            childrenPadding: EdgeInsets.zero,
+            shape: Border(),
+            expandedAlignment: Alignment.centerLeft,
+            collapsedIconColor: Colors.white,
+            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            title: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  Image.asset(
+                    ImageAssets.rupiah,
+                    height: 30,
                     color: value.page == 19 ? Colors.black : Colors.white70,
                   ),
-                )
-              ],
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    "Kas Kecil",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: value.page == 19 ? Colors.black : Colors.white70,
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        ),
+            children: [
+              InkWell(
+                onTap: () => value.gantimenu(19),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: value.page == 19 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 19 ? Colors.black : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Pengeluran/Pemasukan",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 19 ? Colors.black : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(62),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: value.page == 62 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 62 ? Colors.black : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Kas Bon",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 62 ? Colors.black : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(63),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: value.page == 63 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 63 ? Colors.black : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Penyelesaian Kas Bon",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 63 ? Colors.black : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ]),
         InkWell(
           onTap: () => value.gantimenu(59),
           child: Container(

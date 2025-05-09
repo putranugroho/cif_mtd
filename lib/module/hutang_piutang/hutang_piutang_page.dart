@@ -11,14 +11,19 @@ import '../../utils/colors.dart';
 
 class HutangPiutangPage extends StatelessWidget {
   final int tipe;
-  final int jenis;
-  const HutangPiutangPage({super.key, required this.tipe, required this.jenis});
+
+  const HutangPiutangPage({
+    super.key,
+    required this.tipe,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) =>
-          HutangPiutangNotifier(context: context, tipe: tipe, jenis: jenis),
+      create: (_) => HutangPiutangNotifier(
+        context: context,
+        tipe: tipe,
+      ),
       child: Consumer<HutangPiutangNotifier>(
         builder: (context, value, child) => SafeArea(
             child: Scaffold(
@@ -40,7 +45,7 @@ class HutangPiutangPage extends StatelessWidget {
                               child: Row(
                             children: [
                               Text(
-                                jenis == 1 ? "Kelola Hutang" : "Kelola Piutang",
+                                "Kelola Hutang / Piutang",
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -48,15 +53,6 @@ class HutangPiutangPage extends StatelessWidget {
                               ),
                               SizedBox(
                                 width: 6,
-                              ),
-                              Text(
-                                tipe == 1
-                                    ? "Bayar Sekaligus"
-                                    : "Bayar Berjangka",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
                               ),
                             ],
                           )),
@@ -74,7 +70,7 @@ class HutangPiutangPage extends StatelessWidget {
                                 ),
                               ),
                               child: Text(
-                                jenis == 1 ? "Tambah Hutang" : "Tambah Piutang",
+                                "Tambah Hutang/Piutang",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   color: Colors.white,
@@ -116,8 +112,8 @@ class HutangPiutangPage extends StatelessWidget {
                                   Expanded(
                                     child: Text(
                                       value.editData
-                                          ? "Ubah / Hapus ${tipe == 1 ? "${jenis == 1 ? "Hutang" : "Piutang"} Sekaligus" : "${jenis == 1 ? "Hutang" : "Piutang"} Berjangka"}"
-                                          : "Tambah ${tipe == 1 ? "${jenis == 1 ? "Hutang" : "Piutang"} Sekaligus" : "${jenis == 1 ? "Hutang" : "Piutang"} Berjangka"}",
+                                          ? "Ubah / Hapus Hutang/Piutang"
+                                          : "Tambah Hutang/Piutang",
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -157,8 +153,17 @@ class HutangPiutangPage extends StatelessWidget {
                                             Container(
                                               height: 40,
                                               alignment: Alignment.centerLeft,
+                                              child:
+                                                  Text("Pilih Jenis Transaksi"),
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Container(
+                                              height: 40,
+                                              alignment: Alignment.centerLeft,
                                               child: Text(
-                                                  "Pilih ${jenis == 1 ? "Customer" : "Supplier"}"),
+                                                  "Pilih ${value.jenis == 1 ? "Customer" : "Supplier"}"),
                                             ),
                                             SizedBox(
                                               height: 8,
@@ -174,7 +179,7 @@ class HutangPiutangPage extends StatelessWidget {
                                             Container(
                                               height: 40,
                                               alignment: Alignment.centerLeft,
-                                              child: Text("Cara Bayar"),
+                                              child: Text("Nomor"),
                                             ),
                                             SizedBox(
                                               height: 8,
@@ -206,7 +211,15 @@ class HutangPiutangPage extends StatelessWidget {
                                             Container(
                                               height: 40,
                                               alignment: Alignment.centerLeft,
-                                              child: Text("Jangka Waktu"),
+                                              child: Text("Cara Pembayaran"),
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Container(
+                                              height: 40,
+                                              alignment: Alignment.centerLeft,
+                                              child: Text("Cara Bayar"),
                                             ),
                                             SizedBox(
                                               height: 8,
@@ -237,6 +250,37 @@ class HutangPiutangPage extends StatelessWidget {
                                                 alignment: Alignment.centerLeft,
                                                 child: Row(
                                                   children: [
+                                                    Radio(
+                                                        value: 1,
+                                                        activeColor:
+                                                            colorPrimary,
+                                                        groupValue: value.jenis,
+                                                        onChanged: (e) {
+                                                          value.gantijenis(1);
+                                                        }),
+                                                    Text("Piutang"),
+                                                    SizedBox(
+                                                      width: 32,
+                                                    ),
+                                                    Radio(
+                                                        value: 2,
+                                                        groupValue: value.jenis,
+                                                        activeColor:
+                                                            colorPrimary,
+                                                        onChanged: (e) {
+                                                          value.gantijenis(2);
+                                                        }),
+                                                    Text("Hutang"),
+                                                  ],
+                                                )),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Container(
+                                                height: 40,
+                                                alignment: Alignment.centerLeft,
+                                                child: Row(
+                                                  children: [
                                                     Expanded(
                                                       child: TypeAheadField<
                                                           CustomerSupplierModel>(
@@ -260,7 +304,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                                 border:
                                                                     OutlineInputBorder(),
                                                                 labelText:
-                                                                    'Cari ${jenis == 1 ? "Customer" : "Supplier"}',
+                                                                    'Cari ${value.jenis == 1 ? "Customer" : "Supplier"}',
                                                               ));
                                                         },
                                                         itemBuilder:
@@ -357,65 +401,38 @@ class HutangPiutangPage extends StatelessWidget {
                                                 alignment: Alignment.centerLeft,
                                                 child: Row(
                                                   children: [
+                                                    Text("Invoice"),
+                                                    SizedBox(
+                                                      width: 16,
+                                                    ),
                                                     Expanded(
-                                                        child: Row(
-                                                      children: [
-                                                        Radio(
-                                                            value: true,
-                                                            groupValue:
-                                                                value.carabayar,
-                                                            onChanged: (e) {
-                                                              value
-                                                                  .ganticarabayar();
-                                                            }),
-                                                        SizedBox(
-                                                          width: 8,
-                                                        ),
-                                                        Text("Auto"),
-                                                        SizedBox(
-                                                          width: 16,
-                                                        ),
-                                                        Radio(
-                                                            value: false,
-                                                            groupValue:
-                                                                value.carabayar,
-                                                            onChanged: (e) {
-                                                              value
-                                                                  .ganticarabayar();
-                                                            }),
-                                                        SizedBox(
-                                                          width: 8,
-                                                        ),
-                                                        Text("Tagihan"),
-                                                        SizedBox(
-                                                          width: 16,
-                                                        ),
-                                                        Expanded(
-                                                          child: TextFormField(
-                                                            controller:
-                                                                value.noinvoice,
-                                                            decoration:
-                                                                InputDecoration(
-                                                              hintText:
-                                                                  "No. Invoice",
-                                                              border:
-                                                                  OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8),
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  width: 1,
-                                                                  color: Colors
-                                                                      .grey,
-                                                                ),
-                                                              ),
+                                                      child: TextFormField(
+                                                        controller:
+                                                            value.noinvoice,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          hintText:
+                                                              "No Invoice",
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8),
+                                                            borderSide:
+                                                                BorderSide(
+                                                              width: 1,
+                                                              color:
+                                                                  Colors.grey,
                                                             ),
                                                           ),
                                                         ),
-                                                      ],
-                                                    )),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 32,
+                                                    ),
+                                                    Text("Kontrak"),
                                                     SizedBox(
                                                       width: 16,
                                                     ),
@@ -775,29 +792,114 @@ class HutangPiutangPage extends StatelessWidget {
                                                 alignment: Alignment.centerLeft,
                                                 child: Row(
                                                   children: [
-                                                    Container(
-                                                      width: 100,
-                                                      child: TextFormField(
-                                                        controller:
-                                                            value.jangkawaktu,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              width: 1,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
+                                                    Expanded(
+                                                        child: Row(
+                                                      children: [
+                                                        Radio(
+                                                            value: true,
+                                                            groupValue: value
+                                                                .caraPembayaran,
+                                                            onChanged: (e) {
+                                                              value
+                                                                  .ganticaraPembayaran();
+                                                            }),
+                                                        SizedBox(
+                                                          width: 8,
                                                         ),
-                                                      ),
+                                                        Text("Bertahap"),
+                                                        SizedBox(
+                                                          width: 16,
+                                                        ),
+                                                        Radio(
+                                                            value: false,
+                                                            groupValue: value
+                                                                .caraPembayaran,
+                                                            onChanged: (e) {
+                                                              value
+                                                                  .ganticaraPembayaran();
+                                                            }),
+                                                        SizedBox(
+                                                          width: 8,
+                                                        ),
+                                                        Text("Seluruhnya"),
+                                                        SizedBox(
+                                                          width: 32,
+                                                        ),
+                                                        Expanded(
+                                                          child: Row(
+                                                            children: [
+                                                              Text(
+                                                                  "Tanggal Jatuh Tempo"),
+                                                              SizedBox(
+                                                                width: 16,
+                                                              ),
+                                                              Expanded(
+                                                                child:
+                                                                    TextFormField(
+                                                                  controller: value
+                                                                      .noinvoice,
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    hintText:
+                                                                        "Tanggal Jatuh Tempo",
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8),
+                                                                      borderSide:
+                                                                          BorderSide(
+                                                                        width:
+                                                                            1,
+                                                                        color: Colors
+                                                                            .grey,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        )
+                                                      ],
+                                                    )),
+                                                  ],
+                                                )),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Container(
+                                                height: 40,
+                                                alignment: Alignment.centerLeft,
+                                                child: Row(
+                                                  children: [
+                                                    Radio(
+                                                        value: true,
+                                                        groupValue:
+                                                            value.carabayar,
+                                                        onChanged: (e) {
+                                                          value
+                                                              .ganticarabayar();
+                                                        }),
+                                                    SizedBox(
+                                                      width: 8,
                                                     ),
+                                                    Text("Auto"),
+                                                    SizedBox(
+                                                      width: 16,
+                                                    ),
+                                                    Radio(
+                                                        value: false,
+                                                        groupValue:
+                                                            value.carabayar,
+                                                        onChanged: (e) {
+                                                          value
+                                                              .ganticarabayar();
+                                                        }),
+                                                    SizedBox(
+                                                      width: 8,
+                                                    ),
+                                                    Text("Tagihan"),
                                                     SizedBox(
                                                       width: 32,
                                                     ),
@@ -890,27 +992,62 @@ class HutangPiutangPage extends StatelessWidget {
                                             Container(
                                               height: 40,
                                               alignment: Alignment.centerLeft,
-                                              child: InkWell(
-                                                onTap: () {
-                                                  value
-                                                      .pilihTanggalJatuhTempoPertama();
-                                                },
-                                                child: TextFormField(
-                                                  enabled: false,
-                                                  controller: value
-                                                      .tglJatuhTempoPertama,
-                                                  decoration: InputDecoration(
-                                                    border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                      borderSide: BorderSide(
-                                                        width: 1,
-                                                        color: Colors.grey,
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    width: 100,
+                                                    child: TextFormField(
+                                                      controller:
+                                                          value.jangkawaktu,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                          borderSide:
+                                                              BorderSide(
+                                                            width: 1,
+                                                            color: Colors.grey,
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
+                                                  SizedBox(
+                                                    width: 32,
+                                                  ),
+                                                  Expanded(
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        value
+                                                            .pilihTanggalJatuhTempoPertama();
+                                                      },
+                                                      child: TextFormField(
+                                                        enabled: false,
+                                                        controller: value
+                                                            .tglJatuhTempoPertama,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8),
+                                                            borderSide:
+                                                                BorderSide(
+                                                              width: 1,
+                                                              color:
+                                                                  Colors.grey,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                             SizedBox(

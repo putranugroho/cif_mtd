@@ -14,10 +14,11 @@ import '../../repository/SetupRepository.dart';
 class HutangPiutangNotifier extends ChangeNotifier {
   final BuildContext context;
   final int tipe;
-  final int jenis;
 
-  HutangPiutangNotifier(
-      {required this.context, required this.tipe, required this.jenis}) {
+  HutangPiutangNotifier({
+    required this.context,
+    required this.tipe,
+  }) {
     getCustomers();
     getSetupPajak();
   }
@@ -41,6 +42,13 @@ class HutangPiutangNotifier extends ChangeNotifier {
         notifyListeners();
       }
     });
+  }
+
+  int jenis = 1;
+
+  gantijenis(int value) {
+    jenis = value;
+    notifyListeners();
   }
 
   void changeTotal() {
@@ -150,6 +158,44 @@ class HutangPiutangNotifier extends ChangeNotifier {
     if (pickedendDate != null) {
       tglKontrak = pickedendDate;
       tanggalKontrak.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
+      notifyListeners();
+    }
+  }
+
+  DateTime? tglJatuhTempo;
+  TextEditingController tanggalJatuhTempoText = TextEditingController();
+  Future pilihJatuhTempo() async {
+    var pickedendDate = (await showDatePicker(
+      context: context,
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) - 10,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+    ));
+    if (pickedendDate != null) {
+      tglJatuhTempo = pickedendDate;
+      tanggalJatuhTempoText.text = DateFormat("dd-MMM-yyyy")
           .format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
@@ -357,6 +403,12 @@ class HutangPiutangNotifier extends ChangeNotifier {
   var carabayar = false;
   ganticarabayar() {
     carabayar = !carabayar;
+    notifyListeners();
+  }
+
+  var caraPembayaran = false;
+  ganticaraPembayaran() {
+    caraPembayaran = !caraPembayaran;
     notifyListeners();
   }
 

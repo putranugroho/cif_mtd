@@ -58,12 +58,14 @@ import 'package:accounting/module/transaksi/banyak_transaksi/banyak_transaksi_pa
 import 'package:accounting/module/transaksi/bayar_dimuka/bayar_dimuka_page.dart';
 import 'package:accounting/module/transaksi/hutang/hutang_page.dart';
 import 'package:accounting/module/transaksi/kas_kecil/kas_kecil_page.dart';
+import 'package:accounting/module/transaksi/kas_kecil/kasbon_page.dart';
 import 'package:accounting/module/transaksi/laporan/laporan_transaksi_page.dart';
 import 'package:accounting/module/transaksi/otorisasi/otorisasi_transaksi_page.dart';
 import 'package:accounting/module/transaksi/pembatalan_transaksi/pembatalan_transaksi_page.dart';
 import 'package:accounting/module/transaksi/piutang/piutang_page.dart';
 import 'package:accounting/module/transaksi/satu_transaksi/satu_transaksi_page.dart';
 import 'package:accounting/module/transaksi/transaksi_hutang/transaksi_hutang_page.dart';
+import 'package:accounting/module/user_akses_point/user_akses_point_page.dart';
 import 'package:accounting/utils/colors.dart';
 import 'package:accounting/utils/images_path.dart';
 import 'package:flutter/material.dart';
@@ -393,22 +395,18 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                                                   : value.page == 60
                                                                                                                                                                                                                                                       ? LevelUserPage()
                                                                                                                                                                                                                                                       : value.page == 61
-                                                                                                                                                                                                                                                          ? HutangPiutangPage(tipe: 1, jenis: 1)
+                                                                                                                                                                                                                                                          ? HutangPiutangPage(tipe: 1)
                                                                                                                                                                                                                                                           : value.page == 62
-                                                                                                                                                                                                                                                              ? HutangPiutangPage(tipe: 2, jenis: 1)
-                                                                                                                                                                                                                                                              : value.page == 63
-                                                                                                                                                                                                                                                                  ? HutangPiutangPage(tipe: 1, jenis: 2)
-                                                                                                                                                                                                                                                                  : value.page == 64
-                                                                                                                                                                                                                                                                      ? HutangPiutangPage(tipe: 2, jenis: 2)
-                                                                                                                                                                                                                                                                      : value.page == 65
-                                                                                                                                                                                                                                                                          ? SbbHutangPiutangPage()
-                                                                                                                                                                                                                                                                          : value.page == 66
-                                                                                                                                                                                                                                                                              ? AksesPointPage()
-                                                                                                                                                                                                                                                                              : value.page == 67
-                                                                                                                                                                                                                                                                                  ? PembatalanTransaksiPage()
-                                                                                                                                                                                                                                                                                  : value.page == 68
-                                                                                                                                                                                                                                                                                      ? UserAksesPage()
-                                                                                                                                                                                                                                                                                      : Container())
+                                                                                                                                                                                                                                                              ? KasbonPage()
+                                                                                                                                                                                                                                                              : value.page == 65
+                                                                                                                                                                                                                                                                  ? SbbHutangPiutangPage()
+                                                                                                                                                                                                                                                                  : value.page == 66
+                                                                                                                                                                                                                                                                      ? AksesPointPage()
+                                                                                                                                                                                                                                                                      : value.page == 67
+                                                                                                                                                                                                                                                                          ? PembatalanTransaksiPage()
+                                                                                                                                                                                                                                                                          : value.page == 68
+                                                                                                                                                                                                                                                                              ? UserAksesPointPage()
+                                                                                                                                                                                                                                                                              : Container())
             ],
           ),
         )),

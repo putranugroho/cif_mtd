@@ -9,6 +9,7 @@ import 'package:accounting/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -1238,28 +1239,50 @@ class PengadaanPage extends StatelessWidget {
                                                             SizedBox(
                                                               height: 8,
                                                             ),
-                                                            TextFormField(
-                                                              textInputAction:
-                                                                  TextInputAction
-                                                                      .done,
-                                                              maxLines: 1,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                suffixIcon: IconButton(
-                                                                    onPressed:
-                                                                        () {},
-                                                                    icon: Icon(Icons
-                                                                        .search)),
-                                                                hintText:
-                                                                    "Silahkan Masukkan Nama Karyawan",
-                                                                border:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              6),
-                                                                ),
-                                                              ),
+                                                            TypeAheadField<
+                                                                KaryawanModel>(
+                                                              controller: value
+                                                                  .namaKaryawan,
+                                                              suggestionsCallback:
+                                                                  (search) => value
+                                                                      .getInquery(
+                                                                          search),
+                                                              builder: (context,
+                                                                  controller,
+                                                                  focusNode) {
+                                                                return TextField(
+                                                                    controller:
+                                                                        controller,
+                                                                    focusNode:
+                                                                        focusNode,
+                                                                    autofocus:
+                                                                        true,
+                                                                    decoration:
+                                                                        InputDecoration(
+                                                                      border:
+                                                                          OutlineInputBorder(),
+                                                                      labelText:
+                                                                          'Cari Akun',
+                                                                    ));
+                                                              },
+                                                              itemBuilder:
+                                                                  (context,
+                                                                      city) {
+                                                                return ListTile(
+                                                                  title: Text(city
+                                                                      .namaLengkap),
+                                                                  subtitle:
+                                                                      Text(city
+                                                                          .nik),
+                                                                );
+                                                              },
+                                                              onSelected:
+                                                                  (city) {
+                                                                // value.selectInvoice(city);
+                                                                value
+                                                                    .piliAkunKaryawan(
+                                                                        city);
+                                                              },
                                                             ),
                                                             const SizedBox(
                                                                 height: 16),
@@ -1290,6 +1313,8 @@ class PengadaanPage extends StatelessWidget {
                                                                       .done,
                                                               maxLines: 1,
                                                               readOnly: true,
+                                                              controller: value
+                                                                  .nikKaryawan,
                                                               // inputFormatters: [
                                                               //   FilteringTextInputFormatter.digitsOnly
                                                               // ],

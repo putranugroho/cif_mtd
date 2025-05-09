@@ -1,6 +1,7 @@
 import 'package:accounting/models/index.dart';
 import 'package:accounting/module/setup/golongan_aset/golongan_aset_notifier.dart';
 import 'package:accounting/module/transaksi/kas_kecil/kas_kecil_notifier.dart';
+import 'package:accounting/module/transaksi/kas_kecil/kasbon_notifier.dart';
 import 'package:accounting/module/transaksi/satu_transaksi/satu_transaksi_notifier.dart';
 
 import 'package:accounting/utils/button_custom.dart';
@@ -16,14 +17,14 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../../utils/colors.dart';
 
-class KasKecilPage extends StatelessWidget {
-  const KasKecilPage({super.key});
+class KasbonPage extends StatelessWidget {
+  const KasbonPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => KasKecilNotifier(context: context),
-      child: Consumer<KasKecilNotifier>(
+      create: (_) => KasbonNotifier(context: context),
+      child: Consumer<KasbonNotifier>(
         builder: (context, value, child) => SafeArea(
             child: Scaffold(
           body: Stack(
@@ -42,7 +43,7 @@ class KasKecilPage extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "Kas Kecil",
+                              "Kasbon",
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -298,358 +299,6 @@ class KasKecilPage extends StatelessWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Text(
-                                      "Pilih Metode Kas Kecil",
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
-                                    const SizedBox(width: 5),
-                                    const Text(
-                                      "*",
-                                      style: TextStyle(fontSize: 8),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                DropdownSearch<String>(
-                                  popupProps:
-                                      const PopupPropsMultiSelection.menu(
-                                    showSearchBox:
-                                        true, // Aktifkan fitur pencarian
-                                  ),
-                                  selectedItem: value.metode,
-                                  items: value.listMetodeKas,
-                                  itemAsString: (e) => "${e}",
-                                  onChanged: (e) {
-                                    value.pilihMetode(e!);
-                                  },
-                                  dropdownDecoratorProps:
-                                      DropDownDecoratorProps(
-                                    baseStyle: TextStyle(fontSize: 16),
-                                    textAlignVertical: TextAlignVertical.center,
-                                    dropdownSearchDecoration: InputDecoration(
-                                      hintText: "Pilih Metode",
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                        borderSide: BorderSide(
-                                          width: 1,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 16),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Kode Transaksi",
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
-                                    const SizedBox(width: 5),
-                                    const Text(
-                                      "*",
-                                      style: TextStyle(fontSize: 8),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: DropdownSearch<SetupTransModel>(
-                                        popupProps:
-                                            const PopupPropsMultiSelection.menu(
-                                          showSearchBox:
-                                              true, // Aktifkan fitur pencarian
-                                        ),
-                                        selectedItem: value.setupTransModel,
-                                        items: value.listData,
-                                        itemAsString: (e) => "${e.namaTrans}",
-                                        onChanged: (e) {
-                                          value.pilihTransModel(e!);
-                                        },
-                                        dropdownDecoratorProps:
-                                            DropDownDecoratorProps(
-                                          baseStyle: TextStyle(fontSize: 16),
-                                          textAlignVertical:
-                                              TextAlignVertical.center,
-                                          dropdownSearchDecoration:
-                                              InputDecoration(
-                                            hintText: "Pilih Kode Transaksi",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              borderSide: BorderSide(
-                                                width: 1,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 16,
-                                    ),
-                                    Container(
-                                      width: 200,
-                                      child: TextFormField(
-                                        // enabled: false,
-                                        readOnly: true,
-                                        textInputAction: TextInputAction.done,
-                                        controller: value.namaTransaksi,
-                                        maxLines: 1,
-                                        // inputFormatters: [
-                                        //   FilteringTextInputFormatter.digitsOnly
-                                        // ],
-                                        validator: (e) {
-                                          if (e!.isEmpty) {
-                                            return "Wajib diisi";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          filled: true,
-                                          fillColor: Colors.grey[200],
-                                          hintText: "Kode Transaksi",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        value.cancelKode();
-                                      },
-                                      child: Container(
-                                        width: 30,
-                                        height: 30,
-                                        decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: colorPrimary),
-                                        child: Icon(
-                                          Icons.close,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(height: 16),
-                                value.metode == "Pengeluaran"
-                                    ? SizedBox()
-                                    : Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "Pilih Debet Akun",
-                                                style: const TextStyle(
-                                                    fontSize: 12),
-                                              ),
-                                              const SizedBox(width: 5),
-                                              const Text(
-                                                "*",
-                                                style: TextStyle(fontSize: 8),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            height: 8,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: TypeAheadField<
-                                                    InqueryGlModel>(
-                                                  controller: value.nosbbdeb,
-                                                  suggestionsCallback:
-                                                      (search) => value
-                                                          .getInquery(search),
-                                                  builder: (context, controller,
-                                                      focusNode) {
-                                                    return TextField(
-                                                        controller: controller,
-                                                        focusNode: focusNode,
-                                                        enabled: value
-                                                                .setupTransModel ==
-                                                            null,
-                                                        autofocus: true,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          border:
-                                                              OutlineInputBorder(),
-                                                          labelText:
-                                                              'Cari Akun',
-                                                        ));
-                                                  },
-                                                  itemBuilder: (context, city) {
-                                                    return ListTile(
-                                                      title: Text(city.nosbb),
-                                                      subtitle:
-                                                          Text(city.namaSbb),
-                                                    );
-                                                  },
-                                                  onSelected: (city) {
-                                                    // value.selectInvoice(city);
-                                                    value.pilihAkunDeb(city);
-                                                  },
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 16,
-                                              ),
-                                              Container(
-                                                width: 150,
-                                                child: TextFormField(
-                                                  // enabled: false,
-                                                  readOnly: true,
-                                                  textInputAction:
-                                                      TextInputAction.done,
-                                                  controller: value.namaSbbDeb,
-                                                  maxLines: 1,
-                                                  // inputFormatters: [
-                                                  //   FilteringTextInputFormatter.digitsOnly
-                                                  // ],
-                                                  validator: (e) {
-                                                    if (e!.isEmpty) {
-                                                      return "Wajib diisi";
-                                                    } else {
-                                                      return null;
-                                                    }
-                                                  },
-                                                  decoration: InputDecoration(
-                                                    filled: true,
-                                                    fillColor: Colors.grey[200],
-                                                    hintText: "Nomor Debet",
-                                                    border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          const SizedBox(height: 16),
-                                        ],
-                                      ),
-                                value.metode == "Pemasukan"
-                                    ? SizedBox()
-                                    : Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "Pilih Kredit Akun",
-                                                style: const TextStyle(
-                                                    fontSize: 12),
-                                              ),
-                                              const SizedBox(width: 5),
-                                              const Text(
-                                                "*",
-                                                style: TextStyle(fontSize: 8),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            height: 8,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: TypeAheadField<
-                                                    InqueryGlModel>(
-                                                  controller: value.nossbcre,
-                                                  suggestionsCallback:
-                                                      (search) => value
-                                                          .getInquery(search),
-                                                  builder: (context, controller,
-                                                      focusNode) {
-                                                    return TextField(
-                                                        controller: controller,
-                                                        focusNode: focusNode,
-                                                        enabled: value
-                                                                .setupTransModel ==
-                                                            null,
-                                                        autofocus: true,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          border:
-                                                              OutlineInputBorder(),
-                                                          labelText:
-                                                              'Cari Akun',
-                                                        ));
-                                                  },
-                                                  itemBuilder: (context, city) {
-                                                    return ListTile(
-                                                      title: Text(city.nosbb),
-                                                      subtitle:
-                                                          Text(city.namaSbb),
-                                                    );
-                                                  },
-                                                  onSelected: (city) {
-                                                    // value.selectInvoice(city);
-                                                    value.pilihAkunCre(city);
-                                                  },
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 16,
-                                              ),
-                                              Container(
-                                                width: 150,
-                                                child: TextFormField(
-                                                  // enabled: false,
-                                                  readOnly: true,
-                                                  textInputAction:
-                                                      TextInputAction.done,
-                                                  controller: value.namaSbbCre,
-                                                  maxLines: 1,
-                                                  // inputFormatters: [
-                                                  //   FilteringTextInputFormatter.digitsOnly
-                                                  // ],
-                                                  validator: (e) {
-                                                    if (e!.isEmpty) {
-                                                      return "Wajib diisi";
-                                                    } else {
-                                                      return null;
-                                                    }
-                                                  },
-                                                  decoration: InputDecoration(
-                                                    filled: true,
-                                                    fillColor: Colors.grey[200],
-                                                    hintText: "Nomor Kredit",
-                                                    border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          const SizedBox(height: 16),
-                                        ],
-                                      ),
-                                Row(
-                                  children: [
                                     Expanded(
                                         child: Column(
                                       crossAxisAlignment:
@@ -827,12 +476,12 @@ class KasKecilPage extends StatelessWidget {
 }
 
 class DetailDataSource extends DataGridSource {
-  DetailDataSource(KasKecilNotifier value) {
+  DetailDataSource(KasbonNotifier value) {
     tindakanNotifier = value;
     // buildRowData(value.listData);
   }
 
-  KasKecilNotifier? tindakanNotifier;
+  KasbonNotifier? tindakanNotifier;
 
   List<DataGridRow> _laporanData = [];
   @override

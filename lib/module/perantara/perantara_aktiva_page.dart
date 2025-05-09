@@ -4,6 +4,7 @@ import 'package:accounting/utils/button_custom.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 import 'package:provider/provider.dart';
 
@@ -46,125 +47,219 @@ class PerantaraAktivaPage extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Radio(
+                                          value: "AKTIVA",
+                                          activeColor: colorPrimary,
+                                          groupValue: value.jenis,
+                                          onChanged: (e) {
+                                            value.gantijenis("AKTIVA");
+                                          }),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
+                                      Text("Aktiva"),
+                                      SizedBox(
+                                        width: 32,
+                                      ),
+                                      Radio(
+                                          value: "PASIVA",
+                                          activeColor: colorPrimary,
+                                          groupValue: value.jenis,
+                                          onChanged: (e) {
+                                            value.gantijenis("PASIVA");
+                                          }),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
+                                      Text("Pasiva"),
+                                      SizedBox(
+                                        width: 32,
+                                      ),
+                                      Text("Cari SBB"),
+                                      SizedBox(
+                                        width: 16,
+                                      ),
+                                      Container(
+                                          width: 400,
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                child: TypeAheadField<
+                                                    InqueryGlModel>(
+                                                  controller: value.nossbcre,
+                                                  suggestionsCallback:
+                                                      (search) => value
+                                                          .getInquery(search),
+                                                  builder: (context, controller,
+                                                      focusNode) {
+                                                    return TextField(
+                                                        controller: controller,
+                                                        focusNode: focusNode,
+                                                        autofocus: true,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          border:
+                                                              OutlineInputBorder(),
+                                                          labelText: 'Cari SBB',
+                                                        ));
+                                                  },
+                                                  itemBuilder: (context, city) {
+                                                    return ListTile(
+                                                      title: Text(city.nosbb),
+                                                      subtitle:
+                                                          Text(city.namaSbb),
+                                                    );
+                                                  },
+                                                  onSelected: (city) {
+                                                    // value.selectInvoice(city);
+                                                    value.pilihAkunCre(city);
+                                                  },
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 16,
+                                              ),
+                                              Container(
+                                                width: 150,
+                                                child: TextFormField(
+                                                  // enabled: false,
+                                                  readOnly: true,
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  controller: value.namaSbbCre,
+                                                  maxLines: 1,
+                                                  // inputFormatters: [
+                                                  //   FilteringTextInputFormatter.digitsOnly
+                                                  // ],
+                                                  validator: (e) {
+                                                    if (e!.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    filled: true,
+                                                    fillColor: Colors.grey[200],
+                                                    hintText: "No. SBB",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          )),
+                                      SizedBox(
+                                        width: 16,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            height: 50,
+                                            alignment: Alignment.center,
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 16, vertical: 8),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              color: colorPrimary,
+                                              border: Border.all(
+                                                width: 2,
+                                                color: colorPrimary,
+                                              ),
+                                            ),
+                                            child: Text(
+                                              "Cari",
+                                              textAlign: TextAlign.center,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  )
                                 ],
                               ),
                             ),
-                            Row(
-                              children: [
-                                Radio(
-                                    value: "AKTIVA",
-                                    activeColor: colorPrimary,
-                                    groupValue: value.jenis,
-                                    onChanged: (e) {
-                                      value.gantijenis("AKTIVA");
-                                    }),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                Text("Aktiva"),
-                                SizedBox(
-                                  width: 32,
-                                ),
-                                Radio(
-                                    value: "PASIVA",
-                                    activeColor: colorPrimary,
-                                    groupValue: value.jenis,
-                                    onChanged: (e) {
-                                      value.gantijenis("PASIVA");
-                                    }),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                Text("Pasiva"),
-                              ],
-                            )
                           ],
                         ),
                       ),
                       SizedBox(
                         height: 16,
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 180,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "ACC. DEBET",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Bagian kiri: tetap statis
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  headerCell("No.", 50),
+                                  headerCell("Tgl. Trans", 180),
+                                ],
                               ),
-                            ),
-                            Container(
-                              width: 180,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "ACC. KREDIT",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.only(right: 16),
-                                child: Text(
-                                  "KETERANGAN",
-                                  style: TextStyle(
-                                    fontSize: 12,
+                              ...List.generate(value.list.length, (i) {
+                                final data = value.list[i];
+                                return Column(
+                                  children: [
+                                    Container(
+                                        width: 50, child: Text("${i + 1}")),
+                                    Container(width: 180, child: Text("")),
+                                  ],
+                                );
+                              }),
+                            ],
+                          ),
+
+                          // Bagian kanan: bisa discroll horizontal
+                          Expanded(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      headerCell("No Dokumen", 180),
+                                      headerCell("No. Referensi", 180),
+                                      headerCell("Nominal", 180),
+                                      headerCell("Akun Debet", 180),
+                                      headerCell("Akun Kredit", 180),
+                                      headerCell("Keterangan", 300),
+                                      headerCell("Action", 150),
+                                    ],
                                   ),
-                                ),
+                                  ...List.generate(value.list.length, (i) {
+                                    final data = value.list[i];
+                                    return Row(
+                                      children: [
+                                        // cell(data.noDokumen, 180),
+                                        // cell(data.noRef, 180),
+                                        // cell("${data.nominal}", 180),
+                                        // cell(data.akunDebet, 180),
+                                        // cell(data.akunKredit, 180),
+                                        // cell(data.keterangan, 300),
+                                        // cell("Edit | Delete", 150),
+                                      ],
+                                    );
+                                  }),
+                                ],
                               ),
                             ),
-                            Container(
-                              width: 150,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "DEBET",
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 150,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "KREDIT",
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 120,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "SALDO",
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 120,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
-                                "AKSI",
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                       Container(
                         margin: EdgeInsets.symmetric(vertical: 8),
@@ -1630,3 +1725,22 @@ class PerantaraAktivaPage extends StatelessWidget {
         ));
   }
 }
+
+Widget headerText(String label) => Container(
+      padding: EdgeInsets.all(8),
+      color: colorPrimary,
+      child: Text(label, style: TextStyle(fontSize: 12, color: Colors.white)),
+    );
+
+Widget headerCell(String label, double width) => Container(
+      width: width,
+      padding: EdgeInsets.all(8),
+      color: colorPrimary,
+      child: Text(label, style: TextStyle(fontSize: 12, color: Colors.white)),
+    );
+
+Widget cell(String content, double width) => Container(
+      width: width,
+      padding: EdgeInsets.all(8),
+      child: Text(content, style: TextStyle(fontSize: 12)),
+    );

@@ -8,10 +8,10 @@ import 'package:intl/intl.dart';
 import '../../../network/network.dart';
 import '../../../repository/SetupRepository.dart';
 
-class KasKecilNotifier extends ChangeNotifier {
+class KasbonNotifier extends ChangeNotifier {
   final BuildContext context;
 
-  KasKecilNotifier({required this.context}) {
+  KasbonNotifier({required this.context}) {
     // for (Map<String, dynamic> i in coa) {
     //   listCoa.add(CoaModel.fromJson(i));
     // }

@@ -300,45 +300,79 @@ class UsersPage extends StatelessWidget {
                                 Expanded(
                                     child: ListView(
                                   children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Nama User",
-                                          style: const TextStyle(fontSize: 12),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        const Text(
-                                          "*",
-                                          style: TextStyle(fontSize: 8),
-                                        ),
-                                      ],
+                                    Text(
+                                      "Nama Karyawan",
+                                      style: const TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(
+                                    SizedBox(
                                       height: 8,
                                     ),
-                                    TextFormField(
-                                      textInputAction: TextInputAction.done,
-                                      controller: value.namauser,
-                                      maxLines: 1,
-                                      // inputFormatters: [
-                                      //   FilteringTextInputFormatter.digitsOnly
-                                      // ],
-                                      validator: (e) {
-                                        if (e!.isEmpty) {
-                                          return "Wajib diisi";
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                      decoration: InputDecoration(
-                                        hintText: "Nama User",
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: TypeAheadField<KaryawanModel>(
+                                            controller: value.namaKaryawan,
+                                            suggestionsCallback: (search) =>
+                                                value.getInqKaryawan(search),
+                                            builder: (context, controller,
+                                                focusNode) {
+                                              return TextField(
+                                                  controller: controller,
+                                                  focusNode: focusNode,
+                                                  autofocus: true,
+                                                  decoration: InputDecoration(
+                                                    border:
+                                                        OutlineInputBorder(),
+                                                    labelText: 'Cari Akun',
+                                                  ));
+                                            },
+                                            itemBuilder: (context, city) {
+                                              return ListTile(
+                                                title: Text(city.namaLengkap),
+                                                subtitle: Text(city.nik),
+                                              );
+                                            },
+                                            onSelected: (city) {
+                                              // value.selectInvoice(city);
+                                              value.piliAkunKaryawan(city);
+                                            },
+                                          ),
                                         ),
-                                      ),
+                                        SizedBox(
+                                          width: 16,
+                                        ),
+                                        Container(
+                                          width: 160,
+                                          child: TextFormField(
+                                            textInputAction:
+                                                TextInputAction.done,
+                                            maxLines: 1,
+                                            readOnly: true,
+                                            controller: value.nikKaryawan,
+                                            // inputFormatters: [
+                                            //   FilteringTextInputFormatter.digitsOnly
+                                            // ],
+                                            validator: (e) {
+                                              if (e!.isEmpty) {
+                                                return "Wajib diisi";
+                                              } else {
+                                                return null;
+                                              }
+                                            },
+                                            decoration: InputDecoration(
+                                              filled: true,
+                                              fillColor: Colors.grey[200],
+                                              hintText: "NIP Karyawan",
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    const SizedBox(
+                                    SizedBox(
                                       height: 16,
                                     ),
                                     Row(
