@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:accounting/models/index.dart';
 import 'package:accounting/repository/SetupRepository.dart';
 import 'package:accounting/utils/format_currency.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -21,12 +22,54 @@ class UsersNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<KaryawanModel> listKaryawan = [];
+  TextEditingController namaKaryawan = TextEditingController();
+  TextEditingController nikKaryawan = TextEditingController();
+  KaryawanModel? karyawanModel;
+  piliAkunKaryawan(KaryawanModel value) {
+    karyawanModel = value;
+    namaKaryawan.text = karyawanModel!.namaLengkap;
+    nikKaryawan.text = karyawanModel!.nik;
+    notifyListeners();
+  }
+
+  Future<List<KaryawanModel>> getInqKaryawan(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      listKaryawan.clear();
+      notifyListeners();
+      var data = {"nama": query};
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.cariKaryawan(),
+          jsonEncode(data),
+        );
+
+        for (Map<String, dynamic> i in response) {
+          listKaryawan.add(KaryawanModel.fromJson(i));
+        }
+        notifyListeners();
+      } catch (e) {
+        if (kDebugMode) {
+          print("Error: $e");
+        }
+      } finally {
+        notifyListeners();
+      }
+    } else {
+      listKaryawan.clear(); // clear on short query
+    }
+
+    return listKaryawan;
+  }
+
   UsersModel? users;
   var editData = false;
   edit(String id) {
     users = listData.where((e) => e.id == int.parse(id)).first;
     dialog = true;
     editData = true;
+    nikKaryawan.text = users!.empId;
     userid.text = users!.userid;
     pass.text = users!.pass;
     namauser.text = users!.namauser;
@@ -69,8 +112,11 @@ class UsersNotifier extends ChangeNotifier {
         var data = {
           "id": users!.id,
           "userid": "${userid.text}",
+          "emp_id":
+              "${karyawanModel == null ? nikKaryawan.text : karyawanModel!.nik}",
           "pass": "${pass.text}",
-          "namauser": "${namauser.text}",
+          "namauser":
+              "${karyawanModel == null ? namaKaryawan.text : karyawanModel!.namaLengkap}",
           "kd_aktivasi": "${aktivasiModel!.kdAktivasi}",
           "kode_pt": "${kantor == null ? "001" : kantor!.kodePt}",
           "kode_kantor": "${kantor == null ? "001" : kantor!.kodeKantor}",
@@ -107,7 +153,8 @@ class UsersNotifier extends ChangeNotifier {
         var data = {
           "userid": "${userid.text}",
           "pass": "${pass.text}",
-          "namauser": "${namauser.text}",
+          "emp_id": "${karyawanModel!.nik}",
+          "namauser": "${karyawanModel!.namaLengkap}",
           "kd_aktivasi": "${aktivasiModel!.kdAktivasi}",
           "kode_pt": "${kantor == null ? "001" : kantor!.kodePt}",
           "kode_kantor": "${kantor == null ? "001" : kantor!.kodeKantor}",

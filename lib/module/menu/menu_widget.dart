@@ -1420,36 +1420,105 @@ class MenuTransaksiWidget extends StatelessWidget {
             ),
           ),
         ),
-        InkWell(
-          onTap: () => value.gantimenu(19),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(
-              color: value.page == 19 ? Colors.white : Colors.transparent,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                Image.asset(
-                  ImageAssets.rupiah,
-                  height: 30,
-                  color: value.page == 19 ? Colors.black : Colors.white70,
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "Kas Kecil",
-                  style: TextStyle(
-                    fontSize: 16,
+        ExpansionTile(
+            tilePadding: EdgeInsets.zero,
+            childrenPadding: EdgeInsets.zero,
+            shape: Border(),
+            expandedAlignment: Alignment.centerLeft,
+            collapsedIconColor: Colors.white,
+            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            title: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  Image.asset(
+                    ImageAssets.rupiah,
+                    height: 30,
                     color: value.page == 19 ? Colors.black : Colors.white70,
                   ),
-                )
-              ],
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    "Kas Kecil",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: value.page == 19 ? Colors.black : Colors.white70,
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        ),
+            children: [
+              InkWell(
+                onTap: () => value.gantimenu(19),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: value.page == 19 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 19 ? Colors.black : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Pengeluran/Pemasukan",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 19 ? Colors.black : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(62),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: value.page == 50 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 62 ? Colors.black : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Kas Bon",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 62 ? Colors.black : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ]),
         InkWell(
           onTap: () => value.gantimenu(59),
           child: Container(

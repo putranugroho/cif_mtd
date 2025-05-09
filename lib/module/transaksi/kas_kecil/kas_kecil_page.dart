@@ -9,6 +9,7 @@ import 'package:accounting/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -340,7 +341,111 @@ class KasKecilPage extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(height: 16),
-                                
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Kode Transaksi",
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    const Text(
+                                      "*",
+                                      style: TextStyle(fontSize: 8),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: DropdownSearch<SetupTransModel>(
+                                        popupProps:
+                                            const PopupPropsMultiSelection.menu(
+                                          showSearchBox:
+                                              true, // Aktifkan fitur pencarian
+                                        ),
+                                        selectedItem: value.setupTransModel,
+                                        items: value.listData,
+                                        itemAsString: (e) => "${e.namaTrans}",
+                                        onChanged: (e) {
+                                          value.pilihTransModel(e!);
+                                        },
+                                        dropdownDecoratorProps:
+                                            DropDownDecoratorProps(
+                                          baseStyle: TextStyle(fontSize: 16),
+                                          textAlignVertical:
+                                              TextAlignVertical.center,
+                                          dropdownSearchDecoration:
+                                              InputDecoration(
+                                            hintText: "Pilih Kode Transaksi",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              borderSide: BorderSide(
+                                                width: 1,
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 16,
+                                    ),
+                                    Container(
+                                      width: 200,
+                                      child: TextFormField(
+                                        // enabled: false,
+                                        readOnly: true,
+                                        textInputAction: TextInputAction.done,
+                                        controller: value.namaTransaksi,
+                                        maxLines: 1,
+                                        // inputFormatters: [
+                                        //   FilteringTextInputFormatter.digitsOnly
+                                        // ],
+                                        validator: (e) {
+                                          if (e!.isEmpty) {
+                                            return "Wajib diisi";
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor: Colors.grey[200],
+                                          hintText: "Kode Transaksi",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        value.cancelKode();
+                                      },
+                                      child: Container(
+                                        width: 30,
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: colorPrimary),
+                                        child: Icon(
+                                          Icons.close,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(height: 16),
                                 value.metode == "Pengeluaran"
                                     ? SizedBox()
                                     : Column(
@@ -367,46 +472,40 @@ class KasKecilPage extends StatelessWidget {
                                           Row(
                                             children: [
                                               Expanded(
-                                                child: DropdownSearch<CoaModel>(
-                                                  popupProps:
-                                                      const PopupPropsMultiSelection
-                                                          .menu(
-                                                    showSearchBox:
-                                                        true, // Aktifkan fitur pencarian
-                                                  ),
-                                                  selectedItem: value.sbbAset,
-                                                  items: value.listCoa
-                                                      .where((e) =>
-                                                          e.jnsAcc == "C")
-                                                      .toList(),
-                                                  itemAsString: (e) =>
-                                                      "${e.namaSbb}",
-                                                  onChanged: (e) {
-                                                    value.pilihSbbAset(e!);
+                                                child: TypeAheadField<
+                                                    InqueryGlModel>(
+                                                  controller: value.nosbbdeb,
+                                                  suggestionsCallback:
+                                                      (search) => value
+                                                          .getInquery(search),
+                                                  builder: (context, controller,
+                                                      focusNode) {
+                                                    return TextField(
+                                                        controller: controller,
+                                                        focusNode: focusNode,
+                                                        enabled: value
+                                                                .setupTransModel ==
+                                                            null,
+                                                        autofocus: true,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          border:
+                                                              OutlineInputBorder(),
+                                                          labelText:
+                                                              'Cari Akun',
+                                                        ));
                                                   },
-                                                  dropdownDecoratorProps:
-                                                      DropDownDecoratorProps(
-                                                    baseStyle:
-                                                        TextStyle(fontSize: 16),
-                                                    textAlignVertical:
-                                                        TextAlignVertical
-                                                            .center,
-                                                    dropdownSearchDecoration:
-                                                        InputDecoration(
-                                                      hintText:
-                                                          "Pilih Debet Akun",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                        borderSide: BorderSide(
-                                                          width: 1,
-                                                          color: Colors.grey,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
+                                                  itemBuilder: (context, city) {
+                                                    return ListTile(
+                                                      title: Text(city.nosbb),
+                                                      subtitle:
+                                                          Text(city.namaSbb),
+                                                    );
+                                                  },
+                                                  onSelected: (city) {
+                                                    // value.selectInvoice(city);
+                                                    value.pilihAkunDeb(city);
+                                                  },
                                                 ),
                                               ),
                                               SizedBox(
@@ -419,7 +518,7 @@ class KasKecilPage extends StatelessWidget {
                                                   readOnly: true,
                                                   textInputAction:
                                                       TextInputAction.done,
-                                                  controller: value.namaSbbAset,
+                                                  controller: value.namaSbbDeb,
                                                   maxLines: 1,
                                                   // inputFormatters: [
                                                   //   FilteringTextInputFormatter.digitsOnly
@@ -434,7 +533,7 @@ class KasKecilPage extends StatelessWidget {
                                                   decoration: InputDecoration(
                                                     filled: true,
                                                     fillColor: Colors.grey[200],
-                                                    hintText: "Nomor SBB",
+                                                    hintText: "Nomor Debet",
                                                     border: OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -442,7 +541,7 @@ class KasKecilPage extends StatelessWidget {
                                                     ),
                                                   ),
                                                 ),
-                                              ),
+                                              )
                                             ],
                                           ),
                                           const SizedBox(height: 16),
@@ -474,48 +573,40 @@ class KasKecilPage extends StatelessWidget {
                                           Row(
                                             children: [
                                               Expanded(
-                                                child: DropdownSearch<CoaModel>(
-                                                  popupProps:
-                                                      const PopupPropsMultiSelection
-                                                          .menu(
-                                                    showSearchBox:
-                                                        true, // Aktifkan fitur pencarian
-                                                  ),
-                                                  selectedItem:
-                                                      value.sbbpenyusutan,
-                                                  items: value.listCoa
-                                                      .where((e) =>
-                                                          e.jnsAcc == "C")
-                                                      .toList(),
-                                                  itemAsString: (e) =>
-                                                      "${e.namaSbb}",
-                                                  onChanged: (e) {
-                                                    value
-                                                        .pilihSbbpenyusutan(e!);
+                                                child: TypeAheadField<
+                                                    InqueryGlModel>(
+                                                  controller: value.nossbcre,
+                                                  suggestionsCallback:
+                                                      (search) => value
+                                                          .getInquery(search),
+                                                  builder: (context, controller,
+                                                      focusNode) {
+                                                    return TextField(
+                                                        controller: controller,
+                                                        focusNode: focusNode,
+                                                        enabled: value
+                                                                .setupTransModel ==
+                                                            null,
+                                                        autofocus: true,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          border:
+                                                              OutlineInputBorder(),
+                                                          labelText:
+                                                              'Cari Akun',
+                                                        ));
                                                   },
-                                                  dropdownDecoratorProps:
-                                                      DropDownDecoratorProps(
-                                                    baseStyle:
-                                                        TextStyle(fontSize: 16),
-                                                    textAlignVertical:
-                                                        TextAlignVertical
-                                                            .center,
-                                                    dropdownSearchDecoration:
-                                                        InputDecoration(
-                                                      hintText:
-                                                          "Pilih Kredit Akun",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                        borderSide: BorderSide(
-                                                          width: 1,
-                                                          color: Colors.grey,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
+                                                  itemBuilder: (context, city) {
+                                                    return ListTile(
+                                                      title: Text(city.nosbb),
+                                                      subtitle:
+                                                          Text(city.namaSbb),
+                                                    );
+                                                  },
+                                                  onSelected: (city) {
+                                                    // value.selectInvoice(city);
+                                                    value.pilihAkunCre(city);
+                                                  },
                                                 ),
                                               ),
                                               SizedBox(
@@ -528,8 +619,7 @@ class KasKecilPage extends StatelessWidget {
                                                   readOnly: true,
                                                   textInputAction:
                                                       TextInputAction.done,
-                                                  controller:
-                                                      value.namaSbbpenyusutan,
+                                                  controller: value.namaSbbCre,
                                                   maxLines: 1,
                                                   // inputFormatters: [
                                                   //   FilteringTextInputFormatter.digitsOnly
@@ -544,7 +634,7 @@ class KasKecilPage extends StatelessWidget {
                                                   decoration: InputDecoration(
                                                     filled: true,
                                                     fillColor: Colors.grey[200],
-                                                    hintText: "Nomor SBB",
+                                                    hintText: "Nomor Kredit",
                                                     border: OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -552,13 +642,13 @@ class KasKecilPage extends StatelessWidget {
                                                     ),
                                                   ),
                                                 ),
-                                              ),
+                                              )
                                             ],
                                           ),
                                           const SizedBox(height: 16),
                                         ],
                                       ),
-                                      Row(
+                                Row(
                                   children: [
                                     Expanded(
                                         child: Column(
@@ -739,7 +829,7 @@ class KasKecilPage extends StatelessWidget {
 class DetailDataSource extends DataGridSource {
   DetailDataSource(KasKecilNotifier value) {
     tindakanNotifier = value;
-    buildRowData(value.listData);
+    // buildRowData(value.listData);
   }
 
   KasKecilNotifier? tindakanNotifier;
