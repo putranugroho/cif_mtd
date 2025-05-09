@@ -287,166 +287,171 @@ class SbbKhususPage extends StatelessWidget {
                             SizedBox(
                               height: 16,
                             ),
-                            value.golonganSbbKhususModel != null
-                                ? Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    children: [
-                                      Row(
+                            Expanded(
+                              child: SingleChildScrollView(
+                                child: value.golonganSbbKhususModel != null
+                                    ? Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
                                         children: [
-                                          Expanded(
-                                              child:
-                                                  Text("Pilih Sub Buku Besar")),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      ListView.builder(
-                                          itemCount: value.listGl.length,
-                                          shrinkWrap: true,
-                                          physics: ClampingScrollPhysics(),
-                                          itemBuilder: (context, i) {
-                                            final data = value.listGl[i];
-                                            return Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.stretch,
-                                              children: [
-                                                Text(
-                                                  "${data.namaSbb}",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 8,
-                                                ),
-                                                value.golonganSbbKhususModel!
-                                                            .lebihSatuAkun ==
-                                                        "Y"
-                                                    ? ListView.builder(
-                                                        itemCount:
-                                                            data.items.length,
-                                                        shrinkWrap: true,
-                                                        physics:
-                                                            ClampingScrollPhysics(),
-                                                        itemBuilder:
-                                                            (context, b) {
-                                                          final a =
-                                                              data.items[b];
-                                                          return Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .stretch,
-                                                            children: [
-                                                              Row(
-                                                                children: [
-                                                                  Checkbox(
-                                                                      activeColor:
-                                                                          colorPrimary,
-                                                                      value: value
-                                                                              .listGlAdd
-                                                                              .isNotEmpty
-                                                                          ? value.listGlAdd.where((e) => e == a).isNotEmpty
-                                                                              ? true
-                                                                              : false
-                                                                          : false,
-                                                                      onChanged: (e) {
-                                                                        value.pilihCoa(
-                                                                            a);
-                                                                      }),
-                                                                  SizedBox(
-                                                                    width: 8,
-                                                                  ),
-                                                                  Expanded(
-                                                                      child: Text(
-                                                                          "(${a.nosbb}) ${a.namaSbb}")),
-                                                                ],
-                                                              ),
-                                                              SizedBox(
-                                                                height: 4,
-                                                              )
-                                                            ],
-                                                          );
-                                                        })
-                                                    : ListView.builder(
-                                                        itemCount:
-                                                            data.items.length,
-                                                        shrinkWrap: true,
-                                                        physics:
-                                                            ClampingScrollPhysics(),
-                                                        itemBuilder:
-                                                            (context, b) {
-                                                          final a =
-                                                              data.items[b];
-                                                          return Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .stretch,
-                                                            children: [
-                                                              Row(
-                                                                children: [
-                                                                  Radio(
-                                                                      activeColor:
-                                                                          colorPrimary,
-                                                                      value: a,
-                                                                      groupValue:
-                                                                          value
-                                                                              .inqueryGlModel,
-                                                                      onChanged:
-                                                                          (e) {
-                                                                        value.pilihSbbSatu(
-                                                                            a);
-                                                                      }),
-                                                                  SizedBox(
-                                                                    width: 8,
-                                                                  ),
-                                                                  Expanded(
-                                                                      child: Text(
-                                                                          "(${a.nosbb}) ${a.namaSbb}")),
-                                                                ],
-                                                              ),
-                                                              SizedBox(
-                                                                height: 4,
-                                                              )
-                                                            ],
-                                                          );
-                                                        })
-                                              ],
-                                            );
-                                          }),
-                                      SizedBox(
-                                        height: 16,
-                                      ),
-                                      Row(
-                                        children: [
-                                          ButtonPrimary(
-                                            onTap: () {
-                                              value.cek();
-                                            },
-                                            name: "Simpan",
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                  child: Text(
+                                                      "Pilih Sub Buku Besar")),
+                                            ],
                                           ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          ListView.builder(
+                                              itemCount: value.listGl.length,
+                                              shrinkWrap: true,
+                                              physics: ClampingScrollPhysics(),
+                                              itemBuilder: (context, i) {
+                                                final data = value.listGl[i];
+                                                return Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .stretch,
+                                                  children: [
+                                                    Text(
+                                                      "${data.namaSbb}",
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    value.golonganSbbKhususModel!
+                                                                .lebihSatuAkun ==
+                                                            "Y"
+                                                        ? ListView.builder(
+                                                            itemCount: data
+                                                                .items.length,
+                                                            shrinkWrap: true,
+                                                            physics:
+                                                                ClampingScrollPhysics(),
+                                                            itemBuilder:
+                                                                (context, b) {
+                                                              final a =
+                                                                  data.items[b];
+                                                              return Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .stretch,
+                                                                children: [
+                                                                  Row(
+                                                                    children: [
+                                                                      Checkbox(
+                                                                          activeColor:
+                                                                              colorPrimary,
+                                                                          value: value.listGlAdd.isNotEmpty
+                                                                              ? value.listGlAdd.where((e) => e == a).isNotEmpty
+                                                                                  ? true
+                                                                                  : false
+                                                                              : false,
+                                                                          onChanged: (e) {
+                                                                            value.pilihCoa(a);
+                                                                          }),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            8,
+                                                                      ),
+                                                                      Expanded(
+                                                                          child:
+                                                                              Text("(${a.nosbb}) ${a.namaSbb}")),
+                                                                    ],
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 4,
+                                                                  )
+                                                                ],
+                                                              );
+                                                            })
+                                                        : ListView.builder(
+                                                            itemCount: data
+                                                                .items.length,
+                                                            shrinkWrap: true,
+                                                            physics:
+                                                                ClampingScrollPhysics(),
+                                                            itemBuilder:
+                                                                (context, b) {
+                                                              final a =
+                                                                  data.items[b];
+                                                              return Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .stretch,
+                                                                children: [
+                                                                  Row(
+                                                                    children: [
+                                                                      Radio(
+                                                                          activeColor:
+                                                                              colorPrimary,
+                                                                          value:
+                                                                              a,
+                                                                          groupValue: value
+                                                                              .inqueryGlModel,
+                                                                          onChanged:
+                                                                              (e) {
+                                                                            value.pilihSbbSatu(a);
+                                                                          }),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            8,
+                                                                      ),
+                                                                      Expanded(
+                                                                          child:
+                                                                              Text("(${a.nosbb}) ${a.namaSbb}")),
+                                                                    ],
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 4,
+                                                                  )
+                                                                ],
+                                                              );
+                                                            })
+                                                  ],
+                                                );
+                                              }),
+                                          SizedBox(
+                                            height: 16,
+                                          ),
+                                          Row(
+                                            children: [
+                                              ButtonPrimary(
+                                                onTap: () {
+                                                  value.cek();
+                                                },
+                                                name: "Simpan",
+                                              ),
+                                            ],
+                                          ),
+                                          value.editData
+                                              ? Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .stretch,
+                                                  children: [
+                                                    const SizedBox(height: 16),
+                                                    ButtonDanger(
+                                                      onTap: () {
+                                                        // value.confirm();
+                                                      },
+                                                      name: "Hapus",
+                                                    ),
+                                                  ],
+                                                )
+                                              : SizedBox()
                                         ],
-                                      ),
-                                      value.editData
-                                          ? Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.stretch,
-                                              children: [
-                                                const SizedBox(height: 16),
-                                                ButtonDanger(
-                                                  onTap: () {
-                                                    // value.confirm();
-                                                  },
-                                                  name: "Hapus",
-                                                ),
-                                              ],
-                                            )
-                                          : SizedBox()
-                                    ],
-                                  )
-                                : SizedBox()
+                                      )
+                                    : SizedBox(),
+                              ),
+                            )
                           ],
                         ),
                       )

@@ -257,9 +257,18 @@ class CoaNotifier extends ChangeNotifier {
     coaModel = list.where((e) => e.id == int.parse(id)).first;
     print(coaModel!.nosbb);
     print(coaModel!.namaSbb);
+    print(coaModel!.jnsAcc);
     // print(
     //     list.where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "B").length);
-    bukuBesar = coaModel;
+    bukuBesar = coaModel!.jnsAcc == "B"
+        ? coaModel
+        : list
+                .where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "B")
+                .isNotEmpty
+            ? list
+                .where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "B")
+                .first
+            : null;
     print(bukuBesar!.namaSbb);
     header = list
             .where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "A")
