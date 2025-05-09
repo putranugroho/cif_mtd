@@ -357,6 +357,22 @@ class NetworkURL {
     return "$url/karyawan/search";
   }
 
+  static String getAksesPoint() {
+    return "$url/akses-point";
+  }
+
+  static String insertAksesPoint() {
+    return "$url/akses-point/add";
+  }
+
+  static String editAksesPoint(int id) {
+    return "$url/akses-point/$id";
+  }
+
+  static String deleteAksesPoint(int id) {
+    return "$url/akses-point/$id";
+  }
+
   static String getProvinsi() {
     return "$url2/provinsi";
   }

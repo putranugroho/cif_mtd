@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:accounting/models/index.dart';
 import 'package:accounting/network/network.dart';
 import 'package:accounting/repository/SetupRepository.dart';
+import 'package:accounting/utils/dialog_loading.dart';
 import 'package:flutter/material.dart';
 
 class AksesPointNotifier extends ChangeNotifier {
@@ -21,14 +22,43 @@ class AksesPointNotifier extends ChangeNotifier {
   }
 
   cek() {
-    if (keyForm.currentState!.validate()) {}
+    if (keyForm.currentState!.validate()) {
+      DialogCustom().showLoading(context);
+      var data = {
+        "kode_pt": "001",
+        "no_akses": "${noAkses.text}",
+        "akses_id": "${aksesId.text}",
+        "type": "${akses}",
+      };
+      Setuprepository.setup(
+          token, NetworkURL.insertAksesPoint(), jsonEncode(data));
+    }
   }
 
   confirm() {}
 
   final keyForm = GlobalKey<FormState>();
+  List<AksesPointModel> listData = [];
+  getAksesPoint() async {
+    listData.clear();
+    isLoading = true;
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getAksesPoint(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listData.add(AksesPointModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
 
-  getAksesPoint() async {}
   List<KantorModel> list = [];
   var isLoading = true;
   Future getKantor() async {
