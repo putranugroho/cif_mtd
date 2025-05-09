@@ -254,10 +254,56 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
     }
   }
 
+  DateTime? tglBackDate = DateTime.now();
+  Future tanggalBackDate() async {
+    var pickedendDate = (await showDatePicker(
+      context: context,
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+                DateTime.now(),
+              )) -
+              1),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) - 10,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+                DateTime.now(),
+              )) -
+              1),
+    ));
+    if (pickedendDate != null) {
+      tglBackDate = pickedendDate;
+      tglBackDatetext.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
+      notifyListeners();
+    }
+  }
+
   TextEditingController nominal = TextEditingController();
   TextEditingController tglTransaksiText = TextEditingController();
+  TextEditingController tglBackDatetext = TextEditingController();
   TextEditingController nomorDok = TextEditingController();
   TextEditingController nomorRef = TextEditingController();
+
+  bool backDate = false;
+  gantibackDate() {
+    backDate = !backDate;
+    notifyListeners();
+  }
 
   bool dialog = false;
   tambah() {

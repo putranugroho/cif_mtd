@@ -301,7 +301,7 @@ class SatuTransaksiPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      "Kode Transaksi",
+                                      "Transaksi Back Date",
                                       style: const TextStyle(fontSize: 12),
                                     ),
                                     const SizedBox(width: 5),
@@ -317,24 +317,33 @@ class SatuTransaksiPage extends StatelessWidget {
                                     ),
                                     const SizedBox(width: 8),
                                     Expanded(
-                                      child: TextFormField(
-                                        textInputAction: TextInputAction.done,
-                                        readOnly: !value.backDate,
-                                        validator: (e) {
-                                          if (e!.isEmpty) return "Wajib diisi";
-                                          return null;
-                                        },
-                                        decoration: InputDecoration(
-                                          hintText: "No. Dokumen",
-                                          filled: !value.backDate,
-                                          fillColor: Colors.grey[200],
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                      child: InkWell(
+                                        onTap: () => value.tanggalBackDate(),
+                                        child: TextFormField(
+                                          enabled: false,
+                                          textInputAction: TextInputAction.done,
+                                          controller: value.tglBackDatetext,
+                                          maxLines: 1,
+                                          readOnly: !value.backDate,
+                                          validator: (e) {
+                                            if (e!.isEmpty) {
+                                              return "Wajib diisi";
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                          decoration: InputDecoration(
+                                            filled: !value.backDate,
+                                            fillColor: Colors.grey[200],
+                                            hintText: "Tanggal Transaksi",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
+                                    )
                                   ],
                                 ),
                                 Row(

@@ -299,7 +299,7 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Container(
-                                        width: 382,
+                                        width: 1000,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -340,11 +340,83 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                   width: 8,
                                                 ),
                                                 Text("Credit"),
+                                                SizedBox(
+                                                  width: 24,
+                                                ),
+                                                Text(
+                                                  "Transaksi Back Date",
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                ),
+                                                const SizedBox(width: 5),
+                                                const Text(
+                                                  "*",
+                                                  style: TextStyle(fontSize: 8),
+                                                ),
+                                                const SizedBox(width: 16),
+                                                Checkbox(
+                                                  activeColor: colorPrimary,
+                                                  value: value.backDate,
+                                                  onChanged: (e) =>
+                                                      value.gantibackDate(),
+                                                ),
+                                                const SizedBox(width: 8),
+                                                Expanded(
+                                                  child: InkWell(
+                                                    onTap: () =>
+                                                        value.tanggalBackDate(),
+                                                    child: TextFormField(
+                                                      enabled: false,
+                                                      textInputAction:
+                                                          TextInputAction.done,
+                                                      controller:
+                                                          value.tglBackDatetext,
+                                                      maxLines: 1,
+                                                      readOnly: !value.backDate,
+                                                      validator: (e) {
+                                                        if (e!.isEmpty) {
+                                                          return "Wajib diisi";
+                                                        } else {
+                                                          return null;
+                                                        }
+                                                      },
+                                                      decoration:
+                                                          InputDecoration(
+                                                        filled: !value.backDate,
+                                                        fillColor:
+                                                            Colors.grey[200],
+                                                        hintText:
+                                                            "Tanggal Transaksi",
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(6),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
                                               ],
                                             ),
-                                            const SizedBox(
-                                              height: 8,
-                                            ),
+                                          ],
+                                        )),
+                                    SizedBox(
+                                      width: 32,
+                                    ),
+                                    Expanded(child: SizedBox())
+                                  ],
+                                ),
+                                const SizedBox(height: 16),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                        width: 382,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
                                             Row(
                                               children: [
                                                 Expanded(
@@ -383,8 +455,8 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                     },
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  width: 16,
+                                                const SizedBox(
+                                                  height: 8,
                                                 ),
                                                 Container(
                                                   width: 150,
@@ -422,19 +494,11 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                 )
                                               ],
                                             ),
-                                            const SizedBox(height: 16),
                                           ],
                                         )),
                                     SizedBox(
                                       width: 32,
                                     ),
-                                    Expanded(child: SizedBox())
-                                  ],
-                                ),
-                                const SizedBox(height: 16),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
                                     Container(
                                         width: 382,
                                         child: Column(
