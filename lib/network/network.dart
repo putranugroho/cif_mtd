@@ -356,6 +356,9 @@ class NetworkURL {
   static String cariKaryawan() {
     return "$url/karyawan/search";
   }
+  static String cariUsers() {
+    return "$url/users/search";
+  }
 
   static String getAksesPoint() {
     return "$url/akses-point";

@@ -66,6 +66,7 @@ import 'package:accounting/module/transaksi/pembatalan_transaksi/pembatalan_tran
 import 'package:accounting/module/transaksi/piutang/piutang_page.dart';
 import 'package:accounting/module/transaksi/satu_transaksi/satu_transaksi_page.dart';
 import 'package:accounting/module/transaksi/transaksi_hutang/transaksi_hutang_page.dart';
+import 'package:accounting/module/user_akses_point/user_akses_point_page.dart';
 import 'package:accounting/utils/colors.dart';
 import 'package:accounting/utils/images_path.dart';
 import 'package:flutter/material.dart';
@@ -405,7 +406,7 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                                                                       : value.page == 67
                                                                                                                                                                                                                                                                           ? PembatalanTransaksiPage()
                                                                                                                                                                                                                                                                           : value.page == 68
-                                                                                                                                                                                                                                                                              ? UserAksesPage()
+                                                                                                                                                                                                                                                                              ? UserAksesPointPage()
                                                                                                                                                                                                                                                                               : Container())
             ],
           ),

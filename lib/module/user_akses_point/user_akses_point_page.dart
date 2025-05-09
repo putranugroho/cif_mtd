@@ -1,5 +1,7 @@
+import 'package:accounting/models/index.dart';
 import 'package:accounting/module/user_akses_point/user_akses_point_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/colors.dart';
@@ -19,39 +21,126 @@ class UserAksesPointPage extends StatelessWidget {
             children: [
               Container(
                 padding: EdgeInsets.all(20),
-                child: Row(
+                child: Column(
                   children: [
-                    Expanded(
-                      child: Text(
-                        "User Akses Point",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      // onTap: () => value.tambah(),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 8),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: colorPrimary,
-                          border: Border.all(
-                            width: 2,
-                            color: colorPrimary,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "User Akses Point",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                        child: Text(
-                          "Tambah User Akses Point",
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Colors.white,
+                      ],
+                    ),
+                    SizedBox(
+                      height: 32,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 100,
+                          child: Text("Cari user"),
+                        ),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Container(
+                          width: 200,
+                          child: TypeAheadField<UsersModel>(
+                            controller: value.namaKaryawan,
+                            suggestionsCallback: (search) =>
+                                value.getInquery(search),
+                            builder: (context, controller, focusNode) {
+                              return TextField(
+                                  controller: controller,
+                                  focusNode: focusNode,
+                                  autofocus: true,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Cari Akun',
+                                  ));
+                            },
+                            itemBuilder: (context, city) {
+                              return ListTile(
+                                title: Text(city.namauser),
+                                subtitle: Text(city.userid),
+                              );
+                            },
+                            onSelected: (city) {
+                              // value.selectInvoice(city);
+                              value.piliAkunKaryawan(city);
+                            },
                           ),
                         ),
-                      ),
+                      ],
                     ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 100,
+                          child: Text("User ID"),
+                        ),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Container(
+                          width: 200,
+                          child: TextFormField(
+                            controller: value.nikKaryawan,
+                            readOnly: true,
+                            decoration: InputDecoration(
+                                hintText: "User ID",
+                                filled: true,
+                                fillColor: Colors.grey[200],
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8))),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Container(
+                          width: 200,
+                          child: TextFormField(
+                            controller: value.namaKantor,
+                            readOnly: true,
+                            decoration: InputDecoration(
+                                hintText: "Kantor",
+                                filled: true,
+                                fillColor: Colors.grey[200],
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8))),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          decoration: BoxDecoration(
+                              color: colorPrimary,
+                              borderRadius: BorderRadius.circular(16)),
+                          child: Text(
+                            "Tambah",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
