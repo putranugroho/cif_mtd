@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:accounting/models/index.dart';
 import 'package:accounting/models_manual/rekon_perantara_item_model.dart';
 import 'package:accounting/models_manual/rekon_perantara_model.dart';
 import 'package:accounting/utils/format_currency.dart';
 import 'package:flutter/material.dart';
+
+import '../../network/network.dart';
+import '../../repository/SetupRepository.dart';
 
 class PerantaraAktivaNotifier extends ChangeNotifier {
   final BuildContext context;
@@ -35,6 +40,81 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
     //   }
     // }
 
+    notifyListeners();
+  }
+
+  List<Map<String, dynamic>> extractJnsAccB(List<dynamic> rawData) {
+    List<Map<String, dynamic>> result = [];
+
+    void traverse(List<dynamic> items) {
+      for (var item in items) {
+        if (item is Map<String, dynamic>) {
+          if (item['jns_acc'] == 'C') {
+            result.add(item);
+          }
+
+          if (item.containsKey('items') && item['items'] is List) {
+            traverse(item['items']);
+          }
+        }
+      }
+    }
+
+    traverse(rawData);
+    return result;
+  }
+
+  InqueryGlModel? inqueryGlModelcre;
+  var isLoadingInquery = true;
+  List<InqueryGlModel> listGl = [];
+  TextEditingController nosbbdeb = TextEditingController();
+  TextEditingController nossbcre = TextEditingController();
+  Future<List<InqueryGlModel>> getInquery(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      isLoadingInquery = true;
+      listGl.clear();
+      notifyListeners();
+
+      var data = {"kode_pt": "001"};
+
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.getInqueryGL(),
+          jsonEncode(data),
+        );
+
+        if (response['status'].toString().toLowerCase().contains("success")) {
+          final List<Map<String, dynamic>> jnsAccBItems =
+              extractJnsAccB(response['data']);
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .toList();
+        }
+        notifyListeners();
+      } catch (e) {
+        print("Error: $e");
+      } finally {
+        isLoadingInquery = false;
+        notifyListeners();
+      }
+    } else {
+      listGl.clear(); // clear on short query
+    }
+
+    return listGl;
+  }
+
+  TextEditingController namaSbbDeb = TextEditingController();
+  TextEditingController namaSbbCre = TextEditingController();
+
+  pilihAkunCre(InqueryGlModel value) {
+    inqueryGlModelcre = value;
+    nossbcre.text = value.namaSbb;
+    namaSbbCre.text = value.nosbb;
     notifyListeners();
   }
 
