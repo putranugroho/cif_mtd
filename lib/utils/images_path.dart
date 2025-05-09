@@ -2,6 +2,8 @@ const String root = "assets/";
 
 class ImageAssets {
   static const String setting = "${root}setting.png";
+  static const String userwifi = "${root}user-wifi.png";
+  static const String wifi = "${root}wifi-router.png";
   static const String excel = "${root}excel.png";
   static const String list = "${root}to-do-list.png";
   static const String building = "${root}building.png";

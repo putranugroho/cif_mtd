@@ -1,3 +1,4 @@
+import 'package:accounting/module/akses_point/akses_point_page.dart';
 import 'package:accounting/module/aktivasi_users/aktivasi_users_page.dart';
 import 'package:accounting/module/closing_eom/closing_eom_page.dart';
 import 'package:accounting/module/dashboard/dashboard_page.dart';
@@ -64,6 +65,7 @@ import 'package:accounting/module/transaksi/pembatalan_transaksi/pembatalan_tran
 import 'package:accounting/module/transaksi/piutang/piutang_page.dart';
 import 'package:accounting/module/transaksi/satu_transaksi/satu_transaksi_page.dart';
 import 'package:accounting/module/transaksi/transaksi_hutang/transaksi_hutang_page.dart';
+import 'package:accounting/module/user_akses_point/user_akses_point_page.dart';
 import 'package:accounting/utils/colors.dart';
 import 'package:accounting/utils/images_path.dart';
 import 'package:flutter/material.dart';
@@ -399,10 +401,12 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                                                               : value.page == 65
                                                                                                                                                                                                                                                                   ? SbbHutangPiutangPage()
                                                                                                                                                                                                                                                                   : value.page == 66
-                                                                                                                                                                                                                                                                      ? TerminalPage()
+                                                                                                                                                                                                                                                                      ? AksesPointPage()
                                                                                                                                                                                                                                                                       : value.page == 67
                                                                                                                                                                                                                                                                           ? PembatalanTransaksiPage()
-                                                                                                                                                                                                                                                                          : Container())
+                                                                                                                                                                                                                                                                          : value.page == 68
+                                                                                                                                                                                                                                                                              ? UserAksesPointPage()
+                                                                                                                                                                                                                                                                              : Container())
             ],
           ),
         )),

@@ -80,6 +80,10 @@ class PerantaraAktivaPage extends StatelessWidget {
                                       SizedBox(
                                         width: 32,
                                       ),
+                                      Text("Cari SBB"),
+                                      SizedBox(
+                                        width: 16,
+                                      ),
                                       Container(
                                           width: 400,
                                           child: Row(
@@ -152,7 +156,36 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                 ),
                                               )
                                             ],
-                                          ))
+                                          )),
+                                      SizedBox(
+                                        width: 16,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            height: 50,
+                                            alignment: Alignment.center,
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 16, vertical: 8),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              color: colorPrimary,
+                                              border: Border.all(
+                                                width: 2,
+                                                color: colorPrimary,
+                                              ),
+                                            ),
+                                            child: Text(
+                                              "Cari",
+                                              textAlign: TextAlign.center,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
                                     ],
                                   )
                                 ],
