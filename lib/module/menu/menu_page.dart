@@ -18,7 +18,8 @@ import 'package:accounting/module/master/bank/bank_page.dart';
 import 'package:accounting/module/master/customer/customer_page.dart';
 import 'package:accounting/module/master/laporan/laporan_master_page.dart';
 import 'package:accounting/module/master/otorisasi/otorisasi_master_page.dart';
-import 'package:accounting/module/master/terminal/terminal_page.dart';
+import 'package:accounting/module/master/terminal/akses_point_page.dart';
+import 'package:accounting/module/master/terminal/user_akses_page.dart';
 import 'package:accounting/module/master/users/users_page.dart';
 import 'package:accounting/module/menu/menu_notifier.dart';
 import 'package:accounting/module/menu/menu_widget.dart';
@@ -402,10 +403,12 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                                                                       : value.page == 65
                                                                                                                                                                                                                                                                           ? SbbHutangPiutangPage()
                                                                                                                                                                                                                                                                           : value.page == 66
-                                                                                                                                                                                                                                                                              ? TerminalPage()
+                                                                                                                                                                                                                                                                              ? AksesPointPage()
                                                                                                                                                                                                                                                                               : value.page == 67
                                                                                                                                                                                                                                                                                   ? PembatalanTransaksiPage()
-                                                                                                                                                                                                                                                                                  : Container())
+                                                                                                                                                                                                                                                                                  : value.page == 68
+                                                                                                                                                                                                                                                                                      ? UserAksesPage()
+                                                                                                                                                                                                                                                                                      : Container())
             ],
           ),
         )),

@@ -871,36 +871,99 @@ class MenuMasterWidget extends StatelessWidget {
             ),
           ),
         ),
-        InkWell(
-          onTap: () => value.gantimenu(66),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(
-              color: value.page == 66 ? Colors.white : Colors.transparent,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                Image.asset(
-                  ImageAssets.click,
-                  height: 30,
-                  color: value.page == 66 ? Colors.black : Colors.white70,
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "Terminal ID",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: value.page == 66 ? Colors.black : Colors.white70,
+        ExpansionTile(
+            tilePadding: EdgeInsets.zero,
+            childrenPadding: EdgeInsets.zero,
+            shape: Border(),
+            expandedAlignment: Alignment.centerLeft,
+            collapsedIconColor: Colors.white,
+            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            title: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  Image.asset(ImageAssets.trend,
+                      height: 30, color: Colors.white),
+                  SizedBox(
+                    width: 16,
                   ),
-                )
-              ],
+                  Text(
+                    "Terminal Akses",
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  )
+                ],
+              ),
             ),
-          ),
-        ),
+            children: [
+              InkWell(
+                onTap: () => value.gantimenu(66),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: value.page == 66 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.list,
+                        height: 30,
+                        color: value.page == 66 ? Colors.black : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Akses Point",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 66 ? Colors.black : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(68),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: value.page == 68 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.list,
+                        height: 30,
+                        color: value.page == 68 ? Colors.black : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "User Akses Point",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 68 ? Colors.black : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ]),
         // InkWell(
         //   onTap: () => value.gantimenu(10),
         //   child: Container(
