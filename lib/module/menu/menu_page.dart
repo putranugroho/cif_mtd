@@ -1,3 +1,4 @@
+import 'package:accounting/module/akses_point/akses_point_page.dart';
 import 'package:accounting/module/aktivasi_users/aktivasi_users_page.dart';
 import 'package:accounting/module/closing_eom/closing_eom_page.dart';
 import 'package:accounting/module/dashboard/dashboard_page.dart';
@@ -18,7 +19,7 @@ import 'package:accounting/module/master/bank/bank_page.dart';
 import 'package:accounting/module/master/customer/customer_page.dart';
 import 'package:accounting/module/master/laporan/laporan_master_page.dart';
 import 'package:accounting/module/master/otorisasi/otorisasi_master_page.dart';
-import 'package:accounting/module/master/terminal/akses_point_page.dart';
+// import 'package:accounting/module/master/terminal/akses_point_page.dart';
 import 'package:accounting/module/master/terminal/user_akses_page.dart';
 import 'package:accounting/module/master/users/users_page.dart';
 import 'package:accounting/module/menu/menu_notifier.dart';

@@ -1,9 +1,14 @@
+import 'package:accounting/models/index.dart';
 import 'package:accounting/module/akses_point/akses_point_notifier.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../utils/button_custom.dart';
 import '../../utils/colors.dart';
+import '../../utils/pro_shimmer.dart';
 
 class AksesPointPage extends StatelessWidget {
   const AksesPointPage({super.key});
@@ -63,6 +68,134 @@ class AksesPointPage extends StatelessWidget {
                         ],
                       ),
                     ),
+                    Expanded(
+                      child: value.isLoading
+                          ? Container(
+                              padding: const EdgeInsets.all(16),
+                              child: const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ProShimmer(height: 10, width: 200),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  ProShimmer(height: 10, width: 120),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  ProShimmer(height: 10, width: 100),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Container(
+                              padding: EdgeInsets.all(20),
+                              height: MediaQuery.of(context).size.height,
+                              child: SfDataGrid(
+                                headerRowHeight: 40,
+                                defaultColumnWidth: 180,
+                                frozenColumnsCount: 1,
+
+                                // controller: value.dataGridController,
+                                gridLinesVisibility: GridLinesVisibility.both,
+                                headerGridLinesVisibility:
+                                    GridLinesVisibility.both,
+                                selectionMode: SelectionMode.single,
+
+                                source: DetailDataSource(value),
+                                columns: <GridColumn>[
+                                  GridColumn(
+                                      columnName: 'no_akses',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Kode AP',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 12,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'akses_id',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Akses ID',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'type',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Type',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'lokasi',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Lokasi',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'alamat',
+                                      width: 300,
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Alamat',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'keterangan',
+                                      width: 200,
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Keterangan',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'action',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          padding: EdgeInsets.all(6),
+                                          alignment: Alignment.center,
+                                          child: Text('Action',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                ],
+                              ),
+                            ),
+                    )
                   ],
                 ),
               ),
@@ -127,13 +260,78 @@ class AksesPointPage extends StatelessWidget {
                                     children: [
                                       Container(
                                         width: 200,
-                                        child: Text("No Akses"),
+                                        child: Text("Kantor"),
+                                      ),
+                                      SizedBox(
+                                        width: 16,
+                                      ),
+                                      Expanded(
+                                        child: DropdownSearch<KantorModel>(
+                                          validator: (value) {
+                                            if (value == null) {
+                                              return 'Wajib diisi';
+                                            }
+                                            return null;
+                                          },
+                                          popupProps:
+                                              const PopupPropsMultiSelection
+                                                  .menu(
+                                            showSearchBox:
+                                                true, // Aktifkan fitur pencarian
+                                          ),
+                                          selectedItem: value.kantor,
+                                          items: value.list,
+                                          itemAsString: (e) =>
+                                              "${e.namaKantor}",
+                                          onChanged: (e) {
+                                            value.pilihKantor(e!);
+                                          },
+                                          dropdownDecoratorProps:
+                                              DropDownDecoratorProps(
+                                            baseStyle: TextStyle(fontSize: 16),
+                                            textAlignVertical:
+                                                TextAlignVertical.center,
+                                            dropdownSearchDecoration:
+                                                InputDecoration(
+                                              hintText: "Pilih Kantor",
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                borderSide: BorderSide(
+                                                  width: 1,
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Container(
+                                  height: 40,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 200,
+                                        child: Text("Kode Akses Point"),
                                       ),
                                       SizedBox(
                                         width: 16,
                                       ),
                                       Expanded(
                                           child: TextFormField(
+                                        controller: value.noAkses,
+                                        validator: (e) {
+                                          if (e!.isEmpty) {
+                                            return "Wajib diisi";
+                                          } else {
+                                            return null;
+                                          }
+                                        },
                                         decoration: InputDecoration(
                                           border: OutlineInputBorder(
                                             borderRadius:
@@ -159,6 +357,14 @@ class AksesPointPage extends StatelessWidget {
                                       ),
                                       Expanded(
                                           child: TextFormField(
+                                        controller: value.aksesId,
+                                        validator: (e) {
+                                          if (e!.isEmpty) {
+                                            return "Wajib diisi";
+                                          } else {
+                                            return null;
+                                          }
+                                        },
                                         decoration: InputDecoration(
                                           border: OutlineInputBorder(
                                             borderRadius:
@@ -237,31 +443,6 @@ class AksesPointPage extends StatelessWidget {
                                     children: [
                                       Container(
                                         width: 200,
-                                        child: Text("Kantor"),
-                                      ),
-                                      SizedBox(
-                                        width: 16,
-                                      ),
-                                      Expanded(
-                                          child: TextFormField(
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                          ),
-                                        ),
-                                      ))
-                                    ],
-                                  )),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Container(
-                                  height: 40,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        width: 200,
                                         child: Text("Alamat"),
                                       ),
                                       SizedBox(
@@ -269,6 +450,14 @@ class AksesPointPage extends StatelessWidget {
                                       ),
                                       Expanded(
                                           child: TextFormField(
+                                        controller: value.alamat,
+                                        validator: (e) {
+                                          if (e!.isEmpty) {
+                                            return "Wajib diisi";
+                                          } else {
+                                            return null;
+                                          }
+                                        },
                                         decoration: InputDecoration(
                                           border: OutlineInputBorder(
                                             borderRadius:
@@ -294,6 +483,7 @@ class AksesPointPage extends StatelessWidget {
                                       ),
                                       Expanded(
                                           child: TextFormField(
+                                        controller: value.keterangan,
                                         decoration: InputDecoration(
                                           border: OutlineInputBorder(
                                             borderRadius:
@@ -385,5 +575,88 @@ class AksesPointPage extends StatelessWidget {
         )),
       ),
     );
+  }
+}
+
+class DetailDataSource extends DataGridSource {
+  DetailDataSource(AksesPointNotifier value) {
+    tindakanNotifier = value;
+    buildRowData(value.listData);
+  }
+
+  AksesPointNotifier? tindakanNotifier;
+
+  List<DataGridRow> _laporanData = [];
+  @override
+  List<DataGridRow> get rows => _laporanData;
+  void buildRowData(List<AksesPointModel> list) {
+    // int index = 1;
+    _laporanData = list
+        .map<DataGridRow>((data) => DataGridRow(
+              cells: [
+                DataGridCell(columnName: 'no_akses', value: data.noAkses),
+                DataGridCell(columnName: 'akses_id', value: data.aksesId),
+                DataGridCell(columnName: 'type', value: data.type),
+                DataGridCell(columnName: 'lokasi', value: data.lokasi),
+                DataGridCell(columnName: 'alamat', value: data.alamat),
+                DataGridCell(columnName: 'keterangan', value: data.keterangan),
+                DataGridCell(columnName: 'action', value: data.id.toString()),
+              ],
+            ))
+        .toList();
+  }
+
+  @override
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    return DataGridRowAdapter(
+      cells: row.getCells().map<Widget>((e) {
+        if (e.columnName == 'action') {
+          return Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+              onTap: () {
+                tindakanNotifier!.edit(e.value);
+              },
+              child: Container(
+                width: 300,
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: colorPrimary,
+                  border: Border.all(
+                    width: 2,
+                    color: colorPrimary,
+                  ),
+                ),
+                child: Text(
+                  "Aksi",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          );
+        } else {
+          return Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          );
+        }
+      }).toList(),
+    );
+  }
+
+  String formatStringData(String data) {
+    int numericData = int.tryParse(data) ?? 0;
+    final formatter = NumberFormat("#,###");
+    return formatter.format(numericData);
   }
 }

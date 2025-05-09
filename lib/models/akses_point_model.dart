@@ -10,6 +10,8 @@ class AksesPointModel {
     required this.id,
     required this.noAkses,
     required this.aksesId,
+    required this.kodeKantor,
+    required this.namaKantor,
     required this.type,
     required this.lokasi,
     required this.alamat,
@@ -22,6 +24,8 @@ class AksesPointModel {
   final int id;
   final String noAkses;
   final String aksesId;
+  final String kodeKantor;
+  final String namaKantor;
   final String type;
   final String lokasi;
   final String alamat;
@@ -34,6 +38,8 @@ class AksesPointModel {
     id: json['id'] as int,
     noAkses: json['no_akses'].toString(),
     aksesId: json['akses_id'].toString(),
+    kodeKantor: json['kode_Kantor'].toString(),
+    namaKantor: json['nama_kantor'].toString(),
     type: json['type'].toString(),
     lokasi: json['lokasi'].toString(),
     alamat: json['alamat'].toString(),
@@ -47,6 +53,8 @@ class AksesPointModel {
     'id': id,
     'no_akses': noAkses,
     'akses_id': aksesId,
+    'kode_Kantor': kodeKantor,
+    'nama_kantor': namaKantor,
     'type': type,
     'lokasi': lokasi,
     'alamat': alamat,
@@ -60,6 +68,8 @@ class AksesPointModel {
     id: id,
     noAkses: noAkses,
     aksesId: aksesId,
+    kodeKantor: kodeKantor,
+    namaKantor: namaKantor,
     type: type,
     lokasi: lokasi,
     alamat: alamat,
@@ -74,6 +84,8 @@ class AksesPointModel {
     int? id,
     String? noAkses,
     String? aksesId,
+    String? kodeKantor,
+    String? namaKantor,
     String? type,
     String? lokasi,
     String? alamat,
@@ -85,6 +97,8 @@ class AksesPointModel {
     id: id ?? this.id,
     noAkses: noAkses ?? this.noAkses,
     aksesId: aksesId ?? this.aksesId,
+    kodeKantor: kodeKantor ?? this.kodeKantor,
+    namaKantor: namaKantor ?? this.namaKantor,
     type: type ?? this.type,
     lokasi: lokasi ?? this.lokasi,
     alamat: alamat ?? this.alamat,
@@ -96,8 +110,8 @@ class AksesPointModel {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is AksesPointModel && id == other.id && noAkses == other.noAkses && aksesId == other.aksesId && type == other.type && lokasi == other.lokasi && alamat == other.alamat && keterangan == other.keterangan && kodePt == other.kodePt && createddate == other.createddate && isDeleted == other.isDeleted;
+    || other is AksesPointModel && id == other.id && noAkses == other.noAkses && aksesId == other.aksesId && kodeKantor == other.kodeKantor && namaKantor == other.namaKantor && type == other.type && lokasi == other.lokasi && alamat == other.alamat && keterangan == other.keterangan && kodePt == other.kodePt && createddate == other.createddate && isDeleted == other.isDeleted;
 
   @override
-  int get hashCode => id.hashCode ^ noAkses.hashCode ^ aksesId.hashCode ^ type.hashCode ^ lokasi.hashCode ^ alamat.hashCode ^ keterangan.hashCode ^ kodePt.hashCode ^ createddate.hashCode ^ isDeleted.hashCode;
+  int get hashCode => id.hashCode ^ noAkses.hashCode ^ aksesId.hashCode ^ kodeKantor.hashCode ^ namaKantor.hashCode ^ type.hashCode ^ lokasi.hashCode ^ alamat.hashCode ^ keterangan.hashCode ^ kodePt.hashCode ^ createddate.hashCode ^ isDeleted.hashCode;
 }

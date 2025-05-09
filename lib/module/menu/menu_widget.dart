@@ -910,7 +910,7 @@ class MenuMasterWidget extends StatelessWidget {
                         width: 16,
                       ),
                       Image.asset(
-                        ImageAssets.list,
+                        ImageAssets.wifi,
                         height: 30,
                         color: value.page == 66 ? Colors.black : Colors.white70,
                       ),
@@ -944,7 +944,7 @@ class MenuMasterWidget extends StatelessWidget {
                         width: 16,
                       ),
                       Image.asset(
-                        ImageAssets.list,
+                        ImageAssets.userwifi,
                         height: 30,
                         color: value.page == 68 ? Colors.black : Colors.white70,
                       ),
