@@ -57,6 +57,7 @@ import 'package:accounting/module/transaksi/banyak_transaksi/banyak_transaksi_pa
 import 'package:accounting/module/transaksi/bayar_dimuka/bayar_dimuka_page.dart';
 import 'package:accounting/module/transaksi/hutang/hutang_page.dart';
 import 'package:accounting/module/transaksi/kas_kecil/kas_kecil_page.dart';
+import 'package:accounting/module/transaksi/kas_kecil/kasbon_page.dart';
 import 'package:accounting/module/transaksi/laporan/laporan_transaksi_page.dart';
 import 'package:accounting/module/transaksi/otorisasi/otorisasi_transaksi_page.dart';
 import 'package:accounting/module/transaksi/pembatalan_transaksi/pembatalan_transaksi_page.dart';
@@ -393,13 +394,15 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                                                       ? LevelUserPage()
                                                                                                                                                                                                                                                       : value.page == 61
                                                                                                                                                                                                                                                           ? HutangPiutangPage(tipe: 1)
-                                                                                                                                                                                                                                                          : value.page == 65
-                                                                                                                                                                                                                                                              ? SbbHutangPiutangPage()
-                                                                                                                                                                                                                                                              : value.page == 66
-                                                                                                                                                                                                                                                                  ? TerminalPage()
-                                                                                                                                                                                                                                                                  : value.page == 67
-                                                                                                                                                                                                                                                                      ? PembatalanTransaksiPage()
-                                                                                                                                                                                                                                                                      : Container())
+                                                                                                                                                                                                                                                          : value.page == 62
+                                                                                                                                                                                                                                                              ? KasbonPage()
+                                                                                                                                                                                                                                                              : value.page == 65
+                                                                                                                                                                                                                                                                  ? SbbHutangPiutangPage()
+                                                                                                                                                                                                                                                                  : value.page == 66
+                                                                                                                                                                                                                                                                      ? TerminalPage()
+                                                                                                                                                                                                                                                                      : value.page == 67
+                                                                                                                                                                                                                                                                          ? PembatalanTransaksiPage()
+                                                                                                                                                                                                                                                                          : Container())
             ],
           ),
         )),

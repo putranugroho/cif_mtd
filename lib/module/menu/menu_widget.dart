@@ -1361,36 +1361,6 @@ class MenuTransaksiWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(23),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(
-              color: value.page == 23 ? Colors.white : Colors.transparent,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                Image.asset(
-                  ImageAssets.calendar,
-                  height: 30,
-                  color: value.page == 23 ? Colors.black : Colors.white70,
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "Back date",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: value.page == 23 ? Colors.black : Colors.white70,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-        InkWell(
           onTap: () => value.gantimenu(57),
           child: Container(
             width: MediaQuery.of(context).size.width,
@@ -1490,7 +1460,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 50 ? Colors.white : Colors.transparent,
+                    color: value.page == 62 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -1512,6 +1482,40 @@ class MenuTransaksiWidget extends StatelessWidget {
                           fontSize: 16,
                           color:
                               value.page == 62 ? Colors.black : Colors.white70,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(63),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: value.page == 63 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 63 ? Colors.black : Colors.white70,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Penyelesaian Kas Bon",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color:
+                              value.page == 63 ? Colors.black : Colors.white70,
                         ),
                       )
                     ],

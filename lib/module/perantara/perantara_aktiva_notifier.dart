@@ -8,32 +8,32 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
   final BuildContext context;
 
   PerantaraAktivaNotifier({required this.context}) {
-    for (Map<String, dynamic> i in data) {
-      list.add(RekonPerantaraModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in dataPasiva) {
-      listPasive.add(RekonPerantaraModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in coa) {
-      listCoa.add(CoaModel.fromJson(i));
-    }
-    for (Map<String, dynamic> i in coaDebet) {
-      listCoaDebet.add(CoaModel.fromJson(i));
-    }
+    // for (Map<String, dynamic> i in data) {
+    //   list.add(RekonPerantaraModel.fromJson(i));
+    // }
+    // for (Map<String, dynamic> i in dataPasiva) {
+    //   listPasive.add(RekonPerantaraModel.fromJson(i));
+    // }
+    // for (Map<String, dynamic> i in coa) {
+    //   listCoa.add(CoaModel.fromJson(i));
+    // }
+    // for (Map<String, dynamic> i in coaDebet) {
+    //   listCoaDebet.add(CoaModel.fromJson(i));
+    // }
 
-    for (var bb in data) {
-      for (var sbb in bb['sbb_item']) {
-        double saldoAwal = sbb['saldo'] ?? 0.0;
-        List transaksi = sbb['item_transaksi'];
+    // for (var bb in data) {
+    //   for (var sbb in bb['sbb_item']) {
+    //     double saldoAwal = sbb['saldo'] ?? 0.0;
+    //     List transaksi = sbb['item_transaksi'];
 
-        for (var trx in transaksi) {
-          double nominal = trx['nominal'] ?? 0.0;
-          saldoAwal -= nominal;
+    //     for (var trx in transaksi) {
+    //       double nominal = trx['nominal'] ?? 0.0;
+    //       saldoAwal -= nominal;
 
-          trx['sisaSaldo'] = saldoAwal;
-        }
-      }
-    }
+    //       trx['sisaSaldo'] = saldoAwal;
+    //     }
+    //   }
+    // }
 
     notifyListeners();
   }
