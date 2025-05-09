@@ -235,6 +235,12 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool backDate = false;
+  gantibackDate() {
+    backDate = !backDate;
+    notifyListeners();
+  }
+
   tutup() {
     dialog = false;
     notifyListeners();

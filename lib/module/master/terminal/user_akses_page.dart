@@ -188,72 +188,73 @@ class UserAksesPage extends StatelessWidget {
                             source: DetailDataSource(value),
                             columns: <GridColumn>[
                               GridColumn(
-                                  columnName: 'tgl_trans',
-                                  label: Container(
-                                      padding: const EdgeInsets.all(6),
-                                      color: colorPrimary,
-                                      alignment: Alignment.center,
-                                      child: const Text('Tanggal',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w300,
-                                            fontSize: 12,
-                                            color: Colors.white,
-                                          )))),
-                              GridColumn(
-                                  columnName: 'nomor_dok',
-                                  label: Container(
-                                      padding: const EdgeInsets.all(6),
-                                      color: colorPrimary,
-                                      alignment: Alignment.center,
-                                      child: const Text('No Dokumen',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                          )))),
-                              GridColumn(
-                                  columnName: 'nomor_ref',
+                                  width: 50,
+                                  columnName: 'no',
                                   label: Container(
                                       color: colorPrimary,
-                                      alignment: Alignment.center,
                                       padding: const EdgeInsets.all(6),
-                                      child: const Text('No Referensi',
+                                      alignment: Alignment.center,
+                                      child: const Text('no',
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w300,
                                             color: Colors.white,
                                           )))),
                               GridColumn(
-                                  columnName: 'nominal',
+                                  columnName: 'noAkses',
+                                  label: Container(
+                                      padding: const EdgeInsets.all(6),
+                                      color: colorPrimary,
+                                      alignment: Alignment.center,
+                                      child: const Text('No Akses',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w300,
+                                            fontSize: 12,
+                                            color: Colors.white,
+                                          )))),
+                              GridColumn(
+                                  columnName: 'aksesId',
+                                  label: Container(
+                                      padding: const EdgeInsets.all(6),
+                                      color: colorPrimary,
+                                      alignment: Alignment.center,
+                                      child: const Text('Akses ID',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w300,
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                          )))),
+                              GridColumn(
+                                  columnName: 'type',
+                                  label: Container(
+                                      padding: const EdgeInsets.all(6),
+                                      color: colorPrimary,
+                                      alignment: Alignment.center,
+                                      child: const Text('Type',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w300,
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                          )))),
+                              GridColumn(
+                                  columnName: 'lokasi',
                                   label: Container(
                                       color: colorPrimary,
                                       alignment: Alignment.center,
                                       padding: const EdgeInsets.all(6),
-                                      child: const Text('Nominal',
+                                      child: const Text('Lokasi',
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w300,
                                             color: Colors.white,
                                           )))),
                               GridColumn(
-                                  columnName: 'debet_acc',
+                                  columnName: 'alamat',
                                   label: Container(
                                       color: colorPrimary,
                                       alignment: Alignment.center,
                                       padding: const EdgeInsets.all(6),
-                                      child: const Text('Akun Debet',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.white,
-                                          )))),
-                              GridColumn(
-                                  columnName: 'credit_acc',
-                                  label: Container(
-                                      color: colorPrimary,
-                                      alignment: Alignment.center,
-                                      padding: const EdgeInsets.all(6),
-                                      child: const Text('Akun Kredit',
+                                      child: const Text('Alamat',
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w300,
@@ -265,19 +266,7 @@ class UserAksesPage extends StatelessWidget {
                                       color: colorPrimary,
                                       alignment: Alignment.center,
                                       padding: const EdgeInsets.all(6),
-                                      child: const Text('keterangan',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.white,
-                                          )))),
-                              GridColumn(
-                                  columnName: 'action',
-                                  label: Container(
-                                      color: colorPrimary,
-                                      padding: const EdgeInsets.all(6),
-                                      alignment: Alignment.center,
-                                      child: const Text('Action',
+                                      child: const Text('Keterangan',
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w300,
@@ -364,13 +353,13 @@ class UserAksesPage extends StatelessWidget {
                                         source: DetailDataSource(value),
                                         columns: <GridColumn>[
                                           GridColumn(
-                                              columnName: 'tgl_trans',
+                                              columnName: 'noAkses',
                                               label: Container(
                                                   padding:
                                                       const EdgeInsets.all(6),
                                                   color: colorPrimary,
                                                   alignment: Alignment.center,
-                                                  child: const Text('Tanggal',
+                                                  child: const Text('No Akses',
                                                       style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w300,
@@ -378,43 +367,41 @@ class UserAksesPage extends StatelessWidget {
                                                         color: Colors.white,
                                                       )))),
                                           GridColumn(
-                                              columnName: 'nomor_dok',
+                                              columnName: 'aksesId',
                                               label: Container(
                                                   padding:
                                                       const EdgeInsets.all(6),
                                                   color: colorPrimary,
                                                   alignment: Alignment.center,
-                                                  child:
-                                                      const Text('No Dokumen',
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w300,
-                                                            color: Colors.white,
-                                                            fontSize: 12,
-                                                          )))),
+                                                  child: const Text('Akses ID',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        color: Colors.white,
+                                                        fontSize: 12,
+                                                      )))),
                                           GridColumn(
-                                              columnName: 'nomor_ref',
+                                              columnName: 'type',
                                               label: Container(
-                                                  color: colorPrimary,
-                                                  alignment: Alignment.center,
                                                   padding:
                                                       const EdgeInsets.all(6),
-                                                  child:
-                                                      const Text('No Referensi',
-                                                          style: TextStyle(
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight.w300,
-                                                            color: Colors.white,
-                                                          )))),
+                                                  color: colorPrimary,
+                                                  alignment: Alignment.center,
+                                                  child: const Text('Type',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        color: Colors.white,
+                                                        fontSize: 12,
+                                                      )))),
                                           GridColumn(
-                                              columnName: 'nominal',
+                                              columnName: 'lokasi',
                                               label: Container(
                                                   color: colorPrimary,
                                                   alignment: Alignment.center,
                                                   padding:
                                                       const EdgeInsets.all(6),
-                                                  child: const Text('Nominal',
+                                                  child: const Text('Lokasi',
                                                       style: TextStyle(
                                                         fontSize: 12,
                                                         fontWeight:
@@ -422,35 +409,19 @@ class UserAksesPage extends StatelessWidget {
                                                         color: Colors.white,
                                                       )))),
                                           GridColumn(
-                                              columnName: 'debet_acc',
+                                              columnName: 'alamat',
                                               label: Container(
                                                   color: colorPrimary,
                                                   alignment: Alignment.center,
                                                   padding:
                                                       const EdgeInsets.all(6),
-                                                  child:
-                                                      const Text('Akun Debet',
-                                                          style: TextStyle(
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight.w300,
-                                                            color: Colors.white,
-                                                          )))),
-                                          GridColumn(
-                                              columnName: 'credit_acc',
-                                              label: Container(
-                                                  color: colorPrimary,
-                                                  alignment: Alignment.center,
-                                                  padding:
-                                                      const EdgeInsets.all(6),
-                                                  child:
-                                                      const Text('Akun Kredit',
-                                                          style: TextStyle(
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight.w300,
-                                                            color: Colors.white,
-                                                          )))),
+                                                  child: const Text('Alamat',
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        color: Colors.white,
+                                                      )))),
                                           GridColumn(
                                               columnName: 'keterangan',
                                               label: Container(
@@ -459,7 +430,7 @@ class UserAksesPage extends StatelessWidget {
                                                   padding:
                                                       const EdgeInsets.all(6),
                                                   child:
-                                                      const Text('keterangan',
+                                                      const Text('Keterangan',
                                                           style: TextStyle(
                                                             fontSize: 12,
                                                             fontWeight:

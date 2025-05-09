@@ -309,6 +309,45 @@ class SatuTransaksiPage extends StatelessWidget {
                                       "*",
                                       style: TextStyle(fontSize: 8),
                                     ),
+                                    const SizedBox(width: 16),
+                                    Checkbox(
+                                      activeColor: colorPrimary,
+                                      value: value.backDate,
+                                      onChanged: (e) => value.gantibackDate(),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: TextFormField(
+                                        textInputAction: TextInputAction.done,
+                                        readOnly: !value.backDate,
+                                        validator: (e) {
+                                          if (e!.isEmpty) return "Wajib diisi";
+                                          return null;
+                                        },
+                                        decoration: InputDecoration(
+                                          hintText: "No. Dokumen",
+                                          filled: !value.backDate,
+                                          fillColor: Colors.grey[200],
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Kode Transaksi",
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    const Text(
+                                      "*",
+                                      style: TextStyle(fontSize: 8),
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(

@@ -89,6 +89,8 @@ class UserAksesNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  edit(String id) async {}
+
   tutup() {
     dialog = false;
     notifyListeners();
