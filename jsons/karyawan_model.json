@@ -1,0 +1,14 @@
+{
+    "id": 11,
+    "nik": "EMP011",
+    "nama_lengkap": "Farhan Ramadhan",
+    "email": "farhan@example.com",
+    "no_hp": "081234567011",
+    "jabatan": "Software Engineer",
+    "tanggal_lahir": "1996-03-21",
+    "alamat": "Jl. Alpukat No.11",
+    "tanggal_masuk": "2023-01-15",
+    "is_deleted": "N",
+    "created_at": "2025-05-09 12:24:50.8915",
+    "updated_at": "2025-05-09 12:24:50.8915"
+}

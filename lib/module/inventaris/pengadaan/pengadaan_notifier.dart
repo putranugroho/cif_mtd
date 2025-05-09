@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:accounting/models/index.dart';
 import 'package:accounting/utils/colors.dart';
 import 'package:accounting/utils/dialog_loading.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
@@ -157,6 +158,47 @@ class PengadaanNotifier extends ChangeNotifier {
         goToNextStep();
       }
     }
+  }
+
+  List<KaryawanModel> listKaryawan = [];
+  TextEditingController namaKaryawan = TextEditingController();
+  TextEditingController nikKaryawan = TextEditingController();
+  KaryawanModel? karyawanModel;
+  piliAkunKaryawan(KaryawanModel value) {
+    karyawanModel = value;
+    namaKaryawan.text = karyawanModel!.namaLengkap;
+    nikKaryawan.text = karyawanModel!.nik;
+    notifyListeners();
+  }
+
+  Future<List<KaryawanModel>> getInquery(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      listKaryawan.clear();
+      notifyListeners();
+      var data = {"nama": query};
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.cariKaryawan(),
+          jsonEncode(data),
+        );
+
+        for (Map<String, dynamic> i in response) {
+          listKaryawan.add(KaryawanModel.fromJson(i));
+        }
+        notifyListeners();
+      } catch (e) {
+        if (kDebugMode) {
+          print("Error: $e");
+        }
+      } finally {
+        notifyListeners();
+      }
+    } else {
+      listKaryawan.clear(); // clear on short query
+    }
+
+    return listKaryawan;
   }
 
   void onStepBack() {
@@ -426,8 +468,9 @@ class PengadaanNotifier extends ChangeNotifier {
         "stsasr": 'N',
         "nopolis": "",
         "nilai_revaluasi": "",
-        "nik": "",
-        "nama_pejabat": "",
+        "nik": "${karyawanModel == null ? "" : karyawanModel!.nik}",
+        "nama_pejabat":
+            "${karyawanModel == null ? "" : karyawanModel!.namaLengkap}",
         "sbb_aset": golonganAsetModel!.sbbAset,
         "sbb_penyusutan": golonganAsetModel!.sbbPenyusutan,
         "sbb_biaya_penyusutan": golonganAsetModel!.sbbBiayaPenyusutan,
@@ -491,8 +534,9 @@ class PengadaanNotifier extends ChangeNotifier {
         "stsasr": 'N',
         "nopolis": "",
         "nilai_revaluasi": "",
-        "nik": "",
-        "nama_pejabat": "",
+        "nik": "${karyawanModel == null ? "" : karyawanModel!.nik}",
+        "nama_pejabat":
+            "${karyawanModel == null ? "" : karyawanModel!.namaLengkap}",
         "sbb_aset": golonganAsetModel!.sbbAset,
         "sbb_penyusutan": golonganAsetModel!.sbbPenyusutan,
         "sbb_biaya_penyusutan": golonganAsetModel!.sbbBiayaPenyusutan,

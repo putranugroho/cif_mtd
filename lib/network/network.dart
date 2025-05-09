@@ -349,6 +349,14 @@ class NetworkURL {
     return "$url/leveluser/deleted";
   }
 
+  static String getKaryawan() {
+    return "$url/karyawan";
+  }
+
+  static String cariKaryawan() {
+    return "$url/karyawan/search";
+  }
+
   static String getProvinsi() {
     return "$url2/provinsi";
   }
