@@ -177,7 +177,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
             DateTime.now(),
           ))),
       firstDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) - 10,
+          int.parse(DateFormat('y').format(DateTime.now())),
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
@@ -185,7 +185,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
             DateTime.now(),
           ))),
       lastDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('y').format(DateTime.now())) + 10,
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
@@ -286,10 +286,11 @@ class HutangPiutangNotifier extends ChangeNotifier {
     return nilaiBulatan;
   }
 
+  var buttonSimpan = false;
   hitungPembayaran() {
     if (nilaitransaksi.text.isEmpty) {
       informationDialog(context, "Warning", "Input Nilai Transaksi");
-    } else if (jangkawaktu.text.isEmpty) {
+    } else if (jangkawaktu.text.isEmpty && caraPembayaran == "BERTAHAP") {
       informationDialog(context, "Warning", "Input Jangka Waktu");
     } else {
       listTglJthTempo.clear();
@@ -298,7 +299,12 @@ class HutangPiutangNotifier extends ChangeNotifier {
       listNilaiPPH.clear();
       notifyListeners();
 
-      int periode = int.parse(jangkawaktu.text);
+      int periode = 0;
+      if (caraPembayaran == "BERTAHAP") {
+        periode = int.parse(jangkawaktu.text);
+      } else {
+        periode = 1;
+      }
 
       double totalNilai = double.parse(nilaitransaksi.text
           .replaceAll("Rp ", "")
@@ -355,7 +361,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
           }
         }
       }
-
+      buttonSimpan = true;
       notifyListeners();
     }
   }
@@ -406,9 +412,9 @@ class HutangPiutangNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  var caraPembayaran = false;
-  ganticaraPembayaran() {
-    caraPembayaran = !caraPembayaran;
+  var caraPembayaran = "";
+  ganticaraPembayaran(String value) {
+    caraPembayaran = value;
     notifyListeners();
   }
 

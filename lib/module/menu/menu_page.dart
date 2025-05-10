@@ -88,7 +88,7 @@ class MenuPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 330,
+                width: 340,
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(color: colorPrimary),
                 child: ListView(
@@ -144,131 +144,146 @@ class MenuPage extends StatelessWidget {
                     ),
                     MenuHutangPiutangWidget(value: value),
                     SizedBox(
-                      height: 32,
+                      height: 16,
                     ),
                     InkWell(
                       onTap: () => value.gantimenu(26),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(),
+                        padding: EdgeInsets.symmetric(vertical: 16),
+                        decoration: BoxDecoration(
+                          color: value.page == 26
+                              ? Colors.white
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                         child: Row(
                           children: [
                             Image.asset(
                               ImageAssets.user,
                               height: 30,
                               color: value.page == 26
-                                  ? Colors.white
-                                  : Colors.white70,
+                                  ? Colors.black
+                                  : Colors.white,
                             ),
                             SizedBox(
                               width: 16,
                             ),
                             Text(
-                              "Aktivasi Users",
+                              "AKTIVASI USER",
                               style: TextStyle(
                                 fontSize: 16,
                                 color: value.page == 26
-                                    ? Colors.white
-                                    : Colors.white70,
+                                    ? Colors.black
+                                    : Colors.white,
                               ),
                             )
                           ],
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 32,
-                    ),
                     InkWell(
                       onTap: () => value.gantimenu(27),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(),
+                        padding: EdgeInsets.symmetric(vertical: 16),
+                        decoration: BoxDecoration(
+                          color: value.page == 27
+                              ? Colors.white
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                         child: Row(
                           children: [
                             Image.asset(
                               ImageAssets.eom,
                               height: 30,
                               color: value.page == 27
-                                  ? Colors.white
-                                  : Colors.white70,
+                                  ? Colors.black
+                                  : Colors.white,
                             ),
                             SizedBox(
                               width: 16,
                             ),
                             Text(
-                              "Closing EOM",
+                              "LAPORAN",
                               style: TextStyle(
                                 fontSize: 16,
                                 color: value.page == 27
-                                    ? Colors.white
-                                    : Colors.white70,
+                                    ? Colors.black
+                                    : Colors.white,
                               ),
                             )
                           ],
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 32,
-                    ),
                     InkWell(
                       onTap: () => value.gantimenu(28),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(),
+                        padding: EdgeInsets.symmetric(vertical: 16),
+                        decoration: BoxDecoration(
+                          color: value.page == 28
+                              ? Colors.white
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                         child: Row(
                           children: [
                             Image.asset(
                               ImageAssets.settings,
                               height: 30,
                               color: value.page == 28
-                                  ? Colors.white
-                                  : Colors.white70,
+                                  ? Colors.black
+                                  : Colors.white,
                             ),
                             SizedBox(
                               width: 16,
                             ),
                             Text(
-                              "Settings",
+                              "SETINGS",
                               style: TextStyle(
                                 fontSize: 16,
                                 color: value.page == 28
-                                    ? Colors.white
-                                    : Colors.white70,
+                                    ? Colors.black
+                                    : Colors.white,
                               ),
                             )
                           ],
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 32,
-                    ),
                     InkWell(
                       // onTap: () => value.gantimenu(28),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(),
+                        padding: EdgeInsets.symmetric(vertical: 16),
+                        decoration: BoxDecoration(
+                          color: value.page == 30
+                              ? Colors.white
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                         child: Row(
                           children: [
                             Image.asset(
                               ImageAssets.logout,
                               height: 30,
                               color: value.page == 30
-                                  ? Colors.white
-                                  : Colors.white70,
+                                  ? Colors.black
+                                  : Colors.white,
                             ),
                             SizedBox(
                               width: 16,
                             ),
                             Text(
-                              "Sign Out",
+                              "SIGN OUT",
                               style: TextStyle(
                                 fontSize: 16,
                                 color: value.page == 30
-                                    ? Colors.white
-                                    : Colors.white70,
+                                    ? Colors.black
+                                    : Colors.white,
                               ),
                             )
                           ],

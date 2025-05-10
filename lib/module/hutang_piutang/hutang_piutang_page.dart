@@ -216,20 +216,29 @@ class HutangPiutangPage extends StatelessWidget {
                                             SizedBox(
                                               height: 8,
                                             ),
-                                            Container(
-                                              height: 40,
-                                              alignment: Alignment.centerLeft,
-                                              child: Text("Cara Bayar"),
-                                            ),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Container(
-                                              height: 40,
-                                              alignment: Alignment.centerLeft,
-                                              child: Text(
-                                                  "Tanggal Jatuh Tempo Pertama"),
-                                            ),
+                                            value.caraPembayaran == "BERTAHAP"
+                                                ? Column(
+                                                    children: [
+                                                      Container(
+                                                        height: 40,
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        child:
+                                                            Text("Cara Bayar"),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 8,
+                                                      ),
+                                                      Container(
+                                                        height: 40,
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        child: Text(
+                                                            "Tanggal Jatuh Tempo Pertama"),
+                                                      ),
+                                                    ],
+                                                  )
+                                                : SizedBox(),
                                             SizedBox(
                                               height: 24,
                                             ),
@@ -796,12 +805,12 @@ class HutangPiutangPage extends StatelessWidget {
                                                         child: Row(
                                                       children: [
                                                         Radio(
-                                                            value: true,
+                                                            value: "BERTAHAP",
                                                             groupValue: value
                                                                 .caraPembayaran,
                                                             onChanged: (e) {
-                                                              value
-                                                                  .ganticaraPembayaran();
+                                                              value.ganticaraPembayaran(
+                                                                  "BERTAHAP");
                                                             }),
                                                         SizedBox(
                                                           width: 8,
@@ -811,12 +820,12 @@ class HutangPiutangPage extends StatelessWidget {
                                                           width: 16,
                                                         ),
                                                         Radio(
-                                                            value: false,
+                                                            value: "SELURUHNYA",
                                                             groupValue: value
                                                                 .caraPembayaran,
                                                             onChanged: (e) {
-                                                              value
-                                                                  .ganticaraPembayaran();
+                                                              value.ganticaraPembayaran(
+                                                                  "SELURUHNYA");
                                                             }),
                                                         SizedBox(
                                                           width: 8,
@@ -834,25 +843,48 @@ class HutangPiutangPage extends StatelessWidget {
                                                                 width: 16,
                                                               ),
                                                               Expanded(
-                                                                child:
-                                                                    TextFormField(
-                                                                  controller: value
-                                                                      .noinvoice,
-                                                                  decoration:
-                                                                      InputDecoration(
-                                                                    hintText:
-                                                                        "Tanggal Jatuh Tempo",
-                                                                    border:
-                                                                        OutlineInputBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              8),
-                                                                      borderSide:
-                                                                          BorderSide(
-                                                                        width:
-                                                                            1,
-                                                                        color: Colors
-                                                                            .grey,
+                                                                child: InkWell(
+                                                                  onTap: () => value
+                                                                      .pilihJatuhTempo(),
+                                                                  child:
+                                                                      TextFormField(
+                                                                    enabled:
+                                                                        false,
+                                                                    textInputAction:
+                                                                        TextInputAction
+                                                                            .done,
+                                                                    controller:
+                                                                        value
+                                                                            .tanggalJatuhTempoText,
+                                                                    maxLines: 1,
+                                                                    readOnly: value.caraPembayaran ==
+                                                                            "BERTAHAP"
+                                                                        ? true
+                                                                        : false,
+                                                                    validator:
+                                                                        (e) {
+                                                                      if (e!
+                                                                          .isEmpty) {
+                                                                        return "Wajib diisi";
+                                                                      } else {
+                                                                        return null;
+                                                                      }
+                                                                    },
+                                                                    decoration:
+                                                                        InputDecoration(
+                                                                      filled: value.caraPembayaran ==
+                                                                              "BERTAHAP"
+                                                                          ? true
+                                                                          : false,
+                                                                      fillColor:
+                                                                          Colors
+                                                                              .grey[200],
+                                                                      hintText:
+                                                                          "Tanggal Jatuh Tempo",
+                                                                      border:
+                                                                          OutlineInputBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(6),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -868,188 +900,219 @@ class HutangPiutangPage extends StatelessWidget {
                                             SizedBox(
                                               height: 8,
                                             ),
-                                            Container(
-                                                height: 40,
-                                                alignment: Alignment.centerLeft,
-                                                child: Row(
-                                                  children: [
-                                                    Radio(
-                                                        value: true,
-                                                        groupValue:
-                                                            value.carabayar,
-                                                        onChanged: (e) {
-                                                          value
-                                                              .ganticarabayar();
-                                                        }),
-                                                    SizedBox(
-                                                      width: 8,
-                                                    ),
-                                                    Text("Auto"),
-                                                    SizedBox(
-                                                      width: 16,
-                                                    ),
-                                                    Radio(
-                                                        value: false,
-                                                        groupValue:
-                                                            value.carabayar,
-                                                        onChanged: (e) {
-                                                          value
-                                                              .ganticarabayar();
-                                                        }),
-                                                    SizedBox(
-                                                      width: 8,
-                                                    ),
-                                                    Text("Tagihan"),
-                                                    SizedBox(
-                                                      width: 32,
-                                                    ),
-                                                    Expanded(
-                                                      child: Row(
-                                                        children: [
-                                                          Text(
-                                                              "Tagihan Bulanan"),
-                                                          SizedBox(
-                                                            width: 16,
-                                                          ),
-                                                          Radio(
-                                                              value: true,
-                                                              groupValue: value
-                                                                  .tagihanbulanan,
-                                                              onChanged: (e) {
-                                                                value
-                                                                    .gantitagitahnbulanan();
-                                                              }),
-                                                          SizedBox(
-                                                            width: 8,
-                                                          ),
-                                                          Text("Ya"),
-                                                          SizedBox(
-                                                            width: 16,
-                                                          ),
-                                                          Radio(
-                                                              value: false,
-                                                              groupValue: value
-                                                                  .tagihanbulanan,
-                                                              onChanged: (e) {
-                                                                value
-                                                                    .gantitagitahnbulanan();
-                                                              }),
-                                                          SizedBox(
-                                                            width: 8,
-                                                          ),
-                                                          Text("Tidak"),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 32,
-                                                    ),
-                                                    Expanded(
-                                                      child: Row(
-                                                        children: [
-                                                          Text("PPN/PPH"),
-                                                          SizedBox(
-                                                            width: 16,
-                                                          ),
-                                                          Radio(
-                                                              value: true,
-                                                              groupValue:
-                                                                  value.pphppn,
-                                                              onChanged: (e) {
-                                                                value
-                                                                    .gantipphppn();
-                                                              }),
-                                                          SizedBox(
-                                                            width: 8,
-                                                          ),
-                                                          Text("Proposional"),
-                                                          SizedBox(
-                                                            width: 16,
-                                                          ),
-                                                          Radio(
-                                                              value: false,
-                                                              groupValue:
-                                                                  value.pphppn,
-                                                              onChanged: (e) {
-                                                                value
-                                                                    .gantipphppn();
-                                                              }),
-                                                          SizedBox(
-                                                            width: 8,
-                                                          ),
-                                                          Text("Diakhir"),
-                                                          SizedBox(
-                                                            width: 32,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                )),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Container(
-                                              height: 40,
-                                              alignment: Alignment.centerLeft,
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    width: 100,
-                                                    child: TextFormField(
-                                                      controller:
-                                                          value.jangkawaktu,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            width: 1,
-                                                            color: Colors.grey,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 32,
-                                                  ),
-                                                  Expanded(
-                                                    child: InkWell(
-                                                      onTap: () {
-                                                        value
-                                                            .pilihTanggalJatuhTempoPertama();
-                                                      },
-                                                      child: TextFormField(
-                                                        enabled: false,
-                                                        controller: value
-                                                            .tglJatuhTempoPertama,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              width: 1,
-                                                              color:
-                                                                  Colors.grey,
+                                            value.caraPembayaran == "BERTAHAP"
+                                                ? Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      // Baris pertama: radio-radio
+                                                      Container(
+                                                        height: 40,
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        child: Row(
+                                                          children: [
+                                                            // Radio Auto / Tagihan
+                                                            Row(
+                                                              children: [
+                                                                Radio(
+                                                                  value: true,
+                                                                  groupValue: value
+                                                                      .carabayar,
+                                                                  onChanged:
+                                                                      (e) => value
+                                                                          .ganticarabayar(),
+                                                                ),
+                                                                const SizedBox(
+                                                                    width: 8),
+                                                                const Text(
+                                                                    "Auto"),
+                                                                const SizedBox(
+                                                                    width: 16),
+                                                                Radio(
+                                                                  value: false,
+                                                                  groupValue: value
+                                                                      .carabayar,
+                                                                  onChanged:
+                                                                      (e) => value
+                                                                          .ganticarabayar(),
+                                                                ),
+                                                                const SizedBox(
+                                                                    width: 8),
+                                                                const Text(
+                                                                    "Tagihan"),
+                                                              ],
                                                             ),
-                                                          ),
+
+                                                            const SizedBox(
+                                                                width: 32),
+
+                                                            // Tagihan Bulanan
+                                                            Expanded(
+                                                              child: Row(
+                                                                children: [
+                                                                  const Text(
+                                                                      "Tagihan Bulanan"),
+                                                                  const SizedBox(
+                                                                      width:
+                                                                          16),
+                                                                  Radio(
+                                                                    value: true,
+                                                                    groupValue:
+                                                                        value
+                                                                            .tagihanbulanan,
+                                                                    onChanged:
+                                                                        (e) => value
+                                                                            .gantitagitahnbulanan(),
+                                                                  ),
+                                                                  const SizedBox(
+                                                                      width: 8),
+                                                                  const Text(
+                                                                      "Ya"),
+                                                                  const SizedBox(
+                                                                      width:
+                                                                          16),
+                                                                  Radio(
+                                                                    value:
+                                                                        false,
+                                                                    groupValue:
+                                                                        value
+                                                                            .tagihanbulanan,
+                                                                    onChanged:
+                                                                        (e) => value
+                                                                            .gantitagitahnbulanan(),
+                                                                  ),
+                                                                  const SizedBox(
+                                                                      width: 8),
+                                                                  const Text(
+                                                                      "Tidak"),
+                                                                ],
+                                                              ),
+                                                            ),
+
+                                                            const SizedBox(
+                                                                width: 32),
+
+                                                            // PPH/PPN
+                                                            Expanded(
+                                                              child: Row(
+                                                                children: [
+                                                                  const Text(
+                                                                      "PPN/PPH"),
+                                                                  const SizedBox(
+                                                                      width:
+                                                                          16),
+                                                                  Radio(
+                                                                    value: true,
+                                                                    groupValue:
+                                                                        value
+                                                                            .pphppn,
+                                                                    onChanged:
+                                                                        (e) => value
+                                                                            .gantipphppn(),
+                                                                  ),
+                                                                  const SizedBox(
+                                                                      width: 8),
+                                                                  const Text(
+                                                                      "Proporsional"),
+                                                                  const SizedBox(
+                                                                      width:
+                                                                          16),
+                                                                  Radio(
+                                                                    value:
+                                                                        false,
+                                                                    groupValue:
+                                                                        value
+                                                                            .pphppn,
+                                                                    onChanged:
+                                                                        (e) => value
+                                                                            .gantipphppn(),
+                                                                  ),
+                                                                  const SizedBox(
+                                                                      width: 8),
+                                                                  const Text(
+                                                                      "Diakhir"),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
+
+                                                      const SizedBox(
+                                                          height: 16),
+
+                                                      // Baris kedua: jangka waktu dan tanggal jatuh tempo
+                                                      Container(
+                                                        height: 40,
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        child: Row(
+                                                          children: [
+                                                            // Jangka Waktu
+                                                            SizedBox(
+                                                              width: 100,
+                                                              child:
+                                                                  TextFormField(
+                                                                controller: value
+                                                                    .jangkawaktu,
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(8),
+                                                                    borderSide: const BorderSide(
+                                                                        width:
+                                                                            1,
+                                                                        color: Colors
+                                                                            .grey),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+
+                                                            const SizedBox(
+                                                                width: 32),
+
+                                                            // Tanggal Jatuh Tempo Pertama
+                                                            Expanded(
+                                                              child: InkWell(
+                                                                onTap: () {
+                                                                  value
+                                                                      .pilihTanggalJatuhTempoPertama();
+                                                                },
+                                                                child:
+                                                                    TextFormField(
+                                                                  enabled:
+                                                                      false,
+                                                                  controller: value
+                                                                      .tglJatuhTempoPertama,
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8),
+                                                                      borderSide: const BorderSide(
+                                                                          width:
+                                                                              1,
+                                                                          color:
+                                                                              Colors.grey),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )
+                                                : const SizedBox(),
                                             SizedBox(
                                               height: 24,
                                             ),
@@ -1276,10 +1339,12 @@ class HutangPiutangPage extends StatelessWidget {
                                   SizedBox(
                                     height: 32,
                                   ),
-                                  ButtonPrimary(
-                                    onTap: () {},
-                                    name: "Simpan",
-                                  )
+                                  value.buttonSimpan
+                                      ? ButtonPrimary(
+                                          onTap: () {},
+                                          name: "Simpan",
+                                        )
+                                      : SizedBox(),
                                 ],
                               ))
                             ],

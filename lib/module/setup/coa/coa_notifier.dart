@@ -98,9 +98,9 @@ class CoaNotifier extends ChangeNotifier {
   }
 
   List<String> listJns = [
-    "Header",
-    "Buku Besar",
-    "Sub Buku Besar",
+    "HEADER",
+    "BUKU BESAR",
+    "SUB BUKU BESAR",
   ];
   String? jnsAcc;
   pilihJenis(String value) {

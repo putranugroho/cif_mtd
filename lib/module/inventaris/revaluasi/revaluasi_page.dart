@@ -199,7 +199,7 @@ class RevaluasiPage extends StatelessWidget {
                                                 width: 16,
                                               ),
                                               Container(
-                                                width: 150,
+                                                width: 270,
                                                 child: TextFormField(
                                                   readOnly: true,
                                                   controller: value.kdAset,

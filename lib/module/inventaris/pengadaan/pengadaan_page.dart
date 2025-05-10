@@ -176,6 +176,7 @@ class PengadaanPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'harga',
+                                      width: 130,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -188,6 +189,7 @@ class PengadaanPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'diskon',
+                                      width: 130,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -200,6 +202,7 @@ class PengadaanPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'biaya',
+                                      width: 130,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -212,6 +215,7 @@ class PengadaanPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'ppn',
+                                      width: 130,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -224,6 +228,7 @@ class PengadaanPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'total',
+                                      width: 130,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -236,6 +241,7 @@ class PengadaanPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'action',
+                                      width: 80,
                                       label: Container(
                                           color: colorPrimary,
                                           padding: EdgeInsets.all(6),

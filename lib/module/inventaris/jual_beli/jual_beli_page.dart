@@ -150,39 +150,72 @@ class JualBeliPage extends StatelessWidget {
                                           const SizedBox(
                                             height: 8,
                                           ),
-                                          DropdownSearch<InventarisModel>(
-                                            popupProps:
-                                                const PopupPropsMultiSelection
-                                                    .menu(
-                                              showSearchBox:
-                                                  true, // Aktifkan fitur pencarian
-                                            ),
-                                            selectedItem: value.inventarisModel,
-                                            items: value.list,
-                                            itemAsString: (e) => "${e.ket}",
-                                            onChanged: (e) {
-                                              value.pilihInventory(e!);
-                                            },
-                                            dropdownDecoratorProps:
-                                                DropDownDecoratorProps(
-                                              baseStyle:
-                                                  TextStyle(fontSize: 16),
-                                              textAlignVertical:
-                                                  TextAlignVertical.center,
-                                              dropdownSearchDecoration:
-                                                  InputDecoration(
-                                                hintText:
-                                                    "Nama Aset / Inventaris",
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  borderSide: BorderSide(
-                                                    width: 1,
-                                                    color: Colors.grey,
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                child: DropdownSearch<
+                                                    InventarisModel>(
+                                                  popupProps:
+                                                      const PopupPropsMultiSelection
+                                                          .menu(
+                                                    showSearchBox:
+                                                        true, // Aktifkan fitur pencarian
+                                                  ),
+                                                  selectedItem:
+                                                      value.inventarisModel,
+                                                  items: value.list,
+                                                  itemAsString: (e) =>
+                                                      "${e.ket}",
+                                                  onChanged: (e) {
+                                                    value.pilihInventory(e!);
+                                                  },
+                                                  dropdownDecoratorProps:
+                                                      DropDownDecoratorProps(
+                                                    baseStyle:
+                                                        TextStyle(fontSize: 16),
+                                                    textAlignVertical:
+                                                        TextAlignVertical
+                                                            .center,
+                                                    dropdownSearchDecoration:
+                                                        InputDecoration(
+                                                      hintText:
+                                                          "Pilih Inventaris",
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8),
+                                                        borderSide: BorderSide(
+                                                          width: 1,
+                                                          color: Colors.grey,
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
+                                              SizedBox(
+                                                width: 16,
+                                              ),
+                                              Container(
+                                                width: 270,
+                                                child: TextFormField(
+                                                  readOnly: true,
+                                                  controller: value.kdAset,
+                                                  decoration: InputDecoration(
+                                                    fillColor: Colors.grey[200],
+                                                    filled: true,
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
                                           ),
                                           const SizedBox(
                                             height: 16,

@@ -1,5 +1,6 @@
 import 'package:accounting/models/index.dart';
 import 'package:accounting/module/master/bank/bank_notifier.dart';
+import 'package:accounting/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -124,6 +125,7 @@ class BankPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'kodeBank',
+                                      width: 80,
                                       label: Container(
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
@@ -148,6 +150,7 @@ class BankPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'noRek',
+                                      width: 150,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -172,11 +175,12 @@ class BankPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'kdRek',
+                                      width: 100,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
-                                          child: Text('Kode Rekening',
+                                          child: Text('Jenis Rekening',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -184,6 +188,7 @@ class BankPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'nosbb',
+                                      width: 120,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -208,6 +213,7 @@ class BankPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'nominal',
+                                      width: 130,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -220,6 +226,7 @@ class BankPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'action',
+                                      width: 80,
                                       label: Container(
                                           color: colorPrimary,
                                           padding: EdgeInsets.all(6),
@@ -1068,7 +1075,11 @@ class DetailDataSource extends DataGridSource {
                             : "Deposito"),
                 DataGridCell(columnName: 'nosbb', value: data.nosbb),
                 DataGridCell(columnName: 'namaSbb', value: data.namaSbb),
-                DataGridCell(columnName: 'nominal', value: data.nominal),
+                DataGridCell(
+                    columnName: 'nominal',
+                    value: data.nominal == ""
+                        ? ""
+                        : FormatCurrency.oCcy.format(int.parse(data.nominal))),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
@@ -1106,6 +1117,17 @@ class DetailDataSource extends DataGridSource {
                   ),
                 ),
               ),
+            ),
+          );
+        } else if (e.columnName == 'nominal') {
+          return Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              textAlign: TextAlign.right,
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           );
         } else {

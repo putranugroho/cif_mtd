@@ -421,15 +421,11 @@ class SbbKhususPage extends StatelessWidget {
                                           SizedBox(
                                             height: 16,
                                           ),
-                                          Row(
-                                            children: [
-                                              ButtonPrimary(
-                                                onTap: () {
-                                                  value.cek();
-                                                },
-                                                name: "Simpan",
-                                              ),
-                                            ],
+                                          ButtonPrimary(
+                                            onTap: () {
+                                              value.cek();
+                                            },
+                                            name: "Simpan",
                                           ),
                                           value.editData
                                               ? Column(

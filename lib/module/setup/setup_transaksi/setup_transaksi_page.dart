@@ -122,6 +122,7 @@ class SetupTransaksiPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'kode',
+                                      width: 120,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -146,12 +147,12 @@ class SetupTransaksiPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'gl_deb',
-                                      width: 300,
+                                      width: 270,
                                       label: Container(
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Nama Akun Deb.',
+                                          child: Text('Akun Debet',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -159,12 +160,12 @@ class SetupTransaksiPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'gl_kre',
-                                      width: 300,
+                                      width: 270,
                                       label: Container(
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Nama Akun Kre.',
+                                          child: Text('Akun Kredit',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -172,6 +173,7 @@ class SetupTransaksiPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'modul',
+                                      width: 110,
                                       label: Container(
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
@@ -184,6 +186,7 @@ class SetupTransaksiPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'action',
+                                      width: 80,
                                       label: Container(
                                           color: colorPrimary,
                                           padding: EdgeInsets.all(6),
@@ -691,10 +694,10 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'nama', value: "${data.namaTrans}"),
                 DataGridCell(
                     columnName: 'gl_deb',
-                    value: "(${data.glDeb}) ${data.namaDeb}"),
+                    value: "${data.glDeb} - ${data.namaDeb}"),
                 DataGridCell(
                     columnName: 'gl_kre',
-                    value: "(${data.glKre}) ${data.namaKre}"),
+                    value: "${data.glKre} - ${data.namaKre}"),
                 DataGridCell(columnName: 'modul', value: data.modul),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],

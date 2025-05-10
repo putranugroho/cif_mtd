@@ -151,6 +151,7 @@ class UsersPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'tglexp',
+                                      width: 100,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -163,6 +164,7 @@ class UsersPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'lvluser',
+                                      width: 110,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -175,6 +177,7 @@ class UsersPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'level_otor',
+                                      width: 65,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -192,7 +195,7 @@ class UsersPage extends StatelessWidget {
                                           color: colorPrimary,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
-                                          child: Text('Akses Beda Kantor',
+                                          child: Text('Beda Kantor',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -200,6 +203,7 @@ class UsersPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'min_otor',
+                                      width: 150,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -212,6 +216,7 @@ class UsersPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'max_otor',
+                                      width: 150,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -224,6 +229,7 @@ class UsersPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'action',
+                                      width: 80,
                                       label: Container(
                                           color: colorPrimary,
                                           padding: EdgeInsets.all(6),
@@ -1148,9 +1154,9 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'tglexp', value: data.tglexp),
                 DataGridCell(
                     columnName: 'lvluser',
-                    value: data.lvluser == "A"
+                    value: data.lvluser == "2"
                         ? "Administrator"
-                        : data.lvluser == "S"
+                        : data.lvluser == "1"
                             ? "Supervisor"
                             : "User"),
                 DataGridCell(

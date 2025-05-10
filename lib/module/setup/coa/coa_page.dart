@@ -135,7 +135,7 @@ class CoaPage extends StatelessWidget {
                                 source: DetailDataSource(value),
                                 columns: <GridColumn>[
                                   GridColumn(
-                                      width: 50,
+                                      width: 40,
                                       columnName: 'no',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
@@ -160,6 +160,7 @@ class CoaPage extends StatelessWidget {
                                                 fontSize: 12,
                                               )))),
                                   GridColumn(
+                                      width: 120,
                                       columnName: 'jns_acc',
                                       label: Container(
                                           color: colorPrimary,
@@ -208,18 +209,7 @@ class CoaPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      columnName: 'type_posting',
-                                      label: Container(
-                                          padding: EdgeInsets.all(6),
-                                          color: colorPrimary,
-                                          alignment: Alignment.center,
-                                          child: Text('Type Posting',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.white,
-                                              )))),
-                                  GridColumn(
+                                      width: 80,
                                       columnName: 'sbb_khusus',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
@@ -232,7 +222,21 @@ class CoaPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 60,
+                                      columnName: 'type_posting',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Posting',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
                                       columnName: 'action',
+                                      width: 80,
                                       label: Container(
                                           color: colorPrimary,
                                           padding: EdgeInsets.all(6),
@@ -1684,6 +1688,63 @@ class CoaPage extends StatelessWidget {
                                                       Row(
                                                         children: [
                                                           Text(
+                                                            "Pilih Type Posting",
+                                                            style:
+                                                                const TextStyle(
+                                                                    fontSize:
+                                                                        12),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 5),
+                                                          const Text(
+                                                            "*",
+                                                            style: TextStyle(
+                                                                fontSize: 8),
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 16,
+                                                          ),
+                                                          Radio(
+                                                            activeColor:
+                                                                colorPrimary,
+                                                            value: "Y",
+                                                            groupValue: value
+                                                                .typePosting,
+                                                            onChanged: (e) =>
+                                                                value
+                                                                    .gantiPosting(
+                                                                        "Y"),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 8,
+                                                          ),
+                                                          Text("Yes"),
+                                                          SizedBox(
+                                                            width: 32,
+                                                          ),
+                                                          Radio(
+                                                            activeColor:
+                                                                colorPrimary,
+                                                            value: "N",
+                                                            groupValue: value
+                                                                .typePosting,
+                                                            onChanged: (e) =>
+                                                                value
+                                                                    .gantiPosting(
+                                                                        "N"),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 8,
+                                                          ),
+                                                          Text("No"),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 16,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
                                                             "Nama Sub Buku Besar",
                                                             style:
                                                                 const TextStyle(
@@ -1903,16 +1964,16 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(
                     columnName: 'jns_acc',
                     value: data.jnsAcc == 'A'
-                        ? "Header"
+                        ? "HEADER"
                         : data.jnsAcc == 'B'
                             ? "Buku Besar"
                             : "Sub Buku Besar"),
                 DataGridCell(columnName: 'nobb', value: data.nobb),
                 DataGridCell(columnName: 'nosbb', value: data.nosbb),
                 DataGridCell(columnName: 'nama_sbb', value: data.namaSbb),
+                DataGridCell(columnName: 'sbb_khusus', value: data.sbbKhusus),
                 DataGridCell(
                     columnName: 'type_posting', value: data.typePosting),
-                DataGridCell(columnName: 'sbb_khusus', value: data.sbbKhusus),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))

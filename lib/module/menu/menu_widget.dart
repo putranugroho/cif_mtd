@@ -24,7 +24,7 @@ class MenuSetupWidget extends StatelessWidget {
               width: 16,
             ),
             Text(
-              "Setup",
+              "SETUP",
               style: TextStyle(fontSize: 16, color: Colors.white),
             )
           ],
@@ -72,7 +72,7 @@ class MenuSetupWidget extends StatelessWidget {
                     Image.asset(
                       ImageAssets.building,
                       height: 30,
-                      color: value.page == 1 ? Colors.black : Colors.white70,
+                      color: value.page == 1 ? Colors.black : Colors.white,
                     ),
                     SizedBox(
                       width: 16,
@@ -81,7 +81,7 @@ class MenuSetupWidget extends StatelessWidget {
                       "Data Kantor",
                       style: TextStyle(
                         fontSize: 16,
-                        color: value.page == 1 ? Colors.black : Colors.white70,
+                        color: value.page == 1 ? Colors.black : Colors.white,
                       ),
                     )
                   ],
@@ -105,7 +105,7 @@ class MenuSetupWidget extends StatelessWidget {
                     Image.asset(
                       ImageAssets.user,
                       height: 30,
-                      color: value.page == 31 ? Colors.black : Colors.white70,
+                      color: value.page == 31 ? Colors.black : Colors.white,
                     ),
                     SizedBox(
                       width: 16,
@@ -114,7 +114,7 @@ class MenuSetupWidget extends StatelessWidget {
                       "Data Level",
                       style: TextStyle(
                         fontSize: 16,
-                        color: value.page == 31 ? Colors.black : Colors.white70,
+                        color: value.page == 31 ? Colors.black : Colors.white,
                       ),
                     )
                   ],
@@ -138,7 +138,7 @@ class MenuSetupWidget extends StatelessWidget {
                     Image.asset(
                       ImageAssets.group,
                       height: 30,
-                      color: value.page == 29 ? Colors.black : Colors.white70,
+                      color: value.page == 29 ? Colors.black : Colors.white,
                     ),
                     SizedBox(
                       width: 16,
@@ -147,7 +147,7 @@ class MenuSetupWidget extends StatelessWidget {
                       "Data Jabatan",
                       style: TextStyle(
                         fontSize: 16,
-                        color: value.page == 29 ? Colors.black : Colors.white70,
+                        color: value.page == 29 ? Colors.black : Colors.white,
                       ),
                     )
                   ],
@@ -171,7 +171,7 @@ class MenuSetupWidget extends StatelessWidget {
                     Image.asset(
                       ImageAssets.user,
                       height: 30,
-                      color: value.page == 30 ? Colors.black : Colors.white70,
+                      color: value.page == 30 ? Colors.black : Colors.white,
                     ),
                     SizedBox(
                       width: 16,
@@ -180,7 +180,7 @@ class MenuSetupWidget extends StatelessWidget {
                       "Data Pejabat",
                       style: TextStyle(
                         fontSize: 16,
-                        color: value.page == 30 ? Colors.black : Colors.white70,
+                        color: value.page == 30 ? Colors.black : Colors.white,
                       ),
                     )
                   ],
@@ -203,7 +203,7 @@ class MenuSetupWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.calendar,
                   height: 30,
-                  color: value.page == 36 ? Colors.black : Colors.white70,
+                  color: value.page == 36 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -212,7 +212,7 @@ class MenuSetupWidget extends StatelessWidget {
                   "Hari Kerja",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 36 ? Colors.black : Colors.white70,
+                    color: value.page == 36 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -233,7 +233,7 @@ class MenuSetupWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.accounting,
                   height: 30,
-                  color: value.page == 2 ? Colors.black : Colors.white70,
+                  color: value.page == 2 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -242,7 +242,7 @@ class MenuSetupWidget extends StatelessWidget {
                   "Chart of Account",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 2 ? Colors.black : Colors.white70,
+                    color: value.page == 2 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -290,7 +290,7 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.list,
                         height: 30,
-                        color: value.page == 47 ? Colors.black : Colors.white70,
+                        color: value.page == 47 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -299,8 +299,7 @@ class MenuSetupWidget extends StatelessWidget {
                         "Golongan SBB Khusus",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 47 ? Colors.black : Colors.white70,
+                          color: value.page == 47 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -324,7 +323,7 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.list,
                         height: 30,
-                        color: value.page == 37 ? Colors.black : Colors.white70,
+                        color: value.page == 37 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -333,8 +332,7 @@ class MenuSetupWidget extends StatelessWidget {
                         "Setup SBB Khusus",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 37 ? Colors.black : Colors.white70,
+                          color: value.page == 37 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -384,7 +382,7 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.trend,
                         height: 30,
-                        color: value.page == 3 ? Colors.black : Colors.white70,
+                        color: value.page == 3 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -393,8 +391,7 @@ class MenuSetupWidget extends StatelessWidget {
                         "Metode Penyusutan",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 3 ? Colors.black : Colors.white70,
+                          color: value.page == 3 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -418,7 +415,7 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.trend,
                         height: 30,
-                        color: value.page == 33 ? Colors.black : Colors.white70,
+                        color: value.page == 33 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -427,8 +424,7 @@ class MenuSetupWidget extends StatelessWidget {
                         "Kelompok Aset",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 33 ? Colors.black : Colors.white70,
+                          color: value.page == 33 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -452,7 +448,7 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.trend,
                         height: 30,
-                        color: value.page == 34 ? Colors.black : Colors.white70,
+                        color: value.page == 34 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -461,8 +457,7 @@ class MenuSetupWidget extends StatelessWidget {
                         "Golongan Aset",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 34 ? Colors.black : Colors.white70,
+                          color: value.page == 34 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -511,7 +506,7 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.bill,
                         height: 30,
-                        color: value.page == 4 ? Colors.black : Colors.white70,
+                        color: value.page == 4 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -520,8 +515,7 @@ class MenuSetupWidget extends StatelessWidget {
                         "Setup Transaksi",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 4 ? Colors.black : Colors.white70,
+                          color: value.page == 4 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -545,7 +539,7 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.bill,
                         height: 30,
-                        color: value.page == 32 ? Colors.black : Colors.white70,
+                        color: value.page == 32 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -554,8 +548,7 @@ class MenuSetupWidget extends StatelessWidget {
                         "Pajak",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 32 ? Colors.black : Colors.white70,
+                          color: value.page == 32 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -579,7 +572,7 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.bill,
                         height: 30,
-                        color: value.page == 65 ? Colors.black : Colors.white70,
+                        color: value.page == 65 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -588,8 +581,7 @@ class MenuSetupWidget extends StatelessWidget {
                         "Hutang / Piutang",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 65 ? Colors.black : Colors.white70,
+                          color: value.page == 65 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -611,7 +603,7 @@ class MenuSetupWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.eom,
                   height: 30,
-                  color: value.page == 38 ? Colors.black : Colors.white70,
+                  color: value.page == 38 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -620,7 +612,7 @@ class MenuSetupWidget extends StatelessWidget {
                   "Back Date",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 38 ? Colors.black : Colors.white70,
+                    color: value.page == 38 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -641,7 +633,7 @@ class MenuSetupWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.eom,
                   height: 30,
-                  color: value.page == 60 ? Colors.black : Colors.white70,
+                  color: value.page == 60 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -650,7 +642,7 @@ class MenuSetupWidget extends StatelessWidget {
                   "Level User",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 60 ? Colors.black : Colors.white70,
+                    color: value.page == 60 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -671,7 +663,7 @@ class MenuSetupWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.click,
                   height: 30,
-                  color: value.page == 39 ? Colors.black : Colors.white70,
+                  color: value.page == 39 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -680,7 +672,7 @@ class MenuSetupWidget extends StatelessWidget {
                   "Otorisasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 39 ? Colors.black : Colors.white70,
+                    color: value.page == 39 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -701,7 +693,7 @@ class MenuSetupWidget extends StatelessWidget {
         //         Image.asset(
         //           ImageAssets.report,
         //           height: 30,
-        //           color: value.page == 5 ? Colors.black : Colors.white70,
+        //           color: value.page == 5 ? Colors.black : Colors.white,
         //         ),
         //         SizedBox(
         //           width: 16,
@@ -710,7 +702,7 @@ class MenuSetupWidget extends StatelessWidget {
         //           "Laporan",
         //           style: TextStyle(
         //             fontSize: 16,
-        //             color: value.page == 5 ? Colors.black : Colors.white70,
+        //             color: value.page == 5 ? Colors.black : Colors.white,
         //           ),
         //         )
         //       ],
@@ -743,7 +735,7 @@ class MenuMasterWidget extends StatelessWidget {
               width: 16,
             ),
             Text(
-              "Master",
+              "MASTER",
               style: TextStyle(fontSize: 16, color: Colors.white),
             )
           ],
@@ -764,7 +756,7 @@ class MenuMasterWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.group,
                   height: 30,
-                  color: value.page == 6 ? Colors.black : Colors.white70,
+                  color: value.page == 6 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -773,7 +765,7 @@ class MenuMasterWidget extends StatelessWidget {
                   "Users",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 6 ? Colors.black : Colors.white70,
+                    color: value.page == 6 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -794,7 +786,7 @@ class MenuMasterWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.bank,
                   height: 30,
-                  color: value.page == 7 ? Colors.black : Colors.white70,
+                  color: value.page == 7 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -803,7 +795,7 @@ class MenuMasterWidget extends StatelessWidget {
                   "Bank",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 7 ? Colors.black : Colors.white70,
+                    color: value.page == 7 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -825,7 +817,7 @@ class MenuMasterWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.group,
                   height: 30,
-                  color: value.page == 35 ? Colors.black : Colors.white70,
+                  color: value.page == 35 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -834,7 +826,7 @@ class MenuMasterWidget extends StatelessWidget {
                   "AO / Marketing",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 35 ? Colors.black : Colors.white70,
+                    color: value.page == 35 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -855,7 +847,7 @@ class MenuMasterWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.click,
                   height: 30,
-                  color: value.page == 9 ? Colors.black : Colors.white70,
+                  color: value.page == 9 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -864,7 +856,7 @@ class MenuMasterWidget extends StatelessWidget {
                   "Otorisasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 9 ? Colors.black : Colors.white70,
+                    color: value.page == 9 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -912,7 +904,7 @@ class MenuMasterWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.wifi,
                         height: 30,
-                        color: value.page == 66 ? Colors.black : Colors.white70,
+                        color: value.page == 66 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -921,8 +913,7 @@ class MenuMasterWidget extends StatelessWidget {
                         "Akses Point",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 66 ? Colors.black : Colors.white70,
+                          color: value.page == 66 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -946,7 +937,7 @@ class MenuMasterWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.userwifi,
                         height: 30,
-                        color: value.page == 68 ? Colors.black : Colors.white70,
+                        color: value.page == 68 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -955,8 +946,7 @@ class MenuMasterWidget extends StatelessWidget {
                         "User Akses Point",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 68 ? Colors.black : Colors.white70,
+                          color: value.page == 68 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -978,7 +968,7 @@ class MenuMasterWidget extends StatelessWidget {
         //         Image.asset(
         //           ImageAssets.report,
         //           height: 30,
-        //           color: value.page == 10 ? Colors.black : Colors.white70,
+        //           color: value.page == 10 ? Colors.black : Colors.white,
         //         ),
         //         SizedBox(
         //           width: 16,
@@ -987,7 +977,7 @@ class MenuMasterWidget extends StatelessWidget {
         //           "Laporan",
         //           style: TextStyle(
         //             fontSize: 16,
-        //             color: value.page == 10 ? Colors.black : Colors.white70,
+        //             color: value.page == 10 ? Colors.black : Colors.white,
         //           ),
         //         )
         //       ],
@@ -1020,7 +1010,7 @@ class MenuInventarisWidget extends StatelessWidget {
               width: 16,
             ),
             Text(
-              "Inventaris",
+              "INVENTARIS",
               style: TextStyle(fontSize: 16, color: Colors.white),
             )
           ],
@@ -1041,7 +1031,7 @@ class MenuInventarisWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.cart,
                   height: 30,
-                  color: value.page == 11 ? Colors.black : Colors.white70,
+                  color: value.page == 11 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1050,7 +1040,7 @@ class MenuInventarisWidget extends StatelessWidget {
                   "Pengadaan",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 11 ? Colors.black : Colors.white70,
+                    color: value.page == 11 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1071,7 +1061,7 @@ class MenuInventarisWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.placement,
                   height: 30,
-                  color: value.page == 12 ? Colors.black : Colors.white70,
+                  color: value.page == 12 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1080,7 +1070,7 @@ class MenuInventarisWidget extends StatelessWidget {
                   "Penempatan",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 12 ? Colors.black : Colors.white70,
+                    color: value.page == 12 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1101,7 +1091,7 @@ class MenuInventarisWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.audit,
                   height: 30,
-                  color: value.page == 13 ? Colors.black : Colors.white70,
+                  color: value.page == 13 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1110,7 +1100,7 @@ class MenuInventarisWidget extends StatelessWidget {
                   "Revaluasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 13 ? Colors.black : Colors.white70,
+                    color: value.page == 13 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1131,7 +1121,7 @@ class MenuInventarisWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.carts,
                   height: 30,
-                  color: value.page == 14 ? Colors.black : Colors.white70,
+                  color: value.page == 14 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1140,7 +1130,7 @@ class MenuInventarisWidget extends StatelessWidget {
                   "Jual/Hapus",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 14 ? Colors.black : Colors.white70,
+                    color: value.page == 14 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1161,7 +1151,7 @@ class MenuInventarisWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.click,
                   height: 30,
-                  color: value.page == 15 ? Colors.black : Colors.white70,
+                  color: value.page == 15 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1170,7 +1160,7 @@ class MenuInventarisWidget extends StatelessWidget {
                   "Otorisasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 15 ? Colors.black : Colors.white70,
+                    color: value.page == 15 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1191,7 +1181,7 @@ class MenuInventarisWidget extends StatelessWidget {
         //         Image.asset(
         //           ImageAssets.report,
         //           height: 30,
-        //           color: value.page == 16 ? Colors.black : Colors.white70,
+        //           color: value.page == 16 ? Colors.black : Colors.white,
         //         ),
         //         SizedBox(
         //           width: 16,
@@ -1200,7 +1190,7 @@ class MenuInventarisWidget extends StatelessWidget {
         //           "Laporan",
         //           style: TextStyle(
         //             fontSize: 16,
-        //             color: value.page == 16 ? Colors.black : Colors.white70,
+        //             color: value.page == 16 ? Colors.black : Colors.white,
         //           ),
         //         )
         //       ],
@@ -1233,7 +1223,7 @@ class MenuHutangPiutangWidget extends StatelessWidget {
               width: 16,
             ),
             Text(
-              "Kelola Hutang/Piutang",
+              "KELOLA HUTANG/ PIUTANG",
               style: TextStyle(fontSize: 16, color: Colors.white),
             )
           ],
@@ -1254,7 +1244,7 @@ class MenuHutangPiutangWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.user,
                   height: 30,
-                  color: value.page == 8 ? Colors.black : Colors.white70,
+                  color: value.page == 8 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1263,7 +1253,7 @@ class MenuHutangPiutangWidget extends StatelessWidget {
                   "Customer/Supplier",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 8 ? Colors.black : Colors.white70,
+                    color: value.page == 8 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1276,7 +1266,7 @@ class MenuHutangPiutangWidget extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 8 ? Colors.white : Colors.transparent,
+              color: value.page == 61 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1284,7 +1274,7 @@ class MenuHutangPiutangWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.rupiahs,
                   height: 30,
-                  color: value.page == 61 ? Colors.black : Colors.white70,
+                  color: value.page == 61 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1293,7 +1283,7 @@ class MenuHutangPiutangWidget extends StatelessWidget {
                   "Hutang / Piutang",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 61 ? Colors.black : Colors.white70,
+                    color: value.page == 61 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1326,7 +1316,7 @@ class MenuTransaksiWidget extends StatelessWidget {
               width: 16,
             ),
             Text(
-              "Transaksi",
+              "TRANSAKSI",
               style: TextStyle(fontSize: 16, color: Colors.white),
             )
           ],
@@ -1347,7 +1337,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.report,
                   height: 30,
-                  color: value.page == 17 ? Colors.black : Colors.white70,
+                  color: value.page == 17 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1356,7 +1346,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Satu Transaksi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 17 ? Colors.black : Colors.white70,
+                    color: value.page == 17 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1377,7 +1367,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.report,
                   height: 30,
-                  color: value.page == 18 ? Colors.black : Colors.white70,
+                  color: value.page == 18 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1386,7 +1376,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Banyak Transaksi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 18 ? Colors.black : Colors.white70,
+                    color: value.page == 18 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1407,7 +1397,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.report,
                   height: 30,
-                  color: value.page == 67 ? Colors.black : Colors.white70,
+                  color: value.page == 67 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1416,7 +1406,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Pembatalan Transaksi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 67 ? Colors.black : Colors.white70,
+                    color: value.page == 67 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1437,7 +1427,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.report,
                   height: 30,
-                  color: value.page == 57 ? Colors.black : Colors.white70,
+                  color: value.page == 57 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1446,7 +1436,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Perantara Aktiva/Pasiva",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 57 ? Colors.black : Colors.white70,
+                    color: value.page == 57 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1467,7 +1457,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   Image.asset(
                     ImageAssets.rupiah,
                     height: 30,
-                    color: value.page == 19 ? Colors.black : Colors.white70,
+                    color: value.page == 19 ? Colors.black : Colors.white,
                   ),
                   SizedBox(
                     width: 16,
@@ -1476,7 +1466,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                     "Kas Kecil",
                     style: TextStyle(
                       fontSize: 16,
-                      color: value.page == 19 ? Colors.black : Colors.white70,
+                      color: value.page == 19 ? Colors.black : Colors.white,
                     ),
                   )
                 ],
@@ -1500,7 +1490,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 19 ? Colors.black : Colors.white70,
+                        color: value.page == 19 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -1509,8 +1499,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Pengeluran/Pemasukan",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 19 ? Colors.black : Colors.white70,
+                          color: value.page == 19 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -1534,7 +1523,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 62 ? Colors.black : Colors.white70,
+                        color: value.page == 62 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -1543,8 +1532,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Kas Bon",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 62 ? Colors.black : Colors.white70,
+                          color: value.page == 62 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -1568,7 +1556,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 63 ? Colors.black : Colors.white70,
+                        color: value.page == 63 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -1577,8 +1565,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Penyelesaian Kas Bon",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 63 ? Colors.black : Colors.white70,
+                          color: value.page == 63 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -1600,7 +1587,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.rupiahs,
                   height: 30,
-                  color: value.page == 59 ? Colors.black : Colors.white70,
+                  color: value.page == 59 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1609,7 +1596,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Bayar/Pendapatan dimuka",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 59 ? Colors.black : Colors.white70,
+                    color: value.page == 59 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1630,7 +1617,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.bank,
                   height: 30,
-                  color: value.page == 20 ? Colors.black : Colors.white70,
+                  color: value.page == 20 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1639,7 +1626,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Saldo Bank",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 20 ? Colors.black : Colors.white70,
+                    color: value.page == 20 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1660,7 +1647,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.debt,
                   height: 30,
-                  color: value.page == 58 ? Colors.black : Colors.white70,
+                  color: value.page == 58 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1669,7 +1656,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Hutang/Piutang",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 58 ? Colors.black : Colors.white70,
+                    color: value.page == 58 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1690,7 +1677,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   Image.asset(
                     ImageAssets.bill,
                     height: 30,
-                    color: Colors.white70,
+                    color: Colors.white,
                   ),
                   SizedBox(
                     width: 16,
@@ -1699,7 +1686,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                     "Rekonsiliasi Harian",
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.white70,
+                      color: Colors.white,
                     ),
                   )
                 ],
@@ -1723,7 +1710,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 50 ? Colors.black : Colors.white70,
+                        color: value.page == 50 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -1732,8 +1719,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Bank",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 50 ? Colors.black : Colors.white70,
+                          color: value.page == 50 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -1757,7 +1743,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 51 ? Colors.black : Colors.white70,
+                        color: value.page == 51 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -1766,8 +1752,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Hutang/Piutang",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 51 ? Colors.black : Colors.white70,
+                          color: value.page == 51 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -1791,7 +1776,7 @@ class MenuTransaksiWidget extends StatelessWidget {
               //         Image.asset(
               //           ImageAssets.report,
               //           height: 30,
-              //           color: value.page == 52 ? Colors.black : Colors.white70,
+              //           color: value.page == 52 ? Colors.black : Colors.white,
               //         ),
               //         SizedBox(
               //           width: 16,
@@ -1801,7 +1786,7 @@ class MenuTransaksiWidget extends StatelessWidget {
               //           style: TextStyle(
               //             fontSize: 16,
               //             color:
-              //                 value.page == 52 ? Colors.black : Colors.white70,
+              //                 value.page == 52 ? Colors.black : Colors.white,
               //           ),
               //         )
               //       ],
@@ -1825,7 +1810,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 53 ? Colors.black : Colors.white70,
+                        color: value.page == 53 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -1834,8 +1819,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Aset",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 53 ? Colors.black : Colors.white70,
+                          color: value.page == 53 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -1859,7 +1843,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 54 ? Colors.black : Colors.white70,
+                        color: value.page == 54 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -1868,8 +1852,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Transaksi",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 54 ? Colors.black : Colors.white70,
+                          color: value.page == 54 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -1893,7 +1876,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 55 ? Colors.black : Colors.white70,
+                        color: value.page == 55 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -1902,8 +1885,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Perantara Aktiva/Pasiva",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 55 ? Colors.black : Colors.white70,
+                          color: value.page == 55 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -1925,7 +1907,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.click,
                   height: 30,
-                  color: value.page == 24 ? Colors.black : Colors.white70,
+                  color: value.page == 24 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1934,7 +1916,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Otorisasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 24 ? Colors.black : Colors.white70,
+                    color: value.page == 24 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1955,7 +1937,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   Image.asset(
                     ImageAssets.report,
                     height: 30,
-                    color: value.page == 25 ? Colors.black : Colors.white70,
+                    color: value.page == 25 ? Colors.black : Colors.white,
                   ),
                   SizedBox(
                     width: 16,
@@ -1964,7 +1946,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                     "Laporan",
                     style: TextStyle(
                       fontSize: 16,
-                      color: value.page == 25 ? Colors.black : Colors.white70,
+                      color: value.page == 25 ? Colors.black : Colors.white,
                     ),
                   )
                 ],
@@ -1988,7 +1970,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 40 ? Colors.black : Colors.white70,
+                        color: value.page == 40 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -1997,8 +1979,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Satu Transaksi",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 40 ? Colors.black : Colors.white70,
+                          color: value.page == 40 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -2022,7 +2003,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 41 ? Colors.black : Colors.white70,
+                        color: value.page == 41 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -2031,8 +2012,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Banyak Transaksi",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 41 ? Colors.black : Colors.white70,
+                          color: value.page == 41 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -2056,7 +2036,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 42 ? Colors.black : Colors.white70,
+                        color: value.page == 42 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -2065,8 +2045,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Back date",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 42 ? Colors.black : Colors.white70,
+                          color: value.page == 42 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -2090,7 +2069,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 43 ? Colors.black : Colors.white70,
+                        color: value.page == 43 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -2099,8 +2078,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Jurnal",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 43 ? Colors.black : Colors.white70,
+                          color: value.page == 43 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -2124,7 +2102,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 44 ? Colors.black : Colors.white70,
+                        color: value.page == 44 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -2133,8 +2111,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Neraca Berjalan",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 44 ? Colors.black : Colors.white70,
+                          color: value.page == 44 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -2158,7 +2135,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 45 ? Colors.black : Colors.white70,
+                        color: value.page == 45 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -2167,8 +2144,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Neraca Periode",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 45 ? Colors.black : Colors.white70,
+                          color: value.page == 45 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -2192,7 +2168,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 46 ? Colors.black : Colors.white70,
+                        color: value.page == 46 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -2201,8 +2177,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Laba Rugi Berjalan",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 46 ? Colors.black : Colors.white70,
+                          color: value.page == 46 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -2226,7 +2201,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 49 ? Colors.black : Colors.white70,
+                        color: value.page == 49 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -2235,8 +2210,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Laba Rugi Periode",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 49 ? Colors.black : Colors.white70,
+                          color: value.page == 49 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -2260,7 +2234,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 48 ? Colors.black : Colors.white70,
+                        color: value.page == 48 ? Colors.black : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -2269,8 +2243,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "GL",
                         style: TextStyle(
                           fontSize: 16,
-                          color:
-                              value.page == 48 ? Colors.black : Colors.white70,
+                          color: value.page == 48 ? Colors.black : Colors.white,
                         ),
                       )
                     ],

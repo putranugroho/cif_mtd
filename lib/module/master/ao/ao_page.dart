@@ -184,7 +184,9 @@ class AoPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        "Tambah AO / Marketing",
+                                        value.editData
+                                            ? "Ubah / hapus AO / Marketing"
+                                            : "Tambah AO / Marketing",
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,

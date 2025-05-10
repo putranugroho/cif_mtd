@@ -182,6 +182,7 @@ class AksesPointPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'action',
+                                      width: 80,
                                       label: Container(
                                           color: colorPrimary,
                                           padding: EdgeInsets.all(6),
