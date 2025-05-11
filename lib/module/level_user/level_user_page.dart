@@ -147,7 +147,7 @@ class LevelUserPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      width: 80,
+                                      width: 240,
                                       columnName: 'action',
                                       label: Container(
                                           color: colorPrimary,

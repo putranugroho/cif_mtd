@@ -34,7 +34,7 @@ class UsersNotifier extends ChangeNotifier {
   }
 
   Future<List<KaryawanModel>> getInqKaryawan(String query) async {
-    if (query.isNotEmpty && query.length > 2) {
+    if (query.isNotEmpty && query.length > 2 && editData == false) {
       listKaryawan.clear();
       notifyListeners();
       var data = {"nama": query};
@@ -69,6 +69,7 @@ class UsersNotifier extends ChangeNotifier {
     users = listData.where((e) => e.id == int.parse(id)).first;
     dialog = true;
     editData = true;
+    namaKaryawan.text = users!.namauser;
     nikKaryawan.text = users!.empId;
     userid.text = users!.userid;
     pass.text = users!.pass;
@@ -318,6 +319,8 @@ class UsersNotifier extends ChangeNotifier {
     aktivasiModel = null;
     levelUser = null;
     otorisasi = false;
+    namaKaryawan.clear();
+    nikKaryawan.clear();
     userid.clear();
     pass.clear();
     namauser.clear();

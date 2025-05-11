@@ -138,7 +138,7 @@ class PejabatPage extends StatelessWidget {
                                           color: colorPrimary,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
-                                          child: Text('Nama',
+                                          child: Text('Nama Pegawai',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -287,7 +287,7 @@ class PejabatPage extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          "Nama ",
+                                          "Nama Pegawai",
                                           style: const TextStyle(fontSize: 12),
                                         ),
                                         const SizedBox(width: 5),
@@ -315,7 +315,7 @@ class PejabatPage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         filled: true,
                                         fillColor: Colors.grey[200],
-                                        hintText: "Nama",
+                                        hintText: "Nama Pegawai",
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(6),

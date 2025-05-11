@@ -325,8 +325,11 @@ class UsersPage extends StatelessWidget {
                                               return TextField(
                                                   controller: controller,
                                                   focusNode: focusNode,
+                                                  readOnly: value.editData,
                                                   autofocus: true,
                                                   decoration: InputDecoration(
+                                                    filled: value.editData,
+                                                    fillColor: Colors.grey[200],
                                                     border:
                                                         OutlineInputBorder(),
                                                     labelText: 'Cari Akun',
