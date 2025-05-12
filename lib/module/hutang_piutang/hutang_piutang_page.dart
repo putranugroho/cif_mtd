@@ -6,8 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart' as a;
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../utils/colors.dart';
+import '../../utils/pro_shimmer.dart';
 
 class HutangPiutangPage extends StatelessWidget {
   final int tipe;
@@ -81,6 +83,211 @@ class HutangPiutangPage extends StatelessWidget {
                         ],
                       ),
                     ),
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      width: double.infinity,
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: FocusTraversalGroup(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            // Label + Radio Buttons
+                            Expanded(
+                              flex: 5,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Jenis Transaksi",
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Row(
+                                    children: [
+                                      Radio(
+                                        value: true,
+                                        groupValue: value.jenisTrans,
+                                        activeColor: colorPrimary,
+                                        onChanged: (e) =>
+                                            value.pilihJenisTransaksi(true),
+                                      ),
+                                      const Text(
+                                        "Hutang",
+                                        style: const TextStyle(fontSize: 14),
+                                      ),
+                                      const SizedBox(width: 16),
+                                      Radio(
+                                        value: false,
+                                        groupValue: value.jenisTrans,
+                                        activeColor: colorPrimary,
+                                        onChanged: (e) =>
+                                            value.pilihJenisTransaksi(false),
+                                      ),
+                                      const Text(
+                                        "Piutang",
+                                        style: const TextStyle(fontSize: 14),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: value.isLoading
+                          ? Container(
+                              padding: const EdgeInsets.all(16),
+                              child: const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ProShimmer(height: 10, width: 200),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  ProShimmer(height: 10, width: 120),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  ProShimmer(height: 10, width: 100),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Container(
+                              padding: EdgeInsets.all(20),
+                              height: MediaQuery.of(context).size.height,
+                              child: SfDataGrid(
+                                headerRowHeight: 40,
+                                defaultColumnWidth: 180,
+                                frozenColumnsCount: 1,
+
+                                // controller: value.dataGridController,
+                                gridLinesVisibility: GridLinesVisibility.both,
+                                headerGridLinesVisibility:
+                                    GridLinesVisibility.both,
+                                selectionMode: SelectionMode.single,
+
+                                source: DetailDataSource(value),
+                                columns: <GridColumn>[
+                                  GridColumn(
+                                      width: 50,
+                                      columnName: 'no',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('No',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 12,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'cussup',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Customer/Supplier',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'kontrak',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('No. Kontrak',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'invoice',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('No. Invoice',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'transaksi',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Nilai Transaksi',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'kewajiban',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Sisa Kewajiban',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  // Cust/Supp	No Kontrak	No Invoice	Nilai Transaksi	Sisa Kewajiban	cara bayar	Jk Waktu
+                                  GridColumn(
+                                      columnName: 'carabayar',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Cara Bayar',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'jangkawaktu',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Jangka Waktu',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      width: 80,
+                                      columnName: 'action',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          padding: EdgeInsets.all(6),
+                                          alignment: Alignment.center,
+                                          child: Text('Lihat',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                ],
+                              ),
+                            ),
+                    )
                   ],
                 ),
               ),
@@ -234,7 +441,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                         alignment: Alignment
                                                             .centerLeft,
                                                         child: Text(
-                                                            "Tanggal Jatuh Tempo Pertama"),
+                                                            "Jangka Waktu"),
                                                       ),
                                                     ],
                                                   )
@@ -1356,5 +1563,15 @@ class HutangPiutangPage extends StatelessWidget {
         )),
       ),
     );
+  }
+}
+
+class DetailDataSource extends DataGridSource {
+  DetailDataSource(HutangPiutangNotifier value) {}
+
+  @override
+  DataGridRowAdapter? buildRow(DataGridRow row) {
+    // TODO: implement buildRow
+    throw UnimplementedError();
   }
 }

@@ -16,8 +16,7 @@ class LevelUserNotifier extends ChangeNotifier {
 
   var dialog = false;
   tambah() {
-    editModul = false;
-    editData = false;
+    clear();
     dialog = true;
     notifyListeners();
   }

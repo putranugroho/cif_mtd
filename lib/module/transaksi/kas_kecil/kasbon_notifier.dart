@@ -182,7 +182,7 @@ class KasbonNotifier extends ChangeNotifier {
             DateTime.now(),
           ))),
       firstDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('y').format(DateTime.now())) - 10,
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
@@ -190,7 +190,7 @@ class KasbonNotifier extends ChangeNotifier {
             DateTime.now(),
           ))),
       lastDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) + 10,
+          int.parse(DateFormat('y').format(DateTime.now())),
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
@@ -224,8 +224,17 @@ class KasbonNotifier extends ChangeNotifier {
   TextEditingController nomorRef = TextEditingController();
 
   bool dialog = false;
+  bool editData = false;
+
   tambah() {
     dialog = true;
+    editData = false;
+    notifyListeners();
+  }
+
+  edit() {
+    dialog = true;
+    editData = true;
     notifyListeners();
   }
 

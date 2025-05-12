@@ -394,6 +394,12 @@ class HutangPiutangNotifier extends ChangeNotifier {
   TextEditingController tglJatuhTempoPertama = TextEditingController();
   TextEditingController tanggalKontrak = TextEditingController();
 
+  bool jenisTrans = false;
+  pilihJenisTransaksi(bool value) {
+    jenisTrans = value;
+    notifyListeners();
+  }
+
   var tagihanbulanan = true;
   gantitagitahnbulanan() {
     tagihanbulanan = !tagihanbulanan;

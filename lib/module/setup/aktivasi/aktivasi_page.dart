@@ -98,6 +98,7 @@ class AktivasiPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 100,
                                 columnName: 'kd_aktivasi',
                                 label: Container(
                                     padding: EdgeInsets.all(6),
@@ -122,6 +123,7 @@ class AktivasiPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 350,
                                 columnName: 'hari',
                                 label: Container(
                                     color: colorPrimary,
@@ -134,30 +136,33 @@ class AktivasiPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 80,
                                 columnName: 'jam_mulai',
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(6),
-                                    child: Text('Jam Berangkat',
+                                    child: Text('Jam Masuk',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 80,
                                 columnName: 'jam_selesai',
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(6),
-                                    child: Text('Jam Selesai',
+                                    child: Text('Jam Pulang',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 80,
                                 columnName: 'action',
                                 label: Container(
                                     color: colorPrimary,

@@ -122,6 +122,7 @@ class JabatanPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 100,
                                       columnName: 'kode',
                                       label: Container(
                                           color: colorPrimary,
@@ -134,6 +135,7 @@ class JabatanPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 250,
                                       columnName: 'jabatan',
                                       label: Container(
                                           color: colorPrimary,
@@ -146,6 +148,7 @@ class JabatanPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 250,
                                       columnName: 'level',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
@@ -158,6 +161,7 @@ class JabatanPage extends StatelessWidget {
                                                 fontSize: 12,
                                               )))),
                                   GridColumn(
+                                      width: 80,
                                       columnName: 'action',
                                       label: Container(
                                           color: colorPrimary,

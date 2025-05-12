@@ -120,6 +120,7 @@ class LevelPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 50,
                                       columnName: 'level',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
@@ -132,6 +133,7 @@ class LevelPage extends StatelessWidget {
                                                 fontSize: 12,
                                               )))),
                                   GridColumn(
+                                      width: 250,
                                       columnName: 'kelompok',
                                       label: Container(
                                           color: colorPrimary,
@@ -144,6 +146,7 @@ class LevelPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 80,
                                       columnName: 'action',
                                       label: Container(
                                           color: colorPrimary,
@@ -384,6 +387,16 @@ class DetailDataSource extends DataGridSource {
                   ),
                 ),
               ),
+            ),
+          );
+        } else if (e.columnName == 'level') {
+          return Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           );
         } else {

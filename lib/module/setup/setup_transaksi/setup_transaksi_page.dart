@@ -122,7 +122,7 @@ class SetupTransaksiPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'kode',
-                                      width: 120,
+                                      width: 100,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -179,6 +179,19 @@ class SetupTransaksiPage extends StatelessWidget {
                                           color: colorPrimary,
                                           alignment: Alignment.center,
                                           child: Text('Modul',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'hutangpiutang',
+                                      width: 80,
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Hutang Piutang',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -549,6 +562,20 @@ class SetupTransaksiPage extends StatelessWidget {
                                         width: 8,
                                       ),
                                       Text("Kasir"),
+                                      SizedBox(
+                                        width: 32,
+                                      ),
+                                      Radio(
+                                        activeColor: colorPrimary,
+                                        value: "KAS KECIL",
+                                        groupValue: value.modul,
+                                        onChanged: (e) =>
+                                            value.gantimodul("KAS KECIL"),
+                                      ),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
+                                      Text("Kas Kecil"),
                                     ],
                                   ),
                                   SizedBox(
@@ -699,6 +726,7 @@ class DetailDataSource extends DataGridSource {
                     columnName: 'gl_kre',
                     value: "${data.glKre} - ${data.namaKre}"),
                 DataGridCell(columnName: 'modul', value: data.modul),
+                DataGridCell(columnName: 'hutangpiutang', value: "Piutang"),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))

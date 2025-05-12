@@ -122,6 +122,7 @@ class SbbKhususPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 120,
                                       columnName: 'kode',
                                       label: Container(
                                           color: colorPrimary,
@@ -134,6 +135,7 @@ class SbbKhususPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 250,
                                       columnName: 'nama',
                                       label: Container(
                                           color: colorPrimary,
@@ -146,6 +148,7 @@ class SbbKhususPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 150,
                                       columnName: 'items',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
@@ -158,6 +161,7 @@ class SbbKhususPage extends StatelessWidget {
                                                 fontSize: 12,
                                               )))),
                                   GridColumn(
+                                      width: 80,
                                       columnName: 'action',
                                       label: Container(
                                           color: colorPrimary,
@@ -234,7 +238,7 @@ class SbbKhususPage extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  "Pilih SBB Khusus",
+                                  "Pilih Golongan",
                                   style: const TextStyle(fontSize: 12),
                                 ),
                                 const SizedBox(width: 5),
@@ -251,6 +255,7 @@ class SbbKhususPage extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: DropdownSearch<GolonganSbbKhususModel>(
+                                    enabled: !value.editData,
                                     popupProps:
                                         const PopupPropsMultiSelection.menu(
                                       showSearchBox:
@@ -269,6 +274,8 @@ class SbbKhususPage extends StatelessWidget {
                                       textAlignVertical:
                                           TextAlignVertical.center,
                                       dropdownSearchDecoration: InputDecoration(
+                                        filled: value.editData,
+                                        fillColor: Colors.grey[200],
                                         hintText: "Pilih Golongan",
                                         border: OutlineInputBorder(
                                           borderRadius:

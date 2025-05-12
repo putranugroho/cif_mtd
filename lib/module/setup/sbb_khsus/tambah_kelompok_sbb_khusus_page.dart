@@ -125,6 +125,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 100,
                                       columnName: 'kode',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
@@ -137,6 +138,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                                 fontSize: 12,
                                               )))),
                                   GridColumn(
+                                      width: 250,
                                       columnName: 'nama',
                                       label: Container(
                                           color: colorPrimary,
@@ -149,6 +151,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 100,
                                       columnName: 'lebih',
                                       label: Container(
                                           color: colorPrimary,
@@ -161,6 +164,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 80,
                                       columnName: 'action',
                                       label: Container(
                                           color: colorPrimary,
@@ -255,6 +259,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                               TextFormField(
                                 textInputAction: TextInputAction.done,
                                 controller: value.kode,
+                                readOnly: value.editData,
                                 maxLines: 1,
                                 inputFormatters: [
                                   FilteringTextInputFormatter.allow(
@@ -268,6 +273,8 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                   }
                                 },
                                 decoration: InputDecoration(
+                                  filled: value.editData,
+                                  fillColor: Colors.grey[200],
                                   hintText: "Kode Golongan",
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(6),

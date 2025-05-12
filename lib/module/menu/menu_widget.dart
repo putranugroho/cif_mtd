@@ -1539,39 +1539,39 @@ class MenuTransaksiWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              InkWell(
-                onTap: () => value.gantimenu(63),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(
-                    color: value.page == 63 ? Colors.white : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Image.asset(
-                        ImageAssets.report,
-                        height: 30,
-                        color: value.page == 63 ? Colors.black : Colors.white,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "Penyelesaian Kas Bon",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: value.page == 63 ? Colors.black : Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+              // InkWell(
+              //   onTap: () => value.gantimenu(63),
+              //   child: Container(
+              //     width: MediaQuery.of(context).size.width,
+              //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              //     decoration: BoxDecoration(
+              //       color: value.page == 63 ? Colors.white : Colors.transparent,
+              //       borderRadius: BorderRadius.circular(8),
+              //     ),
+              //     child: Row(
+              //       children: [
+              //         SizedBox(
+              //           width: 16,
+              //         ),
+              //         Image.asset(
+              //           ImageAssets.report,
+              //           height: 30,
+              //           color: value.page == 63 ? Colors.black : Colors.white,
+              //         ),
+              //         SizedBox(
+              //           width: 16,
+              //         ),
+              //         Text(
+              //           "Penyelesaian Kas Bon",
+              //           style: TextStyle(
+              //             fontSize: 16,
+              //             color: value.page == 63 ? Colors.black : Colors.white,
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //   ),
+              // ),
             ]),
         InkWell(
           onTap: () => value.gantimenu(59),
@@ -1653,7 +1653,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                   width: 16,
                 ),
                 Text(
-                  "Hutang/Piutang",
+                  "Bayar Hutang/ Piutang",
                   style: TextStyle(
                     fontSize: 16,
                     color: value.page == 58 ? Colors.black : Colors.white,

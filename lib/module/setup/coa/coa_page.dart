@@ -190,7 +190,7 @@ class CoaPage extends StatelessWidget {
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('ANo. Sub Buku Besar',
+                                          child: Text('No. Sub Buku Besar',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -1322,127 +1322,6 @@ class CoaPage extends StatelessWidget {
                                                         CrossAxisAlignment
                                                             .stretch,
                                                     children: [
-                                                      // Row(
-                                                      //   children: [
-                                                      //     Text(
-                                                      //       "Pilih Header",
-                                                      //       style:
-                                                      //           const TextStyle(
-                                                      //               fontSize:
-                                                      //                   12),
-                                                      //     ),
-                                                      //     const SizedBox(
-                                                      //         width: 5),
-                                                      //     const Text(
-                                                      //       "*",
-                                                      //       style: TextStyle(
-                                                      //           fontSize: 8),
-                                                      //     ),
-                                                      //   ],
-                                                      // ),
-                                                      // const SizedBox(
-                                                      //   height: 8,
-                                                      // ),
-                                                      // Row(
-                                                      //   children: [
-                                                      //     Expanded(
-                                                      //       child:
-                                                      //           DropdownSearch<
-                                                      //               CoaModel>(
-                                                      //         popupProps:
-                                                      //             const PopupPropsMultiSelection
-                                                      //                 .menu(
-                                                      //           showSearchBox:
-                                                      //               true, // Aktifkan fitur pencarian
-                                                      //         ),
-                                                      //         selectedItem:
-                                                      //             value.header,
-                                                      //         items: value.list
-                                                      //             .where((e) =>
-                                                      //                 e.jnsAcc ==
-                                                      //                 "A")
-                                                      //             .toList(),
-                                                      //         itemAsString: (e) =>
-                                                      //             "${e.namaSbb}",
-                                                      //         onChanged: (e) {
-                                                      //           value
-                                                      //               .pilihHeader(
-                                                      //                   e!);
-                                                      //         },
-                                                      //         dropdownDecoratorProps:
-                                                      //             DropDownDecoratorProps(
-                                                      //           baseStyle:
-                                                      //               TextStyle(
-                                                      //                   fontSize:
-                                                      //                       16),
-                                                      //           textAlignVertical:
-                                                      //               TextAlignVertical
-                                                      //                   .center,
-                                                      //           dropdownSearchDecoration:
-                                                      //               InputDecoration(
-                                                      //             hintText:
-                                                      //                 "Pilih Header",
-                                                      //             border:
-                                                      //                 OutlineInputBorder(
-                                                      //               borderRadius:
-                                                      //                   BorderRadius
-                                                      //                       .circular(8),
-                                                      //               borderSide:
-                                                      //                   BorderSide(
-                                                      //                 width: 1,
-                                                      //                 color: Colors
-                                                      //                     .grey,
-                                                      //               ),
-                                                      //             ),
-                                                      //           ),
-                                                      //         ),
-                                                      //       ),
-                                                      //     ),
-                                                      //     SizedBox(
-                                                      //       width: 16,
-                                                      //     ),
-                                                      //     Container(
-                                                      //       width: 150,
-                                                      //       child:
-                                                      //           TextFormField(
-                                                      //         readOnly: true,
-                                                      //         textInputAction:
-                                                      //             TextInputAction
-                                                      //                 .done,
-                                                      //         controller: value
-                                                      //             .noHeader,
-                                                      //         maxLines: 1,
-                                                      //         validator: (e) {
-                                                      //           if (e!
-                                                      //               .isEmpty) {
-                                                      //             return "Wajib diisi";
-                                                      //           } else {
-                                                      //             return null;
-                                                      //           }
-                                                      //         },
-                                                      //         decoration:
-                                                      //             InputDecoration(
-                                                      //           filled: true,
-                                                      //           fillColor:
-                                                      //               Colors.grey[
-                                                      //                   200],
-                                                      //           hintText:
-                                                      //               "Nomor Header",
-                                                      //           border:
-                                                      //               OutlineInputBorder(
-                                                      //             borderRadius:
-                                                      //                 BorderRadius
-                                                      //                     .circular(
-                                                      //                         6),
-                                                      //           ),
-                                                      //         ),
-                                                      //       ),
-                                                      //     )
-                                                      //   ],
-                                                      // ),
-                                                      // SizedBox(
-                                                      //   height: 16,
-                                                      // ),
                                                       Row(
                                                         children: [
                                                           Text(
@@ -1552,7 +1431,7 @@ class CoaPage extends StatelessWidget {
                                                                     Colors.grey[
                                                                         200],
                                                                 hintText:
-                                                                    "Nomor Sub Buku Besar",
+                                                                    "Buku Besar",
                                                                 border:
                                                                     OutlineInputBorder(
                                                                   borderRadius:
@@ -1666,7 +1545,7 @@ class CoaPage extends StatelessWidget {
                                                               decoration:
                                                                   InputDecoration(
                                                                 hintText:
-                                                                    "Nomor Header",
+                                                                    "Nomor Sub Buku Besar",
                                                                 filled: true,
                                                                 fillColor:
                                                                     Colors.grey[
@@ -1914,12 +1793,37 @@ class CoaPage extends StatelessWidget {
                                                     ],
                                                   )
                                                 : SizedBox(),
-                                    ButtonPrimary(
-                                      onTap: () {
-                                        value.cek();
-                                      },
-                                      name: "Simpan",
-                                    )
+                                    value.jnsAcc == null
+                                        ? SizedBox()
+                                        : Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              ButtonPrimary(
+                                                onTap: () {
+                                                  value.cek();
+                                                },
+                                                name: "Simpan",
+                                              ),
+                                              value.editData
+                                                  ? Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .stretch,
+                                                      children: [
+                                                        const SizedBox(
+                                                            height: 16),
+                                                        ButtonDanger(
+                                                          onTap: () {
+                                                            // value.cek();
+                                                          },
+                                                          name: "Hapus",
+                                                        ),
+                                                      ],
+                                                    )
+                                                  : SizedBox()
+                                            ],
+                                          )
                                   ],
                                 ))
                               ],

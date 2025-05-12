@@ -121,6 +121,7 @@ class KelompokAsetPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 100,
                                       columnName: 'kode',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
@@ -133,6 +134,7 @@ class KelompokAsetPage extends StatelessWidget {
                                                 fontSize: 12,
                                               )))),
                                   GridColumn(
+                                      width: 250,
                                       columnName: 'nama',
                                       label: Container(
                                           color: colorPrimary,
@@ -145,6 +147,7 @@ class KelompokAsetPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 80,
                                       columnName: 'action',
                                       label: Container(
                                           color: colorPrimary,

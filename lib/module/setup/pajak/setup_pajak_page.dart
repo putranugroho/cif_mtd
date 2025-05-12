@@ -97,7 +97,9 @@ class SetupPajakPage extends StatelessWidget {
                                   readOnly: !value.editData,
                                   inputFormatters: [
                                     FilteringTextInputFormatter.allow(
-                                        RegExp(r'^\d+\.?\d{0,2}')),
+                                      RegExp(
+                                          r'^(100(\.00?)?|([1-9]\d?|0)(\.\d{0,2})?)$'),
+                                    ),
                                   ],
                                   keyboardType: TextInputType.numberWithOptions(
                                     decimal: true,
@@ -114,8 +116,17 @@ class SetupPajakPage extends StatelessWidget {
                                       return "Format tidak valid";
                                     }
 
-                                    if (valueAsDouble > 100) {
-                                      return "Tidak boleh lebih dari 100%";
+                                    if (valueAsDouble < 0 ||
+                                        valueAsDouble > 100) {
+                                      return "Nilai harus antara 0 dan 100";
+                                    }
+
+                                    // Ensure only 2 decimal places max
+                                    if (e.contains(".")) {
+                                      final decimalPart = e.split(".")[1];
+                                      if (decimalPart.length > 2) {
+                                        return "Maksimal 2 angka di belakang koma";
+                                      }
                                     }
 
                                     return null;
@@ -195,7 +206,9 @@ class SetupPajakPage extends StatelessWidget {
                                   readOnly: !value.editData,
                                   inputFormatters: [
                                     FilteringTextInputFormatter.allow(
-                                        RegExp(r'^\d+\.?\d{0,2}')),
+                                      RegExp(
+                                          r'^(100(\.00?)?|([1-9]\d?|0)(\.\d{0,2})?)$'),
+                                    ),
                                   ],
                                   keyboardType: TextInputType.numberWithOptions(
                                     decimal: true,
@@ -212,8 +225,17 @@ class SetupPajakPage extends StatelessWidget {
                                       return "Format tidak valid";
                                     }
 
-                                    if (valueAsDouble > 100) {
-                                      return "Tidak boleh lebih dari 100%";
+                                    if (valueAsDouble < 0 ||
+                                        valueAsDouble > 100) {
+                                      return "Nilai harus antara 0 dan 100";
+                                    }
+
+                                    // Ensure only 2 decimal places max
+                                    if (e.contains(".")) {
+                                      final decimalPart = e.split(".")[1];
+                                      if (decimalPart.length > 2) {
+                                        return "Maksimal 2 angka di belakang koma";
+                                      }
                                     }
 
                                     return null;

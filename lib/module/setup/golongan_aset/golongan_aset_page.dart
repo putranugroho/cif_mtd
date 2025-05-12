@@ -101,6 +101,7 @@ class GolonganAsetPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 100,
                                 columnName: 'kode',
                                 label: Container(
                                     padding: EdgeInsets.all(6),
@@ -125,6 +126,33 @@ class GolonganAsetPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                columnName: 'metode',
+                                width: 110,
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Metode',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 50,
+                                columnName: 'nilaiakhir',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Nilai Akhir',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 50,
                                 columnName: 'masasusut',
                                 label: Container(
                                     color: colorPrimary,
@@ -137,6 +165,7 @@ class GolonganAsetPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 50,
                                 columnName: 'nilai',
                                 label: Container(
                                     color: colorPrimary,
@@ -201,6 +230,7 @@ class GolonganAsetPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 80,
                                 columnName: 'action',
                                 label: Container(
                                     color: colorPrimary,
@@ -837,6 +867,8 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'no', value: (index++).toString()),
                 DataGridCell(columnName: 'kode', value: data.kodeGolongan),
                 DataGridCell(columnName: 'nama', value: data.namaGolongan),
+                DataGridCell(columnName: 'metode', value: "Double Declining"),
+                DataGridCell(columnName: 'nilaiakhir', value: "1"),
                 DataGridCell(columnName: 'masasusut', value: data.masaSusut),
                 DataGridCell(columnName: 'nilai', value: data.nilaiDeclining),
                 DataGridCell(columnName: 'sbbAset', value: data.sbbAset),
@@ -882,6 +914,21 @@ class DetailDataSource extends DataGridSource {
                     color: Colors.white,
                   ),
                 ),
+              ),
+            ),
+          );
+        } else if (e.columnName == 'masasusut' ||
+            e.columnName == 'nilai' ||
+            e.columnName == 'nilaiakhir') {
+          return Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 12,
               ),
             ),
           );

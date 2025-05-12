@@ -72,6 +72,31 @@ class KasbonPage extends StatelessWidget {
                               ),
                             ),
                           ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          InkWell(
+                            onTap: () => value.edit(),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: colorPrimary,
+                                border: Border.all(
+                                  width: 2,
+                                  color: colorPrimary,
+                                ),
+                              ),
+                              child: Text(
+                                "Aksi",
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -230,7 +255,7 @@ class KasbonPage extends StatelessWidget {
                                     color: colorPrimary,
                                     padding: EdgeInsets.all(6),
                                     alignment: Alignment.center,
-                                    child: Text('Action',
+                                    child: Text('Penyelesaian',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -259,212 +284,1299 @@ class KasbonPage extends StatelessWidget {
                 bottom: 0,
                 right: 0,
                 child: value.dialog
-                    ? Container(
-                        padding: EdgeInsets.all(20),
-                        width: 600,
-                        decoration: BoxDecoration(color: Colors.white),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    "Tambah Transaksi",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () => value.tutup(),
-                                  child: Container(
-                                    width: 40,
-                                    height: 40,
-                                    padding: EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey[200],
-                                        shape: BoxShape.circle),
-                                    child: Icon(Icons.close),
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 32,
-                            ),
-                            Expanded(
-                                child: ListView(
+                    ? value.editData
+                        ? Container(
+                            padding: EdgeInsets.all(20),
+                            width: 600,
+                            decoration: BoxDecoration(color: Colors.white),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 Row(
                                   children: [
                                     Expanded(
-                                        child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "Nomor Dokumen",
-                                              style:
-                                                  const TextStyle(fontSize: 12),
-                                            ),
-                                            const SizedBox(width: 5),
-                                          ],
+                                      child: Text(
+                                        "Penyelesaian Kas Bon",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-                                        TextFormField(
-                                          textInputAction: TextInputAction.done,
-                                          controller: value.nomorDok,
-                                          maxLines: 1,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly
-                                          ],
-                                          validator: (e) {
-                                            if (e!.isEmpty) {
-                                              return "Wajib diisi";
-                                            } else {
-                                              return null;
-                                            }
-                                          },
-                                          decoration: InputDecoration(
-                                            hintText: "Nomor Dok",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    )),
-                                    SizedBox(
-                                      width: 16,
+                                      ),
                                     ),
-                                    Expanded(
-                                        child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "Nomor Reference",
-                                              style:
-                                                  const TextStyle(fontSize: 12),
-                                            ),
-                                            const SizedBox(width: 5),
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-                                        TextFormField(
-                                          textInputAction: TextInputAction.done,
-                                          controller: value.nomorRef,
-                                          maxLines: 1,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly
-                                          ],
-                                          validator: (e) {
-                                            if (e!.isEmpty) {
-                                              return "Wajib diisi";
-                                            } else {
-                                              return null;
-                                            }
-                                          },
-                                          decoration: InputDecoration(
-                                            hintText: "Nomor Referensi",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    )),
+                                    InkWell(
+                                      onTap: () => value.tutup(),
+                                      child: Container(
+                                        width: 40,
+                                        height: 40,
+                                        padding: EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey[200],
+                                            shape: BoxShape.circle),
+                                        child: Icon(Icons.close),
+                                      ),
+                                    )
                                   ],
-                                ),
-                                const SizedBox(height: 16),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Nominal",
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
-                                    const SizedBox(width: 5),
-                                    const Text(
-                                      "*",
-                                      style: TextStyle(fontSize: 8),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                TextFormField(
-                                  textInputAction: TextInputAction.done,
-                                  controller: value.nominal,
-                                  maxLines: 1,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly,
-                                    CurrencyInputFormatter(),
-                                  ],
-                                  validator: (e) {
-                                    if (e!.isEmpty) {
-                                      return "Wajib diisi";
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                  decoration: InputDecoration(
-                                    hintText: "Nilai Transaksi",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(6),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Keterangan",
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
-                                    const SizedBox(width: 5),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                TextFormField(
-                                  textInputAction: TextInputAction.done,
-                                  decoration: InputDecoration(
-                                    hintText: "Keterangan Transaksi",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(6),
-                                    ),
-                                  ),
                                 ),
                                 SizedBox(
-                                  height: 16,
+                                  height: 32,
                                 ),
-                                ButtonPrimary(
-                                  onTap: () {},
-                                  name: "Simpan",
-                                )
+                                Expanded(
+                                    child: ListView(
+                                  children: [
+                                    Container(
+                                      margin:
+                                          EdgeInsets.symmetric(vertical: 16),
+                                      height: 1,
+                                      color: Colors.grey,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        "Pemberian",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Tanggal",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TextFormField(
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.nominal,
+                                      maxLines: 1,
+                                      readOnly: true,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        CurrencyInputFormatter(),
+                                      ],
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.grey[200],
+                                        hintText: "Tanggal Transaksi",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Pilih Debet Akun",
+                                              style:
+                                                  const TextStyle(fontSize: 12),
+                                            ),
+                                            const SizedBox(width: 5),
+                                            const Text(
+                                              "*",
+                                              style: TextStyle(fontSize: 8),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: TypeAheadField<
+                                                  InqueryGlModel>(
+                                                controller: value.nosbbdeb,
+                                                suggestionsCallback: (search) =>
+                                                    value.getInquery(search),
+                                                builder: (context, controller,
+                                                    focusNode) {
+                                                  return TextField(
+                                                      controller: controller,
+                                                      focusNode: focusNode,
+                                                      enabled: false,
+                                                      autofocus: true,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        border:
+                                                            OutlineInputBorder(),
+                                                        labelText: 'Cari Akun',
+                                                      ));
+                                                },
+                                                itemBuilder: (context, city) {
+                                                  return ListTile(
+                                                    title: Text(city.nosbb),
+                                                    subtitle:
+                                                        Text(city.namaSbb),
+                                                  );
+                                                },
+                                                onSelected: (city) {
+                                                  // value.selectInvoice(city);
+                                                  value.pilihAkunDeb(city);
+                                                },
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 16,
+                                            ),
+                                            Container(
+                                              width: 150,
+                                              child: TextFormField(
+                                                // enabled: false,
+                                                readOnly: true,
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: value.namaSbbDeb,
+                                                maxLines: 1,
+                                                // inputFormatters: [
+                                                //   FilteringTextInputFormatter.digitsOnly
+                                                // ],
+                                                validator: (e) {
+                                                  if (e!.isEmpty) {
+                                                    return "Wajib diisi";
+                                                  } else {
+                                                    return null;
+                                                  }
+                                                },
+                                                decoration: InputDecoration(
+                                                  filled: true,
+                                                  fillColor: Colors.grey[200],
+                                                  hintText: "Nomor Debet",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        const SizedBox(height: 16),
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Pilih Kredit Akun",
+                                              style:
+                                                  const TextStyle(fontSize: 12),
+                                            ),
+                                            const SizedBox(width: 5),
+                                            const Text(
+                                              "*",
+                                              style: TextStyle(fontSize: 8),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: TypeAheadField<
+                                                  InqueryGlModel>(
+                                                controller: value.nossbcre,
+                                                suggestionsCallback: (search) =>
+                                                    value.getInquery(search),
+                                                builder: (context, controller,
+                                                    focusNode) {
+                                                  return TextField(
+                                                      controller: controller,
+                                                      focusNode: focusNode,
+                                                      enabled: false,
+                                                      autofocus: true,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        border:
+                                                            OutlineInputBorder(),
+                                                        labelText: 'Cari Akun',
+                                                      ));
+                                                },
+                                                itemBuilder: (context, city) {
+                                                  return ListTile(
+                                                    title: Text(city.nosbb),
+                                                    subtitle:
+                                                        Text(city.namaSbb),
+                                                  );
+                                                },
+                                                onSelected: (city) {
+                                                  // value.selectInvoice(city);
+                                                  value.pilihAkunCre(city);
+                                                },
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 16,
+                                            ),
+                                            Container(
+                                              width: 150,
+                                              child: TextFormField(
+                                                // enabled: false,
+                                                readOnly: true,
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: value.namaSbbCre,
+                                                maxLines: 1,
+                                                // inputFormatters: [
+                                                //   FilteringTextInputFormatter.digitsOnly
+                                                // ],
+                                                validator: (e) {
+                                                  if (e!.isEmpty) {
+                                                    return "Wajib diisi";
+                                                  } else {
+                                                    return null;
+                                                  }
+                                                },
+                                                decoration: InputDecoration(
+                                                  filled: true,
+                                                  fillColor: Colors.grey[200],
+                                                  hintText: "Nomor Kredit",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        const SizedBox(height: 16),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Nominal",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TextFormField(
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.nominal,
+                                      maxLines: 1,
+                                      readOnly: true,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        CurrencyInputFormatter(),
+                                      ],
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.grey[200],
+                                        hintText: "Nilai Transaksi",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Nomor Dokumen",
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                ),
+                                                const SizedBox(width: 5),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            TextFormField(
+                                              textInputAction:
+                                                  TextInputAction.done,
+                                              controller: value.nomorDok,
+                                              maxLines: 1,
+                                              readOnly: true,
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
+                                              ],
+                                              validator: (e) {
+                                                if (e!.isEmpty) {
+                                                  return "Wajib diisi";
+                                                } else {
+                                                  return null;
+                                                }
+                                              },
+                                              decoration: InputDecoration(
+                                                filled: true,
+                                                fillColor: Colors.grey[200],
+                                                hintText: "Nomor Dok",
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                        SizedBox(
+                                          width: 16,
+                                        ),
+                                        Expanded(
+                                            child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Nomor Reference",
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                ),
+                                                const SizedBox(width: 5),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            TextFormField(
+                                              textInputAction:
+                                                  TextInputAction.done,
+                                              controller: value.nomorRef,
+                                              maxLines: 1,
+                                              readOnly: true,
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
+                                              ],
+                                              validator: (e) {
+                                                if (e!.isEmpty) {
+                                                  return "Wajib diisi";
+                                                } else {
+                                                  return null;
+                                                }
+                                              },
+                                              decoration: InputDecoration(
+                                                filled: true,
+                                                fillColor: Colors.grey[200],
+                                                hintText: "Nomor Referensi",
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 16),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Keterangan",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TextFormField(
+                                      textInputAction: TextInputAction.done,
+                                      readOnly: true,
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.grey[200],
+                                        hintText: "Keterangan Transaksi",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 16,
+                                    ),
+                                    Container(
+                                      margin:
+                                          EdgeInsets.symmetric(vertical: 16),
+                                      height: 1,
+                                      color: Colors.grey,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        "Penyelesaian",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Tanggal",
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                ),
+                                                const SizedBox(width: 5),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            InkWell(
+                                              onTap: () =>
+                                                  value.pilihTanggalBuka(),
+                                              child: TextFormField(
+                                                enabled: false,
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller:
+                                                    value.tglTransaksiText,
+                                                maxLines: 1,
+                                                validator: (e) {
+                                                  if (e!.isEmpty) {
+                                                    return "Wajib diisi";
+                                                  } else {
+                                                    return null;
+                                                  }
+                                                },
+                                                decoration: InputDecoration(
+                                                  hintText: "Pilih Tanggal",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                        SizedBox(
+                                          width: 16,
+                                        ),
+                                        Expanded(
+                                            child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Nomor Dokumen",
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                ),
+                                                const SizedBox(width: 5),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            TextFormField(
+                                              textInputAction:
+                                                  TextInputAction.done,
+                                              controller: value.nomorRef,
+                                              maxLines: 1,
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
+                                              ],
+                                              validator: (e) {
+                                                if (e!.isEmpty) {
+                                                  return "Wajib diisi";
+                                                } else {
+                                                  return null;
+                                                }
+                                              },
+                                              decoration: InputDecoration(
+                                                hintText: "Nomor Dok",
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 16),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Nilai Transaksi",
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                ),
+                                                const SizedBox(width: 5),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            TextFormField(
+                                              textInputAction:
+                                                  TextInputAction.done,
+                                              controller: value.nomorDok,
+                                              maxLines: 1,
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
+                                              ],
+                                              validator: (e) {
+                                                if (e!.isEmpty) {
+                                                  return "Wajib diisi";
+                                                } else {
+                                                  return null;
+                                                }
+                                              },
+                                              decoration: InputDecoration(
+                                                hintText: "Nilai Transaksi",
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                        SizedBox(
+                                          width: 16,
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Pilih Debet Akun",
+                                                    style: const TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                  const Text(
+                                                    "*",
+                                                    style:
+                                                        TextStyle(fontSize: 8),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: TypeAheadField<
+                                                        InqueryGlModel>(
+                                                      controller:
+                                                          value.nosbbdeb,
+                                                      suggestionsCallback:
+                                                          (search) =>
+                                                              value.getInquery(
+                                                                  search),
+                                                      builder: (context,
+                                                          controller,
+                                                          focusNode) {
+                                                        return TextField(
+                                                            controller:
+                                                                controller,
+                                                            focusNode:
+                                                                focusNode,
+                                                            autofocus: true,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(),
+                                                              labelText:
+                                                                  'Cari Akun',
+                                                            ));
+                                                      },
+                                                      itemBuilder:
+                                                          (context, city) {
+                                                        return ListTile(
+                                                          title:
+                                                              Text(city.nosbb),
+                                                          subtitle: Text(
+                                                              city.namaSbb),
+                                                        );
+                                                      },
+                                                      onSelected: (city) {
+                                                        // value.selectInvoice(city);
+                                                        value
+                                                            .pilihAkunDeb(city);
+                                                      },
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 16),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Selisih",
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                ),
+                                                const SizedBox(width: 5),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            TextFormField(
+                                              textInputAction:
+                                                  TextInputAction.done,
+                                              controller: value.nomorDok,
+                                              maxLines: 1,
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
+                                              ],
+                                              validator: (e) {
+                                                if (e!.isEmpty) {
+                                                  return "Wajib diisi";
+                                                } else {
+                                                  return null;
+                                                }
+                                              },
+                                              decoration: InputDecoration(
+                                                hintText: "Selisih",
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                        SizedBox(
+                                          width: 16,
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Pilih Kredit Akun",
+                                                    style: const TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                  const Text(
+                                                    "*",
+                                                    style:
+                                                        TextStyle(fontSize: 8),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: TypeAheadField<
+                                                        InqueryGlModel>(
+                                                      controller:
+                                                          value.nossbcre,
+                                                      suggestionsCallback:
+                                                          (search) =>
+                                                              value.getInquery(
+                                                                  search),
+                                                      builder: (context,
+                                                          controller,
+                                                          focusNode) {
+                                                        return TextField(
+                                                            controller:
+                                                                controller,
+                                                            focusNode:
+                                                                focusNode,
+                                                            autofocus: true,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(),
+                                                              labelText:
+                                                                  'Cari Akun',
+                                                            ));
+                                                      },
+                                                      itemBuilder:
+                                                          (context, city) {
+                                                        return ListTile(
+                                                          title:
+                                                              Text(city.nosbb),
+                                                          subtitle: Text(
+                                                              city.namaSbb),
+                                                        );
+                                                      },
+                                                      onSelected: (city) {
+                                                        // value.selectInvoice(city);
+                                                        value
+                                                            .pilihAkunCre(city);
+                                                      },
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 16),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Keterangan",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TextFormField(
+                                      textInputAction: TextInputAction.done,
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "Keterangan Transaksi",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    ButtonPrimary(
+                                      onTap: () {},
+                                      name: "Simpan",
+                                    )
+                                  ],
+                                ))
                               ],
-                            ))
-                          ],
-                        ),
-                      )
+                            ),
+                          )
+                        : Container(
+                            padding: EdgeInsets.all(20),
+                            width: 600,
+                            decoration: BoxDecoration(color: Colors.white),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        "Pemberian Kas Bon",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () => value.tutup(),
+                                      child: Container(
+                                        width: 40,
+                                        height: 40,
+                                        padding: EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey[200],
+                                            shape: BoxShape.circle),
+                                        child: Icon(Icons.close),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 32,
+                                ),
+                                Expanded(
+                                    child: ListView(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Nomor Dokumen",
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                ),
+                                                const SizedBox(width: 5),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            TextFormField(
+                                              textInputAction:
+                                                  TextInputAction.done,
+                                              controller: value.nomorDok,
+                                              maxLines: 1,
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
+                                              ],
+                                              validator: (e) {
+                                                if (e!.isEmpty) {
+                                                  return "Wajib diisi";
+                                                } else {
+                                                  return null;
+                                                }
+                                              },
+                                              decoration: InputDecoration(
+                                                hintText: "Nomor Dok",
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                        SizedBox(
+                                          width: 16,
+                                        ),
+                                        Expanded(
+                                            child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Nomor Reference",
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                ),
+                                                const SizedBox(width: 5),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            TextFormField(
+                                              textInputAction:
+                                                  TextInputAction.done,
+                                              controller: value.nomorRef,
+                                              maxLines: 1,
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
+                                              ],
+                                              validator: (e) {
+                                                if (e!.isEmpty) {
+                                                  return "Wajib diisi";
+                                                } else {
+                                                  return null;
+                                                }
+                                              },
+                                              decoration: InputDecoration(
+                                                hintText: "Nomor Referensi",
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 16),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Pilih Debet Akun",
+                                              style:
+                                                  const TextStyle(fontSize: 12),
+                                            ),
+                                            const SizedBox(width: 5),
+                                            const Text(
+                                              "*",
+                                              style: TextStyle(fontSize: 8),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: TypeAheadField<
+                                                  InqueryGlModel>(
+                                                controller: value.nosbbdeb,
+                                                suggestionsCallback: (search) =>
+                                                    value.getInquery(search),
+                                                builder: (context, controller,
+                                                    focusNode) {
+                                                  return TextField(
+                                                      controller: controller,
+                                                      focusNode: focusNode,
+                                                      enabled: false,
+                                                      autofocus: true,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        border:
+                                                            OutlineInputBorder(),
+                                                        labelText: 'Cari Akun',
+                                                      ));
+                                                },
+                                                itemBuilder: (context, city) {
+                                                  return ListTile(
+                                                    title: Text(city.nosbb),
+                                                    subtitle:
+                                                        Text(city.namaSbb),
+                                                  );
+                                                },
+                                                onSelected: (city) {
+                                                  // value.selectInvoice(city);
+                                                  value.pilihAkunDeb(city);
+                                                },
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 16,
+                                            ),
+                                            Container(
+                                              width: 150,
+                                              child: TextFormField(
+                                                // enabled: false,
+                                                readOnly: true,
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: value.namaSbbDeb,
+                                                maxLines: 1,
+                                                // inputFormatters: [
+                                                //   FilteringTextInputFormatter.digitsOnly
+                                                // ],
+                                                validator: (e) {
+                                                  if (e!.isEmpty) {
+                                                    return "Wajib diisi";
+                                                  } else {
+                                                    return null;
+                                                  }
+                                                },
+                                                decoration: InputDecoration(
+                                                  filled: true,
+                                                  fillColor: Colors.grey[200],
+                                                  hintText: "Nomor Debet",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        const SizedBox(height: 16),
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Pilih Kredit Akun",
+                                              style:
+                                                  const TextStyle(fontSize: 12),
+                                            ),
+                                            const SizedBox(width: 5),
+                                            const Text(
+                                              "*",
+                                              style: TextStyle(fontSize: 8),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: TypeAheadField<
+                                                  InqueryGlModel>(
+                                                controller: value.nossbcre,
+                                                suggestionsCallback: (search) =>
+                                                    value.getInquery(search),
+                                                builder: (context, controller,
+                                                    focusNode) {
+                                                  return TextField(
+                                                      controller: controller,
+                                                      focusNode: focusNode,
+                                                      enabled: false,
+                                                      autofocus: true,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        border:
+                                                            OutlineInputBorder(),
+                                                        labelText: 'Cari Akun',
+                                                      ));
+                                                },
+                                                itemBuilder: (context, city) {
+                                                  return ListTile(
+                                                    title: Text(city.nosbb),
+                                                    subtitle:
+                                                        Text(city.namaSbb),
+                                                  );
+                                                },
+                                                onSelected: (city) {
+                                                  // value.selectInvoice(city);
+                                                  value.pilihAkunCre(city);
+                                                },
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 16,
+                                            ),
+                                            Container(
+                                              width: 150,
+                                              child: TextFormField(
+                                                // enabled: false,
+                                                readOnly: true,
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: value.namaSbbCre,
+                                                maxLines: 1,
+                                                // inputFormatters: [
+                                                //   FilteringTextInputFormatter.digitsOnly
+                                                // ],
+                                                validator: (e) {
+                                                  if (e!.isEmpty) {
+                                                    return "Wajib diisi";
+                                                  } else {
+                                                    return null;
+                                                  }
+                                                },
+                                                decoration: InputDecoration(
+                                                  filled: true,
+                                                  fillColor: Colors.grey[200],
+                                                  hintText: "Nomor Kredit",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        const SizedBox(height: 16),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Nominal",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TextFormField(
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.nominal,
+                                      maxLines: 1,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        CurrencyInputFormatter(),
+                                      ],
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "Nilai Transaksi",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Keterangan",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TextFormField(
+                                      textInputAction: TextInputAction.done,
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "Keterangan Transaksi",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 16,
+                                    ),
+                                    ButtonPrimary(
+                                      onTap: () {},
+                                      name: "Simpan",
+                                    )
+                                  ],
+                                ))
+                              ],
+                            ),
+                          )
                     : SizedBox(),
               )
             ],

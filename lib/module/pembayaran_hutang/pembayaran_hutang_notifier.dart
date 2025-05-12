@@ -1,9 +1,118 @@
+import 'dart:convert';
+
+import 'package:accounting/models/index.dart';
+import 'package:accounting/network/network.dart';
+import 'package:accounting/repository/SetupRepository.dart';
+import 'package:accounting/utils/informationdialog.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 
 class PembayaranHutangNotifier extends ChangeNotifier {
   final BuildContext context;
 
-  PembayaranHutangNotifier({required this.context}) {}
+  PembayaranHutangNotifier({required this.context}) {
+    getInqueryAll();
+  }
+
+  Future getInqueryAll() async {
+    list.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        final List<Map<String, dynamic>> jnsAccBItems =
+            extractJnsAccB(value['data']);
+        list =
+            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        notifyListeners();
+      }
+    });
+  }
+
+  List<Map<String, dynamic>> extractJnsAccB(List<dynamic> rawData) {
+    List<Map<String, dynamic>> result = [];
+
+    void traverse(List<dynamic> items) {
+      for (var item in items) {
+        if (item is Map<String, dynamic>) {
+          if (item['jns_acc'] == 'C') {
+            result.add(item);
+          }
+
+          if (item.containsKey('items') && item['items'] is List) {
+            traverse(item['items']);
+          }
+        }
+      }
+    }
+
+    traverse(rawData);
+    return result;
+  }
+
+  List<InqueryGlModel> list = [];
+
+  TextEditingController nmSbb = TextEditingController();
+  TextEditingController noSbb = TextEditingController();
+  TextEditingController caritransaksi = TextEditingController();
+  TextEditingController nilaipembayaran = TextEditingController();
+  TextEditingController nilaitagihan = TextEditingController();
+  TextEditingController nodokumen = TextEditingController();
+  TextEditingController ppn = TextEditingController();
+  TextEditingController maksPpn = TextEditingController();
+  TextEditingController pph23 = TextEditingController();
+
+  InqueryGlModel? inqueryGlModeldeb;
+  InqueryGlModel? inqueryGlModelcre;
+  var isLoadingInquery = true;
+  List<InqueryGlModel> listGl = [];
+  Future<List<InqueryGlModel>> getInquery(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      isLoadingInquery = true;
+      listGl.clear();
+      notifyListeners();
+
+      var data = {"kode_pt": "001"};
+
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.getInqueryGL(),
+          jsonEncode(data),
+        );
+
+        if (response['status'].toString().toLowerCase().contains("success")) {
+          final List<Map<String, dynamic>> jnsAccBItems =
+              extractJnsAccB(response['data']);
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .toList();
+        }
+        notifyListeners();
+      } catch (e) {
+        print("Error: $e");
+      } finally {
+        isLoadingInquery = false;
+        notifyListeners();
+      }
+    } else {
+      listGl.clear(); // clear on short query
+    }
+
+    return listGl;
+  }
+
+  pilihTransHutang(InqueryGlModel value) {
+    inqueryGlModeldeb = value;
+    nmSbb.text = value.namaSbb;
+    noSbb.text = value.nosbb;
+    notifyListeners();
+  }
 
   var isLoading = false;
   final keyForm = GlobalKey<FormState>();
@@ -13,9 +122,20 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   List<TextEditingController> listAmount = [];
 
   tambahTransaksi() {
-    transaksi++;
-    listAmount.add(TextEditingController(text: "0"));
-    notifyListeners();
+    if (noSbb.text.isEmpty && nmSbb.text.isEmpty) {
+      informationDialog(context, "Warning", "Pilih SBB Transaksi");
+    } else if (nilaipembayaran.text.isEmpty) {
+      informationDialog(context, "Warning", "Pilih Transaksi");
+    } else if (nilaitagihan.text.isEmpty) {
+      informationDialog(context, "Warning", "Pilih Tagihan");
+    } else if (nodokumen.text.isEmpty) {
+      informationDialog(context, "Warning", "Masukan Nomor Dokumen");
+    } else {
+      informationDialog(context, "Success", "Success");
+      // transaksi++;
+      // listAmount.add(TextEditingController(text: "0"));
+      // notifyListeners();
+    }
   }
 
   bool akun = false;
@@ -30,9 +150,29 @@ class PembayaranHutangNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  var editData = false;
-  edit() {
-    editData = !editData;
+  var dialog = false;
+  tambah() {
+    dialog = true;
+    editData = "";
+    notifyListeners();
+  }
+
+  var editData = "";
+  cariTrans() {
+    dialog = true;
+    editData = "caritransaksi";
+    notifyListeners();
+  }
+
+  cariTagihan() {
+    dialog = true;
+    editData = "caritagihan";
+    notifyListeners();
+  }
+
+  tutup() {
+    dialog = false;
+    editData = "";
     notifyListeners();
   }
 
@@ -43,8 +183,4 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   }
 
   cek() {}
-
-  TextEditingController ppn = TextEditingController();
-  TextEditingController maksPpn = TextEditingController();
-  TextEditingController pph23 = TextEditingController();
 }

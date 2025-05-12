@@ -4,6 +4,7 @@ import 'package:accounting/utils/button_custom.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -169,6 +170,7 @@ class PejabatPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 80,
                                       columnName: 'action',
                                       label: Container(
                                           color: colorPrimary,
@@ -248,7 +250,7 @@ class PejabatPage extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          "Nomor Induk Pegawai",
+                                          "Nama Pegawai",
                                           style: const TextStyle(fontSize: 12),
                                         ),
                                         const SizedBox(width: 5),
@@ -261,33 +263,42 @@ class PejabatPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 8,
                                     ),
-                                    TextFormField(
-                                      textInputAction: TextInputAction.done,
-                                      controller: value.nik,
-                                      maxLines: 1,
-                                      validator: (e) {
-                                        if (e!.isEmpty) {
-                                          return "Wajib diisi";
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                      decoration: InputDecoration(
-                                        suffixIcon: IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(Icons.search)),
-                                        hintText: "Nomor Induk Pegawai",
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                        ),
+                                    Expanded(
+                                      child: TypeAheadField<KaryawanModel>(
+                                        controller: value.nama,
+                                        suggestionsCallback: (search) =>
+                                            value.getInqKaryawan(search),
+                                        builder:
+                                            (context, controller, focusNode) {
+                                          return TextField(
+                                              controller: controller,
+                                              focusNode: focusNode,
+                                              readOnly: value.editData,
+                                              autofocus: true,
+                                              decoration: InputDecoration(
+                                                filled: value.editData,
+                                                fillColor: Colors.grey[200],
+                                                border: OutlineInputBorder(),
+                                                labelText: 'Cari Akun',
+                                              ));
+                                        },
+                                        itemBuilder: (context, city) {
+                                          return ListTile(
+                                            title: Text(city.namaLengkap),
+                                            subtitle: Text(city.nik),
+                                          );
+                                        },
+                                        onSelected: (city) {
+                                          // value.selectInvoice(city);
+                                          value.piliAkunKaryawan(city);
+                                        },
                                       ),
                                     ),
                                     const SizedBox(height: 16),
                                     Row(
                                       children: [
                                         Text(
-                                          "Nama Pegawai",
+                                          "Nomor Induk Pegawai",
                                           style: const TextStyle(fontSize: 12),
                                         ),
                                         const SizedBox(width: 5),
@@ -303,7 +314,7 @@ class PejabatPage extends StatelessWidget {
                                     TextFormField(
                                       readOnly: true,
                                       textInputAction: TextInputAction.done,
-                                      controller: value.nama,
+                                      controller: value.nik,
                                       maxLines: 1,
                                       validator: (e) {
                                         if (e!.isEmpty) {
@@ -315,7 +326,7 @@ class PejabatPage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         filled: true,
                                         fillColor: Colors.grey[200],
-                                        hintText: "Nama Pegawai",
+                                        hintText: "Nomor Induk Pegawai",
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(6),
