@@ -1454,20 +1454,14 @@ class MenuTransaksiWidget extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-                  Image.asset(
-                    ImageAssets.rupiah,
-                    height: 30,
-                    color: value.page == 19 ? Colors.black : Colors.white,
-                  ),
+                  Image.asset(ImageAssets.rupiah,
+                      height: 30, color: Colors.white),
                   SizedBox(
                     width: 16,
                   ),
                   Text(
                     "Kas Kecil",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: value.page == 19 ? Colors.black : Colors.white,
-                    ),
+                    style: TextStyle(fontSize: 16, color: Colors.white),
                   )
                 ],
               ),
