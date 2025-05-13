@@ -9,39 +9,46 @@ class ItemCategoryModulModel {
   const ItemCategoryModulModel({
     required this.menu,
     required this.submenu,
+    required this.keterangan,
   });
 
   final String menu;
-  final List<ItemModulModel> submenu;
+  final String submenu;
+  final String keterangan;
 
   factory ItemCategoryModulModel.fromJson(Map<String,dynamic> json) => ItemCategoryModulModel(
     menu: json['menu'].toString(),
-    submenu: (json['submenu'] as List? ?? []).map((e) => ItemModulModel.fromJson(e as Map<String, dynamic>)).toList()
+    submenu: json['submenu'].toString(),
+    keterangan: json['keterangan'].toString()
   );
   
   Map<String, dynamic> toJson() => {
     'menu': menu,
-    'submenu': submenu.map((e) => e.toJson()).toList()
+    'submenu': submenu,
+    'keterangan': keterangan
   };
 
   ItemCategoryModulModel clone() => ItemCategoryModulModel(
     menu: menu,
-    submenu: submenu.map((e) => e.clone()).toList()
+    submenu: submenu,
+    keterangan: keterangan
   );
 
 
   ItemCategoryModulModel copyWith({
     String? menu,
-    List<ItemModulModel>? submenu
+    String? submenu,
+    String? keterangan
   }) => ItemCategoryModulModel(
     menu: menu ?? this.menu,
     submenu: submenu ?? this.submenu,
+    keterangan: keterangan ?? this.keterangan,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is ItemCategoryModulModel && menu == other.menu && submenu == other.submenu;
+    || other is ItemCategoryModulModel && menu == other.menu && submenu == other.submenu && keterangan == other.keterangan;
 
   @override
-  int get hashCode => menu.hashCode ^ submenu.hashCode;
+  int get hashCode => menu.hashCode ^ submenu.hashCode ^ keterangan.hashCode;
 }

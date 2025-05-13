@@ -35,15 +35,128 @@ class LevelUserNotifier extends ChangeNotifier {
   ItemCategoryModulModel? itemCategoryModulModel;
   List<MenuAccess> menuAccessList = [];
 
-  void toggleMenu(int index, bool? value, String submenu) {
-    menuAccessList[index].isSelected = value ?? false;
-    menuAccessList[index].menu = itemCategoryModulModel!.menu;
-    menuAccessList[index].modul = modulModel!.modul;
-    menuAccessList[index].submenu = submenu;
-    menuAccessList[index].view = value ?? false;
-    menuAccessList[index].input = value ?? false;
-    menuAccessList[index].edit = value ?? false;
-    menuAccessList[index].delete = value ?? false;
+  // void toggleMenu(int index, bool? value, String submenu, String menu) {
+  //   menuAccessList[index].isSelected = value ?? false;
+  //   menuAccessList[index].menu = menu;
+  //   menuAccessList[index].modul = modulModel!.modul;
+  //   menuAccessList[index].submenu = submenu;
+  //   menuAccessList[index].view = value ?? false;
+  //   menuAccessList[index].input = value ?? false;
+  //   menuAccessList[index].edit = value ?? false;
+  //   menuAccessList[index].delete = value ?? false;
+  //   for (var i = 0; i < modulModel!.menu.length; i++) {
+  //     String currentSubmenu = modulModel!.menu[i].submenu;
+  //     String currentMenu = modulModel!.menu[i].menu;
+
+  //     // cek apakah sudah ada di menuAccessList
+  //     var indexExisting = menuAccessList.indexWhere(
+  //       (e) =>
+  //           e.modul == modulModel!.modul &&
+  //           e.menu == currentMenu &&
+  //           e.submenu == currentSubmenu,
+  //     );
+
+  //     if (indexExisting == -1) {
+  //       // belum ada → tambahkan default
+  //       menuAccessList.add(MenuAccess(
+  //         modul: modulModel!.modul,
+  //         menu: currentMenu,
+  //         submenu: currentSubmenu,
+  //       ));
+
+  //       listView.add(false);
+  //       listinput.add(false);
+  //       listedit.add(false);
+  //       listdelete.add(false);
+  //     } else {
+  //       // sudah ada → gunakan data yg sudah tersimpan
+  //       var existing = menuAccessList[indexExisting];
+  //       listView.add(existing.view);
+  //       listinput.add(existing.input);
+  //       listedit.add(existing.edit);
+  //       listdelete.add(existing.delete);
+  //     }
+  //   }
+  //   notifyListeners();
+  // }
+
+  void toggleMenu(int index, bool? value, String submenu, String menu) {
+    final existingIndex = menuAccessList.indexWhere(
+      (e) =>
+          e.modul == modulModel!.modul &&
+          e.menu == menu &&
+          e.submenu == submenu,
+    );
+
+    if (existingIndex == -1) {
+      // If the entry doesn't exist, add it
+      menuAccessList.add(MenuAccess(
+        modul: modulModel!.modul,
+        menu: menu,
+        submenu: submenu,
+        isSelected: value ?? false,
+        view: value ?? false,
+        input: value ?? false,
+        edit: value ?? false,
+        delete: value ?? false,
+      ));
+    } else {
+      final existing = menuAccessList[existingIndex];
+
+      if (value == false) {
+        // If checkbox is unchecked (value is false), remove the entry
+        menuAccessList.removeAt(existingIndex);
+      } else {
+        // If checkbox is checked (value is true), update the permissions
+        existing.isSelected = true;
+        existing.view = value ?? false;
+        existing.input = value ?? false;
+        existing.edit = value ?? false;
+        existing.delete = value ?? false;
+      }
+    }
+
+    notifyListeners();
+  }
+
+  void togglePermissionBySubmenu(
+    String modul,
+    String menu,
+    String submenu,
+    String permissionType,
+    bool? value,
+  ) {
+    final index = menuAccessList.indexWhere(
+        (e) => e.modul == modul && e.menu == menu && e.submenu == submenu);
+
+    if (index != -1) {
+      switch (permissionType) {
+        case 'view':
+          menuAccessList[index].view = value ?? false;
+          break;
+        case 'input':
+          menuAccessList[index].input = value ?? false;
+          break;
+        case 'edit':
+          menuAccessList[index].edit = value ?? false;
+          break;
+        case 'delete':
+          menuAccessList[index].delete = value ?? false;
+          break;
+      }
+    } else {
+      // Belum ada datanya, tambahkan dulu
+      menuAccessList.add(MenuAccess(
+        modul: modul,
+        menu: menu,
+        submenu: submenu,
+        view: permissionType == 'view' ? value ?? false : false,
+        input: permissionType == 'input' ? value ?? false : false,
+        edit: permissionType == 'edit' ? value ?? false : false,
+        delete: permissionType == 'delete' ? value ?? false : false,
+      ));
+    }
+
     notifyListeners();
   }
 
@@ -149,17 +262,11 @@ class LevelUserNotifier extends ChangeNotifier {
       selectedModuls.add(modul.modul);
       for (var menu in modul.menu) {
         selectedMenus.add(menu.menu);
-        for (var submenu in menu.submenu) {
-          selectedSubmenus.add(submenu.submenu);
-        }
       }
     } else {
       selectedModuls.remove(modul.modul);
       for (var menu in modul.menu) {
         selectedMenus.remove(menu.menu);
-        for (var submenu in menu.submenu) {
-          selectedSubmenus.remove(submenu.submenu);
-        }
       }
     }
     notifyListeners();
@@ -193,34 +300,34 @@ class LevelUserNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleSubmenu(ModulModel modul, ItemCategoryModulModel menu,
-      ItemModulModel submenu, bool selected) {
-    if (selected) {
-      selectedSubmenus.add(submenu.submenu);
-    } else {
-      selectedSubmenus.remove(submenu.submenu);
-    }
+  // void toggleSubmenu(ModulModel modul, ItemCategoryModulModel menu,
+  //     ItemModulModel submenu, bool selected) {
+  //   if (selected) {
+  //     selectedSubmenus.add(submenu.submenu);
+  //   } else {
+  //     selectedSubmenus.remove(submenu.submenu);
+  //   }
 
-    // Cek apakah semua submenu di menu terpilih
-    bool allSubmenusSelected =
-        menu.submenu.every((s) => selectedSubmenus.contains(s.submenu));
-    if (allSubmenusSelected) {
-      selectedMenus.add(menu.menu);
-    } else {
-      selectedMenus.remove(menu.menu);
-    }
+  //   // Cek apakah semua submenu di menu terpilih
+  //   bool allSubmenusSelected =
+  //       .every((s) => selectedSubmenus.contains(s));
+  //   if (allSubmenusSelected) {
+  //     selectedMenus.add(menu.menu);
+  //   } else {
+  //     selectedMenus.remove(menu.menu);
+  //   }
 
-    // Cek apakah semua menu di modul terpilih
-    bool allMenusSelected =
-        modul.menu.every((m) => selectedMenus.contains(m.menu));
-    if (allMenusSelected) {
-      selectedModuls.add(modul.modul);
-    } else {
-      selectedModuls.remove(modul.modul);
-    }
+  //   // Cek apakah semua menu di modul terpilih
+  //   bool allMenusSelected =
+  //       modul.menu.every((m) => selectedMenus.contains(m.menu));
+  //   if (allMenusSelected) {
+  //     selectedModuls.add(modul.modul);
+  //   } else {
+  //     selectedModuls.remove(modul.modul);
+  //   }
 
-    notifyListeners();
-  }
+  //   notifyListeners();
+  // }
 
   TextEditingController levelUsers = TextEditingController();
   var isLoading = true;
@@ -234,96 +341,97 @@ class LevelUserNotifier extends ChangeNotifier {
     listinput.clear();
     listedit.clear();
     listdelete.clear();
-    notifyListeners();
-  }
-
-  void togglePermissionBySubmenu(String modul, String menu, String submenu,
-      String permission, bool? value) {
-    var index = menuAccessList.indexWhere(
-        (e) => e.modul == modul && e.menu == menu && e.submenu == submenu);
-
-    if (index == -1) {
-      // kalau belum ada, tambahkan default dulu
-      menuAccessList.add(MenuAccess(
-        modul: modul,
-        menu: menu,
-        submenu: submenu,
-      ));
-      index = menuAccessList.length - 1;
-    }
-
-    switch (permission) {
-      case 'view':
-        menuAccessList[index].view = value ?? false;
-        break;
-      case 'input':
-        menuAccessList[index].input = value ?? false;
-        break;
-      case 'edit':
-        menuAccessList[index].edit = value ?? false;
-        break;
-      case 'delete':
-        menuAccessList[index].delete = value ?? false;
-        break;
-    }
-
-    // auto update isSelected
-    if (!menuAccessList[index].view &&
-        !menuAccessList[index].input &&
-        !menuAccessList[index].edit &&
-        !menuAccessList[index].delete) {
-      menuAccessList[index].isSelected = false;
-    } else {
-      menuAccessList[index].isSelected = true;
-    }
 
     notifyListeners();
   }
 
-  pilihMenu(ItemCategoryModulModel value) async {
-    itemCategoryModulModel = value;
-    listView.clear();
-    listinput.clear();
-    listedit.clear();
-    listdelete.clear();
-    // menuAccessList.clear();
-    notifyListeners();
+  // void togglePermissionBySubmenu(String modul, String menu, String submenu,
+  //     String permission, bool? value) {
+  //   var index = menuAccessList.indexWhere(
+  //       (e) => e.modul == modul && e.menu == menu && e.submenu == submenu);
 
-    for (var i = 0; i < itemCategoryModulModel!.submenu.length; i++) {
-      String currentSubmenu = itemCategoryModulModel!.submenu[i].submenu;
+  //   if (index == -1) {
+  //     // kalau belum ada, tambahkan default dulu
+  //     menuAccessList.add(MenuAccess(
+  //       modul: modul,
+  //       menu: menu,
+  //       submenu: submenu,
+  //     ));
+  //     index = menuAccessList.length - 1;
+  //   }
 
-      // cek apakah sudah ada di menuAccessList
-      var indexExisting = menuAccessList.indexWhere(
-        (e) =>
-            e.modul == modulModel!.modul &&
-            e.menu == itemCategoryModulModel!.menu &&
-            e.submenu == currentSubmenu,
-      );
+  //   switch (permission) {
+  //     case 'view':
+  //       menuAccessList[index].view = value ?? false;
+  //       break;
+  //     case 'input':
+  //       menuAccessList[index].input = value ?? false;
+  //       break;
+  //     case 'edit':
+  //       menuAccessList[index].edit = value ?? false;
+  //       break;
+  //     case 'delete':
+  //       menuAccessList[index].delete = value ?? false;
+  //       break;
+  //   }
 
-      if (indexExisting == -1) {
-        // belum ada → tambahkan default
-        menuAccessList.add(MenuAccess(
-          modul: modulModel!.modul,
-          menu: itemCategoryModulModel!.menu,
-          submenu: currentSubmenu,
-        ));
+  //   // auto update isSelected
+  //   if (!menuAccessList[index].view &&
+  //       !menuAccessList[index].input &&
+  //       !menuAccessList[index].edit &&
+  //       !menuAccessList[index].delete) {
+  //     menuAccessList[index].isSelected = false;
+  //   } else {
+  //     menuAccessList[index].isSelected = true;
+  //   }
 
-        listView.add(false);
-        listinput.add(false);
-        listedit.add(false);
-        listdelete.add(false);
-      } else {
-        // sudah ada → gunakan data yg sudah tersimpan
-        var existing = menuAccessList[indexExisting];
-        listView.add(existing.view);
-        listinput.add(existing.input);
-        listedit.add(existing.edit);
-        listdelete.add(existing.delete);
-      }
-    }
+  //   notifyListeners();
+  // }
 
-    notifyListeners();
-  }
+  // pilihMenu(ItemCategoryModulModel value) async {
+  //   itemCategoryModulModel = value;
+  //   listView.clear();
+  //   listinput.clear();
+  //   listedit.clear();
+  //   listdelete.clear();
+  //   // menuAccessList.clear();
+  //   notifyListeners();
+
+  //   for (var i = 0; i < itemCategoryModulModel!.submenu.length; i++) {
+  //     String currentSubmenu = itemCategoryModulModel!.submenu[i].submenu;
+
+  //     // cek apakah sudah ada di menuAccessList
+  //     var indexExisting = menuAccessList.indexWhere(
+  //       (e) =>
+  //           e.modul == modulModel!.modul &&
+  //           e.menu == itemCategoryModulModel!.menu &&
+  //           e.submenu == currentSubmenu,
+  //     );
+
+  //     if (indexExisting == -1) {
+  //       // belum ada → tambahkan default
+  //       menuAccessList.add(MenuAccess(
+  //         modul: modulModel!.modul,
+  //         menu: itemCategoryModulModel!.menu,
+  //         submenu: currentSubmenu,
+  //       ));
+
+  //       listView.add(false);
+  //       listinput.add(false);
+  //       listedit.add(false);
+  //       listdelete.add(false);
+  //     } else {
+  //       // sudah ada → gunakan data yg sudah tersimpan
+  //       var existing = menuAccessList[indexExisting];
+  //       listView.add(existing.view);
+  //       listinput.add(existing.input);
+  //       listedit.add(existing.edit);
+  //       listdelete.add(existing.delete);
+  //     }
+  //   }
+
+  //   notifyListeners();
+  // }
 
   // pilihMenu(ItemCategoryModulModel value) async {
   //   itemCategoryModulModel = value;

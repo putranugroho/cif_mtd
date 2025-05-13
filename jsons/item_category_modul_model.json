@@ -1,4 +1,5 @@
 {
-    "menu": "JUAL_HAPUS",
-    "submenu": "$[]item_modul_model"
+    "menu": "BACK_DATE",
+    "submenu": "BACK_DATE",
+    "keterangan": "Back Date"
 }
