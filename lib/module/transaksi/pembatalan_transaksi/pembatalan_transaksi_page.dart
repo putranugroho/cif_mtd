@@ -38,12 +38,16 @@ class PembatalanTransaksiPage extends StatelessWidget {
                     children: [
                       Container(
                         padding: EdgeInsets.all(20),
-                        child: Text(
-                          "Pembatalan Transaksi",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Pembatalan Transaksi",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Container(
@@ -52,13 +56,12 @@ class PembatalanTransaksiPage extends StatelessWidget {
                         decoration: BoxDecoration(color: Colors.white),
                         child: FocusTraversalGroup(
                           child: Form(
-                            key: value.keyForm,
+                            key: value.searchForm,
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                // Label + Radio Buttons
-                                Expanded(
-                                  flex: 5,
+                                // Label + Radio + Tanggal Transaksi
+                                Flexible(
                                   child: Row(
                                     children: [
                                       Text(
@@ -66,51 +69,38 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                         style: const TextStyle(fontSize: 20),
                                       ),
                                       const SizedBox(width: 16),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                            value: true,
-                                            groupValue: value.cariTrans,
-                                            activeColor: colorPrimary,
-                                            onChanged: (e) =>
-                                                value.pilihCariTransaksi(true),
-                                          ),
-                                          const Text("Hari Ini"),
-                                          const SizedBox(width: 16),
-                                          Radio(
-                                            value: false,
-                                            groupValue: value.cariTrans,
-                                            activeColor: colorPrimary,
-                                            onChanged: (e) =>
-                                                value.pilihCariTransaksi(false),
-                                          ),
-                                        ],
+                                      Radio(
+                                        value: true,
+                                        groupValue: value.cariTrans,
+                                        activeColor: colorPrimary,
+                                        onChanged: (e) =>
+                                            value.pilihCariTransaksi(true),
                                       ),
-                                      Expanded(
-                                        child: InkWell(
+                                      const Text("Hari Ini"),
+                                      const SizedBox(width: 16),
+                                      Radio(
+                                        value: false,
+                                        groupValue: value.cariTrans,
+                                        activeColor: colorPrimary,
+                                        onChanged: (e) =>
+                                            value.pilihCariTransaksi(false),
+                                      ),
+                                      const SizedBox(width: 16),
+                                      SizedBox(
+                                        width: 180,
+                                        child: TextFormField(
+                                          readOnly: true,
                                           onTap: () => value.tanggalTransaksi(),
-                                          child: TextFormField(
-                                            enabled: false,
-                                            textInputAction:
-                                                TextInputAction.done,
-                                            controller: value.tglTransaksi,
-                                            maxLines: 1,
-                                            readOnly: value.cariTrans,
-                                            validator: (e) {
-                                              if (e!.isEmpty) {
-                                                return "Wajib diisi";
-                                              } else {
-                                                return null;
-                                              }
-                                            },
-                                            decoration: InputDecoration(
-                                              filled: value.cariTrans,
-                                              fillColor: Colors.grey[200],
-                                              hintText: "Tanggal Transaksi",
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
-                                              ),
+                                          controller: value.tglTransaksi,
+                                          validator: (e) =>
+                                              e!.isEmpty ? "Wajib diisi" : null,
+                                          decoration: InputDecoration(
+                                            filled: value.cariTrans,
+                                            fillColor: Colors.grey[200],
+                                            hintText: "Tanggal Transaksi",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
                                             ),
                                           ),
                                         ),
@@ -119,19 +109,10 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                   ),
                                 ),
 
-                                const SizedBox(width: 16),
+                                const SizedBox(width: 24),
 
-                                // TextField Tanggal
-                                // Expanded(
-                                //   flex: 4,
-                                //   child:
-                                // ),
-
-                                const SizedBox(width: 16),
-
-                                // Checkbox + No Dokumen
-                                Expanded(
-                                  flex: 5,
+                                // Checkbox + No. Dokumen
+                                Flexible(
                                   child: Row(
                                     children: [
                                       Checkbox(
@@ -140,15 +121,12 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                         onChanged: (e) => value.gantiCariDok(),
                                       ),
                                       const SizedBox(width: 8),
-                                      Expanded(
+                                      SizedBox(
+                                        width: 180,
                                         child: TextFormField(
-                                          textInputAction: TextInputAction.done,
                                           readOnly: !value.cariDok,
-                                          validator: (e) {
-                                            if (e!.isEmpty)
-                                              return "Wajib diisi";
-                                            return null;
-                                          },
+                                          validator: (e) =>
+                                              e!.isEmpty ? "Wajib diisi" : null,
                                           decoration: InputDecoration(
                                             hintText: "No. Dokumen",
                                             filled: !value.cariDok,
@@ -164,25 +142,21 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                   ),
                                 ),
 
-                                const SizedBox(width: 16),
+                                const SizedBox(width: 24),
 
                                 // Tombol Cari
-                                InkWell(
-                                  onTap: () => value.tambah(),
-                                  child: Container(
+                                ElevatedButton(
+                                  onPressed: () => value.tambah(),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: colorPrimary,
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 16, vertical: 16),
-                                    decoration: BoxDecoration(
+                                        horizontal: 20, vertical: 16),
+                                    shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),
-                                      color: colorPrimary,
-                                      border: Border.all(
-                                          width: 2, color: colorPrimary),
-                                    ),
-                                    child: const Text(
-                                      "Cari",
-                                      style: TextStyle(color: Colors.white),
                                     ),
                                   ),
+                                  child: const Text("Cari",
+                                      style: TextStyle(color: Colors.white)),
                                 ),
                               ],
                             ),

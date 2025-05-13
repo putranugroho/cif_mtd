@@ -76,6 +76,7 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
   TextEditingController alasan = TextEditingController();
 
   var editData = false;
+  final searchForm = GlobalKey<FormState>();
   final keyForm = GlobalKey<FormState>();
   cek() {}
 
