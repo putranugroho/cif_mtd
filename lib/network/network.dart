@@ -354,7 +354,7 @@ class NetworkURL {
   }
 
   static String getUserAksesPoint() {
-    return "$url/user-akses_point";
+    return "$url/user-akses-point";
   }
 
   static String addUserAksesPoint() {

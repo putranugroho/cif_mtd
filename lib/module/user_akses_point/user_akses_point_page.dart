@@ -126,16 +126,21 @@ class UserAksesPointPage extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          decoration: BoxDecoration(
-                              color: colorPrimary,
-                              borderRadius: BorderRadius.circular(16)),
-                          child: Text(
-                            "Tambah",
-                            style: TextStyle(
-                              color: Colors.white,
+                        InkWell(
+                          onTap: () {
+                            value.getUsersAksesPoint();
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
+                                color: colorPrimary,
+                                borderRadius: BorderRadius.circular(16)),
+                            child: Text(
+                              "Tambah",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
