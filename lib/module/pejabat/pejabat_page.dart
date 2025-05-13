@@ -170,6 +170,18 @@ class PejabatPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      columnName: 'department',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Organisasi',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
                                       width: 80,
                                       columnName: 'action',
                                       label: Container(
@@ -350,40 +362,64 @@ class PejabatPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 8,
                                     ),
-                                    DropdownSearch<JabatanModel>(
-                                      validator: (value) {
-                                        if (value == null) {
-                                          return 'Wajib diisi';
+                                    TextFormField(
+                                      readOnly: true,
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.jabatan,
+                                      maxLines: 1,
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
                                         }
-                                        return null;
                                       },
-                                      popupProps:
-                                          const PopupPropsMultiSelection.menu(
-                                        showSearchBox:
-                                            true, // Aktifkan fitur pencarian
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.grey[200],
+                                        hintText: "Jabatan",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
                                       ),
-                                      selectedItem: value.jabatanModel,
-                                      items: value.listJabatan,
-                                      itemAsString: (e) => "${e.namaJabatan}",
-                                      onChanged: (e) {
-                                        value.pilihJabatan(e!);
+                                    ),
+                                    const SizedBox(height: 16),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Deparment",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TextFormField(
+                                      readOnly: true,
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.department,
+                                      maxLines: 1,
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
                                       },
-                                      dropdownDecoratorProps:
-                                          DropDownDecoratorProps(
-                                        baseStyle: TextStyle(fontSize: 16),
-                                        textAlignVertical:
-                                            TextAlignVertical.center,
-                                        dropdownSearchDecoration:
-                                            InputDecoration(
-                                          hintText: "Pilih Jabatan",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            borderSide: BorderSide(
-                                              width: 1,
-                                              color: Colors.grey,
-                                            ),
-                                          ),
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.grey[200],
+                                        hintText: "Department",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -536,7 +572,8 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'nik', value: data.nik),
                 DataGridCell(columnName: 'nama', value: data.namaPejabat),
                 DataGridCell(columnName: 'hp', value: data.noHpPejabat),
-                DataGridCell(columnName: 'jabatan', value: data.namaJabatan),
+                DataGridCell(columnName: 'jabatan', value: data.idJabatan),
+                DataGridCell(columnName: 'department', value: data.department),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))

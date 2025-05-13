@@ -18,6 +18,7 @@ class KaryawanModel {
     required this.tanggalMasuk,
     required this.isDeleted,
     required this.createdAt,
+    required this.department,
     required this.updatedAt,
   });
 
@@ -32,6 +33,7 @@ class KaryawanModel {
   final String tanggalMasuk;
   final String isDeleted;
   final String createdAt;
+  final String department;
   final String updatedAt;
 
   factory KaryawanModel.fromJson(Map<String,dynamic> json) => KaryawanModel(
@@ -46,6 +48,7 @@ class KaryawanModel {
     tanggalMasuk: json['tanggal_masuk'].toString(),
     isDeleted: json['is_deleted'].toString(),
     createdAt: json['created_at'].toString(),
+    department: json['department'].toString(),
     updatedAt: json['updated_at'].toString()
   );
   
@@ -61,6 +64,7 @@ class KaryawanModel {
     'tanggal_masuk': tanggalMasuk,
     'is_deleted': isDeleted,
     'created_at': createdAt,
+    'department': department,
     'updated_at': updatedAt
   };
 
@@ -76,6 +80,7 @@ class KaryawanModel {
     tanggalMasuk: tanggalMasuk,
     isDeleted: isDeleted,
     createdAt: createdAt,
+    department: department,
     updatedAt: updatedAt
   );
 
@@ -92,6 +97,7 @@ class KaryawanModel {
     String? tanggalMasuk,
     String? isDeleted,
     String? createdAt,
+    String? department,
     String? updatedAt
   }) => KaryawanModel(
     id: id ?? this.id,
@@ -105,13 +111,14 @@ class KaryawanModel {
     tanggalMasuk: tanggalMasuk ?? this.tanggalMasuk,
     isDeleted: isDeleted ?? this.isDeleted,
     createdAt: createdAt ?? this.createdAt,
+    department: department ?? this.department,
     updatedAt: updatedAt ?? this.updatedAt,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is KaryawanModel && id == other.id && nik == other.nik && namaLengkap == other.namaLengkap && email == other.email && noHp == other.noHp && jabatan == other.jabatan && tanggalLahir == other.tanggalLahir && alamat == other.alamat && tanggalMasuk == other.tanggalMasuk && isDeleted == other.isDeleted && createdAt == other.createdAt && updatedAt == other.updatedAt;
+    || other is KaryawanModel && id == other.id && nik == other.nik && namaLengkap == other.namaLengkap && email == other.email && noHp == other.noHp && jabatan == other.jabatan && tanggalLahir == other.tanggalLahir && alamat == other.alamat && tanggalMasuk == other.tanggalMasuk && isDeleted == other.isDeleted && createdAt == other.createdAt && department == other.department && updatedAt == other.updatedAt;
 
   @override
-  int get hashCode => id.hashCode ^ nik.hashCode ^ namaLengkap.hashCode ^ email.hashCode ^ noHp.hashCode ^ jabatan.hashCode ^ tanggalLahir.hashCode ^ alamat.hashCode ^ tanggalMasuk.hashCode ^ isDeleted.hashCode ^ createdAt.hashCode ^ updatedAt.hashCode;
+  int get hashCode => id.hashCode ^ nik.hashCode ^ namaLengkap.hashCode ^ email.hashCode ^ noHp.hashCode ^ jabatan.hashCode ^ tanggalLahir.hashCode ^ alamat.hashCode ^ tanggalMasuk.hashCode ^ isDeleted.hashCode ^ createdAt.hashCode ^ department.hashCode ^ updatedAt.hashCode;
 }

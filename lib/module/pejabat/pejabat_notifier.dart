@@ -226,11 +226,12 @@ class PejabatNotifier extends ChangeNotifier {
     nik.text = pejabatModel!.nik;
     nama.text = pejabatModel!.namaPejabat;
     noHp.text = pejabatModel!.noHpPejabat;
+    jabatan.text = pejabatModel!.idJabatan;
+    department.text = pejabatModel!.department;
+// department.text = pejabatModel!.;
     kantorModel =
         listKantor.where((e) => e.kodeKantor == pejabatModel!.kodeKantor).first;
-    jabatanModel = listJabatan
-        .where((e) => e.id == int.parse(pejabatModel!.idJabatan))
-        .first;
+
     dialog = true;
     editData = true;
     notifyListeners();
@@ -238,12 +239,16 @@ class PejabatNotifier extends ChangeNotifier {
 
   List<KaryawanModel> listKaryawan = [];
   TextEditingController namaKaryawan = TextEditingController();
+  TextEditingController jabatan = TextEditingController();
+  TextEditingController department = TextEditingController();
   TextEditingController nikKaryawan = TextEditingController();
   KaryawanModel? karyawanModel;
   piliAkunKaryawan(KaryawanModel value) {
     karyawanModel = value;
     nama.text = karyawanModel!.namaLengkap;
     nik.text = karyawanModel!.nik;
+    jabatan.text = karyawanModel!.jabatan;
+    department.text = karyawanModel!.department;
     notifyListeners();
   }
 
@@ -294,7 +299,8 @@ class PejabatNotifier extends ChangeNotifier {
           "nik": "${nik.text.trim()}",
           "nama_pejabat": "${nama.text.trim()}",
           "no_hp_pejabat": "${noHp.text.trim()}",
-          "id_jabatan": "${jabatanModel!.id}",
+          "id_jabatan": "${jabatan.text}",
+          "department": "${department.text}",
         };
         Setuprepository.setup(
                 token, NetworkURL.updatedPejabat(), jsonEncode(data))
@@ -318,7 +324,8 @@ class PejabatNotifier extends ChangeNotifier {
           "nik": "${nik.text.trim()}",
           "nama_pejabat": "${nama.text.trim()}",
           "no_hp_pejabat": "${noHp.text.trim()}",
-          "id_jabatan": "${jabatanModel!.id}",
+          "id_jabatan": "${jabatan.text}",
+          "department": "${department.text}",
         };
         Setuprepository.setup(token, NetworkURL.addPejabat(), jsonEncode(data))
             .then((value) {

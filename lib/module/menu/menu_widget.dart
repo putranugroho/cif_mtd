@@ -88,72 +88,72 @@ class MenuSetupWidget extends StatelessWidget {
                 ),
               ),
             ),
-            InkWell(
-              onTap: () => value.gantimenu(31),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                decoration: BoxDecoration(
-                  color: value.page == 31 ? Colors.white : Colors.transparent,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Image.asset(
-                      ImageAssets.user,
-                      height: 30,
-                      color: value.page == 31 ? Colors.black : Colors.white,
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Text(
-                      "Data Level",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: value.page == 31 ? Colors.black : Colors.white,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () => value.gantimenu(29),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                decoration: BoxDecoration(
-                  color: value.page == 29 ? Colors.white : Colors.transparent,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Image.asset(
-                      ImageAssets.group,
-                      height: 30,
-                      color: value.page == 29 ? Colors.black : Colors.white,
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Text(
-                      "Data Jabatan",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: value.page == 29 ? Colors.black : Colors.white,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
+            // InkWell(
+            //   onTap: () => value.gantimenu(31),
+            //   child: Container(
+            //     width: MediaQuery.of(context).size.width,
+            //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            //     decoration: BoxDecoration(
+            //       color: value.page == 31 ? Colors.white : Colors.transparent,
+            //       borderRadius: BorderRadius.circular(8),
+            //     ),
+            //     child: Row(
+            //       children: [
+            //         SizedBox(
+            //           width: 16,
+            //         ),
+            //         Image.asset(
+            //           ImageAssets.user,
+            //           height: 30,
+            //           color: value.page == 31 ? Colors.black : Colors.white,
+            //         ),
+            //         SizedBox(
+            //           width: 16,
+            //         ),
+            //         Text(
+            //           "Data Level",
+            //           style: TextStyle(
+            //             fontSize: 16,
+            //             color: value.page == 31 ? Colors.black : Colors.white,
+            //           ),
+            //         )
+            //       ],
+            //     ),
+            //   ),
+            // ),
+            // InkWell(
+            //   onTap: () => value.gantimenu(29),
+            //   child: Container(
+            //     width: MediaQuery.of(context).size.width,
+            //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            //     decoration: BoxDecoration(
+            //       color: value.page == 29 ? Colors.white : Colors.transparent,
+            //       borderRadius: BorderRadius.circular(8),
+            //     ),
+            //     child: Row(
+            //       children: [
+            //         SizedBox(
+            //           width: 16,
+            //         ),
+            //         Image.asset(
+            //           ImageAssets.group,
+            //           height: 30,
+            //           color: value.page == 29 ? Colors.black : Colors.white,
+            //         ),
+            //         SizedBox(
+            //           width: 16,
+            //         ),
+            //         Text(
+            //           "Data Jabatan",
+            //           style: TextStyle(
+            //             fontSize: 16,
+            //             color: value.page == 29 ? Colors.black : Colors.white,
+            //           ),
+            //         )
+            //       ],
+            //     ),
+            //   ),
+            // ),
             InkWell(
               onTap: () => value.gantimenu(30),
               child: Container(

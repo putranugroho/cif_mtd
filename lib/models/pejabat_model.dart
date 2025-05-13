@@ -15,7 +15,7 @@ class PejabatModel {
     required this.noHpPejabat,
     required this.idJabatan,
     required this.kodeJabatan,
-    required this.namaJabatan,
+    required this.department,
   });
 
   final int id;
@@ -26,7 +26,7 @@ class PejabatModel {
   final String noHpPejabat;
   final String idJabatan;
   final String kodeJabatan;
-  final String namaJabatan;
+  final String department;
 
   factory PejabatModel.fromJson(Map<String,dynamic> json) => PejabatModel(
     id: json['id'] as int,
@@ -37,7 +37,7 @@ class PejabatModel {
     noHpPejabat: json['no_hp_pejabat'].toString(),
     idJabatan: json['id_jabatan'].toString(),
     kodeJabatan: json['kode_jabatan'].toString(),
-    namaJabatan: json['nama_jabatan'].toString()
+    department: json['department'].toString()
   );
   
   Map<String, dynamic> toJson() => {
@@ -49,7 +49,7 @@ class PejabatModel {
     'no_hp_pejabat': noHpPejabat,
     'id_jabatan': idJabatan,
     'kode_jabatan': kodeJabatan,
-    'nama_jabatan': namaJabatan
+    'department': department
   };
 
   PejabatModel clone() => PejabatModel(
@@ -61,7 +61,7 @@ class PejabatModel {
     noHpPejabat: noHpPejabat,
     idJabatan: idJabatan,
     kodeJabatan: kodeJabatan,
-    namaJabatan: namaJabatan
+    department: department
   );
 
 
@@ -74,7 +74,7 @@ class PejabatModel {
     String? noHpPejabat,
     String? idJabatan,
     String? kodeJabatan,
-    String? namaJabatan
+    String? department
   }) => PejabatModel(
     id: id ?? this.id,
     kodeKantor: kodeKantor ?? this.kodeKantor,
@@ -84,13 +84,13 @@ class PejabatModel {
     noHpPejabat: noHpPejabat ?? this.noHpPejabat,
     idJabatan: idJabatan ?? this.idJabatan,
     kodeJabatan: kodeJabatan ?? this.kodeJabatan,
-    namaJabatan: namaJabatan ?? this.namaJabatan,
+    department: department ?? this.department,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is PejabatModel && id == other.id && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && nik == other.nik && namaPejabat == other.namaPejabat && noHpPejabat == other.noHpPejabat && idJabatan == other.idJabatan && kodeJabatan == other.kodeJabatan && namaJabatan == other.namaJabatan;
+    || other is PejabatModel && id == other.id && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && nik == other.nik && namaPejabat == other.namaPejabat && noHpPejabat == other.noHpPejabat && idJabatan == other.idJabatan && kodeJabatan == other.kodeJabatan && department == other.department;
 
   @override
-  int get hashCode => id.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ nik.hashCode ^ namaPejabat.hashCode ^ noHpPejabat.hashCode ^ idJabatan.hashCode ^ kodeJabatan.hashCode ^ namaJabatan.hashCode;
+  int get hashCode => id.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ nik.hashCode ^ namaPejabat.hashCode ^ noHpPejabat.hashCode ^ idJabatan.hashCode ^ kodeJabatan.hashCode ^ department.hashCode;
 }
