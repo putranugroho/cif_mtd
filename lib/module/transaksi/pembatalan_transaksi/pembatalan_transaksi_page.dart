@@ -1,18 +1,16 @@
-import 'package:accounting/models/index.dart';
 import 'package:accounting/module/transaksi/pembatalan_transaksi/pembatalan_transaksi_notifier.dart';
-import 'package:flutter_multi_formatter/flutter_multi_formatter.dart' as a;
 
 import 'package:accounting/utils/button_custom.dart';
-import 'package:accounting/utils/currency_formatted.dart';
+
 // import 'package:accounting/utils/format_currency.dart';
-import 'package:dropdown_search/dropdown_search.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
+
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
+import '../../../models/transaksi_model.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/format_currency.dart';
 
@@ -38,117 +36,100 @@ class PembatalanTransaksiPage extends StatelessWidget {
                     children: [
                       Container(
                         padding: EdgeInsets.all(20),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Pembatalan Transaksi",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                        child: const Text(
+                          "Pembatalan Transaksi",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       Container(
                         padding: EdgeInsets.all(20),
-                        width: double.infinity,
                         decoration: BoxDecoration(color: Colors.white),
                         child: FocusTraversalGroup(
                           child: Form(
-                            key: value.searchForm,
+                            key: value.keyForm,
                             child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                // Label + Radio + Tanggal Transaksi
-                                Flexible(
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "Cari Transaksi",
-                                        style: const TextStyle(fontSize: 20),
-                                      ),
-                                      const SizedBox(width: 16),
-                                      Radio(
-                                        value: true,
-                                        groupValue: value.cariTrans,
-                                        activeColor: colorPrimary,
-                                        onChanged: (e) =>
-                                            value.pilihCariTransaksi(true),
-                                      ),
-                                      const Text("Hari Ini"),
-                                      const SizedBox(width: 16),
-                                      Radio(
-                                        value: false,
-                                        groupValue: value.cariTrans,
-                                        activeColor: colorPrimary,
-                                        onChanged: (e) =>
-                                            value.pilihCariTransaksi(false),
-                                      ),
-                                      const SizedBox(width: 16),
-                                      SizedBox(
-                                        width: 180,
-                                        child: TextFormField(
-                                          readOnly: true,
-                                          onTap: () => value.tanggalTransaksi(),
-                                          controller: value.tglTransaksi,
-                                          validator: (e) =>
-                                              e!.isEmpty ? "Wajib diisi" : null,
-                                          decoration: InputDecoration(
-                                            filled: value.cariTrans,
-                                            fillColor: Colors.grey[200],
-                                            hintText: "Tanggal Transaksi",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                            ),
-                                          ),
+                                Text(
+                                  "Cari Transaksi",
+                                  style: const TextStyle(fontSize: 20),
+                                ),
+                                const SizedBox(width: 16),
+                                Radio(
+                                  value: true,
+                                  groupValue: value.cariTrans,
+                                  activeColor: colorPrimary,
+                                  onChanged: (e) =>
+                                      value.pilihCariTransaksi(true),
+                                ),
+                                const Text("Hari Ini"),
+                                const SizedBox(width: 16),
+                                Radio(
+                                  value: false,
+                                  groupValue: value.cariTrans,
+                                  activeColor: colorPrimary,
+                                  onChanged: (e) =>
+                                      value.pilihCariTransaksi(false),
+                                ),
+                                Expanded(
+                                  child: InkWell(
+                                    onTap: () => value.tanggalTransaksi(),
+                                    child: TextFormField(
+                                      enabled: false,
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.tglTransaksi,
+                                      maxLines: 1,
+                                      readOnly: value.cariTrans,
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        filled: value.cariTrans,
+                                        fillColor: Colors.grey[200],
+                                        hintText: "Tanggal Transaksi",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
                                         ),
                                       ),
-                                    ],
+                                    ),
                                   ),
                                 ),
-
-                                const SizedBox(width: 24),
-
-                                // Checkbox + No. Dokumen
-                                Flexible(
-                                  child: Row(
-                                    children: [
-                                      Checkbox(
-                                        activeColor: colorPrimary,
-                                        value: value.cariDok,
-                                        onChanged: (e) => value.gantiCariDok(),
+                                const SizedBox(width: 16),
+                                Checkbox(
+                                  activeColor: colorPrimary,
+                                  value: value.cariDok,
+                                  onChanged: (e) => value.gantiCariDok(),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: TextFormField(
+                                    textInputAction: TextInputAction.done,
+                                    readOnly: !value.cariDok,
+                                    validator: (e) {
+                                      if (e!.isEmpty) return "Wajib diisi";
+                                      return null;
+                                    },
+                                    decoration: InputDecoration(
+                                      hintText: "No. Dokumen",
+                                      filled: !value.cariDok,
+                                      fillColor: Colors.grey[200],
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(6),
                                       ),
-                                      const SizedBox(width: 8),
-                                      SizedBox(
-                                        width: 180,
-                                        child: TextFormField(
-                                          readOnly: !value.cariDok,
-                                          validator: (e) =>
-                                              e!.isEmpty ? "Wajib diisi" : null,
-                                          decoration: InputDecoration(
-                                            hintText: "No. Dokumen",
-                                            filled: !value.cariDok,
-                                            fillColor: Colors.grey[200],
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
-
-                                const SizedBox(width: 24),
-
-                                // Tombol Cari
-                                ElevatedButton(
-                                  onPressed: () => value.tambah(),
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: colorPrimary,
+                                const SizedBox(width: 16),
+                                InkWell(
+                                  onTap: () => value.tambah(),
+                                  child: Container(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 16),
                                     shape: RoundedRectangleBorder(
@@ -166,17 +147,13 @@ class PembatalanTransaksiPage extends StatelessWidget {
                       Expanded(
                         child: Container(
                           padding: EdgeInsets.all(20),
-                          height: MediaQuery.of(context).size.height,
                           child: SfDataGrid(
                             headerRowHeight: 40,
                             defaultColumnWidth: 180,
                             frozenColumnsCount: 1,
-
-                            // controller: value.dataGridController,
                             gridLinesVisibility: GridLinesVisibility.both,
                             headerGridLinesVisibility: GridLinesVisibility.both,
                             selectionMode: SelectionMode.single,
-
                             source: DetailDataSource(value),
                             columns: <GridColumn>[
                               GridColumn(
@@ -304,7 +281,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                           decoration: BoxDecoration(color: Colors.white),
                           child: FocusTraversalGroup(
                             child: Form(
-                              key: value.keyForm,
+                              key: value.keyForm2,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
@@ -1052,14 +1029,86 @@ class PembatalanTransaksiPage extends StatelessWidget {
 }
 
 class DetailDataSource extends DataGridSource {
-  DetailDataSource(value) {
-    // tindakanNotifier = "";
+  DetailDataSource(PembatalanTransaksiNotifier value) {
+    tindakanNotifier = value;
     // buildRowData(value.listData);
   }
 
+  PembatalanTransaksiNotifier? tindakanNotifier;
+
+  List<DataGridRow> _laporanData = [];
   @override
-  DataGridRowAdapter? buildRow(DataGridRow row) {
-    // TODO: implement buildRow
-    throw UnimplementedError();
+  List<DataGridRow> get rows => _laporanData;
+  void buildRowData(List<TransaksiModel> list) {
+    int index = 1;
+    _laporanData = list
+        .map<DataGridRow>((data) => DataGridRow(
+              cells: [
+                DataGridCell(columnName: 'no', value: (index++).toString()),
+                DataGridCell(columnName: 'tgl_trans', value: data.tglTrans),
+                DataGridCell(columnName: 'kode_trans', value: data.kodeTrans),
+                DataGridCell(columnName: 'debet_acc', value: data.debetAcc),
+                DataGridCell(columnName: 'nama_debet', value: data.namaDebet),
+                DataGridCell(columnName: 'credit_acc', value: data.creditAcc),
+                DataGridCell(columnName: 'nama_credit', value: data.namaCredit),
+                DataGridCell(columnName: 'nomor_dok', value: data.nomorDok),
+                DataGridCell(columnName: 'nomor_ref', value: data.nomorRef),
+                DataGridCell(columnName: 'keterangan', value: data.keterangan),
+                DataGridCell(
+                    columnName: 'nominal',
+                    value: FormatCurrency.oCcy.format(int.parse(data.nominal))),
+                DataGridCell(columnName: 'action', value: data.kodeTrans),
+              ],
+            ))
+        .toList();
+  }
+
+  @override
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    return DataGridRowAdapter(
+      cells: row.getCells().map<Widget>((e) {
+        if (e.columnName == 'action') {
+          return Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: 300,
+              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: colorPrimary,
+                border: Border.all(
+                  width: 2,
+                  color: colorPrimary,
+                ),
+              ),
+              child: Text(
+                "Aksi",
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          );
+        } else {
+          return Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          );
+        }
+      }).toList(),
+    );
+  }
+
+  String formatStringData(String data) {
+    int numericData = int.tryParse(data) ?? 0;
+    final formatter = NumberFormat("#,###");
+    return formatter.format(numericData);
   }
 }

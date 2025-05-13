@@ -273,11 +273,19 @@ class CustomerNotifier extends ChangeNotifier {
 
     customerSupplierModel = list.where((e) => e.id == int.parse(id)).first;
     aoModel = listAoModel
-        .where((e) => e.kode == customerSupplierModel!.kodeAoCustomer)
-        .first;
+            .where((e) => e.kode == customerSupplierModel!.kodeAoCustomer)
+            .isNotEmpty
+        ? listAoModel
+            .where((e) => e.kode == customerSupplierModel!.kodeAoCustomer)
+            .first
+        : null;
     aoModelKRedit = listAoModel
-        .where((e) => e.kode == customerSupplierModel!.kodeAoSupplier)
-        .first;
+            .where((e) => e.kode == customerSupplierModel!.kodeAoSupplier)
+            .isNotEmpty
+        ? listAoModel
+            .where((e) => e.kode == customerSupplierModel!.kodeAoSupplier)
+            .first
+        : null;
     noSif.text = customerSupplierModel!.noSif;
     namaSif.text = customerSupplierModel!.nmSif;
     golCust = customerSupplierModel!.golCust == "1"

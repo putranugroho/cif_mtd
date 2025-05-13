@@ -1,8 +1,3 @@
-import 'dart:convert';
-
-import 'package:accounting/models/index.dart';
-import 'package:accounting/network/network.dart';
-import 'package:accounting/repository/SetupRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -118,6 +113,7 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
   var editData = false;
   final searchForm = GlobalKey<FormState>();
   final keyForm = GlobalKey<FormState>();
+  final keyForm2 = GlobalKey<FormState>();
   cek() {}
 
   confirm() {}

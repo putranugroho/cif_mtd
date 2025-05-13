@@ -100,7 +100,7 @@ class PejabatPage extends StatelessWidget {
                                 defaultColumnWidth: 180,
                                 frozenColumnsCount: 1,
 
-                                // controller: value.dataGridController,
+                                
                                 gridLinesVisibility: GridLinesVisibility.both,
                                 headerGridLinesVisibility:
                                     GridLinesVisibility.both,
@@ -275,36 +275,34 @@ class PejabatPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 8,
                                     ),
-                                    Expanded(
-                                      child: TypeAheadField<KaryawanModel>(
-                                        controller: value.nama,
-                                        suggestionsCallback: (search) =>
-                                            value.getInqKaryawan(search),
-                                        builder:
-                                            (context, controller, focusNode) {
-                                          return TextField(
-                                              controller: controller,
-                                              focusNode: focusNode,
-                                              readOnly: value.editData,
-                                              autofocus: true,
-                                              decoration: InputDecoration(
-                                                filled: value.editData,
-                                                fillColor: Colors.grey[200],
-                                                border: OutlineInputBorder(),
-                                                labelText: 'Cari Akun',
-                                              ));
-                                        },
-                                        itemBuilder: (context, city) {
-                                          return ListTile(
-                                            title: Text(city.namaLengkap),
-                                            subtitle: Text(city.nik),
-                                          );
-                                        },
-                                        onSelected: (city) {
-                                          // value.selectInvoice(city);
-                                          value.piliAkunKaryawan(city);
-                                        },
-                                      ),
+                                    TypeAheadField<KaryawanModel>(
+                                      controller: value.nama,
+                                      suggestionsCallback: (search) =>
+                                          value.getInqKaryawan(search),
+                                      builder:
+                                          (context, controller, focusNode) {
+                                        return TextField(
+                                            controller: controller,
+                                            focusNode: focusNode,
+                                            readOnly: value.editData,
+                                            autofocus: true,
+                                            decoration: InputDecoration(
+                                              filled: value.editData,
+                                              fillColor: Colors.grey[200],
+                                              border: OutlineInputBorder(),
+                                              labelText: 'Cari Akun',
+                                            ));
+                                      },
+                                      itemBuilder: (context, city) {
+                                        return ListTile(
+                                          title: Text(city.namaLengkap),
+                                          subtitle: Text(city.nik),
+                                        );
+                                      },
+                                      onSelected: (city) {
+                                        // value.selectInvoice(city);
+                                        value.piliAkunKaryawan(city);
+                                      },
                                     ),
                                     const SizedBox(height: 16),
                                     Row(
