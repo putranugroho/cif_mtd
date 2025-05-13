@@ -17,16 +17,26 @@ class UserAksesPointNotifier extends ChangeNotifier {
     getKantor();
   }
 
+  List<UserAksesPointModel> listUsers = [];
   getUsersAksesPoint() async {
     DialogCustom().showLoading(context);
     var data = {
       "user_id": karyawanModel!.id,
       "kode_pt": karyawanModel!.kodePt,
     };
+    // print(jsonEncode(data));
     Setuprepository.setup(
             token, NetworkURL.getUserAksesPoint(), jsonEncode(data))
         .then((value) {
       Navigator.pop(context);
+      if (value['status'] == "NOT-FOUND") {
+        notifyListeners();
+      } else {
+        for (Map<String, dynamic> i in value['akses_points']) {
+          listUsers.add(UserAksesPointModel.fromJson(i));
+        }
+        notifyListeners();
+      }
     });
   }
 
@@ -74,7 +84,7 @@ class UserAksesPointNotifier extends ChangeNotifier {
   }
 
   // var isLoadingUsers = false;
-  // List<UserAksesPointModel> listUsers = [];
+
   // Future getUserAksesPoint() async {
   //   isLoadingUsers = true;
   //   listUsers.clear();

@@ -8,82 +8,82 @@ class UserAksesPointModel {
 
   const UserAksesPointModel({
     required this.id,
-    required this.userId,
-    required this.empId,
+    required this.keterangan,
+    required this.lokasi,
     required this.noAkses,
     required this.aksesId,
-    required this.kodePt,
-    required this.createddate,
-    required this.isDeleted,
+    required this.type,
+    required this.kodeKantor,
+    required this.namaKantor,
   });
 
   final int id;
-  final String userId;
-  final String empId;
+  final String keterangan;
+  final String lokasi;
   final String noAkses;
   final String aksesId;
-  final String kodePt;
-  final String createddate;
-  final String isDeleted;
+  final String type;
+  final String kodeKantor;
+  final String namaKantor;
 
   factory UserAksesPointModel.fromJson(Map<String,dynamic> json) => UserAksesPointModel(
     id: json['id'] as int,
-    userId: json['user_id'].toString(),
-    empId: json['emp_id'].toString(),
+    keterangan: json['keterangan'].toString(),
+    lokasi: json['lokasi'].toString(),
     noAkses: json['no_akses'].toString(),
     aksesId: json['akses_id'].toString(),
-    kodePt: json['kode_pt'].toString(),
-    createddate: json['createddate'].toString(),
-    isDeleted: json['is_deleted'].toString()
+    type: json['type'].toString(),
+    kodeKantor: json['kode_kantor'].toString(),
+    namaKantor: json['nama_kantor'].toString()
   );
   
   Map<String, dynamic> toJson() => {
     'id': id,
-    'user_id': userId,
-    'emp_id': empId,
+    'keterangan': keterangan,
+    'lokasi': lokasi,
     'no_akses': noAkses,
     'akses_id': aksesId,
-    'kode_pt': kodePt,
-    'createddate': createddate,
-    'is_deleted': isDeleted
+    'type': type,
+    'kode_kantor': kodeKantor,
+    'nama_kantor': namaKantor
   };
 
   UserAksesPointModel clone() => UserAksesPointModel(
     id: id,
-    userId: userId,
-    empId: empId,
+    keterangan: keterangan,
+    lokasi: lokasi,
     noAkses: noAkses,
     aksesId: aksesId,
-    kodePt: kodePt,
-    createddate: createddate,
-    isDeleted: isDeleted
+    type: type,
+    kodeKantor: kodeKantor,
+    namaKantor: namaKantor
   );
 
 
   UserAksesPointModel copyWith({
     int? id,
-    String? userId,
-    String? empId,
+    String? keterangan,
+    String? lokasi,
     String? noAkses,
     String? aksesId,
-    String? kodePt,
-    String? createddate,
-    String? isDeleted
+    String? type,
+    String? kodeKantor,
+    String? namaKantor
   }) => UserAksesPointModel(
     id: id ?? this.id,
-    userId: userId ?? this.userId,
-    empId: empId ?? this.empId,
+    keterangan: keterangan ?? this.keterangan,
+    lokasi: lokasi ?? this.lokasi,
     noAkses: noAkses ?? this.noAkses,
     aksesId: aksesId ?? this.aksesId,
-    kodePt: kodePt ?? this.kodePt,
-    createddate: createddate ?? this.createddate,
-    isDeleted: isDeleted ?? this.isDeleted,
+    type: type ?? this.type,
+    kodeKantor: kodeKantor ?? this.kodeKantor,
+    namaKantor: namaKantor ?? this.namaKantor,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is UserAksesPointModel && id == other.id && userId == other.userId && empId == other.empId && noAkses == other.noAkses && aksesId == other.aksesId && kodePt == other.kodePt && createddate == other.createddate && isDeleted == other.isDeleted;
+    || other is UserAksesPointModel && id == other.id && keterangan == other.keterangan && lokasi == other.lokasi && noAkses == other.noAkses && aksesId == other.aksesId && type == other.type && kodeKantor == other.kodeKantor && namaKantor == other.namaKantor;
 
   @override
-  int get hashCode => id.hashCode ^ userId.hashCode ^ empId.hashCode ^ noAkses.hashCode ^ aksesId.hashCode ^ kodePt.hashCode ^ createddate.hashCode ^ isDeleted.hashCode;
+  int get hashCode => id.hashCode ^ keterangan.hashCode ^ lokasi.hashCode ^ noAkses.hashCode ^ aksesId.hashCode ^ type.hashCode ^ kodeKantor.hashCode ^ namaKantor.hashCode;
 }
