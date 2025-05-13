@@ -46,6 +46,7 @@ export 'inquery_gl_model.dart';
 export 'item_category_modul_model.dart';
 export 'customer_supplier_model.dart';
 export 'sbb_khusus_model.dart';
+export 'user_akses_point_model.dart';
 export 'menu_model.dart';
 export 'transaksi_model.dart';
 import 'package:quiver/core.dart';

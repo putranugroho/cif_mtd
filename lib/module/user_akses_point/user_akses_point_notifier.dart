@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/kantor_model.dart';
+import '../../models/user_akses_point_model.dart';
 import '../../network/network.dart';
 
 class UserAksesPointNotifier extends ChangeNotifier {
@@ -39,6 +40,7 @@ class UserAksesPointNotifier extends ChangeNotifier {
     });
   }
 
+  var search = false;
   KantorModel? kantor;
 
   List<UsersModel> listKaryawan = [];
@@ -53,8 +55,36 @@ class UserAksesPointNotifier extends ChangeNotifier {
     print(karyawanModel!.kodeKantor);
     kantor = list.where((e) => e.kodeKantor == karyawanModel!.kodeKantor).first;
     namaKantor.text = kantor!.namaKantor;
-
+    search = true;
+    getUserAksesPoint();
     notifyListeners();
+  }
+
+  var isLoadingUsers = false;
+  List<UserAksesPointModel> listUsers = [];
+  Future getUserAksesPoint() async {
+    isLoadingUsers = true;
+    listUsers.clear();
+    search = true;
+    notifyListeners();
+    var data = {
+      "user_id": karyawanModel!.id,
+      "kode_pt": karyawanModel!.kodePt,
+    };
+    Setuprepository.setup(
+            token, NetworkURL.getUserAksesPoint(), jsonEncode(data))
+        .then((value) {
+      if (value['status'] == "NOT-FOUND") {
+        isLoadingUsers = false;
+        notifyListeners();
+      } else {
+        for (Map<String,dynamic>i in value) {
+          
+        }
+        isLoadingUsers = false;
+        notifyListeners();
+      }
+    });
   }
 
   Future<List<UsersModel>> getInquery(String query) async {

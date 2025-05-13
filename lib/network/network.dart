@@ -353,9 +353,18 @@ class NetworkURL {
     return "$url/karyawan";
   }
 
+  static String getUserAksesPoint() {
+    return "$url/user-akses_point";
+  }
+
+  static String addUserAksesPoint() {
+    return "$url/user-akses_point/add";
+  }
+
   static String cariKaryawan() {
     return "$url/karyawan/search";
   }
+
   static String cariUsers() {
     return "$url/users/search";
   }
