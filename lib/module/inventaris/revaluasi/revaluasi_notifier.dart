@@ -91,6 +91,7 @@ class RevaluasiNotifier extends ChangeNotifier {
   TextEditingController tglbeli = TextEditingController();
   TextEditingController tglterima = TextEditingController();
   TextEditingController hargaBeli = TextEditingController(text: "0");
+  TextEditingController hargaBuku = TextEditingController(text: "0");
   TextEditingController haper = TextEditingController(text: "0");
   TextEditingController nilaiBuku = TextEditingController(text: "0");
   TextEditingController discount = TextEditingController(text: "0");
@@ -295,8 +296,15 @@ class RevaluasiNotifier extends ChangeNotifier {
     biaya.text = FormatCurrency.oCcy
         .format(int.parse(inventarisModel!.biaya))
         .replaceAll(".", ",");
-    hargaBeli.text = inventarisModel!.habeli;
-    haper.text = inventarisModel!.haper;
+    hargaBeli.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.habeli))
+        .replaceAll(".", ",");
+    hargaBuku.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.nilaiBuku))
+        .replaceAll(".", ",");
+    haper.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.haper))
+        .replaceAll(".", ",");
     nilaiPenyusutan.text = FormatCurrency.oCcy
         .format(int.parse(inventarisModel!.nilaiResidu))
         .replaceAll(".", ",");

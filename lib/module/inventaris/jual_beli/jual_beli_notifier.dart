@@ -151,8 +151,12 @@ class JualBeliNotifier extends ChangeNotifier {
 
   TextEditingController nodok = TextEditingController();
   TextEditingController tglbeli = TextEditingController();
+  TextEditingController tgljualhapus = TextEditingController();
+  TextEditingController nilaijual = TextEditingController();
+  TextEditingController alasanjualhapus = TextEditingController();
   TextEditingController tglterima = TextEditingController();
   TextEditingController hargaBeli = TextEditingController(text: "0");
+  TextEditingController hargaBuku = TextEditingController(text: "0");
   TextEditingController discount = TextEditingController(text: "0");
   TextEditingController biaya = TextEditingController(text: "0");
   TextEditingController nilaiPenyusutan = TextEditingController();
@@ -193,44 +197,6 @@ class JualBeliNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  DateTime? tglBuka = DateTime.now();
-
-  Future pilihTanggalBuka() async {
-    var pickedendDate = (await showDatePicker(
-      context: context,
-      initialDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())),
-          int.parse(DateFormat('MM').format(
-            DateTime.now(),
-          )),
-          int.parse(DateFormat('dd').format(
-            DateTime.now(),
-          ))),
-      firstDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) - 10,
-          int.parse(DateFormat('MM').format(
-            DateTime.now(),
-          )),
-          int.parse(DateFormat('dd').format(
-            DateTime.now(),
-          ))),
-      lastDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())),
-          int.parse(DateFormat('MM').format(
-            DateTime.now(),
-          )),
-          int.parse(DateFormat('dd').format(
-            DateTime.now(),
-          ))),
-    ));
-    if (pickedendDate != null) {
-      tglTransaksi = pickedendDate;
-      tglbeli.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
-      notifyListeners();
-    }
-  }
-
   DateTime? tglTransaksi;
   Future piihTanggalBeli() async {
     var pickedendDate = (await showDatePicker(
@@ -265,6 +231,45 @@ class JualBeliNotifier extends ChangeNotifier {
     if (pickedendDate != null) {
       tglTransaksi = pickedendDate;
       tglbeli.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
+      notifyListeners();
+    }
+  }
+
+  DateTime? tanggalJual;
+  Future piihTanggalJualHapus() async {
+    var pickedendDate = (await showDatePicker(
+      context: context,
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+                DateTime.now(),
+              )) -
+              1),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+                DateTime.now(),
+              )) -
+              1,
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) + 10,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+    ));
+    if (pickedendDate != null) {
+      tanggalJual = pickedendDate;
+      tgljualhapus.text = DateFormat("dd-MMM-yyyy")
           .format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
@@ -454,8 +459,13 @@ class JualBeliNotifier extends ChangeNotifier {
     keterangan.text = inventarisModel!.ket;
     golongan.text = inventarisModel!.namaGolongan;
     satuans.text = inventarisModel!.satuanAset;
-    tglbeli.text = inventarisModel!.tglBeli;
+    tglbeli.text = DateFormat("dd-MMM-yyyy")
+        .format(DateTime.parse(inventarisModel!.tglBeli.toString()));
+    notifyListeners();
     tglterima.text = inventarisModel!.tglTerima;
+    hargaBuku.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.nilaiBuku))
+        .replaceAll(".", ",");
     notifyListeners();
   }
 }
