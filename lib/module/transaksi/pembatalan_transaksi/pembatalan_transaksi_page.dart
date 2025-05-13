@@ -925,6 +925,59 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                       const SizedBox(
                                         height: 16,
                                       ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "Tanggal Pembatalan",
+                                            style: TextStyle(fontSize: 12),
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            "*",
+                                            style: TextStyle(fontSize: 8),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      InkWell(
+                                        onTap: () => value.tanggalPenjualan(),
+                                        child: TextFormField(
+                                          textInputAction: TextInputAction.done,
+                                          enabled: false,
+                                          controller: value.tglPenjualan,
+                                          style: const TextStyle(
+                                            // Make text bigger and black
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                          validator: (e) {
+                                            if (e!.isEmpty)
+                                              return "Wajib diisi";
+                                            return null;
+                                          },
+                                          decoration: InputDecoration(
+                                            hintText: "Tgl Pembatalan",
+                                            hintStyle: const TextStyle(
+                                                color: Colors.grey),
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
+                                            ),
+                                            disabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.grey.shade600),
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 16,
+                                      ),
                                       const Row(
                                         children: [
                                           Text(

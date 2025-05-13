@@ -62,9 +62,49 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
     }
   }
 
+  DateTime? tglJual = DateTime.now();
+  Future tanggalPenjualan() async {
+    var pickedendDate = (await showDatePicker(
+      context: context,
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+                DateTime.now(),
+              )) -
+              1),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) - 1,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) + 1,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+                DateTime.now(),
+              )) -
+              1),
+    ));
+    if (pickedendDate != null) {
+      tglJual = pickedendDate;
+      tglPenjualan.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
+      notifyListeners();
+    }
+  }
+
   TextEditingController noRef = TextEditingController();
   TextEditingController noDok = TextEditingController();
   TextEditingController tglTransaksi = TextEditingController();
+  TextEditingController tglPenjualan = TextEditingController();
   TextEditingController nominal = TextEditingController();
   TextEditingController akunDebit = TextEditingController();
   TextEditingController akunKredit = TextEditingController();

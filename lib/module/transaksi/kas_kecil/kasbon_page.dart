@@ -773,13 +773,11 @@ class KasbonPage extends StatelessWidget {
                                         height: 1,
                                         color: Colors.grey,
                                       ),
-                                      Expanded(
-                                        child: Text(
-                                          "Penyelesaian",
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                      Text(
+                                        "Penyelesaian",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                       const SizedBox(height: 16),
