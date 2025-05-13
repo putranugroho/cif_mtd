@@ -9,6 +9,7 @@ import 'package:accounting/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -245,7 +246,7 @@ class PenempatanPage extends StatelessWidget {
                                                       height: 8,
                                                     ),
                                                     TextFormField(
-                                                      controller: value.noaset,
+                                                      controller: value.kelompok,
                                                       textInputAction:
                                                           TextInputAction.done,
                                                       maxLines: 1,
@@ -296,7 +297,7 @@ class PenempatanPage extends StatelessWidget {
                                                       height: 8,
                                                     ),
                                                     TextFormField(
-                                                      controller: value.noaset,
+                                                      controller: value.golongan,
                                                       textInputAction:
                                                           TextInputAction.done,
                                                       maxLines: 1,
@@ -422,7 +423,7 @@ class PenempatanPage extends StatelessWidget {
                                                             ),
                                                             TextFormField(
                                                               controller:
-                                                                  value.noaset,
+                                                                  value.satuans,
                                                               textInputAction:
                                                                   TextInputAction
                                                                       .done,
@@ -595,7 +596,7 @@ class PenempatanPage extends StatelessWidget {
                                                                   TextInputAction
                                                                       .done,
                                                               controller: value
-                                                                  .keterangan,
+                                                                  .tglbeli,
                                                               maxLines: 1,
                                                               readOnly: true,
                                                               validator: (e) {
@@ -662,7 +663,7 @@ class PenempatanPage extends StatelessWidget {
                                                                   TextInputAction
                                                                       .done,
                                                               controller: value
-                                                                  .keterangan,
+                                                                  .tglterima,
                                                               maxLines: 1,
                                                               readOnly: true,
                                                               validator: (e) {
@@ -794,9 +795,8 @@ class PenempatanPage extends StatelessWidget {
                                                       showSearchBox:
                                                           true, // Aktifkan fitur pencarian
                                                     ),
-                                                    selectedItem:
-                                                        value.kantorModel,
-                                                    items: value.listkantor,
+                                                    selectedItem: value.kantor,
+                                                    items: value.listKantor,
                                                     itemAsString: (e) =>
                                                         "${e.namaKantor}",
                                                     onChanged: (e) {
@@ -947,24 +947,41 @@ class PenempatanPage extends StatelessWidget {
                                                   SizedBox(
                                                     height: 8,
                                                   ),
-                                                  TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
-                                                    maxLines: 1,
-                                                    decoration: InputDecoration(
-                                                      suffixIcon: IconButton(
-                                                          onPressed: () {},
-                                                          icon: Icon(
-                                                              Icons.search)),
-                                                      hintText:
-                                                          "Silahkan Masukkan Nama Karyawan",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
-                                                      ),
-                                                    ),
+                                                  TypeAheadField<KaryawanModel>(
+                                                    controller:
+                                                        value.namaKaryawan,
+                                                    suggestionsCallback:
+                                                        (search) => value
+                                                            .getInquery(search),
+                                                    builder: (context,
+                                                        controller, focusNode) {
+                                                      return TextField(
+                                                          controller:
+                                                              controller,
+                                                          focusNode: focusNode,
+                                                          autofocus: true,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            border:
+                                                                OutlineInputBorder(),
+                                                            labelText:
+                                                                'Cari Akun',
+                                                          ));
+                                                    },
+                                                    itemBuilder:
+                                                        (context, city) {
+                                                      return ListTile(
+                                                        title: Text(
+                                                            city.namaLengkap),
+                                                        subtitle:
+                                                            Text(city.nik),
+                                                      );
+                                                    },
+                                                    onSelected: (city) {
+                                                      // value.selectInvoice(city);
+                                                      value.piliAkunKaryawan(
+                                                          city);
+                                                    },
                                                   ),
                                                   const SizedBox(height: 16),
                                                   Row(
@@ -990,6 +1007,8 @@ class PenempatanPage extends StatelessWidget {
                                                         TextInputAction.done,
                                                     maxLines: 1,
                                                     readOnly: true,
+                                                    controller:
+                                                        value.nikKaryawan,
                                                     // inputFormatters: [
                                                     //   FilteringTextInputFormatter.digitsOnly
                                                     // ],
@@ -1013,6 +1032,7 @@ class PenempatanPage extends StatelessWidget {
                                                       ),
                                                     ),
                                                   ),
+                                                  const SizedBox(height: 16),
                                                 ],
                                               ),
                                         const SizedBox(height: 16),

@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:accounting/models/index.dart';
 import 'package:accounting/utils/colors.dart';
+import 'package:accounting/utils/dialog_loading.dart';
+import 'package:accounting/utils/informationdialog.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
@@ -19,7 +24,64 @@ class PenempatanNotifier extends ChangeNotifier {
     // for (Map<String, dynamic> i in kantor) {
     //   listkantor.add(KantorModel.fromJson(i));
     // }
+    getKantor();
+    getInventaris();
     notifyListeners();
+  }
+
+  List<KantorModel> listKantor = [];
+  Future getKantor() async {
+    listKantor.clear();
+
+    var data = {
+      "kode_pt": "001",
+    };
+    notifyListeners();
+    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data))
+        .then((value) {
+      if (value['status'] == "Success") {
+        for (Map<String, dynamic> i in value['data']) {
+          listKantor.add(KantorModel.fromJson(i));
+        }
+
+        notifyListeners();
+      } else {
+        notifyListeners();
+      }
+    });
+  }
+
+  pilihKantor(KantorModel value) {
+    kantor = value;
+
+    notifyListeners();
+  }
+
+  KantorModel? kantor;
+  List<InventarisModel> list = [];
+
+//contoh decimal sparator currency
+  var isLoading = true;
+  final currencyFormatter =
+      NumberFormat.currency(symbol: 'Rp ', decimalDigits: 2);
+  getInventaris() async {
+    isLoading = true;
+    list.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getInventaris(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          list.add(InventarisModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
   }
 
   int currentStep = 0;
@@ -52,7 +114,34 @@ class PenempatanNotifier extends ChangeNotifier {
     GlobalKey<FormState>(),
   ];
 
-  cek() {}
+  cek() {
+    DialogCustom().showLoading(context);
+    Future.delayed(Duration(seconds: 2)).then((value) {
+      clear();
+      informationDialog(context, "Information", "Update Successfully");
+    });
+  }
+
+  clear() {
+    inventarisModel = null;
+    karyawanModel = null;
+    namaKaryawan.clear();
+    nikKaryawan.clear();
+    kdAset.clear();
+    noaset.clear();
+    nmAset.clear();
+    lokasi.clear();
+    kota.clear();
+    nik.clear();
+    noDok.clear();
+    kelompok.clear();
+    keterangan.clear();
+    golongan.clear();
+    satuans.clear();
+    tglbeli.clear();
+    tglterima.clear();
+    notifyListeners();
+  }
 
   bool dialog = false;
   tambah() {
@@ -287,23 +376,47 @@ class PenempatanNotifier extends ChangeNotifier {
     }
   }
 
-  List<Map<String, dynamic>> kantor = [
-    {
-      "kode_pt": "10001",
-      "kode_kantor": "100011",
-      "kode_induk": "",
-      "nama_kantor": "PT TEGUH AMAN LESTARI ",
-      "status_kantor": "P",
-      "alamat": "Trasa Coworking Space",
-      "kelurahan": "PROCOT",
-      "kecamatan": "SLAWI",
-      "kota": "KABUPATEN TEGAL",
-      "provinsi": "JAWA TENGAH",
-      "kode_pos": "52419",
-      "telp": null,
-      "fax": null
+  List<KaryawanModel> listKaryawan = [];
+
+  Future<List<KaryawanModel>> getInquery(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      listKaryawan.clear();
+      notifyListeners();
+      var data = {"nama": query};
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.cariKaryawan(),
+          jsonEncode(data),
+        );
+
+        for (Map<String, dynamic> i in response) {
+          listKaryawan.add(KaryawanModel.fromJson(i));
+        }
+        notifyListeners();
+      } catch (e) {
+        if (kDebugMode) {
+          print("Error: $e");
+        }
+      } finally {
+        notifyListeners();
+      }
+    } else {
+      listKaryawan.clear(); // clear on short query
     }
-  ];
+
+    return listKaryawan;
+  }
+
+  TextEditingController namaKaryawan = TextEditingController();
+  TextEditingController nikKaryawan = TextEditingController();
+  KaryawanModel? karyawanModel;
+  piliAkunKaryawan(KaryawanModel value) {
+    karyawanModel = value;
+    namaKaryawan.text = karyawanModel!.namaLengkap;
+    nikKaryawan.text = karyawanModel!.nik;
+    notifyListeners();
+  }
 
   TextEditingController noDok = TextEditingController();
   TextEditingController noaset = TextEditingController();
@@ -311,77 +424,33 @@ class PenempatanNotifier extends ChangeNotifier {
   TextEditingController keterangan = TextEditingController();
 
   List<KantorModel> listkantor = [];
-  KantorModel? kantorModel;
-  pilihKantor(KantorModel value) {
-    kantorModel = value;
-    notifyListeners();
-  }
 
   TextEditingController kdAset = TextEditingController();
   TextEditingController nmAset = TextEditingController();
   TextEditingController lokasi = TextEditingController();
   TextEditingController kota = TextEditingController();
   TextEditingController nik = TextEditingController();
+  TextEditingController golongan = TextEditingController();
+  TextEditingController kelompok = TextEditingController();
+  TextEditingController satuans = TextEditingController();
 
-  List<InventarisModel> list = [];
+  // List<InventarisModel> list = [];
   InventarisModel? inventarisModel;
   pilihInventory(InventarisModel value) {
     inventarisModel = value;
     kdAset.text = inventarisModel!.kdaset;
-    nmAset.text = inventarisModel!.ket;
+    noaset.text = inventarisModel!.kdaset;
+    nmAset.text = inventarisModel!.namaaset;
     lokasi.text = inventarisModel!.lokasi;
     kota.text = inventarisModel!.kota;
     nik.text = inventarisModel!.nik;
+    noDok.text = inventarisModel!.nodokBeli;
+    kelompok.text = inventarisModel!.namaKelompok;
+    keterangan.text = inventarisModel!.ket;
+    golongan.text = inventarisModel!.namaGolongan;
+    satuans.text = inventarisModel!.satuanAset;
+    tglbeli.text = inventarisModel!.tglBeli;
+    tglterima.text = inventarisModel!.tglTerima;
     notifyListeners();
   }
-
-  List<Map<String, dynamic>> data = [
-    {
-      "kdaset": "100001",
-      "ket": "NMAX 100 CC150",
-      "kode_kelompok": "1",
-      "nama_kelompok": "TRANSPORTASI",
-      "kode_golongan": "001",
-      "nama_golongan": "Kendaraan",
-      "nodok_beli": "10000101",
-      "tgl_beli": "2025-03-01",
-      "tgl_terima": "2025-03-07",
-      "habeli": "24000000",
-      "disc": "500000",
-      "biaya": "150000",
-      "haper": "23650000",
-      "nilai_residu": "1",
-      "ppn_beli": "0",
-      "tgl_jual": "",
-      "nodok_jual": "",
-      "hajual": "",
-      "ppn_jual": "",
-      "margin": "",
-      "kode_pt": "",
-      "kode_kantor": "",
-      "kode_induk": "",
-      "lokasi": "",
-      "kota": "",
-      "masasusut": "10",
-      "bln_mulai_susut": "2025-12-01",
-      "kdkondisi": "",
-      "kondisi": "",
-      "satuan_aset": "",
-      "nilai_declining": "",
-      "perbaikan": "",
-      "stsasr": "",
-      "nopolis": "",
-      "nilai_revaluasi": "",
-      "nik": "",
-      "nama_pejabat": "",
-      "sbb_aset": "",
-      "sbb_penyusutan": "",
-      "sbb_biaya_penyusutan": "",
-      "sbb_rugi_revaluasi": "",
-      "sbb_laba_revaluasi": "",
-      "sbb_rugi_jual": "",
-      "sbb_laba_jual": "",
-      "sbb_biaya_perbaikan": ""
-    },
-  ];
 }
