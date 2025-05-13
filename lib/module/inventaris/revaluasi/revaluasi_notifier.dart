@@ -1,25 +1,50 @@
+import 'dart:convert';
+
 import 'package:accounting/models/index.dart';
 import 'package:accounting/utils/colors.dart';
+import 'package:accounting/utils/dialog_loading.dart';
+import 'package:accounting/utils/informationdialog.dart';
 import 'package:accounting/utils/format_currency.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
+
+import '../../../network/network.dart';
+import '../../../repository/SetupRepository.dart';
+import '../../../utils/format_currency.dart';
 
 class RevaluasiNotifier extends ChangeNotifier {
   final BuildContext context;
 
   RevaluasiNotifier({required this.context}) {
-    // for (Map<String, dynamic> i in data) {
-    //   list.add(InventarisModel.fromJson(i));
-    // }
-
-    // for (Map<String, dynamic> i in kantor) {
-    //   listkantor.add(KantorModel.fromJson(i));
-    // }
+    getInventaris();
     notifyListeners();
   }
 
   TextEditingController nominal = TextEditingController();
+  var isLoading = true;
+  final currencyFormatter =
+      NumberFormat.currency(symbol: 'Rp ', decimalDigits: 2);
+  getInventaris() async {
+    isLoading = true;
+    list.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getInventaris(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          list.add(InventarisModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
 
   int currentStep = 0;
   void onStepContinue() {
@@ -66,10 +91,13 @@ class RevaluasiNotifier extends ChangeNotifier {
   TextEditingController tglbeli = TextEditingController();
   TextEditingController tglterima = TextEditingController();
   TextEditingController hargaBeli = TextEditingController(text: "0");
+  TextEditingController haper = TextEditingController(text: "0");
+  TextEditingController nilaiBuku = TextEditingController(text: "0");
   TextEditingController discount = TextEditingController(text: "0");
   TextEditingController biaya = TextEditingController(text: "0");
   TextEditingController nilaiPenyusutan = TextEditingController();
   TextEditingController ppn = TextEditingController(text: "0");
+  TextEditingController pph = TextEditingController(text: "0");
   int total = 0;
   onChange() {
     total = int.parse(hargaBeli.text.replaceAll(",", "")) -
@@ -234,25 +262,52 @@ class RevaluasiNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  TextEditingController noDok = TextEditingController();
+  TextEditingController noaset = TextEditingController();
+  TextEditingController namaaset = TextEditingController();
+  TextEditingController keterangan = TextEditingController();
+
   TextEditingController kdAset = TextEditingController();
   TextEditingController nmAset = TextEditingController();
   TextEditingController lokasi = TextEditingController();
   TextEditingController kota = TextEditingController();
   TextEditingController nik = TextEditingController();
+  TextEditingController golongan = TextEditingController();
+  TextEditingController kelompok = TextEditingController();
+  TextEditingController satuans = TextEditingController();
   TextEditingController picReval = TextEditingController();
 
+  int subtotal = 0;
   List<InventarisModel> list = [];
   InventarisModel? inventarisModel;
   pilihInventory(InventarisModel value) {
     inventarisModel = value;
     kdAset.text = inventarisModel!.kdaset;
-    nmAset.text = inventarisModel!.ket;
-    lokasi.text = inventarisModel!.lokasi;
-    kota.text = inventarisModel!.kota;
-    nik.text = inventarisModel!.nik;
+    noaset.text = inventarisModel!.kdaset;
+    nmAset.text = inventarisModel!.namaaset;
+    noDok.text = inventarisModel!.nodokBeli;
+    kelompok.text = inventarisModel!.namaKelompok;
+    keterangan.text = inventarisModel!.ket;
+    golongan.text = inventarisModel!.namaGolongan;
+    satuans.text = inventarisModel!.satuanAset;
+    tglbeli.text = inventarisModel!.tglBeli;
+    tglterima.text = inventarisModel!.tglTerima;
     biaya.text = FormatCurrency.oCcy
-        .format(int.parse(inventarisModel!.haper))
+        .format(int.parse(inventarisModel!.biaya))
         .replaceAll(".", ",");
+    hargaBeli.text = inventarisModel!.habeli;
+    haper.text = inventarisModel!.haper;
+    nilaiPenyusutan.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.nilaiResidu))
+        .replaceAll(".", ",");
+    ppn.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.ppnBeli))
+        .replaceAll(".", ",");
+    pph.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.pph))
+        .replaceAll(".", ",");
+    total = (subtotal + int.parse(ppn.text.replaceAll(",", ""))) -
+        int.parse(pph.text.replaceAll(",", ""));
     notifyListeners();
   }
 

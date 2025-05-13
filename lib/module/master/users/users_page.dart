@@ -176,6 +176,19 @@ class UsersPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      columnName: 'aktivasi',
+                                      width: 65,
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Aktivasi Login',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
                                       columnName: 'level_otor',
                                       width: 65,
                                       label: Container(
@@ -469,42 +482,83 @@ class UsersPage extends StatelessWidget {
                                     ),
                                     Row(
                                       children: [
-                                        Text(
-                                          "Tanggal Masa Berlaku",
-                                          style: const TextStyle(fontSize: 12),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        const Text(
-                                          "*",
-                                          style: TextStyle(fontSize: 8),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    InkWell(
-                                      onTap: () => value.pilihTanggalBuka(),
-                                      child: TextFormField(
-                                        enabled: false,
-                                        textInputAction: TextInputAction.done,
-                                        controller: value.tglexp,
-                                        maxLines: 1,
-                                        validator: (e) {
-                                          if (e!.isEmpty) {
-                                            return "Wajib diisi";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          hintText: "Tanggal Masa Berlaku",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Tanggal Masa Berlaku",
+                                                    style: const TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                  const Text(
+                                                    "*",
+                                                    style:
+                                                        TextStyle(fontSize: 8),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              InkWell(
+                                                onTap: () =>
+                                                    value.pilihTanggalBuka(),
+                                                child: TextFormField(
+                                                  enabled: false,
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  controller: value.tglexp,
+                                                  maxLines: 1,
+                                                  validator: (e) {
+                                                    if (e!.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText:
+                                                        "Tanggal Masa Berlaku",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ),
+                                        SizedBox(
+                                          width: 16,
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                "Aktivasi Login",
+                                                style: const TextStyle(
+                                                    fontSize: 14),
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              CupertinoSwitch(
+                                                  activeColor: colorPrimary,
+                                                  value: value.aktivasilogin,
+                                                  onChanged: (e) {
+                                                    value.gantiAktivasi();
+                                                  }),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                     const SizedBox(height: 16),
                                     Row(
@@ -1162,6 +1216,7 @@ class DetailDataSource extends DataGridSource {
                         : data.lvluser == "1"
                             ? "Supervisor"
                             : "User"),
+                DataGridCell(columnName: 'aktivasi', value: "N"),
                 DataGridCell(
                     columnName: 'level_otor',
                     value: data.levelOtor == "null" ? "" : data.levelOtor),
@@ -1213,6 +1268,28 @@ class DetailDataSource extends DataGridSource {
                   ),
                 ),
               ),
+            ),
+          );
+        } else if (e.columnName == 'aktivasi' ||
+            e.columnName == 'level_otor' ||
+            e.columnName == 'beda_kantor') {
+          return Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          );
+        } else if (e.columnName == 'min_otor' || e.columnName == 'max_otor') {
+          return Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           );
         } else {

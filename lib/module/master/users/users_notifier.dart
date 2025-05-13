@@ -429,6 +429,13 @@ class UsersNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool aktivasilogin = true;
+  gantiAktivasi() {
+    clearOtor();
+    aktivasilogin = !aktivasilogin;
+    notifyListeners();
+  }
+
   clearOtor() {
     levelOtor = null;
     levelSelected = false;

@@ -75,6 +75,7 @@ class OtorisasiMasterPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 150,
                                 columnName: 'tanggal',
                                 label: Container(
                                     color: colorPrimary,
@@ -87,6 +88,7 @@ class OtorisasiMasterPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 150,
                                 columnName: 'modul',
                                 label: Container(
                                     color: colorPrimary,
@@ -124,6 +126,7 @@ class OtorisasiMasterPage extends StatelessWidget {
                                           fontSize: 12,
                                         )))),
                             GridColumn(
+                                width: 100,
                                 columnName: 'status',
                                 label: Container(
                                     padding: EdgeInsets.all(6),
@@ -136,6 +139,7 @@ class OtorisasiMasterPage extends StatelessWidget {
                                           fontSize: 12,
                                         )))),
                             GridColumn(
+                                width: 80,
                                 columnName: 'action',
                                 label: Container(
                                     color: colorPrimary,

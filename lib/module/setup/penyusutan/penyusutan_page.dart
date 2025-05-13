@@ -93,7 +93,7 @@ class PenyusutanPage extends StatelessWidget {
                                     SizedBox(
                                       width: 8,
                                     ),
-                                    Text("Straight Line"),
+                                    Text("Garis Lurus"),
                                     SizedBox(
                                       width: 24,
                                     ),
@@ -107,7 +107,7 @@ class PenyusutanPage extends StatelessWidget {
                                     SizedBox(
                                       width: 8,
                                     ),
-                                    Text("Double Declining"),
+                                    Text("Menurun"),
                                   ],
                                 ),
                                 SizedBox(
@@ -129,27 +129,36 @@ class PenyusutanPage extends StatelessWidget {
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                TextFormField(
-                                  textInputAction: TextInputAction.done,
-                                  controller: value.nilai,
-                                  maxLines: 1,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly,
-                                    CurrencyInputFormatter(),
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: 180,
+                                      child: TextFormField(
+                                        textInputAction: TextInputAction.done,
+                                        controller: value.nilai,
+                                        maxLines: 1,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          CurrencyInputFormatter(),
+                                        ],
+                                        validator: (e) {
+                                          if (e!.isEmpty) {
+                                            return "Wajib diisi";
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                        decoration: InputDecoration(
+                                          hintText: "Nilai Akhir",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                          ),
+                                        ),
+                                      ),
+                                    )
                                   ],
-                                  validator: (e) {
-                                    if (e!.isEmpty) {
-                                      return "Wajib diisi";
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                  decoration: InputDecoration(
-                                    hintText: "Nilai Akhir",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(6),
-                                    ),
-                                  ),
                                 ),
                                 const SizedBox(height: 16),
                                 value.metode == 2
@@ -158,7 +167,7 @@ class PenyusutanPage extends StatelessWidget {
                                           Row(
                                             children: [
                                               Text(
-                                                "Nilai Declining (%)",
+                                                "Presentase Penurunan (%)",
                                                 style: const TextStyle(
                                                     fontSize: 12),
                                               ),
@@ -172,64 +181,82 @@ class PenyusutanPage extends StatelessWidget {
                                           const SizedBox(
                                             height: 8,
                                           ),
-                                          TextFormField(
-                                            textInputAction:
-                                                TextInputAction.done,
-                                            controller: value.declining,
-                                            maxLines: 1,
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter.allow(
-                                                RegExp(
-                                                    r'^(100(\.00?)?|([1-9]\d?|0)(\.\d{0,2})?)$'),
-                                              ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 180,
+                                                child: TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  controller: value.declining,
+                                                  maxLines: 1,
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .allow(
+                                                      RegExp(
+                                                          r'^(100(\.00?)?|([1-9]\d?|0)(\.\d{0,2})?)$'),
+                                                    ),
+                                                  ],
+                                                  keyboardType: TextInputType
+                                                      .numberWithOptions(
+                                                    decimal: true,
+                                                    signed: false,
+                                                  ),
+                                                  validator: (e) {
+                                                    if (e == null ||
+                                                        e.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    }
+
+                                                    final valueAsDouble =
+                                                        double.tryParse(
+                                                            e.replaceAll(
+                                                                ",", "."));
+                                                    if (valueAsDouble == null) {
+                                                      return "Format tidak valid";
+                                                    }
+
+                                                    if (valueAsDouble < 0 ||
+                                                        valueAsDouble > 100) {
+                                                      return "Nilai harus antara 0 dan 100";
+                                                    }
+
+                                                    // Ensure only 2 decimal places max
+                                                    if (e.contains(".")) {
+                                                      final decimalPart =
+                                                          e.split(".")[1];
+                                                      if (decimalPart.length >
+                                                          2) {
+                                                        return "Maksimal 2 angka di belakang koma";
+                                                      }
+                                                    }
+
+                                                    return null;
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "Penurunan",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
                                             ],
-                                            keyboardType:
-                                                TextInputType.numberWithOptions(
-                                              decimal: true,
-                                              signed: false,
-                                            ),
-                                            validator: (e) {
-                                              if (e == null || e.isEmpty) {
-                                                return "Wajib diisi";
-                                              }
-
-                                              final valueAsDouble =
-                                                  double.tryParse(
-                                                      e.replaceAll(",", "."));
-                                              if (valueAsDouble == null) {
-                                                return "Format tidak valid";
-                                              }
-
-                                              if (valueAsDouble < 0 ||
-                                                  valueAsDouble > 100) {
-                                                return "Nilai harus antara 0 dan 100";
-                                              }
-
-                                              // Ensure only 2 decimal places max
-                                              if (e.contains(".")) {
-                                                final decimalPart =
-                                                    e.split(".")[1];
-                                                if (decimalPart.length > 2) {
-                                                  return "Maksimal 2 angka di belakang koma";
-                                                }
-                                              }
-
-                                              return null;
-                                            },
-                                            decoration: InputDecoration(
-                                              hintText: "Nilai Declining",
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
-                                              ),
-                                            ),
                                           ),
                                           const SizedBox(height: 8),
-                                          Text(
-                                            "Berdampak apabila metode penyusutan Double Declining ",
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                            ),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Berdampak apabila metode penyusutan Menurun",
+                                                style: TextStyle(
+                                                  fontSize: 10,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                           const SizedBox(height: 16),
                                         ],

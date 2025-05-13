@@ -99,18 +99,18 @@ class AoPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 150,
                                 columnName: 'kode',
                                 label: Container(
                                     padding: EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child:
-                                        Text('Kode Account Officer / Marketing',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w300,
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                            )))),
+                                    child: Text('Kode AO / Marketing',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        )))),
                             GridColumn(
                                 columnName: 'nm',
                                 label: Container(
@@ -136,6 +136,7 @@ class AoPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 80,
                                 columnName: 'action',
                                 label: Container(
                                     color: colorPrimary,

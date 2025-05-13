@@ -17,13 +17,6 @@ class PenempatanNotifier extends ChangeNotifier {
   final BuildContext context;
 
   PenempatanNotifier({required this.context}) {
-    // for (Map<String, dynamic> i in data) {
-    //   list.add(InventarisModel.fromJson(i));
-    // }
-
-    // for (Map<String, dynamic> i in kantor) {
-    //   listkantor.add(KantorModel.fromJson(i));
-    // }
     getKantor();
     getInventaris();
     notifyListeners();
@@ -51,6 +44,8 @@ class PenempatanNotifier extends ChangeNotifier {
     });
   }
 
+  List<KantorModel> listkantor = [];
+  KantorModel? kantorModel;
   pilihKantor(KantorModel value) {
     kantor = value;
 
@@ -423,8 +418,6 @@ class PenempatanNotifier extends ChangeNotifier {
   TextEditingController namaaset = TextEditingController();
   TextEditingController keterangan = TextEditingController();
 
-  List<KantorModel> listkantor = [];
-
   TextEditingController kdAset = TextEditingController();
   TextEditingController nmAset = TextEditingController();
   TextEditingController lokasi = TextEditingController();
@@ -441,6 +434,11 @@ class PenempatanNotifier extends ChangeNotifier {
     kdAset.text = inventarisModel!.kdaset;
     noaset.text = inventarisModel!.kdaset;
     nmAset.text = inventarisModel!.namaaset;
+    kantor = listKantor
+        .where((e) =>
+            e.kodePt == inventarisModel!.kodePt &&
+            e.kodeKantor == inventarisModel!.kodeKantor)
+        .first;
     lokasi.text = inventarisModel!.lokasi;
     kota.text = inventarisModel!.kota;
     nik.text = inventarisModel!.nik;
