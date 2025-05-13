@@ -1083,6 +1083,7 @@ class KasbonPage extends StatelessWidget {
                                                           return TextField(
                                                               controller:
                                                                   controller,
+                                                              enabled: false,
                                                               focusNode:
                                                                   focusNode,
                                                               autofocus: true,

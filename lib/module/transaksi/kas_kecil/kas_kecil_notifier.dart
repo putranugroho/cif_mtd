@@ -206,7 +206,9 @@ class KasKecilNotifier extends ChangeNotifier {
     }
   }
 
+  bool cancel = true;
   cancelKode() async {
+    cancel = true;
     inqueryGlModelcre = null;
     inqueryGlModelcre = null;
     setupTransModel = null;
@@ -251,6 +253,7 @@ class KasKecilNotifier extends ChangeNotifier {
     namaSbbDeb.text = setupTransModel!.glDeb;
     nossbcre.text = setupTransModel!.namaKre;
     namaSbbCre.text = setupTransModel!.glKre;
+    cancel = false;
     notifyListeners();
   }
 }

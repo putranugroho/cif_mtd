@@ -491,7 +491,8 @@ class KasKecilPage extends StatelessWidget {
                                                                 controller,
                                                             focusNode:
                                                                 focusNode,
-                                                            enabled: false,
+                                                            enabled:
+                                                                value.cancel,
                                                             autofocus: true,
                                                             decoration:
                                                                 InputDecoration(
@@ -601,7 +602,8 @@ class KasKecilPage extends StatelessWidget {
                                                                 controller,
                                                             focusNode:
                                                                 focusNode,
-                                                            enabled: false,
+                                                            enabled:
+                                                                value.cancel,
                                                             autofocus: true,
                                                             decoration:
                                                                 InputDecoration(
@@ -718,7 +720,8 @@ class KasKecilPage extends StatelessWidget {
                                                                 controller,
                                                             focusNode:
                                                                 focusNode,
-                                                            enabled: false,
+                                                            enabled:
+                                                                value.cancel,
                                                             autofocus: true,
                                                             decoration:
                                                                 InputDecoration(
@@ -829,7 +832,8 @@ class KasKecilPage extends StatelessWidget {
                                                                 controller,
                                                             focusNode:
                                                                 focusNode,
-                                                            enabled: false,
+                                                            enabled:
+                                                                value.cancel,
                                                             autofocus: true,
                                                             decoration:
                                                                 InputDecoration(
