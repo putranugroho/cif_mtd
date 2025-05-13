@@ -269,7 +269,7 @@ class CoaNotifier extends ChangeNotifier {
                 .where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "B")
                 .first
             : null;
-    print(bukuBesar!.namaSbb);
+    // print(bukuBesar!.namaSbb);
     header = list
             .where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "A")
             .isNotEmpty
