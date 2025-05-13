@@ -38,13 +38,11 @@ class PembatalanTransaksiPage extends StatelessWidget {
                     children: [
                       Container(
                         padding: EdgeInsets.all(20),
-                        child: Expanded(
-                          child: const Text(
-                            "Pembatalan Transaksi",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        child: Text(
+                          "Pembatalan Transaksi",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
