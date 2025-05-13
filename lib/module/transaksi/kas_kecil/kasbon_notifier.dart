@@ -206,6 +206,12 @@ class KasbonNotifier extends ChangeNotifier {
     }
   }
 
+  TextEditingController nilaiTrans = TextEditingController();
+  TextEditingController selisih = TextEditingController();
+  int nilaiTransaksi = 0;
+  int nilaiNominal = 0;
+  int nilaiselisih = 0;
+
   cancelKode() async {
     inqueryGlModelcre = null;
     inqueryGlModelcre = null;

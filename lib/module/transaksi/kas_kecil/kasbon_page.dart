@@ -135,35 +135,11 @@ class KasbonPage extends StatelessWidget {
                                     padding: EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Tanggal Transaksi',
+                                    child: Text('Tanggal Kas Bon',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
                                           fontSize: 12,
-                                        )))),
-                            GridColumn(
-                                columnName: 'kode_trans',
-                                label: Container(
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Kode Transaksi',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
-                            GridColumn(
-                                columnName: 'debet_acc',
-                                label: Container(
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Akun Debet',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
                                         )))),
                             GridColumn(
                                 columnName: 'nama_debet',
@@ -172,18 +148,6 @@ class KasbonPage extends StatelessWidget {
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(6),
                                     child: Text('Nama Akun Debet',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
-                            GridColumn(
-                                columnName: 'credit_acc',
-                                label: Container(
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Akun Kredit',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -243,7 +207,7 @@ class KasbonPage extends StatelessWidget {
                                     color: colorPrimary,
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(6),
-                                    child: Text('Nominal',
+                                    child: Text('Nilai Kas Bon',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -328,7 +292,7 @@ class KasbonPage extends StatelessWidget {
                                         color: Colors.grey,
                                       ),
                                       Text(
-                                        "Pemberian",
+                                        "Pemberian Kas Bon",
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -338,7 +302,7 @@ class KasbonPage extends StatelessWidget {
                                       Row(
                                         children: [
                                           Text(
-                                            "Tanggal",
+                                            "Tanggal Kas Bon",
                                             style:
                                                 const TextStyle(fontSize: 12),
                                           ),
@@ -389,7 +353,7 @@ class KasbonPage extends StatelessWidget {
                                           Row(
                                             children: [
                                               Text(
-                                                "Pilih Debet Akun",
+                                                "Debet Akun",
                                                 style: const TextStyle(
                                                     fontSize: 12),
                                               ),
@@ -486,7 +450,7 @@ class KasbonPage extends StatelessWidget {
                                           Row(
                                             children: [
                                               Text(
-                                                "Pilih Kredit Akun",
+                                                "Kredit Akun",
                                                 style: const TextStyle(
                                                     fontSize: 12),
                                               ),
@@ -613,7 +577,7 @@ class KasbonPage extends StatelessWidget {
                                         decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Colors.grey[200],
-                                          hintText: "Nilai Transaksi",
+                                          hintText: "Nominal Kas Bon",
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(6),
@@ -774,7 +738,7 @@ class KasbonPage extends StatelessWidget {
                                         color: Colors.grey,
                                       ),
                                       Text(
-                                        "Penyelesaian",
+                                        "Penyelesaian Kas Bon",
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -921,7 +885,7 @@ class KasbonPage extends StatelessWidget {
                                               TextFormField(
                                                 textInputAction:
                                                     TextInputAction.done,
-                                                controller: value.nomorDok,
+                                                controller: value.nilaiTrans,
                                                 maxLines: 1,
                                                 inputFormatters: [
                                                   FilteringTextInputFormatter
@@ -1046,8 +1010,9 @@ class KasbonPage extends StatelessWidget {
                                               TextFormField(
                                                 textInputAction:
                                                     TextInputAction.done,
-                                                controller: value.nomorDok,
+                                                controller: value.selisih,
                                                 maxLines: 1,
+                                                readOnly: true,
                                                 inputFormatters: [
                                                   FilteringTextInputFormatter
                                                       .digitsOnly
@@ -1060,6 +1025,8 @@ class KasbonPage extends StatelessWidget {
                                                   }
                                                 },
                                                 decoration: InputDecoration(
+                                                  filled: true,
+                                                  fillColor: Colors.grey[200],
                                                   hintText: "Selisih",
                                                   border: OutlineInputBorder(
                                                     borderRadius:
@@ -1081,7 +1048,10 @@ class KasbonPage extends StatelessWidget {
                                                 Row(
                                                   children: [
                                                     Text(
-                                                      "Pilih Kredit Akun",
+                                                      value.nilaiNominal >
+                                                              value.nilaiselisih
+                                                          ? "Kredit Akun"
+                                                          : "Debet Akun",
                                                       style: const TextStyle(
                                                           fontSize: 12),
                                                     ),
@@ -1202,11 +1172,13 @@ class KasbonPage extends StatelessWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Text(
-                                      "Pemberian Kas Bon",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
+                                    Expanded(
+                                      child: Text(
+                                        "Pemberian Kas Bon",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                     InkWell(
@@ -1626,10 +1598,7 @@ class DetailDataSource extends DataGridSource {
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
                 DataGridCell(columnName: 'tgl_trans', value: data.tglTrans),
-                DataGridCell(columnName: 'kode_trans', value: data.kodeTrans),
-                DataGridCell(columnName: 'debet_acc', value: data.debetAcc),
                 DataGridCell(columnName: 'nama_debet', value: data.namaDebet),
-                DataGridCell(columnName: 'credit_acc', value: data.creditAcc),
                 DataGridCell(columnName: 'nama_credit', value: data.namaCredit),
                 DataGridCell(columnName: 'nomor_dok', value: data.nomorDok),
                 DataGridCell(columnName: 'nomor_ref', value: data.nomorRef),
@@ -1669,6 +1638,16 @@ class DetailDataSource extends DataGridSource {
                   color: Colors.white,
                 ),
               ),
+            ),
+          );
+        } else if (e.columnName == 'nominal') {
+          return Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           );
         } else {

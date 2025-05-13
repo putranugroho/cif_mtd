@@ -126,26 +126,24 @@ class PembayaranHutangPage extends StatelessWidget {
                                       ),
                                     ),
                                     Radio(
-                                        value: false,
-                                        groupValue: value.akun,
-                                        onChanged: (e) =>
-                                            value.gantiakun(false)),
+                                        value: 1,
+                                        activeColor: colorPrimary,
+                                        groupValue: value.jenis,
+                                        onChanged: (e) {
+                                          value.gantijenis(1);
+                                        }),
+                                    Text("Piutang"),
                                     SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text("Hutang"),
-                                    SizedBox(
-                                      width: 24,
+                                      width: 32,
                                     ),
                                     Radio(
-                                        value: true,
-                                        groupValue: value.akun,
-                                        onChanged: (e) =>
-                                            value.gantiakun(true)),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text("Piutang"),
+                                        value: 2,
+                                        groupValue: value.jenis,
+                                        activeColor: colorPrimary,
+                                        onChanged: (e) {
+                                          value.gantijenis(2);
+                                        }),
+                                    Text("Hutang"),
                                   ],
                                 ),
                                 const SizedBox(
@@ -174,41 +172,35 @@ class PembayaranHutangPage extends StatelessWidget {
                                       ),
                                     ),
                                     Expanded(
-                                        child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          height: 40,
-                                          child: TextFormField(
-                                            textInputAction:
-                                                TextInputAction.done,
-                                            maxLines: 1,
-                                            style: TextStyle(fontSize: 12),
-                                            validator: (e) {
-                                              if (e!.isEmpty) {
-                                                return "Wajib diisi";
-                                              } else {
-                                                return null;
-                                              }
-                                            },
-                                            decoration: InputDecoration(
-                                              // contentPadding:
-                                              //     EdgeInsets.all(0),
-                                              hintText:
-                                                  "Nama Customer / Supplier",
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 16),
-                                      ],
-                                    )),
+                                      child:
+                                          TypeAheadField<CustomerSupplierModel>(
+                                        controller: value.customersupplier,
+                                        suggestionsCallback: (search) => value
+                                            .getCustomerSupplierQuery(search),
+                                        builder:
+                                            (context, controller, focusNode) {
+                                          return TextField(
+                                              controller: controller,
+                                              focusNode: focusNode,
+                                              autofocus: true,
+                                              decoration: InputDecoration(
+                                                border: OutlineInputBorder(),
+                                                labelText:
+                                                    'Cari ${value.jenis == 1 ? "Customer" : "Supplier"}',
+                                              ));
+                                        },
+                                        itemBuilder: (context, city) {
+                                          return ListTile(
+                                            title: Text(city.nmSif),
+                                            subtitle: Text(city.noSif),
+                                          );
+                                        },
+                                        onSelected: (city) {
+                                          // value.selectInvoice(city);
+                                          value.pilihCustomerSupplier(city);
+                                        },
+                                      ),
+                                    ),
                                     SizedBox(
                                       width: 16,
                                     ),
@@ -223,6 +215,8 @@ class PembayaranHutangPage extends StatelessWidget {
                                             textInputAction:
                                                 TextInputAction.done,
                                             maxLines: 1,
+                                            readOnly: true,
+                                            controller: value.alamat,
                                             style: TextStyle(fontSize: 12),
                                             validator: (e) {
                                               if (e!.isEmpty) {
@@ -232,6 +226,8 @@ class PembayaranHutangPage extends StatelessWidget {
                                               }
                                             },
                                             decoration: InputDecoration(
+                                              filled: true,
+                                              fillColor: Colors.grey[200],
                                               hintText: "Alamat",
                                               border: OutlineInputBorder(
                                                 borderRadius:
@@ -966,230 +962,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                     headerGridLinesVisibility:
                                         GridLinesVisibility.both,
                                     selectionMode: SelectionMode.single,
-                                    // controller: value.dataGridController,
-                                    gridLinesVisibility:
-                                        GridLinesVisibility.both,
-                                    headerGridLinesVisibility:
-                                        GridLinesVisibility.both,
-                                    selectionMode: SelectionMode.single,
 
-                                    source: EmptyDataGridSource(value),
-                                    columns: <GridColumn>[
-                                      GridColumn(
-                                          width: 50,
-                                          columnName: 'no',
-                                          label: Container(
-                                              padding: EdgeInsets.all(6),
-                                              color: colorPrimary,
-                                              alignment: Alignment.center,
-                                              child: Text('Ke',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w300,
-                                                    fontSize: 12,
-                                                    color: Colors.white,
-                                                  )))),
-                                      GridColumn(
-                                          width: 200,
-                                          columnName: 'invoice',
-                                          label: Container(
-                                              padding: EdgeInsets.all(6),
-                                              color: colorPrimary,
-                                              alignment: Alignment.center,
-                                              child: Text('No. Invoice',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w300,
-                                                    color: Colors.white,
-                                                    fontSize: 12,
-                                                  )))),
-                                      GridColumn(
-                                          width: 150,
-                                          columnName: 'tagihan',
-                                          label: Container(
-                                              color: colorPrimary,
-                                              alignment: Alignment.center,
-                                              padding: EdgeInsets.all(6),
-                                              child: Text('Nilai Tagihan',
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w300,
-                                                    color: Colors.white,
-                                                  )))),
-                                      GridColumn(
-                                          width: 100,
-                                          columnName: 'bayartagihan',
-                                          label: Container(
-                                              color: colorPrimary,
-                                              alignment: Alignment.center,
-                                              padding: EdgeInsets.all(6),
-                                              child: Text('Bayar Tagihan',
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w300,
-                                                    color: Colors.white,
-                                                  )))),
-                                      GridColumn(
-                                          width: 150,
-                                          columnName: 'tagppn',
-                                          label: Container(
-                                              color: colorPrimary,
-                                              alignment: Alignment.center,
-                                              padding: EdgeInsets.all(6),
-                                              child: Text('Tag PPN',
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w300,
-                                                    color: Colors.white,
-                                                  )))),
-                                      GridColumn(
-                                          width: 150,
-                                          columnName: 'bayarppn',
-                                          label: Container(
-                                              color: colorPrimary,
-                                              alignment: Alignment.center,
-                                              padding: EdgeInsets.all(6),
-                                              child: Text('Bayar PPN',
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w300,
-                                                    color: Colors.white,
-                                                  )))),
-                                      // Cust/Supp	No Kontrak	No Invoice	Nilai Transaksi	Sisa Kewajiban	cara bayar	Jk Waktu
-                                      GridColumn(
-                                          width: 150,
-                                          columnName: 'tagpph',
-                                          label: Container(
-                                              color: colorPrimary,
-                                              alignment: Alignment.center,
-                                              padding: EdgeInsets.all(6),
-                                              child: Text('Tag PPH',
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w300,
-                                                    color: Colors.white,
-                                                  )))),
-                                      GridColumn(
-                                          width: 150,
-                                          columnName: 'bayarpph',
-                                          label: Container(
-                                              color: colorPrimary,
-                                              alignment: Alignment.center,
-                                              padding: EdgeInsets.all(6),
-                                              child: Text('Bayar PPH',
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w300,
-                                                    color: Colors.white,
-                                                  )))),
-                                      GridColumn(
-                                          width: 200,
-                                          columnName: 'keterangan',
-                                          label: Container(
-                                              color: colorPrimary,
-                                              padding: EdgeInsets.all(6),
-                                              alignment: Alignment.center,
-                                              child: Text('Keterangan',
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w300,
-                                                    color: Colors.white,
-                                                  )))),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.symmetric(vertical: 16),
-                                  height: 1,
-                                  color: Colors.grey[300],
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                        width: 200,
-                                        child: Text(
-                                          "Selisih",
-                                          textAlign: TextAlign.center,
-                                        )),
-                                    SizedBox(
-                                      width: 16,
-                                    ),
-                                    Container(
-                                      width: 200,
-                                      child: TextFormField(
-                                        textInputAction: TextInputAction.done,
-                                        // controller: value.namaSbbAset,
-                                        maxLines: 1,
-                                        inputFormatters: [
-                                          FilteringTextInputFormatter.digitsOnly
-                                        ],
-                                        validator: (e) {
-                                          if (e!.isEmpty) {
-                                            return "Wajib diisi";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          hintText: "Selisih",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 16),
-                                    Container(
-                                      width: 300,
-                                      child: Row(
-                                        children: [
-                                          CupertinoSwitch(
-                                              activeColor: colorPrimary,
-                                              value: value.kelebihan,
-                                              onChanged: (e) {
-                                                value.gantikelebihan();
-                                              }),
-                                          const SizedBox(width: 10),
-                                          Text(
-                                            "Kekurangan / Kelebihan Bayar",
-                                            style:
-                                                const TextStyle(fontSize: 12),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(width: 16),
-                                    Container(
-                                      width: 200,
-                                      child: TextFormField(
-                                        // enabled: false,
-                                        readOnly: true,
-                                        textInputAction: TextInputAction.done,
-                                        // controller: value.namaSbbAset,
-                                        maxLines: 1,
-                                        // inputFormatters: [
-                                        //   FilteringTextInputFormatter.digitsOnly
-                                        // ],
-                                        validator: (e) {
-                                          if (e!.isEmpty) {
-                                            return "Wajib diisi";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          filled: true,
-                                          fillColor: Colors.grey[200],
-                                          hintText: "SBB",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
                                     source: EmptyDataGridSource(value),
                                     columns: <GridColumn>[
                                       GridColumn(
