@@ -881,12 +881,36 @@ class PengadaanPage extends StatelessWidget {
                                                               controller:
                                                                   value.tglbeli,
                                                               maxLines: 1,
+                                                              style:
+                                                                  const TextStyle(
+                                                                // Make text bigger and black
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
                                                               decoration:
                                                                   InputDecoration(
                                                                 hintText:
                                                                     "Tanggal Beli",
+                                                                hintStyle: const TextStyle(
+                                                                    color: Colors
+                                                                        .grey),
                                                                 border:
                                                                     OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              6),
+                                                                ),
+                                                                disabledBorder:
+                                                                    OutlineInputBorder(
+                                                                  borderSide: BorderSide(
+                                                                      color: Colors
+                                                                          .grey
+                                                                          .shade600),
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
@@ -942,6 +966,16 @@ class PengadaanPage extends StatelessWidget {
                                                               controller: value
                                                                   .tglterima,
                                                               maxLines: 1,
+                                                              style:
+                                                                  const TextStyle(
+                                                                // Make text bigger and black
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
                                                               // validator: (e) {
                                                               //   if (e!.isEmpty) {
                                                               //     return "Wajib diisi";
@@ -953,8 +987,22 @@ class PengadaanPage extends StatelessWidget {
                                                                   InputDecoration(
                                                                 hintText:
                                                                     "Tanggal Terima",
+                                                                hintStyle: const TextStyle(
+                                                                    color: Colors
+                                                                        .grey),
                                                                 border:
                                                                     OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              6),
+                                                                ),
+                                                                disabledBorder:
+                                                                    OutlineInputBorder(
+                                                                  borderSide: BorderSide(
+                                                                      color: Colors
+                                                                          .grey
+                                                                          .shade600),
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
@@ -1504,6 +1552,13 @@ class PengadaanPage extends StatelessWidget {
                                                       enabled: false,
                                                       controller:
                                                           value.blnPenyusutan,
+                                                      style: const TextStyle(
+                                                        // Make text bigger and black
+                                                        color: Colors.black,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                       // validator: (e) {
                                                       //   if (e!.isEmpty) {
                                                       //     return "Wajib diisi";
@@ -1515,8 +1570,21 @@ class PengadaanPage extends StatelessWidget {
                                                           InputDecoration(
                                                         hintText:
                                                             "Bulan Mulai Penyusutan",
+                                                        hintStyle:
+                                                            const TextStyle(
+                                                                color: Colors
+                                                                    .grey),
                                                         border:
                                                             OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(6),
+                                                        ),
+                                                        disabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              color: Colors.grey
+                                                                  .shade600),
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(6),

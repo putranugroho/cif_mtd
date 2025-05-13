@@ -1443,6 +1443,66 @@ class MenuTransaksiWidget extends StatelessWidget {
             ),
           ),
         ),
+        InkWell(
+          onTap: () => value.gantimenu(58),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color: value.page == 58 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.debt,
+                  height: 30,
+                  color: value.page == 58 ? Colors.black : Colors.white,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Bayar Hutang/ Piutang",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 58 ? Colors.black : Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () => value.gantimenu(59),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color: value.page == 59 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.rupiahs,
+                  height: 30,
+                  color: value.page == 59 ? Colors.black : Colors.white,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Bayar/Pendapatan dimuka",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 59 ? Colors.black : Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
         ExpansionTile(
             tilePadding: EdgeInsets.zero,
             childrenPadding: EdgeInsets.zero,
@@ -1568,36 +1628,6 @@ class MenuTransaksiWidget extends StatelessWidget {
               // ),
             ]),
         InkWell(
-          onTap: () => value.gantimenu(59),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(
-              color: value.page == 59 ? Colors.white : Colors.transparent,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                Image.asset(
-                  ImageAssets.rupiahs,
-                  height: 30,
-                  color: value.page == 59 ? Colors.black : Colors.white,
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "Bayar/Pendapatan dimuka",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: value.page == 59 ? Colors.black : Colors.white,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-        InkWell(
           onTap: () => value.gantimenu(20),
           child: Container(
             width: MediaQuery.of(context).size.width,
@@ -1621,36 +1651,6 @@ class MenuTransaksiWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     color: value.page == 20 ? Colors.black : Colors.white,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-        InkWell(
-          onTap: () => value.gantimenu(58),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(
-              color: value.page == 58 ? Colors.white : Colors.transparent,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                Image.asset(
-                  ImageAssets.debt,
-                  height: 30,
-                  color: value.page == 58 ? Colors.black : Colors.white,
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "Bayar Hutang/ Piutang",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: value.page == 58 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1688,6 +1688,39 @@ class MenuTransaksiWidget extends StatelessWidget {
             ),
             children: [
               InkWell(
+                onTap: () => value.gantimenu(54),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: value.page == 54 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 54 ? Colors.black : Colors.white,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Transaksi",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: value.page == 54 ? Colors.black : Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
                 onTap: () => value.gantimenu(50),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
@@ -1714,6 +1747,39 @@ class MenuTransaksiWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           color: value.page == 50 ? Colors.black : Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => value.gantimenu(55),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: value.page == 55 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 55 ? Colors.black : Colors.white,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Perantara Aktiva/Pasiva",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: value.page == 55 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -1820,72 +1886,6 @@ class MenuTransaksiWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              InkWell(
-                onTap: () => value.gantimenu(54),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(
-                    color: value.page == 54 ? Colors.white : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Image.asset(
-                        ImageAssets.report,
-                        height: 30,
-                        color: value.page == 54 ? Colors.black : Colors.white,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "Transaksi",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: value.page == 54 ? Colors.black : Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () => value.gantimenu(55),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(
-                    color: value.page == 55 ? Colors.white : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Image.asset(
-                        ImageAssets.report,
-                        height: 30,
-                        color: value.page == 55 ? Colors.black : Colors.white,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "Perantara Aktiva/Pasiva",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: value.page == 55 ? Colors.black : Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
             ]),
         InkWell(
           onTap: () => value.gantimenu(24),
@@ -1947,6 +1947,39 @@ class MenuTransaksiWidget extends StatelessWidget {
               ),
             ),
             children: [
+              InkWell(
+                onTap: () => value.gantimenu(43),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: value.page == 43 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: value.page == 43 ? Colors.black : Colors.white,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Jurnal",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: value.page == 43 ? Colors.black : Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
               InkWell(
                 onTap: () => value.gantimenu(40),
                 child: Container(
@@ -2046,205 +2079,205 @@ class MenuTransaksiWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              InkWell(
-                onTap: () => value.gantimenu(43),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(
-                    color: value.page == 43 ? Colors.white : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Image.asset(
-                        ImageAssets.report,
-                        height: 30,
-                        color: value.page == 43 ? Colors.black : Colors.white,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "Jurnal",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: value.page == 43 ? Colors.black : Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () => value.gantimenu(44),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(
-                    color: value.page == 44 ? Colors.white : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Image.asset(
-                        ImageAssets.report,
-                        height: 30,
-                        color: value.page == 44 ? Colors.black : Colors.white,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "Neraca Berjalan",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: value.page == 44 ? Colors.black : Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () => value.gantimenu(45),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(
-                    color: value.page == 45 ? Colors.white : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Image.asset(
-                        ImageAssets.report,
-                        height: 30,
-                        color: value.page == 45 ? Colors.black : Colors.white,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "Neraca Periode",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: value.page == 45 ? Colors.black : Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () => value.gantimenu(46),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(
-                    color: value.page == 46 ? Colors.white : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Image.asset(
-                        ImageAssets.report,
-                        height: 30,
-                        color: value.page == 46 ? Colors.black : Colors.white,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "Laba Rugi Berjalan",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: value.page == 46 ? Colors.black : Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () => value.gantimenu(49),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(
-                    color: value.page == 49 ? Colors.white : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Image.asset(
-                        ImageAssets.report,
-                        height: 30,
-                        color: value.page == 49 ? Colors.black : Colors.white,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "Laba Rugi Periode",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: value.page == 49 ? Colors.black : Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () => value.gantimenu(48),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(
-                    color: value.page == 48 ? Colors.white : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Image.asset(
-                        ImageAssets.report,
-                        height: 30,
-                        color: value.page == 48 ? Colors.black : Colors.white,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "GL",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: value.page == 48 ? Colors.black : Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
             ]),
+      ],
+    );
+  }
+}
+
+class MenuLaporanWidget extends StatelessWidget {
+  final MenuNotifier value;
+  const MenuLaporanWidget({super.key, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      tilePadding: EdgeInsets.zero,
+      childrenPadding: EdgeInsets.zero,
+      shape: Border(),
+      expandedAlignment: Alignment.centerLeft,
+      collapsedIconColor: Colors.white,
+      expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+      title: Container(
+        child: Row(
+          children: [
+            Image.asset(ImageAssets.eom, height: 30, color: Colors.white),
+            SizedBox(
+              width: 16,
+            ),
+            Text(
+              "LAPORAN",
+              style: TextStyle(fontSize: 16, color: Colors.white),
+            )
+          ],
+        ),
+      ),
+      children: [
+        InkWell(
+          onTap: () => value.gantimenu(44),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color: value.page == 44 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 16,
+                ),
+                Image.asset(
+                  ImageAssets.report,
+                  height: 30,
+                  color: value.page == 44 ? Colors.black : Colors.white,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Neraca Berjalan",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 44 ? Colors.black : Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () => value.gantimenu(46),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color: value.page == 46 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 16,
+                ),
+                Image.asset(
+                  ImageAssets.report,
+                  height: 30,
+                  color: value.page == 46 ? Colors.black : Colors.white,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Laba Rugi Berjalan",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 46 ? Colors.black : Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () => value.gantimenu(45),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color: value.page == 45 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 16,
+                ),
+                Image.asset(
+                  ImageAssets.report,
+                  height: 30,
+                  color: value.page == 45 ? Colors.black : Colors.white,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Neraca Periode",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 45 ? Colors.black : Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () => value.gantimenu(49),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color: value.page == 49 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 16,
+                ),
+                Image.asset(
+                  ImageAssets.report,
+                  height: 30,
+                  color: value.page == 49 ? Colors.black : Colors.white,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Laba Rugi Periode",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 49 ? Colors.black : Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () => value.gantimenu(48),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color: value.page == 48 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 16,
+                ),
+                Image.asset(
+                  ImageAssets.report,
+                  height: 30,
+                  color: value.page == 48 ? Colors.black : Colors.white,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "GL / COA",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 48 ? Colors.black : Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

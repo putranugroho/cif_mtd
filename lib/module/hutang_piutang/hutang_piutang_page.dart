@@ -695,21 +695,38 @@ class HutangPiutangPage extends StatelessWidget {
                                                                         .done,
                                                                 controller: value
                                                                     .tanggalKontrak,
+                                                                style:
+                                                                    const TextStyle(
+                                                                  // Make text bigger and black
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
                                                                 decoration:
                                                                     InputDecoration(
                                                                   hintText:
                                                                       "Tanggal Kontrak",
+                                                                  hintStyle: const TextStyle(
+                                                                      color: Colors
+                                                                          .grey),
                                                                   border:
                                                                       OutlineInputBorder(
                                                                     borderRadius:
                                                                         BorderRadius
-                                                                            .circular(8),
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                      width: 1,
-                                                                      color: Colors
-                                                                          .grey,
-                                                                    ),
+                                                                            .circular(6),
+                                                                  ),
+                                                                  disabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide: BorderSide(
+                                                                        color: Colors
+                                                                            .grey
+                                                                            .shade600),
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(6),
                                                                   ),
                                                                 ),
                                                               ),
@@ -1055,8 +1072,10 @@ class HutangPiutangPage extends StatelessWidget {
                                                                       .pilihJatuhTempo(),
                                                                   child:
                                                                       TextFormField(
-                                                                    enabled:
-                                                                        false,
+                                                                    enabled: value.caraPembayaran ==
+                                                                            "BERTAHAP"
+                                                                        ? true
+                                                                        : false,
                                                                     textInputAction:
                                                                         TextInputAction
                                                                             .done,
@@ -1068,6 +1087,17 @@ class HutangPiutangPage extends StatelessWidget {
                                                                             "BERTAHAP"
                                                                         ? true
                                                                         : false,
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      // Make text bigger and black
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                    ),
                                                                     validator:
                                                                         (e) {
                                                                       if (e!
@@ -1088,8 +1118,18 @@ class HutangPiutangPage extends StatelessWidget {
                                                                               .grey[200],
                                                                       hintText:
                                                                           "Tanggal Jatuh Tempo",
+                                                                      hintStyle:
+                                                                          const TextStyle(
+                                                                              color: Colors.grey),
                                                                       border:
                                                                           OutlineInputBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(6),
+                                                                      ),
+                                                                      disabledBorder:
+                                                                          OutlineInputBorder(
+                                                                        borderSide:
+                                                                            BorderSide(color: Colors.grey.shade600),
                                                                         borderRadius:
                                                                             BorderRadius.circular(6),
                                                                       ),

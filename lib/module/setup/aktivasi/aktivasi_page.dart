@@ -410,7 +410,12 @@ class AktivasiPage extends StatelessWidget {
                                               controller: value.jamMulai,
                                               textInputAction:
                                                   TextInputAction.done,
-
+                                              style: const TextStyle(
+                                                // Make text bigger and black
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                               maxLines: 1,
                                               // inputFormatters: [
                                               //   FilteringTextInputFormatter.digitsOnly
@@ -424,9 +429,17 @@ class AktivasiPage extends StatelessWidget {
                                               },
                                               decoration: InputDecoration(
                                                 hintText: "jam Masuk",
-                                                fillColor: Colors.grey[200],
-                                                filled: true,
+                                                hintStyle: const TextStyle(
+                                                    color: Colors.grey),
                                                 border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                                disabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.grey.shade600),
                                                   borderRadius:
                                                       BorderRadius.circular(6),
                                                 ),
@@ -471,6 +484,12 @@ class AktivasiPage extends StatelessWidget {
                                                   TextInputAction.done,
                                               controller: value.jamSelesai,
                                               maxLines: 1,
+                                              style: const TextStyle(
+                                                // Make text bigger and black
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                               // inputFormatters: [
                                               //   FilteringTextInputFormatter.digitsOnly
                                               // ],
@@ -483,9 +502,17 @@ class AktivasiPage extends StatelessWidget {
                                               },
                                               decoration: InputDecoration(
                                                 hintText: "Jam Pulang",
-                                                fillColor: Colors.grey[200],
-                                                filled: true,
+                                                hintStyle: const TextStyle(
+                                                    color: Colors.grey),
                                                 border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                                disabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.grey.shade600),
                                                   borderRadius:
                                                       BorderRadius.circular(6),
                                                 ),

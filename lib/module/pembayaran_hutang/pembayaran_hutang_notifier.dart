@@ -15,6 +15,57 @@ class PembayaranHutangNotifier extends ChangeNotifier {
     getInqueryAll();
   }
 
+  CustomerSupplierModel? customerSupplierModel;
+  void pilihCustomerSupplier(CustomerSupplierModel value) async {
+    customerSupplierModel = value;
+    customersupplier.text = customerSupplierModel!.nmSif;
+    alamat.text = customerSupplierModel!.alamat;
+    notifyListeners();
+  }
+
+  List<CustomerSupplierModel> listCs = [];
+  Future<List<CustomerSupplierModel>> getCustomerSupplierQuery(
+      String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      listCs.clear();
+      notifyListeners();
+
+      var data = {"kode_pt": "001"};
+
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.getCustomer(),
+          jsonEncode(data),
+        );
+
+        if (response['status'].toString().toLowerCase().contains("success")) {
+          // final List<Map<String, dynamic>> jnsAccBItems = response['data'];
+          for (Map<String, dynamic> i in response['data']) {
+            listCs.add(CustomerSupplierModel.fromJson(i));
+          }
+          return listCs
+              .where((model) => jenis == 1
+                  ? (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
+                      (model.golCust == "1" || model.golCust == "3"))
+                  : (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
+                          model.golCust == "2" ||
+                      model.golCust == "3"))
+              .toList();
+        }
+        notifyListeners();
+      } catch (e) {
+        print("Error: $e");
+      } finally {
+        notifyListeners();
+      }
+    } else {
+      listCs.clear(); // clear on short query
+    }
+
+    return listCs;
+  }
+
   Future getInqueryAll() async {
     list.clear();
     notifyListeners();
@@ -63,6 +114,8 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   TextEditingController ppn = TextEditingController();
   TextEditingController maksPpn = TextEditingController();
   TextEditingController pph23 = TextEditingController();
+  TextEditingController customersupplier = TextEditingController();
+  TextEditingController alamat = TextEditingController();
 
   InqueryGlModel? inqueryGlModeldeb;
   InqueryGlModel? inqueryGlModelcre;
@@ -136,6 +189,13 @@ class PembayaranHutangNotifier extends ChangeNotifier {
       // listAmount.add(TextEditingController(text: "0"));
       // notifyListeners();
     }
+  }
+
+  int jenis = 1;
+
+  gantijenis(int value) {
+    jenis = value;
+    notifyListeners();
   }
 
   bool akun = false;

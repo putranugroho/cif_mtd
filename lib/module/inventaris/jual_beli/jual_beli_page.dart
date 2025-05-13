@@ -878,36 +878,36 @@ class JualBeliPage extends StatelessWidget {
                                                             const SizedBox(
                                                               height: 8,
                                                             ),
-                                                            InkWell(
-                                                              onTap: () => value
-                                                                  .piihTanggalBeli(),
-                                                              child:
-                                                                  TextFormField(
-                                                                enabled: false,
-                                                                textInputAction:
-                                                                    TextInputAction
-                                                                        .done,
-                                                                controller: value
-                                                                    .tglbeli,
-                                                                maxLines: 1,
-                                                                validator: (e) {
-                                                                  if (e!
-                                                                      .isEmpty) {
-                                                                    return "Wajib diisi";
-                                                                  } else {
-                                                                    return null;
-                                                                  }
-                                                                },
-                                                                decoration:
-                                                                    InputDecoration(
-                                                                  hintText:
-                                                                      "Tanggal Beli",
-                                                                  border:
-                                                                      OutlineInputBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(6),
-                                                                  ),
+                                                            TextFormField(
+                                                              textInputAction:
+                                                                  TextInputAction
+                                                                      .done,
+                                                              controller:
+                                                                  value.tglbeli,
+                                                              maxLines: 1,
+                                                              readOnly: true,
+                                                              validator: (e) {
+                                                                if (e!
+                                                                    .isEmpty) {
+                                                                  return "Wajib diisi";
+                                                                } else {
+                                                                  return null;
+                                                                }
+                                                              },
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                filled: true,
+                                                                fillColor:
+                                                                    Colors.grey[
+                                                                        200],
+                                                                hintText:
+                                                                    "Tanggal Beli",
+                                                                border:
+                                                                    OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              6),
                                                                 ),
                                                               ),
                                                             ),
@@ -1020,7 +1020,18 @@ class JualBeliPage extends StatelessWidget {
                                                                         .done,
                                                                 controller: value
                                                                     .tgljualhapus,
+                                                                enabled: false,
                                                                 maxLines: 1,
+                                                                style:
+                                                                    const TextStyle(
+                                                                  // Make text bigger and black
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
                                                                 validator: (e) {
                                                                   if (e!
                                                                       .isEmpty) {
@@ -1033,8 +1044,21 @@ class JualBeliPage extends StatelessWidget {
                                                                     InputDecoration(
                                                                   hintText:
                                                                       "Tanggal Jual",
+                                                                  hintStyle: const TextStyle(
+                                                                      color: Colors
+                                                                          .grey),
                                                                   border:
                                                                       OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(6),
+                                                                  ),
+                                                                  disabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide: BorderSide(
+                                                                        color: Colors
+                                                                            .grey
+                                                                            .shade600),
                                                                     borderRadius:
                                                                         BorderRadius
                                                                             .circular(6),
@@ -1202,7 +1226,18 @@ class JualBeliPage extends StatelessWidget {
                                                                         .done,
                                                                 controller: value
                                                                     .tgljualhapus,
+                                                                enabled: false,
                                                                 maxLines: 1,
+                                                                style:
+                                                                    const TextStyle(
+                                                                  // Make text bigger and black
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
                                                                 validator: (e) {
                                                                   if (e!
                                                                       .isEmpty) {
@@ -1215,8 +1250,21 @@ class JualBeliPage extends StatelessWidget {
                                                                     InputDecoration(
                                                                   hintText:
                                                                       "Tanggal Hapus",
+                                                                  hintStyle: const TextStyle(
+                                                                      color: Colors
+                                                                          .grey),
                                                                   border:
                                                                       OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(6),
+                                                                  ),
+                                                                  disabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide: BorderSide(
+                                                                        color: Colors
+                                                                            .grey
+                                                                            .shade600),
                                                                     borderRadius:
                                                                         BorderRadius
                                                                             .circular(6),

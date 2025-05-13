@@ -52,34 +52,54 @@ class SetupClosingEomPage extends StatelessWidget {
                             const SizedBox(
                               height: 8,
                             ),
-                            InkWell(
-                              onTap: () {
-                                value.showDate();
-                              },
-                              child: TextFormField(
-                                enabled: false,
-                                textInputAction: TextInputAction.done,
-                                controller: value.closingDate,
-                                maxLines: 1,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
-                                validator: (e) {
-                                  if (e!.isEmpty) {
-                                    return "Wajib diisi";
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                decoration: InputDecoration(
-                                  hintText: "Kode Transaksi",
-                                  fillColor: Colors.grey[300],
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6),
+                            Row(
+                              children: [
+                                Container(
+                                  width: 180,
+                                  child: InkWell(
+                                    onTap: () {
+                                      value.showDate();
+                                    },
+                                    child: TextFormField(
+                                      enabled: false,
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.closingDate,
+                                      maxLines: 1,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly
+                                      ],
+                                      style: const TextStyle(
+                                        // Make text bigger and black
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "Kode Transaksi",
+                                        hintStyle:
+                                            const TextStyle(color: Colors.grey),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                        disabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Colors.grey.shade600),
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
                             const SizedBox(height: 16),
                             Row(

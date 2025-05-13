@@ -363,13 +363,20 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                     onTap: () =>
                                                         value.tanggalBackDate(),
                                                     child: TextFormField(
-                                                      enabled: false,
+                                                      enabled: !value.backDate,
                                                       textInputAction:
                                                           TextInputAction.done,
                                                       controller:
                                                           value.tglBackDatetext,
                                                       maxLines: 1,
                                                       readOnly: !value.backDate,
+                                                      style: const TextStyle(
+                                                        // Make text bigger and black
+                                                        color: Colors.black,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                       validator: (e) {
                                                         if (e!.isEmpty) {
                                                           return "Wajib diisi";
@@ -384,8 +391,21 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                             Colors.grey[200],
                                                         hintText:
                                                             "Tanggal Transaksi",
+                                                        hintStyle:
+                                                            const TextStyle(
+                                                                color: Colors
+                                                                    .grey),
                                                         border:
                                                             OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(6),
+                                                        ),
+                                                        disabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              color: Colors.grey
+                                                                  .shade600),
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(6),

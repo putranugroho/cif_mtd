@@ -1,6 +1,7 @@
 import 'package:accounting/models/index.dart';
 import 'package:accounting/module/master/bank/bank_notifier.dart';
 import 'package:accounting/module/transaksi/bank/bank_transaksi_notifier.dart';
+import 'package:accounting/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -76,7 +77,7 @@ class BankTransaksiPage extends StatelessWidget {
                         height: MediaQuery.of(context).size.height,
                         child: SfDataGrid(
                           headerRowHeight: 40,
-                          defaultColumnWidth: 180,
+                          defaultColumnWidth: 150,
                           frozenColumnsCount: 1,
 
                           // controller: value.dataGridController,
@@ -100,6 +101,7 @@ class BankTransaksiPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 200,
                                 columnName: 'nmBank',
                                 label: Container(
                                     padding: EdgeInsets.all(6),
@@ -112,6 +114,7 @@ class BankTransaksiPage extends StatelessWidget {
                                           fontSize: 12,
                                         )))),
                             GridColumn(
+                                width: 200,
                                 columnName: 'ktrBank',
                                 label: Container(
                                     color: colorPrimary,
@@ -196,6 +199,7 @@ class BankTransaksiPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 80,
                                 columnName: 'action',
                                 label: Container(
                                     color: colorPrimary,
@@ -568,9 +572,9 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'no', value: (index++).toString()),
                 // DataGridCell(columnName: 'kodeBank', value: data.kodeBank),
                 DataGridCell(columnName: 'nmBank', value: data.nmBank),
-                DataGridCell(columnName: 'ktrBank', value: data.nmBank),
+                DataGridCell(columnName: 'ktrBank', value: data.cabang),
                 DataGridCell(columnName: 'noRek', value: data.noRek),
-                DataGridCell(columnName: 'nmRek', value: data.noRek),
+                DataGridCell(columnName: 'nmRek', value: data.nmRek),
                 // DataGridCell(
                 //     columnName: 'kdRek',
                 //     value: data.kdRek == "10"
@@ -578,10 +582,18 @@ class DetailDataSource extends DataGridSource {
                 //         : data.kdRek == "20"
                 //             ? "Giro"
                 //             : "Deposito"),
-                DataGridCell(columnName: 'saldoBank', value: data.nominal),
-                DataGridCell(columnName: 'saldoSbb', value: data.nominal),
-                DataGridCell(columnName: 'nosbb', value: data.nosbb),
+                DataGridCell(
+                    columnName: 'saldoBank',
+                    value: data.nominal == ""
+                        ? ""
+                        : FormatCurrency.oCcy.format(int.parse(data.nominal))),
+                DataGridCell(
+                    columnName: 'saldoSbb',
+                    value: data.saldoeom == ""
+                        ? ""
+                        : FormatCurrency.oCcy.format(int.parse(data.saldoeom))),
                 DataGridCell(columnName: 'namaSbb', value: data.namaSbb),
+                DataGridCell(columnName: 'nosbb', value: data.nosbb),
                 DataGridCell(columnName: 'action', value: data.noRek),
               ],
             ))
@@ -614,6 +626,16 @@ class DetailDataSource extends DataGridSource {
                   color: Colors.white,
                 ),
               ),
+            ),
+          );
+        } else if (e.columnName == 'saldoBank' || e.columnName == 'saldoSbb') {
+          return Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           );
         } else {

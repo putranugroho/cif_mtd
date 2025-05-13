@@ -104,6 +104,7 @@ class BayarDimukaPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 100,
                                 columnName: 'status',
                                 label: Container(
                                     padding: EdgeInsets.all(6),
@@ -116,6 +117,7 @@ class BayarDimukaPage extends StatelessWidget {
                                           fontSize: 12,
                                         )))),
                             GridColumn(
+                                width: 150,
                                 columnName: 'nominal',
                                 label: Container(
                                     color: colorPrimary,
@@ -141,6 +143,7 @@ class BayarDimukaPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 100,
                                 columnName: 'tgl_trans',
                                 label: Container(
                                     color: colorPrimary,
@@ -153,6 +156,7 @@ class BayarDimukaPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 130,
                                 columnName: 'no_transaksi',
                                 label: Container(
                                     color: colorPrimary,
@@ -165,6 +169,7 @@ class BayarDimukaPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 130,
                                 columnName: 'nomor_ref',
                                 label: Container(
                                     color: colorPrimary,
@@ -177,6 +182,7 @@ class BayarDimukaPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 80,
                                 columnName: 'action',
                                 label: Container(
                                     color: colorPrimary,
@@ -964,7 +970,11 @@ class DetailDataSource extends DataGridSource {
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
                 DataGridCell(columnName: 'status', value: data.status),
-                DataGridCell(columnName: 'nominal', value: data.nominal),
+                DataGridCell(
+                    columnName: 'nominal',
+                    value: data.nominal == ""
+                        ? ""
+                        : FormatCurrency.oCcy.format(int.parse(data.nominal))),
                 DataGridCell(columnName: 'keterangan', value: data.keterangan),
                 DataGridCell(
                     columnName: 'tgl_trans', value: data.tanggalTransaksi),
@@ -1044,6 +1054,16 @@ class DetailDataSource extends DataGridSource {
                   ),
                 ),
               ),
+            ),
+          );
+        } else if (e.columnName == 'nominal') {
+          return Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           );
         } else {

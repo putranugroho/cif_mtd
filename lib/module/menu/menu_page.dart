@@ -134,15 +134,19 @@ class MenuPage extends StatelessWidget {
                     SizedBox(
                       height: 24,
                     ),
-                    MenuInventarisWidget(value: value),
-                    SizedBox(
-                      height: 24,
-                    ),
                     MenuTransaksiWidget(value: value),
                     SizedBox(
                       height: 24,
                     ),
                     MenuHutangPiutangWidget(value: value),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    MenuInventarisWidget(value: value),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    MenuLaporanWidget(value: value),
                     SizedBox(
                       height: 16,
                     ),
@@ -174,42 +178,6 @@ class MenuPage extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 16,
                                 color: value.page == 26
-                                    ? Colors.black
-                                    : Colors.white,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () => value.gantimenu(27),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.symmetric(vertical: 16),
-                        decoration: BoxDecoration(
-                          color: value.page == 27
-                              ? Colors.white
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              ImageAssets.eom,
-                              height: 30,
-                              color: value.page == 27
-                                  ? Colors.black
-                                  : Colors.white,
-                            ),
-                            SizedBox(
-                              width: 16,
-                            ),
-                            Text(
-                              "LAPORAN",
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: value.page == 27
                                     ? Colors.black
                                     : Colors.white,
                               ),

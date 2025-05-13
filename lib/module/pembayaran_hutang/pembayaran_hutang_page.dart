@@ -127,26 +127,24 @@ class PembayaranHutangPage extends StatelessWidget {
                                         ),
                                       ),
                                       Radio(
-                                          value: false,
-                                          groupValue: value.akun,
-                                          onChanged: (e) =>
-                                              value.gantiakun(false)),
+                                          value: 1,
+                                          activeColor: colorPrimary,
+                                          groupValue: value.jenis,
+                                          onChanged: (e) {
+                                            value.gantijenis(1);
+                                          }),
+                                      Text("Piutang"),
                                       SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text("Hutang"),
-                                      SizedBox(
-                                        width: 24,
+                                        width: 32,
                                       ),
                                       Radio(
-                                          value: true,
-                                          groupValue: value.akun,
-                                          onChanged: (e) =>
-                                              value.gantiakun(true)),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text("Piutang"),
+                                          value: 2,
+                                          groupValue: value.jenis,
+                                          activeColor: colorPrimary,
+                                          onChanged: (e) {
+                                            value.gantijenis(2);
+                                          }),
+                                      Text("Hutang"),
                                     ],
                                   ),
                                   const SizedBox(
@@ -176,41 +174,35 @@ class PembayaranHutangPage extends StatelessWidget {
                                         ),
                                       ),
                                       Expanded(
-                                          child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            height: 40,
-                                            child: TextFormField(
-                                              textInputAction:
-                                                  TextInputAction.done,
-                                              maxLines: 1,
-                                              style: TextStyle(fontSize: 12),
-                                              validator: (e) {
-                                                if (e!.isEmpty) {
-                                                  return "Wajib diisi";
-                                                } else {
-                                                  return null;
-                                                }
-                                              },
-                                              decoration: InputDecoration(
-                                                // contentPadding:
-                                                //     EdgeInsets.all(0),
-                                                hintText:
-                                                    "Nama Customer / Supplier",
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(height: 16),
-                                        ],
-                                      )),
+                                        child: TypeAheadField<
+                                            CustomerSupplierModel>(
+                                          controller: value.customersupplier,
+                                          suggestionsCallback: (search) => value
+                                              .getCustomerSupplierQuery(search),
+                                          builder:
+                                              (context, controller, focusNode) {
+                                            return TextField(
+                                                controller: controller,
+                                                focusNode: focusNode,
+                                                autofocus: true,
+                                                decoration: InputDecoration(
+                                                  border: OutlineInputBorder(),
+                                                  labelText:
+                                                      'Cari ${value.jenis == 1 ? "Customer" : "Supplier"}',
+                                                ));
+                                          },
+                                          itemBuilder: (context, city) {
+                                            return ListTile(
+                                              title: Text(city.nmSif),
+                                              subtitle: Text(city.noSif),
+                                            );
+                                          },
+                                          onSelected: (city) {
+                                            // value.selectInvoice(city);
+                                            value.pilihCustomerSupplier(city);
+                                          },
+                                        ),
+                                      ),
                                       SizedBox(
                                         width: 16,
                                       ),
@@ -225,6 +217,8 @@ class PembayaranHutangPage extends StatelessWidget {
                                               textInputAction:
                                                   TextInputAction.done,
                                               maxLines: 1,
+                                              readOnly: true,
+                                              controller: value.alamat,
                                               style: TextStyle(fontSize: 12),
                                               validator: (e) {
                                                 if (e!.isEmpty) {
@@ -234,6 +228,8 @@ class PembayaranHutangPage extends StatelessWidget {
                                                 }
                                               },
                                               decoration: InputDecoration(
+                                                filled: true,
+                                                fillColor: Colors.grey[200],
                                                 hintText: "Alamat",
                                                 border: OutlineInputBorder(
                                                   borderRadius:

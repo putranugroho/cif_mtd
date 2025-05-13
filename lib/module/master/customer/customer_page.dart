@@ -102,6 +102,7 @@ class CustomerPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 100,
                                 columnName: 'no_sif',
                                 label: Container(
                                     padding: EdgeInsets.all(6),
@@ -162,6 +163,7 @@ class CustomerPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 80,
                                 columnName: 'action',
                                 label: Container(
                                     color: colorPrimary,
@@ -210,7 +212,9 @@ class CustomerPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        "Tambah Customer / Supplier",
+                                        value.editData
+                                            ? "Ubah / Hapus - Customer / Supplier"
+                                            : "Tambah Customer / Supplier",
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
