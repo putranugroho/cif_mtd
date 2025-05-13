@@ -294,13 +294,11 @@ class KasbonPage extends StatelessWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Expanded(
-                                      child: Text(
-                                        "Penyelesaian Kas Bon",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                    Text(
+                                      "Penyelesaian Kas Bon",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     InkWell(
@@ -320,8 +318,7 @@ class KasbonPage extends StatelessWidget {
                                 SizedBox(
                                   height: 32,
                                 ),
-                                Expanded(
-                                    child: ListView(
+                                ListView(
                                   children: [
                                     Container(
                                       margin:
@@ -1179,7 +1176,7 @@ class KasbonPage extends StatelessWidget {
                                       name: "Simpan",
                                     )
                                   ],
-                                ))
+                                )
                               ],
                             ),
                           )
