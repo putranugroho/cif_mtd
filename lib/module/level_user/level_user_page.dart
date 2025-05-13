@@ -466,32 +466,81 @@ class LevelUserPage extends StatelessWidget {
                                                   width: 80,
                                                   margin: EdgeInsets.only(
                                                       right: 16),
-                                                  child: Text("Menu"),
+                                                  child: Row(
+                                                    children: [
+                                                      Checkbox(
+                                                          value: value
+                                                              .pilihSemuaMenu,
+                                                          onChanged: (e) => value
+                                                              .toggleMenuSelectAll()),
+                                                      Text("Menu"),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                               Container(
                                                 width: 80,
                                                 margin:
                                                     EdgeInsets.only(right: 16),
-                                                child: Text("View"),
+                                                child: Row(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Checkbox(
+                                                            value: value
+                                                                .viewSemuaMenu,
+                                                            onChanged: (e) => value
+                                                                .toggleSelectViewAll()),
+                                                        Text("View"),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                               Container(
                                                 width: 80,
                                                 margin:
                                                     EdgeInsets.only(right: 16),
-                                                child: Text("Input"),
+                                                child: Row(
+                                                  children: [
+                                                    Checkbox(
+                                                        value: value
+                                                            .inputSemuaMenu,
+                                                        onChanged: (e) => value
+                                                            .toggleSelectInputAll()),
+                                                    Text("Input"),
+                                                  ],
+                                                ),
                                               ),
                                               Container(
                                                 width: 80,
                                                 margin:
                                                     EdgeInsets.only(right: 16),
-                                                child: Text("Edit"),
+                                                child: Row(
+                                                  children: [
+                                                    Checkbox(
+                                                        value:
+                                                            value.editSemuaMenu,
+                                                        onChanged: (e) => value
+                                                            .toggleSelecteditAll()),
+                                                    Text("Edit"),
+                                                  ],
+                                                ),
                                               ),
                                               Container(
                                                 width: 80,
                                                 margin:
                                                     EdgeInsets.only(right: 16),
-                                                child: Text("Delete"),
+                                                child: Row(
+                                                  children: [
+                                                    Checkbox(
+                                                        value: value
+                                                            .deleteSemuaMenu,
+                                                        onChanged: (e) => value
+                                                            .toggleSelectDeleteAll()),
+                                                    Text("Delete"),
+                                                  ],
+                                                ),
                                               ),
                                             ],
                                           ),

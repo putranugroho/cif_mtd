@@ -80,6 +80,194 @@ class LevelUserNotifier extends ChangeNotifier {
   //   notifyListeners();
   // }
 
+  bool viewSemuaMenu = false;
+
+  void toggleSelectViewAll() {
+    viewSemuaMenu = !viewSemuaMenu;
+
+    if (modulModel == null) return;
+
+    for (var menuItem in modulModel!.menu) {
+      final existingIndex = menuAccessList.indexWhere((e) =>
+          e.modul == modulModel!.modul &&
+          e.menu == menuItem.menu &&
+          e.submenu == menuItem.submenu);
+
+      if (existingIndex == -1) {
+        // Belum ada, tambahkan dengan view = true
+        if (viewSemuaMenu) {
+          menuAccessList.add(MenuAccess(
+            modul: modulModel!.modul,
+            menu: menuItem.menu,
+            submenu: menuItem.submenu,
+            isSelected: true,
+            view: true,
+            input: false,
+            edit: false,
+            delete: false,
+          ));
+        }
+      } else {
+        // Sudah ada, ubah hanya field view
+        menuAccessList[existingIndex].view = viewSemuaMenu;
+      }
+    }
+
+    notifyListeners();
+  }
+
+  bool inputSemuaMenu = false;
+
+  void toggleSelectInputAll() {
+    inputSemuaMenu = !inputSemuaMenu;
+
+    if (modulModel == null) return;
+
+    for (var menuItem in modulModel!.menu) {
+      final existingIndex = menuAccessList.indexWhere((e) =>
+          e.modul == modulModel!.modul &&
+          e.menu == menuItem.menu &&
+          e.submenu == menuItem.submenu);
+
+      if (existingIndex == -1) {
+        // Belum ada, tambahkan dengan view = true
+        if (inputSemuaMenu) {
+          menuAccessList.add(MenuAccess(
+            modul: modulModel!.modul,
+            menu: menuItem.menu,
+            submenu: menuItem.submenu,
+            isSelected: true,
+            view: false,
+            input: true,
+            edit: false,
+            delete: false,
+          ));
+        }
+      } else {
+        // Sudah ada, ubah hanya field view
+        menuAccessList[existingIndex].input = inputSemuaMenu;
+      }
+    }
+
+    notifyListeners();
+  }
+
+  bool editSemuaMenu = false;
+
+  void toggleSelecteditAll() {
+    editSemuaMenu = !editSemuaMenu;
+
+    if (modulModel == null) return;
+
+    for (var menuItem in modulModel!.menu) {
+      final existingIndex = menuAccessList.indexWhere((e) =>
+          e.modul == modulModel!.modul &&
+          e.menu == menuItem.menu &&
+          e.submenu == menuItem.submenu);
+
+      if (existingIndex == -1) {
+        // Belum ada, tambahkan dengan view = true
+        if (editSemuaMenu) {
+          menuAccessList.add(MenuAccess(
+            modul: modulModel!.modul,
+            menu: menuItem.menu,
+            submenu: menuItem.submenu,
+            isSelected: true,
+            view: false,
+            input: false,
+            edit: true,
+            delete: false,
+          ));
+        }
+      } else {
+        // Sudah ada, ubah hanya field view
+        menuAccessList[existingIndex].edit = editSemuaMenu;
+      }
+    }
+
+    notifyListeners();
+  }
+
+  bool deleteSemuaMenu = false;
+
+  void toggleSelectDeleteAll() {
+    deleteSemuaMenu = !deleteSemuaMenu;
+
+    if (modulModel == null) return;
+
+    for (var menuItem in modulModel!.menu) {
+      final existingIndex = menuAccessList.indexWhere((e) =>
+          e.modul == modulModel!.modul &&
+          e.menu == menuItem.menu &&
+          e.submenu == menuItem.submenu);
+
+      if (existingIndex == -1) {
+        // Belum ada, tambahkan dengan view = true
+        if (deleteSemuaMenu) {
+          menuAccessList.add(MenuAccess(
+            modul: modulModel!.modul,
+            menu: menuItem.menu,
+            submenu: menuItem.submenu,
+            isSelected: true,
+            view: false,
+            input: false,
+            edit: false,
+            delete: true,
+          ));
+        }
+      } else {
+        // Sudah ada, ubah hanya field view
+        menuAccessList[existingIndex].delete = deleteSemuaMenu;
+      }
+    }
+
+    notifyListeners();
+  }
+
+  bool pilihSemuaMenu = false;
+
+  void toggleMenuSelectAll() {
+    pilihSemuaMenu = !pilihSemuaMenu;
+    notifyListeners();
+
+    if (modulModel == null) return;
+
+    if (pilihSemuaMenu) {
+      for (var menuItem in modulModel!.menu) {
+        final exists = menuAccessList.any((e) =>
+            e.modul == modulModel!.modul &&
+            e.menu == menuItem.menu &&
+            e.submenu == menuItem.submenu);
+
+        if (!exists) {
+          viewSemuaMenu = true;
+          editSemuaMenu = true;
+          deleteSemuaMenu = true;
+          inputSemuaMenu = true;
+          menuAccessList.add(MenuAccess(
+            modul: modulModel!.modul,
+            menu: menuItem.menu,
+            submenu: menuItem.submenu,
+            isSelected: true,
+            view: true,
+            input: true,
+            edit: true,
+            delete: true,
+          ));
+        }
+      }
+    } else {
+      viewSemuaMenu = false;
+      editSemuaMenu = false;
+      deleteSemuaMenu = false;
+      inputSemuaMenu = false;
+      // Hapus semua akses pada modul ini
+      menuAccessList.removeWhere((e) => e.modul == modulModel!.modul);
+    }
+
+    notifyListeners();
+  }
+
   void toggleMenu(int index, bool? value, String submenu, String menu) {
     final existingIndex = menuAccessList.indexWhere(
       (e) =>
