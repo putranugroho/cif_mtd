@@ -581,7 +581,7 @@ class UsersPage extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          "Group Hari Kerja",
+                                          "Hari Kerja",
                                           style: const TextStyle(fontSize: 12),
                                         ),
                                         const SizedBox(width: 5),
@@ -594,38 +594,68 @@ class UsersPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 8,
                                     ),
-                                    DropdownSearch<AktivasiModel>(
-                                      popupProps:
-                                          const PopupPropsMultiSelection.menu(
-                                        showSearchBox:
-                                            true, // Aktifkan fitur pencarian
-                                      ),
-                                      selectedItem: value.aktivasiModel,
-                                      items: value.listHariKerja,
-                                      itemAsString: (e) =>
-                                          "(${e.kdAktivasi}) - ${e.nmAktivasi}",
-                                      onChanged: (e) {
-                                        value.pilihHariKerja(e!);
-                                      },
-                                      dropdownDecoratorProps:
-                                          DropDownDecoratorProps(
-                                        baseStyle: TextStyle(fontSize: 16),
-                                        textAlignVertical:
-                                            TextAlignVertical.center,
-                                        dropdownSearchDecoration:
-                                            InputDecoration(
-                                          hintText: "Pilih Group Hari Kerja",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            borderSide: BorderSide(
-                                              width: 1,
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                    ListView.builder(
+                                        itemCount: value.listHariKerja.length,
+                                        shrinkWrap: true,
+                                        physics: ClampingScrollPhysics(),
+                                        itemBuilder: (context, i) {
+                                          final data = value.listHariKerja[i];
+                                          return Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Checkbox(
+                                                      activeColor: colorPrimary,
+                                                      value: value
+                                                              .listAddHariKerja
+                                                              .isEmpty
+                                                          ? false
+                                                          : value.listAddHariKerja
+                                                                  .where((e) =>
+                                                                      e == data)
+                                                                  .isNotEmpty
+                                                              ? true
+                                                              : false,
+                                                      onChanged: (e) {
+                                                        value
+                                                            .addHariKerja(data);
+                                                      }),
+                                                  SizedBox(
+                                                    width: 8,
+                                                  ),
+                                                  Expanded(
+                                                      child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .stretch,
+                                                    children: [
+                                                      Text(
+                                                        "(${data.kdAktivasi}) ${data.nmAktivasi}",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        "${data.hari.replaceAll("[", "").replaceAll("]", "")}",
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )),
+                                                  Text(
+                                                      "${data.jamMulai} - ${data.jamSelesai}")
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 8,
+                                              )
+                                            ],
+                                          );
+                                        }),
                                     const SizedBox(
                                       height: 16,
                                     ),

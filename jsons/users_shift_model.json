@@ -1,0 +1,13 @@
+{
+    "id": 8,
+    "id_users": 7,
+    "kd_kelompok": "3001",
+    "nama_kelompok": "Regu 3 Shift Pagi",
+    "hari": "[Senin, Selasa, Rabu, Kamis, Jumat, Sabtu, Minggu]",
+    "ke": 1,
+    "jam_mulai": "03:19",
+    "jam_selesai": "18:57",
+    "status": "AKTIF",
+    "createddate": "2025-05-14 18:58:37",
+    "is_deleted": "N"
+}

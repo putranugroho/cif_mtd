@@ -8,6 +8,7 @@ export 'sandi_bank_model.dart';
 export 'coa_sbb_item_model.dart';
 export 'karyawan_model.dart';
 export 'users_menu_model.dart';
+export 'users_shift_model.dart';
 export 'kantor_model.dart';
 export 'gl_view_model.dart';
 export 'rekon_bank_item_model.dart';

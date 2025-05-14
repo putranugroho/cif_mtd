@@ -98,8 +98,13 @@ class UsersNotifier extends ChangeNotifier {
         : listGl.where((e) => e.nosbb == users!.sbbKasir).first;
     nossbb.text = users!.sbbKasir == "" ? "" : inqueryGlModel!.nosbb;
     namasbb.text = users!.sbbKasir == "" ? "" : inqueryGlModel!.namaSbb;
-    aktivasiModel =
-        listHariKerja.where((e) => e.kdAktivasi == users!.kdAktivasi).first;
+    for (var i = 0; i < users!.shifts.length; i++) {
+      AktivasiModel? aktivasiModel = listHariKerja
+          .where((e) => e.kdAktivasi == users!.shifts[i].kdKelompok)
+          .first;
+      listAddHariKerja.add(aktivasiModel);
+    }
+
     notifyListeners();
   }
 
@@ -109,6 +114,21 @@ class UsersNotifier extends ChangeNotifier {
   cek() {
     if (keyForm.currentState!.validate()) {
       if (editData) {
+        List<Map<String, dynamic>> listTmp = [];
+        for (var i = 0; i < listAddHariKerja.length; i++) {
+          listTmp.add({
+            "id_users": users!.id,
+            "kd_kelompok": "${listAddHariKerja[i].kdAktivasi}",
+            "nama_kelompok": "${listAddHariKerja[i].nmAktivasi}",
+            "hari": "${listAddHariKerja[i].hari}",
+            "ke": "${i + 1}",
+            "jam_mulai": "${listAddHariKerja[i].jamMulai}",
+            "jam_selesai": "${listAddHariKerja[i].jamSelesai}",
+            "status": "AKTIF",
+          });
+        }
+        print("JSON TMP ${jsonEncode(listTmp)}");
+        notifyListeners();
         DialogCustom().showLoading(context);
         var data = {
           "id": users!.id,
@@ -118,7 +138,6 @@ class UsersNotifier extends ChangeNotifier {
           "pass": "${pass.text}",
           "namauser":
               "${karyawanModel == null ? namaKaryawan.text : karyawanModel!.namaLengkap}",
-          "kd_aktivasi": "${aktivasiModel!.kdAktivasi}",
           "kode_pt": "${kantor == null ? "001" : kantor!.kodePt}",
           "kode_kantor": "${kantor == null ? "001" : kantor!.kodeKantor}",
           "kode_induk": "${kantor == null ? "001" : kantor!.kodeInduk}",
@@ -136,6 +155,7 @@ class UsersNotifier extends ChangeNotifier {
           "beda_kantor": "${bedaKantor ? "Y" : "N"}",
           "min_otor": "${minotor.text.trim().replaceAll(",", "")}",
           "max_otor": "${maxotor.text.trim().replaceAll(",", "")}",
+          "shifts": listTmp
         };
         Setuprepository.setup(token, NetworkURL.editusers(), jsonEncode(data))
             .then((value) {
@@ -156,7 +176,6 @@ class UsersNotifier extends ChangeNotifier {
           "pass": "${pass.text}",
           "emp_id": "${karyawanModel!.nik}",
           "namauser": "${karyawanModel!.namaLengkap}",
-          "kd_aktivasi": "${aktivasiModel!.kdAktivasi}",
           "kode_pt": "${kantor == null ? "001" : kantor!.kodePt}",
           "kode_kantor": "${kantor == null ? "001" : kantor!.kodeKantor}",
           "kode_induk": "${kantor == null ? "001" : kantor!.kodeInduk}",
@@ -174,6 +193,7 @@ class UsersNotifier extends ChangeNotifier {
           "beda_kantor": "${bedaKantor ? "Y" : "N"}",
           "min_otor": "${minotor.text.trim().replaceAll(",", "")}",
           "max_otor": "${maxotor.text.trim().replaceAll(",", "")}",
+          "shifts": listAddHariKerja
         };
         Setuprepository.setup(token, NetworkURL.addusers(), jsonEncode(data))
             .then((value) {
@@ -215,6 +235,22 @@ class UsersNotifier extends ChangeNotifier {
   }
 
   List<AktivasiModel> listHariKerja = [];
+  List<AktivasiModel> listAddHariKerja = [];
+  addHariKerja(AktivasiModel value) {
+    if (listAddHariKerja.isEmpty) {
+      listAddHariKerja.add(value);
+    } else {
+      if (listAddHariKerja
+          .where((e) => e.kdAktivasi == value.kdAktivasi)
+          .isNotEmpty) {
+        listAddHariKerja.remove(value);
+      } else {
+        listAddHariKerja.add(value);
+      }
+    }
+    notifyListeners();
+  }
+
   AktivasiModel? aktivasiModel;
   pilihHariKerja(AktivasiModel value) {
     aktivasiModel = value;

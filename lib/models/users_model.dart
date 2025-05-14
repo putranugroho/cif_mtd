@@ -12,7 +12,6 @@ class UsersModel {
     required this.empId,
     required this.pass,
     required this.namauser,
-    required this.kdAktivasi,
     required this.kodePt,
     required this.kodeKantor,
     required this.kodeInduk,
@@ -29,6 +28,9 @@ class UsersModel {
     required this.bedaKantor,
     required this.minOtor,
     required this.maxOtor,
+    required this.createddate,
+    required this.isDeleted,
+    required this.shifts,
   });
 
   final int id;
@@ -36,7 +38,6 @@ class UsersModel {
   final String empId;
   final String pass;
   final String namauser;
-  final String kdAktivasi;
   final String kodePt;
   final String kodeKantor;
   final String kodeInduk;
@@ -53,6 +54,9 @@ class UsersModel {
   final String bedaKantor;
   final String minOtor;
   final String maxOtor;
+  final String createddate;
+  final String isDeleted;
+  final List<UsersShiftModel> shifts;
 
   factory UsersModel.fromJson(Map<String,dynamic> json) => UsersModel(
     id: json['id'] as int,
@@ -60,7 +64,6 @@ class UsersModel {
     empId: json['emp_id'].toString(),
     pass: json['pass'].toString(),
     namauser: json['namauser'].toString(),
-    kdAktivasi: json['kd_aktivasi'].toString(),
     kodePt: json['kode_pt'].toString(),
     kodeKantor: json['kode_kantor'].toString(),
     kodeInduk: json['kode_induk'].toString(),
@@ -76,7 +79,10 @@ class UsersModel {
     levelOtor: json['level_otor'].toString(),
     bedaKantor: json['beda_kantor'].toString(),
     minOtor: json['min_otor'].toString(),
-    maxOtor: json['max_otor'].toString()
+    maxOtor: json['max_otor'].toString(),
+    createddate: json['createddate'].toString(),
+    isDeleted: json['is_deleted'].toString(),
+    shifts: (json['shifts'] as List? ?? []).map((e) => UsersShiftModel.fromJson(e as Map<String, dynamic>)).toList()
   );
   
   Map<String, dynamic> toJson() => {
@@ -85,7 +91,6 @@ class UsersModel {
     'emp_id': empId,
     'pass': pass,
     'namauser': namauser,
-    'kd_aktivasi': kdAktivasi,
     'kode_pt': kodePt,
     'kode_kantor': kodeKantor,
     'kode_induk': kodeInduk,
@@ -101,7 +106,10 @@ class UsersModel {
     'level_otor': levelOtor,
     'beda_kantor': bedaKantor,
     'min_otor': minOtor,
-    'max_otor': maxOtor
+    'max_otor': maxOtor,
+    'createddate': createddate,
+    'is_deleted': isDeleted,
+    'shifts': shifts.map((e) => e.toJson()).toList()
   };
 
   UsersModel clone() => UsersModel(
@@ -110,7 +118,6 @@ class UsersModel {
     empId: empId,
     pass: pass,
     namauser: namauser,
-    kdAktivasi: kdAktivasi,
     kodePt: kodePt,
     kodeKantor: kodeKantor,
     kodeInduk: kodeInduk,
@@ -126,7 +133,10 @@ class UsersModel {
     levelOtor: levelOtor,
     bedaKantor: bedaKantor,
     minOtor: minOtor,
-    maxOtor: maxOtor
+    maxOtor: maxOtor,
+    createddate: createddate,
+    isDeleted: isDeleted,
+    shifts: shifts.map((e) => e.clone()).toList()
   );
 
 
@@ -136,7 +146,6 @@ class UsersModel {
     String? empId,
     String? pass,
     String? namauser,
-    String? kdAktivasi,
     String? kodePt,
     String? kodeKantor,
     String? kodeInduk,
@@ -152,14 +161,16 @@ class UsersModel {
     String? levelOtor,
     String? bedaKantor,
     String? minOtor,
-    String? maxOtor
+    String? maxOtor,
+    String? createddate,
+    String? isDeleted,
+    List<UsersShiftModel>? shifts
   }) => UsersModel(
     id: id ?? this.id,
     userid: userid ?? this.userid,
     empId: empId ?? this.empId,
     pass: pass ?? this.pass,
     namauser: namauser ?? this.namauser,
-    kdAktivasi: kdAktivasi ?? this.kdAktivasi,
     kodePt: kodePt ?? this.kodePt,
     kodeKantor: kodeKantor ?? this.kodeKantor,
     kodeInduk: kodeInduk ?? this.kodeInduk,
@@ -176,12 +187,15 @@ class UsersModel {
     bedaKantor: bedaKantor ?? this.bedaKantor,
     minOtor: minOtor ?? this.minOtor,
     maxOtor: maxOtor ?? this.maxOtor,
+    createddate: createddate ?? this.createddate,
+    isDeleted: isDeleted ?? this.isDeleted,
+    shifts: shifts ?? this.shifts,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is UsersModel && id == other.id && userid == other.userid && empId == other.empId && pass == other.pass && namauser == other.namauser && kdAktivasi == other.kdAktivasi && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && tglexp == other.tglexp && lvluser == other.lvluser && terminalId == other.terminalId && aksesKasir == other.aksesKasir && sbbKasir == other.sbbKasir && namaSbb == other.namaSbb && fhoto1 == other.fhoto1 && fhoto2 == other.fhoto2 && fhoto3 == other.fhoto3 && levelOtor == other.levelOtor && bedaKantor == other.bedaKantor && minOtor == other.minOtor && maxOtor == other.maxOtor;
+    || other is UsersModel && id == other.id && userid == other.userid && empId == other.empId && pass == other.pass && namauser == other.namauser && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && tglexp == other.tglexp && lvluser == other.lvluser && terminalId == other.terminalId && aksesKasir == other.aksesKasir && sbbKasir == other.sbbKasir && namaSbb == other.namaSbb && fhoto1 == other.fhoto1 && fhoto2 == other.fhoto2 && fhoto3 == other.fhoto3 && levelOtor == other.levelOtor && bedaKantor == other.bedaKantor && minOtor == other.minOtor && maxOtor == other.maxOtor && createddate == other.createddate && isDeleted == other.isDeleted && shifts == other.shifts;
 
   @override
-  int get hashCode => id.hashCode ^ userid.hashCode ^ empId.hashCode ^ pass.hashCode ^ namauser.hashCode ^ kdAktivasi.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ tglexp.hashCode ^ lvluser.hashCode ^ terminalId.hashCode ^ aksesKasir.hashCode ^ sbbKasir.hashCode ^ namaSbb.hashCode ^ fhoto1.hashCode ^ fhoto2.hashCode ^ fhoto3.hashCode ^ levelOtor.hashCode ^ bedaKantor.hashCode ^ minOtor.hashCode ^ maxOtor.hashCode;
+  int get hashCode => id.hashCode ^ userid.hashCode ^ empId.hashCode ^ pass.hashCode ^ namauser.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ tglexp.hashCode ^ lvluser.hashCode ^ terminalId.hashCode ^ aksesKasir.hashCode ^ sbbKasir.hashCode ^ namaSbb.hashCode ^ fhoto1.hashCode ^ fhoto2.hashCode ^ fhoto3.hashCode ^ levelOtor.hashCode ^ bedaKantor.hashCode ^ minOtor.hashCode ^ maxOtor.hashCode ^ createddate.hashCode ^ isDeleted.hashCode ^ shifts.hashCode;
 }

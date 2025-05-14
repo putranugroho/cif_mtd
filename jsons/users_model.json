@@ -4,7 +4,6 @@
     "emp_id": "",
     "pass": "",
     "namauser": "",
-    "kd_aktivasi": "",
     "kode_pt": "",
     "kode_kantor": "",
     "kode_induk": "",
@@ -20,5 +19,8 @@
     "level_otor": "",
     "beda_kantor": "",
     "min_otor": "",
-    "max_otor": ""
+    "max_otor": "",
+    "createddate": "2025-05-14 14:58:02",
+    "is_deleted": "N",
+    "shifts": "$[]users_shift_model"
 }
