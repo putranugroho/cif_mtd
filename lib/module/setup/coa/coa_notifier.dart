@@ -8,13 +8,42 @@ import 'package:accounting/utils/format_currency.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/button_custom.dart';
+
 class CoaNotifier extends ChangeNotifier {
   final BuildContext context;
 
   CoaNotifier({required this.context}) {
     getMasterGl();
+    getMasterGlSubtree();
     notifyListeners();
   }
+
+  List<dynamic> listJson = [];
+  List<MasterglSubtreModel> listSubtree = [];
+  Future getMasterGlSubtree() async {
+    isLoading = true;
+    listSubtree.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(
+            token, NetworkURL.getMasterGlSubtree(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listSubtree.add(MasterglSubtreModel.fromJson(i));
+        }
+        listJson = value['data'];
+        print(listJson);
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
   var isLoading = true;
   Future getMasterGl() async {
     var data = {
@@ -148,6 +177,76 @@ class CoaNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  confirm() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: 500,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Anda yakin menghapus ${coaModel!.namaSbb}?",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ButtonSecondary(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        name: "Tidak",
+                      )),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                          child: ButtonPrimary(
+                        onTap: () {
+                          Navigator.pop(context);
+                          remove();
+                        },
+                        name: "Ya",
+                      )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  remove() {
+    DialogCustom().showLoading(context);
+    var data = {
+      "id": coaModel!.id,
+    };
+    Setuprepository.setup(token, NetworkURL.deleteMasterGl(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        getMasterGl();
+        clear();
+        dialog = false;
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message']);
+      }
+    });
+  }
+
   clear() {
     dialog = false;
     editData = false;
@@ -255,65 +354,7 @@ class CoaNotifier extends ChangeNotifier {
   CoaModel? coaModel;
   edit(String id) {
     coaModel = list.where((e) => e.id == int.parse(id)).first;
-    print(coaModel!.nosbb);
-    print(coaModel!.namaSbb);
-    print(coaModel!.jnsAcc);
-    // print(
-    //     list.where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "B").length);
-    bukuBesar = coaModel!.jnsAcc == "B"
-        ? coaModel
-        : list
-                .where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "B")
-                .isNotEmpty
-            ? list
-                .where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "B")
-                .first
-            : null;
-    // print(bukuBesar!.namaSbb);
-    header = list
-            .where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "A")
-            .isNotEmpty
-        ? list.where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "A").first
-        : null;
-    golongan = coaModel!.golAcc == "1"
-        ? "Aktiva"
-        : coaModel!.golAcc == "2"
-            ? "Pasiva"
-            : coaModel!.golAcc == "3"
-                ? "Pendapatan"
-                : coaModel!.golAcc == "4"
-                    ? "Biaya"
-                    : "Pos Administrative";
-    jnsAcc = coaModel!.jnsAcc == "A"
-        ? "Header"
-        : coaModel!.jnsAcc == "B"
-            ? "Buku Besar"
-            : "Sub Buku Besar";
-
-    limitdebet.text = FormatCurrency.oCcy
-        .format(int.parse(coaModel!.limitDebet))
-        .replaceAll(".", ",");
-    limitkredit.text = FormatCurrency.oCcy
-        .format(int.parse(coaModel!.limitKredit))
-        .replaceAll(".", ",");
-    noBb.text = coaModel!.nosbb.substring(0, 3);
-    noSbb.text = coaModel!.nosbb.substring(6, 12);
-    namaSbb.text = coaModel!.namaSbb;
-    resulttext.text = coaModel!.nosbb;
-    noHeader.text = list
-            .where((e) => e.nosbb == coaModel!.nobb && e.jnsAcc == "A")
-            .isNotEmpty
-        ? header!.nobb.substring(0, 3)
-        : "";
-    perantara = coaModel!.akunPerantara == "Y" ? true : false;
-    hutangPiutang = coaModel!.hutang == "Y"
-        ? "HUTANG"
-        : coaModel!.piutang == "Y"
-            ? "PIUTANG"
-            : "";
-
-    dialog = true;
-    editData = true;
+    confirm();
     notifyListeners();
   }
 

@@ -101,6 +101,10 @@ class NetworkURL {
     return "$url/mastergl";
   }
 
+  static String getMasterGlSubtree() {
+    return "$url/mastergl/subtree";
+  }
+
   static String addMasterGl() {
     return "$url/mastergl/add";
   }

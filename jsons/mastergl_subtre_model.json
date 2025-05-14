@@ -1,0 +1,9 @@
+{
+    "nosbb": "020525100102",
+    "nobb": "020525000000",
+    "gol_acc" : "",
+    "nama_sbb": "Pendapatan kelebihan Bayar",
+    "jns_acc": "C",
+    "type_posting": "N",
+    "children": "$[]mastergl_subtre_model"
+}

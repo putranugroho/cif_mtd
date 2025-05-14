@@ -149,6 +149,7 @@ class CoaPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'gol_acc',
+                                      width: 200,
                                       label: Container(
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
@@ -160,49 +161,49 @@ class CoaPage extends StatelessWidget {
                                                 fontSize: 12,
                                               )))),
                                   GridColumn(
-                                      width: 120,
-                                      columnName: 'jns_acc',
+                                      width: 200,
+                                      columnName: 'no_coa',
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
-                                          child: Text('Jenis Akun',
+                                          child: Text('No. COA',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      columnName: 'nobb',
+                                      columnName: 'header',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('No. Buku Besar',
+                                          child: Text('Header',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      columnName: 'nosbb',
+                                      columnName: 'bukubesar',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('No. Sub Buku Besar',
+                                          child: Text('Buku Besar',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      columnName: 'nama_sbb',
+                                      columnName: 'subbukubesar',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Nama SBB',
+                                          child: Text('Sub Buku Besar',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -210,25 +211,24 @@ class CoaPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       width: 80,
-                                      columnName: 'sbb_khusus',
+                                      columnName: 'posting',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('SBB Khusus',
+                                          child: Text('Posting',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      width: 60,
-                                      columnName: 'type_posting',
+                                      columnName: 'sbb_khusus',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Posting',
+                                          child: Text('SBB Khusus',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -249,6 +249,135 @@ class CoaPage extends StatelessWidget {
                                               )))),
                                 ],
                               ),
+
+                              // SfDataGrid(
+                              //   headerRowHeight: 40,
+                              //   defaultColumnWidth: 180,
+                              //   frozenColumnsCount: 1,
+
+                              //   // controller: value.dataGridController,
+                              //   gridLinesVisibility: GridLinesVisibility.both,
+                              //   headerGridLinesVisibility:
+                              //       GridLinesVisibility.both,
+                              //   selectionMode: SelectionMode.single,
+
+                              //   source: DetailDataSource(value),
+                              //   columns: <GridColumn>[
+                              //     GridColumn(
+                              //         width: 40,
+                              //         columnName: 'no',
+                              //         label: Container(
+                              //             padding: EdgeInsets.all(6),
+                              //             color: colorPrimary,
+                              //             alignment: Alignment.center,
+                              //             child: Text('No',
+                              //                 style: TextStyle(
+                              //                   fontWeight: FontWeight.w300,
+                              //                   fontSize: 12,
+                              //                   color: Colors.white,
+                              //                 )))),
+                              //     GridColumn(
+                              //         columnName: 'gol_acc',
+                              //         label: Container(
+                              //             padding: EdgeInsets.all(6),
+                              //             color: colorPrimary,
+                              //             alignment: Alignment.center,
+                              //             child: Text('Gol. Akun',
+                              //                 style: TextStyle(
+                              //                   fontWeight: FontWeight.w300,
+                              //                   color: Colors.white,
+                              //                   fontSize: 12,
+                              //                 )))),
+                              //     GridColumn(
+                              //         width: 120,
+                              //         columnName: 'jns_acc',
+                              //         label: Container(
+                              //             color: colorPrimary,
+                              //             alignment: Alignment.center,
+                              //             padding: EdgeInsets.all(6),
+                              //             child: Text('Jenis Akun',
+                              //                 style: TextStyle(
+                              //                   fontSize: 12,
+                              //                   fontWeight: FontWeight.w300,
+                              //                   color: Colors.white,
+                              //                 )))),
+                              //     GridColumn(
+                              //         columnName: 'nobb',
+                              //         label: Container(
+                              //             padding: EdgeInsets.all(6),
+                              //             color: colorPrimary,
+                              //             alignment: Alignment.center,
+                              //             child: Text('No. Buku Besar',
+                              //                 style: TextStyle(
+                              //                   fontSize: 12,
+                              //                   fontWeight: FontWeight.w300,
+                              //                   color: Colors.white,
+                              //                 )))),
+                              //     GridColumn(
+                              //         columnName: 'nosbb',
+                              //         label: Container(
+                              //             padding: EdgeInsets.all(6),
+                              //             color: colorPrimary,
+                              //             alignment: Alignment.center,
+                              //             child: Text('No. Sub Buku Besar',
+                              //                 style: TextStyle(
+                              //                   fontSize: 12,
+                              //                   fontWeight: FontWeight.w300,
+                              //                   color: Colors.white,
+                              //                 )))),
+                              //     GridColumn(
+                              //         columnName: 'nama_sbb',
+                              //         label: Container(
+                              //             padding: EdgeInsets.all(6),
+                              //             color: colorPrimary,
+                              //             alignment: Alignment.center,
+                              //             child: Text('Nama SBB',
+                              //                 style: TextStyle(
+                              //                   fontSize: 12,
+                              //                   fontWeight: FontWeight.w300,
+                              //                   color: Colors.white,
+                              //                 )))),
+                              //     GridColumn(
+                              //         width: 80,
+                              //         columnName: 'sbb_khusus',
+                              //         label: Container(
+                              //             padding: EdgeInsets.all(6),
+                              //             color: colorPrimary,
+                              //             alignment: Alignment.center,
+                              //             child: Text('SBB Khusus',
+                              //                 style: TextStyle(
+                              //                   fontSize: 12,
+                              //                   fontWeight: FontWeight.w300,
+                              //                   color: Colors.white,
+                              //                 )))),
+                              //     GridColumn(
+                              //         width: 60,
+                              //         columnName: 'type_posting',
+                              //         label: Container(
+                              //             padding: EdgeInsets.all(6),
+                              //             color: colorPrimary,
+                              //             alignment: Alignment.center,
+                              //             child: Text('Posting',
+                              //                 style: TextStyle(
+                              //                   fontSize: 12,
+                              //                   fontWeight: FontWeight.w300,
+                              //                   color: Colors.white,
+                              //                 )))),
+                              //     GridColumn(
+                              //         columnName: 'action',
+                              //         width: 80,
+                              //         label: Container(
+                              //             color: colorPrimary,
+                              //             padding: EdgeInsets.all(6),
+                              //             alignment: Alignment.center,
+                              //             child: Text('Action',
+                              //                 style: TextStyle(
+                              //                   fontSize: 12,
+                              //                   fontWeight: FontWeight.w300,
+                              //                   color: Colors.white,
+                              //                 )))),
+                              //   ],
+                              // ),
                             ),
                     ),
                   ],
@@ -1842,7 +1971,7 @@ class CoaPage extends StatelessWidget {
 class DetailDataSource extends DataGridSource {
   DetailDataSource(CoaNotifier value) {
     tindakanNotifier = value;
-    buildRowData(value.list);
+    buildRowsFromJson(value.listJson);
   }
 
   CoaNotifier? tindakanNotifier;
@@ -1850,38 +1979,61 @@ class DetailDataSource extends DataGridSource {
   List<DataGridRow> _laporanData = [];
   @override
   List<DataGridRow> get rows => _laporanData;
-  void buildRowData(List<CoaModel> list) {
-    int index = 1;
-    _laporanData = list
-        .map<DataGridRow>((data) => DataGridRow(
-              cells: [
-                DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(
-                    columnName: 'gol_acc',
-                    value: data.golAcc == "1"
-                        ? "Aktiva"
-                        : data.golAcc == "2"
-                            ? "Pasiva"
-                            : data.golAcc == "3"
-                                ? "Pendapatan"
-                                : "Biaya"),
-                DataGridCell(
-                    columnName: 'jns_acc',
-                    value: data.jnsAcc == 'A'
-                        ? "HEADER"
-                        : data.jnsAcc == 'B'
-                            ? "Buku Besar"
-                            : "Sub Buku Besar"),
-                DataGridCell(columnName: 'nobb', value: data.nobb),
-                DataGridCell(columnName: 'nosbb', value: data.nosbb),
-                DataGridCell(columnName: 'nama_sbb', value: data.namaSbb),
-                DataGridCell(columnName: 'sbb_khusus', value: data.sbbKhusus),
-                DataGridCell(
-                    columnName: 'type_posting', value: data.typePosting),
-                DataGridCell(columnName: 'action', value: data.id.toString()),
-              ],
-            ))
-        .toList();
+  void buildRowsFromJson(List<dynamic> data) {
+    int index = 0;
+    List<DataGridRow> rows = [];
+
+    void traverse(Map<String, dynamic> node, int level,
+        {String? rootHeader, String? bukuBesar, String? subBukuBesar}) {
+      String namaSbb = node['nama_sbb'];
+      String golAcc = node['gol_acc'];
+      String posting = node['type_posting'];
+      String nosbb = node['nosbb'];
+      String jnsAcc = node['jns_acc'];
+
+      final currentHeader = rootHeader ?? namaSbb;
+
+      String? currentBukuBesar = jnsAcc == 'B' ? namaSbb : bukuBesar;
+      String? currentSubBukuBesar = jnsAcc == 'C' ? namaSbb : subBukuBesar;
+
+      rows.add(DataGridRow(cells: [
+        DataGridCell(columnName: 'no', value: (++index).toString()),
+        DataGridCell(
+          columnName: 'gol_acc',
+          value: golAcc == "1"
+              ? "Aktiva"
+              : golAcc == "2"
+                  ? "Pasiva"
+                  : golAcc == "3"
+                      ? "Pendapatan"
+                      : "Biaya",
+        ),
+        DataGridCell(columnName: 'no_coa', value: nosbb),
+        DataGridCell(columnName: 'header', value: currentHeader),
+        DataGridCell(columnName: 'bukubesar', value: currentBukuBesar ?? ''),
+        DataGridCell(
+            columnName: 'subbukubesar', value: currentSubBukuBesar ?? ''),
+        DataGridCell(columnName: 'posting', value: posting),
+        DataGridCell(columnName: 'sbb_khusus', value: ''),
+        DataGridCell(columnName: 'action', value: nosbb),
+      ]));
+
+      // Rekursif ke anak-anak
+      if (node['children'] != null && node['children'].isNotEmpty) {
+        for (var child in node['children']) {
+          traverse(child, level + 1,
+              rootHeader: currentHeader,
+              bukuBesar: currentBukuBesar,
+              subBukuBesar: currentSubBukuBesar);
+        }
+      }
+    }
+
+    for (var root in data) {
+      traverse(root, 0);
+    }
+
+    _laporanData = rows;
   }
 
   @override
@@ -1908,7 +2060,7 @@ class DetailDataSource extends DataGridSource {
                   ),
                 ),
                 child: Text(
-                  "Aksi",
+                  "Hapus",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,
