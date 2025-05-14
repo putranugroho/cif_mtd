@@ -89,6 +89,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                       SizedBox(
                                         width: 180,
                                         child: TextFormField(
+                                          enabled: !value.cariTrans,
                                           readOnly: true,
                                           onTap: () => value.tanggalTransaksi(),
                                           controller: value.tglTransaksi,

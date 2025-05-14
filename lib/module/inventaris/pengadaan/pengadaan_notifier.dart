@@ -679,6 +679,11 @@ class PengadaanNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  TextEditingController cariTrans = TextEditingController();
+  TextEditingController tglTrans = TextEditingController();
+  TextEditingController noDokTrans = TextEditingController();
+  TextEditingController nilaiTrans = TextEditingController();
+  TextEditingController keteranganTrans = TextEditingController();
   TextEditingController noDok = TextEditingController();
   TextEditingController noaset = TextEditingController();
   TextEditingController namaaset = TextEditingController();

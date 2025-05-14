@@ -76,75 +76,277 @@ class SetupPajakPage extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    Text(
-                                      "PPN (%)",
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
-                                    const SizedBox(width: 5),
-                                    const Text(
-                                      "*",
-                                      style: TextStyle(fontSize: 8),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  children: [
                                     Container(
-                                      width: 180,
-                                      child: TextFormField(
-                                        textInputAction: TextInputAction.done,
-                                        controller: value.ppn,
-                                        maxLines: 1,
-                                        readOnly: !value.editData,
-                                        inputFormatters: [
-                                          FilteringTextInputFormatter.allow(
-                                            RegExp(
-                                                r'^(100(\.00?)?|([1-9]\d?|0)(\.\d{0,2})?)$'),
+                                      width: 250,
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "PPN 1 (%)",
+                                                style: const TextStyle(
+                                                    fontSize: 12),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              const Text(
+                                                "*",
+                                                style: TextStyle(fontSize: 8),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 180,
+                                                child: TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  controller: value.ppn1,
+                                                  maxLines: 1,
+                                                  readOnly: !value.editData,
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .allow(
+                                                      RegExp(
+                                                          r'^(100(\.00?)?|([1-9]\d?|0)(\.\d{0,2})?)$'),
+                                                    ),
+                                                  ],
+                                                  keyboardType: TextInputType
+                                                      .numberWithOptions(
+                                                    decimal: true,
+                                                    signed: false,
+                                                  ),
+                                                  validator: (e) {
+                                                    if (e == null ||
+                                                        e.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    }
+
+                                                    final valueAsDouble =
+                                                        double.tryParse(
+                                                            e.replaceAll(
+                                                                ",", "."));
+                                                    if (valueAsDouble == null) {
+                                                      return "Format tidak valid";
+                                                    }
+
+                                                    if (valueAsDouble < 0 ||
+                                                        valueAsDouble > 100) {
+                                                      return "Nilai harus antara 0 dan 100";
+                                                    }
+
+                                                    // Ensure only 2 decimal places max
+                                                    if (e.contains(".")) {
+                                                      final decimalPart =
+                                                          e.split(".")[1];
+                                                      if (decimalPart.length >
+                                                          2) {
+                                                        return "Maksimal 2 angka di belakang koma";
+                                                      }
+                                                    }
+
+                                                    return null;
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    filled: !value.editData,
+                                                    fillColor: Colors.grey[200],
+                                                    hintText: "PPN",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ],
-                                        keyboardType:
-                                            TextInputType.numberWithOptions(
-                                          decimal: true,
-                                          signed: false,
-                                        ),
-                                        validator: (e) {
-                                          if (e == null || e.isEmpty) {
-                                            return "Wajib diisi";
-                                          }
-
-                                          final valueAsDouble = double.tryParse(
-                                              e.replaceAll(",", "."));
-                                          if (valueAsDouble == null) {
-                                            return "Format tidak valid";
-                                          }
-
-                                          if (valueAsDouble < 0 ||
-                                              valueAsDouble > 100) {
-                                            return "Nilai harus antara 0 dan 100";
-                                          }
-
-                                          // Ensure only 2 decimal places max
-                                          if (e.contains(".")) {
-                                            final decimalPart = e.split(".")[1];
-                                            if (decimalPart.length > 2) {
-                                              return "Maksimal 2 angka di belakang koma";
-                                            }
-                                          }
-
-                                          return null;
-                                        },
-                                        decoration: InputDecoration(
-                                          filled: !value.editData,
-                                          fillColor: Colors.grey[200],
-                                          hintText: "PPN",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: 250,
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "PPN 2 (%)",
+                                                style: const TextStyle(
+                                                    fontSize: 12),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              const Text(
+                                                "*",
+                                                style: TextStyle(fontSize: 8),
+                                              ),
+                                            ],
                                           ),
-                                        ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 180,
+                                                child: TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  controller: value.ppn2,
+                                                  maxLines: 1,
+                                                  readOnly: !value.editData,
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .allow(
+                                                      RegExp(
+                                                          r'^(100(\.00?)?|([1-9]\d?|0)(\.\d{0,2})?)$'),
+                                                    ),
+                                                  ],
+                                                  keyboardType: TextInputType
+                                                      .numberWithOptions(
+                                                    decimal: true,
+                                                    signed: false,
+                                                  ),
+                                                  validator: (e) {
+                                                    if (e == null ||
+                                                        e.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    }
+
+                                                    final valueAsDouble =
+                                                        double.tryParse(
+                                                            e.replaceAll(
+                                                                ",", "."));
+                                                    if (valueAsDouble == null) {
+                                                      return "Format tidak valid";
+                                                    }
+
+                                                    if (valueAsDouble < 0 ||
+                                                        valueAsDouble > 100) {
+                                                      return "Nilai harus antara 0 dan 100";
+                                                    }
+
+                                                    // Ensure only 2 decimal places max
+                                                    if (e.contains(".")) {
+                                                      final decimalPart =
+                                                          e.split(".")[1];
+                                                      if (decimalPart.length >
+                                                          2) {
+                                                        return "Maksimal 2 angka di belakang koma";
+                                                      }
+                                                    }
+
+                                                    return null;
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    filled: !value.editData,
+                                                    fillColor: Colors.grey[200],
+                                                    hintText: "PPN",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      width: 250,
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "PPN 3 (%)",
+                                                style: const TextStyle(
+                                                    fontSize: 12),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              const Text(
+                                                "*",
+                                                style: TextStyle(fontSize: 8),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 180,
+                                                child: TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  controller: value.ppn3,
+                                                  maxLines: 1,
+                                                  readOnly: !value.editData,
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .allow(
+                                                      RegExp(
+                                                          r'^(100(\.00?)?|([1-9]\d?|0)(\.\d{0,2})?)$'),
+                                                    ),
+                                                  ],
+                                                  keyboardType: TextInputType
+                                                      .numberWithOptions(
+                                                    decimal: true,
+                                                    signed: false,
+                                                  ),
+                                                  validator: (e) {
+                                                    if (e == null ||
+                                                        e.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    }
+
+                                                    final valueAsDouble =
+                                                        double.tryParse(
+                                                            e.replaceAll(
+                                                                ",", "."));
+                                                    if (valueAsDouble == null) {
+                                                      return "Format tidak valid";
+                                                    }
+
+                                                    if (valueAsDouble < 0 ||
+                                                        valueAsDouble > 100) {
+                                                      return "Nilai harus antara 0 dan 100";
+                                                    }
+
+                                                    // Ensure only 2 decimal places max
+                                                    if (e.contains(".")) {
+                                                      final decimalPart =
+                                                          e.split(".")[1];
+                                                      if (decimalPart.length >
+                                                          2) {
+                                                        return "Maksimal 2 angka di belakang koma";
+                                                      }
+                                                    }
+
+                                                    return null;
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    filled: !value.editData,
+                                                    fillColor: Colors.grey[200],
+                                                    hintText: "PPN",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
@@ -152,50 +354,184 @@ class SetupPajakPage extends StatelessWidget {
                                 const SizedBox(height: 16),
                                 Row(
                                   children: [
-                                    Text(
-                                      "Nilai maksimal tidak kena PPN",
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
-                                    const SizedBox(width: 5),
-                                    const Text(
-                                      "*",
-                                      style: TextStyle(fontSize: 8),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  children: [
                                     Container(
-                                      width: 180,
-                                      child: TextFormField(
-                                        textInputAction: TextInputAction.done,
-                                        controller: value.maksPpn,
-                                        maxLines: 1,
-                                        readOnly: !value.editData,
-                                        inputFormatters: [
-                                          FilteringTextInputFormatter
-                                              .digitsOnly,
-                                          CurrencyInputFormatter(),
-                                        ],
-                                        validator: (e) {
-                                          if (e!.isEmpty) {
-                                            return "Wajib diisi";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          filled: !value.editData,
-                                          fillColor: Colors.grey[200],
-                                          hintText: "Nilai Maks",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                      width: 250,
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Nilai minimal tidak kena PPN 1",
+                                                style: const TextStyle(
+                                                    fontSize: 12),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              const Text(
+                                                "*",
+                                                style: TextStyle(fontSize: 8),
+                                              ),
+                                            ],
                                           ),
-                                        ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 180,
+                                                child: TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  controller: value.maksPpn1,
+                                                  maxLines: 1,
+                                                  readOnly: !value.editData,
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly,
+                                                    CurrencyInputFormatter(),
+                                                  ],
+                                                  validator: (e) {
+                                                    if (e!.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    filled: !value.editData,
+                                                    fillColor: Colors.grey[200],
+                                                    hintText: "Nilai Maks",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      width: 250,
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Nilai minimal tidak kena PPN 2",
+                                                style: const TextStyle(
+                                                    fontSize: 12),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              const Text(
+                                                "*",
+                                                style: TextStyle(fontSize: 8),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 180,
+                                                child: TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  controller: value.maksPpn2,
+                                                  maxLines: 1,
+                                                  readOnly: !value.editData,
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly,
+                                                    CurrencyInputFormatter(),
+                                                  ],
+                                                  validator: (e) {
+                                                    if (e!.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    filled: !value.editData,
+                                                    fillColor: Colors.grey[200],
+                                                    hintText: "Nilai Maks",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      width: 250,
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Nilai minimal tidak kena PPN 3",
+                                                style: const TextStyle(
+                                                    fontSize: 12),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              const Text(
+                                                "*",
+                                                style: TextStyle(fontSize: 8),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 180,
+                                                child: TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  controller: value.maksPpn3,
+                                                  maxLines: 1,
+                                                  readOnly: !value.editData,
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly,
+                                                    CurrencyInputFormatter(),
+                                                  ],
+                                                  validator: (e) {
+                                                    if (e!.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    filled: !value.editData,
+                                                    fillColor: Colors.grey[200],
+                                                    hintText: "Nilai Maks",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],

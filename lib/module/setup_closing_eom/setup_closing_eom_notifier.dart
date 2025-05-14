@@ -46,8 +46,9 @@ class SetupClosingEomNotifier extends ChangeNotifier {
   }
 
   TextEditingController closing = TextEditingController(text: "3");
-
+  TextEditingController backdatemundur = TextEditingController();
   TextEditingController closingDate = TextEditingController();
+
   DateTime now = DateTime.now();
   showDate() async {
     showDialog(
@@ -166,5 +167,11 @@ class SetupClosingEomNotifier extends ChangeNotifier {
         });
       }
     }
+  }
+
+  bool jenisTrans = true;
+  pilihJenisTransaksi(bool value) {
+    jenisTrans = value;
+    notifyListeners();
   }
 }

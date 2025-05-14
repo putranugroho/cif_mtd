@@ -45,9 +45,13 @@ class SetupPajakNotifier extends ChangeNotifier {
       var data = {
         "id": setupPajakModel!.id,
         "kode_pt": "001",
-        "ppn": "${ppn.text.trim()}",
+        "ppn1": "${ppn1.text.trim()}",
+        "ppn2": "${ppn2.text.trim()}",
+        "ppn3": "${ppn3.text.trim()}",
         "pph_23": "${pph23.text.trim()}",
-        "maks_kena_ppn": "${maksPpn.text.trim().replaceAll(",", "")}",
+        "maks_kena_ppn1": "${maksPpn1.text.trim().replaceAll(",", "")}",
+        "maks_kena_ppn2": "${maksPpn2.text.trim().replaceAll(",", "")}",
+        "maks_kena_ppn3": "${maksPpn3.text.trim().replaceAll(",", "")}",
       };
       Setuprepository.setup(
               token, NetworkURL.editSetupPajak(), jsonEncode(data))
@@ -78,13 +82,25 @@ class SetupPajakNotifier extends ChangeNotifier {
           list.add(SetupPajakModel.fromJson(i));
         }
         setupPajakModel = list[0];
-        ppn.text = setupPajakModel!.ppn.contains(".")
+        ppn1.text = setupPajakModel!.ppn.contains(".")
+            ? "${setupPajakModel!.ppn}"
+            : "${setupPajakModel!.ppn}.00";
+        ppn2.text = setupPajakModel!.ppn.contains(".")
+            ? "${setupPajakModel!.ppn}"
+            : "${setupPajakModel!.ppn}.00";
+        ppn3.text = setupPajakModel!.ppn.contains(".")
             ? "${setupPajakModel!.ppn}"
             : "${setupPajakModel!.ppn}.00";
         pph23.text = setupPajakModel!.pph23.contains(".")
             ? "${setupPajakModel!.pph23}"
             : "${setupPajakModel!.pph23}.00";
-        maksPpn.text = FormatCurrency.oCcy
+        maksPpn1.text = FormatCurrency.oCcy
+            .format(int.parse(setupPajakModel!.maksKenaPpn))
+            .replaceAll(".", ",");
+        maksPpn2.text = FormatCurrency.oCcy
+            .format(int.parse(setupPajakModel!.maksKenaPpn))
+            .replaceAll(".", ",");
+        maksPpn3.text = FormatCurrency.oCcy
             .format(int.parse(setupPajakModel!.maksKenaPpn))
             .replaceAll(".", ",");
         isLoading = false;
@@ -96,7 +112,11 @@ class SetupPajakNotifier extends ChangeNotifier {
     });
   }
 
-  TextEditingController ppn = TextEditingController();
-  TextEditingController maksPpn = TextEditingController();
+  TextEditingController ppn1 = TextEditingController();
+  TextEditingController maksPpn1 = TextEditingController();
+  TextEditingController ppn2 = TextEditingController();
+  TextEditingController maksPpn2 = TextEditingController();
+  TextEditingController ppn3 = TextEditingController();
+  TextEditingController maksPpn3 = TextEditingController();
   TextEditingController pph23 = TextEditingController();
 }

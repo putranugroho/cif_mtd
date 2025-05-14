@@ -259,12 +259,15 @@ class AktivasiPage extends StatelessWidget {
                                     textInputAction: TextInputAction.done,
                                     controller: value.kode,
                                     maxLines: 1,
+                                    maxLength: 4,
                                     inputFormatters: [
                                       FilteringTextInputFormatter.digitsOnly
                                     ],
                                     validator: (e) {
                                       if (e!.isEmpty) {
                                         return "Wajib diisi";
+                                      } else if (e.length < 4) {
+                                        return "Kode Kelompok Harus 4 digit";
                                       } else {
                                         return null;
                                       }

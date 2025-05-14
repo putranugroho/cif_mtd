@@ -189,13 +189,26 @@ class UsersPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      columnName: 'level_otor',
-                                      width: 65,
+                                      width: 50,
+                                      columnName: 'akses_kasir',
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
-                                          child: Text('Level Otorisasi',
+                                          child: Text('Akses Kasir',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      width: 50,
+                                      columnName: 'back_date',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Back Date',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -209,6 +222,19 @@ class UsersPage extends StatelessWidget {
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
                                           child: Text('Beda Kantor',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'level_otor',
+                                      width: 65,
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Level Otorisasi',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -1264,10 +1290,12 @@ class DetailDataSource extends DataGridSource {
                             ? "Supervisor"
                             : "User"),
                 DataGridCell(columnName: 'aktivasi', value: "N"),
+                DataGridCell(columnName: 'akses_kasir', value: data.aksesKasir),
+                DataGridCell(columnName: 'back_date', value: "N"),
+                DataGridCell(columnName: 'beda_kantor', value: data.bedaKantor),
                 DataGridCell(
                     columnName: 'level_otor',
                     value: data.levelOtor == "null" ? "" : data.levelOtor),
-                DataGridCell(columnName: 'beda_kantor', value: data.bedaKantor),
                 DataGridCell(
                     columnName: 'min_otor',
                     value: data.minOtor == ""
@@ -1319,7 +1347,9 @@ class DetailDataSource extends DataGridSource {
           );
         } else if (e.columnName == 'aktivasi' ||
             e.columnName == 'level_otor' ||
-            e.columnName == 'beda_kantor') {
+            e.columnName == 'beda_kantor' ||
+            e.columnName == 'akses_kasir' ||
+            e.columnName == 'back_date') {
           return Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),

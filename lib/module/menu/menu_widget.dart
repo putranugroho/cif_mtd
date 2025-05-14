@@ -556,6 +556,39 @@ class MenuSetupWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
+                onTap: () => value.gantimenu(69),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: value.page == 69 ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.eom,
+                        height: 30,
+                        color: value.page == 69 ? Colors.black : Colors.white,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Kas Kecil",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: value.page == 69 ? Colors.black : Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
                 onTap: () => value.gantimenu(65),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
@@ -589,36 +622,6 @@ class MenuSetupWidget extends StatelessWidget {
                 ),
               ),
             ]),
-        InkWell(
-          onTap: () => value.gantimenu(69),
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: value.page == 69 ? Colors.white : Colors.transparent,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                Image.asset(
-                  ImageAssets.eom,
-                  height: 30,
-                  color: value.page == 69 ? Colors.black : Colors.white,
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  "SBB Kas",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: value.page == 69 ? Colors.black : Colors.white,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
         InkWell(
           onTap: () => value.gantimenu(38),
           child: Container(
@@ -669,7 +672,7 @@ class MenuSetupWidget extends StatelessWidget {
                   width: 16,
                 ),
                 Text(
-                  "Level User",
+                  "Level & Akses User",
                   style: TextStyle(
                     fontSize: 16,
                     color: value.page == 60 ? Colors.black : Colors.white,
