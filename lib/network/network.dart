@@ -358,7 +358,7 @@ class NetworkURL {
   }
 
   static String addUserAksesPoint() {
-    return "$url/user-akses_point/add";
+    return "$url/user-akses-point/add";
   }
 
   static String cariKaryawan() {

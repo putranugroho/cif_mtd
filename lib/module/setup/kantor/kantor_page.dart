@@ -264,6 +264,57 @@ class KantorPage extends StatelessWidget {
                                       Row(
                                         children: [
                                           Text(
+                                            "Status Kantor",
+                                            style:
+                                                const TextStyle(fontSize: 12),
+                                          ),
+                                          const SizedBox(width: 5),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      DropdownSearch<String>(
+                                        validator: (value) {
+                                          if (value == null) {
+                                            return 'Wajib diisi';
+                                          }
+                                          return null;
+                                        },
+                                        popupProps:
+                                            const PopupPropsMultiSelection.menu(
+                                          showSearchBox:
+                                              true, // Aktifkan fitur pencarian
+                                        ),
+                                        selectedItem: value.status,
+                                        items: value.listStatus,
+                                        itemAsString: (e) => "${e}",
+                                        onChanged: (e) {
+                                          value.pilihStatus(e!);
+                                        },
+                                        dropdownDecoratorProps:
+                                            DropDownDecoratorProps(
+                                          baseStyle: TextStyle(fontSize: 16),
+                                          textAlignVertical:
+                                              TextAlignVertical.center,
+                                          dropdownSearchDecoration:
+                                              InputDecoration(
+                                            hintText: "Pilih Status",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              borderSide: BorderSide(
+                                                width: 1,
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      Row(
+                                        children: [
+                                          Text(
                                             "Pilih Kantor Induk",
                                             style:
                                                 const TextStyle(fontSize: 12),
@@ -366,57 +417,6 @@ class KantorPage extends StatelessWidget {
                                             ),
                                           ),
                                         ],
-                                      ),
-                                      const SizedBox(height: 16),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "Status Kantor",
-                                            style:
-                                                const TextStyle(fontSize: 12),
-                                          ),
-                                          const SizedBox(width: 5),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      DropdownSearch<String>(
-                                        validator: (value) {
-                                          if (value == null) {
-                                            return 'Wajib diisi';
-                                          }
-                                          return null;
-                                        },
-                                        popupProps:
-                                            const PopupPropsMultiSelection.menu(
-                                          showSearchBox:
-                                              true, // Aktifkan fitur pencarian
-                                        ),
-                                        selectedItem: value.status,
-                                        items: value.listStatus,
-                                        itemAsString: (e) => "${e}",
-                                        onChanged: (e) {
-                                          value.pilihStatus(e!);
-                                        },
-                                        dropdownDecoratorProps:
-                                            DropDownDecoratorProps(
-                                          baseStyle: TextStyle(fontSize: 16),
-                                          textAlignVertical:
-                                              TextAlignVertical.center,
-                                          dropdownSearchDecoration:
-                                              InputDecoration(
-                                            hintText: "Pilih Status",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              borderSide: BorderSide(
-                                                width: 1,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
                                       ),
                                       const SizedBox(height: 16),
                                       Row(

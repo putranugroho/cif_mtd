@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:accounting/models/users_model.dart';
 import 'package:accounting/repository/SetupRepository.dart';
 import 'package:accounting/utils/dialog_loading.dart';
+import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/akses_point_model.dart';
 import '../../models/kantor_model.dart';
 import '../../models/user_akses_point_model.dart';
 import '../../network/network.dart';
@@ -15,10 +17,41 @@ class UserAksesPointNotifier extends ChangeNotifier {
 
   UserAksesPointNotifier({required this.context}) {
     getKantor();
+    getAksesPoint();
   }
 
+  edit(String id) {
+    userAksesPointModel = listUsers.where((e) => e.id == int.parse(id)).first;
+    notifyListeners();
+  }
+
+  List<AksesPointModel> listData = [];
+  getAksesPoint() async {
+    listData.clear();
+    isLoading = true;
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getAksesPoint(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listData.add(AksesPointModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  UserAksesPointModel? userAksesPointModel;
+  var tambah = false;
   List<UserAksesPointModel> listUsers = [];
   getUsersAksesPoint() async {
+    tambah = false;
+    notifyListeners();
     DialogCustom().showLoading(context);
     var data = {
       "user_id": karyawanModel!.id,
@@ -35,9 +68,53 @@ class UserAksesPointNotifier extends ChangeNotifier {
         for (Map<String, dynamic> i in value['akses_points']) {
           listUsers.add(UserAksesPointModel.fromJson(i));
         }
+        tambah = true;
         notifyListeners();
       }
     });
+  }
+
+  AksesPointModel? aksesPointModel;
+  List<AksesPointModel> listTmpAskes = [];
+  addAkses(String id) {
+    aksesPointModel = listData.where((e) => e.id == int.parse(id)).first;
+    if (listTmpAskes.isEmpty) {
+      listTmpAskes.add(aksesPointModel!);
+    } else {
+      if (listTmpAskes.where((e) => e == aksesPointModel).isNotEmpty) {
+        listTmpAskes.remove(aksesPointModel!);
+      } else {
+        listTmpAskes.add(aksesPointModel!);
+      }
+    }
+    notifyListeners();
+  }
+
+  simpanAkses() {
+    if (listTmpAskes.isNotEmpty) {
+      DialogCustom().showLoading(context);
+      List<Map<String, dynamic>> listTmp = [];
+      for (var i = 0; i < listTmpAskes.length; i++) {
+        listTmp.add({
+          "user_id": karyawanModel!.id,
+          "emp_id": karyawanModel!.empId,
+          "no_akses": listTmpAskes[i].noAkses,
+          "akses_id": listTmpAskes[i].aksesId,
+          "kode_pt": listTmpAskes[i].kodePt,
+        });
+      }
+      notifyListeners();
+      // print(jsonEncode(listTmp));
+      Setuprepository.setup(
+              token, NetworkURL.addUserAksesPoint(), jsonEncode(listTmp))
+          .then((value) {
+        Navigator.pop(context);
+        getUsersAksesPoint();
+        informationDialog(context, "Information", value['message']);
+      });
+    } else {
+      informationDialog(context, "warning", "Pilih Akses Point Anda");
+    }
   }
 
   List<KantorModel> list = [];

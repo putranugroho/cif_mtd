@@ -288,7 +288,7 @@ class KantorNotifier extends ChangeNotifier {
     "Outlet/Gudang",
   ];
 
-  String? status = "Cabang";
+  String? status;
   pilihStatus(String value) {
     status = value;
     kantorModel = null;
