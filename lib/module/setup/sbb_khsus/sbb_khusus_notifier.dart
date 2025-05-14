@@ -108,16 +108,17 @@ class SbbKhususNotifier extends ChangeNotifier {
     listGlAdd.clear();
     inqueryGlModel = null;
     notifyListeners();
+    print(kode);
     golonganSbbKhususModel =
         listGolongan.where((e) => e.kodeGolongan == kode).first;
     sbbKhususModel = list.where((e) => e.kodeGolongan == kode).first;
+    // print(sbbKhususModel!.items.length);
+    // print(sbbKhususModel!.kodeGolongan);
     for (var i = 0; i < sbbKhususModel!.items.length; i++) {
       var nosbb = sbbKhususModel!.items[i].nosbb;
-
-      var result = listGl
-          .expand((e) => e.items) // kumpulkan semua items dari semua e
-          .firstWhere(
-              (f) => f.nosbb == nosbb); // ambil item pertama yang nosbb cocok
+      print(nosbb);
+      var result =
+          listGl.expand((e) => e.items).firstWhere((f) => f.nosbb == nosbb);
       listGlAdd.add(result);
     }
     inqueryGlModel = listGlAdd.first;
