@@ -48,6 +48,7 @@ import 'package:accounting/module/setup/pajak/setup_pajak_page.dart';
 import 'package:accounting/module/setup/penyusutan/penyusutan_page.dart';
 import 'package:accounting/module/setup/perusahaan/perusahaan_page.dart';
 import 'package:accounting/module/setup/sbb_hutang_piutang/sbb_hutang_piutang_page.dart';
+import 'package:accounting/module/setup/sbb_kas/setup_sbb_page.dart';
 import 'package:accounting/module/setup/sbb_khsus/sbb_khusus_page.dart';
 import 'package:accounting/module/setup/sbb_khsus/tambah_kelompok_sbb_khusus_page.dart';
 import 'package:accounting/module/setup/setup_transaksi/setup_transaksi_page.dart';
@@ -390,7 +391,9 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                                                                           ? PembatalanTransaksiPage()
                                                                                                                                                                                                                                                                           : value.page == 68
                                                                                                                                                                                                                                                                               ? UserAksesPointPage()
-                                                                                                                                                                                                                                                                              : Container())
+                                                                                                                                                                                                                                                                              : value.page == 69
+                                                                                                                                                                                                                                                                                  ? SetupSbbPage()
+                                                                                                                                                                                                                                                                                  : Container())
             ],
           ),
         )),

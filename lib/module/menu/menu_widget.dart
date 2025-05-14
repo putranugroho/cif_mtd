@@ -590,6 +590,36 @@ class MenuSetupWidget extends StatelessWidget {
               ),
             ]),
         InkWell(
+          onTap: () => value.gantimenu(69),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              color: value.page == 69 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.eom,
+                  height: 30,
+                  color: value.page == 69 ? Colors.black : Colors.white,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "SBB Kas",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: value.page == 69 ? Colors.black : Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
           onTap: () => value.gantimenu(38),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
