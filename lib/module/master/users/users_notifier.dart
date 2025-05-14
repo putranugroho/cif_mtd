@@ -63,9 +63,17 @@ class UsersNotifier extends ChangeNotifier {
     return listKaryawan;
   }
 
+  var backdate = false;
+  gantiBackdate() {
+    backdate = !backdate;
+    notifyListeners();
+  }
+
   UsersModel? users;
   var editData = false;
   edit(String id) {
+    listAddHariKerja.clear();
+    notifyListeners();
     users = listData.where((e) => e.id == int.parse(id)).first;
     dialog = true;
     editData = true;
@@ -90,6 +98,7 @@ class UsersNotifier extends ChangeNotifier {
     levelUser = listUsers.where((e) => e.idLevel == users!.lvluser).first;
     otorisasi = users!.levelOtor == "null" ? false : true;
     levelSelected = users!.levelOtor == "null" ? false : true;
+    backdate = users!.backDate == "Y" ? true : false;
     levelOtor = users!.levelOtor == "null"
         ? ""
         : listLevelOtor.where((e) => e == users!.levelOtor).first;
@@ -153,6 +162,7 @@ class UsersNotifier extends ChangeNotifier {
           "fhoto_3": "",
           "level_otor": "${levelOtor}",
           "beda_kantor": "${bedaKantor ? "Y" : "N"}",
+          "back_date": "${backdate ? "Y" : "N"}",
           "min_otor": "${minotor.text.trim().replaceAll(",", "")}",
           "max_otor": "${maxotor.text.trim().replaceAll(",", "")}",
           "shifts": listTmp
@@ -190,6 +200,7 @@ class UsersNotifier extends ChangeNotifier {
           "fhoto_2": "",
           "fhoto_3": "",
           "level_otor": "${levelOtor}",
+          "back_date": "${backdate ? "Y" : "N"}",
           "beda_kantor": "${bedaKantor ? "Y" : "N"}",
           "min_otor": "${minotor.text.trim().replaceAll(",", "")}",
           "max_otor": "${maxotor.text.trim().replaceAll(",", "")}",

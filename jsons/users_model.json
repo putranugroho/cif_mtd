@@ -22,5 +22,6 @@
     "max_otor": "",
     "createddate": "2025-05-14 14:58:02",
     "is_deleted": "N",
+    "back_date": "N",
     "shifts": "$[]users_shift_model"
 }

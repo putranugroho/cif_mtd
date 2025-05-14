@@ -1113,6 +1113,55 @@ class UsersPage extends StatelessWidget {
                                         )),
                                       ],
                                     ),
+                                    SizedBox(
+                                      height: 16,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Bisa Back date ",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Radio(
+                                            value: false,
+                                            activeColor: colorPrimary,
+                                            groupValue: value.backdate,
+                                            onChanged: (e) =>
+                                                value.gantiBackdate()),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text("Tidak"),
+                                        SizedBox(
+                                          width: 24,
+                                        ),
+                                        Radio(
+                                            value: true,
+                                            activeColor: colorPrimary,
+                                            groupValue: value.backdate,
+                                            onChanged: (e) =>
+                                                value.gantiBackdate()),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text("Ya"),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 16,
+                                    ),
                                     value.aksesKasir
                                         ? Column(
                                             crossAxisAlignment:

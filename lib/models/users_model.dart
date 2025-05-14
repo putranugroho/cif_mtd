@@ -30,6 +30,7 @@ class UsersModel {
     required this.maxOtor,
     required this.createddate,
     required this.isDeleted,
+    required this.backDate,
     required this.shifts,
   });
 
@@ -56,6 +57,7 @@ class UsersModel {
   final String maxOtor;
   final String createddate;
   final String isDeleted;
+  final String backDate;
   final List<UsersShiftModel> shifts;
 
   factory UsersModel.fromJson(Map<String,dynamic> json) => UsersModel(
@@ -82,6 +84,7 @@ class UsersModel {
     maxOtor: json['max_otor'].toString(),
     createddate: json['createddate'].toString(),
     isDeleted: json['is_deleted'].toString(),
+    backDate: json['back_date'].toString(),
     shifts: (json['shifts'] as List? ?? []).map((e) => UsersShiftModel.fromJson(e as Map<String, dynamic>)).toList()
   );
   
@@ -109,6 +112,7 @@ class UsersModel {
     'max_otor': maxOtor,
     'createddate': createddate,
     'is_deleted': isDeleted,
+    'back_date': backDate,
     'shifts': shifts.map((e) => e.toJson()).toList()
   };
 
@@ -136,6 +140,7 @@ class UsersModel {
     maxOtor: maxOtor,
     createddate: createddate,
     isDeleted: isDeleted,
+    backDate: backDate,
     shifts: shifts.map((e) => e.clone()).toList()
   );
 
@@ -164,6 +169,7 @@ class UsersModel {
     String? maxOtor,
     String? createddate,
     String? isDeleted,
+    String? backDate,
     List<UsersShiftModel>? shifts
   }) => UsersModel(
     id: id ?? this.id,
@@ -189,13 +195,14 @@ class UsersModel {
     maxOtor: maxOtor ?? this.maxOtor,
     createddate: createddate ?? this.createddate,
     isDeleted: isDeleted ?? this.isDeleted,
+    backDate: backDate ?? this.backDate,
     shifts: shifts ?? this.shifts,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is UsersModel && id == other.id && userid == other.userid && empId == other.empId && pass == other.pass && namauser == other.namauser && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && tglexp == other.tglexp && lvluser == other.lvluser && terminalId == other.terminalId && aksesKasir == other.aksesKasir && sbbKasir == other.sbbKasir && namaSbb == other.namaSbb && fhoto1 == other.fhoto1 && fhoto2 == other.fhoto2 && fhoto3 == other.fhoto3 && levelOtor == other.levelOtor && bedaKantor == other.bedaKantor && minOtor == other.minOtor && maxOtor == other.maxOtor && createddate == other.createddate && isDeleted == other.isDeleted && shifts == other.shifts;
+    || other is UsersModel && id == other.id && userid == other.userid && empId == other.empId && pass == other.pass && namauser == other.namauser && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && tglexp == other.tglexp && lvluser == other.lvluser && terminalId == other.terminalId && aksesKasir == other.aksesKasir && sbbKasir == other.sbbKasir && namaSbb == other.namaSbb && fhoto1 == other.fhoto1 && fhoto2 == other.fhoto2 && fhoto3 == other.fhoto3 && levelOtor == other.levelOtor && bedaKantor == other.bedaKantor && minOtor == other.minOtor && maxOtor == other.maxOtor && createddate == other.createddate && isDeleted == other.isDeleted && backDate == other.backDate && shifts == other.shifts;
 
   @override
-  int get hashCode => id.hashCode ^ userid.hashCode ^ empId.hashCode ^ pass.hashCode ^ namauser.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ tglexp.hashCode ^ lvluser.hashCode ^ terminalId.hashCode ^ aksesKasir.hashCode ^ sbbKasir.hashCode ^ namaSbb.hashCode ^ fhoto1.hashCode ^ fhoto2.hashCode ^ fhoto3.hashCode ^ levelOtor.hashCode ^ bedaKantor.hashCode ^ minOtor.hashCode ^ maxOtor.hashCode ^ createddate.hashCode ^ isDeleted.hashCode ^ shifts.hashCode;
+  int get hashCode => id.hashCode ^ userid.hashCode ^ empId.hashCode ^ pass.hashCode ^ namauser.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ tglexp.hashCode ^ lvluser.hashCode ^ terminalId.hashCode ^ aksesKasir.hashCode ^ sbbKasir.hashCode ^ namaSbb.hashCode ^ fhoto1.hashCode ^ fhoto2.hashCode ^ fhoto3.hashCode ^ levelOtor.hashCode ^ bedaKantor.hashCode ^ minOtor.hashCode ^ maxOtor.hashCode ^ createddate.hashCode ^ isDeleted.hashCode ^ backDate.hashCode ^ shifts.hashCode;
 }
