@@ -233,6 +233,14 @@ class NetworkURL {
     return "$url/setupkaskecil/add";
   }
 
+  static String getSetupHutangPiutang() {
+    return "$url/setuphutangpiutang";
+  }
+
+  static String addSetupHutangPiutang() {
+    return "$url/setuphutangpiutang/add";
+  }
+
   static String getusers() {
     return "$url/users";
   }

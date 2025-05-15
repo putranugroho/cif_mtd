@@ -491,7 +491,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                 children: [
                                   ButtonPrimary(
                                     onTap: () {
-                                      // value.cek();
+                                      value.cek();
                                     },
                                     name: "Simpan",
                                   ),

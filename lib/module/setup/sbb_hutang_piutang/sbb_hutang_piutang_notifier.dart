@@ -6,6 +6,9 @@ import 'package:accounting/repository/SetupRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../utils/dialog_loading.dart';
+import '../../../utils/informationdialog.dart';
+
 class SbbHutangPiutangNotifier extends ChangeNotifier {
   final BuildContext context;
 
@@ -16,7 +19,48 @@ class SbbHutangPiutangNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<SetupHutangPiutangModel> listData = [];
+  SetupHutangPiutangModel? setupHutangPiutangModel;
+  Future getSetupkaskecil() async {
+    isLoading = true;
+    listData.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(
+            token, NetworkURL.getSetupHutangPiutang(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listData.add(SetupHutangPiutangModel.fromJson(i));
+        }
+        if (list.isNotEmpty) {
+          setupHutangPiutangModel = listData[0];
+          nmSbbTransHutang.text =
+              setupHutangPiutangModel!.namasbbtransaksihutang;
+          noSbbTransHutang.text = setupHutangPiutangModel!.sbbtransaksihutang;
+          nmSbbPpnHutang.text = setupHutangPiutangModel!.namasbbppnhutang;
+          noSbbPpnHutang.text = setupHutangPiutangModel!.sbbppnhutang;
+          nmSbbPphHutang.text = setupHutangPiutangModel!.namasbbpphhutang;
+          noSbbPphHutang.text = setupHutangPiutangModel!.sbbpphhutang;
+          nmSbbTransPiutang.text =
+              setupHutangPiutangModel!.namasbbtransaksipiutang;
+          noSbbTransPiutang.text = setupHutangPiutangModel!.sbbtransaksipiutang;
+          nmSbbPpnPiutang.text = setupHutangPiutangModel!.namasbbppnpiutang;
+          noSbbPpnPiutang.text = setupHutangPiutangModel!.sbbppnpiutang;
+          nmSbbPphPiutang.text = setupHutangPiutangModel!.namasbbpphpiutang;
+          noSbbPphPiutang.text = setupHutangPiutangModel!.sbbpphpiutang;
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
   Future getInqueryAll() async {
+    isLoading = true;
     list.clear();
     notifyListeners();
     var data = {"kode_pt": "001"};
@@ -27,6 +71,7 @@ class SbbHutangPiutangNotifier extends ChangeNotifier {
             extractJnsAccB(value['data']);
         list =
             jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        getSetupkaskecil();
         notifyListeners();
       }
     });
@@ -154,4 +199,35 @@ class SbbHutangPiutangNotifier extends ChangeNotifier {
   TextEditingController noSbbPpnPiutang = TextEditingController();
   TextEditingController nmSbbPphPiutang = TextEditingController();
   TextEditingController noSbbPphPiutang = TextEditingController();
+
+  cek() {
+    DialogCustom().showLoading(context);
+    var data = {
+      "kode_pt": "001",
+      "sbbtransaksihutang": "${noSbbTransHutang.text}",
+      "sbbpphhutang": "${noSbbPphHutang.text}",
+      "sbbppnhutang": "${noSbbPpnHutang.text}",
+      "sbbtransaksipiutang": "${noSbbTransPiutang.text}",
+      "sbbppnpiutang": "${noSbbPpnPiutang.text}",
+      "sbbpphpiutang": "${noSbbPphPiutang.text}",
+      "namasbbtransaksihutang": "${nmSbbTransHutang.text}",
+      "namasbbpphhutang": "${nmSbbPphHutang.text}",
+      "namasbbppnhutang": "${nmSbbPpnHutang.text}",
+      "namasbbtransaksipiutang": "${nmSbbTransPiutang.text}",
+      "namasbbpphpiutang": "${nmSbbPphPiutang.text}",
+      "namasbbppnpiutang": "${nmSbbPpnPiutang.text}"
+    };
+    Setuprepository.setup(
+            token, NetworkURL.addSetupHutangPiutang(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message'][0]);
+        notifyListeners();
+      }
+    });
+  }
 }
