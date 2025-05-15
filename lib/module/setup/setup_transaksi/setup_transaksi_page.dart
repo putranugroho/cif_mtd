@@ -726,7 +726,12 @@ class DetailDataSource extends DataGridSource {
                     columnName: 'gl_kre',
                     value: "${data.glKre} - ${data.namaKre}"),
                 DataGridCell(columnName: 'modul', value: data.modul),
-                DataGridCell(columnName: 'hutangpiutang', value: "Piutang"),
+                DataGridCell(
+                    columnName: 'hutangpiutang',
+                    value: data.hutangPiutang == null ||
+                            data.hutangPiutang == "null"
+                        ? ""
+                        : data.hutangPiutang),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))

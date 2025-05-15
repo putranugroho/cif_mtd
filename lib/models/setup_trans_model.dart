@@ -29,7 +29,7 @@ class SetupTransModel {
   final String glKre;
   final String namaKre;
   final String modul;
-  final String hutangPiutang;
+  final dynamic hutangPiutang;
   final String createdDate;
 
   factory SetupTransModel.fromJson(Map<String,dynamic> json) => SetupTransModel(
@@ -42,7 +42,7 @@ class SetupTransModel {
     glKre: json['gl_kre'].toString(),
     namaKre: json['nama_kre'].toString(),
     modul: json['modul'].toString(),
-    hutangPiutang: json['hutang_piutang'].toString(),
+    hutangPiutang: json['hutang_piutang'] as dynamic,
     createdDate: json['createdDate'].toString()
   );
   
@@ -85,7 +85,7 @@ class SetupTransModel {
     String? glKre,
     String? namaKre,
     String? modul,
-    String? hutangPiutang,
+    dynamic? hutangPiutang,
     String? createdDate
   }) => SetupTransModel(
     id: id ?? this.id,
