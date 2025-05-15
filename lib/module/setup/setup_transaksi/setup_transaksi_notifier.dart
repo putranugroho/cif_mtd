@@ -21,7 +21,7 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     // }
 
     getSetupTrans();
-    
+
     getInqueryAll();
     notifyListeners();
   }
@@ -89,9 +89,13 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     nosbbdeb.text = setupTransModel!.namaDeb;
     nossbcre.text = setupTransModel!.namaKre;
     inqueryGlModeldeb =
-        list.where((e) => e.nosbb == setupTransModel!.glDeb).first;
+        list.where((e) => e.nosbb == setupTransModel!.glDeb).isNotEmpty
+            ? list.where((e) => e.nosbb == setupTransModel!.glDeb).first
+            : null;
     inqueryGlModelcre =
-        list.where((e) => e.nosbb == setupTransModel!.glKre).first;
+        list.where((e) => e.nosbb == setupTransModel!.glKre).isNotEmpty
+            ? list.where((e) => e.nosbb == setupTransModel!.glKre).first
+            : null;
     namaSbbDeb.text = setupTransModel!.glDeb;
     namaSbbCre.text = setupTransModel!.glKre;
     modul = setupTransModel!.modul;

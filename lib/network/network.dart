@@ -205,6 +205,14 @@ class NetworkURL {
     return "$url/setuppajak/update";
   }
 
+  static String addSetupPajak() {
+    return "$url/setuppajak/add";
+  }
+
+  static String deleteSetupPajak() {
+    return "$url/setuppajak/deleted";
+  }
+
   static String addSetupTrans() {
     return "$url/setuptrans/add";
   }
