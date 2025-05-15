@@ -6,8 +6,7 @@ import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
-import '../../../models/coa_model.dart';
-import '../../../models/inquery_gl_model.dart';
+
 import '../../../network/network.dart';
 
 class SbbKhususNotifier extends ChangeNotifier {
