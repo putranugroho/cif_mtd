@@ -27,14 +27,14 @@ class GolonganAsetModel {
   final String namaGolongan;
   final String masaSusut;
   final String nilaiDeclining;
-  final String sbbAset;
-  final String sbbPenyusutan;
-  final String sbbBiayaPenyusutan;
-  final String sbbRugiRevaluasi;
-  final String sbbLabaRevaluasi;
-  final String sbbRugiJual;
-  final String sbbLabaJual;
-  final String sbbBiayaPerbaikan;
+  final dynamic sbbAset;
+  final dynamic sbbPenyusutan;
+  final dynamic sbbBiayaPenyusutan;
+  final dynamic sbbRugiRevaluasi;
+  final dynamic sbbLabaRevaluasi;
+  final dynamic sbbRugiJual;
+  final dynamic sbbLabaJual;
+  final dynamic sbbBiayaPerbaikan;
 
   factory GolonganAsetModel.fromJson(Map<String,dynamic> json) => GolonganAsetModel(
     id: json['id'] as int,
@@ -42,14 +42,14 @@ class GolonganAsetModel {
     namaGolongan: json['nama_golongan'].toString(),
     masaSusut: json['masa_susut'].toString(),
     nilaiDeclining: json['nilai_declining'].toString(),
-    sbbAset: json['sbb_aset'].toString(),
-    sbbPenyusutan: json['sbb_penyusutan'].toString(),
-    sbbBiayaPenyusutan: json['sbb_biaya_penyusutan'].toString(),
-    sbbRugiRevaluasi: json['sbb_rugi_revaluasi'].toString(),
-    sbbLabaRevaluasi: json['sbb_laba_revaluasi'].toString(),
-    sbbRugiJual: json['sbb_rugi_jual'].toString(),
-    sbbLabaJual: json['sbb_laba_jual'].toString(),
-    sbbBiayaPerbaikan: json['sbb_biaya_perbaikan'].toString()
+    sbbAset: json['sbb_aset'] as dynamic,
+    sbbPenyusutan: json['sbb_penyusutan'] as dynamic,
+    sbbBiayaPenyusutan: json['sbb_biaya_penyusutan'] as dynamic,
+    sbbRugiRevaluasi: json['sbb_rugi_revaluasi'] as dynamic,
+    sbbLabaRevaluasi: json['sbb_laba_revaluasi'] as dynamic,
+    sbbRugiJual: json['sbb_rugi_jual'] as dynamic,
+    sbbLabaJual: json['sbb_laba_jual'] as dynamic,
+    sbbBiayaPerbaikan: json['sbb_biaya_perbaikan'] as dynamic
   );
   
   Map<String, dynamic> toJson() => {
@@ -91,14 +91,14 @@ class GolonganAsetModel {
     String? namaGolongan,
     String? masaSusut,
     String? nilaiDeclining,
-    String? sbbAset,
-    String? sbbPenyusutan,
-    String? sbbBiayaPenyusutan,
-    String? sbbRugiRevaluasi,
-    String? sbbLabaRevaluasi,
-    String? sbbRugiJual,
-    String? sbbLabaJual,
-    String? sbbBiayaPerbaikan
+    dynamic? sbbAset,
+    dynamic? sbbPenyusutan,
+    dynamic? sbbBiayaPenyusutan,
+    dynamic? sbbRugiRevaluasi,
+    dynamic? sbbLabaRevaluasi,
+    dynamic? sbbRugiJual,
+    dynamic? sbbLabaJual,
+    dynamic? sbbBiayaPerbaikan
   }) => GolonganAsetModel(
     id: id ?? this.id,
     kodeGolongan: kodeGolongan ?? this.kodeGolongan,

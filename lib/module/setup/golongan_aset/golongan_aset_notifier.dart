@@ -26,8 +26,6 @@ class GolonganAsetNotifier extends ChangeNotifier {
     dialog = false;
     kode.clear();
     nama.clear();
-    masasusut.clear();
-    nilai.clear();
     sbbAset = null;
     sbbpenyusutan = null;
     sbbrugijual = null;
@@ -47,10 +45,10 @@ class GolonganAsetNotifier extends ChangeNotifier {
           "nama_golongan": "${nama.text.trim()}",
           "masa_susut": "${masasusut.text.trim()}",
           "nilai_declining": "${nilai.text.trim()}",
-          "sbb_aset": "${sbbAset!.nosbb}",
-          "sbb_penyusutan": "${sbbpenyusutan!.nosbb}",
-          "sbb_rugi_jual": "${sbbrugijual!.nosbb}",
-          "sbb_laba_jual": "${sbblabajual!.nosbb}",
+          "sbb_aset": sbbAset == null ? null : sbbAset!.nosbb,
+          "sbb_penyusutan": sbbpenyusutan == null ? null : sbbpenyusutan!.nosbb,
+          "sbb_rugi_jual": sbbrugijual == null ? null : sbbrugijual!.nosbb,
+          "sbb_laba_jual": sbblabajual == null ? null : sbblabajual!.nosbb,
         };
         Setuprepository.setup(
                 token, NetworkURL.editGolonganAset(), jsonEncode(data))
@@ -343,7 +341,8 @@ class GolonganAsetNotifier extends ChangeNotifier {
         }
         metodePenyusutanModel = listPenyusutan[0];
         metode = int.parse(metodePenyusutanModel!.metodePenyusutan);
-        nilai.text = metodePenyusutanModel!.nilaiAkhir.toString();
+        // nilai.text = metodePenyusutanModel!.nilaiAkhir.toString();
+        print(metodePenyusutanModel!.declining.toString());
         nilai.text = metodePenyusutanModel!.declining.toString();
         isLoading = false;
         notifyListeners();
@@ -449,29 +448,60 @@ class GolonganAsetNotifier extends ChangeNotifier {
     nama.text = golonganAsetModel!.namaGolongan;
     nilai.text = golonganAsetModel!.nilaiDeclining;
     masasusut.text = golonganAsetModel!.masaSusut;
+    // print(golonganAsetModel!.sbbAset.substring(1, 13));
     sbbAset = listGl
-        .where((e) => e.nosbb == golonganAsetModel!.sbbAset.substring(1, 13))
-        .first;
+            .where((e) =>
+                e.nosbb ==
+                golonganAsetModel!.sbbAset.toString().substring(1, 13))
+            .isNotEmpty
+        ? listGl
+            .where((e) =>
+                e.nosbb ==
+                golonganAsetModel!.sbbAset.toString().substring(1, 13))
+            .first
+        : null;
     sbbpenyusutan = listGl
-        .where(
-            (e) => e.nosbb == golonganAsetModel!.sbbPenyusutan.substring(1, 13))
-        .first;
+            .where((e) =>
+                e.nosbb ==
+                golonganAsetModel!.sbbPenyusutan.toString().substring(1, 13))
+            .isNotEmpty
+        ? listGl
+            .where((e) =>
+                e.nosbb ==
+                golonganAsetModel!.sbbPenyusutan.toString().substring(1, 13))
+            .first
+        : null;
     sbbrugijual = listGl
-        .where(
-            (e) => e.nosbb == golonganAsetModel!.sbbRugiJual.substring(1, 13))
-        .first;
+            .where((e) =>
+                e.nosbb ==
+                golonganAsetModel!.sbbRugiJual.toString().substring(1, 13))
+            .isNotEmpty
+        ? listGl
+            .where((e) =>
+                e.nosbb ==
+                golonganAsetModel!.sbbRugiJual.toString().substring(1, 13))
+            .first
+        : null;
     sbblabajual = listGl
-        .where(
-            (e) => e.nosbb == golonganAsetModel!.sbbLabaJual.substring(1, 13))
-        .first;
-    namasbbaset.text = sbbAset!.namaSbb;
-    nosbbaset.text = sbbAset!.nosbb;
-    namasbbpenyusutan.text = sbbpenyusutan!.namaSbb;
-    nossbpenyusutan.text = sbbpenyusutan!.nosbb;
-    namasbbrugijual.text = sbbrugijual!.namaSbb;
-    nosbbrugijual.text = sbbrugijual!.nosbb;
-    namasbblabajual.text = sbblabajual!.namaSbb;
-    nosbblabajual.text = sbblabajual!.nosbb;
+            .where((e) =>
+                e.nosbb ==
+                golonganAsetModel!.sbbLabaJual.toString().substring(1, 13))
+            .isNotEmpty
+        ? listGl
+            .where((e) =>
+                e.nosbb ==
+                golonganAsetModel!.sbbLabaJual.toString().substring(1, 13))
+            .first
+        : null;
+    namasbbaset.text = sbbAset == null ? "" : sbbAset!.namaSbb;
+    nosbbaset.text = sbbAset == null ? "" : sbbAset!.nosbb;
+    namasbbpenyusutan.text =
+        sbbpenyusutan == null ? "" : sbbpenyusutan!.namaSbb;
+    nossbpenyusutan.text = sbbpenyusutan == null ? "" : sbbpenyusutan!.nosbb;
+    namasbbrugijual.text = sbbrugijual == null ? "" : sbbrugijual!.namaSbb;
+    nosbbrugijual.text = sbbrugijual == null ? "" : sbbrugijual!.nosbb;
+    namasbblabajual.text = sbblabajual == null ? "" : sbblabajual!.namaSbb;
+    nosbblabajual.text = sbblabajual == null ? "" : sbblabajual!.nosbb;
     notifyListeners();
   }
 }

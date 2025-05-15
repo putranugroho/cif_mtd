@@ -537,13 +537,13 @@ class GolonganAsetPage extends StatelessWidget {
                                           // inputFormatters: [
                                           //   FilteringTextInputFormatter.digitsOnly
                                           // ],
-                                          validator: (e) {
-                                            if (e!.isEmpty) {
-                                              return "Wajib diisi";
-                                            } else {
-                                              return null;
-                                            }
-                                          },
+                                          // validator: (e) {
+                                          //   if (e!.isEmpty) {
+                                          //     return "Wajib diisi";
+                                          //   } else {
+                                          //     return null;
+                                          //   }
+                                          // },
                                           decoration: InputDecoration(
                                             filled: true,
                                             fillColor: Colors.grey[200],
@@ -620,13 +620,13 @@ class GolonganAsetPage extends StatelessWidget {
                                           // inputFormatters: [
                                           //   FilteringTextInputFormatter.digitsOnly
                                           // ],
-                                          validator: (e) {
-                                            if (e!.isEmpty) {
-                                              return "Wajib diisi";
-                                            } else {
-                                              return null;
-                                            }
-                                          },
+                                          // validator: (e) {
+                                          //   if (e!.isEmpty) {
+                                          //     return "Wajib diisi";
+                                          //   } else {
+                                          //     return null;
+                                          //   }
+                                          // },
                                           decoration: InputDecoration(
                                             filled: true,
                                             fillColor: Colors.grey[200],
@@ -703,13 +703,7 @@ class GolonganAsetPage extends StatelessWidget {
                                           // inputFormatters: [
                                           //   FilteringTextInputFormatter.digitsOnly
                                           // ],
-                                          validator: (e) {
-                                            if (e!.isEmpty) {
-                                              return "Wajib diisi";
-                                            } else {
-                                              return null;
-                                            }
-                                          },
+
                                           decoration: InputDecoration(
                                             filled: true,
                                             fillColor: Colors.grey[200],
@@ -786,13 +780,7 @@ class GolonganAsetPage extends StatelessWidget {
                                           // inputFormatters: [
                                           //   FilteringTextInputFormatter.digitsOnly
                                           // ],
-                                          validator: (e) {
-                                            if (e!.isEmpty) {
-                                              return "Wajib diisi";
-                                            } else {
-                                              return null;
-                                            }
-                                          },
+
                                           decoration: InputDecoration(
                                             filled: true,
                                             fillColor: Colors.grey[200],
@@ -871,13 +859,19 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'nilaiakhir', value: "1"),
                 DataGridCell(columnName: 'masasusut', value: data.masaSusut),
                 DataGridCell(columnName: 'nilai', value: data.nilaiDeclining),
-                DataGridCell(columnName: 'sbbAset', value: data.sbbAset),
                 DataGridCell(
-                    columnName: 'sbbPenyusutan', value: data.sbbPenyusutan),
+                    columnName: 'sbbAset',
+                    value: data.sbbAset == null ? "" : data.sbbAset),
                 DataGridCell(
-                    columnName: 'sbbRugiJual', value: data.sbbRugiJual),
+                    columnName: 'sbbPenyusutan',
+                    value:
+                        data.sbbPenyusutan == null ? "" : data.sbbPenyusutan),
                 DataGridCell(
-                    columnName: 'sbbLabaJual', value: data.sbbLabaJual),
+                    columnName: 'sbbRugiJual',
+                    value: data.sbbRugiJual == null ? "" : data.sbbRugiJual),
+                DataGridCell(
+                    columnName: 'sbbLabaJual',
+                    value: data.sbbLabaJual == null ? "" : data.sbbLabaJual),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))

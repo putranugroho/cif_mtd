@@ -18,6 +18,8 @@ class PenyusutanNotifier extends ChangeNotifier {
   final keyForm = GlobalKey<FormState>();
   List<MetodePenyusutanModel> list = [];
   MetodePenyusutanModel? metodePenyusutanModel;
+  TextEditingController nilai = TextEditingController(text: "0");
+  TextEditingController declining = TextEditingController(text: "0");
   Future getMetodePenyusutan() async {
     isLoading = true;
     list.clear();
@@ -52,9 +54,6 @@ class PenyusutanNotifier extends ChangeNotifier {
     metode = value;
     notifyListeners();
   }
-
-  TextEditingController nilai = TextEditingController(text: "0");
-  TextEditingController declining = TextEditingController(text: "0");
 
   cek() {
     if (keyForm.currentState!.validate()) {
