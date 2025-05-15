@@ -127,38 +127,37 @@ class SetupPajakPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       width: 100,
-                                      columnName: 'kode',
+                                      columnName: 'tipe',
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
-                                          child: Text('Kode jabatan',
+                                          child: Text('Tipe Pajak',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      width: 250,
-                                      columnName: 'jabatan',
+                                      columnName: 'nilai',
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
-                                          child: Text('Jabatan',
+                                          child: Text('Nilai',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      width: 250,
-                                      columnName: 'level',
+                                      columnName: 'batas',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Level Jabatan',
+                                          child: Text(
+                                              'Batasan Minimal Kena Pajak (PPN)',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -374,7 +373,10 @@ class SetupPajakPage extends StatelessWidget {
                                                       CrossAxisAlignment
                                                           .stretch,
                                                   children: [
-                                                    ButtonPrimary(
+                                                    SizedBox(
+                                                      height: 16,
+                                                    ),
+                                                    ButtonDanger(
                                                       onTap: () {
                                                         value.confirm();
                                                       },
@@ -520,7 +522,10 @@ class SetupPajakPage extends StatelessWidget {
                                                       CrossAxisAlignment
                                                           .stretch,
                                                   children: [
-                                                    ButtonPrimary(
+                                                    SizedBox(
+                                                      height: 16,
+                                                    ),
+                                                    ButtonDanger(
                                                       onTap: () {
                                                         value.confirm();
                                                       },
@@ -561,12 +566,18 @@ class DetailDataSource extends DataGridSource {
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(columnName: 'ppn', value: "${data.ppn}%"),
                 DataGridCell(
-                    columnName: 'maks',
-                    value: FormatCurrency.oCcy
-                        .format(int.parse(data.maksKenaPpn))),
-                DataGridCell(columnName: 'pph', value: "${data.pph23}%"),
+                    columnName: 'tipe',
+                    value: "${data.tipe == "Y" ? "PPH" : "PPN"}"),
+                DataGridCell(
+                    columnName: 'nilai',
+                    value: "${data.tipe == "Y" ? data.pph23 : data.ppn}%"),
+                DataGridCell(
+                    columnName: 'batas',
+                    value: data.maksKenaPpn == ""
+                        ? ""
+                        : FormatCurrency.oCcy
+                            .format(int.parse(data.maksKenaPpn))),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))

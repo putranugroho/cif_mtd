@@ -29,6 +29,7 @@ class SetupPajakNotifier extends ChangeNotifier {
     ppn.text = setupPajakModel!.ppn;
     pph23.text = setupPajakModel!.pph23;
     maksPpn.text = setupPajakModel!.maksKenaPpn;
+    tipepajak = setupPajakModel!.tipe == "Y" ? true : false;
     notifyListeners();
   }
 
@@ -106,6 +107,7 @@ class SetupPajakNotifier extends ChangeNotifier {
   var dialog = false;
   tambah() {
     dialog = true;
+    editData = false;
     notifyListeners();
   }
 
@@ -137,6 +139,10 @@ class SetupPajakNotifier extends ChangeNotifier {
   var tipepajak = false;
   gantitipe() {
     tipepajak = !tipepajak;
+    if (tipepajak) {
+      maksPpn.clear();
+      ppn.clear();
+    }
     notifyListeners();
   }
 
@@ -147,6 +153,7 @@ class SetupPajakNotifier extends ChangeNotifier {
         var data = {
           "id": setupPajakModel!.id,
           "kode_pt": "001",
+          "tipe": "${tipepajak ? "Y" : "N"}",
           "ppn": "${ppn.text.trim()}",
           "pph_23": "${pph23.text.trim()}",
           "maks_kena_ppn": "${maksPpn.text.trim().replaceAll(",", "")}",
@@ -157,6 +164,8 @@ class SetupPajakNotifier extends ChangeNotifier {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getSetupPajak();
+            dialog = false;
+            clear();
             informationDialog(context, "Information", value['message']);
             notifyListeners();
           } else {
@@ -169,6 +178,7 @@ class SetupPajakNotifier extends ChangeNotifier {
         var data = {
           "kode_pt": "001",
           "ppn": "${ppn.text.trim()}",
+          "tipe": "${tipepajak ? "Y" : "N"}",
           "pph_23": "${pph23.text.trim()}",
           "maks_kena_ppn": "${maksPpn.text.trim().replaceAll(",", "")}",
         };
@@ -178,6 +188,8 @@ class SetupPajakNotifier extends ChangeNotifier {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getSetupPajak();
+            dialog = false;
+            clear();
             informationDialog(context, "Information", value['message']);
             notifyListeners();
           } else {
