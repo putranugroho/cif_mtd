@@ -132,7 +132,7 @@ class SetupPajakPage extends StatelessWidget {
                                           color: colorPrimary,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
-                                          child: Text('Tipe Pajak',
+                                          child: Text('Type',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -144,7 +144,7 @@ class SetupPajakPage extends StatelessWidget {
                                           color: colorPrimary,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
-                                          child: Text('Nilai',
+                                          child: Text('Nilai (%)',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -156,8 +156,7 @@ class SetupPajakPage extends StatelessWidget {
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text(
-                                              'Batasan Minimal Kena Pajak (PPN)',
+                                          child: Text('Min Kena',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,

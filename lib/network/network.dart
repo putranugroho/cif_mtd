@@ -225,6 +225,14 @@ class NetworkURL {
     return "$url/setuptrans/deleted";
   }
 
+  static String getSetupKasKecil() {
+    return "$url/setupkaskecil";
+  }
+
+  static String addSetupKasKecil() {
+    return "$url/setupkaskecil/add";
+  }
+
   static String getusers() {
     return "$url/users";
   }

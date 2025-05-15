@@ -4,8 +4,11 @@ import 'dart:io';
 import 'package:accounting/models/index.dart';
 import 'package:accounting/network/network.dart';
 import 'package:accounting/repository/SetupRepository.dart';
+import 'package:accounting/utils/dialog_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../../../utils/informationdialog.dart';
 
 class SetupSbbNotifier extends ChangeNotifier {
   final BuildContext context;
@@ -13,6 +16,36 @@ class SetupSbbNotifier extends ChangeNotifier {
   SetupSbbNotifier({required this.context}) {
     getInqueryAll();
   }
+  List<KasKecilModel> list = [];
+  KasKecilModel? kasKecilModel;
+  Future getSetupkaskecil() async {
+    isLoading = true;
+    list.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(
+            token, NetworkURL.getSetupKasKecil(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          list.add(KasKecilModel.fromJson(i));
+        }
+        if (list.isNotEmpty) {
+          kasKecilModel = list[0];
+          nosbbdeb.text = kasKecilModel!.namasbbKaskecil;
+          namaSbbDeb.text = kasKecilModel!.nosbbKasKecil;
+          nossbcre.text = kasKecilModel!.namasbbKasbon;
+          namaSbbCre.text = kasKecilModel!.nosbbKasBon;
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
   var isLoading = true;
   final keyForm = GlobalKey<FormState>();
 
@@ -85,20 +118,6 @@ class SetupSbbNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  pilihAkunDeb(InqueryGlModel value) {
-    inqueryGlModeldeb = value;
-    nosbbdeb.text = value.namaSbb;
-    namaSbbDeb.text = value.nosbb;
-    notifyListeners();
-  }
-
-  pilihAkunCre(InqueryGlModel value) {
-    inqueryGlModelcre = value;
-    nossbcre.text = value.namaSbb;
-    namaSbbCre.text = value.nosbb;
-    notifyListeners();
-  }
-
   Future getInqueryAll() async {
     listGl.clear();
     notifyListeners();
@@ -110,7 +129,7 @@ class SetupSbbNotifier extends ChangeNotifier {
             extractJnsAccB(value['data']);
         listGl =
             jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
-        isLoading = false;
+        getSetupkaskecil();
         notifyListeners();
       }
     });
@@ -137,5 +156,40 @@ class SetupSbbNotifier extends ChangeNotifier {
     return result;
   }
 
-  cek() {}
+  pilihAkunDeb(InqueryGlModel value) {
+    inqueryGlModeldeb = value;
+    nosbbdeb.text = value.namaSbb;
+    namaSbbDeb.text = value.nosbb;
+    notifyListeners();
+  }
+
+  pilihAkunCre(InqueryGlModel value) {
+    inqueryGlModelcre = value;
+    nossbcre.text = value.namaSbb;
+    namaSbbCre.text = value.nosbb;
+    notifyListeners();
+  }
+
+  cek() {
+    DialogCustom().showLoading(context);
+    var data = {
+      "kode_pt": "001",
+      "nosbb_kas_kecil": "${namaSbbDeb.text}",
+      "namasbb_kaskecil": "${nosbbdeb.text}",
+      "nosbb_kas_bon": "${namaSbbCre.text}",
+      "namasbb_kasbon": "${nossbcre.text}",
+    };
+    Setuprepository.setup(
+            token, NetworkURL.addSetupKasKecil(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message'][0]);
+        notifyListeners();
+      }
+    });
+  }
 }

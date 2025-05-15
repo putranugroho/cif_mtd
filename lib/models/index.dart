@@ -13,6 +13,7 @@ export 'mastergl_subtre_model.dart';
 export 'kantor_model.dart';
 export 'gl_view_model.dart';
 export 'rekon_bank_item_model.dart';
+export 'kas_kecil_model.dart';
 export 'users_model.dart';
 export 'perusahaan_model.dart';
 export 'metode_penyusutan_model.dart';
