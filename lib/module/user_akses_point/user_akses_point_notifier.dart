@@ -51,6 +51,7 @@ class UserAksesPointNotifier extends ChangeNotifier {
   List<UserAksesPointModel> listUsers = [];
   getUsersAksesPoint() async {
     tambah = false;
+    listUsers.clear();
     notifyListeners();
     DialogCustom().showLoading(context);
     var data = {
