@@ -154,167 +154,43 @@ class UserAksesPointPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Container(
-                    height: 200,
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Expanded(
-                          child: SfDataGrid(
-                            headerRowHeight: 40,
-                            defaultColumnWidth: 180,
-                            frozenColumnsCount: 1,
-
-                            // controller: value.dataGridController,
-                            gridLinesVisibility: GridLinesVisibility.both,
-                            headerGridLinesVisibility: GridLinesVisibility.both,
-                            selectionMode: SelectionMode.single,
-
-                            source: DetailDataSource(value),
-                            columns: <GridColumn>[
-                              GridColumn(
-                                  width: 50,
-                                  columnName: 'no',
-                                  label: Container(
-                                      padding: EdgeInsets.all(6),
-                                      color: colorPrimary,
-                                      alignment: Alignment.center,
-                                      child: Text('No',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w300,
-                                            fontSize: 12,
-                                            color: Colors.white,
-                                          )))),
-                              GridColumn(
-                                  columnName: 'no_akses',
-                                  label: Container(
-                                      color: colorPrimary,
-                                      alignment: Alignment.center,
-                                      padding: EdgeInsets.all(6),
-                                      child: Text('No Akses',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.white,
-                                          )))),
-                              GridColumn(
-                                  columnName: 'akses_id',
-                                  label: Container(
-                                      color: colorPrimary,
-                                      alignment: Alignment.center,
-                                      padding: EdgeInsets.all(6),
-                                      child: Text('Akses ID',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.white,
-                                          )))),
-                              GridColumn(
-                                  columnName: 'type',
-                                  label: Container(
-                                      padding: EdgeInsets.all(6),
-                                      color: colorPrimary,
-                                      alignment: Alignment.center,
-                                      child: Text('Type',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                          )))),
-                              GridColumn(
-                                  columnName: 'lokasi',
-                                  label: Container(
-                                      padding: EdgeInsets.all(6),
-                                      color: colorPrimary,
-                                      alignment: Alignment.center,
-                                      child: Text('Lokasi',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                          )))),
-                              GridColumn(
-                                  columnName: 'alamat',
-                                  label: Container(
-                                      padding: EdgeInsets.all(6),
-                                      color: colorPrimary,
-                                      alignment: Alignment.center,
-                                      child: Text('Alamat',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                          )))),
-                              GridColumn(
-                                  columnName: 'keterangan',
-                                  label: Container(
-                                      padding: EdgeInsets.all(6),
-                                      color: colorPrimary,
-                                      alignment: Alignment.center,
-                                      child: Text('Keterangan',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                          )))),
-                              GridColumn(
-                                  width: 80,
-                                  columnName: 'aksi',
-                                  label: Container(
-                                      color: colorPrimary,
-                                      padding: EdgeInsets.all(6),
-                                      alignment: Alignment.center,
-                                      child: Text('Aksi',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.white,
-                                          )))),
-                            ],
-                          ),
-                        ),
-                        value.listUsers.isEmpty
-                            ? Container(
-                                height: 140,
-                                decoration:
-                                    BoxDecoration(color: Colors.grey[200]),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text("Belum ada akses point ditambahkan")
-                                  ],
-                                ),
-                              )
-                            : SizedBox()
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 24,
-                  ),
-                  value.tambah
-                      ? Container(
-                          height: 200,
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Expanded(
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Container(
+                      height: 200,
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Expanded(
                             child: SfDataGrid(
                               headerRowHeight: 40,
                               defaultColumnWidth: 180,
                               frozenColumnsCount: 1,
-
+                
                               // controller: value.dataGridController,
                               gridLinesVisibility: GridLinesVisibility.both,
-                              headerGridLinesVisibility:
-                                  GridLinesVisibility.both,
+                              headerGridLinesVisibility: GridLinesVisibility.both,
                               selectionMode: SelectionMode.single,
-
-                              source: DetailDataSources(value),
+                
+                              source: DetailDataSource(value),
                               columns: <GridColumn>[
+                                GridColumn(
+                                    width: 50,
+                                    columnName: 'no',
+                                    label: Container(
+                                        padding: EdgeInsets.all(6),
+                                        color: colorPrimary,
+                                        alignment: Alignment.center,
+                                        child: Text('No',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w300,
+                                              fontSize: 12,
+                                              color: Colors.white,
+                                            )))),
                                 GridColumn(
                                     columnName: 'no_akses',
                                     label: Container(
@@ -403,9 +279,135 @@ class UserAksesPointPage extends StatelessWidget {
                               ],
                             ),
                           ),
-                        )
-                      : SizedBox()
-                ],
+                          value.listUsers.isEmpty
+                              ? Container(
+                                  height: 140,
+                                  decoration:
+                                      BoxDecoration(color: Colors.grey[200]),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("Belum ada akses point ditambahkan")
+                                    ],
+                                  ),
+                                )
+                              : SizedBox()
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    value.tambah
+                        ? Container(
+                            height: 200,
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: Expanded(
+                              child: SfDataGrid(
+                                headerRowHeight: 40,
+                                defaultColumnWidth: 180,
+                                frozenColumnsCount: 1,
+                
+                                // controller: value.dataGridController,
+                                gridLinesVisibility: GridLinesVisibility.both,
+                                headerGridLinesVisibility:
+                                    GridLinesVisibility.both,
+                                selectionMode: SelectionMode.single,
+                
+                                source: DetailDataSources(value),
+                                columns: <GridColumn>[
+                                  GridColumn(
+                                      columnName: 'no_akses',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('No Akses',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'akses_id',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Akses ID',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'type',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Type',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'lokasi',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Lokasi',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'alamat',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Alamat',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'keterangan',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Keterangan',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              )))),
+                                  GridColumn(
+                                      width: 80,
+                                      columnName: 'aksi',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          padding: EdgeInsets.all(6),
+                                          alignment: Alignment.center,
+                                          child: Text('Aksi',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                ],
+                              ),
+                            ),
+                          )
+                        : SizedBox()
+                  ],
+                ),
               ),
               SizedBox(
                 height: 16,
