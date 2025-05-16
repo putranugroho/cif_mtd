@@ -41,7 +41,7 @@ class BankNotifier extends ChangeNotifier {
 
   Future getSandiBankAll() async {
     isLoadingInquery = true;
-    listSandi.clear();
+    listSandiAll.clear();
     notifyListeners();
 
     var data = {"kode_pt": "001"};
@@ -60,7 +60,7 @@ class BankNotifier extends ChangeNotifier {
         List<SandiBankModel> allItems =
             jnsAccBItems.map((e) => SandiBankModel.fromJson(e)).toList();
 
-        listSandi = allItems.toList();
+        listSandiAll = allItems.toList();
       }
       notifyListeners();
     } catch (e) {
@@ -124,6 +124,7 @@ class BankNotifier extends ChangeNotifier {
   }
 
   List<SandiBankModel> listSandi = [];
+  List<SandiBankModel> listSandiAll = [];
 
   Future<List<SandiBankModel>> getSandiBank(String query) async {
     if (query.isNotEmpty && query.length > 2) {
@@ -416,13 +417,13 @@ class BankNotifier extends ChangeNotifier {
     editData = true;
     bankModel = list.where((e) => e.id == int.parse(id)).first;
     sandiBankModel =
-        listSandi.where((e) => e.sandi == bankModel!.kodeBank).first;
+        listSandiAll.where((e) => e.sandi == bankModel!.kodeBank).first;
     kodeBank.text = bankModel!.kodeBank;
     cabang.text = bankModel!.cabang;
-    noBilyet.text = bankModel!.noBilyet;
-    namaRek.text = bankModel!.nmRek;
-    namaBank.text = bankModel!.nmBank;
-    noRek.text = bankModel!.noRek;
+    noBilyet.text = bankModel!.noBilyet == null ? "" : bankModel!.noBilyet;
+    namaRek.text = bankModel!.noBilyet == null ? "" : bankModel!.nmRek;
+    namaBank.text = bankModel!.noBilyet == null ? "" : bankModel!.nmBank;
+    noRek.text = bankModel!.noBilyet == null ? "" : bankModel!.noRek;
     rekening = bankModel!.kdRek == "10"
         ? "Tabungan"
         : bankModel!.kdRek == "20"
