@@ -11,6 +11,7 @@ import '../../models/akses_point_model.dart';
 import '../../models/kantor_model.dart';
 import '../../models/user_akses_point_model.dart';
 import '../../network/network.dart';
+import '../../utils/button_custom.dart';
 
 class UserAksesPointNotifier extends ChangeNotifier {
   final BuildContext context;
@@ -22,7 +23,82 @@ class UserAksesPointNotifier extends ChangeNotifier {
 
   edit(String id) {
     userAksesPointModel = listUsers.where((e) => e.id == int.parse(id)).first;
+    confirm();
     notifyListeners();
+  }
+
+  confirm() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: 500,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Anda yakin menghapus ${userAksesPointModel!.noAkses}?",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ButtonSecondary(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        name: "Tidak",
+                      )),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                          child: ButtonPrimary(
+                        onTap: () {
+                          Navigator.pop(context);
+                          remove();
+                        },
+                        name: "Ya",
+                      )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  remove() {
+    DialogCustom().showLoading(context);
+    List<Map<String, dynamic>> listTmp = [];
+    listTmp.add({
+      "user_id": karyawanModel!.id,
+      "emp_id": karyawanModel!.empId,
+      "no_akses": userAksesPointModel!.noAkses,
+      "akses_id": userAksesPointModel!.aksesId,
+      "kode_pt": karyawanModel!.kodePt,
+    });
+    Setuprepository.setup(
+            token, NetworkURL.deletedUserAksesPoint(), jsonEncode(listTmp))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        getUsersAksesPoint();
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message']);
+      }
+    });
   }
 
   List<AksesPointModel> listData = [];

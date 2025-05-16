@@ -496,7 +496,7 @@ class DetailDataSource extends DataGridSource {
                   ),
                 ),
                 child: Text(
-                  "Aksi",
+                  "Hapus",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,

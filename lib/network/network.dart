@@ -389,6 +389,10 @@ class NetworkURL {
     return "$url/user-akses-point/add";
   }
 
+  static String deletedUserAksesPoint() {
+    return "$url/user-akses-point/deleted";
+  }
+
   static String cariKaryawan() {
     return "$url/karyawan/search";
   }
