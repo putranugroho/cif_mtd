@@ -277,7 +277,7 @@ class LevelUserPage extends StatelessWidget {
                                     children: [
                                       ButtonPrimary(
                                         onTap: () {
-                                          // value.simpanModul();
+                                          value.cek();
                                         },
                                         name: "Simpan",
                                       )
