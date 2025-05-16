@@ -96,10 +96,12 @@ class UsersNotifier extends ChangeNotifier {
     aksesKasir = users!.aksesKasir == "Y" ? true : false;
     bedaKantor = users!.bedaKantor == "Y" ? true : false;
     levelUser = listUsers.where((e) => e.idLevel == users!.lvluser).first;
-    otorisasi = users!.levelOtor == "null" ? false : true;
-    levelSelected = users!.levelOtor == "null" ? false : true;
+    otorisasi =
+        users!.levelOtor == "null" || users!.levelOtor == "" ? false : true;
+    levelSelected =
+        users!.levelOtor == "null" || users!.levelOtor == "" ? false : true;
     backdate = users!.backDate == "Y" ? true : false;
-    levelOtor = users!.levelOtor == "null"
+    levelOtor = users!.levelOtor == "null" || users!.levelOtor == ""
         ? ""
         : listLevelOtor.where((e) => e == users!.levelOtor).first;
     inqueryGlModel = users!.sbbKasir == ""
@@ -181,6 +183,19 @@ class UsersNotifier extends ChangeNotifier {
         });
       } else {
         DialogCustom().showLoading(context);
+        List<Map<String, dynamic>> listTmp = [];
+        for (var i = 0; i < listAddHariKerja.length; i++) {
+          listTmp.add({
+            "kd_kelompok": "${listAddHariKerja[i].kdAktivasi}",
+            "nama_kelompok": "${listAddHariKerja[i].nmAktivasi}",
+            "hari": "${listAddHariKerja[i].hari}",
+            "ke": "${i + 1}",
+            "jam_mulai": "${listAddHariKerja[i].jamMulai}",
+            "jam_selesai": "${listAddHariKerja[i].jamSelesai}",
+            "status": "AKTIF",
+          });
+        }
+        print("JSON TMP ${jsonEncode(listTmp)}");
         var data = {
           "userid": "${userid.text}",
           "pass": "${pass.text}",
@@ -204,7 +219,7 @@ class UsersNotifier extends ChangeNotifier {
           "beda_kantor": "${bedaKantor ? "Y" : "N"}",
           "min_otor": "${minotor.text.trim().replaceAll(",", "")}",
           "max_otor": "${maxotor.text.trim().replaceAll(",", "")}",
-          "shifts": listAddHariKerja
+          "shifts": listTmp
         };
         Setuprepository.setup(token, NetworkURL.addusers(), jsonEncode(data))
             .then((value) {
