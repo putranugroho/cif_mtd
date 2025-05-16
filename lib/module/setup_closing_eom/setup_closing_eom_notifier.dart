@@ -34,7 +34,10 @@ class SetupClosingEomNotifier extends ChangeNotifier {
         }
         if (list.isNotEmpty) {
           closingEomSetupModel = list.first;
-          closingDate.text = closingEomSetupModel!.bulan;
+          DateTime futureDate =
+              getDateMonthsAgo(int.parse(closingEomSetupModel!.bulan));
+          closingDate.text = DateFormat('MMMM').format(futureDate);
+          backdatemundur.text = closingEomSetupModel!.bulan;
         }
         isLoading = false;
         notifyListeners();
@@ -45,9 +48,18 @@ class SetupClosingEomNotifier extends ChangeNotifier {
     });
   }
 
+  DateTime getDateMonthsAgo(int monthsAgo) {
+    final now = DateTime.now();
+    return DateTime(now.year, now.month - monthsAgo);
+  }
+
   TextEditingController closing = TextEditingController(text: "3");
   TextEditingController backdatemundur = TextEditingController();
   TextEditingController closingDate = TextEditingController();
+
+  int monthDifference(DateTime from, DateTime to) {
+    return (to.year - (from.year - 1)) * 12 + to.month - from.month;
+  }
 
   DateTime now = DateTime.now();
   showDate() async {
@@ -99,7 +111,10 @@ class SetupClosingEomNotifier extends ChangeNotifier {
                     InkWell(
                       onTap: () {
                         Navigator.pop(context);
-
+                        final int selisihBulan =
+                            monthDifference(now, DateTime.now());
+                        print('Bulan ke belakang: $selisihBulan bulan');
+                        backdatemundur.text = selisihBulan.toString();
                         notifyListeners();
                       },
                       child: Container(
@@ -132,7 +147,7 @@ class SetupClosingEomNotifier extends ChangeNotifier {
         DialogCustom().showLoading(context);
         var data = {
           "kode_pt": "001",
-          "bulan": "${closingDate.text}",
+          "bulan": "${backdatemundur.text}",
         };
         Setuprepository.setup(
                 token, NetworkURL.addClosingEom(), jsonEncode(data))
@@ -151,7 +166,7 @@ class SetupClosingEomNotifier extends ChangeNotifier {
         var data = {
           "id": closingEomSetupModel == null ? null : closingEomSetupModel!.id,
           "kode_pt": "001",
-          "bulan": "${closingDate.text}",
+          "bulan": "${backdatemundur.text}",
         };
         Setuprepository.setup(
                 token, NetworkURL.editClosingEom(), jsonEncode(data))

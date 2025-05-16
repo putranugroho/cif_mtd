@@ -59,6 +59,7 @@ class ClosingEomNotifier extends ChangeNotifier {
                               now = e;
                               closingDate.text =
                                   DateFormat('MMMM y').format(now);
+
                               notifyListeners();
                             });
                           }),
@@ -69,7 +70,9 @@ class ClosingEomNotifier extends ChangeNotifier {
                     InkWell(
                       onTap: () {
                         Navigator.pop(context);
-
+                        final int selisihBulan =
+                            monthDifference(now, DateTime.now());
+                        print('Bulan ke belakang: $selisihBulan bulan');
                         notifyListeners();
                       },
                       child: Container(
@@ -93,6 +96,10 @@ class ClosingEomNotifier extends ChangeNotifier {
             );
           });
         });
+  }
+
+  int monthDifference(DateTime from, DateTime to) {
+    return (to.year - from.year) * 12 + to.month - from.month;
   }
 
   konfirmasi() async {
