@@ -37,12 +37,14 @@ class SetupClosingEomNotifier extends ChangeNotifier {
           if (closingEomSetupModel!.number == "N") {
             jenisTrans = true;
             closingDate.text = closingEomSetupModel!.bulan;
+            notifyListeners();
           } else {
             jenisTrans = false;
             DateTime futureDate =
                 getDateMonthsAgo(int.parse(closingEomSetupModel!.bulan));
             closingDate.text = DateFormat('MMMM').format(futureDate);
             backdatemundur.text = closingEomSetupModel!.bulan;
+            notifyListeners();
           }
         }
         isLoading = false;
@@ -153,6 +155,7 @@ class SetupClosingEomNotifier extends ChangeNotifier {
         DialogCustom().showLoading(context);
         var data = {
           "kode_pt": "001",
+          "number": jenisTrans ? "N" : "Y",
           "bulan": "${backdatemundur.text}",
         };
         Setuprepository.setup(
@@ -172,7 +175,8 @@ class SetupClosingEomNotifier extends ChangeNotifier {
         var data = {
           "id": closingEomSetupModel == null ? null : closingEomSetupModel!.id,
           "kode_pt": "001",
-          "bulan": "${backdatemundur.text}",
+          "number": jenisTrans ? "N" : "Y",
+          "bulan": jenisTrans ? closingDate.text : "${backdatemundur.text}",
         };
         Setuprepository.setup(
                 token, NetworkURL.editClosingEom(), jsonEncode(data))
