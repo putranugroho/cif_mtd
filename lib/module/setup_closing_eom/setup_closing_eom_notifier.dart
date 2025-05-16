@@ -34,10 +34,16 @@ class SetupClosingEomNotifier extends ChangeNotifier {
         }
         if (list.isNotEmpty) {
           closingEomSetupModel = list.first;
-          DateTime futureDate =
-              getDateMonthsAgo(int.parse(closingEomSetupModel!.bulan));
-          closingDate.text = DateFormat('MMMM').format(futureDate);
-          backdatemundur.text = closingEomSetupModel!.bulan;
+          if (closingEomSetupModel!.number == "N") {
+            jenisTrans = true;
+            closingDate.text = closingEomSetupModel!.bulan;
+          } else {
+            jenisTrans = false;
+            DateTime futureDate =
+                getDateMonthsAgo(int.parse(closingEomSetupModel!.bulan));
+            closingDate.text = DateFormat('MMMM').format(futureDate);
+            backdatemundur.text = closingEomSetupModel!.bulan;
+          }
         }
         isLoading = false;
         notifyListeners();

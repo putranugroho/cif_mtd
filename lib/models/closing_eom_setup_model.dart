@@ -11,6 +11,7 @@ class ClosingEomSetupModel {
     required this.kodePt,
     required this.createddate,
     required this.bulan,
+    required this.number,
     required this.isDeleted,
   });
 
@@ -18,6 +19,7 @@ class ClosingEomSetupModel {
   final String kodePt;
   final String createddate;
   final String bulan;
+  final String number;
   final String isDeleted;
 
   factory ClosingEomSetupModel.fromJson(Map<String,dynamic> json) => ClosingEomSetupModel(
@@ -25,6 +27,7 @@ class ClosingEomSetupModel {
     kodePt: json['kode_pt'].toString(),
     createddate: json['createddate'].toString(),
     bulan: json['bulan'].toString(),
+    number: json['number'].toString(),
     isDeleted: json['is_deleted'].toString()
   );
   
@@ -33,6 +36,7 @@ class ClosingEomSetupModel {
     'kode_pt': kodePt,
     'createddate': createddate,
     'bulan': bulan,
+    'number': number,
     'is_deleted': isDeleted
   };
 
@@ -41,6 +45,7 @@ class ClosingEomSetupModel {
     kodePt: kodePt,
     createddate: createddate,
     bulan: bulan,
+    number: number,
     isDeleted: isDeleted
   );
 
@@ -50,19 +55,21 @@ class ClosingEomSetupModel {
     String? kodePt,
     String? createddate,
     String? bulan,
+    String? number,
     String? isDeleted
   }) => ClosingEomSetupModel(
     id: id ?? this.id,
     kodePt: kodePt ?? this.kodePt,
     createddate: createddate ?? this.createddate,
     bulan: bulan ?? this.bulan,
+    number: number ?? this.number,
     isDeleted: isDeleted ?? this.isDeleted,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is ClosingEomSetupModel && id == other.id && kodePt == other.kodePt && createddate == other.createddate && bulan == other.bulan && isDeleted == other.isDeleted;
+    || other is ClosingEomSetupModel && id == other.id && kodePt == other.kodePt && createddate == other.createddate && bulan == other.bulan && number == other.number && isDeleted == other.isDeleted;
 
   @override
-  int get hashCode => id.hashCode ^ kodePt.hashCode ^ createddate.hashCode ^ bulan.hashCode ^ isDeleted.hashCode;
+  int get hashCode => id.hashCode ^ kodePt.hashCode ^ createddate.hashCode ^ bulan.hashCode ^ number.hashCode ^ isDeleted.hashCode;
 }
