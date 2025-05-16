@@ -796,58 +796,45 @@ class CustomerPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 16,
                                     ),
-                                    value.pkp
-                                        ? Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "NPWP",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
-                                                  ),
-                                                  const SizedBox(width: 5),
-                                                  const Text(
-                                                    "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(
-                                                height: 8,
-                                              ),
-                                              TextFormField(
-                                                textInputAction:
-                                                    TextInputAction.done,
-                                                controller: value.npwp,
-                                                maxLines: 1,
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly
-                                                ],
-                                                validator: (e) {
-                                                  if (e!.isEmpty) {
-                                                    return "Wajib diisi";
-                                                  } else {
-                                                    return null;
-                                                  }
-                                                },
-                                                decoration: InputDecoration(
-                                                  hintText: "NPWP",
-                                                  border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            6),
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(height: 16),
-                                            ],
-                                          )
-                                        : SizedBox(),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "NPWP",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TextFormField(
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.npwp,
+                                      maxLines: 1,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly
+                                      ],
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "NPWP",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
                                     Row(
                                       children: [
                                         Expanded(

@@ -821,6 +821,12 @@ class CoaPage extends StatelessWidget {
                                       height: 8,
                                     ),
                                     DropdownSearch<String>(
+                                      validator: (value) {
+                                        if (value == null) {
+                                          return 'Wajib diisi';
+                                        }
+                                        return null;
+                                      },
                                       popupProps:
                                           const PopupPropsMultiSelection.menu(
                                         showSearchBox:
@@ -869,6 +875,12 @@ class CoaPage extends StatelessWidget {
                                       height: 8,
                                     ),
                                     DropdownSearch<String>(
+                                      validator: (value) {
+                                        if (value == null) {
+                                          return 'Wajib diisi';
+                                        }
+                                        return null;
+                                      },
                                       popupProps:
                                           const PopupPropsMultiSelection.menu(
                                         showSearchBox:
@@ -1079,6 +1091,12 @@ class CoaPage extends StatelessWidget {
                                                       Expanded(
                                                         child: DropdownSearch<
                                                             CoaModel>(
+                                                          validator: (value) {
+                                                            if (value == null) {
+                                                              return 'Wajib diisi';
+                                                            }
+                                                            return null;
+                                                          },
                                                           popupProps:
                                                               const PopupPropsMultiSelection
                                                                   .menu(
@@ -1478,6 +1496,14 @@ class CoaPage extends StatelessWidget {
                                                             child:
                                                                 DropdownSearch<
                                                                     CoaModel>(
+                                                              validator:
+                                                                  (value) {
+                                                                if (value ==
+                                                                    null) {
+                                                                  return 'Wajib diisi';
+                                                                }
+                                                                return null;
+                                                              },
                                                               popupProps:
                                                                   const PopupPropsMultiSelection
                                                                       .menu(
@@ -1818,14 +1844,6 @@ class CoaPage extends StatelessWidget {
                                                                         fontSize:
                                                                             12),
                                                                   ),
-                                                                  const SizedBox(
-                                                                      width: 5),
-                                                                  const Text(
-                                                                    "*",
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            8),
-                                                                  ),
                                                                 ],
                                                               ),
                                                               const SizedBox(
@@ -1875,14 +1893,6 @@ class CoaPage extends StatelessWidget {
                                                                     style: const TextStyle(
                                                                         fontSize:
                                                                             12),
-                                                                  ),
-                                                                  const SizedBox(
-                                                                      width: 5),
-                                                                  const Text(
-                                                                    "*",
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            8),
                                                                   ),
                                                                 ],
                                                               ),

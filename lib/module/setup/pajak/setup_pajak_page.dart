@@ -126,7 +126,7 @@ class SetupPajakPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      width: 100,
+                                      width: 80,
                                       columnName: 'tipe',
                                       label: Container(
                                           color: colorPrimary,
@@ -139,6 +139,7 @@ class SetupPajakPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 60,
                                       columnName: 'nilai',
                                       label: Container(
                                           color: colorPrimary,
@@ -151,6 +152,7 @@ class SetupPajakPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 120,
                                       columnName: 'batas',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
@@ -501,7 +503,7 @@ class SetupPajakPage extends StatelessWidget {
                                             decoration: InputDecoration(
                                               filled: !value.editData,
                                               fillColor: Colors.grey[200],
-                                              hintText: "Nilai Maks",
+                                              hintText: "Nilai Minimal",
                                               border: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(6),
@@ -511,7 +513,7 @@ class SetupPajakPage extends StatelessWidget {
                                           const SizedBox(height: 16),
                                           ButtonPrimary(
                                             onTap: () {
-                                              value.cek();
+                                              value.simpan();
                                             },
                                             name: "Simpan",
                                           ),
@@ -616,9 +618,19 @@ class DetailDataSource extends DataGridSource {
               ),
             ),
           );
+        } else if (e.columnName == 'batas') {
+          return Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          );
         } else {
           return Container(
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
             child: Text(
               e.value,

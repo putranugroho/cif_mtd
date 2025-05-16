@@ -97,6 +97,13 @@ class MenuPage extends StatelessWidget {
                     InkWell(
                       onTap: () => value.gantimenu(0),
                       child: Container(
+                        width: double.infinity,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.white, width: 1.5),
+                        ),
                         child: Row(
                           children: [
                             Image.asset(
@@ -154,13 +161,15 @@ class MenuPage extends StatelessWidget {
                     InkWell(
                       onTap: () => value.gantimenu(26),
                       child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.symmetric(vertical: 16),
+                        width: double.infinity,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.white, width: 1.5),
                           color: value.page == 26
                               ? Colors.white
                               : Colors.transparent,
-                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
                           children: [
@@ -190,13 +199,15 @@ class MenuPage extends StatelessWidget {
                     InkWell(
                       onTap: () => value.gantimenu(28),
                       child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.symmetric(vertical: 16),
+                        width: double.infinity,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.white, width: 1.5),
                           color: value.page == 28
                               ? Colors.white
                               : Colors.transparent,
-                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
                           children: [
@@ -226,13 +237,15 @@ class MenuPage extends StatelessWidget {
                     InkWell(
                       // onTap: () => value.gantimenu(28),
                       child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.symmetric(vertical: 16),
+                        width: double.infinity,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.white, width: 1.5),
                           color: value.page == 30
                               ? Colors.white
                               : Colors.transparent,
-                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
                           children: [

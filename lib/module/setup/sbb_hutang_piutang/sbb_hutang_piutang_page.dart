@@ -29,7 +29,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          "Setup Hutang / Piutang",
+                          "Setup Perantara Hutang / Piutang",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -74,16 +74,16 @@ class SbbHutangPiutangPage extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    "Hutang",
+                                    "Akun Perantara Hutang",
                                     style: const TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ],
                               ),
                               const SizedBox(
-                                height: 8,
+                                height: 16,
                               ),
                               Row(
                                 children: [
@@ -100,7 +100,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                             autofocus: true,
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(),
-                                              labelText: 'Cari SBB Transaksi',
+                                              labelText: 'Cari Akun Transaksi',
                                             ));
                                       },
                                       itemBuilder: (context, city) {
@@ -131,7 +131,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                             autofocus: true,
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(),
-                                              labelText: 'Cari SBB PPN',
+                                              labelText: 'Cari Akun PPN',
                                             ));
                                       },
                                       itemBuilder: (context, city) {
@@ -162,7 +162,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                             autofocus: true,
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(),
-                                              labelText: 'Cari SBB PPH',
+                                              labelText: 'Cari Akun PPH',
                                             ));
                                       },
                                       itemBuilder: (context, city) {
@@ -277,21 +277,21 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                 ],
                               ),
                               const SizedBox(
-                                height: 24,
+                                height: 32,
                               ),
                               Row(
                                 children: [
                                   Text(
-                                    "Piutang",
+                                    "Akun Perantara Piutang",
                                     style: const TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ],
                               ),
                               const SizedBox(
-                                height: 8,
+                                height: 16,
                               ),
                               Row(
                                 children: [
@@ -308,7 +308,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                             autofocus: true,
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(),
-                                              labelText: 'Cari SBB Transaksi',
+                                              labelText: 'Cari Akun Transaksi',
                                             ));
                                       },
                                       itemBuilder: (context, city) {
@@ -339,7 +339,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                             autofocus: true,
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(),
-                                              labelText: 'Cari SBB PPN',
+                                              labelText: 'Cari Akun PPN',
                                             ));
                                       },
                                       itemBuilder: (context, city) {
@@ -370,7 +370,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                             autofocus: true,
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(),
-                                              labelText: 'Cari SBB PPH',
+                                              labelText: 'Cari Akun PPH',
                                             ));
                                       },
                                       itemBuilder: (context, city) {

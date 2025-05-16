@@ -61,7 +61,19 @@ class AktivasiNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool showHariError = false;
+
+  void setShowHariError(bool value) {
+    showHariError = value;
+    notifyListeners();
+  }
+
   cek() {
+    if (listHariAdd.isEmpty) {
+      setShowHariError(true);
+    } else {
+      setShowHariError(false);
+    }
     if (keyForm.currentState!.validate()) {
       if (editData) {
         DialogCustom().showLoading(context);
@@ -169,7 +181,7 @@ class AktivasiNotifier extends ChangeNotifier {
   bool dialog = false;
   tambah() {
     dialog = true;
-
+    setShowHariError(false);
     editData = false;
     kode.clear();
     nama.clear();
@@ -435,6 +447,7 @@ class AktivasiNotifier extends ChangeNotifier {
   List<String> listHariAdd = [];
 
   pilihHari(String value) async {
+    setShowHariError(false);
     if (listHariAdd.isEmpty) {
       listHariAdd.add(value);
     } else {

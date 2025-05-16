@@ -17,6 +17,10 @@ class MenuSetupWidget extends StatelessWidget {
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
       title: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.white, width: 1.5),
+        ),
         child: Row(
           children: [
             Image.asset(ImageAssets.settings, height: 30, color: Colors.white),
@@ -761,6 +765,10 @@ class MenuMasterWidget extends StatelessWidget {
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
       title: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.white, width: 1.5),
+        ),
         child: Row(
           children: [
             Image.asset(ImageAssets.setting, height: 30, color: Colors.white),
@@ -1036,6 +1044,10 @@ class MenuInventarisWidget extends StatelessWidget {
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
       title: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.white, width: 1.5),
+        ),
         child: Row(
           children: [
             Image.asset(ImageAssets.prices, height: 30, color: Colors.white),
@@ -1249,6 +1261,10 @@ class MenuHutangPiutangWidget extends StatelessWidget {
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
       title: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.white, width: 1.5),
+        ),
         child: Row(
           children: [
             Image.asset(ImageAssets.bill, height: 30, color: Colors.white),
@@ -1342,6 +1358,10 @@ class MenuTransaksiWidget extends StatelessWidget {
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
       title: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.white, width: 1.5),
+        ),
         child: Row(
           children: [
             Image.asset(ImageAssets.bill, height: 30, color: Colors.white),
@@ -2132,6 +2152,10 @@ class MenuLaporanWidget extends StatelessWidget {
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
       title: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.white, width: 1.5),
+        ),
         child: Row(
           children: [
             Image.asset(ImageAssets.eom, height: 30, color: Colors.white),

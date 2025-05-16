@@ -76,29 +76,12 @@ class SetupSbbPage extends StatelessWidget {
                                     Container(
                                       width: 150,
                                       child: Text(
-                                        "",
+                                        "Akun Kas Kecil",
                                         style: const TextStyle(fontSize: 14),
                                       ),
                                     ),
-                                    Text(
-                                      "Cari Akun",
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  children: [
                                     Container(
-                                      width: 150,
-                                      child: Text(
-                                        "SBB Kas Kecil",
-                                        style: const TextStyle(fontSize: 14),
-                                      ),
-                                    ),
-                                    Expanded(
+                                      width: 375,
                                       child: TypeAheadField<InqueryGlModel>(
                                         controller: value.nosbbdeb,
                                         suggestionsCallback: (search) =>
@@ -163,36 +146,19 @@ class SetupSbbPage extends StatelessWidget {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 16,
+                                  height: 24,
                                 ),
                                 Row(
                                   children: [
                                     Container(
                                       width: 150,
                                       child: Text(
-                                        "",
+                                        "Akun Kas Bon",
                                         style: const TextStyle(fontSize: 14),
                                       ),
                                     ),
-                                    Text(
-                                      "Cari Akun",
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  children: [
                                     Container(
-                                      width: 150,
-                                      child: Text(
-                                        "SBB Kas Bon",
-                                        style: const TextStyle(fontSize: 14),
-                                      ),
-                                    ),
-                                    Expanded(
+                                      width: 375,
                                       child: TypeAheadField<InqueryGlModel>(
                                         controller: value.nossbcre,
                                         suggestionsCallback: (search) =>

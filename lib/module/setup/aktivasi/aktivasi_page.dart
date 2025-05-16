@@ -321,7 +321,7 @@ class AktivasiPage extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
-                                        "Hari",
+                                        "Hari Kerja",
                                         style: const TextStyle(fontSize: 12),
                                       ),
                                       const SizedBox(width: 5),
@@ -377,6 +377,19 @@ class AktivasiPage extends StatelessWidget {
                                               ],
                                             ))
                                         .toList(),
+                                  ),
+                                  value.showHariError
+                                      ? Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 8.0),
+                                          child: Text(
+                                            "Wajib memilih minimal 1 hari",
+                                            style: TextStyle(color: Colors.red),
+                                          ),
+                                        )
+                                      : SizedBox(),
+                                  SizedBox(
+                                    height: 8,
                                   ),
                                   Row(
                                     crossAxisAlignment:
