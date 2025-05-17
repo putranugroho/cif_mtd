@@ -297,6 +297,7 @@ class SetupTransaksiPage extends StatelessWidget {
                                     textInputAction: TextInputAction.done,
                                     controller: value.kodeTransaksi,
                                     maxLines: 1,
+                                    maxLength: 4,
                                     inputFormatters: [
                                       FilteringTextInputFormatter.digitsOnly
                                     ],

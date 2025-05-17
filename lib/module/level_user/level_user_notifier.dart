@@ -350,33 +350,35 @@ class LevelUserNotifier extends ChangeNotifier {
 
   simpanModul() {
     // print(jsonEncode(menuAccessList));
-    DialogCustom().showLoading(context);
-    List<LevelUserModul> listtmp = [];
-    for (var i = 0; i < menuAccessList.length; i++) {
-      listtmp.add(LevelUserModul(
-          modul: menuAccessList[i].modul,
-          menu: menuAccessList[i].menu,
-          submenu: menuAccessList[i].submenu,
-          view: menuAccessList[i].view ? "Y" : "N",
-          input: menuAccessList[i].input ? "Y" : "N",
-          edit: menuAccessList[i].edit ? "Y" : "N",
-          delete: menuAccessList[i].delete ? "Y" : "N"));
-    }
-    notifyListeners();
-    var data = {"id": levelUser!.idLevel, "modul": listtmp};
-    print(jsonEncode(data));
-    Setuprepository.setup(
-            token, NetworkURL.editLevelUsersModul(), jsonEncode(data))
-        .then((value) {
-      Navigator.pop(context);
-      if (value['status'].toString().toLowerCase().contains("success")) {
-        getLevelusers();
-        informationDialog(context, "Information", value['message']);
-      } else {
-        informationDialog(context, "Warning", value['message']);
-        notifyListeners();
+    if (keyForm.currentState!.validate()) {
+      DialogCustom().showLoading(context);
+      List<LevelUserModul> listtmp = [];
+      for (var i = 0; i < menuAccessList.length; i++) {
+        listtmp.add(LevelUserModul(
+            modul: menuAccessList[i].modul,
+            menu: menuAccessList[i].menu,
+            submenu: menuAccessList[i].submenu,
+            view: menuAccessList[i].view ? "Y" : "N",
+            input: menuAccessList[i].input ? "Y" : "N",
+            edit: menuAccessList[i].edit ? "Y" : "N",
+            delete: menuAccessList[i].delete ? "Y" : "N"));
       }
-    });
+      notifyListeners();
+      var data = {"id": levelUser!.idLevel, "modul": listtmp};
+      print(jsonEncode(data));
+      Setuprepository.setup(
+              token, NetworkURL.editLevelUsersModul(), jsonEncode(data))
+          .then((value) {
+        Navigator.pop(context);
+        if (value['status'].toString().toLowerCase().contains("success")) {
+          getLevelusers();
+          informationDialog(context, "Information", value['message']);
+        } else {
+          informationDialog(context, "Warning", value['message']);
+          notifyListeners();
+        }
+      });
+    }
   }
 
   cek() {
@@ -651,6 +653,7 @@ class LevelUserNotifier extends ChangeNotifier {
     editModul = true;
     levelUser = list.where((e) => e.idLevel == id).first;
     levelUsers.text = levelUser!.levelUser;
+    modulModel = null;
     menuAccessList.clear();
 
     // Isi ulang menuAccessList dari levelUser.moduls

@@ -480,7 +480,7 @@ class GolonganAsetPage extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
-                                        "SBB Aset",
+                                        "Akun Aset",
                                         style: const TextStyle(fontSize: 12),
                                       ),
                                       const SizedBox(width: 5),
@@ -496,30 +496,53 @@ class GolonganAsetPage extends StatelessWidget {
                                   Row(
                                     children: [
                                       Expanded(
-                                        child: TypeAheadField<InqueryGlModel>(
-                                          controller: value.namasbbaset,
-                                          suggestionsCallback: (search) =>
-                                              value.getInquerySbbAset(search),
-                                          builder:
-                                              (context, controller, focusNode) {
-                                            return TextField(
-                                                controller: controller,
-                                                focusNode: focusNode,
-                                                autofocus: true,
-                                                decoration: InputDecoration(
-                                                  border: OutlineInputBorder(),
-                                                  labelText: 'Cari Akun',
-                                                ));
+                                        child: FormField<String>(
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'Wajib diisi'; // Must not be empty
+                                            }
+                                            return null;
                                           },
-                                          itemBuilder: (context, city) {
-                                            return ListTile(
-                                              title: Text(city.nosbb),
-                                              subtitle: Text(city.namaSbb),
+                                          builder: (formFieldState) {
+                                            return Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                TypeAheadField<InqueryGlModel>(
+                                                  controller: value.namasbbaset,
+                                                  suggestionsCallback:
+                                                      (search) => value
+                                                          .getInquerySbbAset(
+                                                              search),
+                                                  builder: (context, controller,
+                                                      focusNode) {
+                                                    return TextField(
+                                                        controller: controller,
+                                                        focusNode: focusNode,
+                                                        autofocus: true,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          border:
+                                                              OutlineInputBorder(),
+                                                          labelText:
+                                                              'Cari Akun',
+                                                        ));
+                                                  },
+                                                  itemBuilder: (context, city) {
+                                                    return ListTile(
+                                                      title: Text(city.nosbb),
+                                                      subtitle:
+                                                          Text(city.namaSbb),
+                                                    );
+                                                  },
+                                                  onSelected: (city) {
+                                                    // value.selectInvoice(city);
+                                                    value.pilihSbbAset(city);
+                                                  },
+                                                ),
+                                              ],
                                             );
-                                          },
-                                          onSelected: (city) {
-                                            // value.selectInvoice(city);
-                                            value.pilihSbbAset(city);
                                           },
                                         ),
                                       ),
@@ -537,13 +560,13 @@ class GolonganAsetPage extends StatelessWidget {
                                           // inputFormatters: [
                                           //   FilteringTextInputFormatter.digitsOnly
                                           // ],
-                                          // validator: (e) {
-                                          //   if (e!.isEmpty) {
-                                          //     return "Wajib diisi";
-                                          //   } else {
-                                          //     return null;
-                                          //   }
-                                          // },
+                                          validator: (e) {
+                                            if (e!.isEmpty) {
+                                              return "Wajib diisi";
+                                            } else {
+                                              return null;
+                                            }
+                                          },
                                           decoration: InputDecoration(
                                             filled: true,
                                             fillColor: Colors.grey[200],
@@ -563,7 +586,7 @@ class GolonganAsetPage extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
-                                        "SBB Penyusutan",
+                                        "Akun Penyusutan",
                                         style: const TextStyle(fontSize: 12),
                                       ),
                                       const SizedBox(width: 5),
@@ -620,13 +643,13 @@ class GolonganAsetPage extends StatelessWidget {
                                           // inputFormatters: [
                                           //   FilteringTextInputFormatter.digitsOnly
                                           // ],
-                                          // validator: (e) {
-                                          //   if (e!.isEmpty) {
-                                          //     return "Wajib diisi";
-                                          //   } else {
-                                          //     return null;
-                                          //   }
-                                          // },
+                                          validator: (e) {
+                                            if (e!.isEmpty) {
+                                              return "Wajib diisi";
+                                            } else {
+                                              return null;
+                                            }
+                                          },
                                           decoration: InputDecoration(
                                             filled: true,
                                             fillColor: Colors.grey[200],
@@ -646,7 +669,7 @@ class GolonganAsetPage extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
-                                        "SBB Rugi Jual",
+                                        "Akun Rugi Jual",
                                         style: const TextStyle(fontSize: 12),
                                       ),
                                       const SizedBox(width: 5),
@@ -703,7 +726,13 @@ class GolonganAsetPage extends StatelessWidget {
                                           // inputFormatters: [
                                           //   FilteringTextInputFormatter.digitsOnly
                                           // ],
-
+                                          validator: (e) {
+                                            if (e!.isEmpty) {
+                                              return "Wajib diisi";
+                                            } else {
+                                              return null;
+                                            }
+                                          },
                                           decoration: InputDecoration(
                                             filled: true,
                                             fillColor: Colors.grey[200],
@@ -723,7 +752,7 @@ class GolonganAsetPage extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
-                                        "SBB Laba Jual",
+                                        "Akun Laba Jual",
                                         style: const TextStyle(fontSize: 12),
                                       ),
                                       const SizedBox(width: 5),
@@ -780,7 +809,13 @@ class GolonganAsetPage extends StatelessWidget {
                                           // inputFormatters: [
                                           //   FilteringTextInputFormatter.digitsOnly
                                           // ],
-
+                                          validator: (e) {
+                                            if (e!.isEmpty) {
+                                              return "Wajib diisi";
+                                            } else {
+                                              return null;
+                                            }
+                                          },
                                           decoration: InputDecoration(
                                             filled: true,
                                             fillColor: Colors.grey[200],

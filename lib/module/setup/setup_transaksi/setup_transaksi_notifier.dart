@@ -235,8 +235,6 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     editData = false;
     inqueryGlModelcre = null;
     inqueryGlModeldeb = null;
-    hutangPiutang = null;
-    modul = "0";
     nosbbdeb.clear();
     nossbcre.clear();
     namaSbbDeb.clear();

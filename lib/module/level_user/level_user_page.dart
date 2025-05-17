@@ -407,6 +407,12 @@ class LevelUserPage extends StatelessWidget {
                                                     height: 8,
                                                   ),
                                                   DropdownSearch<ModulModel>(
+                                                    validator: (value) {
+                                                      if (value == null) {
+                                                        return 'Wajib diisi';
+                                                      }
+                                                      return null;
+                                                    },
                                                     popupProps:
                                                         const PopupPropsMultiSelection
                                                             .menu(
