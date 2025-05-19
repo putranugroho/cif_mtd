@@ -116,7 +116,9 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
   final keyForm2 = GlobalKey<FormState>();
   cek() {}
 
-  confirm() {}
+  confirm() {
+    if (keyForm.currentState!.validate()) {}
+  }
 
   bool dialog = false;
   tambah() {

@@ -182,13 +182,13 @@ class AksesPointNotifier extends ChangeNotifier {
     "LAN",
     "WIFI",
   ];
-  String? akses;
+  String? akses = "LAN";
   pilihAkses(String value) {
     akses = value;
     notifyListeners();
   }
 
-  String? lokasi;
+  String? lokasi = "Kantor";
   pilihlokasi(String value) {
     lokasi = value;
     notifyListeners();
@@ -202,8 +202,8 @@ class AksesPointNotifier extends ChangeNotifier {
     aksesId.clear();
     alamat.clear();
     keterangan.clear();
-    lokasi = null;
-    akses = null;
+    // lokasi = null;
+    // akses = null;
     notifyListeners();
   }
 

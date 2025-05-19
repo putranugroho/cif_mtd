@@ -231,6 +231,7 @@ class AoPage extends StatelessWidget {
                                   textInputAction: TextInputAction.done,
                                   controller: value.kd,
                                   maxLines: 1,
+                                  maxLength: 10,
                                   inputFormatters: [
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[a-zA-Z0-9]'))

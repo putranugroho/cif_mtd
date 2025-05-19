@@ -169,6 +169,45 @@ class KasKecilNotifier extends ChangeNotifier {
         });
   }
 
+  DateTime? tglBackDate = DateTime.now();
+  Future tanggalBackDate() async {
+    var pickedendDate = (await showDatePicker(
+      context: context,
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+                DateTime.now(),
+              )) -
+              1),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) - 10,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+                DateTime.now(),
+              )) -
+              1),
+    ));
+    if (pickedendDate != null) {
+      tglBackDate = pickedendDate;
+      tglBackDatetext.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
+      notifyListeners();
+    }
+  }
+
   DateTime? tglTransaksi;
   Future pilihTanggalBuka() async {
     var pickedendDate = (await showDatePicker(
@@ -206,6 +245,12 @@ class KasKecilNotifier extends ChangeNotifier {
     }
   }
 
+  final keyForm = GlobalKey<FormState>();
+
+  cek() {
+    if (keyForm.currentState!.validate()) {}
+  }
+
   bool cancel = true;
   cancelKode() async {
     cancel = true;
@@ -222,12 +267,19 @@ class KasKecilNotifier extends ChangeNotifier {
 
   TextEditingController nominal = TextEditingController();
   TextEditingController tglTransaksiText = TextEditingController();
+  TextEditingController tglBackDatetext = TextEditingController();
   TextEditingController nomorDok = TextEditingController();
   TextEditingController nomorRef = TextEditingController();
 
   bool dialog = false;
   tambah() {
     dialog = true;
+    notifyListeners();
+  }
+
+  bool backDate = false;
+  gantibackDate() {
+    backDate = !backDate;
     notifyListeners();
   }
 

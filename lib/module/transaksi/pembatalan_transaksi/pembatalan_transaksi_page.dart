@@ -93,8 +93,13 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                           readOnly: true,
                                           onTap: () => value.tanggalTransaksi(),
                                           controller: value.tglTransaksi,
-                                          validator: (e) =>
-                                              e!.isEmpty ? "Wajib diisi" : null,
+                                          validator: (e) {
+                                            if (e!.isEmpty) {
+                                              return "Wajib diisi";
+                                            } else {
+                                              return null;
+                                            }
+                                          },
                                           decoration: InputDecoration(
                                             filled: value.cariTrans,
                                             fillColor: Colors.grey[200],
@@ -359,10 +364,6 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                       TextFormField(
                                         textInputAction: TextInputAction.done,
                                         readOnly: true,
-                                        validator: (e) {
-                                          if (e!.isEmpty) return "Wajib diisi";
-                                          return null;
-                                        },
                                         decoration: InputDecoration(
                                           hintText: "Tgl Transaksi",
                                           filled: true,
@@ -409,13 +410,6 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                                   // inputFormatters: [
                                                   //   FilteringTextInputFormatter.digitsOnly
                                                   // ],
-                                                  validator: (e) {
-                                                    if (e!.isEmpty) {
-                                                      return "Wajib diisi";
-                                                    } else {
-                                                      return null;
-                                                    }
-                                                  },
                                                   decoration: InputDecoration(
                                                     filled: true,
                                                     fillColor: Colors.grey[200],
@@ -464,13 +458,6 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                                   // inputFormatters: [
                                                   //   FilteringTextInputFormatter.digitsOnly
                                                   // ],
-                                                  validator: (e) {
-                                                    if (e!.isEmpty) {
-                                                      return "Wajib diisi";
-                                                    } else {
-                                                      return null;
-                                                    }
-                                                  },
                                                   decoration: InputDecoration(
                                                     filled: true,
                                                     fillColor: Colors.grey[200],
@@ -524,13 +511,6 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                                   // inputFormatters: [
                                                   //   FilteringTextInputFormatter.digitsOnly
                                                   // ],
-                                                  validator: (e) {
-                                                    if (e!.isEmpty) {
-                                                      return "Wajib diisi";
-                                                    } else {
-                                                      return null;
-                                                    }
-                                                  },
                                                   decoration: InputDecoration(
                                                     filled: true,
                                                     fillColor: Colors.grey[200],
@@ -580,13 +560,6 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                                   // inputFormatters: [
                                                   //   FilteringTextInputFormatter.digitsOnly
                                                   // ],
-                                                  validator: (e) {
-                                                    if (e!.isEmpty) {
-                                                      return "Wajib diisi";
-                                                    } else {
-                                                      return null;
-                                                    }
-                                                  },
                                                   decoration: InputDecoration(
                                                     filled: true,
                                                     fillColor: Colors.grey[200],
@@ -640,13 +613,6 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                                   // inputFormatters: [
                                                   //   FilteringTextInputFormatter.digitsOnly
                                                   // ],
-                                                  validator: (e) {
-                                                    if (e!.isEmpty) {
-                                                      return "Wajib diisi";
-                                                    } else {
-                                                      return null;
-                                                    }
-                                                  },
                                                   decoration: InputDecoration(
                                                     filled: true,
                                                     fillColor: Colors.grey[200],
@@ -696,13 +662,6 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                                   // inputFormatters: [
                                                   //   FilteringTextInputFormatter.digitsOnly
                                                   // ],
-                                                  validator: (e) {
-                                                    if (e!.isEmpty) {
-                                                      return "Wajib diisi";
-                                                    } else {
-                                                      return null;
-                                                    }
-                                                  },
                                                   decoration: InputDecoration(
                                                     filled: true,
                                                     fillColor: Colors.grey[200],
@@ -745,13 +704,6 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                         // inputFormatters: [
                                         //   FilteringTextInputFormatter.digitsOnly
                                         // ],
-                                        validator: (e) {
-                                          if (e!.isEmpty) {
-                                            return "Wajib diisi";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
                                         decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Colors.grey[200],
@@ -790,13 +742,6 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                         // inputFormatters: [
                                         //   FilteringTextInputFormatter.digitsOnly
                                         // ],
-                                        validator: (e) {
-                                          if (e!.isEmpty) {
-                                            return "Wajib diisi";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
                                         decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Colors.grey[200],
@@ -846,13 +791,6 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                                   // inputFormatters: [
                                                   //   FilteringTextInputFormatter.digitsOnly
                                                   // ],
-                                                  validator: (e) {
-                                                    if (e!.isEmpty) {
-                                                      return "Wajib diisi";
-                                                    } else {
-                                                      return null;
-                                                    }
-                                                  },
                                                   decoration: InputDecoration(
                                                     filled: true,
                                                     fillColor: Colors.grey[200],
@@ -902,13 +840,6 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                                   // inputFormatters: [
                                                   //   FilteringTextInputFormatter.digitsOnly
                                                   // ],
-                                                  validator: (e) {
-                                                    if (e!.isEmpty) {
-                                                      return "Wajib diisi";
-                                                    } else {
-                                                      return null;
-                                                    }
-                                                  },
                                                   decoration: InputDecoration(
                                                     filled: true,
                                                     fillColor: Colors.grey[200],

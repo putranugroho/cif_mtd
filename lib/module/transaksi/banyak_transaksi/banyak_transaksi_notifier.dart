@@ -311,6 +311,12 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  final keyForm = GlobalKey<FormState>();
+
+  cek() {
+    if (keyForm.currentState!.validate()) {}
+  }
+
   tutup() {
     dialog = false;
     notifyListeners();

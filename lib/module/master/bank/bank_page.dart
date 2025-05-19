@@ -530,6 +530,12 @@ class BankPage extends StatelessWidget {
                                       height: 8,
                                     ),
                                     DropdownSearch<String>(
+                                      validator: (value) {
+                                        if (value == null) {
+                                          return 'Wajib diisi';
+                                        }
+                                        return null;
+                                      },
                                       popupProps:
                                           const PopupPropsMultiSelection.menu(
                                         showSearchBox:

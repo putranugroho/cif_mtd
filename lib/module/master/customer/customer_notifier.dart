@@ -99,102 +99,102 @@ class CustomerNotifier extends ChangeNotifier {
   var editData = false;
   cek() {
     if (keyForm.currentState!.validate()) {
-      if (editData) {
-        DialogCustom().showLoading(context);
-        var data = {
-          "id": customerSupplierModel!.id,
-          "kode_pt": "${customerSupplierModel!.kodePt}",
-          "no_sif": "${noSif.text.trim()}",
-          "nm_sif": "${namaSif.text.trim()}",
-          "gol_cust":
-              "${golCust == "Customer" ? 1 : golCust == "Supplier" ? 2 : 3}",
-          "bidang_usaha": "${bidangUsaha.text}",
-          "alamat": "${alamat.text.trim()}",
-          "kelurahan": "${kelurahanModel!.name}",
-          "kecamatan": "${kecamatanModel!.name}",
-          "kota": "${kotaModal!.name}",
-          "provinsi": "${provinsiModel!.name}",
-          "kdpos": "${kodepos.text.trim()}",
-          "npwp": "${npwp.text.trim()}",
-          "pkp": "${pkp ? "Y" : "N"}",
-          "no_telp": "${notelp.text.trim()}",
-          "email": "${email.text.trim()}",
-          "kontak1": "${kontak1.text.trim()}",
-          "hp1": "${hp1.text.trim()}",
-          "email1": "${email1.text.trim()}",
-          "keterangan1": "${keterangan1.text.trim()}",
-          "kontak2": "${kontak2.text.trim()}",
-          "hp2": "${hp2.text.trim()}",
-          "email2": "${email2.text.trim()}",
-          "keterangan2": "${keterangan2.text.trim()}",
-          "kontak3": "${kontak3.text.trim()}",
-          "hp3": "${hp3.text.trim()}",
-          "email3": "${email3.text.trim()}",
-          "keterangan3": "${keterangan3.text.trim()}",
-          "kode_ao_customer": "${aoModel == null ? null : aoModel!.kode}",
-          "kode_ao_supplier":
-              "${aoModelKRedit == null ? null : aoModelKRedit!.kode}",
-        };
-        // print(jsonEncode(data));
-        Setuprepository.setup(
-                token, NetworkURL.editCustomer(), jsonEncode(data))
-            .then((value) {
-          Navigator.pop(context);
-          if (value['status'].toString().toLowerCase().contains("success")) {
-            getCustomers();
-            clear();
-            informationDialog(context, "Information", value['message']);
-          } else {
-            informationDialog(context, "Warning", value['message']);
-          }
-        });
-      } else {
-        DialogCustom().showLoading(context);
-        var data = {
-          "kode_pt": "001",
-          "no_sif": "${noSif.text.trim()}",
-          "nm_sif": "${namaSif.text.trim()}",
-          "gol_cust":
-              "${golCust == "Customer" ? 1 : golCust == "Supplier" ? 2 : 3}",
-          "bidang_usaha": "${bidangUsaha.text}",
-          "alamat": "${alamat.text.trim()}",
-          "kelurahan": "${kelurahanModel!.name}",
-          "kecamatan": "${kecamatanModel!.name}",
-          "kota": "${kotaModal!.name}",
-          "provinsi": "${provinsiModel!.name}",
-          "kdpos": "${kodepos.text.trim()}",
-          "npwp": "${npwp.text.trim()}",
-          "pkp": "${pkp ? "Y" : "N"}",
-          "no_telp": "${notelp.text.trim()}",
-          "email": "${email.text.trim()}",
-          "kontak1": "${kontak1.text.trim()}",
-          "hp1": "${hp1.text.trim()}",
-          "email1": "${email1.text.trim()}",
-          "keterangan1": "${keterangan1.text.trim()}",
-          "kontak2": "${kontak2.text.trim()}",
-          "hp2": "${hp2.text.trim()}",
-          "email2": "${email2.text.trim()}",
-          "keterangan2": "${keterangan2.text.trim()}",
-          "kontak3": "${kontak3.text.trim()}",
-          "hp3": "${hp3.text.trim()}",
-          "email3": "${email3.text.trim()}",
-          "keterangan3": "${keterangan3.text.trim()}",
-          "kode_ao_customer": "${aoModel == null ? null : aoModel!.kode}",
-          "kode_ao_supplier":
-              "${aoModelKRedit == null ? null : aoModelKRedit!.kode}",
-        };
-        Setuprepository.setup(token, NetworkURL.addCustomer(), jsonEncode(data))
-            .then((value) {
-          Navigator.pop(context);
-          if (value['status'].toString().toLowerCase().contains("success")) {
-            getCustomers();
-            clear();
-            informationDialog(context, "Information", value['message']);
-          } else {
-            informationDialog(context, "Warning", value['message']);
-          }
-        });
-      }
+      // if (editData) {
+      //   DialogCustom().showLoading(context);
+      //   var data = {
+      //     "id": customerSupplierModel!.id,
+      //     "kode_pt": "${customerSupplierModel!.kodePt}",
+      //     "no_sif": "${noSif.text.trim()}",
+      //     "nm_sif": "${namaSif.text.trim()}",
+      //     "gol_cust":
+      //         "${golCust == "Customer" ? 1 : golCust == "Supplier" ? 2 : 3}",
+      //     "bidang_usaha": "${bidangUsaha.text}",
+      //     "alamat": "${alamat.text.trim()}",
+      //     "kelurahan": "${kelurahanModel!.name}",
+      //     "kecamatan": "${kecamatanModel!.name}",
+      //     "kota": "${kotaModal!.name}",
+      //     "provinsi": "${provinsiModel!.name}",
+      //     "kdpos": "${kodepos.text.trim()}",
+      //     "npwp": "${npwp.text.trim()}",
+      //     "pkp": "${pkp ? "Y" : "N"}",
+      //     "no_telp": "${notelp.text.trim()}",
+      //     "email": "${email.text.trim()}",
+      //     "kontak1": "${kontak1.text.trim()}",
+      //     "hp1": "${hp1.text.trim()}",
+      //     "email1": "${email1.text.trim()}",
+      //     "keterangan1": "${keterangan1.text.trim()}",
+      //     "kontak2": "${kontak2.text.trim()}",
+      //     "hp2": "${hp2.text.trim()}",
+      //     "email2": "${email2.text.trim()}",
+      //     "keterangan2": "${keterangan2.text.trim()}",
+      //     "kontak3": "${kontak3.text.trim()}",
+      //     "hp3": "${hp3.text.trim()}",
+      //     "email3": "${email3.text.trim()}",
+      //     "keterangan3": "${keterangan3.text.trim()}",
+      //     "kode_ao_customer": "${aoModel == null ? null : aoModel!.kode}",
+      //     "kode_ao_supplier":
+      //         "${aoModelKRedit == null ? null : aoModelKRedit!.kode}",
+      //   };
+      //   // print(jsonEncode(data));
+      //   Setuprepository.setup(
+      //           token, NetworkURL.editCustomer(), jsonEncode(data))
+      //       .then((value) {
+      //     Navigator.pop(context);
+      //     if (value['status'].toString().toLowerCase().contains("success")) {
+      //       getCustomers();
+      //       clear();
+      //       informationDialog(context, "Information", value['message']);
+      //     } else {
+      //       informationDialog(context, "Warning", value['message']);
+      //     }
+      //   });
+      // } else {
+      //   DialogCustom().showLoading(context);
+      //   var data = {
+      //     "kode_pt": "001",
+      //     "no_sif": "${noSif.text.trim()}",
+      //     "nm_sif": "${namaSif.text.trim()}",
+      //     "gol_cust":
+      //         "${golCust == "Customer" ? 1 : golCust == "Supplier" ? 2 : 3}",
+      //     "bidang_usaha": "${bidangUsaha.text}",
+      //     "alamat": "${alamat.text.trim()}",
+      //     "kelurahan": "${kelurahanModel!.name}",
+      //     "kecamatan": "${kecamatanModel!.name}",
+      //     "kota": "${kotaModal!.name}",
+      //     "provinsi": "${provinsiModel!.name}",
+      //     "kdpos": "${kodepos.text.trim()}",
+      //     "npwp": "${npwp.text.trim()}",
+      //     "pkp": "${pkp ? "Y" : "N"}",
+      //     "no_telp": "${notelp.text.trim()}",
+      //     "email": "${email.text.trim()}",
+      //     "kontak1": "${kontak1.text.trim()}",
+      //     "hp1": "${hp1.text.trim()}",
+      //     "email1": "${email1.text.trim()}",
+      //     "keterangan1": "${keterangan1.text.trim()}",
+      //     "kontak2": "${kontak2.text.trim()}",
+      //     "hp2": "${hp2.text.trim()}",
+      //     "email2": "${email2.text.trim()}",
+      //     "keterangan2": "${keterangan2.text.trim()}",
+      //     "kontak3": "${kontak3.text.trim()}",
+      //     "hp3": "${hp3.text.trim()}",
+      //     "email3": "${email3.text.trim()}",
+      //     "keterangan3": "${keterangan3.text.trim()}",
+      //     "kode_ao_customer": "${aoModel == null ? null : aoModel!.kode}",
+      //     "kode_ao_supplier":
+      //         "${aoModelKRedit == null ? null : aoModelKRedit!.kode}",
+      //   };
+      //   Setuprepository.setup(token, NetworkURL.addCustomer(), jsonEncode(data))
+      //       .then((value) {
+      //     Navigator.pop(context);
+      //     if (value['status'].toString().toLowerCase().contains("success")) {
+      //       getCustomers();
+      //       clear();
+      //       informationDialog(context, "Information", value['message']);
+      //     } else {
+      //       informationDialog(context, "Warning", value['message']);
+      //     }
+      //   });
+      // }
     }
   }
 

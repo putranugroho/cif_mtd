@@ -331,6 +331,12 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  final keyForm = GlobalKey<FormState>();
+
+  cek() {
+    if (keyForm.currentState!.validate()) {}
+  }
+
   cancelKode() async {
     inqueryGlModelcre = null;
     inqueryGlModelcre = null;
