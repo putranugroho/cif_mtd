@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:accounting/models/index.dart';
 import 'package:accounting/models/users_model.dart';
 import 'package:accounting/repository/SetupRepository.dart';
 import 'package:accounting/utils/dialog_loading.dart';
@@ -18,7 +19,37 @@ class UserAksesPointNotifier extends ChangeNotifier {
 
   UserAksesPointNotifier({required this.context}) {
     getKantor();
+    getUsersAkses();
     getAksesPoint();
+  }
+  var tambahData = false;
+  tambahs() {
+    tambahData = true;
+    notifyListeners();
+  }
+
+  tutup() {
+    tambahData = false;
+    notifyListeners();
+  }
+
+  List<ListUsersAksesPointModel> listUsersAkses = [];
+  Future getUsersAkses() async {
+    listUsersAkses.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(
+            token, NetworkURL.getUsersAksesPointAll(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("ok")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listUsersAkses.add(ListUsersAksesPointModel.fromJson(i));
+        }
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message']);
+      }
+    });
   }
 
   edit(String id) {

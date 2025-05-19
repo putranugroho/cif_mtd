@@ -276,6 +276,9 @@ class CoaNotifier extends ChangeNotifier {
           "id": coaModel!.id,
           "kode_pt": "001",
           "kode_kantor": "1001",
+          "kode_induk": "200",
+          "userinput": "Testing",
+          "userterm": "114.80.30.143",
           "gol_acc":
               "${golongan == "Aktiva" ? "1" : golongan == "Pasiva" ? "2" : golongan == "Pendapatan" ? "3" : golongan == "Biaya" ? "4" : "5"}",
           "jns_acc":
@@ -315,6 +318,9 @@ class CoaNotifier extends ChangeNotifier {
         var data = {
           "kode_pt": "001",
           "kode_kantor": "1001",
+          "kode_induk": "200",
+          "userinput": "Testing",
+          "userterm": "114.80.30.143",
           "gol_acc":
               "${golongan == "Aktiva" ? "1" : golongan == "Pasiva" ? "2" : golongan == "Pendapatan" ? "3" : golongan == "Biaya" ? "4" : "5"}",
           "jns_acc":

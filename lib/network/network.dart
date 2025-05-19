@@ -393,6 +393,10 @@ class NetworkURL {
     return "$url/user-akses-point/deleted";
   }
 
+  static String getUsersAksesPointAll() {
+    return "$url/user-akses-point/viewall";
+  }
+
   static String cariKaryawan() {
     return "$url/karyawan/search";
   }

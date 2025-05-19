@@ -36,6 +36,7 @@ export 'provinsi_model.dart';
 export 'aktivasi_model.dart';
 export 'kecamatan_model.dart';
 export 'level_model.dart';
+export 'list_users_akses_point_model.dart';
 export 'rekon_aset_model.dart';
 export 'golongan_sbb_khusus_model.dart';
 export 'pejabat_model.dart';
