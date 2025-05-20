@@ -99,25 +99,50 @@ class AoPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
-                                width: 150,
-                                columnName: 'kode',
-                                label: Container(
-                                    padding: EdgeInsets.all(6),
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    child: Text('Kode AO / Marketing',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                          fontSize: 12,
-                                        )))),
-                            GridColumn(
                                 columnName: 'nm',
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(6),
                                     child: Text('Nama',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 130,
+                                columnName: 'kode',
+                                label: Container(
+                                    padding: EdgeInsets.all(6),
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    child: Text('Kode AO / Mkt',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        )))),
+                            GridColumn(
+                                width: 100,
+                                columnName: 'kode_kantor',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Kode Kantor',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                columnName: 'nama_kantor',
+                                label: Container(
+                                    padding: EdgeInsets.all(6),
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    child: Text('Nama Kantor',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -219,6 +244,12 @@ class AoPage extends StatelessWidget {
                                   height: 8,
                                 ),
                                 DropdownSearch<KantorModel>(
+                                  validator: (value) {
+                                    if (value == null) {
+                                      return 'Wajib diisi';
+                                    }
+                                    return null;
+                                  },
                                   popupProps:
                                       const PopupPropsMultiSelection.menu(
                                     showSearchBox:
@@ -422,13 +453,17 @@ class DetailDataSource extends DataGridSource {
   @override
   List<DataGridRow> get rows => _laporanData;
   void buildRowData(List<AoModel> list) {
+    list.sort((a, b) => a.nama.toLowerCase().compareTo(b.nama.toLowerCase()));
     int index = 1;
     _laporanData = list
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(columnName: 'kode', value: data.kode),
                 DataGridCell(columnName: 'nama', value: data.nama),
+                DataGridCell(columnName: 'kode', value: data.kode),
+                DataGridCell(columnName: 'kode_kantor', value: data.kodeKantor),
+                DataGridCell(
+                    columnName: 'nama_kantor', value: "data.namaKantor"),
                 DataGridCell(
                     columnName: 'cs',
                     value: data.golCust == "1"

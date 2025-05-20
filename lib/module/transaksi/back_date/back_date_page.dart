@@ -108,7 +108,7 @@ class BackDatePage extends StatelessWidget {
                                     padding: EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Tanggal Transaksi',
+                                    child: Text('Tanggal Valuta',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -384,7 +384,7 @@ class BackDatePage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      "Tanggal Transaksi (Back date)",
+                                      "Tanggal Valuta (Back date)",
                                       style: const TextStyle(fontSize: 12),
                                     ),
                                     const SizedBox(width: 5),
@@ -402,9 +402,8 @@ class BackDatePage extends StatelessWidget {
                                   child: TextFormField(
                                     enabled: false,
 
-                                    
                                     controller: value.namaTransaksi,
-                                    
+
                                     // inputFormatters: [
                                     //   FilteringTextInputFormatter.digitsOnly
                                     // ],
@@ -418,7 +417,7 @@ class BackDatePage extends StatelessWidget {
                                     decoration: InputDecoration(
                                       filled: true,
                                       fillColor: Colors.grey[200],
-                                      hintText: "Tanggal Transaksi",
+                                      hintText: "Tanggal Valuta",
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(6),
                                       ),

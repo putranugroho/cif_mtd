@@ -2043,6 +2043,22 @@ class DetailDataSource extends DataGridSource {
       traverse(root, 0);
     }
 
+    // Sort by gol_acc ascending, then no_coa descending
+    rows.sort((a, b) {
+      final golAccA =
+          a.getCells().firstWhere((c) => c.columnName == 'gol_acc').value;
+      final golAccB =
+          b.getCells().firstWhere((c) => c.columnName == 'gol_acc').value;
+      final cmp = golAccA.compareTo(golAccB);
+      if (cmp != 0) return cmp;
+
+      final coaA =
+          a.getCells().firstWhere((c) => c.columnName == 'no_coa').value;
+      final coaB =
+          b.getCells().firstWhere((c) => c.columnName == 'no_coa').value;
+      return coaA.compareTo(coaB);
+    });
+
     _laporanData = rows;
   }
 

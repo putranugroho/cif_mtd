@@ -124,6 +124,18 @@ class BankPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      columnName: 'nmBank',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Nama Bank',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
                                       columnName: 'kodeBank',
                                       width: 80,
                                       label: Container(
@@ -135,18 +147,6 @@ class BankPage extends StatelessWidget {
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
                                                 fontSize: 12,
-                                              )))),
-                                  GridColumn(
-                                      columnName: 'nmBank',
-                                      label: Container(
-                                          color: colorPrimary,
-                                          alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Nama Bank',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.white,
                                               )))),
                                   GridColumn(
                                       columnName: 'noRek',
@@ -1068,8 +1068,8 @@ class DetailDataSource extends DataGridSource {
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(columnName: 'kodeBank', value: data.kodeBank),
                 DataGridCell(columnName: 'nmBank', value: data.nmBank),
+                DataGridCell(columnName: 'kodeBank', value: data.kodeBank),
                 DataGridCell(columnName: 'noRek', value: data.noRek),
                 DataGridCell(columnName: 'nmRek', value: data.nmRek),
                 DataGridCell(

@@ -287,6 +287,9 @@ class KasbonNotifier extends ChangeNotifier {
   edit() {
     dialog = true;
     editData = true;
+    tglTransaksiText.text = DateFormat("dd-MMM-yyyy").format(
+      DateTime.now(),
+    );
     notifyListeners();
   }
 

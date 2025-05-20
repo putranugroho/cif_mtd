@@ -439,7 +439,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                       height: 40,
                                       alignment: Alignment.center,
                                       child: Text(
-                                        "Tgl Transaksi",
+                                        "Tgl Valuta",
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     ),
@@ -469,7 +469,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                             decoration: InputDecoration(
                                               filled: true,
                                               fillColor: Colors.grey[200],
-                                              hintText: "Tanggal Transaksi",
+                                              hintText: "Tanggal Valuta",
                                               border: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(6),
@@ -1266,7 +1266,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                               color: colorPrimary,
                                               alignment: Alignment.center,
                                               padding: EdgeInsets.all(6),
-                                              child: Text('Tanggal Transaksi',
+                                              child: Text('Tanggal Valuta',
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     fontWeight: FontWeight.w300,

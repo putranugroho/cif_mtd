@@ -109,7 +109,7 @@ class BanyakTransaksiPage extends StatelessWidget {
                                     padding: EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Tanggal Transaksi',
+                                    child: Text('Tanggal Valuta',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -408,7 +408,7 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                               fillColor: Colors
                                                                   .grey[200],
                                                               hintText:
-                                                                  "Tanggal Transaksi",
+                                                                  "Tanggal Valuta",
                                                               hintStyle:
                                                                   const TextStyle(
                                                                       color: Colors

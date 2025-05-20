@@ -640,7 +640,7 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                         CrossAxisAlignment.stretch,
                                     children: [
                                       Text(
-                                        "Tanggal Transaksi",
+                                        "Tanggal Valuta",
                                         style: TextStyle(
                                           fontSize: 12,
                                         ),
@@ -658,7 +658,7 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                           decoration: InputDecoration(
                                             filled: true,
                                             fillColor: Colors.grey[200],
-                                            hintText: "Tanggal Transaksi",
+                                            hintText: "Tanggal Valuta",
                                             border: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(6),

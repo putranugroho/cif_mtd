@@ -99,13 +99,10 @@ class PejabatPage extends StatelessWidget {
                                 headerRowHeight: 40,
                                 defaultColumnWidth: 180,
                                 frozenColumnsCount: 1,
-
-                                
                                 gridLinesVisibility: GridLinesVisibility.both,
                                 headerGridLinesVisibility:
                                     GridLinesVisibility.both,
                                 selectionMode: SelectionMode.single,
-
                                 source: DetailDataSource(value),
                                 columns: <GridColumn>[
                                   GridColumn(
@@ -122,18 +119,6 @@ class PejabatPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      columnName: 'nik',
-                                      label: Container(
-                                          padding: EdgeInsets.all(6),
-                                          color: colorPrimary,
-                                          alignment: Alignment.center,
-                                          child: Text('NIK',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.white,
-                                                fontSize: 12,
-                                              )))),
-                                  GridColumn(
                                       columnName: 'nama',
                                       label: Container(
                                           color: colorPrimary,
@@ -144,6 +129,18 @@ class PejabatPage extends StatelessWidget {
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'nik',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('NIP',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                                fontSize: 12,
                                               )))),
                                   GridColumn(
                                       columnName: 'hp',
@@ -567,8 +564,8 @@ class DetailDataSource extends DataGridSource {
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(columnName: 'nik', value: data.nik),
                 DataGridCell(columnName: 'nama', value: data.namaPejabat),
+                DataGridCell(columnName: 'nik', value: data.nik),
                 DataGridCell(columnName: 'hp', value: data.noHpPejabat),
                 DataGridCell(columnName: 'jabatan', value: data.idJabatan),
                 DataGridCell(columnName: 'department', value: data.department),

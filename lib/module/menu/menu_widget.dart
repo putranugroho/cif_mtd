@@ -2331,8 +2331,7 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                   Image.asset(
                     ImageAssets.report,
                     height: 30,
-                    color:
-                        widget.value.page == 25 ? Colors.black : Colors.white,
+                    color: Colors.white,
                   ),
                   SizedBox(
                     width: 16,
@@ -2341,8 +2340,7 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                     "Laporan",
                     style: TextStyle(
                       fontSize: 16,
-                      color:
-                          widget.value.page == 25 ? Colors.black : Colors.white,
+                      color: Colors.white,
                     ),
                   )
                 ],
@@ -2389,12 +2387,12 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                 ),
               ),
               InkWell(
-                onTap: () => widget.value.gantimenu(40),
+                onTap: () => widget.value.gantimenu(25),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 40
+                    color: widget.value.page == 25
                         ? Colors.white
                         : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
@@ -2407,7 +2405,7 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: widget.value.page == 40
+                        color: widget.value.page == 25
                             ? Colors.black
                             : Colors.white,
                       ),
@@ -2415,10 +2413,10 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                         width: 16,
                       ),
                       Text(
-                        "Satu Transaksi",
+                        "Transaksi",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 40
+                          color: widget.value.page == 25
                               ? Colors.black
                               : Colors.white,
                         ),
@@ -2427,84 +2425,84 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                   ),
                 ),
               ),
-              InkWell(
-                onTap: () => widget.value.gantimenu(41),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(
-                    color: widget.value.page == 41
-                        ? Colors.white
-                        : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Image.asset(
-                        ImageAssets.report,
-                        height: 30,
-                        color: widget.value.page == 41
-                            ? Colors.black
-                            : Colors.white,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "Banyak Transaksi",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: widget.value.page == 41
-                              ? Colors.black
-                              : Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () => widget.value.gantimenu(42),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(
-                    color: widget.value.page == 42
-                        ? Colors.white
-                        : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Image.asset(
-                        ImageAssets.report,
-                        height: 30,
-                        color: widget.value.page == 42
-                            ? Colors.black
-                            : Colors.white,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "Back date",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: widget.value.page == 42
-                              ? Colors.black
-                              : Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+              // InkWell(
+              //   onTap: () => widget.value.gantimenu(41),
+              //   child: Container(
+              //     width: MediaQuery.of(context).size.width,
+              //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              //     decoration: BoxDecoration(
+              //       color: widget.value.page == 41
+              //           ? Colors.white
+              //           : Colors.transparent,
+              //       borderRadius: BorderRadius.circular(8),
+              //     ),
+              //     child: Row(
+              //       children: [
+              //         SizedBox(
+              //           width: 16,
+              //         ),
+              //         Image.asset(
+              //           ImageAssets.report,
+              //           height: 30,
+              //           color: widget.value.page == 41
+              //               ? Colors.black
+              //               : Colors.white,
+              //         ),
+              //         SizedBox(
+              //           width: 16,
+              //         ),
+              //         Text(
+              //           "Banyak Transaksi",
+              //           style: TextStyle(
+              //             fontSize: 16,
+              //             color: widget.value.page == 41
+              //                 ? Colors.black
+              //                 : Colors.white,
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // InkWell(
+              //   onTap: () => widget.value.gantimenu(42),
+              //   child: Container(
+              //     width: MediaQuery.of(context).size.width,
+              //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              //     decoration: BoxDecoration(
+              //       color: widget.value.page == 42
+              //           ? Colors.white
+              //           : Colors.transparent,
+              //       borderRadius: BorderRadius.circular(8),
+              //     ),
+              //     child: Row(
+              //       children: [
+              //         SizedBox(
+              //           width: 16,
+              //         ),
+              //         Image.asset(
+              //           ImageAssets.report,
+              //           height: 30,
+              //           color: widget.value.page == 42
+              //               ? Colors.black
+              //               : Colors.white,
+              //         ),
+              //         SizedBox(
+              //           width: 16,
+              //         ),
+              //         Text(
+              //           "Back date",
+              //           style: TextStyle(
+              //             fontSize: 16,
+              //             color: widget.value.page == 42
+              //                 ? Colors.black
+              //                 : Colors.white,
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //   ),
+              // ),
             ]),
       ],
     );

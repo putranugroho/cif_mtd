@@ -1,6 +1,20 @@
+import 'package:accounting/models/index.dart';
 import 'package:accounting/module/transaksi/laporan/laporan_transaksi_notifier.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart' as a;
+
+import 'package:accounting/utils/button_custom.dart';
+import 'package:accounting/utils/currency_formatted.dart';
+// import 'package:accounting/utils/format_currency.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+
+import '../../../utils/colors.dart';
+import '../../../utils/format_currency.dart';
 
 class LaporanTransaksiPage extends StatelessWidget {
   const LaporanTransaksiPage({super.key});
@@ -10,8 +24,1074 @@ class LaporanTransaksiPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => LaporanTransaksiNotifier(context: context),
       child: Consumer<LaporanTransaksiNotifier>(
-        builder: (context, value, child) => SafeArea(child: Scaffold()),
+        builder: (context, value, child) => SafeArea(
+            child: Scaffold(
+          body: Stack(
+            children: [
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Pembatalan Transaksi",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      width: double.infinity,
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: FocusTraversalGroup(
+                        // child: Form(
+                        //   key: value.searchForm,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Flexible(
+                              child: Row(
+                                children: [
+                                  Radio(
+                                    value: "SUCCESS",
+                                    groupValue: value.cariTrans,
+                                    activeColor: colorPrimary,
+                                    onChanged: (e) =>
+                                        value.pilihCariTransaksi("SUCCESS"),
+                                  ),
+                                  const Text("Sukses"),
+                                  const SizedBox(width: 16),
+                                  Radio(
+                                    value: "BACKDATE",
+                                    groupValue: value.cariTrans,
+                                    activeColor: colorPrimary,
+                                    onChanged: (e) =>
+                                        value.pilihCariTransaksi("BACKDATE"),
+                                  ),
+                                  const Text("Back Date"),
+                                  const SizedBox(width: 16),
+                                  Radio(
+                                    value: "CANCEL",
+                                    groupValue: value.cariTrans,
+                                    activeColor: colorPrimary,
+                                    onChanged: (e) =>
+                                        value.pilihCariTransaksi("CANCEL"),
+                                  ),
+                                  const Text("Pembatalan"),
+                                  const SizedBox(width: 16),
+                                  Radio(
+                                    value: "PENDING",
+                                    groupValue: value.cariTrans,
+                                    activeColor: colorPrimary,
+                                    onChanged: (e) =>
+                                        value.pilihCariTransaksi("PENDING"),
+                                  ),
+                                  const Text("Pending"),
+                                  const SizedBox(width: 16),
+                                  Radio(
+                                    value: "ALL",
+                                    groupValue: value.cariTrans,
+                                    activeColor: colorPrimary,
+                                    onChanged: (e) =>
+                                        value.pilihCariTransaksi("ALL"),
+                                  ),
+                                  const Text("Semua"),
+                                  const SizedBox(width: 16),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        // ),
+                      ),
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      width: double.infinity,
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: FocusTraversalGroup(
+                        // child: Form(
+                        //   key: value.searchForm,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            // Label + Radio + Tanggal Valuta
+                            Flexible(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "User Input",
+                                    style: const TextStyle(fontSize: 20),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  SizedBox(
+                                    width: 250,
+                                    child: TextFormField(
+                                      // enabled: !value.cariTrans,
+                                      readOnly: true,
+                                      // onTap: () => value.tanggalTransaksi(),
+                                      controller: value.cariUser,
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        // filled: value.cariTrans,
+                                        // fillColor: Colors.grey[200],
+                                        hintText: "Cari User",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Checkbox(
+                                      value: value.pilihSemuaMenu,
+                                      onChanged: (e) =>
+                                          value.togglePilihSemua()),
+                                  Text("Semua"),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        // ),
+                      ),
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      width: double.infinity,
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: FocusTraversalGroup(
+                        // child: Form(
+                        //   key: value.searchForm,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            // Label + Radio + Tanggal Valuta
+                            Flexible(
+                              child: Row(
+                                children: [
+                                  Radio(
+                                    value: true,
+                                    groupValue: value.cariTglTrans,
+                                    activeColor: colorPrimary,
+                                    onChanged: (e) =>
+                                        value.pilihTglTransaksi(true),
+                                  ),
+                                  const Text("Tgl Trx"),
+                                  const SizedBox(width: 16),
+                                  Radio(
+                                    value: false,
+                                    groupValue: value.cariTglTrans,
+                                    activeColor: colorPrimary,
+                                    onChanged: (e) =>
+                                        value.pilihTglTransaksi(false),
+                                  ),
+                                  const Text("Tgl Valuta"),
+                                  const SizedBox(width: 24),
+                                  SizedBox(
+                                    width: 180,
+                                    child: TextFormField(
+                                      readOnly: true,
+                                      onTap: () => value.tanggalTransaksi(),
+                                      controller: value.tglTransaksi,
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        fillColor: Colors.grey[200],
+                                        hintText: "Tanggal Awal",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 24),
+                                  const Text("s/d"),
+                                  const SizedBox(width: 24),
+                                  SizedBox(
+                                    width: 180,
+                                    child: TextFormField(
+                                      readOnly: true,
+                                      onTap: () => value.tanggalTransaksi(),
+                                      controller: value.tglTransaksi,
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        fillColor: Colors.grey[200],
+                                        hintText: "Tanggal Akhir",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // Tombol Cari
+                            ElevatedButton(
+                              onPressed: () => value.tambah(),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: colorPrimary,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 16),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              child: const Text("Tampil",
+                                  style: TextStyle(color: Colors.white)),
+                            ),
+                          ],
+                        ),
+                        // ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        height: MediaQuery.of(context).size.height,
+                        child: SfDataGrid(
+                          headerRowHeight: 40,
+                          defaultColumnWidth: 180,
+                          frozenColumnsCount: 1,
+
+                          // controller: value.dataGridController,
+                          gridLinesVisibility: GridLinesVisibility.both,
+                          headerGridLinesVisibility: GridLinesVisibility.both,
+                          selectionMode: SelectionMode.single,
+
+                          source: DetailDataSource(value),
+                          columns: <GridColumn>[
+                            GridColumn(
+                                columnName: 'tgl_trans',
+                                label: Container(
+                                    padding: const EdgeInsets.all(6),
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    child: const Text('Tanggal',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 12,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                columnName: 'nomor_dok',
+                                label: Container(
+                                    padding: const EdgeInsets.all(6),
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    child: const Text('No Dokumen',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        )))),
+                            GridColumn(
+                                columnName: 'nomor_ref',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('No Referensi',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                columnName: 'nominal',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nominal',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                columnName: 'debet_acc',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Akun Debet',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                columnName: 'credit_acc',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Akun Kredit',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                columnName: 'keterangan',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('keterangan',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                columnName: 'action',
+                                label: Container(
+                                    color: colorPrimary,
+                                    padding: const EdgeInsets.all(6),
+                                    alignment: Alignment.center,
+                                    child: const Text('Action',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: value.dialog
+                    ? Container(
+                        color: Colors.black.withOpacity(0.5),
+                      )
+                    : const SizedBox(),
+              ),
+              Positioned(
+                top: 0,
+                bottom: 0,
+                right: 0,
+                child: value.dialog
+                    ? Container(
+                        padding: EdgeInsets.all(20),
+                        width: 600,
+                        decoration: BoxDecoration(color: Colors.white),
+                        child: FocusTraversalGroup(
+                          child: Form(
+                            key: value.keyForm,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        "Pembatalan Transaksi",
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () => value.tutup(),
+                                      child: Container(
+                                        width: 40,
+                                        height: 40,
+                                        padding: EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey[200],
+                                            shape: BoxShape.circle),
+                                        child: Icon(Icons.close),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 32,
+                                ),
+                                Expanded(
+                                    child: ListView(
+                                  children: [
+                                    const Row(
+                                      children: [
+                                        Text(
+                                          "Tanggal Valuta",
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TextFormField(
+                                      textInputAction: TextInputAction.done,
+                                      readOnly: true,
+                                      decoration: InputDecoration(
+                                        hintText: "Tgl Valuta",
+                                        filled: true,
+                                        fillColor: Colors.grey[200],
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                children: [
+                                              const Row(
+                                                children: [
+                                                  Text(
+                                                    "No. Dokumen",
+                                                    style:
+                                                        TextStyle(fontSize: 12),
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Text(
+                                                    "*",
+                                                    style:
+                                                        TextStyle(fontSize: 8),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              TextFormField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: value.noDok,
+                                                maxLines: 1,
+                                                readOnly: true,
+                                                // inputFormatters: [
+                                                //   FilteringTextInputFormatter.digitsOnly
+                                                // ],
+                                                decoration: InputDecoration(
+                                                  filled: true,
+                                                  fillColor: Colors.grey[200],
+                                                  hintText: "No. Dokumen",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                  ),
+                                                ),
+                                              ),
+                                            ])),
+                                        const SizedBox(
+                                          width: 16,
+                                        ),
+                                        Expanded(
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                children: [
+                                              const Row(
+                                                children: [
+                                                  Text(
+                                                    "No. Referensi",
+                                                    style:
+                                                        TextStyle(fontSize: 12),
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Text(
+                                                    "*",
+                                                    style:
+                                                        TextStyle(fontSize: 8),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              TextFormField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: value.noRef,
+                                                maxLines: 1,
+                                                readOnly: true,
+                                                // inputFormatters: [
+                                                //   FilteringTextInputFormatter.digitsOnly
+                                                // ],
+                                                decoration: InputDecoration(
+                                                  filled: true,
+                                                  fillColor: Colors.grey[200],
+                                                  hintText: "No. Referensi",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                  ),
+                                                ),
+                                              ),
+                                            ])),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                children: [
+                                              const Row(
+                                                children: [
+                                                  Text(
+                                                    "Akun Debet",
+                                                    style:
+                                                        TextStyle(fontSize: 12),
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Text(
+                                                    "*",
+                                                    style:
+                                                        TextStyle(fontSize: 8),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              TextFormField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: value.akunDebit,
+                                                maxLines: 1,
+                                                readOnly: true,
+                                                obscureText: true,
+                                                // inputFormatters: [
+                                                //   FilteringTextInputFormatter.digitsOnly
+                                                // ],
+                                                decoration: InputDecoration(
+                                                  filled: true,
+                                                  fillColor: Colors.grey[200],
+                                                  hintText: "Akun Debet",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                  ),
+                                                ),
+                                              ),
+                                            ])),
+                                        const SizedBox(
+                                          width: 16,
+                                        ),
+                                        Expanded(
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                children: [
+                                              const Row(
+                                                children: [
+                                                  Text(
+                                                    "Akun Kredit",
+                                                    style:
+                                                        TextStyle(fontSize: 12),
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Text(
+                                                    "*",
+                                                    style:
+                                                        TextStyle(fontSize: 8),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              TextFormField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: value.akunKredit,
+                                                maxLines: 1,
+                                                readOnly: true,
+                                                obscureText: true,
+                                                // inputFormatters: [
+                                                //   FilteringTextInputFormatter.digitsOnly
+                                                // ],
+                                                decoration: InputDecoration(
+                                                  filled: true,
+                                                  fillColor: Colors.grey[200],
+                                                  hintText: "Akun Kredit",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                  ),
+                                                ),
+                                              ),
+                                            ])),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                children: [
+                                              const Row(
+                                                children: [
+                                                  Text(
+                                                    "SBB Debet",
+                                                    style:
+                                                        TextStyle(fontSize: 12),
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Text(
+                                                    "*",
+                                                    style:
+                                                        TextStyle(fontSize: 8),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              TextFormField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: value.sbbDebit,
+                                                maxLines: 1,
+                                                readOnly: true,
+                                                obscureText: true,
+                                                // inputFormatters: [
+                                                //   FilteringTextInputFormatter.digitsOnly
+                                                // ],
+                                                decoration: InputDecoration(
+                                                  filled: true,
+                                                  fillColor: Colors.grey[200],
+                                                  hintText: "SBB Debet",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                  ),
+                                                ),
+                                              ),
+                                            ])),
+                                        const SizedBox(
+                                          width: 16,
+                                        ),
+                                        Expanded(
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                children: [
+                                              const Row(
+                                                children: [
+                                                  Text(
+                                                    "SBB Kredit",
+                                                    style:
+                                                        TextStyle(fontSize: 12),
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Text(
+                                                    "*",
+                                                    style:
+                                                        TextStyle(fontSize: 8),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              TextFormField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: value.sbbKredit,
+                                                maxLines: 1,
+                                                readOnly: true,
+                                                obscureText: true,
+                                                // inputFormatters: [
+                                                //   FilteringTextInputFormatter.digitsOnly
+                                                // ],
+                                                decoration: InputDecoration(
+                                                  filled: true,
+                                                  fillColor: Colors.grey[200],
+                                                  hintText: "SBB Kredit",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                  ),
+                                                ),
+                                              ),
+                                            ])),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    const Row(
+                                      children: [
+                                        Text(
+                                          "Nominal",
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TextFormField(
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.nominal,
+                                      maxLines: 1,
+                                      readOnly: true,
+                                      obscureText: true,
+                                      // inputFormatters: [
+                                      //   FilteringTextInputFormatter.digitsOnly
+                                      // ],
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.grey[200],
+                                        hintText: "Nominal",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    const Row(
+                                      children: [
+                                        Text(
+                                          "Keterangan",
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TextFormField(
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.keterangan,
+                                      maxLines: 1,
+                                      readOnly: true,
+                                      obscureText: true,
+                                      // inputFormatters: [
+                                      //   FilteringTextInputFormatter.digitsOnly
+                                      // ],
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.grey[200],
+                                        hintText: "Keterangan",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                children: [
+                                              const Row(
+                                                children: [
+                                                  Text(
+                                                    "AO Debet",
+                                                    style:
+                                                        TextStyle(fontSize: 12),
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Text(
+                                                    "*",
+                                                    style:
+                                                        TextStyle(fontSize: 8),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              TextFormField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: value.aoDebit,
+                                                maxLines: 1,
+                                                readOnly: true,
+                                                obscureText: true,
+                                                // inputFormatters: [
+                                                //   FilteringTextInputFormatter.digitsOnly
+                                                // ],
+                                                decoration: InputDecoration(
+                                                  filled: true,
+                                                  fillColor: Colors.grey[200],
+                                                  hintText: "AO Debet",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                  ),
+                                                ),
+                                              ),
+                                            ])),
+                                        const SizedBox(
+                                          width: 16,
+                                        ),
+                                        Expanded(
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                children: [
+                                              const Row(
+                                                children: [
+                                                  Text(
+                                                    "AO Kredit",
+                                                    style:
+                                                        TextStyle(fontSize: 12),
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Text(
+                                                    "*",
+                                                    style:
+                                                        TextStyle(fontSize: 8),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              TextFormField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: value.aoKredit,
+                                                maxLines: 1,
+                                                readOnly: true,
+                                                obscureText: true,
+                                                // inputFormatters: [
+                                                //   FilteringTextInputFormatter.digitsOnly
+                                                // ],
+                                                decoration: InputDecoration(
+                                                  filled: true,
+                                                  fillColor: Colors.grey[200],
+                                                  hintText: "AO Kredit",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                  ),
+                                                ),
+                                              ),
+                                            ])),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Tanggal Pembatalan",
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    InkWell(
+                                      onTap: () => value.tanggalPenjualan(),
+                                      child: TextFormField(
+                                        textInputAction: TextInputAction.done,
+                                        enabled: false,
+                                        controller: value.tglPenjualan,
+                                        style: const TextStyle(
+                                          // Make text bigger and black
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        validator: (e) {
+                                          if (e!.isEmpty) return "Wajib diisi";
+                                          return null;
+                                        },
+                                        decoration: InputDecoration(
+                                          hintText: "Tgl Pembatalan",
+                                          hintStyle: const TextStyle(
+                                              color: Colors.grey),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                          ),
+                                          disabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.grey.shade600),
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    const Row(
+                                      children: [
+                                        Text(
+                                          "Alasan Pembatalan",
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TextFormField(
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.alasan,
+                                      maxLines: 1,
+                                      obscureText: true,
+                                      // inputFormatters: [
+                                      //   FilteringTextInputFormatter.digitsOnly
+                                      // ],
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "Alasan Pembatalan",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        const SizedBox(height: 16),
+                                        ButtonDanger(
+                                          onTap: () {
+                                            value.confirm();
+                                          },
+                                          name: "Proses Pembatalan",
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ))
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
+              )
+            ],
+          ),
+        )),
       ),
     );
+  }
+}
+
+class DetailDataSource extends DataGridSource {
+  DetailDataSource(value) {
+    // tindakanNotifier = "";
+    // buildRowData(value.listData);
+  }
+
+  @override
+  DataGridRowAdapter? buildRow(DataGridRow row) {
+    // TODO: implement buildRow
+    throw UnimplementedError();
   }
 }

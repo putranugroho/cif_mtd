@@ -126,18 +126,6 @@ class UsersPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      columnName: 'userid',
-                                      label: Container(
-                                          padding: EdgeInsets.all(6),
-                                          color: colorPrimary,
-                                          alignment: Alignment.center,
-                                          child: Text('User ID',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.white,
-                                                fontSize: 12,
-                                              )))),
-                                  GridColumn(
                                       columnName: 'namauser',
                                       label: Container(
                                           color: colorPrimary,
@@ -148,6 +136,18 @@ class UsersPage extends StatelessWidget {
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'userid',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('User ID',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                                fontSize: 12,
                                               )))),
                                   GridColumn(
                                       columnName: 'tglexp',
@@ -353,6 +353,12 @@ class UsersPage extends StatelessWidget {
                                       height: 8,
                                     ),
                                     DropdownSearch<KantorModel>(
+                                      validator: (value) {
+                                        if (value == null) {
+                                          return 'Wajib diisi';
+                                        }
+                                        return null;
+                                      },
                                       popupProps:
                                           const PopupPropsMultiSelection.menu(
                                         showSearchBox:
@@ -1333,8 +1339,8 @@ class DetailDataSource extends DataGridSource {
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(columnName: 'userid', value: data.userid),
                 DataGridCell(columnName: 'namauser', value: data.namauser),
+                DataGridCell(columnName: 'userid', value: data.userid),
                 DataGridCell(columnName: 'tglexp', value: data.tglexp),
                 DataGridCell(
                     columnName: 'lvluser',

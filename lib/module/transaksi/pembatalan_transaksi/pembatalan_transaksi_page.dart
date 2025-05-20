@@ -60,7 +60,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                // Label + Radio + Tanggal Transaksi
+                                // Label + Radio + Tanggal Valuta
                                 Flexible(
                                   child: Row(
                                     children: [
@@ -103,7 +103,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                           decoration: InputDecoration(
                                             filled: value.cariTrans,
                                             fillColor: Colors.grey[200],
-                                            hintText: "Tanggal Transaksi",
+                                            hintText: "Tanggal Valuta",
                                             border: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(6),
@@ -348,7 +348,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                       const Row(
                                         children: [
                                           Text(
-                                            "Tanggal Transaksi",
+                                            "Tanggal Valuta",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                           SizedBox(width: 5),
@@ -365,7 +365,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                         textInputAction: TextInputAction.done,
                                         readOnly: true,
                                         decoration: InputDecoration(
-                                          hintText: "Tgl Transaksi",
+                                          hintText: "Tgl Valuta",
                                           filled: true,
                                           fillColor: Colors.grey[200],
                                           border: OutlineInputBorder(

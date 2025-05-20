@@ -109,7 +109,7 @@ class KasKecilPage extends StatelessWidget {
                                     padding: EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Tanggal Transaksi',
+                                    child: Text('Tanggal Valuta',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -348,7 +348,7 @@ class KasKecilPage extends StatelessWidget {
                                                 decoration: InputDecoration(
                                                   filled: !value.backDate,
                                                   fillColor: Colors.grey[200],
-                                                  hintText: "Tanggal Transaksi",
+                                                  hintText: "Tanggal Valuta",
                                                   hintStyle: const TextStyle(
                                                       color: Colors.grey),
                                                   border: OutlineInputBorder(
@@ -1181,6 +1181,13 @@ class KasKecilPage extends StatelessWidget {
                                       ),
                                       TextFormField(
                                         textInputAction: TextInputAction.done,
+                                        validator: (e) {
+                                          if (e!.isEmpty) {
+                                            return "Wajib diisi";
+                                          } else {
+                                            return null;
+                                          }
+                                        },
                                         decoration: InputDecoration(
                                           hintText: "Keterangan Transaksi",
                                           border: OutlineInputBorder(

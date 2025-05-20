@@ -819,7 +819,7 @@ class JualBeliPage extends StatelessWidget {
                                                             Row(
                                                               children: [
                                                                 Text(
-                                                                  "Tanggal Transaksi",
+                                                                  "Tanggal Valuta",
                                                                   style: const TextStyle(
                                                                       fontSize:
                                                                           12),
@@ -863,7 +863,7 @@ class JualBeliPage extends StatelessWidget {
                                                               decoration:
                                                                   InputDecoration(
                                                                 hintText:
-                                                                    "Tanggal Transaksi",
+                                                                    "Tanggal Valuta",
                                                                 border:
                                                                     OutlineInputBorder(
                                                                   borderRadius:

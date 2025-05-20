@@ -332,17 +332,10 @@ class KasbonPage extends StatelessWidget {
                                                   .digitsOnly,
                                               CurrencyInputFormatter(),
                                             ],
-                                            validator: (e) {
-                                              if (e!.isEmpty) {
-                                                return "Wajib diisi";
-                                              } else {
-                                                return null;
-                                              }
-                                            },
                                             decoration: InputDecoration(
                                               filled: true,
                                               fillColor: Colors.grey[200],
-                                              hintText: "Tanggal Transaksi",
+                                              hintText: "Tanggal Valuta",
                                               border: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(6),
@@ -380,7 +373,7 @@ class KasbonPage extends StatelessWidget {
                                                     child: TypeAheadField<
                                                         InqueryGlModel>(
                                                       controller:
-                                                          value.nosbbdeb,
+                                                          value.namaSbbDeb,
                                                       suggestionsCallback:
                                                           (search) =>
                                                               value.getInquery(
@@ -430,7 +423,7 @@ class KasbonPage extends StatelessWidget {
                                                       textInputAction:
                                                           TextInputAction.done,
                                                       controller:
-                                                          value.namaSbbDeb,
+                                                          value.nosbbdeb,
                                                       maxLines: 1,
                                                       // inputFormatters: [
                                                       //   FilteringTextInputFormatter.digitsOnly
@@ -490,7 +483,7 @@ class KasbonPage extends StatelessWidget {
                                                     child: TypeAheadField<
                                                         InqueryGlModel>(
                                                       controller:
-                                                          value.nossbcre,
+                                                          value.namaSbbCre,
                                                       suggestionsCallback:
                                                           (search) =>
                                                               value.getInquery(
@@ -540,7 +533,7 @@ class KasbonPage extends StatelessWidget {
                                                       textInputAction:
                                                           TextInputAction.done,
                                                       controller:
-                                                          value.namaSbbCre,
+                                                          value.nossbcre,
                                                       maxLines: 1,
                                                       // inputFormatters: [
                                                       //   FilteringTextInputFormatter.digitsOnly
@@ -601,13 +594,6 @@ class KasbonPage extends StatelessWidget {
                                                   .digitsOnly,
                                               CurrencyInputFormatter(),
                                             ],
-                                            validator: (e) {
-                                              if (e!.isEmpty) {
-                                                return "Wajib diisi";
-                                              } else {
-                                                return null;
-                                              }
-                                            },
                                             decoration: InputDecoration(
                                               filled: true,
                                               fillColor: Colors.grey[200],
@@ -651,13 +637,6 @@ class KasbonPage extends StatelessWidget {
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
-                                                    validator: (e) {
-                                                      if (e!.isEmpty) {
-                                                        return "Wajib diisi";
-                                                      } else {
-                                                        return null;
-                                                      }
-                                                    },
                                                     decoration: InputDecoration(
                                                       filled: true,
                                                       fillColor:
@@ -704,13 +683,6 @@ class KasbonPage extends StatelessWidget {
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
-                                                    validator: (e) {
-                                                      if (e!.isEmpty) {
-                                                        return "Wajib diisi";
-                                                      } else {
-                                                        return null;
-                                                      }
-                                                    },
                                                     decoration: InputDecoration(
                                                       filled: true,
                                                       fillColor:
@@ -751,13 +723,6 @@ class KasbonPage extends StatelessWidget {
                                             textInputAction:
                                                 TextInputAction.done,
                                             readOnly: true,
-                                            validator: (e) {
-                                              if (e!.isEmpty) {
-                                                return "Wajib diisi";
-                                              } else {
-                                                return null;
-                                              }
-                                            },
                                             decoration: InputDecoration(
                                               filled: true,
                                               fillColor: Colors.grey[200],
@@ -1073,13 +1038,13 @@ class KasbonPage extends StatelessWidget {
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
-                                                    validator: (e) {
-                                                      if (e!.isEmpty) {
-                                                        return "Wajib diisi";
-                                                      } else {
-                                                        return null;
-                                                      }
-                                                    },
+                                                    // validator: (e) {
+                                                    //   if (e!.isEmpty) {
+                                                    //     return "Wajib diisi";
+                                                    //   } else {
+                                                    //     return null;
+                                                    //   }
+                                                    // },
                                                     decoration: InputDecoration(
                                                       filled: true,
                                                       fillColor:
@@ -1107,9 +1072,7 @@ class KasbonPage extends StatelessWidget {
                                                     Row(
                                                       children: [
                                                         Text(
-                                                          value.nilaiNominal >
-                                                                  value
-                                                                      .nilaiselisih
+                                                          value.nilaiselisih > 0
                                                               ? "Kredit Akun"
                                                               : "Debet Akun",
                                                           style:
@@ -1145,8 +1108,9 @@ class KasbonPage extends StatelessWidget {
                                                               return TextField(
                                                                   controller:
                                                                       controller,
-                                                                  enabled:
-                                                                      false,
+                                                                  enabled: value
+                                                                          .nilaiselisih !=
+                                                                      0,
                                                                   focusNode:
                                                                       focusNode,
                                                                   autofocus:
@@ -1328,7 +1292,7 @@ class KasbonPage extends StatelessWidget {
                                                       fillColor:
                                                           Colors.grey[200],
                                                       hintText:
-                                                          "Tanggal Transaksi",
+                                                          "Tanggal Valuta",
                                                       hintStyle:
                                                           const TextStyle(
                                                               color:
@@ -1693,7 +1657,7 @@ class KasbonPage extends StatelessWidget {
                                           TextFormField(
                                             textInputAction:
                                                 TextInputAction.done,
-                                            controller: value.nominal,
+                                            controller: value.nilaiTrans,
                                             maxLines: 1,
                                             inputFormatters: [
                                               FilteringTextInputFormatter

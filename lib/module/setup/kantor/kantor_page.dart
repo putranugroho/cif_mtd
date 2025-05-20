@@ -122,19 +122,6 @@ class KantorPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       width: 100,
-                                      columnName: 'kode_induk',
-                                      label: Container(
-                                          padding: EdgeInsets.all(6),
-                                          color: colorPrimary,
-                                          alignment: Alignment.center,
-                                          child: Text('Kode Induk',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.white,
-                                                fontSize: 12,
-                                              )))),
-                                  GridColumn(
-                                      width: 100,
                                       columnName: 'kode_kantor',
                                       label: Container(
                                           color: colorPrimary,
@@ -145,6 +132,19 @@ class KantorPage extends StatelessWidget {
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      width: 100,
+                                      columnName: 'kode_induk',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Kode Induk',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                                fontSize: 12,
                                               )))),
                                   GridColumn(
                                       columnName: 'nama_kantor',
@@ -972,13 +972,15 @@ class DetailDataSource extends DataGridSource {
   @override
   List<DataGridRow> get rows => _laporanData;
   void buildRowData(List<KantorModel> list) {
+    list.sort((a, b) => (a.kodeInduk).compareTo(b.kodeInduk));
+
     int index = 1;
     _laporanData = list
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(columnName: 'kode_induk', value: data.kodeInduk),
                 DataGridCell(columnName: 'kode_kantor', value: data.kodeKantor),
+                DataGridCell(columnName: 'kode_induk', value: data.kodeInduk),
                 DataGridCell(columnName: 'nama_kantor', value: data.namaKantor),
                 DataGridCell(columnName: 'alamat', value: data.alamat),
                 DataGridCell(
