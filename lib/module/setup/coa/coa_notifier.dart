@@ -382,8 +382,8 @@ class CoaNotifier extends ChangeNotifier {
         var data = {
           "id": coaModel!.id,
           "kode_pt": "001",
-          "kode_kantor": "1001",
-          "kode_induk": "200",
+          "kode_kantor": "001",
+          "kode_induk": "001",
           "userinput": "Testing",
           "userterm": "114.80.30.143",
           "gol_acc":
@@ -425,8 +425,8 @@ class CoaNotifier extends ChangeNotifier {
         DialogCustom().showLoading(context);
         var data = {
           "kode_pt": "001",
-          "kode_kantor": "1001",
-          "kode_induk": "200",
+          "kode_kantor": "001",
+          "kode_induk": "001",
           "userinput": "Testing",
           "userterm": "114.80.30.143",
           "gol_acc":
