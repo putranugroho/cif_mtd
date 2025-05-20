@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:accounting/models/index.dart';
 import 'package:accounting/repository/SetupRepository.dart';
@@ -126,6 +127,8 @@ class UsersNotifier extends ChangeNotifier {
   // var aksesKasir = false;
   final keyForm = GlobalKey<FormState>();
   cek() {
+    final random = Random();
+    int randomNumber = 1000 + random.nextInt(9000);
     if (keyForm.currentState!.validate()) {
       if (listAddHariKerja.isNotEmpty) {
         if (editData) {
@@ -148,6 +151,7 @@ class UsersNotifier extends ChangeNotifier {
           var data = {
             "id": users!.id,
             "userid": "${userid.text}",
+            "batch": "$randomNumber",
             "emp_id":
                 "${karyawanModel == null ? nikKaryawan.text : karyawanModel!.nik}",
             "pass": "${pass.text}",
@@ -207,6 +211,7 @@ class UsersNotifier extends ChangeNotifier {
           var data = {
             "userid": "${userid.text}",
             "pass": "${pass.text}",
+            "batch": "$randomNumber",
             "emp_id": "${karyawanModel!.nik}",
             "namauser": "${karyawanModel!.namaLengkap}",
             "kode_pt": "${kantorModel == null ? "001" : kantorModel!.kodePt}",
