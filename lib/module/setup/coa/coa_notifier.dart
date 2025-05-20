@@ -16,7 +16,30 @@ class CoaNotifier extends ChangeNotifier {
   CoaNotifier({required this.context}) {
     getMasterGl();
     getMasterGlSubtree();
+    getKantor();
     notifyListeners();
+  }
+  List<KantorModel> listKantor = [];
+  Future getKantor() async {
+    listKantor.clear();
+    isLoading = true;
+    var data = {
+      "kode_pt": "001",
+    };
+    notifyListeners();
+    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data))
+        .then((value) {
+      if (value['status'] == "Success") {
+        for (Map<String, dynamic> i in value['data']) {
+          listKantor.add(KantorModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
   }
 
   List<dynamic> listJson = [];
@@ -177,6 +200,87 @@ class CoaNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  confirmotorisasi() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: 500,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Anda yakin menjalankan otorisasi Master GL ke semua kantor?",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ButtonSecondary(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        name: "Tidak",
+                      )),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                          child: ButtonPrimary(
+                        onTap: () {
+                          Navigator.pop(context);
+                          otorisasiSemua();
+                        },
+                        name: "Ya",
+                      )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  otorisasiSemua() async {
+    DialogCustom().showLoading(context);
+    List<Map<String, dynamic>> listTmp = [];
+    for (var i = 0; i < listKantor.length; i++) {
+      listTmp.add(
+        {
+          "kode_pt": "${listKantor[i].kodePt}",
+          "kode_kantor": "${listKantor[i].kodeKantor}",
+          "kode_induk": "${listKantor[i].kodeInduk}"
+        },
+      );
+    }
+    var data = {
+      "kode_pt": '001',
+      "kode_kantor": '1000',
+      "kode_induk": '',
+      "userinput": 'Testing',
+      "userterm": '114.80.64.90',
+      "data": listTmp,
+    };
+    Setuprepository.setup(token, NetworkURL.otorisasi(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['code'] == "000") {
+        informationDialog(context, "Warning", value['message']);
+      } else {
+        informationDialog(context, "Warning", value['message']);
+      }
+    });
+  }
+
   confirm() async {
     showDialog(
         context: context,
@@ -230,12 +334,15 @@ class CoaNotifier extends ChangeNotifier {
   remove() {
     DialogCustom().showLoading(context);
     var data = {
-      "id": coaModel!.id,
+      "nosbb": coaModel!.nosbb,
+      "userinput": "Testing",
+      "userterm": "114.80.30.143",
     };
     Setuprepository.setup(token, NetworkURL.deleteMasterGl(), jsonEncode(data))
         .then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
+        getMasterGlSubtree();
         getMasterGl();
         clear();
         dialog = false;
@@ -307,6 +414,7 @@ class CoaNotifier extends ChangeNotifier {
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);
             clear();
+            getMasterGlSubtree();
             getMasterGl();
             notifyListeners();
           } else {
@@ -347,10 +455,11 @@ class CoaNotifier extends ChangeNotifier {
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);
             clear();
+            getMasterGlSubtree();
             getMasterGl();
             notifyListeners();
           } else {
-            informationDialog(context, "Warning", value['message'][0]);
+            informationDialog(context, "Warning", value['message']);
           }
         });
       }
@@ -359,7 +468,7 @@ class CoaNotifier extends ChangeNotifier {
 
   CoaModel? coaModel;
   edit(String id) {
-    coaModel = list.where((e) => e.id == int.parse(id)).first;
+    coaModel = list.where((e) => e.nosbb == id).first;
     confirm();
     notifyListeners();
   }

@@ -397,6 +397,14 @@ class NetworkURL {
     return "$url/user-akses-point/viewall";
   }
 
+  static String otorisasi() {
+    return "$url/General-ledger/otorisasi";
+  }
+
+  static String transaksi() {
+    return "$url/transaksi";
+  }
+
   static String cariKaryawan() {
     return "$url/karyawan/search";
   }

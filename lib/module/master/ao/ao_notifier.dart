@@ -14,8 +14,39 @@ class AoNotifier extends ChangeNotifier {
 
   AoNotifier({required this.context}) {
     getAoMarketing();
+    getKantor();
     notifyListeners();
   }
+
+  List<KantorModel> listKantor = [];
+  Future getKantor() async {
+    listKantor.clear();
+    isLoading = true;
+    var data = {
+      "kode_pt": "001",
+    };
+    notifyListeners();
+    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data))
+        .then((value) {
+      if (value['status'] == "Success") {
+        for (Map<String, dynamic> i in value['data']) {
+          listKantor.add(KantorModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  KantorModel? kantorModel;
+  pilihKantor(KantorModel value) {
+    kantorModel = value;
+    notifyListeners();
+  }
+
   var isLoading = true;
   getAoMarketing() async {
     isLoading = true;
@@ -49,9 +80,9 @@ class AoNotifier extends ChangeNotifier {
           "id": aoModel!.id,
           "kode": kd.text.trim(),
           "nama": nm.text.trim(),
-          "kode_pt": aoModel!.kodePt,
-          "kode_kantor": aoModel!.kodeKantor,
-          "kode_induk": aoModel!.kodeInduk,
+          "kode_pt": kantorModel!.kodePt,
+          "kode_kantor": kantorModel!.kodeKantor,
+          "kode_induk": kantorModel!.kodeInduk,
           "gol_cust": penempatanModel == "Customer"
               ? "1"
               : penempatanModel == "Supplier"
@@ -76,14 +107,14 @@ class AoNotifier extends ChangeNotifier {
         var data = {
           "kode": kd.text.trim(),
           "nama": nm.text.trim(),
-          "kode_pt": "001",
           "gol_cust": penempatanModel == "Customer"
               ? "1"
               : penempatanModel == "Supplier"
                   ? "2"
                   : "3",
-          "kode_kantor": "",
-          "kode_induk": "",
+          "kode_pt": kantorModel!.kodePt,
+          "kode_kantor": kantorModel!.kodeKantor,
+          "kode_induk": kantorModel!.kodeInduk,
         };
         Setuprepository.setup(
                 token, NetworkURL.addAoMarketing(), jsonEncode(data))

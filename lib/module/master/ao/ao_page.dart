@@ -211,6 +211,44 @@ class AoPage extends StatelessWidget {
                                 SizedBox(
                                   height: 32,
                                 ),
+                                Text(
+                                  "Kantor",
+                                  style: const TextStyle(fontSize: 12),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                DropdownSearch<KantorModel>(
+                                  popupProps:
+                                      const PopupPropsMultiSelection.menu(
+                                    showSearchBox:
+                                        true, // Aktifkan fitur pencarian
+                                  ),
+                                  selectedItem: value.kantorModel,
+                                  items: value.listKantor,
+                                  itemAsString: (e) => "${e.namaKantor}",
+                                  onChanged: (e) {
+                                    value.pilihKantor(e!);
+                                  },
+                                  dropdownDecoratorProps:
+                                      DropDownDecoratorProps(
+                                    baseStyle: TextStyle(fontSize: 16),
+                                    textAlignVertical: TextAlignVertical.center,
+                                    dropdownSearchDecoration: InputDecoration(
+                                      hintText: "Pilih Kantor",
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(
+                                          width: 1,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
                                 Row(
                                   children: [
                                     Text(

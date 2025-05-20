@@ -72,7 +72,7 @@ class CoaPage extends StatelessWidget {
                             width: 16,
                           ),
                           InkWell(
-                            onTap: () => value.otorisasi(),
+                            onTap: () => value.confirmotorisasi(),
                             child: Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 8),
@@ -1954,7 +1954,7 @@ class CoaPage extends StatelessWidget {
                                                             height: 16),
                                                         ButtonDanger(
                                                           onTap: () {
-                                                            // value.cek();
+                                                            value.confirm();
                                                           },
                                                           name: "Hapus",
                                                         ),

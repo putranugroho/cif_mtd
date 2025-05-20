@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:accounting/models/index.dart';
 import 'package:accounting/network/network.dart';
@@ -390,6 +391,9 @@ class KantorNotifier extends ChangeNotifier {
 
   cek() {
     if (keyForm.currentState!.validate()) {
+      final random = Random();
+      // Menghasilkan angka acak antara 1000 dan 9999 (inklusif)
+      int randomNumber = 1000 + random.nextInt(9000);
       if (editData) {
         DialogCustom().showLoading(context);
         var json = {
@@ -407,6 +411,7 @@ class KantorNotifier extends ChangeNotifier {
           "provinsi": "${provinsiModel!.name}",
           "kode_pos": "${kodepos.text}",
           "telp": "${notelp.text.isEmpty ? "" : notelp.text}",
+          "batch": "$randomNumber",
           "fax": "${fax.text.isEmpty ? "" : fax.text}",
         };
         print(jsonEncode(json));
@@ -431,6 +436,7 @@ class KantorNotifier extends ChangeNotifier {
           "kode_kantor": "${kode.text}",
           "kode_induk": "${kantorModel == null ? "" : kantorModel!.kodeKantor}",
           "nama_kantor": "${nama.text}",
+          "batch": "$randomNumber",
           "status_kantor":
               "${status == "Pusat" ? "P" : status == "Cabang" ? "C" : status == "Anak Cabang" ? "D" : "E"}",
           "alamat": "${alamat.text}",
