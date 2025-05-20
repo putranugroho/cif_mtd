@@ -18,6 +18,7 @@ class UsersModel {
     required this.tglexp,
     required this.lvluser,
     required this.terminalId,
+    required this.aktivasi,
     required this.aksesKasir,
     required this.sbbKasir,
     required this.namaSbb,
@@ -45,6 +46,7 @@ class UsersModel {
   final String tglexp;
   final String lvluser;
   final String terminalId;
+  final String aktivasi;
   final String aksesKasir;
   final String sbbKasir;
   final String namaSbb;
@@ -72,6 +74,7 @@ class UsersModel {
     tglexp: json['tglexp'].toString(),
     lvluser: json['lvluser'].toString(),
     terminalId: json['terminal_id'].toString(),
+    aktivasi: json['aktivasi'].toString(),
     aksesKasir: json['akses_kasir'].toString(),
     sbbKasir: json['sbb_kasir'].toString(),
     namaSbb: json['nama_sbb'].toString(),
@@ -100,6 +103,7 @@ class UsersModel {
     'tglexp': tglexp,
     'lvluser': lvluser,
     'terminal_id': terminalId,
+    'aktivasi': aktivasi,
     'akses_kasir': aksesKasir,
     'sbb_kasir': sbbKasir,
     'nama_sbb': namaSbb,
@@ -128,6 +132,7 @@ class UsersModel {
     tglexp: tglexp,
     lvluser: lvluser,
     terminalId: terminalId,
+    aktivasi: aktivasi,
     aksesKasir: aksesKasir,
     sbbKasir: sbbKasir,
     namaSbb: namaSbb,
@@ -157,6 +162,7 @@ class UsersModel {
     String? tglexp,
     String? lvluser,
     String? terminalId,
+    String? aktivasi,
     String? aksesKasir,
     String? sbbKasir,
     String? namaSbb,
@@ -183,6 +189,7 @@ class UsersModel {
     tglexp: tglexp ?? this.tglexp,
     lvluser: lvluser ?? this.lvluser,
     terminalId: terminalId ?? this.terminalId,
+    aktivasi: aktivasi ?? this.aktivasi,
     aksesKasir: aksesKasir ?? this.aksesKasir,
     sbbKasir: sbbKasir ?? this.sbbKasir,
     namaSbb: namaSbb ?? this.namaSbb,
@@ -201,8 +208,8 @@ class UsersModel {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is UsersModel && id == other.id && userid == other.userid && empId == other.empId && pass == other.pass && namauser == other.namauser && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && tglexp == other.tglexp && lvluser == other.lvluser && terminalId == other.terminalId && aksesKasir == other.aksesKasir && sbbKasir == other.sbbKasir && namaSbb == other.namaSbb && fhoto1 == other.fhoto1 && fhoto2 == other.fhoto2 && fhoto3 == other.fhoto3 && levelOtor == other.levelOtor && bedaKantor == other.bedaKantor && minOtor == other.minOtor && maxOtor == other.maxOtor && createddate == other.createddate && isDeleted == other.isDeleted && backDate == other.backDate && shifts == other.shifts;
+    || other is UsersModel && id == other.id && userid == other.userid && empId == other.empId && pass == other.pass && namauser == other.namauser && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && tglexp == other.tglexp && lvluser == other.lvluser && terminalId == other.terminalId && aktivasi == other.aktivasi && aksesKasir == other.aksesKasir && sbbKasir == other.sbbKasir && namaSbb == other.namaSbb && fhoto1 == other.fhoto1 && fhoto2 == other.fhoto2 && fhoto3 == other.fhoto3 && levelOtor == other.levelOtor && bedaKantor == other.bedaKantor && minOtor == other.minOtor && maxOtor == other.maxOtor && createddate == other.createddate && isDeleted == other.isDeleted && backDate == other.backDate && shifts == other.shifts;
 
   @override
-  int get hashCode => id.hashCode ^ userid.hashCode ^ empId.hashCode ^ pass.hashCode ^ namauser.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ tglexp.hashCode ^ lvluser.hashCode ^ terminalId.hashCode ^ aksesKasir.hashCode ^ sbbKasir.hashCode ^ namaSbb.hashCode ^ fhoto1.hashCode ^ fhoto2.hashCode ^ fhoto3.hashCode ^ levelOtor.hashCode ^ bedaKantor.hashCode ^ minOtor.hashCode ^ maxOtor.hashCode ^ createddate.hashCode ^ isDeleted.hashCode ^ backDate.hashCode ^ shifts.hashCode;
+  int get hashCode => id.hashCode ^ userid.hashCode ^ empId.hashCode ^ pass.hashCode ^ namauser.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ tglexp.hashCode ^ lvluser.hashCode ^ terminalId.hashCode ^ aktivasi.hashCode ^ aksesKasir.hashCode ^ sbbKasir.hashCode ^ namaSbb.hashCode ^ fhoto1.hashCode ^ fhoto2.hashCode ^ fhoto3.hashCode ^ levelOtor.hashCode ^ bedaKantor.hashCode ^ minOtor.hashCode ^ maxOtor.hashCode ^ createddate.hashCode ^ isDeleted.hashCode ^ backDate.hashCode ^ shifts.hashCode;
 }

@@ -342,29 +342,32 @@ class KantorPage extends StatelessWidget {
                                                     true, // Aktifkan fitur pencarian
                                               ),
                                               selectedItem: value.kantorModel,
-                                              items: value.status == "Cabang"
-                                                  ? value.list
-                                                      .where((e) =>
-                                                          e.statusKantor == "P")
-                                                      .toList()
-                                                  : value.status ==
-                                                          "Anak Cabang"
+                                              items: value.status == null
+                                                  ? []
+                                                  : value.status == "Cabang"
                                                       ? value.list
                                                           .where((e) =>
                                                               e.statusKantor ==
-                                                                  "C" ||
-                                                              e.statusKantor ==
-                                                                  "P")
+                                                              "P")
                                                           .toList()
-                                                      : value.list
-                                                          .where((e) =>
-                                                              e.statusKantor ==
-                                                                  "D" ||
-                                                              e.statusKantor ==
-                                                                  "C" ||
-                                                              e.statusKantor ==
-                                                                  "P")
-                                                          .toList(),
+                                                      : value.status ==
+                                                              "Anak Cabang"
+                                                          ? value.list
+                                                              .where((e) =>
+                                                                  e.statusKantor ==
+                                                                      "C" ||
+                                                                  e.statusKantor ==
+                                                                      "P")
+                                                              .toList()
+                                                          : value.list
+                                                              .where((e) =>
+                                                                  e.statusKantor ==
+                                                                      "D" ||
+                                                                  e.statusKantor ==
+                                                                      "C" ||
+                                                                  e.statusKantor ==
+                                                                      "P")
+                                                              .toList(),
                                               itemAsString: (e) =>
                                                   "${e.namaKantor}",
                                               onChanged: (e) {
@@ -439,6 +442,7 @@ class KantorPage extends StatelessWidget {
                                       TextFormField(
                                         textInputAction: TextInputAction.done,
                                         controller: value.kode,
+                                        readOnly: value.editData ? true : false,
                                         maxLines: 1,
                                         inputFormatters: [
                                           FilteringTextInputFormatter.digitsOnly
@@ -452,6 +456,8 @@ class KantorPage extends StatelessWidget {
                                         },
                                         decoration: InputDecoration(
                                           hintText: "Kode Kantor",
+                                          filled: value.editData ? true : false,
+                                          fillColor: Colors.grey[200],
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(6),

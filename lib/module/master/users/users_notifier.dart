@@ -77,6 +77,8 @@ class UsersNotifier extends ChangeNotifier {
     users = listData.where((e) => e.id == int.parse(id)).first;
     dialog = true;
     editData = true;
+    kantorModel =
+        listKantor.where((e) => e.kodeKantor == users!.kodeKantor).first;
     namaKaryawan.text = users!.namauser;
     nikKaryawan.text = users!.empId;
     userid.text = users!.userid;
@@ -104,6 +106,7 @@ class UsersNotifier extends ChangeNotifier {
     levelOtor = users!.levelOtor == "null" || users!.levelOtor == ""
         ? ""
         : listLevelOtor.where((e) => e == users!.levelOtor).first;
+    aktivasilogin = users!.aktivasi == "Y" ? true : false;
     inqueryGlModel = users!.sbbKasir == ""
         ? null
         : listGl.where((e) => e.nosbb == users!.sbbKasir).first;
@@ -124,116 +127,128 @@ class UsersNotifier extends ChangeNotifier {
   final keyForm = GlobalKey<FormState>();
   cek() {
     if (keyForm.currentState!.validate()) {
-      if (editData) {
-        List<Map<String, dynamic>> listTmp = [];
-        for (var i = 0; i < listAddHariKerja.length; i++) {
-          listTmp.add({
-            "id_users": users!.id,
-            "kd_kelompok": "${listAddHariKerja[i].kdAktivasi}",
-            "nama_kelompok": "${listAddHariKerja[i].nmAktivasi}",
-            "hari": "${listAddHariKerja[i].hari}",
-            "ke": "${i + 1}",
-            "jam_mulai": "${listAddHariKerja[i].jamMulai}",
-            "jam_selesai": "${listAddHariKerja[i].jamSelesai}",
-            "status": "AKTIF",
+      if (listAddHariKerja.isNotEmpty) {
+        if (editData) {
+          List<Map<String, dynamic>> listTmp = [];
+          for (var i = 0; i < listAddHariKerja.length; i++) {
+            listTmp.add({
+              "id_users": users!.id,
+              "kd_kelompok": "${listAddHariKerja[i].kdAktivasi}",
+              "nama_kelompok": "${listAddHariKerja[i].nmAktivasi}",
+              "hari": "${listAddHariKerja[i].hari}",
+              "ke": "${i + 1}",
+              "jam_mulai": "${listAddHariKerja[i].jamMulai}",
+              "jam_selesai": "${listAddHariKerja[i].jamSelesai}",
+              "status": "AKTIF",
+            });
+          }
+          print("JSON TMP ${jsonEncode(listTmp)}");
+          notifyListeners();
+          DialogCustom().showLoading(context);
+          var data = {
+            "id": users!.id,
+            "userid": "${userid.text}",
+            "emp_id":
+                "${karyawanModel == null ? nikKaryawan.text : karyawanModel!.nik}",
+            "pass": "${pass.text}",
+            "namauser":
+                "${karyawanModel == null ? namaKaryawan.text : karyawanModel!.namaLengkap}",
+            "kode_pt": "${kantorModel == null ? "001" : kantorModel!.kodePt}",
+            "kode_kantor":
+                "${kantorModel == null ? "001" : kantorModel!.kodeKantor}",
+            "kode_induk":
+                "${kantorModel == null ? "001" : kantorModel!.kodeInduk}",
+            "tglexp": "${tglexp.text}",
+            "lvluser": "${levelUser!.idLevel}",
+            "terminal_id": "",
+            "akses_kasir": "${aksesKasir ? "Y" : "N"}",
+            "sbb_kasir":
+                "${inqueryGlModel == null ? "" : inqueryGlModel!.nosbb}",
+            "nama_sbb":
+                "${inqueryGlModel == null ? "" : inqueryGlModel!.namaSbb}",
+            "fhoto_1": "",
+            "fhoto_2": "",
+            "fhoto_3": "",
+            "level_otor": "${levelOtor}",
+            "aktivasi": "${aktivasilogin ? "Y" : "N"}",
+            "beda_kantor": "${bedaKantor ? "Y" : "N"}",
+            "back_date": "${backdate ? "Y" : "N"}",
+            "min_otor": "${minotor.text.trim().replaceAll(",", "")}",
+            "max_otor": "${maxotor.text.trim().replaceAll(",", "")}",
+            "shifts": listTmp
+          };
+          Setuprepository.setup(token, NetworkURL.editusers(), jsonEncode(data))
+              .then((value) {
+            Navigator.pop(context);
+            if (value['status'].toString().toLowerCase().contains("success")) {
+              informationDialog(context, "Information", value['message']);
+              getUsers();
+              clear();
+              notifyListeners();
+            } else {
+              informationDialog(context, "Warning", value['message']);
+            }
+          });
+        } else {
+          DialogCustom().showLoading(context);
+          List<Map<String, dynamic>> listTmp = [];
+          for (var i = 0; i < listAddHariKerja.length; i++) {
+            listTmp.add({
+              "kd_kelompok": "${listAddHariKerja[i].kdAktivasi}",
+              "nama_kelompok": "${listAddHariKerja[i].nmAktivasi}",
+              "hari": "${listAddHariKerja[i].hari}",
+              "ke": "${i + 1}",
+              "jam_mulai": "${listAddHariKerja[i].jamMulai}",
+              "jam_selesai": "${listAddHariKerja[i].jamSelesai}",
+              "status": "AKTIF",
+            });
+          }
+          print("JSON TMP ${jsonEncode(listTmp)}");
+          var data = {
+            "userid": "${userid.text}",
+            "pass": "${pass.text}",
+            "emp_id": "${karyawanModel!.nik}",
+            "namauser": "${karyawanModel!.namaLengkap}",
+            "kode_pt": "${kantorModel == null ? "001" : kantorModel!.kodePt}",
+            "kode_kantor":
+                "${kantorModel == null ? "001" : kantorModel!.kodeKantor}",
+            "kode_induk":
+                "${kantorModel == null ? "001" : kantorModel!.kodeInduk}",
+            "tglexp": "${tglexp.text}",
+            "lvluser": "${levelUser!.idLevel}",
+            "terminal_id": "",
+            "akses_kasir": "${aksesKasir ? "Y" : "N"}",
+            "sbb_kasir":
+                "${inqueryGlModel == null ? "" : inqueryGlModel!.nosbb}",
+            "nama_sbb":
+                "${inqueryGlModel == null ? "" : inqueryGlModel!.namaSbb}",
+            "fhoto_1": "",
+            "fhoto_2": "",
+            "fhoto_3": "",
+            "level_otor": "${levelOtor}",
+            "aktivasi": "${aktivasilogin ? "Y" : "N"}",
+            "back_date": "${backdate ? "Y" : "N"}",
+            "beda_kantor": "${bedaKantor ? "Y" : "N"}",
+            "min_otor": "${minotor.text.trim().replaceAll(",", "")}",
+            "max_otor": "${maxotor.text.trim().replaceAll(",", "")}",
+            "shifts": listTmp
+          };
+          Setuprepository.setup(token, NetworkURL.addusers(), jsonEncode(data))
+              .then((value) {
+            Navigator.pop(context);
+            if (value['status'].toString().toLowerCase().contains("success")) {
+              informationDialog(context, "Information", value['message']);
+              getUsers();
+              clear();
+              notifyListeners();
+            } else {
+              informationDialog(context, "Warning", value['message'][0]);
+            }
           });
         }
-        print("JSON TMP ${jsonEncode(listTmp)}");
-        notifyListeners();
-        DialogCustom().showLoading(context);
-        var data = {
-          "id": users!.id,
-          "userid": "${userid.text}",
-          "emp_id":
-              "${karyawanModel == null ? nikKaryawan.text : karyawanModel!.nik}",
-          "pass": "${pass.text}",
-          "namauser":
-              "${karyawanModel == null ? namaKaryawan.text : karyawanModel!.namaLengkap}",
-          "kode_pt": "${kantor == null ? "001" : kantor!.kodePt}",
-          "kode_kantor": "${kantor == null ? "001" : kantor!.kodeKantor}",
-          "kode_induk": "${kantor == null ? "001" : kantor!.kodeInduk}",
-          "tglexp": "${tglexp.text}",
-          "lvluser": "${levelUser!.idLevel}",
-          "terminal_id": "",
-          "akses_kasir": "${aksesKasir ? "Y" : "N"}",
-          "sbb_kasir": "${inqueryGlModel == null ? "" : inqueryGlModel!.nosbb}",
-          "nama_sbb":
-              "${inqueryGlModel == null ? "" : inqueryGlModel!.namaSbb}",
-          "fhoto_1": "",
-          "fhoto_2": "",
-          "fhoto_3": "",
-          "level_otor": "${levelOtor}",
-          "beda_kantor": "${bedaKantor ? "Y" : "N"}",
-          "back_date": "${backdate ? "Y" : "N"}",
-          "min_otor": "${minotor.text.trim().replaceAll(",", "")}",
-          "max_otor": "${maxotor.text.trim().replaceAll(",", "")}",
-          "shifts": listTmp
-        };
-        Setuprepository.setup(token, NetworkURL.editusers(), jsonEncode(data))
-            .then((value) {
-          Navigator.pop(context);
-          if (value['status'].toString().toLowerCase().contains("success")) {
-            informationDialog(context, "Information", value['message']);
-            getUsers();
-            clear();
-            notifyListeners();
-          } else {
-            informationDialog(context, "Warning", value['message']);
-          }
-        });
-      } else {
-        DialogCustom().showLoading(context);
-        List<Map<String, dynamic>> listTmp = [];
-        for (var i = 0; i < listAddHariKerja.length; i++) {
-          listTmp.add({
-            "kd_kelompok": "${listAddHariKerja[i].kdAktivasi}",
-            "nama_kelompok": "${listAddHariKerja[i].nmAktivasi}",
-            "hari": "${listAddHariKerja[i].hari}",
-            "ke": "${i + 1}",
-            "jam_mulai": "${listAddHariKerja[i].jamMulai}",
-            "jam_selesai": "${listAddHariKerja[i].jamSelesai}",
-            "status": "AKTIF",
-          });
-        }
-        print("JSON TMP ${jsonEncode(listTmp)}");
-        var data = {
-          "userid": "${userid.text}",
-          "pass": "${pass.text}",
-          "emp_id": "${karyawanModel!.nik}",
-          "namauser": "${karyawanModel!.namaLengkap}",
-          "kode_pt": "${kantor == null ? "001" : kantor!.kodePt}",
-          "kode_kantor": "${kantor == null ? "001" : kantor!.kodeKantor}",
-          "kode_induk": "${kantor == null ? "001" : kantor!.kodeInduk}",
-          "tglexp": "${tglexp.text}",
-          "lvluser": "${levelUser!.idLevel}",
-          "terminal_id": "",
-          "akses_kasir": "${aksesKasir ? "Y" : "N"}",
-          "sbb_kasir": "${inqueryGlModel == null ? "" : inqueryGlModel!.nosbb}",
-          "nama_sbb":
-              "${inqueryGlModel == null ? "" : inqueryGlModel!.namaSbb}",
-          "fhoto_1": "",
-          "fhoto_2": "",
-          "fhoto_3": "",
-          "level_otor": "${levelOtor}",
-          "back_date": "${backdate ? "Y" : "N"}",
-          "beda_kantor": "${bedaKantor ? "Y" : "N"}",
-          "min_otor": "${minotor.text.trim().replaceAll(",", "")}",
-          "max_otor": "${maxotor.text.trim().replaceAll(",", "")}",
-          "shifts": listTmp
-        };
-        Setuprepository.setup(token, NetworkURL.addusers(), jsonEncode(data))
-            .then((value) {
-          Navigator.pop(context);
-          if (value['status'].toString().toLowerCase().contains("success")) {
-            informationDialog(context, "Information", value['message']);
-            getUsers();
-            clear();
-            notifyListeners();
-          } else {
-            informationDialog(context, "Warning", value['message'][0]);
-          }
-        });
       }
+    } else {
+      informationDialog(context, "Warning", "Hari kerja tidak boleh kosong");
     }
   }
 
@@ -538,11 +553,6 @@ class UsersNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  pilihKantor(KantorModel value) {
-    kantor = value;
-    notifyListeners();
-  }
-
   List<CoaModel> listCoa = [];
 
   TextEditingController namasbb = TextEditingController();
@@ -569,9 +579,9 @@ class UsersNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<KantorModel> list = [];
+  List<KantorModel> listKantor = [];
   Future getKantor() async {
-    list.clear();
+    listKantor.clear();
     isLoading = true;
     var data = {
       "kode_pt": "001",
@@ -581,7 +591,7 @@ class UsersNotifier extends ChangeNotifier {
         .then((value) {
       if (value['status'] == "Success") {
         for (Map<String, dynamic> i in value['data']) {
-          list.add(KantorModel.fromJson(i));
+          listKantor.add(KantorModel.fromJson(i));
         }
         isLoading = false;
         notifyListeners();
@@ -592,7 +602,11 @@ class UsersNotifier extends ChangeNotifier {
     });
   }
 
-  KantorModel? kantor;
+  KantorModel? kantorModel;
+  pilihKantor(KantorModel value) {
+    kantorModel = value;
+    notifyListeners();
+  }
 
   pilihMenu(MenuModel value) {
     if (listMenuAdd.isEmpty) {

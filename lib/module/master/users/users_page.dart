@@ -346,6 +346,47 @@ class UsersPage extends StatelessWidget {
                                     child: ListView(
                                   children: [
                                     Text(
+                                      "Kantor",
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    DropdownSearch<KantorModel>(
+                                      popupProps:
+                                          const PopupPropsMultiSelection.menu(
+                                        showSearchBox:
+                                            true, // Aktifkan fitur pencarian
+                                      ),
+                                      selectedItem: value.kantorModel,
+                                      items: value.listKantor,
+                                      itemAsString: (e) => "${e.namaKantor}",
+                                      onChanged: (e) {
+                                        value.pilihKantor(e!);
+                                      },
+                                      dropdownDecoratorProps:
+                                          DropDownDecoratorProps(
+                                        baseStyle: TextStyle(fontSize: 16),
+                                        textAlignVertical:
+                                            TextAlignVertical.center,
+                                        dropdownSearchDecoration:
+                                            InputDecoration(
+                                          hintText: "Pilih Kantor",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            borderSide: BorderSide(
+                                              width: 1,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    Text(
                                       "Nama Karyawan",
                                       style: const TextStyle(fontSize: 12),
                                     ),
@@ -1297,14 +1338,13 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'tglexp', value: data.tglexp),
                 DataGridCell(
                     columnName: 'lvluser',
-                    value: data.lvluser == "2"
-                        ? "Administrator"
-                        : data.lvluser == "1"
-                            ? "Supervisor"
-                            : "User"),
-                DataGridCell(columnName: 'aktivasi', value: "N"),
+                    value: tindakanNotifier!.listUsers
+                        .where((e) => e.idLevel == data.lvluser)
+                        .first
+                        .levelUser),
+                DataGridCell(columnName: 'aktivasi', value: data.aktivasi),
                 DataGridCell(columnName: 'akses_kasir', value: data.aksesKasir),
-                DataGridCell(columnName: 'back_date', value: "N"),
+                DataGridCell(columnName: 'back_date', value: data.backDate),
                 DataGridCell(columnName: 'beda_kantor', value: data.bedaKantor),
                 DataGridCell(
                     columnName: 'level_otor',
