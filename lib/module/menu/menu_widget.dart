@@ -3,9 +3,17 @@ import 'package:flutter/material.dart';
 
 import '../../utils/images_path.dart';
 
-class MenuSetupWidget extends StatelessWidget {
+class MenuSetupWidget extends StatefulWidget {
   final MenuNotifier value;
   const MenuSetupWidget({super.key, required this.value});
+
+  @override
+  State<MenuSetupWidget> createState() => _MenuSetupWidgetState();
+}
+
+class _MenuSetupWidgetState extends State<MenuSetupWidget> {
+  bool _isExpanded = false;
+  int _isExpandedSub = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +24,16 @@ class MenuSetupWidget extends StatelessWidget {
       expandedAlignment: Alignment.centerLeft,
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+      onExpansionChanged: (expanded) {
+        setState(() {
+          _isExpanded = expanded;
+        });
+      },
       title: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.white, width: 1.5),
+          color: _isExpanded
+              ? Color.fromARGB(255, 0, 125, 228)
+              : Colors.transparent,
         ),
         child: Row(
           children: [
@@ -42,7 +56,23 @@ class MenuSetupWidget extends StatelessWidget {
           expandedAlignment: Alignment.centerLeft,
           collapsedIconColor: Colors.white,
           expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+          onExpansionChanged: (expanded) {
+            if (expanded) {
+              setState(() {
+                _isExpandedSub = 1;
+              });
+            } else {
+              setState(() {
+                _isExpandedSub = 0;
+              });
+            }
+          },
           title: Container(
+            decoration: BoxDecoration(
+              color: _isExpandedSub == 1
+                  ? Color.fromARGB(255, 0, 125, 228)
+                  : Colors.transparent,
+            ),
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               children: [
@@ -60,12 +90,14 @@ class MenuSetupWidget extends StatelessWidget {
           ),
           children: [
             InkWell(
-              onTap: () => value.gantimenu(1),
+              onTap: () => widget.value.gantimenu(1),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 decoration: BoxDecoration(
-                  color: value.page == 1 ? Colors.white : Colors.transparent,
+                  color: widget.value.page == 1
+                      ? Colors.white
+                      : Colors.transparent,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -76,7 +108,8 @@ class MenuSetupWidget extends StatelessWidget {
                     Image.asset(
                       ImageAssets.building,
                       height: 30,
-                      color: value.page == 1 ? Colors.black : Colors.white,
+                      color:
+                          widget.value.page == 1 ? Colors.black : Colors.white,
                     ),
                     SizedBox(
                       width: 16,
@@ -85,7 +118,9 @@ class MenuSetupWidget extends StatelessWidget {
                       "Data Kantor",
                       style: TextStyle(
                         fontSize: 16,
-                        color: value.page == 1 ? Colors.black : Colors.white,
+                        color: widget.value.page == 1
+                            ? Colors.black
+                            : Colors.white,
                       ),
                     )
                   ],
@@ -159,12 +194,14 @@ class MenuSetupWidget extends StatelessWidget {
             //   ),
             // ),
             InkWell(
-              onTap: () => value.gantimenu(30),
+              onTap: () => widget.value.gantimenu(30),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 decoration: BoxDecoration(
-                  color: value.page == 30 ? Colors.white : Colors.transparent,
+                  color: widget.value.page == 30
+                      ? Colors.white
+                      : Colors.transparent,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -175,7 +212,8 @@ class MenuSetupWidget extends StatelessWidget {
                     Image.asset(
                       ImageAssets.user,
                       height: 30,
-                      color: value.page == 30 ? Colors.black : Colors.white,
+                      color:
+                          widget.value.page == 30 ? Colors.black : Colors.white,
                     ),
                     SizedBox(
                       width: 16,
@@ -184,7 +222,9 @@ class MenuSetupWidget extends StatelessWidget {
                       "Data Pejabat",
                       style: TextStyle(
                         fontSize: 16,
-                        color: value.page == 30 ? Colors.black : Colors.white,
+                        color: widget.value.page == 30
+                            ? Colors.black
+                            : Colors.white,
                       ),
                     )
                   ],
@@ -194,12 +234,13 @@ class MenuSetupWidget extends StatelessWidget {
           ],
         ),
         InkWell(
-          onTap: () => value.gantimenu(36),
+          onTap: () => widget.value.gantimenu(36),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 36 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 36 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -207,7 +248,7 @@ class MenuSetupWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.calendar,
                   height: 30,
-                  color: value.page == 36 ? Colors.black : Colors.white,
+                  color: widget.value.page == 36 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -216,7 +257,8 @@ class MenuSetupWidget extends StatelessWidget {
                   "Hari Kerja",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 36 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 36 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -224,12 +266,12 @@ class MenuSetupWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(2),
+          onTap: () => widget.value.gantimenu(2),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 2 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 2 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -237,7 +279,7 @@ class MenuSetupWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.accounting,
                   height: 30,
-                  color: value.page == 2 ? Colors.black : Colors.white,
+                  color: widget.value.page == 2 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -246,7 +288,7 @@ class MenuSetupWidget extends StatelessWidget {
                   "Chart of Account",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 2 ? Colors.black : Colors.white,
+                    color: widget.value.page == 2 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -260,7 +302,23 @@ class MenuSetupWidget extends StatelessWidget {
             expandedAlignment: Alignment.centerLeft,
             collapsedIconColor: Colors.white,
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            onExpansionChanged: (expanded) {
+              if (expanded) {
+                setState(() {
+                  _isExpandedSub = 2;
+                });
+              } else {
+                setState(() {
+                  _isExpandedSub = 0;
+                });
+              }
+            },
             title: Container(
+              decoration: BoxDecoration(
+                color: _isExpandedSub == 2
+                    ? Color.fromARGB(255, 0, 125, 228)
+                    : Colors.transparent,
+              ),
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
@@ -278,12 +336,14 @@ class MenuSetupWidget extends StatelessWidget {
             ),
             children: [
               InkWell(
-                onTap: () => value.gantimenu(47),
+                onTap: () => widget.value.gantimenu(47),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 47 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 47
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -294,7 +354,9 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.list,
                         height: 30,
-                        color: value.page == 47 ? Colors.black : Colors.white,
+                        color: widget.value.page == 47
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -303,7 +365,9 @@ class MenuSetupWidget extends StatelessWidget {
                         "Golongan SBB Khusus",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 47 ? Colors.black : Colors.white,
+                          color: widget.value.page == 47
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -311,12 +375,14 @@ class MenuSetupWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => value.gantimenu(37),
+                onTap: () => widget.value.gantimenu(37),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 37 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 37
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -327,7 +393,9 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.list,
                         height: 30,
-                        color: value.page == 37 ? Colors.black : Colors.white,
+                        color: widget.value.page == 37
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -336,7 +404,9 @@ class MenuSetupWidget extends StatelessWidget {
                         "Setup SBB Khusus",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 37 ? Colors.black : Colors.white,
+                          color: widget.value.page == 37
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -352,7 +422,23 @@ class MenuSetupWidget extends StatelessWidget {
             expandedAlignment: Alignment.centerLeft,
             collapsedIconColor: Colors.white,
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            onExpansionChanged: (expanded) {
+              if (expanded) {
+                setState(() {
+                  _isExpandedSub = 3;
+                });
+              } else {
+                setState(() {
+                  _isExpandedSub = 0;
+                });
+              }
+            },
             title: Container(
+              decoration: BoxDecoration(
+                color: _isExpandedSub == 3
+                    ? Color.fromARGB(255, 0, 125, 228)
+                    : Colors.transparent,
+              ),
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
@@ -370,12 +456,14 @@ class MenuSetupWidget extends StatelessWidget {
             ),
             children: [
               InkWell(
-                onTap: () => value.gantimenu(3),
+                onTap: () => widget.value.gantimenu(3),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 3 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 3
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -386,7 +474,9 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.trend,
                         height: 30,
-                        color: value.page == 3 ? Colors.black : Colors.white,
+                        color: widget.value.page == 3
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -395,7 +485,9 @@ class MenuSetupWidget extends StatelessWidget {
                         "Metode Penyusutan",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 3 ? Colors.black : Colors.white,
+                          color: widget.value.page == 3
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -403,12 +495,14 @@ class MenuSetupWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => value.gantimenu(33),
+                onTap: () => widget.value.gantimenu(33),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 33 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 33
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -419,7 +513,9 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.trend,
                         height: 30,
-                        color: value.page == 33 ? Colors.black : Colors.white,
+                        color: widget.value.page == 33
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -428,7 +524,9 @@ class MenuSetupWidget extends StatelessWidget {
                         "Kelompok Aset",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 33 ? Colors.black : Colors.white,
+                          color: widget.value.page == 33
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -436,12 +534,14 @@ class MenuSetupWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => value.gantimenu(34),
+                onTap: () => widget.value.gantimenu(34),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 34 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 34
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -452,7 +552,9 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.trend,
                         height: 30,
-                        color: value.page == 34 ? Colors.black : Colors.white,
+                        color: widget.value.page == 34
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -461,7 +563,9 @@ class MenuSetupWidget extends StatelessWidget {
                         "Golongan Aset",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 34 ? Colors.black : Colors.white,
+                          color: widget.value.page == 34
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -476,7 +580,23 @@ class MenuSetupWidget extends StatelessWidget {
             expandedAlignment: Alignment.centerLeft,
             collapsedIconColor: Colors.white,
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            onExpansionChanged: (expanded) {
+              if (expanded) {
+                setState(() {
+                  _isExpandedSub = 4;
+                });
+              } else {
+                setState(() {
+                  _isExpandedSub = 0;
+                });
+              }
+            },
             title: Container(
+              decoration: BoxDecoration(
+                color: _isExpandedSub == 4
+                    ? Color.fromARGB(255, 0, 125, 228)
+                    : Colors.transparent,
+              ),
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
@@ -494,12 +614,14 @@ class MenuSetupWidget extends StatelessWidget {
             ),
             children: [
               InkWell(
-                onTap: () => value.gantimenu(4),
+                onTap: () => widget.value.gantimenu(4),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 4 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 4
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -510,7 +632,9 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.bill,
                         height: 30,
-                        color: value.page == 4 ? Colors.black : Colors.white,
+                        color: widget.value.page == 4
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -519,7 +643,9 @@ class MenuSetupWidget extends StatelessWidget {
                         "Setup Transaksi",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 4 ? Colors.black : Colors.white,
+                          color: widget.value.page == 4
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -527,12 +653,14 @@ class MenuSetupWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => value.gantimenu(32),
+                onTap: () => widget.value.gantimenu(32),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 32 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 32
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -543,7 +671,9 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.bill,
                         height: 30,
-                        color: value.page == 32 ? Colors.black : Colors.white,
+                        color: widget.value.page == 32
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -552,7 +682,9 @@ class MenuSetupWidget extends StatelessWidget {
                         "Pajak",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 32 ? Colors.black : Colors.white,
+                          color: widget.value.page == 32
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -560,12 +692,14 @@ class MenuSetupWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => value.gantimenu(69),
+                onTap: () => widget.value.gantimenu(69),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 69 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 69
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -576,7 +710,9 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.eom,
                         height: 30,
-                        color: value.page == 69 ? Colors.black : Colors.white,
+                        color: widget.value.page == 69
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -585,7 +721,9 @@ class MenuSetupWidget extends StatelessWidget {
                         "Kas Kecil",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 69 ? Colors.black : Colors.white,
+                          color: widget.value.page == 69
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -593,12 +731,14 @@ class MenuSetupWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => value.gantimenu(65),
+                onTap: () => widget.value.gantimenu(65),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 65 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 65
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -609,7 +749,9 @@ class MenuSetupWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.bill,
                         height: 30,
-                        color: value.page == 65 ? Colors.black : Colors.white,
+                        color: widget.value.page == 65
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -618,7 +760,9 @@ class MenuSetupWidget extends StatelessWidget {
                         "Hutang / Piutang",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 65 ? Colors.black : Colors.white,
+                          color: widget.value.page == 65
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -627,12 +771,13 @@ class MenuSetupWidget extends StatelessWidget {
               ),
             ]),
         InkWell(
-          onTap: () => value.gantimenu(38),
+          onTap: () => widget.value.gantimenu(38),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              color: value.page == 38 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 38 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -640,7 +785,7 @@ class MenuSetupWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.eom,
                   height: 30,
-                  color: value.page == 38 ? Colors.black : Colors.white,
+                  color: widget.value.page == 38 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -649,7 +794,8 @@ class MenuSetupWidget extends StatelessWidget {
                   "Back Date",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 38 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 38 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -657,12 +803,13 @@ class MenuSetupWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(60),
+          onTap: () => widget.value.gantimenu(60),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              color: value.page == 60 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 60 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -670,7 +817,7 @@ class MenuSetupWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.eom,
                   height: 30,
-                  color: value.page == 60 ? Colors.black : Colors.white,
+                  color: widget.value.page == 60 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -679,7 +826,8 @@ class MenuSetupWidget extends StatelessWidget {
                   "Level & Akses User",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 60 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 60 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -687,12 +835,13 @@ class MenuSetupWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(39),
+          onTap: () => widget.value.gantimenu(39),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 39 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 39 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -700,7 +849,7 @@ class MenuSetupWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.click,
                   height: 30,
-                  color: value.page == 39 ? Colors.black : Colors.white,
+                  color: widget.value.page == 39 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -709,7 +858,8 @@ class MenuSetupWidget extends StatelessWidget {
                   "Otorisasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 39 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 39 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -751,9 +901,17 @@ class MenuSetupWidget extends StatelessWidget {
   }
 }
 
-class MenuMasterWidget extends StatelessWidget {
+class MenuMasterWidget extends StatefulWidget {
   final MenuNotifier value;
   const MenuMasterWidget({super.key, required this.value});
+
+  @override
+  State<MenuMasterWidget> createState() => _MenuMasterWidgetState();
+}
+
+class _MenuMasterWidgetState extends State<MenuMasterWidget> {
+  bool _isExpanded = false;
+  bool _isExpandedSub = false;
 
   @override
   Widget build(BuildContext context) {
@@ -764,10 +922,16 @@ class MenuMasterWidget extends StatelessWidget {
       expandedAlignment: Alignment.centerLeft,
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+      onExpansionChanged: (expanded) {
+        setState(() {
+          _isExpanded = expanded;
+        });
+      },
       title: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.white, width: 1.5),
+          color: _isExpanded
+              ? Color.fromARGB(255, 0, 125, 228)
+              : Colors.transparent,
         ),
         child: Row(
           children: [
@@ -784,12 +948,12 @@ class MenuMasterWidget extends StatelessWidget {
       ),
       children: [
         InkWell(
-          onTap: () => value.gantimenu(6),
+          onTap: () => widget.value.gantimenu(6),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 6 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 6 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -797,7 +961,7 @@ class MenuMasterWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.group,
                   height: 30,
-                  color: value.page == 6 ? Colors.black : Colors.white,
+                  color: widget.value.page == 6 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -806,7 +970,7 @@ class MenuMasterWidget extends StatelessWidget {
                   "Users",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 6 ? Colors.black : Colors.white,
+                    color: widget.value.page == 6 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -814,12 +978,12 @@ class MenuMasterWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(7),
+          onTap: () => widget.value.gantimenu(7),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 7 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 7 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -827,7 +991,7 @@ class MenuMasterWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.bank,
                   height: 30,
-                  color: value.page == 7 ? Colors.black : Colors.white,
+                  color: widget.value.page == 7 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -836,7 +1000,7 @@ class MenuMasterWidget extends StatelessWidget {
                   "Bank",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 7 ? Colors.black : Colors.white,
+                    color: widget.value.page == 7 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -845,12 +1009,13 @@ class MenuMasterWidget extends StatelessWidget {
         ),
 
         InkWell(
-          onTap: () => value.gantimenu(35),
+          onTap: () => widget.value.gantimenu(35),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 35 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 35 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -858,7 +1023,7 @@ class MenuMasterWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.group,
                   height: 30,
-                  color: value.page == 35 ? Colors.black : Colors.white,
+                  color: widget.value.page == 35 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -867,7 +1032,8 @@ class MenuMasterWidget extends StatelessWidget {
                   "AO / Marketing",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 35 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 35 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -875,12 +1041,12 @@ class MenuMasterWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(9),
+          onTap: () => widget.value.gantimenu(9),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 9 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 9 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -888,7 +1054,7 @@ class MenuMasterWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.click,
                   height: 30,
-                  color: value.page == 9 ? Colors.black : Colors.white,
+                  color: widget.value.page == 9 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -897,7 +1063,7 @@ class MenuMasterWidget extends StatelessWidget {
                   "Otorisasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 9 ? Colors.black : Colors.white,
+                    color: widget.value.page == 9 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -911,7 +1077,17 @@ class MenuMasterWidget extends StatelessWidget {
             expandedAlignment: Alignment.centerLeft,
             collapsedIconColor: Colors.white,
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            onExpansionChanged: (expanded) {
+              setState(() {
+                _isExpandedSub = expanded;
+              });
+            },
             title: Container(
+              decoration: BoxDecoration(
+                color: _isExpandedSub
+                    ? Color.fromARGB(255, 0, 125, 228)
+                    : Colors.transparent,
+              ),
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
@@ -929,12 +1105,14 @@ class MenuMasterWidget extends StatelessWidget {
             ),
             children: [
               InkWell(
-                onTap: () => value.gantimenu(66),
+                onTap: () => widget.value.gantimenu(66),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 66 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 66
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -945,7 +1123,9 @@ class MenuMasterWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.wifi,
                         height: 30,
-                        color: value.page == 66 ? Colors.black : Colors.white,
+                        color: widget.value.page == 66
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -954,7 +1134,9 @@ class MenuMasterWidget extends StatelessWidget {
                         "Akses Point",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 66 ? Colors.black : Colors.white,
+                          color: widget.value.page == 66
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -962,12 +1144,14 @@ class MenuMasterWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => value.gantimenu(68),
+                onTap: () => widget.value.gantimenu(68),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 68 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 68
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -978,7 +1162,9 @@ class MenuMasterWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.userwifi,
                         height: 30,
-                        color: value.page == 68 ? Colors.black : Colors.white,
+                        color: widget.value.page == 68
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -987,7 +1173,9 @@ class MenuMasterWidget extends StatelessWidget {
                         "User Akses Point",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 68 ? Colors.black : Colors.white,
+                          color: widget.value.page == 68
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -1030,9 +1218,16 @@ class MenuMasterWidget extends StatelessWidget {
   }
 }
 
-class MenuInventarisWidget extends StatelessWidget {
+class MenuInventarisWidget extends StatefulWidget {
   final MenuNotifier value;
   const MenuInventarisWidget({super.key, required this.value});
+
+  @override
+  State<MenuInventarisWidget> createState() => _MenuInventarisWidgetState();
+}
+
+class _MenuInventarisWidgetState extends State<MenuInventarisWidget> {
+  bool _isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -1043,10 +1238,16 @@ class MenuInventarisWidget extends StatelessWidget {
       expandedAlignment: Alignment.centerLeft,
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+      onExpansionChanged: (expanded) {
+        setState(() {
+          _isExpanded = expanded;
+        });
+      },
       title: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.white, width: 1.5),
+          color: _isExpanded
+              ? Color.fromARGB(255, 0, 125, 228)
+              : Colors.transparent,
         ),
         child: Row(
           children: [
@@ -1063,12 +1264,13 @@ class MenuInventarisWidget extends StatelessWidget {
       ),
       children: [
         InkWell(
-          onTap: () => value.gantimenu(11),
+          onTap: () => widget.value.gantimenu(11),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 11 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 11 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1076,7 +1278,7 @@ class MenuInventarisWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.cart,
                   height: 30,
-                  color: value.page == 11 ? Colors.black : Colors.white,
+                  color: widget.value.page == 11 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1085,7 +1287,8 @@ class MenuInventarisWidget extends StatelessWidget {
                   "Pengadaan",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 11 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 11 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1093,12 +1296,13 @@ class MenuInventarisWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(12),
+          onTap: () => widget.value.gantimenu(12),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 12 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 12 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1106,7 +1310,7 @@ class MenuInventarisWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.placement,
                   height: 30,
-                  color: value.page == 12 ? Colors.black : Colors.white,
+                  color: widget.value.page == 12 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1115,7 +1319,8 @@ class MenuInventarisWidget extends StatelessWidget {
                   "Penempatan",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 12 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 12 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1123,12 +1328,13 @@ class MenuInventarisWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(13),
+          onTap: () => widget.value.gantimenu(13),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 13 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 13 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1136,7 +1342,7 @@ class MenuInventarisWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.audit,
                   height: 30,
-                  color: value.page == 13 ? Colors.black : Colors.white,
+                  color: widget.value.page == 13 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1145,7 +1351,8 @@ class MenuInventarisWidget extends StatelessWidget {
                   "Revaluasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 13 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 13 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1153,12 +1360,13 @@ class MenuInventarisWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(14),
+          onTap: () => widget.value.gantimenu(14),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 14 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 14 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1166,7 +1374,7 @@ class MenuInventarisWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.carts,
                   height: 30,
-                  color: value.page == 14 ? Colors.black : Colors.white,
+                  color: widget.value.page == 14 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1175,7 +1383,8 @@ class MenuInventarisWidget extends StatelessWidget {
                   "Jual/Hapus",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 14 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 14 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1183,12 +1392,13 @@ class MenuInventarisWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(15),
+          onTap: () => widget.value.gantimenu(15),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 15 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 15 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1196,7 +1406,7 @@ class MenuInventarisWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.click,
                   height: 30,
-                  color: value.page == 15 ? Colors.black : Colors.white,
+                  color: widget.value.page == 15 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1205,7 +1415,8 @@ class MenuInventarisWidget extends StatelessWidget {
                   "Otorisasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 15 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 15 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1247,9 +1458,17 @@ class MenuInventarisWidget extends StatelessWidget {
   }
 }
 
-class MenuHutangPiutangWidget extends StatelessWidget {
+class MenuHutangPiutangWidget extends StatefulWidget {
   final MenuNotifier value;
   const MenuHutangPiutangWidget({super.key, required this.value});
+
+  @override
+  State<MenuHutangPiutangWidget> createState() =>
+      _MenuHutangPiutangWidgetState();
+}
+
+class _MenuHutangPiutangWidgetState extends State<MenuHutangPiutangWidget> {
+  bool _isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -1260,10 +1479,16 @@ class MenuHutangPiutangWidget extends StatelessWidget {
       expandedAlignment: Alignment.centerLeft,
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+      onExpansionChanged: (expanded) {
+        setState(() {
+          _isExpanded = expanded;
+        });
+      },
       title: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.white, width: 1.5),
+          color: _isExpanded
+              ? Color.fromARGB(255, 0, 125, 228)
+              : Colors.transparent,
         ),
         child: Row(
           children: [
@@ -1280,12 +1505,12 @@ class MenuHutangPiutangWidget extends StatelessWidget {
       ),
       children: [
         InkWell(
-          onTap: () => value.gantimenu(8),
+          onTap: () => widget.value.gantimenu(8),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 8 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 8 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1293,7 +1518,7 @@ class MenuHutangPiutangWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.user,
                   height: 30,
-                  color: value.page == 8 ? Colors.black : Colors.white,
+                  color: widget.value.page == 8 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1302,7 +1527,7 @@ class MenuHutangPiutangWidget extends StatelessWidget {
                   "Customer/Supplier",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 8 ? Colors.black : Colors.white,
+                    color: widget.value.page == 8 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1310,12 +1535,13 @@ class MenuHutangPiutangWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(61),
+          onTap: () => widget.value.gantimenu(61),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 61 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 61 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1323,7 +1549,7 @@ class MenuHutangPiutangWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.rupiahs,
                   height: 30,
-                  color: value.page == 61 ? Colors.black : Colors.white,
+                  color: widget.value.page == 61 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1332,7 +1558,8 @@ class MenuHutangPiutangWidget extends StatelessWidget {
                   "Hutang / Piutang",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 61 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 61 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1344,9 +1571,17 @@ class MenuHutangPiutangWidget extends StatelessWidget {
   }
 }
 
-class MenuTransaksiWidget extends StatelessWidget {
+class MenuTransaksiWidget extends StatefulWidget {
   final MenuNotifier value;
   const MenuTransaksiWidget({super.key, required this.value});
+
+  @override
+  State<MenuTransaksiWidget> createState() => _MenuTransaksiWidgetState();
+}
+
+class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
+  bool _isExpanded = false;
+  int _isExpandedSub = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -1357,10 +1592,16 @@ class MenuTransaksiWidget extends StatelessWidget {
       expandedAlignment: Alignment.centerLeft,
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+      onExpansionChanged: (expanded) {
+        setState(() {
+          _isExpanded = expanded;
+        });
+      },
       title: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.white, width: 1.5),
+          color: _isExpanded
+              ? Color.fromARGB(255, 0, 125, 228)
+              : Colors.transparent,
         ),
         child: Row(
           children: [
@@ -1377,12 +1618,13 @@ class MenuTransaksiWidget extends StatelessWidget {
       ),
       children: [
         InkWell(
-          onTap: () => value.gantimenu(17),
+          onTap: () => widget.value.gantimenu(17),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 17 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 17 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1390,7 +1632,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.report,
                   height: 30,
-                  color: value.page == 17 ? Colors.black : Colors.white,
+                  color: widget.value.page == 17 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1399,7 +1641,8 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Satu Transaksi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 17 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 17 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1407,12 +1650,13 @@ class MenuTransaksiWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(18),
+          onTap: () => widget.value.gantimenu(18),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 18 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 18 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1420,7 +1664,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.report,
                   height: 30,
-                  color: value.page == 18 ? Colors.black : Colors.white,
+                  color: widget.value.page == 18 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1429,7 +1673,8 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Banyak Transaksi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 18 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 18 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1437,12 +1682,13 @@ class MenuTransaksiWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(67),
+          onTap: () => widget.value.gantimenu(67),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 67 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 67 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1450,7 +1696,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.report,
                   height: 30,
-                  color: value.page == 67 ? Colors.black : Colors.white,
+                  color: widget.value.page == 67 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1459,7 +1705,8 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Pembatalan Transaksi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 67 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 67 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1467,12 +1714,13 @@ class MenuTransaksiWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(57),
+          onTap: () => widget.value.gantimenu(57),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 57 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 57 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1480,7 +1728,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.report,
                   height: 30,
-                  color: value.page == 57 ? Colors.black : Colors.white,
+                  color: widget.value.page == 57 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1489,7 +1737,8 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Perantara Aktiva/Pasiva",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 57 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 57 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1497,12 +1746,13 @@ class MenuTransaksiWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(58),
+          onTap: () => widget.value.gantimenu(58),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 58 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 58 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1510,7 +1760,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.debt,
                   height: 30,
-                  color: value.page == 58 ? Colors.black : Colors.white,
+                  color: widget.value.page == 58 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1519,7 +1769,8 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Bayar Hutang/ Piutang",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 58 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 58 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1527,12 +1778,13 @@ class MenuTransaksiWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(59),
+          onTap: () => widget.value.gantimenu(59),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 59 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 59 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1540,7 +1792,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.rupiahs,
                   height: 30,
-                  color: value.page == 59 ? Colors.black : Colors.white,
+                  color: widget.value.page == 59 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1549,7 +1801,8 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Bayar/Pendapatan dimuka",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 59 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 59 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1563,7 +1816,23 @@ class MenuTransaksiWidget extends StatelessWidget {
             expandedAlignment: Alignment.centerLeft,
             collapsedIconColor: Colors.white,
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            onExpansionChanged: (expanded) {
+              if (expanded) {
+                setState(() {
+                  _isExpandedSub = 1;
+                });
+              } else {
+                setState(() {
+                  _isExpandedSub = 0;
+                });
+              }
+            },
             title: Container(
+              decoration: BoxDecoration(
+                color: _isExpandedSub == 1
+                    ? Color.fromARGB(255, 0, 125, 228)
+                    : Colors.transparent,
+              ),
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
@@ -1581,12 +1850,14 @@ class MenuTransaksiWidget extends StatelessWidget {
             ),
             children: [
               InkWell(
-                onTap: () => value.gantimenu(19),
+                onTap: () => widget.value.gantimenu(19),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 19 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 19
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -1597,7 +1868,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 19 ? Colors.black : Colors.white,
+                        color: widget.value.page == 19
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -1606,7 +1879,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Pengeluran/Pemasukan",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 19 ? Colors.black : Colors.white,
+                          color: widget.value.page == 19
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -1614,12 +1889,14 @@ class MenuTransaksiWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => value.gantimenu(62),
+                onTap: () => widget.value.gantimenu(62),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 62 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 62
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -1630,7 +1907,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 62 ? Colors.black : Colors.white,
+                        color: widget.value.page == 62
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -1639,7 +1918,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Kas Bon",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 62 ? Colors.black : Colors.white,
+                          color: widget.value.page == 62
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -1647,12 +1928,12 @@ class MenuTransaksiWidget extends StatelessWidget {
                 ),
               ),
               // InkWell(
-              //   onTap: () => value.gantimenu(63),
+              //   onTap: () => widget.value.gantimenu(63),
               //   child: Container(
               //     width: MediaQuery.of(context).size.width,
               //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
               //     decoration: BoxDecoration(
-              //       color: value.page == 63 ? Colors.white : Colors.transparent,
+              //       color: widget.value.page == 63 ? Colors.white : Colors.transparent,
               //       borderRadius: BorderRadius.circular(8),
               //     ),
               //     child: Row(
@@ -1663,7 +1944,7 @@ class MenuTransaksiWidget extends StatelessWidget {
               //         Image.asset(
               //           ImageAssets.report,
               //           height: 30,
-              //           color: value.page == 63 ? Colors.black : Colors.white,
+              //           color: widget.value.page == 63 ? Colors.black : Colors.white,
               //         ),
               //         SizedBox(
               //           width: 16,
@@ -1672,7 +1953,7 @@ class MenuTransaksiWidget extends StatelessWidget {
               //           "Penyelesaian Kas Bon",
               //           style: TextStyle(
               //             fontSize: 16,
-              //             color: value.page == 63 ? Colors.black : Colors.white,
+              //             color: widget.value.page == 63 ? Colors.black : Colors.white,
               //           ),
               //         )
               //       ],
@@ -1681,12 +1962,13 @@ class MenuTransaksiWidget extends StatelessWidget {
               // ),
             ]),
         InkWell(
-          onTap: () => value.gantimenu(20),
+          onTap: () => widget.value.gantimenu(20),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 20 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 20 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1694,7 +1976,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.bank,
                   height: 30,
-                  color: value.page == 20 ? Colors.black : Colors.white,
+                  color: widget.value.page == 20 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1703,7 +1985,8 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Saldo Bank",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 20 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 20 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1717,7 +2000,23 @@ class MenuTransaksiWidget extends StatelessWidget {
             expandedAlignment: Alignment.centerLeft,
             collapsedIconColor: Colors.white,
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            onExpansionChanged: (expanded) {
+              if (expanded) {
+                setState(() {
+                  _isExpandedSub = 2;
+                });
+              } else {
+                setState(() {
+                  _isExpandedSub = 0;
+                });
+              }
+            },
             title: Container(
+              decoration: BoxDecoration(
+                color: _isExpandedSub == 2
+                    ? Color.fromARGB(255, 0, 125, 228)
+                    : Colors.transparent,
+              ),
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
@@ -1741,12 +2040,14 @@ class MenuTransaksiWidget extends StatelessWidget {
             ),
             children: [
               InkWell(
-                onTap: () => value.gantimenu(54),
+                onTap: () => widget.value.gantimenu(54),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 54 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 54
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -1757,7 +2058,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 54 ? Colors.black : Colors.white,
+                        color: widget.value.page == 54
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -1766,7 +2069,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Transaksi",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 54 ? Colors.black : Colors.white,
+                          color: widget.value.page == 54
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -1774,12 +2079,14 @@ class MenuTransaksiWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => value.gantimenu(50),
+                onTap: () => widget.value.gantimenu(50),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 50 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 50
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -1790,7 +2097,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 50 ? Colors.black : Colors.white,
+                        color: widget.value.page == 50
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -1799,7 +2108,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Bank",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 50 ? Colors.black : Colors.white,
+                          color: widget.value.page == 50
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -1807,12 +2118,14 @@ class MenuTransaksiWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => value.gantimenu(55),
+                onTap: () => widget.value.gantimenu(55),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 55 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 55
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -1823,7 +2136,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 55 ? Colors.black : Colors.white,
+                        color: widget.value.page == 55
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -1832,7 +2147,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Perantara Aktiva/Pasiva",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 55 ? Colors.black : Colors.white,
+                          color: widget.value.page == 55
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -1840,12 +2157,14 @@ class MenuTransaksiWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => value.gantimenu(51),
+                onTap: () => widget.value.gantimenu(51),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 51 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 51
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -1856,7 +2175,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 51 ? Colors.black : Colors.white,
+                        color: widget.value.page == 51
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -1865,7 +2186,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Hutang/Piutang",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 51 ? Colors.black : Colors.white,
+                          color: widget.value.page == 51
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -1907,12 +2230,14 @@ class MenuTransaksiWidget extends StatelessWidget {
               //   ),
               // ),
               InkWell(
-                onTap: () => value.gantimenu(53),
+                onTap: () => widget.value.gantimenu(53),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 53 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 53
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -1923,7 +2248,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 53 ? Colors.black : Colors.white,
+                        color: widget.value.page == 53
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -1932,7 +2259,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Aset",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 53 ? Colors.black : Colors.white,
+                          color: widget.value.page == 53
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -1941,12 +2270,13 @@ class MenuTransaksiWidget extends StatelessWidget {
               ),
             ]),
         InkWell(
-          onTap: () => value.gantimenu(24),
+          onTap: () => widget.value.gantimenu(24),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 24 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 24 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1954,7 +2284,7 @@ class MenuTransaksiWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.click,
                   height: 30,
-                  color: value.page == 24 ? Colors.black : Colors.white,
+                  color: widget.value.page == 24 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -1963,7 +2293,8 @@ class MenuTransaksiWidget extends StatelessWidget {
                   "Otorisasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 24 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 24 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1977,14 +2308,31 @@ class MenuTransaksiWidget extends StatelessWidget {
             expandedAlignment: Alignment.centerLeft,
             collapsedIconColor: Colors.white,
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            onExpansionChanged: (expanded) {
+              if (expanded) {
+                setState(() {
+                  _isExpandedSub = 3;
+                });
+              } else {
+                setState(() {
+                  _isExpandedSub = 0;
+                });
+              }
+            },
             title: Container(
+              decoration: BoxDecoration(
+                color: _isExpandedSub == 3
+                    ? Color.fromARGB(255, 0, 125, 228)
+                    : Colors.transparent,
+              ),
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
                   Image.asset(
                     ImageAssets.report,
                     height: 30,
-                    color: value.page == 25 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 25 ? Colors.black : Colors.white,
                   ),
                   SizedBox(
                     width: 16,
@@ -1993,7 +2341,8 @@ class MenuTransaksiWidget extends StatelessWidget {
                     "Laporan",
                     style: TextStyle(
                       fontSize: 16,
-                      color: value.page == 25 ? Colors.black : Colors.white,
+                      color:
+                          widget.value.page == 25 ? Colors.black : Colors.white,
                     ),
                   )
                 ],
@@ -2001,12 +2350,14 @@ class MenuTransaksiWidget extends StatelessWidget {
             ),
             children: [
               InkWell(
-                onTap: () => value.gantimenu(43),
+                onTap: () => widget.value.gantimenu(43),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 43 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 43
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -2017,7 +2368,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 43 ? Colors.black : Colors.white,
+                        color: widget.value.page == 43
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -2026,7 +2379,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Jurnal",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 43 ? Colors.black : Colors.white,
+                          color: widget.value.page == 43
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -2034,12 +2389,14 @@ class MenuTransaksiWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => value.gantimenu(40),
+                onTap: () => widget.value.gantimenu(40),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 40 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 40
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -2050,7 +2407,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 40 ? Colors.black : Colors.white,
+                        color: widget.value.page == 40
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -2059,7 +2418,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Satu Transaksi",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 40 ? Colors.black : Colors.white,
+                          color: widget.value.page == 40
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -2067,12 +2428,14 @@ class MenuTransaksiWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => value.gantimenu(41),
+                onTap: () => widget.value.gantimenu(41),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 41 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 41
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -2083,7 +2446,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 41 ? Colors.black : Colors.white,
+                        color: widget.value.page == 41
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -2092,7 +2457,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Banyak Transaksi",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 41 ? Colors.black : Colors.white,
+                          color: widget.value.page == 41
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -2100,12 +2467,14 @@ class MenuTransaksiWidget extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => value.gantimenu(42),
+                onTap: () => widget.value.gantimenu(42),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: value.page == 42 ? Colors.white : Colors.transparent,
+                    color: widget.value.page == 42
+                        ? Colors.white
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -2116,7 +2485,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: value.page == 42 ? Colors.black : Colors.white,
+                        color: widget.value.page == 42
+                            ? Colors.black
+                            : Colors.white,
                       ),
                       SizedBox(
                         width: 16,
@@ -2125,7 +2496,9 @@ class MenuTransaksiWidget extends StatelessWidget {
                         "Back date",
                         style: TextStyle(
                           fontSize: 16,
-                          color: value.page == 42 ? Colors.black : Colors.white,
+                          color: widget.value.page == 42
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       )
                     ],
@@ -2138,9 +2511,16 @@ class MenuTransaksiWidget extends StatelessWidget {
   }
 }
 
-class MenuLaporanWidget extends StatelessWidget {
+class MenuLaporanWidget extends StatefulWidget {
   final MenuNotifier value;
   const MenuLaporanWidget({super.key, required this.value});
+
+  @override
+  State<MenuLaporanWidget> createState() => _MenuLaporanWidgetState();
+}
+
+class _MenuLaporanWidgetState extends State<MenuLaporanWidget> {
+  bool _isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -2151,10 +2531,16 @@ class MenuLaporanWidget extends StatelessWidget {
       expandedAlignment: Alignment.centerLeft,
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+      onExpansionChanged: (expanded) {
+        setState(() {
+          _isExpanded = expanded;
+        });
+      },
       title: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.white, width: 1.5),
+          color: _isExpanded
+              ? Color.fromARGB(255, 0, 125, 228)
+              : Colors.transparent,
         ),
         child: Row(
           children: [
@@ -2171,12 +2557,13 @@ class MenuLaporanWidget extends StatelessWidget {
       ),
       children: [
         InkWell(
-          onTap: () => value.gantimenu(44),
+          onTap: () => widget.value.gantimenu(44),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 44 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 44 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -2187,7 +2574,7 @@ class MenuLaporanWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.report,
                   height: 30,
-                  color: value.page == 44 ? Colors.black : Colors.white,
+                  color: widget.value.page == 44 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -2196,7 +2583,8 @@ class MenuLaporanWidget extends StatelessWidget {
                   "Neraca Berjalan",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 44 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 44 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -2204,12 +2592,13 @@ class MenuLaporanWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(46),
+          onTap: () => widget.value.gantimenu(46),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 46 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 46 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -2220,7 +2609,7 @@ class MenuLaporanWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.report,
                   height: 30,
-                  color: value.page == 46 ? Colors.black : Colors.white,
+                  color: widget.value.page == 46 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -2229,7 +2618,8 @@ class MenuLaporanWidget extends StatelessWidget {
                   "Laba Rugi Berjalan",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 46 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 46 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -2237,12 +2627,13 @@ class MenuLaporanWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(45),
+          onTap: () => widget.value.gantimenu(45),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 45 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 45 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -2253,7 +2644,7 @@ class MenuLaporanWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.report,
                   height: 30,
-                  color: value.page == 45 ? Colors.black : Colors.white,
+                  color: widget.value.page == 45 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -2262,7 +2653,8 @@ class MenuLaporanWidget extends StatelessWidget {
                   "Neraca Periode",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 45 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 45 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -2270,12 +2662,13 @@ class MenuLaporanWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(49),
+          onTap: () => widget.value.gantimenu(49),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 49 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 49 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -2286,7 +2679,7 @@ class MenuLaporanWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.report,
                   height: 30,
-                  color: value.page == 49 ? Colors.black : Colors.white,
+                  color: widget.value.page == 49 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -2295,7 +2688,8 @@ class MenuLaporanWidget extends StatelessWidget {
                   "Laba Rugi Periode",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 49 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 49 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -2303,12 +2697,13 @@ class MenuLaporanWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => value.gantimenu(48),
+          onTap: () => widget.value.gantimenu(48),
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: value.page == 48 ? Colors.white : Colors.transparent,
+              color:
+                  widget.value.page == 48 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -2319,7 +2714,7 @@ class MenuLaporanWidget extends StatelessWidget {
                 Image.asset(
                   ImageAssets.report,
                   height: 30,
-                  color: value.page == 48 ? Colors.black : Colors.white,
+                  color: widget.value.page == 48 ? Colors.black : Colors.white,
                 ),
                 SizedBox(
                   width: 16,
@@ -2328,7 +2723,8 @@ class MenuLaporanWidget extends StatelessWidget {
                   "GL / COA",
                   style: TextStyle(
                     fontSize: 16,
-                    color: value.page == 48 ? Colors.black : Colors.white,
+                    color:
+                        widget.value.page == 48 ? Colors.black : Colors.white,
                   ),
                 )
               ],

@@ -100,10 +100,6 @@ class MenuPage extends StatelessWidget {
                         width: double.infinity,
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.white, width: 1.5),
-                        ),
                         child: Row(
                           children: [
                             Image.asset(
@@ -165,8 +161,6 @@ class MenuPage extends StatelessWidget {
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.white, width: 1.5),
                           color: value.page == 26
                               ? Colors.white
                               : Colors.transparent,
@@ -203,8 +197,6 @@ class MenuPage extends StatelessWidget {
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.white, width: 1.5),
                           color: value.page == 28
                               ? Colors.white
                               : Colors.transparent,
@@ -241,8 +233,6 @@ class MenuPage extends StatelessWidget {
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.white, width: 1.5),
                           color: value.page == 30
                               ? Colors.white
                               : Colors.transparent,
