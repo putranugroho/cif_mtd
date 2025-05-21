@@ -3,7 +3,9 @@
     "tgl_trans": "2025-05-21",
     "tgl_val": "2025-05-21",
     "trans_user": "Joko Widodo",
+    "trx_code": "Joko Widodo",
     "batch": "8046",
+    "otor": "8046",
     "no_trans": null,
     "kode_trans": "",
     "debet_acc": "100100000001",
@@ -36,7 +38,13 @@
     "autterm": null,
     "flag_trn": "0",
     "autrevuser": null,
+    "userterm": null,
+    "userinput": null,
+    "inputtgljam": null,
     "autrevtgljam": null,
     "autrevterm": "",
-    "kode_coll": ""
+    "kode_coll": "",
+    "otoruser": "",
+    "otorterm": "",
+    "otortgljam": ""
 }

@@ -225,18 +225,6 @@ class SatuTransaksiPage extends StatelessWidget {
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
                                         )))),
-                            GridColumn(
-                                columnName: 'action',
-                                label: Container(
-                                    color: colorPrimary,
-                                    padding: EdgeInsets.all(6),
-                                    alignment: Alignment.center,
-                                    child: Text('Action',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
                           ],
                         ),
                       ),
@@ -985,7 +973,6 @@ class DetailDataSource extends DataGridSource {
                     columnName: 'nominal',
                     value: FormatCurrency.oCcyDecimal
                         .format(double.parse(data.nominal))),
-                DataGridCell(columnName: 'action', value: data.kodeTrans),
               ],
             ))
         .toList();

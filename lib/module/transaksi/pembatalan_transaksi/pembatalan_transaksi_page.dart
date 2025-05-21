@@ -152,7 +152,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
 
                                 // Tombol Cari
                                 ElevatedButton(
-                                  onPressed: () => value.tambah(),
+                                  onPressed: () => value.cariSekarang(),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: colorPrimary,
                                     padding: const EdgeInsets.symmetric(
@@ -364,6 +364,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                       TextFormField(
                                         textInputAction: TextInputAction.done,
                                         readOnly: true,
+                                        controller: value.tglTransaksi,
                                         decoration: InputDecoration(
                                           hintText: "Tgl Valuta",
                                           filled: true,
@@ -507,7 +508,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                                   controller: value.akunDebit,
                                                   maxLines: 1,
                                                   readOnly: true,
-                                                  obscureText: true,
+
                                                   // inputFormatters: [
                                                   //   FilteringTextInputFormatter.digitsOnly
                                                   // ],
@@ -556,7 +557,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                                   controller: value.akunKredit,
                                                   maxLines: 1,
                                                   readOnly: true,
-                                                  obscureText: true,
+
                                                   // inputFormatters: [
                                                   //   FilteringTextInputFormatter.digitsOnly
                                                   // ],
@@ -609,7 +610,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                                   controller: value.sbbDebit,
                                                   maxLines: 1,
                                                   readOnly: true,
-                                                  obscureText: true,
+
                                                   // inputFormatters: [
                                                   //   FilteringTextInputFormatter.digitsOnly
                                                   // ],
@@ -658,7 +659,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                                   controller: value.sbbKredit,
                                                   maxLines: 1,
                                                   readOnly: true,
-                                                  obscureText: true,
+
                                                   // inputFormatters: [
                                                   //   FilteringTextInputFormatter.digitsOnly
                                                   // ],
@@ -700,7 +701,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                         controller: value.nominal,
                                         maxLines: 1,
                                         readOnly: true,
-                                        obscureText: true,
+
                                         // inputFormatters: [
                                         //   FilteringTextInputFormatter.digitsOnly
                                         // ],
@@ -738,7 +739,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                         controller: value.keterangan,
                                         maxLines: 1,
                                         readOnly: true,
-                                        obscureText: true,
+
                                         // inputFormatters: [
                                         //   FilteringTextInputFormatter.digitsOnly
                                         // ],
@@ -787,7 +788,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                                   controller: value.aoDebit,
                                                   maxLines: 1,
                                                   readOnly: true,
-                                                  obscureText: true,
+
                                                   // inputFormatters: [
                                                   //   FilteringTextInputFormatter.digitsOnly
                                                   // ],
@@ -836,7 +837,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                                   controller: value.aoKredit,
                                                   maxLines: 1,
                                                   readOnly: true,
-                                                  obscureText: true,
+
                                                   // inputFormatters: [
                                                   //   FilteringTextInputFormatter.digitsOnly
                                                   // ],
@@ -930,7 +931,6 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                         textInputAction: TextInputAction.done,
                                         controller: value.alasan,
                                         maxLines: 1,
-                                        obscureText: true,
                                         // inputFormatters: [
                                         //   FilteringTextInputFormatter.digitsOnly
                                         // ],
@@ -984,14 +984,88 @@ class PembatalanTransaksiPage extends StatelessWidget {
 }
 
 class DetailDataSource extends DataGridSource {
-  DetailDataSource(value) {
-    // tindakanNotifier = "";
-    // buildRowData(value.listData);
+  DetailDataSource(PembatalanTransaksiNotifier value) {
+    tindakanNotifier = value;
+    buildRowData(value.listTransaksi);
+  }
+
+  PembatalanTransaksiNotifier? tindakanNotifier;
+
+  List<DataGridRow> _laporanData = [];
+  @override
+  List<DataGridRow> get rows => _laporanData;
+  void buildRowData(List<TransaksiModel> list) {
+    int index = 1;
+    _laporanData = list
+        .map<DataGridRow>((data) => DataGridRow(
+              cells: [
+                DataGridCell(columnName: 'tgl_trans', value: data.tglVal),
+                DataGridCell(columnName: 'nomor_dok', value: data.nomorDok),
+                DataGridCell(columnName: 'nomor_ref', value: data.nomorRef),
+                DataGridCell(
+                    columnName: 'nominal',
+                    value: FormatCurrency.oCcyDecimal
+                        .format(double.parse(data.nominal))),
+                DataGridCell(columnName: 'nama_debet', value: data.namaDebet),
+                DataGridCell(columnName: 'nama_credit', value: data.namaCredit),
+                DataGridCell(columnName: 'keterangan', value: data.keterangan),
+                DataGridCell(columnName: 'action', value: data.rrn),
+              ],
+            ))
+        .toList();
   }
 
   @override
-  DataGridRowAdapter? buildRow(DataGridRow row) {
-    // TODO: implement buildRow
-    throw UnimplementedError();
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    return DataGridRowAdapter(
+      cells: row.getCells().map<Widget>((e) {
+        if (e.columnName == 'action') {
+          return Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+              onTap: () {
+                tindakanNotifier!.tambah(e.value);
+              },
+              child: Container(
+                width: 300,
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: colorPrimary,
+                  border: Border.all(
+                    width: 2,
+                    color: colorPrimary,
+                  ),
+                ),
+                child: Text(
+                  "Batalkan",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          );
+        } else {
+          return Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          );
+        }
+      }).toList(),
+    );
+  }
+
+  String formatStringData(String data) {
+    int numericData = int.tryParse(data) ?? 0;
+    final formatter = NumberFormat("#,###");
+    return formatter.format(numericData);
   }
 }
