@@ -405,6 +405,10 @@ class NetworkURL {
     return "$url/transaksi";
   }
 
+  static String search() {
+    return "$url/transaksi/search";
+  }
+
   static String auth() {
     return "$url/login";
   }

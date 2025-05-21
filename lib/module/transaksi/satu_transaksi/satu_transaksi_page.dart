@@ -958,7 +958,7 @@ class SatuTransaksiPage extends StatelessWidget {
 class DetailDataSource extends DataGridSource {
   DetailDataSource(SatuTransaksiNotifier value) {
     tindakanNotifier = value;
-    // buildRowData(value.listData);
+    buildRowData(value.listTransaksi);
   }
 
   SatuTransaksiNotifier? tindakanNotifier;
@@ -972,7 +972,7 @@ class DetailDataSource extends DataGridSource {
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(columnName: 'tgl_trans', value: data.tglTrans),
+                DataGridCell(columnName: 'tgl_trans', value: data.tglVal),
                 DataGridCell(columnName: 'kode_trans', value: data.kodeTrans),
                 DataGridCell(columnName: 'debet_acc', value: data.debetAcc),
                 DataGridCell(columnName: 'nama_debet', value: data.namaDebet),
@@ -983,7 +983,8 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'keterangan', value: data.keterangan),
                 DataGridCell(
                     columnName: 'nominal',
-                    value: FormatCurrency.oCcy.format(int.parse(data.nominal))),
+                    value: FormatCurrency.oCcyDecimal
+                        .format(double.parse(data.nominal))),
                 DataGridCell(columnName: 'action', value: data.kodeTrans),
               ],
             ))
@@ -998,22 +999,25 @@ class DetailDataSource extends DataGridSource {
           return Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: 300,
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: colorPrimary,
-                border: Border.all(
-                  width: 2,
+            child: InkWell(
+              onTap: () {},
+              child: Container(
+                width: 300,
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
+                  border: Border.all(
+                    width: 2,
+                    color: colorPrimary,
+                  ),
                 ),
-              ),
-              child: Text(
-                "Aksi",
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
+                child: Text(
+                  "Aksi",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

@@ -25,7 +25,52 @@ class SatuTransaksiNotifier extends ChangeNotifier {
       getSetupTrans();
       getAoMarketing();
       getInqueryAll();
+      getTransaksi();
       notifyListeners();
+    });
+  }
+
+  var isLoadingData = true;
+  List<TransaksiModel> listTransaksi = [];
+  Future getTransaksi() async {
+    isLoadingData = true;
+    listTransaksi.clear();
+    notifyListeners();
+    var data = {
+      "filter": {
+        "general": {
+          "batch": null,
+          "status_transaksi": "all",
+          "kode_pt": "${users!.kodePt}",
+          "kode_kantor": "${users!.kodeKantor}",
+          "kode_induk": "${users!.kodeInduk}",
+          "rrn": null,
+          "no_dokumen": null,
+          "no_reff": null,
+          "flag_trn": "0"
+        },
+        "range_tanggal": {
+          "from": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+          "to": "${DateFormat('y-MM-dd').format(DateTime.now())}"
+        },
+        "akun": {"dracc": null, "cracc": null},
+        "range_nominal": {"min": null, "max": null}
+      },
+      "pagination": {"page": 1},
+      "sort": {"by": "tgl_transaksi", "order": "desc"}
+    };
+    Setuprepository.setup(token, NetworkURL.search(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listTransaksi.add(TransaksiModel.fromJson(i));
+        }
+        isLoadingData = false;
+        notifyListeners();
+      } else {
+        isLoadingData = false;
+        notifyListeners();
+      }
     });
   }
 
@@ -314,6 +359,9 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     keterangan.clear();
     aoModel = null;
     aoModelKRedit = null;
+    dialog = false;
+
+    notifyListeners();
   }
 
   List<SetupTransModel> listData = [];
@@ -352,9 +400,9 @@ class SatuTransaksiNotifier extends ChangeNotifier {
       var invoice = DateTime.now().millisecondsSinceEpoch.toString();
       var data = [
         {
-          "tgl_transaksi":
-              "${backDate ? tglBackDatetext.text : DateFormat('y-MM-dd').format(DateTime.now())}",
-          "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+          "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+          "tgl_valuta":
+              "${backDate ? DateFormat('y-MM-dd').format(tglBackDate!) : DateFormat('y-MM-dd').format(DateTime.now())}",
           "batch": "${users!.batch}",
           "trx_type": "TRX",
           "trx_code": "${backDate ? "110" : "100"}",
@@ -397,6 +445,8 @@ class SatuTransaksiNotifier extends ChangeNotifier {
           .then((value) {
         Navigator.pop(context);
         if (value['code'] == "000") {
+          getTransaksi();
+          clear();
           informationDialog(context, "Information", value['message']);
         } else {
           informationDialog(context, "Warning", value['message']);
