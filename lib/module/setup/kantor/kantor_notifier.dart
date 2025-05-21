@@ -236,6 +236,7 @@ class KantorNotifier extends ChangeNotifier {
         list.where((e) => e.kodeKantor == kantor!.kodeInduk).isNotEmpty
             ? list.where((e) => e.kodeKantor == kantor!.kodeInduk).first
             : null;
+    noKantor.text = kantorModel!.kodeKantor;
     nama.text = kantor!.namaKantor;
     notelp.text = kantor!.telp;
     fax.text = kantor!.fax;

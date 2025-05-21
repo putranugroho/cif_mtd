@@ -31,6 +31,7 @@ export 'piutang_hutang_model.dart';
 export 'akses_point_model.dart';
 export 'rekon_bank_model.dart';
 export 'pembayaran_hutang_piutang_model.dart';
+export 'user_model.dart';
 export 'bank_model.dart';
 export 'provinsi_model.dart';
 export 'aktivasi_model.dart';

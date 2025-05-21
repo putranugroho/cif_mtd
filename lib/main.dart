@@ -1,4 +1,6 @@
 import 'package:accounting/module/menu/menu_page.dart';
+import 'package:accounting/module/splash_screen_notifier.dart';
+import 'package:accounting/module/splash_screen_page.dart';
 import 'package:accounting/utils/custom_scroll.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const MenuPage(),
+      home: const SplashScreenPage(),
       scrollBehavior: MyCustomScrollBehavior(),
       title: "Accounting",
     );

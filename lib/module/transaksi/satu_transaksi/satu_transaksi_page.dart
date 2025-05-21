@@ -446,13 +446,7 @@ class SatuTransaksiPage extends StatelessWidget {
                                               // inputFormatters: [
                                               //   FilteringTextInputFormatter.digitsOnly
                                               // ],
-                                              validator: (e) {
-                                                if (e!.isEmpty) {
-                                                  return "Wajib diisi";
-                                                } else {
-                                                  return null;
-                                                }
-                                              },
+
                                               decoration: InputDecoration(
                                                 filled: true,
                                                 fillColor: Colors.grey[200],

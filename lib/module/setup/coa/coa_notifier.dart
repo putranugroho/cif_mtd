@@ -394,7 +394,8 @@ class CoaNotifier extends ChangeNotifier {
               "${jnsAcc == "Header" ? resulttext.text.trim() : jnsAcc == "Buku Besar" ? header!.nosbb : bukuBesar!.nosbb}",
           "nosbb": "${resulttext.text.trim()}",
           "nama_sbb": "${namaSbb.text.trim()}",
-          "type_posting": "$typePosting",
+          "type_posting":
+              "${jnsAcc == "Header" ? "N" : jnsAcc == "Buku Besar" ? "N" : typePosting}",
           "sbb_khusus": "",
           "limit_debet":
               "${limitdebet.text.isEmpty ? "0" : limitdebet.text.replaceAll(",", "")}",
@@ -437,7 +438,8 @@ class CoaNotifier extends ChangeNotifier {
               "${jnsAcc == "Header" ? resulttext.text.trim() : jnsAcc == "Buku Besar" ? header!.nosbb : bukuBesar!.nosbb}",
           "nosbb": "${resulttext.text.trim()}",
           "nama_sbb": "${namaSbb.text.trim()}",
-          "type_posting": "$typePosting",
+          "type_posting":
+              "${jnsAcc == "Header" ? "N" : jnsAcc == "Buku Besar" ? "N" : typePosting}",
           "sbb_khusus": "",
           "limit_debet":
               "${limitdebet.text.isEmpty ? "0" : limitdebet.text.replaceAll(",", "")}",

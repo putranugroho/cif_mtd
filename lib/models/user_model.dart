@@ -4,9 +4,9 @@ import 'package:quiver/core.dart';
 import 'index.dart';
 
 @immutable
-class UsersModel {
+class UserModel {
 
-  const UsersModel({
+  const UserModel({
     required this.id,
     required this.userid,
     required this.empId,
@@ -33,7 +33,6 @@ class UsersModel {
     required this.createddate,
     required this.isDeleted,
     required this.backDate,
-    required this.shifts,
   });
 
   final int id;
@@ -62,9 +61,8 @@ class UsersModel {
   final String createddate;
   final String isDeleted;
   final String backDate;
-  final List<UsersShiftModel> shifts;
 
-  factory UsersModel.fromJson(Map<String,dynamic> json) => UsersModel(
+  factory UserModel.fromJson(Map<String,dynamic> json) => UserModel(
     id: json['id'] as int,
     userid: json['userid'].toString(),
     empId: json['emp_id'].toString(),
@@ -90,8 +88,7 @@ class UsersModel {
     maxOtor: json['max_otor'].toString(),
     createddate: json['createddate'].toString(),
     isDeleted: json['is_deleted'].toString(),
-    backDate: json['back_date'].toString(),
-    shifts: (json['shifts'] as List? ?? []).map((e) => UsersShiftModel.fromJson(e as Map<String, dynamic>)).toList()
+    backDate: json['back_date'].toString()
   );
   
   Map<String, dynamic> toJson() => {
@@ -120,11 +117,10 @@ class UsersModel {
     'max_otor': maxOtor,
     'createddate': createddate,
     'is_deleted': isDeleted,
-    'back_date': backDate,
-    'shifts': shifts.map((e) => e.toJson()).toList()
+    'back_date': backDate
   };
 
-  UsersModel clone() => UsersModel(
+  UserModel clone() => UserModel(
     id: id,
     userid: userid,
     empId: empId,
@@ -150,12 +146,11 @@ class UsersModel {
     maxOtor: maxOtor,
     createddate: createddate,
     isDeleted: isDeleted,
-    backDate: backDate,
-    shifts: shifts.map((e) => e.clone()).toList()
+    backDate: backDate
   );
 
 
-  UsersModel copyWith({
+  UserModel copyWith({
     int? id,
     String? userid,
     String? empId,
@@ -181,9 +176,8 @@ class UsersModel {
     String? maxOtor,
     String? createddate,
     String? isDeleted,
-    String? backDate,
-    List<UsersShiftModel>? shifts
-  }) => UsersModel(
+    String? backDate
+  }) => UserModel(
     id: id ?? this.id,
     userid: userid ?? this.userid,
     empId: empId ?? this.empId,
@@ -210,13 +204,12 @@ class UsersModel {
     createddate: createddate ?? this.createddate,
     isDeleted: isDeleted ?? this.isDeleted,
     backDate: backDate ?? this.backDate,
-    shifts: shifts ?? this.shifts,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is UsersModel && id == other.id && userid == other.userid && empId == other.empId && pass == other.pass && namauser == other.namauser && batch == other.batch && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && tglexp == other.tglexp && lvluser == other.lvluser && terminalId == other.terminalId && aktivasi == other.aktivasi && aksesKasir == other.aksesKasir && sbbKasir == other.sbbKasir && namaSbb == other.namaSbb && fhoto1 == other.fhoto1 && fhoto2 == other.fhoto2 && fhoto3 == other.fhoto3 && levelOtor == other.levelOtor && bedaKantor == other.bedaKantor && minOtor == other.minOtor && maxOtor == other.maxOtor && createddate == other.createddate && isDeleted == other.isDeleted && backDate == other.backDate && shifts == other.shifts;
+    || other is UserModel && id == other.id && userid == other.userid && empId == other.empId && pass == other.pass && namauser == other.namauser && batch == other.batch && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && tglexp == other.tglexp && lvluser == other.lvluser && terminalId == other.terminalId && aktivasi == other.aktivasi && aksesKasir == other.aksesKasir && sbbKasir == other.sbbKasir && namaSbb == other.namaSbb && fhoto1 == other.fhoto1 && fhoto2 == other.fhoto2 && fhoto3 == other.fhoto3 && levelOtor == other.levelOtor && bedaKantor == other.bedaKantor && minOtor == other.minOtor && maxOtor == other.maxOtor && createddate == other.createddate && isDeleted == other.isDeleted && backDate == other.backDate;
 
   @override
-  int get hashCode => id.hashCode ^ userid.hashCode ^ empId.hashCode ^ pass.hashCode ^ namauser.hashCode ^ batch.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ tglexp.hashCode ^ lvluser.hashCode ^ terminalId.hashCode ^ aktivasi.hashCode ^ aksesKasir.hashCode ^ sbbKasir.hashCode ^ namaSbb.hashCode ^ fhoto1.hashCode ^ fhoto2.hashCode ^ fhoto3.hashCode ^ levelOtor.hashCode ^ bedaKantor.hashCode ^ minOtor.hashCode ^ maxOtor.hashCode ^ createddate.hashCode ^ isDeleted.hashCode ^ backDate.hashCode ^ shifts.hashCode;
+  int get hashCode => id.hashCode ^ userid.hashCode ^ empId.hashCode ^ pass.hashCode ^ namauser.hashCode ^ batch.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ tglexp.hashCode ^ lvluser.hashCode ^ terminalId.hashCode ^ aktivasi.hashCode ^ aksesKasir.hashCode ^ sbbKasir.hashCode ^ namaSbb.hashCode ^ fhoto1.hashCode ^ fhoto2.hashCode ^ fhoto3.hashCode ^ levelOtor.hashCode ^ bedaKantor.hashCode ^ minOtor.hashCode ^ maxOtor.hashCode ^ createddate.hashCode ^ isDeleted.hashCode ^ backDate.hashCode;
 }

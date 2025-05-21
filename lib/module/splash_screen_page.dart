@@ -1,4 +1,5 @@
 import 'package:accounting/module/splash_screen_notifier.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,13 @@ class SplashScreenPage extends StatelessWidget {
             child: Scaffold(
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [],
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CupertinoActivityIndicator(
+                radius: 15,
+                color: Colors.grey,
+              )
+            ],
           ),
         )),
       ),

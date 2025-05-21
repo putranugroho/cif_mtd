@@ -176,6 +176,18 @@ class UsersPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      columnName: 'batch',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Batch',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
                                       columnName: 'aktivasi',
                                       width: 65,
                                       label: Container(
@@ -1348,6 +1360,7 @@ class DetailDataSource extends DataGridSource {
                         .where((e) => e.idLevel == data.lvluser)
                         .first
                         .levelUser),
+                DataGridCell(columnName: 'batch', value: data.batch),
                 DataGridCell(columnName: 'aktivasi', value: data.aktivasi),
                 DataGridCell(columnName: 'akses_kasir', value: data.aksesKasir),
                 DataGridCell(columnName: 'back_date', value: data.backDate),

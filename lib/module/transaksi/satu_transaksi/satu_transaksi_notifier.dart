@@ -1,11 +1,12 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:accounting/models/index.dart';
 import 'package:accounting/network/network.dart';
+import 'package:accounting/pref/pref.dart';
 import 'package:accounting/repository/SetupRepository.dart';
 import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/informationdialog.dart';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -13,18 +14,28 @@ class SatuTransaksiNotifier extends ChangeNotifier {
   final BuildContext context;
 
   SatuTransaksiNotifier({required this.context}) {
-    getSetupTrans();
-    getAoMarketing();
-    getInqueryAll();
+    getUsers();
+
     notifyListeners();
   }
+  UserModel? users;
+  getUsers() async {
+    Pref().getUsers().then((value) {
+      users = value;
+      getSetupTrans();
+      getAoMarketing();
+      getInqueryAll();
+      notifyListeners();
+    });
+  }
+
   List<InqueryGlModel> list = [];
   List<AoModel> listAo = [];
   getAoMarketing() async {
     isLoading = true;
     listAo.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
+    var data = {"kode_pt": "${users!.kodePt}"};
     Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data))
         .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
@@ -124,7 +135,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     listGl.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
+    var data = {"kode_pt": "${users!.kodePt}"};
     Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
         .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
@@ -142,7 +153,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     isLoading = true;
     listData.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
+    var data = {"kode_pt": "${users!.kodePt}"};
     Setuprepository.setup(token, NetworkURL.getSetupTrans(), jsonEncode(data))
         .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
@@ -336,7 +347,62 @@ class SatuTransaksiNotifier extends ChangeNotifier {
   final keyForm = GlobalKey<FormState>();
 
   cek() {
-    if (keyForm.currentState!.validate()) {}
+    if (keyForm.currentState!.validate()) {
+      DialogCustom().showLoading(context);
+      var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+      var data = [
+        {
+          "tgl_transaksi":
+              "${backDate ? tglBackDatetext.text : DateFormat('y-MM-dd').format(DateTime.now())}",
+          "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+          "batch": "${users!.batch}",
+          "trx_type": "TRX",
+          "trx_code": "${backDate ? "110" : "100"}",
+          "otor": "0",
+          "kode_trn":
+              "${setupTransModel == null ? "" : setupTransModel!.kdTrans}",
+          "nama_dr": "${nosbbdeb.text}",
+          "dracc": "${namaSbbDeb.text}",
+          "nama_cr": "${nossbcre.text}",
+          "cracc": "${namaSbbCre.text}",
+          "rrn": "$invoice",
+          "no_dokumen": "${nomorDok.text}",
+          "no_ref": "${nomorRef.text}",
+          "nominal": double.parse(nominal.text
+              .replaceAll("Rp ", "")
+              .replaceAll(".", "")
+              .replaceAll(",", ".")),
+          "keterangan": "${keterangan.text}",
+          "kode_pt": "${users!.kodePt}",
+          "kode_kantor": "${users!.kodeKantor}",
+          "kode_induk": "${users!.kodeInduk}",
+          "sts_validasi": "N",
+          "kode_ao_dr": "${aoModel == null ? "" : aoModel!.kode}",
+          "kode_coll": "",
+          "kode_ao_cr": "${aoModelKRedit == null ? "" : aoModelKRedit!.kode}",
+          "userinput": "${users!.namauser}",
+          "userterm": "114.80.90.54",
+          "inputtgljam":
+              "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+          "otoruser": "",
+          "otorterm": "",
+          "otortgljam": "",
+          "flag_trn": "0",
+          "merchant": "",
+          "source_trx": ""
+        }
+      ];
+      print(jsonEncode(data));
+      Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
+          .then((value) {
+        Navigator.pop(context);
+        if (value['code'] == "000") {
+          informationDialog(context, "Information", value['message']);
+        } else {
+          informationDialog(context, "Warning", value['message']);
+        }
+      });
+    }
   }
 
   cancelKode() async {
