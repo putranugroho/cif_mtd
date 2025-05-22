@@ -107,7 +107,7 @@ class KasbonPage extends StatelessWidget {
                         child: SfDataGrid(
                           headerRowHeight: 40,
                           defaultColumnWidth: 180,
-                          frozenColumnsCount: 1,
+                          frozenColumnsCount: 2,
 
                           // controller: value.dataGridController,
                           gridLinesVisibility: GridLinesVisibility.both,
@@ -130,42 +130,33 @@ class KasbonPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 100,
+                                columnName: 'tgl_val',
+                                label: Container(
+                                    padding: EdgeInsets.all(6),
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    child: Text('Tanggal Valuta',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        )))),
+                            GridColumn(
+                                width: 100,
                                 columnName: 'tgl_trans',
                                 label: Container(
                                     padding: EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Tanggal Kas Bon',
+                                    child: Text('Tanggal Input',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
                                           fontSize: 12,
                                         )))),
                             GridColumn(
-                                columnName: 'nama_debet',
-                                label: Container(
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama Akun Debet',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
-                            GridColumn(
-                                columnName: 'nama_credit',
-                                label: Container(
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama Akun Kredit',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
-                            GridColumn(
+                                width: 120,
                                 columnName: 'nomor_dok',
                                 label: Container(
                                     color: colorPrimary,
@@ -178,6 +169,7 @@ class KasbonPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 120,
                                 columnName: 'nomor_ref',
                                 label: Container(
                                     color: colorPrimary,
@@ -190,6 +182,46 @@ class KasbonPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 150,
+                                columnName: 'nominal',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Nominal',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 200,
+                                columnName: 'nama_debet',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Nama Akun Debet',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 200,
+                                columnName: 'nama_credit',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Nama Akun Kredit',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 200,
                                 columnName: 'keterangan',
                                 label: Container(
                                     color: colorPrimary,
@@ -202,12 +234,26 @@ class KasbonPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
-                                columnName: 'nominal',
+                                width: 120,
+                                columnName: 'debet_acc',
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(6),
-                                    child: Text('Nilai Kas Bon',
+                                    child: Text('Akun Debet',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 120,
+                                columnName: 'credit_acc',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Akun Kredit',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -215,11 +261,12 @@ class KasbonPage extends StatelessWidget {
                                         )))),
                             GridColumn(
                                 columnName: 'action',
+                                width: 80,
                                 label: Container(
                                     color: colorPrimary,
                                     padding: EdgeInsets.all(6),
                                     alignment: Alignment.center,
-                                    child: Text('Penyelesaian',
+                                    child: Text('Action',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -1754,16 +1801,20 @@ class DetailDataSource extends DataGridSource {
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
+                DataGridCell(columnName: 'tgl_val', value: data.tglVal),
                 DataGridCell(columnName: 'tgl_trans', value: data.tglTrans),
-                DataGridCell(columnName: 'nama_debet', value: data.namaDebet),
-                DataGridCell(columnName: 'nama_credit', value: data.namaCredit),
                 DataGridCell(columnName: 'nomor_dok', value: data.nomorDok),
                 DataGridCell(columnName: 'nomor_ref', value: data.nomorRef),
-                DataGridCell(columnName: 'keterangan', value: data.keterangan),
                 DataGridCell(
                     columnName: 'nominal',
-                    value: FormatCurrency.oCcy.format(int.parse(data.nominal))),
-                DataGridCell(columnName: 'action', value: data.kodeTrans),
+                    value: FormatCurrency.oCcyDecimal
+                        .format(double.parse(data.nominal))),
+                DataGridCell(columnName: 'nama_debet', value: data.namaDebet),
+                DataGridCell(columnName: 'nama_credit', value: data.namaCredit),
+                DataGridCell(columnName: 'keterangan', value: data.keterangan),
+                DataGridCell(columnName: 'debet_acc', value: data.debetAcc),
+                DataGridCell(columnName: 'credit_acc', value: data.creditAcc),
+                DataGridCell(columnName: 'action', value: data.nomorDok),
               ],
             ))
         .toList();
@@ -1777,22 +1828,25 @@ class DetailDataSource extends DataGridSource {
           return Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: 300,
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: colorPrimary,
-                border: Border.all(
-                  width: 2,
+            child: InkWell(
+              onTap: () {},
+              child: Container(
+                width: 300,
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
+                  border: Border.all(
+                    width: 2,
+                    color: colorPrimary,
+                  ),
                 ),
-              ),
-              child: Text(
-                "Aksi",
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
+                child: Text(
+                  "Aksi",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

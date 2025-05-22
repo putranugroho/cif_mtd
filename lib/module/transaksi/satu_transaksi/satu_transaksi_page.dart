@@ -83,7 +83,7 @@ class SatuTransaksiPage extends StatelessWidget {
                         child: SfDataGrid(
                           headerRowHeight: 40,
                           defaultColumnWidth: 180,
-                          frozenColumnsCount: 1,
+                          frozenColumnsCount: 2,
 
                           // controller: value.dataGridController,
                           gridLinesVisibility: GridLinesVisibility.both,
@@ -106,7 +106,8 @@ class SatuTransaksiPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
-                                columnName: 'tgl_trans',
+                                width: 100,
+                                columnName: 'tgl_val',
                                 label: Container(
                                     padding: EdgeInsets.all(6),
                                     color: colorPrimary,
@@ -118,66 +119,20 @@ class SatuTransaksiPage extends StatelessWidget {
                                           fontSize: 12,
                                         )))),
                             GridColumn(
-                                columnName: 'kode_trans',
+                                width: 100,
+                                columnName: 'tgl_trans',
                                 label: Container(
+                                    padding: EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Kode Transaksi',
+                                    child: Text('Tanggal Input',
                                         style: TextStyle(
-                                          fontSize: 12,
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
-                                        )))),
-                            GridColumn(
-                                columnName: 'debet_acc',
-                                label: Container(
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Akun Debet',
-                                        style: TextStyle(
                                           fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
                                         )))),
                             GridColumn(
-                                columnName: 'nama_debet',
-                                label: Container(
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama Akun Debet',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
-                            GridColumn(
-                                columnName: 'credit_acc',
-                                label: Container(
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Akun Kredit',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
-                            GridColumn(
-                                columnName: 'nama_credit',
-                                label: Container(
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama Akun Kredit',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
-                            GridColumn(
+                                width: 120,
                                 columnName: 'nomor_dok',
                                 label: Container(
                                     color: colorPrimary,
@@ -190,6 +145,7 @@ class SatuTransaksiPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 120,
                                 columnName: 'nomor_ref',
                                 label: Container(
                                     color: colorPrimary,
@@ -202,6 +158,46 @@ class SatuTransaksiPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                width: 150,
+                                columnName: 'nominal',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Nominal',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 200,
+                                columnName: 'nama_debet',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Nama Akun Debet',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 200,
+                                columnName: 'nama_credit',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Nama Akun Kredit',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 200,
                                 columnName: 'keterangan',
                                 label: Container(
                                     color: colorPrimary,
@@ -214,12 +210,39 @@ class SatuTransaksiPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
-                                columnName: 'nominal',
+                                width: 120,
+                                columnName: 'debet_acc',
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(6),
-                                    child: Text('Nominal',
+                                    child: Text('Akun Debet',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 120,
+                                columnName: 'credit_acc',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Akun Kredit',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                columnName: 'action',
+                                width: 80,
+                                label: Container(
+                                    color: colorPrimary,
+                                    padding: EdgeInsets.all(6),
+                                    alignment: Alignment.center,
+                                    child: Text('Action',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -956,23 +979,39 @@ class DetailDataSource extends DataGridSource {
   List<DataGridRow> get rows => _laporanData;
   void buildRowData(List<TransaksiModel> list) {
     int index = 1;
+
+    // 🔽 Sort data terlebih dahulu
+    list.sort((a, b) {
+      final tglA = DateTime.tryParse(a.tglVal) ?? DateTime(1900);
+      final tglB = DateTime.tryParse(b.tglVal) ?? DateTime(1900);
+
+      if (tglA.compareTo(tglB) != 0) {
+        return tglA.compareTo(tglB); // urut berdasarkan tanggal dulu
+      }
+
+      return a.nomorDok
+          .compareTo(b.nomorDok); // lalu urut berdasarkan nomor dokumen
+    });
+
+    // 🧱 Bangun data grid setelah data diurutkan
     _laporanData = list
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(columnName: 'tgl_trans', value: data.tglVal),
-                DataGridCell(columnName: 'kode_trans', value: data.kodeTrans),
-                DataGridCell(columnName: 'debet_acc', value: data.debetAcc),
-                DataGridCell(columnName: 'nama_debet', value: data.namaDebet),
-                DataGridCell(columnName: 'credit_acc', value: data.creditAcc),
-                DataGridCell(columnName: 'nama_credit', value: data.namaCredit),
+                DataGridCell(columnName: 'tgl_val', value: data.tglVal),
+                DataGridCell(columnName: 'tgl_trans', value: data.tglTrans),
                 DataGridCell(columnName: 'nomor_dok', value: data.nomorDok),
                 DataGridCell(columnName: 'nomor_ref', value: data.nomorRef),
-                DataGridCell(columnName: 'keterangan', value: data.keterangan),
                 DataGridCell(
                     columnName: 'nominal',
                     value: FormatCurrency.oCcyDecimal
                         .format(double.parse(data.nominal))),
+                DataGridCell(columnName: 'nama_debet', value: data.namaDebet),
+                DataGridCell(columnName: 'nama_credit', value: data.namaCredit),
+                DataGridCell(columnName: 'keterangan', value: data.keterangan),
+                DataGridCell(columnName: 'debet_acc', value: data.debetAcc),
+                DataGridCell(columnName: 'credit_acc', value: data.creditAcc),
+                DataGridCell(columnName: 'action', value: data.nomorDok),
               ],
             ))
         .toList();
@@ -1007,6 +1046,16 @@ class DetailDataSource extends DataGridSource {
                   ),
                 ),
               ),
+            ),
+          );
+        } else if (e.columnName == 'nominal') {
+          return Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           );
         } else {

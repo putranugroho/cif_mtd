@@ -76,7 +76,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                         onChanged: (e) =>
                                             value.pilihCariTransaksi(true),
                                       ),
-                                      const Text("Hari Ini"),
+                                      const Text("Input Hari Ini"),
                                       const SizedBox(width: 16),
                                       Radio(
                                         value: false,
@@ -85,6 +85,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                         onChanged: (e) =>
                                             value.pilihCariTransaksi(false),
                                       ),
+                                      const Text("Tgl Valuta"),
                                       const SizedBox(width: 16),
                                       SizedBox(
                                         width: 180,
@@ -176,7 +177,7 @@ class PembatalanTransaksiPage extends StatelessWidget {
                           child: SfDataGrid(
                             headerRowHeight: 40,
                             defaultColumnWidth: 180,
-                            frozenColumnsCount: 1,
+                            frozenColumnsCount: 2,
 
                             // controller: value.dataGridController,
                             gridLinesVisibility: GridLinesVisibility.both,
@@ -186,84 +187,143 @@ class PembatalanTransaksiPage extends StatelessWidget {
                             source: DetailDataSource(value),
                             columns: <GridColumn>[
                               GridColumn(
+                                  width: 50,
+                                  columnName: 'no',
+                                  label: Container(
+                                      padding: EdgeInsets.all(6),
+                                      color: colorPrimary,
+                                      alignment: Alignment.center,
+                                      child: Text('No',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w300,
+                                            fontSize: 12,
+                                            color: Colors.white,
+                                          )))),
+                              GridColumn(
+                                  width: 100,
+                                  columnName: 'tgl_val',
+                                  label: Container(
+                                      padding: EdgeInsets.all(6),
+                                      color: colorPrimary,
+                                      alignment: Alignment.center,
+                                      child: Text('Tanggal Valuta',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w300,
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                          )))),
+                              GridColumn(
+                                  width: 100,
                                   columnName: 'tgl_trans',
                                   label: Container(
-                                      padding: const EdgeInsets.all(6),
+                                      padding: EdgeInsets.all(6),
                                       color: colorPrimary,
                                       alignment: Alignment.center,
-                                      child: const Text('Tanggal',
+                                      child: Text('Tanggal Input',
                                           style: TextStyle(
                                             fontWeight: FontWeight.w300,
-                                            fontSize: 12,
                                             color: Colors.white,
+                                            fontSize: 12,
                                           )))),
                               GridColumn(
+                                  width: 120,
                                   columnName: 'nomor_dok',
                                   label: Container(
-                                      padding: const EdgeInsets.all(6),
                                       color: colorPrimary,
                                       alignment: Alignment.center,
-                                      child: const Text('No Dokumen',
+                                      padding: EdgeInsets.all(6),
+                                      child: Text('Nomor Dokumen',
                                           style: TextStyle(
+                                            fontSize: 12,
                                             fontWeight: FontWeight.w300,
                                             color: Colors.white,
-                                            fontSize: 12,
                                           )))),
                               GridColumn(
+                                  width: 120,
                                   columnName: 'nomor_ref',
                                   label: Container(
                                       color: colorPrimary,
                                       alignment: Alignment.center,
-                                      padding: const EdgeInsets.all(6),
-                                      child: const Text('No Referensi',
+                                      padding: EdgeInsets.all(6),
+                                      child: Text('Nomor Referensi',
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w300,
                                             color: Colors.white,
                                           )))),
                               GridColumn(
+                                  width: 150,
                                   columnName: 'nominal',
                                   label: Container(
                                       color: colorPrimary,
                                       alignment: Alignment.center,
-                                      padding: const EdgeInsets.all(6),
-                                      child: const Text('Nominal',
+                                      padding: EdgeInsets.all(6),
+                                      child: Text('Nominal',
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w300,
                                             color: Colors.white,
                                           )))),
                               GridColumn(
-                                  columnName: 'debet_acc',
+                                  width: 200,
+                                  columnName: 'nama_debet',
                                   label: Container(
                                       color: colorPrimary,
                                       alignment: Alignment.center,
-                                      padding: const EdgeInsets.all(6),
-                                      child: const Text('Akun Debet',
+                                      padding: EdgeInsets.all(6),
+                                      child: Text('Nama Akun Debet',
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w300,
                                             color: Colors.white,
                                           )))),
                               GridColumn(
-                                  columnName: 'credit_acc',
+                                  width: 200,
+                                  columnName: 'nama_credit',
                                   label: Container(
                                       color: colorPrimary,
                                       alignment: Alignment.center,
-                                      padding: const EdgeInsets.all(6),
-                                      child: const Text('Akun Kredit',
+                                      padding: EdgeInsets.all(6),
+                                      child: Text('Nama Akun Kredit',
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w300,
                                             color: Colors.white,
                                           )))),
                               GridColumn(
+                                  width: 200,
                                   columnName: 'keterangan',
                                   label: Container(
                                       color: colorPrimary,
                                       alignment: Alignment.center,
-                                      padding: const EdgeInsets.all(6),
-                                      child: const Text('keterangan',
+                                      padding: EdgeInsets.all(6),
+                                      child: Text('Keterangan',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w300,
+                                            color: Colors.white,
+                                          )))),
+                              GridColumn(
+                                  width: 120,
+                                  columnName: 'debet_acc',
+                                  label: Container(
+                                      color: colorPrimary,
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.all(6),
+                                      child: Text('Akun Debet',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w300,
+                                            color: Colors.white,
+                                          )))),
+                              GridColumn(
+                                  width: 120,
+                                  columnName: 'credit_acc',
+                                  label: Container(
+                                      color: colorPrimary,
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.all(6),
+                                      child: Text('Akun Kredit',
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w300,
@@ -271,11 +331,12 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                           )))),
                               GridColumn(
                                   columnName: 'action',
+                                  width: 80,
                                   label: Container(
                                       color: colorPrimary,
-                                      padding: const EdgeInsets.all(6),
+                                      padding: EdgeInsets.all(6),
                                       alignment: Alignment.center,
-                                      child: const Text('Action',
+                                      child: Text('Action',
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w300,
@@ -999,7 +1060,9 @@ class DetailDataSource extends DataGridSource {
     _laporanData = list
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
-                DataGridCell(columnName: 'tgl_trans', value: data.tglVal),
+                DataGridCell(columnName: 'no', value: (index++).toString()),
+                DataGridCell(columnName: 'tgl_val', value: data.tglVal),
+                DataGridCell(columnName: 'tgl_trans', value: data.tglTrans),
                 DataGridCell(columnName: 'nomor_dok', value: data.nomorDok),
                 DataGridCell(columnName: 'nomor_ref', value: data.nomorRef),
                 DataGridCell(
@@ -1009,7 +1072,9 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'nama_debet', value: data.namaDebet),
                 DataGridCell(columnName: 'nama_credit', value: data.namaCredit),
                 DataGridCell(columnName: 'keterangan', value: data.keterangan),
-                DataGridCell(columnName: 'action', value: data.rrn),
+                DataGridCell(columnName: 'debet_acc', value: data.debetAcc),
+                DataGridCell(columnName: 'credit_acc', value: data.creditAcc),
+                DataGridCell(columnName: 'action', value: data.nomorDok),
               ],
             ))
         .toList();
@@ -1024,9 +1089,7 @@ class DetailDataSource extends DataGridSource {
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
-              onTap: () {
-                tindakanNotifier!.tambah(e.value);
-              },
+              onTap: () {},
               child: Container(
                 width: 300,
                 padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
@@ -1039,13 +1102,23 @@ class DetailDataSource extends DataGridSource {
                   ),
                 ),
                 child: Text(
-                  "Batalkan",
+                  "Aksi",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,
                   ),
                 ),
               ),
+            ),
+          );
+        } else if (e.columnName == 'nominal') {
+          return Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           );
         } else {

@@ -163,7 +163,7 @@ class HutangPiutangPage extends StatelessWidget {
                               child: SfDataGrid(
                                 headerRowHeight: 40,
                                 defaultColumnWidth: 180,
-                                frozenColumnsCount: 1,
+                                frozenColumnsCount: 2,
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,

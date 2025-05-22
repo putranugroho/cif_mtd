@@ -97,7 +97,7 @@ class KantorPage extends StatelessWidget {
                               child: SfDataGrid(
                                 headerRowHeight: 40,
                                 defaultColumnWidth: 180,
-                                frozenColumnsCount: 1,
+                                frozenColumnsCount: 2,
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
@@ -972,7 +972,11 @@ class DetailDataSource extends DataGridSource {
   @override
   List<DataGridRow> get rows => _laporanData;
   void buildRowData(List<KantorModel> list) {
-    list.sort((a, b) => (a.kodeInduk).compareTo(b.kodeInduk));
+    list.sort((a, b) {
+      int cmp = a.kodeKantor.compareTo(b.kodeKantor);
+      if (cmp != 0) return cmp;
+      return a.kodeInduk.compareTo(b.kodeInduk);
+    });
 
     int index = 1;
     _laporanData = list

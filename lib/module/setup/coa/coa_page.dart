@@ -124,7 +124,7 @@ class CoaPage extends StatelessWidget {
                               child: SfDataGrid(
                                 headerRowHeight: 40,
                                 defaultColumnWidth: 180,
-                                frozenColumnsCount: 1,
+                                frozenColumnsCount: 2,
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
@@ -149,7 +149,7 @@ class CoaPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'gol_acc',
-                                      width: 200,
+                                      width: 120,
                                       label: Container(
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
@@ -161,7 +161,7 @@ class CoaPage extends StatelessWidget {
                                                 fontSize: 12,
                                               )))),
                                   GridColumn(
-                                      width: 200,
+                                      width: 120,
                                       columnName: 'no_coa',
                                       label: Container(
                                           color: colorPrimary,
@@ -174,6 +174,7 @@ class CoaPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 200,
                                       columnName: 'header',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
@@ -186,6 +187,7 @@ class CoaPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 200,
                                       columnName: 'bukubesar',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
@@ -198,6 +200,7 @@ class CoaPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 200,
                                       columnName: 'subbukubesar',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
@@ -210,7 +213,7 @@ class CoaPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      width: 80,
+                                      width: 60,
                                       columnName: 'posting',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
@@ -223,6 +226,46 @@ class CoaPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 60,
+                                      columnName: 'hutang',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Hutang',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      width: 60,
+                                      columnName: 'piutang',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Piutang',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      width: 70,
+                                      columnName: 'perantara',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Perantara',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      width: 80,
                                       columnName: 'sbb_khusus',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
@@ -253,7 +296,7 @@ class CoaPage extends StatelessWidget {
                               // SfDataGrid(
                               //   headerRowHeight: 40,
                               //   defaultColumnWidth: 180,
-                              //   frozenColumnsCount: 1,
+                              //   frozenColumnsCount: 2,
 
                               //   // controller: value.dataGridController,
                               //   gridLinesVisibility: GridLinesVisibility.both,
@@ -2024,6 +2067,9 @@ class DetailDataSource extends DataGridSource {
         DataGridCell(
             columnName: 'subbukubesar', value: currentSubBukuBesar ?? ''),
         DataGridCell(columnName: 'posting', value: posting),
+        DataGridCell(columnName: 'hutang', value: "Y"),
+        DataGridCell(columnName: 'piutang', value: "N"),
+        DataGridCell(columnName: 'perantara', value: "N"),
         DataGridCell(columnName: 'sbb_khusus', value: ''),
         DataGridCell(columnName: 'action', value: nosbb),
       ]));
@@ -2093,6 +2139,19 @@ class DetailDataSource extends DataGridSource {
                   ),
                 ),
               ),
+            ),
+          );
+        } else if (e.columnName == 'posting' ||
+            e.columnName == 'hutang' ||
+            e.columnName == 'piutang' ||
+            e.columnName == 'perantara') {
+          return Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           );
         } else {

@@ -100,7 +100,7 @@ class BankPage extends StatelessWidget {
                               child: SfDataGrid(
                                 headerRowHeight: 40,
                                 defaultColumnWidth: 180,
-                                frozenColumnsCount: 1,
+                                frozenColumnsCount: 2,
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
@@ -136,13 +136,12 @@ class BankPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      columnName: 'kodeBank',
-                                      width: 80,
+                                      columnName: 'cabang',
                                       label: Container(
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Kode Bank',
+                                          child: Text('Kantor',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -1069,7 +1068,7 @@ class DetailDataSource extends DataGridSource {
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
                 DataGridCell(columnName: 'nmBank', value: data.nmBank),
-                DataGridCell(columnName: 'kodeBank', value: data.kodeBank),
+                DataGridCell(columnName: 'cabang', value: data.cabang),
                 DataGridCell(columnName: 'noRek', value: data.noRek),
                 DataGridCell(columnName: 'nmRek', value: data.nmRek),
                 DataGridCell(

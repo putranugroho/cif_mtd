@@ -97,7 +97,7 @@ class KelompokAsetPage extends StatelessWidget {
                               child: SfDataGrid(
                                 headerRowHeight: 40,
                                 defaultColumnWidth: 180,
-                                frozenColumnsCount: 1,
+                                frozenColumnsCount: 2,
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
@@ -242,6 +242,7 @@ class KelompokAsetPage extends StatelessWidget {
                                 textInputAction: TextInputAction.done,
                                 controller: value.kode,
                                 maxLines: 1,
+                                maxLength: 6,
                                 inputFormatters: [
                                   FilteringTextInputFormatter.allow(
                                       RegExp(r'[a-zA-Z0-9]'))

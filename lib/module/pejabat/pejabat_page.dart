@@ -98,7 +98,7 @@ class PejabatPage extends StatelessWidget {
                               child: SfDataGrid(
                                 headerRowHeight: 40,
                                 defaultColumnWidth: 180,
-                                frozenColumnsCount: 1,
+                                frozenColumnsCount: 2,
                                 gridLinesVisibility: GridLinesVisibility.both,
                                 headerGridLinesVisibility:
                                     GridLinesVisibility.both,
@@ -131,30 +131,6 @@ class PejabatPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      columnName: 'nik',
-                                      label: Container(
-                                          padding: EdgeInsets.all(6),
-                                          color: colorPrimary,
-                                          alignment: Alignment.center,
-                                          child: Text('NIP',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.white,
-                                                fontSize: 12,
-                                              )))),
-                                  GridColumn(
-                                      columnName: 'hp',
-                                      label: Container(
-                                          color: colorPrimary,
-                                          alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('No. HP',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.white,
-                                              )))),
-                                  GridColumn(
                                       columnName: 'jabatan',
                                       label: Container(
                                           color: colorPrimary,
@@ -173,6 +149,30 @@ class PejabatPage extends StatelessWidget {
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
                                           child: Text('Organisasi',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'nik',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('NIP',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'hp',
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('No. HP',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -565,10 +565,10 @@ class DetailDataSource extends DataGridSource {
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
                 DataGridCell(columnName: 'nama', value: data.namaPejabat),
-                DataGridCell(columnName: 'nik', value: data.nik),
-                DataGridCell(columnName: 'hp', value: data.noHpPejabat),
                 DataGridCell(columnName: 'jabatan', value: data.idJabatan),
                 DataGridCell(columnName: 'department', value: data.department),
+                DataGridCell(columnName: 'nik', value: data.nik),
+                DataGridCell(columnName: 'hp', value: data.noHpPejabat),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
