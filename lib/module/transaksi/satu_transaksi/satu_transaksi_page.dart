@@ -235,19 +235,6 @@ class SatuTransaksiPage extends StatelessWidget {
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
                                         )))),
-                            GridColumn(
-                                columnName: 'action',
-                                width: 80,
-                                label: Container(
-                                    color: colorPrimary,
-                                    padding: EdgeInsets.all(6),
-                                    alignment: Alignment.center,
-                                    child: Text('Action',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
                           ],
                         ),
                       ),
@@ -1011,7 +998,6 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'keterangan', value: data.keterangan),
                 DataGridCell(columnName: 'debet_acc', value: data.debetAcc),
                 DataGridCell(columnName: 'credit_acc', value: data.creditAcc),
-                DataGridCell(columnName: 'action', value: data.nomorDok),
               ],
             ))
         .toList();
@@ -1021,34 +1007,7 @@ class DetailDataSource extends DataGridSource {
   DataGridRowAdapter buildRow(DataGridRow row) {
     return DataGridRowAdapter(
       cells: row.getCells().map<Widget>((e) {
-        if (e.columnName == 'action') {
-          return Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: () {},
-              child: Container(
-                width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: colorPrimary,
-                  border: Border.all(
-                    width: 2,
-                    color: colorPrimary,
-                  ),
-                ),
-                child: Text(
-                  "Aksi",
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          );
-        } else if (e.columnName == 'nominal') {
+        if (e.columnName == 'nominal') {
           return Container(
             alignment: Alignment.centerRight,
             padding: const EdgeInsets.all(8.0),

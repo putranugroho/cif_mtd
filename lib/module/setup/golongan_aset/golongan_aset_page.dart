@@ -327,7 +327,7 @@ class GolonganAsetPage extends StatelessWidget {
                                     textInputAction: TextInputAction.done,
                                     controller: value.kode,
                                     maxLines: 1,
-                                    maxLength: 4,
+                                    maxLength: 6,
                                     inputFormatters: [
                                       FilteringTextInputFormatter.digitsOnly
                                     ],
