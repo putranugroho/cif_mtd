@@ -471,7 +471,46 @@ class CoaNotifier extends ChangeNotifier {
   CoaModel? coaModel;
   edit(String id) {
     coaModel = list.where((e) => e.nosbb == id).first;
-    confirm();
+    print(coaModel!.toJson());
+    // confirm();
+    dialog = true;
+    editData = true;
+    golongan =
+        "${coaModel!.golAcc == "1" ? "Aktiva" : coaModel!.golAcc == "2" ? "Pasiva" : coaModel!.golAcc == "3" ? "Pendapatan" : coaModel!.golAcc == "4" ? "Biaya" : "Pos Administrative"}";
+    jnsAcc =
+        "${coaModel!.jnsAcc == "A" ? "Header" : coaModel!.jnsAcc == "B" ? "Buku Besar" : coaModel!.jnsAcc == "C" ? "Sub Buku Besar" : "Sub Buku Besar"}";
+    if (coaModel!.jnsAcc == "A") {
+      noHeader.text = coaModel!.nosbb.substring(0, 3);
+      resulttext.text = coaModel!.nosbb;
+      namaSbb.text = coaModel!.namaSbb;
+    } else if (coaModel!.jnsAcc == "B") {
+      header = list.where((e) => e.nobb == coaModel!.nobb).first;
+      print(header!.toJson());
+      noHeader.text = header!.nosbb;
+      noBb.text = coaModel!.nosbb.substring(3, 6);
+      resulttext.text = coaModel!.nosbb;
+      namaSbb.text = coaModel!.namaSbb;
+      if (coaModel!.hutang == "Y" && coaModel!.piutang == "N") {
+        hutangPiutang = "HUTANG";
+      } else if (coaModel!.piutang == "Y" && coaModel!.hutang == "N") {
+        hutangPiutang = "PIUTANG";
+      }
+      if (coaModel!.akunPerantara == "Y") {
+        perantara = true;
+      } else {
+        perantara = false;
+      }
+    } else if (coaModel!.jnsAcc == "C") {
+      bukuBesar = list.where((e) => e.nosbb == coaModel!.nobb).first;
+      print(bukuBesar!.toJson());
+      noBb.text = bukuBesar!.nosbb;
+      noSbb.text = coaModel!.nosbb.substring(6, 12);
+      resulttext.text = coaModel!.nosbb;
+      typePosting = coaModel!.typePosting;
+      namaSbb.text = coaModel!.namaSbb;
+      limitdebet.text = coaModel!.limitDebet;
+      limitkredit.text = coaModel!.limitKredit;
+    }
     notifyListeners();
   }
 

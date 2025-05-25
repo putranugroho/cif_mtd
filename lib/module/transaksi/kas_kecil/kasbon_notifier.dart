@@ -2,11 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:accounting/models/index.dart';
+import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../../network/network.dart';
 import '../../../repository/SetupRepository.dart';
+import '../../../utils/button_custom.dart';
+import '../../../utils/format_currency.dart';
 
 class KasbonNotifier extends ChangeNotifier {
   final BuildContext context;
@@ -31,17 +34,18 @@ class KasbonNotifier extends ChangeNotifier {
 
   pilihAkunDeb(InqueryGlModel value) {
     inqueryGlModeldeb = value;
-    nosbbdeb.text = value.namaSbb;
-    namaSbbDeb.text = value.nosbb;
+    nosbbdeb.text = value.nosbb;
+    namaSbbDeb.text = value.namaSbb;
     notifyListeners();
   }
 
   TextEditingController namaSbbCre = TextEditingController();
   TextEditingController namaSbbDeb = TextEditingController();
+  TextEditingController namaSbbDebPenyelesaian = TextEditingController();
   pilihAkunCre(InqueryGlModel value) {
     inqueryGlModelcre = value;
-    nossbcre.text = value.namaSbb;
-    namaSbbCre.text = value.nosbb;
+    nossbcre.text = value.nosbb;
+    namaSbbCre.text = value.namaSbb;
     notifyListeners();
   }
 
@@ -208,26 +212,18 @@ class KasbonNotifier extends ChangeNotifier {
     }
   }
 
-  DateTime? tglTransaksi;
-  Future pilihTanggalBuka() async {
+  DateTime? tglPenyelesaian;
+  Future pilihTanggalPenyelesaian() async {
     var pickedendDate = (await showDatePicker(
       context: context,
       initialDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())),
-          int.parse(DateFormat('MM').format(
-            DateTime.now(),
-          )),
-          int.parse(DateFormat('dd').format(
-            DateTime.now(),
-          ))),
+          int.parse(DateFormat('y').format(tglTransaksi!)),
+          int.parse(DateFormat('MM').format(tglTransaksi!)),
+          int.parse(DateFormat('dd').format(tglTransaksi!))),
       firstDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) - 10,
-          int.parse(DateFormat('MM').format(
-            DateTime.now(),
-          )),
-          int.parse(DateFormat('dd').format(
-            DateTime.now(),
-          ))),
+          int.parse(DateFormat('y').format(tglTransaksi!)),
+          int.parse(DateFormat('MM').format(tglTransaksi!)),
+          int.parse(DateFormat('dd').format(tglTransaksi!))),
       lastDate: DateTime(
           int.parse(DateFormat('y').format(DateTime.now())),
           int.parse(DateFormat('MM').format(
@@ -238,8 +234,8 @@ class KasbonNotifier extends ChangeNotifier {
           ))),
     ));
     if (pickedendDate != null) {
-      tglTransaksi = pickedendDate;
-      tglTransaksiText.text = DateFormat("dd-MMM-yyyy")
+      tglPenyelesaian = pickedendDate;
+      tglPenyelesaianText.text = DateFormat("dd-MMM-yyyy")
           .format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
@@ -247,8 +243,6 @@ class KasbonNotifier extends ChangeNotifier {
 
   TextEditingController nilaiTrans = TextEditingController();
   TextEditingController selisih = TextEditingController();
-  int nilaiTransaksi = 0;
-  int nilaiNominal = 0;
   int nilaiselisih = 0;
 
   cancelKode() async {
@@ -265,6 +259,7 @@ class KasbonNotifier extends ChangeNotifier {
 
   TextEditingController nominal = TextEditingController();
   TextEditingController tglTransaksiText = TextEditingController();
+  TextEditingController tglPenyelesaianText = TextEditingController();
   TextEditingController tglBackDatetext = TextEditingController();
   TextEditingController nomorDok = TextEditingController();
   TextEditingController nomorRef = TextEditingController();
@@ -280,16 +275,80 @@ class KasbonNotifier extends ChangeNotifier {
 
   final keyForm = GlobalKey<FormState>();
 
-  cek() {
-    if (keyForm.currentState!.validate()) {}
+  simpan() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: 500,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Apakah data sudah benar ?",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ButtonSecondary(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        name: "Tidak",
+                      )),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                          child: ButtonPrimary(
+                        onTap: () {
+                          Navigator.pop(context);
+                          cek();
+                        },
+                        name: "Ya",
+                      )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
   }
 
+  cek() {
+    if (keyForm.currentState!.validate()) {
+      if (namaSbbDeb.text == "") {
+        informationDialog(
+            context, "Warning", "Akun Penyelesaian Tidak Boleh Kosong");
+      }
+    }
+  }
+
+  updateSelisih() {
+    // FormatCurrency.oCcy.format(int.parse(nominal.text)).replaceAll(".", ",");
+    nilaiselisih = int.parse(nominal.text.replaceAll(",", "")) -
+        int.parse(nilaiTrans.text.replaceAll(",", ""));
+    selisih.text = FormatCurrency.oCcy.format(nilaiselisih);
+    notifyListeners();
+  }
+
+  DateTime? tglTransaksi;
   edit() {
     dialog = true;
     editData = true;
-    tglTransaksiText.text = DateFormat("dd-MMM-yyyy").format(
-      DateTime.now(),
-    );
+    nominal.text = "0";
+    nilaiTrans.text = "0";
+    updateSelisih();
     notifyListeners();
   }
 
@@ -317,10 +376,10 @@ class KasbonNotifier extends ChangeNotifier {
         listGl.where((e) => e.nosbb == setupTransModel!.glKre).isEmpty
             ? null
             : listGl.where((e) => e.nosbb == setupTransModel!.glKre).first;
-    nosbbdeb.text = setupTransModel!.namaDeb;
-    namaSbbDeb.text = setupTransModel!.glDeb;
-    nossbcre.text = setupTransModel!.namaKre;
-    namaSbbCre.text = setupTransModel!.glKre;
+    nosbbdeb.text = setupTransModel!.glDeb;
+    namaSbbDeb.text = setupTransModel!.namaDeb;
+    nossbcre.text = setupTransModel!.glKre;
+    namaSbbCre.text = setupTransModel!.namaKre;
     notifyListeners();
   }
 }

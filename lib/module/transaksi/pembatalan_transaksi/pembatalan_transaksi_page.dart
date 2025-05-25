@@ -92,8 +92,8 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                         child: TextFormField(
                                           enabled: !value.cariTrans,
                                           readOnly: true,
-                                          onTap: () => value.tanggalTransaksi(),
-                                          controller: value.tglTransaksi,
+                                          onTap: () => value.tanggalValuta(),
+                                          controller: value.tglValuta,
                                           validator: (e) {
                                             if (e!.isEmpty) {
                                               return "Wajib diisi";
@@ -406,37 +406,6 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                   Expanded(
                                       child: ListView(
                                     children: [
-                                      const Row(
-                                        children: [
-                                          Text(
-                                            "Tanggal Valuta",
-                                            style: TextStyle(fontSize: 12),
-                                          ),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            "*",
-                                            style: TextStyle(fontSize: 8),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      TextFormField(
-                                        textInputAction: TextInputAction.done,
-                                        readOnly: true,
-                                        controller: value.tglTransaksi,
-                                        decoration: InputDecoration(
-                                          hintText: "Tgl Valuta",
-                                          filled: true,
-                                          fillColor: Colors.grey[200],
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 16),
                                       Row(
                                         children: [
                                           Expanded(
@@ -921,53 +890,112 @@ class PembatalanTransaksiPage extends StatelessWidget {
                                       ),
                                       Row(
                                         children: [
-                                          Text(
-                                            "Tanggal Pembatalan",
-                                            style: TextStyle(fontSize: 12),
+                                          Expanded(
+                                            child: Column(
+                                              children: [
+                                                const Row(
+                                                  children: [
+                                                    Text(
+                                                      "Tanggal Valuta",
+                                                      style: TextStyle(
+                                                          fontSize: 12),
+                                                    ),
+                                                    SizedBox(width: 5),
+                                                    Text(
+                                                      "*",
+                                                      style: TextStyle(
+                                                          fontSize: 8),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(
+                                                  height: 8,
+                                                ),
+                                                TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  readOnly: true,
+                                                  controller:
+                                                      value.tglTransaksi,
+                                                  decoration: InputDecoration(
+                                                    hintText: "Tgl Valuta",
+                                                    filled: true,
+                                                    fillColor: Colors.grey[200],
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            "*",
-                                            style: TextStyle(fontSize: 8),
+                                          const SizedBox(width: 16),
+                                          Expanded(
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Tanggal Pembatalan",
+                                                      style: TextStyle(
+                                                          fontSize: 12),
+                                                    ),
+                                                    SizedBox(width: 5),
+                                                    Text(
+                                                      "*",
+                                                      style: TextStyle(
+                                                          fontSize: 8),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(
+                                                  height: 8,
+                                                ),
+                                                TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  enabled: true,
+                                                  controller:
+                                                      value.tglPenjualan,
+                                                  style: const TextStyle(
+                                                    // Make text bigger and black
+                                                    color: Colors.black,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  validator: (e) {
+                                                    if (e!.isEmpty)
+                                                      return "Wajib diisi";
+                                                    return null;
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    filled: true,
+                                                    fillColor: Colors.grey[200],
+                                                    hintText: "Tgl Pembatalan",
+                                                    hintStyle: const TextStyle(
+                                                        color: Colors.grey),
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                    disabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .grey.shade600),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ],
-                                      ),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      InkWell(
-                                        onTap: () => value.tanggalPenjualan(),
-                                        child: TextFormField(
-                                          textInputAction: TextInputAction.done,
-                                          enabled: false,
-                                          controller: value.tglPenjualan,
-                                          style: const TextStyle(
-                                            // Make text bigger and black
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                          validator: (e) {
-                                            if (e!.isEmpty)
-                                              return "Wajib diisi";
-                                            return null;
-                                          },
-                                          decoration: InputDecoration(
-                                            hintText: "Tgl Pembatalan",
-                                            hintStyle: const TextStyle(
-                                                color: Colors.grey),
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                            ),
-                                            disabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: Colors.grey.shade600),
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                            ),
-                                          ),
-                                        ),
                                       ),
                                       const SizedBox(
                                         height: 16,
@@ -1074,7 +1102,7 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'keterangan', value: data.keterangan),
                 DataGridCell(columnName: 'debet_acc', value: data.debetAcc),
                 DataGridCell(columnName: 'credit_acc', value: data.creditAcc),
-                DataGridCell(columnName: 'action', value: data.nomorDok),
+                DataGridCell(columnName: 'action', value: data.rrn),
               ],
             ))
         .toList();
@@ -1089,7 +1117,9 @@ class DetailDataSource extends DataGridSource {
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                tindakanNotifier!.tambah(e.value);
+              },
               child: Container(
                 width: 300,
                 padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),

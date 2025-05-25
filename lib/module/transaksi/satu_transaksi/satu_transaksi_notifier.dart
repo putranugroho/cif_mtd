@@ -124,7 +124,8 @@ class SatuTransaksiNotifier extends ChangeNotifier {
               .map((item) => InqueryGlModel.fromJson(item))
               .where((model) =>
                   model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+                  model.namaSbb.toLowerCase().contains(query.toLowerCase()) &&
+                      model.typePosting == "Y")
               .toList();
         }
         notifyListeners();

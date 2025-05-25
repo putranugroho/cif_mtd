@@ -39,8 +39,8 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  DateTime? tglTrans = DateTime.now();
-  Future tanggalTransaksi() async {
+  DateTime? tglVal = DateTime.now();
+  Future tanggalValuta() async {
     var pickedendDate = (await showDatePicker(
       context: context,
       initialDate: DateTime(
@@ -71,8 +71,8 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
               1),
     ));
     if (pickedendDate != null) {
-      tglTrans = pickedendDate;
-      tglTransaksi.text = DateFormat("dd-MMM-yyyy")
+      tglVal = pickedendDate;
+      tglValuta.text = DateFormat("dd-MMM-yyyy")
           .format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
@@ -120,6 +120,7 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
   TextEditingController noRef = TextEditingController();
   TextEditingController noDok = TextEditingController();
   TextEditingController tglTransaksi = TextEditingController();
+  TextEditingController tglValuta = TextEditingController();
   TextEditingController tglPenjualan = TextEditingController();
   TextEditingController nominal = TextEditingController();
   TextEditingController akunDebit = TextEditingController();
@@ -209,6 +210,7 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
     keterangan.text = transaksiModel!.keterangan;
     aoDebit.text = transaksiModel!.kodeAoDebet;
     aoKredit.text = transaksiModel!.kodeAoCredit;
+    tglPenjualan.text = DateFormat('yyyy-MM-dd').format(DateTime.now());
     editData = false;
     dialog = true;
     notifyListeners();
@@ -242,15 +244,15 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
         },
         "range_tanggal": {
           "from":
-              "${DateFormat('y-MM-dd').format(cariTrans ? DateTime.now() : tglTrans!)}",
+              "${DateFormat('y-MM-dd').format(cariTrans ? DateTime.now() : tglVal!)}",
           "to":
-              "${DateFormat('y-MM-dd').format(cariTrans ? DateTime.now() : tglTrans!)}"
+              "${DateFormat('y-MM-dd').format(cariTrans ? DateTime.now() : tglVal!)}"
         },
         "akun": {"dracc": null, "cracc": null},
         "range_nominal": {"min": null, "max": null}
       },
       "pagination": {"page": 1},
-      "sort": {"by": "tgl_transaksi", "order": "desc"}
+      "sort": {"by": "tgl_val", "order": "desc"}
     };
     Setuprepository.setup(token, NetworkURL.search(), jsonEncode(data))
         .then((value) {

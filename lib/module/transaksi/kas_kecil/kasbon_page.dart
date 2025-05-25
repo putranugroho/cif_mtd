@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../../utils/colors.dart';
+import '../../../utils/currency_formatted.dart';
 
 class KasbonPage extends StatelessWidget {
   const KasbonPage({super.key});
@@ -353,8 +354,103 @@ class KasbonPage extends StatelessWidget {
                                           const SizedBox(height: 16),
                                           Row(
                                             children: [
+                                              Expanded(
+                                                  child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "Nomor Dokumen",
+                                                        style: const TextStyle(
+                                                            fontSize: 12),
+                                                      ),
+                                                      const SizedBox(width: 5),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  TextFormField(
+                                                    textInputAction:
+                                                        TextInputAction.done,
+                                                    controller: value.nomorDok,
+                                                    maxLines: 1,
+                                                    readOnly: true,
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .digitsOnly
+                                                    ],
+                                                    decoration: InputDecoration(
+                                                      filled: true,
+                                                      fillColor:
+                                                          Colors.grey[200],
+                                                      hintText: "Nomor Dok",
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )),
+                                              SizedBox(
+                                                width: 16,
+                                              ),
+                                              Expanded(
+                                                  child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "Nomor Reference",
+                                                        style: const TextStyle(
+                                                            fontSize: 12),
+                                                      ),
+                                                      const SizedBox(width: 5),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  TextFormField(
+                                                    textInputAction:
+                                                        TextInputAction.done,
+                                                    controller: value.nomorRef,
+                                                    maxLines: 1,
+                                                    readOnly: true,
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .digitsOnly
+                                                    ],
+                                                    decoration: InputDecoration(
+                                                      filled: true,
+                                                      fillColor:
+                                                          Colors.grey[200],
+                                                      hintText:
+                                                          "Nomor Referensi",
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 16),
+                                          Row(
+                                            children: [
                                               Text(
-                                                "Tanggal Kas Bon",
+                                                "Keterangan",
                                                 style: const TextStyle(
                                                     fontSize: 12),
                                               ),
@@ -371,25 +467,18 @@ class KasbonPage extends StatelessWidget {
                                           TextFormField(
                                             textInputAction:
                                                 TextInputAction.done,
-                                            controller: value.nominal,
-                                            maxLines: 1,
                                             readOnly: true,
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter
-                                                  .digitsOnly,
-                                              CurrencyInputFormatter(),
-                                            ],
                                             decoration: InputDecoration(
                                               filled: true,
                                               fillColor: Colors.grey[200],
-                                              hintText: "Tanggal Valuta",
+                                              hintText: "Keterangan Transaksi",
                                               border: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
-                                          const SizedBox(
+                                          SizedBox(
                                             height: 16,
                                           ),
                                           Column(
@@ -615,172 +704,119 @@ class KasbonPage extends StatelessWidget {
                                           ),
                                           Row(
                                             children: [
-                                              Text(
-                                                "Nominal",
-                                                style: const TextStyle(
-                                                    fontSize: 12),
-                                              ),
-                                              const SizedBox(width: 5),
-                                              const Text(
-                                                "*",
-                                                style: TextStyle(fontSize: 8),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            height: 8,
-                                          ),
-                                          TextFormField(
-                                            textInputAction:
-                                                TextInputAction.done,
-                                            controller: value.nominal,
-                                            maxLines: 1,
-                                            readOnly: true,
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter
-                                                  .digitsOnly,
-                                              CurrencyInputFormatter(),
-                                            ],
-                                            decoration: InputDecoration(
-                                              filled: true,
-                                              fillColor: Colors.grey[200],
-                                              hintText: "Nominal Kas Bon",
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 16,
-                                          ),
-                                          Row(
-                                            children: [
                                               Expanded(
-                                                  child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        "Nomor Dokumen",
-                                                        style: const TextStyle(
-                                                            fontSize: 12),
-                                                      ),
-                                                      const SizedBox(width: 5),
-                                                    ],
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 8,
-                                                  ),
-                                                  TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
-                                                    controller: value.nomorDok,
-                                                    maxLines: 1,
-                                                    readOnly: true,
-                                                    inputFormatters: [
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly
-                                                    ],
-                                                    decoration: InputDecoration(
-                                                      filled: true,
-                                                      fillColor:
-                                                          Colors.grey[200],
-                                                      hintText: "Nomor Dok",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                child: Column(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          "Nominal",
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 12),
+                                                        ),
+                                                        const SizedBox(
+                                                            width: 5),
+                                                        const Text(
+                                                          "*",
+                                                          style: TextStyle(
+                                                              fontSize: 8),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    TextFormField(
+                                                      textInputAction:
+                                                          TextInputAction.done,
+                                                      controller: value.nominal,
+                                                      maxLines: 1,
+                                                      readOnly: true,
+                                                      inputFormatters: [
+                                                        FilteringTextInputFormatter
+                                                            .digitsOnly,
+                                                        CurrencyInputFormatter(),
+                                                      ],
+                                                      textAlign:
+                                                          TextAlign.right,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        filled: true,
+                                                        fillColor:
+                                                            Colors.grey[200],
+                                                        hintText:
+                                                            "Nominal Kas Bon",
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(6),
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              )),
-                                              SizedBox(
+                                                  ],
+                                                ),
+                                              ),
+                                              const SizedBox(
                                                 width: 16,
                                               ),
                                               Expanded(
-                                                  child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        "Nomor Reference",
-                                                        style: const TextStyle(
-                                                            fontSize: 12),
-                                                      ),
-                                                      const SizedBox(width: 5),
-                                                    ],
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 8,
-                                                  ),
-                                                  TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
-                                                    controller: value.nomorRef,
-                                                    maxLines: 1,
-                                                    readOnly: true,
-                                                    inputFormatters: [
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly
-                                                    ],
-                                                    decoration: InputDecoration(
-                                                      filled: true,
-                                                      fillColor:
-                                                          Colors.grey[200],
-                                                      hintText:
-                                                          "Nomor Referensi",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                child: Column(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          "Tanggal Kas Bon",
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 12),
+                                                        ),
+                                                        const SizedBox(
+                                                            width: 5),
+                                                        const Text(
+                                                          "*",
+                                                          style: TextStyle(
+                                                              fontSize: 8),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    TextFormField(
+                                                      textInputAction:
+                                                          TextInputAction.done,
+                                                      controller: value
+                                                          .tglTransaksiText,
+                                                      maxLines: 1,
+                                                      readOnly: true,
+                                                      inputFormatters: [
+                                                        FilteringTextInputFormatter
+                                                            .digitsOnly,
+                                                        CurrencyInputFormatter(),
+                                                      ],
+                                                      decoration:
+                                                          InputDecoration(
+                                                        filled: true,
+                                                        fillColor:
+                                                            Colors.grey[200],
+                                                        hintText:
+                                                            "Tanggal Valuta",
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(6),
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              )),
-                                            ],
-                                          ),
-                                          const SizedBox(height: 16),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "Keterangan",
-                                                style: const TextStyle(
-                                                    fontSize: 12),
-                                              ),
-                                              const SizedBox(width: 5),
-                                              const Text(
-                                                "*",
-                                                style: TextStyle(fontSize: 8),
+                                                  ],
+                                                ),
                                               ),
                                             ],
                                           ),
                                           const SizedBox(
-                                            height: 8,
-                                          ),
-                                          TextFormField(
-                                            textInputAction:
-                                                TextInputAction.done,
-                                            readOnly: true,
-                                            decoration: InputDecoration(
-                                              filled: true,
-                                              fillColor: Colors.grey[200],
-                                              hintText: "Keterangan Transaksi",
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
                                             height: 16,
                                           ),
                                           Container(
@@ -819,13 +855,13 @@ class KasbonPage extends StatelessWidget {
                                                   ),
                                                   InkWell(
                                                     onTap: () => value
-                                                        .pilihTanggalBuka(),
+                                                        .pilihTanggalPenyelesaian(),
                                                     child: TextFormField(
                                                       enabled: false,
                                                       textInputAction:
                                                           TextInputAction.done,
                                                       controller: value
-                                                          .tglTransaksiText,
+                                                          .tglPenyelesaianText,
                                                       maxLines: 1,
                                                       style: const TextStyle(
                                                         // Make text bigger and black
@@ -949,8 +985,13 @@ class KasbonPage extends StatelessWidget {
                                                     maxLines: 1,
                                                     inputFormatters: [
                                                       FilteringTextInputFormatter
-                                                          .digitsOnly
+                                                          .digitsOnly,
+                                                      CurrencyInputFormatter(),
                                                     ],
+                                                    textAlign: TextAlign.right,
+                                                    onChanged: (e) {
+                                                      value.updateSelisih();
+                                                    },
                                                     validator: (e) {
                                                       if (e!.isEmpty) {
                                                         return "Wajib diisi";
@@ -983,7 +1024,7 @@ class KasbonPage extends StatelessWidget {
                                                     Row(
                                                       children: [
                                                         Text(
-                                                          "Pilih Debet Akun",
+                                                          "Pilih Kredit Akun",
                                                           style:
                                                               const TextStyle(
                                                                   fontSize: 12),
@@ -1005,8 +1046,8 @@ class KasbonPage extends StatelessWidget {
                                                         Expanded(
                                                           child: TypeAheadField<
                                                               InqueryGlModel>(
-                                                            controller:
-                                                                value.nosbbdeb,
+                                                            controller: value
+                                                                .namaSbbDebPenyelesaian,
                                                             suggestionsCallback:
                                                                 (search) => value
                                                                     .getInquery(
@@ -1083,7 +1124,8 @@ class KasbonPage extends StatelessWidget {
                                                     readOnly: true,
                                                     inputFormatters: [
                                                       FilteringTextInputFormatter
-                                                          .digitsOnly
+                                                          .digitsOnly,
+                                                      CurrencyInputFormatter(),
                                                     ],
                                                     // validator: (e) {
                                                     //   if (e!.isEmpty) {
@@ -1092,6 +1134,14 @@ class KasbonPage extends StatelessWidget {
                                                     //     return null;
                                                     //   }
                                                     // },
+                                                    textAlign: TextAlign.right,
+                                                    style: TextStyle(
+                                                      color:
+                                                          value.nilaiselisih >=
+                                                                  0
+                                                              ? Colors.black
+                                                              : Colors.red,
+                                                    ),
                                                     decoration: InputDecoration(
                                                       filled: true,
                                                       fillColor:
@@ -1120,8 +1170,8 @@ class KasbonPage extends StatelessWidget {
                                                       children: [
                                                         Text(
                                                           value.nilaiselisih > 0
-                                                              ? "Kredit Akun"
-                                                              : "Debet Akun",
+                                                              ? "Kredit Akun (Terima)"
+                                                              : "Debet Akun (Bayar)",
                                                           style:
                                                               const TextStyle(
                                                                   fontSize: 12),
@@ -1143,8 +1193,8 @@ class KasbonPage extends StatelessWidget {
                                                         Expanded(
                                                           child: TypeAheadField<
                                                               InqueryGlModel>(
-                                                            controller:
-                                                                value.nossbcre,
+                                                            controller: value
+                                                                .namaSbbDeb,
                                                             suggestionsCallback:
                                                                 (search) => value
                                                                     .getInquery(
@@ -1155,9 +1205,8 @@ class KasbonPage extends StatelessWidget {
                                                               return TextField(
                                                                   controller:
                                                                       controller,
-                                                                  enabled: value
-                                                                          .nilaiselisih !=
-                                                                      0,
+                                                                  enabled:
+                                                                      false,
                                                                   focusNode:
                                                                       focusNode,
                                                                   autofocus:
@@ -1491,7 +1540,7 @@ class KasbonPage extends StatelessWidget {
                                                     child: TypeAheadField<
                                                         InqueryGlModel>(
                                                       controller:
-                                                          value.nosbbdeb,
+                                                          value.namaSbbDeb,
                                                       suggestionsCallback:
                                                           (search) =>
                                                               value.getInquery(
@@ -1541,18 +1590,11 @@ class KasbonPage extends StatelessWidget {
                                                       textInputAction:
                                                           TextInputAction.done,
                                                       controller:
-                                                          value.namaSbbDeb,
+                                                          value.nosbbdeb,
                                                       maxLines: 1,
                                                       // inputFormatters: [
                                                       //   FilteringTextInputFormatter.digitsOnly
                                                       // ],
-                                                      validator: (e) {
-                                                        if (e!.isEmpty) {
-                                                          return "Wajib diisi";
-                                                        } else {
-                                                          return null;
-                                                        }
-                                                      },
                                                       decoration:
                                                           InputDecoration(
                                                         filled: true,
@@ -1601,7 +1643,7 @@ class KasbonPage extends StatelessWidget {
                                                     child: TypeAheadField<
                                                         InqueryGlModel>(
                                                       controller:
-                                                          value.nossbcre,
+                                                          value.namaSbbCre,
                                                       suggestionsCallback:
                                                           (search) =>
                                                               value.getInquery(
@@ -1651,18 +1693,11 @@ class KasbonPage extends StatelessWidget {
                                                       textInputAction:
                                                           TextInputAction.done,
                                                       controller:
-                                                          value.namaSbbCre,
+                                                          value.nossbcre,
                                                       maxLines: 1,
                                                       // inputFormatters: [
                                                       //   FilteringTextInputFormatter.digitsOnly
                                                       // ],
-                                                      validator: (e) {
-                                                        if (e!.isEmpty) {
-                                                          return "Wajib diisi";
-                                                        } else {
-                                                          return null;
-                                                        }
-                                                      },
                                                       decoration:
                                                           InputDecoration(
                                                         filled: true,

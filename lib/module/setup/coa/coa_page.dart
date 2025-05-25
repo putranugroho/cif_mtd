@@ -870,6 +870,7 @@ class CoaPage extends StatelessWidget {
                                         }
                                         return null;
                                       },
+                                      enabled: !value.editData,
                                       popupProps:
                                           const PopupPropsMultiSelection.menu(
                                         showSearchBox:
@@ -888,6 +889,8 @@ class CoaPage extends StatelessWidget {
                                             TextAlignVertical.center,
                                         dropdownSearchDecoration:
                                             InputDecoration(
+                                          filled: value.editData,
+                                          fillColor: Colors.grey[200],
                                           hintText: "Pilih Golongan Akun",
                                           border: OutlineInputBorder(
                                             borderRadius:
@@ -924,6 +927,7 @@ class CoaPage extends StatelessWidget {
                                         }
                                         return null;
                                       },
+                                      enabled: !value.editData,
                                       popupProps:
                                           const PopupPropsMultiSelection.menu(
                                         showSearchBox:
@@ -942,6 +946,8 @@ class CoaPage extends StatelessWidget {
                                             TextAlignVertical.center,
                                         dropdownSearchDecoration:
                                             InputDecoration(
+                                          filled: value.editData,
+                                          fillColor: Colors.grey[200],
                                           hintText: "Pilih Jenis Akun",
                                           border: OutlineInputBorder(
                                             borderRadius:
@@ -990,6 +996,7 @@ class CoaPage extends StatelessWidget {
                                                           value.updateHeader();
                                                         }
                                                       },
+                                                      readOnly: value.editData,
                                                       textInputAction:
                                                           TextInputAction.done,
                                                       controller:
@@ -1009,6 +1016,9 @@ class CoaPage extends StatelessWidget {
                                                       },
                                                       decoration:
                                                           InputDecoration(
+                                                        filled: value.editData,
+                                                        fillColor:
+                                                            Colors.grey[200],
                                                         hintText:
                                                             "Nomor Header",
                                                         border:
@@ -1140,6 +1150,8 @@ class CoaPage extends StatelessWidget {
                                                             }
                                                             return null;
                                                           },
+                                                          enabled:
+                                                              !value.editData,
                                                           popupProps:
                                                               const PopupPropsMultiSelection
                                                                   .menu(
@@ -1170,6 +1182,10 @@ class CoaPage extends StatelessWidget {
                                                                     .center,
                                                             dropdownSearchDecoration:
                                                                 InputDecoration(
+                                                              filled: value
+                                                                  .editData,
+                                                              fillColor: Colors
+                                                                  .grey[200],
                                                               hintText:
                                                                   "Pilih Header",
                                                               border:
@@ -1269,6 +1285,8 @@ class CoaPage extends StatelessWidget {
                                                               value.noBb,
                                                           maxLength: 3,
                                                           maxLines: 1,
+                                                          readOnly:
+                                                              value.editData,
                                                           onChanged: (e) {
                                                             if (e.length == 3) {
                                                               value.updatebb();
@@ -1287,6 +1305,10 @@ class CoaPage extends StatelessWidget {
                                                           },
                                                           decoration:
                                                               InputDecoration(
+                                                            filled:
+                                                                value.editData,
+                                                            fillColor: Colors
+                                                                .grey[200],
                                                             hintText:
                                                                 "Nomor Buku Besar",
                                                             border:
@@ -1547,6 +1569,8 @@ class CoaPage extends StatelessWidget {
                                                                 }
                                                                 return null;
                                                               },
+                                                              enabled: !value
+                                                                  .editData,
                                                               popupProps:
                                                                   const PopupPropsMultiSelection
                                                                       .menu(
@@ -1577,6 +1601,11 @@ class CoaPage extends StatelessWidget {
                                                                         .center,
                                                                 dropdownSearchDecoration:
                                                                     InputDecoration(
+                                                                  filled: value
+                                                                      .editData,
+                                                                  fillColor:
+                                                                      Colors.grey[
+                                                                          200],
                                                                   hintText:
                                                                       "Pilih Buku Besar",
                                                                   border:
@@ -1681,6 +1710,8 @@ class CoaPage extends StatelessWidget {
                                                               controller:
                                                                   value.noSbb,
                                                               maxLines: 1,
+                                                              readOnly: value
+                                                                  .editData,
                                                               onChanged: (e) {
                                                                 if (e.length ==
                                                                     6) {
@@ -1703,6 +1734,11 @@ class CoaPage extends StatelessWidget {
                                                               },
                                                               decoration:
                                                                   InputDecoration(
+                                                                filled: value
+                                                                    .editData,
+                                                                fillColor:
+                                                                    Colors.grey[
+                                                                        200],
                                                                 hintText:
                                                                     "Nomor Sub Buku Besar",
                                                                 border:
@@ -2132,7 +2168,7 @@ class DetailDataSource extends DataGridSource {
                   ),
                 ),
                 child: Text(
-                  "Hapus",
+                  "Aksi",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,
