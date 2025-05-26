@@ -128,7 +128,7 @@ class UsersNotifier extends ChangeNotifier {
   final keyForm = GlobalKey<FormState>();
   cek() {
     final random = Random();
-    int randomNumber = 1000 + random.nextInt(9000);
+    int randomNumber = 1000 + random.nextInt(8999);
     if (keyForm.currentState!.validate()) {
       if (listAddHariKerja.isNotEmpty) {
         if (editData) {
