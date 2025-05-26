@@ -109,8 +109,7 @@ class TambahKelompokSbbKhususNotifier extends ChangeNotifier {
             clear();
             notifyListeners();
           } else {
-            informationDialog(
-                context, "Warning", value['message']);
+            informationDialog(context, "Warning", value['message']);
             notifyListeners();
           }
         });
@@ -204,7 +203,7 @@ class TambahKelompokSbbKhususNotifier extends ChangeNotifier {
         informationDialog(context, "Information", value['message']);
         notifyListeners();
       } else {
-        informationDialog(context, "Warning", value['message'][0]);
+        informationDialog(context, "Warning", value['message']);
       }
     });
   }

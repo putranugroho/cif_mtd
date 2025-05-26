@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:accounting/models/index.dart';
 import 'package:accounting/network/network.dart';
+import 'package:accounting/pref/pref.dart';
 import 'package:accounting/repository/SetupRepository.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +14,18 @@ class AoNotifier extends ChangeNotifier {
   final BuildContext context;
 
   AoNotifier({required this.context}) {
-    getAoMarketing();
-    getKantor();
+    getProfile();
     notifyListeners();
+  }
+
+  UserModel? users;
+  getProfile() async {
+    Pref().getUsers().then((value) {
+      users = value;
+      getAoMarketing();
+      getKantor();
+      notifyListeners();
+    });
   }
 
   List<KantorModel> listKantor = [];
@@ -80,9 +90,12 @@ class AoNotifier extends ChangeNotifier {
           "id": aoModel!.id,
           "kode": kd.text.trim(),
           "nama": nm.text.trim(),
+          "userinput": users!.namauser,
+          "userterm": "114.80.30.143",
           "kode_pt": kantorModel!.kodePt,
           "kode_kantor": kantorModel!.kodeKantor,
           "kode_induk": kantorModel!.kodeInduk,
+          "nama_kantor": kantorModel!.namaKantor,
           "gol_cust": penempatanModel == "Customer"
               ? "1"
               : penempatanModel == "Supplier"
@@ -107,6 +120,8 @@ class AoNotifier extends ChangeNotifier {
         var data = {
           "kode": kd.text.trim(),
           "nama": nm.text.trim(),
+          "userinput": users!.namauser,
+          "userterm": "114.80.30.143",
           "gol_cust": penempatanModel == "Customer"
               ? "1"
               : penempatanModel == "Supplier"
@@ -114,6 +129,7 @@ class AoNotifier extends ChangeNotifier {
                   : "3",
           "kode_pt": kantorModel!.kodePt,
           "kode_kantor": kantorModel!.kodeKantor,
+          "nama_kantor": kantorModel!.namaKantor,
           "kode_induk": kantorModel!.kodeInduk,
         };
         Setuprepository.setup(
@@ -231,6 +247,19 @@ class AoNotifier extends ChangeNotifier {
     DialogCustom().showLoading(context);
     var data = {
       "id": aoModel!.id,
+      "kode": kd.text.trim(),
+      "nama": nm.text.trim(),
+      "userinput": users!.namauser,
+      "userterm": "114.80.30.143",
+      "kode_pt": kantorModel!.kodePt,
+      "kode_kantor": kantorModel!.kodeKantor,
+      "kode_induk": kantorModel!.kodeInduk,
+      "nama_kantor": kantorModel!.namaKantor,
+      "gol_cust": penempatanModel == "Customer"
+          ? "1"
+          : penempatanModel == "Supplier"
+              ? "2"
+              : "3",
     };
     Setuprepository.setup(
             token, NetworkURL.deleteAoMarketing(), jsonEncode(data))
