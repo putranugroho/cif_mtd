@@ -2077,8 +2077,11 @@ class DetailDataSource extends DataGridSource {
       String namaSbb = node['nama_sbb'];
       String golAcc = node['gol_acc'];
       String posting = node['type_posting'];
+      String akun_perantara = node['akun_perantara'];
       String nosbb = node['nosbb'];
       String jnsAcc = node['jns_acc'];
+      String hutang = node['hutang'];
+      String piutang = node['piutang'];
 
       final currentHeader = rootHeader ?? namaSbb;
 
@@ -2103,9 +2106,9 @@ class DetailDataSource extends DataGridSource {
         DataGridCell(
             columnName: 'subbukubesar', value: currentSubBukuBesar ?? ''),
         DataGridCell(columnName: 'posting', value: posting),
-        DataGridCell(columnName: 'hutang', value: "Y"),
-        DataGridCell(columnName: 'piutang', value: "N"),
-        DataGridCell(columnName: 'perantara', value: "N"),
+        DataGridCell(columnName: 'hutang', value: hutang),
+        DataGridCell(columnName: 'piutang', value: piutang),
+        DataGridCell(columnName: 'perantara', value: akun_perantara),
         DataGridCell(columnName: 'sbb_khusus', value: ''),
         DataGridCell(columnName: 'action', value: nosbb),
       ]));

@@ -401,11 +401,12 @@ class CoaNotifier extends ChangeNotifier {
               "${limitdebet.text.isEmpty ? "0" : limitdebet.text.replaceAll(",", "")}",
           "limit_kredit":
               "${limitkredit.text.isEmpty ? "0" : limitkredit.text.replaceAll(",", "")}",
-          "akun_perantara": "${perantara ? "Y" : "N"}",
+          "akun_perantara":
+              "${jnsAcc == "Sub Buku Besar" ? bukuBesar!.akunPerantara : perantara ? "Y" : "N"}",
           "hutang":
-              "${hutangPiutang == null ? "N" : hutangPiutang == "HUTANG" ? "Y" : "N"}",
+              "${jnsAcc == "Sub Buku Besar" ? bukuBesar!.hutang : hutangPiutang == null ? "N" : hutangPiutang == "HUTANG" ? "Y" : "N"}",
           "piutang":
-              "${hutangPiutang == null ? "N" : hutangPiutang == "PIUTANG" ? "Y" : "N"}",
+              "${jnsAcc == "Sub Buku Besar" ? bukuBesar!.piutang : hutangPiutang == null ? "N" : hutangPiutang == "PIUTANG" ? "Y" : "N"}",
         };
         print(jsonEncode(data));
         Setuprepository.setup(
@@ -445,11 +446,12 @@ class CoaNotifier extends ChangeNotifier {
               "${limitdebet.text.isEmpty ? "0" : limitdebet.text.replaceAll(",", "")}",
           "limit_kredit":
               "${limitkredit.text.isEmpty ? "0" : limitkredit.text.replaceAll(",", "")}",
-          "akun_perantara": "${perantara ? "Y" : "N"}",
+          "akun_perantara":
+              "${jnsAcc == "Sub Buku Besar" ? bukuBesar!.akunPerantara : perantara ? "Y" : "N"}",
           "hutang":
-              "${hutangPiutang == null ? "N" : hutangPiutang == "HUTANG" ? "Y" : "N"}",
+              "${jnsAcc == "Sub Buku Besar" ? bukuBesar!.hutang : hutangPiutang == null ? "N" : hutangPiutang == "HUTANG" ? "Y" : "N"}",
           "piutang":
-              "${hutangPiutang == null ? "N" : hutangPiutang == "PIUTANG" ? "Y" : "N"}",
+              "${jnsAcc == "Sub Buku Besar" ? bukuBesar!.piutang : hutangPiutang == null ? "N" : hutangPiutang == "PIUTANG" ? "Y" : "N"}",
         };
         Setuprepository.setup(token, NetworkURL.addMasterGl(), jsonEncode(data))
             .then((value) {
