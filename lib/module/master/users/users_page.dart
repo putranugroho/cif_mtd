@@ -177,6 +177,7 @@ class UsersPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'batch',
+                                      width: 50,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -253,8 +254,21 @@ class UsersPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      columnName: 'min_otor',
+                                      columnName: 'limit_transaksi',
                                       width: 150,
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Limit Transaksi',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'min_otor',
+                                      width: 130,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -267,7 +281,7 @@ class UsersPage extends StatelessWidget {
                                               )))),
                                   GridColumn(
                                       columnName: 'max_otor',
-                                      width: 150,
+                                      width: 130,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -1368,6 +1382,9 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(
                     columnName: 'level_otor',
                     value: data.levelOtor == "null" ? "" : data.levelOtor),
+                DataGridCell(
+                    columnName: 'limit_transaksi',
+                    value: "data.limitTransaksi"),
                 DataGridCell(
                     columnName: 'min_otor',
                     value: data.minOtor == ""

@@ -110,7 +110,7 @@ class ButtonSecondary extends StatelessWidget {
     return InkWell(
       onTap: () => onTap(),
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: Colors.grey[800],
@@ -123,6 +123,7 @@ class ButtonSecondary extends StatelessWidget {
           "$name",
           textAlign: TextAlign.center,
           style: const TextStyle(
+            fontSize: 18,
             color: Colors.white,
           ),
         ),

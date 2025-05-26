@@ -401,6 +401,7 @@ class UsersNotifier extends ChangeNotifier {
     aktivasiModel = null;
     levelUser = null;
     otorisasi = false;
+    kantorModel = null;
     namaKaryawan.clear();
     nikKaryawan.clear();
     userid.clear();
@@ -410,8 +411,10 @@ class UsersNotifier extends ChangeNotifier {
     levelOtor = null;
     bedaKantor = false;
     aksesKasir = false;
+    backdate = false;
     minotor.clear();
     maxotor.clear();
+    listAddHariKerja.clear();
     notifyListeners();
   }
 

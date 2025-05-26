@@ -1411,38 +1411,34 @@ class CoaPage extends StatelessWidget {
                                                   Row(
                                                     children: [
                                                       Text(
-                                                          "Hutang dan Piutang "),
-                                                      SizedBox(
-                                                        width: 8,
+                                                          "Hutang atau Piutang "),
+                                                      const SizedBox(
+                                                        width: 16,
                                                       ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 8,
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () {
-                                                      value.gantiHutangPiutang(
-                                                          "HUTANG");
-                                                    },
-                                                    child: Row(
-                                                      children: [
-                                                        Container(
-                                                          width: 16,
-                                                          height: 16,
-                                                          padding:
-                                                              EdgeInsets.all(2),
-                                                          decoration: BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                              color:
-                                                                  Colors.white,
-                                                              border: Border.all(
-                                                                  width: 2,
+                                                      InkWell(
+                                                        onTap: () {
+                                                          value
+                                                              .gantiHutangPiutang(
+                                                                  "HUTANG");
+                                                        },
+                                                        child: Row(
+                                                          children: [
+                                                            Container(
+                                                              width: 16,
+                                                              height: 16,
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(2),
+                                                              decoration: BoxDecoration(
+                                                                  shape: BoxShape
+                                                                      .circle,
                                                                   color: Colors
-                                                                      .grey)),
-                                                          child:
-                                                              value.hutangPiutang ==
+                                                                      .white,
+                                                                  border: Border.all(
+                                                                      width: 2,
+                                                                      color: Colors
+                                                                          .grey)),
+                                                              child: value.hutangPiutang ==
                                                                       "HUTANG"
                                                                   ? Container(
                                                                       decoration: BoxDecoration(
@@ -1452,40 +1448,41 @@ class CoaPage extends StatelessWidget {
                                                                               colorPrimary),
                                                                     )
                                                                   : SizedBox(),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 8,
+                                                            ),
+                                                            Text("Hutang"),
+                                                          ],
                                                         ),
-                                                        SizedBox(
-                                                          width: 8,
-                                                        ),
-                                                        Text("Hutang"),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 4,
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () {
-                                                      value.gantiHutangPiutang(
-                                                          "PIUTANG");
-                                                    },
-                                                    child: Row(
-                                                      children: [
-                                                        Container(
-                                                          width: 16,
-                                                          height: 16,
-                                                          padding:
-                                                              EdgeInsets.all(2),
-                                                          decoration: BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                              color:
-                                                                  Colors.white,
-                                                              border: Border.all(
-                                                                  width: 2,
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 16,
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () {
+                                                          value
+                                                              .gantiHutangPiutang(
+                                                                  "PIUTANG");
+                                                        },
+                                                        child: Row(
+                                                          children: [
+                                                            Container(
+                                                              width: 16,
+                                                              height: 16,
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(2),
+                                                              decoration: BoxDecoration(
+                                                                  shape: BoxShape
+                                                                      .circle,
                                                                   color: Colors
-                                                                      .grey)),
-                                                          child:
-                                                              value.hutangPiutang ==
+                                                                      .white,
+                                                                  border: Border.all(
+                                                                      width: 2,
+                                                                      color: Colors
+                                                                          .grey)),
+                                                              child: value.hutangPiutang ==
                                                                       "PIUTANG"
                                                                   ? Container(
                                                                       decoration: BoxDecoration(
@@ -1495,19 +1492,17 @@ class CoaPage extends StatelessWidget {
                                                                               colorPrimary),
                                                                     )
                                                                   : SizedBox(),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 8,
+                                                            ),
+                                                            Text("Piutang"),
+                                                          ],
                                                         ),
-                                                        SizedBox(
-                                                          width: 8,
-                                                        ),
-                                                        Text("Piutang"),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 16,
-                                                  ),
-                                                  Row(
-                                                    children: [
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 32,
+                                                      ),
                                                       Text("Akun Perantara "),
                                                       SizedBox(
                                                         width: 8,
@@ -1526,6 +1521,124 @@ class CoaPage extends StatelessWidget {
                                                   SizedBox(
                                                     height: 16,
                                                   ),
+                                                  // Row(
+                                                  //   children: [
+                                                  //     Text(
+                                                  //         "Hutang atau Piutang "),
+                                                  //     SizedBox(
+                                                  //       width: 8,
+                                                  //     ),
+                                                  //   ],
+                                                  // ),
+                                                  // SizedBox(
+                                                  //   height: 8,
+                                                  // ),
+                                                  // InkWell(
+                                                  //   onTap: () {
+                                                  //     value.gantiHutangPiutang(
+                                                  //         "HUTANG");
+                                                  //   },
+                                                  //   child: Row(
+                                                  //     children: [
+                                                  //       Container(
+                                                  //         width: 16,
+                                                  //         height: 16,
+                                                  //         padding:
+                                                  //             EdgeInsets.all(2),
+                                                  //         decoration: BoxDecoration(
+                                                  //             shape: BoxShape
+                                                  //                 .circle,
+                                                  //             color:
+                                                  //                 Colors.white,
+                                                  //             border: Border.all(
+                                                  //                 width: 2,
+                                                  //                 color: Colors
+                                                  //                     .grey)),
+                                                  //         child:
+                                                  //             value.hutangPiutang ==
+                                                  //                     "HUTANG"
+                                                  //                 ? Container(
+                                                  //                     decoration: BoxDecoration(
+                                                  //                         shape: BoxShape
+                                                  //                             .circle,
+                                                  //                         color:
+                                                  //                             colorPrimary),
+                                                  //                   )
+                                                  //                 : SizedBox(),
+                                                  //       ),
+                                                  //       SizedBox(
+                                                  //         width: 8,
+                                                  //       ),
+                                                  //       Text("Hutang"),
+                                                  //     ],
+                                                  //   ),
+                                                  // ),
+                                                  // SizedBox(
+                                                  //   height: 4,
+                                                  // ),
+                                                  // InkWell(
+                                                  //   onTap: () {
+                                                  //     value.gantiHutangPiutang(
+                                                  //         "PIUTANG");
+                                                  //   },
+                                                  //   child: Row(
+                                                  //     children: [
+                                                  //       Container(
+                                                  //         width: 16,
+                                                  //         height: 16,
+                                                  //         padding:
+                                                  //             EdgeInsets.all(2),
+                                                  //         decoration: BoxDecoration(
+                                                  //             shape: BoxShape
+                                                  //                 .circle,
+                                                  //             color:
+                                                  //                 Colors.white,
+                                                  //             border: Border.all(
+                                                  //                 width: 2,
+                                                  //                 color: Colors
+                                                  //                     .grey)),
+                                                  //         child:
+                                                  //             value.hutangPiutang ==
+                                                  //                     "PIUTANG"
+                                                  //                 ? Container(
+                                                  //                     decoration: BoxDecoration(
+                                                  //                         shape: BoxShape
+                                                  //                             .circle,
+                                                  //                         color:
+                                                  //                             colorPrimary),
+                                                  //                   )
+                                                  //                 : SizedBox(),
+                                                  //       ),
+                                                  //       SizedBox(
+                                                  //         width: 8,
+                                                  //       ),
+                                                  //       Text("Piutang"),
+                                                  //     ],
+                                                  //   ),
+                                                  // ),
+                                                  // SizedBox(
+                                                  //   height: 16,
+                                                  // ),
+                                                  // Row(
+                                                  //   children: [
+                                                  //     Text("Akun Perantara "),
+                                                  //     SizedBox(
+                                                  //       width: 8,
+                                                  //     ),
+                                                  //     Checkbox(
+                                                  //         activeColor:
+                                                  //             colorPrimary,
+                                                  //         value:
+                                                  //             value.perantara,
+                                                  //         onChanged: (e) {
+                                                  //           value
+                                                  //               .gantiperantara();
+                                                  //         })
+                                                  //   ],
+                                                  // ),
+                                                  // SizedBox(
+                                                  //   height: 16,
+                                                  // ),
                                                 ],
                                               )
                                             : value.jnsAcc == "Sub Buku Besar"
@@ -1909,105 +2022,194 @@ class CoaPage extends StatelessWidget {
                                                           height: 16),
                                                       Row(
                                                         children: [
-                                                          Expanded(
-                                                              child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .stretch,
-                                                            children: [
-                                                              Row(
-                                                                children: [
-                                                                  Text(
-                                                                    "Limit Debet",
-                                                                    style: const TextStyle(
-                                                                        fontSize:
-                                                                            12),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              const SizedBox(
-                                                                height: 8,
-                                                              ),
-                                                              TextFormField(
-                                                                textInputAction:
-                                                                    TextInputAction
-                                                                        .done,
-                                                                controller: value
-                                                                    .limitdebet,
-                                                                maxLines: 1,
-                                                                inputFormatters: [
-                                                                  FilteringTextInputFormatter
-                                                                      .digitsOnly,
-                                                                  CurrencyInputFormatter(),
-                                                                ],
-                                                                decoration:
-                                                                    InputDecoration(
-                                                                  hintText:
-                                                                      "Limit Debet",
-                                                                  border:
-                                                                      OutlineInputBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(6),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              const SizedBox(
-                                                                  height: 16),
-                                                            ],
-                                                          )),
-                                                          SizedBox(
+                                                          Text(
+                                                              "Hutang atau Piutang "),
+                                                          const SizedBox(
                                                             width: 16,
                                                           ),
-                                                          Expanded(
-                                                              child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .stretch,
-                                                            children: [
-                                                              Row(
-                                                                children: [
-                                                                  Text(
-                                                                    "Limit Kredit",
-                                                                    style: const TextStyle(
-                                                                        fontSize:
-                                                                            12),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              const SizedBox(
-                                                                height: 8,
-                                                              ),
-                                                              TextFormField(
-                                                                textInputAction:
-                                                                    TextInputAction
-                                                                        .done,
-                                                                controller: value
-                                                                    .limitkredit,
-                                                                maxLines: 1,
-                                                                inputFormatters: [
-                                                                  FilteringTextInputFormatter
-                                                                      .digitsOnly,
-                                                                  CurrencyInputFormatter(),
-                                                                ],
-                                                                decoration:
-                                                                    InputDecoration(
-                                                                  hintText:
-                                                                      "Limit Kredit",
-                                                                  border:
-                                                                      OutlineInputBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(6),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              const SizedBox(
-                                                                  height: 16),
-                                                            ],
-                                                          )),
+                                                          Container(
+                                                            width: 16,
+                                                            height: 16,
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    2),
+                                                            decoration: BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                                color: Colors
+                                                                    .white,
+                                                                border: Border.all(
+                                                                    width: 2,
+                                                                    color: Colors
+                                                                        .grey)),
+                                                            child:
+                                                                value.hutangPiutang ==
+                                                                        "HUTANG"
+                                                                    ? Container(
+                                                                        decoration: BoxDecoration(
+                                                                            shape:
+                                                                                BoxShape.circle,
+                                                                            color: colorPrimary),
+                                                                      )
+                                                                    : SizedBox(),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 8,
+                                                          ),
+                                                          Text("Hutang"),
+                                                          const SizedBox(
+                                                            width: 16,
+                                                          ),
+                                                          Container(
+                                                            width: 16,
+                                                            height: 16,
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    2),
+                                                            decoration: BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                                color: Colors
+                                                                    .white,
+                                                                border: Border.all(
+                                                                    width: 2,
+                                                                    color: Colors
+                                                                        .grey)),
+                                                            child:
+                                                                value.hutangPiutang ==
+                                                                        "PIUTANG"
+                                                                    ? Container(
+                                                                        decoration: BoxDecoration(
+                                                                            shape:
+                                                                                BoxShape.circle,
+                                                                            color: colorPrimary),
+                                                                      )
+                                                                    : SizedBox(),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 8,
+                                                          ),
+                                                          Text("Piutang"),
+                                                          const SizedBox(
+                                                            width: 32,
+                                                          ),
+                                                          Text(
+                                                              "Akun Perantara "),
+                                                          SizedBox(
+                                                            width: 8,
+                                                          ),
+                                                          Checkbox(
+                                                              activeColor:
+                                                                  colorPrimary,
+                                                              value: value
+                                                                  .perantara,
+                                                              onChanged: (e) {})
                                                         ],
                                                       ),
+                                                      SizedBox(
+                                                        height: 16,
+                                                      ),
+                                                      // Row(
+                                                      //   children: [
+                                                      //     Expanded(
+                                                      //         child: Column(
+                                                      //       crossAxisAlignment:
+                                                      //           CrossAxisAlignment
+                                                      //               .stretch,
+                                                      //       children: [
+                                                      //         Row(
+                                                      //           children: [
+                                                      //             Text(
+                                                      //               "Limit Debet",
+                                                      //               style: const TextStyle(
+                                                      //                   fontSize:
+                                                      //                       12),
+                                                      //             ),
+                                                      //           ],
+                                                      //         ),
+                                                      //         const SizedBox(
+                                                      //           height: 8,
+                                                      //         ),
+                                                      //         TextFormField(
+                                                      //           textInputAction:
+                                                      //               TextInputAction
+                                                      //                   .done,
+                                                      //           controller: value
+                                                      //               .limitdebet,
+                                                      //           maxLines: 1,
+                                                      //           inputFormatters: [
+                                                      //             FilteringTextInputFormatter
+                                                      //                 .digitsOnly,
+                                                      //             CurrencyInputFormatter(),
+                                                      //           ],
+                                                      //           decoration:
+                                                      //               InputDecoration(
+                                                      //             hintText:
+                                                      //                 "Limit Debet",
+                                                      //             border:
+                                                      //                 OutlineInputBorder(
+                                                      //               borderRadius:
+                                                      //                   BorderRadius
+                                                      //                       .circular(6),
+                                                      //             ),
+                                                      //           ),
+                                                      //         ),
+                                                      //         const SizedBox(
+                                                      //             height: 16),
+                                                      //       ],
+                                                      //     )),
+                                                      //     SizedBox(
+                                                      //       width: 16,
+                                                      //     ),
+                                                      //     Expanded(
+                                                      //         child: Column(
+                                                      //       crossAxisAlignment:
+                                                      //           CrossAxisAlignment
+                                                      //               .stretch,
+                                                      //       children: [
+                                                      //         Row(
+                                                      //           children: [
+                                                      //             Text(
+                                                      //               "Limit Kredit",
+                                                      //               style: const TextStyle(
+                                                      //                   fontSize:
+                                                      //                       12),
+                                                      //             ),
+                                                      //           ],
+                                                      //         ),
+                                                      //         const SizedBox(
+                                                      //           height: 8,
+                                                      //         ),
+                                                      //         TextFormField(
+                                                      //           textInputAction:
+                                                      //               TextInputAction
+                                                      //                   .done,
+                                                      //           controller: value
+                                                      //               .limitkredit,
+                                                      //           maxLines: 1,
+                                                      //           inputFormatters: [
+                                                      //             FilteringTextInputFormatter
+                                                      //                 .digitsOnly,
+                                                      //             CurrencyInputFormatter(),
+                                                      //           ],
+                                                      //           decoration:
+                                                      //               InputDecoration(
+                                                      //             hintText:
+                                                      //                 "Limit Kredit",
+                                                      //             border:
+                                                      //                 OutlineInputBorder(
+                                                      //               borderRadius:
+                                                      //                   BorderRadius
+                                                      //                       .circular(6),
+                                                      //             ),
+                                                      //           ),
+                                                      //         ),
+                                                      //         const SizedBox(
+                                                      //             height: 16),
+                                                      //       ],
+                                                      //     )),
+                                                      //   ],
+                                                      // ),
                                                     ],
                                                   )
                                                 : SizedBox(),
@@ -2021,7 +2223,9 @@ class CoaPage extends StatelessWidget {
                                                 onTap: () {
                                                   value.cek();
                                                 },
-                                                name: "Simpan",
+                                                name: value.editData
+                                                    ? "Simpan Perubahan"
+                                                    : "Simpan",
                                               ),
                                               value.editData
                                                   ? Column(
@@ -2029,6 +2233,14 @@ class CoaPage extends StatelessWidget {
                                                           CrossAxisAlignment
                                                               .stretch,
                                                       children: [
+                                                        const SizedBox(
+                                                            height: 16),
+                                                        ButtonSecondary(
+                                                          onTap: () {
+                                                            value.cek();
+                                                          },
+                                                          name: "Tutup Akun",
+                                                        ),
                                                         const SizedBox(
                                                             height: 16),
                                                         ButtonDanger(
@@ -2130,12 +2342,12 @@ class DetailDataSource extends DataGridSource {
 
     // Sort by gol_acc ascending, then no_coa descending
     rows.sort((a, b) {
-      final golAccA =
-          a.getCells().firstWhere((c) => c.columnName == 'gol_acc').value;
-      final golAccB =
-          b.getCells().firstWhere((c) => c.columnName == 'gol_acc').value;
-      final cmp = golAccA.compareTo(golAccB);
-      if (cmp != 0) return cmp;
+      // final golAccA =
+      //     a.getCells().firstWhere((c) => c.columnName == 'gol_acc').value;
+      // final golAccB =
+      //     b.getCells().firstWhere((c) => c.columnName == 'gol_acc').value;
+      // final cmp = golAccA.compareTo(golAccB);
+      // if (cmp != 0) return cmp;
 
       final coaA =
           a.getCells().firstWhere((c) => c.columnName == 'no_coa').value;

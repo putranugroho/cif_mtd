@@ -134,7 +134,7 @@ class LaporanTransaksiPage extends StatelessWidget {
                                 children: [
                                   Text(
                                     "User Input",
-                                    style: const TextStyle(fontSize: 20),
+                                    style: const TextStyle(fontSize: 16),
                                   ),
                                   const SizedBox(width: 16),
                                   SizedBox(

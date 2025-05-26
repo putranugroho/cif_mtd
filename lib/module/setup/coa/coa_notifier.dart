@@ -109,7 +109,16 @@ class CoaNotifier extends ChangeNotifier {
   pilihBB(CoaModel value) {
     bukuBesar = value;
     noBb.text = value.nosbb;
-
+    if (value.hutang == "Y" && value.piutang == "N") {
+      hutangPiutang = "HUTANG";
+    } else if (value.piutang == "Y" && value.hutang == "N") {
+      hutangPiutang = "PIUTANG";
+    }
+    if (value.akunPerantara == "Y") {
+      perantara = true;
+    } else {
+      perantara = false;
+    }
     if (noSbb.text != "") {
       updateSbb();
     }
@@ -512,9 +521,16 @@ class CoaNotifier extends ChangeNotifier {
       namaSbb.text = coaModel!.namaSbb;
       limitdebet.text = coaModel!.limitDebet;
       limitkredit.text = coaModel!.limitKredit;
-      print(bukuBesar!.akunPerantara);
-      print(bukuBesar!.hutang);
-      print(bukuBesar!.piutang);
+      if (bukuBesar!.hutang == "Y" && bukuBesar!.piutang == "N") {
+        hutangPiutang = "HUTANG";
+      } else if (bukuBesar!.piutang == "Y" && bukuBesar!.hutang == "N") {
+        hutangPiutang = "PIUTANG";
+      }
+      if (bukuBesar!.akunPerantara == "Y") {
+        perantara = true;
+      } else {
+        perantara = false;
+      }
     }
     notifyListeners();
   }
