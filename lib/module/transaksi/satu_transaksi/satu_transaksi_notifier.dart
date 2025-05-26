@@ -221,7 +221,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     void traverse(List<dynamic> items) {
       for (var item in items) {
         if (item is Map<String, dynamic>) {
-          if (item['jns_acc'] == 'C') {
+          if (item['jns_acc'] == 'C' && item['type_posting'] == "Y") {
             result.add(item);
           }
 
