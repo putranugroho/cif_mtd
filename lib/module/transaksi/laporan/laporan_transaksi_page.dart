@@ -41,7 +41,7 @@ class LaporanTransaksiPage extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            "Pembatalan Transaksi",
+                            "Transaksi",
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,

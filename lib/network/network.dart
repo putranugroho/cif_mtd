@@ -409,6 +409,18 @@ class NetworkURL {
     return "$url/transaksi/search";
   }
 
+  static String view() {
+    return "$url/transaksi/view";
+  }
+
+  static String otorisasiTransaksi() {
+    return "$url/transaksi/otorisasi";
+  }
+
+  static String batal() {
+    return "$url/transaksi/batal";
+  }
+
   static String auth() {
     return "$url/login";
   }

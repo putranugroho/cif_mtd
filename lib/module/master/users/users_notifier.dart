@@ -72,6 +72,18 @@ class UsersNotifier extends ChangeNotifier {
 
   UsersModel? users;
   var editData = false;
+  var limitAkses = false;
+  gantilimitakses() {
+    if (otorisasi) {
+      informationDialog(context, "warning",
+          "Otorisasi Aktif, tidak bisa memberikan akses limit transaksi");
+    } else {
+      limitAkses = !limitAkses;
+    }
+    notifyListeners();
+  }
+
+  TextEditingController maksimalTrans = TextEditingController();
   edit(String id) {
     listAddHariKerja.clear();
     notifyListeners();
@@ -83,6 +95,9 @@ class UsersNotifier extends ChangeNotifier {
     namaKaryawan.text = users!.namauser;
     nikKaryawan.text = users!.empId;
     userid.text = users!.userid;
+    limitAkses = users!.limitAkses == "Y" ? true : false;
+    maksimalTrans.text =
+        "Rp ${FormatCurrency.oCcyDecimal.format(double.parse(users!.maksimalTransaksi))}";
     pass.text = users!.pass;
     namauser.text = users!.namauser;
     tglexp.text = users!.tglexp;
@@ -173,6 +188,9 @@ class UsersNotifier extends ChangeNotifier {
             "fhoto_1": "",
             "fhoto_2": "",
             "fhoto_3": "",
+            "limit_akses": "${limitAkses ? "Y" : "N"}",
+            "maksimal_transaksi":
+                "${maksimalTrans.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")}",
             "level_otor": "${levelOtor}",
             "aktivasi": "${aktivasilogin ? "Y" : "N"}",
             "beda_kantor": "${bedaKantor ? "Y" : "N"}",
@@ -214,6 +232,9 @@ class UsersNotifier extends ChangeNotifier {
             "batch": "$randomNumber",
             "emp_id": "${karyawanModel!.nik}",
             "namauser": "${karyawanModel!.namaLengkap}",
+            "limit_akses": "${limitAkses ? "Y" : "N"}",
+            "maksimal_transaksi":
+                "${maksimalTrans.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")}",
             "kode_pt": "${kantorModel == null ? "001" : kantorModel!.kodePt}",
             "kode_kantor":
                 "${kantorModel == null ? "001" : kantorModel!.kodeKantor}",
@@ -510,7 +531,12 @@ class UsersNotifier extends ChangeNotifier {
   bool otorisasi = false;
   gantiotorisasi() {
     clearOtor();
-    otorisasi = !otorisasi;
+    if (limitAkses) {
+      informationDialog(context, "Warning",
+          "Limit transaksi aktif, tidak bisa memberikan otorisasi");
+    } else {
+      otorisasi = !otorisasi;
+    }
     notifyListeners();
   }
 

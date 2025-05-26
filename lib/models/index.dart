@@ -19,6 +19,7 @@ export 'perusahaan_model.dart';
 export 'metode_penyusutan_model.dart';
 export 'transaksi_bayar_pendapatan_dimuka_model.dart';
 export 'setup_hutang_piutang_model.dart';
+export 'transaksi_pend_model.dart';
 export 'level_user.dart';
 export 'neraca_model.dart';
 export 'level_user_modul.dart';

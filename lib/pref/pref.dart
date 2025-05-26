@@ -21,6 +21,8 @@ class Pref {
   static String fhoto1 = "fhoto_1";
   static String fhoto2 = "fhoto_2";
   static String fhoto3 = "fhoto_3";
+  static String limitAkses = "limit_akses";
+  static String maksimalTransaksi = "maksimal_transaksi";
   static String levelOtor = "level_otor";
   static String bedaKantor = "beda_kantor";
   static String minOtor = "min_otor";
@@ -57,6 +59,8 @@ class Pref {
     pref.setString(Pref.createddate, users.createddate);
     pref.setString(Pref.isDeleted, users.isDeleted);
     pref.setString(Pref.backDate, users.backDate);
+    pref.setString(Pref.limitAkses, users.limitAkses);
+    pref.setString(Pref.maksimalTransaksi, users.maksimalTransaksi);
   }
 
   remove() async {
@@ -86,6 +90,8 @@ class Pref {
     pref.remove(Pref.maxOtor);
     pref.remove(Pref.createddate);
     pref.remove(Pref.isDeleted);
+    pref.remove(Pref.limitAkses);
+    pref.remove(Pref.maksimalTransaksi);
     pref.remove(Pref.backDate);
   }
 
@@ -115,6 +121,8 @@ class Pref {
       bedaKantor: pref.getString(Pref.bedaKantor) ?? "",
       minOtor: pref.getString(Pref.minOtor) ?? "",
       maxOtor: pref.getString(Pref.maxOtor) ?? "",
+      limitAkses: pref.getString(Pref.limitAkses) ?? "",
+      maksimalTransaksi: pref.getString(Pref.maksimalTransaksi) ?? "",
       createddate: pref.getString(Pref.createddate) ?? "",
       isDeleted: pref.getString(Pref.isDeleted) ?? "",
       backDate: pref.getString(Pref.backDate) ?? "",

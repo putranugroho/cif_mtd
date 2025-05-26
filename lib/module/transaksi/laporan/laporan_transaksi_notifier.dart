@@ -1,3 +1,5 @@
+import 'package:accounting/models/index.dart';
+import 'package:accounting/pref/pref.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -5,7 +7,16 @@ class LaporanTransaksiNotifier extends ChangeNotifier {
   final BuildContext context;
 
   LaporanTransaksiNotifier({required this.context}) {
-    tglTransaksi.text = DateFormat("dd-MMM-yyyy").format(DateTime.now());
+    getProfile();
+  }
+
+  UserModel? users;
+  getProfile() async {
+    Pref().getUsers().then((value) {
+      users = value;
+      tglTransaksi.text = DateFormat("dd-MMM-yyyy").format(DateTime.now());
+      notifyListeners();
+    });
   }
 
   String cariTrans = "SUCCESS";

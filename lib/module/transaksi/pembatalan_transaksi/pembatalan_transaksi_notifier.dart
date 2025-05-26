@@ -140,57 +140,36 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
 
   confirm() {
     if (keyForm.currentState!.validate()) {
-      DialogCustom().showLoading(context);
-      var data = [
-        {
-          "tgl_transaksi": "${transaksiModel!.tglTrans}",
-          "tgl_valuta": "${transaksiModel!.tglVal}",
-          "batch": "${transaksiModel!.batch}",
-          "trx_type": "REV",
-          "trx_code": "${transaksiModel!.trxCode}",
-          "otor": "${transaksiModel!.otor}",
-          "kode_trn": "${transaksiModel!.kodeTrans}",
-          "nama_dr": "${transaksiModel!.namaDebet}",
-          "dracc": "${transaksiModel!.debetAcc}",
-          "nama_cr": "${transaksiModel!.namaCredit}",
-          "cracc": "${transaksiModel!.creditAcc}",
+      if (users!.namauser != transaksiModel!.inpuser) {
+        informationDialog(context, "Warning", "User tidak sesuai");
+      } else {
+        DialogCustom().showLoading(context);
+        // print(transaksiModel!.inptgljam);
+
+        var data = {
           "rrn": "${transaksiModel!.rrn}",
-          "no_dokumen": "${transaksiModel!.nomorDok}",
-          "no_ref": "${transaksiModel!.nomorRef}",
-          "nominal": transaksiModel!.nominal,
-          "keterangan": "${transaksiModel!.keterangan}",
+          "otoruser": "${users!.namauser}",
+          "keterangan_otorisasi": "Pembatalan transaksi ${transaksiModel!.rrn}",
+          "alasan": "${alasan.text}",
+          "otorinput":
+              "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
           "kode_pt": "${transaksiModel!.kodePt}",
-          "kode_kantor": "${transaksiModel!.kodeKantor}",
-          "kode_induk": "${transaksiModel!.kodeInduk}",
-          "sts_validasi": "${transaksiModel!.statusValidasi}",
-          "kode_ao_dr": "${transaksiModel!.kodeAoDebet}",
-          "kode_coll": "${transaksiModel!.kodeColl}",
-          "kode_ao_cr": "${transaksiModel!.kodeAoCredit}",
-          "userinput": "${transaksiModel!.userinput}",
-          "userterm": "${transaksiModel!.userterm}",
-          "inputtgljam": "${transaksiModel!.inputtgljam}",
-          "otoruser": "${transaksiModel!.otoruser}",
-          "otorterm": "${transaksiModel!.otorterm}",
-          "otortgljam": "${transaksiModel!.otortgljam}",
-          "flag_trn": "${transaksiModel!.flagTrn}",
-          "merchant": "${transaksiModel!.merchant}",
-          "source_trx": "${transaksiModel!.sourceTrx}"
-        }
-      ];
-      print(jsonEncode(data));
-      Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
-          .then((value) {
-        Navigator.pop(context);
-        if (value['code'] == "000") {
-          dialog = false;
-          editData = false;
-          transaksiModel = null;
-          notifyListeners();
-          informationDialog(context, "Information", value['message']);
-        } else {
-          informationDialog(context, "Warning", value['message']);
-        }
-      });
+        };
+        print(jsonEncode(data));
+        Setuprepository.setup(token, NetworkURL.batal(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['code'] == "000") {
+            dialog = false;
+            editData = false;
+            transaksiModel = null;
+            notifyListeners();
+            informationDialog(context, "Information", value['message']);
+          } else {
+            informationDialog(context, "Warning", value['message']);
+          }
+        });
+      }
     }
   }
 
@@ -229,31 +208,53 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
     isLoadingData = true;
     listTransaksi.clear();
     notifyListeners();
-    var data = {
-      "filter": {
-        "general": {
-          "batch": null,
-          "status_transaksi": "all",
-          "kode_pt": "${users!.kodePt}",
-          "kode_kantor": "${users!.kodeKantor}",
-          "kode_induk": "${users!.kodeInduk}",
-          "rrn": null,
-          "no_dokumen": null,
-          "no_reff": null,
-          "flag_trn": "0"
-        },
-        "range_tanggal": {
-          "from":
-              "${DateFormat('y-MM-dd').format(cariTrans ? DateTime.now() : tglVal!)}",
-          "to":
-              "${DateFormat('y-MM-dd').format(cariTrans ? DateTime.now() : tglVal!)}"
-        },
-        "akun": {"dracc": null, "cracc": null},
-        "range_nominal": {"min": null, "max": null}
-      },
-      "pagination": {"page": 1},
-      "sort": {"by": "tgl_val", "order": "desc"}
-    };
+    var data = cariTrans
+        ? {
+            "filter": {
+              "general": {
+                "batch": null,
+                "status_transaksi": "trx_success",
+                "kode_pt": "${users!.kodePt}",
+                "kode_kantor": "${users!.kodeKantor}",
+                "kode_induk": "${users!.kodeInduk}",
+                "rrn": null,
+                "no_dokumen": null,
+                "no_reff": null,
+                "flag_trn": "0"
+              },
+              "range_tanggal": {
+                "from": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                "to": "${DateFormat('y-MM-dd').format(DateTime.now())}"
+              },
+              "akun": {"dracc": null, "cracc": null},
+              "range_nominal": {"min": null, "max": null}
+            },
+            "pagination": {"page": 1},
+            "sort": {"by": "tgl_val", "order": "desc"}
+          }
+        : {
+            "filter": {
+              "general": {
+                "batch": null,
+                "status_transaksi": "trx_success",
+                "kode_pt": "${users!.kodePt}",
+                "kode_kantor": "${users!.kodeKantor}",
+                "kode_induk": "${users!.kodeInduk}",
+                "rrn": null,
+                "no_dokumen": null,
+                "no_reff": null,
+                "flag_trn": "0"
+              },
+              "range_tanggal_valuta": {
+                "from": "${DateFormat('y-MM-dd').format(tglVal!)}",
+                "to": "${DateFormat('y-MM-dd').format(tglVal!)}"
+              },
+              "akun": {"dracc": null, "cracc": null},
+              "range_nominal": {"min": null, "max": null}
+            },
+            "pagination": {"page": 1},
+            "sort": {"by": "tgl_val", "order": "desc"}
+          };
     Setuprepository.setup(token, NetworkURL.search(), jsonEncode(data))
         .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {

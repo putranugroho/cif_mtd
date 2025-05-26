@@ -107,6 +107,19 @@ class SatuTransaksiPage extends StatelessWidget {
                                         )))),
                             GridColumn(
                                 width: 100,
+                                columnName: 'status',
+                                label: Container(
+                                    padding: EdgeInsets.all(6),
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    child: Text('Status',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        )))),
+                            GridColumn(
+                                width: 100,
                                 columnName: 'tgl_val',
                                 label: Container(
                                     padding: EdgeInsets.all(6),
@@ -956,7 +969,7 @@ class SatuTransaksiPage extends StatelessWidget {
 class DetailDataSource extends DataGridSource {
   DetailDataSource(SatuTransaksiNotifier value) {
     tindakanNotifier = value;
-    buildRowData(value.listTransaksi);
+    buildRowData(value.listTransaksiAdd);
   }
 
   SatuTransaksiNotifier? tindakanNotifier;
@@ -964,20 +977,20 @@ class DetailDataSource extends DataGridSource {
   List<DataGridRow> _laporanData = [];
   @override
   List<DataGridRow> get rows => _laporanData;
-  void buildRowData(List<TransaksiModel> list) {
+  void buildRowData(List<TransaksiPendModel> list) {
     int index = 1;
 
     // 🔽 Sort data terlebih dahulu
     list.sort((a, b) {
-      final tglA = DateTime.tryParse(a.tglVal) ?? DateTime(1900);
-      final tglB = DateTime.tryParse(b.tglVal) ?? DateTime(1900);
+      final tglA = DateTime.tryParse(a.tglValuta) ?? DateTime(1900);
+      final tglB = DateTime.tryParse(b.tglValuta) ?? DateTime(1900);
 
       if (tglA.compareTo(tglB) != 0) {
         return tglA.compareTo(tglB); // urut berdasarkan tanggal dulu
       }
 
-      return a.nomorDok
-          .compareTo(b.nomorDok); // lalu urut berdasarkan nomor dokumen
+      return a.noDokumen
+          .compareTo(b.noDokumen); // lalu urut berdasarkan nomor dokumen
     });
 
     // 🧱 Bangun data grid setelah data diurutkan
@@ -985,19 +998,20 @@ class DetailDataSource extends DataGridSource {
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(columnName: 'tgl_val', value: data.tglVal),
-                DataGridCell(columnName: 'tgl_trans', value: data.tglTrans),
-                DataGridCell(columnName: 'nomor_dok', value: data.nomorDok),
-                DataGridCell(columnName: 'nomor_ref', value: data.nomorRef),
+                DataGridCell(columnName: 'status', value: data.status),
+                DataGridCell(columnName: 'tgl_val', value: data.tglValuta),
+                DataGridCell(columnName: 'tgl_trans', value: data.tglTransaksi),
+                DataGridCell(columnName: 'nomor_dok', value: data.noDokumen),
+                DataGridCell(columnName: 'nomor_ref', value: data.noRef),
                 DataGridCell(
                     columnName: 'nominal',
                     value: FormatCurrency.oCcyDecimal
                         .format(double.parse(data.nominal))),
-                DataGridCell(columnName: 'nama_debet', value: data.namaDebet),
-                DataGridCell(columnName: 'nama_credit', value: data.namaCredit),
+                DataGridCell(columnName: 'nama_debet', value: data.namaDr),
+                DataGridCell(columnName: 'nama_credit', value: data.namaCr),
                 DataGridCell(columnName: 'keterangan', value: data.keterangan),
-                DataGridCell(columnName: 'debet_acc', value: data.debetAcc),
-                DataGridCell(columnName: 'credit_acc', value: data.creditAcc),
+                DataGridCell(columnName: 'debet_acc', value: data.dracc),
+                DataGridCell(columnName: 'credit_acc', value: data.cracc),
               ],
             ))
         .toList();
@@ -1015,6 +1029,29 @@ class DetailDataSource extends DataGridSource {
               e.value,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
+            ),
+          );
+        } else if (e.columnName == 'status') {
+          return Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(4),
+            child: Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  color: e.value == "PENDING"
+                      ? Colors.orange
+                      : e.value == "CANCEL"
+                          ? Colors.red
+                          : Colors.green),
+              child: Text(
+                e.value,
+                maxLines: 1,
+                style: TextStyle(
+                  fontSize: 12,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           );
         } else {

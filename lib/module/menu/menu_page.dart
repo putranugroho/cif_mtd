@@ -227,7 +227,7 @@ class MenuPage extends StatelessWidget {
                       ),
                     ),
                     InkWell(
-                      // onTap: () => value.gantimenu(28),
+                      onTap: () => value.confirm(),
                       child: Container(
                         width: double.infinity,
                         padding:

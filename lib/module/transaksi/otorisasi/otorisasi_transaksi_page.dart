@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../../utils/colors.dart';
+import '../../../utils/format_currency.dart';
 
 class OtorisasiTransaksiPage extends StatelessWidget {
   const OtorisasiTransaksiPage({super.key});
@@ -62,68 +63,20 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                           source: DetailDataSource(value),
                           columns: <GridColumn>[
                             GridColumn(
-                                width: 50,
-                                columnName: 'no',
+                                width: 80,
+                                columnName: 'aksi',
                                 label: Container(
                                     padding: EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('No',
+                                    child: Text('Aksi',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           fontSize: 12,
                                           color: Colors.white,
                                         )))),
                             GridColumn(
-                                columnName: 'tanggal',
-                                label: Container(
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Tanggal',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
-                            GridColumn(
-                                columnName: 'modul',
-                                label: Container(
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Modul',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
-                            GridColumn(
-                                columnName: 'user',
-                                width: 150,
-                                label: Container(
-                                    padding: EdgeInsets.all(6),
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    child: Text('User',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                          fontSize: 12,
-                                        )))),
-                            GridColumn(
-                                columnName: 'data',
-                                label: Container(
-                                    padding: EdgeInsets.all(6),
-                                    color: colorPrimary,
-                                    alignment: Alignment.center,
-                                    child: Text('Data',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                          fontSize: 12,
-                                        )))),
-                            GridColumn(
+                                width: 100,
                                 columnName: 'status',
                                 label: Container(
                                     padding: EdgeInsets.all(6),
@@ -136,12 +89,156 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                           fontSize: 12,
                                         )))),
                             GridColumn(
-                                columnName: 'action',
+                                width: 100,
+                                columnName: 'tgl_val',
+                                label: Container(
+                                    padding: EdgeInsets.all(6),
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    child: Text('Tanggal Valuta',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        )))),
+                            GridColumn(
+                                width: 100,
+                                columnName: 'tgl_trans',
+                                label: Container(
+                                    padding: EdgeInsets.all(6),
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    child: Text('Tanggal Input',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        )))),
+                            GridColumn(
+                                width: 120,
+                                columnName: 'nomor_dok',
                                 label: Container(
                                     color: colorPrimary,
-                                    padding: EdgeInsets.all(6),
                                     alignment: Alignment.center,
-                                    child: Text('Action',
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Nomor Dokumen',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 120,
+                                columnName: 'nomor_ref',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Nomor Referensi',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 150,
+                                columnName: 'modul',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Modul',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 200,
+                                columnName: 'keterangan_otor',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Keterangan Otorisasi',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 150,
+                                columnName: 'nominal',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Nominal',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 200,
+                                columnName: 'nama_debet',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Nama Akun Debet',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 200,
+                                columnName: 'nama_credit',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Nama Akun Kredit',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 200,
+                                columnName: 'keterangan',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Keterangan',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 120,
+                                columnName: 'debet_acc',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Akun Debet',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 120,
+                                columnName: 'credit_acc',
+                                label: Container(
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6),
+                                    child: Text('Akun Kredit',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -222,7 +319,8 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                Text("${value.otorisasiModel!.tanggal}"),
+                                Text(
+                                    "${value.transaksiPendModel!.inputtgljam}"),
                                 const SizedBox(height: 16),
                                 Row(
                                   children: [
@@ -236,7 +334,7 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                Text("${value.otorisasiModel!.modul}"),
+                                Text("${value.transaksiPendModel!.modul}"),
                                 const SizedBox(height: 16),
                                 Row(
                                   children: [
@@ -250,8 +348,48 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                Text("${value.otorisasiModel!.user}"),
+                                Text("${value.transaksiPendModel!.userinput}"),
                                 const SizedBox(height: 16),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Otorisasi",
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                    const SizedBox(width: 5),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                    "${value.transaksiPendModel!.keteranganOtor}"),
+                                const SizedBox(height: 16),
+                                value.transaksiPendModel!.keteranganOtor
+                                        .contains("Pembatalan")
+                                    ? Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Alasan Pembatalan",
+                                                style: const TextStyle(
+                                                    fontSize: 12),
+                                              ),
+                                              const SizedBox(width: 5),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                              "${value.transaksiPendModel!.alasan}"),
+                                          const SizedBox(height: 16),
+                                        ],
+                                      )
+                                    : SizedBox(),
                                 Row(
                                   children: [
                                     Text(
@@ -264,12 +402,37 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                Text("${value.otorisasiModel!.data}"),
+                                Text(
+                                  "Nomor Dokumen : ${value.transaksiPendModel!.noDokumen}",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                Text(
+                                  "Nomor Referensi : ${value.transaksiPendModel!.noRef}",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                Text(
+                                  "Nominal : ${FormatCurrency.oCcyDecimal.format(double.parse(value.transaksiPendModel!.nominal))}",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                Text(
+                                  "Keterangan : ${value.transaksiPendModel!.keterangan}",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
                                 const SizedBox(height: 16),
                                 Row(
                                   children: [
                                     ButtonPrimary(
-                                      onTap: () {},
+                                      onTap: () {
+                                        value.confirm();
+                                      },
                                       name: "Setujui",
                                     ),
                                     SizedBox(
@@ -299,7 +462,7 @@ class OtorisasiTransaksiPage extends StatelessWidget {
 class DetailDataSource extends DataGridSource {
   DetailDataSource(OtorisasiTransaksiNotifier value) {
     tindakanNotifier = value;
-    buildRowData(value.list);
+    buildRowData(value.listTransasiAdd);
   }
 
   OtorisasiTransaksiNotifier? tindakanNotifier;
@@ -307,18 +470,44 @@ class DetailDataSource extends DataGridSource {
   List<DataGridRow> _laporanData = [];
   @override
   List<DataGridRow> get rows => _laporanData;
-  void buildRowData(List<OtorisasiModel> list) {
+  void buildRowData(List<TransaksiPendModel> list) {
     int index = 1;
+
+    // 🔽 Sort data terlebih dahulu
+    list.sort((a, b) {
+      final tglA = DateTime.tryParse(a.tglValuta) ?? DateTime(1900);
+      final tglB = DateTime.tryParse(b.tglValuta) ?? DateTime(1900);
+
+      if (tglA.compareTo(tglB) != 0) {
+        return tglA.compareTo(tglB); // urut berdasarkan tanggal dulu
+      }
+
+      return a.noDokumen
+          .compareTo(b.noDokumen); // lalu urut berdasarkan nomor dokumen
+    });
+
+    // 🧱 Bangun data grid setelah data diurutkan
     _laporanData = list
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
-                DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(columnName: 'tanggal', value: data.tanggal),
-                DataGridCell(columnName: 'modul', value: data.modul),
-                DataGridCell(columnName: 'user', value: data.user),
-                DataGridCell(columnName: 'data', value: data.data),
+                DataGridCell(columnName: 'aksi', value: data.rrn),
                 DataGridCell(columnName: 'status', value: data.status),
-                DataGridCell(columnName: 'action', value: data.data),
+                DataGridCell(columnName: 'tgl_val', value: data.tglValuta),
+                DataGridCell(columnName: 'tgl_trans', value: data.tglTransaksi),
+                DataGridCell(columnName: 'nomor_dok', value: data.noDokumen),
+                DataGridCell(columnName: 'nomor_ref', value: data.noRef),
+                DataGridCell(columnName: 'modul', value: data.modul),
+                DataGridCell(
+                    columnName: 'keterangan_otor', value: data.keteranganOtor),
+                DataGridCell(
+                    columnName: 'nominal',
+                    value: FormatCurrency.oCcyDecimal
+                        .format(double.parse(data.nominal))),
+                DataGridCell(columnName: 'nama_debet', value: data.namaDr),
+                DataGridCell(columnName: 'nama_credit', value: data.namaCr),
+                DataGridCell(columnName: 'keterangan', value: data.keterangan),
+                DataGridCell(columnName: 'debet_acc', value: data.dracc),
+                DataGridCell(columnName: 'credit_acc', value: data.cracc),
               ],
             ))
         .toList();
@@ -328,7 +517,17 @@ class DetailDataSource extends DataGridSource {
   DataGridRowAdapter buildRow(DataGridRow row) {
     return DataGridRowAdapter(
       cells: row.getCells().map<Widget>((e) {
-        if (e.columnName == 'action') {
+        if (e.columnName == 'nominal') {
+          return Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          );
+        } else if (e.columnName == 'aksi') {
           return Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
@@ -354,6 +553,31 @@ class DetailDataSource extends DataGridSource {
                     color: Colors.white,
                   ),
                 ),
+              ),
+            ),
+          );
+        } else if (e.columnName == 'status') {
+          return Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(4),
+            child: Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  color: e.value == "PENDING"
+                      ? Colors.orange
+                      : e.value == "CANCEL"
+                          ? Colors.red
+                          : Colors.green),
+              child: Text(
+                e.value,
+                maxLines: 1,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           );

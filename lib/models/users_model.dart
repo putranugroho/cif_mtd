@@ -21,6 +21,8 @@ class UsersModel {
     required this.terminalId,
     required this.aktivasi,
     required this.aksesKasir,
+    required this.limitAkses,
+    required this.maksimalTransaksi,
     required this.sbbKasir,
     required this.namaSbb,
     required this.fhoto1,
@@ -50,6 +52,8 @@ class UsersModel {
   final String terminalId;
   final String aktivasi;
   final String aksesKasir;
+  final String limitAkses;
+  final String maksimalTransaksi;
   final String sbbKasir;
   final String namaSbb;
   final String fhoto1;
@@ -79,6 +83,8 @@ class UsersModel {
     terminalId: json['terminal_id'].toString(),
     aktivasi: json['aktivasi'].toString(),
     aksesKasir: json['akses_kasir'].toString(),
+    limitAkses: json['limit_akses'].toString(),
+    maksimalTransaksi: json['maksimal_transaksi'].toString(),
     sbbKasir: json['sbb_kasir'].toString(),
     namaSbb: json['nama_sbb'].toString(),
     fhoto1: json['fhoto_1'].toString(),
@@ -109,6 +115,8 @@ class UsersModel {
     'terminal_id': terminalId,
     'aktivasi': aktivasi,
     'akses_kasir': aksesKasir,
+    'limit_akses': limitAkses,
+    'maksimal_transaksi': maksimalTransaksi,
     'sbb_kasir': sbbKasir,
     'nama_sbb': namaSbb,
     'fhoto_1': fhoto1,
@@ -139,6 +147,8 @@ class UsersModel {
     terminalId: terminalId,
     aktivasi: aktivasi,
     aksesKasir: aksesKasir,
+    limitAkses: limitAkses,
+    maksimalTransaksi: maksimalTransaksi,
     sbbKasir: sbbKasir,
     namaSbb: namaSbb,
     fhoto1: fhoto1,
@@ -170,6 +180,8 @@ class UsersModel {
     String? terminalId,
     String? aktivasi,
     String? aksesKasir,
+    String? limitAkses,
+    String? maksimalTransaksi,
     String? sbbKasir,
     String? namaSbb,
     String? fhoto1,
@@ -198,6 +210,8 @@ class UsersModel {
     terminalId: terminalId ?? this.terminalId,
     aktivasi: aktivasi ?? this.aktivasi,
     aksesKasir: aksesKasir ?? this.aksesKasir,
+    limitAkses: limitAkses ?? this.limitAkses,
+    maksimalTransaksi: maksimalTransaksi ?? this.maksimalTransaksi,
     sbbKasir: sbbKasir ?? this.sbbKasir,
     namaSbb: namaSbb ?? this.namaSbb,
     fhoto1: fhoto1 ?? this.fhoto1,
@@ -215,8 +229,8 @@ class UsersModel {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is UsersModel && id == other.id && userid == other.userid && empId == other.empId && pass == other.pass && namauser == other.namauser && batch == other.batch && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && tglexp == other.tglexp && lvluser == other.lvluser && terminalId == other.terminalId && aktivasi == other.aktivasi && aksesKasir == other.aksesKasir && sbbKasir == other.sbbKasir && namaSbb == other.namaSbb && fhoto1 == other.fhoto1 && fhoto2 == other.fhoto2 && fhoto3 == other.fhoto3 && levelOtor == other.levelOtor && bedaKantor == other.bedaKantor && minOtor == other.minOtor && maxOtor == other.maxOtor && createddate == other.createddate && isDeleted == other.isDeleted && backDate == other.backDate && shifts == other.shifts;
+    || other is UsersModel && id == other.id && userid == other.userid && empId == other.empId && pass == other.pass && namauser == other.namauser && batch == other.batch && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && tglexp == other.tglexp && lvluser == other.lvluser && terminalId == other.terminalId && aktivasi == other.aktivasi && aksesKasir == other.aksesKasir && limitAkses == other.limitAkses && maksimalTransaksi == other.maksimalTransaksi && sbbKasir == other.sbbKasir && namaSbb == other.namaSbb && fhoto1 == other.fhoto1 && fhoto2 == other.fhoto2 && fhoto3 == other.fhoto3 && levelOtor == other.levelOtor && bedaKantor == other.bedaKantor && minOtor == other.minOtor && maxOtor == other.maxOtor && createddate == other.createddate && isDeleted == other.isDeleted && backDate == other.backDate && shifts == other.shifts;
 
   @override
-  int get hashCode => id.hashCode ^ userid.hashCode ^ empId.hashCode ^ pass.hashCode ^ namauser.hashCode ^ batch.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ tglexp.hashCode ^ lvluser.hashCode ^ terminalId.hashCode ^ aktivasi.hashCode ^ aksesKasir.hashCode ^ sbbKasir.hashCode ^ namaSbb.hashCode ^ fhoto1.hashCode ^ fhoto2.hashCode ^ fhoto3.hashCode ^ levelOtor.hashCode ^ bedaKantor.hashCode ^ minOtor.hashCode ^ maxOtor.hashCode ^ createddate.hashCode ^ isDeleted.hashCode ^ backDate.hashCode ^ shifts.hashCode;
+  int get hashCode => id.hashCode ^ userid.hashCode ^ empId.hashCode ^ pass.hashCode ^ namauser.hashCode ^ batch.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ tglexp.hashCode ^ lvluser.hashCode ^ terminalId.hashCode ^ aktivasi.hashCode ^ aksesKasir.hashCode ^ limitAkses.hashCode ^ maksimalTransaksi.hashCode ^ sbbKasir.hashCode ^ namaSbb.hashCode ^ fhoto1.hashCode ^ fhoto2.hashCode ^ fhoto3.hashCode ^ levelOtor.hashCode ^ bedaKantor.hashCode ^ minOtor.hashCode ^ maxOtor.hashCode ^ createddate.hashCode ^ isDeleted.hashCode ^ backDate.hashCode ^ shifts.hashCode;
 }

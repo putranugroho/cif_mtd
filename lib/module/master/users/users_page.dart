@@ -1,5 +1,5 @@
 import 'package:accounting/models/index.dart';
-
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart' as a;
 import 'package:accounting/module/master/users/users_notifier.dart';
 import 'package:accounting/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -814,6 +814,92 @@ class UsersPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 16,
                                     ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Limit Transaksi",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        Spacer(),
+                                        CupertinoSwitch(
+                                            activeColor: colorPrimary,
+                                            value: value.limitAkses,
+                                            onChanged: (e) {
+                                              value.gantilimitakses();
+                                            })
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    value.limitAkses
+                                        ? Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Maksimal Transaksi",
+                                                    style: const TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                  const Text(
+                                                    "*",
+                                                    style:
+                                                        TextStyle(fontSize: 8),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              TextFormField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: value.maksimalTrans,
+                                                maxLines: 1,
+                                                keyboardType: TextInputType
+                                                    .numberWithOptions(
+                                                        decimal: true),
+                                                inputFormatters: [
+                                                  a.CurrencyInputFormatter(
+                                                    leadingSymbol: 'Rp ',
+                                                    useSymbolPadding: true,
+                                                    thousandSeparator: a
+                                                        .ThousandSeparator
+                                                        .Period,
+                                                    mantissaLength:
+                                                        2, // jumlah angka desimal
+                                                    // decimalSeparator: DecimalSeparator.Comma,
+                                                  ),
+                                                ],
+                                                validator: (e) {
+                                                  if (e!.isEmpty) {
+                                                    return "Wajib diisi";
+                                                  } else {
+                                                    return null;
+                                                  }
+                                                },
+                                                decoration: InputDecoration(
+                                                  hintText:
+                                                      "Maksimal Transaksi",
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 16,
+                                              ),
+                                            ],
+                                          )
+                                        : SizedBox(
+                                            height: 8,
+                                          ),
                                     Row(
                                       children: [
                                         Expanded(
