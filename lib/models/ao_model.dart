@@ -13,6 +13,7 @@ class AoModel {
     required this.golCust,
     required this.kodePt,
     required this.kodeKantor,
+    required this.namaKantor,
     required this.kodeInduk,
   });
 
@@ -22,6 +23,7 @@ class AoModel {
   final String golCust;
   final String kodePt;
   final String kodeKantor;
+  final String namaKantor;
   final String kodeInduk;
 
   factory AoModel.fromJson(Map<String,dynamic> json) => AoModel(
@@ -31,6 +33,7 @@ class AoModel {
     golCust: json['gol_cust'].toString(),
     kodePt: json['kode_pt'].toString(),
     kodeKantor: json['kode_kantor'].toString(),
+    namaKantor: json['nama_kantor'].toString(),
     kodeInduk: json['kode_induk'].toString()
   );
   
@@ -41,6 +44,7 @@ class AoModel {
     'gol_cust': golCust,
     'kode_pt': kodePt,
     'kode_kantor': kodeKantor,
+    'nama_kantor': namaKantor,
     'kode_induk': kodeInduk
   };
 
@@ -51,6 +55,7 @@ class AoModel {
     golCust: golCust,
     kodePt: kodePt,
     kodeKantor: kodeKantor,
+    namaKantor: namaKantor,
     kodeInduk: kodeInduk
   );
 
@@ -62,6 +67,7 @@ class AoModel {
     String? golCust,
     String? kodePt,
     String? kodeKantor,
+    String? namaKantor,
     String? kodeInduk
   }) => AoModel(
     id: id ?? this.id,
@@ -70,13 +76,14 @@ class AoModel {
     golCust: golCust ?? this.golCust,
     kodePt: kodePt ?? this.kodePt,
     kodeKantor: kodeKantor ?? this.kodeKantor,
+    namaKantor: namaKantor ?? this.namaKantor,
     kodeInduk: kodeInduk ?? this.kodeInduk,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is AoModel && id == other.id && kode == other.kode && nama == other.nama && golCust == other.golCust && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk;
+    || other is AoModel && id == other.id && kode == other.kode && nama == other.nama && golCust == other.golCust && kodePt == other.kodePt && kodeKantor == other.kodeKantor && namaKantor == other.namaKantor && kodeInduk == other.kodeInduk;
 
   @override
-  int get hashCode => id.hashCode ^ kode.hashCode ^ nama.hashCode ^ golCust.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode;
+  int get hashCode => id.hashCode ^ kode.hashCode ^ nama.hashCode ^ golCust.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ namaKantor.hashCode ^ kodeInduk.hashCode;
 }

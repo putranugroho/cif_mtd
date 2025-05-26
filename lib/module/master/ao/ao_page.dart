@@ -462,8 +462,7 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'nama', value: data.nama),
                 DataGridCell(columnName: 'kode', value: data.kode),
                 DataGridCell(columnName: 'kode_kantor', value: data.kodeKantor),
-                DataGridCell(
-                    columnName: 'nama_kantor', value: "data.namaKantor"),
+                DataGridCell(columnName: 'nama_kantor', value: data.namaKantor),
                 DataGridCell(
                     columnName: 'cs',
                     value: data.golCust == "1"

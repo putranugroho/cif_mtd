@@ -420,7 +420,7 @@ class CoaNotifier extends ChangeNotifier {
             getMasterGl();
             notifyListeners();
           } else {
-            informationDialog(context, "Warning", value['message'][0]);
+            informationDialog(context, "Warning", value['message']);
           }
         });
       } else {
@@ -512,6 +512,9 @@ class CoaNotifier extends ChangeNotifier {
       namaSbb.text = coaModel!.namaSbb;
       limitdebet.text = coaModel!.limitDebet;
       limitkredit.text = coaModel!.limitKredit;
+      print(bukuBesar!.akunPerantara);
+      print(bukuBesar!.hutang);
+      print(bukuBesar!.piutang);
     }
     notifyListeners();
   }
