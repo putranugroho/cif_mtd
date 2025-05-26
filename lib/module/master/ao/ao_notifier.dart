@@ -156,6 +156,8 @@ class AoNotifier extends ChangeNotifier {
     dialog = true;
     editData = true;
     aoModel = list.where((e) => e.id == int.parse(id)).first;
+    kantorModel =
+        listKantor.where((e) => e.kodeKantor == aoModel!.kodeKantor).first;
     kd.text = aoModel!.kode;
     nm.text = aoModel!.nama;
     penempatanModel = aoModel!.golCust == "1"
