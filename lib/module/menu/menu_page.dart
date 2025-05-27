@@ -92,176 +92,195 @@ class MenuPage extends StatelessWidget {
                 width: 340,
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(color: colorPrimary),
-                child: ListView(
+                child: Column(
                   children: [
-                    InkWell(
-                      onTap: () => value.gantimenu(0),
-                      child: Container(
-                        width: double.infinity,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              ImageAssets.dashboard,
-                              height: 30,
-                              color: value.page == 0
-                                  ? Colors.white
-                                  : Colors.white70,
-                            ),
-                            SizedBox(
-                              width: 16,
-                            ),
-                            Text(
-                              "Dashboard",
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: value.page == 0
-                                    ? Colors.white
-                                    : Colors.white70,
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          InkWell(
+                            onTap: () => value.gantimenu(0),
+                            child: Container(
+                              width: double.infinity,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 16),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    ImageAssets.dashboard,
+                                    height: 30,
+                                    color: value.page == 0
+                                        ? Colors.white
+                                        : Colors.white70,
+                                  ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Text(
+                                    "Dashboard",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: value.page == 0
+                                          ? Colors.white
+                                          : Colors.white70,
+                                    ),
+                                  )
+                                ],
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    MenuSetupWidget(value: value),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    MenuMasterWidget(
-                      value: value,
-                    ),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    MenuTransaksiWidget(value: value),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    MenuHutangPiutangWidget(value: value),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    MenuInventarisWidget(value: value),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    MenuLaporanWidget(value: value),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    InkWell(
-                      onTap: () => value.gantimenu(26),
-                      child: Container(
-                        width: double.infinity,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                        decoration: BoxDecoration(
-                          color: value.page == 26
-                              ? Colors.white
-                              : Colors.transparent,
-                        ),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              ImageAssets.user,
-                              height: 30,
-                              color: value.page == 26
-                                  ? Colors.black
-                                  : Colors.white,
                             ),
-                            SizedBox(
-                              width: 16,
-                            ),
-                            Text(
-                              "AKTIVASI USER",
-                              style: TextStyle(
-                                fontSize: 16,
+                          ),
+                          SizedBox(
+                            height: 24,
+                          ),
+                          MenuSetupWidget(value: value),
+                          SizedBox(
+                            height: 24,
+                          ),
+                          MenuMasterWidget(
+                            value: value,
+                          ),
+                          SizedBox(
+                            height: 24,
+                          ),
+                          MenuTransaksiWidget(value: value),
+                          SizedBox(
+                            height: 24,
+                          ),
+                          MenuHutangPiutangWidget(value: value),
+                          SizedBox(
+                            height: 24,
+                          ),
+                          MenuInventarisWidget(value: value),
+                          SizedBox(
+                            height: 24,
+                          ),
+                          MenuLaporanWidget(value: value),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          InkWell(
+                            onTap: () => value.gantimenu(26),
+                            child: Container(
+                              width: double.infinity,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 16),
+                              decoration: BoxDecoration(
                                 color: value.page == 26
-                                    ? Colors.black
-                                    : Colors.white,
+                                    ? Colors.white
+                                    : Colors.transparent,
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () => value.gantimenu(28),
-                      child: Container(
-                        width: double.infinity,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                        decoration: BoxDecoration(
-                          color: value.page == 28
-                              ? Colors.white
-                              : Colors.transparent,
-                        ),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              ImageAssets.settings,
-                              height: 30,
-                              color: value.page == 28
-                                  ? Colors.black
-                                  : Colors.white,
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    ImageAssets.user,
+                                    height: 30,
+                                    color: value.page == 26
+                                        ? Colors.black
+                                        : Colors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Text(
+                                    "AKTIVASI USER",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: value.page == 26
+                                          ? Colors.black
+                                          : Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                            SizedBox(
-                              width: 16,
-                            ),
-                            Text(
-                              "SETINGS",
-                              style: TextStyle(
-                                fontSize: 16,
+                          ),
+                          InkWell(
+                            onTap: () => value.gantimenu(28),
+                            child: Container(
+                              width: double.infinity,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 16),
+                              decoration: BoxDecoration(
                                 color: value.page == 28
-                                    ? Colors.black
-                                    : Colors.white,
+                                    ? Colors.white
+                                    : Colors.transparent,
                               ),
-                            )
-                          ],
-                        ),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    ImageAssets.settings,
+                                    height: 30,
+                                    color: value.page == 28
+                                        ? Colors.black
+                                        : Colors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Text(
+                                    "SETINGS",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: value.page == 28
+                                          ? Colors.black
+                                          : Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    InkWell(
-                      onTap: () => value.confirm(),
-                      child: Container(
-                        width: double.infinity,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                        decoration: BoxDecoration(
-                          color: value.page == 30
-                              ? Colors.white
-                              : Colors.transparent,
-                        ),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              ImageAssets.logout,
-                              height: 30,
-                              color: value.page == 30
-                                  ? Colors.black
-                                  : Colors.white,
-                            ),
-                            SizedBox(
-                              width: 16,
-                            ),
-                            Text(
-                              "SIGN OUT",
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "${value.users!.namauser}",
                               style: TextStyle(
-                                fontSize: 16,
-                                color: value.page == 30
-                                    ? Colors.black
-                                    : Colors.white,
+                                fontSize: 12,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
                               ),
-                            )
-                          ],
-                        ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 16,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              value.confirm();
+                            },
+                            child: Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    value.confirm();
+                                  },
+                                  child: Image.asset(
+                                    ImageAssets.logout,
+                                    height: 30,
+                                    color: value.page == 30
+                                        ? Colors.black
+                                        : Colors.white,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  "Sign Out",
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.white),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),

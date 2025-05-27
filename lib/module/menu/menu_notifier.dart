@@ -1,3 +1,4 @@
+import 'package:accounting/models/index.dart';
 import 'package:accounting/module/auth/login_page.dart';
 import 'package:accounting/pref/pref.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,13 @@ class MenuNotifier extends ChangeNotifier {
     getProfile();
   }
 
-  getProfile() async {}
+  UserModel? users;
+  getProfile() async {
+    Pref().getUsers().then((value) {
+      users = value;
+      notifyListeners();
+    });
+  }
 
   int page = 0;
   gantimenu(int value) {

@@ -236,6 +236,89 @@ class AoNotifier extends ChangeNotifier {
         });
   }
 
+  confirmnonaktif() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: 500,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Anda yakin nonaktifkan ${aoModel!.nama}?",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ButtonSecondary(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        name: "Tidak",
+                      )),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                          child: ButtonPrimary(
+                        onTap: () {
+                          Navigator.pop(context);
+                          nonaktifkan();
+                        },
+                        name: "Ya",
+                      )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  nonaktifkan() async {
+    DialogCustom().showLoading(context);
+    var data = {
+      "id": aoModel!.id,
+      "kode": kd.text.trim(),
+      "nama": nm.text.trim(),
+      "userinput": users!.namauser,
+      "userterm": "114.80.30.143",
+      "kode_pt": kantorModel!.kodePt,
+      "kode_kantor": kantorModel!.kodeKantor,
+      "kode_induk": kantorModel!.kodeInduk,
+      "nama_kantor": kantorModel!.namaKantor,
+      "gol_cust": penempatanModel == "Customer"
+          ? "1"
+          : penempatanModel == "Supplier"
+              ? "2"
+              : "3",
+    };
+    Setuprepository.setup(token, NetworkURL.nonaktif(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        getAoMarketing();
+        clear();
+
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message'][0]);
+      }
+    });
+  }
+
   List<String> listPenempatan = ["Customer", "Supplier", "Customer / Supplier"];
   String? penempatanModel = "Customer";
   pilihPenempatan(String value) {

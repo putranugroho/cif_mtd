@@ -305,6 +305,10 @@ class NetworkURL {
     return "$url/aomarketing/deleted";
   }
 
+  static String nonaktif() {
+    return "$url/aomarketing/nonaktif";
+  }
+
   static String getHutangPiutang() {
     return "$url/hutangpiutang";
   }

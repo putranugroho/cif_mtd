@@ -6,6 +6,9 @@
     "nosbb": "100100000001",
     "nama_sbb": "KAS KANTOR",
     "type_posting": "N",
+    "akun_perantara": "N",
+    "hutang": "N",
+    "piutang": "N",
     "sbb_khusus": "",
     "items": "$[]inquery_gl_model"
 }

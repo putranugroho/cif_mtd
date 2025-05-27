@@ -339,7 +339,10 @@ class BayarDimukaPage extends StatelessWidget {
                                                         margin: EdgeInsets.only(
                                                             right: 16),
                                                         child: Text(
-                                                          "(${data.cracc}) ${data.namaCr}",
+                                                          value.jenis ==
+                                                                  "BAYAR DIMUKA"
+                                                              ? "(${data.cracc}) ${data.namaCr}"
+                                                              : "(${data.dracc}) ${data.namaDr}",
                                                           style: TextStyle(
                                                             fontSize: 12,
                                                           ),
@@ -563,21 +566,27 @@ class BayarDimukaPage extends StatelessWidget {
                                             ),
                                             Container(
                                               height: 40,
-                                              alignment: Alignment.center,
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 16, vertical: 4),
-                                              decoration: BoxDecoration(
-                                                  color: colorPrimary,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          16)),
-                                              child: Text(
-                                                "All Perantara",
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w300,
-                                                ),
+                                              alignment: Alignment.centerLeft,
+                                              child: Row(
+                                                children: [
+                                                  Checkbox(
+                                                      value: value.semua,
+                                                      activeColor: colorPrimary,
+                                                      onChanged: (e) {
+                                                        value.gantisemua();
+                                                      }),
+                                                  SizedBox(
+                                                    width: 8,
+                                                  ),
+                                                  Text(
+                                                    "Semua",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                             SizedBox(

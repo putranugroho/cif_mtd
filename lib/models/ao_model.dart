@@ -13,6 +13,7 @@ class AoModel {
     required this.golCust,
     required this.kodePt,
     required this.kodeKantor,
+    required this.nonaktif,
     required this.namaKantor,
     required this.kodeInduk,
   });
@@ -23,6 +24,7 @@ class AoModel {
   final String golCust;
   final String kodePt;
   final String kodeKantor;
+  final String nonaktif;
   final String namaKantor;
   final String kodeInduk;
 
@@ -33,6 +35,7 @@ class AoModel {
     golCust: json['gol_cust'].toString(),
     kodePt: json['kode_pt'].toString(),
     kodeKantor: json['kode_kantor'].toString(),
+    nonaktif: json['nonaktif'].toString(),
     namaKantor: json['nama_kantor'].toString(),
     kodeInduk: json['kode_induk'].toString()
   );
@@ -44,6 +47,7 @@ class AoModel {
     'gol_cust': golCust,
     'kode_pt': kodePt,
     'kode_kantor': kodeKantor,
+    'nonaktif': nonaktif,
     'nama_kantor': namaKantor,
     'kode_induk': kodeInduk
   };
@@ -55,6 +59,7 @@ class AoModel {
     golCust: golCust,
     kodePt: kodePt,
     kodeKantor: kodeKantor,
+    nonaktif: nonaktif,
     namaKantor: namaKantor,
     kodeInduk: kodeInduk
   );
@@ -67,6 +72,7 @@ class AoModel {
     String? golCust,
     String? kodePt,
     String? kodeKantor,
+    String? nonaktif,
     String? namaKantor,
     String? kodeInduk
   }) => AoModel(
@@ -76,14 +82,15 @@ class AoModel {
     golCust: golCust ?? this.golCust,
     kodePt: kodePt ?? this.kodePt,
     kodeKantor: kodeKantor ?? this.kodeKantor,
+    nonaktif: nonaktif ?? this.nonaktif,
     namaKantor: namaKantor ?? this.namaKantor,
     kodeInduk: kodeInduk ?? this.kodeInduk,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is AoModel && id == other.id && kode == other.kode && nama == other.nama && golCust == other.golCust && kodePt == other.kodePt && kodeKantor == other.kodeKantor && namaKantor == other.namaKantor && kodeInduk == other.kodeInduk;
+    || other is AoModel && id == other.id && kode == other.kode && nama == other.nama && golCust == other.golCust && kodePt == other.kodePt && kodeKantor == other.kodeKantor && nonaktif == other.nonaktif && namaKantor == other.namaKantor && kodeInduk == other.kodeInduk;
 
   @override
-  int get hashCode => id.hashCode ^ kode.hashCode ^ nama.hashCode ^ golCust.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ namaKantor.hashCode ^ kodeInduk.hashCode;
+  int get hashCode => id.hashCode ^ kode.hashCode ^ nama.hashCode ^ golCust.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ nonaktif.hashCode ^ namaKantor.hashCode ^ kodeInduk.hashCode;
 }

@@ -29,7 +29,8 @@ class BayarDimukaNotifier extends ChangeNotifier {
   getProfile() async {
     Pref().getUsers().then((value) {
       users = value;
-      getTransaksi();
+      getInqueryAll();
+
       notifyListeners();
     });
   }
@@ -63,7 +64,9 @@ class BayarDimukaNotifier extends ChangeNotifier {
     void traverse(List<dynamic> items) {
       for (var item in items) {
         if (item is Map<String, dynamic>) {
-          if (item['jns_acc'] == 'C' && item['type_posting'] == "Y") {
+          if (item['jns_acc'] == 'C' &&
+              item['type_posting'] == "Y" &&
+              item['akun_perantara'] == "Y") {
             result.add(item);
           }
 
@@ -87,15 +90,34 @@ class BayarDimukaNotifier extends ChangeNotifier {
 
   pilihAkun(InqueryGlModel value) {
     inqueryGlModelcre = value;
+    semua = false;
     nosbb.text = value.namaSbb;
     getTransaksi();
     notifyListeners();
+  }
+
+  Future getInqueryAll() async {
+    listGlAll.clear();
+    notifyListeners();
+    var data = {"kode_pt": "${users!.kodePt}"};
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        final List<Map<String, dynamic>> jnsAccBItems =
+            extractJnsAccBb(value['data']);
+        listGlAll =
+            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        getTransaksi();
+        notifyListeners();
+      }
+    });
   }
 
   InqueryGlModel? inqueryGlModeldeb;
   InqueryGlModel? inqueryGlModelcre;
   var isLoadingInquery = true;
   List<InqueryGlModel> listGl = [];
+  List<InqueryGlModel> listGlAll = [];
   TextEditingController nosbbdeb = TextEditingController();
   TextEditingController nossbcre = TextEditingController();
   Future<List<InqueryGlModel>> getInquery(String query) async {
@@ -180,6 +202,16 @@ class BayarDimukaNotifier extends ChangeNotifier {
     return listGl;
   }
 
+  var semua = false;
+  gantisemua() {
+    semua = !semua;
+    if (semua) {
+      inqueryGlModelcre = null;
+      nosbb.clear();
+    }
+    notifyListeners();
+  }
+
   TextEditingController namaSbbDeb = TextEditingController();
   TextEditingController keteranganBaru = TextEditingController();
   TextEditingController namaSbbCre = TextEditingController();
@@ -202,13 +234,23 @@ class BayarDimukaNotifier extends ChangeNotifier {
           listTransaksi.add(TransaksiPendModel.fromJson(i));
         }
         if (listTransaksi.isNotEmpty) {
-          listTransaksiAdd = inqueryGlModelcre == null
-              ? listTransaksi.where((e) => e.status == "COMPLETED").toList()
-              : listTransaksi
+          if (jenis == "BAYAR DIMUKA") {
+            for (var i = 0; i < listGlAll.length; i++) {
+              listTransaksiAdd.addAll(listTransaksi
                   .where((e) =>
-                      e.cracc == inqueryGlModelcre!.nosbb &&
-                      e.status == "COMPLETED")
-                  .toList();
+                      e.cracc == listGlAll[i].nosbb && e.status == "COMPLETED")
+                  .toList());
+            }
+            notifyListeners();
+          } else {
+            for (var i = 0; i < listGlAll.length; i++) {
+              listTransaksiAdd.addAll(listTransaksi
+                  .where((e) =>
+                      e.dracc == listGlAll[i].nosbb && e.status == "COMPLETED")
+                  .toList());
+            }
+            notifyListeners();
+          }
         }
         isLoadingData = false;
         notifyListeners();
@@ -319,6 +361,9 @@ class BayarDimukaNotifier extends ChangeNotifier {
   String? jenis = "BAYAR DIMUKA";
   pilihjenis(String value) {
     jenis = value;
+    nosbb.clear();
+    inqueryGlModelcre = null;
+    getTransaksi();
     notifyListeners();
   }
 

@@ -161,6 +161,18 @@ class AoPage extends StatelessWidget {
                                           color: Colors.white,
                                         )))),
                             GridColumn(
+                                columnName: 'nonaktif',
+                                label: Container(
+                                    color: colorPrimary,
+                                    padding: EdgeInsets.all(6),
+                                    alignment: Alignment.center,
+                                    child: Text('Nonaktif Akun',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
                                 width: 80,
                                 columnName: 'action',
                                 label: Container(
@@ -417,6 +429,13 @@ class AoPage extends StatelessWidget {
                                             CrossAxisAlignment.stretch,
                                         children: [
                                           const SizedBox(height: 16),
+                                          ButtonSecondary(
+                                            onTap: () {
+                                              value.confirmnonaktif();
+                                            },
+                                            name: "Non-aktifkan",
+                                          ),
+                                          const SizedBox(height: 16),
                                           ButtonDanger(
                                             onTap: () {
                                               value.confirm();
@@ -470,6 +489,9 @@ class DetailDataSource extends DataGridSource {
                         : data.golCust == "2"
                             ? "Supplier"
                             : "Customer / Supplier"),
+                DataGridCell(
+                    columnName: 'nonaktif',
+                    value: data.nonaktif == "Y" ? "Non-aktif" : "Aktif"),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
