@@ -1,13 +1,12 @@
 import 'package:accounting/models/index.dart';
-import 'package:accounting/module/setup/golongan_aset/golongan_aset_notifier.dart';
-import 'package:accounting/module/transaksi/kas_kecil/kas_kecil_notifier.dart';
-import 'package:accounting/module/transaksi/kas_kecil/kasbon_notifier.dart';
-import 'package:accounting/module/transaksi/satu_transaksi/satu_transaksi_notifier.dart';
 
+import 'package:accounting/module/transaksi/kas_kecil/kasbon_notifier.dart';
+
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart' as a;
 import 'package:accounting/utils/button_custom.dart';
 import 'package:accounting/utils/currency_formatted.dart';
 import 'package:accounting/utils/format_currency.dart';
-import 'package:dropdown_search/dropdown_search.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -16,7 +15,6 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../../utils/colors.dart';
-import '../../../utils/currency_formatted.dart';
 
 class KasbonPage extends StatelessWidget {
   const KasbonPage({super.key});
@@ -76,28 +74,6 @@ class KasbonPage extends StatelessWidget {
                           SizedBox(
                             width: 8,
                           ),
-                          InkWell(
-                            onTap: () => value.edit(),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: colorPrimary,
-                                border: Border.all(
-                                  width: 2,
-                                  color: colorPrimary,
-                                ),
-                              ),
-                              child: Text(
-                                "Aksi",
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -129,6 +105,32 @@ class KasbonPage extends StatelessWidget {
                                           fontWeight: FontWeight.w300,
                                           fontSize: 12,
                                           color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 80,
+                                columnName: 'aksi',
+                                label: Container(
+                                    padding: EdgeInsets.all(6),
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    child: Text('Aksi',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 12,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                width: 100,
+                                columnName: 'status',
+                                label: Container(
+                                    padding: EdgeInsets.all(6),
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    child: Text('Status',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.white,
+                                          fontSize: 12,
                                         )))),
                             GridColumn(
                                 width: 100,
@@ -255,19 +257,6 @@ class KasbonPage extends StatelessWidget {
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(6),
                                     child: Text('Akun Kredit',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
-                                        )))),
-                            GridColumn(
-                                columnName: 'action',
-                                width: 80,
-                                label: Container(
-                                    color: colorPrimary,
-                                    padding: EdgeInsets.all(6),
-                                    alignment: Alignment.center,
-                                    child: Text('Action',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -465,6 +454,7 @@ class KasbonPage extends StatelessWidget {
                                             height: 8,
                                           ),
                                           TextFormField(
+                                            controller: value.keterangan,
                                             textInputAction:
                                                 TextInputAction.done,
                                             readOnly: true,
@@ -732,21 +722,33 @@ class KasbonPage extends StatelessWidget {
                                                           TextInputAction.done,
                                                       controller: value.nominal,
                                                       maxLines: 1,
-                                                      readOnly: true,
+                                                      keyboardType: TextInputType
+                                                          .numberWithOptions(
+                                                              decimal: true),
                                                       inputFormatters: [
-                                                        FilteringTextInputFormatter
-                                                            .digitsOnly,
-                                                        CurrencyInputFormatter(),
+                                                        a.CurrencyInputFormatter(
+                                                          leadingSymbol: 'Rp ',
+                                                          useSymbolPadding:
+                                                              true,
+                                                          thousandSeparator: a
+                                                              .ThousandSeparator
+                                                              .Period,
+                                                          mantissaLength:
+                                                              2, // jumlah angka desimal
+                                                          // decimalSeparator: DecimalSeparator.Comma,
+                                                        ),
                                                       ],
-                                                      textAlign:
-                                                          TextAlign.right,
+                                                      validator: (e) {
+                                                        if (e!.isEmpty) {
+                                                          return "Wajib diisi";
+                                                        } else {
+                                                          return null;
+                                                        }
+                                                      },
                                                       decoration:
                                                           InputDecoration(
-                                                        filled: true,
-                                                        fillColor:
-                                                            Colors.grey[200],
                                                         hintText:
-                                                            "Nominal Kas Bon",
+                                                            "Nilai Transaksi",
                                                         border:
                                                             OutlineInputBorder(
                                                           borderRadius:
@@ -1739,12 +1741,21 @@ class KasbonPage extends StatelessWidget {
                                           TextFormField(
                                             textInputAction:
                                                 TextInputAction.done,
-                                            controller: value.nilaiTrans,
+                                            controller: value.nominal,
                                             maxLines: 1,
+                                            keyboardType:
+                                                TextInputType.numberWithOptions(
+                                                    decimal: true),
                                             inputFormatters: [
-                                              FilteringTextInputFormatter
-                                                  .digitsOnly,
-                                              CurrencyInputFormatter(),
+                                              a.CurrencyInputFormatter(
+                                                leadingSymbol: 'Rp ',
+                                                useSymbolPadding: true,
+                                                thousandSeparator:
+                                                    a.ThousandSeparator.Period,
+                                                mantissaLength:
+                                                    2, // jumlah angka desimal
+                                                // decimalSeparator: DecimalSeparator.Comma,
+                                              ),
                                             ],
                                             validator: (e) {
                                               if (e!.isEmpty) {
@@ -1782,6 +1793,7 @@ class KasbonPage extends StatelessWidget {
                                             height: 8,
                                           ),
                                           TextFormField(
+                                            controller: value.keterangan,
                                             textInputAction:
                                                 TextInputAction.done,
                                             decoration: InputDecoration(
@@ -1822,7 +1834,7 @@ class KasbonPage extends StatelessWidget {
 class DetailDataSource extends DataGridSource {
   DetailDataSource(KasbonNotifier value) {
     tindakanNotifier = value;
-    // buildRowData(value.listData);
+    buildRowData(value.listTransaksiAdd);
   }
 
   KasbonNotifier? tindakanNotifier;
@@ -1830,26 +1842,42 @@ class DetailDataSource extends DataGridSource {
   List<DataGridRow> _laporanData = [];
   @override
   List<DataGridRow> get rows => _laporanData;
-  void buildRowData(List<TransaksiModel> list) {
+  void buildRowData(List<TransaksiPendModel> list) {
     int index = 1;
+
+    // 🔽 Sort data terlebih dahulu
+    list.sort((a, b) {
+      final tglA = DateTime.tryParse(a.tglValuta) ?? DateTime(1900);
+      final tglB = DateTime.tryParse(b.tglValuta) ?? DateTime(1900);
+
+      if (tglA.compareTo(tglB) != 0) {
+        return tglA.compareTo(tglB); // urut berdasarkan tanggal dulu
+      }
+
+      return a.noDokumen
+          .compareTo(b.noDokumen); // lalu urut berdasarkan nomor dokumen
+    });
+
+    // 🧱 Bangun data grid setelah data diurutkan
     _laporanData = list
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(columnName: 'tgl_val', value: data.tglVal),
-                DataGridCell(columnName: 'tgl_trans', value: data.tglTrans),
-                DataGridCell(columnName: 'nomor_dok', value: data.nomorDok),
-                DataGridCell(columnName: 'nomor_ref', value: data.nomorRef),
+                DataGridCell(columnName: 'aksi', value: data.rrn),
+                DataGridCell(columnName: 'status', value: data.status),
+                DataGridCell(columnName: 'tgl_val', value: data.tglValuta),
+                DataGridCell(columnName: 'tgl_trans', value: data.tglTransaksi),
+                DataGridCell(columnName: 'nomor_dok', value: data.noDokumen),
+                DataGridCell(columnName: 'nomor_ref', value: data.noRef),
                 DataGridCell(
                     columnName: 'nominal',
                     value: FormatCurrency.oCcyDecimal
                         .format(double.parse(data.nominal))),
-                DataGridCell(columnName: 'nama_debet', value: data.namaDebet),
-                DataGridCell(columnName: 'nama_credit', value: data.namaCredit),
+                DataGridCell(columnName: 'nama_debet', value: data.namaDr),
+                DataGridCell(columnName: 'nama_credit', value: data.namaCr),
                 DataGridCell(columnName: 'keterangan', value: data.keterangan),
-                DataGridCell(columnName: 'debet_acc', value: data.debetAcc),
-                DataGridCell(columnName: 'credit_acc', value: data.creditAcc),
-                DataGridCell(columnName: 'action', value: data.nomorDok),
+                DataGridCell(columnName: 'debet_acc', value: data.dracc),
+                DataGridCell(columnName: 'credit_acc', value: data.cracc),
               ],
             ))
         .toList();
@@ -1859,12 +1887,24 @@ class DetailDataSource extends DataGridSource {
   DataGridRowAdapter buildRow(DataGridRow row) {
     return DataGridRowAdapter(
       cells: row.getCells().map<Widget>((e) {
-        if (e.columnName == 'action') {
+        if (e.columnName == 'nominal') {
+          return Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          );
+        } else if (e.columnName == 'aksi') {
           return Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                tindakanNotifier!.edit(e.value);
+              },
               child: Container(
                 width: 300,
                 padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
@@ -1886,14 +1926,27 @@ class DetailDataSource extends DataGridSource {
               ),
             ),
           );
-        } else if (e.columnName == 'nominal') {
+        } else if (e.columnName == 'status') {
           return Container(
-            alignment: Alignment.centerRight,
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              e.value,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(4),
+            child: Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  color: e.value == "PENDING"
+                      ? Colors.orange
+                      : e.value == "CANCEL"
+                          ? Colors.red
+                          : Colors.green),
+              child: Text(
+                e.value,
+                maxLines: 1,
+                style: TextStyle(
+                  fontSize: 12,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           );
         } else {

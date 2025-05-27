@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:accounting/models/index.dart';
+import 'package:accounting/pref/pref.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -9,26 +10,14 @@ import 'package:intl/intl.dart';
 import '../../../network/network.dart';
 import '../../../repository/SetupRepository.dart';
 import '../../../utils/button_custom.dart';
+import '../../../utils/dialog_loading.dart';
 import '../../../utils/format_currency.dart';
 
 class KasbonNotifier extends ChangeNotifier {
   final BuildContext context;
 
   KasbonNotifier({required this.context}) {
-    // for (Map<String, dynamic> i in coa) {
-    //   listCoa.add(CoaModel.fromJson(i));
-    // }
-    // for (Map<String, dynamic> i in data) {
-    //   listData.add(TransaksiModel.fromJson(i));
-    // }
-    // for (Map<String, dynamic> i in ao) {
-    //   listAo.add(AoModel.fromJson(i));
-    // }
-    // for (Map<String, dynamic> i in json) {
-    //   listKodeTransaksi.add(SetupTransModel.fromJson(i));
-    // }
-    getSetupTrans();
-    getInqueryAll();
+    getProfile();
     notifyListeners();
   }
 
@@ -325,11 +314,204 @@ class KasbonNotifier extends ChangeNotifier {
         });
   }
 
+  UserModel? users;
+  getProfile() async {
+    Pref().getUsers().then((value) {
+      users = value;
+      getSetupTrans();
+      getInqueryAll();
+      getSetupkaskecil();
+      notifyListeners();
+    });
+  }
+
+  var isLoadingData = true;
+  List<TransaksiPendModel> listTransaksi = [];
+  List<TransaksiPendModel> listTransaksiAdd = [];
+  Future getTransaksi() async {
+    isLoadingData = true;
+    listTransaksi.clear();
+    notifyListeners();
+    var data = {
+      "kode_pt": "${users!.kodePt}",
+    };
+    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listTransaksi.add(TransaksiPendModel.fromJson(i));
+        }
+        if (listTransaksi.isNotEmpty) {
+          listTransaksiAdd = listTransaksi
+              .where((e) =>
+                  e.cracc == kasKecilModel!.nosbbKasBon ||
+                  e.dracc == kasKecilModel!.nosbbKasBon)
+              .toList();
+        }
+        isLoadingData = false;
+        notifyListeners();
+      } else {
+        isLoadingData = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  TextEditingController keterangan = TextEditingController();
+  List<KasKecilModel> listkas = [];
+  KasKecilModel? kasKecilModel;
+  Future getSetupkaskecil() async {
+    isLoading = true;
+    listkas.clear();
+    notifyListeners();
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(
+            token, NetworkURL.getSetupKasKecil(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listkas.add(KasKecilModel.fromJson(i));
+        }
+        if (listkas.isNotEmpty) {
+          kasKecilModel = listkas[0];
+          nossbcre.text = kasKecilModel!.namasbbKasbon;
+          namaSbbCre.text = kasKecilModel!.nosbbKasBon;
+          nosbbdeb.text = kasKecilModel!.namasbbKaskecil;
+          namaSbbDeb.text = kasKecilModel!.nosbbKasKecil;
+        }
+        getTransaksi();
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
   cek() {
     if (keyForm.currentState!.validate()) {
-      if (namaSbbDeb.text == "") {
-        informationDialog(
-            context, "Warning", "Akun Penyelesaian Tidak Boleh Kosong");
+      if (users!.limitAkses == "Y") {
+        if (double.parse(users!.maksimalTransaksi) <
+            double.parse(nominal.text
+                .replaceAll("Rp ", "")
+                .replaceAll(".", "")
+                .replaceAll(",", "."))) {
+          DialogCustom().showLoading(context);
+          var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+          var data = {
+            "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+            "tgl_valuta":
+                "${backDate ? DateFormat('y-MM-dd').format(tglBackDate!) : DateFormat('y-MM-dd').format(DateTime.now())}",
+            "batch": "${users!.batch}",
+            "trx_type": "TRX",
+            "trx_code": "${backDate ? "110" : "100"}",
+            "otor": "0",
+            "kode_trn":
+                "${setupTransModel == null ? "" : setupTransModel!.kdTrans}",
+            "nama_dr": "${nosbbdeb.text}",
+            "dracc": "${namaSbbDeb.text}",
+            "nama_cr": "${nossbcre.text}",
+            "cracc": "${namaSbbCre.text}",
+            "rrn": "$invoice",
+            "no_dokumen": "${nomorDok.text}",
+            "no_ref": "${nomorRef.text}",
+            "nominal": double.parse(nominal.text
+                .replaceAll("Rp ", "")
+                .replaceAll(".", "")
+                .replaceAll(",", ".")),
+            "keterangan": "${keterangan.text}",
+            "kode_pt": "${users!.kodePt}",
+            "kode_kantor": "${users!.kodeKantor}",
+            "kode_induk": "${users!.kodeInduk}",
+            "sts_validasi": "N",
+            "kode_ao_dr": "",
+            "kode_coll": "",
+            "kode_ao_cr": "",
+            "userinput": "${users!.namauser}",
+            "userterm": "114.80.90.54",
+            "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+            "inputtgljam":
+                "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+            "otoruser": "",
+            "otorterm": "",
+            "otortgljam": "",
+            "flag_trn": "0",
+            "merchant": "",
+            "source_trx": "",
+            "status": "PENDING",
+            "modul": "Satu Transaksi",
+          };
+          Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
+              .then((value) {
+            Navigator.pop(context);
+            if (value['status'] == "success") {
+              getTransaksi();
+              clear();
+              informationDialog(context, "Information", value['message']);
+            } else {
+              informationDialog(context, "Warning", value['message']);
+            }
+          });
+        } else {
+          DialogCustom().showLoading(context);
+          var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+          var data = {
+            "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+            "tgl_valuta":
+                "${backDate ? DateFormat('y-MM-dd').format(tglBackDate!) : DateFormat('y-MM-dd').format(DateTime.now())}",
+            "batch": "${users!.batch}",
+            "trx_type": "TRX",
+            "trx_code": "${backDate ? "110" : "100"}",
+            "otor": "0",
+            "kode_trn":
+                "${setupTransModel == null ? "" : setupTransModel!.kdTrans}",
+            "nama_dr": "${nosbbdeb.text}",
+            "dracc": "${namaSbbDeb.text}",
+            "nama_cr": "${nossbcre.text}",
+            "cracc": "${namaSbbCre.text}",
+            "rrn": "$invoice",
+            "no_dokumen": "${nomorDok.text}",
+            "no_ref": "${nomorRef.text}",
+            "nominal": double.parse(nominal.text
+                .replaceAll("Rp ", "")
+                .replaceAll(".", "")
+                .replaceAll(",", ".")),
+            "keterangan": "${keterangan.text}",
+            "kode_pt": "${users!.kodePt}",
+            "kode_kantor": "${users!.kodeKantor}",
+            "kode_induk": "${users!.kodeInduk}",
+            "sts_validasi": "N",
+            "kode_ao_dr": "",
+            "kode_coll": "",
+            "kode_ao_cr": "",
+            "userinput": "${users!.namauser}",
+            "userterm": "114.80.90.54",
+            "inputtgljam":
+                "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+            "otoruser": "",
+            "otorterm": "",
+            "otortgljam": "",
+            "flag_trn": "0",
+            "merchant": "",
+            "source_trx": "",
+            "status": "COMPLETED",
+            "modul": "Satu Transaksi",
+          };
+          Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
+              .then((value) {
+            Navigator.pop(context);
+            if (value['status'] == "success") {
+              getTransaksi();
+              clear();
+              informationDialog(context, "Information", value['message']);
+            } else {
+              informationDialog(context, "Warning", value['message']);
+            }
+          });
+        }
+      } else {
+        informationDialog(context, "Warning", "Tidak bisa melakukan transaksi");
       }
     }
   }
@@ -343,10 +525,16 @@ class KasbonNotifier extends ChangeNotifier {
   }
 
   DateTime? tglTransaksi;
-  edit() {
+  TransaksiPendModel? transaksiPendModel;
+  edit(String rrn) {
+    transaksiPendModel = listTransaksi.where((e) => e.rrn == rrn).first;
+    nomorDok.text = transaksiPendModel!.noDokumen;
+    nomorRef.text = transaksiPendModel!.noRef;
+    keterangan.text = transaksiPendModel!.keterangan;
     dialog = true;
     editData = true;
-    nominal.text = "0";
+    tglTransaksiText.text = transaksiPendModel!.tglTransaksi;
+    nominal.text = transaksiPendModel!.nominal;
     nilaiTrans.text = "0";
     updateSelisih();
     notifyListeners();
@@ -355,6 +543,20 @@ class KasbonNotifier extends ChangeNotifier {
   bool backDate = false;
   gantibackDate() {
     backDate = !backDate;
+    notifyListeners();
+  }
+
+  clear() {
+    nomorDok.clear();
+    nomorRef.clear();
+    namaSbbCre.clear();
+    nossbcre.clear();
+    nosbbdeb.clear();
+    namaSbbDeb.clear();
+    nominal.clear();
+    keterangan.clear();
+    dialog = false;
+
     notifyListeners();
   }
 
