@@ -265,6 +265,19 @@ class CoaPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      width: 70,
+                                      columnName: 'nonaktif',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Nonaktif',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
                                       width: 80,
                                       columnName: 'sbb_khusus',
                                       label: Container(
@@ -2291,6 +2304,7 @@ class DetailDataSource extends DataGridSource {
       String golAcc = node['gol_acc'];
       String posting = node['type_posting'];
       String akun_perantara = node['akun_perantara'];
+      String nonaktif = node['nonaktif'];
       String nosbb = node['nosbb'];
       String jnsAcc = node['jns_acc'];
       String hutang = node['hutang'];
@@ -2322,6 +2336,7 @@ class DetailDataSource extends DataGridSource {
         DataGridCell(columnName: 'hutang', value: hutang),
         DataGridCell(columnName: 'piutang', value: piutang),
         DataGridCell(columnName: 'perantara', value: akun_perantara),
+        DataGridCell(columnName: 'nonaktif', value: nonaktif),
         DataGridCell(columnName: 'sbb_khusus', value: ''),
         DataGridCell(columnName: 'action', value: nosbb),
       ]));

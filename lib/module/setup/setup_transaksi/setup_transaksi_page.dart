@@ -357,6 +357,68 @@ class SetupTransaksiPage extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
+                                        "Pilih Modul",
+                                        style: const TextStyle(fontSize: 12),
+                                      ),
+                                      const SizedBox(width: 5),
+                                      const Text(
+                                        "*",
+                                        style: TextStyle(fontSize: 8),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Radio(
+                                        activeColor: colorPrimary,
+                                        value: "BACKOFFICE",
+                                        groupValue: value.modul,
+                                        onChanged: (e) =>
+                                            value.gantimodul("BACKOFFICE"),
+                                      ),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
+                                      Text("Backoffice"),
+                                      SizedBox(
+                                        width: 32,
+                                      ),
+                                      Radio(
+                                        activeColor: colorPrimary,
+                                        value: "KASIR",
+                                        groupValue: value.modul,
+                                        onChanged: (e) =>
+                                            value.gantimodul("KASIR"),
+                                      ),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
+                                      Text("Kasir"),
+                                      SizedBox(
+                                        width: 32,
+                                      ),
+                                      Radio(
+                                        activeColor: colorPrimary,
+                                        value: "KAS KECIL",
+                                        groupValue: value.modul,
+                                        onChanged: (e) =>
+                                            value.gantimodul("KAS KECIL"),
+                                      ),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
+                                      Text("Kas Kecil"),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
                                         "Pilih Debet Akun",
                                         style: const TextStyle(fontSize: 12),
                                       ),
@@ -520,145 +582,102 @@ class SetupTransaksiPage extends StatelessWidget {
                                   SizedBox(
                                     height: 16,
                                   ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Pilih Modul",
-                                        style: const TextStyle(fontSize: 12),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      const Text(
-                                        "*",
-                                        style: TextStyle(fontSize: 8),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Radio(
-                                        activeColor: colorPrimary,
-                                        value: "BACKOFFICE",
-                                        groupValue: value.modul,
-                                        onChanged: (e) =>
-                                            value.gantimodul("BACKOFFICE"),
-                                      ),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text("Backoffice"),
-                                      SizedBox(
-                                        width: 32,
-                                      ),
-                                      Radio(
-                                        activeColor: colorPrimary,
-                                        value: "KASIR",
-                                        groupValue: value.modul,
-                                        onChanged: (e) =>
-                                            value.gantimodul("KASIR"),
-                                      ),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text("Kasir"),
-                                      SizedBox(
-                                        width: 32,
-                                      ),
-                                      Radio(
-                                        activeColor: colorPrimary,
-                                        value: "KAS KECIL",
-                                        groupValue: value.modul,
-                                        onChanged: (e) =>
-                                            value.gantimodul("KAS KECIL"),
-                                      ),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text("Kas Kecil"),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text("Hutang dan Piutang "),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      value.gantiHutangPiutang("HUTANG");
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 16,
-                                          height: 16,
-                                          padding: EdgeInsets.all(2),
-                                          decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Colors.white,
-                                              border: Border.all(
-                                                  width: 2,
-                                                  color: Colors.grey)),
-                                          child: value.hutangPiutang == "HUTANG"
-                                              ? Container(
-                                                  decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      color: colorPrimary),
-                                                )
-                                              : SizedBox(),
+                                  value.modul == "KAS KECIL"
+                                      ? SizedBox()
+                                      : Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text("Hutang dan Piutang "),
+                                                SizedBox(
+                                                  width: 8,
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                value.gantiHutangPiutang(
+                                                    "HUTANG");
+                                              },
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    width: 16,
+                                                    height: 16,
+                                                    padding: EdgeInsets.all(2),
+                                                    decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        color: Colors.white,
+                                                        border: Border.all(
+                                                            width: 2,
+                                                            color:
+                                                                Colors.grey)),
+                                                    child:
+                                                        value.hutangPiutang ==
+                                                                "HUTANG"
+                                                            ? Container(
+                                                                decoration: BoxDecoration(
+                                                                    shape: BoxShape
+                                                                        .circle,
+                                                                    color:
+                                                                        colorPrimary),
+                                                              )
+                                                            : SizedBox(),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 8,
+                                                  ),
+                                                  Text("Hutang"),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 4,
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                value.gantiHutangPiutang(
+                                                    "PIUTANG");
+                                              },
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    width: 16,
+                                                    height: 16,
+                                                    padding: EdgeInsets.all(2),
+                                                    decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        color: Colors.white,
+                                                        border: Border.all(
+                                                            width: 2,
+                                                            color:
+                                                                Colors.grey)),
+                                                    child:
+                                                        value.hutangPiutang ==
+                                                                "PIUTANG"
+                                                            ? Container(
+                                                                decoration: BoxDecoration(
+                                                                    shape: BoxShape
+                                                                        .circle,
+                                                                    color:
+                                                                        colorPrimary),
+                                                              )
+                                                            : SizedBox(),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 8,
+                                                  ),
+                                                  Text("Piutang"),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        SizedBox(
-                                          width: 8,
-                                        ),
-                                        Text("Hutang"),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      value.gantiHutangPiutang("PIUTANG");
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 16,
-                                          height: 16,
-                                          padding: EdgeInsets.all(2),
-                                          decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Colors.white,
-                                              border: Border.all(
-                                                  width: 2,
-                                                  color: Colors.grey)),
-                                          child: value.hutangPiutang ==
-                                                  "PIUTANG"
-                                              ? Container(
-                                                  decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      color: colorPrimary),
-                                                )
-                                              : SizedBox(),
-                                        ),
-                                        SizedBox(
-                                          width: 8,
-                                        ),
-                                        Text("Piutang"),
-                                      ],
-                                    ),
-                                  ),
                                   SizedBox(
                                     height: 16,
                                   ),

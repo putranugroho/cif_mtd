@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:accounting/models/index.dart';
 import 'package:accounting/network/network.dart';
+import 'package:accounting/pref/pref.dart';
 import 'package:accounting/repository/SetupRepository.dart';
 import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/informationdialog.dart';
@@ -19,17 +21,52 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     // for (Map<String, dynamic> i in json) {
     //   listData.add(SetupTransModel.fromJson(i));
     // }
-
-    getSetupTrans();
-
-    getInqueryAll();
+    getProfile();
     notifyListeners();
+  }
+
+  UserModel? users;
+  getProfile() async {
+    Pref().getUsers().then((value) {
+      users = value;
+      getSetupTrans();
+
+      getInqueryAll();
+      getSetupkaskecil();
+      notifyListeners();
+    });
+  }
+
+  List<KasKecilModel> listkas = [];
+  KasKecilModel? kasKecilModel;
+  Future getSetupkaskecil() async {
+    isLoading = true;
+    listkas.clear();
+    notifyListeners();
+    var data = {"kode_pt": "${users!.kodePt}"};
+    Setuprepository.setup(
+            token, NetworkURL.getSetupKasKecil(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listkas.add(KasKecilModel.fromJson(i));
+        }
+        if (listkas.isNotEmpty) {
+          kasKecilModel = listkas[0];
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
   }
 
   Future getInqueryAll() async {
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
+    var data = {"kode_pt": "${users!.kodePt}"};
     Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
         .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
@@ -107,55 +144,129 @@ class SetupTransaksiNotifier extends ChangeNotifier {
   final keyForm = GlobalKey<FormState>();
   cek() {
     if (keyForm.currentState!.validate()) {
-      if (editData) {
-        DialogCustom().showLoading(context);
-        var data = {
-          "id": setupTransModel!.id,
-          "kode_pt": "001",
-          "kd_trans": kodeTransaksi.text.trim(),
-          "nama_trans": namaTransaksi.text.trim(),
-          "gl_deb": namaSbbDeb.text.trim(),
-          "gl_kre": namaSbbCre.text.trim(),
-          "modul": modul,
-          "hutang_piutang": hutangPiutang,
-        };
-        Setuprepository.setup(
-                token, NetworkURL.editSetupTrans(), jsonEncode(data))
-            .then((value) {
-          Navigator.pop(context);
-          if (value['status'].toString().toLowerCase().contains("success")) {
-            clear();
-            getSetupTrans();
-            informationDialog(context, "Information", value['message']);
+      if (modul == "KAS KECIL") {
+        if (listkas.isNotEmpty) {
+          if (namaSbbCre.text == kasKecilModel!.nosbbKasKecil ||
+              namaSbbCre.text == kasKecilModel!.nosbbKasBon ||
+              namaSbbDeb.text == kasKecilModel!.nosbbKasKecil ||
+              namaSbbDeb.text == kasKecilModel!.nosbbKasBon) {
+            if (editData) {
+              DialogCustom().showLoading(context);
+              var data = {
+                "id": setupTransModel!.id,
+                "kode_pt": "${users!.kodePt}",
+                "kd_trans": kodeTransaksi.text.trim(),
+                "nama_trans": namaTransaksi.text.trim(),
+                "gl_deb": namaSbbDeb.text.trim(),
+                "gl_kre": namaSbbCre.text.trim(),
+                "modul": modul,
+                "hutang_piutang": hutangPiutang,
+              };
+              Setuprepository.setup(
+                      token, NetworkURL.editSetupTrans(), jsonEncode(data))
+                  .then((value) {
+                Navigator.pop(context);
+                if (value['status']
+                    .toString()
+                    .toLowerCase()
+                    .contains("success")) {
+                  clear();
+                  getSetupTrans();
+                  informationDialog(context, "Information", value['message']);
+                } else {
+                  clear();
+                  informationDialog(
+                      context, "Information", value['message'][0]);
+                }
+              });
+            } else {
+              DialogCustom().showLoading(context);
+              var data = {
+                "kode_pt": "${users!.kodePt}",
+                "kd_trans": kodeTransaksi.text.trim(),
+                "nama_trans": namaTransaksi.text.trim(),
+                "gl_deb": namaSbbDeb.text.trim(),
+                "gl_kre": namaSbbCre.text.trim(),
+                "modul": modul,
+                "hutang_piutang": hutangPiutang,
+              };
+              Setuprepository.setup(
+                      token, NetworkURL.addSetupTrans(), jsonEncode(data))
+                  .then((value) {
+                Navigator.pop(context);
+                if (value['status']
+                    .toString()
+                    .toLowerCase()
+                    .contains("success")) {
+                  clear();
+                  getSetupTrans();
+                  informationDialog(context, "Information", value['message']);
+                } else {
+                  clear();
+                  informationDialog(
+                      context, "Information", value['message'][0]);
+                }
+              });
+            }
           } else {
-            clear();
-            informationDialog(context, "Information", value['message'][0]);
+            informationDialog(context, "Warning",
+                "Akun setup kas kecil tidak digunakan, tidak bisa melakukan simpan setup trans. pada modul Kas Kecil");
           }
-        });
+        } else {
+          informationDialog(context, "Warning",
+              "Tidak ada akun setup kas kecil, silahkan cek akun setup kas kecil");
+        }
       } else {
-        DialogCustom().showLoading(context);
-        var data = {
-          "kode_pt": "001",
-          "kd_trans": kodeTransaksi.text.trim(),
-          "nama_trans": namaTransaksi.text.trim(),
-          "gl_deb": namaSbbDeb.text.trim(),
-          "gl_kre": namaSbbCre.text.trim(),
-          "modul": modul,
-          "hutang_piutang": hutangPiutang,
-        };
-        Setuprepository.setup(
-                token, NetworkURL.addSetupTrans(), jsonEncode(data))
-            .then((value) {
-          Navigator.pop(context);
-          if (value['status'].toString().toLowerCase().contains("success")) {
-            clear();
-            getSetupTrans();
-            informationDialog(context, "Information", value['message']);
-          } else {
-            clear();
-            informationDialog(context, "Information", value['message'][0]);
-          }
-        });
+        if (editData) {
+          DialogCustom().showLoading(context);
+          var data = {
+            "id": setupTransModel!.id,
+            "kode_pt": "${users!.kodePt}",
+            "kd_trans": kodeTransaksi.text.trim(),
+            "nama_trans": namaTransaksi.text.trim(),
+            "gl_deb": namaSbbDeb.text.trim(),
+            "gl_kre": namaSbbCre.text.trim(),
+            "modul": modul,
+            "hutang_piutang": hutangPiutang,
+          };
+          Setuprepository.setup(
+                  token, NetworkURL.editSetupTrans(), jsonEncode(data))
+              .then((value) {
+            Navigator.pop(context);
+            if (value['status'].toString().toLowerCase().contains("success")) {
+              clear();
+              getSetupTrans();
+              informationDialog(context, "Information", value['message']);
+            } else {
+              clear();
+              informationDialog(context, "Information", value['message'][0]);
+            }
+          });
+        } else {
+          DialogCustom().showLoading(context);
+          var data = {
+            "kode_pt": "${users!.kodePt}",
+            "kd_trans": kodeTransaksi.text.trim(),
+            "nama_trans": namaTransaksi.text.trim(),
+            "gl_deb": namaSbbDeb.text.trim(),
+            "gl_kre": namaSbbCre.text.trim(),
+            "modul": modul,
+            "hutang_piutang": hutangPiutang,
+          };
+          Setuprepository.setup(
+                  token, NetworkURL.addSetupTrans(), jsonEncode(data))
+              .then((value) {
+            Navigator.pop(context);
+            if (value['status'].toString().toLowerCase().contains("success")) {
+              clear();
+              getSetupTrans();
+              informationDialog(context, "Information", value['message']);
+            } else {
+              clear();
+              informationDialog(context, "Information", value['message'][0]);
+            }
+          });
+        }
       }
     }
   }
@@ -270,7 +381,9 @@ class SetupTransaksiNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "${users!.kodePt}",
+      };
 
       try {
         final response = await Setuprepository.setup(

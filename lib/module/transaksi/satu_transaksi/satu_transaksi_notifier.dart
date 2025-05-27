@@ -443,7 +443,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
           Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
               .then((value) {
             Navigator.pop(context);
-            if (value['code'] == "000") {
+            if (value['status'] == "success") {
               getTransaksi();
               clear();
               informationDialog(context, "Information", value['message']);
@@ -499,7 +499,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
           Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
               .then((value) {
             Navigator.pop(context);
-            if (value['code'] == "000") {
+            if (value['status'] == "success") {
               getTransaksi();
               clear();
               informationDialog(context, "Information", value['message']);
