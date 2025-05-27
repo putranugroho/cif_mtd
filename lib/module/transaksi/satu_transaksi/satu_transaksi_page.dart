@@ -584,7 +584,7 @@ class SatuTransaksiPage extends StatelessWidget {
                                       Row(
                                         children: [
                                           Text(
-                                            "Pilih Debet Akun",
+                                            "Pilih Debet Akun ",
                                             style:
                                                 const TextStyle(fontSize: 12),
                                           ),
