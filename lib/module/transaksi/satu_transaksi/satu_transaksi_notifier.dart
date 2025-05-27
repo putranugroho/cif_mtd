@@ -63,9 +63,11 @@ class SatuTransaksiNotifier extends ChangeNotifier {
 
   List<InqueryGlModel> list = [];
   List<AoModel> listAo = [];
+  List<AoModel> listAoAdd = [];
   getAoMarketing() async {
     isLoading = true;
     listAo.clear();
+    listAoAdd.clear();
     notifyListeners();
     var data = {"kode_pt": "${users!.kodePt}"};
     Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data))
@@ -73,6 +75,9 @@ class SatuTransaksiNotifier extends ChangeNotifier {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listAo.add(AoModel.fromJson(i));
+        }
+        if (listAo.isNotEmpty) {
+          listAoAdd.addAll(listAo.where((e) => e.nonaktif == "N").toList());
         }
         isLoading = false;
         notifyListeners();

@@ -340,6 +340,79 @@ class CoaNotifier extends ChangeNotifier {
         });
   }
 
+  confirmtutup() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: 500,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Anda yakin tutup ${coaModel!.namaSbb}?",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ButtonSecondary(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        name: "Tidak",
+                      )),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                          child: ButtonPrimary(
+                        onTap: () {
+                          Navigator.pop(context);
+                          removetutup();
+                        },
+                        name: "Ya",
+                      )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  removetutup() {
+    DialogCustom().showLoading(context);
+    var data = {
+      "nosbb": coaModel!.nosbb,
+      "userinput": "Testing",
+      "userterm": "114.80.30.143",
+    };
+    Setuprepository.setup(token, NetworkURL.tutup(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        getMasterGlSubtree();
+        getMasterGl();
+        clear();
+        dialog = false;
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message']);
+      }
+    });
+  }
+
   remove() {
     DialogCustom().showLoading(context);
     var data = {

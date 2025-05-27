@@ -5,5 +5,6 @@
     "nama_sbb": "Pendapatan kelebihan Bayar",
     "jns_acc": "C",
     "type_posting": "N",
+    "nonaktif": "N",
     "children": "$[]mastergl_subtre_model"
 }

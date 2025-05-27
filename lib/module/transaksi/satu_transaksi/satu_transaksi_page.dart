@@ -872,7 +872,7 @@ class SatuTransaksiPage extends StatelessWidget {
                                               true, // Aktifkan fitur pencarian
                                         ),
                                         selectedItem: value.aoModel,
-                                        items: value.listAo,
+                                        items: value.listAoAdd,
                                         itemAsString: (e) => "${e.nama}",
                                         onChanged: (e) {
                                           value.pilihAoModelDebet(e!);
@@ -917,7 +917,7 @@ class SatuTransaksiPage extends StatelessWidget {
                                               true, // Aktifkan fitur pencarian
                                         ),
                                         selectedItem: value.aoModelKRedit,
-                                        items: value.listAo,
+                                        items: value.listAoAdd,
                                         itemAsString: (e) => "${e.nama}",
                                         onChanged: (e) {
                                           value.pilihAoModelKredit(e!);

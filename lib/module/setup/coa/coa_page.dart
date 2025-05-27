@@ -2237,7 +2237,8 @@ class CoaPage extends StatelessWidget {
                                                             height: 16),
                                                         ButtonSecondary(
                                                           onTap: () {
-                                                            value.cek();
+                                                            value
+                                                                .confirmtutup();
                                                           },
                                                           name: "Tutup Akun",
                                                         ),

@@ -16,6 +16,7 @@ class InqueryGlModel {
     required this.typePosting,
     required this.akunPerantara,
     required this.hutang,
+    required this.nonaktif,
     required this.piutang,
     required this.sbbKhusus,
     required this.items,
@@ -30,6 +31,7 @@ class InqueryGlModel {
   final String typePosting;
   final String akunPerantara;
   final String hutang;
+  final String nonaktif;
   final String piutang;
   final String sbbKhusus;
   final List<InqueryGlModel> items;
@@ -44,6 +46,7 @@ class InqueryGlModel {
     typePosting: json['type_posting'].toString(),
     akunPerantara: json['akun_perantara'].toString(),
     hutang: json['hutang'].toString(),
+    nonaktif: json['nonaktif'].toString(),
     piutang: json['piutang'].toString(),
     sbbKhusus: json['sbb_khusus'].toString(),
     items: (json['items'] as List? ?? []).map((e) => InqueryGlModel.fromJson(e as Map<String, dynamic>)).toList()
@@ -59,6 +62,7 @@ class InqueryGlModel {
     'type_posting': typePosting,
     'akun_perantara': akunPerantara,
     'hutang': hutang,
+    'nonaktif': nonaktif,
     'piutang': piutang,
     'sbb_khusus': sbbKhusus,
     'items': items.map((e) => e.toJson()).toList()
@@ -74,6 +78,7 @@ class InqueryGlModel {
     typePosting: typePosting,
     akunPerantara: akunPerantara,
     hutang: hutang,
+    nonaktif: nonaktif,
     piutang: piutang,
     sbbKhusus: sbbKhusus,
     items: items.map((e) => e.clone()).toList()
@@ -90,6 +95,7 @@ class InqueryGlModel {
     String? typePosting,
     String? akunPerantara,
     String? hutang,
+    String? nonaktif,
     String? piutang,
     String? sbbKhusus,
     List<InqueryGlModel>? items
@@ -103,6 +109,7 @@ class InqueryGlModel {
     typePosting: typePosting ?? this.typePosting,
     akunPerantara: akunPerantara ?? this.akunPerantara,
     hutang: hutang ?? this.hutang,
+    nonaktif: nonaktif ?? this.nonaktif,
     piutang: piutang ?? this.piutang,
     sbbKhusus: sbbKhusus ?? this.sbbKhusus,
     items: items ?? this.items,
@@ -110,8 +117,8 @@ class InqueryGlModel {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is InqueryGlModel && id == other.id && golAcc == other.golAcc && jnsAcc == other.jnsAcc && nobb == other.nobb && nosbb == other.nosbb && namaSbb == other.namaSbb && typePosting == other.typePosting && akunPerantara == other.akunPerantara && hutang == other.hutang && piutang == other.piutang && sbbKhusus == other.sbbKhusus && items == other.items;
+    || other is InqueryGlModel && id == other.id && golAcc == other.golAcc && jnsAcc == other.jnsAcc && nobb == other.nobb && nosbb == other.nosbb && namaSbb == other.namaSbb && typePosting == other.typePosting && akunPerantara == other.akunPerantara && hutang == other.hutang && nonaktif == other.nonaktif && piutang == other.piutang && sbbKhusus == other.sbbKhusus && items == other.items;
 
   @override
-  int get hashCode => id.hashCode ^ golAcc.hashCode ^ jnsAcc.hashCode ^ nobb.hashCode ^ nosbb.hashCode ^ namaSbb.hashCode ^ typePosting.hashCode ^ akunPerantara.hashCode ^ hutang.hashCode ^ piutang.hashCode ^ sbbKhusus.hashCode ^ items.hashCode;
+  int get hashCode => id.hashCode ^ golAcc.hashCode ^ jnsAcc.hashCode ^ nobb.hashCode ^ nosbb.hashCode ^ namaSbb.hashCode ^ typePosting.hashCode ^ akunPerantara.hashCode ^ hutang.hashCode ^ nonaktif.hashCode ^ piutang.hashCode ^ sbbKhusus.hashCode ^ items.hashCode;
 }

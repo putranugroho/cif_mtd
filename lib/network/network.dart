@@ -117,6 +117,10 @@ class NetworkURL {
     return "$url/mastergl/deleted";
   }
 
+  static String tutup() {
+    return "$url/mastergl/tutup";
+  }
+
   static String getMetodePenyusutan() {
     return "$url/metode_penyusutan";
   }

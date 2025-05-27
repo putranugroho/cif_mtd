@@ -8,6 +8,7 @@
     "type_posting": "N",
     "akun_perantara": "N",
     "hutang": "N",
+    "nonaktif": "N",
     "piutang": "N",
     "sbb_khusus": "",
     "items": "$[]inquery_gl_model"
