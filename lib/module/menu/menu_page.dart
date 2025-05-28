@@ -235,13 +235,15 @@ class MenuPage extends StatelessWidget {
                     ),
                     Container(
                       padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 0, 125, 228)),
                       child: Row(
                         children: [
                           Expanded(
                             child: Text(
                               "${value.users!.namauser}",
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 14,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
