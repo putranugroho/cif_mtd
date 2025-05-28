@@ -5,6 +5,7 @@ import 'package:accounting/utils/button_custom.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -348,26 +349,33 @@ class AoPage extends StatelessWidget {
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                TextFormField(
-                                  textInputAction: TextInputAction.done,
+                                TypeAheadField<KaryawanModel>(
                                   controller: value.nm,
-                                  maxLines: 1,
-                                  // inputFormatters: [
-                                  //   FilteringTextInputFormatter.digitsOnly
-                                  // ],
-                                  validator: (e) {
-                                    if (e!.isEmpty) {
-                                      return "Wajib diisi";
-                                    } else {
-                                      return null;
-                                    }
+                                  suggestionsCallback: (search) =>
+                                      value.getInqKaryawan(search),
+                                  builder: (context, controller, focusNode) {
+                                    return TextField(
+                                        controller: controller,
+                                        focusNode: focusNode,
+                                        readOnly: value.editData,
+                                        autofocus: true,
+                                        decoration: InputDecoration(
+                                          filled: value.editData,
+                                          fillColor: Colors.grey[200],
+                                          border: OutlineInputBorder(),
+                                          labelText: 'Cari Akun',
+                                        ));
                                   },
-                                  decoration: InputDecoration(
-                                    hintText: "Input Nama",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(6),
-                                    ),
-                                  ),
+                                  itemBuilder: (context, city) {
+                                    return ListTile(
+                                      title: Text(city.namaLengkap),
+                                      subtitle: Text(city.nik),
+                                    );
+                                  },
+                                  onSelected: (city) {
+                                    // value.selectInvoice(city);
+                                    value.piliAkunKaryawan(city);
+                                  },
                                 ),
                                 const SizedBox(height: 16),
                                 Row(

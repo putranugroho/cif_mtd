@@ -496,6 +496,8 @@ class DetailDataSource extends DataGridSource {
   @override
   List<DataGridRow> get rows => _laporanData;
   void buildRowData(List<SbbKhususModel> list) {
+    list.sort((a, b) =>
+        a.kodeGolongan.toLowerCase().compareTo(b.kodeGolongan.toLowerCase()));
     int index = 1;
     _laporanData = list
         .map<DataGridRow>((data) => DataGridRow(

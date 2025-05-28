@@ -4,6 +4,7 @@ import 'package:accounting/models/index.dart';
 import 'package:accounting/network/network.dart';
 import 'package:accounting/pref/pref.dart';
 import 'package:accounting/repository/SetupRepository.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/button_custom.dart';
@@ -26,6 +27,44 @@ class AoNotifier extends ChangeNotifier {
       getKantor();
       notifyListeners();
     });
+  }
+
+  List<KaryawanModel> listKaryawan = [];
+  KaryawanModel? karyawanModel;
+  piliAkunKaryawan(KaryawanModel value) {
+    karyawanModel = value;
+    nm.text = karyawanModel!.namaLengkap;
+    notifyListeners();
+  }
+
+  Future<List<KaryawanModel>> getInqKaryawan(String query) async {
+    if (query.isNotEmpty && query.length > 2 && editData == false) {
+      listKaryawan.clear();
+      notifyListeners();
+      var data = {"nama": query};
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.cariKaryawan(),
+          jsonEncode(data),
+        );
+
+        for (Map<String, dynamic> i in response) {
+          listKaryawan.add(KaryawanModel.fromJson(i));
+        }
+        notifyListeners();
+      } catch (e) {
+        if (kDebugMode) {
+          print("Error: $e");
+        }
+      } finally {
+        notifyListeners();
+      }
+    } else {
+      listKaryawan.clear(); // clear on short query
+    }
+
+    return listKaryawan;
   }
 
   List<KantorModel> listKantor = [];

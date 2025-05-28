@@ -1927,6 +1927,45 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                   ),
                 ),
               ),
+              InkWell(
+                onTap: () => widget.value.gantimenu(70),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: widget.value.page == 70
+                        ? Colors.white
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Image.asset(
+                        ImageAssets.report,
+                        height: 30,
+                        color: widget.value.page == 70
+                            ? Colors.black
+                            : Colors.white,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        "Laporan Kas Kecil",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: widget.value.page == 70
+                              ? Colors.black
+                              : Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
               // InkWell(
               //   onTap: () => widget.value.gantimenu(63),
               //   child: Container(

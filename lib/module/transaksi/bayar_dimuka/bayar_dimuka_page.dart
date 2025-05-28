@@ -624,27 +624,67 @@ class BayarDimukaPage extends StatelessWidget {
                                         const Text("Tgl Valuta"),
                                         const SizedBox(width: 16),
                                         Expanded(
-                                          child: TextFormField(
-                                            enabled: !value.cariTrans,
-                                            readOnly: true,
-                                            onTap: () => value.changeDate(),
-                                            controller: value.periode,
-                                            validator: (e) {
-                                              if (e!.isEmpty) {
-                                                return "Wajib diisi";
-                                              } else {
-                                                return null;
-                                              }
-                                            },
-                                            decoration: InputDecoration(
-                                              filled: value.cariTrans,
-                                              fillColor: Colors.grey[200],
-                                              hintText: "Tanggal Valuta",
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 130,
+                                                child: TextFormField(
+                                                  enabled: !value.cariTrans,
+                                                  readOnly: true,
+                                                  onTap: () =>
+                                                      value.pilihTanggalAwal(),
+                                                  controller: value.tanggalAwal,
+                                                  validator: (e) {
+                                                    if (e!.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    filled: value.cariTrans,
+                                                    fillColor: Colors.grey[200],
+                                                    hintText: "Tanggal Awal",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
+                                              const SizedBox(width: 8),
+                                              const Text("s/d"),
+                                              const SizedBox(width: 8),
+                                              SizedBox(
+                                                width: 130,
+                                                child: TextFormField(
+                                                  enabled: !value.cariTrans,
+                                                  readOnly: true,
+                                                  onTap: () =>
+                                                      value.pilihTanggalAkhir(),
+                                                  controller:
+                                                      value.tanggalAkhir,
+                                                  validator: (e) {
+                                                    if (e!.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    filled: value.cariTrans,
+                                                    fillColor: Colors.grey[200],
+                                                    hintText: "Tanggal Akhir",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],

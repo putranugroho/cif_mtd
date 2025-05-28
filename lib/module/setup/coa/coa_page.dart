@@ -1024,7 +1024,11 @@ class CoaPage extends StatelessWidget {
                                                         if (e!.isEmpty) {
                                                           return "Wajib diisi";
                                                         } else {
-                                                          return null;
+                                                          if (e.length != 3) {
+                                                            return "Wajib 3";
+                                                          } else {
+                                                            return null;
+                                                          }
                                                         }
                                                       },
                                                       decoration:
@@ -1324,7 +1328,12 @@ class CoaPage extends StatelessWidget {
                                                             if (e!.isEmpty) {
                                                               return "Wajib diisi";
                                                             } else {
-                                                              return null;
+                                                              if (e.length !=
+                                                                  3) {
+                                                                return "Wajib 3";
+                                                              } else {
+                                                                return null;
+                                                              }
                                                             }
                                                           },
                                                           decoration:
@@ -1878,7 +1887,12 @@ class CoaPage extends StatelessWidget {
                                                                     .isEmpty) {
                                                                   return "Wajib diisi";
                                                                 } else {
-                                                                  return null;
+                                                                  if (e.length !=
+                                                                      6) {
+                                                                    return "Wajib 6";
+                                                                  } else {
+                                                                    return null;
+                                                                  }
                                                                 }
                                                               },
                                                               decoration:

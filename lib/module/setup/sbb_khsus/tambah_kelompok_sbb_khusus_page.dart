@@ -270,7 +270,11 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                   if (e!.isEmpty) {
                                     return "Wajib diisi";
                                   } else {
-                                    return null;
+                                    if (e.length != 3) {
+                                      return "Wajib 3 Karakter";
+                                    } else {
+                                      return null;
+                                    }
                                   }
                                 },
                                 decoration: InputDecoration(

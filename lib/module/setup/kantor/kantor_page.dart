@@ -121,6 +121,18 @@ class KantorPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
+                                      columnName: 'nama_kantor',
+                                      label: Container(
+                                          padding: EdgeInsets.all(6),
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          child: Text('Nama Kantor',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
                                       width: 100,
                                       columnName: 'kode_kantor',
                                       label: Container(
@@ -145,18 +157,6 @@ class KantorPage extends StatelessWidget {
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
                                                 fontSize: 12,
-                                              )))),
-                                  GridColumn(
-                                      columnName: 'nama_kantor',
-                                      label: Container(
-                                          padding: EdgeInsets.all(6),
-                                          color: colorPrimary,
-                                          alignment: Alignment.center,
-                                          child: Text('Nama Kantor',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.white,
                                               )))),
                                   GridColumn(
                                       columnName: 'alamat',
@@ -468,7 +468,16 @@ class KantorPage extends StatelessWidget {
                                                     if (e!.isEmpty) {
                                                       return "Wajib diisi";
                                                     } else {
-                                                      return null;
+                                                      if (value.status ==
+                                                              "Cabang" &&
+                                                          e.length != 3) {
+                                                        return "Wajib 3 digit";
+                                                      } else if (e.length !=
+                                                          4) {
+                                                        return "Wajib 4 digit";
+                                                      } else {
+                                                        return null;
+                                                      }
                                                     }
                                                   },
                                                   decoration: InputDecoration(
@@ -1020,9 +1029,9 @@ class DetailDataSource extends DataGridSource {
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
+                DataGridCell(columnName: 'nama_kantor', value: data.namaKantor),
                 DataGridCell(columnName: 'kode_kantor', value: data.kodeKantor),
                 DataGridCell(columnName: 'kode_induk', value: data.kodeInduk),
-                DataGridCell(columnName: 'nama_kantor', value: data.namaKantor),
                 DataGridCell(columnName: 'alamat', value: data.alamat),
                 DataGridCell(
                     columnName: 'status_kantor',

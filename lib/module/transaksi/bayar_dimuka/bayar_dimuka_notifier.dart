@@ -353,6 +353,85 @@ class BayarDimukaNotifier extends ChangeNotifier {
   TextEditingController namaakundebet = TextEditingController();
 
   TextEditingController tanggaltransaksi = TextEditingController();
+  TextEditingController tanggalAwal = TextEditingController();
+  TextEditingController tanggalAkhir = TextEditingController();
+
+  DateTime? tglAwal = DateTime.now();
+  Future pilihTanggalAwal() async {
+    var pickedendDate = (await showDatePicker(
+      context: context,
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+                DateTime.now(),
+              )) -
+              1),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) - 10,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+                DateTime.now(),
+              )) -
+              1),
+    ));
+    if (pickedendDate != null) {
+      tglAwal = pickedendDate;
+      tanggalAwal.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
+      notifyListeners();
+    }
+  }
+
+  DateTime? tglAkhir = DateTime.now();
+  Future pilihTanggalAkhir() async {
+    var pickedendDate = (await showDatePicker(
+      context: context,
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(tglAwal!)),
+          int.parse(DateFormat('MM').format(
+            tglAwal!,
+          )),
+          int.parse(DateFormat('dd').format(
+            tglAwal!,
+          ))),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(tglAwal!)),
+          int.parse(DateFormat('MM').format(
+            tglAwal!,
+          )),
+          int.parse(DateFormat('dd').format(
+            tglAwal!,
+          ))),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+                DateTime.now(),
+              )) -
+              1),
+    ));
+    if (pickedendDate != null) {
+      tglAkhir = pickedendDate;
+      tanggalAkhir.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
+      notifyListeners();
+    }
+  }
 
   List<String> listJenis = [
     "BAYAR DIMUKA",
@@ -380,7 +459,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool cariTrans = false;
+  bool cariTrans = true;
   pilihCariTransaksi(bool value) {
     cariTrans = value;
     notifyListeners();
@@ -425,8 +504,8 @@ class BayarDimukaNotifier extends ChangeNotifier {
     }
   }
 
-  DateTime tglAwal = DateTime.now();
-  DateTime tglAkhir = DateTime.now();
+  // DateTime tglAwal = DateTime.now();
+  // DateTime tglAkhir = DateTime.now();
   changeDate() async {
     final picked = await showDateRangePicker(
         context: context,
@@ -444,8 +523,8 @@ class BayarDimukaNotifier extends ChangeNotifier {
     tglAwal = DateTime.parse(tglAwalString);
     tglAkhir = DateTime.parse(tglAkhirString);
 
-    periode.text =
-        "${DateFormat('dd MMM y').format(tglAwal)} - ${DateFormat('dd MMM y').format(tglAkhir)}";
+    // periode.text =
+    //     "${DateFormat('dd MMM y').format(tglAwal)} - ${DateFormat('dd MMM y').format(tglAkhir)}";
 
     notifyListeners();
   }

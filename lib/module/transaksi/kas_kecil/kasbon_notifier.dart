@@ -215,13 +215,19 @@ class KasbonNotifier extends ChangeNotifier {
     var pickedendDate = (await showDatePicker(
       context: context,
       initialDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())),
-          int.parse(DateFormat('MM').format(DateTime.now())),
-          int.parse(DateFormat('dd').format(DateTime.now()))),
+          int.parse(
+              DateFormat('y').format(DateTime.parse(tglTransaksiText.text))),
+          int.parse(
+              DateFormat('MM').format(DateTime.parse(tglTransaksiText.text))),
+          int.parse(
+              DateFormat('dd').format(DateTime.parse(tglTransaksiText.text)))),
       firstDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) - 2,
-          int.parse(DateFormat('MM').format(DateTime.now())),
-          int.parse(DateFormat('dd').format(DateTime.now()))),
+          int.parse(
+              DateFormat('y').format(DateTime.parse(tglTransaksiText.text))),
+          int.parse(
+              DateFormat('MM').format(DateTime.parse(tglTransaksiText.text))),
+          int.parse(
+              DateFormat('dd').format(DateTime.parse(tglTransaksiText.text)))),
       lastDate: DateTime(
           int.parse(DateFormat('y').format(DateTime.now())),
           int.parse(DateFormat('MM').format(
@@ -266,6 +272,7 @@ class KasbonNotifier extends ChangeNotifier {
   bool editData = false;
 
   tambah() {
+    clear();
     dialog = true;
     editData = false;
     notifyListeners();
@@ -340,6 +347,7 @@ class KasbonNotifier extends ChangeNotifier {
   Future getTransaksi() async {
     isLoadingData = true;
     listTransaksi.clear();
+    listTransaksiAdd.clear();
     notifyListeners();
     var data = {
       "kode_pt": "${users!.kodePt}",
@@ -352,7 +360,9 @@ class KasbonNotifier extends ChangeNotifier {
         }
         if (listTransaksi.isNotEmpty) {
           listTransaksiAdd = listTransaksi
-              .where((e) => e.dracc == kasKecilModel!.nosbbKasBon||e.cracc == kasKecilModel!.nosbbKasBon)
+              .where((e) =>
+                  e.dracc == kasKecilModel!.nosbbKasBon ||
+                  e.cracc == kasKecilModel!.nosbbKasBon)
               .toList();
         }
         isLoadingData = false;
@@ -775,6 +785,10 @@ class KasbonNotifier extends ChangeNotifier {
       tglTransaksiText.text = transaksiPendModel!.tglTransaksi;
       nominal.text = transaksiPendModel!.nominal;
       nilaiTrans.text = "0";
+      tglPenyelesaianText.text = DateFormat('y-MM-dd').format(DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(DateTime.now())),
+          int.parse(DateFormat('dd').format(DateTime.now()))));
       updateSelisih();
       notifyListeners();
     }
@@ -791,8 +805,8 @@ class KasbonNotifier extends ChangeNotifier {
     nomorRef.clear();
     namaSbbCre.clear();
     nossbcre.clear();
-    nosbbdeb.clear();
     namaSbbDeb.clear();
+    nosbbdeb.clear();
     nominal.clear();
     keterangan.clear();
     dialog = false;

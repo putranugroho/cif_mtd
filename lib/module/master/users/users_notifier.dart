@@ -408,6 +408,14 @@ class UsersNotifier extends ChangeNotifier {
     clear();
     editData = false;
     dialog = true;
+    tglexp.text = DateFormat("y-MM-dd").format(DateTime(
+        int.parse(DateFormat('y').format(DateTime.now())) + 1,
+        int.parse(DateFormat('MM').format(
+          DateTime.now(),
+        )),
+        int.parse(DateFormat('dd').format(
+          DateTime.now(),
+        ))));
     notifyListeners();
   }
 
@@ -503,7 +511,7 @@ class UsersNotifier extends ChangeNotifier {
               )) +
               1),
       firstDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) + 1,
+          int.parse(DateFormat('y').format(DateTime.now())),
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
