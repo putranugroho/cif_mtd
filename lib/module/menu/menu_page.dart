@@ -274,7 +274,7 @@ class MenuPage extends StatelessWidget {
                                   width: 8,
                                 ),
                                 Text(
-                                  "Sign Out",
+                                  "SIGN OUT",
                                   style: TextStyle(
                                       fontSize: 12, color: Colors.white),
                                 )
