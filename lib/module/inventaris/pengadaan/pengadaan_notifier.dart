@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:accounting/models/index.dart';
+import 'package:accounting/pref/pref.dart';
 import 'package:accounting/utils/colors.dart';
 import 'package:accounting/utils/dialog_loading.dart';
 import 'package:flutter/foundation.dart';
@@ -17,16 +18,26 @@ class PengadaanNotifier extends ChangeNotifier {
   final BuildContext context;
 
   PengadaanNotifier({required this.context}) {
-    getKelompokAset();
-    getMetodePenyusutan();
-    getGolonganAset();
-    getKantor();
-    getSetupPajak();
-    getInventaris();
+    getProfile();
     notifyListeners();
   }
   SetupPajakModel? setupPajakModel;
   List<SetupPajakModel> listPajak = [];
+
+  UserModel? users;
+  getProfile() async {
+    Pref().getUsers().then((value) {
+      users = value;
+      getKelompokAset();
+      getMetodePenyusutan();
+      getGolonganAset();
+      getKantor();
+      getSetupPajak();
+      getInventaris();
+      getTransaksi();
+      notifyListeners();
+    });
+  }
 
   Future getSetupPajak() async {
     isLoading = true;
@@ -116,6 +127,51 @@ class PengadaanNotifier extends ChangeNotifier {
         notifyListeners();
       }
     });
+  }
+
+  var isLoadingData = true;
+  List<TransaksiPendModel> listTransaksi = [];
+  List<TransaksiPendModel> listTransaksiAdd = [];
+  Future getTransaksi() async {
+    isLoadingData = true;
+    listTransaksi.clear();
+    notifyListeners();
+    var data = {
+      "kode_pt": "${users!.kodePt}",
+    };
+    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listTransaksi.add(TransaksiPendModel.fromJson(i));
+        }
+        if (listTransaksi.isNotEmpty) {
+          listTransaksiAdd = listTransaksi
+              .where((e) =>
+                  e.cracc ==
+                  golonganAsetModel!.sbbAset.toString().substring(1, 13))
+              .toList();
+        }
+        isLoadingData = false;
+        notifyListeners();
+      } else {
+        isLoadingData = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  TransaksiPendModel? transaksiPendModel;
+  pilihTransaksi(TransaksiPendModel value) async {
+    transaksiPendModel = value;
+    noDok.text = transaksiPendModel!.noDokumen;
+    noRef.text = transaksiPendModel!.noRef;
+    nilaiTrans.text =
+        FormatCurrency.oCcy.format(int.parse(transaksiPendModel!.nominal));
+    keteranganTrans.text = transaksiPendModel!.keterangan;
+    dialog = true;
+    dialogTransaksi = false;
+    notifyListeners();
   }
 
   int metode = 0;
@@ -254,6 +310,20 @@ class PengadaanNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  var dialogTransaksi = false;
+
+  bukaTransaksi() {
+    dialogTransaksi = true;
+    dialog = false;
+    notifyListeners();
+  }
+
+  tutupDialogTransaksi() {
+    dialogTransaksi = false;
+    dialog = true;
+    notifyListeners();
+  }
+
   TextEditingController nodok = TextEditingController();
   TextEditingController tglbeli = TextEditingController();
   TextEditingController tglterima = TextEditingController();
@@ -265,12 +335,21 @@ class PengadaanNotifier extends ChangeNotifier {
   TextEditingController pph = TextEditingController(text: "0");
   int total = 0;
   onChange() {
-    subtotal = int.parse(hargaBeli.text.replaceAll(",", "")) -
-        int.parse(discount.text.replaceAll(",", "")) +
-        int.parse(biaya.text.replaceAll(",", ""));
-    total = int.parse(hargaBeli.text.replaceAll(",", "")) -
-        int.parse(discount.text.replaceAll(",", "")) +
-        int.parse(biaya.text.replaceAll(",", ""));
+    if (pajak) {
+      subtotal = int.parse(hargaBeli.text.replaceAll(",", "")) -
+          int.parse(discount.text.replaceAll(",", "")) +
+          int.parse(biaya.text.replaceAll(",", ""));
+      total = (subtotal + int.parse(ppn.text.replaceAll(",", ""))) -
+          int.parse(pph.text.replaceAll(",", ""));
+    } else {
+      subtotal = int.parse(hargaBeli.text.replaceAll(",", "")) -
+          int.parse(discount.text.replaceAll(",", "")) +
+          int.parse(biaya.text.replaceAll(",", ""));
+      total = int.parse(hargaBeli.text.replaceAll(",", "")) -
+          int.parse(discount.text.replaceAll(",", "")) +
+          int.parse(biaya.text.replaceAll(",", ""));
+    }
+
     notifyListeners();
   }
 
@@ -344,6 +423,7 @@ class PengadaanNotifier extends ChangeNotifier {
   GolonganAsetModel? golonganAsetModel;
   pilihGolongan(GolonganAsetModel value) {
     golonganAsetModel = value;
+    getTransaksi();
     notifyListeners();
   }
 
@@ -685,6 +765,7 @@ class PengadaanNotifier extends ChangeNotifier {
   TextEditingController nilaiTrans = TextEditingController();
   TextEditingController keteranganTrans = TextEditingController();
   TextEditingController noDok = TextEditingController();
+  TextEditingController noRef = TextEditingController();
   TextEditingController noaset = TextEditingController();
   TextEditingController namaaset = TextEditingController();
   TextEditingController keterangan = TextEditingController();
