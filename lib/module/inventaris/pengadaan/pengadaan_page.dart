@@ -340,7 +340,7 @@ class PengadaanPage extends StatelessWidget {
                                                           .stretch,
                                                   children: [
                                                     Text(
-                                                      "(${data.cracc}) ${data.namaCr}",
+                                                      "(${data.dracc}) ${data.namaDr}",
                                                       style: TextStyle(
                                                           fontSize: 12,
                                                           fontWeight:
@@ -1740,39 +1740,50 @@ class PengadaanPage extends StatelessWidget {
                                                                 const SizedBox(
                                                                   height: 8,
                                                                 ),
-                                                                TextFormField(
-                                                                  textInputAction:
-                                                                      TextInputAction
-                                                                          .done,
-                                                                  controller: value
-                                                                      .tglTrans,
-                                                                  maxLines: 1,
-                                                                  onChanged:
-                                                                      (e) => value
-                                                                          .onChange(),
-                                                                  inputFormatters: [
-                                                                    FilteringTextInputFormatter
-                                                                        .digitsOnly,
-                                                                    CurrencyInputFormatter(),
-                                                                  ],
-                                                                  validator:
-                                                                      (e) {
-                                                                    if (e!
-                                                                        .isEmpty) {
-                                                                      return "Wajib diisi";
-                                                                    } else {
-                                                                      return null;
-                                                                    }
-                                                                  },
-                                                                  decoration:
-                                                                      InputDecoration(
-                                                                    hintText:
-                                                                        "Tanggal Valuta",
-                                                                    border:
-                                                                        OutlineInputBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              6),
+                                                                InkWell(
+                                                                  onTap: () => value
+                                                                      .pilihTanggalValuta(),
+                                                                  child:
+                                                                      TextFormField(
+                                                                    enabled:
+                                                                        false,
+                                                                    textInputAction:
+                                                                        TextInputAction
+                                                                            .done,
+                                                                    controller:
+                                                                        value
+                                                                            .tglTrans,
+                                                                    maxLines: 1,
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      // Make text bigger and black
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                    ),
+                                                                    decoration:
+                                                                        InputDecoration(
+                                                                      hintText:
+                                                                          "Tanggal Valuta",
+                                                                      hintStyle:
+                                                                          const TextStyle(
+                                                                              color: Colors.grey),
+                                                                      border:
+                                                                          OutlineInputBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(6),
+                                                                      ),
+                                                                      disabledBorder:
+                                                                          OutlineInputBorder(
+                                                                        borderSide:
+                                                                            BorderSide(color: Colors.grey.shade600),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(6),
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -1813,14 +1824,6 @@ class PengadaanPage extends StatelessWidget {
                                                                   controller: value
                                                                       .noDokTrans,
                                                                   maxLines: 1,
-                                                                  onChanged:
-                                                                      (e) => value
-                                                                          .onChange(),
-                                                                  inputFormatters: [
-                                                                    FilteringTextInputFormatter
-                                                                        .digitsOnly,
-                                                                    CurrencyInputFormatter(),
-                                                                  ],
                                                                   validator:
                                                                       (e) {
                                                                     if (e!
