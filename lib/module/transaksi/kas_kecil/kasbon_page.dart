@@ -1182,8 +1182,8 @@ class KasbonPage extends StatelessWidget {
                                                       children: [
                                                         Text(
                                                           value.nilaiselisih > 0
-                                                              ? "Kredit Akun (Terima)"
-                                                              : "Debet Akun (Bayar)",
+                                                              ? "Debet Akun (Terima)"
+                                                              : "Kredit Akun (Bayar)",
                                                           style:
                                                               const TextStyle(
                                                                   fontSize: 12),
@@ -1205,8 +1205,8 @@ class KasbonPage extends StatelessWidget {
                                                         Expanded(
                                                           child: TypeAheadField<
                                                               InqueryGlModel>(
-                                                            controller: value
-                                                                .namaSbbDeb,
+                                                            controller:
+                                                                value.nossbcre,
                                                             suggestionsCallback:
                                                                 (search) => value
                                                                     .getInquery(

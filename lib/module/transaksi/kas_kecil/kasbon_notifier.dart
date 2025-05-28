@@ -485,10 +485,12 @@ class KasbonNotifier extends ChangeNotifier {
             "rrn": "$invoice",
             "no_dokumen": "${nomorDokBaru.text}",
             "no_ref": "${transaksiPendModel!.noRef}",
-            "nominal": double.parse(nilaiTrans.text
-                .replaceAll("Rp ", "")
-                .replaceAll(".", "")
-                .replaceAll(",", ".")),
+            "nominal": (nilaiselisih < 0)
+                ? double.parse(transaksiPendModel!.nominal)
+                : double.parse(nilaiTrans.text
+                    .replaceAll("Rp ", "")
+                    .replaceAll(".", "")
+                    .replaceAll(",", ".")),
             "keterangan": "${keteranganBaru.text}",
             "kode_pt": "${users!.kodePt}",
             "kode_kantor": "${users!.kodeKantor}",
@@ -512,6 +514,97 @@ class KasbonNotifier extends ChangeNotifier {
           };
           Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
               .then((value) {
+            if (nilaiselisih < 0) {
+              var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+              var data = {
+                "tgl_transaksi":
+                    "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                "tgl_valuta":
+                    "${backDate ? DateFormat('y-MM-dd').format(tglPenyelesaian!) : DateFormat('y-MM-dd').format(DateTime.now())}",
+                "batch": "${users!.batch}",
+                "trx_type": "TRX",
+                "trx_code": "${backDate ? "110" : "100"}",
+                "otor": "0",
+                "kode_trn":
+                    "${setupTransModel == null ? "" : setupTransModel!.kdTrans}",
+                "nama_dr": "${inqueryGlModelPenyelesaian!.namaSbb}",
+                "dracc": "${inqueryGlModelPenyelesaian!.nosbb}",
+                "nama_cr": "${nossbcre.text}",
+                "cracc": "${namaSbbCre.text}",
+                "rrn": "$invoice",
+                "no_dokumen": "${nomorDokBaru.text}",
+                "no_ref": "${transaksiPendModel!.noRef}",
+                "nominal":
+                    double.parse(nilaiselisih.toString().replaceAll("-", "")),
+                "keterangan": "${keteranganBaru.text}",
+                "kode_pt": "${users!.kodePt}",
+                "kode_kantor": "${users!.kodeKantor}",
+                "kode_induk": "${users!.kodeInduk}",
+                "sts_validasi": "N",
+                "kode_ao_dr": "",
+                "kode_coll": "",
+                "kode_ao_cr": "",
+                "userinput": "${users!.namauser}",
+                "userterm": "114.80.90.54",
+                "inputtgljam":
+                    "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                "otoruser": "",
+                "otorterm": "",
+                "otortgljam": "",
+                "flag_trn": "0",
+                "merchant": "",
+                "source_trx": "",
+                "status": "COMPLETED",
+                "modul": "SISA KASBON",
+              };
+              Setuprepository.setup(
+                  token, NetworkURL.transaksi(), jsonEncode(data));
+            } else if (nilaiselisih > 0) {
+              var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+              var data = {
+                "tgl_transaksi":
+                    "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                "tgl_valuta":
+                    "${backDate ? DateFormat('y-MM-dd').format(tglPenyelesaian!) : DateFormat('y-MM-dd').format(DateTime.now())}",
+                "batch": "${users!.batch}",
+                "trx_type": "TRX",
+                "trx_code": "${backDate ? "110" : "100"}",
+                "otor": "0",
+                "kode_trn":
+                    "${setupTransModel == null ? "" : setupTransModel!.kdTrans}",
+                "nama_dr": "${nossbcre.text}",
+                "dracc": "${namaSbbCre.text}",
+                "nama_cr": "${nosbbdeb.text}",
+                "cracc": "${namaSbbDeb.text}",
+                "rrn": "$invoice",
+                "no_dokumen": "${nomorDokBaru.text}",
+                "no_ref": "${transaksiPendModel!.noRef}",
+                "nominal":
+                    double.parse(nilaiselisih.toString().replaceAll("-", "")),
+                "keterangan": "${keteranganBaru.text}",
+                "kode_pt": "${users!.kodePt}",
+                "kode_kantor": "${users!.kodeKantor}",
+                "kode_induk": "${users!.kodeInduk}",
+                "sts_validasi": "N",
+                "kode_ao_dr": "",
+                "kode_coll": "",
+                "kode_ao_cr": "",
+                "userinput": "${users!.namauser}",
+                "userterm": "114.80.90.54",
+                "inputtgljam":
+                    "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                "otoruser": "",
+                "otorterm": "",
+                "otortgljam": "",
+                "flag_trn": "0",
+                "merchant": "",
+                "source_trx": "",
+                "status": "COMPLETED",
+                "modul": "SISA KASBON",
+              };
+              Setuprepository.setup(
+                  token, NetworkURL.transaksi(), jsonEncode(data));
+            }
             Navigator.pop(context);
             if (value['status'] == "success") {
               getTransaksi();
@@ -703,7 +796,7 @@ class KasbonNotifier extends ChangeNotifier {
     nominal.clear();
     keterangan.clear();
     dialog = false;
-
+    getSetupkaskecil();
     notifyListeners();
   }
 
