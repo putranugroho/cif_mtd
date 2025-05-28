@@ -242,7 +242,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
           listGl = jnsAccBItems
               .map((item) => InqueryGlModel.fromJson(item))
               .where((model) =>
-                  model.golAcc == "1" &&
+                  model.golAcc == "2" &&
                   (model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
                       model.namaSbb
                           .toLowerCase()
@@ -284,7 +284,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
           listGl = jnsAccBItems
               .map((item) => InqueryGlModel.fromJson(item))
               .where((model) =>
-                  model.golAcc == "1" &&
+                  model.golAcc == "2" &&
                   (model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
                       model.namaSbb
                           .toLowerCase()
@@ -639,6 +639,11 @@ class GolonganAsetNotifier extends ChangeNotifier {
             .first
         : null;
     namasbbaset.text = sbbAset == null ? "" : sbbAset!.namaSbb;
+    namasbbppn.text = sbbppn == null ? "" : sbbppn!.namaSbb;
+    nosbbppn.text = sbbppn == null ? "" : sbbppn!.nosbb;
+
+    namasbbpph.text = sbbpph == null ? "" : sbbpph!.namaSbb;
+    nosbbpph.text = sbbpph == null ? "" : sbbpph!.nosbb;
     nosbbaset.text = sbbAset == null ? "" : sbbAset!.nosbb;
     namasbbpenyusutan.text =
         sbbpenyusutan == null ? "" : sbbpenyusutan!.namaSbb;
