@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:accounting/models/index.dart';
+import 'package:accounting/pref/pref.dart';
 import 'package:accounting/repository/SetupRepository.dart';
 import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/informationdialog.dart';
@@ -13,11 +14,21 @@ class GolonganAsetNotifier extends ChangeNotifier {
   final BuildContext context;
 
   GolonganAsetNotifier({required this.context}) {
-    getMetodePenyusutan();
-    getInqueryAll();
-    getGolonganAset();
+    getProfile();
     notifyListeners();
   }
+
+  UserModel? users;
+  getProfile() async {
+    Pref().getUsers().then((value) {
+      users = value;
+      getMetodePenyusutan();
+      getInqueryAll();
+      getGolonganAset();
+      notifyListeners();
+    });
+  }
+
   TextEditingController masasusut = TextEditingController();
   final keyForm = GlobalKey<FormState>();
   var editData = false;
@@ -35,20 +46,24 @@ class GolonganAsetNotifier extends ChangeNotifier {
 
   GolonganAsetModel? golonganAsetModel;
   cek() {
+    print("Simpan");
     if (keyForm.currentState!.validate()) {
       if (editData) {
         DialogCustom().showLoading(context);
         var data = {
           "id": golonganAsetModel!.id,
-          "kode_pt": "001",
+          "kode_pt": "${users!.kodePt}",
           "kode_golongan": "${kode.text.trim()}",
           "nama_golongan": "${nama.text.trim()}",
-          "masa_susut": "${masasusut.text.trim()}",
-          "nilai_declining": "${nilai.text.trim()}",
+          "masa_susut":
+              "${masasusut.text.isEmpty ? "" : masasusut.text.trim()}",
+          "nilai_declining": "${nilai.text.isEmpty ? "" : nilai.text.trim()}",
           "sbb_aset": sbbAset == null ? null : sbbAset!.nosbb,
           "sbb_penyusutan": sbbpenyusutan == null ? null : sbbpenyusutan!.nosbb,
           "sbb_rugi_jual": sbbrugijual == null ? null : sbbrugijual!.nosbb,
           "sbb_laba_jual": sbblabajual == null ? null : sbblabajual!.nosbb,
+          "sbb_ppn": sbbppn == null ? null : sbbppn!.nosbb,
+          "sbb_pph": sbbpph == null ? null : sbbpph!.nosbb,
         };
         Setuprepository.setup(
                 token, NetworkURL.editGolonganAset(), jsonEncode(data))
@@ -66,16 +81,20 @@ class GolonganAsetNotifier extends ChangeNotifier {
       } else {
         DialogCustom().showLoading(context);
         var data = {
-          "kode_pt": "001",
+          "kode_pt": "${users!.kodePt}",
           "kode_golongan": "${kode.text.trim()}",
           "nama_golongan": "${nama.text.trim()}",
-          "masa_susut": "${masasusut.text.trim()}",
-          "nilai_declining": "${nilai.text.trim()}",
+          "masa_susut":
+              "${masasusut.text.isEmpty ? "" : masasusut.text.trim()}",
+          "nilai_declining": "${nilai.text.isEmpty ? "" : nilai.text.trim()}",
           "sbb_aset": "${sbbAset!.nosbb}",
           "sbb_penyusutan": "${sbbpenyusutan!.nosbb}",
           "sbb_rugi_jual": "${sbbrugijual!.nosbb}",
           "sbb_laba_jual": "${sbblabajual!.nosbb}",
+          "sbb_ppn": sbbppn == null ? null : sbbppn!.nosbb,
+          "sbb_pph": sbbpph == null ? null : sbbpph!.nosbb,
         };
+        print(jsonEncode(data));
         Setuprepository.setup(
                 token, NetworkURL.addGolonganAset(), jsonEncode(data))
             .then((value) {
@@ -161,6 +180,90 @@ class GolonganAsetNotifier extends ChangeNotifier {
   }
 
   Future<List<InqueryGlModel>> getInquerySbbAset(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      isLoadingInquery = true;
+      listGl.clear();
+      notifyListeners();
+
+      var data = {"kode_pt": "001"};
+
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.getInqueryGL(),
+          jsonEncode(data),
+        );
+
+        if (response['status'].toString().toLowerCase().contains("success")) {
+          final List<Map<String, dynamic>> jnsAccBItems =
+              extractJnsAccB(response['data']);
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.golAcc == "1" &&
+                  (model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                      model.namaSbb
+                          .toLowerCase()
+                          .contains(query.toLowerCase())))
+              .toList();
+        }
+        notifyListeners();
+      } catch (e) {
+        print("Error: $e");
+      } finally {
+        isLoadingInquery = false;
+        notifyListeners();
+      }
+    } else {
+      listGl.clear(); // clear on short query
+    }
+
+    return listGl;
+  }
+
+  Future<List<InqueryGlModel>> getInquerySbbppn(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      isLoadingInquery = true;
+      listGl.clear();
+      notifyListeners();
+
+      var data = {"kode_pt": "001"};
+
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.getInqueryGL(),
+          jsonEncode(data),
+        );
+
+        if (response['status'].toString().toLowerCase().contains("success")) {
+          final List<Map<String, dynamic>> jnsAccBItems =
+              extractJnsAccB(response['data']);
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.golAcc == "1" &&
+                  (model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                      model.namaSbb
+                          .toLowerCase()
+                          .contains(query.toLowerCase())))
+              .toList();
+        }
+        notifyListeners();
+      } catch (e) {
+        print("Error: $e");
+      } finally {
+        isLoadingInquery = false;
+        notifyListeners();
+      }
+    } else {
+      listGl.clear(); // clear on short query
+    }
+
+    return listGl;
+  }
+
+  Future<List<InqueryGlModel>> getInquerySbbpph(String query) async {
     if (query.isNotEmpty && query.length > 2) {
       isLoadingInquery = true;
       listGl.clear();
@@ -289,7 +392,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     listGl.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
+    var data = {"kode_pt": "${users!.kodePt}"};
     Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
         .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
@@ -329,7 +432,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
     isLoading = true;
     listPenyusutan.clear();
     var data = {
-      "kode_pt": "001",
+      "kode_pt": "${users!.kodePt}",
     };
     notifyListeners();
     Setuprepository.setup(
@@ -357,15 +460,21 @@ class GolonganAsetNotifier extends ChangeNotifier {
   int metode = 0;
 
   InqueryGlModel? sbbAset;
+  InqueryGlModel? sbbppn;
+  InqueryGlModel? sbbpph;
   InqueryGlModel? sbbpenyusutan;
   InqueryGlModel? sbbrugijual;
   InqueryGlModel? sbblabajual;
 
   TextEditingController nosbbaset = TextEditingController();
+  TextEditingController nosbbppn = TextEditingController();
+  TextEditingController nosbbpph = TextEditingController();
   TextEditingController nossbpenyusutan = TextEditingController();
   TextEditingController nosbbrugijual = TextEditingController();
   TextEditingController nosbblabajual = TextEditingController();
   TextEditingController namasbbaset = TextEditingController();
+  TextEditingController namasbbppn = TextEditingController();
+  TextEditingController namasbbpph = TextEditingController();
   TextEditingController namasbbpenyusutan = TextEditingController();
   TextEditingController namasbbrugijual = TextEditingController();
   TextEditingController namasbblabajual = TextEditingController();
@@ -374,6 +483,20 @@ class GolonganAsetNotifier extends ChangeNotifier {
     sbbAset = value;
     namasbbaset.text = value.namaSbb;
     nosbbaset.text = value.nosbb;
+    notifyListeners();
+  }
+
+  pilihsbbppn(InqueryGlModel value) {
+    sbbppn = value;
+    namasbbppn.text = value.namaSbb;
+    nosbbppn.text = value.nosbb;
+    notifyListeners();
+  }
+
+  pilihsbbpph(InqueryGlModel value) {
+    sbbpph = value;
+    namasbbpph.text = value.namaSbb;
+    nosbbpph.text = value.nosbb;
     notifyListeners();
   }
 
@@ -405,7 +528,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
   Future getGolonganAset() async {
     isLoading = true;
     listData.clear();
-    var data = {"kode_pt": "001"};
+    var data = {"kode_pt": "${users!.kodePt}"};
     Setuprepository.setup(token, NetworkURL.getGolonganAset(), jsonEncode(data))
         .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
@@ -491,6 +614,28 @@ class GolonganAsetNotifier extends ChangeNotifier {
             .where((e) =>
                 e.nosbb ==
                 golonganAsetModel!.sbbLabaJual.toString().substring(1, 13))
+            .first
+        : null;
+    sbbppn = listGl
+            .where((e) =>
+                e.nosbb ==
+                golonganAsetModel!.sbbPpn.toString().substring(1, 13))
+            .isNotEmpty
+        ? listGl
+            .where((e) =>
+                e.nosbb ==
+                golonganAsetModel!.sbbPpn.toString().substring(1, 13))
+            .first
+        : null;
+    sbbpph = listGl
+            .where((e) =>
+                e.nosbb ==
+                golonganAsetModel!.sbbPph.toString().substring(1, 13))
+            .isNotEmpty
+        ? listGl
+            .where((e) =>
+                e.nosbb ==
+                golonganAsetModel!.sbbPph.toString().substring(1, 13))
             .first
         : null;
     namasbbaset.text = sbbAset == null ? "" : sbbAset!.namaSbb;

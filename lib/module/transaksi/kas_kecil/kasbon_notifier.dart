@@ -352,7 +352,7 @@ class KasbonNotifier extends ChangeNotifier {
         }
         if (listTransaksi.isNotEmpty) {
           listTransaksiAdd = listTransaksi
-              .where((e) => e.dracc == kasKecilModel!.nosbbKasBon)
+              .where((e) => e.dracc == kasKecilModel!.nosbbKasBon||e.cracc == kasKecilModel!.nosbbKasBon)
               .toList();
         }
         isLoadingData = false;

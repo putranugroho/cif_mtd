@@ -19,6 +19,8 @@ class GolonganAsetModel {
     required this.sbbLabaRevaluasi,
     required this.sbbRugiJual,
     required this.sbbLabaJual,
+    required this.sbbPpn,
+    required this.sbbPph,
     required this.sbbBiayaPerbaikan,
   });
 
@@ -34,6 +36,8 @@ class GolonganAsetModel {
   final dynamic sbbLabaRevaluasi;
   final dynamic sbbRugiJual;
   final dynamic sbbLabaJual;
+  final dynamic sbbPpn;
+  final dynamic sbbPph;
   final dynamic sbbBiayaPerbaikan;
 
   factory GolonganAsetModel.fromJson(Map<String,dynamic> json) => GolonganAsetModel(
@@ -49,6 +53,8 @@ class GolonganAsetModel {
     sbbLabaRevaluasi: json['sbb_laba_revaluasi'] as dynamic,
     sbbRugiJual: json['sbb_rugi_jual'] as dynamic,
     sbbLabaJual: json['sbb_laba_jual'] as dynamic,
+    sbbPpn: json['sbb_ppn'] as dynamic,
+    sbbPph: json['sbb_pph'] as dynamic,
     sbbBiayaPerbaikan: json['sbb_biaya_perbaikan'] as dynamic
   );
   
@@ -65,6 +71,8 @@ class GolonganAsetModel {
     'sbb_laba_revaluasi': sbbLabaRevaluasi,
     'sbb_rugi_jual': sbbRugiJual,
     'sbb_laba_jual': sbbLabaJual,
+    'sbb_ppn': sbbPpn,
+    'sbb_pph': sbbPph,
     'sbb_biaya_perbaikan': sbbBiayaPerbaikan
   };
 
@@ -81,6 +89,8 @@ class GolonganAsetModel {
     sbbLabaRevaluasi: sbbLabaRevaluasi,
     sbbRugiJual: sbbRugiJual,
     sbbLabaJual: sbbLabaJual,
+    sbbPpn: sbbPpn,
+    sbbPph: sbbPph,
     sbbBiayaPerbaikan: sbbBiayaPerbaikan
   );
 
@@ -98,6 +108,8 @@ class GolonganAsetModel {
     dynamic? sbbLabaRevaluasi,
     dynamic? sbbRugiJual,
     dynamic? sbbLabaJual,
+    dynamic? sbbPpn,
+    dynamic? sbbPph,
     dynamic? sbbBiayaPerbaikan
   }) => GolonganAsetModel(
     id: id ?? this.id,
@@ -112,13 +124,15 @@ class GolonganAsetModel {
     sbbLabaRevaluasi: sbbLabaRevaluasi ?? this.sbbLabaRevaluasi,
     sbbRugiJual: sbbRugiJual ?? this.sbbRugiJual,
     sbbLabaJual: sbbLabaJual ?? this.sbbLabaJual,
+    sbbPpn: sbbPpn ?? this.sbbPpn,
+    sbbPph: sbbPph ?? this.sbbPph,
     sbbBiayaPerbaikan: sbbBiayaPerbaikan ?? this.sbbBiayaPerbaikan,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is GolonganAsetModel && id == other.id && kodeGolongan == other.kodeGolongan && namaGolongan == other.namaGolongan && masaSusut == other.masaSusut && nilaiDeclining == other.nilaiDeclining && sbbAset == other.sbbAset && sbbPenyusutan == other.sbbPenyusutan && sbbBiayaPenyusutan == other.sbbBiayaPenyusutan && sbbRugiRevaluasi == other.sbbRugiRevaluasi && sbbLabaRevaluasi == other.sbbLabaRevaluasi && sbbRugiJual == other.sbbRugiJual && sbbLabaJual == other.sbbLabaJual && sbbBiayaPerbaikan == other.sbbBiayaPerbaikan;
+    || other is GolonganAsetModel && id == other.id && kodeGolongan == other.kodeGolongan && namaGolongan == other.namaGolongan && masaSusut == other.masaSusut && nilaiDeclining == other.nilaiDeclining && sbbAset == other.sbbAset && sbbPenyusutan == other.sbbPenyusutan && sbbBiayaPenyusutan == other.sbbBiayaPenyusutan && sbbRugiRevaluasi == other.sbbRugiRevaluasi && sbbLabaRevaluasi == other.sbbLabaRevaluasi && sbbRugiJual == other.sbbRugiJual && sbbLabaJual == other.sbbLabaJual && sbbPpn == other.sbbPpn && sbbPph == other.sbbPph && sbbBiayaPerbaikan == other.sbbBiayaPerbaikan;
 
   @override
-  int get hashCode => id.hashCode ^ kodeGolongan.hashCode ^ namaGolongan.hashCode ^ masaSusut.hashCode ^ nilaiDeclining.hashCode ^ sbbAset.hashCode ^ sbbPenyusutan.hashCode ^ sbbBiayaPenyusutan.hashCode ^ sbbRugiRevaluasi.hashCode ^ sbbLabaRevaluasi.hashCode ^ sbbRugiJual.hashCode ^ sbbLabaJual.hashCode ^ sbbBiayaPerbaikan.hashCode;
+  int get hashCode => id.hashCode ^ kodeGolongan.hashCode ^ namaGolongan.hashCode ^ masaSusut.hashCode ^ nilaiDeclining.hashCode ^ sbbAset.hashCode ^ sbbPenyusutan.hashCode ^ sbbBiayaPenyusutan.hashCode ^ sbbRugiRevaluasi.hashCode ^ sbbLabaRevaluasi.hashCode ^ sbbRugiJual.hashCode ^ sbbLabaJual.hashCode ^ sbbPpn.hashCode ^ sbbPph.hashCode ^ sbbBiayaPerbaikan.hashCode;
 }
