@@ -430,7 +430,7 @@ class KasKecilNotifier extends ChangeNotifier {
             "merchant": "",
             "source_trx": "",
             "status": "PENDING",
-            "modul": "Satu Transaksi",
+            "modul": "KAS KECIL",
           };
           Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
               .then((value) {
@@ -486,7 +486,7 @@ class KasKecilNotifier extends ChangeNotifier {
             "merchant": "",
             "source_trx": "",
             "status": "COMPLETED",
-            "modul": "Satu Transaksi",
+            "modul": "KAS KECIL",
           };
           Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
               .then((value) {

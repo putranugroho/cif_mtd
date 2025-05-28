@@ -856,17 +856,16 @@ class KasbonPage extends StatelessWidget {
                                                     height: 8,
                                                   ),
                                                   InkWell(
-                                                    onTap: () => value
-                                                        .pilihTanggalPenyelesaian(),
+                                                    onTap: () {
+                                                      value
+                                                          .pilihTanggalPenyelesaian();
+                                                    },
                                                     child: TextFormField(
                                                       enabled: false,
-                                                      textInputAction:
-                                                          TextInputAction.done,
                                                       controller: value
                                                           .tglPenyelesaianText,
                                                       maxLines: 1,
                                                       style: const TextStyle(
-                                                        // Make text bigger and black
                                                         color: Colors.black,
                                                         fontSize: 16,
                                                         fontWeight:
@@ -931,7 +930,8 @@ class KasbonPage extends StatelessWidget {
                                                   TextFormField(
                                                     textInputAction:
                                                         TextInputAction.done,
-                                                    controller: value.nomorRef,
+                                                    controller:
+                                                        value.nomorDokBaru,
                                                     maxLines: 1,
                                                     inputFormatters: [
                                                       FilteringTextInputFormatter
@@ -985,10 +985,20 @@ class KasbonPage extends StatelessWidget {
                                                     controller:
                                                         value.nilaiTrans,
                                                     maxLines: 1,
+                                                    keyboardType: TextInputType
+                                                        .numberWithOptions(
+                                                            decimal: true),
                                                     inputFormatters: [
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly,
-                                                      CurrencyInputFormatter(),
+                                                      a.CurrencyInputFormatter(
+                                                        leadingSymbol: 'Rp ',
+                                                        useSymbolPadding: true,
+                                                        thousandSeparator: a
+                                                            .ThousandSeparator
+                                                            .Period,
+                                                        mantissaLength:
+                                                            2, // jumlah angka desimal
+                                                        // decimalSeparator: DecimalSeparator.Comma,
+                                                      ),
                                                     ],
                                                     textAlign: TextAlign.right,
                                                     onChanged: (e) {
@@ -1026,7 +1036,7 @@ class KasbonPage extends StatelessWidget {
                                                     Row(
                                                       children: [
                                                         Text(
-                                                          "Pilih Kredit Akun",
+                                                          "Pilih Debet Akun",
                                                           style:
                                                               const TextStyle(
                                                                   fontSize: 12),
@@ -1085,7 +1095,7 @@ class KasbonPage extends StatelessWidget {
                                                             onSelected: (city) {
                                                               // value.selectInvoice(city);
                                                               value
-                                                                  .pilihAkunDeb(
+                                                                  .pilihAkunKreditPenyelesaian(
                                                                       city);
                                                             },
                                                           ),
@@ -1265,6 +1275,7 @@ class KasbonPage extends StatelessWidget {
                                             height: 8,
                                           ),
                                           TextFormField(
+                                            controller: value.keteranganBaru,
                                             textInputAction:
                                                 TextInputAction.done,
                                             validator: (e) {
@@ -1285,7 +1296,7 @@ class KasbonPage extends StatelessWidget {
                                           const SizedBox(height: 16),
                                           ButtonPrimary(
                                             onTap: () {
-                                              value.cek();
+                                              value.penyelesaian();
                                             },
                                             name: "Simpan",
                                           )
