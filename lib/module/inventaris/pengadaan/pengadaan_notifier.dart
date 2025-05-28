@@ -604,160 +604,349 @@ class PengadaanNotifier extends ChangeNotifier {
 
   TextEditingController masasusut = TextEditingController();
   cek() {
-    if (editData) {
-      DialogCustom().showLoading(context);
-
-      var data = {
-        "id": inventarisModel!.id,
-        "kdaset": noaset.text,
-        "namaaset": namaaset.text,
-        "ket": keterangan.text,
-        "kode_kelompok": kelompokAsetModel!.kodeKelompok,
-        "nama_kelompok": kelompokAsetModel!.namaKelompokn,
-        "kode_golongan": golonganAsetModel!.kodeGolongan,
-        "nama_golongan": golonganAsetModel!.namaGolongan,
-        "nodok_beli": noDok.text,
-        "tgl_beli": DateFormat('y-MM-dd').format(tglTransaksi!),
-        "tgl_terima": DateFormat('y-MM-dd').format(tglTransaksis!),
-        "habeli": hargaBeli.text.replaceAll(",", ""),
-        "disc": discount.text.replaceAll(",", ""),
-        "biaya": biaya.text.replaceAll(",", ""),
-        "haper": subtotal,
-        "nilai_residu": nilaiPenyusutan.text.replaceAll(",", ""),
-        "ppn_beli": ppn.text.replaceAll(",", ""),
-        "pph": pph.text.replaceAll(",", ""),
-        "tgl_jual": "",
-        "nodok_jual": "",
-        "hajual": "",
-        "ppn_jual": "",
-        "margin": "",
-        "tgl_revaluasi": "",
-        "pic_revaluasi": "",
-        "nilai_buku": "0",
-        "total_susut": "0",
-        "susut_ke": "0",
-        "kode_pt": kantor!.kodePt,
-        "kode_kantor": kantor!.kodeKantor,
-        "kode_induk": kantor!.kodeInduk,
-        "lokasi": lokasi.text.trim(),
-        "kota": kota.text,
-        "masasusut": masasusut.text,
-        "bln_mulai_susut": blnPenyusutan.text,
-        "kdkondisi": "",
-        "kondisi": "",
-        "satuan_aset": satuan!,
-        "nilai_declining": nilaiPenyusutan.text.replaceAll(",", ""),
-        "perbaikan": "",
-        "stsasr": 'N',
-        "nopolis": "",
-        "nilai_revaluasi": "",
-        "nik": "${karyawanModel == null ? "" : karyawanModel!.nik}",
-        "nama_pejabat":
-            "${karyawanModel == null ? "" : karyawanModel!.namaLengkap}",
-        "sbb_aset": golonganAsetModel!.sbbAset,
-        "sbb_penyusutan": golonganAsetModel!.sbbPenyusutan,
-        "sbb_biaya_penyusutan": golonganAsetModel!.sbbBiayaPenyusutan,
-        "sbb_rugi_revaluasi": golonganAsetModel!.sbbRugiRevaluasi,
-        "sbb_laba_revaluasi": golonganAsetModel!.sbbLabaRevaluasi,
-        "sbb_rugi_jual": golonganAsetModel!.sbbRugiJual,
-        "sbb_laba_jual": golonganAsetModel!.sbbLabaJual,
-        "sbb_ppn": golonganAsetModel!.sbbPpn,
-        "sbb_pph": golonganAsetModel!.sbbPph,
-        "sbb_biaya_perbaikan": golonganAsetModel!.sbbBiayaPerbaikan,
-      };
-      Setuprepository.setup(
-              token, NetworkURL.editInventaris(), jsonEncode(data))
-          .then((value) {
-        Navigator.pop(context);
-        if (value['status'].toString().toLowerCase().contains("success")) {
-          clear();
-          dialog = false;
-          informationDialog(context, "Information", value['message']);
-          notifyListeners();
-        } else {
-          informationDialog(context, "Warning", value['message']);
-        }
-      });
+    if (int.parse(transaksiPendModel!.nominal) != total) {
+      informationDialog(context, "Warning", "Selisih harus 0");
     } else {
-      DialogCustom().showLoading(context);
+      if (editData) {
+        DialogCustom().showLoading(context);
 
-      var data = {
-        "kdaset": noaset.text,
-        "kode_pt": kantor!.kodePt,
-        "kode_kantor": kantor!.kodeKantor,
-        "kode_induk": kantor!.kodeInduk,
-        "userinput": users!.namauser,
-        "userterm": "114.80.90.54",
-        "ket": keterangan.text,
-        "namaaset": namaaset.text,
-        "kode_kelompok": kelompokAsetModel!.kodeKelompok,
-        "nama_kelompok": kelompokAsetModel!.namaKelompokn,
-        "kode_golongan": golonganAsetModel!.kodeGolongan,
-        "nama_golongan": golonganAsetModel!.namaGolongan,
-        "nodok_beli": noDok.text,
-        "nodok_transaksi": noDok.text,
-        "tgl_beli": DateFormat('y-MM-dd').format(tglTransaksi!),
-        "tgl_terima": DateFormat('y-MM-dd').format(tglTransaksis!),
-        "habeli": hargaBeli.text.replaceAll(",", ""),
-        "disc": discount.text.replaceAll(",", ""),
-        "biaya": biaya.text.replaceAll(",", ""),
-        "haper": subtotal,
-        "nilai_residu": nilaiPenyusutan.text.replaceAll(",", ""),
-        "ppn_beli": ppn.text.replaceAll(",", ""),
-        "pph": pph.text.replaceAll(",", ""),
-        "tgl_jual": "",
-        "pajak": pajak ? "Y" : "N",
-        "nodok_jual": "",
-        "hajual": "",
-        "ppn_jual": "",
-        "margin": "",
-        "tgl_revaluasi": "",
-        "pic_revaluasi": "",
-        "tgl_valuta": "${transaksiPendModel!.tglValuta}",
-        "nilai_buku": "0",
-        "total_susut": "0",
-        "susut_ke": "0",
-        "nama_kantor": kantor!.namaKantor,
-        "lokasi": lokasi.text.trim(),
-        "kota": kota.text,
-        "masasusut": masasusut.text,
-        "keterangan_transaksi": keteranganTrans.text,
-        "jenis_penempatan": penempatanModel,
-        "metode_penyusutan": metodePenyusutanModel!.metodePenyusutan,
-        "bln_mulai_susut": blnPenyusutan.text,
-        "persentase_penyusutan": metodePenyusutanModel!.declining,
-        "bln_susut": DateFormat("y-MM").format(now),
-        "kdkondisi": "",
-        "kondisi": "",
-        "satuan_aset": satuan!,
-        "nilai_declining": nilaiPenyusutan.text.replaceAll(",", ""),
-        "perbaikan": "",
-        "stsasr": 'N',
-        "nopolis": "",
-        "nilai_revaluasi": "",
-        "nik": "${karyawanModel == null ? "" : karyawanModel!.nik}",
-        "nama_pejabat":
-            "${karyawanModel == null ? "" : karyawanModel!.namaLengkap}",
-        "sbb_aset": golonganAsetModel!.sbbAset,
-        "sbb_penyusutan": golonganAsetModel!.sbbPenyusutan,
-        "sbb_biaya_penyusutan": golonganAsetModel!.sbbBiayaPenyusutan,
-        "sbb_rugi_revaluasi": golonganAsetModel!.sbbRugiRevaluasi,
-        "sbb_laba_revaluasi": golonganAsetModel!.sbbLabaRevaluasi,
-        "sbb_rugi_jual": golonganAsetModel!.sbbRugiJual,
-        "sbb_laba_jual": golonganAsetModel!.sbbLabaJual,
-        "sbb_biaya_perbaikan": golonganAsetModel!.sbbBiayaPerbaikan,
-        "sbb_ppn": golonganAsetModel!.sbbPpn,
-        "sbb_pph": golonganAsetModel!.sbbPph,
-        "sbb_aset_data": golonganAsetModel!.sbbAset.toString().substring(1, 13),
-        "sbb_penyusutan_data":
-            golonganAsetModel!.sbbPenyusutan.toString().substring(1, 13),
-      };
-      Setuprepository.setup(token, NetworkURL.addInventaris(), jsonEncode(data))
-          .then((value) {
-        Navigator.pop(context);
-        if (value['status'].toString().toLowerCase().contains("success")) {
-          if (pajak) {
-            if (double.parse(ppn.text.replaceAll(",", "")) < total) {
+        var data = {
+          "id": inventarisModel!.id,
+          "kdaset": noaset.text,
+          "namaaset": namaaset.text,
+          "ket": keterangan.text,
+          "kode_kelompok": kelompokAsetModel!.kodeKelompok,
+          "nama_kelompok": kelompokAsetModel!.namaKelompokn,
+          "kode_golongan": golonganAsetModel!.kodeGolongan,
+          "nama_golongan": golonganAsetModel!.namaGolongan,
+          "nodok_beli": noDok.text,
+          "tgl_beli": DateFormat('y-MM-dd').format(tglTransaksi!),
+          "tgl_terima": DateFormat('y-MM-dd').format(tglTransaksis!),
+          "habeli": hargaBeli.text.replaceAll(",", ""),
+          "disc": discount.text.replaceAll(",", ""),
+          "biaya": biaya.text.replaceAll(",", ""),
+          "haper": subtotal,
+          "nilai_residu": nilaiPenyusutan.text.replaceAll(",", ""),
+          "ppn_beli": ppn.text.replaceAll(",", ""),
+          "pph": pph.text.replaceAll(",", ""),
+          "tgl_jual": "",
+          "nodok_jual": "",
+          "hajual": "",
+          "ppn_jual": "",
+          "margin": "",
+          "tgl_revaluasi": "",
+          "pic_revaluasi": "",
+          "nilai_buku": "0",
+          "total_susut": "0",
+          "susut_ke": "0",
+          "kode_pt": kantor!.kodePt,
+          "kode_kantor": kantor!.kodeKantor,
+          "kode_induk": kantor!.kodeInduk,
+          "lokasi": lokasi.text.trim(),
+          "kota": kota.text,
+          "masasusut": masasusut.text,
+          "bln_mulai_susut": blnPenyusutan.text,
+          "kdkondisi": "",
+          "kondisi": "",
+          "satuan_aset": satuan!,
+          "nilai_declining": nilaiPenyusutan.text.replaceAll(",", ""),
+          "perbaikan": "",
+          "stsasr": 'N',
+          "nopolis": "",
+          "nilai_revaluasi": "",
+          "nik": "${karyawanModel == null ? "" : karyawanModel!.nik}",
+          "nama_pejabat":
+              "${karyawanModel == null ? "" : karyawanModel!.namaLengkap}",
+          "sbb_aset": golonganAsetModel!.sbbAset,
+          "sbb_penyusutan": golonganAsetModel!.sbbPenyusutan,
+          "sbb_biaya_penyusutan": golonganAsetModel!.sbbBiayaPenyusutan,
+          "sbb_rugi_revaluasi": golonganAsetModel!.sbbRugiRevaluasi,
+          "sbb_laba_revaluasi": golonganAsetModel!.sbbLabaRevaluasi,
+          "sbb_rugi_jual": golonganAsetModel!.sbbRugiJual,
+          "sbb_laba_jual": golonganAsetModel!.sbbLabaJual,
+          "sbb_ppn": golonganAsetModel!.sbbPpn,
+          "sbb_pph": golonganAsetModel!.sbbPph,
+          "sbb_biaya_perbaikan": golonganAsetModel!.sbbBiayaPerbaikan,
+        };
+        Setuprepository.setup(
+                token, NetworkURL.editInventaris(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'].toString().toLowerCase().contains("success")) {
+            clear();
+            dialog = false;
+            informationDialog(context, "Information", value['message']);
+            notifyListeners();
+          } else {
+            informationDialog(context, "Warning", value['message']);
+          }
+        });
+      } else {
+        DialogCustom().showLoading(context);
+
+        var data = {
+          "kdaset": noaset.text,
+          "kode_pt": kantor!.kodePt,
+          "kode_kantor": kantor!.kodeKantor,
+          "kode_induk": kantor!.kodeInduk,
+          "userinput": users!.namauser,
+          "userterm": "114.80.90.54",
+          "ket": keterangan.text,
+          "namaaset": namaaset.text,
+          "kode_kelompok": kelompokAsetModel!.kodeKelompok,
+          "nama_kelompok": kelompokAsetModel!.namaKelompokn,
+          "kode_golongan": golonganAsetModel!.kodeGolongan,
+          "nama_golongan": golonganAsetModel!.namaGolongan,
+          "nodok_beli": noDok.text,
+          "nodok_transaksi": noDok.text,
+          "tgl_beli": DateFormat('y-MM-dd').format(tglTransaksi!),
+          "tgl_terima": DateFormat('y-MM-dd').format(tglTransaksis!),
+          "habeli": hargaBeli.text.replaceAll(",", ""),
+          "disc": discount.text.replaceAll(",", ""),
+          "biaya": biaya.text.replaceAll(",", ""),
+          "haper": subtotal,
+          "nilai_residu": nilaiPenyusutan.text.replaceAll(",", ""),
+          "ppn_beli": ppn.text.replaceAll(",", ""),
+          "pph": pph.text.replaceAll(",", ""),
+          "tgl_jual": "",
+          "pajak": pajak ? "Y" : "N",
+          "nodok_jual": "",
+          "hajual": "",
+          "ppn_jual": "",
+          "margin": "",
+          "tgl_revaluasi": "",
+          "pic_revaluasi": "",
+          "tgl_valuta": "${transaksiPendModel!.tglValuta}",
+          "nilai_buku": "0",
+          "total_susut": "0",
+          "susut_ke": "0",
+          "nama_kantor": kantor!.namaKantor,
+          "lokasi": lokasi.text.trim(),
+          "kota": kota.text,
+          "masasusut": masasusut.text,
+          "keterangan_transaksi": keteranganTrans.text,
+          "jenis_penempatan": penempatanModel,
+          "metode_penyusutan": metodePenyusutanModel!.metodePenyusutan,
+          "bln_mulai_susut": blnPenyusutan.text,
+          "persentase_penyusutan": metodePenyusutanModel!.declining,
+          "bln_susut": DateFormat("y-MM").format(now),
+          "kdkondisi": "",
+          "kondisi": "",
+          "satuan_aset": satuan!,
+          "nilai_declining": nilaiPenyusutan.text.replaceAll(",", ""),
+          "perbaikan": "",
+          "stsasr": 'N',
+          "nopolis": "",
+          "nilai_revaluasi": "",
+          "nik": "${karyawanModel == null ? "" : karyawanModel!.nik}",
+          "nama_pejabat":
+              "${karyawanModel == null ? "" : karyawanModel!.namaLengkap}",
+          "sbb_aset": golonganAsetModel!.sbbAset,
+          "sbb_penyusutan": golonganAsetModel!.sbbPenyusutan,
+          "sbb_biaya_penyusutan": golonganAsetModel!.sbbBiayaPenyusutan,
+          "sbb_rugi_revaluasi": golonganAsetModel!.sbbRugiRevaluasi,
+          "sbb_laba_revaluasi": golonganAsetModel!.sbbLabaRevaluasi,
+          "sbb_rugi_jual": golonganAsetModel!.sbbRugiJual,
+          "sbb_laba_jual": golonganAsetModel!.sbbLabaJual,
+          "sbb_biaya_perbaikan": golonganAsetModel!.sbbBiayaPerbaikan,
+          "sbb_ppn": golonganAsetModel!.sbbPpn,
+          "sbb_pph": golonganAsetModel!.sbbPph,
+          "sbb_aset_data":
+              golonganAsetModel!.sbbAset.toString().substring(1, 13),
+          "sbb_penyusutan_data":
+              golonganAsetModel!.sbbPenyusutan.toString().substring(1, 13),
+        };
+        Setuprepository.setup(
+                token, NetworkURL.addInventaris(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'].toString().toLowerCase().contains("success")) {
+            if (pajak) {
+              if (double.parse(ppn.text.replaceAll(",", "")) < total) {
+                var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+                var data = {
+                  "tgl_transaksi":
+                      "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                  "tgl_valuta": "${transaksiPendModel!.tglValuta}",
+                  "batch": "${users!.batch}",
+                  "trx_type": "TRX",
+                  "trx_code": "${transaksiPendModel!.trxCode}",
+                  "otor": "0",
+                  "kode_trn": "",
+                  "nama_dr":
+                      "${golonganAsetModel!.sbbPpn.toString().substring(14, golonganAsetModel!.sbbPpn.toString().length)}",
+                  "dracc":
+                      "${golonganAsetModel!.sbbPpn.toString().substring(1, 13)}",
+                  "nama_cr": "${transaksiPendModel!.namaDr}",
+                  "cracc": "${transaksiPendModel!.dracc}",
+                  "rrn": "$invoice",
+                  "no_dokumen": "${transaksiPendModel!.noDokumen}",
+                  "no_ref": "${transaksiPendModel!.noRef}",
+                  "nominal": double.parse(ppn.text.replaceAll(",", "")),
+                  "keterangan": "${keteranganTrans.text}",
+                  "kode_pt": "${users!.kodePt}",
+                  "kode_kantor": "${users!.kodeKantor}",
+                  "kode_induk": "${users!.kodeInduk}",
+                  "sts_validasi": "N",
+                  "kode_ao_dr": "",
+                  "kode_coll": "",
+                  "kode_ao_cr": "",
+                  "userinput": "${users!.namauser}",
+                  "userterm": "114.80.90.54",
+                  "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+                  "inputtgljam":
+                      "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                  "otoruser": "",
+                  "otorterm": "",
+                  "otortgljam": "",
+                  "flag_trn": "0",
+                  "merchant": "",
+                  "source_trx": "",
+                  "status": "PENDING",
+                  "modul": "PAJAK PENGADAAN INVENTARIS",
+                };
+                Setuprepository.setup(
+                    token, NetworkURL.transaksi(), jsonEncode(data));
+              } else {
+                var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+                var data = {
+                  "tgl_transaksi":
+                      "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                  "tgl_valuta": "${transaksiPendModel!.tglValuta}",
+                  "batch": "${users!.batch}",
+                  "trx_type": "TRX",
+                  "trx_code": "${transaksiPendModel!.trxCode}",
+                  "otor": "0",
+                  "kode_trn": "",
+                  "nama_dr":
+                      "${golonganAsetModel!.sbbPpn.toString().substring(14, golonganAsetModel!.sbbPpn.toString().length)}",
+                  "dracc":
+                      "${golonganAsetModel!.sbbPpn.toString().substring(1, 13)}",
+                  "nama_cr": "${transaksiPendModel!.namaDr}",
+                  "cracc": "${transaksiPendModel!.dracc}",
+                  "rrn": "$invoice",
+                  "no_dokumen": "${transaksiPendModel!.noDokumen}",
+                  "no_ref": "${transaksiPendModel!.noRef}",
+                  "nominal": subtotal,
+                  "keterangan": "${keteranganTrans.text}",
+                  "kode_pt": "${users!.kodePt}",
+                  "kode_kantor": "${users!.kodeKantor}",
+                  "kode_induk": "${users!.kodeInduk}",
+                  "sts_validasi": "N",
+                  "kode_ao_dr": "",
+                  "kode_coll": "",
+                  "kode_ao_cr": "",
+                  "userinput": "${users!.namauser}",
+                  "userterm": "114.80.90.54",
+                  "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+                  "inputtgljam":
+                      "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                  "otoruser": "",
+                  "otorterm": "",
+                  "otortgljam": "",
+                  "flag_trn": "0",
+                  "merchant": "",
+                  "source_trx": "",
+                  "status": "COMPLETED",
+                  "modul": "PAJAK PENGADAAN INVENTARIS",
+                };
+                Setuprepository.setup(
+                    token, NetworkURL.transaksi(), jsonEncode(data));
+              }
+
+              if (double.parse(pph.text.replaceAll(",", "")) < total) {
+                var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+                var data = {
+                  "tgl_transaksi":
+                      "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                  "tgl_valuta": "${transaksiPendModel!.tglValuta}",
+                  "batch": "${users!.batch}",
+                  "trx_type": "TRX",
+                  "trx_code": "${transaksiPendModel!.trxCode}",
+                  "otor": "0",
+                  "kode_trn": "",
+                  "nama_cr":
+                      "${golonganAsetModel!.sbbPph.toString().substring(14, golonganAsetModel!.sbbPph.toString().length)}",
+                  "cracc":
+                      "${golonganAsetModel!.sbbPph.toString().substring(1, 13)}",
+                  "nama_dr": "${transaksiPendModel!.namaDr}",
+                  "dracc": "${transaksiPendModel!.dracc}",
+                  "rrn": "$invoice",
+                  "no_dokumen": "${transaksiPendModel!.noDokumen}",
+                  "no_ref": "${transaksiPendModel!.noRef}",
+                  "nominal": double.parse(pph.text.replaceAll(",", "")),
+                  "keterangan": "${keteranganTrans.text}",
+                  "kode_pt": "${users!.kodePt}",
+                  "kode_kantor": "${users!.kodeKantor}",
+                  "kode_induk": "${users!.kodeInduk}",
+                  "sts_validasi": "N",
+                  "kode_ao_dr": "",
+                  "kode_coll": "",
+                  "kode_ao_cr": "",
+                  "userinput": "${users!.namauser}",
+                  "userterm": "114.80.90.54",
+                  "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+                  "inputtgljam":
+                      "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                  "otoruser": "",
+                  "otorterm": "",
+                  "otortgljam": "",
+                  "flag_trn": "0",
+                  "merchant": "",
+                  "source_trx": "",
+                  "status": "PENDING",
+                  "modul": "PAJAK PPH PENGADAAN INVENTARIS",
+                };
+                Setuprepository.setup(
+                    token, NetworkURL.transaksi(), jsonEncode(data));
+              } else {
+                var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+                var data = {
+                  "tgl_transaksi":
+                      "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                  "tgl_valuta": "${transaksiPendModel!.tglValuta}",
+                  "batch": "${users!.batch}",
+                  "trx_type": "TRX",
+                  "trx_code": "${transaksiPendModel!.trxCode}",
+                  "otor": "0",
+                  "kode_trn": "",
+                  "nama_cr":
+                      "${golonganAsetModel!.sbbPph.toString().substring(14, golonganAsetModel!.sbbPph.toString().length)}",
+                  "cracc":
+                      "${golonganAsetModel!.sbbPph.toString().substring(1, 13)}",
+                  "nama_dr": "${transaksiPendModel!.namaDr}",
+                  "dracc": "${transaksiPendModel!.dracc}",
+                  "rrn": "$invoice",
+                  "no_dokumen": "${transaksiPendModel!.noDokumen}",
+                  "no_ref": "${transaksiPendModel!.noRef}",
+                  "nominal": double.parse(pph.text.replaceAll(",", "")),
+                  "keterangan": "${keteranganTrans.text}",
+                  "kode_pt": "${users!.kodePt}",
+                  "kode_kantor": "${users!.kodeKantor}",
+                  "kode_induk": "${users!.kodeInduk}",
+                  "sts_validasi": "N",
+                  "kode_ao_dr": "",
+                  "kode_coll": "",
+                  "kode_ao_cr": "",
+                  "userinput": "${users!.namauser}",
+                  "userterm": "114.80.90.54",
+                  "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+                  "inputtgljam":
+                      "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                  "otoruser": "",
+                  "otorterm": "",
+                  "otortgljam": "",
+                  "flag_trn": "0",
+                  "merchant": "",
+                  "source_trx": "",
+                  "status": "COMPLETED",
+                  "modul": "PAJAK PENGADAAN INVENTARIS",
+                };
+                Setuprepository.setup(
+                    token, NetworkURL.transaksi(), jsonEncode(data));
+              }
+            }
+            if (double.parse(users!.maksimalTransaksi) < total) {
               var invoice = DateTime.now().millisecondsSinceEpoch.toString();
               var data = {
                 "tgl_transaksi":
@@ -769,15 +958,15 @@ class PengadaanNotifier extends ChangeNotifier {
                 "otor": "0",
                 "kode_trn": "",
                 "nama_dr":
-                    "${golonganAsetModel!.sbbPpn.toString().substring(14, golonganAsetModel!.sbbPpn.toString().length)}",
+                    "${golonganAsetModel!.sbbAset.toString().substring(14, golonganAsetModel!.sbbAset.toString().length)}",
                 "dracc":
-                    "${golonganAsetModel!.sbbPpn.toString().substring(1, 13)}",
+                    "${golonganAsetModel!.sbbAset.toString().substring(1, 13)}",
                 "nama_cr": "${transaksiPendModel!.namaDr}",
                 "cracc": "${transaksiPendModel!.dracc}",
                 "rrn": "$invoice",
                 "no_dokumen": "${transaksiPendModel!.noDokumen}",
                 "no_ref": "${transaksiPendModel!.noRef}",
-                "nominal": double.parse(ppn.text.replaceAll(",", "")),
+                "nominal": subtotal,
                 "keterangan": "${keteranganTrans.text}",
                 "kode_pt": "${users!.kodePt}",
                 "kode_kantor": "${users!.kodeKantor}",
@@ -798,7 +987,7 @@ class PengadaanNotifier extends ChangeNotifier {
                 "merchant": "",
                 "source_trx": "",
                 "status": "PENDING",
-                "modul": "PAJAK PENGADAAN INVENTARIS",
+                "modul": "PENGADAAN INVENTARIS",
               };
               Setuprepository.setup(
                   token, NetworkURL.transaksi(), jsonEncode(data));
@@ -814,9 +1003,9 @@ class PengadaanNotifier extends ChangeNotifier {
                 "otor": "0",
                 "kode_trn": "",
                 "nama_dr":
-                    "${golonganAsetModel!.sbbPpn.toString().substring(14, golonganAsetModel!.sbbPpn.toString().length)}",
+                    "${golonganAsetModel!.sbbAset.toString().substring(14, golonganAsetModel!.sbbAset.toString().length)}",
                 "dracc":
-                    "${golonganAsetModel!.sbbPpn.toString().substring(1, 13)}",
+                    "${golonganAsetModel!.sbbAset.toString().substring(1, 13)}",
                 "nama_cr": "${transaksiPendModel!.namaDr}",
                 "cracc": "${transaksiPendModel!.dracc}",
                 "rrn": "$invoice",
@@ -843,203 +1032,20 @@ class PengadaanNotifier extends ChangeNotifier {
                 "merchant": "",
                 "source_trx": "",
                 "status": "COMPLETED",
-                "modul": "PAJAK PENGADAAN INVENTARIS",
+                "modul": "PENGADAAN INVENTARIS",
               };
               Setuprepository.setup(
                   token, NetworkURL.transaksi(), jsonEncode(data));
             }
-
-            if (double.parse(pph.text.replaceAll(",", "")) < total) {
-              var invoice = DateTime.now().millisecondsSinceEpoch.toString();
-              var data = {
-                "tgl_transaksi":
-                    "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                "tgl_valuta": "${transaksiPendModel!.tglValuta}",
-                "batch": "${users!.batch}",
-                "trx_type": "TRX",
-                "trx_code": "${transaksiPendModel!.trxCode}",
-                "otor": "0",
-                "kode_trn": "",
-                "nama_cr":
-                    "${golonganAsetModel!.sbbPph.toString().substring(14, golonganAsetModel!.sbbPph.toString().length)}",
-                "cracc":
-                    "${golonganAsetModel!.sbbPph.toString().substring(1, 13)}",
-                "nama_dr": "${transaksiPendModel!.namaDr}",
-                "dracc": "${transaksiPendModel!.dracc}",
-                "rrn": "$invoice",
-                "no_dokumen": "${transaksiPendModel!.noDokumen}",
-                "no_ref": "${transaksiPendModel!.noRef}",
-                "nominal": double.parse(pph.text.replaceAll(",", "")),
-                "keterangan": "${keteranganTrans.text}",
-                "kode_pt": "${users!.kodePt}",
-                "kode_kantor": "${users!.kodeKantor}",
-                "kode_induk": "${users!.kodeInduk}",
-                "sts_validasi": "N",
-                "kode_ao_dr": "",
-                "kode_coll": "",
-                "kode_ao_cr": "",
-                "userinput": "${users!.namauser}",
-                "userterm": "114.80.90.54",
-                "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                "inputtgljam":
-                    "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
-                "otoruser": "",
-                "otorterm": "",
-                "otortgljam": "",
-                "flag_trn": "0",
-                "merchant": "",
-                "source_trx": "",
-                "status": "PENDING",
-                "modul": "PAJAK PPH PENGADAAN INVENTARIS",
-              };
-              Setuprepository.setup(
-                  token, NetworkURL.transaksi(), jsonEncode(data));
-            } else {
-              var invoice = DateTime.now().millisecondsSinceEpoch.toString();
-              var data = {
-                "tgl_transaksi":
-                    "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                "tgl_valuta": "${transaksiPendModel!.tglValuta}",
-                "batch": "${users!.batch}",
-                "trx_type": "TRX",
-                "trx_code": "${transaksiPendModel!.trxCode}",
-                "otor": "0",
-                "kode_trn": "",
-                "nama_cr":
-                    "${golonganAsetModel!.sbbPph.toString().substring(14, golonganAsetModel!.sbbPph.toString().length)}",
-                "cracc":
-                    "${golonganAsetModel!.sbbPph.toString().substring(1, 13)}",
-                "nama_dr": "${transaksiPendModel!.namaDr}",
-                "dracc": "${transaksiPendModel!.dracc}",
-                "rrn": "$invoice",
-                "no_dokumen": "${transaksiPendModel!.noDokumen}",
-                "no_ref": "${transaksiPendModel!.noRef}",
-                "nominal": double.parse(pph.text.replaceAll(",", "")),
-                "keterangan": "${keteranganTrans.text}",
-                "kode_pt": "${users!.kodePt}",
-                "kode_kantor": "${users!.kodeKantor}",
-                "kode_induk": "${users!.kodeInduk}",
-                "sts_validasi": "N",
-                "kode_ao_dr": "",
-                "kode_coll": "",
-                "kode_ao_cr": "",
-                "userinput": "${users!.namauser}",
-                "userterm": "114.80.90.54",
-                "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                "inputtgljam":
-                    "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
-                "otoruser": "",
-                "otorterm": "",
-                "otortgljam": "",
-                "flag_trn": "0",
-                "merchant": "",
-                "source_trx": "",
-                "status": "COMPLETED",
-                "modul": "PAJAK PENGADAAN INVENTARIS",
-              };
-              Setuprepository.setup(
-                  token, NetworkURL.transaksi(), jsonEncode(data));
-            }
-          }
-          if (double.parse(users!.maksimalTransaksi) < total) {
-            var invoice = DateTime.now().millisecondsSinceEpoch.toString();
-            var data = {
-              "tgl_transaksi":
-                  "${DateFormat('y-MM-dd').format(DateTime.now())}",
-              "tgl_valuta": "${transaksiPendModel!.tglValuta}",
-              "batch": "${users!.batch}",
-              "trx_type": "TRX",
-              "trx_code": "${transaksiPendModel!.trxCode}",
-              "otor": "0",
-              "kode_trn": "",
-              "nama_dr":
-                  "${golonganAsetModel!.sbbAset.toString().substring(14, golonganAsetModel!.sbbAset.toString().length)}",
-              "dracc":
-                  "${golonganAsetModel!.sbbAset.toString().substring(1, 13)}",
-              "nama_cr": "${transaksiPendModel!.namaDr}",
-              "cracc": "${transaksiPendModel!.dracc}",
-              "rrn": "$invoice",
-              "no_dokumen": "${transaksiPendModel!.noDokumen}",
-              "no_ref": "${transaksiPendModel!.noRef}",
-              "nominal": subtotal,
-              "keterangan": "${keteranganTrans.text}",
-              "kode_pt": "${users!.kodePt}",
-              "kode_kantor": "${users!.kodeKantor}",
-              "kode_induk": "${users!.kodeInduk}",
-              "sts_validasi": "N",
-              "kode_ao_dr": "",
-              "kode_coll": "",
-              "kode_ao_cr": "",
-              "userinput": "${users!.namauser}",
-              "userterm": "114.80.90.54",
-              "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-              "inputtgljam":
-                  "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
-              "otoruser": "",
-              "otorterm": "",
-              "otortgljam": "",
-              "flag_trn": "0",
-              "merchant": "",
-              "source_trx": "",
-              "status": "PENDING",
-              "modul": "PENGADAAN INVENTARIS",
-            };
-            Setuprepository.setup(
-                token, NetworkURL.transaksi(), jsonEncode(data));
+            clear();
+            dialog = false;
+            informationDialog(context, "Information", value['message']);
+            notifyListeners();
           } else {
-            var invoice = DateTime.now().millisecondsSinceEpoch.toString();
-            var data = {
-              "tgl_transaksi":
-                  "${DateFormat('y-MM-dd').format(DateTime.now())}",
-              "tgl_valuta": "${transaksiPendModel!.tglValuta}",
-              "batch": "${users!.batch}",
-              "trx_type": "TRX",
-              "trx_code": "${transaksiPendModel!.trxCode}",
-              "otor": "0",
-              "kode_trn": "",
-              "nama_dr":
-                  "${golonganAsetModel!.sbbAset.toString().substring(14, golonganAsetModel!.sbbAset.toString().length)}",
-              "dracc":
-                  "${golonganAsetModel!.sbbAset.toString().substring(1, 13)}",
-              "nama_cr": "${transaksiPendModel!.namaDr}",
-              "cracc": "${transaksiPendModel!.dracc}",
-              "rrn": "$invoice",
-              "no_dokumen": "${transaksiPendModel!.noDokumen}",
-              "no_ref": "${transaksiPendModel!.noRef}",
-              "nominal": subtotal,
-              "keterangan": "${keteranganTrans.text}",
-              "kode_pt": "${users!.kodePt}",
-              "kode_kantor": "${users!.kodeKantor}",
-              "kode_induk": "${users!.kodeInduk}",
-              "sts_validasi": "N",
-              "kode_ao_dr": "",
-              "kode_coll": "",
-              "kode_ao_cr": "",
-              "userinput": "${users!.namauser}",
-              "userterm": "114.80.90.54",
-              "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-              "inputtgljam":
-                  "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
-              "otoruser": "",
-              "otorterm": "",
-              "otortgljam": "",
-              "flag_trn": "0",
-              "merchant": "",
-              "source_trx": "",
-              "status": "COMPLETED",
-              "modul": "PENGADAAN INVENTARIS",
-            };
-            Setuprepository.setup(
-                token, NetworkURL.transaksi(), jsonEncode(data));
+            informationDialog(context, "Warning", value['message']);
           }
-          clear();
-          dialog = false;
-          informationDialog(context, "Information", value['message']);
-          notifyListeners();
-        } else {
-          informationDialog(context, "Warning", value['message']);
-        }
-      });
+        });
+      }
     }
   }
 

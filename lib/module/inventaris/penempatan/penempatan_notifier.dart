@@ -108,13 +108,39 @@ class PenempatanNotifier extends ChangeNotifier {
     GlobalKey<FormState>(),
     GlobalKey<FormState>(),
   ];
-
+  final keyForm = GlobalKey<FormState>();
   cek() {
-    DialogCustom().showLoading(context);
-    Future.delayed(Duration(seconds: 2)).then((value) {
-      clear();
-      informationDialog(context, "Information", "Update Successfully");
-    });
+    if (keyForm.currentState!.validate()) {
+      DialogCustom().showLoading(context);
+      var data = {
+        "jenis_penempatan": penempatanModel,
+        "kode_kelompok": inventarisModel!.kodeKelompok,
+        "kdaset": inventarisModel!.kdaset,
+        "kode_golongan": inventarisModel!.kodeGolongan,
+        "lokasi": lokasi.text,
+        "kota": kota.text,
+        "kode_pt": kantor!.kodePt,
+        "kode_kantor": kantor!.kodeKantor,
+        "kode_induk": kantor!.kodeInduk,
+        "nama_kantor": kantor!.namaKantor,
+        "nama_pejabat": karyawanModel == null ? "" : karyawanModel!.namaLengkap,
+        "nik": karyawanModel == null ? "" : karyawanModel!.nik,
+      };
+      Setuprepository.setup(token, NetworkURL.penempatan(), jsonEncode(data))
+          .then((value) {
+        Navigator.pop(context);
+        if (value['status'].toString().toLowerCase().contains("success")) {
+          getInventaris();
+          dialog = false;
+          currentStep = 0;
+          clear();
+          informationDialog(context, "Information", value['message']);
+          notifyListeners();
+        } else {
+          informationDialog(context, "Warning", value['message']);
+        }
+      });
+    }
   }
 
   clear() {
@@ -434,6 +460,9 @@ class PenempatanNotifier extends ChangeNotifier {
     kdAset.text = inventarisModel!.kdaset;
     noaset.text = inventarisModel!.kdaset;
     nmAset.text = inventarisModel!.namaaset;
+    inventarisModel!.nik != ""
+        ? penempatanModel = "Karyawan"
+        : penempatanModel = "Kantor";
     kantor = listKantor
         .where((e) =>
             e.kodePt == inventarisModel!.kodePt &&
@@ -441,10 +470,12 @@ class PenempatanNotifier extends ChangeNotifier {
         .first;
     lokasi.text = inventarisModel!.lokasi;
     kota.text = inventarisModel!.kota;
-    nik.text = inventarisModel!.nik;
+    nikKaryawan.text = inventarisModel!.nik;
     noDok.text = inventarisModel!.nodokBeli;
     kelompok.text = inventarisModel!.namaKelompok;
     keterangan.text = inventarisModel!.ket;
+    namaKaryawan.text = inventarisModel!.namaPejabat;
+    nikKaryawan.text = inventarisModel!.nik;
     golongan.text = inventarisModel!.namaGolongan;
     satuans.text = inventarisModel!.satuanAset;
     tglbeli.text = inventarisModel!.tglBeli;
