@@ -150,32 +150,6 @@ class UsersPage extends StatelessWidget {
                                                 fontSize: 12,
                                               )))),
                                   GridColumn(
-                                      columnName: 'tglexp',
-                                      width: 100,
-                                      label: Container(
-                                          color: colorPrimary,
-                                          alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Tanggal Kadaluarsa',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.white,
-                                              )))),
-                                  GridColumn(
-                                      columnName: 'lvluser',
-                                      width: 110,
-                                      label: Container(
-                                          color: colorPrimary,
-                                          alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Level User',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.white,
-                                              )))),
-                                  GridColumn(
                                       columnName: 'batch',
                                       width: 50,
                                       label: Container(
@@ -189,13 +163,26 @@ class UsersPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      columnName: 'aktivasi',
-                                      width: 65,
+                                      columnName: 'kantor',
+                                      width: 50,
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
-                                          child: Text('Aktivasi Login',
+                                          child: Text('Kantor',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'lvluser',
+                                      width: 110,
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Level User',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -241,19 +228,6 @@ class UsersPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      columnName: 'level_otor',
-                                      width: 65,
-                                      label: Container(
-                                          color: colorPrimary,
-                                          alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Level Otorisasi',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.white,
-                                              )))),
-                                  GridColumn(
                                       columnName: 'limit_transaksi',
                                       width: 150,
                                       label: Container(
@@ -261,6 +235,19 @@ class UsersPage extends StatelessWidget {
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
                                           child: Text('Limit Transaksi',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'level_otor',
+                                      width: 65,
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Level Otorisasi',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -287,6 +274,32 @@ class UsersPage extends StatelessWidget {
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
                                           child: Text('Maksimal Otorisasi',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'aktivasi',
+                                      width: 65,
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Aktivasi Login',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
+                                              )))),
+                                  GridColumn(
+                                      columnName: 'tglexp',
+                                      width: 100,
+                                      label: Container(
+                                          color: colorPrimary,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          child: Text('Tanggal Kadaluarsa',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -820,7 +833,10 @@ class UsersPage extends StatelessWidget {
                                           "Limit Transaksi",
                                           style: const TextStyle(fontSize: 12),
                                         ),
-                                        Spacer(),
+                                        // Spacer(),
+                                        SizedBox(
+                                          width: 64,
+                                        ),
                                         CupertinoSwitch(
                                             activeColor: colorPrimary,
                                             value: value.limitAkses,
@@ -903,31 +919,35 @@ class UsersPage extends StatelessWidget {
                                     Row(
                                       children: [
                                         Expanded(
-                                            child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "Akses Otorisasi",
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
-                                                ),
-                                                Spacer(),
-                                                CupertinoSwitch(
-                                                    activeColor: colorPrimary,
-                                                    value: value.otorisasi,
-                                                    onChanged: (e) {
-                                                      value.gantiotorisasi();
-                                                    })
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              height: 16,
-                                            ),
-                                          ],
-                                        )),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Akses Otorisasi",
+                                                    style: const TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                  // Spacer(),
+                                                  SizedBox(
+                                                    width: 64,
+                                                  ),
+                                                  CupertinoSwitch(
+                                                      activeColor: colorPrimary,
+                                                      value: value.otorisasi,
+                                                      onChanged: (e) {
+                                                        value.gantiotorisasi();
+                                                      })
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 16,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                         SizedBox(
                                           width: 16,
                                         ),
@@ -1453,24 +1473,23 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'no', value: (index++).toString()),
                 DataGridCell(columnName: 'namauser', value: data.namauser),
                 DataGridCell(columnName: 'userid', value: data.userid),
-                DataGridCell(columnName: 'tglexp', value: data.tglexp),
+                DataGridCell(columnName: 'batch', value: data.batch),
+                DataGridCell(columnName: 'kantor', value: data.kodeKantor),
                 DataGridCell(
                     columnName: 'lvluser',
                     value: tindakanNotifier!.listUsers
                         .where((e) => e.idLevel == data.lvluser)
                         .first
                         .levelUser),
-                DataGridCell(columnName: 'batch', value: data.batch),
-                DataGridCell(columnName: 'aktivasi', value: data.aktivasi),
                 DataGridCell(columnName: 'akses_kasir', value: data.aksesKasir),
                 DataGridCell(columnName: 'back_date', value: data.backDate),
                 DataGridCell(columnName: 'beda_kantor', value: data.bedaKantor),
                 DataGridCell(
-                    columnName: 'level_otor',
-                    value: data.levelOtor == "null" ? "" : data.levelOtor),
-                DataGridCell(
                     columnName: 'limit_transaksi',
                     value: "data.limitTransaksi"),
+                DataGridCell(
+                    columnName: 'level_otor',
+                    value: data.levelOtor == "null" ? "" : data.levelOtor),
                 DataGridCell(
                     columnName: 'min_otor',
                     value: data.minOtor == ""
@@ -1481,6 +1500,8 @@ class DetailDataSource extends DataGridSource {
                     value: data.maxOtor == ""
                         ? ""
                         : FormatCurrency.oCcy.format(int.parse(data.maxOtor))),
+                DataGridCell(columnName: 'aktivasi', value: data.aktivasi),
+                DataGridCell(columnName: 'tglexp', value: data.tglexp),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))

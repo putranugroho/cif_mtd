@@ -7,6 +7,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../../../models/coa_model.dart';
 import '../../../utils/colors.dart';
@@ -301,6 +302,21 @@ class SbbKhususPage extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.stretch,
                                         children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Lebih dari satu akun",
+                                                style: const TextStyle(
+                                                    fontSize: 12),
+                                              ),
+                                              Spacer(),
+                                              CupertinoSwitch(
+                                                  activeColor: colorPrimary,
+                                                  value: value.satu,
+                                                  onChanged: (e) {})
+                                            ],
+                                          ),
+                                          const SizedBox(height: 16),
                                           Row(
                                             children: [
                                               Expanded(

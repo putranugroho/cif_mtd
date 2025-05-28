@@ -424,82 +424,119 @@ class KantorPage extends StatelessWidget {
                                       const SizedBox(height: 16),
                                       Row(
                                         children: [
-                                          Text(
-                                            "Kode Kantor",
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                          Expanded(
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Kode Kantor",
+                                                      style: const TextStyle(
+                                                          fontSize: 12),
+                                                    ),
+                                                    const SizedBox(width: 5),
+                                                    const Text(
+                                                      "*",
+                                                      style: TextStyle(
+                                                          fontSize: 8),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(
+                                                  height: 8,
+                                                ),
+                                                TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  controller: value.kode,
+                                                  readOnly: value.editData
+                                                      ? true
+                                                      : false,
+                                                  maxLines: 1,
+                                                  maxLength:
+                                                      value.status == "Cabang"
+                                                          ? 3
+                                                          : value.status ==
+                                                                  "Anak Cabang"
+                                                              ? 4
+                                                              : 4,
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly
+                                                  ],
+                                                  validator: (e) {
+                                                    if (e!.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "Kode Kantor",
+                                                    filled: value.editData
+                                                        ? true
+                                                        : false,
+                                                    fillColor: Colors.grey[200],
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          const SizedBox(width: 5),
-                                          const Text(
-                                            "*",
-                                            style: TextStyle(fontSize: 8),
+                                          const SizedBox(width: 16),
+                                          Expanded(
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Nama Kantor",
+                                                      style: const TextStyle(
+                                                          fontSize: 12),
+                                                    ),
+                                                    const SizedBox(width: 5),
+                                                    const Text(
+                                                      "*",
+                                                      style: TextStyle(
+                                                          fontSize: 8),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(
+                                                  height: 8,
+                                                ),
+                                                TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  controller: value.nama,
+                                                  maxLines: 1,
+                                                  validator: (e) {
+                                                    if (e!.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "Nama Kantor",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 24,
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ],
-                                      ),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      TextFormField(
-                                        textInputAction: TextInputAction.done,
-                                        controller: value.kode,
-                                        readOnly: value.editData ? true : false,
-                                        maxLines: 1,
-                                        inputFormatters: [
-                                          FilteringTextInputFormatter.digitsOnly
-                                        ],
-                                        validator: (e) {
-                                          if (e!.isEmpty) {
-                                            return "Wajib diisi";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          hintText: "Kode Kantor",
-                                          filled: value.editData ? true : false,
-                                          fillColor: Colors.grey[200],
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 16),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "Nama Kantor",
-                                            style:
-                                                const TextStyle(fontSize: 12),
-                                          ),
-                                          const SizedBox(width: 5),
-                                          const Text(
-                                            "*",
-                                            style: TextStyle(fontSize: 8),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      TextFormField(
-                                        textInputAction: TextInputAction.done,
-                                        controller: value.nama,
-                                        maxLines: 1,
-                                        validator: (e) {
-                                          if (e!.isEmpty) {
-                                            return "Wajib diisi";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          hintText: "Nama Kantor",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                          ),
-                                        ),
                                       ),
                                       const SizedBox(height: 16),
                                       Column(

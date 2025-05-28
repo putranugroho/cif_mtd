@@ -6,7 +6,6 @@ import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
-
 import '../../../network/network.dart';
 
 class SbbKhususNotifier extends ChangeNotifier {
@@ -103,6 +102,7 @@ class SbbKhususNotifier extends ChangeNotifier {
   }
 
   SbbKhususModel? sbbKhususModel;
+  bool satu = false;
   edit(String kode) {
     listGlAdd.clear();
     inqueryGlModel = null;

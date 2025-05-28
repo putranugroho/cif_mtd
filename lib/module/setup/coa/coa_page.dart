@@ -1136,6 +1136,17 @@ class CoaPage extends StatelessWidget {
                                                 children: [
                                                   Row(
                                                     children: [
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            width: 150,
+                                                            child: SizedBox(),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        width: 16,
+                                                      ),
                                                       Text(
                                                         "Pilih Header",
                                                         style: const TextStyle(
@@ -1154,6 +1165,48 @@ class CoaPage extends StatelessWidget {
                                                   ),
                                                   Row(
                                                     children: [
+                                                      Container(
+                                                        width: 150,
+                                                        child: TextFormField(
+                                                          // enabled: false,
+                                                          readOnly: true,
+                                                          textInputAction:
+                                                              TextInputAction
+                                                                  .done,
+                                                          controller:
+                                                              value.noHeader,
+                                                          maxLines: 1,
+                                                          inputFormatters: [
+                                                            FilteringTextInputFormatter
+                                                                .digitsOnly
+                                                          ],
+                                                          validator: (e) {
+                                                            if (e!.isEmpty) {
+                                                              return "Wajib diisi";
+                                                            } else {
+                                                              return null;
+                                                            }
+                                                          },
+                                                          decoration:
+                                                              InputDecoration(
+                                                            filled: true,
+                                                            fillColor: Colors
+                                                                .grey[200],
+                                                            hintText:
+                                                                "Nomor Header",
+                                                            border:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          6),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 16,
+                                                      ),
                                                       Expanded(
                                                         child: DropdownSearch<
                                                             CoaModel>(
@@ -1218,48 +1271,6 @@ class CoaPage extends StatelessWidget {
                                                           ),
                                                         ),
                                                       ),
-                                                      SizedBox(
-                                                        width: 16,
-                                                      ),
-                                                      Container(
-                                                        width: 150,
-                                                        child: TextFormField(
-                                                          // enabled: false,
-                                                          readOnly: true,
-                                                          textInputAction:
-                                                              TextInputAction
-                                                                  .done,
-                                                          controller:
-                                                              value.noHeader,
-                                                          maxLines: 1,
-                                                          inputFormatters: [
-                                                            FilteringTextInputFormatter
-                                                                .digitsOnly
-                                                          ],
-                                                          validator: (e) {
-                                                            if (e!.isEmpty) {
-                                                              return "Wajib diisi";
-                                                            } else {
-                                                              return null;
-                                                            }
-                                                          },
-                                                          decoration:
-                                                              InputDecoration(
-                                                            filled: true,
-                                                            fillColor: Colors
-                                                                .grey[200],
-                                                            hintText:
-                                                                "Nomor Header",
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          6),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      )
                                                     ],
                                                   ),
                                                   SizedBox(
@@ -1662,6 +1673,18 @@ class CoaPage extends StatelessWidget {
                                                     children: [
                                                       Row(
                                                         children: [
+                                                          Row(
+                                                            children: [
+                                                              Container(
+                                                                width: 150,
+                                                                child:
+                                                                    SizedBox(),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            width: 16,
+                                                          ),
                                                           Text(
                                                             "Pilih Buku Besar",
                                                             style:
@@ -1683,6 +1706,51 @@ class CoaPage extends StatelessWidget {
                                                       ),
                                                       Row(
                                                         children: [
+                                                          Container(
+                                                            width: 150,
+                                                            child:
+                                                                TextFormField(
+                                                              // enabled: false,
+                                                              readOnly: true,
+                                                              textInputAction:
+                                                                  TextInputAction
+                                                                      .done,
+                                                              controller:
+                                                                  value.noBb,
+                                                              maxLines: 1,
+                                                              inputFormatters: [
+                                                                FilteringTextInputFormatter
+                                                                    .digitsOnly
+                                                              ],
+                                                              validator: (e) {
+                                                                if (e!
+                                                                    .isEmpty) {
+                                                                  return "Wajib diisi";
+                                                                } else {
+                                                                  return null;
+                                                                }
+                                                              },
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                filled: true,
+                                                                fillColor:
+                                                                    Colors.grey[
+                                                                        200],
+                                                                hintText:
+                                                                    "Buku Besar",
+                                                                border:
+                                                                    OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              6),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 16,
+                                                          ),
                                                           Expanded(
                                                             child:
                                                                 DropdownSearch<
@@ -1750,51 +1818,6 @@ class CoaPage extends StatelessWidget {
                                                               ),
                                                             ),
                                                           ),
-                                                          SizedBox(
-                                                            width: 16,
-                                                          ),
-                                                          Container(
-                                                            width: 150,
-                                                            child:
-                                                                TextFormField(
-                                                              // enabled: false,
-                                                              readOnly: true,
-                                                              textInputAction:
-                                                                  TextInputAction
-                                                                      .done,
-                                                              controller:
-                                                                  value.noBb,
-                                                              maxLines: 1,
-                                                              inputFormatters: [
-                                                                FilteringTextInputFormatter
-                                                                    .digitsOnly
-                                                              ],
-                                                              validator: (e) {
-                                                                if (e!
-                                                                    .isEmpty) {
-                                                                  return "Wajib diisi";
-                                                                } else {
-                                                                  return null;
-                                                                }
-                                                              },
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                filled: true,
-                                                                fillColor:
-                                                                    Colors.grey[
-                                                                        200],
-                                                                hintText:
-                                                                    "Buku Besar",
-                                                                border:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              6),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          )
                                                         ],
                                                       ),
                                                       SizedBox(
@@ -1922,62 +1945,6 @@ class CoaPage extends StatelessWidget {
                                                           )
                                                         ],
                                                       ),
-                                                      const SizedBox(
-                                                          height: 16),
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            "Pilih Type Posting",
-                                                            style:
-                                                                const TextStyle(
-                                                                    fontSize:
-                                                                        12),
-                                                          ),
-                                                          const SizedBox(
-                                                              width: 5),
-                                                          const Text(
-                                                            "*",
-                                                            style: TextStyle(
-                                                                fontSize: 8),
-                                                          ),
-                                                          const SizedBox(
-                                                            width: 16,
-                                                          ),
-                                                          Radio(
-                                                            activeColor:
-                                                                colorPrimary,
-                                                            value: "Y",
-                                                            groupValue: value
-                                                                .typePosting,
-                                                            onChanged: (e) =>
-                                                                value
-                                                                    .gantiPosting(
-                                                                        "Y"),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 8,
-                                                          ),
-                                                          Text("Yes"),
-                                                          SizedBox(
-                                                            width: 32,
-                                                          ),
-                                                          Radio(
-                                                            activeColor:
-                                                                colorPrimary,
-                                                            value: "N",
-                                                            groupValue: value
-                                                                .typePosting,
-                                                            onChanged: (e) =>
-                                                                value
-                                                                    .gantiPosting(
-                                                                        "N"),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 8,
-                                                          ),
-                                                          Text("No"),
-                                                        ],
-                                                      ),
                                                       SizedBox(
                                                         height: 16,
                                                       ),
@@ -2030,6 +1997,62 @@ class CoaPage extends StatelessWidget {
                                                                         6),
                                                           ),
                                                         ),
+                                                      ),
+                                                      const SizedBox(
+                                                          height: 16),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "Pilih Type Posting",
+                                                            // style:
+                                                            //     const TextStyle(
+                                                            //         fontSize:
+                                                            //             12),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 5),
+                                                          const Text(
+                                                            "*",
+                                                            style: TextStyle(
+                                                                fontSize: 8),
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 16,
+                                                          ),
+                                                          Radio(
+                                                            activeColor:
+                                                                colorPrimary,
+                                                            value: "Y",
+                                                            groupValue: value
+                                                                .typePosting,
+                                                            onChanged: (e) =>
+                                                                value
+                                                                    .gantiPosting(
+                                                                        "Y"),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 8,
+                                                          ),
+                                                          Text("Yes"),
+                                                          SizedBox(
+                                                            width: 32,
+                                                          ),
+                                                          Radio(
+                                                            activeColor:
+                                                                colorPrimary,
+                                                            value: "N",
+                                                            groupValue: value
+                                                                .typePosting,
+                                                            onChanged: (e) =>
+                                                                value
+                                                                    .gantiPosting(
+                                                                        "N"),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 8,
+                                                          ),
+                                                          Text("No"),
+                                                        ],
                                                       ),
                                                       const SizedBox(
                                                           height: 16),

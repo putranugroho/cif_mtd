@@ -17,6 +17,7 @@ class BankNotifier extends ChangeNotifier {
 
   BankNotifier({required this.context}) {
     getBank();
+    getKantor();
     getInqueryAll();
     getSandiBankAll();
     notifyListeners();
@@ -301,6 +302,37 @@ class BankNotifier extends ChangeNotifier {
   pilihRekening(String value) {
     rekening = value;
     notifyListeners();
+  }
+
+  KantorModel? kantor;
+  List<KantorModel> listkantor = [];
+  KantorModel? kantorModel;
+  pilihKantor(KantorModel value) {
+    kantor = value;
+
+    notifyListeners();
+  }
+
+  List<KantorModel> listKantor = [];
+  Future getKantor() async {
+    listKantor.clear();
+
+    var data = {
+      "kode_pt": "001",
+    };
+    notifyListeners();
+    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data))
+        .then((value) {
+      if (value['status'] == "Success") {
+        for (Map<String, dynamic> i in value['data']) {
+          listKantor.add(KantorModel.fromJson(i));
+        }
+
+        notifyListeners();
+      } else {
+        notifyListeners();
+      }
+    });
   }
 
   List<CoaModel> listCoa = [];

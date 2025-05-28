@@ -158,7 +158,7 @@ class SetupPajakPage extends StatelessWidget {
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Min Kena',
+                                          child: Text('Max Bebas Pajak',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -469,7 +469,7 @@ class SetupPajakPage extends StatelessWidget {
                                           Row(
                                             children: [
                                               Text(
-                                                "Nilai minimal tidak kena PPN",
+                                                "Nilai maksimal bebas PPN",
                                                 style: const TextStyle(
                                                     fontSize: 12),
                                               ),
@@ -503,7 +503,7 @@ class SetupPajakPage extends StatelessWidget {
                                             decoration: InputDecoration(
                                               filled: !value.editData,
                                               fillColor: Colors.grey[200],
-                                              hintText: "Nilai Minimal",
+                                              hintText: "Nilai Maksimal",
                                               border: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(6),

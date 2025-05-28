@@ -261,6 +261,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                 controller: value.kode,
                                 readOnly: value.editData,
                                 maxLines: 1,
+                                maxLength: 3,
                                 inputFormatters: [
                                   FilteringTextInputFormatter.allow(
                                       RegExp(r'[a-zA-Z0-9]'))
@@ -387,6 +388,8 @@ class DetailDataSource extends DataGridSource {
   @override
   List<DataGridRow> get rows => _laporanData;
   void buildRowData(List<GolonganSbbKhususModel> list) {
+    list.sort((a, b) =>
+        a.kodeGolongan.toLowerCase().compareTo(b.kodeGolongan.toLowerCase()));
     int index = 1;
     _laporanData = list
         .map<DataGridRow>((data) => DataGridRow(

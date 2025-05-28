@@ -141,7 +141,7 @@ class BankPage extends StatelessWidget {
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Kantor',
+                                          child: Text('Cabang',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -205,19 +205,6 @@ class BankPage extends StatelessWidget {
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
                                           child: Text('Nama SBB',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.white,
-                                              )))),
-                                  GridColumn(
-                                      columnName: 'nominal',
-                                      width: 130,
-                                      label: Container(
-                                          color: colorPrimary,
-                                          alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Nominal',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -571,6 +558,46 @@ class BankPage extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
+                                          "Nominal",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        const Text(
+                                          "*",
+                                          style: TextStyle(fontSize: 8),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TextFormField(
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.nilai,
+                                      maxLines: 1,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        CurrencyInputFormatter(),
+                                      ],
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "Saldo Rekening",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    Row(
+                                      children: [
+                                        Text(
                                           "Pilih SBB",
                                           style: const TextStyle(fontSize: 12),
                                         ),
@@ -650,13 +677,11 @@ class BankPage extends StatelessWidget {
                                         )
                                       ],
                                     ),
-                                    SizedBox(
-                                      height: 16,
-                                    ),
+                                    const SizedBox(height: 16),
                                     Row(
                                       children: [
                                         Text(
-                                          "Nominal",
+                                          "Pilih Kantor",
                                           style: const TextStyle(fontSize: 12),
                                         ),
                                         const SizedBox(width: 5),
@@ -669,26 +694,34 @@ class BankPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 8,
                                     ),
-                                    TextFormField(
-                                      textInputAction: TextInputAction.done,
-                                      controller: value.nilai,
-                                      maxLines: 1,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.digitsOnly,
-                                        CurrencyInputFormatter(),
-                                      ],
-                                      validator: (e) {
-                                        if (e!.isEmpty) {
-                                          return "Wajib diisi";
-                                        } else {
-                                          return null;
-                                        }
+                                    DropdownSearch<KantorModel>(
+                                      popupProps:
+                                          const PopupPropsMultiSelection.menu(
+                                        showSearchBox:
+                                            true, // Aktifkan fitur pencarian
+                                      ),
+                                      selectedItem: value.kantor,
+                                      items: value.listKantor,
+                                      itemAsString: (e) => "${e.namaKantor}",
+                                      onChanged: (e) {
+                                        value.pilihKantor(e!);
                                       },
-                                      decoration: InputDecoration(
-                                        hintText: "Saldo Rekening",
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                      dropdownDecoratorProps:
+                                          DropDownDecoratorProps(
+                                        baseStyle: TextStyle(fontSize: 16),
+                                        textAlignVertical:
+                                            TextAlignVertical.center,
+                                        dropdownSearchDecoration:
+                                            InputDecoration(
+                                          hintText: "Pilih Kantor",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            borderSide: BorderSide(
+                                              width: 1,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -1080,11 +1113,11 @@ class DetailDataSource extends DataGridSource {
                             : "Deposito"),
                 DataGridCell(columnName: 'nosbb', value: data.nosbb),
                 DataGridCell(columnName: 'namaSbb', value: data.namaSbb),
-                DataGridCell(
-                    columnName: 'nominal',
-                    value: data.nominal == ""
-                        ? ""
-                        : FormatCurrency.oCcy.format(int.parse(data.nominal))),
+                // DataGridCell(
+                //     columnName: 'nominal',
+                //     value: data.nominal == ""
+                //         ? ""
+                //         : FormatCurrency.oCcy.format(int.parse(data.nominal))),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
