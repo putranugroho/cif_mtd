@@ -338,45 +338,74 @@ class RevaluasiNotifier extends ChangeNotifier {
   int subtotal = 0;
   List<InventarisModel> list = [];
   InventarisModel? inventarisModel;
+  List<InventarisTransaksiModel> listInventarisTranskasi = [];
+  InventarisTransaksiModel? inventarisTransaksiModel;
   pilihInventory(InventarisModel value) {
     inventarisModel = value;
-    kdAset.text = inventarisModel!.kdaset;
-    noaset.text = inventarisModel!.kdaset;
-    nmAset.text = inventarisModel!.namaaset;
-    noDok.text = inventarisModel!.nodokBeli;
-    kelompok.text = inventarisModel!.namaKelompok;
-    keterangan.text = inventarisModel!.ket;
-    golongan.text = inventarisModel!.namaGolongan;
-    satuans.text = inventarisModel!.satuanAset;
-    tglbeli.text = inventarisModel!.tglRevaluasi;
-    nominal.text = FormatCurrency.oCcy
-        .format(int.parse(inventarisModel!.nilaiRevaluasi))
-        .replaceAll(".", ",");
-    picReval.text = inventarisModel!.picRevaluasi;
-    tglterima.text = inventarisModel!.tglTerima;
-    biaya.text = FormatCurrency.oCcy
-        .format(int.parse(inventarisModel!.biaya))
-        .replaceAll(".", ",");
-    hargaBeli.text = FormatCurrency.oCcy
-        .format(int.parse(inventarisModel!.habeli))
-        .replaceAll(".", ",");
-    hargaBuku.text = FormatCurrency.oCcy
-        .format(int.parse(inventarisModel!.nilaiBuku))
-        .replaceAll(".", ",");
-    haper.text = FormatCurrency.oCcy
-        .format(int.parse(inventarisModel!.haper))
-        .replaceAll(".", ",");
-    nilaiPenyusutan.text = FormatCurrency.oCcy
-        .format(int.parse(inventarisModel!.nilaiResidu))
-        .replaceAll(".", ",");
-    ppn.text = FormatCurrency.oCcy
-        .format(int.parse(inventarisModel!.ppnBeli))
-        .replaceAll(".", ",");
-    pph.text = FormatCurrency.oCcy
-        .format(int.parse(inventarisModel!.pph))
-        .replaceAll(".", ",");
-    total = (subtotal + int.parse(ppn.text.replaceAll(",", ""))) -
-        int.parse(pph.text.replaceAll(",", ""));
+    DialogCustom().showLoading(context);
+    var data = {
+      "kode_pt": inventarisModel!.kodePt,
+      "kode_kantor": inventarisModel!.kodeKantor,
+      "kode_induk": inventarisModel!.kodeInduk,
+      "kode_kelompok": inventarisModel!.kodeKelompok,
+      "kode_golongan": inventarisModel!.kodeGolongan,
+      "kdaset": inventarisModel!.kdaset,
+    };
+    Setuprepository.setup(token, NetworkURL.cariInventaris(), jsonEncode(data))
+        .then((values) {
+      Navigator.pop(context);
+      if (values['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in values['data']) {
+          listInventarisTranskasi.add(InventarisTransaksiModel.fromJson(i));
+        }
+        if (listInventarisTranskasi.isNotEmpty) {
+          inventarisTransaksiModel = listInventarisTranskasi[0];
+          print("HABELI : ${inventarisModel!.habeli}");
+          kdAset.text = inventarisModel!.kdaset;
+          noaset.text = inventarisModel!.kdaset;
+          nmAset.text = inventarisModel!.namaaset;
+          noDok.text = inventarisModel!.nodokBeli;
+          kelompok.text = inventarisModel!.namaKelompok;
+          keterangan.text = inventarisModel!.ket;
+          golongan.text = inventarisModel!.namaGolongan;
+          satuans.text = inventarisModel!.satuanAset;
+          tglbeli.text = inventarisModel!.tglRevaluasi;
+          nominal.text = FormatCurrency.oCcy
+              .format(int.parse(inventarisModel!.nilaiRevaluasi))
+              .replaceAll(".", ",");
+          picReval.text = inventarisModel!.picRevaluasi;
+          tglterima.text = inventarisModel!.tglTerima;
+          biaya.text = FormatCurrency.oCcy
+              .format(int.parse(inventarisModel!.biaya))
+              .replaceAll(".", ",");
+          hargaBeli.text = FormatCurrency.oCcy
+              .format(int.parse(inventarisModel!.habeli))
+              .replaceAll(".", ",");
+          hargaBuku.text = FormatCurrency.oCcy
+              .format(int.parse(inventarisTransaksiModel!.nilaiBuku))
+              .replaceAll(".", ",");
+          haper.text = FormatCurrency.oCcy
+              .format(int.parse(inventarisModel!.haper))
+              .replaceAll(".", ",");
+          nilaiPenyusutan.text = FormatCurrency.oCcy
+              .format(int.parse(inventarisTransaksiModel!.persentasePenyusutan))
+              .replaceAll(".", ",");
+          ppn.text = FormatCurrency.oCcy
+              .format(int.parse(inventarisModel!.ppnBeli))
+              .replaceAll(".", ",");
+          pph.text = FormatCurrency.oCcy
+              .format(int.parse(inventarisModel!.pph))
+              .replaceAll(".", ",");
+          total = (subtotal + int.parse(ppn.text.replaceAll(",", ""))) -
+              int.parse(pph.text.replaceAll(",", ""));
+          notifyListeners();
+        } else {
+          informationDialog(
+              context, "Warning", "Inventaris tidak ditemukan di transaksi");
+        }
+      }
+    });
+
     notifyListeners();
   }
 }
