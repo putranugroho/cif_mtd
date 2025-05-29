@@ -89,6 +89,10 @@ class NetworkURL {
     return "$url/inventaris/penempatan";
   }
 
+  static String revaluasi() {
+    return "$url/inventaris/revaluasi";
+  }
+
   static String addPejabat() {
     return "$url/pejabat/add";
   }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:accounting/models/index.dart';
+import 'package:accounting/pref/pref.dart';
 import 'package:accounting/utils/colors.dart';
 import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/informationdialog.dart';
@@ -18,8 +19,17 @@ class RevaluasiNotifier extends ChangeNotifier {
   final BuildContext context;
 
   RevaluasiNotifier({required this.context}) {
-    getInventaris();
+    getProfile();
     notifyListeners();
+  }
+
+  UserModel? users;
+  getProfile() async {
+    Pref().getUsers().then((value) {
+      users = value;
+      getInventaris();
+      notifyListeners();
+    });
   }
 
   TextEditingController nominal = TextEditingController();
@@ -130,20 +140,18 @@ class RevaluasiNotifier extends ChangeNotifier {
             DateTime.now(),
           )),
           int.parse(DateFormat('dd').format(
-                DateTime.now(),
-              )) -
-              1),
+            DateTime.now(),
+          ))),
       firstDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('y').format(DateTime.now())) - 10,
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
           int.parse(DateFormat('dd').format(
-                DateTime.now(),
-              )) -
-              1),
+            DateTime.now(),
+          ))),
       lastDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) - 10,
+          int.parse(DateFormat('y').format(DateTime.now())) + 2,
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
@@ -157,6 +165,55 @@ class RevaluasiNotifier extends ChangeNotifier {
           .format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
+  }
+
+  cek() async {
+    DialogCustom().showLoading(context);
+    var data = {
+      "kode_kelompok": inventarisModel!.kodeKelompok,
+      "kdaset": inventarisModel!.kdaset,
+      "kode_golongan": inventarisModel!.kodeGolongan,
+      "pic_revaluasi": picReval.text.trim(),
+      "nilai_revaluasi": nominal.text.replaceAll(",", ""),
+      "tgl_revaluasi": DateFormat('y-MM-dd').format(tglTransaksi!),
+      "kode_pt": users!.kodePt,
+      "kode_kantor": users!.kodeKantor,
+      "kode_induk": users!.kodeInduk,
+      "userinput": users!.namauser,
+      "userterm": "114.80.90.54",
+    };
+    Setuprepository.setup(token, NetworkURL.revaluasi(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        getInventaris();
+        dialog = false;
+        currentStep = 0;
+        clear();
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message']);
+      }
+    });
+  }
+
+  clear() {
+    inventarisModel = null;
+    kdAset.clear();
+    noaset.clear();
+    nmAset.clear();
+    lokasi.clear();
+    kota.clear();
+    nik.clear();
+    noDok.clear();
+    kelompok.clear();
+    keterangan.clear();
+    golongan.clear();
+    satuans.clear();
+    tglbeli.clear();
+    tglterima.clear();
+    notifyListeners();
   }
 
   TextEditingController blnPenyusutan = TextEditingController();

@@ -978,6 +978,7 @@ class RevaluasiPage extends StatelessWidget {
                                                       height: 8,
                                                     ),
                                                     TextFormField(
+                                                      controller: value.nominal,
                                                       textInputAction:
                                                           TextInputAction.done,
                                                       maxLines: 1,
@@ -1042,6 +1043,7 @@ class RevaluasiPage extends StatelessWidget {
                                                   TextFormField(
                                                     textInputAction:
                                                         TextInputAction.done,
+                                                    controller: value.picReval,
                                                     maxLines: 1,
                                                     validator: (e) {
                                                       if (e!.isEmpty) {
@@ -1144,7 +1146,9 @@ class RevaluasiPage extends StatelessWidget {
                                         ),
                                         const SizedBox(height: 16),
                                         ButtonPrimary(
-                                          onTap: () {},
+                                          onTap: () {
+                                            value.cek();
+                                          },
                                           name: "Simpan",
                                         )
                                       ],
