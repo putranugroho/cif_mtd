@@ -1,5 +1,6 @@
 export 'neraca_item_model.dart';
 export 'kota_model.dart';
+export 'inventaris_transaksi_model.dart';
 export 'jabatan_model.dart';
 export 'coa_sbb_model.dart';
 export 'rekonsiliasi_piutang_hutang_model.dart';

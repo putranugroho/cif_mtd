@@ -96,6 +96,13 @@ class NetworkURL {
   static String jual() {
     return "$url/inventaris/jual";
   }
+  static String hapusaset() {
+    return "$url/inventaris/hapusaset";
+  }
+
+  static String cariInventaris() {
+    return "$url/inventaris/cari";
+  }
 
   static String addPejabat() {
     return "$url/pejabat/add";

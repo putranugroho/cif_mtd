@@ -1847,6 +1847,18 @@ class JualBeliPage extends StatelessWidget {
                                                                         TextInputAction
                                                                             .done,
                                                                     maxLines: 1,
+                                                                    validator:
+                                                                        (e) {
+                                                                      if (e!
+                                                                          .isEmpty) {
+                                                                        return "Wajib diisi";
+                                                                      } else {
+                                                                        return null;
+                                                                      }
+                                                                    },
+                                                                    controller:
+                                                                        value
+                                                                            .alasanjualhapus,
                                                                     decoration:
                                                                         InputDecoration(
                                                                       hintText:

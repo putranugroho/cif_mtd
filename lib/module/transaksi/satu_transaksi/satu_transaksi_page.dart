@@ -132,7 +132,7 @@ class SatuTransaksiPage extends StatelessWidget {
                                           fontSize: 12,
                                         )))),
                             GridColumn(
-                                width: 100,
+                                width: 150,
                                 columnName: 'tgl_trans',
                                 label: Container(
                                     padding: EdgeInsets.all(6),
@@ -981,17 +981,6 @@ class DetailDataSource extends DataGridSource {
     int index = 1;
 
     // 🔽 Sort data terlebih dahulu
-    list.sort((a, b) {
-      final tglA = DateTime.tryParse(a.tglValuta) ?? DateTime(1900);
-      final tglB = DateTime.tryParse(b.tglValuta) ?? DateTime(1900);
-
-      if (tglA.compareTo(tglB) != 0) {
-        return tglA.compareTo(tglB); // urut berdasarkan tanggal dulu
-      }
-
-      return a.noDokumen
-          .compareTo(b.noDokumen); // lalu urut berdasarkan nomor dokumen
-    });
 
     // 🧱 Bangun data grid setelah data diurutkan
     _laporanData = list
@@ -1000,7 +989,7 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'no', value: (index++).toString()),
                 DataGridCell(columnName: 'status', value: data.status),
                 DataGridCell(columnName: 'tgl_val', value: data.tglValuta),
-                DataGridCell(columnName: 'tgl_trans', value: data.tglTransaksi),
+                DataGridCell(columnName: 'tgl_trans', value: data.createddate),
                 DataGridCell(columnName: 'nomor_dok', value: data.noDokumen),
                 DataGridCell(columnName: 'nomor_ref', value: data.noRef),
                 DataGridCell(

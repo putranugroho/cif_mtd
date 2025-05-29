@@ -37,6 +37,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
   Future getTransaksi() async {
     isLoadingData = true;
     listTransaksi.clear();
+    listTransaksiAdd.clear();
     notifyListeners();
     var data = {
       "kode_pt": "${users!.kodePt}",
@@ -51,6 +52,9 @@ class SatuTransaksiNotifier extends ChangeNotifier {
           listTransaksiAdd = listTransaksi
               .where((e) => e.userinput == users!.namauser)
               .toList();
+
+          listTransaksiAdd.sort((a, b) => DateTime.parse(b.createddate)
+              .compareTo(DateTime.parse(a.createddate)));
         }
         isLoadingData = false;
         notifyListeners();
