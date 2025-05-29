@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:accounting/models/index.dart';
+import 'package:accounting/pref/pref.dart';
 import 'package:accounting/utils/colors.dart';
 import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/informationdialog.dart';
@@ -17,9 +18,131 @@ class JualBeliNotifier extends ChangeNotifier {
   final BuildContext context;
 
   JualBeliNotifier({required this.context}) {
-    getKantor();
-    getInventaris();
+    getProfile();
     notifyListeners();
+  }
+
+  UserModel? users;
+  getProfile() async {
+    Pref().getUsers().then((value) {
+      users = value;
+      getKantor();
+      getInventaris();
+      getInqueryAll();
+      getMetodePenyusutan();
+      notifyListeners();
+    });
+  }
+
+  List<MetodePenyusutanModel> listPenyusutan = [];
+  MetodePenyusutanModel? metodePenyusutanModel;
+  int metode = 0;
+  Future getMetodePenyusutan() async {
+    isLoading = true;
+    listPenyusutan.clear();
+    var data = {
+      "kode_pt": "001",
+    };
+    notifyListeners();
+    Setuprepository.setup(
+            token, NetworkURL.getMetodePenyusutan(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listPenyusutan.add(MetodePenyusutanModel.fromJson(i));
+        }
+        metodePenyusutanModel = listPenyusutan[0];
+        metode = int.parse(metodePenyusutanModel!.metodePenyusutan);
+        nilaiPenyusutan.text = metodePenyusutanModel!.nilaiAkhir.toString();
+
+        print("Declining ${metodePenyusutanModel!.declining}");
+        isLoading = false;
+        notifyListeners();
+      } else {
+        // informationDialog(context, "Warning", value['message'][0]);
+        notifyListeners();
+      }
+    });
+    notifyListeners();
+  }
+
+  var isLoadingData = true;
+  List<TransaksiPendModel> listTransaksi = [];
+  List<TransaksiPendModel> listTransaksiAdd = [];
+  Future getTransaksi() async {
+    isLoadingData = true;
+    listTransaksi.clear();
+    listTransaksiAdd.clear();
+    notifyListeners();
+    var data = {
+      "kode_pt": "${users!.kodePt}",
+    };
+    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listTransaksi.add(TransaksiPendModel.fromJson(i));
+        }
+        if (listTransaksi.isNotEmpty) {
+          for (var i = 0; i < listGlAll.length; i++) {
+            listTransaksiAdd.addAll(listTransaksi
+                .where((e) =>
+                    (e.cracc == listGlAll[i].nosbb ||
+                        e.dracc == listGlAll[i].nosbb) &&
+                    e.status == "COMPLETED" &&
+                    e.tglValuta == DateFormat('y-MM-dd').format(tglTransaksi!))
+                .toList());
+          }
+        }
+        isLoadingData = false;
+        notifyListeners();
+      } else {
+        isLoadingData = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  List<Map<String, dynamic>> extractJnsAccBb(List<dynamic> rawData) {
+    List<Map<String, dynamic>> result = [];
+
+    void traverse(List<dynamic> items) {
+      for (var item in items) {
+        if (item is Map<String, dynamic>) {
+          if (item['jns_acc'] == 'C' &&
+              item['type_posting'] == "Y" &&
+              item['akun_perantara'] == "Y") {
+            result.add(item);
+          }
+
+          if (item.containsKey('items') && item['items'] is List) {
+            traverse(item['items']);
+          }
+        }
+      }
+    }
+
+    traverse(rawData);
+    return result;
+  }
+
+  List<InqueryGlModel> listGlAll = [];
+  Future getInqueryAll() async {
+    listGlAll.clear();
+    notifyListeners();
+    var data = {"kode_pt": "${users!.kodePt}"};
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        final List<Map<String, dynamic>> jnsAccBItems =
+            extractJnsAccBb(value['data']);
+        listGlAll =
+            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        print("GL : ${jsonEncode(listGlAll)}");
+        getTransaksi();
+        notifyListeners();
+      }
+    });
   }
 
   List<KantorModel> listKantor = [];
@@ -102,6 +225,83 @@ class JualBeliNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<Map<String, dynamic>> extractJnsAccB(List<dynamic> rawData) {
+    List<Map<String, dynamic>> result = [];
+
+    void traverse(List<dynamic> items) {
+      for (var item in items) {
+        if (item is Map<String, dynamic>) {
+          if (item['jns_acc'] == 'C' &&
+              item['type_posting'] == "Y" &&
+              item['gol_acc'] == "3") {
+            result.add(item);
+          }
+
+          if (item.containsKey('items') && item['items'] is List) {
+            traverse(item['items']);
+          }
+        }
+      }
+    }
+
+    traverse(rawData);
+    return result;
+  }
+
+  pilihAkunDeb(InqueryGlModel value) {
+    inqueryGlModeldeb = value;
+    nosbbdeb.text = value.namaSbb;
+    namaSbbDeb.text = value.nosbb;
+    notifyListeners();
+  }
+
+  InqueryGlModel? inqueryGlModeldeb;
+  InqueryGlModel? inqueryGlModelcre;
+  var isLoadingInquery = true;
+  List<InqueryGlModel> listGl = [];
+  TextEditingController nosbbdeb = TextEditingController();
+  TextEditingController namaSbbDeb = TextEditingController();
+  TextEditingController nossbcre = TextEditingController();
+  Future<List<InqueryGlModel>> getInqueryTransaksi(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      isLoadingInquery = true;
+      listGl.clear();
+      notifyListeners();
+
+      var data = {"kode_pt": "001"};
+
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.getInqueryGL(),
+          jsonEncode(data),
+        );
+
+        if (response['status'].toString().toLowerCase().contains("success")) {
+          final List<Map<String, dynamic>> jnsAccBItems =
+              extractJnsAccB(response['data']);
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                  model.namaSbb.toLowerCase().contains(query.toLowerCase()) &&
+                      model.typePosting == "Y")
+              .toList();
+        }
+        notifyListeners();
+      } catch (e) {
+        print("Error: $e");
+      } finally {
+        isLoadingInquery = false;
+        notifyListeners();
+      }
+    } else {
+      listGl.clear(); // clear on short query
+    }
+
+    return listGl;
+  }
+
   final List<GlobalKey<FormState>> formStep = [
     GlobalKey<FormState>(),
     GlobalKey<FormState>(),
@@ -111,15 +311,230 @@ class JualBeliNotifier extends ChangeNotifier {
 
   cek() {
     DialogCustom().showLoading(context);
-    Future.delayed(Duration(seconds: 2)).then((value) {
-      clear();
-      informationDialog(context, "Information", "Update Successfully");
+    var jenisPenempatan = inventarisModel!.nik != '' ? "Karyawan" : "Kantor";
+    var format = DateFormat('MMMM y');
+    DateTime parseDate = format.parse(inventarisModel!.blnMulaiSusut);
+    var data = {
+      "kode_pt": users!.kodePt,
+      "kdaset": inventarisModel!.kdaset,
+      "kode_induk": users!.kodeInduk,
+      "jenis_penempatan": jenisPenempatan,
+      "nama_kantor": kantor!.namaKantor,
+      "kode_kantor": users!.kodeKantor,
+      "userinput": users!.namauser,
+      "userterm": "114.80.90.54",
+      "nilai_jual": nilaijual.text.replaceAll(",", ""),
+      "tgl_jual": DateFormat('y-MM-dd').format(tanggalJual!),
+      "alasan_jual": alasanjualhapus.text.trim(),
+      "bln_susut": DateFormat('y-MM-dd').format(parseDate),
+      "tgl_valuta": transaksiPendModel!.tglValuta,
+      "nomor_dok": transaksiPendModel!.noDokumen,
+      "keterangan_transaksi": transaksiPendModel!.keterangan,
+      "habeli": nilaiTrans.text.replaceAll(",", ""),
+      "persentase_penyusutan": nilaiPenyusutan.text.replaceAll(",", ""),
+      "metode_penyusutan": metode.toString(),
+    };
+    print("Data Payload ${jsonEncode(data)}");
+    Setuprepository.setup(token, NetworkURL.jual(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        if (double.parse(users!.maksimalTransaksi) <
+            double.parse(inventarisModel!.habeli)) {
+          var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+          var data = {
+            "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+            "tgl_valuta": "${transaksiPendModel!.tglValuta}",
+            "batch": "${users!.batch}",
+            "trx_type": "TRX",
+            "trx_code": "${transaksiPendModel!.trxCode}",
+            "otor": "0",
+            "kode_trn": "",
+            "nama_dr":
+                "${inventarisModel!.sbbAset.toString().substring(14, inventarisModel!.sbbAset.toString().length)}",
+            "dracc": "${inventarisModel!.sbbAset.toString().substring(1, 13)}",
+            "nama_cr":
+                "${inventarisModel!.sbbPenyusutan.toString().substring(14, inventarisModel!.sbbPenyusutan.toString().length)}",
+            "cracc":
+                "${inventarisModel!.sbbPenyusutan.toString().substring(1, 13)}",
+            "rrn": "$invoice",
+            "no_dokumen": "${transaksiPendModel!.noDokumen}",
+            "no_ref": "${transaksiPendModel!.noRef}",
+            "nominal": inventarisModel!.habeli,
+            "keterangan": "${keteranganTrans.text}",
+            "kode_pt": "${users!.kodePt}",
+            "kode_kantor": "${users!.kodeKantor}",
+            "kode_induk": "${users!.kodeInduk}",
+            "sts_validasi": "N",
+            "kode_ao_dr": "",
+            "kode_coll": "",
+            "kode_ao_cr": "",
+            "userinput": "${users!.namauser}",
+            "userterm": "114.80.90.54",
+            "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+            "inputtgljam":
+                "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+            "otoruser": "",
+            "otorterm": "",
+            "otortgljam": "",
+            "flag_trn": "0",
+            "merchant": "",
+            "source_trx": "",
+            "status": "PENDING",
+            "modul": "JUAL INVENTARIS",
+          };
+          Setuprepository.setup(
+              token, NetworkURL.transaksi(), jsonEncode(data));
+        } else {
+          var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+          var data = {
+            "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+            "tgl_valuta": "${transaksiPendModel!.tglValuta}",
+            "batch": "${users!.batch}",
+            "trx_type": "TRX",
+            "trx_code": "${transaksiPendModel!.trxCode}",
+            "otor": "0",
+            "kode_trn": "",
+            "nama_dr":
+                "${inventarisModel!.sbbAset.toString().substring(14, inventarisModel!.sbbAset.toString().length)}",
+            "dracc": "${inventarisModel!.sbbAset.toString().substring(1, 13)}",
+            "nama_cr":
+                "${inventarisModel!.sbbPenyusutan.toString().substring(14, inventarisModel!.sbbPenyusutan.toString().length)}",
+            "cracc":
+                "${inventarisModel!.sbbPenyusutan.toString().substring(1, 13)}",
+            "rrn": "$invoice",
+            "no_dokumen": "${transaksiPendModel!.noDokumen}",
+            "no_ref": "${transaksiPendModel!.noRef}",
+            "nominal": inventarisModel!.habeli,
+            "keterangan": "${keteranganTrans.text}",
+            "kode_pt": "${users!.kodePt}",
+            "kode_kantor": "${users!.kodeKantor}",
+            "kode_induk": "${users!.kodeInduk}",
+            "sts_validasi": "N",
+            "kode_ao_dr": "",
+            "kode_coll": "",
+            "kode_ao_cr": "",
+            "userinput": "${users!.namauser}",
+            "userterm": "114.80.90.54",
+            "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+            "inputtgljam":
+                "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+            "otoruser": "",
+            "otorterm": "",
+            "otortgljam": "",
+            "flag_trn": "0",
+            "merchant": "",
+            "source_trx": "",
+            "status": "COMPLETED",
+            "modul": "JUAL INVENTARIS",
+          };
+          Setuprepository.setup(
+              token, NetworkURL.transaksi(), jsonEncode(data));
+        }
+
+        if (double.parse(users!.maksimalTransaksi) <
+            double.parse(inventarisModel!.habeli)) {
+          var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+          var data = {
+            "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+            "tgl_valuta": "${transaksiPendModel!.tglValuta}",
+            "batch": "${users!.batch}",
+            "trx_type": "TRX",
+            "trx_code": "${transaksiPendModel!.trxCode}",
+            "otor": "0",
+            "kode_trn": "",
+            "nama_dr": "${transaksiPendModel!.namaCr}",
+            "dracc": "${transaksiPendModel!.cracc}",
+            "nama_cr": "${inqueryGlModeldeb!.namaSbb}",
+            "cracc": "${inqueryGlModeldeb!.nosbb}",
+            "rrn": "$invoice",
+            "no_dokumen": "${transaksiPendModel!.noDokumen}",
+            "no_ref": "${transaksiPendModel!.noRef}",
+            "nominal": nilaijual.text.replaceAll(",", ""),
+            "keterangan": "${keteranganTrans.text}",
+            "kode_pt": "${users!.kodePt}",
+            "kode_kantor": "${users!.kodeKantor}",
+            "kode_induk": "${users!.kodeInduk}",
+            "sts_validasi": "N",
+            "kode_ao_dr": "",
+            "kode_coll": "",
+            "kode_ao_cr": "",
+            "userinput": "${users!.namauser}",
+            "userterm": "114.80.90.54",
+            "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+            "inputtgljam":
+                "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+            "otoruser": "",
+            "otorterm": "",
+            "otortgljam": "",
+            "flag_trn": "0",
+            "merchant": "",
+            "source_trx": "",
+            "status": "PENDING",
+            "modul": "JUAL PENDAPATAN INVENTARIS",
+          };
+          Setuprepository.setup(
+              token, NetworkURL.transaksi(), jsonEncode(data));
+        } else {
+          var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+          var data = {
+            "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+            "tgl_valuta": "${transaksiPendModel!.tglValuta}",
+            "batch": "${users!.batch}",
+            "trx_type": "TRX",
+            "trx_code": "${transaksiPendModel!.trxCode}",
+            "otor": "0",
+            "kode_trn": "",
+            "nama_dr": "${transaksiPendModel!.namaCr}",
+            "dracc": "${transaksiPendModel!.cracc}",
+            "nama_cr": "${inqueryGlModeldeb!.namaSbb}",
+            "cracc": "${inqueryGlModeldeb!.nosbb}",
+            "rrn": "$invoice",
+            "no_dokumen": "${transaksiPendModel!.noDokumen}",
+            "no_ref": "${transaksiPendModel!.noRef}",
+            "nominal": nilaijual.text.replaceAll(",", ""),
+            "keterangan": "${keteranganTrans.text}",
+            "kode_pt": "${users!.kodePt}",
+            "kode_kantor": "${users!.kodeKantor}",
+            "kode_induk": "${users!.kodeInduk}",
+            "sts_validasi": "N",
+            "kode_ao_dr": "",
+            "kode_coll": "",
+            "kode_ao_cr": "",
+            "userinput": "${users!.namauser}",
+            "userterm": "114.80.90.54",
+            "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+            "inputtgljam":
+                "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+            "otoruser": "",
+            "otorterm": "",
+            "otortgljam": "",
+            "flag_trn": "0",
+            "merchant": "",
+            "source_trx": "",
+            "status": "COMPLETED",
+            "modul": "JUAL PENDAPATAN INVENTARIS",
+          };
+          Setuprepository.setup(
+              token, NetworkURL.transaksi(), jsonEncode(data));
+        }
+
+        getInventaris();
+        dialog = false;
+        currentStep = 0;
+        clear();
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message']);
+      }
     });
   }
 
   clear() {
     inventarisModel = null;
     karyawanModel = null;
+    transaksiPendModel = null;
     namaKaryawan.clear();
     nikKaryawan.clear();
     kdAset.clear();
@@ -146,6 +561,16 @@ class JualBeliNotifier extends ChangeNotifier {
 
   tutup() {
     dialog = false;
+    notifyListeners();
+  }
+
+  TransaksiPendModel? transaksiPendModel;
+  pilihTransaksi(TransaksiPendModel value) {
+    dialog = false;
+    transaksiPendModel = value;
+    nilaijual.text = FormatCurrency.oCcy
+        .format(int.parse(transaksiPendModel!.nominal))
+        .replaceAll(".", ",");
     notifyListeners();
   }
 
@@ -197,7 +622,7 @@ class JualBeliNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  DateTime? tglTransaksi;
+  DateTime? tglTransaksi = DateTime.now();
   Future piihTanggalBeli() async {
     var pickedendDate = (await showDatePicker(
       context: context,
@@ -207,20 +632,18 @@ class JualBeliNotifier extends ChangeNotifier {
             DateTime.now(),
           )),
           int.parse(DateFormat('dd').format(
-                DateTime.now(),
-              )) -
-              1),
+            DateTime.now(),
+          ))),
       firstDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('y').format(DateTime.now())) - 2,
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
           int.parse(DateFormat('dd').format(
-                DateTime.now(),
-              )) -
-              1),
+            DateTime.now(),
+          ))),
       lastDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) - 10,
+          int.parse(DateFormat('y').format(DateTime.now())) + 10,
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
@@ -230,8 +653,9 @@ class JualBeliNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTransaksi = pickedendDate;
-      tglbeli.text = DateFormat("dd-MMM-yyyy")
+      tglTrans.text = DateFormat("dd-MMM-yyyy")
           .format(DateTime.parse(pickedendDate.toString()));
+      getTransaksi();
       notifyListeners();
     }
   }
@@ -449,6 +873,7 @@ class JualBeliNotifier extends ChangeNotifier {
   InventarisModel? inventarisModel;
   pilihInventory(InventarisModel value) {
     inventarisModel = value;
+    print("HABELI : ${inventarisModel!.habeli}");
     kdAset.text = inventarisModel!.kdaset;
     noaset.text = inventarisModel!.kdaset;
     nmAset.text = inventarisModel!.namaaset;
@@ -462,16 +887,26 @@ class JualBeliNotifier extends ChangeNotifier {
     nik.text = inventarisModel!.nik;
     noDok.text = inventarisModel!.nodokBeli;
     kelompok.text = inventarisModel!.namaKelompok;
+    // keteranganTrans.text = inventarisModel!.ket;
     keterangan.text = inventarisModel!.ket;
     golongan.text = inventarisModel!.namaGolongan;
     satuans.text = inventarisModel!.satuanAset;
     tglbeli.text = DateFormat("dd-MMM-yyyy")
         .format(DateTime.parse(inventarisModel!.tglBeli.toString()));
-    notifyListeners();
+
     tglterima.text = inventarisModel!.tglTerima;
+    nilaiTrans.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.habeli))
+        .replaceAll(".", ",");
     hargaBuku.text = FormatCurrency.oCcy
         .format(int.parse(inventarisModel!.nilaiBuku))
         .replaceAll(".", ",");
+    getTransaksi();
+    notifyListeners();
+  }
+
+  bukaTransaksi() {
+    dialog = true;
     notifyListeners();
   }
 }
