@@ -12,6 +12,7 @@ import 'package:scroll_date_picker/scroll_date_picker.dart';
 
 import '../../../network/network.dart';
 import '../../../repository/SetupRepository.dart';
+import '../../../utils/button_custom.dart';
 
 class BayarDimukaNotifier extends ChangeNotifier {
   final BuildContext context;
@@ -86,9 +87,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
     void traverse(List<dynamic> items) {
       for (var item in items) {
         if (item is Map<String, dynamic>) {
-          if (item['jns_acc'] == 'C' &&
-              item['type_posting'] == "Y" &&
-              item['akun_perantara'] == "Y") {
+          if (item['jns_acc'] == 'C' && item['type_posting'] == "Y") {
             result.add(item);
           }
 
@@ -118,37 +117,195 @@ class BayarDimukaNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  var editData = false;
+  TransaksiBayarDimukaModel? transaksiBayarDimukaModel;
+  edit(String id) {
+    transaksiBayarDimukaModel = list.where((e) => e.id == int.parse(id)).first;
+    dialogEdit = true;
+    editData = true;
+    dialog = false;
+    nominal.text = FormatCurrency.oCcy
+        .format(int.parse(transaksiBayarDimukaModel!.nominal))
+        .replaceAll(".", ",");
+    tglPenyusutan.text = transaksiBayarDimukaModel!.mulaiSusu;
+    berapakali.text = transaksiBayarDimukaModel!.masaBayar;
+    keteranganBaru.text = transaksiBayarDimukaModel!.keterangan;
+    nilaiPengakuan.text = FormatCurrency.oCcy
+        .format(int.parse(transaksiBayarDimukaModel!.nilaiPengakuan))
+        .replaceAll(".", ",");
+
+    inqueryGlModelcre = listGlAll
+            .where((e) => e.nosbb == transaksiBayarDimukaModel!.debetSbb)
+            .isNotEmpty
+        ? listGlAll
+            .where((e) => e.nosbb == transaksiBayarDimukaModel!.debetSbb)
+            .first
+        : null;
+    noakun.text = inqueryGlModelcre!.nosbb;
+    namaakun.text = inqueryGlModelcre!.namaSbb;
+    inqueryGlModeldeb = listGlAll
+            .where((e) => e.nosbb == transaksiBayarDimukaModel!.creditSbb)
+            .isNotEmpty
+        ? listGlAll
+            .where((e) => e.nosbb == transaksiBayarDimukaModel!.creditSbb)
+            .first
+        : null;
+    nosbbdeb.text = inqueryGlModeldeb!.namaSbb;
+    namaSbbDeb.text = inqueryGlModeldeb!.nosbb;
+    notifyListeners();
+  }
+
+  confirm() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: 500,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Anda yakin menghapus transaksi ini?",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ButtonSecondary(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        name: "Tidak",
+                      )),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                          child: ButtonPrimary(
+                        onTap: () {
+                          Navigator.pop(context);
+                          remove();
+                        },
+                        name: "Ya",
+                      )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  remove() {
+    DialogCustom().showLoading(context);
+    var data = {
+      "id": transaksiBayarDimukaModel!.id,
+      "kode_pt": users!.kodePt,
+      "kode_kantor": users!.kodeKantor,
+      "kode_induk": users!.kodeInduk,
+      "userinput": users!.namauser,
+      "userterm": "",
+      "nomor_dok": transaksiBayarDimukaModel!.nomorDok,
+      "nomor_ref": transaksiBayarDimukaModel!.nomorRef,
+      "masa_bayar": berapakali.text.trim(),
+      "nominal": transaksiBayarDimukaModel!.nominal,
+      "nilai_pengakuan": nilaiPengakuan.text.replaceAll(",", ""),
+      "keterangan": keteranganBaru.text.trim(),
+      "debet_sbb": noakun.text.trim(),
+      "credit_sbb": namaSbbDeb.text.trim(),
+      "mulai_susu": DateFormat('y-MM').format(now),
+    };
+    Setuprepository.setup(
+            token, NetworkURL.bayardimukahapus(), jsonEncode(data))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        gettransaksibayar();
+        clear();
+        dialog = false;
+        informationDialog(context, "Information", value['message']);
+        notifyListeners();
+      } else {
+        informationDialog(context, "Warning", value['message']);
+      }
+    });
+  }
+
   final keyForm = GlobalKey<FormState>();
   cek() {
     if (keyForm.currentState!.validate()) {
-      DialogCustom().showLoading(context);
-      var data = {
-        "kode_pt": users!.kodePt,
-        "kode_kantor": users!.kodeKantor,
-        "kode_induk": users!.kodeInduk,
-        "userinput": users!.namauser,
-        "userterm": "",
-        "nomor_dok": nomorDok.text.trim(),
-        "nomor_ref": nomorRef.text.trim(),
-        "masa_bayar": berapakali.text.trim(),
-        "nominal": nominal.text.replaceAll(",", ""),
-        "nilai_pengakuan": nilaiPengakuan.text.replaceAll(",", ""),
-        "keterangan": keterangan.text.trim(),
-        "debet_sbb": noakun.text.trim(),
-        "credit_sbb": namaSbbDeb.text.trim(),
-        "mulai_susu": DateFormat('y-MM').format(now),
-      };
-      Setuprepository.setup(token, NetworkURL.bayardimuka(), jsonEncode(data))
-          .then((value) {
-        Navigator.pop(context);
-        if (value['status'].toString().toLowerCase().contains("success")) {
-          clear();
-          informationDialog(context, "Information", value['message']);
-          notifyListeners();
-        } else {
-          informationDialog(context, "Warning", value['message']);
-        }
-      });
+      if (editData) {
+        DialogCustom().showLoading(context);
+        var data = {
+          "id": transaksiBayarDimukaModel!.id,
+          "kode_pt": users!.kodePt,
+          "kode_kantor": users!.kodeKantor,
+          "kode_induk": users!.kodeInduk,
+          "userinput": users!.namauser,
+          "userterm": "",
+          "nomor_dok": transaksiBayarDimukaModel!.nomorDok,
+          "nomor_ref": transaksiBayarDimukaModel!.nomorRef,
+          "masa_bayar": berapakali.text.trim(),
+          "nominal": transaksiBayarDimukaModel!.nominal,
+          "nilai_pengakuan": nilaiPengakuan.text.replaceAll(",", ""),
+          "keterangan": keteranganBaru.text.trim(),
+          "debet_sbb": noakun.text.trim(),
+          "credit_sbb": namaSbbDeb.text.trim(),
+          "mulai_susu": DateFormat('y-MM').format(now),
+        };
+        Setuprepository.setup(
+                token, NetworkURL.bayardimukaubah(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'].toString().toLowerCase().contains("success")) {
+            clear();
+            gettransaksibayar();
+            informationDialog(context, "Information", value['message']);
+            notifyListeners();
+          } else {
+            informationDialog(context, "Warning", value['message']);
+          }
+        });
+      } else {
+        DialogCustom().showLoading(context);
+        var data = {
+          "kode_pt": users!.kodePt,
+          "kode_kantor": users!.kodeKantor,
+          "kode_induk": users!.kodeInduk,
+          "userinput": users!.namauser,
+          "userterm": "",
+          "nomor_dok": nomorDok.text.trim(),
+          "nomor_ref": nomorRef.text.trim(),
+          "masa_bayar": berapakali.text.trim(),
+          "nominal": nominal.text.replaceAll(",", ""),
+          "nilai_pengakuan": nilaiPengakuan.text.replaceAll(",", ""),
+          "keterangan": keterangan.text.trim(),
+          "debet_sbb": noakun.text.trim(),
+          "credit_sbb": namaSbbDeb.text.trim(),
+          "mulai_susu": DateFormat('y-MM').format(now),
+        };
+        Setuprepository.setup(token, NetworkURL.bayardimuka(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'].toString().toLowerCase().contains("success")) {
+            clear();
+            gettransaksibayar();
+            informationDialog(context, "Information", value['message']);
+            notifyListeners();
+          } else {
+            informationDialog(context, "Warning", value['message']);
+          }
+        });
+      }
     }
   }
 
@@ -368,14 +525,19 @@ class BayarDimukaNotifier extends ChangeNotifier {
   TextEditingController nomorRef = TextEditingController();
 
   bool dialog = false;
+  bool dialogEdit = false;
   tambah() {
     dialog = true;
+    dialogEdit = false;
+    editData = false;
     referensi = false;
     notifyListeners();
   }
 
   tutup() {
     dialog = false;
+    dialogEdit = false;
+    editData = false;
     referensi = false;
     notifyListeners();
   }
@@ -703,6 +865,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
   clear() {
     transaksiModel = null;
     dialog = false;
+    dialogEdit = false;
     noakun.clear();
     namaakun.clear();
     nominal.clear();
