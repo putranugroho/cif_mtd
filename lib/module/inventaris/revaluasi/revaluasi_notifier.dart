@@ -348,7 +348,11 @@ class RevaluasiNotifier extends ChangeNotifier {
     keterangan.text = inventarisModel!.ket;
     golongan.text = inventarisModel!.namaGolongan;
     satuans.text = inventarisModel!.satuanAset;
-    tglbeli.text = inventarisModel!.tglBeli;
+    tglbeli.text = inventarisModel!.tglRevaluasi;
+    nominal.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.nilaiRevaluasi))
+        .replaceAll(".", ",");
+    picReval.text = inventarisModel!.picRevaluasi;
     tglterima.text = inventarisModel!.tglTerima;
     biaya.text = FormatCurrency.oCcy
         .format(int.parse(inventarisModel!.biaya))
