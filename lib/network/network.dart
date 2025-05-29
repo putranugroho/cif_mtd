@@ -421,6 +421,14 @@ class NetworkURL {
     return "$url/transaksi/search";
   }
 
+  static String bayardimuka() {
+    return "$url/transaksi/bayardimuka";
+  }
+
+  static String viewbayardimuka() {
+    return "$url/bayardimuka";
+  }
+
   static String view() {
     return "$url/transaksi/view";
   }

@@ -3,9 +3,12 @@ import 'dart:io';
 
 import 'package:accounting/models/index.dart';
 import 'package:accounting/pref/pref.dart';
+import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/format_currency.dart';
+import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:scroll_date_picker/scroll_date_picker.dart';
 
 import '../../../network/network.dart';
 import '../../../repository/SetupRepository.dart';
@@ -30,8 +33,27 @@ class BayarDimukaNotifier extends ChangeNotifier {
     Pref().getUsers().then((value) {
       users = value;
       getInqueryAll();
-
+      gettransaksibayar();
       notifyListeners();
+    });
+  }
+
+  var isLoading = true;
+  List<TransaksiBayarDimukaModel> list = [];
+  Future gettransaksibayar() async {
+    isLoading = true;
+    list.clear();
+    notifyListeners();
+    var data = {"kode_pt": users!.kodePt};
+    Setuprepository.setup(token, NetworkURL.viewbayardimuka(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          list.add(TransaksiBayarDimukaModel.fromJson(i));
+        }
+        isLoading = false;
+        notifyListeners();
+      }
     });
   }
 
@@ -94,6 +116,40 @@ class BayarDimukaNotifier extends ChangeNotifier {
     nosbb.text = value.namaSbb;
     getTransaksi();
     notifyListeners();
+  }
+
+  final keyForm = GlobalKey<FormState>();
+  cek() {
+    if (keyForm.currentState!.validate()) {
+      DialogCustom().showLoading(context);
+      var data = {
+        "kode_pt": users!.kodePt,
+        "kode_kantor": users!.kodeKantor,
+        "kode_induk": users!.kodeInduk,
+        "userinput": users!.namauser,
+        "userterm": "",
+        "nomor_dok": nomorDok.text.trim(),
+        "nomor_ref": nomorRef.text.trim(),
+        "masa_bayar": berapakali.text.trim(),
+        "nominal": nominal.text.replaceAll(",", ""),
+        "nilai_pengakuan": nilaiPengakuan.text.replaceAll(",", ""),
+        "keterangan": keterangan.text.trim(),
+        "debet_sbb": noakun.text.trim(),
+        "credit_sbb": namaSbbDeb.text.trim(),
+        "mulai_susu": DateFormat('y-MM').format(now),
+      };
+      Setuprepository.setup(token, NetworkURL.bayardimuka(), jsonEncode(data))
+          .then((value) {
+        Navigator.pop(context);
+        if (value['status'].toString().toLowerCase().contains("success")) {
+          clear();
+          informationDialog(context, "Information", value['message']);
+          notifyListeners();
+        } else {
+          informationDialog(context, "Warning", value['message']);
+        }
+      });
+    }
   }
 
   Future getInqueryAll() async {
@@ -536,6 +592,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
   }
 
   TextEditingController tglValuta = TextEditingController();
+  TextEditingController nilaiPengakuan = TextEditingController();
   TextEditingController periode = TextEditingController();
 
   TransaksiPendModel? transaksiModel;
@@ -550,18 +607,108 @@ class BayarDimukaNotifier extends ChangeNotifier {
     keterangan.text = value.keterangan;
     namaakun.text = value.namaCr;
     namaakundebet.text = value.namaDr;
-    nominal.text = FormatCurrency.oCcyDecimal
-        .format(double.parse(value.nominal))
-        .replaceAll(".", ",")
+    nominal.text = FormatCurrency.oCcy
+        .format(double.parse(value.nominal).toInt())
         .replaceAll(".", ",");
     notifyListeners();
   }
 
+  onchange() {
+    nilaiPengakuan.text = FormatCurrency.oCcy
+        .format((double.parse(nominal.text.replaceAll(",", "")) /
+                int.parse(berapakali.text))
+            .toInt())
+        .replaceAll(".", ',');
+    notifyListeners();
+  }
+
+  TextEditingController tglPenyusutan = TextEditingController();
+  DateTime now = DateTime.now();
+  void showDate() async {
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(builder: (context, setStateDialog) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Container(
+              width: 500,
+              padding: EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    "Pilih Periode",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Container(
+                    height: 100,
+                    child: ScrollDatePicker(
+                      minimumDate: DateTime.now(),
+                      maximumDate: DateTime(DateTime.now().year + 50),
+                      options: DatePickerOptions(backgroundColor: Colors.white),
+                      viewType: [
+                        DatePickerViewType.month,
+                        DatePickerViewType.year,
+                      ],
+                      selectedDate: now,
+                      onDateTimeChanged: (e) {
+                        setStateDialog(() {
+                          now = e;
+                          tglPenyusutan.text = DateFormat('MMMM y').format(now);
+                        });
+                        notifyListeners(); // if ChangeNotifier is needed
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                      tglPenyusutan.text = DateFormat('MMMM y').format(now);
+                      notifyListeners(); // if ChangeNotifier is needed
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.blue, // replace with your colorPrimary
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        "Simpan",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+      },
+    );
+  }
+
   clear() {
     transaksiModel = null;
+    dialog = false;
     noakun.clear();
     namaakun.clear();
     nominal.clear();
+    transaksiModel = null;
+    nosbbdeb.clear();
+    nossbcre.clear();
     notifyListeners();
   }
 }
