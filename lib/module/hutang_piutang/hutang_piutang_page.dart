@@ -1,10 +1,12 @@
 import 'package:accounting/models/index.dart';
 import 'package:accounting/module/hutang_piutang/hutang_piutang_notifier.dart';
 import 'package:accounting/utils/button_custom.dart';
+import 'package:accounting/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart' as a;
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -212,12 +214,12 @@ class HutangPiutangPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      columnName: 'invoice',
+                                      columnName: 'tgl_kontrak',
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.all(6),
-                                          child: Text('No. Invoice',
+                                          child: Text('Tanggal Kontrak',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -236,7 +238,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      columnName: 'kewajiban',
+                                      columnName: 'os',
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
@@ -1816,11 +1818,97 @@ class HutangPiutangPage extends StatelessWidget {
 }
 
 class DetailDataSource extends DataGridSource {
-  DetailDataSource(HutangPiutangNotifier value) {}
+  DetailDataSource(HutangPiutangNotifier value) {
+    tindakanNotifier = value;
+    buildRowData(value.listTransaksiAdd);
+  }
+
+  HutangPiutangNotifier? tindakanNotifier;
+
+  List<DataGridRow> _laporanData = [];
+  @override
+  List<DataGridRow> get rows => _laporanData;
+  void buildRowData(List<HutangPiutangTransaksiModel> list) {
+    int index = 1;
+    _laporanData = list
+        .map<DataGridRow>((data) => DataGridRow(
+              cells: [
+                DataGridCell(columnName: 'no', value: (index++).toString()),
+                DataGridCell(columnName: 'cussup', value: data.namaSif),
+                DataGridCell(columnName: 'kontrak', value: data.nokontrak),
+                DataGridCell(columnName: 'tgl_kontrak', value: data.tglKontrak),
+                DataGridCell(
+                    columnName: 'transaksi',
+                    value: FormatCurrency.oCcy
+                        .format(int.parse(data.totalTagPokok))),
+                DataGridCell(
+                    columnName: 'os',
+                    value: FormatCurrency.oCcy.format(
+                        (int.parse(data.totalTagPokok) -
+                            int.parse(data.totalByrPokok)))),
+                DataGridCell(
+                    columnName: 'carabayar',
+                    value: data.noinv == null ? "Tagihan" : "Auto"),
+                DataGridCell(
+                    columnName: 'jangkawaktu', value: data.jangkawaktu),
+                DataGridCell(
+                    columnName: 'action', value: data.nokontrak.toString()),
+              ],
+            ))
+        .toList();
+  }
 
   @override
-  DataGridRowAdapter? buildRow(DataGridRow row) {
-    // TODO: implement buildRow
-    throw UnimplementedError();
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    return DataGridRowAdapter(
+      cells: row.getCells().map<Widget>((e) {
+        if (e.columnName == 'action') {
+          return Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+              onTap: () {
+                // tindakanNotifier!.edit(e.value);
+              },
+              child: Container(
+                width: 300,
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: colorPrimary,
+                  border: Border.all(
+                    width: 2,
+                    color: colorPrimary,
+                  ),
+                ),
+                child: Text(
+                  "Aksi",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          );
+        } else {
+          return Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          );
+        }
+      }).toList(),
+    );
+  }
+
+  String formatStringData(String data) {
+    int numericData = int.tryParse(data) ?? 0;
+    final formatter = NumberFormat("#,###");
+    return formatter.format(numericData);
   }
 }

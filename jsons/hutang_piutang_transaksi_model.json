@@ -1,0 +1,19 @@
+{
+    "nokontrak": "",
+    "nama_sif": "",
+    "alamat": "",
+    "tgl_kontrak": "",
+    "jenis_transaksi": "",
+    "keterangan": "",
+    "no_ref": "",
+    "custsupp": "",
+    "tipe_transaksi": "",
+    "noinv": null,
+    "jangkawaktu": "",
+    "total_tag_pokok": "",
+    "total_tag_ppn": "",
+    "total_tag_pph": "",
+    "total_byr_pokok": "",
+    "total_byr_ppn": "",
+    "total_byr_pph": ""
+}

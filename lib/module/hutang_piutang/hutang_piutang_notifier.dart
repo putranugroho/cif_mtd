@@ -32,7 +32,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
       getCustomers();
       getSetupPajak();
       getSetupkaskecil();
-      // getHutangPiutang();
+      getHutangPiutang();
       notifyListeners();
     });
   }
@@ -63,10 +63,33 @@ class HutangPiutangNotifier extends ChangeNotifier {
     });
   }
 
+  List<HutangPiutangTransaksiModel> listTransaksi = [];
+  List<HutangPiutangTransaksiModel> listTransaksiAdd = [];
   Future getHutangPiutang() async {
+    isLoading = true;
+    listTransaksi.clear();
+    listTransaksiAdd.clear();
+    notifyListeners();
     var data = {"kode_pt": users!.kodePt};
     Setuprepository.setup(
-        token, NetworkURL.getHutangPiutang(), jsonEncode(data));
+            token, NetworkURL.getHutangPiutang(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listTransaksi.add(HutangPiutangTransaksiModel.fromJson(i));
+        }
+        if (listTransaksi.isNotEmpty) {
+          listTransaksiAdd = jenisTrans
+              ? listTransaksi.where((e) => e.tipeTransaksi == "2").toList()
+              : listTransaksi.where((e) => e.tipeTransaksi == "1").toList();
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
   }
 
   List<Map<String, dynamic>> extractJnsAccB(List<dynamic> rawData) {
@@ -178,10 +201,14 @@ class HutangPiutangNotifier extends ChangeNotifier {
 
       for (var i = 0; i < listTglJthTempo.length; i++) {
         var tglJatuhTempo = listTglJthTempo[i].text;
-        var nilaiTransaksi = listNilaiTransaksi[i].text.replaceAll(",", "");
-        var nilaippn = listNilaiPPN[i].text.replaceAll(",", "");
-        var nilaipph = listNilaiPPH[i].text.replaceAll(",", "");
-        var outstanding = listOutstanding[i].text.replaceAll(",", "");
+        var nilaiTransaksi =
+            listNilaiTransaksi[i].text.replaceAll(".", "").replaceAll(",", ".");
+        var nilaippn =
+            listNilaiPPN[i].text.replaceAll(".", "").replaceAll(",", ".");
+        var nilaipph =
+            listNilaiPPH[i].text.replaceAll(".", "").replaceAll(",", ".");
+        var outstanding =
+            listOutstanding[i].text.replaceAll(".", "").replaceAll(",", ".");
         var format = DateFormat('dd-MMM-y');
         DateTime parseDate = format.parse(tglJatuhTempo);
         listTmp.add({
@@ -233,6 +260,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
           "jenis_transaksi": "$tipePiutang",
           "nama_sif": "${customerSupplierModel!.nmSif}",
           "alamat": "${alamat.text}",
+          "tipe_transaksi": "${jenis}",
         });
       }
       notifyListeners();
@@ -704,6 +732,9 @@ class HutangPiutangNotifier extends ChangeNotifier {
 
           dialog = false;
           listTmp.clear();
+          getHutangPiutang();
+          clear();
+          notifyListeners();
 
           informationDialog(context, "Information", value['message']);
         } else {
@@ -711,6 +742,22 @@ class HutangPiutangNotifier extends ChangeNotifier {
         }
       });
     }
+  }
+
+  clear() {
+    listTglJthTempo.clear();
+    listNilaiTransaksi.clear();
+    listNilaiPPN.clear();
+    listNilaiPPH.clear();
+    listOutstanding.clear();
+    customerSupplierModel = null;
+    nilaitransaksi.clear();
+    nilaihpp.clear();
+    nilaippn.clear();
+    nilaipph.clear();
+    keterangan.clear();
+    noreferensi.clear();
+    notifyListeners();
   }
 
   Future getSetupPajak() async {
@@ -1155,6 +1202,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
   bool jenisTrans = false;
   pilihJenisTransaksi(bool value) {
     jenisTrans = value;
+    getHutangPiutang();
     notifyListeners();
   }
 
