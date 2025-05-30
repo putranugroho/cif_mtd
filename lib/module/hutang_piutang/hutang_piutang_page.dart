@@ -944,75 +944,144 @@ class HutangPiutangPage extends StatelessWidget {
                                             SizedBox(
                                               height: 8,
                                             ),
+
+                                            // ambil SBB
                                             Container(
                                                 height: 40,
                                                 alignment: Alignment.centerLeft,
                                                 child: Row(
                                                   children: [
                                                     Expanded(
-                                                      child: TextFormField(
-                                                        decoration:
-                                                            InputDecoration(
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              width: 1,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
-                                                        ),
+                                                      child: TypeAheadField<
+                                                          InqueryGlModel>(
+                                                        controller: value
+                                                            .namaakuntransaksi,
+                                                        suggestionsCallback:
+                                                            (search) => value
+                                                                .getInquery(
+                                                                    search),
+                                                        builder: (context,
+                                                            controller,
+                                                            focusNode) {
+                                                          return TextField(
+                                                              controller:
+                                                                  controller,
+                                                              focusNode:
+                                                                  focusNode,
+                                                              autofocus: true,
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                border:
+                                                                    OutlineInputBorder(),
+                                                                labelText:
+                                                                    'Cari Akun',
+                                                              ));
+                                                        },
+                                                        itemBuilder:
+                                                            (context, city) {
+                                                          return ListTile(
+                                                            title: Text(
+                                                                city.nosbb),
+                                                            subtitle: Text(
+                                                                city.namaSbb),
+                                                          );
+                                                        },
+                                                        onSelected: (city) {
+                                                          // value.selectInvoice(city);
+                                                          value
+                                                              .pilihAkunTransaksi(
+                                                                  city);
+                                                        },
                                                       ),
                                                     ),
                                                     SizedBox(
                                                       width: 16,
                                                     ),
                                                     Expanded(
-                                                      child: TextFormField(
-                                                        decoration:
-                                                            InputDecoration(
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              width: 1,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
-                                                        ),
+                                                      child: TypeAheadField<
+                                                          InqueryGlModel>(
+                                                        controller:
+                                                            value.namaakunpajak,
+                                                        suggestionsCallback:
+                                                            (search) => value
+                                                                .getInquery(
+                                                                    search),
+                                                        builder: (context,
+                                                            controller,
+                                                            focusNode) {
+                                                          return TextField(
+                                                              controller:
+                                                                  controller,
+                                                              focusNode:
+                                                                  focusNode,
+                                                              autofocus: true,
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                border:
+                                                                    OutlineInputBorder(),
+                                                                labelText:
+                                                                    'Cari Akun PPN',
+                                                              ));
+                                                        },
+                                                        itemBuilder:
+                                                            (context, city) {
+                                                          return ListTile(
+                                                            title: Text(
+                                                                city.nosbb),
+                                                            subtitle: Text(
+                                                                city.namaSbb),
+                                                          );
+                                                        },
+                                                        onSelected: (city) {
+                                                          // value.selectInvoice(city);
+                                                          value.pilihAkunPajak(
+                                                              city);
+                                                        },
                                                       ),
                                                     ),
                                                     SizedBox(
                                                       width: 16,
                                                     ),
                                                     Expanded(
-                                                      child: TextFormField(
-                                                        decoration:
-                                                            InputDecoration(
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              width: 1,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
-                                                        ),
+                                                      child: TypeAheadField<
+                                                          InqueryGlModel>(
+                                                        controller:
+                                                            value.namaakunpph,
+                                                        suggestionsCallback:
+                                                            (search) => value
+                                                                .getInquery(
+                                                                    search),
+                                                        builder: (context,
+                                                            controller,
+                                                            focusNode) {
+                                                          return TextField(
+                                                              controller:
+                                                                  controller,
+                                                              focusNode:
+                                                                  focusNode,
+                                                              autofocus: true,
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                border:
+                                                                    OutlineInputBorder(),
+                                                                labelText:
+                                                                    'Cari Akun PPH',
+                                                              ));
+                                                        },
+                                                        itemBuilder:
+                                                            (context, city) {
+                                                          return ListTile(
+                                                            title: Text(
+                                                                city.nosbb),
+                                                            subtitle: Text(
+                                                                city.namaSbb),
+                                                          );
+                                                        },
+                                                        onSelected: (city) {
+                                                          // value.selectInvoice(city);
+                                                          value.pilihAkunPph(
+                                                              city);
+                                                        },
                                                       ),
                                                     ),
                                                   ],
@@ -1432,6 +1501,54 @@ class HutangPiutangPage extends StatelessWidget {
                                                         hintText:
                                                             "Jatuh Tempo"),
                                                   ),
+                                                ),
+                                                Expanded(
+                                                  child: TextFormField(
+                                                    controller: value
+                                                        .listOutstanding[i],
+                                                    keyboardType: TextInputType
+                                                        .numberWithOptions(
+                                                            decimal: true),
+                                                    inputFormatters: [
+                                                      a.CurrencyInputFormatter(
+                                                        leadingSymbol: '',
+                                                        useSymbolPadding: true,
+                                                        thousandSeparator: a
+                                                            .ThousandSeparator
+                                                            .Period,
+                                                        mantissaLength:
+                                                            2, // jumlah angka desimal
+                                                        // decimalSeparator: DecimalSeparator.Comma,
+                                                      ),
+                                                    ],
+                                                    // readOnly:
+                                                    //     value.tagihanbulanan
+                                                    //         ? true
+                                                    //         : false,
+                                                    decoration: InputDecoration(
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                          borderSide:
+                                                              BorderSide(
+                                                            width: 1,
+                                                            color: Colors.grey,
+                                                          ),
+                                                        ),
+                                                        // filled:
+                                                        //     value.tagihanbulanan
+                                                        //         ? true
+                                                        //         : false,
+                                                        // fillColor:
+                                                        //     Colors.grey[200],
+                                                        hintText:
+                                                            "Outstanding"),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 16,
                                                 ),
                                                 Expanded(
                                                   child: TextFormField(

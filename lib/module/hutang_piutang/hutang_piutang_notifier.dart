@@ -1,9 +1,12 @@
 import 'dart:convert';
 
+import 'package:accounting/models/index.dart';
+import 'package:accounting/pref/pref.dart';
 import 'package:accounting/utils/format_currency.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../../models/inquery_gl_model.dart';
 import 'adjusted_rounding.dart';
 
 import '../../models/customer_supplier_model.dart';
@@ -19,8 +22,178 @@ class HutangPiutangNotifier extends ChangeNotifier {
     required this.context,
     required this.tipe,
   }) {
-    getCustomers();
-    getSetupPajak();
+    getProfile();
+  }
+  UserModel? users;
+  getProfile() async {
+    Pref().getUsers().then((value) {
+      users = value;
+      getCustomers();
+      getSetupPajak();
+      notifyListeners();
+    });
+  }
+
+  List<Map<String, dynamic>> extractJnsAccB(List<dynamic> rawData) {
+    List<Map<String, dynamic>> result = [];
+
+    void traverse(List<dynamic> items) {
+      for (var item in items) {
+        if (item is Map<String, dynamic>) {
+          if (item['jns_acc'] == 'C' && item['type_posting'] == "Y") {
+            result.add(item);
+          }
+
+          if (item.containsKey('items') && item['items'] is List) {
+            traverse(item['items']);
+          }
+        }
+      }
+    }
+
+    traverse(rawData);
+    return result;
+  }
+
+  InqueryGlModel? inqueryGlModelTransaksi;
+  pilihAkunTransaksi(InqueryGlModel value) {
+    inqueryGlModelTransaksi = value;
+    namaakuntransaksi.text = value.namaSbb;
+    notifyListeners();
+  }
+
+  InqueryGlModel? inqueryGlModelPajak;
+  pilihAkunPajak(InqueryGlModel value) {
+    inqueryGlModelPajak = value;
+    namaakunpajak.text = value.namaSbb;
+    notifyListeners();
+  }
+
+  InqueryGlModel? inqueryGlModelPph;
+  pilihAkunPph(InqueryGlModel value) {
+    inqueryGlModelPph = value;
+    namaakunpph.text = value.namaSbb;
+    notifyListeners();
+  }
+
+  var isLoadingInquery = true;
+  List<InqueryGlModel> listGl = [];
+  TextEditingController namaakuntransaksi = TextEditingController();
+  TextEditingController namaakunpajak = TextEditingController();
+  TextEditingController namaakunpph = TextEditingController();
+  Future<List<InqueryGlModel>> getInquery(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      isLoadingInquery = true;
+      listGl.clear();
+      notifyListeners();
+
+      var data = {"kode_pt": "001"};
+
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.getInqueryGL(),
+          jsonEncode(data),
+        );
+
+        if (response['status'].toString().toLowerCase().contains("success")) {
+          final List<Map<String, dynamic>> jnsAccBItems =
+              extractJnsAccB(response['data']);
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                  model.namaSbb.toLowerCase().contains(query.toLowerCase()) &&
+                      model.typePosting == "Y")
+              .toList();
+        }
+        notifyListeners();
+      } catch (e) {
+        print("Error: $e");
+      } finally {
+        isLoadingInquery = false;
+        notifyListeners();
+      }
+    } else {
+      listGl.clear(); // clear on short query
+    }
+
+    return listGl;
+  }
+
+  final keyForm = GlobalKey<FormState>();
+  cek() {
+    if (keyForm.currentState!.validate()) {
+      List<Map<String, dynamic>> listTmp = [];
+
+      for (var i = 0; i < listTglJthTempo.length; i++) {
+        var tglJatuhTempo = listTglJthTempo[i].text;
+        var nilaiTransaksi = listNilaiTransaksi[i].text.replaceAll(",", "");
+        var nilaippn = listNilaiPPN[i].text.replaceAll(",", "");
+        var nilaipph = listNilaiPPH[i].text.replaceAll(",", "");
+        var outstanding = listOutstanding[i].text.replaceAll(",", "");
+        var format = DateFormat('dd-MMM-y');
+        DateTime parseDate = format.parse(tglJatuhTempo);
+        listTmp.add({
+          "custsupp": "${customerSupplierModel!.noSif}",
+          "nokontrak": "${nokontrak.text}",
+          "ke": "${i + 1}",
+          "thn": "${DateFormat('y').format(parseDate)}",
+          "bln": "${DateFormat('MM').format(parseDate)}",
+          "tgl": "${DateFormat('dd').format(parseDate)}",
+          "os": "$outstanding",
+          "tag_pokok": "$nilaiTransaksi",
+          "tag_ppn": "$nilaippn",
+          "tag_pph": "$nilaipph",
+          "byr_pokok": "0",
+          "byr_ppn": "0",
+          "byr_pph": "0",
+          "ststgh": "0",
+          "tglbyr_pokok": "",
+          "tglbyr_ppn": "",
+          "tglbyr_pph": "",
+          "noinv": "${noinvoice.text}",
+          "tgltagihan": "${DateFormat('y-MM-dd').format(parseDate)}",
+          "tglppn": "${DateFormat('y-MM-dd').format(parseDate)}",
+          "tglpph": "${DateFormat('y-MM-dd').format(parseDate)}",
+          "stspokok": "0",
+          "stsppn": "0",
+          "stspph": "0",
+          "kdmkt": "",
+          "stsrec": "A",
+          "inpuser": "${users!.namauser}",
+          "inptgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(parseDate)}",
+          "inpterm": "",
+          "chguser": "",
+          "chgtgljam": "",
+          "chgterm": "",
+          "autuser": "",
+          "auttgljam": "",
+          "autterm": "",
+          "stsacru": "",
+          "tglbyrlambat": "",
+          "userinput": "${users!.namauser}",
+          "userterm": "",
+          "kode_pt": "${users!.kodePt}",
+          "kode_kantor": "${users!.kodeKantor}",
+          "kode_induk": "${users!.kodeInduk}",
+        });
+      }
+      notifyListeners();
+
+      Setuprepository.setup(
+              token, NetworkURL.addHutangPiutang(), jsonEncode(listTmp))
+          .then((value) {
+        if (value['status'].toString().toLowerCase().contains("success")) {
+          dialog = false;
+          listTmp.clear();
+
+          informationDialog(context, "Information", value['message']);
+        } else {
+          informationDialog(context, "Warning", value['message']);
+        }
+      });
+    }
   }
 
   Future getSetupPajak() async {
@@ -250,7 +423,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
   }
 
   var isLoading = true;
-  getProfile() async {}
+
   var dialog = false;
   var editData = false;
   tambah() {
@@ -260,6 +433,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
   }
 
   List<TextEditingController> listTglJthTempo = [];
+  List<TextEditingController> listOutstanding = [];
   List<TextEditingController> listNilaiTransaksi = [];
   List<TextEditingController> listNilaiPPN = [];
   List<TextEditingController> listNilaiPPH = [];
@@ -287,6 +461,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
   }
 
   var buttonSimpan = false;
+
   hitungPembayaran() {
     if (nilaitransaksi.text.isEmpty) {
       informationDialog(context, "Warning", "Input Nilai Transaksi");
@@ -295,6 +470,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
     } else {
       listTglJthTempo.clear();
       listNilaiTransaksi.clear();
+      listOutstanding.clear();
       listNilaiPPN.clear();
       listNilaiPPH.clear();
       notifyListeners();
@@ -330,6 +506,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
       int nilaiLast = totalNilai.round() - nilaiList.reduce((a, b) => a + b);
       int ppnLast = totalPPN.round() - ppnList.reduce((a, b) => a + b);
       int pphLast = totalPPH.round() - pphList.reduce((a, b) => a + b);
+      int outstanding = totalNilai.round();
 
       for (var i = 0; i < periode; i++) {
         listTglJthTempo.add(TextEditingController(
@@ -360,6 +537,14 @@ class HutangPiutangNotifier extends ChangeNotifier {
                 text: FormatCurrency.oCcyDecimal.format(0)));
           }
         }
+
+        // listOutstanding.add(TextEditingController(
+        //     text: FormatCurrency.oCcyDecimal.format(outstanding)));
+
+        // outstanding -= nilai;
+        outstanding -= nilai;
+        listOutstanding.add(TextEditingController(
+            text: FormatCurrency.oCcyDecimal.format(outstanding)));
       }
       buttonSimpan = true;
       notifyListeners();
