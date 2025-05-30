@@ -19,6 +19,16 @@ class SbbHutangPiutangNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  TextEditingController namasbblawanhutang = TextEditingController();
+  TextEditingController namasbblawanpiutang = TextEditingController();
+  TextEditingController namasbbhpppiutang = TextEditingController();
+  TextEditingController namasbbpersedianpiutang = TextEditingController();
+
+  TextEditingController sbblawanhutang = TextEditingController();
+  TextEditingController sbblawanpiutang = TextEditingController();
+  TextEditingController sbbhpppiutang = TextEditingController();
+  TextEditingController sbbpersedianpiutang = TextEditingController();
+
   List<SetupHutangPiutangModel> listData = [];
   SetupHutangPiutangModel? setupHutangPiutangModel;
   Future getSetupkaskecil() async {
@@ -42,6 +52,11 @@ class SbbHutangPiutangNotifier extends ChangeNotifier {
           noSbbPpnHutang.text = setupHutangPiutangModel!.sbbppnhutang;
           nmSbbPphHutang.text = setupHutangPiutangModel!.namasbbpphhutang;
           noSbbPphHutang.text = setupHutangPiutangModel!.sbbpphhutang;
+          sbblawanhutang.text = setupHutangPiutangModel!.sbblawanhutang;
+          sbblawanpiutang.text = setupHutangPiutangModel!.sbblawanpiutang;
+          sbbhpppiutang.text = setupHutangPiutangModel!.sbbhpppiutang;
+          sbbpersedianpiutang.text =
+              setupHutangPiutangModel!.sbbpersedianpiutang;
           nmSbbTransPiutang.text =
               setupHutangPiutangModel!.namasbbtransaksipiutang;
           noSbbTransPiutang.text = setupHutangPiutangModel!.sbbtransaksipiutang;
@@ -49,6 +64,12 @@ class SbbHutangPiutangNotifier extends ChangeNotifier {
           noSbbPpnPiutang.text = setupHutangPiutangModel!.sbbppnpiutang;
           nmSbbPphPiutang.text = setupHutangPiutangModel!.namasbbpphpiutang;
           noSbbPphPiutang.text = setupHutangPiutangModel!.sbbpphpiutang;
+          namasbblawanhutang.text = setupHutangPiutangModel!.namasbblawanhutang;
+          namasbblawanpiutang.text =
+              setupHutangPiutangModel!.namasbblawanpiutang;
+          namasbbhpppiutang.text = setupHutangPiutangModel!.namasbbhpppiutang;
+          namasbbpersedianpiutang.text =
+              setupHutangPiutangModel!.namasbbpersedianpiutang;
         }
         isLoading = false;
         notifyListeners();
@@ -183,6 +204,34 @@ class SbbHutangPiutangNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  pilihlawanhutang(InqueryGlModel value) {
+    inqueryGlModeldeb = value;
+    namasbblawanhutang.text = value.namaSbb;
+    sbblawanhutang.text = value.nosbb;
+    notifyListeners();
+  }
+
+  pilihlawanpiutang(InqueryGlModel value) {
+    inqueryGlModeldeb = value;
+    namasbblawanpiutang.text = value.namaSbb;
+    sbblawanpiutang.text = value.nosbb;
+    notifyListeners();
+  }
+
+  pilihhpp(InqueryGlModel value) {
+    inqueryGlModeldeb = value;
+    namasbbhpppiutang.text = value.namaSbb;
+    sbbhpppiutang.text = value.nosbb;
+    notifyListeners();
+  }
+
+  pilihpersediaan(InqueryGlModel value) {
+    inqueryGlModeldeb = value;
+    namasbbpersedianpiutang.text = value.namaSbb;
+    sbbpersedianpiutang.text = value.nosbb;
+    notifyListeners();
+  }
+
   List<InqueryGlModel> list = [];
 
   var isLoading = false;
@@ -210,12 +259,20 @@ class SbbHutangPiutangNotifier extends ChangeNotifier {
       "sbbtransaksipiutang": "${noSbbTransPiutang.text}",
       "sbbppnpiutang": "${noSbbPpnPiutang.text}",
       "sbbpphpiutang": "${noSbbPphPiutang.text}",
+      "sbblawanhutang": "${sbblawanhutang.text}",
+      "sbblawanpiutang": "${sbblawanpiutang.text}",
+      "sbbhpppiutang": "${sbbhpppiutang.text}",
+      "sbbpersedianpiutang": "${sbbpersedianpiutang.text}",
       "namasbbtransaksihutang": "${nmSbbTransHutang.text}",
       "namasbbpphhutang": "${nmSbbPphHutang.text}",
       "namasbbppnhutang": "${nmSbbPpnHutang.text}",
       "namasbbtransaksipiutang": "${nmSbbTransPiutang.text}",
       "namasbbpphpiutang": "${nmSbbPphPiutang.text}",
-      "namasbbppnpiutang": "${nmSbbPpnPiutang.text}"
+      "namasbbppnpiutang": "${nmSbbPpnPiutang.text}",
+      "namasbblawanhutang": "${namasbblawanhutang.text}",
+      "namasbblawanpiutang": "${namasbblawanpiutang.text}",
+      "namasbbhpppiutang": "${namasbbhpppiutang.text}",
+      "namasbbpersedianpiutang": "${namasbbpersedianpiutang.text}",
     };
     Setuprepository.setup(
             token, NetworkURL.addSetupHutangPiutang(), jsonEncode(data))

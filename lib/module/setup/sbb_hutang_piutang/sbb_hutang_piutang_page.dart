@@ -120,6 +120,38 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   ),
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
+                                      controller: value.namasbblawanhutang,
+                                      suggestionsCallback: (search) =>
+                                          value.getInquery(search),
+                                      builder:
+                                          (context, controller, focusNode) {
+                                        return TextField(
+                                            controller: controller,
+                                            focusNode: focusNode,
+                                            autofocus: true,
+                                            decoration: InputDecoration(
+                                              border: OutlineInputBorder(),
+                                              labelText:
+                                                  'Cari Akun Lawan Hutang',
+                                            ));
+                                      },
+                                      itemBuilder: (context, city) {
+                                        return ListTile(
+                                          title: Text(city.nosbb),
+                                          subtitle: Text(city.namaSbb),
+                                        );
+                                      },
+                                      onSelected: (city) {
+                                        // value.selectInvoice(city);
+                                        value.pilihlawanhutang(city);
+                                      },
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Expanded(
+                                    child: TypeAheadField<InqueryGlModel>(
                                       controller: value.nmSbbPpnHutang,
                                       suggestionsCallback: (search) =>
                                           value.getInquery(search),
@@ -220,6 +252,37 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                       // enabled: false,
                                       readOnly: true,
                                       textInputAction: TextInputAction.done,
+                                      controller: value.sbblawanhutang,
+                                      maxLines: 1,
+                                      // inputFormatters: [
+                                      //   FilteringTextInputFormatter.digitsOnly
+                                      // ],
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.grey[200],
+                                        hintText: "No SBB",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Expanded(
+                                    child: TextFormField(
+                                      // enabled: false,
+                                      readOnly: true,
+                                      textInputAction: TextInputAction.done,
                                       controller: value.noSbbPpnHutang,
                                       maxLines: 1,
                                       // inputFormatters: [
@@ -273,7 +336,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                               const SizedBox(
@@ -326,6 +389,234 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   SizedBox(
                                     width: 16,
                                   ),
+                                  Expanded(
+                                    child: TypeAheadField<InqueryGlModel>(
+                                      controller: value.namasbblawanpiutang,
+                                      suggestionsCallback: (search) =>
+                                          value.getInquery(search),
+                                      builder:
+                                          (context, controller, focusNode) {
+                                        return TextField(
+                                            controller: controller,
+                                            focusNode: focusNode,
+                                            autofocus: true,
+                                            decoration: InputDecoration(
+                                              border: OutlineInputBorder(),
+                                              labelText:
+                                                  'Cari Akun Lawan Piutang',
+                                            ));
+                                      },
+                                      itemBuilder: (context, city) {
+                                        return ListTile(
+                                          title: Text(city.nosbb),
+                                          subtitle: Text(city.namaSbb),
+                                        );
+                                      },
+                                      onSelected: (city) {
+                                        // value.selectInvoice(city);
+                                        value.pilihlawanpiutang(city);
+                                      },
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Expanded(
+                                    child: TypeAheadField<InqueryGlModel>(
+                                      controller: value.namasbbhpppiutang,
+                                      suggestionsCallback: (search) =>
+                                          value.getInquery(search),
+                                      builder:
+                                          (context, controller, focusNode) {
+                                        return TextField(
+                                            controller: controller,
+                                            focusNode: focusNode,
+                                            autofocus: true,
+                                            decoration: InputDecoration(
+                                              border: OutlineInputBorder(),
+                                              labelText:
+                                                  'Cari Akun HPP Piutang',
+                                            ));
+                                      },
+                                      itemBuilder: (context, city) {
+                                        return ListTile(
+                                          title: Text(city.nosbb),
+                                          subtitle: Text(city.namaSbb),
+                                        );
+                                      },
+                                      onSelected: (city) {
+                                        // value.selectInvoice(city);
+                                        value.pilihhpp(city);
+                                      },
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Expanded(
+                                    child: TypeAheadField<InqueryGlModel>(
+                                      controller: value.namasbbpersedianpiutang,
+                                      suggestionsCallback: (search) =>
+                                          value.getInquery(search),
+                                      builder:
+                                          (context, controller, focusNode) {
+                                        return TextField(
+                                            controller: controller,
+                                            focusNode: focusNode,
+                                            autofocus: true,
+                                            decoration: InputDecoration(
+                                              border: OutlineInputBorder(),
+                                              labelText:
+                                                  'Cari Akun Persedian Piutang',
+                                            ));
+                                      },
+                                      itemBuilder: (context, city) {
+                                        return ListTile(
+                                          title: Text(city.nosbb),
+                                          subtitle: Text(city.namaSbb),
+                                        );
+                                      },
+                                      onSelected: (city) {
+                                        // value.selectInvoice(city);
+                                        value.pilihpersediaan(city);
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TextFormField(
+                                      // enabled: false,
+                                      readOnly: true,
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.noSbbTransPiutang,
+                                      maxLines: 1,
+                                      // inputFormatters: [
+                                      //   FilteringTextInputFormatter.digitsOnly
+                                      // ],
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.grey[200],
+                                        hintText: "No SBB",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Expanded(
+                                    child: TextFormField(
+                                      // enabled: false,
+                                      readOnly: true,
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.sbblawanpiutang,
+                                      maxLines: 1,
+                                      // inputFormatters: [
+                                      //   FilteringTextInputFormatter.digitsOnly
+                                      // ],
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.grey[200],
+                                        hintText: "No SBB",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Expanded(
+                                    child: TextFormField(
+                                      // enabled: false,
+                                      readOnly: true,
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.sbbhpppiutang,
+                                      maxLines: 1,
+                                      // inputFormatters: [
+                                      //   FilteringTextInputFormatter.digitsOnly
+                                      // ],
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.grey[200],
+                                        hintText: "No SBB",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Expanded(
+                                    child: TextFormField(
+                                      // enabled: false,
+                                      readOnly: true,
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.sbbpersedianpiutang,
+                                      maxLines: 1,
+                                      // inputFormatters: [
+                                      //   FilteringTextInputFormatter.digitsOnly
+                                      // ],
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.grey[200],
+                                        hintText: "No SBB",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Row(
+                                children: [
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.nmSbbPpnPiutang,
@@ -385,6 +676,14 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                       },
                                     ),
                                   ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Expanded(child: SizedBox()),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Expanded(child: SizedBox()),
                                 ],
                               ),
                               const SizedBox(
@@ -392,37 +691,6 @@ class SbbHutangPiutangPage extends StatelessWidget {
                               ),
                               Row(
                                 children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      // enabled: false,
-                                      readOnly: true,
-                                      textInputAction: TextInputAction.done,
-                                      controller: value.noSbbTransPiutang,
-                                      maxLines: 1,
-                                      // inputFormatters: [
-                                      //   FilteringTextInputFormatter.digitsOnly
-                                      // ],
-                                      validator: (e) {
-                                        if (e!.isEmpty) {
-                                          return "Wajib diisi";
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.grey[200],
-                                        hintText: "No SBB",
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 16,
-                                  ),
                                   Expanded(
                                     child: TextFormField(
                                       // enabled: false,
@@ -481,7 +749,15 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                  )
+                                  ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Expanded(child: SizedBox()),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Expanded(child: SizedBox()),
                                 ],
                               ),
                               const SizedBox(

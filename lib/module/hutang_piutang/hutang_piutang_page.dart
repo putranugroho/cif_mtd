@@ -1,6 +1,7 @@
 import 'package:accounting/models/index.dart';
 import 'package:accounting/module/hutang_piutang/hutang_piutang_notifier.dart';
 import 'package:accounting/utils/button_custom.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -97,7 +98,7 @@ class HutangPiutangPage extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Text(
-                                    "Jenis Transaksi",
+                                    "Tipe Transaksi",
                                     style: const TextStyle(fontSize: 16),
                                   ),
                                   const SizedBox(width: 16),
@@ -345,817 +346,406 @@ class HutangPiutangPage extends StatelessWidget {
                                 height: 32,
                               ),
                               Expanded(
+                                  child: FocusTraversalGroup(
+                                child: Form(
+                                  key: value.keyForm,
                                   child: ListView(
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                     children: [
-                                      Container(
-                                        width: 200,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Container(
-                                              height: 40,
-                                              alignment: Alignment.centerLeft,
-                                              child:
-                                                  Text("Pilih Jenis Transaksi"),
-                                            ),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Container(
-                                              height: 40,
-                                              alignment: Alignment.centerLeft,
-                                              child: Text(
-                                                  "Pilih ${value.jenis == 1 ? "Customer" : "Supplier"}"),
-                                            ),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Container(
-                                              height: 40,
-                                              alignment: Alignment.centerLeft,
-                                              child: Text("Alamat"),
-                                            ),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Container(
-                                              height: 40,
-                                              alignment: Alignment.centerLeft,
-                                              child: Text("Nomor"),
-                                            ),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Container(
-                                              height: 40,
-                                              alignment: Alignment.centerLeft,
-                                              child: Text("No Referensi"),
-                                            ),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Container(
-                                              height: 40,
-                                              alignment: Alignment.centerLeft,
-                                              child: Text("Nilai Transaksi"),
-                                            ),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Container(
-                                              height: 40,
-                                              alignment: Alignment.centerLeft,
-                                              child: Text("SBB"),
-                                            ),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Container(
-                                              height: 40,
-                                              alignment: Alignment.centerLeft,
-                                              child: Text("Cara Pembayaran"),
-                                            ),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            value.caraPembayaran == "BERTAHAP"
-                                                ? Column(
-                                                    children: [
-                                                      Container(
-                                                        height: 40,
-                                                        alignment: Alignment
-                                                            .centerLeft,
-                                                        child:
-                                                            Text("Cara Bayar"),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Container(
-                                                        height: 40,
-                                                        alignment: Alignment
-                                                            .centerLeft,
-                                                        child: Text(
-                                                            "Jangka Waktu"),
-                                                      ),
-                                                    ],
-                                                  )
-                                                : SizedBox(),
-                                            SizedBox(
-                                              height: 24,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 32,
-                                      ),
-                                      Expanded(
-                                          child: Container(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Container(
-                                                height: 40,
-                                                alignment: Alignment.centerLeft,
-                                                child: Row(
-                                                  children: [
-                                                    Radio(
-                                                        value: 1,
-                                                        activeColor:
-                                                            colorPrimary,
-                                                        groupValue: value.jenis,
-                                                        onChanged: (e) {
-                                                          value.gantijenis(1);
-                                                        }),
-                                                    Text("Piutang"),
-                                                    SizedBox(
-                                                      width: 32,
-                                                    ),
-                                                    Radio(
-                                                        value: 2,
-                                                        groupValue: value.jenis,
-                                                        activeColor:
-                                                            colorPrimary,
-                                                        onChanged: (e) {
-                                                          value.gantijenis(2);
-                                                        }),
-                                                    Text("Hutang"),
-                                                  ],
-                                                )),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Container(
-                                                height: 40,
-                                                alignment: Alignment.centerLeft,
-                                                child: Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: TypeAheadField<
-                                                          CustomerSupplierModel>(
-                                                        controller: value
-                                                            .customersupplier,
-                                                        suggestionsCallback:
-                                                            (search) => value
-                                                                .getCustomerSupplierQuery(
-                                                                    search),
-                                                        builder: (context,
-                                                            controller,
-                                                            focusNode) {
-                                                          return TextField(
-                                                              controller:
-                                                                  controller,
-                                                              focusNode:
-                                                                  focusNode,
-                                                              autofocus: true,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                border:
-                                                                    OutlineInputBorder(),
-                                                                labelText:
-                                                                    'Cari ${value.jenis == 1 ? "Customer" : "Supplier"}',
-                                                              ));
-                                                        },
-                                                        itemBuilder:
-                                                            (context, city) {
-                                                          return ListTile(
-                                                            title: Text(
-                                                                city.nmSif),
-                                                            subtitle: Text(
-                                                                city.noSif),
-                                                          );
-                                                        },
-                                                        onSelected: (city) {
-                                                          // value.selectInvoice(city);
-                                                          value
-                                                              .pilihCustomerSupplier(
-                                                                  city);
-                                                        },
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 16,
-                                                    ),
-                                                    Expanded(
-                                                      child: TextFormField(
-                                                        controller: value.ao,
-                                                        readOnly: true,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          hintText:
-                                                              "AO Marketing",
-                                                          filled: true,
-                                                          fillColor:
-                                                              Colors.grey[200],
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              width: 1,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Container(
-                                                height: 40,
-                                                alignment: Alignment.centerLeft,
-                                                child: Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: TextFormField(
-                                                        controller:
-                                                            value.alamat,
-                                                        readOnly: true,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          hintText: "Alamat",
-                                                          filled: true,
-                                                          fillColor:
-                                                              Colors.grey[200],
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              width: 1,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Container(
-                                                height: 40,
-                                                alignment: Alignment.centerLeft,
-                                                child: Row(
-                                                  children: [
-                                                    Text("Invoice"),
-                                                    SizedBox(
-                                                      width: 16,
-                                                    ),
-                                                    Expanded(
-                                                      child: TextFormField(
-                                                        controller:
-                                                            value.noinvoice,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          hintText:
-                                                              "No Invoice",
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              width: 1,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 32,
-                                                    ),
-                                                    Text("Kontrak"),
-                                                    SizedBox(
-                                                      width: 16,
-                                                    ),
-                                                    Expanded(
-                                                      child: Row(
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: 140,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: [
+                                                Container(
+                                                  height: 40,
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text(
+                                                      "Pilih Tipe Transaksi"),
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                Container(
+                                                  height: 40,
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text(
+                                                      "Pilih ${value.jenis == 1 ? "Customer" : "Supplier"}"),
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                Container(
+                                                  height: 40,
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text("Alamat"),
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                Container(
+                                                  height: 40,
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text("Nomor"),
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                Container(
+                                                  height: 40,
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child:
+                                                      Text("Jenis Transaksi"),
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                Container(
+                                                  height: 40,
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child:
+                                                      Text("Nilai Transaksi"),
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                value.jenis == 1 &&
+                                                        value.tipePiutang ==
+                                                            "Barang"
+                                                    ? Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .stretch,
                                                         children: [
-                                                          Expanded(
-                                                            child:
-                                                                TextFormField(
-                                                              controller: value
-                                                                  .nokontrak,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                hintText:
-                                                                    "No Kontrak",
-                                                                border:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8),
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                    width: 1,
-                                                                    color: Colors
-                                                                        .grey,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
+                                                          Container(
+                                                            height: 40,
+                                                            alignment: Alignment
+                                                                .centerLeft,
+                                                            child: Text(
+                                                                "Nilai HPP Produk"),
                                                           ),
                                                           SizedBox(
-                                                            width: 16,
-                                                          ),
-                                                          Expanded(
-                                                            child: InkWell(
-                                                              onTap: () => value
-                                                                  .pilihTanggalKontrak(),
-                                                              child:
-                                                                  TextFormField(
-                                                                enabled: false,
-                                                                textInputAction:
-                                                                    TextInputAction
-                                                                        .done,
-                                                                controller: value
-                                                                    .tanggalKontrak,
-                                                                style:
-                                                                    const TextStyle(
-                                                                  // Make text bigger and black
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                ),
-                                                                decoration:
-                                                                    InputDecoration(
-                                                                  hintText:
-                                                                      "Tanggal Kontrak",
-                                                                  hintStyle: const TextStyle(
-                                                                      color: Colors
-                                                                          .grey),
-                                                                  border:
-                                                                      OutlineInputBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(6),
-                                                                  ),
-                                                                  disabledBorder:
-                                                                      OutlineInputBorder(
-                                                                    borderSide: BorderSide(
-                                                                        color: Colors
-                                                                            .grey
-                                                                            .shade600),
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(6),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
+                                                            height: 8,
                                                           ),
                                                         ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                )),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Container(
-                                                height: 40,
-                                                alignment: Alignment.centerLeft,
-                                                child: Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: TextFormField(
-                                                        controller:
-                                                            value.noreferensi,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              width: 1,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 16,
-                                                    ),
-                                                    Expanded(
-                                                      child: Row(
+                                                      )
+                                                    : SizedBox(),
+                                                Container(
+                                                  height: 40,
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child:
+                                                      Text("Cara Pembayaran"),
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                value.caraPembayaran ==
+                                                        "BERTAHAP"
+                                                    ? Column(
                                                         children: [
-                                                          Text("Keterangan"),
+                                                          Container(
+                                                            height: 40,
+                                                            alignment: Alignment
+                                                                .centerLeft,
+                                                            child: Text(
+                                                                "Cara Bayar"),
+                                                          ),
                                                           SizedBox(
-                                                            width: 16,
+                                                            height: 8,
                                                           ),
-                                                          Expanded(
-                                                            child:
-                                                                TextFormField(
-                                                              controller: value
-                                                                  .keterangan,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                border:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8),
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                    width: 1,
-                                                                    color: Colors
-                                                                        .grey,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
+                                                          Container(
+                                                            height: 40,
+                                                            alignment: Alignment
+                                                                .centerLeft,
+                                                            child: Text(
+                                                                "Jangka Waktu"),
                                                           ),
                                                         ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                )),
-                                            SizedBox(
-                                              height: 8,
+                                                      )
+                                                    : SizedBox(),
+                                                SizedBox(
+                                                  height: 24,
+                                                ),
+                                              ],
                                             ),
-                                            Container(
-                                                height: 40,
-                                                alignment: Alignment.centerLeft,
-                                                child: Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: TextFormField(
-                                                        onChanged: (e) {
-                                                          value.changeTotal();
-                                                        },
-                                                        controller: value
-                                                            .nilaitransaksi,
-                                                        keyboardType: TextInputType
-                                                            .numberWithOptions(
-                                                                decimal: true),
-                                                        inputFormatters: [
-                                                          a.CurrencyInputFormatter(
-                                                            leadingSymbol:
-                                                                'Rp ',
-                                                            useSymbolPadding:
-                                                                true,
-                                                            thousandSeparator: a
-                                                                .ThousandSeparator
-                                                                .Period,
-                                                            mantissaLength:
-                                                                2, // jumlah angka desimal
-                                                            // decimalSeparator: DecimalSeparator.Comma,
-                                                          ),
-                                                        ],
-                                                        decoration:
-                                                            InputDecoration(
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              width: 1,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 16,
-                                                    ),
-                                                    Expanded(
-                                                      child: TextFormField(
-                                                        controller:
-                                                            value.nilaippn,
-                                                        keyboardType: TextInputType
-                                                            .numberWithOptions(
-                                                                decimal: true),
-                                                        inputFormatters: [
-                                                          a.CurrencyInputFormatter(
-                                                            leadingSymbol:
-                                                                'Rp ',
-                                                            useSymbolPadding:
-                                                                true,
-                                                            thousandSeparator: a
-                                                                .ThousandSeparator
-                                                                .Period,
-                                                            mantissaLength:
-                                                                2, // jumlah angka desimal
-                                                            // decimalSeparator: DecimalSeparator.Comma,
-                                                          ),
-                                                        ],
-                                                        decoration:
-                                                            InputDecoration(
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              width: 1,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 16,
-                                                    ),
-                                                    Expanded(
-                                                      child: TextFormField(
-                                                        controller:
-                                                            value.nilaipph,
-                                                        keyboardType: TextInputType
-                                                            .numberWithOptions(
-                                                                decimal: true),
-                                                        inputFormatters: [
-                                                          a.CurrencyInputFormatter(
-                                                            leadingSymbol:
-                                                                'Rp ',
-                                                            useSymbolPadding:
-                                                                true,
-                                                            thousandSeparator: a
-                                                                .ThousandSeparator
-                                                                .Period,
-                                                            mantissaLength:
-                                                                2, // jumlah angka desimal
-                                                            // decimalSeparator: DecimalSeparator.Comma,
-                                                          ),
-                                                        ],
-                                                        decoration:
-                                                            InputDecoration(
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              width: 1,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-
-                                            // ambil SBB
-                                            Container(
-                                                height: 40,
-                                                alignment: Alignment.centerLeft,
-                                                child: Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: TypeAheadField<
-                                                          InqueryGlModel>(
-                                                        controller: value
-                                                            .namaakuntransaksi,
-                                                        suggestionsCallback:
-                                                            (search) => value
-                                                                .getInquery(
-                                                                    search),
-                                                        builder: (context,
-                                                            controller,
-                                                            focusNode) {
-                                                          return TextField(
-                                                              controller:
-                                                                  controller,
-                                                              focusNode:
-                                                                  focusNode,
-                                                              autofocus: true,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                border:
-                                                                    OutlineInputBorder(),
-                                                                labelText:
-                                                                    'Cari Akun',
-                                                              ));
-                                                        },
-                                                        itemBuilder:
-                                                            (context, city) {
-                                                          return ListTile(
-                                                            title: Text(
-                                                                city.nosbb),
-                                                            subtitle: Text(
-                                                                city.namaSbb),
-                                                          );
-                                                        },
-                                                        onSelected: (city) {
-                                                          // value.selectInvoice(city);
-                                                          value
-                                                              .pilihAkunTransaksi(
-                                                                  city);
-                                                        },
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 16,
-                                                    ),
-                                                    Expanded(
-                                                      child: TypeAheadField<
-                                                          InqueryGlModel>(
-                                                        controller:
-                                                            value.namaakunpajak,
-                                                        suggestionsCallback:
-                                                            (search) => value
-                                                                .getInquery(
-                                                                    search),
-                                                        builder: (context,
-                                                            controller,
-                                                            focusNode) {
-                                                          return TextField(
-                                                              controller:
-                                                                  controller,
-                                                              focusNode:
-                                                                  focusNode,
-                                                              autofocus: true,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                border:
-                                                                    OutlineInputBorder(),
-                                                                labelText:
-                                                                    'Cari Akun PPN',
-                                                              ));
-                                                        },
-                                                        itemBuilder:
-                                                            (context, city) {
-                                                          return ListTile(
-                                                            title: Text(
-                                                                city.nosbb),
-                                                            subtitle: Text(
-                                                                city.namaSbb),
-                                                          );
-                                                        },
-                                                        onSelected: (city) {
-                                                          // value.selectInvoice(city);
-                                                          value.pilihAkunPajak(
-                                                              city);
-                                                        },
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 16,
-                                                    ),
-                                                    Expanded(
-                                                      child: TypeAheadField<
-                                                          InqueryGlModel>(
-                                                        controller:
-                                                            value.namaakunpph,
-                                                        suggestionsCallback:
-                                                            (search) => value
-                                                                .getInquery(
-                                                                    search),
-                                                        builder: (context,
-                                                            controller,
-                                                            focusNode) {
-                                                          return TextField(
-                                                              controller:
-                                                                  controller,
-                                                              focusNode:
-                                                                  focusNode,
-                                                              autofocus: true,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                border:
-                                                                    OutlineInputBorder(),
-                                                                labelText:
-                                                                    'Cari Akun PPH',
-                                                              ));
-                                                        },
-                                                        itemBuilder:
-                                                            (context, city) {
-                                                          return ListTile(
-                                                            title: Text(
-                                                                city.nosbb),
-                                                            subtitle: Text(
-                                                                city.namaSbb),
-                                                          );
-                                                        },
-                                                        onSelected: (city) {
-                                                          // value.selectInvoice(city);
-                                                          value.pilihAkunPph(
-                                                              city);
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Container(
-                                                height: 40,
-                                                alignment: Alignment.centerLeft,
-                                                child: Row(
-                                                  children: [
-                                                    Expanded(
-                                                        child: Row(
+                                          ),
+                                          SizedBox(
+                                            width: 32,
+                                          ),
+                                          Expanded(
+                                              child: Container(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: [
+                                                Container(
+                                                    height: 40,
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Row(
                                                       children: [
                                                         Radio(
-                                                            value: "BERTAHAP",
-                                                            groupValue: value
-                                                                .caraPembayaran,
+                                                            value: 1,
+                                                            activeColor:
+                                                                colorPrimary,
+                                                            groupValue:
+                                                                value.jenis,
                                                             onChanged: (e) {
-                                                              value.ganticaraPembayaran(
-                                                                  "BERTAHAP");
+                                                              value.gantijenis(
+                                                                  1);
                                                             }),
+                                                        Text("Piutang"),
                                                         SizedBox(
-                                                          width: 8,
+                                                          width: 32,
                                                         ),
-                                                        Text("Bertahap"),
+                                                        Radio(
+                                                            value: 2,
+                                                            groupValue:
+                                                                value.jenis,
+                                                            activeColor:
+                                                                colorPrimary,
+                                                            onChanged: (e) {
+                                                              value.gantijenis(
+                                                                  2);
+                                                            }),
+                                                        Text("Hutang"),
+                                                      ],
+                                                    )),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                Container(
+                                                    height: 40,
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: TypeAheadField<
+                                                              CustomerSupplierModel>(
+                                                            controller: value
+                                                                .customersupplier,
+                                                            suggestionsCallback:
+                                                                (search) => value
+                                                                    .getCustomerSupplierQuery(
+                                                                        search),
+                                                            builder: (context,
+                                                                controller,
+                                                                focusNode) {
+                                                              return TextField(
+                                                                  controller:
+                                                                      controller,
+                                                                  focusNode:
+                                                                      focusNode,
+                                                                  autofocus:
+                                                                      true,
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    border:
+                                                                        OutlineInputBorder(),
+                                                                    labelText:
+                                                                        'Cari ${value.jenis == 1 ? "Customer" : "Supplier"}',
+                                                                  ));
+                                                            },
+                                                            itemBuilder:
+                                                                (context,
+                                                                    city) {
+                                                              return ListTile(
+                                                                title: Text(
+                                                                    city.nmSif),
+                                                                subtitle: Text(
+                                                                    city.noSif),
+                                                              );
+                                                            },
+                                                            onSelected: (city) {
+                                                              // value.selectInvoice(city);
+                                                              value
+                                                                  .pilihCustomerSupplier(
+                                                                      city);
+                                                            },
+                                                          ),
+                                                        ),
                                                         SizedBox(
                                                           width: 16,
                                                         ),
-                                                        Radio(
-                                                            value: "SELURUHNYA",
-                                                            groupValue: value
-                                                                .caraPembayaran,
-                                                            onChanged: (e) {
-                                                              value.ganticaraPembayaran(
-                                                                  "SELURUHNYA");
-                                                            }),
-                                                        SizedBox(
-                                                          width: 8,
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            controller:
+                                                                value.ao,
+                                                            readOnly: true,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              hintText:
+                                                                  "AO Marketing",
+                                                              filled: true,
+                                                              fillColor: Colors
+                                                                  .grey[200],
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  width: 1,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
                                                         ),
-                                                        Text("Seluruhnya"),
+                                                      ],
+                                                    )),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                Container(
+                                                    height: 40,
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            controller:
+                                                                value.alamat,
+                                                            readOnly: true,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              hintText:
+                                                                  "Alamat",
+                                                              filled: true,
+                                                              fillColor: Colors
+                                                                  .grey[200],
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  width: 1,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    )),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                Container(
+                                                    height: 40,
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Row(
+                                                      children: [
+                                                        value.carabayar
+                                                            ? Text("Invoice")
+                                                            : SizedBox(),
+                                                        value.carabayar
+                                                            ? SizedBox(
+                                                                width: 16,
+                                                              )
+                                                            : SizedBox(),
+                                                        value.carabayar
+                                                            ? Expanded(
+                                                                child:
+                                                                    TextFormField(
+                                                                  controller: value
+                                                                      .noinvoice,
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    hintText:
+                                                                        "No Invoice",
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8),
+                                                                      borderSide:
+                                                                          BorderSide(
+                                                                        width:
+                                                                            1,
+                                                                        color: Colors
+                                                                            .grey,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            : SizedBox(),
+                                                        value.carabayar
+                                                            ? SizedBox(
+                                                                width: 32,
+                                                              )
+                                                            : SizedBox(),
+                                                        Text("Kontrak"),
                                                         SizedBox(
-                                                          width: 32,
+                                                          width: 16,
                                                         ),
                                                         Expanded(
                                                           child: Row(
                                                             children: [
-                                                              Text(
-                                                                  "Tanggal Jatuh Tempo"),
+                                                              Expanded(
+                                                                child:
+                                                                    TextFormField(
+                                                                  controller: value
+                                                                      .nokontrak,
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    hintText:
+                                                                        "No Kontrak",
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8),
+                                                                      borderSide:
+                                                                          BorderSide(
+                                                                        width:
+                                                                            1,
+                                                                        color: Colors
+                                                                            .grey,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
                                                               SizedBox(
                                                                 width: 16,
                                                               ),
                                                               Expanded(
                                                                 child: InkWell(
                                                                   onTap: () => value
-                                                                      .pilihJatuhTempo(),
+                                                                      .pilihTanggalKontrak(),
                                                                   child:
                                                                       TextFormField(
-                                                                    enabled: value.caraPembayaran ==
-                                                                            "BERTAHAP"
-                                                                        ? true
-                                                                        : false,
+                                                                    enabled:
+                                                                        false,
                                                                     textInputAction:
                                                                         TextInputAction
                                                                             .done,
                                                                     controller:
                                                                         value
-                                                                            .tanggalJatuhTempoText,
-                                                                    maxLines: 1,
-                                                                    readOnly: value.caraPembayaran ==
-                                                                            "BERTAHAP"
-                                                                        ? true
-                                                                        : false,
+                                                                            .tanggalKontrak,
                                                                     style:
                                                                         const TextStyle(
                                                                       // Make text bigger and black
@@ -1167,26 +757,10 @@ class HutangPiutangPage extends StatelessWidget {
                                                                           FontWeight
                                                                               .w500,
                                                                     ),
-                                                                    validator:
-                                                                        (e) {
-                                                                      if (e!
-                                                                          .isEmpty) {
-                                                                        return "Wajib diisi";
-                                                                      } else {
-                                                                        return null;
-                                                                      }
-                                                                    },
                                                                     decoration:
                                                                         InputDecoration(
-                                                                      filled: value.caraPembayaran ==
-                                                                              "BERTAHAP"
-                                                                          ? true
-                                                                          : false,
-                                                                      fillColor:
-                                                                          Colors
-                                                                              .grey[200],
                                                                       hintText:
-                                                                          "Tanggal Jatuh Tempo",
+                                                                          "Tanggal Kontrak",
                                                                       hintStyle:
                                                                           const TextStyle(
                                                                               color: Colors.grey),
@@ -1211,201 +785,112 @@ class HutangPiutangPage extends StatelessWidget {
                                                         )
                                                       ],
                                                     )),
-                                                  ],
-                                                )),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            value.caraPembayaran == "BERTAHAP"
-                                                ? Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      // Baris pertama: radio-radio
-                                                      Container(
-                                                        height: 40,
-                                                        alignment: Alignment
-                                                            .centerLeft,
-                                                        child: Row(
-                                                          children: [
-                                                            // Radio Auto / Tagihan
-                                                            Row(
-                                                              children: [
-                                                                Radio(
-                                                                  value: true,
-                                                                  groupValue: value
-                                                                      .carabayar,
-                                                                  onChanged:
-                                                                      (e) => value
-                                                                          .ganticarabayar(),
-                                                                ),
-                                                                const SizedBox(
-                                                                    width: 8),
-                                                                const Text(
-                                                                    "Auto"),
-                                                                const SizedBox(
-                                                                    width: 16),
-                                                                Radio(
-                                                                  value: false,
-                                                                  groupValue: value
-                                                                      .carabayar,
-                                                                  onChanged:
-                                                                      (e) => value
-                                                                          .ganticarabayar(),
-                                                                ),
-                                                                const SizedBox(
-                                                                    width: 8),
-                                                                const Text(
-                                                                    "Tagihan"),
-                                                              ],
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                Container(
+                                                    height: 40,
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: DropdownSearch<
+                                                              String>(
+                                                            popupProps:
+                                                                const PopupPropsMultiSelection
+                                                                    .menu(
+                                                              showSearchBox:
+                                                                  true, // Aktifkan fitur pencarian
                                                             ),
-
-                                                            const SizedBox(
-                                                                width: 32),
-
-                                                            // Tagihan Bulanan
-                                                            Expanded(
-                                                              child: Row(
-                                                                children: [
-                                                                  const Text(
-                                                                      "Tagihan Bulanan"),
-                                                                  const SizedBox(
-                                                                      width:
-                                                                          16),
-                                                                  Radio(
-                                                                    value: true,
-                                                                    groupValue:
-                                                                        value
-                                                                            .tagihanbulanan,
-                                                                    onChanged:
-                                                                        (e) => value
-                                                                            .gantitagitahnbulanan(),
+                                                            selectedItem: value
+                                                                .tipePiutang,
+                                                            items: value
+                                                                .listTipePiutang,
+                                                            itemAsString: (e) =>
+                                                                "${e}",
+                                                            onChanged: (e) {
+                                                              value
+                                                                  .pilihTipePiutang(
+                                                                      e!);
+                                                            },
+                                                            dropdownDecoratorProps:
+                                                                DropDownDecoratorProps(
+                                                              baseStyle:
+                                                                  TextStyle(
+                                                                      fontSize:
+                                                                          12),
+                                                              textAlignVertical:
+                                                                  TextAlignVertical
+                                                                      .center,
+                                                              dropdownSearchDecoration:
+                                                                  InputDecoration(
+                                                                hintText:
+                                                                    "Pilih Jenis Transaksi",
+                                                                border:
+                                                                    OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8),
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    width: 1,
+                                                                    color: Colors
+                                                                        .grey,
                                                                   ),
-                                                                  const SizedBox(
-                                                                      width: 8),
-                                                                  const Text(
-                                                                      "Ya"),
-                                                                  const SizedBox(
-                                                                      width:
-                                                                          16),
-                                                                  Radio(
-                                                                    value:
-                                                                        false,
-                                                                    groupValue:
-                                                                        value
-                                                                            .tagihanbulanan,
-                                                                    onChanged:
-                                                                        (e) => value
-                                                                            .gantitagitahnbulanan(),
-                                                                  ),
-                                                                  const SizedBox(
-                                                                      width: 8),
-                                                                  const Text(
-                                                                      "Tidak"),
-                                                                ],
+                                                                ),
                                                               ),
                                                             ),
-
-                                                            const SizedBox(
-                                                                width: 32),
-
-                                                            // PPH/PPN
-                                                            Expanded(
-                                                              child: Row(
-                                                                children: [
-                                                                  const Text(
-                                                                      "PPN/PPH"),
-                                                                  const SizedBox(
-                                                                      width:
-                                                                          16),
-                                                                  Radio(
-                                                                    value: true,
-                                                                    groupValue:
-                                                                        value
-                                                                            .pphppn,
-                                                                    onChanged:
-                                                                        (e) => value
-                                                                            .gantipphppn(),
-                                                                  ),
-                                                                  const SizedBox(
-                                                                      width: 8),
-                                                                  const Text(
-                                                                      "Proporsional"),
-                                                                  const SizedBox(
-                                                                      width:
-                                                                          16),
-                                                                  Radio(
-                                                                    value:
-                                                                        false,
-                                                                    groupValue:
-                                                                        value
-                                                                            .pphppn,
-                                                                    onChanged:
-                                                                        (e) => value
-                                                                            .gantipphppn(),
-                                                                  ),
-                                                                  const SizedBox(
-                                                                      width: 8),
-                                                                  const Text(
-                                                                      "Diakhir"),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
+                                                          ),
                                                         ),
-                                                      ),
-
-                                                      const SizedBox(
-                                                          height: 16),
-
-                                                      // Baris kedua: jangka waktu dan tanggal jatuh tempo
-                                                      Container(
-                                                        height: 40,
-                                                        alignment: Alignment
-                                                            .centerLeft,
-                                                        child: Row(
-                                                          children: [
-                                                            // Jangka Waktu
-                                                            SizedBox(
-                                                              width: 100,
-                                                              child:
-                                                                  TextFormField(
-                                                                controller: value
-                                                                    .jangkawaktu,
-                                                                decoration:
-                                                                    InputDecoration(
-                                                                  border:
-                                                                      OutlineInputBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(8),
-                                                                    borderSide: const BorderSide(
-                                                                        width:
-                                                                            1,
-                                                                        color: Colors
-                                                                            .grey),
-                                                                  ),
+                                                        SizedBox(
+                                                          width: 24,
+                                                        ),
+                                                        Text(
+                                                          "No Referensi",
+                                                        ),
+                                                        SizedBox(
+                                                          width: 16,
+                                                        ),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            controller: value
+                                                                .noreferensi,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  width: 1,
+                                                                  color: Colors
+                                                                      .grey,
                                                                 ),
                                                               ),
                                                             ),
-
-                                                            const SizedBox(
-                                                                width: 32),
-
-                                                            // Tanggal Jatuh Tempo Pertama
-                                                            Expanded(
-                                                              child: InkWell(
-                                                                onTap: () {
-                                                                  value
-                                                                      .pilihTanggalJatuhTempoPertama();
-                                                                },
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 16,
+                                                        ),
+                                                        Expanded(
+                                                          child: Row(
+                                                            children: [
+                                                              Text(
+                                                                  "Keterangan"),
+                                                              SizedBox(
+                                                                width: 16,
+                                                              ),
+                                                              Expanded(
                                                                 child:
                                                                     TextFormField(
-                                                                  enabled:
-                                                                      false,
                                                                   controller: value
-                                                                      .tglJatuhTempoPertama,
+                                                                      .keterangan,
                                                                   decoration:
                                                                       InputDecoration(
                                                                     border:
@@ -1413,303 +898,910 @@ class HutangPiutangPage extends StatelessWidget {
                                                                       borderRadius:
                                                                           BorderRadius.circular(
                                                                               8),
-                                                                      borderSide: const BorderSide(
-                                                                          width:
-                                                                              1,
-                                                                          color:
-                                                                              Colors.grey),
+                                                                      borderSide:
+                                                                          BorderSide(
+                                                                        width:
+                                                                            1,
+                                                                        color: Colors
+                                                                            .grey,
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
                                                               ),
+                                                            ],
+                                                          ),
+                                                        )
+                                                      ],
+                                                    )),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                Container(
+                                                    height: 40,
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            onChanged: (e) {
+                                                              value
+                                                                  .changeTotal();
+                                                            },
+                                                            controller: value
+                                                                .nilaitransaksi,
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .numberWithOptions(
+                                                                        decimal:
+                                                                            true),
+                                                            inputFormatters: [
+                                                              a.CurrencyInputFormatter(
+                                                                leadingSymbol:
+                                                                    'Rp ',
+                                                                useSymbolPadding:
+                                                                    true,
+                                                                thousandSeparator:
+                                                                    a.ThousandSeparator
+                                                                        .Period,
+                                                                mantissaLength:
+                                                                    2, // jumlah angka desimal
+                                                                // decimalSeparator: DecimalSeparator.Comma,
+                                                              ),
+                                                            ],
+                                                            decoration:
+                                                                InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  width: 1,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                ),
+                                                              ),
                                                             ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 16,
+                                                        ),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            controller:
+                                                                value.nilaippn,
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .numberWithOptions(
+                                                                        decimal:
+                                                                            true),
+                                                            inputFormatters: [
+                                                              a.CurrencyInputFormatter(
+                                                                leadingSymbol:
+                                                                    'Rp ',
+                                                                useSymbolPadding:
+                                                                    true,
+                                                                thousandSeparator:
+                                                                    a.ThousandSeparator
+                                                                        .Period,
+                                                                mantissaLength:
+                                                                    2, // jumlah angka desimal
+                                                                // decimalSeparator: DecimalSeparator.Comma,
+                                                              ),
+                                                            ],
+                                                            decoration:
+                                                                InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  width: 1,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 16,
+                                                        ),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            controller:
+                                                                value.nilaipph,
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .numberWithOptions(
+                                                                        decimal:
+                                                                            true),
+                                                            inputFormatters: [
+                                                              a.CurrencyInputFormatter(
+                                                                leadingSymbol:
+                                                                    'Rp ',
+                                                                useSymbolPadding:
+                                                                    true,
+                                                                thousandSeparator:
+                                                                    a.ThousandSeparator
+                                                                        .Period,
+                                                                mantissaLength:
+                                                                    2, // jumlah angka desimal
+                                                                // decimalSeparator: DecimalSeparator.Comma,
+                                                              ),
+                                                            ],
+                                                            decoration:
+                                                                InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  width: 1,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    )),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+
+                                                value.jenis == 1 &&
+                                                        value.tipePiutang ==
+                                                            "Barang"
+                                                    ? Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .stretch,
+                                                        children: [
+                                                          TextFormField(
+                                                            controller:
+                                                                value.nilaihpp,
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .numberWithOptions(
+                                                                        decimal:
+                                                                            true),
+                                                            inputFormatters: [
+                                                              a.CurrencyInputFormatter(
+                                                                leadingSymbol:
+                                                                    'Rp ',
+                                                                useSymbolPadding:
+                                                                    true,
+                                                                thousandSeparator:
+                                                                    a.ThousandSeparator
+                                                                        .Period,
+                                                                mantissaLength:
+                                                                    2, // jumlah angka desimal
+                                                                // decimalSeparator: DecimalSeparator.Comma,
+                                                              ),
+                                                            ],
+                                                            decoration:
+                                                                InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  width: 1,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 8,
+                                                          )
+                                                        ],
+                                                      )
+                                                    : SizedBox(),
+                                                // ambil SBB
+
+                                                Container(
+                                                    height: 40,
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                            child: Row(
+                                                          children: [
+                                                            Radio(
+                                                                value:
+                                                                    "BERTAHAP",
+                                                                groupValue: value
+                                                                    .caraPembayaran,
+                                                                onChanged: (e) {
+                                                                  value.ganticaraPembayaran(
+                                                                      "BERTAHAP");
+                                                                }),
+                                                            SizedBox(
+                                                              width: 8,
+                                                            ),
+                                                            Text("Bertahap"),
+                                                            SizedBox(
+                                                              width: 16,
+                                                            ),
+                                                            Radio(
+                                                                value:
+                                                                    "SELURUHNYA",
+                                                                groupValue: value
+                                                                    .caraPembayaran,
+                                                                onChanged: (e) {
+                                                                  value.ganticaraPembayaran(
+                                                                      "SELURUHNYA");
+                                                                }),
+                                                            SizedBox(
+                                                              width: 8,
+                                                            ),
+                                                            Text("Seluruhnya"),
+                                                            SizedBox(
+                                                              width: 32,
+                                                            ),
+                                                            Expanded(
+                                                              child: Row(
+                                                                children: [
+                                                                  Text(
+                                                                      "Tanggal Jatuh Tempo"),
+                                                                  SizedBox(
+                                                                    width: 16,
+                                                                  ),
+                                                                  Expanded(
+                                                                    child:
+                                                                        InkWell(
+                                                                      onTap: () =>
+                                                                          value
+                                                                              .pilihJatuhTempo(),
+                                                                      child:
+                                                                          TextFormField(
+                                                                        enabled: value.caraPembayaran ==
+                                                                                "BERTAHAP"
+                                                                            ? true
+                                                                            : false,
+                                                                        textInputAction:
+                                                                            TextInputAction.done,
+                                                                        controller:
+                                                                            value.tanggalJatuhTempoText,
+                                                                        maxLines:
+                                                                            1,
+                                                                        readOnly: value.caraPembayaran ==
+                                                                                "BERTAHAP"
+                                                                            ? true
+                                                                            : false,
+                                                                        style:
+                                                                            const TextStyle(
+                                                                          // Make text bigger and black
+                                                                          color:
+                                                                              Colors.black,
+                                                                          fontSize:
+                                                                              16,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                        ),
+                                                                        decoration:
+                                                                            InputDecoration(
+                                                                          filled: value.caraPembayaran == "BERTAHAP"
+                                                                              ? true
+                                                                              : false,
+                                                                          fillColor:
+                                                                              Colors.grey[200],
+                                                                          hintText:
+                                                                              "Tanggal Jatuh Tempo",
+                                                                          hintStyle:
+                                                                              const TextStyle(color: Colors.grey),
+                                                                          border:
+                                                                              OutlineInputBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(6),
+                                                                          ),
+                                                                          disabledBorder:
+                                                                              OutlineInputBorder(
+                                                                            borderSide:
+                                                                                BorderSide(color: Colors.grey.shade600),
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(6),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            )
                                                           ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  )
-                                                : const SizedBox(),
-                                            SizedBox(
-                                              height: 24,
-                                            ),
-                                          ],
-                                        ),
-                                      ))
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      ButtonPrimary(
-                                        onTap: () {
-                                          value.hitungPembayaran();
-                                        },
-                                        name: "Bentuk Jadwal Pembayaran",
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 32,
-                                  ),
-                                  ListView.builder(
-                                      itemCount:
-                                          value.listNilaiTransaksi.length,
-                                      shrinkWrap: true,
-                                      physics: ClampingScrollPhysics(),
-                                      itemBuilder: (context, i) {
-                                        var no = i + 1;
-                                        return Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  width: 32,
-                                                  margin: EdgeInsets.only(
-                                                      right: 16),
-                                                  child: Text("$no. "),
-                                                ),
-                                                Container(
-                                                  width: 150,
-                                                  margin: EdgeInsets.only(
-                                                      right: 16),
-                                                  child: TextFormField(
-                                                    controller: value
-                                                        .listTglJthTempo[i],
-                                                    // readOnly:
-                                                    //     value.tagihanbulanan
-                                                    //         ? true
-                                                    //         : false,
-                                                    decoration: InputDecoration(
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            width: 1,
-                                                            color: Colors.grey,
-                                                          ),
-                                                        ),
-                                                        // filled:
-                                                        //     value.tagihanbulanan
-                                                        //         ? true
-                                                        //         : false,
-                                                        // fillColor:
-                                                        //     Colors.grey[200],
-                                                        hintText:
-                                                            "Jatuh Tempo"),
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: TextFormField(
-                                                    controller: value
-                                                        .listOutstanding[i],
-                                                    keyboardType: TextInputType
-                                                        .numberWithOptions(
-                                                            decimal: true),
-                                                    inputFormatters: [
-                                                      a.CurrencyInputFormatter(
-                                                        leadingSymbol: '',
-                                                        useSymbolPadding: true,
-                                                        thousandSeparator: a
-                                                            .ThousandSeparator
-                                                            .Period,
-                                                        mantissaLength:
-                                                            2, // jumlah angka desimal
-                                                        // decimalSeparator: DecimalSeparator.Comma,
-                                                      ),
-                                                    ],
-                                                    // readOnly:
-                                                    //     value.tagihanbulanan
-                                                    //         ? true
-                                                    //         : false,
-                                                    decoration: InputDecoration(
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            width: 1,
-                                                            color: Colors.grey,
-                                                          ),
-                                                        ),
-                                                        // filled:
-                                                        //     value.tagihanbulanan
-                                                        //         ? true
-                                                        //         : false,
-                                                        // fillColor:
-                                                        //     Colors.grey[200],
-                                                        hintText:
-                                                            "Outstanding"),
-                                                  ),
-                                                ),
+                                                        )),
+                                                      ],
+                                                    )),
                                                 SizedBox(
-                                                  width: 16,
+                                                  height: 8,
                                                 ),
-                                                Expanded(
-                                                  child: TextFormField(
-                                                    controller: value
-                                                        .listNilaiTransaksi[i],
-                                                    keyboardType: TextInputType
-                                                        .numberWithOptions(
-                                                            decimal: true),
-                                                    inputFormatters: [
-                                                      a.CurrencyInputFormatter(
-                                                        leadingSymbol: '',
-                                                        useSymbolPadding: true,
-                                                        thousandSeparator: a
-                                                            .ThousandSeparator
-                                                            .Period,
-                                                        mantissaLength:
-                                                            2, // jumlah angka desimal
-                                                        // decimalSeparator: DecimalSeparator.Comma,
-                                                      ),
-                                                    ],
-                                                    // readOnly:
-                                                    //     value.tagihanbulanan
-                                                    //         ? true
-                                                    //         : false,
-                                                    decoration: InputDecoration(
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            width: 1,
-                                                            color: Colors.grey,
+                                                value.caraPembayaran ==
+                                                        "BERTAHAP"
+                                                    ? Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          // Baris pertama: radio-radio
+                                                          Container(
+                                                            height: 40,
+                                                            alignment: Alignment
+                                                                .centerLeft,
+                                                            child: Row(
+                                                              children: [
+                                                                // Radio Auto / Tagihan
+                                                                Row(
+                                                                  children: [
+                                                                    Radio(
+                                                                      value:
+                                                                          true,
+                                                                      groupValue:
+                                                                          value
+                                                                              .carabayar,
+                                                                      onChanged:
+                                                                          (e) =>
+                                                                              value.ganticarabayar(),
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        width:
+                                                                            8),
+                                                                    const Text(
+                                                                        "Auto"),
+                                                                    const SizedBox(
+                                                                        width:
+                                                                            16),
+                                                                    Radio(
+                                                                      value:
+                                                                          false,
+                                                                      groupValue:
+                                                                          value
+                                                                              .carabayar,
+                                                                      onChanged:
+                                                                          (e) =>
+                                                                              value.ganticarabayar(),
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        width:
+                                                                            8),
+                                                                    const Text(
+                                                                        "Tagihan"),
+                                                                  ],
+                                                                ),
+
+                                                                const SizedBox(
+                                                                    width: 32),
+
+                                                                // Tagihan Bulanan
+                                                                Expanded(
+                                                                  child: Row(
+                                                                    children: [
+                                                                      const Text(
+                                                                          "Tagihan Bulanan"),
+                                                                      const SizedBox(
+                                                                          width:
+                                                                              16),
+                                                                      Radio(
+                                                                        value:
+                                                                            true,
+                                                                        groupValue:
+                                                                            value.tagihanbulanan,
+                                                                        onChanged:
+                                                                            (e) =>
+                                                                                value.gantitagitahnbulanan(),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                          width:
+                                                                              8),
+                                                                      const Text(
+                                                                          "Ya"),
+                                                                      const SizedBox(
+                                                                          width:
+                                                                              16),
+                                                                      Radio(
+                                                                        value:
+                                                                            false,
+                                                                        groupValue:
+                                                                            value.tagihanbulanan,
+                                                                        onChanged:
+                                                                            (e) =>
+                                                                                value.gantitagitahnbulanan(),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                          width:
+                                                                              8),
+                                                                      const Text(
+                                                                          "Tidak"),
+                                                                    ],
+                                                                  ),
+                                                                ),
+
+                                                                const SizedBox(
+                                                                    width: 24),
+                                                              ],
+                                                            ),
                                                           ),
-                                                        ),
-                                                        // filled:
-                                                        //     value.tagihanbulanan
-                                                        //         ? true
-                                                        //         : false,
-                                                        // fillColor:
-                                                        //     Colors.grey[200],
-                                                        hintText:
-                                                            "Nilai Transaksi"),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 16,
-                                                ),
-                                                Expanded(
-                                                  child: TextFormField(
-                                                    controller:
-                                                        value.listNilaiPPN[i],
-                                                    keyboardType: TextInputType
-                                                        .numberWithOptions(
-                                                            decimal: true),
-                                                    inputFormatters: [
-                                                      a.CurrencyInputFormatter(
-                                                        leadingSymbol: '',
-                                                        useSymbolPadding: true,
-                                                        thousandSeparator: a
-                                                            .ThousandSeparator
-                                                            .Period,
-                                                        mantissaLength:
-                                                            2, // jumlah angka desimal
-                                                        // decimalSeparator: DecimalSeparator.Comma,
-                                                      ),
-                                                    ],
-                                                    // readOnly:
-                                                    //     value.tagihanbulanan
-                                                    //         ? true
-                                                    //         : false,
-                                                    decoration: InputDecoration(
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            width: 1,
-                                                            color: Colors.grey,
+
+                                                          const SizedBox(
+                                                              height: 16),
+
+                                                          // Baris kedua: jangka waktu dan tanggal jatuh tempo
+                                                          Container(
+                                                            height: 40,
+                                                            alignment: Alignment
+                                                                .centerLeft,
+                                                            child: Row(
+                                                              children: [
+                                                                // Jangka Waktu
+                                                                SizedBox(
+                                                                  width: 100,
+                                                                  child:
+                                                                      TextFormField(
+                                                                    controller:
+                                                                        value
+                                                                            .jangkawaktu,
+                                                                    decoration:
+                                                                        InputDecoration(
+                                                                      border:
+                                                                          OutlineInputBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(8),
+                                                                        borderSide: const BorderSide(
+                                                                            width:
+                                                                                1,
+                                                                            color:
+                                                                                Colors.grey),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+
+                                                                const SizedBox(
+                                                                    width: 32),
+
+                                                                // Tanggal Jatuh Tempo Pertama
+                                                                Expanded(
+                                                                  child:
+                                                                      InkWell(
+                                                                    onTap: () {
+                                                                      value
+                                                                          .pilihTanggalJatuhTempoPertama();
+                                                                    },
+                                                                    child:
+                                                                        TextFormField(
+                                                                      enabled:
+                                                                          false,
+                                                                      controller:
+                                                                          value
+                                                                              .tglJatuhTempoPertama,
+                                                                      decoration:
+                                                                          InputDecoration(
+                                                                        border:
+                                                                            OutlineInputBorder(
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(8),
+                                                                          borderSide: const BorderSide(
+                                                                              width: 1,
+                                                                              color: Colors.grey),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 32,
+                                                                ),
+                                                                Checkbox(
+                                                                  value:
+                                                                      value.ppn,
+                                                                  onChanged:
+                                                                      (e) {
+                                                                    value
+                                                                        .gantippn();
+                                                                  },
+                                                                  activeColor:
+                                                                      colorPrimary,
+                                                                ),
+                                                                Text(
+                                                                  "PPN",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 16,
+                                                                ),
+                                                                Checkbox(
+                                                                  value:
+                                                                      value.pph,
+                                                                  onChanged:
+                                                                      (e) {
+                                                                    value
+                                                                        .gantipph();
+                                                                  },
+                                                                  activeColor:
+                                                                      colorPrimary,
+                                                                ),
+                                                                Text(
+                                                                  "PPH",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 24,
+                                                                ),
+                                                                // PPH/PPN
+                                                                Expanded(
+                                                                  child: Row(
+                                                                    children: [
+                                                                      const Text(
+                                                                          "PPN/PPH"),
+                                                                      const SizedBox(
+                                                                          width:
+                                                                              8),
+                                                                      Radio(
+                                                                        value:
+                                                                            true,
+                                                                        groupValue:
+                                                                            value.pphppn,
+                                                                        onChanged:
+                                                                            (e) =>
+                                                                                value.gantipphppn(),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                          width:
+                                                                              8),
+                                                                      const Text(
+                                                                        "Proporsional",
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontSize:
+                                                                              12,
+                                                                        ),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                          width:
+                                                                              16),
+                                                                      Radio(
+                                                                        value:
+                                                                            false,
+                                                                        groupValue:
+                                                                            value.pphppn,
+                                                                        onChanged:
+                                                                            (e) =>
+                                                                                value.gantipphppn(),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                          width:
+                                                                              8),
+                                                                      const Text(
+                                                                        "Diakhir",
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontSize:
+                                                                              12,
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
-                                                        ),
-                                                        // filled:
-                                                        //     value.tagihanbulanan
-                                                        //         ? true
-                                                        //         : false,
-                                                        // fillColor:
-                                                        //     Colors.grey[200],
-                                                        hintText: "Nilai PPN"),
-                                                  ),
-                                                ),
+                                                        ],
+                                                      )
+                                                    : const SizedBox(),
                                                 SizedBox(
-                                                  width: 16,
-                                                ),
-                                                Expanded(
-                                                  child: TextFormField(
-                                                    controller:
-                                                        value.listNilaiPPH[i],
-                                                    keyboardType: TextInputType
-                                                        .numberWithOptions(
-                                                            decimal: true),
-                                                    inputFormatters: [
-                                                      a.CurrencyInputFormatter(
-                                                        leadingSymbol: '',
-                                                        useSymbolPadding: true,
-                                                        thousandSeparator: a
-                                                            .ThousandSeparator
-                                                            .Period,
-                                                        mantissaLength:
-                                                            2, // jumlah angka desimal
-                                                        // decimalSeparator: DecimalSeparator.Comma,
-                                                      ),
-                                                    ],
-                                                    // readOnly:
-                                                    //     value.tagihanbulanan
-                                                    //         ? true
-                                                    //         : false,
-                                                    decoration: InputDecoration(
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            width: 1,
-                                                            color: Colors.grey,
-                                                          ),
-                                                        ),
-                                                        // filled:
-                                                        //     value.tagihanbulanan
-                                                        //         ? true
-                                                        //         : false,
-                                                        // fillColor:
-                                                        //     Colors.grey[200],
-                                                        hintText: "Nilai PPH"),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 16,
+                                                  height: 24,
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(
-                                              height: 8,
+                                          ))
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          ButtonPrimary(
+                                            onTap: () {
+                                              value.hitungPembayaran();
+                                            },
+                                            name: "Bentuk Jadwal Pembayaran",
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 32,
+                                      ),
+                                      ListView.builder(
+                                          itemCount:
+                                              value.listNilaiTransaksi.length,
+                                          shrinkWrap: true,
+                                          physics: ClampingScrollPhysics(),
+                                          itemBuilder: (context, i) {
+                                            var no = i + 1;
+                                            return Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Container(
+                                                      width: 32,
+                                                      margin: EdgeInsets.only(
+                                                          right: 16),
+                                                      child: Text("$no. "),
+                                                    ),
+                                                    Container(
+                                                      width: 150,
+                                                      margin: EdgeInsets.only(
+                                                          right: 16),
+                                                      child: TextFormField(
+                                                        controller: value
+                                                            .listTglJthTempo[i],
+                                                        // readOnly:
+                                                        //     value.tagihanbulanan
+                                                        //         ? true
+                                                        //         : false,
+                                                        decoration: InputDecoration(
+                                                            border: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                width: 1,
+                                                                color:
+                                                                    Colors.grey,
+                                                              ),
+                                                            ),
+                                                            // filled:
+                                                            //     value.tagihanbulanan
+                                                            //         ? true
+                                                            //         : false,
+                                                            // fillColor:
+                                                            //     Colors.grey[200],
+                                                            hintText: "Jatuh Tempo"),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: TextFormField(
+                                                        controller: value
+                                                            .listOutstanding[i],
+                                                        keyboardType: TextInputType
+                                                            .numberWithOptions(
+                                                                decimal: true),
+                                                        inputFormatters: [
+                                                          a.CurrencyInputFormatter(
+                                                            leadingSymbol: '',
+                                                            useSymbolPadding:
+                                                                true,
+                                                            thousandSeparator: a
+                                                                .ThousandSeparator
+                                                                .Period,
+                                                            mantissaLength:
+                                                                2, // jumlah angka desimal
+                                                            // decimalSeparator: DecimalSeparator.Comma,
+                                                          ),
+                                                        ],
+                                                        // readOnly:
+                                                        //     value.tagihanbulanan
+                                                        //         ? true
+                                                        //         : false,
+                                                        decoration: InputDecoration(
+                                                            border: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                width: 1,
+                                                                color:
+                                                                    Colors.grey,
+                                                              ),
+                                                            ),
+                                                            // filled:
+                                                            //     value.tagihanbulanan
+                                                            //         ? true
+                                                            //         : false,
+                                                            // fillColor:
+                                                            //     Colors.grey[200],
+                                                            hintText: "Outstanding"),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 16,
+                                                    ),
+                                                    Expanded(
+                                                      child: TextFormField(
+                                                        controller: value
+                                                            .listNilaiTransaksi[i],
+                                                        keyboardType: TextInputType
+                                                            .numberWithOptions(
+                                                                decimal: true),
+                                                        inputFormatters: [
+                                                          a.CurrencyInputFormatter(
+                                                            leadingSymbol: '',
+                                                            useSymbolPadding:
+                                                                true,
+                                                            thousandSeparator: a
+                                                                .ThousandSeparator
+                                                                .Period,
+                                                            mantissaLength:
+                                                                2, // jumlah angka desimal
+                                                            // decimalSeparator: DecimalSeparator.Comma,
+                                                          ),
+                                                        ],
+                                                        // readOnly:
+                                                        //     value.tagihanbulanan
+                                                        //         ? true
+                                                        //         : false,
+                                                        decoration: InputDecoration(
+                                                            border: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                width: 1,
+                                                                color:
+                                                                    Colors.grey,
+                                                              ),
+                                                            ),
+                                                            // filled:
+                                                            //     value.tagihanbulanan
+                                                            //         ? true
+                                                            //         : false,
+                                                            // fillColor:
+                                                            //     Colors.grey[200],
+                                                            hintText: "Nilai Transaksi"),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 16,
+                                                    ),
+                                                    Expanded(
+                                                      child: TextFormField(
+                                                        controller: value
+                                                            .listNilaiPPN[i],
+                                                        keyboardType: TextInputType
+                                                            .numberWithOptions(
+                                                                decimal: true),
+                                                        inputFormatters: [
+                                                          a.CurrencyInputFormatter(
+                                                            leadingSymbol: '',
+                                                            useSymbolPadding:
+                                                                true,
+                                                            thousandSeparator: a
+                                                                .ThousandSeparator
+                                                                .Period,
+                                                            mantissaLength:
+                                                                2, // jumlah angka desimal
+                                                            // decimalSeparator: DecimalSeparator.Comma,
+                                                          ),
+                                                        ],
+                                                        // readOnly:
+                                                        //     value.tagihanbulanan
+                                                        //         ? true
+                                                        //         : false,
+                                                        decoration: InputDecoration(
+                                                            border: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                width: 1,
+                                                                color:
+                                                                    Colors.grey,
+                                                              ),
+                                                            ),
+                                                            // filled:
+                                                            //     value.tagihanbulanan
+                                                            //         ? true
+                                                            //         : false,
+                                                            // fillColor:
+                                                            //     Colors.grey[200],
+                                                            hintText: "Nilai PPN"),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 16,
+                                                    ),
+                                                    Expanded(
+                                                      child: TextFormField(
+                                                        controller: value
+                                                            .listNilaiPPH[i],
+                                                        keyboardType: TextInputType
+                                                            .numberWithOptions(
+                                                                decimal: true),
+                                                        inputFormatters: [
+                                                          a.CurrencyInputFormatter(
+                                                            leadingSymbol: '',
+                                                            useSymbolPadding:
+                                                                true,
+                                                            thousandSeparator: a
+                                                                .ThousandSeparator
+                                                                .Period,
+                                                            mantissaLength:
+                                                                2, // jumlah angka desimal
+                                                            // decimalSeparator: DecimalSeparator.Comma,
+                                                          ),
+                                                        ],
+                                                        // readOnly:
+                                                        //     value.tagihanbulanan
+                                                        //         ? true
+                                                        //         : false,
+                                                        decoration: InputDecoration(
+                                                            border: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                width: 1,
+                                                                color:
+                                                                    Colors.grey,
+                                                              ),
+                                                            ),
+                                                            // filled:
+                                                            //     value.tagihanbulanan
+                                                            //         ? true
+                                                            //         : false,
+                                                            // fillColor:
+                                                            //     Colors.grey[200],
+                                                            hintText: "Nilai PPH"),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 16,
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                )
+                                              ],
+                                            );
+                                          }),
+                                      SizedBox(
+                                        height: 32,
+                                      ),
+                                      value.buttonSimpan
+                                          ? ButtonPrimary(
+                                              onTap: () {
+                                                value.cek();
+                                              },
+                                              name: "Simpan",
                                             )
-                                          ],
-                                        );
-                                      }),
-                                  SizedBox(
-                                    height: 32,
+                                          : SizedBox(),
+                                    ],
                                   ),
-                                  value.buttonSimpan
-                                      ? ButtonPrimary(
-                                          onTap: () {},
-                                          name: "Simpan",
-                                        )
-                                      : SizedBox(),
-                                ],
+                                ),
                               ))
                             ],
                           ),

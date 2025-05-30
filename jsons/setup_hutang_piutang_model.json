@@ -7,10 +7,18 @@
     "sbbtransaksipiutang": "",
     "sbbppnpiutang": "",
     "sbbpphpiutang": "",
+    "sbblawanhutang": "",
+    "sbblawanpiutang": "",
+    "sbbhpppiutang": "",
+    "sbbpersedianpiutang": "",
     "namasbbtransaksihutang": "",
     "namasbbpphhutang": "",
     "namasbbppnhutang": "",
     "namasbbtransaksipiutang": "",
     "namasbbpphpiutang": "",
-    "namasbbppnpiutang": ""
+    "namasbbppnpiutang": "",
+    "namasbblawanhutang": "",
+    "namasbblawanpiutang": "",
+    "namasbbhpppiutang": "",
+    "namasbbpersedianpiutang": ""
 }
