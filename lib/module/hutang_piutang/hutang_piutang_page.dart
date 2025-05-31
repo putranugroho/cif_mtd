@@ -195,7 +195,8 @@ class HutangPiutangPage extends StatelessWidget {
                                           padding: EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Customer/Supplier',
+                                          child: Text(
+                                              'Nama ${value.jenisTrans ? "Supplier" : "Customer"}',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -1176,6 +1177,19 @@ class HutangPiutangPage extends StatelessWidget {
                                                                               .pilihJatuhTempo(),
                                                                       child:
                                                                           TextFormField(
+                                                                        validator:
+                                                                            (e) {
+                                                                          if (value.caraPembayaran ==
+                                                                              "BERTAHAP") {
+                                                                            return null;
+                                                                          } else {
+                                                                            if (e!.isEmpty) {
+                                                                              return "Wajib diisi";
+                                                                            } else {
+                                                                              return null;
+                                                                            }
+                                                                          }
+                                                                        },
                                                                         enabled: value.caraPembayaran ==
                                                                                 "BERTAHAP"
                                                                             ? true
@@ -1521,16 +1535,28 @@ class HutangPiutangPage extends StatelessWidget {
                                           ))
                                         ],
                                       ),
-                                      Row(
-                                        children: [
-                                          ButtonPrimary(
-                                            onTap: () {
-                                              value.hitungPembayaran();
-                                            },
-                                            name: "Bentuk Jadwal Pembayaran",
-                                          )
-                                        ],
-                                      ),
+                                      value.caraPembayaran == "BERTAHAP"
+                                          ? Row(
+                                              children: [
+                                                ButtonPrimary(
+                                                  onTap: () {
+                                                    value.hitungPembayaran();
+                                                  },
+                                                  name:
+                                                      "Bentuk Jadwal Pembayaran",
+                                                )
+                                              ],
+                                            )
+                                          : Row(
+                                              children: [
+                                                ButtonPrimary(
+                                                  onTap: () {
+                                                    value.cek();
+                                                  },
+                                                  name: "Simpan",
+                                                )
+                                              ],
+                                            ),
                                       SizedBox(
                                         height: 32,
                                       ),
@@ -1588,6 +1614,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                     ),
                                                     Expanded(
                                                       child: TextFormField(
+                                                        readOnly: true,
                                                         controller: value
                                                             .listOutstanding[i],
                                                         keyboardType: TextInputType
@@ -1601,35 +1628,34 @@ class HutangPiutangPage extends StatelessWidget {
                                                             thousandSeparator: a
                                                                 .ThousandSeparator
                                                                 .Period,
-                                                            mantissaLength:
-                                                                2, // jumlah angka desimal
-                                                            // decimalSeparator: DecimalSeparator.Comma,
+                                                            mantissaLength: 2,
                                                           ),
                                                         ],
                                                         // readOnly:
                                                         //     value.tagihanbulanan
                                                         //         ? true
                                                         //         : false,
-                                                        decoration: InputDecoration(
-                                                            border: OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8),
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                width: 1,
-                                                                color:
-                                                                    Colors.grey,
-                                                              ),
-                                                            ),
-                                                            // filled:
-                                                            //     value.tagihanbulanan
-                                                            //         ? true
-                                                            //         : false,
-                                                            // fillColor:
-                                                            //     Colors.grey[200],
-                                                            hintText: "Outstanding"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                border:
+                                                                    OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8),
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    width: 1,
+                                                                    color: Colors
+                                                                        .grey,
+                                                                  ),
+                                                                ),
+                                                                filled: true,
+                                                                fillColor:
+                                                                    Colors.grey[
+                                                                        200],
+                                                                hintText:
+                                                                    "Outstanding"),
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -1637,8 +1663,20 @@ class HutangPiutangPage extends StatelessWidget {
                                                     ),
                                                     Expanded(
                                                       child: TextFormField(
+                                                        readOnly: !value
+                                                                .tagihanbulanan
+                                                            ? false
+                                                            : true,
                                                         controller: value
                                                             .listNilaiTransaksi[i],
+                                                        onChanged: (e) {
+                                                          if (!value
+                                                              .tagihanbulanan) {
+                                                            value
+                                                                .onNilaiTransaksiChanged(
+                                                                    i, e);
+                                                          }
+                                                        },
                                                         keyboardType: TextInputType
                                                             .numberWithOptions(
                                                                 decimal: true),
@@ -1659,26 +1697,30 @@ class HutangPiutangPage extends StatelessWidget {
                                                         //     value.tagihanbulanan
                                                         //         ? true
                                                         //         : false,
-                                                        decoration: InputDecoration(
-                                                            border: OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8),
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                width: 1,
-                                                                color:
-                                                                    Colors.grey,
-                                                              ),
-                                                            ),
-                                                            // filled:
-                                                            //     value.tagihanbulanan
-                                                            //         ? true
-                                                            //         : false,
-                                                            // fillColor:
-                                                            //     Colors.grey[200],
-                                                            hintText: "Nilai Transaksi"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                border:
+                                                                    OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8),
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    width: 1,
+                                                                    color: Colors
+                                                                        .grey,
+                                                                  ),
+                                                                ),
+                                                                filled: value
+                                                                        .tagihanbulanan
+                                                                    ? true
+                                                                    : false,
+                                                                fillColor:
+                                                                    Colors.grey[
+                                                                        200],
+                                                                hintText:
+                                                                    "Nilai Transaksi"),
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -1686,8 +1728,10 @@ class HutangPiutangPage extends StatelessWidget {
                                                     ),
                                                     Expanded(
                                                       child: TextFormField(
+                                                        readOnly: true,
                                                         controller: value
                                                             .listNilaiPPN[i],
+
                                                         keyboardType: TextInputType
                                                             .numberWithOptions(
                                                                 decimal: true),
@@ -1708,26 +1752,27 @@ class HutangPiutangPage extends StatelessWidget {
                                                         //     value.tagihanbulanan
                                                         //         ? true
                                                         //         : false,
-                                                        decoration: InputDecoration(
-                                                            border: OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8),
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                width: 1,
-                                                                color:
-                                                                    Colors.grey,
-                                                              ),
-                                                            ),
-                                                            // filled:
-                                                            //     value.tagihanbulanan
-                                                            //         ? true
-                                                            //         : false,
-                                                            // fillColor:
-                                                            //     Colors.grey[200],
-                                                            hintText: "Nilai PPN"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                border:
+                                                                    OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8),
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    width: 1,
+                                                                    color: Colors
+                                                                        .grey,
+                                                                  ),
+                                                                ),
+                                                                filled: true,
+                                                                fillColor:
+                                                                    Colors.grey[
+                                                                        200],
+                                                                hintText:
+                                                                    "Nilai PPN"),
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -1735,6 +1780,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                     ),
                                                     Expanded(
                                                       child: TextFormField(
+                                                        readOnly: true,
                                                         controller: value
                                                             .listNilaiPPH[i],
                                                         keyboardType: TextInputType
@@ -1757,26 +1803,27 @@ class HutangPiutangPage extends StatelessWidget {
                                                         //     value.tagihanbulanan
                                                         //         ? true
                                                         //         : false,
-                                                        decoration: InputDecoration(
-                                                            border: OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8),
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                width: 1,
-                                                                color:
-                                                                    Colors.grey,
-                                                              ),
-                                                            ),
-                                                            // filled:
-                                                            //     value.tagihanbulanan
-                                                            //         ? true
-                                                            //         : false,
-                                                            // fillColor:
-                                                            //     Colors.grey[200],
-                                                            hintText: "Nilai PPH"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                border:
+                                                                    OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8),
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    width: 1,
+                                                                    color: Colors
+                                                                        .grey,
+                                                                  ),
+                                                                ),
+                                                                filled: true,
+                                                                fillColor:
+                                                                    Colors.grey[
+                                                                        200],
+                                                                hintText:
+                                                                    "Nilai PPH"),
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -1839,13 +1886,13 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'tgl_kontrak', value: data.tglKontrak),
                 DataGridCell(
                     columnName: 'transaksi',
-                    value: FormatCurrency.oCcy
-                        .format(int.parse(data.totalTagPokok))),
+                    value: FormatCurrency.oCcyDecimal
+                        .format(double.parse(data.totalTagPokok))),
                 DataGridCell(
                     columnName: 'os',
-                    value: FormatCurrency.oCcy.format(
-                        (int.parse(data.totalTagPokok) -
-                            int.parse(data.totalByrPokok)))),
+                    value: FormatCurrency.oCcyDecimal.format(
+                        (double.parse(data.totalTagPokok) -
+                            double.parse(data.totalByrPokok)))),
                 DataGridCell(
                     columnName: 'carabayar',
                     value: data.noinv == null ? "Tagihan" : "Auto"),
