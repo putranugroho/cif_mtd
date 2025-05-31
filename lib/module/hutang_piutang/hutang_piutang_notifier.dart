@@ -231,6 +231,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
               "os": "$outstanding",
               "tag_pokok": "$nilaiTransaksi",
               "tag_ppn": "$nilaippn",
+              "no_dok": "${nodok.text.trim()}",
               "tag_pph": "$nilaipph",
               "byr_pokok": "0",
               "byr_ppn": "0",
@@ -312,7 +313,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
                       ? setupHutangPiutangModel!.sbbtransaksipiutang
                       : setupHutangPiutangModel!.sbblawanhutang,
                   "rrn": "$invoice",
-                  "no_dokumen": "${nokontrak.text}",
+                  "no_dokumen": "${nodok.text.trim()}",
                   "no_ref": "${noreferensi.text}",
                   "nominal": double.parse(nilaitransaksi.text
                       .replaceAll("Rp ", "")
@@ -367,7 +368,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
                       ? setupHutangPiutangModel!.sbbtransaksipiutang
                       : setupHutangPiutangModel!.sbblawanhutang,
                   "rrn": "$invoice",
-                  "no_dokumen": "${nokontrak.text}",
+                  "no_dokumen": "${nodok.text.trim()}",
                   "no_ref": "${noreferensi.text}",
                   "nominal": double.parse(nilaitransaksi.text
                       .replaceAll("Rp ", "")
@@ -432,7 +433,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
                         ? setupHutangPiutangModel!.sbbppnpiutang
                         : setupHutangPiutangModel!.sbblawanhutang,
                     "rrn": "$invoice",
-                    "no_dokumen": "${nokontrak.text}",
+                    "no_dokumen": "${nodok.text.trim()}",
                     "no_ref": "${noreferensi.text}",
                     "nominal": double.parse(nilaippn.text
                         .replaceAll("Rp ", "")
@@ -489,7 +490,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
                         ? setupHutangPiutangModel!.sbbppnpiutang
                         : setupHutangPiutangModel!.sbblawanhutang,
                     "rrn": "$invoice",
-                    "no_dokumen": "${nokontrak.text}",
+                    "no_dokumen": "${nodok.text.trim()}",
                     "no_ref": "${noreferensi.text}",
                     "nominal": double.parse(nilaippn.text
                         .replaceAll("Rp ", "")
@@ -555,7 +556,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
                         ? setupHutangPiutangModel!.sbblawanpiutang
                         : setupHutangPiutangModel!.sbbpphhutang,
                     "rrn": "$invoice",
-                    "no_dokumen": "${nokontrak.text}",
+                    "no_dokumen": "${nodok.text.trim()}",
                     "no_ref": "${noreferensi.text}",
                     "nominal": double.parse(nilaipph.text
                         .replaceAll("Rp ", "")
@@ -612,7 +613,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
                         ? setupHutangPiutangModel!.sbblawanpiutang
                         : setupHutangPiutangModel!.sbbpphhutang,
                     "rrn": "$invoice",
-                    "no_dokumen": "${nokontrak.text}",
+                    "no_dokumen": "${nodok.text.trim()}",
                     "no_ref": "${noreferensi.text}",
                     "nominal": double.parse(nilaipph.text
                         .replaceAll("Rp ", "")
@@ -672,7 +673,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
                           setupHutangPiutangModel!.namasbbpersedianpiutang,
                       "cracc": setupHutangPiutangModel!.sbbpersedianpiutang,
                       "rrn": "$invoice",
-                      "no_dokumen": "${nokontrak.text}",
+                      "no_dokumen": "${nodok.text.trim()}",
                       "no_ref": "${noreferensi.text}",
                       "nominal": double.parse(nilaihpp.text
                           .replaceAll("Rp ", "")
@@ -723,7 +724,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
                           setupHutangPiutangModel!.namasbbpersedianpiutang,
                       "cracc": setupHutangPiutangModel!.sbbpersedianpiutang,
                       "rrn": "$invoice",
-                      "no_dokumen": "${nokontrak.text}",
+                      "no_dokumen": "${nodok.text.trim()}",
                       "no_ref": "${noreferensi.text}",
                       "nominal": double.parse(nilaihpp.text
                           .replaceAll("Rp ", "")
@@ -792,6 +793,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
             "tag_pph":
                 "${nilaipph.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")}",
             "byr_pokok": "0",
+            "no_dok": "${nodok.text.trim()}",
             "byr_ppn": "0",
             "byr_pph": "0",
             "ststgh": "0",
@@ -870,7 +872,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
                       ? setupHutangPiutangModel!.sbbtransaksipiutang
                       : setupHutangPiutangModel!.sbblawanhutang,
                   "rrn": "$invoice",
-                  "no_dokumen": "${nokontrak.text}",
+                  "no_dokumen": "${nodok.text.trim()}",
                   "no_ref": "${noreferensi.text}",
                   "nominal": double.parse(nilaitransaksi.text
                       .replaceAll("Rp ", "")
@@ -925,7 +927,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
                       ? setupHutangPiutangModel!.sbbtransaksipiutang
                       : setupHutangPiutangModel!.sbblawanhutang,
                   "rrn": "$invoice",
-                  "no_dokumen": "${nokontrak.text}",
+                  "no_dokumen": "${nodok.text.trim()}",
                   "no_ref": "${noreferensi.text}",
                   "nominal": double.parse(nilaitransaksi.text
                       .replaceAll("Rp ", "")
@@ -995,7 +997,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
                           ? setupHutangPiutangModel!.sbbppnpiutang
                           : setupHutangPiutangModel!.sbblawanhutang,
                       "rrn": "$invoice",
-                      "no_dokumen": "${nokontrak.text}",
+                      "no_dokumen": "${nodok.text.trim()}",
                       "no_ref": "${noreferensi.text}",
                       "nominal": double.parse(nilaippn.text
                           .replaceAll("Rp ", "")
@@ -1053,7 +1055,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
                           ? setupHutangPiutangModel!.sbbppnpiutang
                           : setupHutangPiutangModel!.sbblawanhutang,
                       "rrn": "$invoice",
-                      "no_dokumen": "${nokontrak.text}",
+                      "no_dokumen": "${nodok.text.trim()}",
                       "no_ref": "${noreferensi.text}",
                       "nominal": double.parse(nilaippn.text
                           .replaceAll("Rp ", "")
@@ -1125,7 +1127,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
                           ? setupHutangPiutangModel!.sbblawanpiutang
                           : setupHutangPiutangModel!.sbbpphhutang,
                       "rrn": "$invoice",
-                      "no_dokumen": "${nokontrak.text}",
+                      "no_dokumen": "${nodok.text.trim()}",
                       "no_ref": "${noreferensi.text}",
                       "nominal": double.parse(nilaipph.text
                           .replaceAll("Rp ", "")
@@ -1183,7 +1185,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
                           ? setupHutangPiutangModel!.sbblawanpiutang
                           : setupHutangPiutangModel!.sbbpphhutang,
                       "rrn": "$invoice",
-                      "no_dokumen": "${nokontrak.text}",
+                      "no_dokumen": "${nodok.text.trim()}",
                       "no_ref": "${noreferensi.text}",
                       "nominal": double.parse(nilaipph.text
                           .replaceAll("Rp ", "")
@@ -1246,7 +1248,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
                           setupHutangPiutangModel!.namasbbpersedianpiutang,
                       "cracc": setupHutangPiutangModel!.sbbpersedianpiutang,
                       "rrn": "$invoice",
-                      "no_dokumen": "${nokontrak.text}",
+                      "no_dokumen": "${nodok.text.trim()}",
                       "no_ref": "${noreferensi.text}",
                       "nominal": double.parse(nilaihpp.text
                           .replaceAll("Rp ", "")
@@ -1297,7 +1299,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
                           setupHutangPiutangModel!.namasbbpersedianpiutang,
                       "cracc": setupHutangPiutangModel!.sbbpersedianpiutang,
                       "rrn": "$invoice",
-                      "no_dokumen": "${nokontrak.text}",
+                      "no_dokumen": "${nodok.text.trim()}",
                       "no_ref": "${noreferensi.text}",
                       "nominal": double.parse(nilaihpp.text
                           .replaceAll("Rp ", "")
@@ -1876,6 +1878,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
   TextEditingController ao = TextEditingController();
   TextEditingController noinvoice = TextEditingController();
   TextEditingController noreferensi = TextEditingController();
+  TextEditingController nodok = TextEditingController();
   TextEditingController customersupplier = TextEditingController();
   TextEditingController alamat = TextEditingController();
   TextEditingController nokontrak = TextEditingController();

@@ -714,6 +714,44 @@ class HutangPiutangPage extends StatelessWidget {
                                                           width: 24,
                                                         ),
                                                         const Text(
+                                                          "No Dokumen",
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 16,
+                                                        ),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            controller:
+                                                                value.nodok,
+                                                            validator: (e) {
+                                                              if (e!.isEmpty) {
+                                                                return "Wajib diisi";
+                                                              } else {
+                                                                return null;
+                                                              }
+                                                            },
+                                                            decoration:
+                                                                InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8),
+                                                                borderSide:
+                                                                    const BorderSide(
+                                                                  width: 1,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 16,
+                                                        ),
+                                                        const Text(
                                                           "No Referensi",
                                                         ),
                                                         const SizedBox(
