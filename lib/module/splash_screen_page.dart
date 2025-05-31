@@ -11,7 +11,7 @@ class SplashScreenPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => SplashScreenNotifier(context: context),
       child: Consumer<SplashScreenNotifier>(
-        builder: (context, value, child) => SafeArea(
+        builder: (context, value, child) => const SafeArea(
             child: Scaffold(
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

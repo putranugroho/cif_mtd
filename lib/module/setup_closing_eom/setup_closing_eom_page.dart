@@ -20,8 +20,8 @@ class SetupClosingEomPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                padding: EdgeInsets.all(20),
-                child: Row(
+                padding: const EdgeInsets.all(20),
+                child: const Row(
                   children: [
                     Expanded(
                       child: Text(
@@ -39,7 +39,7 @@ class SetupClosingEomPage extends StatelessWidget {
                   child: ListView(
                 children: [
                   Container(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     child: FocusTraversalGroup(
                       child: Form(
                         key: value.keyForm,
@@ -48,7 +48,7 @@ class SetupClosingEomPage extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Container(
+                                SizedBox(
                                   width: 350,
                                   child: Column(
                                     children: [
@@ -61,10 +61,10 @@ class SetupClosingEomPage extends StatelessWidget {
                                               onChanged: (e) {
                                                 value.pilihJenisTransaksi(e!);
                                               }),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 8,
                                           ),
-                                          Text(
+                                          const Text(
                                             "Back Date s/d Bulan (Tahun Lalu)",
                                           ),
                                         ],
@@ -74,24 +74,20 @@ class SetupClosingEomPage extends StatelessWidget {
                                       ),
                                       Row(
                                         children: [
-                                          Container(
+                                          SizedBox(
                                             width: 180,
                                             child: TextFormField(
                                               enabled: value.jenisTrans,
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              textInputAction: TextInputAction.done,
                                               controller: value.closingDate,
                                               maxLines: 1,
                                               onTap: () => value.showDate(),
                                               inputFormatters: [
-                                                FilteringTextInputFormatter
-                                                    .digitsOnly
+                                                FilteringTextInputFormatter.digitsOnly
                                               ],
                                               style: TextStyle(
                                                 // Make text bigger and black
-                                                color: value.jenisTrans
-                                                    ? Colors.black
-                                                    : Colors.grey,
+                                                color: value.jenisTrans ? Colors.black : Colors.grey,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
                                               ),
@@ -106,19 +102,13 @@ class SetupClosingEomPage extends StatelessWidget {
                                                 filled: !value.jenisTrans,
                                                 fillColor: Colors.grey[200],
                                                 hintText: "Pilih Bulan",
-                                                hintStyle: const TextStyle(
-                                                    color: Colors.grey),
+                                                hintStyle: const TextStyle(color: Colors.grey),
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
-                                                disabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.grey.shade600),
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                disabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: Colors.grey.shade600),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -141,10 +131,10 @@ class SetupClosingEomPage extends StatelessWidget {
                                               onChanged: (e) {
                                                 value.pilihJenisTransaksi(e!);
                                               }),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 8,
                                           ),
-                                          Text(
+                                          const Text(
                                             "Back Date mundur (bulan)",
                                           ),
                                         ],
@@ -154,35 +144,27 @@ class SetupClosingEomPage extends StatelessWidget {
                                       ),
                                       Row(
                                         children: [
-                                          Container(
+                                          SizedBox(
                                             width: 180,
                                             child: TextFormField(
                                               enabled: !value.jenisTrans,
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              textInputAction: TextInputAction.done,
                                               controller: value.backdatemundur,
                                               maxLines: 1,
                                               inputFormatters: [
-                                                FilteringTextInputFormatter
-                                                    .digitsOnly,
-                                                FilteringTextInputFormatter
-                                                    .allow(RegExp(
-                                                        r'^(0?[1-9]|[1-9][0-9])$')),
+                                                FilteringTextInputFormatter.digitsOnly,
+                                                FilteringTextInputFormatter.allow(RegExp(r'^(0?[1-9]|[1-9][0-9])$')),
                                               ],
                                               style: TextStyle(
                                                 // Make text bigger and black
-                                                color: !value.jenisTrans
-                                                    ? Colors.black
-                                                    : Colors.grey,
+                                                color: !value.jenisTrans ? Colors.black : Colors.grey,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                               validator: (e) {
                                                 if (e!.isEmpty) {
                                                   return "Wajib diisi";
-                                                } else if (int.tryParse(e)! <
-                                                        1 ||
-                                                    int.tryParse(e)! > 99) {
+                                                } else if (int.tryParse(e)! < 1 || int.tryParse(e)! > 99) {
                                                   return "Hanya angka 1 sampai 99";
                                                 }
                                                 return null;
@@ -191,19 +173,13 @@ class SetupClosingEomPage extends StatelessWidget {
                                                 filled: value.jenisTrans,
                                                 fillColor: Colors.grey[200],
                                                 hintText: "Bulan",
-                                                hintStyle: const TextStyle(
-                                                    color: Colors.grey),
+                                                hintStyle: const TextStyle(color: Colors.grey),
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
-                                                disabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.grey.shade600),
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                disabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: Colors.grey.shade600),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),

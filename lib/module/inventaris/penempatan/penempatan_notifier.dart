@@ -30,8 +30,7 @@ class PenempatanNotifier extends ChangeNotifier {
       "kode_pt": "001",
     };
     notifyListeners();
-    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data)).then((value) {
       if (value['status'] == "Success") {
         for (Map<String, dynamic> i in value['data']) {
           listKantor.add(KantorModel.fromJson(i));
@@ -57,15 +56,15 @@ class PenempatanNotifier extends ChangeNotifier {
 
 //contoh decimal sparator currency
   var isLoading = true;
-  final currencyFormatter =
-      NumberFormat.currency(symbol: 'Rp ', decimalDigits: 2);
+  final currencyFormatter = NumberFormat.currency(symbol: 'Rp ', decimalDigits: 2);
   getInventaris() async {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getInventaris(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getInventaris(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(InventarisModel.fromJson(i));
@@ -126,8 +125,7 @@ class PenempatanNotifier extends ChangeNotifier {
         "nama_pejabat": karyawanModel == null ? "" : karyawanModel!.namaLengkap,
         "nik": karyawanModel == null ? "" : karyawanModel!.nik,
       };
-      Setuprepository.setup(token, NetworkURL.penempatan(), jsonEncode(data))
-          .then((value) {
+      Setuprepository.setup(token, NetworkURL.penempatan(), jsonEncode(data)).then((value) {
         Navigator.pop(context);
         if (value['status'].toString().toLowerCase().contains("success")) {
           getInventaris();
@@ -186,9 +184,7 @@ class PenempatanNotifier extends ChangeNotifier {
   TextEditingController pph = TextEditingController(text: "0");
   int total = 0;
   onChange() {
-    total = int.parse(hargaBeli.text.replaceAll(",", "")) -
-        int.parse(discount.text.replaceAll(",", "")) +
-        int.parse(biaya.text.replaceAll(",", ""));
+    total = int.parse(hargaBeli.text.replaceAll(",", "")) - int.parse(discount.text.replaceAll(",", "")) + int.parse(biaya.text.replaceAll(",", ""));
     notifyListeners();
   }
 
@@ -198,7 +194,10 @@ class PenempatanNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<String> listPenempatan = ["Kantor", "Karyawan"];
+  List<String> listPenempatan = [
+    "Kantor",
+    "Karyawan"
+  ];
   String? penempatanModel = "Kantor";
   pilihPenempatan(String value) {
     penempatanModel = value;
@@ -244,8 +243,7 @@ class PenempatanNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTransaksi = pickedendDate;
-      tglbeli.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglbeli.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -283,8 +281,7 @@ class PenempatanNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTransaksi = pickedendDate;
-      tglbeli.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglbeli.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -297,32 +294,27 @@ class PenempatanNotifier extends ChangeNotifier {
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
             return Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               child: Container(
                 width: 500,
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    const Text(
                       "Pilih Periode",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
-                    Container(
+                    SizedBox(
                       height: 100,
                       child: ScrollDatePicker(
-                          maximumDate: DateTime(int.parse(
-                                  DateFormat('y').format(DateTime.now())) +
-                              50),
-                          options:
-                              DatePickerOptions(backgroundColor: Colors.white),
-                          viewType: [
+                          maximumDate: DateTime(int.parse(DateFormat('y').format(DateTime.now())) + 50),
+                          options: const DatePickerOptions(backgroundColor: Colors.white),
+                          viewType: const [
                             DatePickerViewType.month,
                             DatePickerViewType.year,
                           ],
@@ -330,13 +322,12 @@ class PenempatanNotifier extends ChangeNotifier {
                           onDateTimeChanged: (e) {
                             setState(() {
                               now = e;
-                              blnPenyusutan.text =
-                                  DateFormat('MMMM y').format(now);
+                              blnPenyusutan.text = DateFormat('MMMM y').format(now);
                               notifyListeners();
                             });
                           }),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     InkWell(
@@ -346,12 +337,9 @@ class PenempatanNotifier extends ChangeNotifier {
                         notifyListeners();
                       },
                       child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                        decoration: BoxDecoration(
-                            color: colorPrimary,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Text(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                        decoration: BoxDecoration(color: colorPrimary, borderRadius: BorderRadius.circular(8)),
+                        child: const Text(
                           "Simpan",
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -380,19 +368,12 @@ class PenempatanNotifier extends ChangeNotifier {
           int.parse(DateFormat('dd').format(
             tglTransaksi!,
           ))),
-      firstDate: DateTime(
-          int.parse(DateFormat('y').format(tglTransaksi!)),
-          int.parse(DateFormat('MM').format(tglTransaksi!)),
-          int.parse(DateFormat('dd').format(tglTransaksi!))),
-      lastDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) + 10,
-          int.parse(DateFormat('MM').format(tglTransaksi!)),
-          int.parse(DateFormat('dd').format(tglTransaksi!))),
+      firstDate: DateTime(int.parse(DateFormat('y').format(tglTransaksi!)), int.parse(DateFormat('MM').format(tglTransaksi!)), int.parse(DateFormat('dd').format(tglTransaksi!))),
+      lastDate: DateTime(int.parse(DateFormat('y').format(DateTime.now())) + 10, int.parse(DateFormat('MM').format(tglTransaksi!)), int.parse(DateFormat('dd').format(tglTransaksi!))),
     ));
     if (pickedendDate != null) {
       tglTransaksis = pickedendDate;
-      tglterima.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglterima.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -403,7 +384,9 @@ class PenempatanNotifier extends ChangeNotifier {
     if (query.isNotEmpty && query.length > 2) {
       listKaryawan.clear();
       notifyListeners();
-      var data = {"nama": query};
+      var data = {
+        "nama": query
+      };
       try {
         final response = await Setuprepository.setup(
           token,
@@ -460,14 +443,8 @@ class PenempatanNotifier extends ChangeNotifier {
     kdAset.text = inventarisModel!.kdaset;
     noaset.text = inventarisModel!.kdaset;
     nmAset.text = inventarisModel!.namaaset;
-    inventarisModel!.nik != ""
-        ? penempatanModel = "Karyawan"
-        : penempatanModel = "Kantor";
-    kantor = listKantor
-        .where((e) =>
-            e.kodePt == inventarisModel!.kodePt &&
-            e.kodeKantor == inventarisModel!.kodeKantor)
-        .first;
+    inventarisModel!.nik != "" ? penempatanModel = "Karyawan" : penempatanModel = "Kantor";
+    kantor = listKantor.where((e) => e.kodePt == inventarisModel!.kodePt && e.kodeKantor == inventarisModel!.kodeKantor).first;
     lokasi.text = inventarisModel!.lokasi;
     kota.text = inventarisModel!.kota;
     nikKaryawan.text = inventarisModel!.nik;

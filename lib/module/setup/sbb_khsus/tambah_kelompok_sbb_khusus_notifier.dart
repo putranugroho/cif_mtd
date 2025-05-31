@@ -24,8 +24,7 @@ class TambahKelompokSbbKhususNotifier extends ChangeNotifier {
     var data = {
       "kode_pt": "001",
     };
-    Setuprepository.setup(token, NetworkURL.getGolonganSbb(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getGolonganSbb(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(GolonganSbbKhususModel.fromJson(i));
@@ -73,13 +72,11 @@ class TambahKelompokSbbKhususNotifier extends ChangeNotifier {
         var data = {
           "id": golonganSbbKhususModel!.id,
           "kode_pt": "001",
-          "kode_golongan": "${kode.text.trim()}",
-          "nama_golongan": "${nama.text.trim()}",
-          "lebih_satu_akun": "${satu ? "Y" : "N"}",
+          "kode_golongan": kode.text.trim(),
+          "nama_golongan": nama.text.trim(),
+          "lebih_satu_akun": satu ? "Y" : "N",
         };
-        Setuprepository.setup(
-                token, NetworkURL.editGolonganSbb(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.editGolonganSbb(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);
@@ -95,13 +92,11 @@ class TambahKelompokSbbKhususNotifier extends ChangeNotifier {
         DialogCustom().showLoading(context);
         var data = {
           "kode_pt": "001",
-          "kode_golongan": "${kode.text.trim()}",
-          "nama_golongan": "${nama.text.trim()}",
-          "lebih_satu_akun": "${satu ? "Y" : "N"}",
+          "kode_golongan": kode.text.trim(),
+          "nama_golongan": nama.text.trim(),
+          "lebih_satu_akun": satu ? "Y" : "N",
         };
-        Setuprepository.setup(
-                token, NetworkURL.addGolonganSbb(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.addGolonganSbb(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);
@@ -143,7 +138,7 @@ class TambahKelompokSbbKhususNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -151,11 +146,11 @@ class TambahKelompokSbbKhususNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin menghapus ${golonganSbbKhususModel!.namaGolongan}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -167,7 +162,7 @@ class TambahKelompokSbbKhususNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -192,9 +187,7 @@ class TambahKelompokSbbKhususNotifier extends ChangeNotifier {
     var data = {
       "id": golonganSbbKhususModel!.id,
     };
-    Setuprepository.setup(
-            token, NetworkURL.deleteGolonganSbb(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.deleteGolonganSbb(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getGolonganSbb();

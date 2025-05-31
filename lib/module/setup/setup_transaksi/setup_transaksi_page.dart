@@ -32,10 +32,10 @@ class SetupTransaksiPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Setup Transaksi",
                               style: TextStyle(
@@ -47,8 +47,7 @@ class SetupTransaksiPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -57,10 +56,10 @@ class SetupTransaksiPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah Setup Trans.",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -92,7 +91,7 @@ class SetupTransaksiPage extends StatelessWidget {
                               ),
                             )
                           : Container(
-                              padding: EdgeInsets.all(20),
+                              padding: const EdgeInsets.all(20),
                               height: MediaQuery.of(context).size.height,
                               child: SfDataGrid(
                                 headerRowHeight: 40,
@@ -101,8 +100,7 @@ class SetupTransaksiPage extends StatelessWidget {
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
-                                headerGridLinesVisibility:
-                                    GridLinesVisibility.both,
+                                headerGridLinesVisibility: GridLinesVisibility.both,
                                 selectionMode: SelectionMode.single,
 
                                 source: DetailDataSource(value),
@@ -111,10 +109,10 @@ class SetupTransaksiPage extends StatelessWidget {
                                       width: 30,
                                       columnName: 'no',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('No',
+                                          child: const Text('No',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 12,
@@ -125,8 +123,8 @@ class SetupTransaksiPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Nama Transaksi',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Nama Transaksi',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -138,8 +136,8 @@ class SetupTransaksiPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Kode Transaksi',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Kode Transaksi',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -149,10 +147,10 @@ class SetupTransaksiPage extends StatelessWidget {
                                       columnName: 'gl_deb',
                                       width: 270,
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Akun Debet',
+                                          child: const Text('Akun Debet',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -162,10 +160,10 @@ class SetupTransaksiPage extends StatelessWidget {
                                       columnName: 'gl_kre',
                                       width: 270,
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Akun Kredit',
+                                          child: const Text('Akun Kredit',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -175,10 +173,10 @@ class SetupTransaksiPage extends StatelessWidget {
                                       columnName: 'modul',
                                       width: 110,
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Modul',
+                                          child: const Text('Modul',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -188,10 +186,10 @@ class SetupTransaksiPage extends StatelessWidget {
                                       columnName: 'hutangpiutang',
                                       width: 80,
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Hutang Piutang',
+                                          child: const Text('Hutang Piutang',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -202,9 +200,9 @@ class SetupTransaksiPage extends StatelessWidget {
                                       width: 80,
                                       label: Container(
                                           color: colorPrimary,
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           alignment: Alignment.center,
-                                          child: Text('Action',
+                                          child: const Text('Action',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -226,7 +224,7 @@ class SetupTransaksiPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -235,8 +233,8 @@ class SetupTransaksiPage extends StatelessWidget {
                 child: value.dialog
                     ? Container(
                         width: 600,
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
+                        padding: const EdgeInsets.all(20),
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                         ),
                         child: Form(
@@ -248,10 +246,8 @@ class SetupTransaksiPage extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      value.editData
-                                          ? "Ubah / Hapus Setup Transaksi"
-                                          : "Tambah Setup Transaksi",
-                                      style: TextStyle(
+                                      value.editData ? "Ubah / Hapus Setup Transaksi" : "Tambah Setup Transaksi",
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -262,29 +258,27 @@ class SetupTransaksiPage extends StatelessWidget {
                                     child: Container(
                                       width: 40,
                                       height: 40,
-                                      padding: EdgeInsets.all(4),
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey[200],
-                                          shape: BoxShape.circle),
-                                      child: Icon(Icons.close),
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                      child: const Icon(Icons.close),
                                     ),
                                   )
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 32,
                               ),
                               Expanded(
                                   child: ListView(
                                 children: [
-                                  Row(
+                                  const Row(
                                     children: [
                                       Text(
                                         "Kode Transaksi",
-                                        style: const TextStyle(fontSize: 12),
+                                        style: TextStyle(fontSize: 12),
                                       ),
-                                      const SizedBox(width: 5),
-                                      const Text(
+                                      SizedBox(width: 5),
+                                      Text(
                                         "*",
                                         style: TextStyle(fontSize: 8),
                                       ),
@@ -316,14 +310,14 @@ class SetupTransaksiPage extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(height: 16),
-                                  Row(
+                                  const Row(
                                     children: [
                                       Text(
                                         "Nama Transaksi",
-                                        style: const TextStyle(fontSize: 12),
+                                        style: TextStyle(fontSize: 12),
                                       ),
-                                      const SizedBox(width: 5),
-                                      const Text(
+                                      SizedBox(width: 5),
+                                      Text(
                                         "*",
                                         style: TextStyle(fontSize: 8),
                                       ),
@@ -354,14 +348,14 @@ class SetupTransaksiPage extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(height: 16),
-                                  Row(
+                                  const Row(
                                     children: [
                                       Text(
                                         "Pilih Modul",
-                                        style: const TextStyle(fontSize: 12),
+                                        style: TextStyle(fontSize: 12),
                                       ),
-                                      const SizedBox(width: 5),
-                                      const Text(
+                                      SizedBox(width: 5),
+                                      Text(
                                         "*",
                                         style: TextStyle(fontSize: 8),
                                       ),
@@ -376,54 +370,51 @@ class SetupTransaksiPage extends StatelessWidget {
                                         activeColor: colorPrimary,
                                         value: "BACKOFFICE",
                                         groupValue: value.modul,
-                                        onChanged: (e) =>
-                                            value.gantimodul("BACKOFFICE"),
+                                        onChanged: (e) => value.gantimodul("BACKOFFICE"),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 8,
                                       ),
-                                      Text("Backoffice"),
-                                      SizedBox(
+                                      const Text("Backoffice"),
+                                      const SizedBox(
                                         width: 32,
                                       ),
                                       Radio(
                                         activeColor: colorPrimary,
                                         value: "KASIR",
                                         groupValue: value.modul,
-                                        onChanged: (e) =>
-                                            value.gantimodul("KASIR"),
+                                        onChanged: (e) => value.gantimodul("KASIR"),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 8,
                                       ),
-                                      Text("Kasir"),
-                                      SizedBox(
+                                      const Text("Kasir"),
+                                      const SizedBox(
                                         width: 32,
                                       ),
                                       Radio(
                                         activeColor: colorPrimary,
                                         value: "KAS KECIL",
                                         groupValue: value.modul,
-                                        onChanged: (e) =>
-                                            value.gantimodul("KAS KECIL"),
+                                        onChanged: (e) => value.gantimodul("KAS KECIL"),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 8,
                                       ),
-                                      Text("Kas Kecil"),
+                                      const Text("Kas Kecil"),
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 16,
                                   ),
-                                  Row(
+                                  const Row(
                                     children: [
                                       Text(
                                         "Pilih Debet Akun",
-                                        style: const TextStyle(fontSize: 12),
+                                        style: TextStyle(fontSize: 12),
                                       ),
-                                      const SizedBox(width: 5),
-                                      const Text(
+                                      SizedBox(width: 5),
+                                      Text(
                                         "*",
                                         style: TextStyle(fontSize: 8),
                                       ),
@@ -437,15 +428,13 @@ class SetupTransaksiPage extends StatelessWidget {
                                       Expanded(
                                         child: TypeAheadField<InqueryGlModel>(
                                           controller: value.nosbbdeb,
-                                          suggestionsCallback: (search) =>
-                                              value.getInquery(search),
-                                          builder:
-                                              (context, controller, focusNode) {
+                                          suggestionsCallback: (search) => value.getInquery(search),
+                                          builder: (context, controller, focusNode) {
                                             return TextField(
                                                 controller: controller,
                                                 focusNode: focusNode,
                                                 autofocus: true,
-                                                decoration: InputDecoration(
+                                                decoration: const InputDecoration(
                                                   border: OutlineInputBorder(),
                                                   labelText: 'Cari Akun',
                                                 ));
@@ -462,10 +451,10 @@ class SetupTransaksiPage extends StatelessWidget {
                                           },
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 16,
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 150,
                                         child: TextFormField(
                                           // enabled: false,
@@ -488,25 +477,24 @@ class SetupTransaksiPage extends StatelessWidget {
                                             fillColor: Colors.grey[200],
                                             hintText: "Nomor Debet",
                                             border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
+                                              borderRadius: BorderRadius.circular(6),
                                             ),
                                           ),
                                         ),
                                       )
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 16,
                                   ),
-                                  Row(
+                                  const Row(
                                     children: [
                                       Text(
                                         "Pilih Kredit Akun",
-                                        style: const TextStyle(fontSize: 12),
+                                        style: TextStyle(fontSize: 12),
                                       ),
-                                      const SizedBox(width: 5),
-                                      const Text(
+                                      SizedBox(width: 5),
+                                      Text(
                                         "*",
                                         style: TextStyle(fontSize: 8),
                                       ),
@@ -520,15 +508,13 @@ class SetupTransaksiPage extends StatelessWidget {
                                       Expanded(
                                         child: TypeAheadField<InqueryGlModel>(
                                           controller: value.nossbcre,
-                                          suggestionsCallback: (search) =>
-                                              value.getInquery(search),
-                                          builder:
-                                              (context, controller, focusNode) {
+                                          suggestionsCallback: (search) => value.getInquery(search),
+                                          builder: (context, controller, focusNode) {
                                             return TextField(
                                                 controller: controller,
                                                 focusNode: focusNode,
                                                 autofocus: true,
-                                                decoration: InputDecoration(
+                                                decoration: const InputDecoration(
                                                   border: OutlineInputBorder(),
                                                   labelText: 'Cari Akun',
                                                 ));
@@ -545,10 +531,10 @@ class SetupTransaksiPage extends StatelessWidget {
                                           },
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 16,
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 150,
                                         child: TextFormField(
                                           // enabled: false,
@@ -571,65 +557,48 @@ class SetupTransaksiPage extends StatelessWidget {
                                             fillColor: Colors.grey[200],
                                             hintText: "Nomor Kredit",
                                             border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
+                                              borderRadius: BorderRadius.circular(6),
                                             ),
                                           ),
                                         ),
                                       )
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 16,
                                   ),
                                   value.modul == "KAS KECIL"
-                                      ? SizedBox()
+                                      ? const SizedBox()
                                       : Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
+                                          crossAxisAlignment: CrossAxisAlignment.stretch,
                                           children: [
                                             Row(
                                               children: [
-                                                Text("Hutang atau Piutang "),
+                                                const Text("Hutang atau Piutang "),
                                                 const SizedBox(
                                                   width: 16,
                                                 ),
                                                 InkWell(
                                                   onTap: () {
-                                                    value.gantiHutangPiutang(
-                                                        "HUTANG");
+                                                    value.gantiHutangPiutang("HUTANG");
                                                   },
                                                   child: Row(
                                                     children: [
                                                       Container(
                                                         width: 16,
                                                         height: 16,
-                                                        padding:
-                                                            EdgeInsets.all(2),
-                                                        decoration: BoxDecoration(
-                                                            shape:
-                                                                BoxShape.circle,
-                                                            color: Colors.white,
-                                                            border: Border.all(
-                                                                width: 2,
-                                                                color: Colors
-                                                                    .grey)),
-                                                        child:
-                                                            value.hutangPiutang ==
-                                                                    "HUTANG"
-                                                                ? Container(
-                                                                    decoration: BoxDecoration(
-                                                                        shape: BoxShape
-                                                                            .circle,
-                                                                        color:
-                                                                            colorPrimary),
-                                                                  )
-                                                                : SizedBox(),
+                                                        padding: const EdgeInsets.all(2),
+                                                        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white, border: Border.all(width: 2, color: Colors.grey)),
+                                                        child: value.hutangPiutang == "HUTANG"
+                                                            ? Container(
+                                                                decoration: const BoxDecoration(shape: BoxShape.circle, color: colorPrimary),
+                                                              )
+                                                            : const SizedBox(),
                                                       ),
-                                                      SizedBox(
+                                                      const SizedBox(
                                                         width: 8,
                                                       ),
-                                                      Text("Hutang"),
+                                                      const Text("Hutang"),
                                                     ],
                                                   ),
                                                 ),
@@ -638,40 +607,25 @@ class SetupTransaksiPage extends StatelessWidget {
                                                 ),
                                                 InkWell(
                                                   onTap: () {
-                                                    value.gantiHutangPiutang(
-                                                        "PIUTANG");
+                                                    value.gantiHutangPiutang("PIUTANG");
                                                   },
                                                   child: Row(
                                                     children: [
                                                       Container(
                                                         width: 16,
                                                         height: 16,
-                                                        padding:
-                                                            EdgeInsets.all(2),
-                                                        decoration: BoxDecoration(
-                                                            shape:
-                                                                BoxShape.circle,
-                                                            color: Colors.white,
-                                                            border: Border.all(
-                                                                width: 2,
-                                                                color: Colors
-                                                                    .grey)),
-                                                        child:
-                                                            value.hutangPiutang ==
-                                                                    "PIUTANG"
-                                                                ? Container(
-                                                                    decoration: BoxDecoration(
-                                                                        shape: BoxShape
-                                                                            .circle,
-                                                                        color:
-                                                                            colorPrimary),
-                                                                  )
-                                                                : SizedBox(),
+                                                        padding: const EdgeInsets.all(2),
+                                                        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white, border: Border.all(width: 2, color: Colors.grey)),
+                                                        child: value.hutangPiutang == "PIUTANG"
+                                                            ? Container(
+                                                                decoration: const BoxDecoration(shape: BoxShape.circle, color: colorPrimary),
+                                                              )
+                                                            : const SizedBox(),
                                                       ),
-                                                      SizedBox(
+                                                      const SizedBox(
                                                         width: 8,
                                                       ),
-                                                      Text("Piutang"),
+                                                      const Text("Piutang"),
                                                     ],
                                                   ),
                                                 ),
@@ -767,7 +721,7 @@ class SetupTransaksiPage extends StatelessWidget {
                                             // ),
                                           ],
                                         ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 16,
                                   ),
                                   ButtonPrimary(
@@ -778,8 +732,7 @@ class SetupTransaksiPage extends StatelessWidget {
                                   ),
                                   value.editData
                                       ? Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
+                                          crossAxisAlignment: CrossAxisAlignment.stretch,
                                           children: [
                                             const SizedBox(
                                               height: 16,
@@ -792,14 +745,14 @@ class SetupTransaksiPage extends StatelessWidget {
                                             ),
                                           ],
                                         )
-                                      : SizedBox(),
+                                      : const SizedBox(),
                                 ],
                               ))
                             ],
                           ),
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -826,21 +779,12 @@ class DetailDataSource extends DataGridSource {
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(columnName: 'nama', value: "${data.namaTrans}"),
+                DataGridCell(columnName: 'nama', value: data.namaTrans),
                 DataGridCell(columnName: 'kode', value: data.kdTrans),
-                DataGridCell(
-                    columnName: 'gl_deb',
-                    value: "${data.glDeb} - ${data.namaDeb}"),
-                DataGridCell(
-                    columnName: 'gl_kre',
-                    value: "${data.glKre} - ${data.namaKre}"),
+                DataGridCell(columnName: 'gl_deb', value: "${data.glDeb} - ${data.namaDeb}"),
+                DataGridCell(columnName: 'gl_kre', value: "${data.glKre} - ${data.namaKre}"),
                 DataGridCell(columnName: 'modul', value: data.modul),
-                DataGridCell(
-                    columnName: 'hutangpiutang',
-                    value: data.hutangPiutang == null ||
-                            data.hutangPiutang == "null"
-                        ? ""
-                        : data.hutangPiutang),
+                DataGridCell(columnName: 'hutangpiutang', value: data.hutangPiutang == null || data.hutangPiutang == "null" ? "" : data.hutangPiutang),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
@@ -861,7 +805,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -870,10 +814,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),
@@ -888,7 +832,7 @@ class DetailDataSource extends DataGridSource {
               e.value,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: 12),
+              style: const TextStyle(fontSize: 12),
             ),
           );
         }

@@ -11,8 +11,7 @@ class JurnalNotifier extends ChangeNotifier {
     }
     firstDayCurrentMonth = DateTime.utc(now.year, now.month, 1);
 
-    lastDayCurrentMonth =
-        DateTime.utc(now.year, now.month + 1).subtract(Duration(days: 1));
+    lastDayCurrentMonth = DateTime.utc(now.year, now.month + 1).subtract(const Duration(days: 1));
     notifyListeners();
   }
 

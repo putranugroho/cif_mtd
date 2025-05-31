@@ -36,10 +36,10 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Golongan SBB Khusus",
                               style: TextStyle(
@@ -51,8 +51,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -61,10 +60,10 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah Golongan SBB Khusus",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -96,7 +95,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                               ),
                             )
                           : Container(
-                              padding: EdgeInsets.all(20),
+                              padding: const EdgeInsets.all(20),
                               height: MediaQuery.of(context).size.height,
                               child: SfDataGrid(
                                 headerRowHeight: 40,
@@ -105,8 +104,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
-                                headerGridLinesVisibility:
-                                    GridLinesVisibility.both,
+                                headerGridLinesVisibility: GridLinesVisibility.both,
                                 selectionMode: SelectionMode.single,
 
                                 source: DetailDataSource(value),
@@ -115,10 +113,10 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                       width: 50,
                                       columnName: 'no',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('No',
+                                          child: const Text('No',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 12,
@@ -128,10 +126,10 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                       width: 100,
                                       columnName: 'kode',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Kode Golongan',
+                                          child: const Text('Kode Golongan',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -143,8 +141,8 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Nama Golongan',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Nama Golongan',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -156,8 +154,8 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Lebih Satu Akun',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Lebih Satu Akun',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -168,9 +166,9 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                       columnName: 'action',
                                       label: Container(
                                           color: colorPrimary,
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           alignment: Alignment.center,
-                                          child: Text('Action',
+                                          child: const Text('Action',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -192,7 +190,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -203,8 +201,8 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                         key: value.keyForm,
                         child: Container(
                           width: 600,
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
+                          padding: const EdgeInsets.all(20),
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                           ),
                           child: Column(
@@ -214,10 +212,8 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      value.editData
-                                          ? "Ubah / Hapus Golongan SBB Khusus"
-                                          : "Tambah Golongan SBB Khusus",
-                                      style: TextStyle(
+                                      value.editData ? "Ubah / Hapus Golongan SBB Khusus" : "Tambah Golongan SBB Khusus",
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -228,26 +224,24 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                     child: Container(
                                       width: 40,
                                       height: 40,
-                                      padding: EdgeInsets.all(4),
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey[200],
-                                          shape: BoxShape.circle),
-                                      child: Icon(Icons.close),
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                      child: const Icon(Icons.close),
                                     ),
                                   )
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 32,
                               ),
-                              Row(
+                              const Row(
                                 children: [
                                   Text(
                                     "Kode Golongan",
-                                    style: const TextStyle(fontSize: 12),
+                                    style: TextStyle(fontSize: 12),
                                   ),
-                                  const SizedBox(width: 5),
-                                  const Text(
+                                  SizedBox(width: 5),
+                                  Text(
                                     "*",
                                     style: TextStyle(fontSize: 8),
                                   ),
@@ -263,8 +257,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                 maxLines: 1,
                                 maxLength: 3,
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r'[a-zA-Z0-9]'))
+                                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]'))
                                 ],
                                 validator: (e) {
                                   if (e!.isEmpty) {
@@ -287,14 +280,14 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              Row(
+                              const Row(
                                 children: [
                                   Text(
                                     "Nama Golongan SBB Khusus",
-                                    style: const TextStyle(fontSize: 12),
+                                    style: TextStyle(fontSize: 12),
                                   ),
-                                  const SizedBox(width: 5),
-                                  const Text(
+                                  SizedBox(width: 5),
+                                  Text(
                                     "*",
                                     style: TextStyle(fontSize: 8),
                                   ),
@@ -327,13 +320,13 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                               const SizedBox(height: 16),
                               Row(
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Lebih dari satu akun",
-                                    style: const TextStyle(fontSize: 12),
+                                    style: TextStyle(fontSize: 12),
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   CupertinoSwitch(
-                                      activeColor: colorPrimary,
+                                      activeTrackColor: colorPrimary,
                                       value: value.satu,
                                       onChanged: (e) {
                                         value.gantisatuan();
@@ -351,8 +344,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                               ),
                               value.editData
                                   ? Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         const SizedBox(
                                           height: 16,
@@ -365,12 +357,12 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                         ),
                                       ],
                                     )
-                                  : SizedBox()
+                                  : const SizedBox()
                             ],
                           ),
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -392,8 +384,7 @@ class DetailDataSource extends DataGridSource {
   @override
   List<DataGridRow> get rows => _laporanData;
   void buildRowData(List<GolonganSbbKhususModel> list) {
-    list.sort((a, b) =>
-        a.kodeGolongan.toLowerCase().compareTo(b.kodeGolongan.toLowerCase()));
+    list.sort((a, b) => a.kodeGolongan.toLowerCase().compareTo(b.kodeGolongan.toLowerCase()));
     int index = 1;
     _laporanData = list
         .map<DataGridRow>((data) => DataGridRow(
@@ -422,7 +413,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -431,10 +422,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),
@@ -442,13 +433,7 @@ class DetailDataSource extends DataGridSource {
             ),
           );
         } else if (e.columnName == 'lebih') {
-          return Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(8.0),
-              child: Checkbox(
-                  activeColor: colorPrimary,
-                  value: e.value == "Y" ? true : false,
-                  onChanged: (e) {}));
+          return Container(alignment: Alignment.center, padding: const EdgeInsets.all(8.0), child: Checkbox(activeColor: colorPrimary, value: e.value == "Y" ? true : false, onChanged: (e) {}));
         } else {
           return Container(
             alignment: Alignment.centerLeft,

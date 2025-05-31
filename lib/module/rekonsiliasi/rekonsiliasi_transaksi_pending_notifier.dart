@@ -27,7 +27,7 @@ class RekonsiliasiTransaksiPendingNotifier extends ChangeNotifier {
     showDialog(
         context: context,
         builder: (context) {
-          return Dialog();
+          return const Dialog();
         });
   }
 
@@ -62,8 +62,7 @@ class RekonsiliasiTransaksiPendingNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTransaksi = pickedendDate;
-      tglTransaksiText.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglTransaksiText.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }

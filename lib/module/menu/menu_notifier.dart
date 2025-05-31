@@ -32,19 +32,19 @@ class MenuNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
+                  const Text(
                     "Anda yakin Keluar aplikasi?",
                     style: TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -56,7 +56,7 @@ class MenuNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -64,11 +64,7 @@ class MenuNotifier extends ChangeNotifier {
                         onTap: () {
                           Navigator.pop(context);
                           Pref().remove();
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginPage()),
-                              (route) => false);
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginPage()), (route) => false);
                         },
                         name: "Ya",
                       )),

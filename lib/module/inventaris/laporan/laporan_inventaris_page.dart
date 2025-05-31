@@ -10,7 +10,7 @@ class LaporanInventarisPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => LaporanInventarisNotifier(context: context),
       child: Consumer<LaporanInventarisNotifier>(
-        builder: (context, value, child) => SafeArea(
+        builder: (context, value, child) => const SafeArea(
           child: Scaffold(),
         ),
       ),

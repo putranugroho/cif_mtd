@@ -36,10 +36,10 @@ class BackDatePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Back date",
                               style: TextStyle(
@@ -51,8 +51,7 @@ class BackDatePage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -61,10 +60,10 @@ class BackDatePage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah Transaksi",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -75,7 +74,7 @@ class BackDatePage extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         height: MediaQuery.of(context).size.height,
                         child: SfDataGrid(
                           headerRowHeight: 40,
@@ -93,10 +92,10 @@ class BackDatePage extends StatelessWidget {
                                 width: 50,
                                 columnName: 'no',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('No',
+                                    child: const Text('No',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           fontSize: 12,
@@ -105,10 +104,10 @@ class BackDatePage extends StatelessWidget {
                             GridColumn(
                                 columnName: 'tgl_trans',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Tanggal Valuta',
+                                    child: const Text('Tanggal Valuta',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -119,8 +118,8 @@ class BackDatePage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Kode Transaksi',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Kode Transaksi',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -131,8 +130,8 @@ class BackDatePage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Akun Debet',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Akun Debet',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -143,8 +142,8 @@ class BackDatePage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama Akun Debet',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nama Akun Debet',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -155,8 +154,8 @@ class BackDatePage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Akun Kredit',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Akun Kredit',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -167,8 +166,8 @@ class BackDatePage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama Akun Kredit',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nama Akun Kredit',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -179,8 +178,8 @@ class BackDatePage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nomor Dokumen',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nomor Dokumen',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -191,8 +190,8 @@ class BackDatePage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nomor Referensi',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nomor Referensi',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -203,8 +202,8 @@ class BackDatePage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Keterangan',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Keterangan',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -215,8 +214,8 @@ class BackDatePage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nominal',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nominal',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -226,9 +225,9 @@ class BackDatePage extends StatelessWidget {
                                 columnName: 'action',
                                 label: Container(
                                     color: colorPrimary,
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     alignment: Alignment.center,
-                                    child: Text('Action',
+                                    child: const Text('Action',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -250,7 +249,7 @@ class BackDatePage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -258,15 +257,15 @@ class BackDatePage extends StatelessWidget {
                 right: 0,
                 child: value.dialog
                     ? Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         width: 600,
-                        decoration: BoxDecoration(color: Colors.white),
+                        decoration: const BoxDecoration(color: Colors.white),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   child: Text(
                                     "Tambah Transaksi",
                                     style: TextStyle(
@@ -280,29 +279,27 @@ class BackDatePage extends StatelessWidget {
                                   child: Container(
                                     width: 40,
                                     height: 40,
-                                    padding: EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey[200],
-                                        shape: BoxShape.circle),
-                                    child: Icon(Icons.close),
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                    child: const Icon(Icons.close),
                                   ),
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 32,
                             ),
                             Expanded(
                                 child: ListView(
                               children: [
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Kode Transaksi",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
-                                    const Text(
+                                    SizedBox(width: 5),
+                                    Text(
                                       "*",
                                       style: TextStyle(fontSize: 8),
                                     ),
@@ -315,29 +312,23 @@ class BackDatePage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: DropdownSearch<SetupTransModel>(
-                                        popupProps:
-                                            const PopupPropsMultiSelection.menu(
-                                          showSearchBox:
-                                              true, // Aktifkan fitur pencarian
+                                        popupProps: const PopupPropsMultiSelection.menu(
+                                          showSearchBox: true, // Aktifkan fitur pencarian
                                         ),
                                         selectedItem: value.setupTransModel,
                                         items: value.listKodeTransaksi,
-                                        itemAsString: (e) => "${e.namaTrans}",
+                                        itemAsString: (e) => e.namaTrans,
                                         onChanged: (e) {
                                           value.pilihTransModel(e!);
                                         },
-                                        dropdownDecoratorProps:
-                                            DropDownDecoratorProps(
-                                          baseStyle: TextStyle(fontSize: 16),
-                                          textAlignVertical:
-                                              TextAlignVertical.center,
-                                          dropdownSearchDecoration:
-                                              InputDecoration(
+                                        dropdownDecoratorProps: DropDownDecoratorProps(
+                                          baseStyle: const TextStyle(fontSize: 16),
+                                          textAlignVertical: TextAlignVertical.center,
+                                          dropdownSearchDecoration: InputDecoration(
                                             hintText: "Pilih Kode Transaksi",
                                             border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              borderSide: BorderSide(
+                                              borderRadius: BorderRadius.circular(8),
+                                              borderSide: const BorderSide(
                                                 width: 1,
                                                 color: Colors.grey,
                                               ),
@@ -346,10 +337,10 @@ class BackDatePage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 16,
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: 200,
                                       child: TextFormField(
                                         // enabled: false,
@@ -372,8 +363,7 @@ class BackDatePage extends StatelessWidget {
                                           fillColor: Colors.grey[200],
                                           hintText: "Kode Transaksi",
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),
@@ -381,14 +371,14 @@ class BackDatePage extends StatelessWidget {
                                   ],
                                 ),
                                 const SizedBox(height: 16),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Tanggal Valuta (Back date)",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
-                                    const Text(
+                                    SizedBox(width: 5),
+                                    Text(
                                       "*",
                                       style: TextStyle(fontSize: 8),
                                     ),
@@ -424,24 +414,22 @@ class BackDatePage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 ),
                                 Row(
                                   children: [
                                     Expanded(
                                         child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
-                                        Row(
+                                        const Row(
                                           children: [
                                             Text(
                                               "Nomor Dokumen",
-                                              style:
-                                                  const TextStyle(fontSize: 12),
+                                              style: TextStyle(fontSize: 12),
                                             ),
-                                            const SizedBox(width: 5),
+                                            SizedBox(width: 5),
                                           ],
                                         ),
                                         const SizedBox(
@@ -452,8 +440,7 @@ class BackDatePage extends StatelessWidget {
                                           controller: value.nomorDok,
                                           maxLines: 1,
                                           inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly
+                                            FilteringTextInputFormatter.digitsOnly
                                           ],
                                           validator: (e) {
                                             if (e!.isEmpty) {
@@ -465,29 +452,26 @@ class BackDatePage extends StatelessWidget {
                                           decoration: InputDecoration(
                                             hintText: "Nomor Dok",
                                             border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
+                                              borderRadius: BorderRadius.circular(6),
                                             ),
                                           ),
                                         ),
                                       ],
                                     )),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 16,
                                     ),
                                     Expanded(
                                         child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
-                                        Row(
+                                        const Row(
                                           children: [
                                             Text(
                                               "Nomor Reference",
-                                              style:
-                                                  const TextStyle(fontSize: 12),
+                                              style: TextStyle(fontSize: 12),
                                             ),
-                                            const SizedBox(width: 5),
+                                            SizedBox(width: 5),
                                           ],
                                         ),
                                         const SizedBox(
@@ -498,8 +482,7 @@ class BackDatePage extends StatelessWidget {
                                           controller: value.nomorRef,
                                           maxLines: 1,
                                           inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly
+                                            FilteringTextInputFormatter.digitsOnly
                                           ],
                                           validator: (e) {
                                             if (e!.isEmpty) {
@@ -511,8 +494,7 @@ class BackDatePage extends StatelessWidget {
                                           decoration: InputDecoration(
                                             hintText: "Nomor Referensi",
                                             border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
+                                              borderRadius: BorderRadius.circular(6),
                                             ),
                                           ),
                                         ),
@@ -521,14 +503,14 @@ class BackDatePage extends StatelessWidget {
                                   ],
                                 ),
                                 const SizedBox(height: 16),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Pilih Debet Akun",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
-                                    const Text(
+                                    SizedBox(width: 5),
+                                    Text(
                                       "*",
                                       style: TextStyle(fontSize: 8),
                                     ),
@@ -541,31 +523,23 @@ class BackDatePage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: DropdownSearch<CoaModel>(
-                                        popupProps:
-                                            const PopupPropsMultiSelection.menu(
-                                          showSearchBox:
-                                              true, // Aktifkan fitur pencarian
+                                        popupProps: const PopupPropsMultiSelection.menu(
+                                          showSearchBox: true, // Aktifkan fitur pencarian
                                         ),
                                         selectedItem: value.sbbAset,
-                                        items: value.listCoa
-                                            .where((e) => e.jnsAcc == "C")
-                                            .toList(),
-                                        itemAsString: (e) => "${e.namaSbb}",
+                                        items: value.listCoa.where((e) => e.jnsAcc == "C").toList(),
+                                        itemAsString: (e) => e.namaSbb,
                                         onChanged: (e) {
                                           value.pilihSbbAset(e!);
                                         },
-                                        dropdownDecoratorProps:
-                                            DropDownDecoratorProps(
-                                          baseStyle: TextStyle(fontSize: 16),
-                                          textAlignVertical:
-                                              TextAlignVertical.center,
-                                          dropdownSearchDecoration:
-                                              InputDecoration(
+                                        dropdownDecoratorProps: DropDownDecoratorProps(
+                                          baseStyle: const TextStyle(fontSize: 16),
+                                          textAlignVertical: TextAlignVertical.center,
+                                          dropdownSearchDecoration: InputDecoration(
                                             hintText: "Pilih Debet Akun",
                                             border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              borderSide: BorderSide(
+                                              borderRadius: BorderRadius.circular(8),
+                                              borderSide: const BorderSide(
                                                 width: 1,
                                                 color: Colors.grey,
                                               ),
@@ -574,10 +548,10 @@ class BackDatePage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 16,
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: 150,
                                       child: TextFormField(
                                         // enabled: false,
@@ -600,8 +574,7 @@ class BackDatePage extends StatelessWidget {
                                           fillColor: Colors.grey[200],
                                           hintText: "Nomor SBB",
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),
@@ -609,14 +582,14 @@ class BackDatePage extends StatelessWidget {
                                   ],
                                 ),
                                 const SizedBox(height: 16),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Pilih Kredit Akun",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
-                                    const Text(
+                                    SizedBox(width: 5),
+                                    Text(
                                       "*",
                                       style: TextStyle(fontSize: 8),
                                     ),
@@ -629,31 +602,23 @@ class BackDatePage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: DropdownSearch<CoaModel>(
-                                        popupProps:
-                                            const PopupPropsMultiSelection.menu(
-                                          showSearchBox:
-                                              true, // Aktifkan fitur pencarian
+                                        popupProps: const PopupPropsMultiSelection.menu(
+                                          showSearchBox: true, // Aktifkan fitur pencarian
                                         ),
                                         selectedItem: value.sbbpenyusutan,
-                                        items: value.listCoa
-                                            .where((e) => e.jnsAcc == "C")
-                                            .toList(),
-                                        itemAsString: (e) => "${e.namaSbb}",
+                                        items: value.listCoa.where((e) => e.jnsAcc == "C").toList(),
+                                        itemAsString: (e) => e.namaSbb,
                                         onChanged: (e) {
                                           value.pilihSbbpenyusutan(e!);
                                         },
-                                        dropdownDecoratorProps:
-                                            DropDownDecoratorProps(
-                                          baseStyle: TextStyle(fontSize: 16),
-                                          textAlignVertical:
-                                              TextAlignVertical.center,
-                                          dropdownSearchDecoration:
-                                              InputDecoration(
+                                        dropdownDecoratorProps: DropDownDecoratorProps(
+                                          baseStyle: const TextStyle(fontSize: 16),
+                                          textAlignVertical: TextAlignVertical.center,
+                                          dropdownSearchDecoration: InputDecoration(
                                             hintText: "Pilih Kredit Akun",
                                             border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              borderSide: BorderSide(
+                                              borderRadius: BorderRadius.circular(8),
+                                              borderSide: const BorderSide(
                                                 width: 1,
                                                 color: Colors.grey,
                                               ),
@@ -662,10 +627,10 @@ class BackDatePage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 16,
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: 150,
                                       child: TextFormField(
                                         // enabled: false,
@@ -688,8 +653,7 @@ class BackDatePage extends StatelessWidget {
                                           fillColor: Colors.grey[200],
                                           hintText: "Nomor SBB",
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),
@@ -697,14 +661,14 @@ class BackDatePage extends StatelessWidget {
                                   ],
                                 ),
                                 const SizedBox(height: 16),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Nominal",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
-                                    const Text(
+                                    SizedBox(width: 5),
+                                    Text(
                                       "*",
                                       style: TextStyle(fontSize: 8),
                                     ),
@@ -738,13 +702,13 @@ class BackDatePage extends StatelessWidget {
                                 const SizedBox(
                                   height: 16,
                                 ),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Keterangan",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
+                                    SizedBox(width: 5),
                                   ],
                                 ),
                                 const SizedBox(
@@ -760,49 +724,46 @@ class BackDatePage extends StatelessWidget {
                                   ),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.symmetric(vertical: 16),
+                                  margin: const EdgeInsets.symmetric(vertical: 16),
                                   height: 1,
                                   color: Colors.grey[300],
                                 ),
-                                Text("AO / Marketing"),
+                                const Text("AO / Marketing"),
                                 Container(
-                                  margin: EdgeInsets.symmetric(vertical: 16),
+                                  margin: const EdgeInsets.symmetric(vertical: 16),
                                   height: 1,
                                   color: Colors.grey[300],
                                 ),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "AO / Marketing Debet",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
+                                    SizedBox(width: 5),
                                   ],
                                 ),
                                 const SizedBox(
                                   height: 8,
                                 ),
                                 DropdownSearch<AoModel>(
-                                  popupProps:
-                                      const PopupPropsMultiSelection.menu(
-                                    showSearchBox:
-                                        true, // Aktifkan fitur pencarian
+                                  popupProps: const PopupPropsMultiSelection.menu(
+                                    showSearchBox: true, // Aktifkan fitur pencarian
                                   ),
                                   selectedItem: value.aoModel,
                                   items: value.listAo,
-                                  itemAsString: (e) => "${e.nama}",
+                                  itemAsString: (e) => e.nama,
                                   onChanged: (e) {
                                     value.pilihAoModelDebet(e!);
                                   },
-                                  dropdownDecoratorProps:
-                                      DropDownDecoratorProps(
-                                    baseStyle: TextStyle(fontSize: 16),
+                                  dropdownDecoratorProps: DropDownDecoratorProps(
+                                    baseStyle: const TextStyle(fontSize: 16),
                                     textAlignVertical: TextAlignVertical.center,
                                     dropdownSearchDecoration: InputDecoration(
                                       hintText: "Pilih AO / Marketing",
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(8),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           width: 1,
                                           color: Colors.grey,
                                         ),
@@ -811,39 +772,36 @@ class BackDatePage extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(height: 16),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "AO / Marketing Kredit",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
+                                    SizedBox(width: 5),
                                   ],
                                 ),
                                 const SizedBox(
                                   height: 8,
                                 ),
                                 DropdownSearch<AoModel>(
-                                  popupProps:
-                                      const PopupPropsMultiSelection.menu(
-                                    showSearchBox:
-                                        true, // Aktifkan fitur pencarian
+                                  popupProps: const PopupPropsMultiSelection.menu(
+                                    showSearchBox: true, // Aktifkan fitur pencarian
                                   ),
                                   selectedItem: value.aoModelKRedit,
                                   items: value.listAo,
-                                  itemAsString: (e) => "${e.nama}",
+                                  itemAsString: (e) => e.nama,
                                   onChanged: (e) {
                                     value.pilihAoModelKredit(e!);
                                   },
-                                  dropdownDecoratorProps:
-                                      DropDownDecoratorProps(
-                                    baseStyle: TextStyle(fontSize: 16),
+                                  dropdownDecoratorProps: DropDownDecoratorProps(
+                                    baseStyle: const TextStyle(fontSize: 16),
                                     textAlignVertical: TextAlignVertical.center,
                                     dropdownSearchDecoration: InputDecoration(
                                       hintText: "Pilih AO / Marketing",
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(8),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           width: 1,
                                           color: Colors.grey,
                                         ),
@@ -861,7 +819,7 @@ class BackDatePage extends StatelessWidget {
                           ],
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -897,9 +855,7 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'nomor_dok', value: data.nomorDok),
                 DataGridCell(columnName: 'nomor_ref', value: data.nomorRef),
                 DataGridCell(columnName: 'keterangan', value: data.keterangan),
-                DataGridCell(
-                    columnName: 'nominal',
-                    value: FormatCurrency.oCcy.format(int.parse(data.nominal))),
+                DataGridCell(columnName: 'nominal', value: FormatCurrency.oCcy.format(int.parse(data.nominal))),
                 DataGridCell(columnName: 'action', value: data.kodeTrans),
               ],
             ))
@@ -916,7 +872,7 @@ class DetailDataSource extends DataGridSource {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               width: 300,
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: colorPrimary,
@@ -925,10 +881,10 @@ class DetailDataSource extends DataGridSource {
                   color: colorPrimary,
                 ),
               ),
-              child: Text(
+              child: const Text(
                 "Aksi",
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
                 ),
               ),

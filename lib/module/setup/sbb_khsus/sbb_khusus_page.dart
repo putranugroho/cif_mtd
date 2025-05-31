@@ -34,10 +34,10 @@ class SbbKhususPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "SBB Khusus",
                               style: TextStyle(
@@ -49,8 +49,7 @@ class SbbKhususPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -59,10 +58,10 @@ class SbbKhususPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah SBB Khusus",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -94,7 +93,7 @@ class SbbKhususPage extends StatelessWidget {
                               ),
                             )
                           : Container(
-                              padding: EdgeInsets.all(20),
+                              padding: const EdgeInsets.all(20),
                               height: MediaQuery.of(context).size.height,
                               child: SfDataGrid(
                                 headerRowHeight: 40,
@@ -103,8 +102,7 @@ class SbbKhususPage extends StatelessWidget {
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
-                                headerGridLinesVisibility:
-                                    GridLinesVisibility.both,
+                                headerGridLinesVisibility: GridLinesVisibility.both,
                                 selectionMode: SelectionMode.single,
 
                                 source: DetailDataSource(value),
@@ -113,10 +111,10 @@ class SbbKhususPage extends StatelessWidget {
                                       width: 50,
                                       columnName: 'no',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('No',
+                                          child: const Text('No',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 12,
@@ -128,8 +126,8 @@ class SbbKhususPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Kode Golongan',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Kode Golongan',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -141,8 +139,8 @@ class SbbKhususPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Nama Golongan',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Nama Golongan',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -152,10 +150,10 @@ class SbbKhususPage extends StatelessWidget {
                                       width: 150,
                                       columnName: 'items',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Akun',
+                                          child: const Text('Akun',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -166,9 +164,9 @@ class SbbKhususPage extends StatelessWidget {
                                       columnName: 'action',
                                       label: Container(
                                           color: colorPrimary,
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           alignment: Alignment.center,
-                                          child: Text('Action',
+                                          child: const Text('Action',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -190,7 +188,7 @@ class SbbKhususPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -199,8 +197,8 @@ class SbbKhususPage extends StatelessWidget {
                 child: value.dialog
                     ? Container(
                         width: 600,
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
+                        padding: const EdgeInsets.all(20),
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                         ),
                         child: Column(
@@ -210,10 +208,8 @@ class SbbKhususPage extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    value.editData
-                                        ? "Ubah / Hapus SBB Khusus"
-                                        : "Tambah SBB Khusus",
-                                    style: TextStyle(
+                                    value.editData ? "Ubah / Hapus SBB Khusus" : "Tambah SBB Khusus",
+                                    style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -224,26 +220,24 @@ class SbbKhususPage extends StatelessWidget {
                                   child: Container(
                                     width: 40,
                                     height: 40,
-                                    padding: EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey[200],
-                                        shape: BoxShape.circle),
-                                    child: Icon(Icons.close),
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                    child: const Icon(Icons.close),
                                   ),
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 32,
                             ),
-                            Row(
+                            const Row(
                               children: [
                                 Text(
                                   "Pilih Golongan",
-                                  style: const TextStyle(fontSize: 12),
+                                  style: TextStyle(fontSize: 12),
                                 ),
-                                const SizedBox(width: 5),
-                                const Text(
+                                SizedBox(width: 5),
+                                Text(
                                   "*",
                                   style: TextStyle(fontSize: 8),
                                 ),
@@ -257,31 +251,25 @@ class SbbKhususPage extends StatelessWidget {
                                 Expanded(
                                   child: DropdownSearch<GolonganSbbKhususModel>(
                                     enabled: !value.editData,
-                                    popupProps:
-                                        const PopupPropsMultiSelection.menu(
-                                      showSearchBox:
-                                          true, // Aktifkan fitur pencarian
+                                    popupProps: const PopupPropsMultiSelection.menu(
+                                      showSearchBox: true, // Aktifkan fitur pencarian
                                     ),
                                     selectedItem: value.golonganSbbKhususModel,
                                     items: value.listGolongan,
-                                    itemAsString: (e) =>
-                                        "(${e.kodeGolongan}) ${e.namaGolongan}",
+                                    itemAsString: (e) => "(${e.kodeGolongan}) ${e.namaGolongan}",
                                     onChanged: (e) {
                                       value.pilihGolongan(e!);
                                     },
-                                    dropdownDecoratorProps:
-                                        DropDownDecoratorProps(
-                                      baseStyle: TextStyle(fontSize: 16),
-                                      textAlignVertical:
-                                          TextAlignVertical.center,
+                                    dropdownDecoratorProps: DropDownDecoratorProps(
+                                      baseStyle: const TextStyle(fontSize: 16),
+                                      textAlignVertical: TextAlignVertical.center,
                                       dropdownSearchDecoration: InputDecoration(
                                         filled: value.editData,
                                         fillColor: Colors.grey[200],
                                         hintText: "Pilih Golongan",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          borderSide: BorderSide(
+                                          borderRadius: BorderRadius.circular(8),
+                                          borderSide: const BorderSide(
                                             width: 1,
                                             color: Colors.grey,
                                           ),
@@ -292,36 +280,29 @@ class SbbKhususPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 16,
                             ),
                             Expanded(
                               child: SingleChildScrollView(
                                 child: value.golonganSbbKhususModel != null
                                     ? Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
                                           Row(
                                             children: [
-                                              Text(
+                                              const Text(
                                                 "Lebih dari satu akun",
-                                                style: const TextStyle(
-                                                    fontSize: 12),
+                                                style: TextStyle(fontSize: 12),
                                               ),
-                                              Spacer(),
-                                              CupertinoSwitch(
-                                                  activeColor: colorPrimary,
-                                                  value: value.satu,
-                                                  onChanged: (e) {})
+                                              const Spacer(),
+                                              CupertinoSwitch(activeTrackColor: colorPrimary, value: value.satu, onChanged: (e) {})
                                             ],
                                           ),
                                           const SizedBox(height: 16),
-                                          Row(
+                                          const Row(
                                             children: [
-                                              Expanded(
-                                                  child: Text(
-                                                      "Pilih Sub Buku Besar")),
+                                              Expanded(child: Text("Pilih Sub Buku Besar")),
                                             ],
                                           ),
                                           const SizedBox(
@@ -330,48 +311,36 @@ class SbbKhususPage extends StatelessWidget {
                                           ListView.builder(
                                               itemCount: value.listGl.length,
                                               shrinkWrap: true,
-                                              physics: ClampingScrollPhysics(),
+                                              physics: const ClampingScrollPhysics(),
                                               itemBuilder: (context, i) {
                                                 final data = value.listGl[i];
                                                 return Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .stretch,
+                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                                   children: [
                                                     Text(
-                                                      "${data.namaSbb}",
-                                                      style: TextStyle(
+                                                      data.namaSbb,
+                                                      style: const TextStyle(
                                                         fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.bold,
+                                                        fontWeight: FontWeight.bold,
                                                       ),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 8,
                                                     ),
-                                                    value.golonganSbbKhususModel!
-                                                                .lebihSatuAkun ==
-                                                            "Y"
+                                                    value.golonganSbbKhususModel!.lebihSatuAkun == "Y"
                                                         ? ListView.builder(
-                                                            itemCount: data
-                                                                .items.length,
+                                                            itemCount: data.items.length,
                                                             shrinkWrap: true,
-                                                            physics:
-                                                                ClampingScrollPhysics(),
-                                                            itemBuilder:
-                                                                (context, b) {
-                                                              final a =
-                                                                  data.items[b];
+                                                            physics: const ClampingScrollPhysics(),
+                                                            itemBuilder: (context, b) {
+                                                              final a = data.items[b];
                                                               return Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .stretch,
+                                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                                 children: [
                                                                   Row(
                                                                     children: [
                                                                       Checkbox(
-                                                                          activeColor:
-                                                                              colorPrimary,
+                                                                          activeColor: colorPrimary,
                                                                           value: value.listGlAdd.isNotEmpty
                                                                               ? value.listGlAdd.where((e) => e == a).isNotEmpty
                                                                                   ? true
@@ -380,59 +349,43 @@ class SbbKhususPage extends StatelessWidget {
                                                                           onChanged: (e) {
                                                                             value.pilihCoa(a);
                                                                           }),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            8,
+                                                                      const SizedBox(
+                                                                        width: 8,
                                                                       ),
-                                                                      Expanded(
-                                                                          child:
-                                                                              Text("(${a.nosbb}) ${a.namaSbb}")),
+                                                                      Expanded(child: Text("(${a.nosbb}) ${a.namaSbb}")),
                                                                     ],
                                                                   ),
-                                                                  SizedBox(
+                                                                  const SizedBox(
                                                                     height: 4,
                                                                   )
                                                                 ],
                                                               );
                                                             })
                                                         : ListView.builder(
-                                                            itemCount: data
-                                                                .items.length,
+                                                            itemCount: data.items.length,
                                                             shrinkWrap: true,
-                                                            physics:
-                                                                ClampingScrollPhysics(),
-                                                            itemBuilder:
-                                                                (context, b) {
-                                                              final a =
-                                                                  data.items[b];
+                                                            physics: const ClampingScrollPhysics(),
+                                                            itemBuilder: (context, b) {
+                                                              final a = data.items[b];
                                                               return Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .stretch,
+                                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                                 children: [
                                                                   Row(
                                                                     children: [
                                                                       Radio(
-                                                                          activeColor:
-                                                                              colorPrimary,
-                                                                          value:
-                                                                              a,
-                                                                          groupValue: value
-                                                                              .inqueryGlModel,
-                                                                          onChanged:
-                                                                              (e) {
+                                                                          activeColor: colorPrimary,
+                                                                          value: a,
+                                                                          groupValue: value.inqueryGlModel,
+                                                                          onChanged: (e) {
                                                                             value.pilihSbbSatu(a);
                                                                           }),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            8,
+                                                                      const SizedBox(
+                                                                        width: 8,
                                                                       ),
-                                                                      Expanded(
-                                                                          child:
-                                                                              Text("(${a.nosbb}) ${a.namaSbb}")),
+                                                                      Expanded(child: Text("(${a.nosbb}) ${a.namaSbb}")),
                                                                     ],
                                                                   ),
-                                                                  SizedBox(
+                                                                  const SizedBox(
                                                                     height: 4,
                                                                   )
                                                                 ],
@@ -441,7 +394,7 @@ class SbbKhususPage extends StatelessWidget {
                                                   ],
                                                 );
                                               }),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 16,
                                           ),
                                           ButtonPrimary(
@@ -452,9 +405,7 @@ class SbbKhususPage extends StatelessWidget {
                                           ),
                                           value.editData
                                               ? Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .stretch,
+                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                                   children: [
                                                     const SizedBox(height: 16),
                                                     ButtonDanger(
@@ -465,16 +416,16 @@ class SbbKhususPage extends StatelessWidget {
                                                     ),
                                                   ],
                                                 )
-                                              : SizedBox()
+                                              : const SizedBox()
                                         ],
                                       )
-                                    : SizedBox(),
+                                    : const SizedBox(),
                               ),
                             )
                           ],
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -496,8 +447,7 @@ class DetailDataSource extends DataGridSource {
   @override
   List<DataGridRow> get rows => _laporanData;
   void buildRowData(List<SbbKhususModel> list) {
-    list.sort((a, b) =>
-        a.kodeGolongan.toLowerCase().compareTo(b.kodeGolongan.toLowerCase()));
+    list.sort((a, b) => a.kodeGolongan.toLowerCase().compareTo(b.kodeGolongan.toLowerCase()));
     int index = 1;
     _laporanData = list
         .map<DataGridRow>((data) => DataGridRow(
@@ -505,9 +455,7 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'no', value: (index++).toString()),
                 DataGridCell(columnName: 'kode', value: data.kodeGolongan),
                 DataGridCell(columnName: 'nama', value: data.namaGolongan),
-                DataGridCell(
-                    columnName: 'items',
-                    value: "${data.items.length} Akun Terdaftar"),
+                DataGridCell(columnName: 'items', value: "${data.items.length} Akun Terdaftar"),
                 DataGridCell(columnName: 'action', value: data.kodeGolongan),
               ],
             ))
@@ -528,7 +476,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -537,10 +485,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),

@@ -25,16 +25,12 @@ class LoginNotifier extends ChangeNotifier {
         "userid": username.text.trim(),
         "pass": password.text.trim(),
       };
-      Setuprepository.setup(token, NetworkURL.auth(), jsonEncode(data))
-          .then((value) {
+      Setuprepository.setup(token, NetworkURL.auth(), jsonEncode(data)).then((value) {
         Navigator.pop(context);
         if (value['status'].toString().toLowerCase().contains("success")) {
           UserModel users = UserModel.fromJson(value);
           Pref().simpan(users);
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => MenuPage()),
-              (route) => false);
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const MenuPage()), (route) => false);
         } else {
           informationDialog(context, "Warning", value['message']);
         }

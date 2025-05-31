@@ -21,22 +21,17 @@ class ProvidedPinBoxDecoration {
 
   /// Underlined BoxDecoration
   static PinBoxDecoration underlinedPinBoxDecoration = (borderColor) {
-    return BoxDecoration(
-        border: Border(bottom: BorderSide(color: borderColor, width: 2.0)));
+    return BoxDecoration(border: Border(bottom: BorderSide(color: borderColor, width: 2.0)));
   };
 }
 
 class ProvidedPinBoxTextAnimation {
   /// A combination of RotationTransition, DefaultTextStyleTransition, ScaleTransition
-  static AnimatedSwitcherTransitionBuilder awesomeTransition =
-      (child, animation) {
+  static AnimatedSwitcherTransitionBuilder awesomeTransition = (child, animation) {
     return RotationTransition(
         turns: animation,
         child: DefaultTextStyleTransition(
-          style: TextStyleTween(
-                  begin: const TextStyle(color: Colors.pink),
-                  end: const TextStyle(color: Colors.blue))
-              .animate(animation),
+          style: TextStyleTween(begin: const TextStyle(color: Colors.pink), end: const TextStyle(color: Colors.blue)).animate(animation),
           child: ScaleTransition(
             scale: animation,
             child: child,
@@ -45,8 +40,7 @@ class ProvidedPinBoxTextAnimation {
   };
 
   /// Simple Scaling Transition
-  static AnimatedSwitcherTransitionBuilder scalingTransition =
-      (child, animation) {
+  static AnimatedSwitcherTransitionBuilder scalingTransition = (child, animation) {
     return ScaleTransition(
       scale: animation,
       child: child,
@@ -54,14 +48,12 @@ class ProvidedPinBoxTextAnimation {
   };
 
   /// No transition
-  static AnimatedSwitcherTransitionBuilder defaultNoTransition =
-      (child, animation) {
+  static AnimatedSwitcherTransitionBuilder defaultNoTransition = (child, animation) {
     return child;
   };
 
   /// Rotate Transition
-  static AnimatedSwitcherTransitionBuilder rotateTransition =
-      (child, animation) {
+  static AnimatedSwitcherTransitionBuilder rotateTransition = (child, animation) {
     return RotationTransition(turns: animation, child: child);
   };
 }
@@ -91,32 +83,7 @@ class PinCodeTextField extends StatefulWidget {
   final PinCodeTextFieldLayoutType pinCodeTextFieldLayoutType;
   final TextInputType keyboardType;
 
-  const PinCodeTextField(
-      {Key? key,
-      this.enable = true,
-      this.maxLength = 6,
-      required this.controller,
-      this.hideCharacter = false,
-      this.highlight = false,
-      this.highlightColor = Colors.black,
-      required this.pinBoxDecoration,
-      this.maskCharacter = " ",
-      this.pinBoxWidth = 70.0,
-      this.pinBoxHeight = 70.0,
-      required this.pinTextStyle,
-      required this.onDone,
-      this.defaultBorderColor = Colors.black,
-      this.hasTextBorderColor = Colors.black,
-      required this.pinTextAnimatedSwitcherTransition,
-      this.pinTextAnimatedSwitcherDuration = const Duration(),
-      this.hasError = false,
-      this.errorBorderColor = Colors.red,
-      required this.onTextChanged,
-      this.autofocus = false,
-      this.wrapAlignment = WrapAlignment.start,
-      this.pinCodeTextFieldLayoutType = PinCodeTextFieldLayoutType.normal,
-      this.keyboardType = TextInputType.number})
-      : super(key: key);
+  const PinCodeTextField({super.key, this.enable = true, this.maxLength = 6, required this.controller, this.hideCharacter = false, this.highlight = false, this.highlightColor = Colors.black, required this.pinBoxDecoration, this.maskCharacter = " ", this.pinBoxWidth = 70.0, this.pinBoxHeight = 70.0, required this.pinTextStyle, required this.onDone, this.defaultBorderColor = Colors.black, this.hasTextBorderColor = Colors.black, required this.pinTextAnimatedSwitcherTransition, this.pinTextAnimatedSwitcherDuration = const Duration(), this.hasError = false, this.errorBorderColor = Colors.red, required this.onTextChanged, this.autofocus = false, this.wrapAlignment = WrapAlignment.start, this.pinCodeTextFieldLayoutType = PinCodeTextFieldLayoutType.normal, this.keyboardType = TextInputType.number});
 
   @override
   State<StatefulWidget> createState() {
@@ -141,19 +108,14 @@ class PinCodeTextFieldState extends State<PinCodeTextField> {
         currentIndex = text.length;
       });
       widget.controller.text = text;
-      widget.controller.selection =
-          TextSelection.collapsed(offset: text.length);
-    } else if (oldWidget.maxLength > widget.maxLength &&
-        widget.maxLength > 0 &&
-        text.isNotEmpty &&
-        text.length > widget.maxLength) {
+      widget.controller.selection = TextSelection.collapsed(offset: text.length);
+    } else if (oldWidget.maxLength > widget.maxLength && widget.maxLength > 0 && text.isNotEmpty && text.length > widget.maxLength) {
       setState(() {
         text = text.substring(0, widget.maxLength);
         currentIndex = text.length;
       });
       widget.controller.text = text;
-      widget.controller.selection =
-          TextSelection.collapsed(offset: text.length);
+      widget.controller.selection = TextSelection.collapsed(offset: text.length);
     }
   }
 
@@ -168,8 +130,7 @@ class PinCodeTextFieldState extends State<PinCodeTextField> {
   }
 
   _calculatePinWidth() async {
-    if (widget.pinCodeTextFieldLayoutType ==
-        PinCodeTextFieldLayoutType.autoAdjustWidth) {
+    if (widget.pinCodeTextFieldLayoutType == PinCodeTextFieldLayoutType.autoAdjustWidth) {
       screenWidth = MediaQuery.of(context).size.width;
       var tempPinWidth = widget.pinBoxWidth;
       var maxLength = widget.maxLength;
@@ -260,8 +221,7 @@ class PinCodeTextFieldState extends State<PinCodeTextField> {
       if (text.length < currentIndex) {
         strList[text.length] = "";
       } else {
-        strList[text.length - 1] =
-            widget.hideCharacter ? widget.maskCharacter : text[text.length - 1];
+        strList[text.length - 1] = widget.hideCharacter ? widget.maskCharacter : text[text.length - 1];
       }
       currentIndex = text.length;
     });
@@ -284,12 +244,7 @@ class PinCodeTextFieldState extends State<PinCodeTextField> {
             verticalDirection: VerticalDirection.down,
             children: pinCodes,
           )
-        : Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            verticalDirection: VerticalDirection.down,
-            children: pinCodes);
+        : Row(mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, verticalDirection: VerticalDirection.down, children: pinCodes);
   }
 
   Widget _buildPinCode(int i, BuildContext context) {
@@ -297,10 +252,7 @@ class PinCodeTextFieldState extends State<PinCodeTextField> {
     BoxDecoration boxDecoration;
     if (widget.hasError) {
       borderColor = widget.errorBorderColor;
-    } else if (widget.highlight &&
-        hasFocus &&
-        (i == text.length ||
-            (i == text.length - 1 && text.length == widget.maxLength))) {
+    } else if (widget.highlight && hasFocus && (i == text.length || (i == text.length - 1 && text.length == widget.maxLength))) {
       borderColor = widget.highlightColor;
     } else if (i < text.length) {
       borderColor = widget.hasTextBorderColor;
@@ -311,8 +263,7 @@ class PinCodeTextFieldState extends State<PinCodeTextField> {
     if (widget.pinBoxDecoration != null) {
       boxDecoration = widget.pinBoxDecoration(borderColor);
     } else {
-      boxDecoration =
-          ProvidedPinBoxDecoration.defaultPinBoxDecoration(borderColor);
+      boxDecoration = ProvidedPinBoxDecoration.defaultPinBoxDecoration(borderColor);
     }
 
     return Padding(
@@ -348,4 +299,8 @@ class PinCodeTextFieldState extends State<PinCodeTextField> {
   }
 }
 
-enum PinCodeTextFieldLayoutType { normal, wrap, autoAdjustWidth }
+enum PinCodeTextFieldLayoutType {
+  normal,
+  wrap,
+  autoAdjustWidth
+}

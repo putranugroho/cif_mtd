@@ -20,14 +20,14 @@ class JurnalPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Row(
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Text(
+                          const Text(
                             "Jurnal",
                             style: TextStyle(
                               fontSize: 18,
@@ -36,17 +36,16 @@ class JurnalPage extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.calendar_month,
                                 size: 12,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 8,
                               ),
                               Text(
-                                "${DateFormat('dd MMM y').format(value.now)}",
-                                style: TextStyle(
-                                    fontSize: 12, fontWeight: FontWeight.w300),
+                                DateFormat('dd MMM y').format(value.now),
+                                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
                               ),
                             ],
                           ),
@@ -54,28 +53,25 @@ class JurnalPage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      decoration: BoxDecoration(
-                          color: colorPrimary,
-                          borderRadius: BorderRadius.circular(8)),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      decoration: BoxDecoration(color: colorPrimary, borderRadius: BorderRadius.circular(8)),
                       child: Row(
                         children: [
                           Image.asset(
                             ImageAssets.excel,
                             height: 15,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 8,
                           ),
-                          Text(
+                          const Text(
                             "Download to Excel",
                             style: TextStyle(fontSize: 12, color: Colors.white),
                           )
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 16,
                     ),
                     InkWell(
@@ -83,22 +79,19 @@ class JurnalPage extends StatelessWidget {
                         value.changeStartDate();
                       },
                       child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                        decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(8)),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(8)),
                         child: Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.calendar_month,
                               size: 14,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 8,
                             ),
                             Text(
-                              "${DateFormat('dd MMM y').format(value.now)}",
+                              DateFormat('dd MMM y').format(value.now),
                             )
                           ],
                         ),
@@ -107,184 +100,168 @@ class JurnalPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Expanded(
                   child: ListView.builder(
                       itemCount: value.listData.length,
                       shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
+                      physics: const ClampingScrollPhysics(),
                       itemBuilder: (context, i) {
                         final data = value.listData[i];
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              padding: const EdgeInsets.symmetric(horizontal: 20),
                               child: Row(
                                 children: [
                                   Container(
                                     width: 150,
-                                    margin: EdgeInsets.only(right: 16),
-                                    child: Text(
+                                    margin: const EdgeInsets.only(right: 16),
+                                    child: const Text(
                                       "Kode",
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
+                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   Expanded(
                                     child: Container(
-                                      margin: EdgeInsets.only(right: 16),
-                                      child: Text(
+                                      margin: const EdgeInsets.only(right: 16),
+                                      child: const Text(
                                         "Keterangan",
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ),
                                   Container(
                                     width: 100,
-                                    margin: EdgeInsets.only(right: 16),
-                                    child: Text(
+                                    margin: const EdgeInsets.only(right: 16),
+                                    child: const Text(
                                       "No. Dok",
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
+                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   Container(
                                     width: 100,
-                                    margin: EdgeInsets.only(right: 16),
-                                    child: Text(
+                                    margin: const EdgeInsets.only(right: 16),
+                                    child: const Text(
                                       "No. Ref",
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
+                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   Container(
                                     width: 150,
-                                    margin: EdgeInsets.only(right: 16),
-                                    child: Text(
+                                    margin: const EdgeInsets.only(right: 16),
+                                    child: const Text(
                                       "No-Acc Debet",
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
+                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   Container(
                                     width: 150,
-                                    margin: EdgeInsets.only(right: 16),
-                                    child: Text(
+                                    margin: const EdgeInsets.only(right: 16),
+                                    child: const Text(
                                       "No-Acc Kredit",
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
+                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   Container(
                                     width: 100,
-                                    margin: EdgeInsets.only(right: 16),
-                                    child: Text(
+                                    margin: const EdgeInsets.only(right: 16),
+                                    child: const Text(
                                       "Nilai Debet",
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
+                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   Container(
                                     width: 100,
-                                    margin: EdgeInsets.only(right: 16),
-                                    child: Text(
+                                    margin: const EdgeInsets.only(right: 16),
+                                    child: const Text(
                                       "Nilai Kredit",
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
+                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.symmetric(vertical: 4),
+                              margin: const EdgeInsets.symmetric(vertical: 4),
                               height: 1,
                               color: Colors.grey,
                             ),
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              padding: const EdgeInsets.symmetric(horizontal: 20),
                               child: Row(
                                 children: [
                                   Container(
                                     width: 100,
-                                    margin: EdgeInsets.only(right: 16),
+                                    margin: const EdgeInsets.only(right: 16),
                                     child: Text(
-                                      "${data.kodeTrans}",
+                                      data.kodeTrans,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(fontSize: 12),
+                                      style: const TextStyle(fontSize: 12),
                                     ),
                                   ),
                                   Expanded(
                                     child: Container(
-                                      margin: EdgeInsets.only(right: 16),
+                                      margin: const EdgeInsets.only(right: 16),
                                       child: Text(
-                                        "${data.keterangan}",
-                                        style: TextStyle(fontSize: 12),
+                                        data.keterangan,
+                                        style: const TextStyle(fontSize: 12),
                                       ),
                                     ),
                                   ),
                                   Container(
                                     width: 100,
-                                    margin: EdgeInsets.only(right: 16),
+                                    margin: const EdgeInsets.only(right: 16),
                                     child: Text(
-                                      "${data.nomorDok}",
+                                      data.nomorDok,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(fontSize: 12),
+                                      style: const TextStyle(fontSize: 12),
                                     ),
                                   ),
                                   Container(
                                     width: 100,
-                                    margin: EdgeInsets.only(right: 16),
+                                    margin: const EdgeInsets.only(right: 16),
                                     child: Text(
-                                      "${data.nomorRef}",
+                                      data.nomorRef,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(fontSize: 12),
+                                      style: const TextStyle(fontSize: 12),
                                     ),
                                   ),
                                   Container(
                                     width: 150,
-                                    margin: EdgeInsets.only(right: 16),
+                                    margin: const EdgeInsets.only(right: 16),
                                     child: Text(
                                       "(${data.debetAcc}) - ${data.namaDebet}",
-                                      style: TextStyle(fontSize: 12),
+                                      style: const TextStyle(fontSize: 12),
                                     ),
                                   ),
                                   Container(
                                     width: 150,
-                                    margin: EdgeInsets.only(right: 16),
-                                    child: Text(
+                                    margin: const EdgeInsets.only(right: 16),
+                                    child: const Text(
                                       "",
                                       style: TextStyle(fontSize: 12),
                                     ),
                                   ),
                                   Container(
                                     width: 100,
-                                    margin: EdgeInsets.only(right: 16),
+                                    margin: const EdgeInsets.only(right: 16),
                                     child: Text(
-                                      "${FormatCurrency.oCcy.format(int.parse(data.nominal))}",
+                                      FormatCurrency.oCcy.format(int.parse(data.nominal)),
                                       textAlign: TextAlign.end,
-                                      style: TextStyle(fontSize: 12),
+                                      style: const TextStyle(fontSize: 12),
                                     ),
                                   ),
                                   Container(
                                     width: 100,
-                                    margin: EdgeInsets.only(right: 16),
-                                    child: Text(
+                                    margin: const EdgeInsets.only(right: 16),
+                                    child: const Text(
                                       "",
                                       textAlign: TextAlign.end,
                                       style: TextStyle(fontSize: 12),
@@ -294,40 +271,39 @@ class JurnalPage extends StatelessWidget {
                               ),
                             ),
                             i == 0
-                                ? SizedBox()
+                                ? const SizedBox()
                                 : Container(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(horizontal: 20),
                                     child: Row(
                                       children: [
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Expanded(
                                           child: Container(
-                                            margin: EdgeInsets.only(right: 16),
-                                            child: Text(
+                                            margin: const EdgeInsets.only(right: 16),
+                                            child: const Text(
                                               "",
                                               style: TextStyle(fontSize: 12),
                                             ),
@@ -335,32 +311,32 @@ class JurnalPage extends StatelessWidget {
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 150,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 150,
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           child: Text(
                                             "(${data.creditAcc}) - ${data.namaCredit}",
-                                            style: TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             textAlign: TextAlign.end,
                                             style: TextStyle(fontSize: 12),
@@ -368,11 +344,11 @@ class JurnalPage extends StatelessWidget {
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           child: Text(
-                                            "${FormatCurrency.oCcy.format(50000)}",
+                                            FormatCurrency.oCcy.format(50000),
                                             textAlign: TextAlign.end,
-                                            style: TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                       ],
@@ -380,38 +356,37 @@ class JurnalPage extends StatelessWidget {
                                   ),
                             i == 0
                                 ? Container(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(horizontal: 20),
                                     child: Row(
                                       children: [
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Expanded(
                                           child: Container(
-                                            margin: EdgeInsets.only(right: 16),
-                                            child: Text(
+                                            margin: const EdgeInsets.only(right: 16),
+                                            child: const Text(
                                               "",
                                               style: TextStyle(fontSize: 12),
                                             ),
@@ -419,32 +394,32 @@ class JurnalPage extends StatelessWidget {
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 150,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 150,
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           child: Text(
                                             "(${data.creditAcc}) - ${data.namaCredit}",
-                                            style: TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             textAlign: TextAlign.end,
                                             style: TextStyle(fontSize: 12),
@@ -452,52 +427,51 @@ class JurnalPage extends StatelessWidget {
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           child: Text(
-                                            "${FormatCurrency.oCcy.format(int.parse(data.nominal))}",
+                                            FormatCurrency.oCcy.format(int.parse(data.nominal)),
                                             textAlign: TextAlign.end,
-                                            style: TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                       ],
                                     ),
                                   )
-                                : SizedBox(),
+                                : const SizedBox(),
                             i == 0
-                                ? SizedBox()
+                                ? const SizedBox()
                                 : Container(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(horizontal: 20),
                                     child: Row(
                                       children: [
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Expanded(
                                           child: Container(
-                                            margin: EdgeInsets.only(right: 16),
-                                            child: Text(
+                                            margin: const EdgeInsets.only(right: 16),
+                                            child: const Text(
                                               "",
                                               style: TextStyle(fontSize: 12),
                                             ),
@@ -505,32 +479,32 @@ class JurnalPage extends StatelessWidget {
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 150,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 150,
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           child: Text(
                                             "(${data.creditAcc}) - ${data.namaCredit}",
-                                            style: TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             textAlign: TextAlign.end,
                                             style: TextStyle(fontSize: 12),
@@ -538,51 +512,50 @@ class JurnalPage extends StatelessWidget {
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           child: Text(
-                                            "${FormatCurrency.oCcy.format(700000)}",
+                                            FormatCurrency.oCcy.format(700000),
                                             textAlign: TextAlign.end,
-                                            style: TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
                             i == 0
-                                ? SizedBox()
+                                ? const SizedBox()
                                 : Container(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(horizontal: 20),
                                     child: Row(
                                       children: [
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Expanded(
                                           child: Container(
-                                            margin: EdgeInsets.only(right: 16),
-                                            child: Text(
+                                            margin: const EdgeInsets.only(right: 16),
+                                            child: const Text(
                                               "",
                                               style: TextStyle(fontSize: 12),
                                             ),
@@ -590,32 +563,32 @@ class JurnalPage extends StatelessWidget {
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 150,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 150,
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           child: Text(
                                             "(${data.creditAcc}) - ${data.namaCredit}",
-                                            style: TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "",
                                             textAlign: TextAlign.end,
                                             style: TextStyle(fontSize: 12),
@@ -623,53 +596,53 @@ class JurnalPage extends StatelessWidget {
                                         ),
                                         Container(
                                           width: 100,
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           child: Text(
-                                            "${FormatCurrency.oCcy.format(750000)}",
+                                            FormatCurrency.oCcy.format(750000),
                                             textAlign: TextAlign.end,
-                                            style: TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
                             Container(
-                              margin: EdgeInsets.symmetric(vertical: 4),
+                              margin: const EdgeInsets.symmetric(vertical: 4),
                               height: 1,
                               color: Colors.grey,
                             ),
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              padding: const EdgeInsets.symmetric(horizontal: 20),
                               child: Row(
                                 children: [
                                   Container(
                                     width: 100,
-                                    margin: EdgeInsets.only(right: 16),
-                                    child: Text(
+                                    margin: const EdgeInsets.only(right: 16),
+                                    child: const Text(
                                       "",
                                       style: TextStyle(fontSize: 12),
                                     ),
                                   ),
                                   Container(
                                     width: 100,
-                                    margin: EdgeInsets.only(right: 16),
-                                    child: Text(
+                                    margin: const EdgeInsets.only(right: 16),
+                                    child: const Text(
                                       "",
                                       style: TextStyle(fontSize: 12),
                                     ),
                                   ),
                                   Container(
                                     width: 100,
-                                    margin: EdgeInsets.only(right: 16),
-                                    child: Text(
+                                    margin: const EdgeInsets.only(right: 16),
+                                    child: const Text(
                                       "",
                                       style: TextStyle(fontSize: 12),
                                     ),
                                   ),
                                   Expanded(
                                     child: Container(
-                                      margin: EdgeInsets.only(right: 16),
-                                      child: Text(
+                                      margin: const EdgeInsets.only(right: 16),
+                                      child: const Text(
                                         "",
                                         style: TextStyle(fontSize: 12),
                                       ),
@@ -677,35 +650,35 @@ class JurnalPage extends StatelessWidget {
                                   ),
                                   Container(
                                     width: 100,
-                                    margin: EdgeInsets.only(right: 16),
-                                    child: Text(
+                                    margin: const EdgeInsets.only(right: 16),
+                                    child: const Text(
                                       "",
                                       style: TextStyle(fontSize: 12),
                                     ),
                                   ),
                                   Container(
                                     width: 150,
-                                    margin: EdgeInsets.only(right: 16),
-                                    child: Text(
+                                    margin: const EdgeInsets.only(right: 16),
+                                    child: const Text(
                                       "",
                                       style: TextStyle(fontSize: 12),
                                     ),
                                   ),
                                   Container(
                                     width: 150,
-                                    margin: EdgeInsets.only(right: 16),
-                                    child: Text(
+                                    margin: const EdgeInsets.only(right: 16),
+                                    child: const Text(
                                       "",
                                       style: TextStyle(fontSize: 12),
                                     ),
                                   ),
                                   Container(
                                     width: 100,
-                                    margin: EdgeInsets.only(right: 16),
+                                    margin: const EdgeInsets.only(right: 16),
                                     child: Text(
-                                      "${FormatCurrency.oCcy.format(int.parse(data.nominal))}",
+                                      FormatCurrency.oCcy.format(int.parse(data.nominal)),
                                       textAlign: TextAlign.end,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -713,11 +686,11 @@ class JurnalPage extends StatelessWidget {
                                   ),
                                   Container(
                                     width: 100,
-                                    margin: EdgeInsets.only(right: 16),
+                                    margin: const EdgeInsets.only(right: 16),
                                     child: Text(
-                                      "${FormatCurrency.oCcy.format(int.parse(data.nominal))}",
+                                      FormatCurrency.oCcy.format(int.parse(data.nominal)),
                                       textAlign: TextAlign.end,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -727,7 +700,7 @@ class JurnalPage extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.symmetric(vertical: 16),
+                              margin: const EdgeInsets.symmetric(vertical: 16),
                               height: 8,
                               color: Colors.grey[300],
                             ),

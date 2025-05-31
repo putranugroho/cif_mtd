@@ -37,10 +37,10 @@ class UsersPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Users",
                               style: TextStyle(
@@ -52,8 +52,7 @@ class UsersPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -62,10 +61,10 @@ class UsersPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah Users",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -97,7 +96,7 @@ class UsersPage extends StatelessWidget {
                               ),
                             )
                           : Container(
-                              padding: EdgeInsets.all(20),
+                              padding: const EdgeInsets.all(20),
                               height: MediaQuery.of(context).size.height,
                               child: SfDataGrid(
                                 headerRowHeight: 40,
@@ -106,8 +105,7 @@ class UsersPage extends StatelessWidget {
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
-                                headerGridLinesVisibility:
-                                    GridLinesVisibility.both,
+                                headerGridLinesVisibility: GridLinesVisibility.both,
                                 selectionMode: SelectionMode.single,
 
                                 source: DetailDataSource(value),
@@ -116,10 +114,10 @@ class UsersPage extends StatelessWidget {
                                       width: 50,
                                       columnName: 'no',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('No',
+                                          child: const Text('No',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 12,
@@ -130,8 +128,8 @@ class UsersPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Nama User',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Nama User',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -140,10 +138,10 @@ class UsersPage extends StatelessWidget {
                                   GridColumn(
                                       columnName: 'userid',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('User ID',
+                                          child: const Text('User ID',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -155,8 +153,8 @@ class UsersPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Batch',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Batch',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -168,8 +166,8 @@ class UsersPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Kantor',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Kantor',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -181,8 +179,8 @@ class UsersPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Level User',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Level User',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -194,8 +192,8 @@ class UsersPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Akses Kasir',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Akses Kasir',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -207,8 +205,8 @@ class UsersPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Back Date',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Back Date',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -220,8 +218,8 @@ class UsersPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Beda Kantor',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Beda Kantor',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -233,8 +231,8 @@ class UsersPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Limit Transaksi',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Limit Transaksi',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -246,8 +244,8 @@ class UsersPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Level Otorisasi',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Level Otorisasi',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -259,8 +257,8 @@ class UsersPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Minimal Otorisasi',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Minimal Otorisasi',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -272,8 +270,8 @@ class UsersPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Maksimal Otorisasi',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Maksimal Otorisasi',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -285,8 +283,8 @@ class UsersPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Aktivasi Login',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Aktivasi Login',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -298,8 +296,8 @@ class UsersPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Tanggal Kadaluarsa',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Tanggal Kadaluarsa',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -310,9 +308,9 @@ class UsersPage extends StatelessWidget {
                                       width: 80,
                                       label: Container(
                                           color: colorPrimary,
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           alignment: Alignment.center,
-                                          child: Text('Action',
+                                          child: const Text('Action',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -334,7 +332,7 @@ class UsersPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -342,9 +340,9 @@ class UsersPage extends StatelessWidget {
                 right: 0,
                 child: value.dialog
                     ? Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         width: 600,
-                        decoration: BoxDecoration(color: Colors.white),
+                        decoration: const BoxDecoration(color: Colors.white),
                         child: FocusTraversalGroup(
                           child: Form(
                             key: value.keyForm,
@@ -355,10 +353,8 @@ class UsersPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        value.editData
-                                            ? "Ubah / Hapus Users"
-                                            : "Tambah User",
-                                        style: TextStyle(
+                                        value.editData ? "Ubah / Hapus Users" : "Tambah User",
+                                        style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -369,24 +365,22 @@ class UsersPage extends StatelessWidget {
                                       child: Container(
                                         width: 40,
                                         height: 40,
-                                        padding: EdgeInsets.all(4),
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey[200],
-                                            shape: BoxShape.circle),
-                                        child: Icon(Icons.close),
+                                        padding: const EdgeInsets.all(4),
+                                        decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                        child: const Icon(Icons.close),
                                       ),
                                     )
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 32,
                                 ),
                                 Expanded(
                                     child: ListView(
                                   children: [
-                                    Text(
+                                    const Text(
                                       "Kantor",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
                                     const SizedBox(
                                       height: 8,
@@ -398,29 +392,23 @@ class UsersPage extends StatelessWidget {
                                         }
                                         return null;
                                       },
-                                      popupProps:
-                                          const PopupPropsMultiSelection.menu(
-                                        showSearchBox:
-                                            true, // Aktifkan fitur pencarian
+                                      popupProps: const PopupPropsMultiSelection.menu(
+                                        showSearchBox: true, // Aktifkan fitur pencarian
                                       ),
                                       selectedItem: value.kantorModel,
                                       items: value.listKantor,
-                                      itemAsString: (e) => "${e.namaKantor}",
+                                      itemAsString: (e) => e.namaKantor,
                                       onChanged: (e) {
                                         value.pilihKantor(e!);
                                       },
-                                      dropdownDecoratorProps:
-                                          DropDownDecoratorProps(
-                                        baseStyle: TextStyle(fontSize: 16),
-                                        textAlignVertical:
-                                            TextAlignVertical.center,
-                                        dropdownSearchDecoration:
-                                            InputDecoration(
+                                      dropdownDecoratorProps: DropDownDecoratorProps(
+                                        baseStyle: const TextStyle(fontSize: 16),
+                                        textAlignVertical: TextAlignVertical.center,
+                                        dropdownSearchDecoration: InputDecoration(
                                           hintText: "Pilih Kantor",
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            borderSide: BorderSide(
+                                            borderRadius: BorderRadius.circular(8),
+                                            borderSide: const BorderSide(
                                               width: 1,
                                               color: Colors.grey,
                                             ),
@@ -431,11 +419,11 @@ class UsersPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 16,
                                     ),
-                                    Text(
+                                    const Text(
                                       "Nama Karyawan",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 8,
                                     ),
                                     Row(
@@ -443,10 +431,8 @@ class UsersPage extends StatelessWidget {
                                         Expanded(
                                           child: TypeAheadField<KaryawanModel>(
                                             controller: value.namaKaryawan,
-                                            suggestionsCallback: (search) =>
-                                                value.getInqKaryawan(search),
-                                            builder: (context, controller,
-                                                focusNode) {
+                                            suggestionsCallback: (search) => value.getInqKaryawan(search),
+                                            builder: (context, controller, focusNode) {
                                               return TextField(
                                                   controller: controller,
                                                   focusNode: focusNode,
@@ -455,8 +441,7 @@ class UsersPage extends StatelessWidget {
                                                   decoration: InputDecoration(
                                                     filled: value.editData,
                                                     fillColor: Colors.grey[200],
-                                                    border:
-                                                        OutlineInputBorder(),
+                                                    border: const OutlineInputBorder(),
                                                     labelText: 'Cari Akun',
                                                   ));
                                             },
@@ -472,14 +457,13 @@ class UsersPage extends StatelessWidget {
                                             },
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 16,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: 160,
                                           child: TextFormField(
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             maxLines: 1,
                                             readOnly: true,
                                             controller: value.nikKaryawan,
@@ -498,25 +482,24 @@ class UsersPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "NIP Karyawan",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
                                         )
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "User ID",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -542,22 +525,21 @@ class UsersPage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         hintText: "User ID  ",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
                                     const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Password",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -584,8 +566,7 @@ class UsersPage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         hintText: "Password",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -596,21 +577,18 @@ class UsersPage extends StatelessWidget {
                                       children: [
                                         Expanded(
                                           child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
-                                              Row(
+                                              const Row(
                                                 children: [
                                                   Text(
                                                     "Tanggal Masa Berlaku",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
-                                                  const SizedBox(width: 5),
-                                                  const Text(
+                                                  SizedBox(width: 5),
+                                                  Text(
                                                     "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
+                                                    style: TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -618,12 +596,10 @@ class UsersPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               InkWell(
-                                                onTap: () =>
-                                                    value.pilihTanggalBuka(),
+                                                onTap: () => value.pilihTanggalBuka(),
                                                 child: TextFormField(
                                                   enabled: false,
-                                                  textInputAction:
-                                                      TextInputAction.done,
+                                                  textInputAction: TextInputAction.done,
                                                   controller: value.tglexp,
                                                   maxLines: 1,
                                                   style: const TextStyle(
@@ -640,23 +616,14 @@ class UsersPage extends StatelessWidget {
                                                     }
                                                   },
                                                   decoration: InputDecoration(
-                                                    hintText:
-                                                        "Tanggal Masa Berlaku",
-                                                    hintStyle: const TextStyle(
-                                                        color: Colors.grey),
+                                                    hintText: "Tanggal Masa Berlaku",
+                                                    hintStyle: const TextStyle(color: Colors.grey),
                                                     border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
+                                                      borderRadius: BorderRadius.circular(6),
                                                     ),
-                                                    disabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Colors
-                                                              .grey.shade600),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
+                                                    disabledBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(color: Colors.grey.shade600),
+                                                      borderRadius: BorderRadius.circular(6),
                                                     ),
                                                   ),
                                                 ),
@@ -664,22 +631,21 @@ class UsersPage extends StatelessWidget {
                                             ],
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 16,
                                         ),
                                         Expanded(
                                           child: Column(
                                             children: [
-                                              Text(
+                                              const Text(
                                                 "Aktivasi Login",
-                                                style: const TextStyle(
-                                                    fontSize: 14),
+                                                style: TextStyle(fontSize: 14),
                                               ),
                                               const SizedBox(
                                                 height: 8,
                                               ),
                                               CupertinoSwitch(
-                                                  activeColor: colorPrimary,
+                                                  activeTrackColor: colorPrimary,
                                                   value: value.aktivasilogin,
                                                   onChanged: (e) {
                                                     value.gantiAktivasi();
@@ -690,14 +656,14 @@ class UsersPage extends StatelessWidget {
                                       ],
                                     ),
                                     const SizedBox(height: 16),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Hari Kerja",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -709,60 +675,49 @@ class UsersPage extends StatelessWidget {
                                     ListView.builder(
                                         itemCount: value.listHariKerja.length,
                                         shrinkWrap: true,
-                                        physics: ClampingScrollPhysics(),
+                                        physics: const ClampingScrollPhysics(),
                                         itemBuilder: (context, i) {
                                           final data = value.listHariKerja[i];
                                           return Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
                                               Row(
                                                 children: [
                                                   Checkbox(
                                                       activeColor: colorPrimary,
-                                                      value: value
-                                                              .listAddHariKerja
-                                                              .isEmpty
+                                                      value: value.listAddHariKerja.isEmpty
                                                           ? false
-                                                          : value.listAddHariKerja
-                                                                  .where((e) =>
-                                                                      e == data)
-                                                                  .isNotEmpty
+                                                          : value.listAddHariKerja.where((e) => e == data).isNotEmpty
                                                               ? true
                                                               : false,
                                                       onChanged: (e) {
-                                                        value
-                                                            .addHariKerja(data);
+                                                        value.addHariKerja(data);
                                                       }),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 8,
                                                   ),
                                                   Expanded(
                                                       child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .stretch,
+                                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                                     children: [
                                                       Text(
                                                         "(${data.kdAktivasi}) ${data.nmAktivasi}",
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
+                                                        style: const TextStyle(
+                                                          fontWeight: FontWeight.bold,
                                                         ),
                                                       ),
                                                       Text(
-                                                        "${data.hari.replaceAll("[", "").replaceAll("]", "")}",
-                                                        style: TextStyle(
+                                                        data.hari.replaceAll("[", "").replaceAll("]", ""),
+                                                        style: const TextStyle(
                                                           fontSize: 12,
                                                         ),
                                                       ),
                                                     ],
                                                   )),
-                                                  Text(
-                                                      "${data.jamMulai} - ${data.jamSelesai}")
+                                                  Text("${data.jamMulai} - ${data.jamSelesai}")
                                                 ],
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 8,
                                               )
                                             ],
@@ -771,14 +726,14 @@ class UsersPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Level User",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -794,29 +749,23 @@ class UsersPage extends StatelessWidget {
                                         }
                                         return null;
                                       },
-                                      popupProps:
-                                          const PopupPropsMultiSelection.menu(
-                                        showSearchBox:
-                                            true, // Aktifkan fitur pencarian
+                                      popupProps: const PopupPropsMultiSelection.menu(
+                                        showSearchBox: true, // Aktifkan fitur pencarian
                                       ),
                                       selectedItem: value.levelUser,
                                       items: value.listUsers,
-                                      itemAsString: (e) => "${e.levelUser}",
+                                      itemAsString: (e) => e.levelUser,
                                       onChanged: (e) {
                                         value.pilihLevel(e!);
                                       },
-                                      dropdownDecoratorProps:
-                                          DropDownDecoratorProps(
-                                        baseStyle: TextStyle(fontSize: 16),
-                                        textAlignVertical:
-                                            TextAlignVertical.center,
-                                        dropdownSearchDecoration:
-                                            InputDecoration(
+                                      dropdownDecoratorProps: DropDownDecoratorProps(
+                                        baseStyle: const TextStyle(fontSize: 16),
+                                        textAlignVertical: TextAlignVertical.center,
+                                        dropdownSearchDecoration: InputDecoration(
                                           hintText: "Pilih Level User",
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            borderSide: BorderSide(
+                                            borderRadius: BorderRadius.circular(8),
+                                            borderSide: const BorderSide(
                                               width: 1,
                                               color: Colors.grey,
                                             ),
@@ -829,42 +778,39 @@ class UsersPage extends StatelessWidget {
                                     ),
                                     Row(
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Limit Transaksi",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
                                         // Spacer(),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 64,
                                         ),
                                         CupertinoSwitch(
-                                            activeColor: colorPrimary,
+                                            activeTrackColor: colorPrimary,
                                             value: value.limitAkses,
                                             onChanged: (e) {
                                               value.gantilimitakses();
                                             })
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 8,
                                     ),
                                     value.limitAkses
                                         ? Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
-                                              Row(
+                                              const Row(
                                                 children: [
                                                   Text(
                                                     "Maksimal Transaksi",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
-                                                  const SizedBox(width: 5),
-                                                  const Text(
+                                                  SizedBox(width: 5),
+                                                  Text(
                                                     "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
+                                                    style: TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -872,22 +818,16 @@ class UsersPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               TextFormField(
-                                                textInputAction:
-                                                    TextInputAction.done,
+                                                textInputAction: TextInputAction.done,
                                                 controller: value.maksimalTrans,
                                                 maxLines: 1,
-                                                keyboardType: TextInputType
-                                                    .numberWithOptions(
-                                                        decimal: true),
+                                                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                                                 inputFormatters: [
                                                   a.CurrencyInputFormatter(
                                                     leadingSymbol: 'Rp ',
                                                     useSymbolPadding: true,
-                                                    thousandSeparator: a
-                                                        .ThousandSeparator
-                                                        .Period,
-                                                    mantissaLength:
-                                                        2, // jumlah angka desimal
+                                                    thousandSeparator: a.ThousandSeparator.Period,
+                                                    mantissaLength: 2, // jumlah angka desimal
                                                     // decimalSeparator: DecimalSeparator.Comma,
                                                   ),
                                                 ],
@@ -899,12 +839,9 @@ class UsersPage extends StatelessWidget {
                                                   }
                                                 },
                                                 decoration: InputDecoration(
-                                                  hintText:
-                                                      "Maksimal Transaksi",
+                                                  hintText: "Maksimal Transaksi",
                                                   border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            6),
+                                                    borderRadius: BorderRadius.circular(6),
                                                   ),
                                                 ),
                                               ),
@@ -913,29 +850,27 @@ class UsersPage extends StatelessWidget {
                                               ),
                                             ],
                                           )
-                                        : SizedBox(
+                                        : const SizedBox(
                                             height: 8,
                                           ),
                                     Row(
                                       children: [
                                         Expanded(
                                           child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
                                               Row(
                                                 children: [
-                                                  Text(
+                                                  const Text(
                                                     "Akses Otorisasi",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
                                                   // Spacer(),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 64,
                                                   ),
                                                   CupertinoSwitch(
-                                                      activeColor: colorPrimary,
+                                                      activeTrackColor: colorPrimary,
                                                       value: value.otorisasi,
                                                       onChanged: (e) {
                                                         value.gantiotorisasi();
@@ -948,27 +883,24 @@ class UsersPage extends StatelessWidget {
                                             ],
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 16,
                                         ),
                                         value.otorisasi
                                             ? Expanded(
                                                 child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
-                                                  Row(
+                                                  const Row(
                                                     children: [
                                                       Text(
                                                         "Level Otorisasi",
-                                                        style: const TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
-                                                      const SizedBox(width: 5),
-                                                      const Text(
+                                                      SizedBox(width: 5),
+                                                      Text(
                                                         "*",
-                                                        style: TextStyle(
-                                                            fontSize: 8),
+                                                        style: TextStyle(fontSize: 8),
                                                       ),
                                                     ],
                                                   ),
@@ -977,48 +909,31 @@ class UsersPage extends StatelessWidget {
                                                   ),
                                                   DropdownSearch<String>(
                                                     key: value.dropdownKey,
-                                                    popupProps:
-                                                        const PopupProps.menu(
+                                                    popupProps: const PopupProps.menu(
                                                       showSearchBox: true,
                                                     ),
-                                                    selectedItem:
-                                                        value.levelSelected
-                                                            ? value.levelOtor
-                                                            : null,
+                                                    selectedItem: value.levelSelected ? value.levelOtor : null,
                                                     items: value.listLevelOtor,
-                                                    itemAsString: (e) => "${e}",
+                                                    itemAsString: (e) => e,
                                                     onChanged: (e) {
                                                       value.pilihLevelOtor(e!);
                                                     },
-                                                    dropdownDecoratorProps:
-                                                        DropDownDecoratorProps(
-                                                      baseStyle: TextStyle(
-                                                          fontSize: 16),
-                                                      textAlignVertical:
-                                                          TextAlignVertical
-                                                              .center,
-                                                      dropdownSearchDecoration:
-                                                          InputDecoration(
-                                                        hintText:
-                                                            "Pilih Level Otorisasi",
-                                                        suffixIcon: value
-                                                                .levelSelected
+                                                    dropdownDecoratorProps: DropDownDecoratorProps(
+                                                      baseStyle: const TextStyle(fontSize: 16),
+                                                      textAlignVertical: TextAlignVertical.center,
+                                                      dropdownSearchDecoration: InputDecoration(
+                                                        hintText: "Pilih Level Otorisasi",
+                                                        suffixIcon: value.levelSelected
                                                             ? IconButton(
                                                                 onPressed: () {
-                                                                  value
-                                                                      .clearOtor();
+                                                                  value.clearOtor();
                                                                 },
-                                                                icon: Icon(Icons
-                                                                    .close),
+                                                                icon: const Icon(Icons.close),
                                                               )
-                                                            : SizedBox(),
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          borderSide:
-                                                              BorderSide(
+                                                            : const SizedBox(),
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          borderSide: const BorderSide(
                                                             width: 1,
                                                             color: Colors.grey,
                                                           ),
@@ -1028,7 +943,7 @@ class UsersPage extends StatelessWidget {
                                                   ),
                                                 ],
                                               ))
-                                            : SizedBox(),
+                                            : const SizedBox(),
                                       ],
                                     ),
                                     const SizedBox(
@@ -1039,21 +954,18 @@ class UsersPage extends StatelessWidget {
                                             children: [
                                               Expanded(
                                                   child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
-                                                  Row(
+                                                  const Row(
                                                     children: [
                                                       Text(
                                                         "Minimal Otorisasi",
-                                                        style: const TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
-                                                      const SizedBox(width: 5),
-                                                      const Text(
+                                                      SizedBox(width: 5),
+                                                      Text(
                                                         "*",
-                                                        style: TextStyle(
-                                                            fontSize: 8),
+                                                        style: TextStyle(fontSize: 8),
                                                       ),
                                                     ],
                                                   ),
@@ -1061,15 +973,12 @@ class UsersPage extends StatelessWidget {
                                                     height: 8,
                                                   ),
                                                   TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
+                                                    textInputAction: TextInputAction.done,
                                                     maxLines: 1,
-                                                    readOnly:
-                                                        !value.levelSelected,
+                                                    readOnly: !value.levelSelected,
                                                     controller: value.minotor,
                                                     inputFormatters: [
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly,
+                                                      FilteringTextInputFormatter.digitsOnly,
                                                       CurrencyInputFormatter(),
                                                     ],
                                                     validator: (e) {
@@ -1080,45 +989,34 @@ class UsersPage extends StatelessWidget {
                                                       }
                                                     },
                                                     decoration: InputDecoration(
-                                                      filled:
-                                                          !value.levelSelected
-                                                              ? true
-                                                              : false,
-                                                      fillColor:
-                                                          Colors.grey[200],
-                                                      hintText:
-                                                          "Minimal Otorisasi",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      filled: !value.levelSelected ? true : false,
+                                                      fillColor: Colors.grey[200],
+                                                      hintText: "Minimal Otorisasi",
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
                                                   const SizedBox(height: 16),
                                                 ],
                                               )),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 16,
                                               ),
                                               Expanded(
                                                   child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
-                                                  Row(
+                                                  const Row(
                                                     children: [
                                                       Text(
                                                         "Maksimal Otorisasi",
-                                                        style: const TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
-                                                      const SizedBox(width: 5),
-                                                      const Text(
+                                                      SizedBox(width: 5),
+                                                      Text(
                                                         "*",
-                                                        style: TextStyle(
-                                                            fontSize: 8),
+                                                        style: TextStyle(fontSize: 8),
                                                       ),
                                                     ],
                                                   ),
@@ -1126,28 +1024,19 @@ class UsersPage extends StatelessWidget {
                                                     height: 8,
                                                   ),
                                                   TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
+                                                    textInputAction: TextInputAction.done,
                                                     maxLines: 1,
-                                                    readOnly:
-                                                        !value.levelSelected,
+                                                    readOnly: !value.levelSelected,
                                                     controller: value.maxotor,
                                                     inputFormatters: [
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly,
+                                                      FilteringTextInputFormatter.digitsOnly,
                                                       CurrencyInputFormatter(),
                                                     ],
                                                     validator: (e) {
                                                       if (e!.isEmpty) {
                                                         return "Wajib diisi";
                                                       } else {
-                                                        if (int.parse(
-                                                                e.replaceAll(
-                                                                    ",", "")) <=
-                                                            int.parse(value
-                                                                .minotor.text
-                                                                .replaceAll(
-                                                                    ",", ""))) {
+                                                        if (int.parse(e.replaceAll(",", "")) <= int.parse(value.minotor.text.replaceAll(",", ""))) {
                                                           return "Harus lebih besar dari minimal otorisasi";
                                                         } else {
                                                           return null;
@@ -1155,19 +1044,11 @@ class UsersPage extends StatelessWidget {
                                                       }
                                                     },
                                                     decoration: InputDecoration(
-                                                      filled:
-                                                          !value.levelSelected
-                                                              ? true
-                                                              : false,
-                                                      fillColor:
-                                                          Colors.grey[200],
-                                                      hintText:
-                                                          "Maksimal Otorisasi",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      filled: !value.levelSelected ? true : false,
+                                                      fillColor: Colors.grey[200],
+                                                      hintText: "Maksimal Otorisasi",
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1176,30 +1057,24 @@ class UsersPage extends StatelessWidget {
                                               ))
                                             ],
                                           )
-                                        : SizedBox(),
+                                        : const SizedBox(),
                                     Row(
                                       children: [
                                         value.otorisasi
                                             ? Expanded(
                                                 child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .stretch,
+                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                                   children: [
-                                                    Row(
+                                                    const Row(
                                                       children: [
                                                         Text(
                                                           "Akses Beda Kantor",
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 12),
+                                                          style: TextStyle(fontSize: 12),
                                                         ),
-                                                        const SizedBox(
-                                                            width: 5),
-                                                        const Text(
+                                                        SizedBox(width: 5),
+                                                        Text(
                                                           "*",
-                                                          style: TextStyle(
-                                                              fontSize: 8),
+                                                          style: TextStyle(fontSize: 8),
                                                         ),
                                                       ],
                                                     ),
@@ -1208,35 +1083,19 @@ class UsersPage extends StatelessWidget {
                                                     ),
                                                     Row(
                                                       children: [
-                                                        Radio(
-                                                            value: false,
-                                                            activeColor:
-                                                                colorPrimary,
-                                                            groupValue: value
-                                                                .bedaKantor,
-                                                            onChanged: (e) => value
-                                                                .pilihBedaKantor(
-                                                                    false)),
-                                                        SizedBox(
+                                                        Radio(value: false, activeColor: colorPrimary, groupValue: value.bedaKantor, onChanged: (e) => value.pilihBedaKantor(false)),
+                                                        const SizedBox(
                                                           width: 8,
                                                         ),
-                                                        Text("Tidak"),
-                                                        SizedBox(
+                                                        const Text("Tidak"),
+                                                        const SizedBox(
                                                           width: 24,
                                                         ),
-                                                        Radio(
-                                                            value: true,
-                                                            activeColor:
-                                                                colorPrimary,
-                                                            groupValue: value
-                                                                .bedaKantor,
-                                                            onChanged: (e) => value
-                                                                .pilihBedaKantor(
-                                                                    true)),
-                                                        SizedBox(
+                                                        Radio(value: true, activeColor: colorPrimary, groupValue: value.bedaKantor, onChanged: (e) => value.pilihBedaKantor(true)),
+                                                        const SizedBox(
                                                           width: 8,
                                                         ),
-                                                        Text("Ya"),
+                                                        const Text("Ya"),
                                                       ],
                                                     ),
                                                     const SizedBox(
@@ -1245,24 +1104,22 @@ class UsersPage extends StatelessWidget {
                                                   ],
                                                 ),
                                               )
-                                            : SizedBox(),
-                                        SizedBox(
+                                            : const SizedBox(),
+                                        const SizedBox(
                                           width: 16,
                                         ),
                                         Expanded(
                                             child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
+                                          crossAxisAlignment: CrossAxisAlignment.stretch,
                                           children: [
-                                            Row(
+                                            const Row(
                                               children: [
                                                 Text(
                                                   "Bisa Back date ",
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
-                                                const SizedBox(width: 5),
-                                                const Text(
+                                                SizedBox(width: 5),
+                                                Text(
                                                   "*",
                                                   style: TextStyle(fontSize: 8),
                                                 ),
@@ -1273,55 +1130,42 @@ class UsersPage extends StatelessWidget {
                                             ),
                                             Row(
                                               children: [
-                                                Radio(
-                                                    value: false,
-                                                    activeColor: colorPrimary,
-                                                    groupValue: value.backdate,
-                                                    onChanged: (e) =>
-                                                        value.gantiBackdate()),
-                                                SizedBox(
+                                                Radio(value: false, activeColor: colorPrimary, groupValue: value.backdate, onChanged: (e) => value.gantiBackdate()),
+                                                const SizedBox(
                                                   width: 8,
                                                 ),
-                                                Text("Tidak"),
-                                                SizedBox(
+                                                const Text("Tidak"),
+                                                const SizedBox(
                                                   width: 24,
                                                 ),
-                                                Radio(
-                                                    value: true,
-                                                    activeColor: colorPrimary,
-                                                    groupValue: value.backdate,
-                                                    onChanged: (e) =>
-                                                        value.gantiBackdate()),
-                                                SizedBox(
+                                                Radio(value: true, activeColor: colorPrimary, groupValue: value.backdate, onChanged: (e) => value.gantiBackdate()),
+                                                const SizedBox(
                                                   width: 8,
                                                 ),
-                                                Text("Ya"),
+                                                const Text("Ya"),
                                               ],
                                             ),
                                           ],
                                         )),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     value.aksesKasir
                                         ? Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
-                                              Row(
+                                              const Row(
                                                 children: [
                                                   Text(
                                                     "Pilih SBB ",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
-                                                  const SizedBox(width: 5),
-                                                  const Text(
+                                                  SizedBox(width: 5),
+                                                  Text(
                                                     "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
+                                                    style: TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -1331,56 +1175,40 @@ class UsersPage extends StatelessWidget {
                                               Row(
                                                 children: [
                                                   Expanded(
-                                                    child: TypeAheadField<
-                                                        InqueryGlModel>(
+                                                    child: TypeAheadField<InqueryGlModel>(
                                                       controller: value.nossbb,
-                                                      suggestionsCallback:
-                                                          (search) =>
-                                                              value.getInquery(
-                                                                  search),
-                                                      builder: (context,
-                                                          controller,
-                                                          focusNode) {
+                                                      suggestionsCallback: (search) => value.getInquery(search),
+                                                      builder: (context, controller, focusNode) {
                                                         return TextField(
-                                                            controller:
-                                                                controller,
-                                                            focusNode:
-                                                                focusNode,
+                                                            controller: controller,
+                                                            focusNode: focusNode,
                                                             autofocus: true,
-                                                            decoration:
-                                                                InputDecoration(
-                                                              border:
-                                                                  OutlineInputBorder(),
-                                                              labelText:
-                                                                  'Cari Akun',
+                                                            decoration: const InputDecoration(
+                                                              border: OutlineInputBorder(),
+                                                              labelText: 'Cari Akun',
                                                             ));
                                                       },
-                                                      itemBuilder:
-                                                          (context, city) {
+                                                      itemBuilder: (context, city) {
                                                         return ListTile(
-                                                          title:
-                                                              Text(city.nosbb),
-                                                          subtitle: Text(
-                                                              city.namaSbb),
+                                                          title: Text(city.nosbb),
+                                                          subtitle: Text(city.namaSbb),
                                                         );
                                                       },
                                                       onSelected: (city) {
                                                         // value.selectInvoice(city);
-                                                        value
-                                                            .pilihSbbAset(city);
+                                                        value.pilihSbbAset(city);
                                                       },
                                                     ),
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 16,
                                                   ),
-                                                  Container(
+                                                  SizedBox(
                                                     width: 150,
                                                     child: TextFormField(
                                                       // enabled: false,
                                                       readOnly: true,
-                                                      textInputAction:
-                                                          TextInputAction.done,
+                                                      textInputAction: TextInputAction.done,
                                                       controller: value.namasbb,
                                                       maxLines: 1,
                                                       // inputFormatters: [
@@ -1393,29 +1221,24 @@ class UsersPage extends StatelessWidget {
                                                           return null;
                                                         }
                                                       },
-                                                      decoration:
-                                                          InputDecoration(
+                                                      decoration: InputDecoration(
                                                         filled: true,
-                                                        fillColor:
-                                                            Colors.grey[200],
+                                                        fillColor: Colors.grey[200],
                                                         hintText: "Nomor Akun",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
                                                   )
                                                 ],
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 16,
                                               ),
                                             ],
                                           )
-                                        : SizedBox(),
+                                        : const SizedBox(),
                                     ButtonPrimary(
                                       onTap: () {
                                         value.cek();
@@ -1424,8 +1247,7 @@ class UsersPage extends StatelessWidget {
                                     ),
                                     value.editData
                                         ? Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
                                               const SizedBox(height: 16),
                                               ButtonDanger(
@@ -1436,7 +1258,7 @@ class UsersPage extends StatelessWidget {
                                               ),
                                             ],
                                           )
-                                        : SizedBox()
+                                        : const SizedBox()
                                   ],
                                 ))
                               ],
@@ -1444,7 +1266,7 @@ class UsersPage extends StatelessWidget {
                           ),
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -1475,31 +1297,14 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'userid', value: data.userid),
                 DataGridCell(columnName: 'batch', value: data.batch),
                 DataGridCell(columnName: 'kantor', value: data.kodeKantor),
-                DataGridCell(
-                    columnName: 'lvluser',
-                    value: tindakanNotifier!.listUsers
-                        .where((e) => e.idLevel == data.lvluser)
-                        .first
-                        .levelUser),
+                DataGridCell(columnName: 'lvluser', value: tindakanNotifier!.listUsers.where((e) => e.idLevel == data.lvluser).first.levelUser),
                 DataGridCell(columnName: 'akses_kasir', value: data.aksesKasir),
                 DataGridCell(columnName: 'back_date', value: data.backDate),
                 DataGridCell(columnName: 'beda_kantor', value: data.bedaKantor),
-                DataGridCell(
-                    columnName: 'limit_transaksi',
-                    value: "data.limitTransaksi"),
-                DataGridCell(
-                    columnName: 'level_otor',
-                    value: data.levelOtor == "null" ? "" : data.levelOtor),
-                DataGridCell(
-                    columnName: 'min_otor',
-                    value: data.minOtor == ""
-                        ? ""
-                        : FormatCurrency.oCcy.format(int.parse(data.minOtor))),
-                DataGridCell(
-                    columnName: 'max_otor',
-                    value: data.maxOtor == ""
-                        ? ""
-                        : FormatCurrency.oCcy.format(int.parse(data.maxOtor))),
+                const DataGridCell(columnName: 'limit_transaksi', value: "data.limitTransaksi"),
+                DataGridCell(columnName: 'level_otor', value: data.levelOtor == "null" ? "" : data.levelOtor),
+                DataGridCell(columnName: 'min_otor', value: data.minOtor == "" ? "" : FormatCurrency.oCcy.format(int.parse(data.minOtor))),
+                DataGridCell(columnName: 'max_otor', value: data.maxOtor == "" ? "" : FormatCurrency.oCcy.format(int.parse(data.maxOtor))),
                 DataGridCell(columnName: 'aktivasi', value: data.aktivasi),
                 DataGridCell(columnName: 'tglexp', value: data.tglexp),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
@@ -1522,7 +1327,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -1531,21 +1336,17 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),
               ),
             ),
           );
-        } else if (e.columnName == 'aktivasi' ||
-            e.columnName == 'level_otor' ||
-            e.columnName == 'beda_kantor' ||
-            e.columnName == 'akses_kasir' ||
-            e.columnName == 'back_date') {
+        } else if (e.columnName == 'aktivasi' || e.columnName == 'level_otor' || e.columnName == 'beda_kantor' || e.columnName == 'akses_kasir' || e.columnName == 'back_date') {
           return Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),

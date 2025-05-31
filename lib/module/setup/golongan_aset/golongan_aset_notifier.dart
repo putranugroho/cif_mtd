@@ -52,22 +52,19 @@ class GolonganAsetNotifier extends ChangeNotifier {
         DialogCustom().showLoading(context);
         var data = {
           "id": golonganAsetModel!.id,
-          "kode_pt": "${users!.kodePt}",
-          "kode_golongan": "${kode.text.trim()}",
-          "nama_golongan": "${nama.text.trim()}",
-          "masa_susut":
-              "${masasusut.text.isEmpty ? "" : masasusut.text.trim()}",
-          "nilai_declining": "${nilai.text.isEmpty ? "" : nilai.text.trim()}",
-          "sbb_aset": sbbAset == null ? null : sbbAset!.nosbb,
-          "sbb_penyusutan": sbbpenyusutan == null ? null : sbbpenyusutan!.nosbb,
-          "sbb_rugi_jual": sbbrugijual == null ? null : sbbrugijual!.nosbb,
-          "sbb_laba_jual": sbblabajual == null ? null : sbblabajual!.nosbb,
-          "sbb_ppn": sbbppn == null ? null : sbbppn!.nosbb,
-          "sbb_pph": sbbpph == null ? null : sbbpph!.nosbb,
+          "kode_pt": users!.kodePt,
+          "kode_golongan": kode.text.trim(),
+          "nama_golongan": nama.text.trim(),
+          "masa_susut": masasusut.text.isEmpty ? "" : masasusut.text.trim(),
+          "nilai_declining": nilai.text.isEmpty ? "" : nilai.text.trim(),
+          "sbb_aset": sbbAset?.nosbb,
+          "sbb_penyusutan": sbbpenyusutan?.nosbb,
+          "sbb_rugi_jual": sbbrugijual?.nosbb,
+          "sbb_laba_jual": sbblabajual?.nosbb,
+          "sbb_ppn": sbbppn?.nosbb,
+          "sbb_pph": sbbpph?.nosbb,
         };
-        Setuprepository.setup(
-                token, NetworkURL.editGolonganAset(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.editGolonganAset(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             clear();
@@ -81,23 +78,20 @@ class GolonganAsetNotifier extends ChangeNotifier {
       } else {
         DialogCustom().showLoading(context);
         var data = {
-          "kode_pt": "${users!.kodePt}",
-          "kode_golongan": "${kode.text.trim()}",
-          "nama_golongan": "${nama.text.trim()}",
-          "masa_susut":
-              "${masasusut.text.isEmpty ? "" : masasusut.text.trim()}",
-          "nilai_declining": "${nilai.text.isEmpty ? "" : nilai.text.trim()}",
-          "sbb_aset": "${sbbAset!.nosbb}",
-          "sbb_penyusutan": "${sbbpenyusutan!.nosbb}",
-          "sbb_rugi_jual": "${sbbrugijual!.nosbb}",
-          "sbb_laba_jual": "${sbblabajual!.nosbb}",
-          "sbb_ppn": sbbppn == null ? null : sbbppn!.nosbb,
-          "sbb_pph": sbbpph == null ? null : sbbpph!.nosbb,
+          "kode_pt": users!.kodePt,
+          "kode_golongan": kode.text.trim(),
+          "nama_golongan": nama.text.trim(),
+          "masa_susut": masasusut.text.isEmpty ? "" : masasusut.text.trim(),
+          "nilai_declining": nilai.text.isEmpty ? "" : nilai.text.trim(),
+          "sbb_aset": sbbAset!.nosbb,
+          "sbb_penyusutan": sbbpenyusutan!.nosbb,
+          "sbb_rugi_jual": sbbrugijual!.nosbb,
+          "sbb_laba_jual": sbblabajual!.nosbb,
+          "sbb_ppn": sbbppn?.nosbb,
+          "sbb_pph": sbbpph?.nosbb,
         };
         print(jsonEncode(data));
-        Setuprepository.setup(
-                token, NetworkURL.addGolonganAset(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.addGolonganAset(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             clear();
@@ -118,7 +112,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -126,11 +120,11 @@ class GolonganAsetNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin menghapus (${golonganAsetModel!.kodeGolongan}) ${golonganAsetModel!.namaGolongan}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -142,7 +136,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -167,8 +161,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
     var data = {
       "id": golonganAsetModel!.id,
     };
-    Setuprepository.setup(token, NetworkURL.deletedJabatan(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.deletedJabatan(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         clear();
@@ -185,7 +178,9 @@ class GolonganAsetNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -195,17 +190,8 @@ class GolonganAsetNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.golAcc == "1" &&
-                  (model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                      model.namaSbb
-                          .toLowerCase()
-                          .contains(query.toLowerCase())))
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.golAcc == "1" && (model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -227,7 +213,9 @@ class GolonganAsetNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -237,17 +225,8 @@ class GolonganAsetNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.golAcc == "2" &&
-                  (model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                      model.namaSbb
-                          .toLowerCase()
-                          .contains(query.toLowerCase())))
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.golAcc == "2" && (model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -269,7 +248,9 @@ class GolonganAsetNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -279,17 +260,8 @@ class GolonganAsetNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.golAcc == "2" &&
-                  (model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                      model.namaSbb
-                          .toLowerCase()
-                          .contains(query.toLowerCase())))
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.golAcc == "2" && (model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -311,7 +283,9 @@ class GolonganAsetNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -321,17 +295,8 @@ class GolonganAsetNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.golAcc == "4" &&
-                  (model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                      model.namaSbb
-                          .toLowerCase()
-                          .contains(query.toLowerCase())))
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.golAcc == "4" && (model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -353,7 +318,9 @@ class GolonganAsetNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -363,17 +330,8 @@ class GolonganAsetNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.golAcc == "3" &&
-                  (model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                      model.namaSbb
-                          .toLowerCase()
-                          .contains(query.toLowerCase())))
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.golAcc == "3" && (model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -392,14 +350,13 @@ class GolonganAsetNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     listGl.clear();
     notifyListeners();
-    var data = {"kode_pt": "${users!.kodePt}"};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": users!.kodePt
+    };
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        listGl =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         notifyListeners();
       }
     });
@@ -432,12 +389,10 @@ class GolonganAsetNotifier extends ChangeNotifier {
     isLoading = true;
     listPenyusutan.clear();
     var data = {
-      "kode_pt": "${users!.kodePt}",
+      "kode_pt": users!.kodePt,
     };
     notifyListeners();
-    Setuprepository.setup(
-            token, NetworkURL.getMetodePenyusutan(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getMetodePenyusutan(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listPenyusutan.add(MetodePenyusutanModel.fromJson(i));
@@ -528,9 +483,10 @@ class GolonganAsetNotifier extends ChangeNotifier {
   Future getGolonganAset() async {
     isLoading = true;
     listData.clear();
-    var data = {"kode_pt": "${users!.kodePt}"};
-    Setuprepository.setup(token, NetworkURL.getGolonganAset(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": users!.kodePt
+    };
+    Setuprepository.setup(token, NetworkURL.getGolonganAset(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listData.add(GolonganAsetModel.fromJson(i));
@@ -572,72 +528,12 @@ class GolonganAsetNotifier extends ChangeNotifier {
     nilai.text = golonganAsetModel!.nilaiDeclining;
     masasusut.text = golonganAsetModel!.masaSusut;
     // print(golonganAsetModel!.sbbAset.substring(1, 13));
-    sbbAset = listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbAset.toString().substring(1, 13))
-            .isNotEmpty
-        ? listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbAset.toString().substring(1, 13))
-            .first
-        : null;
-    sbbpenyusutan = listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbPenyusutan.toString().substring(1, 13))
-            .isNotEmpty
-        ? listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbPenyusutan.toString().substring(1, 13))
-            .first
-        : null;
-    sbbrugijual = listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbRugiJual.toString().substring(1, 13))
-            .isNotEmpty
-        ? listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbRugiJual.toString().substring(1, 13))
-            .first
-        : null;
-    sbblabajual = listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbLabaJual.toString().substring(1, 13))
-            .isNotEmpty
-        ? listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbLabaJual.toString().substring(1, 13))
-            .first
-        : null;
-    sbbppn = listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbPpn.toString().substring(1, 13))
-            .isNotEmpty
-        ? listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbPpn.toString().substring(1, 13))
-            .first
-        : null;
-    sbbpph = listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbPph.toString().substring(1, 13))
-            .isNotEmpty
-        ? listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbPph.toString().substring(1, 13))
-            .first
-        : null;
+    sbbAset = listGl.where((e) => e.nosbb == golonganAsetModel!.sbbAset.toString().substring(1, 13)).isNotEmpty ? listGl.where((e) => e.nosbb == golonganAsetModel!.sbbAset.toString().substring(1, 13)).first : null;
+    sbbpenyusutan = listGl.where((e) => e.nosbb == golonganAsetModel!.sbbPenyusutan.toString().substring(1, 13)).isNotEmpty ? listGl.where((e) => e.nosbb == golonganAsetModel!.sbbPenyusutan.toString().substring(1, 13)).first : null;
+    sbbrugijual = listGl.where((e) => e.nosbb == golonganAsetModel!.sbbRugiJual.toString().substring(1, 13)).isNotEmpty ? listGl.where((e) => e.nosbb == golonganAsetModel!.sbbRugiJual.toString().substring(1, 13)).first : null;
+    sbblabajual = listGl.where((e) => e.nosbb == golonganAsetModel!.sbbLabaJual.toString().substring(1, 13)).isNotEmpty ? listGl.where((e) => e.nosbb == golonganAsetModel!.sbbLabaJual.toString().substring(1, 13)).first : null;
+    sbbppn = listGl.where((e) => e.nosbb == golonganAsetModel!.sbbPpn.toString().substring(1, 13)).isNotEmpty ? listGl.where((e) => e.nosbb == golonganAsetModel!.sbbPpn.toString().substring(1, 13)).first : null;
+    sbbpph = listGl.where((e) => e.nosbb == golonganAsetModel!.sbbPph.toString().substring(1, 13)).isNotEmpty ? listGl.where((e) => e.nosbb == golonganAsetModel!.sbbPph.toString().substring(1, 13)).first : null;
     namasbbaset.text = sbbAset == null ? "" : sbbAset!.namaSbb;
     namasbbppn.text = sbbppn == null ? "" : sbbppn!.namaSbb;
     nosbbppn.text = sbbppn == null ? "" : sbbppn!.nosbb;
@@ -645,8 +541,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
     namasbbpph.text = sbbpph == null ? "" : sbbpph!.namaSbb;
     nosbbpph.text = sbbpph == null ? "" : sbbpph!.nosbb;
     nosbbaset.text = sbbAset == null ? "" : sbbAset!.nosbb;
-    namasbbpenyusutan.text =
-        sbbpenyusutan == null ? "" : sbbpenyusutan!.namaSbb;
+    namasbbpenyusutan.text = sbbpenyusutan == null ? "" : sbbpenyusutan!.namaSbb;
     nossbpenyusutan.text = sbbpenyusutan == null ? "" : sbbpenyusutan!.nosbb;
     namasbbrugijual.text = sbbrugijual == null ? "" : sbbrugijual!.namaSbb;
     nosbbrugijual.text = sbbrugijual == null ? "" : sbbrugijual!.nosbb;

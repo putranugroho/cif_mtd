@@ -30,9 +30,7 @@ class TransaksiHutangNotifier extends ChangeNotifier {
 
   Future<List<PiutangHutangModel>> cariInvoice(String e) async {
     if (e.isNotEmpty && e.length > 2) {
-      return list
-          .where((f) => f.noInvoice.toLowerCase().contains(e.toLowerCase()))
-          .toList();
+      return list.where((f) => f.noInvoice.toLowerCase().contains(e.toLowerCase())).toList();
     } else {
       return [];
     }
@@ -40,9 +38,7 @@ class TransaksiHutangNotifier extends ChangeNotifier {
 
   Future<List<NeracaItemModel>> cariAkun(String e) async {
     if (e.isNotEmpty && e.length > 2) {
-      return listCoa
-          .where((f) => f.namaSbb.toLowerCase().contains(e.toLowerCase()))
-          .toList();
+      return listCoa.where((f) => f.namaSbb.toLowerCase().contains(e.toLowerCase())).toList();
     } else {
       return [];
     }
@@ -58,24 +54,14 @@ class TransaksiHutangNotifier extends ChangeNotifier {
 
   Future<List<CustomerSupplierModel>> caricustomer(String e) async {
     if (e.isNotEmpty && e.length > 2) {
-      return listcustomer
-          .where((f) => f.nmSif.toLowerCase().contains(e.toLowerCase()))
-          .toList();
+      return listcustomer.where((f) => f.nmSif.toLowerCase().contains(e.toLowerCase())).toList();
     } else {
       return [];
     }
   }
 
   gantinominal() {
-    sisa.text = piutangHutangModel!.bertahap == "Y"
-        ? FormatCurrency.oCcy.format(
-            int.parse(nominal.text.replaceAll(",", "")) -
-                (int.parse(piutangHutangModel!.nilaiInvoice) /
-                    int.parse(piutangHutangModel!.jumlahTahap)))
-        : FormatCurrency.oCcy
-            .format(int.parse(nominal.text.replaceAll(",", "")) -
-                int.parse(piutangHutangModel!.nilaiInvoice))
-            .replaceAll(".", ",");
+    sisa.text = piutangHutangModel!.bertahap == "Y" ? FormatCurrency.oCcy.format(int.parse(nominal.text.replaceAll(",", "")) - (int.parse(piutangHutangModel!.nilaiInvoice) / int.parse(piutangHutangModel!.jumlahTahap))) : FormatCurrency.oCcy.format(int.parse(nominal.text.replaceAll(",", "")) - int.parse(piutangHutangModel!.nilaiInvoice)).replaceAll(".", ",");
     notifyListeners();
   }
 
@@ -109,14 +95,7 @@ class TransaksiHutangNotifier extends ChangeNotifier {
     tglInvoice.text = piutangHutangModel!.tglInvoice;
     customer.text = piutangHutangModel!.nmSif;
     tahap.text = ((piutangHutangModel!.itemPembayaran.length) + 1).toString();
-    tagihan.text = piutangHutangModel!.bertahap == "Y"
-        ? FormatCurrency.oCcy
-            .format(int.parse(piutangHutangModel!.nilaiInvoice) /
-                int.parse(piutangHutangModel!.jumlahTahap))
-            .replaceAll(".", ",")
-        : FormatCurrency.oCcy
-            .format(int.parse(piutangHutangModel!.nilaiInvoice))
-            .replaceAll(".", ",");
+    tagihan.text = piutangHutangModel!.bertahap == "Y" ? FormatCurrency.oCcy.format(int.parse(piutangHutangModel!.nilaiInvoice) / int.parse(piutangHutangModel!.jumlahTahap)).replaceAll(".", ",") : FormatCurrency.oCcy.format(int.parse(piutangHutangModel!.nilaiInvoice)).replaceAll(".", ",");
     notifyListeners();
   }
 
@@ -127,15 +106,15 @@ class TransaksiHutangNotifier extends ChangeNotifier {
           return Dialog(
             child: Container(
               width: 600,
-              decoration: BoxDecoration(color: Colors.white),
-              padding: EdgeInsets.all(20),
+              decoration: const BoxDecoration(color: Colors.white),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Row(
                     children: [
-                      Expanded(
+                      const Expanded(
                           child: Text(
                         "Rincian Pembayaran",
                         style: TextStyle(
@@ -150,9 +129,8 @@ class TransaksiHutangNotifier extends ChangeNotifier {
                         child: Container(
                           width: 30,
                           height: 30,
-                          decoration: BoxDecoration(
-                              color: Colors.grey[300], shape: BoxShape.circle),
-                          child: Icon(
+                          decoration: BoxDecoration(color: Colors.grey[300], shape: BoxShape.circle),
+                          child: const Icon(
                             Icons.close,
                             size: 15,
                             color: Colors.white,
@@ -161,80 +139,66 @@ class TransaksiHutangNotifier extends ChangeNotifier {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   ListView.builder(
                       itemCount: int.parse(piutangHutangModel!.jumlahTahap),
                       shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
+                      physics: const ClampingScrollPhysics(),
                       itemBuilder: (context, i) {
                         var no = i + 1;
-                        double tagihan =
-                            int.parse(piutangHutangModel!.nilaiInvoice) /
-                                int.parse(piutangHutangModel!.jumlahTahap);
+                        double tagihan = int.parse(piutangHutangModel!.nilaiInvoice) / int.parse(piutangHutangModel!.jumlahTahap);
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Row(
                               children: [
-                                Container(
+                                SizedBox(
                                   width: 26,
                                   child: Text(
                                     "$no. ",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 12,
                                     ),
                                   ),
                                 ),
-                                Container(
+                                SizedBox(
                                   width: 100,
                                   child: Text(
-                                    "${DateFormat('dd MMM y').format(
+                                    DateFormat('dd MMM y').format(
                                       DateTime(
                                           int.parse(DateFormat('y').format(
-                                            DateTime.parse(
-                                                piutangHutangModel!.tglInvoice),
+                                            DateTime.parse(piutangHutangModel!.tglInvoice),
                                           )),
                                           int.parse(DateFormat('MM').format(
-                                                DateTime.parse(
-                                                    piutangHutangModel!
-                                                        .tglInvoice),
+                                                DateTime.parse(piutangHutangModel!.tglInvoice),
                                               )) +
                                               i,
                                           int.parse(DateFormat('dd').format(
-                                            DateTime.parse(
-                                                piutangHutangModel!.tglInvoice),
+                                            DateTime.parse(piutangHutangModel!.tglInvoice),
                                           ))),
-                                    )}",
-                                    style: TextStyle(
+                                    ),
+                                    style: const TextStyle(
                                       fontSize: 12,
                                     ),
                                   ),
                                 ),
                                 Expanded(
                                     child: Text(
-                                  "${FormatCurrency.oCcy.format(tagihan.toInt())}",
-                                  style: TextStyle(
+                                  FormatCurrency.oCcy.format(tagihan.toInt()),
+                                  style: const TextStyle(
                                     fontSize: 12,
                                   ),
                                 )),
                                 Icon(
-                                  (i + 1) <=
-                                          (piutangHutangModel!
-                                              .itemPembayaran.length)
-                                      ? Icons.check_circle
-                                      : Icons.warning,
-                                  color: (i + 1) <=
-                                          (piutangHutangModel!
-                                              .itemPembayaran.length)
-                                      ? Colors.green
-                                      : Colors.orange,
+                                  (i + 1) <= (piutangHutangModel!.itemPembayaran.length) ? Icons.check_circle : Icons.warning,
+                                  color: (i + 1) <= (piutangHutangModel!.itemPembayaran.length) ? Colors.green : Colors.orange,
                                   size: 15,
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 8,
                             )
                           ],

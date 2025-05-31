@@ -31,8 +31,8 @@ class OtorisasiInventarisPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
-                      child: Row(
+                      padding: const EdgeInsets.all(20),
+                      child: const Row(
                         children: [
                           Expanded(
                             child: Text(
@@ -48,7 +48,7 @@ class OtorisasiInventarisPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         height: MediaQuery.of(context).size.height,
                         child: SfDataGrid(
                           headerRowHeight: 40,
@@ -66,10 +66,10 @@ class OtorisasiInventarisPage extends StatelessWidget {
                                 width: 50,
                                 columnName: 'no',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('No',
+                                    child: const Text('No',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           fontSize: 12,
@@ -80,8 +80,8 @@ class OtorisasiInventarisPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Tanggal',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Tanggal',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -92,8 +92,8 @@ class OtorisasiInventarisPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Modul',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Modul',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -103,10 +103,10 @@ class OtorisasiInventarisPage extends StatelessWidget {
                                 columnName: 'user',
                                 width: 150,
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('User',
+                                    child: const Text('User',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -115,10 +115,10 @@ class OtorisasiInventarisPage extends StatelessWidget {
                             GridColumn(
                                 columnName: 'data',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Data',
+                                    child: const Text('Data',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -127,10 +127,10 @@ class OtorisasiInventarisPage extends StatelessWidget {
                             GridColumn(
                                 columnName: 'status',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Status',
+                                    child: const Text('Status',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -141,9 +141,9 @@ class OtorisasiInventarisPage extends StatelessWidget {
                                 width: 80,
                                 label: Container(
                                     color: colorPrimary,
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     alignment: Alignment.center,
-                                    child: Text('Action',
+                                    child: const Text('Action',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -165,7 +165,7 @@ class OtorisasiInventarisPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -174,8 +174,8 @@ class OtorisasiInventarisPage extends StatelessWidget {
                 child: value.dialog
                     ? Container(
                         width: 600,
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
+                        padding: const EdgeInsets.all(20),
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                         ),
                         child: Column(
@@ -183,7 +183,7 @@ class OtorisasiInventarisPage extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   child: Text(
                                     "Otorisasi Detail",
                                     style: TextStyle(
@@ -197,76 +197,74 @@ class OtorisasiInventarisPage extends StatelessWidget {
                                   child: Container(
                                     width: 40,
                                     height: 40,
-                                    padding: EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey[200],
-                                        shape: BoxShape.circle),
-                                    child: Icon(Icons.close),
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                    child: const Icon(Icons.close),
                                   ),
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 32,
                             ),
                             Expanded(
                                 child: ListView(
                               children: [
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Tanggal",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
+                                    SizedBox(width: 5),
                                   ],
                                 ),
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                Text("${value.otorisasiModel!.tanggal}"),
+                                Text(value.otorisasiModel!.tanggal),
                                 const SizedBox(height: 16),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Modul",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
+                                    SizedBox(width: 5),
                                   ],
                                 ),
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                Text("${value.otorisasiModel!.modul}"),
+                                Text(value.otorisasiModel!.modul),
                                 const SizedBox(height: 16),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "User",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
+                                    SizedBox(width: 5),
                                   ],
                                 ),
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                Text("${value.otorisasiModel!.user}"),
+                                Text(value.otorisasiModel!.user),
                                 const SizedBox(height: 16),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Data",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
+                                    SizedBox(width: 5),
                                   ],
                                 ),
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                Text("${value.otorisasiModel!.data}"),
+                                Text(value.otorisasiModel!.data),
                                 const SizedBox(height: 16),
                                 Row(
                                   children: [
@@ -274,7 +272,7 @@ class OtorisasiInventarisPage extends StatelessWidget {
                                       onTap: () {},
                                       name: "Setujui",
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 16,
                                     ),
                                     ButtonPrimary(
@@ -288,7 +286,7 @@ class OtorisasiInventarisPage extends StatelessWidget {
                           ],
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -340,7 +338,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -349,10 +347,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),

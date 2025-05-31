@@ -31,10 +31,10 @@ class LevelPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Data Level",
                               style: TextStyle(
@@ -46,8 +46,7 @@ class LevelPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -56,10 +55,10 @@ class LevelPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah Data Level",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -91,7 +90,7 @@ class LevelPage extends StatelessWidget {
                               ),
                             )
                           : Container(
-                              padding: EdgeInsets.all(20),
+                              padding: const EdgeInsets.all(20),
                               height: MediaQuery.of(context).size.height,
                               child: SfDataGrid(
                                 headerRowHeight: 40,
@@ -100,8 +99,7 @@ class LevelPage extends StatelessWidget {
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
-                                headerGridLinesVisibility:
-                                    GridLinesVisibility.both,
+                                headerGridLinesVisibility: GridLinesVisibility.both,
                                 selectionMode: SelectionMode.single,
 
                                 source: DetailDataSource(value),
@@ -110,10 +108,10 @@ class LevelPage extends StatelessWidget {
                                       width: 50,
                                       columnName: 'no',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('No',
+                                          child: const Text('No',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 12,
@@ -123,10 +121,10 @@ class LevelPage extends StatelessWidget {
                                       width: 50,
                                       columnName: 'level',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Level',
+                                          child: const Text('Level',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -138,8 +136,8 @@ class LevelPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Nama Level',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Nama Level',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -150,9 +148,9 @@ class LevelPage extends StatelessWidget {
                                       columnName: 'action',
                                       label: Container(
                                           color: colorPrimary,
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           alignment: Alignment.center,
-                                          child: Text('Action',
+                                          child: const Text('Action',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -174,7 +172,7 @@ class LevelPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -182,9 +180,9 @@ class LevelPage extends StatelessWidget {
                 right: 0,
                 child: value.dialog
                     ? Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         width: 600,
-                        decoration: BoxDecoration(color: Colors.white),
+                        decoration: const BoxDecoration(color: Colors.white),
                         child: Form(
                           key: value.keyForm,
                           child: Column(
@@ -194,10 +192,8 @@ class LevelPage extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      value.editData
-                                          ? "Ubah / Hapus Level "
-                                          : "Tambah Level ",
-                                      style: TextStyle(
+                                      value.editData ? "Ubah / Hapus Level " : "Tambah Level ",
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -208,26 +204,24 @@ class LevelPage extends StatelessWidget {
                                     child: Container(
                                       width: 40,
                                       height: 40,
-                                      padding: EdgeInsets.all(4),
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey[200],
-                                          shape: BoxShape.circle),
-                                      child: Icon(Icons.close),
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                      child: const Icon(Icons.close),
                                     ),
                                   )
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 32,
                               ),
-                              Row(
+                              const Row(
                                 children: [
                                   Text(
                                     "Level",
-                                    style: const TextStyle(fontSize: 12),
+                                    style: TextStyle(fontSize: 12),
                                   ),
-                                  const SizedBox(width: 5),
-                                  const Text(
+                                  SizedBox(width: 5),
+                                  Text(
                                     "*",
                                     style: TextStyle(fontSize: 8),
                                   ),
@@ -258,14 +252,14 @@ class LevelPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              Row(
+                              const Row(
                                 children: [
                                   Text(
                                     "Nama Level",
-                                    style: const TextStyle(fontSize: 12),
+                                    style: TextStyle(fontSize: 12),
                                   ),
-                                  const SizedBox(width: 5),
-                                  const Text(
+                                  SizedBox(width: 5),
+                                  Text(
                                     "*",
                                     style: TextStyle(fontSize: 8),
                                   ),
@@ -304,8 +298,7 @@ class LevelPage extends StatelessWidget {
                               ),
                               value.editData
                                   ? Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         const SizedBox(height: 16),
                                         ButtonDanger(
@@ -316,12 +309,12 @@ class LevelPage extends StatelessWidget {
                                         ),
                                       ],
                                     )
-                                  : SizedBox()
+                                  : const SizedBox()
                             ],
                           ),
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -370,7 +363,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -379,10 +372,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),

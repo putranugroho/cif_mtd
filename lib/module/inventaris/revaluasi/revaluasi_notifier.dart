@@ -34,15 +34,15 @@ class RevaluasiNotifier extends ChangeNotifier {
 
   TextEditingController nominal = TextEditingController();
   var isLoading = true;
-  final currencyFormatter =
-      NumberFormat.currency(symbol: 'Rp ', decimalDigits: 2);
+  final currencyFormatter = NumberFormat.currency(symbol: 'Rp ', decimalDigits: 2);
   getInventaris() async {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getInventaris(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getInventaris(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(InventarisModel.fromJson(i));
@@ -111,9 +111,7 @@ class RevaluasiNotifier extends ChangeNotifier {
   TextEditingController pph = TextEditingController(text: "0");
   int total = 0;
   onChange() {
-    total = int.parse(hargaBeli.text.replaceAll(",", "")) -
-        int.parse(discount.text.replaceAll(",", "")) +
-        int.parse(biaya.text.replaceAll(",", ""));
+    total = int.parse(hargaBeli.text.replaceAll(",", "")) - int.parse(discount.text.replaceAll(",", "")) + int.parse(biaya.text.replaceAll(",", ""));
     notifyListeners();
   }
 
@@ -151,7 +149,7 @@ class RevaluasiNotifier extends ChangeNotifier {
             DateTime.now(),
           ))),
       lastDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) + 2,
+          int.parse(DateFormat('y').format(DateTime.now())),
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
@@ -161,8 +159,7 @@ class RevaluasiNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTransaksi = pickedendDate;
-      tglbeli.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglbeli.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -182,8 +179,7 @@ class RevaluasiNotifier extends ChangeNotifier {
       "userinput": users!.namauser,
       "userterm": "114.80.90.54",
     };
-    Setuprepository.setup(token, NetworkURL.revaluasi(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.revaluasi(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getInventaris();
@@ -224,32 +220,27 @@ class RevaluasiNotifier extends ChangeNotifier {
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
             return Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               child: Container(
                 width: 500,
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    const Text(
                       "Pilih Periode",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
-                    Container(
+                    SizedBox(
                       height: 100,
                       child: ScrollDatePicker(
-                          maximumDate: DateTime(int.parse(
-                                  DateFormat('y').format(DateTime.now())) +
-                              50),
-                          options:
-                              DatePickerOptions(backgroundColor: Colors.white),
-                          viewType: [
+                          maximumDate: DateTime(int.parse(DateFormat('y').format(DateTime.now())) + 50),
+                          options: const DatePickerOptions(backgroundColor: Colors.white),
+                          viewType: const [
                             DatePickerViewType.month,
                             DatePickerViewType.year,
                           ],
@@ -257,13 +248,12 @@ class RevaluasiNotifier extends ChangeNotifier {
                           onDateTimeChanged: (e) {
                             setState(() {
                               now = e;
-                              blnPenyusutan.text =
-                                  DateFormat('MMMM y').format(now);
+                              blnPenyusutan.text = DateFormat('MMMM y').format(now);
                               notifyListeners();
                             });
                           }),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     InkWell(
@@ -273,12 +263,9 @@ class RevaluasiNotifier extends ChangeNotifier {
                         notifyListeners();
                       },
                       child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                        decoration: BoxDecoration(
-                            color: colorPrimary,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Text(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                        decoration: BoxDecoration(color: colorPrimary, borderRadius: BorderRadius.circular(8)),
+                        child: const Text(
                           "Simpan",
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -351,8 +338,7 @@ class RevaluasiNotifier extends ChangeNotifier {
       "kode_golongan": inventarisModel!.kodeGolongan,
       "kdaset": inventarisModel!.kdaset,
     };
-    Setuprepository.setup(token, NetworkURL.cariInventaris(), jsonEncode(data))
-        .then((values) {
+    Setuprepository.setup(token, NetworkURL.cariInventaris(), jsonEncode(data)).then((values) {
       Navigator.pop(context);
       if (values['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in values['data']) {
@@ -369,39 +355,21 @@ class RevaluasiNotifier extends ChangeNotifier {
           keterangan.text = inventarisModel!.ket;
           golongan.text = inventarisModel!.namaGolongan;
           satuans.text = inventarisModel!.satuanAset;
-          tglbeli.text = inventarisModel!.tglRevaluasi;
-          nominal.text = FormatCurrency.oCcy
-              .format(int.parse(inventarisModel!.nilaiRevaluasi))
-              .replaceAll(".", ",");
+          tglbeli.text = DateFormat("dd-MMM-yyyy").format(DateTime.now());
+          nominal.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.nilaiRevaluasi)).replaceAll(".", ",");
           picReval.text = inventarisModel!.picRevaluasi;
           tglterima.text = inventarisModel!.tglTerima;
-          biaya.text = FormatCurrency.oCcy
-              .format(int.parse(inventarisModel!.biaya))
-              .replaceAll(".", ",");
-          hargaBeli.text = FormatCurrency.oCcy
-              .format(int.parse(inventarisModel!.habeli))
-              .replaceAll(".", ",");
-          hargaBuku.text = FormatCurrency.oCcy
-              .format(int.parse(inventarisTransaksiModel!.nilaiBuku))
-              .replaceAll(".", ",");
-          haper.text = FormatCurrency.oCcy
-              .format(int.parse(inventarisModel!.haper))
-              .replaceAll(".", ",");
-          nilaiPenyusutan.text = FormatCurrency.oCcy
-              .format(int.parse(inventarisTransaksiModel!.persentasePenyusutan))
-              .replaceAll(".", ",");
-          ppn.text = FormatCurrency.oCcy
-              .format(int.parse(inventarisModel!.ppnBeli))
-              .replaceAll(".", ",");
-          pph.text = FormatCurrency.oCcy
-              .format(int.parse(inventarisModel!.pph))
-              .replaceAll(".", ",");
-          total = (subtotal + int.parse(ppn.text.replaceAll(",", ""))) -
-              int.parse(pph.text.replaceAll(",", ""));
+          biaya.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.biaya)).replaceAll(".", ",");
+          hargaBeli.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.habeli)).replaceAll(".", ",");
+          hargaBuku.text = FormatCurrency.oCcy.format(int.parse(inventarisTransaksiModel!.nilaiBuku)).replaceAll(".", ",");
+          haper.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.haper)).replaceAll(".", ",");
+          nilaiPenyusutan.text = FormatCurrency.oCcy.format(int.parse(inventarisTransaksiModel!.persentasePenyusutan)).replaceAll(".", ",");
+          ppn.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.ppnBeli)).replaceAll(".", ",");
+          pph.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.pph)).replaceAll(".", ",");
+          total = (subtotal + int.parse(ppn.text.replaceAll(",", ""))) - int.parse(pph.text.replaceAll(",", ""));
           notifyListeners();
         } else {
-          informationDialog(
-              context, "Warning", "Inventaris tidak ditemukan di transaksi");
+          informationDialog(context, "Warning", "Inventaris tidak ditemukan di transaksi");
         }
       }
     });

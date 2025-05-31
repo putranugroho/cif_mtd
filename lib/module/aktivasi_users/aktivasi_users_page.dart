@@ -38,7 +38,7 @@ class AktivasiUsersPage extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   height: MediaQuery.of(context).size.height,
                   child: SfDataGrid(
                     headerRowHeight: 40,
@@ -56,10 +56,10 @@ class AktivasiUsersPage extends StatelessWidget {
                           width: 50,
                           columnName: 'no',
                           label: Container(
-                              padding: EdgeInsets.all(6),
+                              padding: const EdgeInsets.all(6),
                               color: colorPrimary,
                               alignment: Alignment.center,
-                              child: Text('No',
+                              child: const Text('No',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w300,
                                     fontSize: 12,
@@ -68,10 +68,10 @@ class AktivasiUsersPage extends StatelessWidget {
                       GridColumn(
                           columnName: 'userid',
                           label: Container(
-                              padding: EdgeInsets.all(6),
+                              padding: const EdgeInsets.all(6),
                               color: colorPrimary,
                               alignment: Alignment.center,
-                              child: Text('User ID',
+                              child: const Text('User ID',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w300,
                                     color: Colors.white,
@@ -82,8 +82,8 @@ class AktivasiUsersPage extends StatelessWidget {
                           label: Container(
                               color: colorPrimary,
                               alignment: Alignment.center,
-                              padding: EdgeInsets.all(6),
-                              child: Text('Nama User',
+                              padding: const EdgeInsets.all(6),
+                              child: const Text('Nama User',
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w300,
@@ -94,8 +94,8 @@ class AktivasiUsersPage extends StatelessWidget {
                           label: Container(
                               color: colorPrimary,
                               alignment: Alignment.center,
-                              padding: EdgeInsets.all(6),
-                              child: Text('Tanggal Kadaluarsa',
+                              padding: const EdgeInsets.all(6),
+                              child: const Text('Tanggal Kadaluarsa',
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w300,
@@ -106,8 +106,8 @@ class AktivasiUsersPage extends StatelessWidget {
                           label: Container(
                               color: colorPrimary,
                               alignment: Alignment.center,
-                              padding: EdgeInsets.all(6),
-                              child: Text('Level User',
+                              padding: const EdgeInsets.all(6),
+                              child: const Text('Level User',
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w300,
@@ -118,9 +118,9 @@ class AktivasiUsersPage extends StatelessWidget {
                           width: 80,
                           label: Container(
                               color: colorPrimary,
-                              padding: EdgeInsets.all(6),
+                              padding: const EdgeInsets.all(6),
                               alignment: Alignment.center,
-                              child: Text('Action',
+                              child: const Text('Action',
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w300,
@@ -181,7 +181,7 @@ class DetailDataSource extends DataGridSource {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               width: 300,
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: colorPrimary,
@@ -190,10 +190,10 @@ class DetailDataSource extends DataGridSource {
                   color: colorPrimary,
                 ),
               ),
-              child: Text(
+              child: const Text(
                 "Aktifkan",
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
                 ),
               ),

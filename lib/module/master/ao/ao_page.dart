@@ -33,10 +33,10 @@ class AoPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Account Officer / Marketing",
                               style: TextStyle(
@@ -48,8 +48,7 @@ class AoPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -58,10 +57,10 @@ class AoPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah AO / Marketing",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -72,7 +71,7 @@ class AoPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         height: MediaQuery.of(context).size.height,
                         child: SfDataGrid(
                           headerRowHeight: 40,
@@ -90,10 +89,10 @@ class AoPage extends StatelessWidget {
                                 width: 50,
                                 columnName: 'no',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('No',
+                                    child: const Text('No',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           fontSize: 12,
@@ -104,8 +103,8 @@ class AoPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nama',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -115,10 +114,10 @@ class AoPage extends StatelessWidget {
                                 width: 130,
                                 columnName: 'kode',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Kode AO / Mkt',
+                                    child: const Text('Kode AO / Mkt',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -130,8 +129,8 @@ class AoPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Kode Kantor',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Kode Kantor',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -140,10 +139,10 @@ class AoPage extends StatelessWidget {
                             GridColumn(
                                 columnName: 'nama_kantor',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Nama Kantor',
+                                    child: const Text('Nama Kantor',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -153,9 +152,9 @@ class AoPage extends StatelessWidget {
                                 columnName: 'cs',
                                 label: Container(
                                     color: colorPrimary,
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     alignment: Alignment.center,
-                                    child: Text('Customer / Supplier',
+                                    child: const Text('Customer / Supplier',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -165,9 +164,9 @@ class AoPage extends StatelessWidget {
                                 columnName: 'nonaktif',
                                 label: Container(
                                     color: colorPrimary,
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     alignment: Alignment.center,
-                                    child: Text('Nonaktif Akun',
+                                    child: const Text('Nonaktif Akun',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -178,9 +177,9 @@ class AoPage extends StatelessWidget {
                                 columnName: 'action',
                                 label: Container(
                                     color: colorPrimary,
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     alignment: Alignment.center,
-                                    child: Text('Action',
+                                    child: const Text('Action',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -202,7 +201,7 @@ class AoPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -210,9 +209,9 @@ class AoPage extends StatelessWidget {
                 right: 0,
                 child: value.dialog
                     ? Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         width: 600,
-                        decoration: BoxDecoration(color: Colors.white),
+                        decoration: const BoxDecoration(color: Colors.white),
                         child: FocusTraversalGroup(
                           child: Form(
                             key: value.keyForm,
@@ -223,10 +222,8 @@ class AoPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        value.editData
-                                            ? "Ubah / hapus AO / Marketing"
-                                            : "Tambah AO / Marketing",
-                                        style: TextStyle(
+                                        value.editData ? "Ubah / hapus AO / Marketing" : "Tambah AO / Marketing",
+                                        style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -237,21 +234,19 @@ class AoPage extends StatelessWidget {
                                       child: Container(
                                         width: 40,
                                         height: 40,
-                                        padding: EdgeInsets.all(4),
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey[200],
-                                            shape: BoxShape.circle),
-                                        child: Icon(Icons.close),
+                                        padding: const EdgeInsets.all(4),
+                                        decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                        child: const Icon(Icons.close),
                                       ),
                                     )
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 32,
                                 ),
-                                Text(
+                                const Text(
                                   "Kantor",
-                                  style: const TextStyle(fontSize: 12),
+                                  style: TextStyle(fontSize: 12),
                                 ),
                                 const SizedBox(
                                   height: 8,
@@ -263,26 +258,23 @@ class AoPage extends StatelessWidget {
                                     }
                                     return null;
                                   },
-                                  popupProps:
-                                      const PopupPropsMultiSelection.menu(
-                                    showSearchBox:
-                                        true, // Aktifkan fitur pencarian
+                                  popupProps: const PopupPropsMultiSelection.menu(
+                                    showSearchBox: true, // Aktifkan fitur pencarian
                                   ),
                                   selectedItem: value.kantorModel,
                                   items: value.listKantor,
-                                  itemAsString: (e) => "${e.namaKantor}",
+                                  itemAsString: (e) => e.namaKantor,
                                   onChanged: (e) {
                                     value.pilihKantor(e!);
                                   },
-                                  dropdownDecoratorProps:
-                                      DropDownDecoratorProps(
-                                    baseStyle: TextStyle(fontSize: 16),
+                                  dropdownDecoratorProps: DropDownDecoratorProps(
+                                    baseStyle: const TextStyle(fontSize: 16),
                                     textAlignVertical: TextAlignVertical.center,
                                     dropdownSearchDecoration: InputDecoration(
                                       hintText: "Pilih Kantor",
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(8),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           width: 1,
                                           color: Colors.grey,
                                         ),
@@ -293,14 +285,14 @@ class AoPage extends StatelessWidget {
                                 const SizedBox(
                                   height: 16,
                                 ),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Kode AO / Marketing",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
-                                    const Text(
+                                    SizedBox(width: 5),
+                                    Text(
                                       "*",
                                       style: TextStyle(fontSize: 8),
                                     ),
@@ -315,8 +307,7 @@ class AoPage extends StatelessWidget {
                                   maxLines: 1,
                                   maxLength: 10,
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[a-zA-Z0-9]'))
+                                    FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]'))
                                   ],
                                   validator: (e) {
                                     if (e!.isEmpty) {
@@ -333,14 +324,14 @@ class AoPage extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(height: 16),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Nama ",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
-                                    const Text(
+                                    SizedBox(width: 5),
+                                    Text(
                                       "*",
                                       style: TextStyle(fontSize: 8),
                                     ),
@@ -351,8 +342,7 @@ class AoPage extends StatelessWidget {
                                 ),
                                 TypeAheadField<KaryawanModel>(
                                   controller: value.nm,
-                                  suggestionsCallback: (search) =>
-                                      value.getInqKaryawan(search),
+                                  suggestionsCallback: (search) => value.getInqKaryawan(search),
                                   builder: (context, controller, focusNode) {
                                     return TextField(
                                         controller: controller,
@@ -362,7 +352,7 @@ class AoPage extends StatelessWidget {
                                         decoration: InputDecoration(
                                           filled: value.editData,
                                           fillColor: Colors.grey[200],
-                                          border: OutlineInputBorder(),
+                                          border: const OutlineInputBorder(),
                                           labelText: 'Cari Akun',
                                         ));
                                   },
@@ -378,14 +368,14 @@ class AoPage extends StatelessWidget {
                                   },
                                 ),
                                 const SizedBox(height: 16),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Tipe Customer / Supplier",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
-                                    const Text(
+                                    SizedBox(width: 5),
+                                    Text(
                                       "*",
                                       style: TextStyle(fontSize: 8),
                                     ),
@@ -395,26 +385,23 @@ class AoPage extends StatelessWidget {
                                   height: 8,
                                 ),
                                 DropdownSearch<String>(
-                                  popupProps:
-                                      const PopupPropsMultiSelection.menu(
-                                    showSearchBox:
-                                        true, // Aktifkan fitur pencarian
+                                  popupProps: const PopupPropsMultiSelection.menu(
+                                    showSearchBox: true, // Aktifkan fitur pencarian
                                   ),
                                   selectedItem: value.penempatanModel,
                                   items: value.listPenempatan,
-                                  itemAsString: (e) => "${e}",
+                                  itemAsString: (e) => e,
                                   onChanged: (e) {
                                     value.pilihPenempatan(e!);
                                   },
-                                  dropdownDecoratorProps:
-                                      DropDownDecoratorProps(
-                                    baseStyle: TextStyle(fontSize: 16),
+                                  dropdownDecoratorProps: DropDownDecoratorProps(
+                                    baseStyle: const TextStyle(fontSize: 16),
                                     textAlignVertical: TextAlignVertical.center,
                                     dropdownSearchDecoration: InputDecoration(
                                       hintText: "Pilih Kantor / Karyawan",
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(8),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           width: 1,
                                           color: Colors.grey,
                                         ),
@@ -433,8 +420,7 @@ class AoPage extends StatelessWidget {
                                 ),
                                 value.editData
                                     ? Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
                                           const SizedBox(height: 16),
                                           ButtonSecondary(
@@ -452,13 +438,13 @@ class AoPage extends StatelessWidget {
                                           ),
                                         ],
                                       )
-                                    : SizedBox()
+                                    : const SizedBox()
                               ],
                             ),
                           ),
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -497,9 +483,7 @@ class DetailDataSource extends DataGridSource {
                         : data.golCust == "2"
                             ? "Supplier"
                             : "Customer / Supplier"),
-                DataGridCell(
-                    columnName: 'nonaktif',
-                    value: data.nonaktif == "Y" ? "Non-aktif" : "Aktif"),
+                DataGridCell(columnName: 'nonaktif', value: data.nonaktif == "Y" ? "Non-aktif" : "Aktif"),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
@@ -520,7 +504,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -529,10 +513,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),

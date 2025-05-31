@@ -25,8 +25,8 @@ class TransaksiHutangPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                padding: EdgeInsets.all(20),
-                child: Row(
+                padding: const EdgeInsets.all(20),
+                child: const Row(
                   children: [
                     Expanded(
                       child: Text(
@@ -40,38 +40,37 @@ class TransaksiHutangPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               Expanded(
                   child: ListView(
                 children: [
                   Container(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: 300,
-                              child: Text("No Invoice "),
+                              child: const Text("No Invoice "),
                             ),
-                            Container(
+                            SizedBox(
                               width: 16,
-                              child: Text(": "),
+                              child: const Text(": "),
                             ),
                             Expanded(
                               child: TypeAheadField<PiutangHutangModel>(
                                 controller: value.noInvoice,
-                                suggestionsCallback: (search) =>
-                                    value.cariInvoice(search),
+                                suggestionsCallback: (search) => value.cariInvoice(search),
                                 builder: (context, controller, focusNode) {
                                   return TextField(
                                       controller: controller,
                                       focusNode: focusNode,
                                       autofocus: true,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         border: OutlineInputBorder(),
                                         labelText: 'Cari Nomor Invoice',
                                       ));
@@ -89,30 +88,29 @@ class TransaksiHutangPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 24,
                         ),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: 300,
-                              child: Text("Customer / Supplier"),
+                              child: const Text("Customer / Supplier"),
                             ),
-                            Container(
+                            SizedBox(
                               width: 16,
-                              child: Text(": "),
+                              child: const Text(": "),
                             ),
                             Expanded(
                               child: TypeAheadField<CustomerSupplierModel>(
                                 controller: value.customer,
-                                suggestionsCallback: (search) =>
-                                    value.caricustomer(search),
+                                suggestionsCallback: (search) => value.caricustomer(search),
                                 builder: (context, controller, focusNode) {
                                   return TextField(
                                       controller: controller,
                                       focusNode: focusNode,
                                       autofocus: true,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         border: OutlineInputBorder(),
                                         labelText: 'Cari Customer / Supplier',
                                       ));
@@ -130,7 +128,7 @@ class TransaksiHutangPage extends StatelessWidget {
                           ],
                         ),
                         Container(
-                          margin: EdgeInsets.symmetric(vertical: 16),
+                          margin: const EdgeInsets.symmetric(vertical: 16),
                           height: 1,
                           color: Colors.grey,
                         ),
@@ -140,13 +138,13 @@ class TransaksiHutangPage extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: 300,
-                                        child: Text("Jenis Invoice "),
+                                        child: const Text("Jenis Invoice "),
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 16,
-                                        child: Text(": "),
+                                        child: const Text(": "),
                                       ),
                                       Expanded(
                                           child: TextFormField(
@@ -156,25 +154,24 @@ class TransaksiHutangPage extends StatelessWidget {
                                           fillColor: Colors.grey[300],
                                           filled: true,
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       )),
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 24,
                                   ),
                                   Row(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: 300,
-                                        child: Text("Tanggal Invoice "),
+                                        child: const Text("Tanggal Invoice "),
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 16,
-                                        child: Text(": "),
+                                        child: const Text(": "),
                                       ),
                                       Expanded(
                                           child: TextFormField(
@@ -184,49 +181,45 @@ class TransaksiHutangPage extends StatelessWidget {
                                           fillColor: Colors.grey[300],
                                           filled: true,
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       )),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 32,
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 300,
-                                        child: Text("Tanggal Pembayaran "),
+                                        child: const Text("Tanggal Pembayaran "),
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 16,
-                                        child: Text(": "),
+                                        child: const Text(": "),
                                       ),
                                       Expanded(
                                           child: TextFormField(
                                         decoration: InputDecoration(
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       )),
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 24,
                                   ),
                                   value.piutangHutangModel != null
-                                      ? value.piutangHutangModel!.bertahap ==
-                                              "Y"
+                                      ? value.piutangHutangModel!.bertahap == "Y"
                                           ? Row(
                                               children: [
-                                                Container(
+                                                SizedBox(
                                                   width: 300,
-                                                  child:
-                                                      Text("Nominal Tagihan"),
+                                                  child: const Text("Nominal Tagihan"),
                                                 ),
-                                                Container(
+                                                SizedBox(
                                                   width: 16,
-                                                  child: Text(": "),
+                                                  child: const Text(": "),
                                                 ),
                                                 Expanded(
                                                     child: TextFormField(
@@ -236,22 +229,20 @@ class TransaksiHutangPage extends StatelessWidget {
                                                     fillColor: Colors.grey[300],
                                                     filled: true,
                                                     border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
+                                                      borderRadius: BorderRadius.circular(6),
                                                     ),
                                                   ),
                                                 )),
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 32,
                                                 ),
-                                                Container(
+                                                SizedBox(
                                                   width: 300,
-                                                  child: Text("Tahapan Ke"),
+                                                  child: const Text("Tahapan Ke"),
                                                 ),
-                                                Container(
+                                                SizedBox(
                                                   width: 16,
-                                                  child: Text(": "),
+                                                  child: const Text(": "),
                                                 ),
                                                 Expanded(
                                                     child: TextFormField(
@@ -260,25 +251,17 @@ class TransaksiHutangPage extends StatelessWidget {
                                                   decoration: InputDecoration(
                                                     fillColor: Colors.grey[300],
                                                     filled: true,
-                                                    suffixIcon: value
-                                                                .piutangHutangModel !=
-                                                            null
-                                                        ? value.piutangHutangModel!
-                                                                    .bertahap ==
-                                                                "Y"
+                                                    suffixIcon: value.piutangHutangModel != null
+                                                        ? value.piutangHutangModel!.bertahap == "Y"
                                                             ? IconButton(
                                                                 onPressed: () {
-                                                                  value
-                                                                      .rincianBertahap();
+                                                                  value.rincianBertahap();
                                                                 },
-                                                                icon: Icon(Icons
-                                                                    .visibility))
-                                                            : SizedBox()
-                                                        : SizedBox(),
+                                                                icon: const Icon(Icons.visibility))
+                                                            : const SizedBox()
+                                                        : const SizedBox(),
                                                     border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
+                                                      borderRadius: BorderRadius.circular(6),
                                                     ),
                                                   ),
                                                 )),
@@ -286,14 +269,13 @@ class TransaksiHutangPage extends StatelessWidget {
                                             )
                                           : Row(
                                               children: [
-                                                Container(
+                                                SizedBox(
                                                   width: 300,
-                                                  child:
-                                                      Text("Nominal Tagihan"),
+                                                  child: const Text("Nominal Tagihan"),
                                                 ),
-                                                Container(
+                                                SizedBox(
                                                   width: 16,
-                                                  child: Text(": "),
+                                                  child: const Text(": "),
                                                 ),
                                                 Expanded(
                                                     child: TextFormField(
@@ -302,25 +284,17 @@ class TransaksiHutangPage extends StatelessWidget {
                                                   decoration: InputDecoration(
                                                     fillColor: Colors.grey[300],
                                                     filled: true,
-                                                    suffixIcon: value
-                                                                .piutangHutangModel !=
-                                                            null
-                                                        ? value.piutangHutangModel!
-                                                                    .bertahap ==
-                                                                "Y"
+                                                    suffixIcon: value.piutangHutangModel != null
+                                                        ? value.piutangHutangModel!.bertahap == "Y"
                                                             ? IconButton(
                                                                 onPressed: () {
-                                                                  value
-                                                                      .rincianBertahap();
+                                                                  value.rincianBertahap();
                                                                 },
-                                                                icon: Icon(Icons
-                                                                    .visibility))
-                                                            : SizedBox()
-                                                        : SizedBox(),
+                                                                icon: const Icon(Icons.visibility))
+                                                            : const SizedBox()
+                                                        : const SizedBox(),
                                                     border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
+                                                      borderRadius: BorderRadius.circular(6),
                                                     ),
                                                   ),
                                                 )),
@@ -328,13 +302,13 @@ class TransaksiHutangPage extends StatelessWidget {
                                             )
                                       : Row(
                                           children: [
-                                            Container(
+                                            SizedBox(
                                               width: 300,
-                                              child: Text("Nominal Tagihan"),
+                                              child: const Text("Nominal Tagihan"),
                                             ),
-                                            Container(
+                                            SizedBox(
                                               width: 16,
-                                              child: Text(": "),
+                                              child: const Text(": "),
                                             ),
                                             Expanded(
                                                 child: TextFormField(
@@ -343,41 +317,34 @@ class TransaksiHutangPage extends StatelessWidget {
                                               decoration: InputDecoration(
                                                 fillColor: Colors.grey[300],
                                                 filled: true,
-                                                suffixIcon: value
-                                                            .piutangHutangModel !=
-                                                        null
-                                                    ? value.piutangHutangModel!
-                                                                .bertahap ==
-                                                            "Y"
+                                                suffixIcon: value.piutangHutangModel != null
+                                                    ? value.piutangHutangModel!.bertahap == "Y"
                                                         ? IconButton(
                                                             onPressed: () {
-                                                              value
-                                                                  .rincianBertahap();
+                                                              value.rincianBertahap();
                                                             },
-                                                            icon: Icon(Icons
-                                                                .visibility))
-                                                        : SizedBox()
-                                                    : SizedBox(),
+                                                            icon: const Icon(Icons.visibility))
+                                                        : const SizedBox()
+                                                    : const SizedBox(),
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
                                               ),
                                             )),
                                           ],
                                         ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 24,
                                   ),
                                   Row(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: 300,
-                                        child: Text("Nominal Pembayaran"),
+                                        child: const Text("Nominal Pembayaran"),
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 16,
-                                        child: Text(": "),
+                                        child: const Text(": "),
                                       ),
                                       Expanded(
                                           child: TextFormField(
@@ -386,79 +353,73 @@ class TransaksiHutangPage extends StatelessWidget {
                                         },
                                         controller: value.nominal,
                                         inputFormatters: [
-                                          FilteringTextInputFormatter
-                                              .digitsOnly,
+                                          FilteringTextInputFormatter.digitsOnly,
                                           CurrencyInputFormatter(),
                                         ],
                                         decoration: InputDecoration(
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       )),
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 24,
                                   ),
                                   Row(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: 300,
-                                        child: Text("Sisa Pembayaran"),
+                                        child: const Text("Sisa Pembayaran"),
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 16,
-                                        child: Text(": "),
+                                        child: const Text(": "),
                                       ),
                                       Expanded(
                                           child: TextFormField(
                                         readOnly: true,
                                         controller: value.sisa,
                                         inputFormatters: [
-                                          FilteringTextInputFormatter
-                                              .digitsOnly,
+                                          FilteringTextInputFormatter.digitsOnly,
                                           CurrencyInputFormatter(),
                                         ],
                                         decoration: InputDecoration(
                                           fillColor: Colors.grey[300],
                                           filled: true,
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       )),
                                     ],
                                   ),
                                   Container(
-                                    margin: EdgeInsets.symmetric(vertical: 16),
+                                    margin: const EdgeInsets.symmetric(vertical: 16),
                                     height: 1,
                                     color: Colors.grey,
                                   ),
                                   Row(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: 300,
-                                        child: Text("Akun Debet"),
+                                        child: const Text("Akun Debet"),
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 16,
-                                        child: Text(": "),
+                                        child: const Text(": "),
                                       ),
                                       Expanded(
                                         child: TypeAheadField<NeracaItemModel>(
                                           controller: value.namaSbbDebet,
-                                          suggestionsCallback: (search) =>
-                                              value.cariAkun(search),
-                                          builder:
-                                              (context, controller, focusNode) {
+                                          suggestionsCallback: (search) => value.cariAkun(search),
+                                          builder: (context, controller, focusNode) {
                                             return TextField(
                                                 controller: controller,
                                                 focusNode: focusNode,
                                                 autofocus: true,
-                                                decoration: InputDecoration(
+                                                decoration: const InputDecoration(
                                                   border: OutlineInputBorder(),
                                                   labelText: 'Cari Akun Debet',
                                                 ));
@@ -474,47 +435,44 @@ class TransaksiHutangPage extends StatelessWidget {
                                           },
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 16,
                                       ),
-                                      Container(
+                                      SizedBox(
                                           width: 150,
                                           child: TextFormField(
                                             controller: value.noSbbDebet,
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           )),
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 24,
                                   ),
                                   Row(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: 300,
-                                        child: Text("Akun Kredit"),
+                                        child: const Text("Akun Kredit"),
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 16,
-                                        child: Text(": "),
+                                        child: const Text(": "),
                                       ),
                                       Expanded(
                                         child: TypeAheadField<NeracaItemModel>(
                                           controller: value.namaSbbKredit,
-                                          suggestionsCallback: (search) =>
-                                              value.cariAkun(search),
-                                          builder:
-                                              (context, controller, focusNode) {
+                                          suggestionsCallback: (search) => value.cariAkun(search),
+                                          builder: (context, controller, focusNode) {
                                             return TextField(
                                                 controller: controller,
                                                 focusNode: focusNode,
                                                 autofocus: true,
-                                                decoration: InputDecoration(
+                                                decoration: const InputDecoration(
                                                   border: OutlineInputBorder(),
                                                   labelText: 'Cari Akun Kredit',
                                                 ));
@@ -530,47 +488,44 @@ class TransaksiHutangPage extends StatelessWidget {
                                           },
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 16,
                                       ),
-                                      Container(
+                                      SizedBox(
                                           width: 150,
                                           child: TextFormField(
                                             controller: value.noSbbKredit,
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           )),
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 24,
                                   ),
                                   Row(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: 300,
-                                        child: Text("Akun Sisa Pembayaran"),
+                                        child: const Text("Akun Sisa Pembayaran"),
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 16,
-                                        child: Text(": "),
+                                        child: const Text(": "),
                                       ),
                                       Expanded(
                                         child: TypeAheadField<NeracaItemModel>(
                                           controller: value.namaSbbDebet,
-                                          suggestionsCallback: (search) =>
-                                              value.cariAkun(search),
-                                          builder:
-                                              (context, controller, focusNode) {
+                                          suggestionsCallback: (search) => value.cariAkun(search),
+                                          builder: (context, controller, focusNode) {
                                             return TextField(
                                                 controller: controller,
                                                 focusNode: focusNode,
                                                 autofocus: true,
-                                                decoration: InputDecoration(
+                                                decoration: const InputDecoration(
                                                   border: OutlineInputBorder(),
                                                   labelText: 'Cari Akun Sisa Pembayaran',
                                                 ));
@@ -586,23 +541,22 @@ class TransaksiHutangPage extends StatelessWidget {
                                           },
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 16,
                                       ),
-                                      Container(
+                                      SizedBox(
                                           width: 150,
                                           child: TextFormField(
                                             controller: value.noSbbDebet,
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           )),
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 24,
                                   ),
                                 ],
@@ -611,33 +565,31 @@ class TransaksiHutangPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.all(20),
+                                    padding: const EdgeInsets.all(20),
                                     decoration: BoxDecoration(
                                         border: Border.all(
                                       width: 1,
                                       color: Colors.grey,
                                     )),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Hutang",
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 16,
                                         ),
                                         Row(
                                           children: [
                                             Container(
                                               width: 26,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "No. ",
                                                 style: TextStyle(
                                                   fontSize: 12,
@@ -646,9 +598,8 @@ class TransaksiHutangPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 80,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "Status",
                                                 style: TextStyle(
                                                   fontSize: 12,
@@ -657,9 +608,8 @@ class TransaksiHutangPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 120,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "No. Invoice",
                                                 style: TextStyle(
                                                   fontSize: 12,
@@ -668,9 +618,8 @@ class TransaksiHutangPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 100,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "Tgl. Invoice",
                                                 style: TextStyle(
                                                   fontSize: 12,
@@ -679,9 +628,8 @@ class TransaksiHutangPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 120,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "Nominal Tagihan",
                                                 textAlign: TextAlign.end,
                                                 style: TextStyle(
@@ -691,9 +639,8 @@ class TransaksiHutangPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 120,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "Nominal Bayar",
                                                 textAlign: TextAlign.end,
                                                 style: TextStyle(
@@ -703,9 +650,8 @@ class TransaksiHutangPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 120,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "Sisa",
                                                 textAlign: TextAlign.end,
                                                 style: TextStyle(
@@ -715,9 +661,8 @@ class TransaksiHutangPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 80,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "Bertahap",
                                                 style: TextStyle(
                                                   fontSize: 12,
@@ -726,9 +671,8 @@ class TransaksiHutangPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 120,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "Tgl. Jatuh Tempo",
                                                 style: TextStyle(
                                                   fontSize: 12,
@@ -738,39 +682,19 @@ class TransaksiHutangPage extends StatelessWidget {
                                           ],
                                         ),
                                         Container(
-                                          margin:
-                                              EdgeInsets.symmetric(vertical: 8),
+                                          margin: const EdgeInsets.symmetric(vertical: 8),
                                           height: 1,
                                           color: Colors.grey,
                                         ),
                                         ListView.builder(
                                             shrinkWrap: true,
-                                            physics: ClampingScrollPhysics(),
-                                            itemCount: value.list
-                                                .where((e) =>
-                                                    e.nmSif
-                                                        .toLowerCase()
-                                                        .contains(value
-                                                            .customerSupplierModel!
-                                                            .nmSif
-                                                            .toLowerCase()) &&
-                                                    e.jnsInvoice == "1")
-                                                .length,
+                                            physics: const ClampingScrollPhysics(),
+                                            itemCount: value.list.where((e) => e.nmSif.toLowerCase().contains(value.customerSupplierModel!.nmSif.toLowerCase()) && e.jnsInvoice == "1").length,
                                             itemBuilder: (context, b) {
-                                              final data = value.list
-                                                  .where((e) =>
-                                                      e.nmSif
-                                                          .toLowerCase()
-                                                          .contains(value
-                                                              .customerSupplierModel!
-                                                              .nmSif
-                                                              .toLowerCase()) &&
-                                                      e.jnsInvoice == "1")
-                                                  .toList()[b];
+                                              final data = value.list.where((e) => e.nmSif.toLowerCase().contains(value.customerSupplierModel!.nmSif.toLowerCase()) && e.jnsInvoice == "1").toList()[b];
                                               var no = b + 1;
                                               return Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
                                                   InkWell(
                                                     onTap: () {
@@ -780,116 +704,93 @@ class TransaksiHutangPage extends StatelessWidget {
                                                       children: [
                                                         Container(
                                                           width: 26,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            "${no}. ",
-                                                            style: TextStyle(
+                                                            "$no. ",
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
                                                           width: 80,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            "${data.statusInvoice == "A" ? "Aktif" : "Macet"}",
-                                                            style: TextStyle(
+                                                            data.statusInvoice == "A" ? "Aktif" : "Macet",
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
                                                           width: 120,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            "${data.noInvoice}",
-                                                            style: TextStyle(
+                                                            data.noInvoice,
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
                                                           width: 100,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            "${DateFormat('dd MMM y').format(DateTime.parse(data.tglInvoice))}",
-                                                            style: TextStyle(
+                                                            DateFormat('dd MMM y').format(DateTime.parse(data.tglInvoice)),
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
                                                           width: 120,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            "${FormatCurrency.oCcy.format(int.parse(data.nilaiInvoice))}",
-                                                            textAlign:
-                                                                TextAlign.end,
-                                                            style: TextStyle(
+                                                            FormatCurrency.oCcy.format(int.parse(data.nilaiInvoice)),
+                                                            textAlign: TextAlign.end,
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
                                                           width: 120,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            "${FormatCurrency.oCcy.format(int.parse(data.nilaiBayar))}",
-                                                            textAlign:
-                                                                TextAlign.end,
-                                                            style: TextStyle(
+                                                            FormatCurrency.oCcy.format(int.parse(data.nilaiBayar)),
+                                                            textAlign: TextAlign.end,
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
                                                           width: 120,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            "${FormatCurrency.oCcy.format(int.parse(data.nilaiInvoice) - int.parse(data.nilaiBayar))}",
-                                                            textAlign:
-                                                                TextAlign.end,
-                                                            style: TextStyle(
+                                                            FormatCurrency.oCcy.format(int.parse(data.nilaiInvoice) - int.parse(data.nilaiBayar)),
+                                                            textAlign: TextAlign.end,
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
                                                           width: 80,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            "${data.bertahap}",
-                                                            style: TextStyle(
+                                                            data.bertahap,
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
                                                           width: 120,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            data.bertahap == "N"
-                                                                ? "${DateFormat('dd MM y').format(DateTime.parse(data.tglJtTempo))}"
-                                                                : "",
-                                                            style: TextStyle(
+                                                            data.bertahap == "N" ? DateFormat('dd MM y').format(DateTime.parse(data.tglJtTempo)) : "",
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
@@ -897,7 +798,7 @@ class TransaksiHutangPage extends StatelessWidget {
                                                       ],
                                                     ),
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     height: 16,
                                                   )
                                                 ],
@@ -906,37 +807,35 @@ class TransaksiHutangPage extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 16,
                                   ),
                                   Container(
-                                    padding: EdgeInsets.all(20),
+                                    padding: const EdgeInsets.all(20),
                                     decoration: BoxDecoration(
                                         border: Border.all(
                                       width: 1,
                                       color: Colors.grey,
                                     )),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Piutang",
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 16,
                                         ),
                                         Row(
                                           children: [
                                             Container(
                                               width: 26,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "No. ",
                                                 style: TextStyle(
                                                   fontSize: 12,
@@ -945,9 +844,8 @@ class TransaksiHutangPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 80,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "Status",
                                                 style: TextStyle(
                                                   fontSize: 12,
@@ -956,9 +854,8 @@ class TransaksiHutangPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 120,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "No. Invoice",
                                                 style: TextStyle(
                                                   fontSize: 12,
@@ -967,9 +864,8 @@ class TransaksiHutangPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 100,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "Tgl. Invoice",
                                                 style: TextStyle(
                                                   fontSize: 12,
@@ -978,9 +874,8 @@ class TransaksiHutangPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 120,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "Nominal Tagihan",
                                                 textAlign: TextAlign.end,
                                                 style: TextStyle(
@@ -990,9 +885,8 @@ class TransaksiHutangPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 120,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "Nominal Bayar",
                                                 textAlign: TextAlign.end,
                                                 style: TextStyle(
@@ -1002,9 +896,8 @@ class TransaksiHutangPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 120,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "Sisa",
                                                 textAlign: TextAlign.end,
                                                 style: TextStyle(
@@ -1014,9 +907,8 @@ class TransaksiHutangPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 80,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "Bertahap",
                                                 style: TextStyle(
                                                   fontSize: 12,
@@ -1025,9 +917,8 @@ class TransaksiHutangPage extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 120,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text(
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text(
                                                 "Tgl. Jatuh Tempo",
                                                 style: TextStyle(
                                                   fontSize: 12,
@@ -1037,39 +928,19 @@ class TransaksiHutangPage extends StatelessWidget {
                                           ],
                                         ),
                                         Container(
-                                          margin:
-                                              EdgeInsets.symmetric(vertical: 8),
+                                          margin: const EdgeInsets.symmetric(vertical: 8),
                                           height: 1,
                                           color: Colors.grey,
                                         ),
                                         ListView.builder(
                                             shrinkWrap: true,
-                                            physics: ClampingScrollPhysics(),
-                                            itemCount: value.list
-                                                .where((e) =>
-                                                    e.nmSif
-                                                        .toLowerCase()
-                                                        .contains(value
-                                                            .customerSupplierModel!
-                                                            .nmSif
-                                                            .toLowerCase()) &&
-                                                    e.jnsInvoice == "2")
-                                                .length,
+                                            physics: const ClampingScrollPhysics(),
+                                            itemCount: value.list.where((e) => e.nmSif.toLowerCase().contains(value.customerSupplierModel!.nmSif.toLowerCase()) && e.jnsInvoice == "2").length,
                                             itemBuilder: (context, b) {
-                                              final data = value.list
-                                                  .where((e) =>
-                                                      e.nmSif
-                                                          .toLowerCase()
-                                                          .contains(value
-                                                              .customerSupplierModel!
-                                                              .nmSif
-                                                              .toLowerCase()) &&
-                                                      e.jnsInvoice == "2")
-                                                  .toList()[b];
+                                              final data = value.list.where((e) => e.nmSif.toLowerCase().contains(value.customerSupplierModel!.nmSif.toLowerCase()) && e.jnsInvoice == "2").toList()[b];
                                               var no = b + 1;
                                               return Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
                                                   InkWell(
                                                     onTap: () {
@@ -1079,116 +950,93 @@ class TransaksiHutangPage extends StatelessWidget {
                                                       children: [
                                                         Container(
                                                           width: 26,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            "${no}. ",
-                                                            style: TextStyle(
+                                                            "$no. ",
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
                                                           width: 80,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            "${data.statusInvoice == "A" ? "Aktif" : "Macet"}",
-                                                            style: TextStyle(
+                                                            data.statusInvoice == "A" ? "Aktif" : "Macet",
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
                                                           width: 120,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            "${data.noInvoice}",
-                                                            style: TextStyle(
+                                                            data.noInvoice,
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
                                                           width: 100,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            "${DateFormat('dd MMM y').format(DateTime.parse(data.tglInvoice))}",
-                                                            style: TextStyle(
+                                                            DateFormat('dd MMM y').format(DateTime.parse(data.tglInvoice)),
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
                                                           width: 120,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            "${FormatCurrency.oCcy.format(int.parse(data.nilaiInvoice))}",
-                                                            textAlign:
-                                                                TextAlign.end,
-                                                            style: TextStyle(
+                                                            FormatCurrency.oCcy.format(int.parse(data.nilaiInvoice)),
+                                                            textAlign: TextAlign.end,
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
                                                           width: 120,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            "${FormatCurrency.oCcy.format(int.parse(data.nilaiBayar))}",
-                                                            textAlign:
-                                                                TextAlign.end,
-                                                            style: TextStyle(
+                                                            FormatCurrency.oCcy.format(int.parse(data.nilaiBayar)),
+                                                            textAlign: TextAlign.end,
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
                                                           width: 120,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            "${FormatCurrency.oCcy.format(int.parse(data.nilaiInvoice) - int.parse(data.nilaiBayar))}",
-                                                            textAlign:
-                                                                TextAlign.end,
-                                                            style: TextStyle(
+                                                            FormatCurrency.oCcy.format(int.parse(data.nilaiInvoice) - int.parse(data.nilaiBayar)),
+                                                            textAlign: TextAlign.end,
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
                                                           width: 80,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            "${data.bertahap}",
-                                                            style: TextStyle(
+                                                            data.bertahap,
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Container(
                                                           width: 120,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 16),
+                                                          margin: const EdgeInsets.only(right: 16),
                                                           child: Text(
-                                                            data.bertahap == "N"
-                                                                ? "${DateFormat('dd MM y').format(DateTime.parse(data.tglJtTempo))}"
-                                                                : "",
-                                                            style: TextStyle(
+                                                            data.bertahap == "N" ? DateFormat('dd MM y').format(DateTime.parse(data.tglJtTempo)) : "",
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
@@ -1196,7 +1044,7 @@ class TransaksiHutangPage extends StatelessWidget {
                                                       ],
                                                     ),
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     height: 16,
                                                   )
                                                 ],
@@ -1205,7 +1053,7 @@ class TransaksiHutangPage extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 16,
                                   )
                                 ],
@@ -1216,13 +1064,11 @@ class TransaksiHutangPage extends StatelessWidget {
                 ],
               )),
               Container(
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                    border:
-                        Border(top: BorderSide(width: 1, color: Colors.grey))),
+                padding: const EdgeInsets.all(20),
+                decoration: const BoxDecoration(border: Border(top: BorderSide(width: 1, color: Colors.grey))),
                 child: Row(
                   children: [
-                    Spacer(),
+                    const Spacer(),
                     ButtonPrimary(
                       onTap: () {},
                       name: "Simpan",

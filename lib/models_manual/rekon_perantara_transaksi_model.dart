@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:quiver/core.dart';
 
 @immutable
 class RekonPerantaraTransaksiModel {
@@ -41,24 +40,7 @@ class RekonPerantaraTransaksiModel {
   final String kodeAoCredit;
   double? sisaSaldo;
 
-  factory RekonPerantaraTransaksiModel.fromJson(Map<String, dynamic> json) =>
-      RekonPerantaraTransaksiModel(
-          tglTrans: json['tgl_trans'].toString(),
-          transUser: json['trans_user'].toString(),
-          kodeTrans: json['kode_trans'].toString(),
-          debetAcc: json['debet_acc'].toString(),
-          namaDebet: json['nama_debet'].toString(),
-          creditAcc: json['credit_acc'].toString(),
-          namaCredit: json['nama_credit'].toString(),
-          nomorDok: json['nomor_dok'].toString(),
-          nomorRef: json['nomor_ref'].toString(),
-          nominal: (json['nominal'] as num).toDouble(),
-          keterangan: json['keterangan'].toString(),
-          kodePt: json['kode_pt'].toString(),
-          kodeKantor: json['kode_kantor'].toString(),
-          kodeInduk: json['kode_induk'].toString(),
-          kodeAoDebet: json['kode_ao_debet'].toString(),
-          kodeAoCredit: json['kode_ao_credit'].toString());
+  factory RekonPerantaraTransaksiModel.fromJson(Map<String, dynamic> json) => RekonPerantaraTransaksiModel(tglTrans: json['tgl_trans'].toString(), transUser: json['trans_user'].toString(), kodeTrans: json['kode_trans'].toString(), debetAcc: json['debet_acc'].toString(), namaDebet: json['nama_debet'].toString(), creditAcc: json['credit_acc'].toString(), namaCredit: json['nama_credit'].toString(), nomorDok: json['nomor_dok'].toString(), nomorRef: json['nomor_ref'].toString(), nominal: (json['nominal'] as num).toDouble(), keterangan: json['keterangan'].toString(), kodePt: json['kode_pt'].toString(), kodeKantor: json['kode_kantor'].toString(), kodeInduk: json['kode_induk'].toString(), kodeAoDebet: json['kode_ao_debet'].toString(), kodeAoCredit: json['kode_ao_credit'].toString());
 
   Map<String, dynamic> toJson() => {
         'tgl_trans': tglTrans,
@@ -80,42 +62,9 @@ class RekonPerantaraTransaksiModel {
         'kode_ao_credit': kodeAoCredit
       };
 
-  RekonPerantaraTransaksiModel clone() => RekonPerantaraTransaksiModel(
-      tglTrans: tglTrans,
-      transUser: transUser,
-      kodeTrans: kodeTrans,
-      debetAcc: debetAcc,
-      namaDebet: namaDebet,
-      creditAcc: creditAcc,
-      namaCredit: namaCredit,
-      nomorDok: nomorDok,
-      nomorRef: nomorRef,
-      nominal: nominal,
-      keterangan: keterangan,
-      kodePt: kodePt,
-      kodeKantor: kodeKantor,
-      kodeInduk: kodeInduk,
-      kodeAoDebet: kodeAoDebet,
-      kodeAoCredit: kodeAoCredit);
+  RekonPerantaraTransaksiModel clone() => RekonPerantaraTransaksiModel(tglTrans: tglTrans, transUser: transUser, kodeTrans: kodeTrans, debetAcc: debetAcc, namaDebet: namaDebet, creditAcc: creditAcc, namaCredit: namaCredit, nomorDok: nomorDok, nomorRef: nomorRef, nominal: nominal, keterangan: keterangan, kodePt: kodePt, kodeKantor: kodeKantor, kodeInduk: kodeInduk, kodeAoDebet: kodeAoDebet, kodeAoCredit: kodeAoCredit);
 
-  RekonPerantaraTransaksiModel copyWith(
-          {String? tglTrans,
-          String? transUser,
-          String? kodeTrans,
-          String? debetAcc,
-          String? namaDebet,
-          String? creditAcc,
-          String? namaCredit,
-          String? nomorDok,
-          String? nomorRef,
-          double? nominal,
-          String? keterangan,
-          String? kodePt,
-          String? kodeKantor,
-          String? kodeInduk,
-          String? kodeAoDebet,
-          String? kodeAoCredit}) =>
-      RekonPerantaraTransaksiModel(
+  RekonPerantaraTransaksiModel copyWith({String? tglTrans, String? transUser, String? kodeTrans, String? debetAcc, String? namaDebet, String? creditAcc, String? namaCredit, String? nomorDok, String? nomorRef, double? nominal, String? keterangan, String? kodePt, String? kodeKantor, String? kodeInduk, String? kodeAoDebet, String? kodeAoCredit}) => RekonPerantaraTransaksiModel(
         tglTrans: tglTrans ?? this.tglTrans,
         transUser: transUser ?? this.transUser,
         kodeTrans: kodeTrans ?? this.kodeTrans,
@@ -135,42 +84,8 @@ class RekonPerantaraTransaksiModel {
       );
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is RekonPerantaraTransaksiModel &&
-          tglTrans == other.tglTrans &&
-          transUser == other.transUser &&
-          kodeTrans == other.kodeTrans &&
-          debetAcc == other.debetAcc &&
-          namaDebet == other.namaDebet &&
-          creditAcc == other.creditAcc &&
-          namaCredit == other.namaCredit &&
-          nomorDok == other.nomorDok &&
-          nomorRef == other.nomorRef &&
-          nominal == other.nominal &&
-          keterangan == other.keterangan &&
-          kodePt == other.kodePt &&
-          kodeKantor == other.kodeKantor &&
-          kodeInduk == other.kodeInduk &&
-          kodeAoDebet == other.kodeAoDebet &&
-          kodeAoCredit == other.kodeAoCredit;
+  bool operator ==(Object other) => identical(this, other) || other is RekonPerantaraTransaksiModel && tglTrans == other.tglTrans && transUser == other.transUser && kodeTrans == other.kodeTrans && debetAcc == other.debetAcc && namaDebet == other.namaDebet && creditAcc == other.creditAcc && namaCredit == other.namaCredit && nomorDok == other.nomorDok && nomorRef == other.nomorRef && nominal == other.nominal && keterangan == other.keterangan && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && kodeAoDebet == other.kodeAoDebet && kodeAoCredit == other.kodeAoCredit;
 
   @override
-  int get hashCode =>
-      tglTrans.hashCode ^
-      transUser.hashCode ^
-      kodeTrans.hashCode ^
-      debetAcc.hashCode ^
-      namaDebet.hashCode ^
-      creditAcc.hashCode ^
-      namaCredit.hashCode ^
-      nomorDok.hashCode ^
-      nomorRef.hashCode ^
-      nominal.hashCode ^
-      keterangan.hashCode ^
-      kodePt.hashCode ^
-      kodeKantor.hashCode ^
-      kodeInduk.hashCode ^
-      kodeAoDebet.hashCode ^
-      kodeAoCredit.hashCode;
+  int get hashCode => tglTrans.hashCode ^ transUser.hashCode ^ kodeTrans.hashCode ^ debetAcc.hashCode ^ namaDebet.hashCode ^ creditAcc.hashCode ^ namaCredit.hashCode ^ nomorDok.hashCode ^ nomorRef.hashCode ^ nominal.hashCode ^ keterangan.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ kodeAoDebet.hashCode ^ kodeAoCredit.hashCode;
 }

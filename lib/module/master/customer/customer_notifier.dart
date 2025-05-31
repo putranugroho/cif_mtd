@@ -25,9 +25,10 @@ class CustomerNotifier extends ChangeNotifier {
     isLoading = true;
     listAoModel.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listAoModel.add(AoModel.fromJson(i));
@@ -46,9 +47,10 @@ class CustomerNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getCustomer(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getCustomer(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(CustomerSupplierModel.fromJson(i));
@@ -204,7 +206,7 @@ class CustomerNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -212,11 +214,11 @@ class CustomerNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin menghapus ${customerSupplierModel!.nmSif}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -228,7 +230,7 @@ class CustomerNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -253,8 +255,7 @@ class CustomerNotifier extends ChangeNotifier {
     var data = {
       "id": customerSupplierModel!.id,
     };
-    Setuprepository.setup(token, NetworkURL.deleteCustomer(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.deleteCustomer(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getCustomers();
@@ -272,20 +273,8 @@ class CustomerNotifier extends ChangeNotifier {
     DialogCustom().showLoading(context);
 
     customerSupplierModel = list.where((e) => e.id == int.parse(id)).first;
-    aoModel = listAoModel
-            .where((e) => e.kode == customerSupplierModel!.kodeAoCustomer)
-            .isNotEmpty
-        ? listAoModel
-            .where((e) => e.kode == customerSupplierModel!.kodeAoCustomer)
-            .first
-        : null;
-    aoModelKRedit = listAoModel
-            .where((e) => e.kode == customerSupplierModel!.kodeAoSupplier)
-            .isNotEmpty
-        ? listAoModel
-            .where((e) => e.kode == customerSupplierModel!.kodeAoSupplier)
-            .first
-        : null;
+    aoModel = listAoModel.where((e) => e.kode == customerSupplierModel!.kodeAoCustomer).isNotEmpty ? listAoModel.where((e) => e.kode == customerSupplierModel!.kodeAoCustomer).first : null;
+    aoModelKRedit = listAoModel.where((e) => e.kode == customerSupplierModel!.kodeAoSupplier).isNotEmpty ? listAoModel.where((e) => e.kode == customerSupplierModel!.kodeAoSupplier).first : null;
     noSif.text = customerSupplierModel!.noSif;
     namaSif.text = customerSupplierModel!.nmSif;
     golCust = customerSupplierModel!.golCust == "1"
@@ -295,50 +284,29 @@ class CustomerNotifier extends ChangeNotifier {
             : "Customer dan Supplier";
     bidangUsaha.text = customerSupplierModel!.bidangUsaha;
     alamat.text = customerSupplierModel!.alamat;
-    provinsiModel = listProvinsi
-        .where((e) => e.name == customerSupplierModel!.provinsi)
-        .first;
+    provinsiModel = listProvinsi.where((e) => e.name == customerSupplierModel!.provinsi).first;
     listKota.clear();
     notifyListeners();
-    WilayahRepository.getKota(NetworkURL.getKota(provinsiModel!.id.toString()))
-        .then((value) {
+    WilayahRepository.getKota(NetworkURL.getKota(provinsiModel!.id.toString())).then((value) {
       for (var i = 0; i < value.length; i++) {
-        listKota.add(KotaModel(
-            id: value[i]['id'],
-            name: value[i]['name'],
-            provinceId: provinsiModel!.id));
+        listKota.add(KotaModel(id: value[i]['id'], name: value[i]['name'], provinceId: provinsiModel!.id));
       }
-      kotaModal =
-          listKota.where((e) => e.name == customerSupplierModel!.kota).first;
+      kotaModal = listKota.where((e) => e.name == customerSupplierModel!.kota).first;
       listKecamatan.clear();
       notifyListeners();
-      WilayahRepository.getKota(
-              NetworkURL.getKecamatan(kotaModal!.id.toString()))
-          .then((valuess) {
+      WilayahRepository.getKota(NetworkURL.getKecamatan(kotaModal!.id.toString())).then((valuess) {
         for (var i = 0; i < valuess.length; i++) {
-          listKecamatan.add(KecamatanModel(
-              id: valuess[i]['id'],
-              name: valuess[i]['name'],
-              regencyId: kotaModal!.id));
+          listKecamatan.add(KecamatanModel(id: valuess[i]['id'], name: valuess[i]['name'], regencyId: kotaModal!.id));
         }
-        kecamatanModel = listKecamatan
-            .where((e) => e.name == customerSupplierModel!.kecamatan)
-            .first;
+        kecamatanModel = listKecamatan.where((e) => e.name == customerSupplierModel!.kecamatan).first;
         listKelurahan.clear();
         notifyListeners();
-        WilayahRepository.getKelurahan(
-                NetworkURL.getKelurahan(kecamatanModel!.id))
-            .then((e) {
+        WilayahRepository.getKelurahan(NetworkURL.getKelurahan(kecamatanModel!.id)).then((e) {
           Navigator.pop(context);
           for (var i = 0; i < e.length; i++) {
-            listKelurahan.add(KelurahanModel(
-                id: e[i]['id'],
-                name: e[i]['name'],
-                districtId: kecamatanModel!.id));
+            listKelurahan.add(KelurahanModel(id: e[i]['id'], name: e[i]['name'], districtId: kecamatanModel!.id));
           }
-          kelurahanModel = listKelurahan
-              .where((e) => e.name == customerSupplierModel!.kelurahan)
-              .first;
+          kelurahanModel = listKelurahan.where((e) => e.name == customerSupplierModel!.kelurahan).first;
           dialog = true;
           editData = true;
           notifyListeners();
@@ -425,8 +393,7 @@ class CustomerNotifier extends ChangeNotifier {
   Future getProvinsi() async {
     WilayahRepository.getProvinsi(NetworkURL.getProvinsi()).then((value) {
       for (var i = 0; i < value.length; i++) {
-        listProvinsi.add(ProvinsiModel(
-            id: value[i]['id'].toString(), name: value[i]['name']));
+        listProvinsi.add(ProvinsiModel(id: value[i]['id'].toString(), name: value[i]['name']));
       }
       notifyListeners();
     });
@@ -447,13 +414,9 @@ class CustomerNotifier extends ChangeNotifier {
   getKota() async {
     listKota.clear();
     notifyListeners();
-    WilayahRepository.getKota(NetworkURL.getKota(provinsiModel!.id.toString()))
-        .then((value) {
+    WilayahRepository.getKota(NetworkURL.getKota(provinsiModel!.id.toString())).then((value) {
       for (var i = 0; i < value.length; i++) {
-        listKota.add(KotaModel(
-            id: value[i]['id'],
-            name: value[i]['name'],
-            provinceId: provinsiModel!.id));
+        listKota.add(KotaModel(id: value[i]['id'], name: value[i]['name'], provinceId: provinsiModel!.id));
       }
 
       notifyListeners();
@@ -473,13 +436,9 @@ class CustomerNotifier extends ChangeNotifier {
   getKecamatan() async {
     listKecamatan.clear();
     notifyListeners();
-    WilayahRepository.getKota(NetworkURL.getKecamatan(kotaModal!.id.toString()))
-        .then((value) {
+    WilayahRepository.getKota(NetworkURL.getKecamatan(kotaModal!.id.toString())).then((value) {
       for (var i = 0; i < value.length; i++) {
-        listKecamatan.add(KecamatanModel(
-            id: value[i]['id'],
-            name: value[i]['name'],
-            regencyId: kotaModal!.id));
+        listKecamatan.add(KecamatanModel(id: value[i]['id'], name: value[i]['name'], regencyId: kotaModal!.id));
       }
 
       notifyListeners();
@@ -497,13 +456,9 @@ class CustomerNotifier extends ChangeNotifier {
   getKelurahan() async {
     listKelurahan.clear();
     notifyListeners();
-    WilayahRepository.getKelurahan(NetworkURL.getKelurahan(kecamatanModel!.id))
-        .then((value) {
+    WilayahRepository.getKelurahan(NetworkURL.getKelurahan(kecamatanModel!.id)).then((value) {
       for (var i = 0; i < value.length; i++) {
-        listKelurahan.add(KelurahanModel(
-            id: value[i]['id'],
-            name: value[i]['name'],
-            districtId: kecamatanModel!.id));
+        listKelurahan.add(KelurahanModel(id: value[i]['id'], name: value[i]['name'], districtId: kecamatanModel!.id));
       }
       notifyListeners();
     });

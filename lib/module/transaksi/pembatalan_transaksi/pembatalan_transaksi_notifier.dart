@@ -72,8 +72,7 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglVal = pickedendDate;
-      tglValuta.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglValuta.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -111,8 +110,7 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglJual = pickedendDate;
-      tglPenjualan.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglPenjualan.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -147,17 +145,15 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
         // print(transaksiModel!.inptgljam);
 
         var data = {
-          "rrn": "${transaksiModel!.rrn}",
-          "otoruser": "${users!.namauser}",
+          "rrn": transaksiModel!.rrn,
+          "otoruser": users!.namauser,
           "keterangan_otorisasi": "Pembatalan transaksi ${transaksiModel!.rrn}",
-          "alasan": "${alasan.text}",
-          "otorinput":
-              "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
-          "kode_pt": "${transaksiModel!.kodePt}",
+          "alasan": alasan.text,
+          "otorinput": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
+          "kode_pt": transaksiModel!.kodePt,
         };
         print(jsonEncode(data));
-        Setuprepository.setup(token, NetworkURL.batal(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.batal(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['code'] == "000") {
             dialog = false;
@@ -180,8 +176,7 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
     noDok.text = transaksiModel!.nomorDok;
     noRef.text = transaksiModel!.nomorRef;
     tglTransaksi.text = transaksiModel!.tglVal;
-    nominal.text =
-        "Rp ${FormatCurrency.oCcyDecimal.format(double.parse(transaksiModel!.nominal))}";
+    nominal.text = "Rp ${FormatCurrency.oCcyDecimal.format(double.parse(transaksiModel!.nominal))}";
     akunDebit.text = transaksiModel!.namaDebet;
     sbbDebit.text = transaksiModel!.debetAcc;
     sbbKredit.text = transaksiModel!.creditAcc;
@@ -214,49 +209,70 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
               "general": {
                 "batch": null,
                 "status_transaksi": "trx_success",
-                "kode_pt": "${users!.kodePt}",
-                "kode_kantor": "${users!.kodeKantor}",
-                "kode_induk": "${users!.kodeInduk}",
+                "kode_pt": users!.kodePt,
+                "kode_kantor": users!.kodeKantor,
+                "kode_induk": users!.kodeInduk,
                 "rrn": null,
                 "no_dokumen": null,
                 "no_reff": null,
                 "flag_trn": "0"
               },
               "range_tanggal": {
-                "from": "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                "to": "${DateFormat('y-MM-dd').format(DateTime.now())}"
+                "from": DateFormat('y-MM-dd').format(DateTime.now()),
+                "to": DateFormat('y-MM-dd').format(DateTime.now())
               },
-              "akun": {"dracc": null, "cracc": null},
-              "range_nominal": {"min": null, "max": null}
+              "akun": {
+                "dracc": null,
+                "cracc": null
+              },
+              "range_nominal": {
+                "min": null,
+                "max": null
+              }
             },
-            "pagination": {"page": 1},
-            "sort": {"by": "tgl_val", "order": "desc"}
+            "pagination": {
+              "page": 1
+            },
+            "sort": {
+              "by": "tgl_val",
+              "order": "desc"
+            }
           }
         : {
             "filter": {
               "general": {
                 "batch": null,
                 "status_transaksi": "trx_success",
-                "kode_pt": "${users!.kodePt}",
-                "kode_kantor": "${users!.kodeKantor}",
-                "kode_induk": "${users!.kodeInduk}",
+                "kode_pt": users!.kodePt,
+                "kode_kantor": users!.kodeKantor,
+                "kode_induk": users!.kodeInduk,
                 "rrn": null,
                 "no_dokumen": null,
                 "no_reff": null,
                 "flag_trn": "0"
               },
               "range_tanggal_valuta": {
-                "from": "${DateFormat('y-MM-dd').format(tglVal!)}",
-                "to": "${DateFormat('y-MM-dd').format(tglVal!)}"
+                "from": DateFormat('y-MM-dd').format(tglVal!),
+                "to": DateFormat('y-MM-dd').format(tglVal!)
               },
-              "akun": {"dracc": null, "cracc": null},
-              "range_nominal": {"min": null, "max": null}
+              "akun": {
+                "dracc": null,
+                "cracc": null
+              },
+              "range_nominal": {
+                "min": null,
+                "max": null
+              }
             },
-            "pagination": {"page": 1},
-            "sort": {"by": "tgl_val", "order": "desc"}
+            "pagination": {
+              "page": 1
+            },
+            "sort": {
+              "by": "tgl_val",
+              "order": "desc"
+            }
           };
-    Setuprepository.setup(token, NetworkURL.search(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.search(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksi.add(TransaksiModel.fromJson(i));

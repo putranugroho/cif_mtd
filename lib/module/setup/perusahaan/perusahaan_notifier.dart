@@ -5,19 +5,7 @@ class PerusahaanNotifier extends ChangeNotifier {
   final BuildContext context;
 
   PerusahaanNotifier({required this.context}) {
-    perusahaanModel = PerusahaanModel(
-        kodePt: "001",
-        namaPt: "PT TEGUH AMAN LESTARI",
-        alamat: "TRASA COWORKING SPACE",
-        kelurahan: "PROCOT",
-        kecamatan: "SLAWI",
-        kota: "KABUPATEN TEGAL",
-        provinsi: "JAWA TENGAH",
-        kodePos: "52419",
-        npwp: "000288282882882",
-        dirut: "",
-        dirKeuangan: "",
-        dirOperasi: "");
+    perusahaanModel = const PerusahaanModel(kodePt: "001", namaPt: "PT TEGUH AMAN LESTARI", alamat: "TRASA COWORKING SPACE", kelurahan: "PROCOT", kecamatan: "SLAWI", kota: "KABUPATEN TEGAL", provinsi: "JAWA TENGAH", kodePos: "52419", npwp: "000288282882882", dirut: "", dirKeuangan: "", dirOperasi: "");
     kodePerusahaan.text = perusahaanModel!.kodePt;
     namaPerusahaan.text = perusahaanModel!.namaPt;
     alamat.text = perusahaanModel!.alamat;

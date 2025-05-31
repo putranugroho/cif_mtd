@@ -91,8 +91,8 @@ class MenuPage extends StatelessWidget {
             children: [
               Container(
                 width: 340,
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(color: colorPrimary),
+                padding: const EdgeInsets.all(20),
+                decoration: const BoxDecoration(color: colorPrimary),
                 child: Column(
                   children: [
                     Expanded(
@@ -102,92 +102,80 @@ class MenuPage extends StatelessWidget {
                             onTap: () => value.gantimenu(0),
                             child: Container(
                               width: double.infinity,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 16),
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                               child: Row(
                                 children: [
                                   Image.asset(
                                     ImageAssets.dashboard,
                                     height: 30,
-                                    color: value.page == 0
-                                        ? Colors.white
-                                        : Colors.white70,
+                                    color: value.page == 0 ? Colors.white : Colors.white70,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Text(
                                     "Dashboard",
                                     style: TextStyle(
                                       fontSize: 16,
-                                      color: value.page == 0
-                                          ? Colors.white
-                                          : Colors.white70,
+                                      color: value.page == 0 ? Colors.white : Colors.white70,
                                     ),
                                   )
                                 ],
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 24,
                           ),
                           MenuSetupWidget(value: value),
-                          SizedBox(
+                          const SizedBox(
                             height: 24,
                           ),
                           MenuMasterWidget(
                             value: value,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 24,
                           ),
                           MenuTransaksiWidget(value: value),
-                          SizedBox(
+                          const SizedBox(
                             height: 24,
                           ),
                           MenuHutangPiutangWidget(value: value),
-                          SizedBox(
+                          const SizedBox(
                             height: 24,
                           ),
                           MenuInventarisWidget(value: value),
-                          SizedBox(
+                          const SizedBox(
                             height: 24,
                           ),
                           MenuLaporanWidget(value: value),
-                          SizedBox(
+                          const SizedBox(
                             height: 16,
                           ),
                           InkWell(
                             onTap: () => value.gantimenu(26),
                             child: Container(
                               width: double.infinity,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 16),
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                               decoration: BoxDecoration(
-                                color: value.page == 26
-                                    ? Colors.white
-                                    : Colors.transparent,
+                                color: value.page == 26 ? Colors.white : Colors.transparent,
                               ),
                               child: Row(
                                 children: [
                                   Image.asset(
                                     ImageAssets.user,
                                     height: 30,
-                                    color: value.page == 26
-                                        ? Colors.black
-                                        : Colors.white,
+                                    color: value.page == 26 ? Colors.black : Colors.white,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Text(
                                     "AKTIVASI USER",
                                     style: TextStyle(
                                       fontSize: 16,
-                                      color: value.page == 26
-                                          ? Colors.black
-                                          : Colors.white,
+                                      color: value.page == 26 ? Colors.black : Colors.white,
                                     ),
                                   )
                                 ],
@@ -198,32 +186,25 @@ class MenuPage extends StatelessWidget {
                             onTap: () => value.gantimenu(28),
                             child: Container(
                               width: double.infinity,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 16),
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                               decoration: BoxDecoration(
-                                color: value.page == 28
-                                    ? Colors.white
-                                    : Colors.transparent,
+                                color: value.page == 28 ? Colors.white : Colors.transparent,
                               ),
                               child: Row(
                                 children: [
                                   Image.asset(
                                     ImageAssets.settings,
                                     height: 30,
-                                    color: value.page == 28
-                                        ? Colors.black
-                                        : Colors.white,
+                                    color: value.page == 28 ? Colors.black : Colors.white,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Text(
                                     "SETINGS",
                                     style: TextStyle(
                                       fontSize: 16,
-                                      color: value.page == 28
-                                          ? Colors.black
-                                          : Colors.white,
+                                      color: value.page == 28 ? Colors.black : Colors.white,
                                     ),
                                   )
                                 ],
@@ -234,22 +215,21 @@ class MenuPage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 0, 125, 228)),
+                      padding: const EdgeInsets.all(20),
+                      decoration: const BoxDecoration(color: Color.fromARGB(255, 0, 125, 228)),
                       child: Row(
                         children: [
                           Expanded(
                             child: Text(
-                              "${value.users!.namauser}",
-                              style: TextStyle(
+                              value.users!.namauser,
+                              style: const TextStyle(
                                 fontSize: 14,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 16,
                           ),
                           InkWell(
@@ -265,18 +245,15 @@ class MenuPage extends StatelessWidget {
                                   child: Image.asset(
                                     ImageAssets.logout,
                                     height: 30,
-                                    color: value.page == 30
-                                        ? Colors.black
-                                        : Colors.white,
+                                    color: value.page == 30 ? Colors.black : Colors.white,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 8,
                                 ),
-                                Text(
+                                const Text(
                                   "SIGN OUT",
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.white),
+                                  style: TextStyle(fontSize: 12, color: Colors.white),
                                 )
                               ],
                             ),
@@ -289,137 +266,135 @@ class MenuPage extends StatelessWidget {
               ),
               Expanded(
                   child: value.page == 0
-                      ? DashboardPage()
+                      ? const DashboardPage()
                       : value.page == 1
-                          ? KantorPage()
+                          ? const KantorPage()
                           : value.page == 2
-                              ? CoaPage()
+                              ? const CoaPage()
                               : value.page == 3
-                                  ? PenyusutanPage()
+                                  ? const PenyusutanPage()
                                   : value.page == 4
-                                      ? SetupTransaksiPage()
+                                      ? const SetupTransaksiPage()
                                       : value.page == 5
-                                          ? LaporanSetupPage()
+                                          ? const LaporanSetupPage()
                                           : value.page == 6
-                                              ? UsersPage()
+                                              ? const UsersPage()
                                               : value.page == 7
-                                                  ? BankPage()
+                                                  ? const BankPage()
                                                   : value.page == 8
-                                                      ? CustomerPage()
+                                                      ? const CustomerPage()
                                                       : value.page == 9
-                                                          ? OtorisasiMasterPage()
+                                                          ? const OtorisasiMasterPage()
                                                           : value.page == 10
-                                                              ? LaporanMasterPage()
+                                                              ? const LaporanMasterPage()
                                                               : value.page == 11
-                                                                  ? PengadaanPage()
-                                                                  : value.page ==
-                                                                          12
-                                                                      ? PenempatanPage()
-                                                                      : value.page ==
-                                                                              13
-                                                                          ? RevaluasiPage()
+                                                                  ? const PengadaanPage()
+                                                                  : value.page == 12
+                                                                      ? const PenempatanPage()
+                                                                      : value.page == 13
+                                                                          ? const RevaluasiPage()
                                                                           : value.page == 14
-                                                                              ? JualBeliPage()
+                                                                              ? const JualBeliPage()
                                                                               : value.page == 15
-                                                                                  ? OtorisasiInventarisPage()
+                                                                                  ? const OtorisasiInventarisPage()
                                                                                   : value.page == 16
-                                                                                      ? LaporanInventarisPage()
+                                                                                      ? const LaporanInventarisPage()
                                                                                       : value.page == 17
-                                                                                          ? SatuTransaksiPage()
+                                                                                          ? const SatuTransaksiPage()
                                                                                           : value.page == 18
-                                                                                              ? BanyakTransaksiPage()
+                                                                                              ? const BanyakTransaksiPage()
                                                                                               : value.page == 19
-                                                                                                  ? KasKecilPage()
+                                                                                                  ? const KasKecilPage()
                                                                                                   : value.page == 20
-                                                                                                      ? BankTransaksiPage()
+                                                                                                      ? const BankTransaksiPage()
                                                                                                       : value.page == 21
-                                                                                                          ? HutangPage()
+                                                                                                          ? const HutangPage()
                                                                                                           : value.page == 22
-                                                                                                              ? PiutangPage()
+                                                                                                              ? const PiutangPage()
                                                                                                               : value.page == 23
-                                                                                                                  ? BackDatePage()
+                                                                                                                  ? const BackDatePage()
                                                                                                                   : value.page == 24
-                                                                                                                      ? OtorisasiTransaksiPage()
+                                                                                                                      ? const OtorisasiTransaksiPage()
                                                                                                                       : value.page == 25
-                                                                                                                          ? LaporanTransaksiPage()
+                                                                                                                          ? const LaporanTransaksiPage()
                                                                                                                           : value.page == 26
-                                                                                                                              ? AktivasiUsersPage()
+                                                                                                                              ? const AktivasiUsersPage()
                                                                                                                               : value.page == 27
-                                                                                                                                  ? ClosingEomPage()
+                                                                                                                                  ? const ClosingEomPage()
                                                                                                                                   : value.page == 28
-                                                                                                                                      ? PerusahaanPage()
+                                                                                                                                      ? const PerusahaanPage()
                                                                                                                                       : value.page == 29
-                                                                                                                                          ? JabatanPage()
+                                                                                                                                          ? const JabatanPage()
                                                                                                                                           : value.page == 30
-                                                                                                                                              ? PejabatPage()
+                                                                                                                                              ? const PejabatPage()
                                                                                                                                               : value.page == 31
-                                                                                                                                                  ? LevelPage()
+                                                                                                                                                  ? const LevelPage()
                                                                                                                                                   : value.page == 32
-                                                                                                                                                      ? SetupPajakPage()
+                                                                                                                                                      ? const SetupPajakPage()
                                                                                                                                                       : value.page == 33
-                                                                                                                                                          ? KelompokAsetPage()
+                                                                                                                                                          ? const KelompokAsetPage()
                                                                                                                                                           : value.page == 34
-                                                                                                                                                              ? GolonganAsetPage()
+                                                                                                                                                              ? const GolonganAsetPage()
                                                                                                                                                               : value.page == 35
-                                                                                                                                                                  ? AoPage()
+                                                                                                                                                                  ? const AoPage()
                                                                                                                                                                   : value.page == 36
-                                                                                                                                                                      ? AktivasiPage()
+                                                                                                                                                                      ? const AktivasiPage()
                                                                                                                                                                       : value.page == 37
-                                                                                                                                                                          ? SbbKhususPage()
+                                                                                                                                                                          ? const SbbKhususPage()
                                                                                                                                                                           : value.page == 38
-                                                                                                                                                                              ? SetupClosingEomPage()
+                                                                                                                                                                              ? const SetupClosingEomPage()
                                                                                                                                                                               : value.page == 39
-                                                                                                                                                                                  ? SetupOtorisasiPage()
+                                                                                                                                                                                  ? const SetupOtorisasiPage()
                                                                                                                                                                                   : value.page == 43
-                                                                                                                                                                                      ? JurnalPage()
+                                                                                                                                                                                      ? const JurnalPage()
                                                                                                                                                                                       : value.page == 44
-                                                                                                                                                                                          ? NeracaBerjalanPage()
+                                                                                                                                                                                          ? const NeracaBerjalanPage()
                                                                                                                                                                                           : value.page == 45
-                                                                                                                                                                                              ? NeracaPeriodePage()
+                                                                                                                                                                                              ? const NeracaPeriodePage()
                                                                                                                                                                                               : value.page == 46
-                                                                                                                                                                                                  ? LabaRugiBerjalanPage()
+                                                                                                                                                                                                  ? const LabaRugiBerjalanPage()
                                                                                                                                                                                                   : value.page == 47
-                                                                                                                                                                                                      ? TambahKelompokSbbKhususPage()
+                                                                                                                                                                                                      ? const TambahKelompokSbbKhususPage()
                                                                                                                                                                                                       : value.page == 48
-                                                                                                                                                                                                          ? GlPage()
+                                                                                                                                                                                                          ? const GlPage()
                                                                                                                                                                                                           : value.page == 49
-                                                                                                                                                                                                              ? LabaRugiPeriodePage()
+                                                                                                                                                                                                              ? const LabaRugiPeriodePage()
                                                                                                                                                                                                               : value.page == 50
-                                                                                                                                                                                                                  ? RekonsiliasiBankPage()
+                                                                                                                                                                                                                  ? const RekonsiliasiBankPage()
                                                                                                                                                                                                                   : value.page == 51
-                                                                                                                                                                                                                      ? RekonsiliasiHutangPage()
+                                                                                                                                                                                                                      ? const RekonsiliasiHutangPage()
                                                                                                                                                                                                                       : value.page == 52
-                                                                                                                                                                                                                          ? RekonsiliasiPiutangPage()
+                                                                                                                                                                                                                          ? const RekonsiliasiPiutangPage()
                                                                                                                                                                                                                           : value.page == 53
-                                                                                                                                                                                                                              ? RekonsiliasiAsetPage()
+                                                                                                                                                                                                                              ? const RekonsiliasiAsetPage()
                                                                                                                                                                                                                               : value.page == 54
-                                                                                                                                                                                                                                  ? RekonsiliasiTransaksiPendingPage()
+                                                                                                                                                                                                                                  ? const RekonsiliasiTransaksiPendingPage()
                                                                                                                                                                                                                                   : value.page == 55
-                                                                                                                                                                                                                                      ? RekonsiliasiPerantaraPage()
+                                                                                                                                                                                                                                      ? const RekonsiliasiPerantaraPage()
                                                                                                                                                                                                                                       : value.page == 57
-                                                                                                                                                                                                                                          ? PerantaraAktivaPage()
+                                                                                                                                                                                                                                          ? const PerantaraAktivaPage()
                                                                                                                                                                                                                                           : value.page == 58
-                                                                                                                                                                                                                                              ? PembayaranHutangPage()
+                                                                                                                                                                                                                                              ? const PembayaranHutangPage()
                                                                                                                                                                                                                                               : value.page == 59
-                                                                                                                                                                                                                                                  ? BayarDimukaPage()
+                                                                                                                                                                                                                                                  ? const BayarDimukaPage()
                                                                                                                                                                                                                                                   : value.page == 60
-                                                                                                                                                                                                                                                      ? LevelUserPage()
+                                                                                                                                                                                                                                                      ? const LevelUserPage()
                                                                                                                                                                                                                                                       : value.page == 61
-                                                                                                                                                                                                                                                          ? HutangPiutangPage(tipe: 1)
+                                                                                                                                                                                                                                                          ? const HutangPiutangPage(tipe: 1)
                                                                                                                                                                                                                                                           : value.page == 62
-                                                                                                                                                                                                                                                              ? KasbonPage()
+                                                                                                                                                                                                                                                              ? const KasbonPage()
                                                                                                                                                                                                                                                               : value.page == 65
-                                                                                                                                                                                                                                                                  ? SbbHutangPiutangPage()
+                                                                                                                                                                                                                                                                  ? const SbbHutangPiutangPage()
                                                                                                                                                                                                                                                                   : value.page == 66
-                                                                                                                                                                                                                                                                      ? AksesPointPage()
+                                                                                                                                                                                                                                                                      ? const AksesPointPage()
                                                                                                                                                                                                                                                                       : value.page == 67
-                                                                                                                                                                                                                                                                          ? PembatalanTransaksiPage()
+                                                                                                                                                                                                                                                                          ? const PembatalanTransaksiPage()
                                                                                                                                                                                                                                                                           : value.page == 68
-                                                                                                                                                                                                                                                                              ? UserAksesPointPage()
+                                                                                                                                                                                                                                                                              ? const UserAksesPointPage()
                                                                                                                                                                                                                                                                               : value.page == 69
-                                                                                                                                                                                                                                                                                  ? SetupSbbPage()
+                                                                                                                                                                                                                                                                                  ? const SetupSbbPage()
                                                                                                                                                                                                                                                                                   : value.page == 70
-                                                                                                                                                                                                                                                                                      ? LaporanKasKecilPage()
+                                                                                                                                                                                                                                                                                      ? const LaporanKasKecilPage()
                                                                                                                                                                                                                                                                                       : Container())
             ],
           ),

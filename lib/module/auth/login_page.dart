@@ -21,45 +21,45 @@ class LoginPage extends StatelessWidget {
                   child: Container(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: colorPrimary,
                 ),
               )),
               Container(
                 width: 800,
-                padding: EdgeInsets.symmetric(horizontal: 64),
+                padding: const EdgeInsets.symmetric(horizontal: 64),
                 child: FocusTraversalGroup(
                   child: Form(
                     key: value.keyForm,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 64,
                         ),
-                        Text(
+                        const Text(
                           "Sign In",
                           style: TextStyle(
                             fontSize: 48,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Text(
+                        const Text(
                           "Sign In for access to application",
                           style: TextStyle(
                             fontSize: 18,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
-                        Text(
+                        const Text(
                           "USer ID",
                           style: TextStyle(
                             fontSize: 12,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 8,
                         ),
                         TextFormField(
@@ -81,13 +81,13 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        Text(
+                        const Text(
                           "Password",
                           style: TextStyle(
                             fontSize: 12,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 8,
                         ),
                         TextFormField(

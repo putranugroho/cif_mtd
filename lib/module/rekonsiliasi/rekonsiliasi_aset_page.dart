@@ -21,10 +21,10 @@ class RekonsiliasiAsetPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Row(
                     children: [
-                      Expanded(
+                      const Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
@@ -39,24 +39,20 @@ class RekonsiliasiAsetPage extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                        decoration: BoxDecoration(
-                            color: colorPrimary,
-                            borderRadius: BorderRadius.circular(8)),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        decoration: BoxDecoration(color: colorPrimary, borderRadius: BorderRadius.circular(8)),
                         child: Row(
                           children: [
                             Image.asset(
                               ImageAssets.excel,
                               height: 15,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 8,
                             ),
-                            Text(
+                            const Text(
                               "Download to Excel",
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.white),
+                              style: TextStyle(fontSize: 12, color: Colors.white),
                             )
                           ],
                         ),
@@ -64,43 +60,43 @@ class RekonsiliasiAsetPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(right: 16),
+                        margin: const EdgeInsets.only(right: 16),
                         width: 120,
-                        child: Text("NO. ASET"),
+                        child: const Text("NO. ASET"),
                       ),
                       Container(
                         width: 120,
-                        margin: EdgeInsets.only(right: 16),
-                        child: Text(
+                        margin: const EdgeInsets.only(right: 16),
+                        child: const Text(
                           "TGL BELI",
                         ),
                       ),
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(right: 16),
-                          child: Text("KETERANGAN"),
+                          margin: const EdgeInsets.only(right: 16),
+                          child: const Text("KETERANGAN"),
                         ),
                       ),
                       Container(
                         width: 180,
-                        margin: EdgeInsets.only(right: 16),
-                        child: Text(
+                        margin: const EdgeInsets.only(right: 16),
+                        child: const Text(
                           "SALDO ASET",
                           textAlign: TextAlign.end,
                         ),
                       ),
                       Container(
                         width: 120,
-                        margin: EdgeInsets.only(right: 16),
-                        child: Text(
+                        margin: const EdgeInsets.only(right: 16),
+                        child: const Text(
                           "TGL UPDATE",
                         ),
                       ),
@@ -108,7 +104,7 @@ class RekonsiliasiAsetPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 8),
+                  margin: const EdgeInsets.symmetric(vertical: 8),
                   height: 1,
                   color: Colors.grey,
                 ),
@@ -119,7 +115,7 @@ class RekonsiliasiAsetPage extends StatelessWidget {
                       ListView.builder(
                           itemCount: value.list.length,
                           shrinkWrap: true,
-                          physics: ClampingScrollPhysics(),
+                          physics: const ClampingScrollPhysics(),
                           itemBuilder: (context, i) {
                             final data = value.list[i];
                             return Column(
@@ -128,47 +124,42 @@ class RekonsiliasiAsetPage extends StatelessWidget {
                                 ListView.builder(
                                     itemCount: data.item.length,
                                     shrinkWrap: true,
-                                    physics: ClampingScrollPhysics(),
+                                    physics: const ClampingScrollPhysics(),
                                     itemBuilder: (context, b) {
                                       final a = data.item[b];
                                       return Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
                                           Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 20),
+                                            padding: const EdgeInsets.symmetric(horizontal: 20),
                                             child: Row(
                                               children: [
                                                 Container(
-                                                  margin: EdgeInsets.only(
-                                                      right: 16),
+                                                  margin: const EdgeInsets.only(right: 16),
                                                   width: 120,
                                                   child: Text(
-                                                    "${a.kdaset}",
-                                                    style: TextStyle(
+                                                    a.kdaset,
+                                                    style: const TextStyle(
                                                       fontSize: 12,
                                                     ),
                                                   ),
                                                 ),
                                                 Container(
-                                                  margin: EdgeInsets.only(
-                                                      right: 16),
+                                                  margin: const EdgeInsets.only(right: 16),
                                                   width: 120,
                                                   child: Text(
-                                                    "${a.tglBeli}",
-                                                    style: TextStyle(
+                                                    a.tglBeli,
+                                                    style: const TextStyle(
                                                       fontSize: 12,
                                                     ),
                                                   ),
                                                 ),
                                                 Expanded(
                                                   child: Container(
-                                                    margin: EdgeInsets.only(
-                                                        right: 16),
+                                                    margin: const EdgeInsets.only(right: 16),
                                                     child: Text(
-                                                      "${a.ket}",
-                                                      style: TextStyle(
+                                                      a.ket,
+                                                      style: const TextStyle(
                                                         fontSize: 12,
                                                       ),
                                                     ),
@@ -176,44 +167,42 @@ class RekonsiliasiAsetPage extends StatelessWidget {
                                                 ),
                                                 Container(
                                                   width: 180,
-                                                  margin: EdgeInsets.only(
-                                                      right: 16),
+                                                  margin: const EdgeInsets.only(right: 16),
                                                   child: Text(
-                                                    "${FormatCurrency.oCcy.format(int.parse(a.haper))}",
+                                                    FormatCurrency.oCcy.format(int.parse(a.haper)),
                                                     textAlign: TextAlign.end,
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                       fontSize: 12,
                                                     ),
                                                   ),
                                                 ),
                                                 Container(
                                                   width: 120,
-                                                  margin: EdgeInsets.only(
-                                                      right: 16),
-                                                  child: Text(
+                                                  margin: const EdgeInsets.only(right: 16),
+                                                  child: const Text(
                                                     "",
                                                   ),
                                                 ),
                                               ],
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 4,
                                           )
                                         ],
                                       );
                                     }),
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(horizontal: 20),
                                   child: Row(
                                     children: [
                                       Expanded(
                                         child: Container(
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           child: Text(
-                                            "${data.namaKelompok}",
+                                            data.namaKelompok,
                                             textAlign: TextAlign.end,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 12,
                                             ),
@@ -222,11 +211,11 @@ class RekonsiliasiAsetPage extends StatelessWidget {
                                       ),
                                       Container(
                                         width: 180,
-                                        margin: EdgeInsets.only(right: 16),
+                                        margin: const EdgeInsets.only(right: 16),
                                         child: Text(
-                                          "${FormatCurrency.oCcy.format(data.item.map((e) => int.parse(e.haper)).reduce((a, b) => a + b))}",
+                                          FormatCurrency.oCcy.format(data.item.map((e) => int.parse(e.haper)).reduce((a, b) => a + b)),
                                           textAlign: TextAlign.end,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 12,
                                           ),
@@ -234,8 +223,8 @@ class RekonsiliasiAsetPage extends StatelessWidget {
                                       ),
                                       Container(
                                         width: 120,
-                                        margin: EdgeInsets.only(right: 16),
-                                        child: Text(
+                                        margin: const EdgeInsets.only(right: 16),
+                                        child: const Text(
                                           "",
                                         ),
                                       ),
@@ -243,16 +232,16 @@ class RekonsiliasiAsetPage extends StatelessWidget {
                                   ),
                                 ),
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(horizontal: 20),
                                   child: Row(
                                     children: [
                                       Expanded(
                                         child: Container(
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           child: Text(
                                             "(${0160201 + i}) - INVENTARIS ${data.namaKelompok}",
                                             textAlign: TextAlign.end,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 12,
                                             ),
@@ -261,11 +250,11 @@ class RekonsiliasiAsetPage extends StatelessWidget {
                                       ),
                                       Container(
                                         width: 180,
-                                        margin: EdgeInsets.only(right: 16),
+                                        margin: const EdgeInsets.only(right: 16),
                                         child: Text(
-                                          "${FormatCurrency.oCcy.format(data.item.map((e) => int.parse(e.haper)).reduce((a, b) => a + b))}",
+                                          FormatCurrency.oCcy.format(data.item.map((e) => int.parse(e.haper)).reduce((a, b) => a + b)),
                                           textAlign: TextAlign.end,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 12,
                                           ),
@@ -273,8 +262,8 @@ class RekonsiliasiAsetPage extends StatelessWidget {
                                       ),
                                       Container(
                                         width: 120,
-                                        margin: EdgeInsets.only(right: 16),
-                                        child: Text(
+                                        margin: const EdgeInsets.only(right: 16),
+                                        child: const Text(
                                           "",
                                         ),
                                       ),
@@ -282,13 +271,13 @@ class RekonsiliasiAsetPage extends StatelessWidget {
                                   ),
                                 ),
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(horizontal: 20),
                                   child: Row(
                                     children: [
                                       Expanded(
                                         child: Container(
-                                          margin: EdgeInsets.only(right: 16),
-                                          child: Text(
+                                          margin: const EdgeInsets.only(right: 16),
+                                          child: const Text(
                                             "SELISIH",
                                             textAlign: TextAlign.end,
                                             style: TextStyle(
@@ -300,11 +289,11 @@ class RekonsiliasiAsetPage extends StatelessWidget {
                                       ),
                                       Container(
                                         width: 180,
-                                        margin: EdgeInsets.only(right: 16),
+                                        margin: const EdgeInsets.only(right: 16),
                                         child: Text(
-                                          "${FormatCurrency.oCcy.format(data.item.map((e) => int.parse(e.haper)).reduce((a, b) => a + b) - data.item.map((e) => int.parse(e.haper)).reduce((a, b) => a + b))}",
+                                          FormatCurrency.oCcy.format(data.item.map((e) => int.parse(e.haper)).reduce((a, b) => a + b) - data.item.map((e) => int.parse(e.haper)).reduce((a, b) => a + b)),
                                           textAlign: TextAlign.end,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 12,
                                           ),
@@ -312,15 +301,15 @@ class RekonsiliasiAsetPage extends StatelessWidget {
                                       ),
                                       Container(
                                         width: 120,
-                                        margin: EdgeInsets.only(right: 16),
-                                        child: Text(
+                                        margin: const EdgeInsets.only(right: 16),
+                                        child: const Text(
                                           "",
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 )
                               ],
@@ -329,7 +318,7 @@ class RekonsiliasiAsetPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 80,
                 )
               ],

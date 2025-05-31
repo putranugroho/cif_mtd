@@ -33,10 +33,10 @@ class JabatanPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Jabatan",
                               style: TextStyle(
@@ -48,8 +48,7 @@ class JabatanPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -58,10 +57,10 @@ class JabatanPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah Jabatan",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -93,7 +92,7 @@ class JabatanPage extends StatelessWidget {
                               ),
                             )
                           : Container(
-                              padding: EdgeInsets.all(20),
+                              padding: const EdgeInsets.all(20),
                               height: MediaQuery.of(context).size.height,
                               child: SfDataGrid(
                                 headerRowHeight: 40,
@@ -102,8 +101,7 @@ class JabatanPage extends StatelessWidget {
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
-                                headerGridLinesVisibility:
-                                    GridLinesVisibility.both,
+                                headerGridLinesVisibility: GridLinesVisibility.both,
                                 selectionMode: SelectionMode.single,
 
                                 source: DetailDataSource(value),
@@ -112,10 +110,10 @@ class JabatanPage extends StatelessWidget {
                                       width: 50,
                                       columnName: 'no',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('No',
+                                          child: const Text('No',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 12,
@@ -127,8 +125,8 @@ class JabatanPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Kode jabatan',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Kode jabatan',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -140,8 +138,8 @@ class JabatanPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Jabatan',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Jabatan',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -151,10 +149,10 @@ class JabatanPage extends StatelessWidget {
                                       width: 250,
                                       columnName: 'level',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Level Jabatan',
+                                          child: const Text('Level Jabatan',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -165,9 +163,9 @@ class JabatanPage extends StatelessWidget {
                                       columnName: 'action',
                                       label: Container(
                                           color: colorPrimary,
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           alignment: Alignment.center,
-                                          child: Text('Action',
+                                          child: const Text('Action',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -189,7 +187,7 @@ class JabatanPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -197,9 +195,9 @@ class JabatanPage extends StatelessWidget {
                 right: 0,
                 child: value.dialog
                     ? Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         width: 600,
-                        decoration: BoxDecoration(color: Colors.white),
+                        decoration: const BoxDecoration(color: Colors.white),
                         child: Form(
                           key: value.keyForm,
                           child: Column(
@@ -209,10 +207,8 @@ class JabatanPage extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      value.editData
-                                          ? "Ubah / Hapus Jabatan"
-                                          : "Tambah  Jabatan",
-                                      style: TextStyle(
+                                      value.editData ? "Ubah / Hapus Jabatan" : "Tambah  Jabatan",
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -223,26 +219,24 @@ class JabatanPage extends StatelessWidget {
                                     child: Container(
                                       width: 40,
                                       height: 40,
-                                      padding: EdgeInsets.all(4),
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey[200],
-                                          shape: BoxShape.circle),
-                                      child: Icon(Icons.close),
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                      child: const Icon(Icons.close),
                                     ),
                                   )
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 32,
                               ),
-                              Row(
+                              const Row(
                                 children: [
                                   Text(
                                     "Level",
-                                    style: const TextStyle(fontSize: 12),
+                                    style: TextStyle(fontSize: 12),
                                   ),
-                                  const SizedBox(width: 5),
-                                  const Text(
+                                  SizedBox(width: 5),
+                                  Text(
                                     "*",
                                     style: TextStyle(fontSize: 8),
                                   ),
@@ -253,23 +247,22 @@ class JabatanPage extends StatelessWidget {
                               ),
                               DropdownSearch<LevelModel>(
                                 popupProps: const PopupPropsMultiSelection.menu(
-                                  showSearchBox:
-                                      true, // Aktifkan fitur pencarian
+                                  showSearchBox: true, // Aktifkan fitur pencarian
                                 ),
                                 selectedItem: value.levelModel,
                                 items: value.list,
-                                itemAsString: (e) => "${e.kelJabatan}",
+                                itemAsString: (e) => e.kelJabatan,
                                 onChanged: (e) {
                                   value.pilihLevel(e!);
                                 },
                                 dropdownDecoratorProps: DropDownDecoratorProps(
-                                  baseStyle: TextStyle(fontSize: 16),
+                                  baseStyle: const TextStyle(fontSize: 16),
                                   textAlignVertical: TextAlignVertical.center,
                                   dropdownSearchDecoration: InputDecoration(
                                     hintText: "Pilih Level",
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         width: 1,
                                         color: Colors.grey,
                                       ),
@@ -278,14 +271,14 @@ class JabatanPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              Row(
+                              const Row(
                                 children: [
                                   Text(
                                     "Kode Jabatan",
-                                    style: const TextStyle(fontSize: 12),
+                                    style: TextStyle(fontSize: 12),
                                   ),
-                                  const SizedBox(width: 5),
-                                  const Text(
+                                  SizedBox(width: 5),
+                                  Text(
                                     "*",
                                     style: TextStyle(fontSize: 8),
                                   ),
@@ -299,8 +292,7 @@ class JabatanPage extends StatelessWidget {
                                 controller: value.kode,
                                 maxLines: 1,
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r'[a-zA-Z0-9]'))
+                                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]'))
                                 ],
                                 validator: (e) {
                                   if (e!.isEmpty) {
@@ -317,14 +309,14 @@ class JabatanPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              Row(
+                              const Row(
                                 children: [
                                   Text(
                                     "Jabatan",
-                                    style: const TextStyle(fontSize: 12),
+                                    style: TextStyle(fontSize: 12),
                                   ),
-                                  const SizedBox(width: 5),
-                                  const Text(
+                                  SizedBox(width: 5),
+                                  Text(
                                     "*",
                                     style: TextStyle(fontSize: 8),
                                   ),
@@ -363,8 +355,7 @@ class JabatanPage extends StatelessWidget {
                               ),
                               value.editData
                                   ? Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         const SizedBox(height: 16),
                                         ButtonDanger(
@@ -375,12 +366,12 @@ class JabatanPage extends StatelessWidget {
                                         ),
                                       ],
                                     )
-                                  : SizedBox()
+                                  : const SizedBox()
                             ],
                           ),
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -430,7 +421,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -439,10 +430,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),

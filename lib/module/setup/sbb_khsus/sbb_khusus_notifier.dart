@@ -31,9 +31,10 @@ class SbbKhususNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getSbbKhusus(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getSbbKhusus(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(SbbKhususModel.fromJson(i));
@@ -51,9 +52,10 @@ class SbbKhususNotifier extends ChangeNotifier {
     isLoading = true;
     listGolongan.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getGolonganSbb(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getGolonganSbb(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listGolongan.add(GolonganSbbKhususModel.fromJson(i));
@@ -88,14 +90,13 @@ class SbbKhususNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     listGl.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        listGl =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         notifyListeners();
       }
     });
@@ -108,16 +109,14 @@ class SbbKhususNotifier extends ChangeNotifier {
     inqueryGlModel = null;
     notifyListeners();
     print(kode);
-    golonganSbbKhususModel =
-        listGolongan.where((e) => e.kodeGolongan == kode).first;
+    golonganSbbKhususModel = listGolongan.where((e) => e.kodeGolongan == kode).first;
     sbbKhususModel = list.where((e) => e.kodeGolongan == kode).first;
     // print(sbbKhususModel!.items.length);
     // print(sbbKhususModel!.kodeGolongan);
     for (var i = 0; i < sbbKhususModel!.items.length; i++) {
       var nosbb = sbbKhususModel!.items[i].nosbb;
       print(nosbb);
-      var result =
-          listGl.expand((e) => e.items).firstWhere((f) => f.nosbb == nosbb);
+      var result = listGl.expand((e) => e.items).firstWhere((f) => f.nosbb == nosbb);
       listGlAdd.add(result);
     }
     inqueryGlModel = listGlAdd.first;
@@ -180,46 +179,47 @@ class SbbKhususNotifier extends ChangeNotifier {
     print("listGlAdd");
     print(inqueryGlModel);
     print(listGlAdd.length);
-    if (inqueryGlModel == null || listGlAdd.length == 0) {
+    if (inqueryGlModel == null || listGlAdd.isEmpty) {
       informationDialog(context, "Warning", "Harap memilih Sub Buku Besar!!");
     } else {
       DialogCustom().showLoading(context);
       if (golonganSbbKhususModel!.lebihSatuAkun == "Y") {
         for (var i = 0; i < listGlAdd.length; i++) {
-          print("listGlAdd${i}");
+          print("listGlAdd$i");
           print(listGlAdd[i]);
           json.add({
             "id": listGlAdd[i].id,
-            "gol_acc": "${listGlAdd[i].golAcc}",
-            "jns_acc": "${listGlAdd[i].jnsAcc}",
-            "nobb": "${listGlAdd[i].nobb}",
-            "nosbb": "${listGlAdd[i].nosbb}",
-            "nama_sbb": "${listGlAdd[i].namaSbb}",
-            "type_posting": "${listGlAdd[i].typePosting}",
+            "gol_acc": listGlAdd[i].golAcc,
+            "jns_acc": listGlAdd[i].jnsAcc,
+            "nobb": listGlAdd[i].nobb,
+            "nosbb": listGlAdd[i].nosbb,
+            "nama_sbb": listGlAdd[i].namaSbb,
+            "type_posting": listGlAdd[i].typePosting,
             "id_golongan": "${golonganSbbKhususModel!.id}",
-            "kode_pt": "${golonganSbbKhususModel!.kodePt}",
+            "kode_pt": golonganSbbKhususModel!.kodePt,
             "sbb_khusus": ""
           });
         }
       } else {
         json.add({
           "id": inqueryGlModel!.id,
-          "gol_acc": "${inqueryGlModel!.golAcc}",
-          "jns_acc": "${inqueryGlModel!.jnsAcc}",
-          "nobb": "${inqueryGlModel!.nobb}",
-          "nosbb": "${inqueryGlModel!.nosbb}",
-          "nama_sbb": "${inqueryGlModel!.namaSbb}",
-          "type_posting": "${inqueryGlModel!.typePosting}",
+          "gol_acc": inqueryGlModel!.golAcc,
+          "jns_acc": inqueryGlModel!.jnsAcc,
+          "nobb": inqueryGlModel!.nobb,
+          "nosbb": inqueryGlModel!.nosbb,
+          "nama_sbb": inqueryGlModel!.namaSbb,
+          "type_posting": inqueryGlModel!.typePosting,
           "id_golongan": "${golonganSbbKhususModel!.id}",
-          "kode_pt": "${golonganSbbKhususModel!.kodePt}",
+          "kode_pt": golonganSbbKhususModel!.kodePt,
           "sbb_khusus": ""
         });
       }
 
-      var data = {"data": json};
+      var data = {
+        "data": json
+      };
       print(jsonEncode(data));
-      Setuprepository.setup(token, NetworkURL.addSbbKhusus(), jsonEncode(data))
-          .then((value) {
+      Setuprepository.setup(token, NetworkURL.addSbbKhusus(), jsonEncode(data)).then((value) {
         Navigator.pop(context);
         if (value['status'].toString().toLowerCase().contains("success")) {
           informationDialog(context, "Information", value['message']);

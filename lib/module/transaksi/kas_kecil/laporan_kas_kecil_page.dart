@@ -38,8 +38,8 @@ class LaporanKasKecilPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
-                      child: Row(
+                      padding: const EdgeInsets.all(20),
+                      child: const Row(
                         children: [
                           Expanded(
                             child: Text(
@@ -76,7 +76,7 @@ class LaporanKasKecilPage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
                           Expanded(
@@ -85,38 +85,30 @@ class LaporanKasKecilPage extends StatelessWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                         width: 400,
                                         child: Row(
                                           children: [
                                             Expanded(
-                                              child:
-                                                  TypeAheadField<KaryawanModel>(
+                                              child: TypeAheadField<KaryawanModel>(
                                                 controller: value.namaKaryawan,
-                                                suggestionsCallback: (search) =>
-                                                    value
-                                                        .getInqKaryawan(search),
-                                                builder: (context, controller,
-                                                    focusNode) {
+                                                suggestionsCallback: (search) => value.getInqKaryawan(search),
+                                                builder: (context, controller, focusNode) {
                                                   return TextField(
                                                       controller: controller,
                                                       focusNode: focusNode,
                                                       readOnly: value.editData,
                                                       autofocus: true,
-                                                      decoration:
-                                                          InputDecoration(
+                                                      decoration: InputDecoration(
                                                         filled: value.editData,
-                                                        fillColor:
-                                                            Colors.grey[200],
-                                                        border:
-                                                            OutlineInputBorder(),
+                                                        fillColor: Colors.grey[200],
+                                                        border: const OutlineInputBorder(),
                                                         labelText: 'Cari Akun',
                                                       ));
                                                 },
                                                 itemBuilder: (context, city) {
                                                   return ListTile(
-                                                    title:
-                                                        Text(city.namaLengkap),
+                                                    title: Text(city.namaLengkap),
                                                     subtitle: Text(city.nik),
                                                   );
                                                 },
@@ -126,10 +118,10 @@ class LaporanKasKecilPage extends StatelessWidget {
                                                 },
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 16,
                                             ),
-                                            Container(
+                                            SizedBox(
                                               width: 150,
                                               child: InkWell(
                                                 onTap: () {
@@ -153,21 +145,13 @@ class LaporanKasKecilPage extends StatelessWidget {
                                                   },
                                                   decoration: InputDecoration(
                                                     hintText: "Pilih Tanggal",
-                                                    hintStyle: const TextStyle(
-                                                        color: Colors.grey),
+                                                    hintStyle: const TextStyle(color: Colors.grey),
                                                     border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
+                                                      borderRadius: BorderRadius.circular(6),
                                                     ),
-                                                    disabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Colors
-                                                              .grey.shade600),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
+                                                    disabledBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(color: Colors.grey.shade600),
+                                                      borderRadius: BorderRadius.circular(6),
                                                     ),
                                                   ),
                                                 ),
@@ -175,7 +159,7 @@ class LaporanKasKecilPage extends StatelessWidget {
                                             )
                                           ],
                                         )),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 16,
                                     ),
                                     Row(
@@ -183,21 +167,19 @@ class LaporanKasKecilPage extends StatelessWidget {
                                         Container(
                                           height: 50,
                                           alignment: Alignment.center,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 16, vertical: 8),
+                                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                                           decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
+                                            borderRadius: BorderRadius.circular(8),
                                             color: colorPrimary,
                                             border: Border.all(
                                               width: 2,
                                               color: colorPrimary,
                                             ),
                                           ),
-                                          child: Text(
+                                          child: const Text(
                                             "Cari",
                                             textAlign: TextAlign.center,
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                               color: Colors.white,
                                             ),
                                           ),
@@ -214,7 +196,7 @@ class LaporanKasKecilPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         height: MediaQuery.of(context).size.height,
                         child: SfDataGrid(
                           headerRowHeight: 40,
@@ -232,10 +214,10 @@ class LaporanKasKecilPage extends StatelessWidget {
                                 width: 50,
                                 columnName: 'no',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('No',
+                                    child: const Text('No',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           fontSize: 12,
@@ -245,10 +227,10 @@ class LaporanKasKecilPage extends StatelessWidget {
                                 width: 100,
                                 columnName: 'tgl_val',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Tanggal Valuta',
+                                    child: const Text('Tanggal Valuta',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -258,10 +240,10 @@ class LaporanKasKecilPage extends StatelessWidget {
                                 width: 100,
                                 columnName: 'tgl_trans',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Tanggal Input',
+                                    child: const Text('Tanggal Input',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -273,8 +255,8 @@ class LaporanKasKecilPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nomor Dokumen',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nomor Dokumen',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -286,8 +268,8 @@ class LaporanKasKecilPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nomor Referensi',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nomor Referensi',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -299,8 +281,8 @@ class LaporanKasKecilPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nominal',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nominal',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -312,8 +294,8 @@ class LaporanKasKecilPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama Akun Debet',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nama Akun Debet',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -325,8 +307,8 @@ class LaporanKasKecilPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama Akun Kredit',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nama Akun Kredit',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -338,8 +320,8 @@ class LaporanKasKecilPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Keterangan',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Keterangan',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -351,8 +333,8 @@ class LaporanKasKecilPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Akun Debet',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Akun Debet',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -364,8 +346,8 @@ class LaporanKasKecilPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Akun Kredit',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Akun Kredit',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -409,8 +391,7 @@ class DetailDataSource extends DataGridSource {
         return tglA.compareTo(tglB); // urut berdasarkan tanggal dulu
       }
 
-      return a.noDokumen
-          .compareTo(b.noDokumen); // lalu urut berdasarkan nomor dokumen
+      return a.noDokumen.compareTo(b.noDokumen); // lalu urut berdasarkan nomor dokumen
     });
 
     // 🧱 Bangun data grid setelah data diurutkan
@@ -422,10 +403,7 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'tgl_trans', value: data.tglTransaksi),
                 DataGridCell(columnName: 'nomor_dok', value: data.noDokumen),
                 DataGridCell(columnName: 'nomor_ref', value: data.noRef),
-                DataGridCell(
-                    columnName: 'nominal',
-                    value: FormatCurrency.oCcyDecimal
-                        .format(double.parse(data.nominal))),
+                DataGridCell(columnName: 'nominal', value: FormatCurrency.oCcyDecimal.format(double.parse(data.nominal))),
                 DataGridCell(columnName: 'nama_debet', value: data.namaDr),
                 DataGridCell(columnName: 'nama_credit', value: data.namaCr),
                 DataGridCell(columnName: 'keterangan', value: data.keterangan),
@@ -453,9 +431,9 @@ class DetailDataSource extends DataGridSource {
         } else if (e.columnName == 'status') {
           return Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.all(4),
+            padding: const EdgeInsets.all(4),
             child: Container(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(32),
                   color: e.value == "PENDING"
@@ -466,7 +444,7 @@ class DetailDataSource extends DataGridSource {
               child: Text(
                 e.value,
                 maxLines: 1,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                 ),
                 overflow: TextOverflow.ellipsis,

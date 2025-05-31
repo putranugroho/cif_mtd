@@ -30,8 +30,7 @@ class KantorNotifier extends ChangeNotifier {
   Future getProvinsi() async {
     WilayahRepository.getProvinsi(NetworkURL.getProvinsi()).then((value) {
       for (var i = 0; i < value.length; i++) {
-        listProvinsi.add(ProvinsiModel(
-            id: value[i]['id'].toString(), name: value[i]['name']));
+        listProvinsi.add(ProvinsiModel(id: value[i]['id'].toString(), name: value[i]['name']));
       }
       notifyListeners();
     });
@@ -52,13 +51,9 @@ class KantorNotifier extends ChangeNotifier {
   getKota() async {
     listKota.clear();
     notifyListeners();
-    WilayahRepository.getKota(NetworkURL.getKota(provinsiModel!.id.toString()))
-        .then((value) {
+    WilayahRepository.getKota(NetworkURL.getKota(provinsiModel!.id.toString())).then((value) {
       for (var i = 0; i < value.length; i++) {
-        listKota.add(KotaModel(
-            id: value[i]['id'],
-            name: value[i]['name'],
-            provinceId: provinsiModel!.id));
+        listKota.add(KotaModel(id: value[i]['id'], name: value[i]['name'], provinceId: provinsiModel!.id));
       }
 
       notifyListeners();
@@ -78,13 +73,9 @@ class KantorNotifier extends ChangeNotifier {
   getKecamatan() async {
     listKecamatan.clear();
     notifyListeners();
-    WilayahRepository.getKota(NetworkURL.getKecamatan(kotaModal!.id.toString()))
-        .then((value) {
+    WilayahRepository.getKota(NetworkURL.getKecamatan(kotaModal!.id.toString())).then((value) {
       for (var i = 0; i < value.length; i++) {
-        listKecamatan.add(KecamatanModel(
-            id: value[i]['id'],
-            name: value[i]['name'],
-            regencyId: kotaModal!.id));
+        listKecamatan.add(KecamatanModel(id: value[i]['id'], name: value[i]['name'], regencyId: kotaModal!.id));
       }
 
       notifyListeners();
@@ -102,13 +93,9 @@ class KantorNotifier extends ChangeNotifier {
   getKelurahan() async {
     listKelurahan.clear();
     notifyListeners();
-    WilayahRepository.getKelurahan(NetworkURL.getKelurahan(kecamatanModel!.id))
-        .then((value) {
+    WilayahRepository.getKelurahan(NetworkURL.getKelurahan(kecamatanModel!.id)).then((value) {
       for (var i = 0; i < value.length; i++) {
-        listKelurahan.add(KelurahanModel(
-            id: value[i]['id'],
-            name: value[i]['name'],
-            districtId: kecamatanModel!.id));
+        listKelurahan.add(KelurahanModel(id: value[i]['id'], name: value[i]['name'], districtId: kecamatanModel!.id));
       }
       notifyListeners();
     });
@@ -129,9 +116,7 @@ class KantorNotifier extends ChangeNotifier {
       "kode_pt": "001",
     };
     notifyListeners();
-    Setuprepository.getPerusahaan(
-            token, NetworkURL.gerPerusahaan(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.getPerusahaan(token, NetworkURL.gerPerusahaan(), jsonEncode(data)).then((value) {
       if (value['status'] == "Success") {
         for (Map<String, dynamic> i in value['data']) {
           listPerusahaan.add(PerusahaanModel.fromJson(i));
@@ -154,8 +139,7 @@ class KantorNotifier extends ChangeNotifier {
       "kode_pt": "001",
     };
     notifyListeners();
-    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data)).then((value) {
       if (value['status'] == "Success") {
         for (Map<String, dynamic> i in value['data']) {
           list.add(KantorModel.fromJson(i));
@@ -177,42 +161,26 @@ class KantorNotifier extends ChangeNotifier {
     provinsiModel = listProvinsi.where((e) => e.name == kantor!.provinsi).first;
     listKota.clear();
     notifyListeners();
-    WilayahRepository.getKota(NetworkURL.getKota(provinsiModel!.id.toString()))
-        .then((value) {
+    WilayahRepository.getKota(NetworkURL.getKota(provinsiModel!.id.toString())).then((value) {
       for (var i = 0; i < value.length; i++) {
-        listKota.add(KotaModel(
-            id: value[i]['id'],
-            name: value[i]['name'],
-            provinceId: provinsiModel!.id));
+        listKota.add(KotaModel(id: value[i]['id'], name: value[i]['name'], provinceId: provinsiModel!.id));
       }
       kotaModal = listKota.where((e) => e.name == kantor!.kota).first;
       listKecamatan.clear();
       notifyListeners();
-      WilayahRepository.getKota(
-              NetworkURL.getKecamatan(kotaModal!.id.toString()))
-          .then((valuess) {
+      WilayahRepository.getKota(NetworkURL.getKecamatan(kotaModal!.id.toString())).then((valuess) {
         for (var i = 0; i < valuess.length; i++) {
-          listKecamatan.add(KecamatanModel(
-              id: valuess[i]['id'],
-              name: valuess[i]['name'],
-              regencyId: kotaModal!.id));
+          listKecamatan.add(KecamatanModel(id: valuess[i]['id'], name: valuess[i]['name'], regencyId: kotaModal!.id));
         }
-        kecamatanModel =
-            listKecamatan.where((e) => e.name == kantor!.kecamatan).first;
+        kecamatanModel = listKecamatan.where((e) => e.name == kantor!.kecamatan).first;
         listKelurahan.clear();
         notifyListeners();
-        WilayahRepository.getKelurahan(
-                NetworkURL.getKelurahan(kecamatanModel!.id))
-            .then((e) {
+        WilayahRepository.getKelurahan(NetworkURL.getKelurahan(kecamatanModel!.id)).then((e) {
           Navigator.pop(context);
           for (var i = 0; i < e.length; i++) {
-            listKelurahan.add(KelurahanModel(
-                id: e[i]['id'],
-                name: e[i]['name'],
-                districtId: kecamatanModel!.id));
+            listKelurahan.add(KelurahanModel(id: e[i]['id'], name: e[i]['name'], districtId: kecamatanModel!.id));
           }
-          kelurahanModel =
-              listKelurahan.where((e) => e.name == kantor!.kelurahan).first;
+          kelurahanModel = listKelurahan.where((e) => e.name == kantor!.kelurahan).first;
           dialog = true;
           editData = true;
           notifyListeners();
@@ -232,10 +200,7 @@ class KantorNotifier extends ChangeNotifier {
             : kantor!.statusKantor == "D"
                 ? "Anak Cabang"
                 : "Outlet/Gudang";
-    kantorModel =
-        list.where((e) => e.kodeKantor == kantor!.kodeInduk).isNotEmpty
-            ? list.where((e) => e.kodeKantor == kantor!.kodeInduk).first
-            : null;
+    kantorModel = list.where((e) => e.kodeKantor == kantor!.kodeInduk).isNotEmpty ? list.where((e) => e.kodeKantor == kantor!.kodeInduk).first : null;
     noKantor.text = kantorModel!.kodeKantor;
     nama.text = kantor!.namaKantor;
     notelp.text = kantor!.telp;
@@ -325,7 +290,7 @@ class KantorNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -333,11 +298,11 @@ class KantorNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin menghapus ${kantor!.namaKantor}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -349,7 +314,7 @@ class KantorNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -374,9 +339,7 @@ class KantorNotifier extends ChangeNotifier {
     var json = {
       "id": kantor!.id,
     };
-    Setuprepository.deleteKantor(
-            token, NetworkURL.deletedKantor(), jsonEncode(json))
-        .then((value) {
+    Setuprepository.deleteKantor(token, NetworkURL.deletedKantor(), jsonEncode(json)).then((value) {
       Navigator.pop(context);
       if (value['status'] == "success") {
         getKantor();
@@ -398,25 +361,28 @@ class KantorNotifier extends ChangeNotifier {
         DialogCustom().showLoading(context);
         var json = {
           "id": kantor!.id,
-          "kode_pt": "${perusahaanModel!.kodePt}",
-          "kode_kantor": "${kode.text}",
-          "kode_induk": "${kantorModel == null ? "" : kantorModel!.kodeKantor}",
-          "nama_kantor": "${nama.text}",
-          "status_kantor":
-              "${status == "Pusat" ? "P" : status == "Cabang" ? "C" : status == "Anak Cabang" ? "D" : "E"}",
-          "alamat": "${alamat.text}",
-          "kelurahan": "${kelurahanModel!.name}",
-          "kecamatan": "${kecamatanModel!.name}",
-          "kota": "${kotaModal!.name}",
-          "provinsi": "${provinsiModel!.name}",
-          "kode_pos": "${kodepos.text}",
-          "telp": "${notelp.text.isEmpty ? "" : notelp.text}",
-          "fax": "${fax.text.isEmpty ? "" : fax.text}",
+          "kode_pt": perusahaanModel!.kodePt,
+          "kode_kantor": kode.text,
+          "kode_induk": kantorModel == null ? "" : kantorModel!.kodeKantor,
+          "nama_kantor": nama.text,
+          "status_kantor": status == "Pusat"
+              ? "P"
+              : status == "Cabang"
+                  ? "C"
+                  : status == "Anak Cabang"
+                      ? "D"
+                      : "E",
+          "alamat": alamat.text,
+          "kelurahan": kelurahanModel!.name,
+          "kecamatan": kecamatanModel!.name,
+          "kota": kotaModal!.name,
+          "provinsi": provinsiModel!.name,
+          "kode_pos": kodepos.text,
+          "telp": notelp.text.isEmpty ? "" : notelp.text,
+          "fax": fax.text.isEmpty ? "" : fax.text,
         };
         print(jsonEncode(json));
-        Setuprepository.insertKantor(
-                token, NetworkURL.updateKantor(), jsonEncode(json))
-            .then((value) {
+        Setuprepository.insertKantor(token, NetworkURL.updateKantor(), jsonEncode(json)).then((value) {
           Navigator.pop(context);
           if (value['status'] == "success") {
             getKantor();
@@ -431,24 +397,27 @@ class KantorNotifier extends ChangeNotifier {
       } else {
         DialogCustom().showLoading(context);
         var json = {
-          "kode_pt": "${perusahaanModel!.kodePt}",
-          "kode_kantor": "${kode.text}",
-          "kode_induk": "${kantorModel == null ? "" : kantorModel!.kodeKantor}",
-          "nama_kantor": "${nama.text}",
-          "status_kantor":
-              "${status == "Pusat" ? "P" : status == "Cabang" ? "C" : status == "Anak Cabang" ? "D" : "E"}",
-          "alamat": "${alamat.text}",
-          "kelurahan": "${kelurahanModel!.name}",
-          "kecamatan": "${kecamatanModel!.name}",
-          "kota": "${kotaModal!.name}",
-          "provinsi": "${provinsiModel!.name}",
-          "kode_pos": "${kodepos.text}",
-          "telp": "${notelp.text.isEmpty ? "" : notelp.text}",
-          "fax": "${fax.text.isEmpty ? "" : fax.text}",
+          "kode_pt": perusahaanModel!.kodePt,
+          "kode_kantor": kode.text,
+          "kode_induk": kantorModel == null ? "" : kantorModel!.kodeKantor,
+          "nama_kantor": nama.text,
+          "status_kantor": status == "Pusat"
+              ? "P"
+              : status == "Cabang"
+                  ? "C"
+                  : status == "Anak Cabang"
+                      ? "D"
+                      : "E",
+          "alamat": alamat.text,
+          "kelurahan": kelurahanModel!.name,
+          "kecamatan": kecamatanModel!.name,
+          "kota": kotaModal!.name,
+          "provinsi": provinsiModel!.name,
+          "kode_pos": kodepos.text,
+          "telp": notelp.text.isEmpty ? "" : notelp.text,
+          "fax": fax.text.isEmpty ? "" : fax.text,
         };
-        Setuprepository.insertKantor(
-                token, NetworkURL.addKantor(), jsonEncode(json))
-            .then((value) {
+        Setuprepository.insertKantor(token, NetworkURL.addKantor(), jsonEncode(json)).then((value) {
           Navigator.pop(context);
           if (value['status'] == "success") {
             informationDialog(context, "Information", value['message']);

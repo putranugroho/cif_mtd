@@ -35,10 +35,10 @@ class HutangPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Hutang",
                               style: TextStyle(
@@ -50,8 +50,7 @@ class HutangPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -60,10 +59,10 @@ class HutangPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah Data Hutang",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -74,7 +73,7 @@ class HutangPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         height: MediaQuery.of(context).size.height,
                         child: SfDataGrid(
                           headerRowHeight: 40,
@@ -92,10 +91,10 @@ class HutangPage extends StatelessWidget {
                                 width: 50,
                                 columnName: 'no',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('No',
+                                    child: const Text('No',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           fontSize: 12,
@@ -104,10 +103,10 @@ class HutangPage extends StatelessWidget {
                             GridColumn(
                                 columnName: 'status',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Status',
+                                    child: const Text('Status',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -118,8 +117,8 @@ class HutangPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Tanggal Invoice',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Tanggal Invoice',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -130,8 +129,8 @@ class HutangPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('No. Invoice',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('No. Invoice',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -142,8 +141,8 @@ class HutangPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nilai',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nilai',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -154,8 +153,8 @@ class HutangPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Customer',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Customer',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -166,8 +165,8 @@ class HutangPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Tanggal Bayar',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Tanggal Bayar',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -177,9 +176,9 @@ class HutangPage extends StatelessWidget {
                                 columnName: 'action',
                                 label: Container(
                                     color: colorPrimary,
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     alignment: Alignment.center,
-                                    child: Text('Action',
+                                    child: const Text('Action',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -201,7 +200,7 @@ class HutangPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -209,9 +208,9 @@ class HutangPage extends StatelessWidget {
                 bottom: 0,
                 child: value.dialog
                     ? Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         width: 600,
-                        decoration: BoxDecoration(color: Colors.white),
+                        decoration: const BoxDecoration(color: Colors.white),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
@@ -219,10 +218,8 @@ class HutangPage extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    value.editData
-                                        ? "Ubah / Hapus Data Hutang"
-                                        : "Tambah Data Hutang",
-                                    style: TextStyle(
+                                    value.editData ? "Ubah / Hapus Data Hutang" : "Tambah Data Hutang",
+                                    style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -233,16 +230,14 @@ class HutangPage extends StatelessWidget {
                                   child: Container(
                                     width: 40,
                                     height: 40,
-                                    padding: EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey[200],
-                                        shape: BoxShape.circle),
-                                    child: Icon(Icons.close),
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                    child: const Icon(Icons.close),
                                   ),
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 32,
                             ),
                             Expanded(
@@ -251,13 +246,13 @@ class HutangPage extends StatelessWidget {
                                 key: value.keyForm,
                                 child: ListView(
                                   children: [
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Nomor Invoice",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
+                                        SizedBox(width: 5),
                                       ],
                                     ),
                                     const SizedBox(
@@ -277,8 +272,7 @@ class HutangPage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         hintText: "Nomor Invoice",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -292,15 +286,15 @@ class HutangPage extends StatelessWidget {
                                           },
                                           activeColor: colorPrimary,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 8,
                                         ),
-                                        Text(
+                                        const Text(
                                           "Hutang Berjangka",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
                                         const SizedBox(width: 5),
-                                        Spacer(),
+                                        const Spacer(),
                                       ],
                                     ),
                                     const SizedBox(
@@ -311,17 +305,15 @@ class HutangPage extends StatelessWidget {
                                       children: [
                                         Expanded(
                                             child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
+                                          crossAxisAlignment: CrossAxisAlignment.stretch,
                                           children: [
-                                            Row(
+                                            const Row(
                                               children: [
                                                 Text(
                                                   "Tanggal Invoice",
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
-                                                const SizedBox(width: 5),
+                                                SizedBox(width: 5),
                                               ],
                                             ),
                                             const SizedBox(
@@ -346,9 +338,7 @@ class HutangPage extends StatelessWidget {
                                                   filled: true,
                                                   fillColor: Colors.grey[300],
                                                   border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            6),
+                                                    borderRadius: BorderRadius.circular(6),
                                                   ),
                                                 ),
                                               ),
@@ -357,25 +347,23 @@ class HutangPage extends StatelessWidget {
                                           ],
                                         )),
                                         value.jenis
-                                            ? SizedBox()
-                                            : SizedBox(
+                                            ? const SizedBox()
+                                            : const SizedBox(
                                                 width: 16,
                                               ),
                                         value.jenis
-                                            ? SizedBox()
+                                            ? const SizedBox()
                                             : Expanded(
                                                 child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
-                                                  Row(
+                                                  const Row(
                                                     children: [
                                                       Text(
                                                         "Tanggal Jatuh Tempo",
-                                                        style: const TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
-                                                      const SizedBox(width: 5),
+                                                      SizedBox(width: 5),
                                                     ],
                                                   ),
                                                   const SizedBox(
@@ -383,13 +371,11 @@ class HutangPage extends StatelessWidget {
                                                   ),
                                                   InkWell(
                                                     onTap: () {
-                                                      value
-                                                          .pilihTanggalJatuhTempo();
+                                                      value.pilihTanggalJatuhTempo();
                                                     },
                                                     child: TextFormField(
                                                       enabled: false,
-                                                      controller:
-                                                          value.tglJtTempo,
+                                                      controller: value.tglJtTempo,
                                                       validator: (e) {
                                                         if (e!.isEmpty) {
                                                           return "Wajib diisi";
@@ -397,18 +383,12 @@ class HutangPage extends StatelessWidget {
                                                           return null;
                                                         }
                                                       },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        hintText:
-                                                            "Tanggal Jatuh Tempo",
+                                                      decoration: InputDecoration(
+                                                        hintText: "Tanggal Jatuh Tempo",
                                                         filled: true,
-                                                        fillColor:
-                                                            Colors.grey[300],
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                        fillColor: Colors.grey[300],
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
@@ -420,21 +400,18 @@ class HutangPage extends StatelessWidget {
                                     ),
                                     value.jenis
                                         ? Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
-                                              Row(
+                                              const Row(
                                                 children: [
                                                   Text(
                                                     "Nominal",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
-                                                  const SizedBox(width: 5),
-                                                  const Text(
+                                                  SizedBox(width: 5),
+                                                  Text(
                                                     "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
+                                                    style: TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -442,13 +419,11 @@ class HutangPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               TextFormField(
-                                                textInputAction:
-                                                    TextInputAction.done,
+                                                textInputAction: TextInputAction.done,
                                                 controller: value.nilaiInvoice,
                                                 maxLines: 1,
                                                 inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly,
+                                                  FilteringTextInputFormatter.digitsOnly,
                                                   CurrencyInputFormatter(),
                                                 ],
                                                 validator: (e) {
@@ -461,9 +436,7 @@ class HutangPage extends StatelessWidget {
                                                 decoration: InputDecoration(
                                                   hintText: "Nilai Transaksi",
                                                   border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            6),
+                                                    borderRadius: BorderRadius.circular(6),
                                                   ),
                                                 ),
                                               ),
@@ -472,29 +445,23 @@ class HutangPage extends StatelessWidget {
                                               ),
                                               Row(
                                                 children: [
-                                                  Text(
+                                                  const Text(
                                                     "Jatuh Tempo",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
                                                   const SizedBox(width: 5),
-                                                  Spacer(),
+                                                  const Spacer(),
                                                   InkWell(
                                                     onTap: () {
                                                       value.addJatuhTempo();
                                                     },
                                                     child: Container(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 20,
-                                                              vertical: 8),
+                                                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                                                       decoration: BoxDecoration(
                                                         color: colorPrimary,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
+                                                        borderRadius: BorderRadius.circular(16),
                                                       ),
-                                                      child: Text(
+                                                      child: const Text(
                                                         "Tambah Jatuh Tempo",
                                                         style: TextStyle(
                                                           fontSize: 12,
@@ -509,73 +476,49 @@ class HutangPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               ListView.builder(
-                                                  itemCount: value
-                                                      .listTglJatuhTempo.length,
+                                                  itemCount: value.listTglJatuhTempo.length,
                                                   shrinkWrap: true,
-                                                  physics:
-                                                      ClampingScrollPhysics(),
+                                                  physics: const ClampingScrollPhysics(),
                                                   itemBuilder: (context, i) {
-                                                    final data = value
-                                                        .listTglJatuhTempo[i];
+                                                    final data = value.listTglJatuhTempo[i];
                                                     var no = 1 + i;
                                                     return Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .stretch,
+                                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                                       children: [
                                                         Row(
                                                           children: [
-                                                            Container(
+                                                            SizedBox(
                                                               width: 26,
-                                                              child:
-                                                                  Text("$no. "),
+                                                              child: Text("$no. "),
                                                             ),
                                                             Expanded(
                                                               child: InkWell(
                                                                 onTap: () {
-                                                                  value
-                                                                      .pilihJthTempo(
-                                                                          i);
+                                                                  value.pilihJthTempo(i);
                                                                 },
-                                                                child:
-                                                                    TextFormField(
-                                                                  enabled:
-                                                                      false,
-                                                                  controller:
-                                                                      value.listTglJatuhTempo[
-                                                                          i],
-                                                                  decoration: InputDecoration(
-                                                                      border:
-                                                                          OutlineInputBorder(),
-                                                                      hintText:
-                                                                          "Tanggal Jatuh Tempo"),
+                                                                child: TextFormField(
+                                                                  enabled: false,
+                                                                  controller: value.listTglJatuhTempo[i],
+                                                                  decoration: const InputDecoration(border: OutlineInputBorder(), hintText: "Tanggal Jatuh Tempo"),
                                                                 ),
                                                               ),
                                                             ),
-                                                            SizedBox(
+                                                            const SizedBox(
                                                               width: 16,
                                                             ),
                                                             Expanded(
-                                                                child:
-                                                                    TextFormField(
+                                                                child: TextFormField(
                                                               onChanged: (e) {
-                                                                value
-                                                                    .changeCalculate();
+                                                                value.changeCalculate();
                                                               },
-                                                              controller: value
-                                                                  .listNominal[i],
+                                                              controller: value.listNominal[i],
                                                               inputFormatters: [
-                                                                FilteringTextInputFormatter
-                                                                    .digitsOnly,
+                                                                FilteringTextInputFormatter.digitsOnly,
                                                                 CurrencyInputFormatter(),
                                                               ],
-                                                              decoration: InputDecoration(
-                                                                  border:
-                                                                      OutlineInputBorder(),
-                                                                  hintText:
-                                                                      "Nominal"),
+                                                              decoration: const InputDecoration(border: OutlineInputBorder(), hintText: "Nominal"),
                                                             )),
-                                                            SizedBox(
+                                                            const SizedBox(
                                                               width: 16,
                                                             ),
                                                             InkWell(
@@ -585,41 +528,36 @@ class HutangPage extends StatelessWidget {
                                                               child: Container(
                                                                 width: 30,
                                                                 height: 30,
-                                                                decoration: BoxDecoration(
-                                                                    color:
-                                                                        colorPrimary,
-                                                                    shape: BoxShape
-                                                                        .circle),
-                                                                child: Icon(
+                                                                decoration: const BoxDecoration(color: colorPrimary, shape: BoxShape.circle),
+                                                                child: const Icon(
                                                                   Icons.close,
                                                                   size: 20,
-                                                                  color: Colors
-                                                                      .white,
+                                                                  color: Colors.white,
                                                                 ),
                                                               ),
                                                             )
                                                           ],
                                                         ),
-                                                        SizedBox(
+                                                        const SizedBox(
                                                           height: 4,
                                                         ),
                                                       ],
                                                     );
                                                   }),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 8,
                                               ),
                                               Row(
                                                 children: [
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 26,
                                                   ),
-                                                  Expanded(
+                                                  const Expanded(
                                                       child: Text(
                                                     "Selisih",
                                                     textAlign: TextAlign.end,
                                                   )),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 16,
                                                   ),
                                                   Expanded(
@@ -627,25 +565,25 @@ class HutangPage extends StatelessWidget {
                                                     "Rp. ${FormatCurrency.oCcy.format(value.selisih)}",
                                                     textAlign: TextAlign.start,
                                                   )),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 16,
                                                   )
                                                 ],
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 16,
                                               ),
                                             ],
                                           )
-                                        : SizedBox(),
-                                    Row(
+                                        : const SizedBox(),
+                                    const Row(
                                       children: [
                                         Text(
                                           "Supplier",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -657,34 +595,24 @@ class HutangPage extends StatelessWidget {
                                     Row(
                                       children: [
                                         Expanded(
-                                          child: DropdownSearch<
-                                              CustomerSupplierModel>(
-                                            popupProps:
-                                                const PopupPropsMultiSelection
-                                                    .menu(
-                                              showSearchBox:
-                                                  true, // Aktifkan fitur pencarian
+                                          child: DropdownSearch<CustomerSupplierModel>(
+                                            popupProps: const PopupPropsMultiSelection.menu(
+                                              showSearchBox: true, // Aktifkan fitur pencarian
                                             ),
-                                            selectedItem:
-                                                value.customerSupplierModel,
+                                            selectedItem: value.customerSupplierModel,
                                             items: value.listCustomer,
-                                            itemAsString: (e) => "${e.nmSif}",
+                                            itemAsString: (e) => e.nmSif,
                                             onChanged: (e) {
                                               value.pilihCustomer(e!);
                                             },
-                                            dropdownDecoratorProps:
-                                                DropDownDecoratorProps(
-                                              baseStyle:
-                                                  TextStyle(fontSize: 16),
-                                              textAlignVertical:
-                                                  TextAlignVertical.center,
-                                              dropdownSearchDecoration:
-                                                  InputDecoration(
+                                            dropdownDecoratorProps: DropDownDecoratorProps(
+                                              baseStyle: const TextStyle(fontSize: 16),
+                                              textAlignVertical: TextAlignVertical.center,
+                                              dropdownSearchDecoration: InputDecoration(
                                                 hintText: "Pilih Supplier",
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  borderSide: BorderSide(
+                                                  borderRadius: BorderRadius.circular(8),
+                                                  borderSide: const BorderSide(
                                                     width: 1,
                                                     color: Colors.grey,
                                                   ),
@@ -697,23 +625,20 @@ class HutangPage extends StatelessWidget {
                                     ),
                                     const SizedBox(height: 16),
                                     value.jenis
-                                        ? SizedBox()
+                                        ? const SizedBox()
                                         : Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
-                                              Row(
+                                              const Row(
                                                 children: [
                                                   Text(
                                                     "Nominal",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
-                                                  const SizedBox(width: 5),
-                                                  const Text(
+                                                  SizedBox(width: 5),
+                                                  Text(
                                                     "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
+                                                    style: TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -721,13 +646,11 @@ class HutangPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               TextFormField(
-                                                textInputAction:
-                                                    TextInputAction.done,
+                                                textInputAction: TextInputAction.done,
                                                 controller: value.nilaiInvoice,
                                                 maxLines: 1,
                                                 inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly,
+                                                  FilteringTextInputFormatter.digitsOnly,
                                                   CurrencyInputFormatter(),
                                                 ],
                                                 validator: (e) {
@@ -740,27 +663,23 @@ class HutangPage extends StatelessWidget {
                                                 decoration: InputDecoration(
                                                   hintText: "Nilai Transaksi",
                                                   border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            6),
+                                                    borderRadius: BorderRadius.circular(6),
                                                   ),
                                                 ),
                                               ),
                                               const SizedBox(
                                                 height: 16,
                                               ),
-                                              Row(
+                                              const Row(
                                                 children: [
                                                   Text(
                                                     "PPN",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
-                                                  const SizedBox(width: 5),
-                                                  const Text(
+                                                  SizedBox(width: 5),
+                                                  Text(
                                                     "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
+                                                    style: TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -768,13 +687,11 @@ class HutangPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               TextFormField(
-                                                textInputAction:
-                                                    TextInputAction.done,
+                                                textInputAction: TextInputAction.done,
                                                 controller: value.ppn,
                                                 maxLines: 1,
                                                 inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly,
+                                                  FilteringTextInputFormatter.digitsOnly,
                                                   CurrencyInputFormatter(),
                                                 ],
                                                 validator: (e) {
@@ -787,27 +704,23 @@ class HutangPage extends StatelessWidget {
                                                 decoration: InputDecoration(
                                                   hintText: "Pajak",
                                                   border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            6),
+                                                    borderRadius: BorderRadius.circular(6),
                                                   ),
                                                 ),
                                               ),
                                               const SizedBox(
                                                 height: 16,
                                               ),
-                                              Row(
+                                              const Row(
                                                 children: [
                                                   Text(
                                                     "PPH",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
-                                                  const SizedBox(width: 5),
-                                                  const Text(
+                                                  SizedBox(width: 5),
+                                                  Text(
                                                     "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
+                                                    style: TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -815,13 +728,11 @@ class HutangPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               TextFormField(
-                                                textInputAction:
-                                                    TextInputAction.done,
+                                                textInputAction: TextInputAction.done,
                                                 controller: value.pph,
                                                 maxLines: 1,
                                                 inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly,
+                                                  FilteringTextInputFormatter.digitsOnly,
                                                   CurrencyInputFormatter(),
                                                 ],
                                                 validator: (e) {
@@ -834,9 +745,7 @@ class HutangPage extends StatelessWidget {
                                                 decoration: InputDecoration(
                                                   hintText: "PPH",
                                                   border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            6),
+                                                    borderRadius: BorderRadius.circular(6),
                                                   ),
                                                 ),
                                               ),
@@ -845,14 +754,14 @@ class HutangPage extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Pilih Kredit Akun",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -866,17 +775,14 @@ class HutangPage extends StatelessWidget {
                                         Expanded(
                                           child: TypeAheadField<InqueryGlModel>(
                                             controller: value.nosbb,
-                                            suggestionsCallback: (search) =>
-                                                value.getInquery(search),
-                                            builder: (context, controller,
-                                                focusNode) {
+                                            suggestionsCallback: (search) => value.getInquery(search),
+                                            builder: (context, controller, focusNode) {
                                               return TextField(
                                                   controller: controller,
                                                   focusNode: focusNode,
                                                   autofocus: true,
-                                                  decoration: InputDecoration(
-                                                    border:
-                                                        OutlineInputBorder(),
+                                                  decoration: const InputDecoration(
+                                                    border: OutlineInputBorder(),
                                                     labelText: 'Cari Akun',
                                                   ));
                                             },
@@ -892,16 +798,15 @@ class HutangPage extends StatelessWidget {
                                             },
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 16,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: 150,
                                           child: TextFormField(
                                             // enabled: false,
                                             readOnly: true,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             controller: value.namasbb,
                                             maxLines: 1,
                                             // inputFormatters: [
@@ -919,24 +824,23 @@ class HutangPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Nama Akun",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
                                         )
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Keterangan",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
+                                        SizedBox(width: 5),
                                       ],
                                     ),
                                     const SizedBox(
@@ -948,12 +852,11 @@ class HutangPage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         hintText: "Keterangan Transaksi",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     ButtonPrimary(
@@ -964,10 +867,9 @@ class HutangPage extends StatelessWidget {
                                     ),
                                     value.editData
                                         ? Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 16,
                                               ),
                                               ButtonDanger(
@@ -978,7 +880,7 @@ class HutangPage extends StatelessWidget {
                                               ),
                                             ],
                                           )
-                                        : SizedBox()
+                                        : const SizedBox()
                                   ],
                                 ),
                               ),
@@ -986,7 +888,7 @@ class HutangPage extends StatelessWidget {
                           ],
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
             ],
           ),
@@ -1016,10 +918,7 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'status', value: data.statusInvoice),
                 DataGridCell(columnName: 'tanggal', value: data.tglInvoice),
                 DataGridCell(columnName: 'invoice', value: data.noInvoice),
-                DataGridCell(
-                    columnName: 'nilai',
-                    value: FormatCurrency.oCcy
-                        .format(int.parse(data.nilaiInvoice))),
+                DataGridCell(columnName: 'nilai', value: FormatCurrency.oCcy.format(int.parse(data.nilaiInvoice))),
                 DataGridCell(columnName: 'supplier', value: data.nmSif),
                 DataGridCell(columnName: 'tgl_bayar', value: data.tglBayar),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
@@ -1042,7 +941,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -1051,10 +950,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),
@@ -1071,7 +970,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: e.value == "A"

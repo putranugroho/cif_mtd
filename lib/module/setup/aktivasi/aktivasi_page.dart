@@ -31,10 +31,10 @@ class AktivasiPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Hari Kerja",
                               style: TextStyle(
@@ -46,8 +46,7 @@ class AktivasiPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -56,10 +55,10 @@ class AktivasiPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah Hari Kerja",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -70,7 +69,7 @@ class AktivasiPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         height: MediaQuery.of(context).size.height,
                         child: SfDataGrid(
                           headerRowHeight: 40,
@@ -88,10 +87,10 @@ class AktivasiPage extends StatelessWidget {
                                 width: 50,
                                 columnName: 'no',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('No',
+                                    child: const Text('No',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           fontSize: 12,
@@ -101,10 +100,10 @@ class AktivasiPage extends StatelessWidget {
                                 width: 100,
                                 columnName: 'kd_aktivasi',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Kode Kelompok',
+                                    child: const Text('Kode Kelompok',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -115,8 +114,8 @@ class AktivasiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama Kelompok',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nama Kelompok',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -128,8 +127,8 @@ class AktivasiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Hari',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Hari',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -141,8 +140,8 @@ class AktivasiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Jam Masuk',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Jam Masuk',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -154,8 +153,8 @@ class AktivasiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Jam Pulang',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Jam Pulang',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -166,9 +165,9 @@ class AktivasiPage extends StatelessWidget {
                                 columnName: 'action',
                                 label: Container(
                                     color: colorPrimary,
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     alignment: Alignment.center,
-                                    child: Text('Action',
+                                    child: const Text('Action',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -190,7 +189,7 @@ class AktivasiPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -198,9 +197,9 @@ class AktivasiPage extends StatelessWidget {
                 right: 0,
                 child: value.dialog
                     ? Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         width: 600,
-                        decoration: BoxDecoration(color: Colors.white),
+                        decoration: const BoxDecoration(color: Colors.white),
                         child: Form(
                           key: value.keyForm,
                           child: Column(
@@ -210,10 +209,8 @@ class AktivasiPage extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      value.editData
-                                          ? "Ubah / Hapus Kelompok"
-                                          : "Tambah Kelompok",
-                                      style: TextStyle(
+                                      value.editData ? "Ubah / Hapus Kelompok" : "Tambah Kelompok",
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -224,29 +221,27 @@ class AktivasiPage extends StatelessWidget {
                                     child: Container(
                                       width: 40,
                                       height: 40,
-                                      padding: EdgeInsets.all(4),
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey[200],
-                                          shape: BoxShape.circle),
-                                      child: Icon(Icons.close),
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                      child: const Icon(Icons.close),
                                     ),
                                   )
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 32,
                               ),
                               Expanded(
                                   child: ListView(
                                 children: [
-                                  Row(
+                                  const Row(
                                     children: [
                                       Text(
                                         "Kode Kelompok",
-                                        style: const TextStyle(fontSize: 12),
+                                        style: TextStyle(fontSize: 12),
                                       ),
-                                      const SizedBox(width: 5),
-                                      const Text(
+                                      SizedBox(width: 5),
+                                      Text(
                                         "*",
                                         style: TextStyle(fontSize: 8),
                                       ),
@@ -280,14 +275,14 @@ class AktivasiPage extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(height: 16),
-                                  Row(
+                                  const Row(
                                     children: [
                                       Text(
                                         "Nama Kelompok",
-                                        style: const TextStyle(fontSize: 12),
+                                        style: TextStyle(fontSize: 12),
                                       ),
-                                      const SizedBox(width: 5),
-                                      const Text(
+                                      SizedBox(width: 5),
+                                      Text(
                                         "*",
                                         style: TextStyle(fontSize: 8),
                                       ),
@@ -318,14 +313,14 @@ class AktivasiPage extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(height: 16),
-                                  Row(
+                                  const Row(
                                     children: [
                                       Text(
                                         "Hari Kerja",
-                                        style: const TextStyle(fontSize: 12),
+                                        style: TextStyle(fontSize: 12),
                                       ),
-                                      const SizedBox(width: 5),
-                                      const Text(
+                                      SizedBox(width: 5),
+                                      Text(
                                         "*",
                                         style: TextStyle(fontSize: 8),
                                       ),
@@ -336,42 +331,33 @@ class AktivasiPage extends StatelessWidget {
                                   ),
                                   ListView(
                                     shrinkWrap: true,
-                                    physics: ClampingScrollPhysics(),
+                                    physics: const ClampingScrollPhysics(),
                                     children: value.listHari
                                         .map((e) => Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.stretch,
+                                              crossAxisAlignment: CrossAxisAlignment.stretch,
                                               children: [
                                                 Row(
                                                   children: [
                                                     Checkbox(
-                                                        activeColor:
-                                                            colorPrimary,
-                                                        value: value.listHariAdd
-                                                                .isEmpty
+                                                        activeColor: colorPrimary,
+                                                        value: value.listHariAdd.isEmpty
                                                             ? false
-                                                            : value.listHariAdd
-                                                                    .where(
-                                                                        (f) =>
-                                                                            f ==
-                                                                            e)
-                                                                    .isNotEmpty
+                                                            : value.listHariAdd.where((f) => f == e).isNotEmpty
                                                                 ? true
                                                                 : false,
-                                                        onChanged: (g) =>
-                                                            value.pilihHari(e)),
-                                                    SizedBox(
+                                                        onChanged: (g) => value.pilihHari(e)),
+                                                    const SizedBox(
                                                       width: 8,
                                                     ),
                                                     Text(
-                                                      "$e",
-                                                      style: TextStyle(
+                                                      e,
+                                                      style: const TextStyle(
                                                         fontSize: 12,
                                                       ),
                                                     ),
                                                   ],
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 8,
                                                 )
                                               ],
@@ -379,36 +365,32 @@ class AktivasiPage extends StatelessWidget {
                                         .toList(),
                                   ),
                                   value.showHariError
-                                      ? Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 8.0),
+                                      ? const Padding(
+                                          padding: EdgeInsets.only(top: 8.0),
                                           child: Text(
                                             "Wajib memilih minimal 1 hari",
                                             style: TextStyle(color: Colors.red),
                                           ),
                                         )
-                                      : SizedBox(),
-                                  SizedBox(
+                                      : const SizedBox(),
+                                  const SizedBox(
                                     height: 8,
                                   ),
                                   Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
                                           child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
-                                          Row(
+                                          const Row(
                                             children: [
                                               Text(
                                                 "Jam Masuk",
-                                                style: const TextStyle(
-                                                    fontSize: 12),
+                                                style: TextStyle(fontSize: 12),
                                               ),
-                                              const SizedBox(width: 5),
-                                              const Text(
+                                              SizedBox(width: 5),
+                                              Text(
                                                 "*",
                                                 style: TextStyle(fontSize: 8),
                                               ),
@@ -424,8 +406,7 @@ class AktivasiPage extends StatelessWidget {
                                             child: TextFormField(
                                               enabled: false,
                                               controller: value.jamMulai,
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              textInputAction: TextInputAction.done,
                                               style: const TextStyle(
                                                 // Make text bigger and black
                                                 color: Colors.black,
@@ -445,19 +426,13 @@ class AktivasiPage extends StatelessWidget {
                                               },
                                               decoration: InputDecoration(
                                                 hintText: "jam Masuk",
-                                                hintStyle: const TextStyle(
-                                                    color: Colors.grey),
+                                                hintStyle: const TextStyle(color: Colors.grey),
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
-                                                disabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.grey.shade600),
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                disabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: Colors.grey.shade600),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -465,23 +440,21 @@ class AktivasiPage extends StatelessWidget {
                                           const SizedBox(height: 16),
                                         ],
                                       )),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 16,
                                       ),
                                       Expanded(
                                           child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
-                                          Row(
+                                          const Row(
                                             children: [
                                               Text(
                                                 "Jam Pulang",
-                                                style: const TextStyle(
-                                                    fontSize: 12),
+                                                style: TextStyle(fontSize: 12),
                                               ),
-                                              const SizedBox(width: 5),
-                                              const Text(
+                                              SizedBox(width: 5),
+                                              Text(
                                                 "*",
                                                 style: TextStyle(fontSize: 8),
                                               ),
@@ -496,8 +469,7 @@ class AktivasiPage extends StatelessWidget {
                                             },
                                             child: TextFormField(
                                               enabled: false,
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              textInputAction: TextInputAction.done,
                                               controller: value.jamSelesai,
                                               maxLines: 1,
                                               style: const TextStyle(
@@ -518,19 +490,13 @@ class AktivasiPage extends StatelessWidget {
                                               },
                                               decoration: InputDecoration(
                                                 hintText: "Jam Pulang",
-                                                hintStyle: const TextStyle(
-                                                    color: Colors.grey),
+                                                hintStyle: const TextStyle(color: Colors.grey),
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
-                                                disabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.grey.shade600),
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                disabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: Colors.grey.shade600),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -549,8 +515,7 @@ class AktivasiPage extends StatelessWidget {
                                   ),
                                   value.editData
                                       ? Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
+                                          crossAxisAlignment: CrossAxisAlignment.stretch,
                                           children: [
                                             const SizedBox(height: 16),
                                             ButtonDanger(
@@ -561,14 +526,14 @@ class AktivasiPage extends StatelessWidget {
                                             ),
                                           ],
                                         )
-                                      : SizedBox()
+                                      : const SizedBox()
                                 ],
                               ))
                             ],
                           ),
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -597,13 +562,7 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'no', value: (index++).toString()),
                 DataGridCell(columnName: 'kd_aktivasi', value: data.kdAktivasi),
                 DataGridCell(columnName: 'nm_aktivasi', value: data.nmAktivasi),
-                DataGridCell(
-                    columnName: 'hari',
-                    value: data.hari
-                        .replaceAll("[", '')
-                        .replaceAll(",", ", ")
-                        .replaceAll("]", "")
-                        .replaceAll("'", "")),
+                DataGridCell(columnName: 'hari', value: data.hari.replaceAll("[", '').replaceAll(",", ", ").replaceAll("]", "").replaceAll("'", "")),
                 DataGridCell(columnName: 'jam_mulai', value: data.jamMulai),
                 DataGridCell(columnName: 'jam_selesai', value: data.jamSelesai),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
@@ -626,7 +585,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -635,10 +594,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),

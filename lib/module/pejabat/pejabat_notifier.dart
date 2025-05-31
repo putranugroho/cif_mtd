@@ -28,8 +28,7 @@ class PejabatNotifier extends ChangeNotifier {
       "kode_pt": "001",
       "kode_kantor": "1001",
     };
-    Setuprepository.setup(token, NetworkURL.getPejabat(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getPejabat(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(PejabatModel.fromJson(i));
@@ -52,8 +51,7 @@ class PejabatNotifier extends ChangeNotifier {
     var data = {
       "kode_pt": "001",
     };
-    Setuprepository.setup(token, NetworkURL.getKantor(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getKantor(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listKantor.add(KantorModel.fromJson(i));
@@ -74,8 +72,7 @@ class PejabatNotifier extends ChangeNotifier {
       "kode_pt": "001",
       "kode_kantor": "1001",
     };
-    Setuprepository.setup(token, NetworkURL.getjabatan(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getjabatan(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listJabatan.add(JabatanModel.fromJson(i));
@@ -107,7 +104,7 @@ class PejabatNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -115,11 +112,11 @@ class PejabatNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin menghapus ${pejabatModel!.namaPejabat}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -131,7 +128,7 @@ class PejabatNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -157,19 +154,19 @@ class PejabatNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
+                  const Text(
                     "Apakah data sudah benar ?",
                     style: TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -181,7 +178,7 @@ class PejabatNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -203,9 +200,10 @@ class PejabatNotifier extends ChangeNotifier {
 
   remove() {
     DialogCustom().showLoading(context);
-    var data = {"id": pejabatModel!.id};
-    Setuprepository.setup(token, NetworkURL.deletedPejabat(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "id": pejabatModel!.id
+    };
+    Setuprepository.setup(token, NetworkURL.deletedPejabat(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getPejabat();
@@ -229,8 +227,7 @@ class PejabatNotifier extends ChangeNotifier {
     jabatan.text = pejabatModel!.idJabatan;
     department.text = pejabatModel!.department;
 // department.text = pejabatModel!.;
-    kantorModel =
-        listKantor.where((e) => e.kodeKantor == pejabatModel!.kodeKantor).first;
+    kantorModel = listKantor.where((e) => e.kodeKantor == pejabatModel!.kodeKantor).first;
 
     dialog = true;
     editData = true;
@@ -256,7 +253,9 @@ class PejabatNotifier extends ChangeNotifier {
     if (query.isNotEmpty && query.length > 2 && editData == false) {
       listKaryawan.clear();
       notifyListeners();
-      var data = {"nama": query};
+      var data = {
+        "nama": query
+      };
       try {
         final response = await Setuprepository.setup(
           token,
@@ -293,18 +292,16 @@ class PejabatNotifier extends ChangeNotifier {
         DialogCustom().showLoading(context);
         var data = {
           "id": pejabatModel!.id,
-          "kode_pt": "${kantorModel!.kodePt}",
-          "kode_kantor": "${kantorModel!.kodeKantor}",
-          "kode_induk": "${kantorModel!.kodeInduk}",
-          "nik": "${nik.text.trim()}",
-          "nama_pejabat": "${nama.text.trim()}",
-          "no_hp_pejabat": "${noHp.text.trim()}",
-          "id_jabatan": "${jabatan.text}",
-          "department": "${department.text}",
+          "kode_pt": kantorModel!.kodePt,
+          "kode_kantor": kantorModel!.kodeKantor,
+          "kode_induk": kantorModel!.kodeInduk,
+          "nik": nik.text.trim(),
+          "nama_pejabat": nama.text.trim(),
+          "no_hp_pejabat": noHp.text.trim(),
+          "id_jabatan": jabatan.text,
+          "department": department.text,
         };
-        Setuprepository.setup(
-                token, NetworkURL.updatedPejabat(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.updatedPejabat(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);
@@ -318,17 +315,16 @@ class PejabatNotifier extends ChangeNotifier {
       } else {
         DialogCustom().showLoading(context);
         var data = {
-          "kode_pt": "${kantorModel!.kodePt}",
-          "kode_kantor": "${kantorModel!.kodeKantor}",
-          "kode_induk": "${kantorModel!.kodeInduk}",
-          "nik": "${nik.text.trim()}",
-          "nama_pejabat": "${nama.text.trim()}",
-          "no_hp_pejabat": "${noHp.text.trim()}",
-          "id_jabatan": "${jabatan.text}",
-          "department": "${department.text}",
+          "kode_pt": kantorModel!.kodePt,
+          "kode_kantor": kantorModel!.kodeKantor,
+          "kode_induk": kantorModel!.kodeInduk,
+          "nik": nik.text.trim(),
+          "nama_pejabat": nama.text.trim(),
+          "no_hp_pejabat": noHp.text.trim(),
+          "id_jabatan": jabatan.text,
+          "department": department.text,
         };
-        Setuprepository.setup(token, NetworkURL.addPejabat(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.addPejabat(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);

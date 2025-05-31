@@ -31,10 +31,10 @@ class AksesPointPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Akses Point",
                               style: TextStyle(
@@ -46,8 +46,7 @@ class AksesPointPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -56,10 +55,10 @@ class AksesPointPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah Akses Point",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -91,7 +90,7 @@ class AksesPointPage extends StatelessWidget {
                               ),
                             )
                           : Container(
-                              padding: EdgeInsets.all(20),
+                              padding: const EdgeInsets.all(20),
                               height: MediaQuery.of(context).size.height,
                               child: SfDataGrid(
                                 headerRowHeight: 40,
@@ -100,8 +99,7 @@ class AksesPointPage extends StatelessWidget {
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
-                                headerGridLinesVisibility:
-                                    GridLinesVisibility.both,
+                                headerGridLinesVisibility: GridLinesVisibility.both,
                                 selectionMode: SelectionMode.single,
 
                                 source: DetailDataSource(value),
@@ -109,10 +107,10 @@ class AksesPointPage extends StatelessWidget {
                                   GridColumn(
                                       columnName: 'no_akses',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Kode AP',
+                                          child: const Text('Kode AP',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 12,
@@ -123,8 +121,8 @@ class AksesPointPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Akses ID',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Akses ID',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -135,8 +133,8 @@ class AksesPointPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Type',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Type',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -145,10 +143,10 @@ class AksesPointPage extends StatelessWidget {
                                   GridColumn(
                                       columnName: 'lokasi',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Lokasi',
+                                          child: const Text('Lokasi',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -158,10 +156,10 @@ class AksesPointPage extends StatelessWidget {
                                       columnName: 'alamat',
                                       width: 300,
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Alamat',
+                                          child: const Text('Alamat',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -171,10 +169,10 @@ class AksesPointPage extends StatelessWidget {
                                       columnName: 'keterangan',
                                       width: 200,
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Keterangan',
+                                          child: const Text('Keterangan',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -185,9 +183,9 @@ class AksesPointPage extends StatelessWidget {
                                       width: 80,
                                       label: Container(
                                           color: colorPrimary,
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           alignment: Alignment.center,
-                                          child: Text('Action',
+                                          child: const Text('Action',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -209,7 +207,7 @@ class AksesPointPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -217,9 +215,9 @@ class AksesPointPage extends StatelessWidget {
                 right: 0,
                 child: value.dialog
                     ? Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         width: 700,
-                        decoration: BoxDecoration(color: Colors.white),
+                        decoration: const BoxDecoration(color: Colors.white),
                         child: Form(
                           key: value.keyForm,
                           child: Column(
@@ -229,10 +227,8 @@ class AksesPointPage extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      value.editData
-                                          ? "Ubah / Hapus Akses Point"
-                                          : "Tambah Akses Point",
-                                      style: TextStyle(
+                                      value.editData ? "Ubah / Hapus Akses Point" : "Tambah Akses Point",
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -243,27 +239,25 @@ class AksesPointPage extends StatelessWidget {
                                     child: Container(
                                       width: 40,
                                       height: 40,
-                                      padding: EdgeInsets.all(4),
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey[200],
-                                          shape: BoxShape.circle),
-                                      child: Icon(Icons.close),
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                      child: const Icon(Icons.close),
                                     ),
                                   )
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 32,
                               ),
-                              Container(
+                              SizedBox(
                                   height: 40,
                                   child: Row(
                                     children: [
-                                      Container(
-                                        width: 200,
-                                        child: Text("Kantor"),
-                                      ),
                                       SizedBox(
+                                        width: 200,
+                                        child: const Text("Kantor"),
+                                      ),
+                                      const SizedBox(
                                         width: 16,
                                       ),
                                       Expanded(
@@ -274,31 +268,23 @@ class AksesPointPage extends StatelessWidget {
                                             }
                                             return null;
                                           },
-                                          popupProps:
-                                              const PopupPropsMultiSelection
-                                                  .menu(
-                                            showSearchBox:
-                                                true, // Aktifkan fitur pencarian
+                                          popupProps: const PopupPropsMultiSelection.menu(
+                                            showSearchBox: true, // Aktifkan fitur pencarian
                                           ),
                                           selectedItem: value.kantor,
                                           items: value.list,
-                                          itemAsString: (e) =>
-                                              "${e.namaKantor}",
+                                          itemAsString: (e) => e.namaKantor,
                                           onChanged: (e) {
                                             value.pilihKantor(e!);
                                           },
-                                          dropdownDecoratorProps:
-                                              DropDownDecoratorProps(
-                                            baseStyle: TextStyle(fontSize: 16),
-                                            textAlignVertical:
-                                                TextAlignVertical.center,
-                                            dropdownSearchDecoration:
-                                                InputDecoration(
+                                          dropdownDecoratorProps: DropDownDecoratorProps(
+                                            baseStyle: const TextStyle(fontSize: 16),
+                                            textAlignVertical: TextAlignVertical.center,
+                                            dropdownSearchDecoration: InputDecoration(
                                               hintText: "Pilih Kantor",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                borderSide: BorderSide(
+                                                borderRadius: BorderRadius.circular(8),
+                                                borderSide: const BorderSide(
                                                   width: 1,
                                                   color: Colors.grey,
                                                 ),
@@ -309,18 +295,18 @@ class AksesPointPage extends StatelessWidget {
                                       )
                                     ],
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
-                              Container(
+                              SizedBox(
                                   height: 40,
                                   child: Row(
                                     children: [
-                                      Container(
-                                        width: 200,
-                                        child: Text("Kode Akses Point"),
-                                      ),
                                       SizedBox(
+                                        width: 200,
+                                        child: const Text("Kode Akses Point"),
+                                      ),
+                                      const SizedBox(
                                         width: 16,
                                       ),
                                       Expanded(
@@ -335,25 +321,24 @@ class AksesPointPage extends StatelessWidget {
                                         },
                                         decoration: InputDecoration(
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       ))
                                     ],
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
-                              Container(
+                              SizedBox(
                                   height: 40,
                                   child: Row(
                                     children: [
-                                      Container(
-                                        width: 200,
-                                        child: Text("Akses ID"),
-                                      ),
                                       SizedBox(
+                                        width: 200,
+                                        child: const Text("Akses ID"),
+                                      ),
+                                      const SizedBox(
                                         width: 16,
                                       ),
                                       Expanded(
@@ -368,25 +353,24 @@ class AksesPointPage extends StatelessWidget {
                                         },
                                         decoration: InputDecoration(
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       ))
                                     ],
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
-                              Container(
+                              SizedBox(
                                   height: 40,
                                   child: Row(
                                     children: [
-                                      Container(
-                                        width: 200,
-                                        child: Text("Lokasi"),
-                                      ),
                                       SizedBox(
+                                        width: 200,
+                                        child: const Text("Lokasi"),
+                                      ),
+                                      const SizedBox(
                                         width: 16,
                                       ),
                                       Expanded(
@@ -399,11 +383,11 @@ class AksesPointPage extends StatelessWidget {
                                               onChanged: (e) {
                                                 value.pilihlokasi(e!);
                                               }),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 8,
                                           ),
-                                          Text("Kantor"),
-                                          SizedBox(
+                                          const Text("Kantor"),
+                                          const SizedBox(
                                             width: 32,
                                           ),
                                           Radio(
@@ -413,11 +397,11 @@ class AksesPointPage extends StatelessWidget {
                                               onChanged: (e) {
                                                 value.pilihlokasi(e!);
                                               }),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 8,
                                           ),
-                                          Text("Luar Kantor"),
-                                          SizedBox(
+                                          const Text("Luar Kantor"),
+                                          const SizedBox(
                                             width: 32,
                                           ),
                                           Radio(
@@ -427,26 +411,26 @@ class AksesPointPage extends StatelessWidget {
                                               onChanged: (e) {
                                                 value.pilihlokasi(e!);
                                               }),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 8,
                                           ),
-                                          Text("Rumah Karyawan"),
+                                          const Text("Rumah Karyawan"),
                                         ],
                                       ))
                                     ],
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
-                              Container(
+                              SizedBox(
                                   height: 40,
                                   child: Row(
                                     children: [
-                                      Container(
-                                        width: 200,
-                                        child: Text("Alamat"),
-                                      ),
                                       SizedBox(
+                                        width: 200,
+                                        child: const Text("Alamat"),
+                                      ),
+                                      const SizedBox(
                                         width: 16,
                                       ),
                                       Expanded(
@@ -461,25 +445,24 @@ class AksesPointPage extends StatelessWidget {
                                         },
                                         decoration: InputDecoration(
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       ))
                                     ],
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
-                              Container(
+                              SizedBox(
                                   height: 40,
                                   child: Row(
                                     children: [
-                                      Container(
-                                        width: 200,
-                                        child: Text("Keterangan"),
-                                      ),
                                       SizedBox(
+                                        width: 200,
+                                        child: const Text("Keterangan"),
+                                      ),
+                                      const SizedBox(
                                         width: 16,
                                       ),
                                       Expanded(
@@ -487,25 +470,24 @@ class AksesPointPage extends StatelessWidget {
                                         controller: value.keterangan,
                                         decoration: InputDecoration(
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       ))
                                     ],
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
-                              Container(
+                              SizedBox(
                                   height: 40,
                                   child: Row(
                                     children: [
-                                      Container(
-                                        width: 200,
-                                        child: Text("Tipe Akses"),
-                                      ),
                                       SizedBox(
+                                        width: 200,
+                                        child: const Text("Tipe Akses"),
+                                      ),
+                                      const SizedBox(
                                         width: 16,
                                       ),
                                       Expanded(
@@ -518,11 +500,11 @@ class AksesPointPage extends StatelessWidget {
                                               onChanged: (e) {
                                                 value.pilihAkses(e!);
                                               }),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 8,
                                           ),
-                                          Text("LAN"),
-                                          SizedBox(
+                                          const Text("LAN"),
+                                          const SizedBox(
                                             width: 32,
                                           ),
                                           Radio(
@@ -532,15 +514,15 @@ class AksesPointPage extends StatelessWidget {
                                               onChanged: (e) {
                                                 value.pilihAkses(e!);
                                               }),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 8,
                                           ),
-                                          Text("WIFI"),
+                                          const Text("WIFI"),
                                         ],
                                       ))
                                     ],
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
                               const SizedBox(height: 16),
@@ -552,8 +534,7 @@ class AksesPointPage extends StatelessWidget {
                               ),
                               value.editData
                                   ? Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         const SizedBox(height: 16),
                                         ButtonDanger(
@@ -564,12 +545,12 @@ class AksesPointPage extends StatelessWidget {
                                         ),
                                       ],
                                     )
-                                  : SizedBox()
+                                  : const SizedBox()
                             ],
                           ),
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -621,7 +602,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -630,10 +611,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),

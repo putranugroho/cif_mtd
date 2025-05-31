@@ -29,9 +29,10 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
     isLoading = true;
     listAo.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listAo.add(AoModel.fromJson(i));
@@ -79,7 +80,9 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -89,14 +92,8 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -131,14 +128,13 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
     list.clear();
     isLoading = true;
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        list =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        list = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         // inqueryGlModeldeb = listGl[0];
         tambahTransaksi();
         isLoading = false;
@@ -187,25 +183,13 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
   }
 
   changeMaster() {
-    total = double.parse(nominal.text
-        .replaceAll(".", '')
-        .replaceAll("Rp ", '')
-        .replaceAll(",", "."));
+    total = double.parse(nominal.text.replaceAll(".", '').replaceAll("Rp ", '').replaceAll(",", "."));
     notifyListeners();
   }
 
   double total = 0;
   changeTotal() {
-    total = double.parse(nominal.text
-            .replaceAll(".", '')
-            .replaceAll("Rp ", '')
-            .replaceAll(",", ".")) -
-        listAmount
-            .map((e) => double.parse(e.text
-                .replaceAll(".", "")
-                .replaceAll("Rp ", '')
-                .replaceAll(",", ".")))
-            .reduce((a, b) => a + b);
+    total = double.parse(nominal.text.replaceAll(".", '').replaceAll("Rp ", '').replaceAll(",", ".")) - listAmount.map((e) => double.parse(e.text.replaceAll(".", "").replaceAll("Rp ", '').replaceAll(",", "."))).reduce((a, b) => a + b);
     notifyListeners();
   }
 
@@ -213,7 +197,7 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
     showDialog(
         context: context,
         builder: (context) {
-          return Dialog();
+          return const Dialog();
         });
   }
 
@@ -248,8 +232,7 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTransaksi = pickedendDate;
-      tglTransaksiText.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglTransaksiText.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -287,8 +270,7 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglBackDate = pickedendDate;
-      tglBackDatetext.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglBackDatetext.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }

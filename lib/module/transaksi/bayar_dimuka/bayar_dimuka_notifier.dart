@@ -45,9 +45,10 @@ class BayarDimukaNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": users!.kodePt};
-    Setuprepository.setup(token, NetworkURL.viewbayardimuka(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": users!.kodePt
+    };
+    Setuprepository.setup(token, NetworkURL.viewbayardimuka(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(TransaksiBayarDimukaModel.fromJson(i));
@@ -64,9 +65,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
     void traverse(List<dynamic> items) {
       for (var item in items) {
         if (item is Map<String, dynamic>) {
-          if (item['jns_acc'] == 'C' &&
-              item['type_posting'] == "Y" &&
-              item['gol_acc'] == "4") {
+          if (item['jns_acc'] == 'C' && item['type_posting'] == "Y" && item['gol_acc'] == "4") {
             result.add(item);
           }
 
@@ -124,32 +123,16 @@ class BayarDimukaNotifier extends ChangeNotifier {
     dialogEdit = true;
     editData = true;
     dialog = false;
-    nominal.text = FormatCurrency.oCcy
-        .format(int.parse(transaksiBayarDimukaModel!.nominal))
-        .replaceAll(".", ",");
+    nominal.text = FormatCurrency.oCcy.format(int.parse(transaksiBayarDimukaModel!.nominal)).replaceAll(".", ",");
     tglPenyusutan.text = transaksiBayarDimukaModel!.mulaiSusu;
     berapakali.text = transaksiBayarDimukaModel!.masaBayar;
     keteranganBaru.text = transaksiBayarDimukaModel!.keterangan;
-    nilaiPengakuan.text = FormatCurrency.oCcy
-        .format(int.parse(transaksiBayarDimukaModel!.nilaiPengakuan))
-        .replaceAll(".", ",");
+    nilaiPengakuan.text = FormatCurrency.oCcy.format(int.parse(transaksiBayarDimukaModel!.nilaiPengakuan)).replaceAll(".", ",");
 
-    inqueryGlModelcre = listGlAll
-            .where((e) => e.nosbb == transaksiBayarDimukaModel!.debetSbb)
-            .isNotEmpty
-        ? listGlAll
-            .where((e) => e.nosbb == transaksiBayarDimukaModel!.debetSbb)
-            .first
-        : null;
+    inqueryGlModelcre = listGlAll.where((e) => e.nosbb == transaksiBayarDimukaModel!.debetSbb).isNotEmpty ? listGlAll.where((e) => e.nosbb == transaksiBayarDimukaModel!.debetSbb).first : null;
     noakun.text = inqueryGlModelcre!.nosbb;
     namaakun.text = inqueryGlModelcre!.namaSbb;
-    inqueryGlModeldeb = listGlAll
-            .where((e) => e.nosbb == transaksiBayarDimukaModel!.creditSbb)
-            .isNotEmpty
-        ? listGlAll
-            .where((e) => e.nosbb == transaksiBayarDimukaModel!.creditSbb)
-            .first
-        : null;
+    inqueryGlModeldeb = listGlAll.where((e) => e.nosbb == transaksiBayarDimukaModel!.creditSbb).isNotEmpty ? listGlAll.where((e) => e.nosbb == transaksiBayarDimukaModel!.creditSbb).first : null;
     nosbbdeb.text = inqueryGlModeldeb!.namaSbb;
     namaSbbDeb.text = inqueryGlModeldeb!.nosbb;
     notifyListeners();
@@ -161,19 +144,19 @@ class BayarDimukaNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
+                  const Text(
                     "Anda yakin menghapus transaksi ini?",
                     style: TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -185,7 +168,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -224,9 +207,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
       "credit_sbb": namaSbbDeb.text.trim(),
       "mulai_susu": DateFormat('y-MM').format(now),
     };
-    Setuprepository.setup(
-            token, NetworkURL.bayardimukahapus(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.bayardimukahapus(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         gettransaksibayar();
@@ -262,9 +243,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
           "credit_sbb": namaSbbDeb.text.trim(),
           "mulai_susu": DateFormat('y-MM').format(now),
         };
-        Setuprepository.setup(
-                token, NetworkURL.bayardimukaubah(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.bayardimukaubah(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             clear();
@@ -293,8 +272,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
           "credit_sbb": namaSbbDeb.text.trim(),
           "mulai_susu": DateFormat('y-MM').format(now),
         };
-        Setuprepository.setup(token, NetworkURL.bayardimuka(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.bayardimuka(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             clear();
@@ -312,14 +290,13 @@ class BayarDimukaNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     listGlAll.clear();
     notifyListeners();
-    var data = {"kode_pt": "${users!.kodePt}"};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": users!.kodePt
+    };
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccBb(value['data']);
-        listGlAll =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccBb(value['data']);
+        listGlAll = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         getTransaksi();
         notifyListeners();
       }
@@ -339,7 +316,9 @@ class BayarDimukaNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -349,15 +328,8 @@ class BayarDimukaNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()) &&
-                      model.typePosting == "Y")
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()) && model.typePosting == "Y").toList();
         }
         notifyListeners();
       } catch (e) {
@@ -381,7 +353,9 @@ class BayarDimukaNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -391,15 +365,8 @@ class BayarDimukaNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccBb(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()) &&
-                      model.typePosting == "Y")
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccBb(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()) && model.typePosting == "Y").toList();
         }
         notifyListeners();
       } catch (e) {
@@ -438,10 +405,9 @@ class BayarDimukaNotifier extends ChangeNotifier {
     listTransaksiAdd.clear();
     notifyListeners();
     var data = {
-      "kode_pt": "${users!.kodePt}",
+      "kode_pt": users!.kodePt,
     };
-    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksi.add(TransaksiPendModel.fromJson(i));
@@ -449,18 +415,12 @@ class BayarDimukaNotifier extends ChangeNotifier {
         if (listTransaksi.isNotEmpty) {
           if (jenis == "BAYAR DIMUKA") {
             for (var i = 0; i < listGlAll.length; i++) {
-              listTransaksiAdd.addAll(listTransaksi
-                  .where((e) =>
-                      e.cracc == listGlAll[i].nosbb && e.status == "COMPLETED")
-                  .toList());
+              listTransaksiAdd.addAll(listTransaksi.where((e) => e.cracc == listGlAll[i].nosbb && e.status == "COMPLETED").toList());
             }
             notifyListeners();
           } else {
             for (var i = 0; i < listGlAll.length; i++) {
-              listTransaksiAdd.addAll(listTransaksi
-                  .where((e) =>
-                      e.dracc == listGlAll[i].nosbb && e.status == "COMPLETED")
-                  .toList());
+              listTransaksiAdd.addAll(listTransaksi.where((e) => e.dracc == listGlAll[i].nosbb && e.status == "COMPLETED").toList());
             }
             notifyListeners();
           }
@@ -478,7 +438,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
     showDialog(
         context: context,
         builder: (context) {
-          return Dialog();
+          return const Dialog();
         });
   }
 
@@ -513,8 +473,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTransaksi = pickedendDate;
-      tglTransaksiText.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglTransaksiText.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -607,8 +566,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglAwal = pickedendDate;
-      tanggalAwal.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tanggalAwal.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -645,8 +603,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglAkhir = pickedendDate;
-      tanggalAkhir.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tanggalAkhir.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -716,8 +673,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglVal = pickedendDate;
-      tglValuta.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglValuta.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -725,11 +681,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
   // DateTime tglAwal = DateTime.now();
   // DateTime tglAkhir = DateTime.now();
   changeDate() async {
-    final picked = await showDateRangePicker(
-        context: context,
-        firstDate: DateTime(2000),
-        lastDate:
-            DateTime(int.parse(DateFormat('yyyy').format(DateTime.now())) + 2));
+    final picked = await showDateRangePicker(context: context, firstDate: DateTime(2000), lastDate: DateTime(int.parse(DateFormat('yyyy').format(DateTime.now())) + 2));
 
     var tglSplit = picked.toString().split(" - ");
 
@@ -769,18 +721,12 @@ class BayarDimukaNotifier extends ChangeNotifier {
     keterangan.text = value.keterangan;
     namaakun.text = value.namaCr;
     namaakundebet.text = value.namaDr;
-    nominal.text = FormatCurrency.oCcy
-        .format(double.parse(value.nominal).toInt())
-        .replaceAll(".", ",");
+    nominal.text = FormatCurrency.oCcy.format(double.parse(value.nominal).toInt()).replaceAll(".", ",");
     notifyListeners();
   }
 
   onchange() {
-    nilaiPengakuan.text = FormatCurrency.oCcy
-        .format((double.parse(nominal.text.replaceAll(",", "")) /
-                int.parse(berapakali.text))
-            .toInt())
-        .replaceAll(".", ',');
+    nilaiPengakuan.text = FormatCurrency.oCcy.format((double.parse(nominal.text.replaceAll(",", "")) / int.parse(berapakali.text)).toInt()).replaceAll(".", ',');
     notifyListeners();
   }
 
@@ -797,26 +743,26 @@ class BayarDimukaNotifier extends ChangeNotifier {
             ),
             child: Container(
               width: 500,
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
+                  const Text(
                     "Pilih Periode",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 16),
-                  Container(
+                  const SizedBox(height: 16),
+                  SizedBox(
                     height: 100,
                     child: ScrollDatePicker(
                       minimumDate: DateTime.now(),
                       maximumDate: DateTime(DateTime.now().year + 50),
-                      options: DatePickerOptions(backgroundColor: Colors.white),
-                      viewType: [
+                      options: const DatePickerOptions(backgroundColor: Colors.white),
+                      viewType: const [
                         DatePickerViewType.month,
                         DatePickerViewType.year,
                       ],
@@ -830,7 +776,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
                       },
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   InkWell(
                     onTap: () {
                       Navigator.pop(context);
@@ -838,13 +784,12 @@ class BayarDimukaNotifier extends ChangeNotifier {
                       notifyListeners(); // if ChangeNotifier is needed
                     },
                     child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                       decoration: BoxDecoration(
                         color: Colors.blue, // replace with your colorPrimary
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Text(
+                      child: const Text(
                         "Simpan",
                         textAlign: TextAlign.center,
                         style: TextStyle(

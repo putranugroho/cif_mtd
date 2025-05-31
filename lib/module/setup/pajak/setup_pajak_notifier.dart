@@ -39,7 +39,7 @@ class SetupPajakNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -47,11 +47,11 @@ class SetupPajakNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin menghapus ${setupPajakModel!.ppn}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -63,7 +63,7 @@ class SetupPajakNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -88,9 +88,7 @@ class SetupPajakNotifier extends ChangeNotifier {
     var data = {
       "id": setupPajakModel!.id,
     };
-    Setuprepository.setup(
-            token, NetworkURL.deleteSetupPajak(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.deleteSetupPajak(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getSetupPajak();
@@ -152,19 +150,19 @@ class SetupPajakNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
+                  const Text(
                     "Apakah data sudah benar ?",
                     style: TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -176,7 +174,7 @@ class SetupPajakNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -203,14 +201,12 @@ class SetupPajakNotifier extends ChangeNotifier {
         var data = {
           "id": setupPajakModel!.id,
           "kode_pt": "001",
-          "tipe": "${tipepajak ? "Y" : "N"}",
-          "ppn": "${ppn.text.trim()}",
-          "pph_23": "${pph23.text.trim()}",
-          "maks_kena_ppn": "${maksPpn.text.trim().replaceAll(",", "")}",
+          "tipe": tipepajak ? "Y" : "N",
+          "ppn": ppn.text.trim(),
+          "pph_23": pph23.text.trim(),
+          "maks_kena_ppn": maksPpn.text.trim().replaceAll(",", ""),
         };
-        Setuprepository.setup(
-                token, NetworkURL.editSetupPajak(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.editSetupPajak(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getSetupPajak();
@@ -227,14 +223,12 @@ class SetupPajakNotifier extends ChangeNotifier {
       } else {
         var data = {
           "kode_pt": "001",
-          "ppn": "${ppn.text.trim()}",
-          "tipe": "${tipepajak ? "Y" : "N"}",
-          "pph_23": "${pph23.text.trim()}",
-          "maks_kena_ppn": "${maksPpn.text.trim().replaceAll(",", "")}",
+          "ppn": ppn.text.trim(),
+          "tipe": tipepajak ? "Y" : "N",
+          "pph_23": pph23.text.trim(),
+          "maks_kena_ppn": maksPpn.text.trim().replaceAll(",", ""),
         };
-        Setuprepository.setup(
-                token, NetworkURL.addSetupPajak(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.addSetupPajak(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getSetupPajak();
@@ -255,9 +249,10 @@ class SetupPajakNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getSetupPajak(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getSetupPajak(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(SetupPajakModel.fromJson(i));

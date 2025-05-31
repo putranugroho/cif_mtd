@@ -35,18 +35,17 @@ class SbbHutangPiutangNotifier extends ChangeNotifier {
     isLoading = true;
     listData.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(
-            token, NetworkURL.getSetupHutangPiutang(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getSetupHutangPiutang(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listData.add(SetupHutangPiutangModel.fromJson(i));
         }
         if (list.isNotEmpty) {
           setupHutangPiutangModel = listData[0];
-          nmSbbTransHutang.text =
-              setupHutangPiutangModel!.namasbbtransaksihutang;
+          nmSbbTransHutang.text = setupHutangPiutangModel!.namasbbtransaksihutang;
           noSbbTransHutang.text = setupHutangPiutangModel!.sbbtransaksihutang;
           nmSbbPpnHutang.text = setupHutangPiutangModel!.namasbbppnhutang;
           noSbbPpnHutang.text = setupHutangPiutangModel!.sbbppnhutang;
@@ -55,21 +54,17 @@ class SbbHutangPiutangNotifier extends ChangeNotifier {
           sbblawanhutang.text = setupHutangPiutangModel!.sbblawanhutang;
           sbblawanpiutang.text = setupHutangPiutangModel!.sbblawanpiutang;
           sbbhpppiutang.text = setupHutangPiutangModel!.sbbhpppiutang;
-          sbbpersedianpiutang.text =
-              setupHutangPiutangModel!.sbbpersedianpiutang;
-          nmSbbTransPiutang.text =
-              setupHutangPiutangModel!.namasbbtransaksipiutang;
+          sbbpersedianpiutang.text = setupHutangPiutangModel!.sbbpersedianpiutang;
+          nmSbbTransPiutang.text = setupHutangPiutangModel!.namasbbtransaksipiutang;
           noSbbTransPiutang.text = setupHutangPiutangModel!.sbbtransaksipiutang;
           nmSbbPpnPiutang.text = setupHutangPiutangModel!.namasbbppnpiutang;
           noSbbPpnPiutang.text = setupHutangPiutangModel!.sbbppnpiutang;
           nmSbbPphPiutang.text = setupHutangPiutangModel!.namasbbpphpiutang;
           noSbbPphPiutang.text = setupHutangPiutangModel!.sbbpphpiutang;
           namasbblawanhutang.text = setupHutangPiutangModel!.namasbblawanhutang;
-          namasbblawanpiutang.text =
-              setupHutangPiutangModel!.namasbblawanpiutang;
+          namasbblawanpiutang.text = setupHutangPiutangModel!.namasbblawanpiutang;
           namasbbhpppiutang.text = setupHutangPiutangModel!.namasbbhpppiutang;
-          namasbbpersedianpiutang.text =
-              setupHutangPiutangModel!.namasbbpersedianpiutang;
+          namasbbpersedianpiutang.text = setupHutangPiutangModel!.namasbbpersedianpiutang;
         }
         isLoading = false;
         notifyListeners();
@@ -84,14 +79,13 @@ class SbbHutangPiutangNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        list =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        list = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         getSetupkaskecil();
         notifyListeners();
       }
@@ -129,7 +123,9 @@ class SbbHutangPiutangNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -139,14 +135,8 @@ class SbbHutangPiutangNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -253,30 +243,28 @@ class SbbHutangPiutangNotifier extends ChangeNotifier {
     DialogCustom().showLoading(context);
     var data = {
       "kode_pt": "001",
-      "sbbtransaksihutang": "${noSbbTransHutang.text}",
-      "sbbpphhutang": "${noSbbPphHutang.text}",
-      "sbbppnhutang": "${noSbbPpnHutang.text}",
-      "sbbtransaksipiutang": "${noSbbTransPiutang.text}",
-      "sbbppnpiutang": "${noSbbPpnPiutang.text}",
-      "sbbpphpiutang": "${noSbbPphPiutang.text}",
-      "sbblawanhutang": "${sbblawanhutang.text}",
-      "sbblawanpiutang": "${sbblawanpiutang.text}",
-      "sbbhpppiutang": "${sbbhpppiutang.text}",
-      "sbbpersedianpiutang": "${sbbpersedianpiutang.text}",
-      "namasbbtransaksihutang": "${nmSbbTransHutang.text}",
-      "namasbbpphhutang": "${nmSbbPphHutang.text}",
-      "namasbbppnhutang": "${nmSbbPpnHutang.text}",
-      "namasbbtransaksipiutang": "${nmSbbTransPiutang.text}",
-      "namasbbpphpiutang": "${nmSbbPphPiutang.text}",
-      "namasbbppnpiutang": "${nmSbbPpnPiutang.text}",
-      "namasbblawanhutang": "${namasbblawanhutang.text}",
-      "namasbblawanpiutang": "${namasbblawanpiutang.text}",
-      "namasbbhpppiutang": "${namasbbhpppiutang.text}",
-      "namasbbpersedianpiutang": "${namasbbpersedianpiutang.text}",
+      "sbbtransaksihutang": noSbbTransHutang.text,
+      "sbbpphhutang": noSbbPphHutang.text,
+      "sbbppnhutang": noSbbPpnHutang.text,
+      "sbbtransaksipiutang": noSbbTransPiutang.text,
+      "sbbppnpiutang": noSbbPpnPiutang.text,
+      "sbbpphpiutang": noSbbPphPiutang.text,
+      "sbblawanhutang": sbblawanhutang.text,
+      "sbblawanpiutang": sbblawanpiutang.text,
+      "sbbhpppiutang": sbbhpppiutang.text,
+      "sbbpersedianpiutang": sbbpersedianpiutang.text,
+      "namasbbtransaksihutang": nmSbbTransHutang.text,
+      "namasbbpphhutang": nmSbbPphHutang.text,
+      "namasbbppnhutang": nmSbbPpnHutang.text,
+      "namasbbtransaksipiutang": nmSbbTransPiutang.text,
+      "namasbbpphpiutang": nmSbbPphPiutang.text,
+      "namasbbppnpiutang": nmSbbPpnPiutang.text,
+      "namasbblawanhutang": namasbblawanhutang.text,
+      "namasbblawanpiutang": namasbblawanpiutang.text,
+      "namasbbhpppiutang": namasbbhpppiutang.text,
+      "namasbbpersedianpiutang": namasbbpersedianpiutang.text,
     };
-    Setuprepository.setup(
-            token, NetworkURL.addSetupHutangPiutang(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.addSetupHutangPiutang(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         informationDialog(context, "Information", value['message']);

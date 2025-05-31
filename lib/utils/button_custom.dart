@@ -5,7 +5,7 @@ import 'colors.dart';
 class ButtonIcon extends StatelessWidget {
   final IconData icon;
 
-  const ButtonIcon({Key? key, required this.icon}) : super(key: key);
+  const ButtonIcon({super.key, required this.icon});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,13 +13,10 @@ class ButtonIcon extends StatelessWidget {
       width: 40,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          gradient: const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                colorPrimary,
-                colorSecondary,
-              ])),
+          gradient: const LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [
+            colorPrimary,
+            colorSecondary,
+          ])),
       child: Icon(
         icon,
         color: Colors.white,
@@ -64,8 +61,7 @@ class ButtonPrimary extends StatelessWidget {
 class ButtonDanger extends StatelessWidget {
   final String? name;
   final Function onTap;
-  const ButtonDanger({Key? key, this.name, required this.onTap})
-      : super(key: key);
+  const ButtonDanger({super.key, this.name, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -79,13 +75,10 @@ class ButtonDanger extends StatelessWidget {
               width: 2,
               color: Colors.red,
             ),
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Colors.red[900] ?? Colors.transparent,
-                  Colors.red,
-                ])),
+            gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [
+              Colors.red[900] ?? Colors.transparent,
+              Colors.red,
+            ])),
         child: Text(
           "$name",
           textAlign: TextAlign.center,
@@ -102,8 +95,7 @@ class ButtonDanger extends StatelessWidget {
 class ButtonSecondary extends StatelessWidget {
   final String? name;
   final Function onTap;
-  const ButtonSecondary({Key? key, this.name, required this.onTap})
-      : super(key: key);
+  const ButtonSecondary({super.key, this.name, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

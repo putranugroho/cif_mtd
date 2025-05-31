@@ -36,12 +36,10 @@ class LevelNotifier extends ChangeNotifier {
           "id": levelModel!.id,
           "kode_pt": "001",
           "kode_kantor": "1001",
-          "lvl_jabatan": "${level.text.trim()}",
-          "kel_jabatan": "${jabatan.text.trim()}",
+          "lvl_jabatan": level.text.trim(),
+          "kel_jabatan": jabatan.text.trim(),
         };
-        Setuprepository.setup(
-                token, NetworkURL.updateLevelJabatan(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.updateLevelJabatan(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);
@@ -59,12 +57,10 @@ class LevelNotifier extends ChangeNotifier {
         var data = {
           "kode_pt": "001",
           "kode_kantor": "1001",
-          "lvl_jabatan": "${level.text.trim()}",
-          "kel_jabatan": "${jabatan.text.trim()}",
+          "lvl_jabatan": level.text.trim(),
+          "kel_jabatan": jabatan.text.trim(),
         };
-        Setuprepository.setup(
-                token, NetworkURL.addLevelJabatan(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.addLevelJabatan(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);
@@ -73,7 +69,7 @@ class LevelNotifier extends ChangeNotifier {
             clear();
             notifyListeners();
           } else {
-           informationDialog(context, "Warning", value['message'][0]);
+            informationDialog(context, "Warning", value['message'][0]);
             notifyListeners();
           }
         });
@@ -109,7 +105,7 @@ class LevelNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -117,11 +113,11 @@ class LevelNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin menghapus ${levelModel!.kelJabatan}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -133,7 +129,7 @@ class LevelNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -158,9 +154,7 @@ class LevelNotifier extends ChangeNotifier {
     var data = {
       "id": levelModel!.id,
     };
-    Setuprepository.setup(
-            token, NetworkURL.deletedLevelJabatan(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.deletedLevelJabatan(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getLevel();
@@ -182,8 +176,7 @@ class LevelNotifier extends ChangeNotifier {
     var data = {
       "kode_pt": "001",
     };
-    Setuprepository.setup(token, NetworkURL.getLevelJabatan(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getLevelJabatan(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(LevelModel.fromJson(i));

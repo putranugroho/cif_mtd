@@ -23,14 +23,13 @@ class PiutangNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        listGl =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         notifyListeners();
       }
     });
@@ -45,7 +44,9 @@ class PiutangNotifier extends ChangeNotifier {
       isLoadingInquery = true;
       listGl.clear();
       notifyListeners();
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
       try {
         final response = await Setuprepository.setup(
           token,
@@ -54,14 +55,8 @@ class PiutangNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -117,16 +112,13 @@ class PiutangNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       // tglTransaksi = pickedendDate;
-      listTglJatuhTempo[index].text = DateFormat("y-MM-dd")
-          .format(DateTime.parse(pickedendDate.toString()));
+      listTglJatuhTempo[index].text = DateFormat("y-MM-dd").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
 
   changeCalculate() async {
-    var tempobayar = listNominal
-        .map((e) => int.parse(e.text.replaceAll(",", "")))
-        .reduce((a, b) => a + b);
+    var tempobayar = listNominal.map((e) => int.parse(e.text.replaceAll(",", ""))).reduce((a, b) => a + b);
     selisih = int.parse(nilaiInvoice.text.replaceAll(",", "")) - tempobayar;
     notifyListeners();
   }
@@ -156,9 +148,10 @@ class PiutangNotifier extends ChangeNotifier {
     list.clear();
     listCustomer.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getCustomer(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getCustomer(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listCustomer.add(CustomerSupplierModel.fromJson(i));
@@ -203,8 +196,7 @@ class PiutangNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTransaksi = pickedendDate;
-      tglInvoice.text = DateFormat("y-MM-dd")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglInvoice.text = DateFormat("y-MM-dd").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -238,8 +230,7 @@ class PiutangNotifier extends ChangeNotifier {
           ))),
     ));
     if (pickedendDate != null) {
-      tglJtTempo.text = DateFormat("y-MM-dd")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglJtTempo.text = DateFormat("y-MM-dd").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -250,10 +241,11 @@ class PiutangNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001", "jns_invoice": "2"};
-    Setuprepository.setup(
-            token, NetworkURL.getHutangPiutang(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001",
+      "jns_invoice": "2"
+    };
+    Setuprepository.setup(token, NetworkURL.getHutangPiutang(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(PiutangHutangModel.fromJson(i));
@@ -298,21 +290,14 @@ class PiutangNotifier extends ChangeNotifier {
     dialog = true;
     editData = true;
     piutangHutangModel = list.where((e) => e.id == int.parse(id)).first;
-    customerSupplierModel =
-        listCustomer.where((e) => e.noSif == piutangHutangModel!.noSif).first;
+    customerSupplierModel = listCustomer.where((e) => e.noSif == piutangHutangModel!.noSif).first;
     noInvoice.text = piutangHutangModel!.noInvoice;
     noSif.text = piutangHutangModel!.noSif;
     nmSif.text = piutangHutangModel!.nmSif;
     tglInvoice.text = piutangHutangModel!.tglInvoice;
-    nilaiInvoice.text = FormatCurrency.oCcy
-        .format(int.parse(piutangHutangModel!.nilaiInvoice))
-        .replaceAll(".", ",");
-    ppn.text = FormatCurrency.oCcy
-        .format(int.parse(piutangHutangModel!.ppn))
-        .replaceAll(".", ",");
-    pph.text = FormatCurrency.oCcy
-        .format(int.parse(piutangHutangModel!.pph))
-        .replaceAll(".", ",");
+    nilaiInvoice.text = FormatCurrency.oCcy.format(int.parse(piutangHutangModel!.nilaiInvoice)).replaceAll(".", ",");
+    ppn.text = FormatCurrency.oCcy.format(int.parse(piutangHutangModel!.ppn)).replaceAll(".", ",");
+    pph.text = FormatCurrency.oCcy.format(int.parse(piutangHutangModel!.pph)).replaceAll(".", ",");
     tglJtTempo.text = piutangHutangModel!.tglJtTempo;
     bertahap.text = piutangHutangModel!.bertahap;
     jumlahTahap.text = piutangHutangModel!.jumlahTahap;
@@ -353,9 +338,7 @@ class PiutangNotifier extends ChangeNotifier {
           "kode_induk": "",
           "kode_ao": customerSupplierModel!.kodeAoCustomer,
         };
-        Setuprepository.setup(
-                token, NetworkURL.editHutangPiutang(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.editHutangPiutang(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getHutangPiutang();
@@ -391,9 +374,7 @@ class PiutangNotifier extends ChangeNotifier {
           "kode_induk": "",
           "kode_ao": customerSupplierModel!.kodeAoCustomer,
         };
-        Setuprepository.setup(
-                token, NetworkURL.addHutangPiutang(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.addHutangPiutang(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getHutangPiutang();
@@ -414,7 +395,7 @@ class PiutangNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -422,11 +403,11 @@ class PiutangNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin menghapus ${piutangHutangModel!.noInvoice}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -438,7 +419,7 @@ class PiutangNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -463,9 +444,7 @@ class PiutangNotifier extends ChangeNotifier {
     var data = {
       "id": piutangHutangModel!.id,
     };
-    Setuprepository.setup(
-            token, NetworkURL.deleteHutangPiutang(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.deleteHutangPiutang(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getHutangPiutang();

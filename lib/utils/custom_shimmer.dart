@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-enum ShimmerDirection { ltr, rtl, ttb, btt }
+enum ShimmerDirection {
+  ltr,
+  rtl,
+  ttb,
+  btt
+}
 
 class CustomShimmer extends StatefulWidget {
   final Widget child;
@@ -11,40 +16,28 @@ class CustomShimmer extends StatefulWidget {
   final int loop;
 
   const CustomShimmer({
-    Key? key,
+    super.key,
     required this.child,
     required this.gradient,
     this.direction = ShimmerDirection.ltr,
     this.period = const Duration(milliseconds: 1500),
     this.loop = 0,
-  }) : super(key: key);
+  });
 
-  CustomShimmer.fromColors(
-      {Key? key,
-      required this.child,
-      required Color baseColor,
-      required Color highlightColor,
-      this.period = const Duration(milliseconds: 1500),
-      this.direction = ShimmerDirection.ltr,
-      this.loop = 0})
-      : gradient = LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.topRight,
-            colors: [
-              baseColor,
-              baseColor,
-              highlightColor,
-              baseColor,
-              baseColor
-            ],
-            stops: const [
-              0.0,
-              0.35,
-              0.5,
-              0.65,
-              1.0
-            ]),
-        super(key: key);
+  CustomShimmer.fromColors({super.key, required this.child, required Color baseColor, required Color highlightColor, this.period = const Duration(milliseconds: 1500), this.direction = ShimmerDirection.ltr, this.loop = 0})
+      : gradient = LinearGradient(begin: Alignment.topLeft, end: Alignment.topRight, colors: [
+          baseColor,
+          baseColor,
+          highlightColor,
+          baseColor,
+          baseColor
+        ], stops: const [
+          0.0,
+          0.35,
+          0.5,
+          0.65,
+          1.0
+        ]);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -53,16 +46,13 @@ class CustomShimmer extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Gradient>('gradient', gradient,
-        defaultValue: null));
+    properties.add(DiagnosticsProperty<Gradient>('gradient', gradient, defaultValue: null));
     properties.add(EnumProperty<ShimmerDirection>('direction', direction));
-    properties.add(
-        DiagnosticsProperty<Duration>('period', period, defaultValue: null));
+    properties.add(DiagnosticsProperty<Duration>('period', period, defaultValue: null));
   }
 }
 
-class _CustomShimmerState extends State<CustomShimmer>
-    with SingleTickerProviderStateMixin {
+class _CustomShimmerState extends State<CustomShimmer> with SingleTickerProviderStateMixin {
   AnimationController? _controller;
   int? _count;
 
@@ -109,12 +99,7 @@ class _Shimmer extends SingleChildRenderObjectWidget {
   final ShimmerDirection direction;
   final Gradient gradient;
 
-  const _Shimmer(
-      {Widget? child,
-      required this.percent,
-      required this.direction,
-      required this.gradient})
-      : super(child: child);
+  const _Shimmer({super.child, required this.percent, required this.direction, required this.gradient});
 
   @override
   _ShimmerFilter createRenderObject(BuildContext context) {
@@ -135,8 +120,7 @@ class _ShimmerFilter extends RenderProxyBox {
   double? _percent;
   Rect? _rect;
 
-  _ShimmerFilter(this._percent, this._direction, this._gradient)
-      : _gradientPaint = Paint()..blendMode = BlendMode.srcIn;
+  _ShimmerFilter(this._percent, this._direction, this._gradient) : _gradientPaint = Paint()..blendMode = BlendMode.srcIn;
 
   @override
   bool get alwaysNeedsCompositing => child != null;

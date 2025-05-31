@@ -12,15 +12,14 @@ class DialogCustom {
           builder: (context) {
             return Dialog(
               backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16)),
-              child: SizedBox(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              child: const SizedBox(
                 width: 350,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       height: 32,
                     ),
                     // ClipRRect(
@@ -30,24 +29,24 @@ class DialogCustom {
                     //     height: 80,
                     //   ),
                     // ),
-                    const SizedBox(
+                    SizedBox(
                       height: 16,
                     ),
-                    const Text(
+                    Text(
                       "Silahkan Tunggu..",
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w300,
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 4,
                     ),
-                    const CupertinoActivityIndicator(
+                    CupertinoActivityIndicator(
                       radius: 20,
                       color: Color.fromARGB(255, 244, 113, 31),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 32,
                     ),
                   ],
@@ -65,8 +64,7 @@ class DialogCustom {
           builder: (context) {
             return Dialog(
               backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
               child: SizedBox(
                 width: 400,
                 child: Column(
@@ -122,8 +120,7 @@ class DialogCustom {
           builder: (context) {
             return Dialog(
               backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
               child: Container(
                 padding: const EdgeInsets.all(16),
                 width: 400,

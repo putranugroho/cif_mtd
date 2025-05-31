@@ -24,32 +24,27 @@ class ClosingEomNotifier extends ChangeNotifier {
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
             return Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               child: Container(
                 width: 500,
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    const Text(
                       "Pilih Periode",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
-                    Container(
+                    SizedBox(
                       height: 100,
                       child: ScrollDatePicker(
-                          maximumDate: DateTime(int.parse(
-                                  DateFormat('y').format(DateTime.now())) +
-                              50),
-                          options:
-                              DatePickerOptions(backgroundColor: Colors.white),
-                          viewType: [
+                          maximumDate: DateTime(int.parse(DateFormat('y').format(DateTime.now())) + 50),
+                          options: const DatePickerOptions(backgroundColor: Colors.white),
+                          viewType: const [
                             DatePickerViewType.month,
                             DatePickerViewType.year,
                           ],
@@ -57,31 +52,26 @@ class ClosingEomNotifier extends ChangeNotifier {
                           onDateTimeChanged: (e) {
                             setState(() {
                               now = e;
-                              closingDate.text =
-                                  DateFormat('MMMM y').format(now);
+                              closingDate.text = DateFormat('MMMM y').format(now);
 
                               notifyListeners();
                             });
                           }),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     InkWell(
                       onTap: () {
                         Navigator.pop(context);
-                        final int selisihBulan =
-                            monthDifference(now, DateTime.now());
+                        final int selisihBulan = monthDifference(now, DateTime.now());
                         print('Bulan ke belakang: $selisihBulan bulan');
                         notifyListeners();
                       },
                       child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                        decoration: BoxDecoration(
-                            color: colorPrimary,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Text(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                        decoration: BoxDecoration(color: colorPrimary, borderRadius: BorderRadius.circular(8)),
+                        child: const Text(
                           "Simpan",
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -109,14 +99,14 @@ class ClosingEomNotifier extends ChangeNotifier {
           return Dialog(
             child: Container(
               width: 600,
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Row(
                     children: [
-                      Expanded(
+                      const Expanded(
                           child: Text(
                         "Konfirmasi Closing",
                         style: TextStyle(
@@ -131,9 +121,8 @@ class ClosingEomNotifier extends ChangeNotifier {
                         child: Container(
                           width: 30,
                           height: 30,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle, color: Colors.grey[300]),
-                          child: Icon(
+                          decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.grey[300]),
+                          child: const Icon(
                             Icons.close,
                             size: 15,
                             color: Colors.white,
@@ -142,13 +131,13 @@ class ClosingEomNotifier extends ChangeNotifier {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
-                  Text(
+                  const Text(
                     "Jika melakukan closing EOM, Users yang online akan di non-aktifkan, apakah Anda yakin akan melanjutkan closing EOM?",
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -160,7 +149,7 @@ class ClosingEomNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(

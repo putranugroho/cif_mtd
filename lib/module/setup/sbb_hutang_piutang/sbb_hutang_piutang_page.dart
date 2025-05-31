@@ -24,8 +24,8 @@ class SbbHutangPiutangPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
-                  padding: EdgeInsets.all(20),
-                  child: Row(
+                  padding: const EdgeInsets.all(20),
+                  child: const Row(
                     children: [
                       Expanded(
                         child: Text(
@@ -39,7 +39,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Expanded(
@@ -65,17 +65,17 @@ class SbbHutangPiutangPage extends StatelessWidget {
                           ),
                         )
                       : Container(
-                          padding: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           width: 600,
-                          decoration: BoxDecoration(color: Colors.white),
+                          decoration: const BoxDecoration(color: Colors.white),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Row(
+                              const Row(
                                 children: [
                                   Text(
                                     "Akun Perantara Hutang",
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -90,15 +90,13 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.nmSbbTransHutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
                                             autofocus: true,
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
                                               labelText: 'Cari Akun Transaksi',
                                             ));
@@ -115,24 +113,21 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                       },
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.namasbblawanhutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
                                             autofocus: true,
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
-                                              labelText:
-                                                  'Cari Akun Lawan Hutang',
+                                              labelText: 'Cari Akun Lawan Hutang',
                                             ));
                                       },
                                       itemBuilder: (context, city) {
@@ -147,21 +142,19 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                       },
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.nmSbbPpnHutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
                                             autofocus: true,
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
                                               labelText: 'Cari Akun PPN',
                                             ));
@@ -178,21 +171,19 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                       },
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.nmSbbPphHutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
                                             autofocus: true,
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
                                               labelText: 'Cari Akun PPH',
                                             ));
@@ -238,13 +229,12 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Expanded(
@@ -269,13 +259,12 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Expanded(
@@ -300,13 +289,12 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Expanded(
@@ -331,8 +319,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -342,11 +329,11 @@ class SbbHutangPiutangPage extends StatelessWidget {
                               const SizedBox(
                                 height: 32,
                               ),
-                              Row(
+                              const Row(
                                 children: [
                                   Text(
                                     "Akun Perantara Piutang",
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -361,15 +348,13 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.nmSbbTransPiutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
                                             autofocus: true,
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
                                               labelText: 'Cari Akun Transaksi',
                                             ));
@@ -386,24 +371,21 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                       },
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.namasbblawanpiutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
                                             autofocus: true,
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
-                                              labelText:
-                                                  'Cari Akun Lawan Piutang',
+                                              labelText: 'Cari Akun Lawan Piutang',
                                             ));
                                       },
                                       itemBuilder: (context, city) {
@@ -418,24 +400,21 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                       },
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
-                                      controller: value.namasbbhpppiutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      controller: value.nmSbbPpnPiutang,
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
                                             autofocus: true,
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
-                                              labelText:
-                                                  'Cari Akun HPP Piutang',
+                                              labelText: 'Cari Akun PPN',
                                             ));
                                       },
                                       itemBuilder: (context, city) {
@@ -446,28 +425,25 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                       },
                                       onSelected: (city) {
                                         // value.selectInvoice(city);
-                                        value.pilihhpp(city);
+                                        value.pilihPpnPiutang(city);
                                       },
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
-                                      controller: value.namasbbpersedianpiutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      controller: value.nmSbbPphPiutang,
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
                                             autofocus: true,
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
-                                              labelText:
-                                                  'Cari Akun Persedian Piutang',
+                                              labelText: 'Cari Akun PPH',
                                             ));
                                       },
                                       itemBuilder: (context, city) {
@@ -478,7 +454,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                       },
                                       onSelected: (city) {
                                         // value.selectInvoice(city);
-                                        value.pilihpersediaan(city);
+                                        value.pilihPphPiutang(city);
                                       },
                                     ),
                                   ),
@@ -511,13 +487,12 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Expanded(
@@ -542,155 +517,14 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
-                                  Expanded(
-                                    child: TextFormField(
-                                      // enabled: false,
-                                      readOnly: true,
-                                      textInputAction: TextInputAction.done,
-                                      controller: value.sbbhpppiutang,
-                                      maxLines: 1,
-                                      // inputFormatters: [
-                                      //   FilteringTextInputFormatter.digitsOnly
-                                      // ],
-                                      validator: (e) {
-                                        if (e!.isEmpty) {
-                                          return "Wajib diisi";
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.grey[200],
-                                        hintText: "No SBB",
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 16,
-                                  ),
-                                  Expanded(
-                                    child: TextFormField(
-                                      // enabled: false,
-                                      readOnly: true,
-                                      textInputAction: TextInputAction.done,
-                                      controller: value.sbbpersedianpiutang,
-                                      maxLines: 1,
-                                      // inputFormatters: [
-                                      //   FilteringTextInputFormatter.digitsOnly
-                                      // ],
-                                      validator: (e) {
-                                        if (e!.isEmpty) {
-                                          return "Wajib diisi";
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.grey[200],
-                                        hintText: "No SBB",
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: TypeAheadField<InqueryGlModel>(
-                                      controller: value.nmSbbPpnPiutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
-                                        return TextField(
-                                            controller: controller,
-                                            focusNode: focusNode,
-                                            autofocus: true,
-                                            decoration: InputDecoration(
-                                              border: OutlineInputBorder(),
-                                              labelText: 'Cari Akun PPN',
-                                            ));
-                                      },
-                                      itemBuilder: (context, city) {
-                                        return ListTile(
-                                          title: Text(city.nosbb),
-                                          subtitle: Text(city.namaSbb),
-                                        );
-                                      },
-                                      onSelected: (city) {
-                                        // value.selectInvoice(city);
-                                        value.pilihPpnPiutang(city);
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 16,
-                                  ),
-                                  Expanded(
-                                    child: TypeAheadField<InqueryGlModel>(
-                                      controller: value.nmSbbPphPiutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
-                                        return TextField(
-                                            controller: controller,
-                                            focusNode: focusNode,
-                                            autofocus: true,
-                                            decoration: InputDecoration(
-                                              border: OutlineInputBorder(),
-                                              labelText: 'Cari Akun PPH',
-                                            ));
-                                      },
-                                      itemBuilder: (context, city) {
-                                        return ListTile(
-                                          title: Text(city.nosbb),
-                                          subtitle: Text(city.namaSbb),
-                                        );
-                                      },
-                                      onSelected: (city) {
-                                        // value.selectInvoice(city);
-                                        value.pilihPphPiutang(city);
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 16,
-                                  ),
-                                  Expanded(child: SizedBox()),
-                                  SizedBox(
-                                    width: 16,
-                                  ),
-                                  Expanded(child: SizedBox()),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Row(
-                                children: [
                                   Expanded(
                                     child: TextFormField(
                                       // enabled: false,
@@ -713,13 +547,12 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Expanded(
@@ -744,20 +577,153 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TypeAheadField<InqueryGlModel>(
+                                      controller: value.namasbbhpppiutang,
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
+                                        return TextField(
+                                            controller: controller,
+                                            focusNode: focusNode,
+                                            autofocus: true,
+                                            decoration: const InputDecoration(
+                                              border: OutlineInputBorder(),
+                                              labelText: 'Cari Akun HPP Piutang',
+                                            ));
+                                      },
+                                      itemBuilder: (context, city) {
+                                        return ListTile(
+                                          title: Text(city.nosbb),
+                                          subtitle: Text(city.namaSbb),
+                                        );
+                                      },
+                                      onSelected: (city) {
+                                        // value.selectInvoice(city);
+                                        value.pilihhpp(city);
+                                      },
+                                    ),
+                                  ),
+                                  const SizedBox(
                                     width: 16,
                                   ),
-                                  Expanded(child: SizedBox()),
-                                  SizedBox(
+                                  Expanded(
+                                    child: TypeAheadField<InqueryGlModel>(
+                                      controller: value.namasbbpersedianpiutang,
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
+                                        return TextField(
+                                            controller: controller,
+                                            focusNode: focusNode,
+                                            autofocus: true,
+                                            decoration: const InputDecoration(
+                                              border: OutlineInputBorder(),
+                                              labelText: 'Cari Akun Persedian Piutang',
+                                            ));
+                                      },
+                                      itemBuilder: (context, city) {
+                                        return ListTile(
+                                          title: Text(city.nosbb),
+                                          subtitle: Text(city.namaSbb),
+                                        );
+                                      },
+                                      onSelected: (city) {
+                                        // value.selectInvoice(city);
+                                        value.pilihpersediaan(city);
+                                      },
+                                    ),
+                                  ),
+                                  const SizedBox(
                                     width: 16,
                                   ),
-                                  Expanded(child: SizedBox()),
+                                  const Expanded(child: SizedBox()),
+                                  const SizedBox(
+                                    width: 16,
+                                  ),
+                                  const Expanded(child: SizedBox()),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TextFormField(
+                                      // enabled: false,
+                                      readOnly: true,
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.sbbhpppiutang,
+                                      maxLines: 1,
+                                      // inputFormatters: [
+                                      //   FilteringTextInputFormatter.digitsOnly
+                                      // ],
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.grey[200],
+                                        hintText: "No SBB",
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 16,
+                                  ),
+                                  Expanded(
+                                    child: TextFormField(
+                                      // enabled: false,
+                                      readOnly: true,
+                                      textInputAction: TextInputAction.done,
+                                      controller: value.sbbpersedianpiutang,
+                                      maxLines: 1,
+                                      // inputFormatters: [
+                                      //   FilteringTextInputFormatter.digitsOnly
+                                      // ],
+                                      validator: (e) {
+                                        if (e!.isEmpty) {
+                                          return "Wajib diisi";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.grey[200],
+                                        hintText: "No SBB",
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(6),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 16,
+                                  ),
+                                  const Expanded(child: SizedBox()),
+                                  const SizedBox(
+                                    width: 16,
+                                  ),
+                                  const Expanded(child: SizedBox()),
                                 ],
                               ),
                               const SizedBox(

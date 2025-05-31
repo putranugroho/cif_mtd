@@ -41,7 +41,9 @@ class AoNotifier extends ChangeNotifier {
     if (query.isNotEmpty && query.length > 2 && editData == false) {
       listKaryawan.clear();
       notifyListeners();
-      var data = {"nama": query};
+      var data = {
+        "nama": query
+      };
       try {
         final response = await Setuprepository.setup(
           token,
@@ -75,8 +77,7 @@ class AoNotifier extends ChangeNotifier {
       "kode_pt": "001",
     };
     notifyListeners();
-    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data)).then((value) {
       if (value['status'] == "Success") {
         for (Map<String, dynamic> i in value['data']) {
           listKantor.add(KantorModel.fromJson(i));
@@ -101,9 +102,10 @@ class AoNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(AoModel.fromJson(i));
@@ -142,9 +144,7 @@ class AoNotifier extends ChangeNotifier {
                   : "3",
         };
         print(jsonEncode(data));
-        Setuprepository.setup(
-                token, NetworkURL.editAoMarketing(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.editAoMarketing(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getAoMarketing();
@@ -171,9 +171,7 @@ class AoNotifier extends ChangeNotifier {
           "nama_kantor": kantorModel!.namaKantor,
           "kode_induk": kantorModel!.kodeInduk,
         };
-        Setuprepository.setup(
-                token, NetworkURL.addAoMarketing(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.addAoMarketing(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getAoMarketing();
@@ -211,8 +209,7 @@ class AoNotifier extends ChangeNotifier {
     dialog = true;
     editData = true;
     aoModel = list.where((e) => e.id == int.parse(id)).first;
-    kantorModel =
-        listKantor.where((e) => e.kodeKantor == aoModel!.kodeKantor).first;
+    kantorModel = listKantor.where((e) => e.kodeKantor == aoModel!.kodeKantor).first;
     kd.text = aoModel!.kode;
     nm.text = aoModel!.nama;
     penempatanModel = aoModel!.golCust == "1"
@@ -231,7 +228,7 @@ class AoNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -239,11 +236,11 @@ class AoNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin menghapus ${aoModel!.nama}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -255,7 +252,7 @@ class AoNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -281,7 +278,7 @@ class AoNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -289,11 +286,11 @@ class AoNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin nonaktifkan ${aoModel!.nama}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -305,7 +302,7 @@ class AoNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -343,8 +340,7 @@ class AoNotifier extends ChangeNotifier {
               ? "2"
               : "3",
     };
-    Setuprepository.setup(token, NetworkURL.nonaktif(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.nonaktif(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getAoMarketing();
@@ -358,7 +354,11 @@ class AoNotifier extends ChangeNotifier {
     });
   }
 
-  List<String> listPenempatan = ["Customer", "Supplier", "Customer / Supplier"];
+  List<String> listPenempatan = [
+    "Customer",
+    "Supplier",
+    "Customer / Supplier"
+  ];
   String? penempatanModel = "Customer";
   pilihPenempatan(String value) {
     penempatanModel = value;
@@ -383,9 +383,7 @@ class AoNotifier extends ChangeNotifier {
               ? "2"
               : "3",
     };
-    Setuprepository.setup(
-            token, NetworkURL.deleteAoMarketing(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.deleteAoMarketing(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getAoMarketing();

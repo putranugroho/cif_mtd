@@ -30,10 +30,10 @@ class UserAksesPointPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Container(
-                            padding: EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(20),
                             child: Column(
                               children: [
-                                Row(
+                                const Row(
                                   children: [
                                     Expanded(
                                       child: Text(
@@ -46,31 +46,29 @@ class UserAksesPointPage extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 32,
                                 ),
                                 Row(
                                   children: [
-                                    Container(
-                                      width: 100,
-                                      child: Text("Cari user"),
-                                    ),
                                     SizedBox(
+                                      width: 100,
+                                      child: const Text("Cari user"),
+                                    ),
+                                    const SizedBox(
                                       width: 16,
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: 200,
                                       child: TypeAheadField<UsersModel>(
                                         controller: value.namaKaryawan,
-                                        suggestionsCallback: (search) =>
-                                            value.getInquery(search),
-                                        builder:
-                                            (context, controller, focusNode) {
+                                        suggestionsCallback: (search) => value.getInquery(search),
+                                        builder: (context, controller, focusNode) {
                                           return TextField(
                                               controller: controller,
                                               focusNode: focusNode,
                                               autofocus: true,
-                                              decoration: InputDecoration(
+                                              decoration: const InputDecoration(
                                                 border: OutlineInputBorder(),
                                                 labelText: 'Cari Akun',
                                               ));
@@ -89,52 +87,40 @@ class UserAksesPointPage extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 8,
                                 ),
                                 Row(
                                   children: [
-                                    Container(
-                                      width: 100,
-                                      child: Text("User ID"),
-                                    ),
                                     SizedBox(
+                                      width: 100,
+                                      child: const Text("User ID"),
+                                    ),
+                                    const SizedBox(
                                       width: 16,
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: 200,
                                       child: TextFormField(
                                         controller: value.nikKaryawan,
                                         readOnly: true,
-                                        decoration: InputDecoration(
-                                            hintText: "User ID",
-                                            filled: true,
-                                            fillColor: Colors.grey[200],
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8))),
+                                        decoration: InputDecoration(hintText: "User ID", filled: true, fillColor: Colors.grey[200], border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 16,
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: 200,
                                       child: TextFormField(
                                         controller: value.namaKantor,
                                         readOnly: true,
-                                        decoration: InputDecoration(
-                                            hintText: "Kantor",
-                                            filled: true,
-                                            fillColor: Colors.grey[200],
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8))),
+                                        decoration: InputDecoration(hintText: "Kantor", filled: true, fillColor: Colors.grey[200], border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
                                       ),
                                     ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 8,
                                 ),
                                 Row(
@@ -144,13 +130,9 @@ class UserAksesPointPage extends StatelessWidget {
                                         value.getUsersAksesPoint();
                                       },
                                       child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 16, vertical: 8),
-                                        decoration: BoxDecoration(
-                                            color: colorPrimary,
-                                            borderRadius:
-                                                BorderRadius.circular(16)),
-                                        child: Text(
+                                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                        decoration: BoxDecoration(color: colorPrimary, borderRadius: BorderRadius.circular(16)),
+                                        child: const Text(
                                           "Tambah",
                                           style: TextStyle(
                                             color: Colors.white,
@@ -160,7 +142,7 @@ class UserAksesPointPage extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 24,
                                 ),
                               ],
@@ -172,11 +154,10 @@ class UserAksesPointPage extends StatelessWidget {
                               children: [
                                 Container(
                                   height: 200,
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(horizontal: 20),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                     children: [
                                       Expanded(
                                         child: SfDataGrid(
@@ -185,10 +166,8 @@ class UserAksesPointPage extends StatelessWidget {
                                           frozenColumnsCount: 2,
 
                                           // controller: value.dataGridController,
-                                          gridLinesVisibility:
-                                              GridLinesVisibility.both,
-                                          headerGridLinesVisibility:
-                                              GridLinesVisibility.both,
+                                          gridLinesVisibility: GridLinesVisibility.both,
+                                          headerGridLinesVisibility: GridLinesVisibility.both,
                                           selectionMode: SelectionMode.single,
 
                                           source: DetailDataSource(value),
@@ -197,13 +176,12 @@ class UserAksesPointPage extends StatelessWidget {
                                                 width: 50,
                                                 columnName: 'no',
                                                 label: Container(
-                                                    padding: EdgeInsets.all(6),
+                                                    padding: const EdgeInsets.all(6),
                                                     color: colorPrimary,
                                                     alignment: Alignment.center,
-                                                    child: Text('No',
+                                                    child: const Text('No',
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w300,
+                                                          fontWeight: FontWeight.w300,
                                                           fontSize: 12,
                                                           color: Colors.white,
                                                         )))),
@@ -212,12 +190,11 @@ class UserAksesPointPage extends StatelessWidget {
                                                 label: Container(
                                                     color: colorPrimary,
                                                     alignment: Alignment.center,
-                                                    padding: EdgeInsets.all(6),
-                                                    child: Text('No Akses',
+                                                    padding: const EdgeInsets.all(6),
+                                                    child: const Text('No Akses',
                                                         style: TextStyle(
                                                           fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w300,
+                                                          fontWeight: FontWeight.w300,
                                                           color: Colors.white,
                                                         )))),
                                             GridColumn(
@@ -225,63 +202,58 @@ class UserAksesPointPage extends StatelessWidget {
                                                 label: Container(
                                                     color: colorPrimary,
                                                     alignment: Alignment.center,
-                                                    padding: EdgeInsets.all(6),
-                                                    child: Text('Akses ID',
+                                                    padding: const EdgeInsets.all(6),
+                                                    child: const Text('Akses ID',
                                                         style: TextStyle(
                                                           fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w300,
+                                                          fontWeight: FontWeight.w300,
                                                           color: Colors.white,
                                                         )))),
                                             GridColumn(
                                                 columnName: 'type',
                                                 label: Container(
-                                                    padding: EdgeInsets.all(6),
+                                                    padding: const EdgeInsets.all(6),
                                                     color: colorPrimary,
                                                     alignment: Alignment.center,
-                                                    child: Text('Type',
+                                                    child: const Text('Type',
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w300,
+                                                          fontWeight: FontWeight.w300,
                                                           color: Colors.white,
                                                           fontSize: 12,
                                                         )))),
                                             GridColumn(
                                                 columnName: 'lokasi',
                                                 label: Container(
-                                                    padding: EdgeInsets.all(6),
+                                                    padding: const EdgeInsets.all(6),
                                                     color: colorPrimary,
                                                     alignment: Alignment.center,
-                                                    child: Text('Lokasi',
+                                                    child: const Text('Lokasi',
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w300,
+                                                          fontWeight: FontWeight.w300,
                                                           color: Colors.white,
                                                           fontSize: 12,
                                                         )))),
                                             GridColumn(
                                                 columnName: 'alamat',
                                                 label: Container(
-                                                    padding: EdgeInsets.all(6),
+                                                    padding: const EdgeInsets.all(6),
                                                     color: colorPrimary,
                                                     alignment: Alignment.center,
-                                                    child: Text('Alamat',
+                                                    child: const Text('Alamat',
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w300,
+                                                          fontWeight: FontWeight.w300,
                                                           color: Colors.white,
                                                           fontSize: 12,
                                                         )))),
                                             GridColumn(
                                                 columnName: 'keterangan',
                                                 label: Container(
-                                                    padding: EdgeInsets.all(6),
+                                                    padding: const EdgeInsets.all(6),
                                                     color: colorPrimary,
                                                     alignment: Alignment.center,
-                                                    child: Text('Keterangan',
+                                                    child: const Text('Keterangan',
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w300,
+                                                          fontWeight: FontWeight.w300,
                                                           color: Colors.white,
                                                           fontSize: 12,
                                                         )))),
@@ -290,13 +262,12 @@ class UserAksesPointPage extends StatelessWidget {
                                                 columnName: 'aksi',
                                                 label: Container(
                                                     color: colorPrimary,
-                                                    padding: EdgeInsets.all(6),
+                                                    padding: const EdgeInsets.all(6),
                                                     alignment: Alignment.center,
-                                                    child: Text('Aksi',
+                                                    child: const Text('Aksi',
                                                         style: TextStyle(
                                                           fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w300,
+                                                          fontWeight: FontWeight.w300,
                                                           color: Colors.white,
                                                         )))),
                                           ],
@@ -305,39 +276,33 @@ class UserAksesPointPage extends StatelessWidget {
                                       value.listUsers.isEmpty
                                           ? Container(
                                               height: 140,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.grey[200]),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
+                                              decoration: BoxDecoration(color: Colors.grey[200]),
+                                              child: const Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
-                                                  Text(
-                                                      "Belum ada akses point ditambahkan")
+                                                  Text("Belum ada akses point ditambahkan")
                                                 ],
                                               ),
                                             )
-                                          : SizedBox()
+                                          : const SizedBox()
                                     ],
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 24,
                                 ),
                                 value.tambah
                                     ? Container(
                                         height: 200,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20),
+                                        padding: const EdgeInsets.symmetric(horizontal: 20),
                                         child: SfDataGrid(
                                           headerRowHeight: 40,
                                           defaultColumnWidth: 180,
                                           frozenColumnsCount: 2,
 
                                           // controller: value.dataGridController,
-                                          gridLinesVisibility:
-                                              GridLinesVisibility.both,
-                                          headerGridLinesVisibility:
-                                              GridLinesVisibility.both,
+                                          gridLinesVisibility: GridLinesVisibility.both,
+                                          headerGridLinesVisibility: GridLinesVisibility.both,
                                           selectionMode: SelectionMode.single,
 
                                           source: DetailDataSources(value),
@@ -347,12 +312,11 @@ class UserAksesPointPage extends StatelessWidget {
                                                 label: Container(
                                                     color: colorPrimary,
                                                     alignment: Alignment.center,
-                                                    padding: EdgeInsets.all(6),
-                                                    child: Text('No Akses',
+                                                    padding: const EdgeInsets.all(6),
+                                                    child: const Text('No Akses',
                                                         style: TextStyle(
                                                           fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w300,
+                                                          fontWeight: FontWeight.w300,
                                                           color: Colors.white,
                                                         )))),
                                             GridColumn(
@@ -360,63 +324,58 @@ class UserAksesPointPage extends StatelessWidget {
                                                 label: Container(
                                                     color: colorPrimary,
                                                     alignment: Alignment.center,
-                                                    padding: EdgeInsets.all(6),
-                                                    child: Text('Akses ID',
+                                                    padding: const EdgeInsets.all(6),
+                                                    child: const Text('Akses ID',
                                                         style: TextStyle(
                                                           fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w300,
+                                                          fontWeight: FontWeight.w300,
                                                           color: Colors.white,
                                                         )))),
                                             GridColumn(
                                                 columnName: 'type',
                                                 label: Container(
-                                                    padding: EdgeInsets.all(6),
+                                                    padding: const EdgeInsets.all(6),
                                                     color: colorPrimary,
                                                     alignment: Alignment.center,
-                                                    child: Text('Type',
+                                                    child: const Text('Type',
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w300,
+                                                          fontWeight: FontWeight.w300,
                                                           color: Colors.white,
                                                           fontSize: 12,
                                                         )))),
                                             GridColumn(
                                                 columnName: 'lokasi',
                                                 label: Container(
-                                                    padding: EdgeInsets.all(6),
+                                                    padding: const EdgeInsets.all(6),
                                                     color: colorPrimary,
                                                     alignment: Alignment.center,
-                                                    child: Text('Lokasi',
+                                                    child: const Text('Lokasi',
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w300,
+                                                          fontWeight: FontWeight.w300,
                                                           color: Colors.white,
                                                           fontSize: 12,
                                                         )))),
                                             GridColumn(
                                                 columnName: 'alamat',
                                                 label: Container(
-                                                    padding: EdgeInsets.all(6),
+                                                    padding: const EdgeInsets.all(6),
                                                     color: colorPrimary,
                                                     alignment: Alignment.center,
-                                                    child: Text('Alamat',
+                                                    child: const Text('Alamat',
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w300,
+                                                          fontWeight: FontWeight.w300,
                                                           color: Colors.white,
                                                           fontSize: 12,
                                                         )))),
                                             GridColumn(
                                                 columnName: 'keterangan',
                                                 label: Container(
-                                                    padding: EdgeInsets.all(6),
+                                                    padding: const EdgeInsets.all(6),
                                                     color: colorPrimary,
                                                     alignment: Alignment.center,
-                                                    child: Text('Keterangan',
+                                                    child: const Text('Keterangan',
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w300,
+                                                          fontWeight: FontWeight.w300,
                                                           color: Colors.white,
                                                           fontSize: 12,
                                                         )))),
@@ -425,23 +384,22 @@ class UserAksesPointPage extends StatelessWidget {
                                                 columnName: 'aksi',
                                                 label: Container(
                                                     color: colorPrimary,
-                                                    padding: EdgeInsets.all(6),
+                                                    padding: const EdgeInsets.all(6),
                                                     alignment: Alignment.center,
-                                                    child: Text('Aksi',
+                                                    child: const Text('Aksi',
                                                         style: TextStyle(
                                                           fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w300,
+                                                          fontWeight: FontWeight.w300,
                                                           color: Colors.white,
                                                         )))),
                                           ],
                                         ),
                                       )
-                                    : SizedBox()
+                                    : const SizedBox()
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 16,
                           ),
                           Row(
@@ -453,12 +411,9 @@ class UserAksesPointPage extends StatelessWidget {
                                   value.simpanAkses();
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 16, vertical: 8),
-                                  decoration: BoxDecoration(
-                                      color: colorPrimary,
-                                      borderRadius: BorderRadius.circular(16)),
-                                  child: Text(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                  decoration: BoxDecoration(color: colorPrimary, borderRadius: BorderRadius.circular(16)),
+                                  child: const Text(
                                     "Simpan",
                                     style: TextStyle(
                                       color: Colors.white,
@@ -470,7 +425,7 @@ class UserAksesPointPage extends StatelessWidget {
                           ),
                         ],
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
             ],
           ),
@@ -523,7 +478,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -532,10 +487,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Hapus",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),
@@ -604,9 +559,7 @@ class DetailDataSources extends DataGridSource {
                   activeColor: colorPrimary,
                   value: tindakanNotifier!.listTmpAskes.isEmpty
                       ? false
-                      : tindakanNotifier!.listTmpAskes
-                              .where((f) => f.id == int.parse(e.value))
-                              .isNotEmpty
+                      : tindakanNotifier!.listTmpAskes.where((f) => f.id == int.parse(e.value)).isNotEmpty
                           ? true
                           : false,
                   onChanged: (f) {

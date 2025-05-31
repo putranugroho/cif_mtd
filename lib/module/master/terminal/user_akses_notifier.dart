@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 class UserAksesNotifier extends ChangeNotifier {
   final BuildContext context;
 
-  UserAksesNotifier({required this.context}) {}
+  UserAksesNotifier({required this.context});
 
   bool cariTrans = false;
   pilihCariTransaksi(bool value) {
@@ -56,8 +56,7 @@ class UserAksesNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTrans = pickedendDate;
-      tglTransaksi.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglTransaksi.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }

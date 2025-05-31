@@ -32,10 +32,10 @@ class KantorPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Kantor",
                               style: TextStyle(
@@ -47,8 +47,7 @@ class KantorPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -57,10 +56,10 @@ class KantorPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah Kantor",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -92,7 +91,7 @@ class KantorPage extends StatelessWidget {
                               ),
                             )
                           : Container(
-                              padding: EdgeInsets.all(20),
+                              padding: const EdgeInsets.all(20),
                               height: MediaQuery.of(context).size.height,
                               child: SfDataGrid(
                                 headerRowHeight: 40,
@@ -101,8 +100,7 @@ class KantorPage extends StatelessWidget {
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
-                                headerGridLinesVisibility:
-                                    GridLinesVisibility.both,
+                                headerGridLinesVisibility: GridLinesVisibility.both,
                                 selectionMode: SelectionMode.single,
 
                                 source: DetailDataSource(value),
@@ -111,10 +109,10 @@ class KantorPage extends StatelessWidget {
                                       width: 50,
                                       columnName: 'no',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('No',
+                                          child: const Text('No',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 12,
@@ -123,10 +121,10 @@ class KantorPage extends StatelessWidget {
                                   GridColumn(
                                       columnName: 'nama_kantor',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Nama Kantor',
+                                          child: const Text('Nama Kantor',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -138,8 +136,8 @@ class KantorPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Kode Kantor',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Kode Kantor',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -149,10 +147,10 @@ class KantorPage extends StatelessWidget {
                                       width: 100,
                                       columnName: 'kode_induk',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Kode Induk',
+                                          child: const Text('Kode Induk',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -162,10 +160,10 @@ class KantorPage extends StatelessWidget {
                                       columnName: 'alamat',
                                       width: 300,
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Alamat',
+                                          child: const Text('Alamat',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -175,9 +173,9 @@ class KantorPage extends StatelessWidget {
                                       columnName: 'status_kantor',
                                       label: Container(
                                           color: colorPrimary,
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           alignment: Alignment.center,
-                                          child: Text('Status Kantor',
+                                          child: const Text('Status Kantor',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -188,9 +186,9 @@ class KantorPage extends StatelessWidget {
                                       columnName: 'action',
                                       label: Container(
                                           color: colorPrimary,
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           alignment: Alignment.center,
-                                          child: Text('Action',
+                                          child: const Text('Action',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -212,7 +210,7 @@ class KantorPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                   top: 0,
@@ -220,9 +218,9 @@ class KantorPage extends StatelessWidget {
                   bottom: 0,
                   child: value.dialog
                       ? Container(
-                          padding: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           width: 600,
-                          decoration: BoxDecoration(color: Colors.white),
+                          decoration: const BoxDecoration(color: Colors.white),
                           child: FocusTraversalGroup(
                             child: Form(
                               key: value.keyForm,
@@ -233,10 +231,8 @@ class KantorPage extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          value.editData
-                                              ? "Ubah / Hapus Kantor"
-                                              : "Tambah Kantor",
-                                          style: TextStyle(
+                                          value.editData ? "Ubah / Hapus Kantor" : "Tambah Kantor",
+                                          style: const TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -247,28 +243,25 @@ class KantorPage extends StatelessWidget {
                                         child: Container(
                                           width: 40,
                                           height: 40,
-                                          padding: EdgeInsets.all(4),
-                                          decoration: BoxDecoration(
-                                              color: Colors.grey[200],
-                                              shape: BoxShape.circle),
-                                          child: Icon(Icons.close),
+                                          padding: const EdgeInsets.all(4),
+                                          decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                          child: const Icon(Icons.close),
                                         ),
                                       )
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 16,
                                   ),
                                   Expanded(
                                     child: ListView(children: [
-                                      Row(
+                                      const Row(
                                         children: [
                                           Text(
                                             "Status Kantor",
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: TextStyle(fontSize: 12),
                                           ),
-                                          const SizedBox(width: 5),
+                                          SizedBox(width: 5),
                                         ],
                                       ),
                                       const SizedBox(
@@ -281,29 +274,23 @@ class KantorPage extends StatelessWidget {
                                           }
                                           return null;
                                         },
-                                        popupProps:
-                                            const PopupPropsMultiSelection.menu(
-                                          showSearchBox:
-                                              true, // Aktifkan fitur pencarian
+                                        popupProps: const PopupPropsMultiSelection.menu(
+                                          showSearchBox: true, // Aktifkan fitur pencarian
                                         ),
                                         selectedItem: value.status,
                                         items: value.listStatus,
-                                        itemAsString: (e) => "${e}",
+                                        itemAsString: (e) => e,
                                         onChanged: (e) {
                                           value.pilihStatus(e!);
                                         },
-                                        dropdownDecoratorProps:
-                                            DropDownDecoratorProps(
-                                          baseStyle: TextStyle(fontSize: 16),
-                                          textAlignVertical:
-                                              TextAlignVertical.center,
-                                          dropdownSearchDecoration:
-                                              InputDecoration(
+                                        dropdownDecoratorProps: DropDownDecoratorProps(
+                                          baseStyle: const TextStyle(fontSize: 16),
+                                          textAlignVertical: TextAlignVertical.center,
+                                          dropdownSearchDecoration: InputDecoration(
                                             hintText: "Pilih Status",
                                             border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              borderSide: BorderSide(
+                                              borderRadius: BorderRadius.circular(8),
+                                              borderSide: const BorderSide(
                                                 width: 1,
                                                 color: Colors.grey,
                                               ),
@@ -312,14 +299,13 @@ class KantorPage extends StatelessWidget {
                                         ),
                                       ),
                                       const SizedBox(height: 16),
-                                      Row(
+                                      const Row(
                                         children: [
                                           Text(
                                             "Pilih Kantor Induk",
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: TextStyle(fontSize: 12),
                                           ),
-                                          const SizedBox(width: 5),
+                                          SizedBox(width: 5),
                                         ],
                                       ),
                                       const SizedBox(
@@ -335,58 +321,29 @@ class KantorPage extends StatelessWidget {
                                                 }
                                                 return null;
                                               },
-                                              popupProps:
-                                                  const PopupPropsMultiSelection
-                                                      .menu(
-                                                showSearchBox:
-                                                    true, // Aktifkan fitur pencarian
+                                              popupProps: const PopupPropsMultiSelection.menu(
+                                                showSearchBox: true, // Aktifkan fitur pencarian
                                               ),
                                               selectedItem: value.kantorModel,
                                               items: value.status == null
                                                   ? []
                                                   : value.status == "Cabang"
-                                                      ? value.list
-                                                          .where((e) =>
-                                                              e.statusKantor ==
-                                                              "P")
-                                                          .toList()
-                                                      : value.status ==
-                                                              "Anak Cabang"
-                                                          ? value.list
-                                                              .where((e) =>
-                                                                  e.statusKantor ==
-                                                                      "C" ||
-                                                                  e.statusKantor ==
-                                                                      "P")
-                                                              .toList()
-                                                          : value.list
-                                                              .where((e) =>
-                                                                  e.statusKantor ==
-                                                                      "D" ||
-                                                                  e.statusKantor ==
-                                                                      "C" ||
-                                                                  e.statusKantor ==
-                                                                      "P")
-                                                              .toList(),
-                                              itemAsString: (e) =>
-                                                  "${e.namaKantor}",
+                                                      ? value.list.where((e) => e.statusKantor == "P").toList()
+                                                      : value.status == "Anak Cabang"
+                                                          ? value.list.where((e) => e.statusKantor == "C" || e.statusKantor == "P").toList()
+                                                          : value.list.where((e) => e.statusKantor == "D" || e.statusKantor == "C" || e.statusKantor == "P").toList(),
+                                              itemAsString: (e) => e.namaKantor,
                                               onChanged: (e) {
                                                 value.pilihKantor(e!);
                                               },
-                                              dropdownDecoratorProps:
-                                                  DropDownDecoratorProps(
-                                                baseStyle:
-                                                    TextStyle(fontSize: 16),
-                                                textAlignVertical:
-                                                    TextAlignVertical.center,
-                                                dropdownSearchDecoration:
-                                                    InputDecoration(
+                                              dropdownDecoratorProps: DropDownDecoratorProps(
+                                                baseStyle: const TextStyle(fontSize: 16),
+                                                textAlignVertical: TextAlignVertical.center,
+                                                dropdownSearchDecoration: InputDecoration(
                                                   hintText: "Pilih Kantor",
                                                   border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                    borderSide: BorderSide(
+                                                    borderRadius: BorderRadius.circular(8),
+                                                    borderSide: const BorderSide(
                                                       width: 1,
                                                       color: Colors.grey,
                                                     ),
@@ -396,13 +353,12 @@ class KantorPage extends StatelessWidget {
                                             ),
                                           ),
                                           const SizedBox(height: 16),
-                                          Container(
+                                          SizedBox(
                                             width: 150,
                                             child: TextFormField(
                                               // enabled: false,
                                               readOnly: true,
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              textInputAction: TextInputAction.done,
                                               controller: value.noKantor,
                                               maxLines: 1,
                                               // inputFormatters: [
@@ -413,8 +369,7 @@ class KantorPage extends StatelessWidget {
                                                 fillColor: Colors.grey[200],
                                                 hintText: "Nomor Kantor",
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -427,18 +382,16 @@ class KantorPage extends StatelessWidget {
                                           Expanded(
                                             child: Column(
                                               children: [
-                                                Row(
+                                                const Row(
                                                   children: [
                                                     Text(
                                                       "Kode Kantor",
-                                                      style: const TextStyle(
-                                                          fontSize: 12),
+                                                      style: TextStyle(fontSize: 12),
                                                     ),
-                                                    const SizedBox(width: 5),
-                                                    const Text(
+                                                    SizedBox(width: 5),
+                                                    Text(
                                                       "*",
-                                                      style: TextStyle(
-                                                          fontSize: 8),
+                                                      style: TextStyle(fontSize: 8),
                                                     ),
                                                   ],
                                                 ),
@@ -446,34 +399,25 @@ class KantorPage extends StatelessWidget {
                                                   height: 8,
                                                 ),
                                                 TextFormField(
-                                                  textInputAction:
-                                                      TextInputAction.done,
+                                                  textInputAction: TextInputAction.done,
                                                   controller: value.kode,
-                                                  readOnly: value.editData
-                                                      ? true
-                                                      : false,
+                                                  readOnly: value.editData ? true : false,
                                                   maxLines: 1,
-                                                  maxLength:
-                                                      value.status == "Cabang"
-                                                          ? 3
-                                                          : value.status ==
-                                                                  "Anak Cabang"
-                                                              ? 4
-                                                              : 4,
+                                                  maxLength: value.status == "Cabang"
+                                                      ? 3
+                                                      : value.status == "Anak Cabang"
+                                                          ? 4
+                                                          : 4,
                                                   inputFormatters: [
-                                                    FilteringTextInputFormatter
-                                                        .digitsOnly
+                                                    FilteringTextInputFormatter.digitsOnly
                                                   ],
                                                   validator: (e) {
                                                     if (e!.isEmpty) {
                                                       return "Wajib diisi";
                                                     } else {
-                                                      if (value.status ==
-                                                              "Cabang" &&
-                                                          e.length != 3) {
+                                                      if (value.status == "Cabang" && e.length != 3) {
                                                         return "Wajib 3 digit";
-                                                      } else if (e.length !=
-                                                          4) {
+                                                      } else if (e.length != 4) {
                                                         return "Wajib 4 digit";
                                                       } else {
                                                         return null;
@@ -482,14 +426,10 @@ class KantorPage extends StatelessWidget {
                                                   },
                                                   decoration: InputDecoration(
                                                     hintText: "Kode Kantor",
-                                                    filled: value.editData
-                                                        ? true
-                                                        : false,
+                                                    filled: value.editData ? true : false,
                                                     fillColor: Colors.grey[200],
                                                     border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
+                                                      borderRadius: BorderRadius.circular(6),
                                                     ),
                                                   ),
                                                 ),
@@ -500,18 +440,16 @@ class KantorPage extends StatelessWidget {
                                           Expanded(
                                             child: Column(
                                               children: [
-                                                Row(
+                                                const Row(
                                                   children: [
                                                     Text(
                                                       "Nama Kantor",
-                                                      style: const TextStyle(
-                                                          fontSize: 12),
+                                                      style: TextStyle(fontSize: 12),
                                                     ),
-                                                    const SizedBox(width: 5),
-                                                    const Text(
+                                                    SizedBox(width: 5),
+                                                    Text(
                                                       "*",
-                                                      style: TextStyle(
-                                                          fontSize: 8),
+                                                      style: TextStyle(fontSize: 8),
                                                     ),
                                                   ],
                                                 ),
@@ -519,8 +457,7 @@ class KantorPage extends StatelessWidget {
                                                   height: 8,
                                                 ),
                                                 TextFormField(
-                                                  textInputAction:
-                                                      TextInputAction.done,
+                                                  textInputAction: TextInputAction.done,
                                                   controller: value.nama,
                                                   maxLines: 1,
                                                   validator: (e) {
@@ -533,9 +470,7 @@ class KantorPage extends StatelessWidget {
                                                   decoration: InputDecoration(
                                                     hintText: "Nama Kantor",
                                                     border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
+                                                      borderRadius: BorderRadius.circular(6),
                                                     ),
                                                   ),
                                                 ),
@@ -549,43 +484,33 @@ class KantorPage extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 16),
                                       Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
-                                          Text(
+                                          const Text(
                                             "Provinsi",
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: TextStyle(fontSize: 12),
                                           ),
                                           const SizedBox(
                                             height: 8,
                                           ),
                                           DropdownSearch<ProvinsiModel>(
-                                            popupProps:
-                                                const PopupPropsMultiSelection
-                                                    .menu(
-                                              showSearchBox:
-                                                  true, // Aktifkan fitur pencarian
+                                            popupProps: const PopupPropsMultiSelection.menu(
+                                              showSearchBox: true, // Aktifkan fitur pencarian
                                             ),
                                             selectedItem: value.provinsiModel,
                                             items: value.listProvinsi,
-                                            itemAsString: (e) => "${e.name}",
+                                            itemAsString: (e) => e.name,
                                             onChanged: (e) {
                                               value.pilihProvinsi(e!);
                                             },
-                                            dropdownDecoratorProps:
-                                                DropDownDecoratorProps(
-                                              baseStyle:
-                                                  TextStyle(fontSize: 16),
-                                              textAlignVertical:
-                                                  TextAlignVertical.center,
-                                              dropdownSearchDecoration:
-                                                  InputDecoration(
+                                            dropdownDecoratorProps: DropDownDecoratorProps(
+                                              baseStyle: const TextStyle(fontSize: 16),
+                                              textAlignVertical: TextAlignVertical.center,
+                                              dropdownSearchDecoration: InputDecoration(
                                                 hintText: "Pilih Provinsi",
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  borderSide: BorderSide(
+                                                  borderRadius: BorderRadius.circular(8),
+                                                  borderSide: const BorderSide(
                                                     width: 1,
                                                     color: Colors.grey,
                                                   ),
@@ -597,46 +522,34 @@ class KantorPage extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 16),
                                       Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
-                                          Text(
+                                          const Text(
                                             "Kota",
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: TextStyle(fontSize: 12),
                                           ),
                                           const SizedBox(
                                             height: 8,
                                           ),
                                           DropdownSearch<KotaModel>(
-                                            popupProps:
-                                                const PopupPropsMultiSelection
-                                                    .menu(
-                                              showSearchBox:
-                                                  true, // Aktifkan fitur pencarian
+                                            popupProps: const PopupPropsMultiSelection.menu(
+                                              showSearchBox: true, // Aktifkan fitur pencarian
                                             ),
-                                            enabled: value.listKota.isNotEmpty
-                                                ? true
-                                                : false,
+                                            enabled: value.listKota.isNotEmpty ? true : false,
                                             selectedItem: value.kotaModal,
                                             items: value.listKota,
-                                            itemAsString: (e) => "${e.name}",
+                                            itemAsString: (e) => e.name,
                                             onChanged: (e) {
                                               value.pilihKota(e!);
                                             },
-                                            dropdownDecoratorProps:
-                                                DropDownDecoratorProps(
-                                              baseStyle:
-                                                  TextStyle(fontSize: 16),
-                                              textAlignVertical:
-                                                  TextAlignVertical.center,
-                                              dropdownSearchDecoration:
-                                                  InputDecoration(
+                                            dropdownDecoratorProps: DropDownDecoratorProps(
+                                              baseStyle: const TextStyle(fontSize: 16),
+                                              textAlignVertical: TextAlignVertical.center,
+                                              dropdownSearchDecoration: InputDecoration(
                                                 hintText: "Pilih Kota",
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  borderSide: BorderSide(
+                                                  borderRadius: BorderRadius.circular(8),
+                                                  borderSide: const BorderSide(
                                                     width: 1,
                                                     color: Colors.grey,
                                                   ),
@@ -648,58 +561,38 @@ class KantorPage extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 16),
                                       Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Expanded(
                                             child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.stretch,
+                                              crossAxisAlignment: CrossAxisAlignment.stretch,
                                               children: [
-                                                Text(
+                                                const Text(
                                                   "Kecamatan",
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
                                                 const SizedBox(
                                                   height: 8,
                                                 ),
                                                 DropdownSearch<KecamatanModel>(
-                                                  popupProps:
-                                                      const PopupPropsMultiSelection
-                                                          .menu(
-                                                    showSearchBox:
-                                                        true, // Aktifkan fitur pencarian
+                                                  popupProps: const PopupPropsMultiSelection.menu(
+                                                    showSearchBox: true, // Aktifkan fitur pencarian
                                                   ),
-                                                  enabled: value.listKecamatan
-                                                          .isNotEmpty
-                                                      ? true
-                                                      : false,
-                                                  selectedItem:
-                                                      value.kecamatanModel,
+                                                  enabled: value.listKecamatan.isNotEmpty ? true : false,
+                                                  selectedItem: value.kecamatanModel,
                                                   items: value.listKecamatan,
-                                                  itemAsString: (e) =>
-                                                      "${e.name}",
+                                                  itemAsString: (e) => e.name,
                                                   onChanged: (e) {
                                                     value.pilihKecamatan(e!);
                                                   },
-                                                  dropdownDecoratorProps:
-                                                      DropDownDecoratorProps(
-                                                    baseStyle:
-                                                        TextStyle(fontSize: 16),
-                                                    textAlignVertical:
-                                                        TextAlignVertical
-                                                            .center,
-                                                    dropdownSearchDecoration:
-                                                        InputDecoration(
-                                                      hintText:
-                                                          "Pilih Kecamatan",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                        borderSide: BorderSide(
+                                                  dropdownDecoratorProps: DropDownDecoratorProps(
+                                                    baseStyle: const TextStyle(fontSize: 16),
+                                                    textAlignVertical: TextAlignVertical.center,
+                                                    dropdownSearchDecoration: InputDecoration(
+                                                      hintText: "Pilih Kecamatan",
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(8),
+                                                        borderSide: const BorderSide(
                                                           width: 1,
                                                           color: Colors.grey,
                                                         ),
@@ -715,53 +608,34 @@ class KantorPage extends StatelessWidget {
                                           ),
                                           Expanded(
                                             child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.stretch,
+                                              crossAxisAlignment: CrossAxisAlignment.stretch,
                                               children: [
-                                                Text(
+                                                const Text(
                                                   "Kelurahan",
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
                                                 const SizedBox(
                                                   height: 8,
                                                 ),
                                                 DropdownSearch<KelurahanModel>(
-                                                  popupProps:
-                                                      const PopupPropsMultiSelection
-                                                          .menu(
-                                                    showSearchBox:
-                                                        true, // Aktifkan fitur pencarian
+                                                  popupProps: const PopupPropsMultiSelection.menu(
+                                                    showSearchBox: true, // Aktifkan fitur pencarian
                                                   ),
-                                                  enabled: value.listKelurahan
-                                                          .isNotEmpty
-                                                      ? true
-                                                      : false,
-                                                  selectedItem:
-                                                      value.kelurahanModel,
+                                                  enabled: value.listKelurahan.isNotEmpty ? true : false,
+                                                  selectedItem: value.kelurahanModel,
                                                   items: value.listKelurahan,
-                                                  itemAsString: (e) =>
-                                                      "${e.name}",
+                                                  itemAsString: (e) => e.name,
                                                   onChanged: (e) {
                                                     value.pilihKelurahan(e!);
                                                   },
-                                                  dropdownDecoratorProps:
-                                                      DropDownDecoratorProps(
-                                                    baseStyle:
-                                                        TextStyle(fontSize: 16),
-                                                    textAlignVertical:
-                                                        TextAlignVertical
-                                                            .center,
-                                                    dropdownSearchDecoration:
-                                                        InputDecoration(
-                                                      hintText:
-                                                          "Pilih Kelurahan",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                        borderSide: BorderSide(
+                                                  dropdownDecoratorProps: DropDownDecoratorProps(
+                                                    baseStyle: const TextStyle(fontSize: 16),
+                                                    textAlignVertical: TextAlignVertical.center,
+                                                    dropdownSearchDecoration: InputDecoration(
+                                                      hintText: "Pilih Kelurahan",
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(8),
+                                                        borderSide: const BorderSide(
                                                           width: 1,
                                                           color: Colors.grey,
                                                         ),
@@ -778,21 +652,18 @@ class KantorPage extends StatelessWidget {
                                           SizedBox(
                                               width: 120,
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
-                                                  Row(
+                                                  const Row(
                                                     children: [
                                                       Text(
                                                         "Kode Pos",
-                                                        style: const TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
-                                                      const SizedBox(width: 5),
-                                                      const Text(
+                                                      SizedBox(width: 5),
+                                                      Text(
                                                         "*",
-                                                        style: TextStyle(
-                                                            fontSize: 8),
+                                                        style: TextStyle(fontSize: 8),
                                                       ),
                                                     ],
                                                   ),
@@ -801,8 +672,7 @@ class KantorPage extends StatelessWidget {
                                                   ),
                                                   TextFormField(
                                                     inputFormatters: [
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly
+                                                      FilteringTextInputFormatter.digitsOnly
                                                     ],
                                                     maxLength: 5,
                                                     controller: value.kodepos,
@@ -819,11 +689,8 @@ class KantorPage extends StatelessWidget {
                                                     },
                                                     decoration: InputDecoration(
                                                       hintText: "Kode Pos",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -832,15 +699,14 @@ class KantorPage extends StatelessWidget {
                                         ],
                                       ),
                                       const SizedBox(height: 16),
-                                      Row(
+                                      const Row(
                                         children: [
                                           Text(
                                             "Alamat",
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: TextStyle(fontSize: 12),
                                           ),
-                                          const SizedBox(width: 5),
-                                          const Text(
+                                          SizedBox(width: 5),
+                                          Text(
                                             "*",
                                             style: TextStyle(fontSize: 8),
                                           ),
@@ -850,8 +716,7 @@ class KantorPage extends StatelessWidget {
                                         height: 8,
                                       ),
                                       TextFormField(
-                                        textInputAction:
-                                            TextInputAction.newline,
+                                        textInputAction: TextInputAction.newline,
                                         controller: value.alamat,
                                         maxLines: 3,
                                         // inputFormatters: [
@@ -867,8 +732,7 @@ class KantorPage extends StatelessWidget {
                                         decoration: InputDecoration(
                                           hintText: "Alamat",
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),
@@ -877,21 +741,18 @@ class KantorPage extends StatelessWidget {
                                         children: [
                                           Expanded(
                                               child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
-                                              Row(
+                                              const Row(
                                                 children: [
                                                   Text(
                                                     "No. Telp",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
-                                                  const SizedBox(width: 5),
-                                                  const Text(
+                                                  SizedBox(width: 5),
+                                                  Text(
                                                     "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
+                                                    style: TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -899,13 +760,11 @@ class KantorPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               TextFormField(
-                                                textInputAction:
-                                                    TextInputAction.done,
+                                                textInputAction: TextInputAction.done,
                                                 controller: value.notelp,
                                                 maxLines: 1,
                                                 inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly
+                                                  FilteringTextInputFormatter.digitsOnly
                                                 ],
                                                 validator: (e) {
                                                   if (e!.isEmpty) {
@@ -917,50 +776,42 @@ class KantorPage extends StatelessWidget {
                                                 decoration: InputDecoration(
                                                   hintText: "No. Telp",
                                                   border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            6),
+                                                    borderRadius: BorderRadius.circular(6),
                                                   ),
                                                 ),
                                               ),
                                             ],
                                           )),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 16,
                                           ),
                                           Expanded(
                                               child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
-                                              Row(
+                                              const Row(
                                                 children: [
                                                   Text(
                                                     "No. Fax",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
-                                                  const SizedBox(width: 5),
+                                                  SizedBox(width: 5),
                                                 ],
                                               ),
                                               const SizedBox(
                                                 height: 8,
                                               ),
                                               TextFormField(
-                                                textInputAction:
-                                                    TextInputAction.done,
+                                                textInputAction: TextInputAction.done,
                                                 controller: value.fax,
                                                 maxLines: 1,
                                                 inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly
+                                                  FilteringTextInputFormatter.digitsOnly
                                                 ],
                                                 decoration: InputDecoration(
                                                   hintText: "No. Fax",
                                                   border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            6),
+                                                    borderRadius: BorderRadius.circular(6),
                                                   ),
                                                 ),
                                               ),
@@ -977,8 +828,7 @@ class KantorPage extends StatelessWidget {
                                       ),
                                       value.editData
                                           ? Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.stretch,
+                                              crossAxisAlignment: CrossAxisAlignment.stretch,
                                               children: [
                                                 const SizedBox(height: 16),
                                                 ButtonDanger(
@@ -989,7 +839,7 @@ class KantorPage extends StatelessWidget {
                                                 ),
                                               ],
                                             )
-                                          : SizedBox()
+                                          : const SizedBox()
                                     ]),
                                   ),
                                 ],
@@ -997,7 +847,7 @@ class KantorPage extends StatelessWidget {
                             ),
                           ),
                         )
-                      : SizedBox())
+                      : const SizedBox())
             ],
           ),
         )),
@@ -1062,7 +912,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -1071,10 +921,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),

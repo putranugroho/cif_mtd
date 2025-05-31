@@ -33,10 +33,10 @@ class PejabatPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Pejabat",
                               style: TextStyle(
@@ -48,8 +48,7 @@ class PejabatPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -58,10 +57,10 @@ class PejabatPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah Pejabat",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -93,15 +92,14 @@ class PejabatPage extends StatelessWidget {
                               ),
                             )
                           : Container(
-                              padding: EdgeInsets.all(20),
+                              padding: const EdgeInsets.all(20),
                               height: MediaQuery.of(context).size.height,
                               child: SfDataGrid(
                                 headerRowHeight: 40,
                                 defaultColumnWidth: 180,
                                 frozenColumnsCount: 2,
                                 gridLinesVisibility: GridLinesVisibility.both,
-                                headerGridLinesVisibility:
-                                    GridLinesVisibility.both,
+                                headerGridLinesVisibility: GridLinesVisibility.both,
                                 selectionMode: SelectionMode.single,
                                 source: DetailDataSource(value),
                                 columns: <GridColumn>[
@@ -109,10 +107,10 @@ class PejabatPage extends StatelessWidget {
                                       width: 50,
                                       columnName: 'no',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('No',
+                                          child: const Text('No',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 12,
@@ -123,8 +121,8 @@ class PejabatPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Nama Pegawai',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Nama Pegawai',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -135,8 +133,8 @@ class PejabatPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Jabatan',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Jabatan',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -147,8 +145,8 @@ class PejabatPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Organisasi',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Organisasi',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -157,10 +155,10 @@ class PejabatPage extends StatelessWidget {
                                   GridColumn(
                                       columnName: 'nik',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('NIP',
+                                          child: const Text('NIP',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -171,8 +169,8 @@ class PejabatPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('No. HP',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('No. HP',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -183,9 +181,9 @@ class PejabatPage extends StatelessWidget {
                                       columnName: 'action',
                                       label: Container(
                                           color: colorPrimary,
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           alignment: Alignment.center,
-                                          child: Text('Action',
+                                          child: const Text('Action',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -207,7 +205,7 @@ class PejabatPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                   top: 0,
@@ -216,8 +214,8 @@ class PejabatPage extends StatelessWidget {
                   child: value.dialog
                       ? Container(
                           width: 600,
-                          decoration: BoxDecoration(color: Colors.white),
-                          padding: EdgeInsets.all(20),
+                          decoration: const BoxDecoration(color: Colors.white),
+                          padding: const EdgeInsets.all(20),
                           child: Form(
                             key: value.keyForm,
                             child: Column(
@@ -227,10 +225,8 @@ class PejabatPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        value.editData
-                                            ? "Ubah / Hapus Pejabat"
-                                            : "Tambah Pejabat",
-                                        style: TextStyle(
+                                        value.editData ? "Ubah / Hapus Pejabat" : "Tambah Pejabat",
+                                        style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -241,29 +237,27 @@ class PejabatPage extends StatelessWidget {
                                       child: Container(
                                         width: 40,
                                         height: 40,
-                                        padding: EdgeInsets.all(4),
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey[200],
-                                            shape: BoxShape.circle),
-                                        child: Icon(Icons.close),
+                                        padding: const EdgeInsets.all(4),
+                                        decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                        child: const Icon(Icons.close),
                                       ),
                                     )
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 32,
                                 ),
                                 Expanded(
                                     child: ListView(
                                   children: [
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Nama Pegawai",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -274,10 +268,8 @@ class PejabatPage extends StatelessWidget {
                                     ),
                                     TypeAheadField<KaryawanModel>(
                                       controller: value.nama,
-                                      suggestionsCallback: (search) =>
-                                          value.getInqKaryawan(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInqKaryawan(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
@@ -286,7 +278,7 @@ class PejabatPage extends StatelessWidget {
                                             decoration: InputDecoration(
                                               filled: value.editData,
                                               fillColor: Colors.grey[200],
-                                              border: OutlineInputBorder(),
+                                              border: const OutlineInputBorder(),
                                               labelText: 'Cari Akun',
                                             ));
                                       },
@@ -302,14 +294,14 @@ class PejabatPage extends StatelessWidget {
                                       },
                                     ),
                                     const SizedBox(height: 16),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Nomor Induk Pegawai",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -335,20 +327,19 @@ class PejabatPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "Nomor Induk Pegawai",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
                                     const SizedBox(height: 16),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Jabatan",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -374,20 +365,19 @@ class PejabatPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "Jabatan",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
                                     const SizedBox(height: 16),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Deparment",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -413,20 +403,19 @@ class PejabatPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "Department",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
                                     const SizedBox(height: 16),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Kantor",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -442,29 +431,23 @@ class PejabatPage extends StatelessWidget {
                                         }
                                         return null;
                                       },
-                                      popupProps:
-                                          const PopupPropsMultiSelection.menu(
-                                        showSearchBox:
-                                            true, // Aktifkan fitur pencarian
+                                      popupProps: const PopupPropsMultiSelection.menu(
+                                        showSearchBox: true, // Aktifkan fitur pencarian
                                       ),
                                       selectedItem: value.kantorModel,
                                       items: value.listKantor,
-                                      itemAsString: (e) => "${e.namaKantor}",
+                                      itemAsString: (e) => e.namaKantor,
                                       onChanged: (e) {
                                         value.pilihKantor(e!);
                                       },
-                                      dropdownDecoratorProps:
-                                          DropDownDecoratorProps(
-                                        baseStyle: TextStyle(fontSize: 16),
-                                        textAlignVertical:
-                                            TextAlignVertical.center,
-                                        dropdownSearchDecoration:
-                                            InputDecoration(
+                                      dropdownDecoratorProps: DropDownDecoratorProps(
+                                        baseStyle: const TextStyle(fontSize: 16),
+                                        textAlignVertical: TextAlignVertical.center,
+                                        dropdownSearchDecoration: InputDecoration(
                                           hintText: "Pilih Kantor",
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            borderSide: BorderSide(
+                                            borderRadius: BorderRadius.circular(8),
+                                            borderSide: const BorderSide(
                                               width: 1,
                                               color: Colors.grey,
                                             ),
@@ -473,13 +456,13 @@ class PejabatPage extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(height: 16),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "No. HP",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
+                                        SizedBox(width: 5),
                                       ],
                                     ),
                                     const SizedBox(
@@ -503,8 +486,7 @@ class PejabatPage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         hintText: "No. HP",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -513,14 +495,11 @@ class PejabatPage extends StatelessWidget {
                                       onTap: () {
                                         value.simpan();
                                       },
-                                      name: value.editData
-                                          ? "Ubah Data"
-                                          : "Simpan",
+                                      name: value.editData ? "Ubah Data" : "Simpan",
                                     ),
                                     value.editData
                                         ? Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
                                               const SizedBox(height: 16),
                                               ButtonDanger(
@@ -531,14 +510,14 @@ class PejabatPage extends StatelessWidget {
                                               ),
                                             ],
                                           )
-                                        : SizedBox()
+                                        : const SizedBox()
                                   ],
                                 ))
                               ],
                             ),
                           ),
                         )
-                      : SizedBox())
+                      : const SizedBox())
             ],
           ),
         )),
@@ -589,7 +568,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -598,10 +577,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),

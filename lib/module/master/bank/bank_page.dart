@@ -35,10 +35,10 @@ class BankPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Bank",
                               style: TextStyle(
@@ -50,8 +50,7 @@ class BankPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -60,10 +59,10 @@ class BankPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah Bank",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -95,7 +94,7 @@ class BankPage extends StatelessWidget {
                               ),
                             )
                           : Container(
-                              padding: EdgeInsets.all(20),
+                              padding: const EdgeInsets.all(20),
                               height: MediaQuery.of(context).size.height,
                               child: SfDataGrid(
                                 headerRowHeight: 40,
@@ -104,8 +103,7 @@ class BankPage extends StatelessWidget {
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
-                                headerGridLinesVisibility:
-                                    GridLinesVisibility.both,
+                                headerGridLinesVisibility: GridLinesVisibility.both,
                                 selectionMode: SelectionMode.single,
 
                                 source: DetailDataSource(value),
@@ -114,10 +112,10 @@ class BankPage extends StatelessWidget {
                                       width: 50,
                                       columnName: 'no',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('No',
+                                          child: const Text('No',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 12,
@@ -128,8 +126,8 @@ class BankPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Nama Bank',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Nama Bank',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -138,10 +136,10 @@ class BankPage extends StatelessWidget {
                                   GridColumn(
                                       columnName: 'cabang',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Cabang',
+                                          child: const Text('Cabang',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -153,8 +151,8 @@ class BankPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('No Rekening',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('No Rekening',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -165,8 +163,8 @@ class BankPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Nama Rek.',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Nama Rek.',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -178,8 +176,8 @@ class BankPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Jenis Rekening',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Jenis Rekening',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -191,8 +189,8 @@ class BankPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('No. SBB',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('No. SBB',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -203,8 +201,8 @@ class BankPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Nama SBB',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Nama SBB',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -215,9 +213,9 @@ class BankPage extends StatelessWidget {
                                       width: 80,
                                       label: Container(
                                           color: colorPrimary,
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           alignment: Alignment.center,
-                                          child: Text('Action',
+                                          child: const Text('Action',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -239,7 +237,7 @@ class BankPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -247,15 +245,15 @@ class BankPage extends StatelessWidget {
                 right: 0,
                 child: value.dialog
                     ? Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         width: 600,
-                        decoration: BoxDecoration(color: Colors.white),
+                        decoration: const BoxDecoration(color: Colors.white),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   child: Text(
                                     "Tambah Bank",
                                     style: TextStyle(
@@ -269,16 +267,14 @@ class BankPage extends StatelessWidget {
                                   child: Container(
                                     width: 40,
                                     height: 40,
-                                    padding: EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey[200],
-                                        shape: BoxShape.circle),
-                                    child: Icon(Icons.close),
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                    child: const Icon(Icons.close),
                                   ),
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 32,
                             ),
                             Expanded(
@@ -287,14 +283,14 @@ class BankPage extends StatelessWidget {
                                 key: value.keyForm,
                                 child: ListView(
                                   children: [
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Bank",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -308,25 +304,21 @@ class BankPage extends StatelessWidget {
                                         Expanded(
                                           child: TypeAheadField<SandiBankModel>(
                                             controller: value.namaBank,
-                                            suggestionsCallback: (search) =>
-                                                value.getSandiBank(search),
-                                            builder: (context, controller,
-                                                focusNode) {
+                                            suggestionsCallback: (search) => value.getSandiBank(search),
+                                            builder: (context, controller, focusNode) {
                                               return TextField(
                                                   controller: controller,
                                                   focusNode: focusNode,
                                                   autofocus: true,
-                                                  decoration: InputDecoration(
-                                                    border:
-                                                        OutlineInputBorder(),
+                                                  decoration: const InputDecoration(
+                                                    border: OutlineInputBorder(),
                                                     labelText: 'Cari Bank',
                                                   ));
                                             },
                                             itemBuilder: (context, city) {
                                               return ListTile(
                                                 title: Text(city.namaLjk),
-                                                subtitle: Text(
-                                                    "Sandi : ${city.sandi}"),
+                                                subtitle: Text("Sandi : ${city.sandi}"),
                                               );
                                             },
                                             onSelected: (city) {
@@ -335,16 +327,15 @@ class BankPage extends StatelessWidget {
                                             },
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 16,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: 100,
                                           child: TextFormField(
                                             // enabled: false,
                                             readOnly: true,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             controller: value.kodeBank,
                                             maxLines: 1,
                                             // inputFormatters: [
@@ -362,8 +353,7 @@ class BankPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Kode Bank",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -373,14 +363,14 @@ class BankPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Cabang Pembuatan Rekening",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -402,26 +392,23 @@ class BankPage extends StatelessWidget {
                                       },
                                       decoration: InputDecoration(
                                         hintText: "Cabang Pembuatan Rekening",
-                                        suffixIcon: InkWell(
-                                            onTap: () {},
-                                            child: Icon(Icons.search)),
+                                        suffixIcon: InkWell(onTap: () {}, child: const Icon(Icons.search)),
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
                                     const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "No. Rekening",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -450,22 +437,21 @@ class BankPage extends StatelessWidget {
                                             onTap: () {
                                               value.cariRekening();
                                             },
-                                            child: Icon(Icons.search)),
+                                            child: const Icon(Icons.search)),
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
                                     const SizedBox(height: 16),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Nama. Rekening",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -487,26 +473,23 @@ class BankPage extends StatelessWidget {
                                       },
                                       decoration: InputDecoration(
                                         hintText: "Nama Rekening",
-                                        suffixIcon: InkWell(
-                                            onTap: () {},
-                                            child: Icon(Icons.search)),
+                                        suffixIcon: InkWell(onTap: () {}, child: const Icon(Icons.search)),
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
                                     const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Jenis Rekening ",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -522,29 +505,23 @@ class BankPage extends StatelessWidget {
                                         }
                                         return null;
                                       },
-                                      popupProps:
-                                          const PopupPropsMultiSelection.menu(
-                                        showSearchBox:
-                                            true, // Aktifkan fitur pencarian
+                                      popupProps: const PopupPropsMultiSelection.menu(
+                                        showSearchBox: true, // Aktifkan fitur pencarian
                                       ),
                                       selectedItem: value.rekening,
                                       items: value.jnsRekening.toList(),
-                                      itemAsString: (e) => "${e}",
+                                      itemAsString: (e) => e,
                                       onChanged: (e) {
                                         value.pilihRekening(e!);
                                       },
-                                      dropdownDecoratorProps:
-                                          DropDownDecoratorProps(
-                                        baseStyle: TextStyle(fontSize: 16),
-                                        textAlignVertical:
-                                            TextAlignVertical.center,
-                                        dropdownSearchDecoration:
-                                            InputDecoration(
+                                      dropdownDecoratorProps: DropDownDecoratorProps(
+                                        baseStyle: const TextStyle(fontSize: 16),
+                                        textAlignVertical: TextAlignVertical.center,
+                                        dropdownSearchDecoration: InputDecoration(
                                           hintText: "Pilih Jenis Rekening",
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            borderSide: BorderSide(
+                                            borderRadius: BorderRadius.circular(8),
+                                            borderSide: const BorderSide(
                                               width: 1,
                                               color: Colors.grey,
                                             ),
@@ -555,14 +532,14 @@ class BankPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Nominal",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -589,20 +566,19 @@ class BankPage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         hintText: "Saldo Rekening",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
                                     const SizedBox(height: 16),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Pilih SBB",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -616,17 +592,14 @@ class BankPage extends StatelessWidget {
                                         Expanded(
                                           child: TypeAheadField<InqueryGlModel>(
                                             controller: value.nosbbdeb,
-                                            suggestionsCallback: (search) =>
-                                                value.getInquery(search),
-                                            builder: (context, controller,
-                                                focusNode) {
+                                            suggestionsCallback: (search) => value.getInquery(search),
+                                            builder: (context, controller, focusNode) {
                                               return TextField(
                                                   controller: controller,
                                                   focusNode: focusNode,
                                                   autofocus: true,
-                                                  decoration: InputDecoration(
-                                                    border:
-                                                        OutlineInputBorder(),
+                                                  decoration: const InputDecoration(
+                                                    border: OutlineInputBorder(),
                                                     labelText: 'Cari Akun',
                                                   ));
                                             },
@@ -642,16 +615,15 @@ class BankPage extends StatelessWidget {
                                             },
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 16,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: 150,
                                           child: TextFormField(
                                             // enabled: false,
                                             readOnly: true,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             controller: value.namaSbbDeb,
                                             maxLines: 1,
                                             // inputFormatters: [
@@ -669,8 +641,7 @@ class BankPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Nomor Debet",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -678,14 +649,14 @@ class BankPage extends StatelessWidget {
                                       ],
                                     ),
                                     const SizedBox(height: 16),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Pilih Kantor",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -695,29 +666,23 @@ class BankPage extends StatelessWidget {
                                       height: 8,
                                     ),
                                     DropdownSearch<KantorModel>(
-                                      popupProps:
-                                          const PopupPropsMultiSelection.menu(
-                                        showSearchBox:
-                                            true, // Aktifkan fitur pencarian
+                                      popupProps: const PopupPropsMultiSelection.menu(
+                                        showSearchBox: true, // Aktifkan fitur pencarian
                                       ),
                                       selectedItem: value.kantor,
                                       items: value.listKantor,
-                                      itemAsString: (e) => "${e.namaKantor}",
+                                      itemAsString: (e) => e.namaKantor,
                                       onChanged: (e) {
                                         value.pilihKantor(e!);
                                       },
-                                      dropdownDecoratorProps:
-                                          DropDownDecoratorProps(
-                                        baseStyle: TextStyle(fontSize: 16),
-                                        textAlignVertical:
-                                            TextAlignVertical.center,
-                                        dropdownSearchDecoration:
-                                            InputDecoration(
+                                      dropdownDecoratorProps: DropDownDecoratorProps(
+                                        baseStyle: const TextStyle(fontSize: 16),
+                                        textAlignVertical: TextAlignVertical.center,
+                                        dropdownSearchDecoration: InputDecoration(
                                           hintText: "Pilih Kantor",
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            borderSide: BorderSide(
+                                            borderRadius: BorderRadius.circular(8),
+                                            borderSide: const BorderSide(
                                               width: 1,
                                               color: Colors.grey,
                                             ),
@@ -728,34 +693,25 @@ class BankPage extends StatelessWidget {
                                     const SizedBox(height: 16),
                                     value.rekening == "Deposito"
                                         ? Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
                                               Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Expanded(
                                                       child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .stretch,
+                                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                                     children: [
-                                                      Row(
+                                                      const Row(
                                                         children: [
                                                           Text(
                                                             "Nomor Bilyet",
-                                                            style:
-                                                                const TextStyle(
-                                                                    fontSize:
-                                                                        12),
+                                                            style: TextStyle(fontSize: 12),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 5),
-                                                          const Text(
+                                                          SizedBox(width: 5),
+                                                          Text(
                                                             "*",
-                                                            style: TextStyle(
-                                                                fontSize: 8),
+                                                            style: TextStyle(fontSize: 8),
                                                           ),
                                                         ],
                                                       ),
@@ -763,12 +719,9 @@ class BankPage extends StatelessWidget {
                                                         height: 8,
                                                       ),
                                                       TextFormField(
-                                                        textInputAction:
-                                                            TextInputAction
-                                                                .done,
+                                                        textInputAction: TextInputAction.done,
                                                         maxLines: 1,
-                                                        controller:
-                                                            value.noBilyet,
+                                                        controller: value.noBilyet,
                                                         validator: (e) {
                                                           if (e!.isEmpty) {
                                                             return "Wajib diisi";
@@ -776,45 +729,32 @@ class BankPage extends StatelessWidget {
                                                             return null;
                                                           }
                                                         },
-                                                        decoration:
-                                                            InputDecoration(
-                                                          hintText:
-                                                              "Nomor Bilyet Deposito",
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        6),
+                                                        decoration: InputDecoration(
+                                                          hintText: "Nomor Bilyet Deposito",
+                                                          border: OutlineInputBorder(
+                                                            borderRadius: BorderRadius.circular(6),
                                                           ),
                                                         ),
                                                       ),
                                                     ],
                                                   )),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 16,
                                                   ),
                                                   Expanded(
                                                       child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
-                                                      Row(
+                                                      const Row(
                                                         children: [
                                                           Text(
                                                             "Jangka Waktu (Bulan)",
-                                                            style:
-                                                                const TextStyle(
-                                                                    fontSize:
-                                                                        12),
+                                                            style: TextStyle(fontSize: 12),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 5),
-                                                          const Text(
+                                                          SizedBox(width: 5),
+                                                          Text(
                                                             "*",
-                                                            style: TextStyle(
-                                                                fontSize: 8),
+                                                            style: TextStyle(fontSize: 8),
                                                           ),
                                                         ],
                                                       ),
@@ -822,15 +762,11 @@ class BankPage extends StatelessWidget {
                                                         height: 8,
                                                       ),
                                                       TextFormField(
-                                                        textInputAction:
-                                                            TextInputAction
-                                                                .done,
-                                                        controller:
-                                                            value.jangkaWaktu,
+                                                        textInputAction: TextInputAction.done,
+                                                        controller: value.jangkaWaktu,
                                                         maxLines: 1,
                                                         inputFormatters: [
-                                                          FilteringTextInputFormatter
-                                                              .digitsOnly,
+                                                          FilteringTextInputFormatter.digitsOnly,
                                                         ],
                                                         validator: (e) {
                                                           if (e!.isEmpty) {
@@ -839,16 +775,10 @@ class BankPage extends StatelessWidget {
                                                             return null;
                                                           }
                                                         },
-                                                        decoration:
-                                                            InputDecoration(
-                                                          hintText:
-                                                              "Jangka Waktu",
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        6),
+                                                        decoration: InputDecoration(
+                                                          hintText: "Jangka Waktu",
+                                                          border: OutlineInputBorder(
+                                                            borderRadius: BorderRadius.circular(6),
                                                           ),
                                                         ),
                                                       ),
@@ -858,30 +788,22 @@ class BankPage extends StatelessWidget {
                                               ),
                                               const SizedBox(height: 16),
                                               Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Expanded(
                                                       child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .stretch,
+                                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                                     children: [
-                                                      Row(
+                                                      const Row(
                                                         children: [
                                                           Text(
                                                             "Tanggal Buka Deposito",
-                                                            style:
-                                                                const TextStyle(
-                                                                    fontSize:
-                                                                        12),
+                                                            style: TextStyle(fontSize: 12),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 5),
-                                                          const Text(
+                                                          SizedBox(width: 5),
+                                                          Text(
                                                             "*",
-                                                            style: TextStyle(
-                                                                fontSize: 8),
+                                                            style: TextStyle(fontSize: 8),
                                                           ),
                                                         ],
                                                       ),
@@ -889,15 +811,11 @@ class BankPage extends StatelessWidget {
                                                         height: 8,
                                                       ),
                                                       InkWell(
-                                                        onTap: () => value
-                                                            .pilihTanggalBuka(),
+                                                        onTap: () => value.pilihTanggalBuka(),
                                                         child: TextFormField(
                                                           enabled: false,
-                                                          textInputAction:
-                                                              TextInputAction
-                                                                  .done,
-                                                          controller: value
-                                                              .tglBukaRekening,
+                                                          textInputAction: TextInputAction.done,
+                                                          controller: value.tglBukaRekening,
                                                           maxLines: 1,
                                                           validator: (e) {
                                                             if (e!.isEmpty) {
@@ -906,48 +824,34 @@ class BankPage extends StatelessWidget {
                                                               return null;
                                                             }
                                                           },
-                                                          decoration:
-                                                              InputDecoration(
-                                                            hintText:
-                                                                "Tanggal Buka Rekening",
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          6),
+                                                          decoration: InputDecoration(
+                                                            hintText: "Tanggal Buka Rekening",
+                                                            border: OutlineInputBorder(
+                                                              borderRadius: BorderRadius.circular(6),
                                                             ),
                                                           ),
                                                         ),
                                                       ),
-                                                      const SizedBox(
-                                                          height: 16),
+                                                      const SizedBox(height: 16),
                                                     ],
                                                   )),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 16,
                                                   ),
                                                   Expanded(
                                                       child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .stretch,
+                                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                                     children: [
-                                                      Row(
+                                                      const Row(
                                                         children: [
                                                           Text(
                                                             "Tanggal Jatuh Tempo",
-                                                            style:
-                                                                const TextStyle(
-                                                                    fontSize:
-                                                                        12),
+                                                            style: TextStyle(fontSize: 12),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 5),
-                                                          const Text(
+                                                          SizedBox(width: 5),
+                                                          Text(
                                                             "*",
-                                                            style: TextStyle(
-                                                                fontSize: 8),
+                                                            style: TextStyle(fontSize: 8),
                                                           ),
                                                         ],
                                                       ),
@@ -955,15 +859,11 @@ class BankPage extends StatelessWidget {
                                                         height: 8,
                                                       ),
                                                       InkWell(
-                                                        onTap: () => value
-                                                            .pilihTanggalJatuhTempo(),
+                                                        onTap: () => value.pilihTanggalJatuhTempo(),
                                                         child: TextFormField(
                                                           enabled: false,
-                                                          textInputAction:
-                                                              TextInputAction
-                                                                  .done,
-                                                          controller: value
-                                                              .tglJatuhTempoRekening,
+                                                          textInputAction: TextInputAction.done,
+                                                          controller: value.tglJatuhTempoRekening,
                                                           maxLines: 1,
                                                           validator: (e) {
                                                             if (e!.isEmpty) {
@@ -972,38 +872,29 @@ class BankPage extends StatelessWidget {
                                                               return null;
                                                             }
                                                           },
-                                                          decoration:
-                                                              InputDecoration(
-                                                            hintText:
-                                                                "Tanggal Jatuh Tempo",
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          6),
+                                                          decoration: InputDecoration(
+                                                            hintText: "Tanggal Jatuh Tempo",
+                                                            border: OutlineInputBorder(
+                                                              borderRadius: BorderRadius.circular(6),
                                                             ),
                                                           ),
                                                         ),
                                                       ),
-                                                      const SizedBox(
-                                                          height: 16),
+                                                      const SizedBox(height: 16),
                                                     ],
                                                   ))
                                                 ],
                                               ),
-                                              Row(
+                                              const Row(
                                                 children: [
                                                   Text(
                                                     "ARO",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
-                                                  const SizedBox(width: 5),
-                                                  const Text(
+                                                  SizedBox(width: 5),
+                                                  Text(
                                                     "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
+                                                    style: TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -1019,11 +910,11 @@ class BankPage extends StatelessWidget {
                                                       onChanged: (e) {
                                                         value.pilihAro(true);
                                                       }),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 8,
                                                   ),
-                                                  Text("Ya"),
-                                                  SizedBox(
+                                                  const Text("Ya"),
+                                                  const SizedBox(
                                                     width: 24,
                                                   ),
                                                   Radio(
@@ -1033,16 +924,16 @@ class BankPage extends StatelessWidget {
                                                       onChanged: (e) {
                                                         value.pilihAro(false);
                                                       }),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 8,
                                                   ),
-                                                  Text("Tidak"),
+                                                  const Text("Tidak"),
                                                 ],
                                               ),
                                               const SizedBox(height: 16),
                                             ],
                                           )
-                                        : SizedBox(),
+                                        : const SizedBox(),
                                     ButtonPrimary(
                                       onTap: () {
                                         value.cek();
@@ -1051,10 +942,9 @@ class BankPage extends StatelessWidget {
                                     ),
                                     value.editData
                                         ? Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 16,
                                               ),
                                               ButtonDanger(
@@ -1065,7 +955,7 @@ class BankPage extends StatelessWidget {
                                               )
                                             ],
                                           )
-                                        : SizedBox()
+                                        : const SizedBox()
                                   ],
                                 ),
                               ),
@@ -1073,7 +963,7 @@ class BankPage extends StatelessWidget {
                           ],
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -1138,7 +1028,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -1147,10 +1037,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),

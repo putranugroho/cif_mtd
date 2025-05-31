@@ -37,10 +37,10 @@ class BanyakTransaksiPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Banyak Transaksi",
                               style: TextStyle(
@@ -52,8 +52,7 @@ class BanyakTransaksiPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -62,10 +61,10 @@ class BanyakTransaksiPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah Transaksi",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -76,7 +75,7 @@ class BanyakTransaksiPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         height: MediaQuery.of(context).size.height,
                         child: SfDataGrid(
                           headerRowHeight: 40,
@@ -94,10 +93,10 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 width: 50,
                                 columnName: 'no',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('No',
+                                    child: const Text('No',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           fontSize: 12,
@@ -107,10 +106,10 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 width: 100,
                                 columnName: 'tgl_val',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Tanggal Valuta',
+                                    child: const Text('Tanggal Valuta',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -120,10 +119,10 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 width: 100,
                                 columnName: 'tgl_trans',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Tanggal Input',
+                                    child: const Text('Tanggal Input',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -135,8 +134,8 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nomor Dokumen',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nomor Dokumen',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -148,8 +147,8 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nomor Referensi',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nomor Referensi',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -161,8 +160,8 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nominal',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nominal',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -174,8 +173,8 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama Akun Debet',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nama Akun Debet',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -187,8 +186,8 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama Akun Kredit',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nama Akun Kredit',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -200,8 +199,8 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Keterangan',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Keterangan',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -213,8 +212,8 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Akun Debet',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Akun Debet',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -226,8 +225,8 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Akun Kredit',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Akun Kredit',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -238,9 +237,9 @@ class BanyakTransaksiPage extends StatelessWidget {
                                 width: 80,
                                 label: Container(
                                     color: colorPrimary,
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     alignment: Alignment.center,
-                                    child: Text('Action',
+                                    child: const Text('Action',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -262,7 +261,7 @@ class BanyakTransaksiPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -270,15 +269,15 @@ class BanyakTransaksiPage extends StatelessWidget {
                 right: 0,
                 child: value.dialog
                     ? Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         width: 1180,
-                        decoration: BoxDecoration(color: Colors.white),
+                        decoration: const BoxDecoration(color: Colors.white),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   child: Text(
                                     "Tambah Transaksi",
                                     style: TextStyle(
@@ -292,16 +291,14 @@ class BanyakTransaksiPage extends StatelessWidget {
                                   child: Container(
                                     width: 40,
                                     height: 40,
-                                    padding: EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey[200],
-                                        shape: BoxShape.circle),
-                                    child: Icon(Icons.close),
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                    child: const Icon(Icons.close),
                                   ),
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 32,
                             ),
                             Expanded(
@@ -312,98 +309,68 @@ class BanyakTransaksiPage extends StatelessWidget {
                                     children: [
                                       Row(
                                         children: [
-                                          Container(
+                                          SizedBox(
                                               width: 1000,
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      Text(
+                                                      const Text(
                                                         "Pilih Akun",
-                                                        style: const TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
                                                       const SizedBox(width: 5),
                                                       const Text(
                                                         "*",
-                                                        style: TextStyle(
-                                                            fontSize: 8),
+                                                        style: TextStyle(fontSize: 8),
                                                       ),
-                                                      SizedBox(
+                                                      const SizedBox(
                                                         width: 16,
                                                       ),
-                                                      Radio(
-                                                          value: false,
-                                                          groupValue:
-                                                              value.akun,
-                                                          onChanged: (e) =>
-                                                              value.gantiakun(
-                                                                  false)),
-                                                      SizedBox(
+                                                      Radio(value: false, groupValue: value.akun, onChanged: (e) => value.gantiakun(false)),
+                                                      const SizedBox(
                                                         width: 8,
                                                       ),
-                                                      Text("Debet"),
-                                                      SizedBox(
+                                                      const Text("Debet"),
+                                                      const SizedBox(
                                                         width: 24,
                                                       ),
-                                                      Radio(
-                                                          value: true,
-                                                          groupValue:
-                                                              value.akun,
-                                                          onChanged: (e) =>
-                                                              value.gantiakun(
-                                                                  true)),
-                                                      SizedBox(
+                                                      Radio(value: true, groupValue: value.akun, onChanged: (e) => value.gantiakun(true)),
+                                                      const SizedBox(
                                                         width: 8,
                                                       ),
-                                                      Text("Credit"),
-                                                      const SizedBox(
-                                                          width: 150),
+                                                      const Text("Credit"),
+                                                      const SizedBox(width: 150),
                                                       Checkbox(
-                                                        activeColor:
-                                                            colorPrimary,
+                                                        activeColor: colorPrimary,
                                                         value: value.backDate,
-                                                        onChanged: (e) => value
-                                                            .gantibackDate(),
+                                                        onChanged: (e) => value.gantibackDate(),
                                                       ),
-                                                      Text(
+                                                      const Text(
                                                         "Transaksi Back Date",
-                                                        style: const TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
                                                       const SizedBox(width: 5),
                                                       const Text(
                                                         "*",
-                                                        style: TextStyle(
-                                                            fontSize: 8),
+                                                        style: TextStyle(fontSize: 8),
                                                       ),
                                                       const SizedBox(width: 8),
                                                       Expanded(
                                                         child: InkWell(
-                                                          onTap: () => value
-                                                              .tanggalBackDate(),
+                                                          onTap: () => value.tanggalBackDate(),
                                                           child: TextFormField(
-                                                            enabled:
-                                                                !value.backDate,
-                                                            textInputAction:
-                                                                TextInputAction
-                                                                    .done,
-                                                            controller: value
-                                                                .tglBackDatetext,
+                                                            enabled: !value.backDate,
+                                                            textInputAction: TextInputAction.done,
+                                                            controller: value.tglBackDatetext,
                                                             maxLines: 1,
-                                                            readOnly:
-                                                                !value.backDate,
-                                                            style:
-                                                                const TextStyle(
+                                                            readOnly: !value.backDate,
+                                                            style: const TextStyle(
                                                               // Make text bigger and black
-                                                              color:
-                                                                  Colors.black,
+                                                              color: Colors.black,
                                                               fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
+                                                              fontWeight: FontWeight.w500,
                                                             ),
                                                             // validator: (e) {
                                                             //   if (e!.isEmpty) {
@@ -412,35 +379,17 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                             //     return null;
                                                             //   }
                                                             // },
-                                                            decoration:
-                                                                InputDecoration(
-                                                              filled: !value
-                                                                  .backDate,
-                                                              fillColor: Colors
-                                                                  .grey[200],
-                                                              hintText:
-                                                                  "Tanggal Valuta",
-                                                              hintStyle:
-                                                                  const TextStyle(
-                                                                      color: Colors
-                                                                          .grey),
-                                                              border:
-                                                                  OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            6),
+                                                            decoration: InputDecoration(
+                                                              filled: !value.backDate,
+                                                              fillColor: Colors.grey[200],
+                                                              hintText: "Tanggal Valuta",
+                                                              hintStyle: const TextStyle(color: Colors.grey),
+                                                              border: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(6),
                                                               ),
-                                                              disabledBorder:
-                                                                  OutlineInputBorder(
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .grey
-                                                                        .shade600),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            6),
+                                                              disabledBorder: OutlineInputBorder(
+                                                                borderSide: BorderSide(color: Colors.grey.shade600),
+                                                                borderRadius: BorderRadius.circular(6),
                                                               ),
                                                             ),
                                                           ),
@@ -453,76 +402,56 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                   ),
                                                 ],
                                               )),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 32,
                                           ),
                                         ],
                                       ),
                                       Row(
                                         children: [
-                                          Container(
+                                          SizedBox(
                                               width: 368,
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
                                                   Row(
                                                     children: [
                                                       Expanded(
-                                                        child: TypeAheadField<
-                                                            InqueryGlModel>(
-                                                          controller:
-                                                              value.nosbbdeb,
-                                                          suggestionsCallback:
-                                                              (search) => value
-                                                                  .getInquery(
-                                                                      search),
-                                                          builder: (context,
-                                                              controller,
-                                                              focusNode) {
+                                                        child: TypeAheadField<InqueryGlModel>(
+                                                          controller: value.nosbbdeb,
+                                                          suggestionsCallback: (search) => value.getInquery(search),
+                                                          builder: (context, controller, focusNode) {
                                                             return TextField(
-                                                                controller:
-                                                                    controller,
-                                                                focusNode:
-                                                                    focusNode,
+                                                                controller: controller,
+                                                                focusNode: focusNode,
                                                                 autofocus: true,
-                                                                decoration:
-                                                                    InputDecoration(
-                                                                  border:
-                                                                      OutlineInputBorder(),
-                                                                  labelText:
-                                                                      'Cari Akun',
+                                                                decoration: const InputDecoration(
+                                                                  border: OutlineInputBorder(),
+                                                                  labelText: 'Cari Akun',
                                                                 ));
                                                           },
-                                                          itemBuilder:
-                                                              (context, city) {
+                                                          itemBuilder: (context, city) {
                                                             return ListTile(
-                                                              title: Text(
-                                                                  city.nosbb),
-                                                              subtitle: Text(
-                                                                  city.namaSbb),
+                                                              title: Text(city.nosbb),
+                                                              subtitle: Text(city.namaSbb),
                                                             );
                                                           },
                                                           onSelected: (city) {
                                                             // value.selectInvoice(city);
-                                                            value.pilihAkunDeb(
-                                                                city);
+                                                            value.pilihAkunDeb(city);
                                                           },
                                                         ),
                                                       ),
-                                                      SizedBox(
+                                                      const SizedBox(
                                                         width: 16,
                                                       ),
-                                                      Container(
+                                                      SizedBox(
                                                         width: 150,
                                                         child: TextFormField(
                                                           // enabled: false,
                                                           readOnly: true,
-                                                          textInputAction:
-                                                              TextInputAction
-                                                                  .done,
-                                                          controller:
-                                                              value.namaSbbDeb,
+                                                          textInputAction: TextInputAction.done,
+                                                          controller: value.namaSbbDeb,
                                                           maxLines: 1,
                                                           // inputFormatters: [
                                                           //   FilteringTextInputFormatter.digitsOnly
@@ -534,19 +463,12 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                               return null;
                                                             }
                                                           },
-                                                          decoration:
-                                                              InputDecoration(
+                                                          decoration: InputDecoration(
                                                             filled: true,
-                                                            fillColor: Colors
-                                                                .grey[200],
-                                                            hintText:
-                                                                "Nomor Akun",
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          6),
+                                                            fillColor: Colors.grey[200],
+                                                            hintText: "Nomor Akun",
+                                                            border: OutlineInputBorder(
+                                                              borderRadius: BorderRadius.circular(6),
                                                             ),
                                                           ),
                                                         ),
@@ -560,31 +482,27 @@ class BanyakTransaksiPage extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 16),
                                       Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Container(
+                                          SizedBox(
                                               width: 382,
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
-                                                  Row(
+                                                  const Row(
                                                     children: [
                                                       Text(
                                                         "Nomor Reference",
-                                                        style: const TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
-                                                      const SizedBox(width: 5),
+                                                      SizedBox(width: 5),
                                                     ],
                                                   ),
                                                   const SizedBox(
                                                     height: 8,
                                                   ),
                                                   TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
+                                                    textInputAction: TextInputAction.done,
                                                     controller: value.nomorRef,
                                                     maxLines: 1,
                                                     validator: (e) {
@@ -595,39 +513,32 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                       }
                                                     },
                                                     decoration: InputDecoration(
-                                                      hintText:
-                                                          "Nomor Referensi",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      hintText: "Nomor Referensi",
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
                                                 ],
                                               )),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 32,
                                           ),
-                                          Container(
+                                          SizedBox(
                                               width: 300,
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
-                                                  Row(
+                                                  const Row(
                                                     children: [
                                                       Text(
                                                         "Nominal",
-                                                        style: const TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
-                                                      const SizedBox(width: 5),
-                                                      const Text(
+                                                      SizedBox(width: 5),
+                                                      Text(
                                                         "*",
-                                                        style: TextStyle(
-                                                            fontSize: 8),
+                                                        style: TextStyle(fontSize: 8),
                                                       ),
                                                     ],
                                                   ),
@@ -636,8 +547,7 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                   ),
                                                   TextFormField(
                                                     textAlign: TextAlign.end,
-                                                    textInputAction:
-                                                        TextInputAction.done,
+                                                    textInputAction: TextInputAction.done,
                                                     controller: value.nominal,
                                                     onChanged: (e) {
                                                       value.changeTotal();
@@ -647,11 +557,8 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                       a.CurrencyInputFormatter(
                                                         leadingSymbol: 'Rp ',
                                                         useSymbolPadding: true,
-                                                        thousandSeparator: a
-                                                            .ThousandSeparator
-                                                            .Period,
-                                                        mantissaLength:
-                                                            2, // jumlah angka desimal
+                                                        thousandSeparator: a.ThousandSeparator.Period,
+                                                        mantissaLength: 2, // jumlah angka desimal
                                                         // decimalSeparator: DecimalSeparator.Comma,
                                                       ),
                                                     ],
@@ -663,13 +570,9 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                       }
                                                     },
                                                     decoration: InputDecoration(
-                                                      hintText:
-                                                          "Nilai Transaksi",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      hintText: "Nilai Transaksi",
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -680,29 +583,22 @@ class BanyakTransaksiPage extends StatelessWidget {
                                       ),
                                       Row(
                                         children: [
-                                          Text(
+                                          const Text(
                                             "Input Transaksi Lawan",
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: TextStyle(fontSize: 12),
                                           ),
                                           const SizedBox(width: 5),
                                           const Text(
                                             "*",
                                             style: TextStyle(fontSize: 8),
                                           ),
-                                          Spacer(),
+                                          const Spacer(),
                                           InkWell(
-                                            onTap: () =>
-                                                value.tambahTransaksi(),
+                                            onTap: () => value.tambahTransaksi(),
                                             child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 16, vertical: 8),
-                                              decoration: BoxDecoration(
-                                                  color: colorPrimary,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          16)),
-                                              child: Text(
+                                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                              decoration: BoxDecoration(color: colorPrimary, borderRadius: BorderRadius.circular(16)),
+                                              child: const Text(
                                                 "Tambah Akun",
                                                 style: TextStyle(
                                                   fontSize: 12,
@@ -719,68 +615,48 @@ class BanyakTransaksiPage extends StatelessWidget {
                                       ListView.builder(
                                           itemCount: value.transaksi,
                                           shrinkWrap: true,
-                                          physics: ClampingScrollPhysics(),
+                                          physics: const ClampingScrollPhysics(),
                                           itemBuilder: (context, i) {
                                             return Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.stretch,
+                                              crossAxisAlignment: CrossAxisAlignment.stretch,
                                               children: [
                                                 Row(
                                                   children: [
-                                                    Container(
+                                                    SizedBox(
                                                       width: 216,
-                                                      child: TypeAheadField<
-                                                          InqueryGlModel>(
-                                                        controller: value
-                                                            .listNamaSbbItems[i],
-                                                        suggestionsCallback:
-                                                            (search) => value
-                                                                .getInquery(
-                                                                    search),
-                                                        builder: (context,
-                                                            controller,
-                                                            focusNode) {
+                                                      child: TypeAheadField<InqueryGlModel>(
+                                                        controller: value.listNamaSbbItems[i],
+                                                        suggestionsCallback: (search) => value.getInquery(search),
+                                                        builder: (context, controller, focusNode) {
                                                           return TextField(
-                                                              controller:
-                                                                  controller,
-                                                              focusNode:
-                                                                  focusNode,
+                                                              controller: controller,
+                                                              focusNode: focusNode,
                                                               autofocus: true,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                border:
-                                                                    OutlineInputBorder(),
-                                                                labelText:
-                                                                    'Cari Akun',
+                                                              decoration: const InputDecoration(
+                                                                border: OutlineInputBorder(),
+                                                                labelText: 'Cari Akun',
                                                               ));
                                                         },
-                                                        itemBuilder:
-                                                            (context, city) {
+                                                        itemBuilder: (context, city) {
                                                           return ListTile(
-                                                            title: Text(
-                                                                city.nosbb),
-                                                            subtitle: Text(
-                                                                city.namaSbb),
+                                                            title: Text(city.nosbb),
+                                                            subtitle: Text(city.namaSbb),
                                                           );
                                                         },
                                                         onSelected: (city) {
                                                           // value.selectInvoice(city);
-                                                          value.pilihAkunItem(
-                                                              city, i);
+                                                          value.pilihAkunItem(city, i);
                                                         },
                                                       ),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       width: 16,
                                                     ),
-                                                    Container(
+                                                    SizedBox(
                                                       width: 150,
                                                       child: TextFormField(
-                                                        textInputAction:
-                                                            TextInputAction
-                                                                .done,
-                                                        controller:
-                                                            value.listNoDok[i],
+                                                        textInputAction: TextInputAction.done,
+                                                        controller: value.listNoDok[i],
                                                         maxLines: 1,
                                                         validator: (e) {
                                                           if (e!.isEmpty) {
@@ -789,48 +665,33 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                             return null;
                                                           }
                                                         },
-                                                        decoration:
-                                                            InputDecoration(
-                                                          hintText:
-                                                              "No. Dokumen",
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        6),
+                                                        decoration: InputDecoration(
+                                                          hintText: "No. Dokumen",
+                                                          border: OutlineInputBorder(
+                                                            borderRadius: BorderRadius.circular(6),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       width: 32,
                                                     ),
-                                                    Container(
+                                                    SizedBox(
                                                       width: 300,
                                                       child: TextFormField(
-                                                        textAlign:
-                                                            TextAlign.end,
-                                                        textInputAction:
-                                                            TextInputAction
-                                                                .done,
+                                                        textAlign: TextAlign.end,
+                                                        textInputAction: TextInputAction.done,
                                                         maxLines: 1,
                                                         onChanged: (e) {
                                                           value.changeTotal();
                                                         },
-                                                        controller:
-                                                            value.listAmount[i],
+                                                        controller: value.listAmount[i],
                                                         inputFormatters: [
                                                           a.CurrencyInputFormatter(
-                                                            leadingSymbol:
-                                                                'Rp ',
-                                                            useSymbolPadding:
-                                                                true,
-                                                            thousandSeparator: a
-                                                                .ThousandSeparator
-                                                                .Period,
-                                                            mantissaLength:
-                                                                2, // jumlah angka desimal
+                                                            leadingSymbol: 'Rp ',
+                                                            useSymbolPadding: true,
+                                                            thousandSeparator: a.ThousandSeparator.Period,
+                                                            mantissaLength: 2, // jumlah angka desimal
                                                             // decimalSeparator: DecimalSeparator.Comma,
                                                           ),
                                                         ],
@@ -841,97 +702,60 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                             return null;
                                                           }
                                                         },
-                                                        decoration:
-                                                            InputDecoration(
+                                                        decoration: InputDecoration(
                                                           hintText: "Nominal",
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        6),
+                                                          border: OutlineInputBorder(
+                                                            borderRadius: BorderRadius.circular(6),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       width: 16,
                                                     ),
-                                                    Container(
+                                                    SizedBox(
                                                       width: 200,
-                                                      child: DropdownSearch<
-                                                          AoModel>(
-                                                        popupProps:
-                                                            const PopupPropsMultiSelection
-                                                                .menu(
-                                                          showSearchBox:
-                                                              true, // Aktifkan fitur pencarian
+                                                      child: DropdownSearch<AoModel>(
+                                                        popupProps: const PopupPropsMultiSelection.menu(
+                                                          showSearchBox: true, // Aktifkan fitur pencarian
                                                         ),
-                                                        selectedItem: value
-                                                            .listAoitems[i],
+                                                        selectedItem: value.listAoitems[i],
                                                         items: value.listAo,
-                                                        itemAsString: (e) =>
-                                                            "${e.nama}",
+                                                        itemAsString: (e) => e.nama,
                                                         onChanged: (e) {
-                                                          value
-                                                              .pilihAoModelDebet(
-                                                                  e!, i);
+                                                          value.pilihAoModelDebet(e!, i);
                                                         },
-                                                        dropdownBuilder:
-                                                            (context,
-                                                                selectedItem) {
+                                                        dropdownBuilder: (context, selectedItem) {
                                                           return Text(
-                                                            selectedItem != null
-                                                                ? selectedItem
-                                                                    .nama
-                                                                : "AO",
+                                                            selectedItem != null ? selectedItem.nama : "AO",
                                                             maxLines: 1,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            style:
-                                                                const TextStyle(
-                                                                    fontSize:
-                                                                        16),
+                                                            overflow: TextOverflow.ellipsis,
+                                                            style: const TextStyle(fontSize: 16),
                                                           );
                                                         },
-                                                        dropdownDecoratorProps:
-                                                            DropDownDecoratorProps(
-                                                          baseStyle: TextStyle(
-                                                              fontSize: 16),
-                                                          textAlignVertical:
-                                                              TextAlignVertical
-                                                                  .center,
-                                                          dropdownSearchDecoration:
-                                                              InputDecoration(
+                                                        dropdownDecoratorProps: DropDownDecoratorProps(
+                                                          baseStyle: const TextStyle(fontSize: 16),
+                                                          textAlignVertical: TextAlignVertical.center,
+                                                          dropdownSearchDecoration: InputDecoration(
                                                             hintText: "AO",
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8),
-                                                              borderSide:
-                                                                  BorderSide(
+                                                            border: OutlineInputBorder(
+                                                              borderRadius: BorderRadius.circular(8),
+                                                              borderSide: const BorderSide(
                                                                 width: 1,
-                                                                color:
-                                                                    Colors.grey,
+                                                                color: Colors.grey,
                                                               ),
                                                             ),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       width: 16,
                                                     ),
                                                     Expanded(
                                                       child: TextFormField(
-                                                        controller: value
-                                                            .listKeterangan[i],
-                                                        textInputAction:
-                                                            TextInputAction
-                                                                .done,
+                                                        controller: value.listKeterangan[i],
+                                                        textInputAction: TextInputAction.done,
                                                         maxLines: 1,
                                                         validator: (e) {
                                                           if (e!.isEmpty) {
@@ -940,21 +764,15 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                             return null;
                                                           }
                                                         },
-                                                        decoration:
-                                                            InputDecoration(
-                                                          hintText:
-                                                              "Keterangan",
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        6),
+                                                        decoration: InputDecoration(
+                                                          hintText: "Keterangan",
+                                                          border: OutlineInputBorder(
+                                                            borderRadius: BorderRadius.circular(6),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       width: 16,
                                                     ),
                                                     InkWell(
@@ -964,13 +782,11 @@ class BanyakTransaksiPage extends StatelessWidget {
                                                       child: Container(
                                                         width: 20,
                                                         height: 20,
-                                                        decoration:
-                                                            BoxDecoration(
+                                                        decoration: const BoxDecoration(
                                                           color: colorPrimary,
-                                                          shape:
-                                                              BoxShape.circle,
+                                                          shape: BoxShape.circle,
                                                         ),
-                                                        child: Icon(
+                                                        child: const Icon(
                                                           Icons.close,
                                                           size: 12,
                                                           color: Colors.white,
@@ -984,40 +800,38 @@ class BanyakTransaksiPage extends StatelessWidget {
                                             );
                                           }),
                                       Container(
-                                        margin:
-                                            EdgeInsets.symmetric(vertical: 16),
+                                        margin: const EdgeInsets.symmetric(vertical: 16),
                                         height: 1,
                                         color: Colors.grey[300],
                                       ),
                                       Row(
                                         children: [
-                                          Container(
+                                          SizedBox(
                                               width: 382,
-                                              child: Text(
+                                              child: const Text(
                                                 "Selisih",
                                                 textAlign: TextAlign.end,
                                               )),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 32,
                                           ),
-                                          Container(
+                                          SizedBox(
                                             width: 290,
                                             child: Text(
                                               "Rp. ${FormatCurrency.oCcyDecimal.format(value.total)}",
                                               textAlign: TextAlign.end,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 16,
                                               ),
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 432,
                                           )
                                         ],
                                       ),
                                       Container(
-                                        margin:
-                                            EdgeInsets.symmetric(vertical: 16),
+                                        margin: const EdgeInsets.symmetric(vertical: 16),
                                         height: 1,
                                         color: Colors.grey[300],
                                       ),
@@ -1038,7 +852,7 @@ class BanyakTransaksiPage extends StatelessWidget {
                           ],
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -1069,10 +883,7 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'tgl_trans', value: data.tglTrans),
                 DataGridCell(columnName: 'nomor_dok', value: data.nomorDok),
                 DataGridCell(columnName: 'nomor_ref', value: data.nomorRef),
-                DataGridCell(
-                    columnName: 'nominal',
-                    value: FormatCurrency.oCcyDecimal
-                        .format(double.parse(data.nominal))),
+                DataGridCell(columnName: 'nominal', value: FormatCurrency.oCcyDecimal.format(double.parse(data.nominal))),
                 DataGridCell(columnName: 'nama_debet', value: data.namaDebet),
                 DataGridCell(columnName: 'nama_credit', value: data.namaCredit),
                 DataGridCell(columnName: 'keterangan', value: data.keterangan),
@@ -1096,7 +907,7 @@ class DetailDataSource extends DataGridSource {
               onTap: () {},
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -1105,10 +916,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),

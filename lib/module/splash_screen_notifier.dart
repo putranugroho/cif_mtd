@@ -11,18 +11,10 @@ class SplashScreenNotifier extends ChangeNotifier {
   }
 
   getProfile() async {
-    Future.delayed(Duration(seconds: 2)).then((e) {
+    Future.delayed(const Duration(seconds: 2)).then((e) {
       Pref().getUsers().then((value) {
         print(value.id);
-        value.id != 0
-            ? Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => MenuPage()),
-                ((route) => false))
-            : Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
-                ((route) => false));
+        value.id != 0 ? Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const MenuPage()), ((route) => false)) : Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginPage()), ((route) => false));
         notifyListeners();
       });
     });

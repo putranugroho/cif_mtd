@@ -18,8 +18,8 @@ class PerusahaanPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                padding: EdgeInsets.all(20),
-                child: Text(
+                padding: const EdgeInsets.all(20),
+                child: const Text(
                   "Settings",
                   style: TextStyle(
                     fontSize: 18,
@@ -31,18 +31,18 @@ class PerusahaanPage extends StatelessWidget {
                   child: ListView(
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 32),
+                    padding: const EdgeInsets.symmetric(horizontal: 32),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Row(
+                        const Row(
                           children: [
                             Text(
                               "Kode Perusahaan",
-                              style: const TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: 12),
                             ),
-                            const SizedBox(width: 5),
-                            const Text(
+                            SizedBox(width: 5),
+                            Text(
                               "*",
                               style: TextStyle(fontSize: 8),
                             ),
@@ -76,14 +76,14 @@ class PerusahaanPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        Row(
+                        const Row(
                           children: [
                             Text(
                               "Nama Perusahaan",
-                              style: const TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: 12),
                             ),
-                            const SizedBox(width: 5),
-                            const Text(
+                            SizedBox(width: 5),
+                            Text(
                               "*",
                               style: TextStyle(fontSize: 8),
                             ),
@@ -117,14 +117,14 @@ class PerusahaanPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        Row(
+                        const Row(
                           children: [
                             Text(
                               "Provinsi",
-                              style: const TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: 12),
                             ),
-                            const SizedBox(width: 5),
-                            const Text(
+                            SizedBox(width: 5),
+                            Text(
                               "*",
                               style: TextStyle(fontSize: 8),
                             ),
@@ -157,14 +157,14 @@ class PerusahaanPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        Row(
+                        const Row(
                           children: [
                             Text(
                               "Kota / Kabupaten",
-                              style: const TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: 12),
                             ),
-                            const SizedBox(width: 5),
-                            const Text(
+                            SizedBox(width: 5),
+                            Text(
                               "*",
                               style: TextStyle(fontSize: 8),
                             ),
@@ -204,14 +204,14 @@ class PerusahaanPage extends StatelessWidget {
                                 child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Kecamatan",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
-                                    const Text(
+                                    SizedBox(width: 5),
+                                    Text(
                                       "*",
                                       style: TextStyle(fontSize: 8),
                                     ),
@@ -245,21 +245,21 @@ class PerusahaanPage extends StatelessWidget {
                                 ),
                               ],
                             )),
-                            SizedBox(
+                            const SizedBox(
                               width: 16,
                             ),
                             Expanded(
                                 child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Kelurahan",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
-                                    const Text(
+                                    SizedBox(width: 5),
+                                    Text(
                                       "*",
                                       style: TextStyle(fontSize: 8),
                                     ),
@@ -294,23 +294,22 @@ class PerusahaanPage extends StatelessWidget {
                                 ),
                               ],
                             )),
-                            SizedBox(
+                            const SizedBox(
                               width: 16,
                             ),
-                            Container(
+                            SizedBox(
                                 width: 100,
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                   children: [
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Kode Pos",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -338,8 +337,7 @@ class PerusahaanPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "Kelurahan",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -348,13 +346,13 @@ class PerusahaanPage extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 16),
-                        Row(
+                        const Row(
                           children: [
                             Text(
                               "Alamat",
-                              style: const TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: 12),
                             ),
-                            const SizedBox(width: 5),
+                            SizedBox(width: 5),
                           ],
                         ),
                         const SizedBox(
@@ -384,14 +382,14 @@ class PerusahaanPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        Row(
+                        const Row(
                           children: [
                             Text(
                               "NPWP",
-                              style: const TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: 12),
                             ),
-                            const SizedBox(width: 5),
-                            const Text(
+                            SizedBox(width: 5),
+                            Text(
                               "*",
                               style: TextStyle(fontSize: 8),
                             ),
@@ -424,14 +422,14 @@ class PerusahaanPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        Row(
+                        const Row(
                           children: [
                             Text(
                               "Direktu Utama",
-                              style: const TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: 12),
                             ),
-                            const SizedBox(width: 5),
-                            const Text(
+                            SizedBox(width: 5),
+                            Text(
                               "*",
                               style: TextStyle(fontSize: 8),
                             ),
@@ -464,14 +462,14 @@ class PerusahaanPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        Row(
+                        const Row(
                           children: [
                             Text(
                               "Direktu Keuangan",
-                              style: const TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: 12),
                             ),
-                            const SizedBox(width: 5),
-                            const Text(
+                            SizedBox(width: 5),
+                            Text(
                               "*",
                               style: TextStyle(fontSize: 8),
                             ),
@@ -504,14 +502,14 @@ class PerusahaanPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        Row(
+                        const Row(
                           children: [
                             Text(
                               "Direktu Operasional",
-                              style: const TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: 12),
                             ),
-                            const SizedBox(width: 5),
-                            const Text(
+                            SizedBox(width: 5),
+                            Text(
                               "*",
                               style: TextStyle(fontSize: 8),
                             ),
@@ -548,7 +546,7 @@ class PerusahaanPage extends StatelessWidget {
                           onTap: () {},
                           name: "Simpan",
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 48,
                         )
                       ],

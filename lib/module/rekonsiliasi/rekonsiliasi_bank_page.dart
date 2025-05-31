@@ -32,10 +32,10 @@ class RekonsiliasiBankPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
@@ -50,24 +50,20 @@ class RekonsiliasiBankPage extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            decoration: BoxDecoration(
-                                color: colorPrimary,
-                                borderRadius: BorderRadius.circular(8)),
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(color: colorPrimary, borderRadius: BorderRadius.circular(8)),
                             child: Row(
                               children: [
                                 Image.asset(
                                   ImageAssets.excel,
                                   height: 15,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 8,
                                 ),
-                                Text(
+                                const Text(
                                   "Download to Excel",
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.white),
+                                  style: TextStyle(fontSize: 12, color: Colors.white),
                                 )
                               ],
                             ),
@@ -75,52 +71,52 @@ class RekonsiliasiBankPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(right: 16),
+                            margin: const EdgeInsets.only(right: 16),
                             width: 80,
-                            child: Text("NO SBB"),
+                            child: const Text("NO SBB"),
                           ),
                           Expanded(
                             child: Container(
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text("KETERANGAN"),
+                              margin: const EdgeInsets.only(right: 16),
+                              child: const Text("KETERANGAN"),
                             ),
                           ),
                           Container(
                             width: 180,
-                            margin: EdgeInsets.only(right: 16),
-                            child: Text(
+                            margin: const EdgeInsets.only(right: 16),
+                            child: const Text(
                               "SALDO GL",
                               textAlign: TextAlign.end,
                             ),
                           ),
                           Container(
                             width: 150,
-                            margin: EdgeInsets.only(right: 16),
-                            child: Text(
+                            margin: const EdgeInsets.only(right: 16),
+                            child: const Text(
                               "SELISIH",
                               textAlign: TextAlign.end,
                             ),
                           ),
                           Container(
                             width: 180,
-                            margin: EdgeInsets.only(right: 16),
-                            child: Text(
+                            margin: const EdgeInsets.only(right: 16),
+                            child: const Text(
                               "SALDO BANK",
                               textAlign: TextAlign.end,
                             ),
                           ),
                           Container(
                             width: 180,
-                            margin: EdgeInsets.only(right: 16),
-                            child: Text(
+                            margin: const EdgeInsets.only(right: 16),
+                            child: const Text(
                               "TANGGAL BANK",
                               textAlign: TextAlign.start,
                             ),
@@ -129,193 +125,104 @@ class RekonsiliasiBankPage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 8),
+                      margin: const EdgeInsets.symmetric(vertical: 8),
                       height: 1,
                       color: Colors.grey,
                     ),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
                                 child: ListView.builder(
-                                    itemCount: value.list
-                                        .where((e) => e.typePosting == "AKTIVA")
-                                        .length,
+                                    itemCount: value.list.where((e) => e.typePosting == "AKTIVA").length,
                                     shrinkWrap: true,
-                                    physics: ClampingScrollPhysics(),
+                                    physics: const ClampingScrollPhysics(),
                                     itemBuilder: (context, i) {
-                                      final data = value.list
-                                          .where(
-                                              (e) => e.typePosting == "AKTIVA")
-                                          .toList()[i];
+                                      final data = value.list.where((e) => e.typePosting == "AKTIVA").toList()[i];
                                       return Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
                                           ListView.builder(
                                               itemCount: data.sbbItem.length,
                                               shrinkWrap: true,
-                                              physics: ClampingScrollPhysics(),
+                                              physics: const ClampingScrollPhysics(),
                                               itemBuilder: (context, b) {
                                                 final a = data.sbbItem[b];
                                                 return Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .stretch,
+                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                                   children: [
                                                     InkWell(
                                                       onTap: () {
                                                         value.edit(a);
                                                       },
                                                       child: Container(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                vertical: 2),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: a.saldo -
-                                                                      a.saldoSistem !=
-                                                                  0.00
-                                                              ? Colors.red[800]
-                                                              : Colors.white,
+                                                        padding: const EdgeInsets.symmetric(vertical: 2),
+                                                        decoration: BoxDecoration(
+                                                          color: a.saldo - a.saldoSistem != 0.00 ? Colors.red[800] : Colors.white,
                                                         ),
                                                         child: Row(
                                                           children: [
                                                             Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          16),
+                                                              margin: const EdgeInsets.only(right: 16),
                                                               width: 80,
                                                               child: Text(
-                                                                "${a.nosbb}",
-                                                                style: TextStyle(
-                                                                    color: a.saldo - a.saldoSistem !=
-                                                                            0.00
-                                                                        ? Colors
-                                                                            .white
-                                                                        : Colors
-                                                                            .black,
-                                                                    fontSize:
-                                                                        12),
+                                                                a.nosbb,
+                                                                style: TextStyle(color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black, fontSize: 12),
                                                               ),
                                                             ),
                                                             Expanded(
                                                               child: Container(
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                        right:
-                                                                            16),
+                                                                margin: const EdgeInsets.only(right: 16),
                                                                 child: Text(
-                                                                  "${a.namaSbb}",
-                                                                  style: TextStyle(
-                                                                      color: a.saldo - a.saldoSistem !=
-                                                                              0.00
-                                                                          ? Colors
-                                                                              .white
-                                                                          : Colors
-                                                                              .black,
-                                                                      fontSize:
-                                                                          12),
+                                                                  a.namaSbb,
+                                                                  style: TextStyle(color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black, fontSize: 12),
                                                                 ),
                                                               ),
                                                             ),
                                                             Container(
                                                               width: 180,
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          16),
+                                                              margin: const EdgeInsets.only(right: 16),
                                                               child: Text(
-                                                                "${FormatCurrency.oCcyDecimal.format(a.saldo)}",
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .end,
-                                                                style: TextStyle(
-                                                                    color: a.saldo - a.saldoSistem !=
-                                                                            0.00
-                                                                        ? Colors
-                                                                            .white
-                                                                        : Colors
-                                                                            .black,
-                                                                    fontSize:
-                                                                        12),
+                                                                FormatCurrency.oCcyDecimal.format(a.saldo),
+                                                                textAlign: TextAlign.end,
+                                                                style: TextStyle(color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black, fontSize: 12),
                                                               ),
                                                             ),
                                                             Container(
                                                               width: 150,
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          16),
+                                                              margin: const EdgeInsets.only(right: 16),
                                                               child: Text(
-                                                                "${FormatCurrency.oCcyDecimal.format(a.saldo - a.saldoSistem)}",
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .end,
-                                                                style: TextStyle(
-                                                                    color: a.saldo - a.saldoSistem !=
-                                                                            0.00
-                                                                        ? Colors
-                                                                            .white
-                                                                        : Colors
-                                                                            .black,
-                                                                    fontSize:
-                                                                        12),
+                                                                FormatCurrency.oCcyDecimal.format(a.saldo - a.saldoSistem),
+                                                                textAlign: TextAlign.end,
+                                                                style: TextStyle(color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black, fontSize: 12),
                                                               ),
                                                             ),
                                                             Container(
                                                               width: 180,
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          16),
+                                                              margin: const EdgeInsets.only(right: 16),
                                                               child: Text(
-                                                                "${FormatCurrency.oCcyDecimal.format(a.saldoSistem)}",
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .end,
-                                                                style: TextStyle(
-                                                                    color: a.saldo - a.saldoSistem !=
-                                                                            0.00
-                                                                        ? Colors
-                                                                            .white
-                                                                        : Colors
-                                                                            .black,
-                                                                    fontSize:
-                                                                        12),
+                                                                FormatCurrency.oCcyDecimal.format(a.saldoSistem),
+                                                                textAlign: TextAlign.end,
+                                                                style: TextStyle(color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black, fontSize: 12),
                                                               ),
                                                             ),
                                                             Container(
                                                               width: 180,
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          16),
+                                                              margin: const EdgeInsets.only(right: 16),
                                                               child: Text(
-                                                                "${DateFormat('dd MMM y HH:mm').format(DateTime.parse(a.tglTransaksi))}",
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .start,
-                                                                style: TextStyle(
-                                                                    color: a.saldo - a.saldoSistem !=
-                                                                            0.00
-                                                                        ? Colors
-                                                                            .white
-                                                                        : Colors
-                                                                            .black,
-                                                                    fontSize:
-                                                                        12),
+                                                                DateFormat('dd MMM y HH:mm').format(DateTime.parse(a.tglTransaksi)),
+                                                                textAlign: TextAlign.start,
+                                                                style: TextStyle(color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black, fontSize: 12),
                                                               ),
                                                             ),
                                                           ],
                                                         ),
                                                       ),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 4,
                                                     )
                                                   ],
@@ -328,65 +235,48 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                               ),
                                               Expanded(
                                                 child: Container(
-                                                  margin: EdgeInsets.only(
-                                                      right: 16),
+                                                  margin: const EdgeInsets.only(right: 16),
                                                   child: Text(
-                                                    "${data.namaBb}",
+                                                    data.namaBb,
                                                     textAlign: TextAlign.end,
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 12),
+                                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
                                                   ),
                                                 ),
                                               ),
                                               Container(
                                                 width: 180,
-                                                margin:
-                                                    EdgeInsets.only(right: 16),
+                                                margin: const EdgeInsets.only(right: 16),
                                                 child: Text(
-                                                  "${FormatCurrency.oCcyDecimal.format(data.sbbItem.map((e) => e.saldo).reduce((a, b) => a + b))}",
+                                                  FormatCurrency.oCcyDecimal.format(data.sbbItem.map((e) => e.saldo).reduce((a, b) => a + b)),
                                                   textAlign: TextAlign.end,
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 12),
+                                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
                                                 ),
                                               ),
                                               Container(
                                                 width: 150,
-                                                margin:
-                                                    EdgeInsets.only(right: 16),
+                                                margin: const EdgeInsets.only(right: 16),
                                                 child: Text(
-                                                  "${FormatCurrency.oCcyDecimal.format(data.sbbItem.map((e) => e.saldo - e.saldoSistem).reduce((a, b) => a + b))}",
+                                                  FormatCurrency.oCcyDecimal.format(data.sbbItem.map((e) => e.saldo - e.saldoSistem).reduce((a, b) => a + b)),
                                                   textAlign: TextAlign.end,
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 12),
+                                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
                                                 ),
                                               ),
                                               Container(
                                                 width: 180,
-                                                margin:
-                                                    EdgeInsets.only(right: 16),
+                                                margin: const EdgeInsets.only(right: 16),
                                                 child: Text(
-                                                  "${FormatCurrency.oCcyDecimal.format(data.sbbItem.map((e) => e.saldoSistem).reduce((a, b) => a + b))}",
+                                                  FormatCurrency.oCcyDecimal.format(data.sbbItem.map((e) => e.saldoSistem).reduce((a, b) => a + b)),
                                                   textAlign: TextAlign.end,
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 12),
+                                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
                                                 ),
                                               ),
                                               Container(
                                                 width: 180,
-                                                margin:
-                                                    EdgeInsets.only(right: 16),
+                                                margin: const EdgeInsets.only(right: 16),
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 8,
                                           )
                                         ],
@@ -397,23 +287,23 @@ class RekonsiliasiBankPage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 8),
+                      margin: const EdgeInsets.symmetric(vertical: 8),
                       height: 1,
                       color: Colors.grey,
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(right: 16),
+                            margin: const EdgeInsets.only(right: 16),
                             width: 80,
-                            child: Text(""),
+                            child: const Text(""),
                           ),
                           Expanded(
                             child: Container(
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
+                              margin: const EdgeInsets.only(right: 16),
+                              child: const Text(
                                 "TOTAL",
                                 textAlign: TextAlign.end,
                                 style: TextStyle(fontSize: 12),
@@ -422,39 +312,39 @@ class RekonsiliasiBankPage extends StatelessWidget {
                           ),
                           Container(
                             width: 180,
-                            margin: EdgeInsets.only(right: 16),
+                            margin: const EdgeInsets.only(right: 16),
                             child: Text(
-                              "${formatRounded(value.totalAktiva)}",
+                              formatRounded(value.totalAktiva),
                               textAlign: TextAlign.end,
-                              style: TextStyle(fontSize: 12),
+                              style: const TextStyle(fontSize: 12),
                             ),
                           ),
                           Container(
                             width: 150,
-                            margin: EdgeInsets.only(right: 16),
+                            margin: const EdgeInsets.only(right: 16),
                             child: Text(
-                              "${formatRounded(value.totalAktiva - value.totalSistem)}",
+                              formatRounded(value.totalAktiva - value.totalSistem),
                               textAlign: TextAlign.end,
-                              style: TextStyle(fontSize: 12),
+                              style: const TextStyle(fontSize: 12),
                             ),
                           ),
                           Container(
                             width: 180,
-                            margin: EdgeInsets.only(right: 16),
+                            margin: const EdgeInsets.only(right: 16),
                             child: Text(
-                              "${formatRounded(value.totalSistem)}",
+                              formatRounded(value.totalSistem),
                               textAlign: TextAlign.end,
-                              style: TextStyle(fontSize: 12),
+                              style: const TextStyle(fontSize: 12),
                             ),
                           ),
                           Container(
                             width: 180,
-                            margin: EdgeInsets.only(right: 16),
+                            margin: const EdgeInsets.only(right: 16),
                           )
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 80,
                     )
                   ],
@@ -469,7 +359,7 @@ class RekonsiliasiBankPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                   top: 0,
@@ -478,16 +368,16 @@ class RekonsiliasiBankPage extends StatelessWidget {
                   child: value.dialog
                       ? Container(
                           width: 600,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                           ),
-                          padding: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Row(
                                 children: [
-                                  Expanded(
+                                  const Expanded(
                                     child: Text(
                                       "Bank Rekonsiliasi",
                                       style: TextStyle(
@@ -501,25 +391,23 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                     child: Container(
                                       width: 40,
                                       height: 40,
-                                      padding: EdgeInsets.all(4),
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey[200],
-                                          shape: BoxShape.circle),
-                                      child: Icon(Icons.close),
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                      child: const Icon(Icons.close),
                                     ),
                                   )
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 32,
                               ),
-                              Text(
+                              const Text(
                                 "No. SBB",
                                 style: TextStyle(
                                   fontSize: 12,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
                               TextField(
@@ -535,13 +423,13 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              Text(
+                              const Text(
                                 "Nama Akun",
                                 style: TextStyle(
                                   fontSize: 12,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
                               TextField(
@@ -557,13 +445,13 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              Text(
+                              const Text(
                                 "Saldo GL",
                                 style: TextStyle(
                                   fontSize: 12,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
                               TextField(
@@ -580,25 +468,24 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              Text(
+                              const Text(
                                 "Saldo Bank",
                                 style: TextStyle(
                                   fontSize: 12,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
                               TextField(
                                 controller: value.nominal,
-                                keyboardType: TextInputType.numberWithOptions(
+                                keyboardType: const TextInputType.numberWithOptions(
                                   decimal: true,
                                   signed: false,
                                 ),
                                 textAlign: TextAlign.end,
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r'^\d+\.?\d{0,2}')),
+                                  FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
                                 ],
                                 onChanged: (e) => value.onChangeTotal(),
                                 decoration: InputDecoration(
@@ -609,13 +496,13 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              Text(
+                              const Text(
                                 "Selisih",
                                 style: TextStyle(
                                   fontSize: 12,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
                               TextField(
@@ -636,16 +523,15 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                 children: [
                                   Expanded(
                                       child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                     children: [
-                                      Text(
+                                      const Text(
                                         "Tanggal Valuta",
                                         style: TextStyle(
                                           fontSize: 12,
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 8,
                                       ),
                                       InkWell(
@@ -660,8 +546,7 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                             fillColor: Colors.grey[200],
                                             hintText: "Tanggal Valuta",
                                             border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
+                                              borderRadius: BorderRadius.circular(6),
                                             ),
                                           ),
                                         ),
@@ -669,21 +554,20 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                       const SizedBox(height: 16),
                                     ],
                                   )),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 16,
                                   ),
                                   Expanded(
                                       child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                     children: [
-                                      Text(
+                                      const Text(
                                         "Jam Transaksi",
                                         style: TextStyle(
                                           fontSize: 12,
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 8,
                                       ),
                                       InkWell(
@@ -698,8 +582,7 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                             fillColor: Colors.grey[200],
                                             hintText: "Pilih Jam",
                                             border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
+                                              borderRadius: BorderRadius.circular(6),
                                             ),
                                           ),
                                         ),
@@ -720,7 +603,7 @@ class RekonsiliasiBankPage extends StatelessWidget {
                             ],
                           ),
                         )
-                      : SizedBox())
+                      : const SizedBox())
             ],
           ),
         )),

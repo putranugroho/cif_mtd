@@ -37,10 +37,10 @@ class UserAksesPointNotifier extends ChangeNotifier {
   Future getUsersAkses() async {
     listUsersAkses.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(
-            token, NetworkURL.getUsersAksesPointAll(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getUsersAksesPointAll(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("ok")) {
         for (Map<String, dynamic> i in value['data']) {
           listUsersAkses.add(ListUsersAksesPointModel.fromJson(i));
@@ -64,7 +64,7 @@ class UserAksesPointNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -72,11 +72,11 @@ class UserAksesPointNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin menghapus ${userAksesPointModel!.noAkses}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -88,7 +88,7 @@ class UserAksesPointNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -118,9 +118,7 @@ class UserAksesPointNotifier extends ChangeNotifier {
       "akses_id": userAksesPointModel!.aksesId,
       "kode_pt": karyawanModel!.kodePt,
     });
-    Setuprepository.setup(
-            token, NetworkURL.deletedUserAksesPoint(), jsonEncode(listTmp))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.deletedUserAksesPoint(), jsonEncode(listTmp)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getUsersAksesPoint();
@@ -137,9 +135,10 @@ class UserAksesPointNotifier extends ChangeNotifier {
     listData.clear();
     isLoading = true;
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getAksesPoint(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getAksesPoint(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listData.add(AksesPointModel.fromJson(i));
@@ -166,9 +165,7 @@ class UserAksesPointNotifier extends ChangeNotifier {
       "kode_pt": karyawanModel!.kodePt,
     };
     // print(jsonEncode(data));
-    Setuprepository.setup(
-            token, NetworkURL.getUserAksesPoint(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getUserAksesPoint(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'] == "NOT-FOUND") {
         notifyListeners();
@@ -213,9 +210,7 @@ class UserAksesPointNotifier extends ChangeNotifier {
       }
       notifyListeners();
       // print(jsonEncode(listTmp));
-      Setuprepository.setup(
-              token, NetworkURL.addUserAksesPoint(), jsonEncode(listTmp))
-          .then((value) {
+      Setuprepository.setup(token, NetworkURL.addUserAksesPoint(), jsonEncode(listTmp)).then((value) {
         Navigator.pop(context);
         getUsersAksesPoint();
         informationDialog(context, "Information", value['message']);
@@ -234,8 +229,7 @@ class UserAksesPointNotifier extends ChangeNotifier {
       "kode_pt": "001",
     };
     notifyListeners();
-    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data)).then((value) {
       if (value['status'] == "Success") {
         for (Map<String, dynamic> i in value['data']) {
           list.add(KantorModel.fromJson(i));
@@ -297,7 +291,9 @@ class UserAksesPointNotifier extends ChangeNotifier {
     if (query.isNotEmpty && query.length > 2) {
       listKaryawan.clear();
       notifyListeners();
-      var data = {"namauser": query};
+      var data = {
+        "namauser": query
+      };
       try {
         final response = await Setuprepository.setup(
           token,

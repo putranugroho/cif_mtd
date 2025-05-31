@@ -27,9 +27,7 @@ class PenyusutanNotifier extends ChangeNotifier {
       "kode_pt": "001",
     };
     notifyListeners();
-    Setuprepository.setup(
-            token, NetworkURL.getMetodePenyusutan(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getMetodePenyusutan(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(MetodePenyusutanModel.fromJson(i));
@@ -61,12 +59,10 @@ class PenyusutanNotifier extends ChangeNotifier {
       var data = {
         "id": metodePenyusutanModel!.id,
         "metode_penyusutan": "$metode",
-        "nilai_akhir": "${nilai.text}",
+        "nilai_akhir": nilai.text,
         "declining": "${metode == 2 ? declining.text : 0}",
       };
-      Setuprepository.setup(
-              token, NetworkURL.editMetodePenyusutan(), jsonEncode(data))
-          .then((value) {
+      Setuprepository.setup(token, NetworkURL.editMetodePenyusutan(), jsonEncode(data)).then((value) {
         Navigator.pop(context);
         if (value['status'].toString().toLowerCase().contains("success")) {
           informationDialog(context, "Information", value['message']);

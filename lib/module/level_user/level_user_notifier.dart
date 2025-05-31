@@ -88,10 +88,7 @@ class LevelUserNotifier extends ChangeNotifier {
     if (modulModel == null) return;
 
     for (var menuItem in modulModel!.menu) {
-      final existingIndex = menuAccessList.indexWhere((e) =>
-          e.modul == modulModel!.modul &&
-          e.menu == menuItem.menu &&
-          e.submenu == menuItem.submenu);
+      final existingIndex = menuAccessList.indexWhere((e) => e.modul == modulModel!.modul && e.menu == menuItem.menu && e.submenu == menuItem.submenu);
 
       if (existingIndex == -1) {
         // Belum ada, tambahkan dengan view = true
@@ -124,10 +121,7 @@ class LevelUserNotifier extends ChangeNotifier {
     if (modulModel == null) return;
 
     for (var menuItem in modulModel!.menu) {
-      final existingIndex = menuAccessList.indexWhere((e) =>
-          e.modul == modulModel!.modul &&
-          e.menu == menuItem.menu &&
-          e.submenu == menuItem.submenu);
+      final existingIndex = menuAccessList.indexWhere((e) => e.modul == modulModel!.modul && e.menu == menuItem.menu && e.submenu == menuItem.submenu);
 
       if (existingIndex == -1) {
         // Belum ada, tambahkan dengan view = true
@@ -160,10 +154,7 @@ class LevelUserNotifier extends ChangeNotifier {
     if (modulModel == null) return;
 
     for (var menuItem in modulModel!.menu) {
-      final existingIndex = menuAccessList.indexWhere((e) =>
-          e.modul == modulModel!.modul &&
-          e.menu == menuItem.menu &&
-          e.submenu == menuItem.submenu);
+      final existingIndex = menuAccessList.indexWhere((e) => e.modul == modulModel!.modul && e.menu == menuItem.menu && e.submenu == menuItem.submenu);
 
       if (existingIndex == -1) {
         // Belum ada, tambahkan dengan view = true
@@ -196,10 +187,7 @@ class LevelUserNotifier extends ChangeNotifier {
     if (modulModel == null) return;
 
     for (var menuItem in modulModel!.menu) {
-      final existingIndex = menuAccessList.indexWhere((e) =>
-          e.modul == modulModel!.modul &&
-          e.menu == menuItem.menu &&
-          e.submenu == menuItem.submenu);
+      final existingIndex = menuAccessList.indexWhere((e) => e.modul == modulModel!.modul && e.menu == menuItem.menu && e.submenu == menuItem.submenu);
 
       if (existingIndex == -1) {
         // Belum ada, tambahkan dengan view = true
@@ -234,10 +222,7 @@ class LevelUserNotifier extends ChangeNotifier {
 
     if (pilihSemuaMenu) {
       for (var menuItem in modulModel!.menu) {
-        final exists = menuAccessList.any((e) =>
-            e.modul == modulModel!.modul &&
-            e.menu == menuItem.menu &&
-            e.submenu == menuItem.submenu);
+        final exists = menuAccessList.any((e) => e.modul == modulModel!.modul && e.menu == menuItem.menu && e.submenu == menuItem.submenu);
 
         if (!exists) {
           viewSemuaMenu = true;
@@ -270,10 +255,7 @@ class LevelUserNotifier extends ChangeNotifier {
 
   void toggleMenu(int index, bool? value, String submenu, String menu) {
     final existingIndex = menuAccessList.indexWhere(
-      (e) =>
-          e.modul == modulModel!.modul &&
-          e.menu == menu &&
-          e.submenu == submenu,
+      (e) => e.modul == modulModel!.modul && e.menu == menu && e.submenu == submenu,
     );
 
     if (existingIndex == -1) {
@@ -314,8 +296,7 @@ class LevelUserNotifier extends ChangeNotifier {
     String permissionType,
     bool? value,
   ) {
-    final index = menuAccessList.indexWhere(
-        (e) => e.modul == modul && e.menu == menu && e.submenu == submenu);
+    final index = menuAccessList.indexWhere((e) => e.modul == modul && e.menu == menu && e.submenu == submenu);
 
     if (index != -1) {
       switch (permissionType) {
@@ -354,21 +335,15 @@ class LevelUserNotifier extends ChangeNotifier {
       DialogCustom().showLoading(context);
       List<LevelUserModul> listtmp = [];
       for (var i = 0; i < menuAccessList.length; i++) {
-        listtmp.add(LevelUserModul(
-            modul: menuAccessList[i].modul,
-            menu: menuAccessList[i].menu,
-            submenu: menuAccessList[i].submenu,
-            view: menuAccessList[i].view ? "Y" : "N",
-            input: menuAccessList[i].input ? "Y" : "N",
-            edit: menuAccessList[i].edit ? "Y" : "N",
-            delete: menuAccessList[i].delete ? "Y" : "N"));
+        listtmp.add(LevelUserModul(modul: menuAccessList[i].modul, menu: menuAccessList[i].menu, submenu: menuAccessList[i].submenu, view: menuAccessList[i].view ? "Y" : "N", input: menuAccessList[i].input ? "Y" : "N", edit: menuAccessList[i].edit ? "Y" : "N", delete: menuAccessList[i].delete ? "Y" : "N"));
       }
       notifyListeners();
-      var data = {"id": levelUser!.idLevel, "modul": listtmp};
+      var data = {
+        "id": levelUser!.idLevel,
+        "modul": listtmp
+      };
       print(jsonEncode(data));
-      Setuprepository.setup(
-              token, NetworkURL.editLevelUsersModul(), jsonEncode(data))
-          .then((value) {
+      Setuprepository.setup(token, NetworkURL.editLevelUsersModul(), jsonEncode(data)).then((value) {
         Navigator.pop(context);
         if (value['status'].toString().toLowerCase().contains("success")) {
           getLevelusers();
@@ -389,11 +364,9 @@ class LevelUserNotifier extends ChangeNotifier {
         var data = {
           "id": levelUser!.idLevel,
           "kode_pt": "001",
-          "level_user": "${levelUsers.text.trim()}",
+          "level_user": levelUsers.text.trim(),
         };
-        Setuprepository.setup(
-                token, NetworkURL.editLevelUsers(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.editLevelUsers(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);
@@ -409,11 +382,9 @@ class LevelUserNotifier extends ChangeNotifier {
         // print(jsonEncode(listModulAdd));
         var data = {
           "kode_pt": "001",
-          "level_user": "${levelUsers.text.trim()}",
+          "level_user": levelUsers.text.trim(),
         };
-        Setuprepository.setup(
-                token, NetworkURL.addLevelUsers(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.addLevelUsers(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);
@@ -478,10 +449,7 @@ class LevelUserNotifier extends ChangeNotifier {
         break;
     }
     // jika semua permission di-uncheck, auto uncheck menu
-    if (!menuAccessList[index].view &&
-        !menuAccessList[index].input &&
-        !menuAccessList[index].edit &&
-        !menuAccessList[index].delete) {
+    if (!menuAccessList[index].view && !menuAccessList[index].input && !menuAccessList[index].edit && !menuAccessList[index].delete) {
       menuAccessList[index].isSelected = false;
     } else {
       menuAccessList[index].isSelected = true;
@@ -697,9 +665,10 @@ class LevelUserNotifier extends ChangeNotifier {
     isLoading = true;
     listModul.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getModul(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getModul(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listModul.add(ModulModel.fromJson(i));
@@ -717,9 +686,10 @@ class LevelUserNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getLevelUsers(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getLevelUsers(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(LevelUser.fromJson(i));

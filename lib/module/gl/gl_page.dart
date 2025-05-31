@@ -22,10 +22,10 @@ class GlPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Row(
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
@@ -40,28 +40,25 @@ class GlPage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      decoration: BoxDecoration(
-                          color: colorPrimary,
-                          borderRadius: BorderRadius.circular(8)),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      decoration: BoxDecoration(color: colorPrimary, borderRadius: BorderRadius.circular(8)),
                       child: Row(
                         children: [
                           Image.asset(
                             ImageAssets.excel,
                             height: 15,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 8,
                           ),
-                          Text(
+                          const Text(
                             "Download to Excel",
                             style: TextStyle(fontSize: 12, color: Colors.white),
                           )
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 16,
                     ),
                     InkWell(
@@ -69,22 +66,19 @@ class GlPage extends StatelessWidget {
                         // value.changeStartDate();
                       },
                       child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                        decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(8)),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(8)),
                         child: Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.calendar_month,
                               size: 14,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 8,
                             ),
                             Text(
-                              "${DateFormat('MMMM y').format(DateTime.now())}",
+                              DateFormat('MMMM y').format(DateTime.now()),
                             )
                           ],
                         ),
@@ -93,35 +87,32 @@ class GlPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Expanded(
                 child: ListView.builder(
                     itemCount: value.list.length,
                     shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     itemBuilder: (context, i) {
                       final ac = value.list[i];
                       return Column(
                         children: [
                           Container(
-                            margin: EdgeInsets.all(20),
-                            padding: EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                                border:
-                                    Border.all(width: 1, color: Colors.grey),
-                                borderRadius: BorderRadius.circular(16)),
+                            margin: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(20),
+                            decoration: BoxDecoration(border: Border.all(width: 1, color: Colors.grey), borderRadius: BorderRadius.circular(16)),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 Container(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                     vertical: 16,
                                   ),
                                   child: Text(
-                                    "${ac.group}",
-                                    style: TextStyle(
+                                    ac.group,
+                                    style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -130,42 +121,32 @@ class GlPage extends StatelessWidget {
                                 ListView.builder(
                                     itemCount: ac.item.length,
                                     shrinkWrap: true,
-                                    physics: ClampingScrollPhysics(),
+                                    physics: const ClampingScrollPhysics(),
                                     itemBuilder: (context, i) {
                                       final data = ac.item[i];
                                       return Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
                                           ListView.builder(
                                               itemCount: data.sbbItem.length,
                                               shrinkWrap: true,
-                                              physics: ClampingScrollPhysics(),
+                                              physics: const ClampingScrollPhysics(),
                                               itemBuilder: (context, b) {
                                                 final a = data.sbbItem[b];
                                                 return Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .stretch,
+                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                                   children: [
                                                     Container(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
+                                                      padding: const EdgeInsets.symmetric(
                                                         horizontal: 20,
                                                       ),
                                                       child: Row(
                                                         children: [
-                                                          Container(
-                                                              width: 120,
-                                                              child: Text(
-                                                                  "${a.nosbb}")),
-                                                          Expanded(
-                                                              child: Text(
-                                                                  "${a.namaSbb}")),
+                                                          SizedBox(width: 120, child: Text(a.nosbb)),
+                                                          Expanded(child: Text(a.namaSbb)),
                                                           Text(
-                                                            "${FormatCurrency.oCcyDecimal.format(a.saldo)}",
-                                                            textAlign:
-                                                                TextAlign.end,
+                                                            FormatCurrency.oCcyDecimal.format(a.saldo),
+                                                            textAlign: TextAlign.end,
                                                           ),
                                                         ],
                                                       ),
@@ -174,37 +155,36 @@ class GlPage extends StatelessWidget {
                                                 );
                                               }),
                                           Container(
-                                            padding: EdgeInsets.symmetric(
+                                            padding: const EdgeInsets.symmetric(
                                               horizontal: 20,
                                             ),
                                             child: Row(
                                               children: [
                                                 Expanded(
                                                     child: Text(
-                                                  "${data.namaBb}",
+                                                  data.namaBb,
                                                   textAlign: TextAlign.end,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 )),
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 100,
                                                 ),
                                                 SizedBox(
                                                   width: 200,
                                                   child: Text(
-                                                    "${FormatCurrency.oCcyDecimal.format(data.sbbItem.map((e) => e.saldo).reduce((a, b) => a + b))}",
+                                                    FormatCurrency.oCcyDecimal.format(data.sbbItem.map((e) => e.saldo).reduce((a, b) => a + b)),
                                                     textAlign: TextAlign.end,
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                                    style: const TextStyle(
+                                                      fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
                                                 ),
                                               ],
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 8,
                                           ),
                                         ],
@@ -217,7 +197,7 @@ class GlPage extends StatelessWidget {
                       );
                     }),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 80,
               )
             ],

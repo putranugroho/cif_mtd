@@ -34,10 +34,10 @@ class LevelUserPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Level Users",
                               style: TextStyle(
@@ -49,8 +49,7 @@ class LevelUserPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -59,10 +58,10 @@ class LevelUserPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah Level User",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -94,7 +93,7 @@ class LevelUserPage extends StatelessWidget {
                               ),
                             )
                           : Container(
-                              padding: EdgeInsets.all(20),
+                              padding: const EdgeInsets.all(20),
                               height: MediaQuery.of(context).size.height,
                               child: SfDataGrid(
                                 headerRowHeight: 40,
@@ -103,8 +102,7 @@ class LevelUserPage extends StatelessWidget {
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
-                                headerGridLinesVisibility:
-                                    GridLinesVisibility.both,
+                                headerGridLinesVisibility: GridLinesVisibility.both,
                                 selectionMode: SelectionMode.single,
 
                                 source: DetailDataSource(value),
@@ -113,10 +111,10 @@ class LevelUserPage extends StatelessWidget {
                                       width: 50,
                                       columnName: 'no',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('No',
+                                          child: const Text('No',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 12,
@@ -127,8 +125,8 @@ class LevelUserPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Level User',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Level User',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -139,8 +137,8 @@ class LevelUserPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Modul',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Modul',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -151,9 +149,9 @@ class LevelUserPage extends StatelessWidget {
                                       columnName: 'action',
                                       label: Container(
                                           color: colorPrimary,
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           alignment: Alignment.center,
-                                          child: Text('Akses',
+                                          child: const Text('Akses',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -175,7 +173,7 @@ class LevelUserPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -184,9 +182,9 @@ class LevelUserPage extends StatelessWidget {
                 child: value.dialog
                     ? value.editModul == false && value.editData == false
                         ? Container(
-                            padding: EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(20),
                             width: 700,
-                            decoration: BoxDecoration(color: Colors.white),
+                            decoration: const BoxDecoration(color: Colors.white),
                             child: Form(
                               key: value.keyForm,
                               child: Column(
@@ -194,7 +192,7 @@ class LevelUserPage extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      Expanded(
+                                      const Expanded(
                                         child: Text(
                                           "Tambah Level User",
                                           style: TextStyle(
@@ -208,34 +206,30 @@ class LevelUserPage extends StatelessWidget {
                                         child: Container(
                                           width: 40,
                                           height: 40,
-                                          padding: EdgeInsets.all(4),
-                                          decoration: BoxDecoration(
-                                              color: Colors.grey[200],
-                                              shape: BoxShape.circle),
-                                          child: Icon(Icons.close),
+                                          padding: const EdgeInsets.all(4),
+                                          decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                          child: const Icon(Icons.close),
                                         ),
                                       )
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 32,
                                   ),
                                   Row(
                                     children: [
                                       Expanded(
                                           child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
-                                          Row(
+                                          const Row(
                                             children: [
                                               Text(
                                                 "Level User",
-                                                style: const TextStyle(
-                                                    fontSize: 12),
+                                                style: TextStyle(fontSize: 12),
                                               ),
-                                              const SizedBox(width: 5),
-                                              const Text(
+                                              SizedBox(width: 5),
+                                              Text(
                                                 "*",
                                                 style: TextStyle(fontSize: 8),
                                               ),
@@ -245,8 +239,7 @@ class LevelUserPage extends StatelessWidget {
                                             height: 8,
                                           ),
                                           TextFormField(
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             controller: value.levelUsers,
                                             validator: (e) {
                                               if (e!.isEmpty) {
@@ -258,19 +251,18 @@ class LevelUserPage extends StatelessWidget {
                                             decoration: InputDecoration(
                                               hintText: "Level Users",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
                                         ],
                                       )),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 16,
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 16,
                                   ),
                                   Row(
@@ -290,18 +282,17 @@ class LevelUserPage extends StatelessWidget {
                         : value.editModul == true && value.editData == false
                             ? Container(
                                 width: 700,
-                                padding: EdgeInsets.all(20),
-                                decoration: BoxDecoration(color: Colors.white),
+                                padding: const EdgeInsets.all(20),
+                                decoration: const BoxDecoration(color: Colors.white),
                                 child: FocusTraversalGroup(
                                   child: Form(
                                       key: value.keyForm,
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
                                           Row(
                                             children: [
-                                              Expanded(
+                                              const Expanded(
                                                 child: Text(
                                                   "Tambah Akses Menu",
                                                   style: TextStyle(
@@ -315,37 +306,32 @@ class LevelUserPage extends StatelessWidget {
                                                 child: Container(
                                                   width: 40,
                                                   height: 40,
-                                                  padding: EdgeInsets.all(4),
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.grey[200],
-                                                      shape: BoxShape.circle),
-                                                  child: Icon(Icons.close),
+                                                  padding: const EdgeInsets.all(4),
+                                                  decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                                  child: const Icon(Icons.close),
                                                 ),
                                               )
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 32,
                                           ),
                                           Row(
                                             children: [
                                               Expanded(
                                                   child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
-                                                  Row(
+                                                  const Row(
                                                     children: [
                                                       Text(
                                                         "Level User",
-                                                        style: const TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
-                                                      const SizedBox(width: 5),
-                                                      const Text(
+                                                      SizedBox(width: 5),
+                                                      Text(
                                                         "*",
-                                                        style: TextStyle(
-                                                            fontSize: 8),
+                                                        style: TextStyle(fontSize: 8),
                                                       ),
                                                     ],
                                                   ),
@@ -353,10 +339,8 @@ class LevelUserPage extends StatelessWidget {
                                                     height: 8,
                                                   ),
                                                   TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
-                                                    controller:
-                                                        value.levelUsers,
+                                                    textInputAction: TextInputAction.done,
+                                                    controller: value.levelUsers,
                                                     readOnly: true,
                                                     validator: (e) {
                                                       if (e!.isEmpty) {
@@ -367,39 +351,32 @@ class LevelUserPage extends StatelessWidget {
                                                     },
                                                     decoration: InputDecoration(
                                                       filled: true,
-                                                      fillColor:
-                                                          Colors.grey[200],
+                                                      fillColor: Colors.grey[200],
                                                       hintText: "Level Users",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
                                                 ],
                                               )),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 16,
                                               ),
                                               Expanded(
                                                   child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
-                                                  Row(
+                                                  const Row(
                                                     children: [
                                                       Text(
                                                         "Modul",
-                                                        style: const TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
-                                                      const SizedBox(width: 5),
-                                                      const Text(
+                                                      SizedBox(width: 5),
+                                                      Text(
                                                         "*",
-                                                        style: TextStyle(
-                                                            fontSize: 8),
+                                                        style: TextStyle(fontSize: 8),
                                                       ),
                                                     ],
                                                   ),
@@ -413,37 +390,23 @@ class LevelUserPage extends StatelessWidget {
                                                       }
                                                       return null;
                                                     },
-                                                    popupProps:
-                                                        const PopupPropsMultiSelection
-                                                            .menu(
-                                                      showSearchBox:
-                                                          true, // Aktifkan fitur pencarian
+                                                    popupProps: const PopupPropsMultiSelection.menu(
+                                                      showSearchBox: true, // Aktifkan fitur pencarian
                                                     ),
-                                                    selectedItem:
-                                                        value.modulModel,
+                                                    selectedItem: value.modulModel,
                                                     items: value.listModul,
-                                                    itemAsString: (e) =>
-                                                        "${e.modul}",
+                                                    itemAsString: (e) => e.modul,
                                                     onChanged: (e) {
                                                       value.pilihModul(e!);
                                                     },
-                                                    dropdownDecoratorProps:
-                                                        DropDownDecoratorProps(
-                                                      baseStyle: TextStyle(
-                                                          fontSize: 16),
-                                                      textAlignVertical:
-                                                          TextAlignVertical
-                                                              .center,
-                                                      dropdownSearchDecoration:
-                                                          InputDecoration(
+                                                    dropdownDecoratorProps: DropDownDecoratorProps(
+                                                      baseStyle: const TextStyle(fontSize: 16),
+                                                      textAlignVertical: TextAlignVertical.center,
+                                                      dropdownSearchDecoration: InputDecoration(
                                                         hintText: "Pilih Modul",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          borderSide:
-                                                              BorderSide(
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          borderSide: const BorderSide(
                                                             width: 1,
                                                             color: Colors.grey,
                                                           ),
@@ -455,14 +418,14 @@ class LevelUserPage extends StatelessWidget {
                                               )),
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 16,
                                           ),
-                                          Text(
+                                          const Text(
                                             "Pilih Akses Menu",
                                             style: TextStyle(fontSize: 12),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 16,
                                           ),
                                           Row(
@@ -470,34 +433,24 @@ class LevelUserPage extends StatelessWidget {
                                               Expanded(
                                                 child: Container(
                                                   width: 80,
-                                                  margin: EdgeInsets.only(
-                                                      right: 16),
+                                                  margin: const EdgeInsets.only(right: 16),
                                                   child: Row(
                                                     children: [
-                                                      Checkbox(
-                                                          value: value
-                                                              .pilihSemuaMenu,
-                                                          onChanged: (e) => value
-                                                              .toggleMenuSelectAll()),
-                                                      Text("Menu"),
+                                                      Checkbox(value: value.pilihSemuaMenu, onChanged: (e) => value.toggleMenuSelectAll()),
+                                                      const Text("Menu"),
                                                     ],
                                                   ),
                                                 ),
                                               ),
                                               Container(
                                                 width: 80,
-                                                margin:
-                                                    EdgeInsets.only(right: 16),
+                                                margin: const EdgeInsets.only(right: 16),
                                                 child: Row(
                                                   children: [
                                                     Row(
                                                       children: [
-                                                        Checkbox(
-                                                            value: value
-                                                                .viewSemuaMenu,
-                                                            onChanged: (e) => value
-                                                                .toggleSelectViewAll()),
-                                                        Text("View"),
+                                                        Checkbox(value: value.viewSemuaMenu, onChanged: (e) => value.toggleSelectViewAll()),
+                                                        const Text("View"),
                                                       ],
                                                     ),
                                                   ],
@@ -505,156 +458,89 @@ class LevelUserPage extends StatelessWidget {
                                               ),
                                               Container(
                                                 width: 80,
-                                                margin:
-                                                    EdgeInsets.only(right: 16),
+                                                margin: const EdgeInsets.only(right: 16),
                                                 child: Row(
                                                   children: [
-                                                    Checkbox(
-                                                        value: value
-                                                            .inputSemuaMenu,
-                                                        onChanged: (e) => value
-                                                            .toggleSelectInputAll()),
-                                                    Text("Input"),
+                                                    Checkbox(value: value.inputSemuaMenu, onChanged: (e) => value.toggleSelectInputAll()),
+                                                    const Text("Input"),
                                                   ],
                                                 ),
                                               ),
                                               Container(
                                                 width: 80,
-                                                margin:
-                                                    EdgeInsets.only(right: 16),
+                                                margin: const EdgeInsets.only(right: 16),
                                                 child: Row(
                                                   children: [
-                                                    Checkbox(
-                                                        value:
-                                                            value.editSemuaMenu,
-                                                        onChanged: (e) => value
-                                                            .toggleSelecteditAll()),
-                                                    Text("Edit"),
+                                                    Checkbox(value: value.editSemuaMenu, onChanged: (e) => value.toggleSelecteditAll()),
+                                                    const Text("Edit"),
                                                   ],
                                                 ),
                                               ),
                                               Container(
                                                 width: 80,
-                                                margin:
-                                                    EdgeInsets.only(right: 16),
+                                                margin: const EdgeInsets.only(right: 16),
                                                 child: Row(
                                                   children: [
-                                                    Checkbox(
-                                                        value: value
-                                                            .deleteSemuaMenu,
-                                                        onChanged: (e) => value
-                                                            .toggleSelectDeleteAll()),
-                                                    Text("Delete"),
+                                                    Checkbox(value: value.deleteSemuaMenu, onChanged: (e) => value.toggleSelectDeleteAll()),
+                                                    const Text("Delete"),
                                                   ],
                                                 ),
                                               ),
                                             ],
                                           ),
                                           Container(
-                                            margin: EdgeInsets.symmetric(
-                                                vertical: 8),
+                                            margin: const EdgeInsets.symmetric(vertical: 8),
                                             height: 1,
                                             color: Colors.grey,
                                           ),
                                           Expanded(
                                               child: ListView(
                                             shrinkWrap: true,
-                                            physics: ClampingScrollPhysics(),
+                                            physics: const ClampingScrollPhysics(),
                                             children: [
                                               value.modulModel == null
-                                                  ? SizedBox()
+                                                  ? const SizedBox()
                                                   : ListView.builder(
-                                                      itemCount: value
-                                                          .modulModel!
-                                                          .menu
-                                                          .length,
+                                                      itemCount: value.modulModel!.menu.length,
                                                       shrinkWrap: true,
-                                                      physics:
-                                                          ClampingScrollPhysics(),
-                                                      itemBuilder:
-                                                          (context, i) {
-                                                        final data = value
-                                                            .modulModel!
-                                                            .menu[i];
-                                                        final menuAccess = value
-                                                            .menuAccessList
-                                                            .firstWhere(
-                                                          (e) =>
-                                                              e.modul ==
-                                                                  value
-                                                                      .modulModel!
-                                                                      .modul &&
-                                                              e.menu ==
-                                                                  data.menu &&
-                                                              e.submenu ==
-                                                                  data.submenu,
-                                                          orElse: () =>
-                                                              MenuAccess(
-                                                                  modul: value
-                                                                      .modulModel!
-                                                                      .modul,
-                                                                  menu:
-                                                                      data.menu,
-                                                                  submenu: data
-                                                                      .submenu),
+                                                      physics: const ClampingScrollPhysics(),
+                                                      itemBuilder: (context, i) {
+                                                        final data = value.modulModel!.menu[i];
+                                                        final menuAccess = value.menuAccessList.firstWhere(
+                                                          (e) => e.modul == value.modulModel!.modul && e.menu == data.menu && e.submenu == data.submenu,
+                                                          orElse: () => MenuAccess(modul: value.modulModel!.modul, menu: data.menu, submenu: data.submenu),
                                                         );
 
                                                         return Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .stretch,
+                                                          crossAxisAlignment: CrossAxisAlignment.stretch,
                                                           children: [
                                                             Row(
                                                               children: [
                                                                 Container(
-                                                                  margin: EdgeInsets
-                                                                      .only(
-                                                                          right:
-                                                                              16),
+                                                                  margin: const EdgeInsets.only(right: 16),
                                                                   width: 30,
-                                                                  child:
-                                                                      Checkbox(
-                                                                    activeColor:
-                                                                        colorPrimary,
+                                                                  child: Checkbox(
+                                                                    activeColor: colorPrimary,
                                                                     // value:
                                                                     //     false,
-                                                                    value: menuAccess
-                                                                        .isSelected,
-                                                                    onChanged: (val) =>
-                                                                        value.toggleMenu(
-                                                                            i,
-                                                                            val,
-                                                                            data.submenu,
-                                                                            data.menu),
+                                                                    value: menuAccess.isSelected,
+                                                                    onChanged: (val) => value.toggleMenu(i, val, data.submenu, data.menu),
                                                                   ),
                                                                 ),
                                                                 Expanded(
-                                                                  child:
-                                                                      Container(
-                                                                    margin: EdgeInsets.only(
-                                                                        right:
-                                                                            16),
-                                                                    child: Text(
-                                                                        "${data.keterangan}"),
+                                                                  child: Container(
+                                                                    margin: const EdgeInsets.only(right: 16),
+                                                                    child: Text(data.keterangan),
                                                                   ),
                                                                 ),
                                                                 Container(
                                                                     width: 80,
-                                                                    margin: EdgeInsets.only(
-                                                                        right:
-                                                                            16),
-                                                                    child:
-                                                                        Checkbox(
-                                                                      activeColor:
-                                                                          colorPrimary,
-                                                                      value: menuAccess
-                                                                          .view,
-                                                                      onChanged:
-                                                                          (val) =>
-                                                                              value.togglePermissionBySubmenu(
-                                                                        value
-                                                                            .modulModel!
-                                                                            .modul,
+                                                                    margin: const EdgeInsets.only(right: 16),
+                                                                    child: Checkbox(
+                                                                      activeColor: colorPrimary,
+                                                                      value: menuAccess.view,
+                                                                      onChanged: (val) => value.togglePermissionBySubmenu(
+                                                                        value.modulModel!.modul,
                                                                         data.menu,
                                                                         data.submenu,
                                                                         'view',
@@ -663,21 +549,12 @@ class LevelUserPage extends StatelessWidget {
                                                                     )),
                                                                 Container(
                                                                     width: 80,
-                                                                    margin: EdgeInsets.only(
-                                                                        right:
-                                                                            16),
-                                                                    child:
-                                                                        Checkbox(
-                                                                      activeColor:
-                                                                          colorPrimary,
-                                                                      value: menuAccess
-                                                                          .input,
-                                                                      onChanged:
-                                                                          (val) =>
-                                                                              value.togglePermissionBySubmenu(
-                                                                        value
-                                                                            .modulModel!
-                                                                            .modul,
+                                                                    margin: const EdgeInsets.only(right: 16),
+                                                                    child: Checkbox(
+                                                                      activeColor: colorPrimary,
+                                                                      value: menuAccess.input,
+                                                                      onChanged: (val) => value.togglePermissionBySubmenu(
+                                                                        value.modulModel!.modul,
                                                                         data.menu,
                                                                         data.submenu,
                                                                         'input',
@@ -686,21 +563,12 @@ class LevelUserPage extends StatelessWidget {
                                                                     )),
                                                                 Container(
                                                                     width: 80,
-                                                                    margin: EdgeInsets.only(
-                                                                        right:
-                                                                            16),
-                                                                    child:
-                                                                        Checkbox(
-                                                                      activeColor:
-                                                                          colorPrimary,
-                                                                      value: menuAccess
-                                                                          .edit,
-                                                                      onChanged:
-                                                                          (val) =>
-                                                                              value.togglePermissionBySubmenu(
-                                                                        value
-                                                                            .modulModel!
-                                                                            .modul,
+                                                                    margin: const EdgeInsets.only(right: 16),
+                                                                    child: Checkbox(
+                                                                      activeColor: colorPrimary,
+                                                                      value: menuAccess.edit,
+                                                                      onChanged: (val) => value.togglePermissionBySubmenu(
+                                                                        value.modulModel!.modul,
                                                                         data.menu,
                                                                         data.submenu,
                                                                         'edit',
@@ -709,24 +577,13 @@ class LevelUserPage extends StatelessWidget {
                                                                     )),
                                                                 Container(
                                                                     width: 80,
-                                                                    margin: EdgeInsets.only(
-                                                                        right:
-                                                                            16),
-                                                                    child:
-                                                                        Checkbox(
-                                                                      activeColor:
-                                                                          colorPrimary,
-                                                                      value: menuAccess
-                                                                          .delete,
-                                                                      onChanged:
-                                                                          (val) =>
-                                                                              value.togglePermissionBySubmenu(
-                                                                        value
-                                                                            .modulModel!
-                                                                            .modul,
-                                                                        value
-                                                                            .itemCategoryModulModel!
-                                                                            .menu,
+                                                                    margin: const EdgeInsets.only(right: 16),
+                                                                    child: Checkbox(
+                                                                      activeColor: colorPrimary,
+                                                                      value: menuAccess.delete,
+                                                                      onChanged: (val) => value.togglePermissionBySubmenu(
+                                                                        value.modulModel!.modul,
+                                                                        value.itemCategoryModulModel!.menu,
                                                                         data.submenu,
                                                                         'delete',
                                                                         val,
@@ -734,13 +591,13 @@ class LevelUserPage extends StatelessWidget {
                                                                     )),
                                                               ],
                                                             ),
-                                                            SizedBox(
+                                                            const SizedBox(
                                                               height: 8,
                                                             )
                                                           ],
                                                         );
                                                       }),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 16,
                                               ),
                                               Row(
@@ -760,18 +617,17 @@ class LevelUserPage extends StatelessWidget {
                                 ),
                               )
                             : Container(
-                                padding: EdgeInsets.all(20),
+                                padding: const EdgeInsets.all(20),
                                 width: 700,
-                                decoration: BoxDecoration(color: Colors.white),
+                                decoration: const BoxDecoration(color: Colors.white),
                                 child: Form(
                                   key: value.keyForm,
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                     children: [
                                       Row(
                                         children: [
-                                          Expanded(
+                                          const Expanded(
                                             child: Text(
                                               "Ubah Akses Menu",
                                               style: TextStyle(
@@ -785,37 +641,32 @@ class LevelUserPage extends StatelessWidget {
                                             child: Container(
                                               width: 40,
                                               height: 40,
-                                              padding: EdgeInsets.all(4),
-                                              decoration: BoxDecoration(
-                                                  color: Colors.grey[200],
-                                                  shape: BoxShape.circle),
-                                              child: Icon(Icons.close),
+                                              padding: const EdgeInsets.all(4),
+                                              decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                              child: const Icon(Icons.close),
                                             ),
                                           )
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 32,
                                       ),
                                       Row(
                                         children: [
                                           Expanded(
                                               child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
-                                              Row(
+                                              const Row(
                                                 children: [
                                                   Text(
                                                     "Level User",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
-                                                  const SizedBox(width: 5),
-                                                  const Text(
+                                                  SizedBox(width: 5),
+                                                  Text(
                                                     "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
+                                                    style: TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -823,8 +674,7 @@ class LevelUserPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               TextFormField(
-                                                textInputAction:
-                                                    TextInputAction.done,
+                                                textInputAction: TextInputAction.done,
                                                 controller: value.levelUsers,
                                                 readOnly: true,
                                                 validator: (e) {
@@ -839,9 +689,7 @@ class LevelUserPage extends StatelessWidget {
                                                   fillColor: Colors.grey[200],
                                                   hintText: "Level Users",
                                                   border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            6),
+                                                    borderRadius: BorderRadius.circular(6),
                                                   ),
                                                 ),
                                               ),
@@ -883,66 +731,64 @@ class LevelUserPage extends StatelessWidget {
                                               //     const SizedBox(height: 16),
                                             ],
                                           )),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 16,
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 16,
                                       ),
-                                      Text(
+                                      const Text(
                                         "Akses Modul dan Menu",
                                         style: TextStyle(fontSize: 12),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 16,
                                       ),
                                       Row(
                                         children: [
                                           Container(
                                             width: 80,
-                                            margin: EdgeInsets.only(right: 16),
-                                            child: Text("Modul"),
+                                            margin: const EdgeInsets.only(right: 16),
+                                            child: const Text("Modul"),
                                           ),
                                           Expanded(
                                             child: Container(
                                               width: 80,
-                                              margin:
-                                                  EdgeInsets.only(right: 16),
-                                              child: Text("Menu"),
+                                              margin: const EdgeInsets.only(right: 16),
+                                              child: const Text("Menu"),
                                             ),
                                           ),
                                           Container(
                                             width: 60,
-                                            margin: EdgeInsets.only(right: 16),
-                                            child: Text("View"),
+                                            margin: const EdgeInsets.only(right: 16),
+                                            child: const Text("View"),
                                           ),
                                           Container(
                                             width: 60,
-                                            margin: EdgeInsets.only(right: 16),
-                                            child: Text("Input"),
+                                            margin: const EdgeInsets.only(right: 16),
+                                            child: const Text("Input"),
                                           ),
                                           Container(
                                             width: 60,
-                                            margin: EdgeInsets.only(right: 16),
-                                            child: Text("Edit"),
+                                            margin: const EdgeInsets.only(right: 16),
+                                            child: const Text("Edit"),
                                           ),
                                           Container(
                                             width: 60,
-                                            margin: EdgeInsets.only(right: 16),
-                                            child: Text("Delete"),
+                                            margin: const EdgeInsets.only(right: 16),
+                                            child: const Text("Delete"),
                                           ),
                                           Container(
                                             width: 60,
-                                            margin: EdgeInsets.only(right: 16),
-                                            child: Text("Hapus"),
+                                            margin: const EdgeInsets.only(right: 16),
+                                            child: const Text("Hapus"),
                                           ),
                                         ],
                                       ),
                                       Container(
-                                        margin:
-                                            EdgeInsets.symmetric(vertical: 8),
+                                        margin: const EdgeInsets.symmetric(vertical: 8),
                                         height: 1,
                                         color: Colors.grey,
                                       ),
@@ -950,16 +796,13 @@ class LevelUserPage extends StatelessWidget {
                                           child: ListView(
                                         children: [
                                           value.modulModel == null
-                                              ? SizedBox()
+                                              ? const SizedBox()
                                               : ListView.builder(
-                                                  itemCount: value
-                                                      .modulModel!.menu.length,
+                                                  itemCount: value.modulModel!.menu.length,
                                                   shrinkWrap: true,
-                                                  physics:
-                                                      ClampingScrollPhysics(),
+                                                  physics: const ClampingScrollPhysics(),
                                                   itemBuilder: (context, i) {
-                                                    final data = value
-                                                        .modulModel!.menu[i];
+                                                    final data = value.modulModel!.menu[i];
                                                     // final menuAccess = value
                                                     //     .menuAccessList
                                                     //     .firstWhere(
@@ -982,56 +825,33 @@ class LevelUserPage extends StatelessWidget {
                                                     // );
 
                                                     return Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .stretch,
+                                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                                       children: [
                                                         Row(
                                                           children: [
                                                             Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          16),
+                                                              margin: const EdgeInsets.only(right: 16),
                                                               width: 30,
                                                               child: Checkbox(
-                                                                activeColor:
-                                                                    colorPrimary,
+                                                                activeColor: colorPrimary,
                                                                 value: false,
-                                                                onChanged: (val) =>
-                                                                    value.toggleMenu(
-                                                                        i,
-                                                                        val,
-                                                                        data.submenu,
-                                                                        data.menu),
+                                                                onChanged: (val) => value.toggleMenu(i, val, data.submenu, data.menu),
                                                               ),
                                                             ),
                                                             Expanded(
                                                               child: Container(
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                        right:
-                                                                            16),
-                                                                child: Text(
-                                                                    "${data.keterangan}"),
+                                                                margin: const EdgeInsets.only(right: 16),
+                                                                child: Text(data.keterangan),
                                                               ),
                                                             ),
                                                             Container(
                                                                 width: 80,
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                        right:
-                                                                            16),
+                                                                margin: const EdgeInsets.only(right: 16),
                                                                 child: Checkbox(
-                                                                  activeColor:
-                                                                      colorPrimary,
+                                                                  activeColor: colorPrimary,
                                                                   value: false,
-                                                                  onChanged:
-                                                                      (val) => value
-                                                                          .togglePermissionBySubmenu(
-                                                                    value
-                                                                        .modulModel!
-                                                                        .modul,
+                                                                  onChanged: (val) => value.togglePermissionBySubmenu(
+                                                                    value.modulModel!.modul,
                                                                     data.menu,
                                                                     data.submenu,
                                                                     'view',
@@ -1040,20 +860,12 @@ class LevelUserPage extends StatelessWidget {
                                                                 )),
                                                             Container(
                                                                 width: 80,
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                        right:
-                                                                            16),
+                                                                margin: const EdgeInsets.only(right: 16),
                                                                 child: Checkbox(
-                                                                  activeColor:
-                                                                      colorPrimary,
+                                                                  activeColor: colorPrimary,
                                                                   value: false,
-                                                                  onChanged:
-                                                                      (val) => value
-                                                                          .togglePermissionBySubmenu(
-                                                                    value
-                                                                        .modulModel!
-                                                                        .modul,
+                                                                  onChanged: (val) => value.togglePermissionBySubmenu(
+                                                                    value.modulModel!.modul,
                                                                     data.menu,
                                                                     data.submenu,
                                                                     'input',
@@ -1062,20 +874,12 @@ class LevelUserPage extends StatelessWidget {
                                                                 )),
                                                             Container(
                                                                 width: 80,
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                        right:
-                                                                            16),
+                                                                margin: const EdgeInsets.only(right: 16),
                                                                 child: Checkbox(
-                                                                  activeColor:
-                                                                      colorPrimary,
+                                                                  activeColor: colorPrimary,
                                                                   value: false,
-                                                                  onChanged:
-                                                                      (val) => value
-                                                                          .togglePermissionBySubmenu(
-                                                                    value
-                                                                        .modulModel!
-                                                                        .modul,
+                                                                  onChanged: (val) => value.togglePermissionBySubmenu(
+                                                                    value.modulModel!.modul,
                                                                     data.menu,
                                                                     data.submenu,
                                                                     'edit',
@@ -1084,20 +888,12 @@ class LevelUserPage extends StatelessWidget {
                                                                 )),
                                                             Container(
                                                                 width: 80,
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                        right:
-                                                                            16),
+                                                                margin: const EdgeInsets.only(right: 16),
                                                                 child: Checkbox(
-                                                                  activeColor:
-                                                                      colorPrimary,
+                                                                  activeColor: colorPrimary,
                                                                   value: false,
-                                                                  onChanged:
-                                                                      (val) => value
-                                                                          .togglePermissionBySubmenu(
-                                                                    value
-                                                                        .modulModel!
-                                                                        .modul,
+                                                                  onChanged: (val) => value.togglePermissionBySubmenu(
+                                                                    value.modulModel!.modul,
                                                                     data.menu,
                                                                     data.submenu,
                                                                     'delete',
@@ -1106,13 +902,13 @@ class LevelUserPage extends StatelessWidget {
                                                                 )),
                                                           ],
                                                         ),
-                                                        SizedBox(
+                                                        const SizedBox(
                                                           height: 8,
                                                         )
                                                       ],
                                                     );
                                                   }),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 16,
                                           ),
                                           Row(
@@ -1131,7 +927,7 @@ class LevelUserPage extends StatelessWidget {
                                   ),
                                 ),
                               )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -1159,8 +955,7 @@ class DetailDataSource extends DataGridSource {
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
                 DataGridCell(columnName: 'level_user', value: data.levelUser),
-                DataGridCell(
-                    columnName: 'modul', value: "${data.moduls.length} Modul"),
+                DataGridCell(columnName: 'modul', value: "${data.moduls.length} Modul"),
                 DataGridCell(columnName: 'action', value: data.idLevel),
               ],
             ))
@@ -1183,7 +978,7 @@ class DetailDataSource extends DataGridSource {
                       tindakanNotifier!.editModuls(e.value);
                     },
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: colorPrimary,
@@ -1192,10 +987,10 @@ class DetailDataSource extends DataGridSource {
                           color: colorPrimary,
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         "Tambah / Ubah",
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
                         ),
                       ),

@@ -4,11 +4,7 @@ import 'package:accounting/models/index.dart';
 import 'package:accounting/network/network.dart';
 import 'package:accounting/repository/SetupRepository.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
-import '../../../network/network.dart';
-import '../../../repository/wilayah_repository.dart';
-import '../../../utils/button_custom.dart';
 import '../../../utils/dialog_loading.dart';
 import '../../../utils/informationdialog.dart';
 
@@ -26,9 +22,10 @@ class AksesPointNotifier extends ChangeNotifier {
     isLoading = true;
     listAoModel.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listAoModel.add(AoModel.fromJson(i));
@@ -47,9 +44,10 @@ class AksesPointNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getCustomer(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getCustomer(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(CustomerSupplierModel.fromJson(i));

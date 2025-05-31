@@ -1,5 +1,3 @@
-import 'package:accounting/module/menu/menu_page.dart';
-import 'package:accounting/module/splash_screen_notifier.dart';
 import 'package:accounting/module/splash_screen_page.dart';
 import 'package:accounting/utils/custom_scroll.dart';
 import 'package:flutter/material.dart';

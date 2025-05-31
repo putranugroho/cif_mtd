@@ -46,14 +46,7 @@ class AktivasiNotifier extends ChangeNotifier {
     jamMulai.text = aktivasiModel!.jamMulai;
     jamSelesai.text = aktivasiModel!.jamSelesai;
 
-    List<String> hariList = jsonEncode(aktivasiModel!.hari)
-        .toString()
-        .replaceAll('[', '')
-        .replaceAll("\"", "")
-        .replaceAll(']', '')
-        .split(',')
-        .map((e) => e.trim())
-        .toList();
+    List<String> hariList = jsonEncode(aktivasiModel!.hari).toString().replaceAll('[', '').replaceAll("\"", "").replaceAll(']', '').split(',').map((e) => e.trim()).toList();
     print(hariList.length);
     for (var i = 0; i < hariList.length; i++) {
       listHariAdd.add(hariList[i]);
@@ -80,16 +73,14 @@ class AktivasiNotifier extends ChangeNotifier {
         var data = {
           "id": aktivasiModel!.id,
           "kode_pt": "001",
-          "kd_aktivasi": "${kode.text}",
-          "nm_aktivasi": "${nama.text}",
-          "hari": "${listHariAdd}",
-          "jam_mulai": "${jamMulai.text}",
-          "jam_selesai": "${jamSelesai.text}",
+          "kd_aktivasi": kode.text,
+          "nm_aktivasi": nama.text,
+          "hari": "$listHariAdd",
+          "jam_mulai": jamMulai.text,
+          "jam_selesai": jamSelesai.text,
         };
 
-        Setuprepository.setup(
-                token, NetworkURL.editAktivasi(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.editAktivasi(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);
@@ -105,15 +96,14 @@ class AktivasiNotifier extends ChangeNotifier {
         DialogCustom().showLoading(context);
         var data = {
           "kode_pt": "001",
-          "kd_aktivasi": "${kode.text}",
-          "nm_aktivasi": "${nama.text}",
-          "hari": "${listHariAdd}",
-          "jam_mulai": "${jamMulai.text}",
-          "jam_selesai": "${jamSelesai.text}",
+          "kd_aktivasi": kode.text,
+          "nm_aktivasi": nama.text,
+          "hari": "$listHariAdd",
+          "jam_mulai": jamMulai.text,
+          "jam_selesai": jamSelesai.text,
         };
 
-        Setuprepository.setup(token, NetworkURL.addAktivasi(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.addAktivasi(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);
@@ -138,8 +128,7 @@ class AktivasiNotifier extends ChangeNotifier {
     );
 
     if (pickedTime != null) {
-      jamMulai.text =
-          '${pickedTime.hour.toString().padLeft(2, '0')}:${pickedTime.minute.toString().padLeft(2, '0')}';
+      jamMulai.text = '${pickedTime.hour.toString().padLeft(2, '0')}:${pickedTime.minute.toString().padLeft(2, '0')}';
     }
     notifyListeners();
   }
@@ -151,8 +140,7 @@ class AktivasiNotifier extends ChangeNotifier {
     );
 
     if (pickedTime != null) {
-      jamSelesai.text =
-          '${pickedTime.hour.toString().padLeft(2, '0')}:${pickedTime.minute.toString().padLeft(2, '0')}';
+      jamSelesai.text = '${pickedTime.hour.toString().padLeft(2, '0')}:${pickedTime.minute.toString().padLeft(2, '0')}';
     }
     notifyListeners();
   }
@@ -162,9 +150,10 @@ class AktivasiNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getAktivasi(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getAktivasi(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(AktivasiModel.fromJson(i));
@@ -202,7 +191,7 @@ class AktivasiNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -210,11 +199,11 @@ class AktivasiNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin menghapus ${aktivasiModel!.nmAktivasi}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -226,7 +215,7 @@ class AktivasiNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -251,8 +240,7 @@ class AktivasiNotifier extends ChangeNotifier {
     var data = {
       "id": aktivasiModel!.id,
     };
-    Setuprepository.setup(token, NetworkURL.deleteAktivasi(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.deleteAktivasi(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getAktivasi();
@@ -280,14 +268,14 @@ class AktivasiNotifier extends ChangeNotifier {
             return Dialog(
               child: Container(
                 width: 600,
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Row(
                       children: [
-                        Expanded(
+                        const Expanded(
                           child: Text(
                             "Pilih Jam Mulai",
                             style: TextStyle(fontWeight: FontWeight.bold),
@@ -300,10 +288,8 @@ class AktivasiNotifier extends ChangeNotifier {
                           child: Container(
                             width: 30,
                             height: 30,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.grey[300]),
-                            child: Icon(
+                            decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.grey[300]),
+                            child: const Icon(
                               Icons.close,
                               size: 12,
                             ),
@@ -311,7 +297,7 @@ class AktivasiNotifier extends ChangeNotifier {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     TimePickerSpinner(
@@ -323,8 +309,7 @@ class AktivasiNotifier extends ChangeNotifier {
                       normalTextStyle: const TextStyle(
                         fontSize: 24,
                       ),
-                      highlightedTextStyle:
-                          const TextStyle(fontSize: 24, color: Colors.blue),
+                      highlightedTextStyle: const TextStyle(fontSize: 24, color: Colors.blue),
                       isForce2Digits: true,
                       onTimeChange: (time) {
                         setState(() {
@@ -334,14 +319,13 @@ class AktivasiNotifier extends ChangeNotifier {
                         });
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     ButtonPrimary(
                       onTap: () {
                         Navigator.pop(context);
-                        jamMulai.text =
-                            DateFormat('HH:mm').format(jamMulaiTime);
+                        jamMulai.text = DateFormat('HH:mm').format(jamMulaiTime);
                       },
                       name: "Simpan",
                     )
@@ -361,14 +345,14 @@ class AktivasiNotifier extends ChangeNotifier {
             return Dialog(
               child: Container(
                 width: 600,
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Row(
                       children: [
-                        Expanded(
+                        const Expanded(
                           child: Text(
                             "Pilih Jam Selesai",
                             style: TextStyle(fontWeight: FontWeight.bold),
@@ -381,10 +365,8 @@ class AktivasiNotifier extends ChangeNotifier {
                           child: Container(
                             width: 30,
                             height: 30,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.grey[300]),
-                            child: Icon(
+                            decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.grey[300]),
+                            child: const Icon(
                               Icons.close,
                               size: 12,
                             ),
@@ -392,7 +374,7 @@ class AktivasiNotifier extends ChangeNotifier {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     TimePickerSpinner(
@@ -404,8 +386,7 @@ class AktivasiNotifier extends ChangeNotifier {
                       normalTextStyle: const TextStyle(
                         fontSize: 24,
                       ),
-                      highlightedTextStyle:
-                          const TextStyle(fontSize: 24, color: Colors.blue),
+                      highlightedTextStyle: const TextStyle(fontSize: 24, color: Colors.blue),
                       isForce2Digits: true,
                       onTimeChange: (time) {
                         setState(() {
@@ -415,14 +396,13 @@ class AktivasiNotifier extends ChangeNotifier {
                         });
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     ButtonPrimary(
                       onTap: () {
                         Navigator.pop(context);
-                        jamSelesai.text =
-                            DateFormat('HH:mm').format(jamSelesaiTime);
+                        jamSelesai.text = DateFormat('HH:mm').format(jamSelesaiTime);
                       },
                       name: "Simpan",
                     )

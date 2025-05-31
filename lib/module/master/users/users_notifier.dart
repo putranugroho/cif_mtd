@@ -38,7 +38,9 @@ class UsersNotifier extends ChangeNotifier {
     if (query.isNotEmpty && query.length > 2 && editData == false) {
       listKaryawan.clear();
       notifyListeners();
-      var data = {"nama": query};
+      var data = {
+        "nama": query
+      };
       try {
         final response = await Setuprepository.setup(
           token,
@@ -75,8 +77,7 @@ class UsersNotifier extends ChangeNotifier {
   var limitAkses = false;
   gantilimitakses() {
     if (otorisasi) {
-      informationDialog(context, "warning",
-          "Otorisasi Aktif, tidak bisa memberikan akses limit transaksi");
+      informationDialog(context, "warning", "Otorisasi Aktif, tidak bisa memberikan akses limit transaksi");
     } else {
       limitAkses = !limitAkses;
     }
@@ -90,48 +91,30 @@ class UsersNotifier extends ChangeNotifier {
     users = listData.where((e) => e.id == int.parse(id)).first;
     dialog = true;
     editData = true;
-    kantorModel =
-        listKantor.where((e) => e.kodeKantor == users!.kodeKantor).first;
+    kantorModel = listKantor.where((e) => e.kodeKantor == users!.kodeKantor).first;
     namaKaryawan.text = users!.namauser;
     nikKaryawan.text = users!.empId;
     userid.text = users!.userid;
     limitAkses = users!.limitAkses == "Y" ? true : false;
-    maksimalTrans.text =
-        "Rp ${FormatCurrency.oCcyDecimal.format(double.parse(users!.maksimalTransaksi))}";
+    maksimalTrans.text = "Rp ${FormatCurrency.oCcyDecimal.format(double.parse(users!.maksimalTransaksi))}";
     pass.text = users!.pass;
     namauser.text = users!.namauser;
     tglexp.text = users!.tglexp;
-    minotor.text = users!.minOtor == ""
-        ? ""
-        : FormatCurrency.oCcy
-            .format(int.parse(users!.minOtor))
-            .replaceAll(".", ",");
-    maxotor.text = users!.maxOtor == ""
-        ? ""
-        : FormatCurrency.oCcy
-            .format(int.parse(users!.maxOtor))
-            .replaceAll(".", ",");
+    minotor.text = users!.minOtor == "" ? "" : FormatCurrency.oCcy.format(int.parse(users!.minOtor)).replaceAll(".", ",");
+    maxotor.text = users!.maxOtor == "" ? "" : FormatCurrency.oCcy.format(int.parse(users!.maxOtor)).replaceAll(".", ",");
     aksesKasir = users!.aksesKasir == "Y" ? true : false;
     bedaKantor = users!.bedaKantor == "Y" ? true : false;
     levelUser = listUsers.where((e) => e.idLevel == users!.lvluser).first;
-    otorisasi =
-        users!.levelOtor == "null" || users!.levelOtor == "" ? false : true;
-    levelSelected =
-        users!.levelOtor == "null" || users!.levelOtor == "" ? false : true;
+    otorisasi = users!.levelOtor == "null" || users!.levelOtor == "" ? false : true;
+    levelSelected = users!.levelOtor == "null" || users!.levelOtor == "" ? false : true;
     backdate = users!.backDate == "Y" ? true : false;
-    levelOtor = users!.levelOtor == "null" || users!.levelOtor == ""
-        ? ""
-        : listLevelOtor.where((e) => e == users!.levelOtor).first;
+    levelOtor = users!.levelOtor == "null" || users!.levelOtor == "" ? "" : listLevelOtor.where((e) => e == users!.levelOtor).first;
     aktivasilogin = users!.aktivasi == "Y" ? true : false;
-    inqueryGlModel = users!.sbbKasir == ""
-        ? null
-        : listGl.where((e) => e.nosbb == users!.sbbKasir).first;
+    inqueryGlModel = users!.sbbKasir == "" ? null : listGl.where((e) => e.nosbb == users!.sbbKasir).first;
     nossbb.text = users!.sbbKasir == "" ? "" : inqueryGlModel!.nosbb;
     namasbb.text = users!.sbbKasir == "" ? "" : inqueryGlModel!.namaSbb;
     for (var i = 0; i < users!.shifts.length; i++) {
-      AktivasiModel? aktivasiModel = listHariKerja
-          .where((e) => e.kdAktivasi == users!.shifts[i].kdKelompok)
-          .first;
+      AktivasiModel? aktivasiModel = listHariKerja.where((e) => e.kdAktivasi == users!.shifts[i].kdKelompok).first;
       listAddHariKerja.add(aktivasiModel);
     }
 
@@ -151,12 +134,12 @@ class UsersNotifier extends ChangeNotifier {
           for (var i = 0; i < listAddHariKerja.length; i++) {
             listTmp.add({
               "id_users": users!.id,
-              "kd_kelompok": "${listAddHariKerja[i].kdAktivasi}",
-              "nama_kelompok": "${listAddHariKerja[i].nmAktivasi}",
-              "hari": "${listAddHariKerja[i].hari}",
+              "kd_kelompok": listAddHariKerja[i].kdAktivasi,
+              "nama_kelompok": listAddHariKerja[i].nmAktivasi,
+              "hari": listAddHariKerja[i].hari,
               "ke": "${i + 1}",
-              "jam_mulai": "${listAddHariKerja[i].jamMulai}",
-              "jam_selesai": "${listAddHariKerja[i].jamSelesai}",
+              "jam_mulai": listAddHariKerja[i].jamMulai,
+              "jam_selesai": listAddHariKerja[i].jamSelesai,
               "status": "AKTIF",
             });
           }
@@ -165,42 +148,34 @@ class UsersNotifier extends ChangeNotifier {
           DialogCustom().showLoading(context);
           var data = {
             "id": users!.id,
-            "userid": "${userid.text}",
+            "userid": userid.text,
             "batch": "$randomNumber",
-            "emp_id":
-                "${karyawanModel == null ? nikKaryawan.text : karyawanModel!.nik}",
-            "pass": "${pass.text}",
-            "namauser":
-                "${karyawanModel == null ? namaKaryawan.text : karyawanModel!.namaLengkap}",
-            "kode_pt": "${kantorModel == null ? "001" : kantorModel!.kodePt}",
-            "kode_kantor":
-                "${kantorModel == null ? "001" : kantorModel!.kodeKantor}",
-            "kode_induk":
-                "${kantorModel == null ? "001" : kantorModel!.kodeInduk}",
-            "tglexp": "${tglexp.text}",
-            "lvluser": "${levelUser!.idLevel}",
+            "emp_id": karyawanModel == null ? nikKaryawan.text : karyawanModel!.nik,
+            "pass": pass.text,
+            "namauser": karyawanModel == null ? namaKaryawan.text : karyawanModel!.namaLengkap,
+            "kode_pt": kantorModel == null ? "001" : kantorModel!.kodePt,
+            "kode_kantor": kantorModel == null ? "001" : kantorModel!.kodeKantor,
+            "kode_induk": kantorModel == null ? "001" : kantorModel!.kodeInduk,
+            "tglexp": tglexp.text,
+            "lvluser": levelUser!.idLevel,
             "terminal_id": "",
-            "akses_kasir": "${aksesKasir ? "Y" : "N"}",
-            "sbb_kasir":
-                "${inqueryGlModel == null ? "" : inqueryGlModel!.nosbb}",
-            "nama_sbb":
-                "${inqueryGlModel == null ? "" : inqueryGlModel!.namaSbb}",
+            "akses_kasir": aksesKasir ? "Y" : "N",
+            "sbb_kasir": inqueryGlModel == null ? "" : inqueryGlModel!.nosbb,
+            "nama_sbb": inqueryGlModel == null ? "" : inqueryGlModel!.namaSbb,
             "fhoto_1": "",
             "fhoto_2": "",
             "fhoto_3": "",
-            "limit_akses": "${limitAkses ? "Y" : "N"}",
-            "maksimal_transaksi":
-                "${maksimalTrans.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")}",
-            "level_otor": "${levelOtor}",
-            "aktivasi": "${aktivasilogin ? "Y" : "N"}",
-            "beda_kantor": "${bedaKantor ? "Y" : "N"}",
-            "back_date": "${backdate ? "Y" : "N"}",
-            "min_otor": "${minotor.text.trim().replaceAll(",", "")}",
-            "max_otor": "${maxotor.text.trim().replaceAll(",", "")}",
+            "limit_akses": limitAkses ? "Y" : "N",
+            "maksimal_transaksi": maksimalTrans.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."),
+            "level_otor": "$levelOtor",
+            "aktivasi": aktivasilogin ? "Y" : "N",
+            "beda_kantor": bedaKantor ? "Y" : "N",
+            "back_date": backdate ? "Y" : "N",
+            "min_otor": minotor.text.trim().replaceAll(",", ""),
+            "max_otor": maxotor.text.trim().replaceAll(",", ""),
             "shifts": listTmp
           };
-          Setuprepository.setup(token, NetworkURL.editusers(), jsonEncode(data))
-              .then((value) {
+          Setuprepository.setup(token, NetworkURL.editusers(), jsonEncode(data)).then((value) {
             Navigator.pop(context);
             if (value['status'].toString().toLowerCase().contains("success")) {
               informationDialog(context, "Information", value['message']);
@@ -216,51 +191,45 @@ class UsersNotifier extends ChangeNotifier {
           List<Map<String, dynamic>> listTmp = [];
           for (var i = 0; i < listAddHariKerja.length; i++) {
             listTmp.add({
-              "kd_kelompok": "${listAddHariKerja[i].kdAktivasi}",
-              "nama_kelompok": "${listAddHariKerja[i].nmAktivasi}",
-              "hari": "${listAddHariKerja[i].hari}",
+              "kd_kelompok": listAddHariKerja[i].kdAktivasi,
+              "nama_kelompok": listAddHariKerja[i].nmAktivasi,
+              "hari": listAddHariKerja[i].hari,
               "ke": "${i + 1}",
-              "jam_mulai": "${listAddHariKerja[i].jamMulai}",
-              "jam_selesai": "${listAddHariKerja[i].jamSelesai}",
+              "jam_mulai": listAddHariKerja[i].jamMulai,
+              "jam_selesai": listAddHariKerja[i].jamSelesai,
               "status": "AKTIF",
             });
           }
           print("JSON TMP ${jsonEncode(listTmp)}");
           var data = {
-            "userid": "${userid.text}",
-            "pass": "${pass.text}",
+            "userid": userid.text,
+            "pass": pass.text,
             "batch": "$randomNumber",
-            "emp_id": "${karyawanModel!.nik}",
-            "namauser": "${karyawanModel!.namaLengkap}",
-            "limit_akses": "${limitAkses ? "Y" : "N"}",
-            "maksimal_transaksi":
-                "${maksimalTrans.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")}",
-            "kode_pt": "${kantorModel == null ? "001" : kantorModel!.kodePt}",
-            "kode_kantor":
-                "${kantorModel == null ? "001" : kantorModel!.kodeKantor}",
-            "kode_induk":
-                "${kantorModel == null ? "001" : kantorModel!.kodeInduk}",
-            "tglexp": "${tglexp.text}",
-            "lvluser": "${levelUser!.idLevel}",
+            "emp_id": karyawanModel!.nik,
+            "namauser": karyawanModel!.namaLengkap,
+            "limit_akses": limitAkses ? "Y" : "N",
+            "maksimal_transaksi": maksimalTrans.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."),
+            "kode_pt": kantorModel == null ? "001" : kantorModel!.kodePt,
+            "kode_kantor": kantorModel == null ? "001" : kantorModel!.kodeKantor,
+            "kode_induk": kantorModel == null ? "001" : kantorModel!.kodeInduk,
+            "tglexp": tglexp.text,
+            "lvluser": levelUser!.idLevel,
             "terminal_id": "",
-            "akses_kasir": "${aksesKasir ? "Y" : "N"}",
-            "sbb_kasir":
-                "${inqueryGlModel == null ? "" : inqueryGlModel!.nosbb}",
-            "nama_sbb":
-                "${inqueryGlModel == null ? "" : inqueryGlModel!.namaSbb}",
+            "akses_kasir": aksesKasir ? "Y" : "N",
+            "sbb_kasir": inqueryGlModel == null ? "" : inqueryGlModel!.nosbb,
+            "nama_sbb": inqueryGlModel == null ? "" : inqueryGlModel!.namaSbb,
             "fhoto_1": "",
             "fhoto_2": "",
             "fhoto_3": "",
-            "level_otor": "${levelOtor}",
-            "aktivasi": "${aktivasilogin ? "Y" : "N"}",
-            "back_date": "${backdate ? "Y" : "N"}",
-            "beda_kantor": "${bedaKantor ? "Y" : "N"}",
-            "min_otor": "${minotor.text.trim().replaceAll(",", "")}",
-            "max_otor": "${maxotor.text.trim().replaceAll(",", "")}",
+            "level_otor": "$levelOtor",
+            "aktivasi": aktivasilogin ? "Y" : "N",
+            "back_date": backdate ? "Y" : "N",
+            "beda_kantor": bedaKantor ? "Y" : "N",
+            "min_otor": minotor.text.trim().replaceAll(",", ""),
+            "max_otor": maxotor.text.trim().replaceAll(",", ""),
             "shifts": listTmp
           };
-          Setuprepository.setup(token, NetworkURL.addusers(), jsonEncode(data))
-              .then((value) {
+          Setuprepository.setup(token, NetworkURL.addusers(), jsonEncode(data)).then((value) {
             Navigator.pop(context);
             if (value['status'].toString().toLowerCase().contains("success")) {
               informationDialog(context, "Information", value['message']);
@@ -285,9 +254,10 @@ class UsersNotifier extends ChangeNotifier {
     isLoading = true;
     listUsers.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getLevelUsers(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getLevelUsers(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listUsers.add(LevelUser.fromJson(i));
@@ -307,9 +277,7 @@ class UsersNotifier extends ChangeNotifier {
     if (listAddHariKerja.isEmpty) {
       listAddHariKerja.add(value);
     } else {
-      if (listAddHariKerja
-          .where((e) => e.kdAktivasi == value.kdAktivasi)
-          .isNotEmpty) {
+      if (listAddHariKerja.where((e) => e.kdAktivasi == value.kdAktivasi).isNotEmpty) {
         listAddHariKerja.remove(value);
       } else {
         listAddHariKerja.add(value);
@@ -349,14 +317,13 @@ class UsersNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     listGl.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        listGl =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         notifyListeners();
       }
     });
@@ -367,9 +334,10 @@ class UsersNotifier extends ChangeNotifier {
     isLoading = true;
     listHariKerja.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getAktivasi(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getAktivasi(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listHariKerja.add(AktivasiModel.fromJson(i));
@@ -387,9 +355,10 @@ class UsersNotifier extends ChangeNotifier {
     isLoading = true;
     listData.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getusers(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getusers(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listData.add(UsersModel.fromJson(i));
@@ -466,7 +435,9 @@ class UsersNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -476,14 +447,8 @@ class UsersNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -530,8 +495,7 @@ class UsersNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglBuka = pickedendDate;
-      tglexp.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglexp.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -540,8 +504,7 @@ class UsersNotifier extends ChangeNotifier {
   gantiotorisasi() {
     clearOtor();
     if (limitAkses) {
-      informationDialog(context, "Warning",
-          "Limit transaksi aktif, tidak bisa memberikan otorisasi");
+      informationDialog(context, "Warning", "Limit transaksi aktif, tidak bisa memberikan otorisasi");
     } else {
       otorisasi = !otorisasi;
     }
@@ -629,8 +592,7 @@ class UsersNotifier extends ChangeNotifier {
       "kode_pt": "001",
     };
     notifyListeners();
-    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data)).then((value) {
       if (value['status'] == "Success") {
         for (Map<String, dynamic> i in value['data']) {
           listKantor.add(KantorModel.fromJson(i));

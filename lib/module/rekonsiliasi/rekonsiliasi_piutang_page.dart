@@ -21,10 +21,10 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Row(
                     children: [
-                      Expanded(
+                      const Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
@@ -39,24 +39,20 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                        decoration: BoxDecoration(
-                            color: colorPrimary,
-                            borderRadius: BorderRadius.circular(8)),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        decoration: BoxDecoration(color: colorPrimary, borderRadius: BorderRadius.circular(8)),
                         child: Row(
                           children: [
                             Image.asset(
                               ImageAssets.excel,
                               height: 15,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 8,
                             ),
-                            Text(
+                            const Text(
                               "Download to Excel",
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.white),
+                              style: TextStyle(fontSize: 12, color: Colors.white),
                             )
                           ],
                         ),
@@ -64,55 +60,55 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(right: 16),
+                        margin: const EdgeInsets.only(right: 16),
                         width: 100,
-                        child: Text("STATUS"),
+                        child: const Text("STATUS"),
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 16),
+                        margin: const EdgeInsets.only(right: 16),
                         width: 120,
-                        child: Text("NO INVOICE"),
+                        child: const Text("NO INVOICE"),
                       ),
                       Container(
                         width: 120,
-                        margin: EdgeInsets.only(right: 16),
-                        child: Text(
+                        margin: const EdgeInsets.only(right: 16),
+                        child: const Text(
                           "TGL INVOICE",
                         ),
                       ),
                       Container(
                         width: 150,
-                        margin: EdgeInsets.only(right: 16),
-                        child: Text(
+                        margin: const EdgeInsets.only(right: 16),
+                        child: const Text(
                           "TGL JATUH TEMPO",
                         ),
                       ),
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(right: 16),
-                          child: Text("CUSTOMER"),
+                          margin: const EdgeInsets.only(right: 16),
+                          child: const Text("CUSTOMER"),
                         ),
                       ),
                       Container(
                         width: 180,
-                        margin: EdgeInsets.only(right: 16),
-                        child: Text(
+                        margin: const EdgeInsets.only(right: 16),
+                        child: const Text(
                           "SALDO PIUTANG",
                           textAlign: TextAlign.end,
                         ),
                       ),
                       Container(
                         width: 120,
-                        margin: EdgeInsets.only(right: 16),
-                        child: Text(
+                        margin: const EdgeInsets.only(right: 16),
+                        child: const Text(
                           "TGL UPDATE",
                         ),
                       ),
@@ -120,7 +116,7 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 8),
+                  margin: const EdgeInsets.symmetric(vertical: 8),
                   height: 1,
                   color: Colors.grey,
                 ),
@@ -129,16 +125,12 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       ListView.builder(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          itemCount: value.list
-                              .where((e) => e.statusInvoice == "A")
-                              .length,
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          itemCount: value.list.where((e) => e.statusInvoice == "A").length,
                           shrinkWrap: true,
-                          physics: ClampingScrollPhysics(),
+                          physics: const ClampingScrollPhysics(),
                           itemBuilder: (context, b) {
-                            final a = value.list
-                                .where((e) => e.statusInvoice == "A")
-                                .toList()[b];
+                            final a = value.list.where((e) => e.statusInvoice == "A").toList()[b];
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
@@ -147,97 +139,103 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                                     // value.edit(a);
                                   },
                                   child: Container(
-                                    padding: EdgeInsets.symmetric(vertical: 2),
-                                    decoration: BoxDecoration(),
+                                    padding: const EdgeInsets.symmetric(vertical: 2),
+                                    decoration: const BoxDecoration(),
                                     child: Row(
                                       children: [
                                         Container(
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           width: 100,
                                           child: Text(
-                                            "${a.statusInvoice == "A" ? "Aktif" : a.statusInvoice == "L" ? "Lunas" : a.statusInvoice == "M" ? "Macet" : "Hapus"}",
-                                            style: TextStyle(fontSize: 12),
+                                            a.statusInvoice == "A"
+                                                ? "Aktif"
+                                                : a.statusInvoice == "L"
+                                                    ? "Lunas"
+                                                    : a.statusInvoice == "M"
+                                                        ? "Macet"
+                                                        : "Hapus",
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           width: 120,
                                           child: Text(
-                                            "${a.noInvoice}",
-                                            style: TextStyle(fontSize: 12),
+                                            a.noInvoice,
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           width: 120,
                                           child: Text(
-                                            "${a.tglInvoice}",
-                                            style: TextStyle(fontSize: 12),
+                                            a.tglInvoice,
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           width: 150,
                                           child: Text(
-                                            "${a.tglJtTempo}",
-                                            style: TextStyle(fontSize: 12),
+                                            a.tglJtTempo,
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Expanded(
                                           child: Container(
-                                            margin: EdgeInsets.only(right: 16),
+                                            margin: const EdgeInsets.only(right: 16),
                                             child: Text(
-                                              "${a.nmSif}",
-                                              style: TextStyle(fontSize: 12),
+                                              a.nmSif,
+                                              style: const TextStyle(fontSize: 12),
                                             ),
                                           ),
                                         ),
                                         Container(
                                           width: 180,
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           child: Text(
-                                            "${FormatCurrency.oCcyDecimal.format(int.parse(a.nilaiInvoice))}",
+                                            FormatCurrency.oCcyDecimal.format(int.parse(a.nilaiInvoice)),
                                             textAlign: TextAlign.end,
-                                            style: TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 120,
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           child: Text(
-                                            "${DateFormat('dd MMM y HH:mm').format(DateTime.parse(a.tglInvoice))}",
+                                            DateFormat('dd MMM y HH:mm').format(DateTime.parse(a.tglInvoice)),
                                             textAlign: TextAlign.start,
-                                            style: TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 4,
                                 )
                               ],
                             );
                           }),
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 8),
+                        margin: const EdgeInsets.symmetric(vertical: 8),
                         height: 1,
                         color: Colors.grey,
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
                           children: [
                             Container(
-                              margin: EdgeInsets.only(right: 16),
+                              margin: const EdgeInsets.only(right: 16),
                               width: 100,
-                              child: Text(""),
+                              child: const Text(""),
                             ),
                             Expanded(
                               child: Container(
-                                margin: EdgeInsets.only(right: 16),
-                                child: Text(
+                                margin: const EdgeInsets.only(right: 16),
+                                child: const Text(
                                   "TOTAL PIUTANG AKTIF",
                                   textAlign: TextAlign.end,
                                   style: TextStyle(
@@ -249,11 +247,11 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                             ),
                             Container(
                               width: 180,
-                              margin: EdgeInsets.only(right: 16),
+                              margin: const EdgeInsets.only(right: 16),
                               child: Text(
-                                "${FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "A").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)))}",
+                                FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "A").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b))),
                                 textAlign: TextAlign.end,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -261,8 +259,8 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                             ),
                             Container(
                               width: 120,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
+                              margin: const EdgeInsets.only(right: 16),
+                              child: const Text(
                                 "",
                               ),
                             ),
@@ -270,18 +268,18 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
                           children: [
                             Container(
-                              margin: EdgeInsets.only(right: 16),
+                              margin: const EdgeInsets.only(right: 16),
                               width: 100,
-                              child: Text(""),
+                              child: const Text(""),
                             ),
                             Expanded(
                               child: Container(
-                                margin: EdgeInsets.only(right: 16),
-                                child: Text(
+                                margin: const EdgeInsets.only(right: 16),
+                                child: const Text(
                                   "(0290101) - PIUTANG AKTIF",
                                   textAlign: TextAlign.end,
                                   style: TextStyle(
@@ -293,11 +291,11 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                             ),
                             Container(
                               width: 180,
-                              margin: EdgeInsets.only(right: 16),
+                              margin: const EdgeInsets.only(right: 16),
                               child: Text(
-                                "${FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "A").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)))}",
+                                FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "A").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b))),
                                 textAlign: TextAlign.end,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -305,8 +303,8 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                             ),
                             Container(
                               width: 120,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
+                              margin: const EdgeInsets.only(right: 16),
+                              child: const Text(
                                 "",
                               ),
                             ),
@@ -314,18 +312,18 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
                           children: [
                             Container(
-                              margin: EdgeInsets.only(right: 16),
+                              margin: const EdgeInsets.only(right: 16),
                               width: 100,
-                              child: Text(""),
+                              child: const Text(""),
                             ),
                             Expanded(
                               child: Container(
-                                margin: EdgeInsets.only(right: 16),
-                                child: Text(
+                                margin: const EdgeInsets.only(right: 16),
+                                child: const Text(
                                   "SELISIH",
                                   textAlign: TextAlign.end,
                                   style: TextStyle(
@@ -337,11 +335,11 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                             ),
                             Container(
                               width: 180,
-                              margin: EdgeInsets.only(right: 16),
+                              margin: const EdgeInsets.only(right: 16),
                               child: Text(
-                                "${FormatCurrency.oCcyDecimal.format(0)}",
+                                FormatCurrency.oCcyDecimal.format(0),
                                 textAlign: TextAlign.end,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -349,28 +347,24 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                             ),
                             Container(
                               width: 120,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
+                              margin: const EdgeInsets.only(right: 16),
+                              child: const Text(
                                 "",
                               ),
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       ListView.builder(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          itemCount: value.list
-                              .where((e) => e.statusInvoice == "M")
-                              .length,
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          itemCount: value.list.where((e) => e.statusInvoice == "M").length,
                           shrinkWrap: true,
-                          physics: ClampingScrollPhysics(),
+                          physics: const ClampingScrollPhysics(),
                           itemBuilder: (context, b) {
-                            final a = value.list
-                                .where((e) => e.statusInvoice == "M")
-                                .toList()[b];
+                            final a = value.list.where((e) => e.statusInvoice == "M").toList()[b];
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
@@ -379,97 +373,103 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                                     // value.edit(a);
                                   },
                                   child: Container(
-                                    padding: EdgeInsets.symmetric(vertical: 2),
-                                    decoration: BoxDecoration(),
+                                    padding: const EdgeInsets.symmetric(vertical: 2),
+                                    decoration: const BoxDecoration(),
                                     child: Row(
                                       children: [
                                         Container(
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           width: 100,
                                           child: Text(
-                                            "${a.statusInvoice == "A" ? "Aktif" : a.statusInvoice == "L" ? "Lunas" : a.statusInvoice == "M" ? "Macet" : "Hapus"}",
-                                            style: TextStyle(fontSize: 12),
+                                            a.statusInvoice == "A"
+                                                ? "Aktif"
+                                                : a.statusInvoice == "L"
+                                                    ? "Lunas"
+                                                    : a.statusInvoice == "M"
+                                                        ? "Macet"
+                                                        : "Hapus",
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           width: 120,
                                           child: Text(
-                                            "${a.noInvoice}",
-                                            style: TextStyle(fontSize: 12),
+                                            a.noInvoice,
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           width: 120,
                                           child: Text(
-                                            "${a.tglInvoice}",
-                                            style: TextStyle(fontSize: 12),
+                                            a.tglInvoice,
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           width: 150,
                                           child: Text(
-                                            "${a.tglJtTempo}",
-                                            style: TextStyle(fontSize: 12),
+                                            a.tglJtTempo,
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Expanded(
                                           child: Container(
-                                            margin: EdgeInsets.only(right: 16),
+                                            margin: const EdgeInsets.only(right: 16),
                                             child: Text(
-                                              "${a.nmSif}",
-                                              style: TextStyle(fontSize: 12),
+                                              a.nmSif,
+                                              style: const TextStyle(fontSize: 12),
                                             ),
                                           ),
                                         ),
                                         Container(
                                           width: 180,
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           child: Text(
-                                            "${FormatCurrency.oCcyDecimal.format(int.parse(a.nilaiInvoice))}",
+                                            FormatCurrency.oCcyDecimal.format(int.parse(a.nilaiInvoice)),
                                             textAlign: TextAlign.end,
-                                            style: TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                         Container(
                                           width: 120,
-                                          margin: EdgeInsets.only(right: 16),
+                                          margin: const EdgeInsets.only(right: 16),
                                           child: Text(
-                                            "${DateFormat('dd MMM y HH:mm').format(DateTime.parse(a.tglInvoice))}",
+                                            DateFormat('dd MMM y HH:mm').format(DateTime.parse(a.tglInvoice)),
                                             textAlign: TextAlign.start,
-                                            style: TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 4,
                                 )
                               ],
                             );
                           }),
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 8),
+                        margin: const EdgeInsets.symmetric(vertical: 8),
                         height: 1,
                         color: Colors.grey,
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
                           children: [
                             Container(
-                              margin: EdgeInsets.only(right: 16),
+                              margin: const EdgeInsets.only(right: 16),
                               width: 100,
-                              child: Text(""),
+                              child: const Text(""),
                             ),
                             Expanded(
                               child: Container(
-                                margin: EdgeInsets.only(right: 16),
-                                child: Text(
+                                margin: const EdgeInsets.only(right: 16),
+                                child: const Text(
                                   "TOTAL PIUTANG MACET",
                                   textAlign: TextAlign.end,
                                   style: TextStyle(
@@ -481,11 +481,11 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                             ),
                             Container(
                               width: 180,
-                              margin: EdgeInsets.only(right: 16),
+                              margin: const EdgeInsets.only(right: 16),
                               child: Text(
-                                "${FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)))}",
+                                FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b))),
                                 textAlign: TextAlign.end,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -493,8 +493,8 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                             ),
                             Container(
                               width: 120,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
+                              margin: const EdgeInsets.only(right: 16),
+                              child: const Text(
                                 "",
                               ),
                             ),
@@ -502,18 +502,18 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
                           children: [
                             Container(
-                              margin: EdgeInsets.only(right: 16),
+                              margin: const EdgeInsets.only(right: 16),
                               width: 100,
-                              child: Text(""),
+                              child: const Text(""),
                             ),
                             Expanded(
                               child: Container(
-                                margin: EdgeInsets.only(right: 16),
-                                child: Text(
+                                margin: const EdgeInsets.only(right: 16),
+                                child: const Text(
                                   "(0290102) - PIUTANG MACET",
                                   textAlign: TextAlign.end,
                                   style: TextStyle(
@@ -525,11 +525,11 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                             ),
                             Container(
                               width: 180,
-                              margin: EdgeInsets.only(right: 16),
+                              margin: const EdgeInsets.only(right: 16),
                               child: Text(
-                                "${FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - 185000)}",
+                                FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - 185000),
                                 textAlign: TextAlign.end,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -537,8 +537,8 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                             ),
                             Container(
                               width: 120,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
+                              margin: const EdgeInsets.only(right: 16),
+                              child: const Text(
                                 "",
                               ),
                             ),
@@ -546,18 +546,18 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
                           children: [
                             Container(
-                              margin: EdgeInsets.only(right: 16),
+                              margin: const EdgeInsets.only(right: 16),
                               width: 100,
-                              child: Text(""),
+                              child: const Text(""),
                             ),
                             Expanded(
                               child: Container(
-                                margin: EdgeInsets.only(right: 16),
-                                child: Text(
+                                margin: const EdgeInsets.only(right: 16),
+                                child: const Text(
                                   "SELISIH",
                                   textAlign: TextAlign.end,
                                   style: TextStyle(
@@ -569,11 +569,11 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                             ),
                             Container(
                               width: 180,
-                              margin: EdgeInsets.only(right: 16),
+                              margin: const EdgeInsets.only(right: 16),
                               child: Text(
-                                "${FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - ((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - 185000))}",
+                                FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - ((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - 185000)),
                                 textAlign: TextAlign.end,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -581,8 +581,8 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                             ),
                             Container(
                               width: 120,
-                              margin: EdgeInsets.only(right: 16),
-                              child: Text(
+                              margin: const EdgeInsets.only(right: 16),
+                              child: const Text(
                                 "",
                               ),
                             ),
@@ -592,7 +592,7 @@ class RekonsiliasiPiutangPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 80,
                 )
               ],

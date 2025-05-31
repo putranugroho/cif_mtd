@@ -16,13 +16,10 @@ class RekonsiliasiBankNotifier extends ChangeNotifier {
     }
     for (var item in data) {
       String typePosting = item['type_posting'];
-      List<Map<String, dynamic>> sbbItems =
-          List<Map<String, dynamic>>.from(item['sbb_item']);
+      List<Map<String, dynamic>> sbbItems = List<Map<String, dynamic>>.from(item['sbb_item']);
 
-      double subtotal =
-          sbbItems.fold(0, (sum, sbb) => sum + (sbb['saldo'] ?? 0));
-      double subtotals =
-          sbbItems.fold(0, (sum, sbb) => sum + (sbb['saldo_sistem'] ?? 0));
+      double subtotal = sbbItems.fold(0, (sum, sbb) => sum + (sbb['saldo'] ?? 0));
+      double subtotals = sbbItems.fold(0, (sum, sbb) => sum + (sbb['saldo_sistem'] ?? 0));
 
       if (typePosting == 'AKTIVA') {
         totalAktiva += subtotal;
@@ -46,17 +43,17 @@ class RekonsiliasiBankNotifier extends ChangeNotifier {
   pilihJam() {
     showModalBottomSheet(
         context: context,
-        constraints: BoxConstraints(maxWidth: 400),
+        constraints: const BoxConstraints(maxWidth: 400),
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
             return Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text("Pilih Jam"),
-                  SizedBox(
+                  const Text("Pilih Jam"),
+                  const SizedBox(
                     height: 8,
                   ),
                   TimePickerSpinner(
@@ -67,19 +64,17 @@ class RekonsiliasiBankNotifier extends ChangeNotifier {
                     normalTextStyle: const TextStyle(
                       fontSize: 24,
                     ),
-                    highlightedTextStyle:
-                        const TextStyle(fontSize: 24, color: colorPrimary),
+                    highlightedTextStyle: const TextStyle(fontSize: 24, color: colorPrimary),
                     isForce2Digits: true,
                     onTimeChange: (time) {
                       setState(() {
                         jamMeetingDate = time;
-                        jamMulai.text =
-                            DateFormat('HH:mm').format(jamMeetingDate!);
+                        jamMulai.text = DateFormat('HH:mm').format(jamMeetingDate!);
                         notifyListeners();
                       });
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   ButtonPrimary(
@@ -126,8 +121,7 @@ class RekonsiliasiBankNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTransaksi = pickedendDate;
-      tglTransaksiText.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglTransaksiText.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -136,15 +130,9 @@ class RekonsiliasiBankNotifier extends ChangeNotifier {
     rekonBankItemModel = value;
     nosbb.text = rekonBankItemModel!.nosbb;
     akun.text = rekonBankItemModel!.namaSbb;
-    saldo.text = FormatCurrency.oCcyDecimal
-        .format(rekonBankItemModel!.saldo)
-        .replaceAll(".", ",");
-    nominal.text = FormatCurrency.oCcyDecimal
-        .format(rekonBankItemModel!.saldoSistem)
-        .replaceAll(".", ",");
-    selisih.text = FormatCurrency.oCcyDecimal
-        .format(rekonBankItemModel!.saldo - rekonBankItemModel!.saldoSistem)
-        .replaceAll(".", ",");
+    saldo.text = FormatCurrency.oCcyDecimal.format(rekonBankItemModel!.saldo).replaceAll(".", ",");
+    nominal.text = FormatCurrency.oCcyDecimal.format(rekonBankItemModel!.saldoSistem).replaceAll(".", ",");
+    selisih.text = FormatCurrency.oCcyDecimal.format(rekonBankItemModel!.saldo - rekonBankItemModel!.saldoSistem).replaceAll(".", ",");
     dialog = true;
     notifyListeners();
   }
@@ -157,8 +145,7 @@ class RekonsiliasiBankNotifier extends ChangeNotifier {
 
   onChangeTotal() {
     double total = rekonBankItemModel!.saldo - double.parse(nominal.text);
-    selisih.text =
-        FormatCurrency.oCcyDecimal.format(total).replaceAll(".", ',');
+    selisih.text = FormatCurrency.oCcyDecimal.format(total).replaceAll(".", ',');
     notifyListeners();
   }
 

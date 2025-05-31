@@ -10,7 +10,7 @@ class OtorisasiSetupPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => OtorisasiSetupNotifier(context: context),
       child: Consumer<OtorisasiSetupNotifier>(
-        builder: (context, value, child) => SafeArea(child: Scaffold()),
+        builder: (context, value, child) => const SafeArea(child: Scaffold()),
       ),
     );
   }

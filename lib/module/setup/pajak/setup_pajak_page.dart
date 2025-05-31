@@ -34,10 +34,10 @@ class SetupPajakPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Setup Pajak",
                               style: TextStyle(
@@ -49,8 +49,7 @@ class SetupPajakPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -59,10 +58,10 @@ class SetupPajakPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah Pajak",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -71,7 +70,7 @@ class SetupPajakPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     Expanded(
@@ -97,7 +96,7 @@ class SetupPajakPage extends StatelessWidget {
                               ),
                             )
                           : Container(
-                              padding: EdgeInsets.all(20),
+                              padding: const EdgeInsets.all(20),
                               height: MediaQuery.of(context).size.height,
                               child: SfDataGrid(
                                 headerRowHeight: 40,
@@ -106,8 +105,7 @@ class SetupPajakPage extends StatelessWidget {
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
-                                headerGridLinesVisibility:
-                                    GridLinesVisibility.both,
+                                headerGridLinesVisibility: GridLinesVisibility.both,
                                 selectionMode: SelectionMode.single,
 
                                 source: DetailDataSource(value),
@@ -116,10 +114,10 @@ class SetupPajakPage extends StatelessWidget {
                                       width: 50,
                                       columnName: 'no',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('No',
+                                          child: const Text('No',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 12,
@@ -131,8 +129,8 @@ class SetupPajakPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Type',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Type',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -144,8 +142,8 @@ class SetupPajakPage extends StatelessWidget {
                                       label: Container(
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          padding: EdgeInsets.all(6),
-                                          child: Text('Nilai (%)',
+                                          padding: const EdgeInsets.all(6),
+                                          child: const Text('Nilai (%)',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -155,10 +153,10 @@ class SetupPajakPage extends StatelessWidget {
                                       width: 120,
                                       columnName: 'batas',
                                       label: Container(
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: Text('Max Bebas Pajak',
+                                          child: const Text('Max Bebas Pajak',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -169,9 +167,9 @@ class SetupPajakPage extends StatelessWidget {
                                       columnName: 'action',
                                       label: Container(
                                           color: colorPrimary,
-                                          padding: EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           alignment: Alignment.center,
-                                          child: Text('Action',
+                                          child: const Text('Action',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w300,
@@ -193,7 +191,7 @@ class SetupPajakPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                   top: 0,
@@ -202,8 +200,8 @@ class SetupPajakPage extends StatelessWidget {
                   child: value.dialog
                       ? Container(
                           width: 600,
-                          decoration: BoxDecoration(color: Colors.white),
-                          padding: EdgeInsets.all(20),
+                          decoration: const BoxDecoration(color: Colors.white),
+                          padding: const EdgeInsets.all(20),
                           child: Form(
                             key: value.keyForm,
                             child: Column(
@@ -213,10 +211,8 @@ class SetupPajakPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        value.editData
-                                            ? "Ubah / Hapus Setup Pajak"
-                                            : "Tambah Setup Pajak",
-                                        style: TextStyle(
+                                        value.editData ? "Ubah / Hapus Setup Pajak" : "Tambah Setup Pajak",
+                                        style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -227,26 +223,24 @@ class SetupPajakPage extends StatelessWidget {
                                       child: Container(
                                         width: 40,
                                         height: 40,
-                                        padding: EdgeInsets.all(4),
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey[200],
-                                            shape: BoxShape.circle),
-                                        child: Icon(Icons.close),
+                                        padding: const EdgeInsets.all(4),
+                                        decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                        child: const Icon(Icons.close),
                                       ),
                                     )
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 32,
                                 ),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Jenis Pajak",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
-                                    const Text(
+                                    SizedBox(width: 5),
+                                    Text(
                                       "*",
                                       style: TextStyle(fontSize: 8),
                                     ),
@@ -263,11 +257,11 @@ class SetupPajakPage extends StatelessWidget {
                                         onChanged: (e) {
                                           value.gantitipe();
                                         }),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 8,
                                     ),
-                                    Text("PPN"),
-                                    SizedBox(
+                                    const Text("PPN"),
+                                    const SizedBox(
                                       width: 32,
                                     ),
                                     Radio(
@@ -276,29 +270,27 @@ class SetupPajakPage extends StatelessWidget {
                                         onChanged: (e) {
                                           value.gantitipe();
                                         }),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 8,
                                     ),
-                                    Text("PPH"),
+                                    const Text("PPH"),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 ),
                                 value.tipepajak
                                     ? Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
-                                          Row(
+                                          const Row(
                                             children: [
                                               Text(
                                                 "PPH 23 (%)",
-                                                style: const TextStyle(
-                                                    fontSize: 12),
+                                                style: TextStyle(fontSize: 12),
                                               ),
-                                              const SizedBox(width: 5),
-                                              const Text(
+                                              SizedBox(width: 5),
+                                              Text(
                                                 "*",
                                                 style: TextStyle(fontSize: 8),
                                               ),
@@ -308,18 +300,15 @@ class SetupPajakPage extends StatelessWidget {
                                             height: 8,
                                           ),
                                           TextFormField(
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             controller: value.pph23,
                                             maxLines: 1,
                                             inputFormatters: [
                                               FilteringTextInputFormatter.allow(
-                                                RegExp(
-                                                    r'^(100(\.00?)?|([1-9]\d?|0)(\.\d{0,2})?)$'),
+                                                RegExp(r'^(100(\.00?)?|([1-9]\d?|0)(\.\d{0,2})?)$'),
                                               ),
                                             ],
-                                            keyboardType:
-                                                TextInputType.numberWithOptions(
+                                            keyboardType: const TextInputType.numberWithOptions(
                                               decimal: true,
                                               signed: false,
                                             ),
@@ -328,22 +317,18 @@ class SetupPajakPage extends StatelessWidget {
                                                 return "Wajib diisi";
                                               }
 
-                                              final valueAsDouble =
-                                                  double.tryParse(
-                                                      e.replaceAll(",", "."));
+                                              final valueAsDouble = double.tryParse(e.replaceAll(",", "."));
                                               if (valueAsDouble == null) {
                                                 return "Format tidak valid";
                                               }
 
-                                              if (valueAsDouble < 0 ||
-                                                  valueAsDouble > 100) {
+                                              if (valueAsDouble < 0 || valueAsDouble > 100) {
                                                 return "Nilai harus antara 0 dan 100";
                                               }
 
                                               // Ensure only 2 decimal places max
                                               if (e.contains(".")) {
-                                                final decimalPart =
-                                                    e.split(".")[1];
+                                                final decimalPart = e.split(".")[1];
                                                 if (decimalPart.length > 2) {
                                                   return "Maksimal 2 angka di belakang koma";
                                                 }
@@ -356,8 +341,7 @@ class SetupPajakPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "PPH",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -370,11 +354,9 @@ class SetupPajakPage extends StatelessWidget {
                                           ),
                                           value.editData
                                               ? Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .stretch,
+                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                                   children: [
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 16,
                                                     ),
                                                     ButtonDanger(
@@ -385,22 +367,20 @@ class SetupPajakPage extends StatelessWidget {
                                                     ),
                                                   ],
                                                 )
-                                              : SizedBox()
+                                              : const SizedBox()
                                         ],
                                       )
                                     : Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
-                                          Row(
+                                          const Row(
                                             children: [
                                               Text(
                                                 "PPN (%)",
-                                                style: const TextStyle(
-                                                    fontSize: 12),
+                                                style: TextStyle(fontSize: 12),
                                               ),
-                                              const SizedBox(width: 5),
-                                              const Text(
+                                              SizedBox(width: 5),
+                                              Text(
                                                 "*",
                                                 style: TextStyle(fontSize: 8),
                                               ),
@@ -410,18 +390,15 @@ class SetupPajakPage extends StatelessWidget {
                                             height: 8,
                                           ),
                                           TextFormField(
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             controller: value.ppn,
                                             maxLines: 1,
                                             inputFormatters: [
                                               FilteringTextInputFormatter.allow(
-                                                RegExp(
-                                                    r'^(100(\.00?)?|([1-9]\d?|0)(\.\d{0,2})?)$'),
+                                                RegExp(r'^(100(\.00?)?|([1-9]\d?|0)(\.\d{0,2})?)$'),
                                               ),
                                             ],
-                                            keyboardType:
-                                                TextInputType.numberWithOptions(
+                                            keyboardType: const TextInputType.numberWithOptions(
                                               decimal: true,
                                               signed: false,
                                             ),
@@ -430,22 +407,18 @@ class SetupPajakPage extends StatelessWidget {
                                                 return "Wajib diisi";
                                               }
 
-                                              final valueAsDouble =
-                                                  double.tryParse(
-                                                      e.replaceAll(",", "."));
+                                              final valueAsDouble = double.tryParse(e.replaceAll(",", "."));
                                               if (valueAsDouble == null) {
                                                 return "Format tidak valid";
                                               }
 
-                                              if (valueAsDouble < 0 ||
-                                                  valueAsDouble > 100) {
+                                              if (valueAsDouble < 0 || valueAsDouble > 100) {
                                                 return "Nilai harus antara 0 dan 100";
                                               }
 
                                               // Ensure only 2 decimal places max
                                               if (e.contains(".")) {
-                                                final decimalPart =
-                                                    e.split(".")[1];
+                                                final decimalPart = e.split(".")[1];
                                                 if (decimalPart.length > 2) {
                                                   return "Maksimal 2 angka di belakang koma";
                                                 }
@@ -458,23 +431,21 @@ class SetupPajakPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "PPN",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 16,
                                           ),
-                                          Row(
+                                          const Row(
                                             children: [
                                               Text(
                                                 "Nilai maksimal bebas PPN",
-                                                style: const TextStyle(
-                                                    fontSize: 12),
+                                                style: TextStyle(fontSize: 12),
                                               ),
-                                              const SizedBox(width: 5),
-                                              const Text(
+                                              SizedBox(width: 5),
+                                              Text(
                                                 "*",
                                                 style: TextStyle(fontSize: 8),
                                               ),
@@ -484,13 +455,11 @@ class SetupPajakPage extends StatelessWidget {
                                             height: 8,
                                           ),
                                           TextFormField(
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             controller: value.maksPpn,
                                             maxLines: 1,
                                             inputFormatters: [
-                                              FilteringTextInputFormatter
-                                                  .digitsOnly,
+                                              FilteringTextInputFormatter.digitsOnly,
                                               CurrencyInputFormatter(),
                                             ],
                                             validator: (e) {
@@ -505,8 +474,7 @@ class SetupPajakPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Nilai Maksimal",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -519,11 +487,9 @@ class SetupPajakPage extends StatelessWidget {
                                           ),
                                           value.editData
                                               ? Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .stretch,
+                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                                   children: [
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 16,
                                                     ),
                                                     ButtonDanger(
@@ -534,14 +500,14 @@ class SetupPajakPage extends StatelessWidget {
                                                     ),
                                                   ],
                                                 )
-                                              : SizedBox()
+                                              : const SizedBox()
                                         ],
                                       ),
                               ],
                             ),
                           ),
                         )
-                      : SizedBox())
+                      : const SizedBox())
             ],
           ),
         )),
@@ -567,18 +533,9 @@ class DetailDataSource extends DataGridSource {
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (index++).toString()),
-                DataGridCell(
-                    columnName: 'tipe',
-                    value: "${data.tipe == "Y" ? "PPH" : "PPN"}"),
-                DataGridCell(
-                    columnName: 'nilai',
-                    value: "${data.tipe == "Y" ? data.pph23 : data.ppn}%"),
-                DataGridCell(
-                    columnName: 'batas',
-                    value: data.maksKenaPpn == ""
-                        ? ""
-                        : FormatCurrency.oCcy
-                            .format(int.parse(data.maksKenaPpn))),
+                DataGridCell(columnName: 'tipe', value: data.tipe == "Y" ? "PPH" : "PPN"),
+                DataGridCell(columnName: 'nilai', value: "${data.tipe == "Y" ? data.pph23 : data.ppn}%"),
+                DataGridCell(columnName: 'batas', value: data.maksKenaPpn == "" ? "" : FormatCurrency.oCcy.format(int.parse(data.maksKenaPpn))),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
@@ -599,7 +556,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -608,10 +565,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),

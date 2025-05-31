@@ -20,7 +20,7 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
     return ExpansionTile(
       tilePadding: EdgeInsets.zero,
       childrenPadding: EdgeInsets.zero,
-      shape: Border(),
+      shape: const Border(),
       expandedAlignment: Alignment.centerLeft,
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -31,17 +31,15 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
       },
       title: Container(
         decoration: BoxDecoration(
-          color: _isExpanded
-              ? Color.fromARGB(255, 0, 125, 228)
-              : Colors.transparent,
+          color: _isExpanded ? const Color.fromARGB(255, 0, 125, 228) : Colors.transparent,
         ),
         child: Row(
           children: [
             Image.asset(ImageAssets.settings, height: 30, color: Colors.white),
-            SizedBox(
+            const SizedBox(
               width: 16,
             ),
-            Text(
+            const Text(
               "SETUP",
               style: TextStyle(fontSize: 16, color: Colors.white),
             )
@@ -52,7 +50,7 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
         ExpansionTile(
           tilePadding: EdgeInsets.zero,
           childrenPadding: EdgeInsets.zero,
-          shape: Border(),
+          shape: const Border(),
           expandedAlignment: Alignment.centerLeft,
           collapsedIconColor: Colors.white,
           expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -69,19 +67,16 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
           },
           title: Container(
             decoration: BoxDecoration(
-              color: _isExpandedSub == 1
-                  ? Color.fromARGB(255, 0, 125, 228)
-                  : Colors.transparent,
+              color: _isExpandedSub == 1 ? const Color.fromARGB(255, 0, 125, 228) : Colors.transparent,
             ),
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               children: [
-                Image.asset(ImageAssets.building,
-                    height: 30, color: Colors.white),
-                SizedBox(
+                Image.asset(ImageAssets.building, height: 30, color: Colors.white),
+                const SizedBox(
                   width: 16,
                 ),
-                Text(
+                const Text(
                   "Kantor",
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 )
@@ -93,34 +88,29 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
               onTap: () => widget.value.gantimenu(1),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 decoration: BoxDecoration(
-                  color: widget.value.page == 1
-                      ? Colors.white
-                      : Colors.transparent,
+                  color: widget.value.page == 1 ? Colors.white : Colors.transparent,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 16,
                     ),
                     Image.asset(
                       ImageAssets.building,
                       height: 30,
-                      color:
-                          widget.value.page == 1 ? Colors.black : Colors.white,
+                      color: widget.value.page == 1 ? Colors.black : Colors.white,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 16,
                     ),
                     Text(
                       "Data Kantor",
                       style: TextStyle(
                         fontSize: 16,
-                        color: widget.value.page == 1
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 1 ? Colors.black : Colors.white,
                       ),
                     )
                   ],
@@ -197,34 +187,29 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
               onTap: () => widget.value.gantimenu(30),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 decoration: BoxDecoration(
-                  color: widget.value.page == 30
-                      ? Colors.white
-                      : Colors.transparent,
+                  color: widget.value.page == 30 ? Colors.white : Colors.transparent,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 16,
                     ),
                     Image.asset(
                       ImageAssets.user,
                       height: 30,
-                      color:
-                          widget.value.page == 30 ? Colors.black : Colors.white,
+                      color: widget.value.page == 30 ? Colors.black : Colors.white,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 16,
                     ),
                     Text(
                       "Data Pejabat",
                       style: TextStyle(
                         fontSize: 16,
-                        color: widget.value.page == 30
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 30 ? Colors.black : Colors.white,
                       ),
                     )
                   ],
@@ -237,10 +222,9 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
           onTap: () => widget.value.gantimenu(36),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 36 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 36 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -250,15 +234,14 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
                   height: 30,
                   color: widget.value.page == 36 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Hari Kerja",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 36 ? Colors.black : Colors.white,
+                    color: widget.value.page == 36 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -269,7 +252,7 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
           onTap: () => widget.value.gantimenu(2),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
               color: widget.value.page == 2 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
@@ -281,7 +264,7 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
                   height: 30,
                   color: widget.value.page == 2 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
@@ -298,7 +281,7 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
         ExpansionTile(
             tilePadding: EdgeInsets.zero,
             childrenPadding: EdgeInsets.zero,
-            shape: Border(),
+            shape: const Border(),
             expandedAlignment: Alignment.centerLeft,
             collapsedIconColor: Colors.white,
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -315,19 +298,16 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
             },
             title: Container(
               decoration: BoxDecoration(
-                color: _isExpandedSub == 2
-                    ? Color.fromARGB(255, 0, 125, 228)
-                    : Colors.transparent,
+                color: _isExpandedSub == 2 ? const Color.fromARGB(255, 0, 125, 228) : Colors.transparent,
               ),
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-                  Image.asset(ImageAssets.trend,
-                      height: 30, color: Colors.white),
-                  SizedBox(
+                  Image.asset(ImageAssets.trend, height: 30, color: Colors.white),
+                  const SizedBox(
                     width: 16,
                   ),
-                  Text(
+                  const Text(
                     "SBB Khusus",
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   )
@@ -339,35 +319,29 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
                 onTap: () => widget.value.gantimenu(47),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 47
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 47 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.list,
                         height: 30,
-                        color: widget.value.page == 47
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 47 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Golongan SBB Khusus",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 47
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 47 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -378,35 +352,29 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
                 onTap: () => widget.value.gantimenu(37),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 37
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 37 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.list,
                         height: 30,
-                        color: widget.value.page == 37
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 37 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Setup SBB Khusus",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 37
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 37 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -418,7 +386,7 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
         ExpansionTile(
             tilePadding: EdgeInsets.zero,
             childrenPadding: EdgeInsets.zero,
-            shape: Border(),
+            shape: const Border(),
             expandedAlignment: Alignment.centerLeft,
             collapsedIconColor: Colors.white,
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -435,19 +403,16 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
             },
             title: Container(
               decoration: BoxDecoration(
-                color: _isExpandedSub == 3
-                    ? Color.fromARGB(255, 0, 125, 228)
-                    : Colors.transparent,
+                color: _isExpandedSub == 3 ? const Color.fromARGB(255, 0, 125, 228) : Colors.transparent,
               ),
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-                  Image.asset(ImageAssets.trend,
-                      height: 30, color: Colors.white),
-                  SizedBox(
+                  Image.asset(ImageAssets.trend, height: 30, color: Colors.white),
+                  const SizedBox(
                     width: 16,
                   ),
-                  Text(
+                  const Text(
                     "Penyusutan",
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   )
@@ -459,35 +424,29 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
                 onTap: () => widget.value.gantimenu(3),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 3
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 3 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.trend,
                         height: 30,
-                        color: widget.value.page == 3
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 3 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Metode Penyusutan",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 3
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 3 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -498,35 +457,29 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
                 onTap: () => widget.value.gantimenu(33),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 33
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 33 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.trend,
                         height: 30,
-                        color: widget.value.page == 33
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 33 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Kelompok Aset",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 33
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 33 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -537,35 +490,29 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
                 onTap: () => widget.value.gantimenu(34),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 34
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 34 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.trend,
                         height: 30,
-                        color: widget.value.page == 34
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 34 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Golongan Aset",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 34
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 34 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -576,7 +523,7 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
         ExpansionTile(
             tilePadding: EdgeInsets.zero,
             childrenPadding: EdgeInsets.zero,
-            shape: Border(),
+            shape: const Border(),
             expandedAlignment: Alignment.centerLeft,
             collapsedIconColor: Colors.white,
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -593,19 +540,16 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
             },
             title: Container(
               decoration: BoxDecoration(
-                color: _isExpandedSub == 4
-                    ? Color.fromARGB(255, 0, 125, 228)
-                    : Colors.transparent,
+                color: _isExpandedSub == 4 ? const Color.fromARGB(255, 0, 125, 228) : Colors.transparent,
               ),
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-                  Image.asset(ImageAssets.setting,
-                      height: 30, color: Colors.white),
-                  SizedBox(
+                  Image.asset(ImageAssets.setting, height: 30, color: Colors.white),
+                  const SizedBox(
                     width: 16,
                   ),
-                  Text(
+                  const Text(
                     "Transaksi",
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   )
@@ -617,35 +561,29 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
                 onTap: () => widget.value.gantimenu(4),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 4
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 4 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.bill,
                         height: 30,
-                        color: widget.value.page == 4
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 4 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Setup Transaksi",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 4
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 4 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -656,35 +594,29 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
                 onTap: () => widget.value.gantimenu(32),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 32
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 32 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.bill,
                         height: 30,
-                        color: widget.value.page == 32
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 32 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Pajak",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 32
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 32 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -695,35 +627,29 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
                 onTap: () => widget.value.gantimenu(69),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 69
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 69 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.eom,
                         height: 30,
-                        color: widget.value.page == 69
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 69 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Kas Kecil",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 69
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 69 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -734,35 +660,29 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
                 onTap: () => widget.value.gantimenu(65),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 65
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 65 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.bill,
                         height: 30,
-                        color: widget.value.page == 65
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 65 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Hutang / Piutang",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 65
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 65 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -773,11 +693,10 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
         InkWell(
           onTap: () => widget.value.gantimenu(38),
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 38 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 38 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -787,15 +706,14 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
                   height: 30,
                   color: widget.value.page == 38 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Back Date",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 38 ? Colors.black : Colors.white,
+                    color: widget.value.page == 38 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -805,11 +723,10 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
         InkWell(
           onTap: () => widget.value.gantimenu(60),
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 60 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 60 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -819,15 +736,14 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
                   height: 30,
                   color: widget.value.page == 60 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Level & Akses User",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 60 ? Colors.black : Colors.white,
+                    color: widget.value.page == 60 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -838,10 +754,9 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
           onTap: () => widget.value.gantimenu(39),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 39 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 39 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -851,15 +766,14 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
                   height: 30,
                   color: widget.value.page == 39 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Otorisasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 39 ? Colors.black : Colors.white,
+                    color: widget.value.page == 39 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -918,7 +832,7 @@ class _MenuMasterWidgetState extends State<MenuMasterWidget> {
     return ExpansionTile(
       tilePadding: EdgeInsets.zero,
       childrenPadding: EdgeInsets.zero,
-      shape: Border(),
+      shape: const Border(),
       expandedAlignment: Alignment.centerLeft,
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -929,17 +843,15 @@ class _MenuMasterWidgetState extends State<MenuMasterWidget> {
       },
       title: Container(
         decoration: BoxDecoration(
-          color: _isExpanded
-              ? Color.fromARGB(255, 0, 125, 228)
-              : Colors.transparent,
+          color: _isExpanded ? const Color.fromARGB(255, 0, 125, 228) : Colors.transparent,
         ),
         child: Row(
           children: [
             Image.asset(ImageAssets.setting, height: 30, color: Colors.white),
-            SizedBox(
+            const SizedBox(
               width: 16,
             ),
-            Text(
+            const Text(
               "MASTER",
               style: TextStyle(fontSize: 16, color: Colors.white),
             )
@@ -951,7 +863,7 @@ class _MenuMasterWidgetState extends State<MenuMasterWidget> {
           onTap: () => widget.value.gantimenu(6),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
               color: widget.value.page == 6 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
@@ -963,7 +875,7 @@ class _MenuMasterWidgetState extends State<MenuMasterWidget> {
                   height: 30,
                   color: widget.value.page == 6 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
@@ -981,7 +893,7 @@ class _MenuMasterWidgetState extends State<MenuMasterWidget> {
           onTap: () => widget.value.gantimenu(7),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
               color: widget.value.page == 7 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
@@ -993,7 +905,7 @@ class _MenuMasterWidgetState extends State<MenuMasterWidget> {
                   height: 30,
                   color: widget.value.page == 7 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
@@ -1012,10 +924,9 @@ class _MenuMasterWidgetState extends State<MenuMasterWidget> {
           onTap: () => widget.value.gantimenu(35),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 35 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 35 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1025,15 +936,14 @@ class _MenuMasterWidgetState extends State<MenuMasterWidget> {
                   height: 30,
                   color: widget.value.page == 35 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "AO / Marketing",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 35 ? Colors.black : Colors.white,
+                    color: widget.value.page == 35 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1044,7 +954,7 @@ class _MenuMasterWidgetState extends State<MenuMasterWidget> {
           onTap: () => widget.value.gantimenu(9),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
               color: widget.value.page == 9 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
@@ -1056,7 +966,7 @@ class _MenuMasterWidgetState extends State<MenuMasterWidget> {
                   height: 30,
                   color: widget.value.page == 9 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
@@ -1073,7 +983,7 @@ class _MenuMasterWidgetState extends State<MenuMasterWidget> {
         ExpansionTile(
             tilePadding: EdgeInsets.zero,
             childrenPadding: EdgeInsets.zero,
-            shape: Border(),
+            shape: const Border(),
             expandedAlignment: Alignment.centerLeft,
             collapsedIconColor: Colors.white,
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -1084,19 +994,16 @@ class _MenuMasterWidgetState extends State<MenuMasterWidget> {
             },
             title: Container(
               decoration: BoxDecoration(
-                color: _isExpandedSub
-                    ? Color.fromARGB(255, 0, 125, 228)
-                    : Colors.transparent,
+                color: _isExpandedSub ? const Color.fromARGB(255, 0, 125, 228) : Colors.transparent,
               ),
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-                  Image.asset(ImageAssets.trend,
-                      height: 30, color: Colors.white),
-                  SizedBox(
+                  Image.asset(ImageAssets.trend, height: 30, color: Colors.white),
+                  const SizedBox(
                     width: 16,
                   ),
-                  Text(
+                  const Text(
                     "Terminal Akses",
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   )
@@ -1108,35 +1015,29 @@ class _MenuMasterWidgetState extends State<MenuMasterWidget> {
                 onTap: () => widget.value.gantimenu(66),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 66
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 66 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.wifi,
                         height: 30,
-                        color: widget.value.page == 66
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 66 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Akses Point",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 66
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 66 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -1147,35 +1048,29 @@ class _MenuMasterWidgetState extends State<MenuMasterWidget> {
                 onTap: () => widget.value.gantimenu(68),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 68
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 68 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.userwifi,
                         height: 30,
-                        color: widget.value.page == 68
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 68 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "User Akses Point",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 68
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 68 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -1234,7 +1129,7 @@ class _MenuInventarisWidgetState extends State<MenuInventarisWidget> {
     return ExpansionTile(
       tilePadding: EdgeInsets.zero,
       childrenPadding: EdgeInsets.zero,
-      shape: Border(),
+      shape: const Border(),
       expandedAlignment: Alignment.centerLeft,
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -1245,17 +1140,15 @@ class _MenuInventarisWidgetState extends State<MenuInventarisWidget> {
       },
       title: Container(
         decoration: BoxDecoration(
-          color: _isExpanded
-              ? Color.fromARGB(255, 0, 125, 228)
-              : Colors.transparent,
+          color: _isExpanded ? const Color.fromARGB(255, 0, 125, 228) : Colors.transparent,
         ),
         child: Row(
           children: [
             Image.asset(ImageAssets.prices, height: 30, color: Colors.white),
-            SizedBox(
+            const SizedBox(
               width: 16,
             ),
-            Text(
+            const Text(
               "INVENTARIS",
               style: TextStyle(fontSize: 16, color: Colors.white),
             )
@@ -1267,10 +1160,9 @@ class _MenuInventarisWidgetState extends State<MenuInventarisWidget> {
           onTap: () => widget.value.gantimenu(11),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 11 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 11 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1280,15 +1172,14 @@ class _MenuInventarisWidgetState extends State<MenuInventarisWidget> {
                   height: 30,
                   color: widget.value.page == 11 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Pengadaan",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 11 ? Colors.black : Colors.white,
+                    color: widget.value.page == 11 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1299,10 +1190,9 @@ class _MenuInventarisWidgetState extends State<MenuInventarisWidget> {
           onTap: () => widget.value.gantimenu(12),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 12 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 12 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1312,15 +1202,14 @@ class _MenuInventarisWidgetState extends State<MenuInventarisWidget> {
                   height: 30,
                   color: widget.value.page == 12 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Penempatan",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 12 ? Colors.black : Colors.white,
+                    color: widget.value.page == 12 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1331,10 +1220,9 @@ class _MenuInventarisWidgetState extends State<MenuInventarisWidget> {
           onTap: () => widget.value.gantimenu(13),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 13 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 13 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1344,15 +1232,14 @@ class _MenuInventarisWidgetState extends State<MenuInventarisWidget> {
                   height: 30,
                   color: widget.value.page == 13 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Revaluasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 13 ? Colors.black : Colors.white,
+                    color: widget.value.page == 13 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1363,10 +1250,9 @@ class _MenuInventarisWidgetState extends State<MenuInventarisWidget> {
           onTap: () => widget.value.gantimenu(14),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 14 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 14 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1376,15 +1262,14 @@ class _MenuInventarisWidgetState extends State<MenuInventarisWidget> {
                   height: 30,
                   color: widget.value.page == 14 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Jual/Hapus",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 14 ? Colors.black : Colors.white,
+                    color: widget.value.page == 14 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1395,10 +1280,9 @@ class _MenuInventarisWidgetState extends State<MenuInventarisWidget> {
           onTap: () => widget.value.gantimenu(15),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 15 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 15 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1408,15 +1292,14 @@ class _MenuInventarisWidgetState extends State<MenuInventarisWidget> {
                   height: 30,
                   color: widget.value.page == 15 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Otorisasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 15 ? Colors.black : Colors.white,
+                    color: widget.value.page == 15 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1463,8 +1346,7 @@ class MenuHutangPiutangWidget extends StatefulWidget {
   const MenuHutangPiutangWidget({super.key, required this.value});
 
   @override
-  State<MenuHutangPiutangWidget> createState() =>
-      _MenuHutangPiutangWidgetState();
+  State<MenuHutangPiutangWidget> createState() => _MenuHutangPiutangWidgetState();
 }
 
 class _MenuHutangPiutangWidgetState extends State<MenuHutangPiutangWidget> {
@@ -1475,7 +1357,7 @@ class _MenuHutangPiutangWidgetState extends State<MenuHutangPiutangWidget> {
     return ExpansionTile(
       tilePadding: EdgeInsets.zero,
       childrenPadding: EdgeInsets.zero,
-      shape: Border(),
+      shape: const Border(),
       expandedAlignment: Alignment.centerLeft,
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -1486,17 +1368,15 @@ class _MenuHutangPiutangWidgetState extends State<MenuHutangPiutangWidget> {
       },
       title: Container(
         decoration: BoxDecoration(
-          color: _isExpanded
-              ? Color.fromARGB(255, 0, 125, 228)
-              : Colors.transparent,
+          color: _isExpanded ? const Color.fromARGB(255, 0, 125, 228) : Colors.transparent,
         ),
         child: Row(
           children: [
             Image.asset(ImageAssets.bill, height: 30, color: Colors.white),
-            SizedBox(
+            const SizedBox(
               width: 16,
             ),
-            Text(
+            const Text(
               "KELOLA HUTANG/ PIUTANG",
               style: TextStyle(fontSize: 16, color: Colors.white),
             )
@@ -1508,7 +1388,7 @@ class _MenuHutangPiutangWidgetState extends State<MenuHutangPiutangWidget> {
           onTap: () => widget.value.gantimenu(8),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
               color: widget.value.page == 8 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
@@ -1520,7 +1400,7 @@ class _MenuHutangPiutangWidgetState extends State<MenuHutangPiutangWidget> {
                   height: 30,
                   color: widget.value.page == 8 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
@@ -1538,10 +1418,9 @@ class _MenuHutangPiutangWidgetState extends State<MenuHutangPiutangWidget> {
           onTap: () => widget.value.gantimenu(61),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 61 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 61 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1551,15 +1430,14 @@ class _MenuHutangPiutangWidgetState extends State<MenuHutangPiutangWidget> {
                   height: 30,
                   color: widget.value.page == 61 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Hutang / Piutang",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 61 ? Colors.black : Colors.white,
+                    color: widget.value.page == 61 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1588,7 +1466,7 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
     return ExpansionTile(
       tilePadding: EdgeInsets.zero,
       childrenPadding: EdgeInsets.zero,
-      shape: Border(),
+      shape: const Border(),
       expandedAlignment: Alignment.centerLeft,
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -1599,17 +1477,15 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
       },
       title: Container(
         decoration: BoxDecoration(
-          color: _isExpanded
-              ? Color.fromARGB(255, 0, 125, 228)
-              : Colors.transparent,
+          color: _isExpanded ? const Color.fromARGB(255, 0, 125, 228) : Colors.transparent,
         ),
         child: Row(
           children: [
             Image.asset(ImageAssets.bill, height: 30, color: Colors.white),
-            SizedBox(
+            const SizedBox(
               width: 16,
             ),
-            Text(
+            const Text(
               "TRANSAKSI",
               style: TextStyle(fontSize: 16, color: Colors.white),
             )
@@ -1621,10 +1497,9 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
           onTap: () => widget.value.gantimenu(17),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 17 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 17 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1634,15 +1509,14 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                   height: 30,
                   color: widget.value.page == 17 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Satu Transaksi",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 17 ? Colors.black : Colors.white,
+                    color: widget.value.page == 17 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1653,10 +1527,9 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
           onTap: () => widget.value.gantimenu(18),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 18 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 18 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1666,15 +1539,14 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                   height: 30,
                   color: widget.value.page == 18 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Banyak Transaksi",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 18 ? Colors.black : Colors.white,
+                    color: widget.value.page == 18 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1685,10 +1557,9 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
           onTap: () => widget.value.gantimenu(67),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 67 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 67 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1698,15 +1569,14 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                   height: 30,
                   color: widget.value.page == 67 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Pembatalan Transaksi",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 67 ? Colors.black : Colors.white,
+                    color: widget.value.page == 67 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1717,10 +1587,9 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
           onTap: () => widget.value.gantimenu(57),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 57 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 57 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1730,15 +1599,14 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                   height: 30,
                   color: widget.value.page == 57 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Perantara Aktiva/Pasiva",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 57 ? Colors.black : Colors.white,
+                    color: widget.value.page == 57 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1749,10 +1617,9 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
           onTap: () => widget.value.gantimenu(58),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 58 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 58 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1762,15 +1629,14 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                   height: 30,
                   color: widget.value.page == 58 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Bayar Hutang/ Piutang",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 58 ? Colors.black : Colors.white,
+                    color: widget.value.page == 58 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1781,10 +1647,9 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
           onTap: () => widget.value.gantimenu(59),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 59 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 59 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1794,15 +1659,14 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                   height: 30,
                   color: widget.value.page == 59 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Bayar/Pendapatan dimuka",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 59 ? Colors.black : Colors.white,
+                    color: widget.value.page == 59 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -1812,7 +1676,7 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
         ExpansionTile(
             tilePadding: EdgeInsets.zero,
             childrenPadding: EdgeInsets.zero,
-            shape: Border(),
+            shape: const Border(),
             expandedAlignment: Alignment.centerLeft,
             collapsedIconColor: Colors.white,
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -1829,19 +1693,16 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
             },
             title: Container(
               decoration: BoxDecoration(
-                color: _isExpandedSub == 1
-                    ? Color.fromARGB(255, 0, 125, 228)
-                    : Colors.transparent,
+                color: _isExpandedSub == 1 ? const Color.fromARGB(255, 0, 125, 228) : Colors.transparent,
               ),
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-                  Image.asset(ImageAssets.rupiah,
-                      height: 30, color: Colors.white),
-                  SizedBox(
+                  Image.asset(ImageAssets.rupiah, height: 30, color: Colors.white),
+                  const SizedBox(
                     width: 16,
                   ),
-                  Text(
+                  const Text(
                     "Kas Kecil",
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   )
@@ -1853,35 +1714,29 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                 onTap: () => widget.value.gantimenu(19),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 19
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 19 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: widget.value.page == 19
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 19 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Pengeluran/Pemasukan",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 19
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 19 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -1892,35 +1747,29 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                 onTap: () => widget.value.gantimenu(62),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 62
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 62 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: widget.value.page == 62
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 62 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Kas Bon",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 62
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 62 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -1931,35 +1780,29 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                 onTap: () => widget.value.gantimenu(70),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 70
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 70 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: widget.value.page == 70
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 70 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Laporan Kas Kecil",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 70
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 70 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -2004,10 +1847,9 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
           onTap: () => widget.value.gantimenu(20),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 20 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 20 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -2017,15 +1859,14 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                   height: 30,
                   color: widget.value.page == 20 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Saldo Bank",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 20 ? Colors.black : Colors.white,
+                    color: widget.value.page == 20 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -2035,7 +1876,7 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
         ExpansionTile(
             tilePadding: EdgeInsets.zero,
             childrenPadding: EdgeInsets.zero,
-            shape: Border(),
+            shape: const Border(),
             expandedAlignment: Alignment.centerLeft,
             collapsedIconColor: Colors.white,
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -2052,11 +1893,9 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
             },
             title: Container(
               decoration: BoxDecoration(
-                color: _isExpandedSub == 2
-                    ? Color.fromARGB(255, 0, 125, 228)
-                    : Colors.transparent,
+                color: _isExpandedSub == 2 ? const Color.fromARGB(255, 0, 125, 228) : Colors.transparent,
               ),
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
                   Image.asset(
@@ -2064,10 +1903,10 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                     height: 30,
                     color: Colors.white,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 16,
                   ),
-                  Text(
+                  const Text(
                     "Rekonsiliasi Harian",
                     style: TextStyle(
                       fontSize: 16,
@@ -2082,35 +1921,29 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                 onTap: () => widget.value.gantimenu(54),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 54
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 54 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: widget.value.page == 54
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 54 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Transaksi",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 54
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 54 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -2121,35 +1954,29 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                 onTap: () => widget.value.gantimenu(50),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 50
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 50 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: widget.value.page == 50
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 50 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Bank",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 50
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 50 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -2160,35 +1987,29 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                 onTap: () => widget.value.gantimenu(55),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 55
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 55 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: widget.value.page == 55
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 55 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Perantara Aktiva/Pasiva",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 55
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 55 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -2199,35 +2020,29 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                 onTap: () => widget.value.gantimenu(51),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 51
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 51 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: widget.value.page == 51
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 51 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Hutang/Piutang",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 51
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 51 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -2272,35 +2087,29 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                 onTap: () => widget.value.gantimenu(53),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 53
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 53 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: widget.value.page == 53
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 53 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Aset",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 53
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 53 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -2312,10 +2121,9 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
           onTap: () => widget.value.gantimenu(24),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 24 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 24 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -2325,15 +2133,14 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                   height: 30,
                   color: widget.value.page == 24 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Otorisasi",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 24 ? Colors.black : Colors.white,
+                    color: widget.value.page == 24 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -2343,7 +2150,7 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
         ExpansionTile(
             tilePadding: EdgeInsets.zero,
             childrenPadding: EdgeInsets.zero,
-            shape: Border(),
+            shape: const Border(),
             expandedAlignment: Alignment.centerLeft,
             collapsedIconColor: Colors.white,
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -2360,11 +2167,9 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
             },
             title: Container(
               decoration: BoxDecoration(
-                color: _isExpandedSub == 3
-                    ? Color.fromARGB(255, 0, 125, 228)
-                    : Colors.transparent,
+                color: _isExpandedSub == 3 ? const Color.fromARGB(255, 0, 125, 228) : Colors.transparent,
               ),
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
                   Image.asset(
@@ -2372,10 +2177,10 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                     height: 30,
                     color: Colors.white,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 16,
                   ),
-                  Text(
+                  const Text(
                     "Laporan",
                     style: TextStyle(
                       fontSize: 16,
@@ -2390,35 +2195,29 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                 onTap: () => widget.value.gantimenu(43),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 43
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 43 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: widget.value.page == 43
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 43 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Jurnal",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 43
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 43 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -2429,35 +2228,29 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
                 onTap: () => widget.value.gantimenu(25),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: widget.value.page == 25
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: widget.value.page == 25 ? Colors.white : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Image.asset(
                         ImageAssets.report,
                         height: 30,
-                        color: widget.value.page == 25
-                            ? Colors.black
-                            : Colors.white,
+                        color: widget.value.page == 25 ? Colors.black : Colors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
                         "Transaksi",
                         style: TextStyle(
                           fontSize: 16,
-                          color: widget.value.page == 25
-                              ? Colors.black
-                              : Colors.white,
+                          color: widget.value.page == 25 ? Colors.black : Colors.white,
                         ),
                       )
                     ],
@@ -2564,7 +2357,7 @@ class _MenuLaporanWidgetState extends State<MenuLaporanWidget> {
     return ExpansionTile(
       tilePadding: EdgeInsets.zero,
       childrenPadding: EdgeInsets.zero,
-      shape: Border(),
+      shape: const Border(),
       expandedAlignment: Alignment.centerLeft,
       collapsedIconColor: Colors.white,
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -2575,17 +2368,15 @@ class _MenuLaporanWidgetState extends State<MenuLaporanWidget> {
       },
       title: Container(
         decoration: BoxDecoration(
-          color: _isExpanded
-              ? Color.fromARGB(255, 0, 125, 228)
-              : Colors.transparent,
+          color: _isExpanded ? const Color.fromARGB(255, 0, 125, 228) : Colors.transparent,
         ),
         child: Row(
           children: [
             Image.asset(ImageAssets.eom, height: 30, color: Colors.white),
-            SizedBox(
+            const SizedBox(
               width: 16,
             ),
-            Text(
+            const Text(
               "LAPORAN",
               style: TextStyle(fontSize: 16, color: Colors.white),
             )
@@ -2597,15 +2388,14 @@ class _MenuLaporanWidgetState extends State<MenuLaporanWidget> {
           onTap: () => widget.value.gantimenu(44),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 44 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 44 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Image.asset(
@@ -2613,15 +2403,14 @@ class _MenuLaporanWidgetState extends State<MenuLaporanWidget> {
                   height: 30,
                   color: widget.value.page == 44 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Neraca Berjalan",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 44 ? Colors.black : Colors.white,
+                    color: widget.value.page == 44 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -2632,15 +2421,14 @@ class _MenuLaporanWidgetState extends State<MenuLaporanWidget> {
           onTap: () => widget.value.gantimenu(46),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 46 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 46 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Image.asset(
@@ -2648,15 +2436,14 @@ class _MenuLaporanWidgetState extends State<MenuLaporanWidget> {
                   height: 30,
                   color: widget.value.page == 46 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Laba Rugi Berjalan",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 46 ? Colors.black : Colors.white,
+                    color: widget.value.page == 46 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -2667,15 +2454,14 @@ class _MenuLaporanWidgetState extends State<MenuLaporanWidget> {
           onTap: () => widget.value.gantimenu(45),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 45 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 45 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Image.asset(
@@ -2683,15 +2469,14 @@ class _MenuLaporanWidgetState extends State<MenuLaporanWidget> {
                   height: 30,
                   color: widget.value.page == 45 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Neraca Periode",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 45 ? Colors.black : Colors.white,
+                    color: widget.value.page == 45 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -2702,15 +2487,14 @@ class _MenuLaporanWidgetState extends State<MenuLaporanWidget> {
           onTap: () => widget.value.gantimenu(49),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 49 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 49 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Image.asset(
@@ -2718,15 +2502,14 @@ class _MenuLaporanWidgetState extends State<MenuLaporanWidget> {
                   height: 30,
                   color: widget.value.page == 49 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "Laba Rugi Periode",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 49 ? Colors.black : Colors.white,
+                    color: widget.value.page == 49 ? Colors.black : Colors.white,
                   ),
                 )
               ],
@@ -2737,15 +2520,14 @@ class _MenuLaporanWidgetState extends State<MenuLaporanWidget> {
           onTap: () => widget.value.gantimenu(48),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color:
-                  widget.value.page == 48 ? Colors.white : Colors.transparent,
+              color: widget.value.page == 48 ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Image.asset(
@@ -2753,15 +2535,14 @@ class _MenuLaporanWidgetState extends State<MenuLaporanWidget> {
                   height: 30,
                   color: widget.value.page == 48 ? Colors.black : Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "GL / COA",
                   style: TextStyle(
                     fontSize: 16,
-                    color:
-                        widget.value.page == 48 ? Colors.black : Colors.white,
+                    color: widget.value.page == 48 ? Colors.black : Colors.white,
                   ),
                 )
               ],

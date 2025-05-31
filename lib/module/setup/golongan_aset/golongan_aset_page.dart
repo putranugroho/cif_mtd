@@ -34,10 +34,10 @@ class GolonganAsetPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Golongan Aset",
                               style: TextStyle(
@@ -49,8 +49,7 @@ class GolonganAsetPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -59,10 +58,10 @@ class GolonganAsetPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Tambah Golongan Aset",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -73,7 +72,7 @@ class GolonganAsetPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         height: MediaQuery.of(context).size.height,
                         child: SfDataGrid(
                           headerRowHeight: 40,
@@ -91,10 +90,10 @@ class GolonganAsetPage extends StatelessWidget {
                                 width: 50,
                                 columnName: 'no',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('No',
+                                    child: const Text('No',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           fontSize: 12,
@@ -104,10 +103,10 @@ class GolonganAsetPage extends StatelessWidget {
                                 width: 100,
                                 columnName: 'kode',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Kode golongan',
+                                    child: const Text('Kode golongan',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -118,8 +117,8 @@ class GolonganAsetPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama Golongan',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nama Golongan',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -131,8 +130,8 @@ class GolonganAsetPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Metode',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Metode',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -144,8 +143,8 @@ class GolonganAsetPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nilai Akhir',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nilai Akhir',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -157,8 +156,8 @@ class GolonganAsetPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Masa Susut',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Masa Susut',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -170,8 +169,8 @@ class GolonganAsetPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nilai Declining',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nilai Declining',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -183,8 +182,8 @@ class GolonganAsetPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('SBB Aset',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('SBB Aset',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -196,8 +195,8 @@ class GolonganAsetPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('SBB Penyusutan',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('SBB Penyusutan',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -209,8 +208,8 @@ class GolonganAsetPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('SBB Rugi Jual',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('SBB Rugi Jual',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -222,8 +221,8 @@ class GolonganAsetPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('SBB Laba Jual',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('SBB Laba Jual',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -235,8 +234,8 @@ class GolonganAsetPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('SBB PPN',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('SBB PPN',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -248,8 +247,8 @@ class GolonganAsetPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('SBB PPH',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('SBB PPH',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -260,9 +259,9 @@ class GolonganAsetPage extends StatelessWidget {
                                 columnName: 'action',
                                 label: Container(
                                     color: colorPrimary,
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     alignment: Alignment.center,
-                                    child: Text('Action',
+                                    child: const Text('Action',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -284,7 +283,7 @@ class GolonganAsetPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -295,9 +294,9 @@ class GolonganAsetPage extends StatelessWidget {
                         child: Form(
                           key: value.keyForm,
                           child: Container(
-                            padding: EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(20),
                             width: 600,
-                            decoration: BoxDecoration(color: Colors.white),
+                            decoration: const BoxDecoration(color: Colors.white),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
@@ -305,10 +304,8 @@ class GolonganAsetPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        value.editData
-                                            ? "Ubah / Hapus Golongan Aset"
-                                            : "Tambah Golongan Aset",
-                                        style: TextStyle(
+                                        value.editData ? "Ubah / Hapus Golongan Aset" : "Tambah Golongan Aset",
+                                        style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -319,29 +316,27 @@ class GolonganAsetPage extends StatelessWidget {
                                       child: Container(
                                         width: 40,
                                         height: 40,
-                                        padding: EdgeInsets.all(4),
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey[200],
-                                            shape: BoxShape.circle),
-                                        child: Icon(Icons.close),
+                                        padding: const EdgeInsets.all(4),
+                                        decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                        child: const Icon(Icons.close),
                                       ),
                                     )
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 32,
                                 ),
                                 Expanded(
                                     child: ListView(
                                   children: [
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Kode Golongan",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -368,20 +363,19 @@ class GolonganAsetPage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         hintText: "Kode Golongan",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
                                     const SizedBox(height: 16),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Nama Golongan",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -407,8 +401,7 @@ class GolonganAsetPage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         hintText: "Nama Golongan",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -416,18 +409,16 @@ class GolonganAsetPage extends StatelessWidget {
                                     value.metode == 1
                                         ? Column(
                                             children: [
-                                              Row(
+                                              const Row(
                                                 children: [
                                                   Text(
                                                     "Masa Susut (Bulan)",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
-                                                  const SizedBox(width: 5),
-                                                  const Text(
+                                                  SizedBox(width: 5),
+                                                  Text(
                                                     "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
+                                                    style: TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -435,20 +426,16 @@ class GolonganAsetPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               TextFormField(
-                                                textInputAction:
-                                                    TextInputAction.done,
+                                                textInputAction: TextInputAction.done,
                                                 controller: value.masasusut,
                                                 maxLines: 1,
                                                 inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly
+                                                  FilteringTextInputFormatter.digitsOnly
                                                 ],
                                                 decoration: InputDecoration(
                                                   hintText: "Masa Susut",
                                                   border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            6),
+                                                    borderRadius: BorderRadius.circular(6),
                                                   ),
                                                 ),
                                               ),
@@ -457,18 +444,16 @@ class GolonganAsetPage extends StatelessWidget {
                                           )
                                         : Column(
                                             children: [
-                                              Row(
+                                              const Row(
                                                 children: [
                                                   Text(
                                                     "Nilai Declining",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
-                                                  const SizedBox(width: 5),
-                                                  const Text(
+                                                  SizedBox(width: 5),
+                                                  Text(
                                                     "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
+                                                    style: TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -476,14 +461,11 @@ class GolonganAsetPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               TextFormField(
-                                                textInputAction:
-                                                    TextInputAction.done,
+                                                textInputAction: TextInputAction.done,
                                                 controller: value.nilai,
                                                 maxLines: 1,
                                                 inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .allow(RegExp(
-                                                          r'^\d+\.?\d{0,2}')),
+                                                  FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
                                                 ],
                                                 validator: (e) {
                                                   if (e!.isEmpty) {
@@ -495,23 +477,21 @@ class GolonganAsetPage extends StatelessWidget {
                                                 decoration: InputDecoration(
                                                   hintText: "Nilai Declining",
                                                   border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            6),
+                                                    borderRadius: BorderRadius.circular(6),
                                                   ),
                                                 ),
                                               ),
                                               const SizedBox(height: 16),
                                             ],
                                           ),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Akun Aset",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -525,10 +505,8 @@ class GolonganAsetPage extends StatelessWidget {
                                         Expanded(
                                           child: TypeAheadField<InqueryGlModel>(
                                             controller: value.namasbbaset,
-                                            suggestionsCallback: (search) =>
-                                                value.getInquerySbbAset(search),
-                                            builder: (context, controller,
-                                                focusNode) {
+                                            suggestionsCallback: (search) => value.getInquerySbbAset(search),
+                                            builder: (context, controller, focusNode) {
                                               return TextFormField(
                                                   validator: (value) {
                                                     if (value!.isEmpty) {
@@ -539,9 +517,8 @@ class GolonganAsetPage extends StatelessWidget {
                                                   controller: controller,
                                                   focusNode: focusNode,
                                                   autofocus: true,
-                                                  decoration: InputDecoration(
-                                                    border:
-                                                        OutlineInputBorder(),
+                                                  decoration: const InputDecoration(
+                                                    border: OutlineInputBorder(),
                                                     labelText: 'Cari Akun',
                                                   ));
                                             },
@@ -557,16 +534,15 @@ class GolonganAsetPage extends StatelessWidget {
                                             },
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 16,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: 150,
                                           child: TextFormField(
                                             // enabled: false,
                                             readOnly: true,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             controller: value.nosbbaset,
                                             maxLines: 1,
                                             // inputFormatters: [
@@ -584,25 +560,24 @@ class GolonganAsetPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Nomor Debet",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
                                         )
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Akun Penyusutan",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -616,11 +591,8 @@ class GolonganAsetPage extends StatelessWidget {
                                         Expanded(
                                           child: TypeAheadField<InqueryGlModel>(
                                             controller: value.namasbbpenyusutan,
-                                            suggestionsCallback: (search) =>
-                                                value.getInquerySbbPenyusutan(
-                                                    search),
-                                            builder: (context, controller,
-                                                focusNode) {
+                                            suggestionsCallback: (search) => value.getInquerySbbPenyusutan(search),
+                                            builder: (context, controller, focusNode) {
                                               return TextFormField(
                                                   validator: (value) {
                                                     if (value!.isEmpty) {
@@ -631,9 +603,8 @@ class GolonganAsetPage extends StatelessWidget {
                                                   controller: controller,
                                                   focusNode: focusNode,
                                                   autofocus: true,
-                                                  decoration: InputDecoration(
-                                                    border:
-                                                        OutlineInputBorder(),
+                                                  decoration: const InputDecoration(
+                                                    border: OutlineInputBorder(),
                                                     labelText: 'Cari Akun',
                                                   ));
                                             },
@@ -649,16 +620,15 @@ class GolonganAsetPage extends StatelessWidget {
                                             },
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 16,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: 150,
                                           child: TextFormField(
                                             // enabled: false,
                                             readOnly: true,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             controller: value.nossbpenyusutan,
                                             maxLines: 1,
                                             // inputFormatters: [
@@ -676,25 +646,24 @@ class GolonganAsetPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Nomor Debet",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
                                         )
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Akun Rugi Jual",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -708,11 +677,8 @@ class GolonganAsetPage extends StatelessWidget {
                                         Expanded(
                                           child: TypeAheadField<InqueryGlModel>(
                                             controller: value.namasbbrugijual,
-                                            suggestionsCallback: (search) =>
-                                                value.getInquerySbbPenyusutan(
-                                                    search),
-                                            builder: (context, controller,
-                                                focusNode) {
+                                            suggestionsCallback: (search) => value.getInquerySbbPenyusutan(search),
+                                            builder: (context, controller, focusNode) {
                                               return TextFormField(
                                                   validator: (value) {
                                                     if (value!.isEmpty) {
@@ -723,9 +689,8 @@ class GolonganAsetPage extends StatelessWidget {
                                                   controller: controller,
                                                   focusNode: focusNode,
                                                   autofocus: true,
-                                                  decoration: InputDecoration(
-                                                    border:
-                                                        OutlineInputBorder(),
+                                                  decoration: const InputDecoration(
+                                                    border: OutlineInputBorder(),
                                                     labelText: 'Cari Akun',
                                                   ));
                                             },
@@ -741,16 +706,15 @@ class GolonganAsetPage extends StatelessWidget {
                                             },
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 16,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: 150,
                                           child: TextFormField(
                                             // enabled: false,
                                             readOnly: true,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             controller: value.nosbbrugijual,
                                             maxLines: 1,
                                             // inputFormatters: [
@@ -768,25 +732,24 @@ class GolonganAsetPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Nomor Debet",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
                                         )
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Akun Laba Jual",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -800,11 +763,8 @@ class GolonganAsetPage extends StatelessWidget {
                                         Expanded(
                                           child: TypeAheadField<InqueryGlModel>(
                                             controller: value.namasbblabajual,
-                                            suggestionsCallback: (search) =>
-                                                value.getInquerySbbLabaJual(
-                                                    search),
-                                            builder: (context, controller,
-                                                focusNode) {
+                                            suggestionsCallback: (search) => value.getInquerySbbLabaJual(search),
+                                            builder: (context, controller, focusNode) {
                                               return TextFormField(
                                                   validator: (value) {
                                                     if (value!.isEmpty) {
@@ -815,9 +775,8 @@ class GolonganAsetPage extends StatelessWidget {
                                                   controller: controller,
                                                   focusNode: focusNode,
                                                   autofocus: true,
-                                                  decoration: InputDecoration(
-                                                    border:
-                                                        OutlineInputBorder(),
+                                                  decoration: const InputDecoration(
+                                                    border: OutlineInputBorder(),
                                                     labelText: 'Cari Akun',
                                                   ));
                                             },
@@ -833,16 +792,15 @@ class GolonganAsetPage extends StatelessWidget {
                                             },
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 16,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: 150,
                                           child: TextFormField(
                                             // enabled: false,
                                             readOnly: true,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             controller: value.nosbblabajual,
                                             maxLines: 1,
                                             // inputFormatters: [
@@ -860,25 +818,24 @@ class GolonganAsetPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Nomor Debet",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
                                         )
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Akun Kewajiban PPN",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -892,10 +849,8 @@ class GolonganAsetPage extends StatelessWidget {
                                         Expanded(
                                           child: TypeAheadField<InqueryGlModel>(
                                             controller: value.namasbbppn,
-                                            suggestionsCallback: (search) =>
-                                                value.getInquerySbbppn(search),
-                                            builder: (context, controller,
-                                                focusNode) {
+                                            suggestionsCallback: (search) => value.getInquerySbbppn(search),
+                                            builder: (context, controller, focusNode) {
                                               return TextFormField(
                                                   validator: (value) {
                                                     if (value!.isEmpty) {
@@ -906,9 +861,8 @@ class GolonganAsetPage extends StatelessWidget {
                                                   controller: controller,
                                                   focusNode: focusNode,
                                                   autofocus: true,
-                                                  decoration: InputDecoration(
-                                                    border:
-                                                        OutlineInputBorder(),
+                                                  decoration: const InputDecoration(
+                                                    border: OutlineInputBorder(),
                                                     labelText: 'Cari Akun',
                                                   ));
                                             },
@@ -924,16 +878,15 @@ class GolonganAsetPage extends StatelessWidget {
                                             },
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 16,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: 150,
                                           child: TextFormField(
                                             // enabled: false,
                                             readOnly: true,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             controller: value.nosbbppn,
                                             maxLines: 1,
                                             // inputFormatters: [
@@ -951,25 +904,24 @@ class GolonganAsetPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Nomor Debet",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
                                         )
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Text(
                                           "Akun Titipan PPH",
-                                          style: const TextStyle(fontSize: 12),
+                                          style: TextStyle(fontSize: 12),
                                         ),
-                                        const SizedBox(width: 5),
-                                        const Text(
+                                        SizedBox(width: 5),
+                                        Text(
                                           "*",
                                           style: TextStyle(fontSize: 8),
                                         ),
@@ -983,10 +935,8 @@ class GolonganAsetPage extends StatelessWidget {
                                         Expanded(
                                           child: TypeAheadField<InqueryGlModel>(
                                             controller: value.namasbbpph,
-                                            suggestionsCallback: (search) =>
-                                                value.getInquerySbbpph(search),
-                                            builder: (context, controller,
-                                                focusNode) {
+                                            suggestionsCallback: (search) => value.getInquerySbbpph(search),
+                                            builder: (context, controller, focusNode) {
                                               return TextFormField(
                                                   validator: (value) {
                                                     if (value!.isEmpty) {
@@ -997,9 +947,8 @@ class GolonganAsetPage extends StatelessWidget {
                                                   controller: controller,
                                                   focusNode: focusNode,
                                                   autofocus: true,
-                                                  decoration: InputDecoration(
-                                                    border:
-                                                        OutlineInputBorder(),
+                                                  decoration: const InputDecoration(
+                                                    border: OutlineInputBorder(),
                                                     labelText: 'Cari Akun',
                                                   ));
                                             },
@@ -1015,16 +964,15 @@ class GolonganAsetPage extends StatelessWidget {
                                             },
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 16,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: 150,
                                           child: TextFormField(
                                             // enabled: false,
                                             readOnly: true,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             controller: value.nosbbpph,
                                             maxLines: 1,
                                             // inputFormatters: [
@@ -1042,15 +990,14 @@ class GolonganAsetPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Nomor Debet",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
                                         )
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     ButtonPrimary(
@@ -1061,10 +1008,9 @@ class GolonganAsetPage extends StatelessWidget {
                                     ),
                                     value.editData
                                         ? Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 16,
                                               ),
                                               ButtonDanger(
@@ -1075,7 +1021,7 @@ class GolonganAsetPage extends StatelessWidget {
                                               ),
                                             ],
                                           )
-                                        : SizedBox()
+                                        : const SizedBox()
                                   ],
                                 ))
                               ],
@@ -1083,7 +1029,7 @@ class GolonganAsetPage extends StatelessWidget {
                           ),
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -1112,29 +1058,16 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'no', value: (index++).toString()),
                 DataGridCell(columnName: 'kode', value: data.kodeGolongan),
                 DataGridCell(columnName: 'nama', value: data.namaGolongan),
-                DataGridCell(columnName: 'metode', value: "Double Declining"),
-                DataGridCell(columnName: 'nilaiakhir', value: "1"),
+                const DataGridCell(columnName: 'metode', value: "Double Declining"),
+                const DataGridCell(columnName: 'nilaiakhir', value: "1"),
                 DataGridCell(columnName: 'masasusut', value: data.masaSusut),
                 DataGridCell(columnName: 'nilai', value: data.nilaiDeclining),
-                DataGridCell(
-                    columnName: 'sbbAset',
-                    value: data.sbbAset == null ? "" : data.sbbAset),
-                DataGridCell(
-                    columnName: 'sbbPenyusutan',
-                    value:
-                        data.sbbPenyusutan == null ? "" : data.sbbPenyusutan),
-                DataGridCell(
-                    columnName: 'sbbRugiJual',
-                    value: data.sbbRugiJual == null ? "" : data.sbbRugiJual),
-                DataGridCell(
-                    columnName: 'sbbLabaJual',
-                    value: data.sbbLabaJual == null ? "" : data.sbbLabaJual),
-                DataGridCell(
-                    columnName: 'sbbppn',
-                    value: data.sbbPpn == null ? "" : data.sbbPpn),
-                DataGridCell(
-                    columnName: 'sbbpph',
-                    value: data.sbbPph == null ? "" : data.sbbPph),
+                DataGridCell(columnName: 'sbbAset', value: data.sbbAset ?? ""),
+                DataGridCell(columnName: 'sbbPenyusutan', value: data.sbbPenyusutan ?? ""),
+                DataGridCell(columnName: 'sbbRugiJual', value: data.sbbRugiJual ?? ""),
+                DataGridCell(columnName: 'sbbLabaJual', value: data.sbbLabaJual ?? ""),
+                DataGridCell(columnName: 'sbbppn', value: data.sbbPpn ?? ""),
+                DataGridCell(columnName: 'sbbpph', value: data.sbbPph ?? ""),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))
@@ -1155,7 +1088,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -1164,19 +1097,17 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),
               ),
             ),
           );
-        } else if (e.columnName == 'masasusut' ||
-            e.columnName == 'nilai' ||
-            e.columnName == 'nilaiakhir') {
+        } else if (e.columnName == 'masasusut' || e.columnName == 'nilai' || e.columnName == 'nilaiakhir') {
           return Container(
             alignment: Alignment.centerRight,
             padding: const EdgeInsets.all(8.0),
@@ -1184,7 +1115,7 @@ class DetailDataSource extends DataGridSource {
               e.value,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
               ),
             ),
@@ -1197,7 +1128,7 @@ class DetailDataSource extends DataGridSource {
               e.value,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
               ),
             ),

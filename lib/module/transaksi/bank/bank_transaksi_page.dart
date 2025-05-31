@@ -34,10 +34,10 @@ class BankTransaksiPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Rekonsiliasi Saldo Bank",
                               style: TextStyle(
@@ -49,8 +49,7 @@ class BankTransaksiPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -59,10 +58,10 @@ class BankTransaksiPage extends StatelessWidget {
                                   color: colorPrimary,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Inquery Bank",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -73,7 +72,7 @@ class BankTransaksiPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         height: MediaQuery.of(context).size.height,
                         child: SfDataGrid(
                           headerRowHeight: 40,
@@ -91,10 +90,10 @@ class BankTransaksiPage extends StatelessWidget {
                                 width: 50,
                                 columnName: 'no',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('No',
+                                    child: const Text('No',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           fontSize: 12,
@@ -104,10 +103,10 @@ class BankTransaksiPage extends StatelessWidget {
                                 width: 200,
                                 columnName: 'nmBank',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Nama Bank',
+                                    child: const Text('Nama Bank',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -119,8 +118,8 @@ class BankTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Kantor Bank',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Kantor Bank',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -131,8 +130,8 @@ class BankTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('No Rekening',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('No Rekening',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -143,8 +142,8 @@ class BankTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama Rekening',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nama Rekening',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -155,8 +154,8 @@ class BankTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Saldo Bank',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Saldo Bank',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -167,8 +166,8 @@ class BankTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Saldo SBB',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Saldo SBB',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -179,8 +178,8 @@ class BankTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama SBB',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nama SBB',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -191,8 +190,8 @@ class BankTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('No. SBB',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('No. SBB',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -203,9 +202,9 @@ class BankTransaksiPage extends StatelessWidget {
                                 columnName: 'action',
                                 label: Container(
                                     color: colorPrimary,
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     alignment: Alignment.center,
-                                    child: Text('Action',
+                                    child: const Text('Action',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -227,7 +226,7 @@ class BankTransaksiPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -235,15 +234,15 @@ class BankTransaksiPage extends StatelessWidget {
                 right: 0,
                 child: value.dialog
                     ? Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         width: 1000,
-                        decoration: BoxDecoration(color: Colors.white),
+                        decoration: const BoxDecoration(color: Colors.white),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   child: Text(
                                     "Rekonsiliasi Saldo Bank",
                                     style: TextStyle(
@@ -257,29 +256,27 @@ class BankTransaksiPage extends StatelessWidget {
                                   child: Container(
                                     width: 40,
                                     height: 40,
-                                    padding: EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey[200],
-                                        shape: BoxShape.circle),
-                                    child: Icon(Icons.close),
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                    child: const Icon(Icons.close),
                                   ),
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 32,
                             ),
                             Expanded(
                                 child: ListView(
                               children: [
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Bank",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
-                                    const Text(
+                                    SizedBox(width: 5),
+                                    Text(
                                       "*",
                                       style: TextStyle(fontSize: 8),
                                     ),
@@ -292,29 +289,23 @@ class BankTransaksiPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: DropdownSearch<BankModel>(
-                                        popupProps:
-                                            const PopupPropsMultiSelection.menu(
-                                          showSearchBox:
-                                              true, // Aktifkan fitur pencarian
+                                        popupProps: const PopupPropsMultiSelection.menu(
+                                          showSearchBox: true, // Aktifkan fitur pencarian
                                         ),
                                         selectedItem: value.bankModel,
                                         items: value.list.toList(),
-                                        itemAsString: (e) => "${e.nmBank}",
+                                        itemAsString: (e) => e.nmBank,
                                         onChanged: (e) {
                                           value.pilihBank(e!);
                                         },
-                                        dropdownDecoratorProps:
-                                            DropDownDecoratorProps(
-                                          baseStyle: TextStyle(fontSize: 16),
-                                          textAlignVertical:
-                                              TextAlignVertical.center,
-                                          dropdownSearchDecoration:
-                                              InputDecoration(
+                                        dropdownDecoratorProps: DropDownDecoratorProps(
+                                          baseStyle: const TextStyle(fontSize: 16),
+                                          textAlignVertical: TextAlignVertical.center,
+                                          dropdownSearchDecoration: InputDecoration(
                                             hintText: "Pilih Sandi Bank",
                                             border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              borderSide: BorderSide(
+                                              borderRadius: BorderRadius.circular(8),
+                                              borderSide: const BorderSide(
                                                 width: 1,
                                                 color: Colors.grey,
                                               ),
@@ -323,10 +314,10 @@ class BankTransaksiPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 16,
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: 100,
                                       child: TextFormField(
                                         // enabled: false,
@@ -349,8 +340,7 @@ class BankTransaksiPage extends StatelessWidget {
                                           fillColor: Colors.grey[200],
                                           hintText: "Kode Bank",
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),
@@ -360,19 +350,17 @@ class BankTransaksiPage extends StatelessWidget {
                                 const SizedBox(
                                   height: 16,
                                 ),
-                                Row(
+                                const Row(
                                   children: [
                                     Expanded(child: Text("Bank")),
                                     SizedBox(
                                       width: 16,
                                     ),
-                                    SizedBox(
-                                        width: 150, child: Text("Akun SBB")),
+                                    SizedBox(width: 150, child: Text("Akun SBB")),
                                     SizedBox(
                                       width: 16,
                                     ),
-                                    SizedBox(
-                                        width: 150, child: Text("Nominal SBB")),
+                                    SizedBox(width: 150, child: Text("Nominal SBB")),
                                     SizedBox(
                                       width: 16,
                                     ),
@@ -380,154 +368,117 @@ class BankTransaksiPage extends StatelessWidget {
                                     SizedBox(
                                       width: 16,
                                     ),
-                                    SizedBox(
-                                        width: 150, child: Text("Selisih")),
+                                    SizedBox(width: 150, child: Text("Selisih")),
                                   ],
                                 ),
                                 value.sandiBankModel != null
                                     ? ListView.builder(
-                                        itemCount: value.list
-                                            .where((e) =>
-                                                e.kodeBank ==
-                                                value.sandiBankModel!.sandi)
-                                            .length,
+                                        itemCount: value.list.where((e) => e.kodeBank == value.sandiBankModel!.sandi).length,
                                         shrinkWrap: true,
-                                        physics: ClampingScrollPhysics(),
+                                        physics: const ClampingScrollPhysics(),
                                         itemBuilder: (context, i) {
                                           return Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
                                               Row(
                                                 children: [
                                                   Expanded(
                                                       child: TextField(
                                                     readOnly: true,
-                                                    controller: value
-                                                        .listBankController[i],
+                                                    controller: value.listBankController[i],
                                                     decoration: InputDecoration(
                                                       filled: true,
-                                                      fillColor:
-                                                          Colors.grey[200],
+                                                      fillColor: Colors.grey[200],
                                                       hintText: "Kode Bank",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   )),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 16,
                                                   ),
-                                                  Container(
+                                                  SizedBox(
                                                     width: 150,
                                                     child: TextField(
                                                       readOnly: true,
-                                                      controller:
-                                                          value.listNoSBB[i],
-                                                      decoration:
-                                                          InputDecoration(
+                                                      controller: value.listNoSBB[i],
+                                                      decoration: InputDecoration(
                                                         filled: true,
-                                                        fillColor:
-                                                            Colors.grey[200],
+                                                        fillColor: Colors.grey[200],
                                                         hintText: "Akun SBB",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 16,
                                                   ),
-                                                  Container(
+                                                  SizedBox(
                                                     width: 150,
                                                     child: TextField(
                                                       readOnly: true,
-                                                      controller:
-                                                          value.listSaldo[i],
-                                                      decoration:
-                                                          InputDecoration(
+                                                      controller: value.listSaldo[i],
+                                                      decoration: InputDecoration(
                                                         filled: true,
-                                                        fillColor:
-                                                            Colors.grey[200],
+                                                        fillColor: Colors.grey[200],
                                                         hintText: "Nominal GL",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 16,
                                                   ),
-                                                  Container(
+                                                  SizedBox(
                                                     width: 150,
                                                     child: TextField(
                                                       inputFormatters: [
-                                                        FilteringTextInputFormatter
-                                                            .digitsOnly,
+                                                        FilteringTextInputFormatter.digitsOnly,
                                                         CurrencyInputFormatter(),
                                                       ],
-                                                      onChanged: (e) => value
-                                                          .onChangeTotal(i),
-                                                      controller:
-                                                          value.listAmount[i],
-                                                      decoration:
-                                                          InputDecoration(
-                                                        hintText:
-                                                            "Nominal Saldo",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                      onChanged: (e) => value.onChangeTotal(i),
+                                                      controller: value.listAmount[i],
+                                                      decoration: InputDecoration(
+                                                        hintText: "Nominal Saldo",
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 16,
                                                   ),
-                                                  Container(
+                                                  SizedBox(
                                                     width: 150,
                                                     child: TextField(
                                                       readOnly: true,
-                                                      controller:
-                                                          value.listSelisih[i],
-                                                      decoration:
-                                                          InputDecoration(
+                                                      controller: value.listSelisih[i],
+                                                      decoration: InputDecoration(
                                                         filled: true,
-                                                        fillColor:
-                                                            Colors.grey[200],
+                                                        fillColor: Colors.grey[200],
                                                         hintText: "Selisih",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 8,
                                               )
                                             ],
                                           );
                                         })
-                                    : SizedBox(),
-                                SizedBox(
+                                    : const SizedBox(),
+                                const SizedBox(
                                   height: 16,
                                 ),
                                 Row(
@@ -543,7 +494,7 @@ class BankTransaksiPage extends StatelessWidget {
                           ],
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -582,16 +533,8 @@ class DetailDataSource extends DataGridSource {
                 //         : data.kdRek == "20"
                 //             ? "Giro"
                 //             : "Deposito"),
-                DataGridCell(
-                    columnName: 'saldoBank',
-                    value: data.nominal == ""
-                        ? ""
-                        : FormatCurrency.oCcy.format(int.parse(data.nominal))),
-                DataGridCell(
-                    columnName: 'saldoSbb',
-                    value: data.saldoeom == ""
-                        ? ""
-                        : FormatCurrency.oCcy.format(int.parse(data.saldoeom))),
+                DataGridCell(columnName: 'saldoBank', value: data.nominal == "" ? "" : FormatCurrency.oCcy.format(int.parse(data.nominal))),
+                DataGridCell(columnName: 'saldoSbb', value: data.saldoeom == "" ? "" : FormatCurrency.oCcy.format(int.parse(data.saldoeom))),
                 DataGridCell(columnName: 'namaSbb', value: data.namaSbb),
                 DataGridCell(columnName: 'nosbb', value: data.nosbb),
                 DataGridCell(columnName: 'action', value: data.noRek),
@@ -610,7 +553,7 @@ class DetailDataSource extends DataGridSource {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               width: 300,
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: colorPrimary,
@@ -619,10 +562,10 @@ class DetailDataSource extends DataGridSource {
                   color: colorPrimary,
                 ),
               ),
-              child: Text(
+              child: const Text(
                 "Aksi",
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
                 ),
               ),

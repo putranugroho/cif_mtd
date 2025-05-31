@@ -10,7 +10,7 @@ class LaporanSetupPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => LaporanSetupNotifier(context: context),
       child: Consumer<LaporanSetupNotifier>(
-        builder: (context, value, child) => SafeArea(child: Scaffold()),
+        builder: (context, value, child) => const SafeArea(child: Scaffold()),
       ),
     );
   }

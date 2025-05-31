@@ -1,8 +1,5 @@
-import 'dart:math';
-
 // Fungsi untuk membulatkan nilai dan menyesuaikan total agar sesuai target
-List<int> pembulatanDenganPenyesuaian(
-    List<double> nilaiAsli, double totalTarget) {
+List<int> pembulatanDenganPenyesuaian(List<double> nilaiAsli, double totalTarget) {
   List<int> nilaiBulatan = nilaiAsli.map((e) => e.round()).toList();
   int totalBulatan = nilaiBulatan.fold(0, (a, b) => a + b);
   int selisih = totalTarget.round() - totalBulatan;
@@ -24,15 +21,8 @@ List<int> pembulatanDenganPenyesuaian(
 }
 
 // Contoh integrasi ke dalam fungsi utama atau saat pengolahan data
-void prosesNilaiTransaksiPPNPPH(
-    List<double> listTransaksi,
-    List<double> listPPN,
-    List<double> listPPH,
-    double totalTransaksi,
-    double totalPPN,
-    double totalPPH) {
-  List<int> hasilTransaksi =
-      pembulatanDenganPenyesuaian(listTransaksi, totalTransaksi);
+void prosesNilaiTransaksiPPNPPH(List<double> listTransaksi, List<double> listPPN, List<double> listPPH, double totalTransaksi, double totalPPN, double totalPPH) {
+  List<int> hasilTransaksi = pembulatanDenganPenyesuaian(listTransaksi, totalTransaksi);
   List<int> hasilPPN = pembulatanDenganPenyesuaian(listPPN, totalPPN);
   List<int> hasilPPH = pembulatanDenganPenyesuaian(listPPH, totalPPH);
 

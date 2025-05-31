@@ -24,9 +24,10 @@ class KelompokAsetNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getKelompokAset(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getKelompokAset(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(KelompokAsetModel.fromJson(i));
@@ -86,9 +87,7 @@ class KelompokAsetNotifier extends ChangeNotifier {
           "kode_kelompok": kode.text.trim(),
           "nama_kelompokn": nama.text.trim(),
         };
-        Setuprepository.setup(
-                token, NetworkURL.editKelompokAset(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.editKelompokAset(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);
@@ -110,9 +109,7 @@ class KelompokAsetNotifier extends ChangeNotifier {
           "kode_kelompok": kode.text.trim(),
           "nama_kelompokn": nama.text.trim(),
         };
-        Setuprepository.setup(
-                token, NetworkURL.addKelompokAset(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.addKelompokAset(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);
@@ -137,7 +134,7 @@ class KelompokAsetNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -145,11 +142,11 @@ class KelompokAsetNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin menghapus ${kelompokAsetModel!.namaKelompokn}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -161,7 +158,7 @@ class KelompokAsetNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -186,9 +183,7 @@ class KelompokAsetNotifier extends ChangeNotifier {
     var data = {
       "id": kelompokAsetModel!.id,
     };
-    Setuprepository.setup(
-            token, NetworkURL.deleteKelompokAset(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.deleteKelompokAset(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getKelompokAset();

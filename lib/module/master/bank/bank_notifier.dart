@@ -27,14 +27,13 @@ class BankNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     listGl.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        listGl =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         notifyListeners();
       }
     });
@@ -45,7 +44,9 @@ class BankNotifier extends ChangeNotifier {
     listSandiAll.clear();
     notifyListeners();
 
-    var data = {"kode_pt": "001"};
+    var data = {
+      "kode_pt": "001"
+    };
 
     try {
       final response = await Setuprepository.setup(
@@ -55,11 +56,9 @@ class BankNotifier extends ChangeNotifier {
       );
 
       if (response['status'].toString().toLowerCase().contains("success")) {
-        final jnsAccBItems =
-            (response['data'] as List).cast<Map<String, dynamic>>();
+        final jnsAccBItems = (response['data'] as List).cast<Map<String, dynamic>>();
 
-        List<SandiBankModel> allItems =
-            jnsAccBItems.map((e) => SandiBankModel.fromJson(e)).toList();
+        List<SandiBankModel> allItems = jnsAccBItems.map((e) => SandiBankModel.fromJson(e)).toList();
 
         listSandiAll = allItems.toList();
       }
@@ -91,7 +90,9 @@ class BankNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -101,14 +102,8 @@ class BankNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -133,7 +128,9 @@ class BankNotifier extends ChangeNotifier {
       listSandi.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -143,16 +140,11 @@ class BankNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final jnsAccBItems =
-              (response['data'] as List).cast<Map<String, dynamic>>();
+          final jnsAccBItems = (response['data'] as List).cast<Map<String, dynamic>>();
 
-          List<SandiBankModel> allItems =
-              jnsAccBItems.map((e) => SandiBankModel.fromJson(e)).toList();
+          List<SandiBankModel> allItems = jnsAccBItems.map((e) => SandiBankModel.fromJson(e)).toList();
 
-          listSandi = allItems
-              .where((item) =>
-                  item.namaLjk.toLowerCase().contains(query.toLowerCase()))
-              .toList();
+          listSandi = allItems.where((item) => item.namaLjk.toLowerCase().contains(query.toLowerCase())).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -195,9 +187,10 @@ class BankNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getBank(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getBank(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(BankModel.fromJson(i));
@@ -257,8 +250,7 @@ class BankNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglBuka = pickedendDate;
-      tglBukaRekening.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglBukaRekening.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -266,23 +258,13 @@ class BankNotifier extends ChangeNotifier {
   Future pilihTanggalJatuhTempo() async {
     var pickedendDate = (await showDatePicker(
       context: context,
-      initialDate: DateTime(
-          int.parse(DateFormat('y').format(tglBuka!)),
-          int.parse(DateFormat('MM').format(tglBuka!)),
-          int.parse(DateFormat('dd').format(tglBuka!)) + 10),
-      firstDate: DateTime(
-          int.parse(DateFormat('y').format(tglBuka!)),
-          int.parse(DateFormat('MM').format(tglBuka!)),
-          int.parse(DateFormat('dd').format(tglBuka!)) + 10),
-      lastDate: DateTime(
-          int.parse(DateFormat('y').format(tglBuka!)) + 10,
-          int.parse(DateFormat('MM').format(tglBuka!)),
-          int.parse(DateFormat('dd').format(tglBuka!))),
+      initialDate: DateTime(int.parse(DateFormat('y').format(tglBuka!)), int.parse(DateFormat('MM').format(tglBuka!)), int.parse(DateFormat('dd').format(tglBuka!)) + 10),
+      firstDate: DateTime(int.parse(DateFormat('y').format(tglBuka!)), int.parse(DateFormat('MM').format(tglBuka!)), int.parse(DateFormat('dd').format(tglBuka!)) + 10),
+      lastDate: DateTime(int.parse(DateFormat('y').format(tglBuka!)) + 10, int.parse(DateFormat('MM').format(tglBuka!)), int.parse(DateFormat('dd').format(tglBuka!))),
     ));
     if (pickedendDate != null) {
       tglJatuhTempo = pickedendDate;
-      tglJatuhTempoRekening.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglJatuhTempoRekening.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -321,8 +303,7 @@ class BankNotifier extends ChangeNotifier {
       "kode_pt": "001",
     };
     notifyListeners();
-    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data)).then((value) {
       if (value['status'] == "Success") {
         for (Map<String, dynamic> i in value['data']) {
           listKantor.add(KantorModel.fromJson(i));
@@ -363,7 +344,7 @@ class BankNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -371,11 +352,11 @@ class BankNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin menghapus ${bankModel!.nmBank} - ${bankModel!.nmRek}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -387,7 +368,7 @@ class BankNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -412,8 +393,7 @@ class BankNotifier extends ChangeNotifier {
     var data = {
       "id": bankModel!.id,
     };
-    Setuprepository.setup(token, NetworkURL.deleteBank(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.deleteBank(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getBank();
@@ -448,11 +428,10 @@ class BankNotifier extends ChangeNotifier {
     dialog = true;
     editData = true;
     bankModel = list.where((e) => e.id == int.parse(id)).first;
-    sandiBankModel =
-        listSandiAll.where((e) => e.sandi == bankModel!.kodeBank).first;
+    sandiBankModel = listSandiAll.where((e) => e.sandi == bankModel!.kodeBank).first;
     kodeBank.text = bankModel!.kodeBank;
     cabang.text = bankModel!.cabang;
-    noBilyet.text = bankModel!.noBilyet == null ? "" : bankModel!.noBilyet;
+    noBilyet.text = bankModel!.noBilyet ?? "";
     namaRek.text = bankModel!.noBilyet == null ? "" : bankModel!.nmRek;
     namaBank.text = bankModel!.noBilyet == null ? "" : bankModel!.nmBank;
     noRek.text = bankModel!.noBilyet == null ? "" : bankModel!.noRek;
@@ -463,9 +442,7 @@ class BankNotifier extends ChangeNotifier {
             : "Deposito";
     nosbbdeb.text = bankModel!.nosbb;
     namaSbbDeb.text = bankModel!.namaSbb;
-    nilai.text = FormatCurrency.oCcy
-        .format(int.parse(bankModel!.nominal))
-        .replaceAll(".", ",");
+    nilai.text = FormatCurrency.oCcy.format(int.parse(bankModel!.nominal)).replaceAll(".", ",");
     jangkaWaktu.text = bankModel!.jw;
     tglBukaRekening.text = bankModel!.tglbuka;
     tglJatuhTempoRekening.text = bankModel!.tgljtempo;
@@ -479,30 +456,30 @@ class BankNotifier extends ChangeNotifier {
         DialogCustom().showLoading(context);
         var data = {
           "id": "${bankModel!.id}",
-          "kode_bank": "${kodeBank.text.trim()}",
-          "nm_bank": "${sandiBankModel!.namaLjk}",
-          "nm_rek": "${namaRek.text.trim()}",
-          "cabang": "${cabang.text.trim()}",
-          "no_bilyet": "${noBilyet.text.trim()}",
-          "no_rek": "${noRek.text}",
-          "kd_rek":
-              "${rekening == "Tabungan" ? "10" : rekening == "Giro" ? "20" : "30"}",
-          "nosbb": "${nosbbdeb.text.trim()}",
-          "nama_sbb": "${namaSbbDeb.text.trim()}",
-          "nominal": "${nilai.text.trim().replaceAll(",", '')}",
-          "jw": "${jangkaWaktu.text}",
-          "tglbuka":
-              "${tglBuka == null ? "" : DateFormat('y-MM-dd').format(tglBuka!)}",
-          "tgljtempo":
-              "${tglJatuhTempo == null ? "" : DateFormat('y-MM-dd').format(tglJatuhTempo!)}",
-          "saldoeom": "${saldoEOM.text.replaceAll(",", "")}",
+          "kode_bank": kodeBank.text.trim(),
+          "nm_bank": sandiBankModel!.namaLjk,
+          "nm_rek": namaRek.text.trim(),
+          "cabang": cabang.text.trim(),
+          "no_bilyet": noBilyet.text.trim(),
+          "no_rek": noRek.text,
+          "kd_rek": rekening == "Tabungan"
+              ? "10"
+              : rekening == "Giro"
+                  ? "20"
+                  : "30",
+          "nosbb": nosbbdeb.text.trim(),
+          "nama_sbb": namaSbbDeb.text.trim(),
+          "nominal": nilai.text.trim().replaceAll(",", ''),
+          "jw": jangkaWaktu.text,
+          "tglbuka": tglBuka == null ? "" : DateFormat('y-MM-dd').format(tglBuka!),
+          "tgljtempo": tglJatuhTempo == null ? "" : DateFormat('y-MM-dd').format(tglJatuhTempo!),
+          "saldoeom": saldoEOM.text.replaceAll(",", ""),
           "kode_pt": "001",
           "kode_kantor": "",
           "kode_induk": ""
         };
         // print(jsonEncode(data));
-        Setuprepository.setup(token, NetworkURL.editBank(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.editBank(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getBank();
@@ -515,29 +492,29 @@ class BankNotifier extends ChangeNotifier {
       } else {
         DialogCustom().showLoading(context);
         var data = {
-          "kode_bank": "${kodeBank.text.trim()}",
-          "nm_bank": "${sandiBankModel!.namaLjk}",
-          "nm_rek": "${namaRek.text.trim()}",
-          "no_rek": "${noRek.text}",
-          "no_bilyet": "${noBilyet.text.trim()}",
-          "cabang": "${cabang.text}",
-          "kd_rek":
-              "${rekening == "Tabungan" ? "10" : rekening == "Giro" ? "20" : "30"}",
-          "nosbb": "${inqueryGlModeldeb!.nosbb}",
-          "nama_sbb": "${inqueryGlModeldeb!.namaSbb}",
-          "nominal": "${nilai.text.trim().replaceAll(",", '')}",
-          "jw": "${jangkaWaktu.text}",
-          "tglbuka":
-              "${tglBuka == null ? "" : DateFormat('y-MM-dd').format(tglBuka!)}",
-          "tgljtempo":
-              "${tglJatuhTempo == null ? "" : DateFormat('y-MM-dd').format(tglJatuhTempo!)}",
-          "saldoeom": "${saldoEOM.text.replaceAll(",", "")}",
+          "kode_bank": kodeBank.text.trim(),
+          "nm_bank": sandiBankModel!.namaLjk,
+          "nm_rek": namaRek.text.trim(),
+          "no_rek": noRek.text,
+          "no_bilyet": noBilyet.text.trim(),
+          "cabang": cabang.text,
+          "kd_rek": rekening == "Tabungan"
+              ? "10"
+              : rekening == "Giro"
+                  ? "20"
+                  : "30",
+          "nosbb": inqueryGlModeldeb!.nosbb,
+          "nama_sbb": inqueryGlModeldeb!.namaSbb,
+          "nominal": nilai.text.trim().replaceAll(",", ''),
+          "jw": jangkaWaktu.text,
+          "tglbuka": tglBuka == null ? "" : DateFormat('y-MM-dd').format(tglBuka!),
+          "tgljtempo": tglJatuhTempo == null ? "" : DateFormat('y-MM-dd').format(tglJatuhTempo!),
+          "saldoeom": saldoEOM.text.replaceAll(",", ""),
           "kode_pt": "001",
           "kode_kantor": "",
           "kode_induk": ""
         };
-        Setuprepository.setup(token, NetworkURL.addBank(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.addBank(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getBank();

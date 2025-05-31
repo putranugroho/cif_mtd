@@ -16,8 +16,8 @@ class DashboardPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                padding: EdgeInsets.all(20),
-                child: Text(
+                padding: const EdgeInsets.all(20),
+                child: const Text(
                   "Dashboard",
                   style: TextStyle(
                     fontSize: 18,

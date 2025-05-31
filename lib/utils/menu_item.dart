@@ -5,8 +5,7 @@ class MenuItem extends StatelessWidget {
   final String? title;
   final int? position;
   final int? index;
-  const MenuItem({Key? key, this.icon, this.title, this.position, this.index})
-      : super(key: key);
+  const MenuItem({super.key, this.icon, this.title, this.position, this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +18,7 @@ class MenuItem extends StatelessWidget {
         ),
         Text(
           "$title",
-          style: TextStyle(
-              fontSize: 10,
-              color: position == index ? Colors.red[900] : Colors.grey),
+          style: TextStyle(fontSize: 10, color: position == index ? Colors.red[900] : Colors.grey),
         ),
       ],
     );

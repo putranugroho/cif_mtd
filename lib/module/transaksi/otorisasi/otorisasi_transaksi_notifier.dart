@@ -35,10 +35,9 @@ class OtorisasiTransaksiNotifier extends ChangeNotifier {
     listTransaksi.clear();
     notifyListeners();
     var data = {
-      "kode_pt": "${users!.kodePt}",
+      "kode_pt": users!.kodePt,
     };
-    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksi.add(TransaksiPendModel.fromJson(i));
@@ -47,23 +46,8 @@ class OtorisasiTransaksiNotifier extends ChangeNotifier {
           listTransasiAdd = users!.levelOtor == "null"
               ? []
               : users!.bedaKantor == "Y"
-                  ? listTransaksi
-                      .where((e) =>
-                          e.status == "PENDING" &&
-                          ((double.parse(e.nominal) >
-                                  double.parse(users!.minOtor)) &&
-                              (double.parse(e.nominal) <=
-                                  double.parse(users!.maxOtor))))
-                      .toList()
-                  : listTransaksi
-                      .where((e) =>
-                          (e.status == "PENDING") &&
-                          ((double.parse(e.nominal) >
-                                  double.parse(users!.minOtor)) &&
-                              (double.parse(e.nominal) <=
-                                  double.parse(users!.maxOtor))) &&
-                          e.kodeKantor == users!.kodeKantor)
-                      .toList();
+                  ? listTransaksi.where((e) => e.status == "PENDING" && ((double.parse(e.nominal) > double.parse(users!.minOtor)) && (double.parse(e.nominal) <= double.parse(users!.maxOtor)))).toList()
+                  : listTransaksi.where((e) => (e.status == "PENDING") && ((double.parse(e.nominal) > double.parse(users!.minOtor)) && (double.parse(e.nominal) <= double.parse(users!.maxOtor))) && e.kodeKantor == users!.kodeKantor).toList();
         }
         isLoadingData = false;
         notifyListeners();
@@ -92,9 +76,7 @@ class OtorisasiTransaksiNotifier extends ChangeNotifier {
       "otoruser": users!.namauser,
       "otorinput": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
     };
-    Setuprepository.setup(
-            token, NetworkURL.otorisasiTransaksi(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.otorisasiTransaksi(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getTransaksi();

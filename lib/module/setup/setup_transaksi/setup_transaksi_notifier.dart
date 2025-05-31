@@ -43,10 +43,10 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     isLoading = true;
     listkas.clear();
     notifyListeners();
-    var data = {"kode_pt": "${users!.kodePt}"};
-    Setuprepository.setup(
-            token, NetworkURL.getSetupKasKecil(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": users!.kodePt
+    };
+    Setuprepository.setup(token, NetworkURL.getSetupKasKecil(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listkas.add(KasKecilModel.fromJson(i));
@@ -66,14 +66,13 @@ class SetupTransaksiNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "${users!.kodePt}"};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": users!.kodePt
+    };
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        list =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        list = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         notifyListeners();
       }
     });
@@ -125,14 +124,8 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     namaTransaksi.text = setupTransModel!.namaTrans;
     nosbbdeb.text = setupTransModel!.namaDeb;
     nossbcre.text = setupTransModel!.namaKre;
-    inqueryGlModeldeb =
-        list.where((e) => e.nosbb == setupTransModel!.glDeb).isNotEmpty
-            ? list.where((e) => e.nosbb == setupTransModel!.glDeb).first
-            : null;
-    inqueryGlModelcre =
-        list.where((e) => e.nosbb == setupTransModel!.glKre).isNotEmpty
-            ? list.where((e) => e.nosbb == setupTransModel!.glKre).first
-            : null;
+    inqueryGlModeldeb = list.where((e) => e.nosbb == setupTransModel!.glDeb).isNotEmpty ? list.where((e) => e.nosbb == setupTransModel!.glDeb).first : null;
+    inqueryGlModelcre = list.where((e) => e.nosbb == setupTransModel!.glKre).isNotEmpty ? list.where((e) => e.nosbb == setupTransModel!.glKre).first : null;
     namaSbbDeb.text = setupTransModel!.glDeb;
     namaSbbCre.text = setupTransModel!.glKre;
     modul = setupTransModel!.modul;
@@ -146,15 +139,12 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     if (keyForm.currentState!.validate()) {
       if (modul == "KAS KECIL") {
         if (listkas.isNotEmpty) {
-          if (namaSbbCre.text == kasKecilModel!.nosbbKasKecil ||
-              namaSbbCre.text == kasKecilModel!.nosbbKasBon ||
-              namaSbbDeb.text == kasKecilModel!.nosbbKasKecil ||
-              namaSbbDeb.text == kasKecilModel!.nosbbKasBon) {
+          if (namaSbbCre.text == kasKecilModel!.nosbbKasKecil || namaSbbCre.text == kasKecilModel!.nosbbKasBon || namaSbbDeb.text == kasKecilModel!.nosbbKasKecil || namaSbbDeb.text == kasKecilModel!.nosbbKasBon) {
             if (editData) {
               DialogCustom().showLoading(context);
               var data = {
                 "id": setupTransModel!.id,
-                "kode_pt": "${users!.kodePt}",
+                "kode_pt": users!.kodePt,
                 "kd_trans": kodeTransaksi.text.trim(),
                 "nama_trans": namaTransaksi.text.trim(),
                 "gl_deb": namaSbbDeb.text.trim(),
@@ -162,27 +152,21 @@ class SetupTransaksiNotifier extends ChangeNotifier {
                 "modul": modul,
                 "hutang_piutang": hutangPiutang,
               };
-              Setuprepository.setup(
-                      token, NetworkURL.editSetupTrans(), jsonEncode(data))
-                  .then((value) {
+              Setuprepository.setup(token, NetworkURL.editSetupTrans(), jsonEncode(data)).then((value) {
                 Navigator.pop(context);
-                if (value['status']
-                    .toString()
-                    .toLowerCase()
-                    .contains("success")) {
+                if (value['status'].toString().toLowerCase().contains("success")) {
                   clear();
                   getSetupTrans();
                   informationDialog(context, "Information", value['message']);
                 } else {
                   clear();
-                  informationDialog(
-                      context, "Information", value['message'][0]);
+                  informationDialog(context, "Information", value['message'][0]);
                 }
               });
             } else {
               DialogCustom().showLoading(context);
               var data = {
-                "kode_pt": "${users!.kodePt}",
+                "kode_pt": users!.kodePt,
                 "kd_trans": kodeTransaksi.text.trim(),
                 "nama_trans": namaTransaksi.text.trim(),
                 "gl_deb": namaSbbDeb.text.trim(),
@@ -190,38 +174,30 @@ class SetupTransaksiNotifier extends ChangeNotifier {
                 "modul": modul,
                 "hutang_piutang": hutangPiutang,
               };
-              Setuprepository.setup(
-                      token, NetworkURL.addSetupTrans(), jsonEncode(data))
-                  .then((value) {
+              Setuprepository.setup(token, NetworkURL.addSetupTrans(), jsonEncode(data)).then((value) {
                 Navigator.pop(context);
-                if (value['status']
-                    .toString()
-                    .toLowerCase()
-                    .contains("success")) {
+                if (value['status'].toString().toLowerCase().contains("success")) {
                   clear();
                   getSetupTrans();
                   informationDialog(context, "Information", value['message']);
                 } else {
                   clear();
-                  informationDialog(
-                      context, "Information", value['message'][0]);
+                  informationDialog(context, "Information", value['message'][0]);
                 }
               });
             }
           } else {
-            informationDialog(context, "Warning",
-                "Akun setup kas kecil tidak digunakan, tidak bisa melakukan simpan setup trans. pada modul Kas Kecil");
+            informationDialog(context, "Warning", "Akun setup kas kecil tidak digunakan, tidak bisa melakukan simpan setup trans. pada modul Kas Kecil");
           }
         } else {
-          informationDialog(context, "Warning",
-              "Tidak ada akun setup kas kecil, silahkan cek akun setup kas kecil");
+          informationDialog(context, "Warning", "Tidak ada akun setup kas kecil, silahkan cek akun setup kas kecil");
         }
       } else {
         if (editData) {
           DialogCustom().showLoading(context);
           var data = {
             "id": setupTransModel!.id,
-            "kode_pt": "${users!.kodePt}",
+            "kode_pt": users!.kodePt,
             "kd_trans": kodeTransaksi.text.trim(),
             "nama_trans": namaTransaksi.text.trim(),
             "gl_deb": namaSbbDeb.text.trim(),
@@ -229,9 +205,7 @@ class SetupTransaksiNotifier extends ChangeNotifier {
             "modul": modul,
             "hutang_piutang": hutangPiutang,
           };
-          Setuprepository.setup(
-                  token, NetworkURL.editSetupTrans(), jsonEncode(data))
-              .then((value) {
+          Setuprepository.setup(token, NetworkURL.editSetupTrans(), jsonEncode(data)).then((value) {
             Navigator.pop(context);
             if (value['status'].toString().toLowerCase().contains("success")) {
               clear();
@@ -245,7 +219,7 @@ class SetupTransaksiNotifier extends ChangeNotifier {
         } else {
           DialogCustom().showLoading(context);
           var data = {
-            "kode_pt": "${users!.kodePt}",
+            "kode_pt": users!.kodePt,
             "kd_trans": kodeTransaksi.text.trim(),
             "nama_trans": namaTransaksi.text.trim(),
             "gl_deb": namaSbbDeb.text.trim(),
@@ -253,9 +227,7 @@ class SetupTransaksiNotifier extends ChangeNotifier {
             "modul": modul,
             "hutang_piutang": hutangPiutang,
           };
-          Setuprepository.setup(
-                  token, NetworkURL.addSetupTrans(), jsonEncode(data))
-              .then((value) {
+          Setuprepository.setup(token, NetworkURL.addSetupTrans(), jsonEncode(data)).then((value) {
             Navigator.pop(context);
             if (value['status'].toString().toLowerCase().contains("success")) {
               clear();
@@ -277,7 +249,7 @@ class SetupTransaksiNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -285,11 +257,11 @@ class SetupTransaksiNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin menghapus (${setupTransModel!.kdTrans}) ${setupTransModel!.namaTrans}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -301,7 +273,7 @@ class SetupTransaksiNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -326,9 +298,7 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     var data = {
       "id": setupTransModel!.id,
     };
-    Setuprepository.setup(
-            token, NetworkURL.deleteSetupTrans(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.deleteSetupTrans(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getSetupTrans();
@@ -382,7 +352,7 @@ class SetupTransaksiNotifier extends ChangeNotifier {
       notifyListeners();
 
       var data = {
-        "kode_pt": "${users!.kodePt}",
+        "kode_pt": users!.kodePt,
       };
 
       try {
@@ -393,14 +363,8 @@ class SetupTransaksiNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -421,9 +385,10 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     isLoading = true;
     listData.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getSetupTrans(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getSetupTrans(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listData.add(SetupTransModel.fromJson(i));

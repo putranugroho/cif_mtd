@@ -24,8 +24,8 @@ class SetupSbbPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                padding: EdgeInsets.all(20),
-                child: Row(
+                padding: const EdgeInsets.all(20),
+                child: const Row(
                   children: [
                     Expanded(
                       child: Text(
@@ -39,7 +39,7 @@ class SetupSbbPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Expanded(
@@ -65,7 +65,7 @@ class SetupSbbPage extends StatelessWidget {
                           ),
                         )
                       : Container(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Form(
                             key: value.keyForm,
                             child: Column(
@@ -73,28 +73,25 @@ class SetupSbbPage extends StatelessWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: 150,
-                                      child: Text(
+                                      child: const Text(
                                         "Akun Kas Kecil",
-                                        style: const TextStyle(fontSize: 14),
+                                        style: TextStyle(fontSize: 14),
                                       ),
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: 375,
                                       child: TypeAheadField<InqueryGlModel>(
                                         controller: value.nosbbdeb,
-                                        suggestionsCallback: (search) =>
-                                            value.getInquery(search),
-                                        builder:
-                                            (context, controller, focusNode) {
+                                        suggestionsCallback: (search) => value.getInquery(search),
+                                        builder: (context, controller, focusNode) {
                                           return TextField(
                                               controller: controller,
                                               focusNode: focusNode,
-                                              enabled:
-                                                  value.setupTransModel == null,
+                                              enabled: value.setupTransModel == null,
                                               autofocus: true,
-                                              decoration: InputDecoration(
+                                              decoration: const InputDecoration(
                                                 border: OutlineInputBorder(),
                                                 labelText: 'Cari Akun',
                                               ));
@@ -111,10 +108,10 @@ class SetupSbbPage extends StatelessWidget {
                                         },
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 16,
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: 150,
                                       child: TextFormField(
                                         // enabled: false,
@@ -137,41 +134,37 @@ class SetupSbbPage extends StatelessWidget {
                                           fillColor: Colors.grey[200],
                                           hintText: "Nomor Akun",
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),
                                     )
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 24,
                                 ),
                                 Row(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: 150,
-                                      child: Text(
+                                      child: const Text(
                                         "Akun Kas Bon",
-                                        style: const TextStyle(fontSize: 14),
+                                        style: TextStyle(fontSize: 14),
                                       ),
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: 375,
                                       child: TypeAheadField<InqueryGlModel>(
                                         controller: value.nossbcre,
-                                        suggestionsCallback: (search) =>
-                                            value.getInquery(search),
-                                        builder:
-                                            (context, controller, focusNode) {
+                                        suggestionsCallback: (search) => value.getInquery(search),
+                                        builder: (context, controller, focusNode) {
                                           return TextField(
                                               controller: controller,
                                               focusNode: focusNode,
-                                              enabled:
-                                                  value.setupTransModel == null,
+                                              enabled: value.setupTransModel == null,
                                               autofocus: true,
-                                              decoration: InputDecoration(
+                                              decoration: const InputDecoration(
                                                 border: OutlineInputBorder(),
                                                 labelText: 'Cari Akun',
                                               ));
@@ -188,10 +181,10 @@ class SetupSbbPage extends StatelessWidget {
                                         },
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 16,
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: 150,
                                       child: TextFormField(
                                         // enabled: false,
@@ -214,15 +207,14 @@ class SetupSbbPage extends StatelessWidget {
                                           fillColor: Colors.grey[200],
                                           hintText: "Nomor Akun",
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),
                                     )
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 ),
                                 Row(

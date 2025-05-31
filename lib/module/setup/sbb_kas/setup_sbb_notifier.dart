@@ -22,10 +22,10 @@ class SetupSbbNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(
-            token, NetworkURL.getSetupKasKecil(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getSetupKasKecil(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(KasKecilModel.fromJson(i));
@@ -61,7 +61,9 @@ class SetupSbbNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -71,14 +73,8 @@ class SetupSbbNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -103,14 +99,8 @@ class SetupSbbNotifier extends ChangeNotifier {
   pilihTransModel(SetupTransModel value) {
     setupTransModel = value;
     namaTransaksi.text = setupTransModel!.kdTrans;
-    inqueryGlModeldeb =
-        listGl.where((e) => e.nosbb == setupTransModel!.glDeb).isEmpty
-            ? null
-            : listGl.where((e) => e.nosbb == setupTransModel!.glDeb).first;
-    inqueryGlModelcre =
-        listGl.where((e) => e.nosbb == setupTransModel!.glKre).isEmpty
-            ? null
-            : listGl.where((e) => e.nosbb == setupTransModel!.glKre).first;
+    inqueryGlModeldeb = listGl.where((e) => e.nosbb == setupTransModel!.glDeb).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glDeb).first;
+    inqueryGlModelcre = listGl.where((e) => e.nosbb == setupTransModel!.glKre).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glKre).first;
     nosbbdeb.text = setupTransModel!.namaDeb;
     namaSbbDeb.text = setupTransModel!.glDeb;
     nossbcre.text = setupTransModel!.namaKre;
@@ -121,14 +111,13 @@ class SetupSbbNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     listGl.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        listGl =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         getSetupkaskecil();
         notifyListeners();
       }
@@ -174,14 +163,12 @@ class SetupSbbNotifier extends ChangeNotifier {
     DialogCustom().showLoading(context);
     var data = {
       "kode_pt": "001",
-      "nosbb_kas_kecil": "${namaSbbDeb.text}",
-      "namasbb_kaskecil": "${nosbbdeb.text}",
-      "nosbb_kas_bon": "${namaSbbCre.text}",
-      "namasbb_kasbon": "${nossbcre.text}",
+      "nosbb_kas_kecil": namaSbbDeb.text,
+      "namasbb_kaskecil": nosbbdeb.text,
+      "nosbb_kas_bon": namaSbbCre.text,
+      "namasbb_kasbon": nossbcre.text,
     };
-    Setuprepository.setup(
-            token, NetworkURL.addSetupKasKecil(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.addSetupKasKecil(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         informationDialog(context, "Information", value['message']);

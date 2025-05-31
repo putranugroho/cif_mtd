@@ -27,8 +27,7 @@ class CoaNotifier extends ChangeNotifier {
       "kode_pt": "001",
     };
     notifyListeners();
-    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data)).then((value) {
       if (value['status'] == "Success") {
         for (Map<String, dynamic> i in value['data']) {
           listKantor.add(KantorModel.fromJson(i));
@@ -48,10 +47,10 @@ class CoaNotifier extends ChangeNotifier {
     isLoading = true;
     listSubtree.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(
-            token, NetworkURL.getMasterGlSubtree(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getMasterGlSubtree(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listSubtree.add(MasterglSubtreModel.fromJson(i));
@@ -75,8 +74,7 @@ class CoaNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    Setuprepository.setup(token, NetworkURL.getMasterGl(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getMasterGl(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(CoaModel.fromJson(i));
@@ -176,13 +174,13 @@ class CoaNotifier extends ChangeNotifier {
   }
 
   updateHeader() {
-    result = noHeader.text + "000000000";
+    result = "${noHeader.text}000000000";
     resulttext.text = result;
     notifyListeners();
   }
 
   updatebb() {
-    result = header!.nobb.substring(0, 3) + noBb.text.trim() + "000000";
+    result = "${header!.nobb.substring(0, 3)}${noBb.text.trim()}000000";
     resulttext.text = result;
     notifyListeners();
   }
@@ -215,19 +213,19 @@ class CoaNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
+                  const Text(
                     "Anda yakin menjalankan otorisasi Master GL ke semua kantor?",
                     style: TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -239,7 +237,7 @@ class CoaNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -265,9 +263,9 @@ class CoaNotifier extends ChangeNotifier {
     for (var i = 0; i < listKantor.length; i++) {
       listTmp.add(
         {
-          "kode_pt": "${listKantor[i].kodePt}",
-          "kode_kantor": "${listKantor[i].kodeKantor}",
-          "kode_induk": "${listKantor[i].kodeInduk}"
+          "kode_pt": listKantor[i].kodePt,
+          "kode_kantor": listKantor[i].kodeKantor,
+          "kode_induk": listKantor[i].kodeInduk
         },
       );
     }
@@ -279,8 +277,7 @@ class CoaNotifier extends ChangeNotifier {
       "userterm": '114.80.64.90',
       "data": listTmp,
     };
-    Setuprepository.setup(token, NetworkURL.otorisasi(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.otorisasi(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['code'] == "000") {
         informationDialog(context, "Warning", value['message']);
@@ -296,7 +293,7 @@ class CoaNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -304,11 +301,11 @@ class CoaNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin menghapus ${coaModel!.namaSbb}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -320,7 +317,7 @@ class CoaNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -346,7 +343,7 @@ class CoaNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -354,11 +351,11 @@ class CoaNotifier extends ChangeNotifier {
                 children: [
                   Text(
                     "Anda yakin tutup ${coaModel!.namaSbb}?",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -370,7 +367,7 @@ class CoaNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -397,8 +394,7 @@ class CoaNotifier extends ChangeNotifier {
       "userinput": "Testing",
       "userterm": "114.80.30.143",
     };
-    Setuprepository.setup(token, NetworkURL.tutup(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.tutup(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getMasterGlSubtree();
@@ -420,8 +416,7 @@ class CoaNotifier extends ChangeNotifier {
       "userinput": "Testing",
       "userterm": "114.80.30.143",
     };
-    Setuprepository.setup(token, NetworkURL.deleteMasterGl(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.deleteMasterGl(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getMasterGlSubtree();
@@ -468,32 +463,55 @@ class CoaNotifier extends ChangeNotifier {
           "kode_induk": "001",
           "userinput": "Testing",
           "userterm": "114.80.30.143",
-          "gol_acc":
-              "${golongan == "Aktiva" ? "1" : golongan == "Pasiva" ? "2" : golongan == "Pendapatan" ? "3" : golongan == "Biaya" ? "4" : "5"}",
-          "jns_acc":
-              "${jnsAcc == "Header" ? "A" : jnsAcc == "Buku Besar" ? "B" : jnsAcc == "Sub Buku Besar" ? "C" : "C"}",
-          "nobb":
-              "${jnsAcc == "Header" ? resulttext.text.trim() : jnsAcc == "Buku Besar" ? header!.nosbb : bukuBesar!.nosbb}",
-          "nosbb": "${resulttext.text.trim()}",
-          "nama_sbb": "${namaSbb.text.trim()}",
-          "type_posting":
-              "${jnsAcc == "Header" ? "N" : jnsAcc == "Buku Besar" ? "N" : typePosting}",
+          "gol_acc": golongan == "Aktiva"
+              ? "1"
+              : golongan == "Pasiva"
+                  ? "2"
+                  : golongan == "Pendapatan"
+                      ? "3"
+                      : golongan == "Biaya"
+                          ? "4"
+                          : "5",
+          "jns_acc": jnsAcc == "Header"
+              ? "A"
+              : jnsAcc == "Buku Besar"
+                  ? "B"
+                  : jnsAcc == "Sub Buku Besar"
+                      ? "C"
+                      : "C",
+          "nobb": jnsAcc == "Header"
+              ? resulttext.text.trim()
+              : jnsAcc == "Buku Besar"
+                  ? header!.nosbb
+                  : bukuBesar!.nosbb,
+          "nosbb": resulttext.text.trim(),
+          "nama_sbb": namaSbb.text.trim(),
+          "type_posting": "${jnsAcc == "Header" ? "N" : jnsAcc == "Buku Besar" ? "N" : typePosting}",
           "sbb_khusus": "",
-          "limit_debet":
-              "${limitdebet.text.isEmpty ? "0" : limitdebet.text.replaceAll(",", "")}",
-          "limit_kredit":
-              "${limitkredit.text.isEmpty ? "0" : limitkredit.text.replaceAll(",", "")}",
-          "akun_perantara":
-              "${jnsAcc == "Sub Buku Besar" ? bukuBesar!.akunPerantara : perantara ? "Y" : "N"}",
-          "hutang":
-              "${jnsAcc == "Sub Buku Besar" ? bukuBesar!.hutang : hutangPiutang == null ? "N" : hutangPiutang == "HUTANG" ? "Y" : "N"}",
-          "piutang":
-              "${jnsAcc == "Sub Buku Besar" ? bukuBesar!.piutang : hutangPiutang == null ? "N" : hutangPiutang == "PIUTANG" ? "Y" : "N"}",
+          "limit_debet": limitdebet.text.isEmpty ? "0" : limitdebet.text.replaceAll(",", ""),
+          "limit_kredit": limitkredit.text.isEmpty ? "0" : limitkredit.text.replaceAll(",", ""),
+          "akun_perantara": jnsAcc == "Sub Buku Besar"
+              ? bukuBesar!.akunPerantara
+              : perantara
+                  ? "Y"
+                  : "N",
+          "hutang": jnsAcc == "Sub Buku Besar"
+              ? bukuBesar!.hutang
+              : hutangPiutang == null
+                  ? "N"
+                  : hutangPiutang == "HUTANG"
+                      ? "Y"
+                      : "N",
+          "piutang": jnsAcc == "Sub Buku Besar"
+              ? bukuBesar!.piutang
+              : hutangPiutang == null
+                  ? "N"
+                  : hutangPiutang == "PIUTANG"
+                      ? "Y"
+                      : "N",
         };
         print(jsonEncode(data));
-        Setuprepository.setup(
-                token, NetworkURL.editMasterGl(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.editMasterGl(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);
@@ -513,30 +531,54 @@ class CoaNotifier extends ChangeNotifier {
           "kode_induk": "001",
           "userinput": "Testing",
           "userterm": "114.80.30.143",
-          "gol_acc":
-              "${golongan == "Aktiva" ? "1" : golongan == "Pasiva" ? "2" : golongan == "Pendapatan" ? "3" : golongan == "Biaya" ? "4" : "5"}",
-          "jns_acc":
-              "${jnsAcc == "Header" ? "A" : jnsAcc == "Buku Besar" ? "B" : jnsAcc == "Sub Buku Besar" ? "C" : "C"}",
-          "nobb":
-              "${jnsAcc == "Header" ? resulttext.text.trim() : jnsAcc == "Buku Besar" ? header!.nosbb : bukuBesar!.nosbb}",
-          "nosbb": "${resulttext.text.trim()}",
-          "nama_sbb": "${namaSbb.text.trim()}",
-          "type_posting":
-              "${jnsAcc == "Header" ? "N" : jnsAcc == "Buku Besar" ? "N" : typePosting}",
+          "gol_acc": golongan == "Aktiva"
+              ? "1"
+              : golongan == "Pasiva"
+                  ? "2"
+                  : golongan == "Pendapatan"
+                      ? "3"
+                      : golongan == "Biaya"
+                          ? "4"
+                          : "5",
+          "jns_acc": jnsAcc == "Header"
+              ? "A"
+              : jnsAcc == "Buku Besar"
+                  ? "B"
+                  : jnsAcc == "Sub Buku Besar"
+                      ? "C"
+                      : "C",
+          "nobb": jnsAcc == "Header"
+              ? resulttext.text.trim()
+              : jnsAcc == "Buku Besar"
+                  ? header!.nosbb
+                  : bukuBesar!.nosbb,
+          "nosbb": resulttext.text.trim(),
+          "nama_sbb": namaSbb.text.trim(),
+          "type_posting": "${jnsAcc == "Header" ? "N" : jnsAcc == "Buku Besar" ? "N" : typePosting}",
           "sbb_khusus": "",
-          "limit_debet":
-              "${limitdebet.text.isEmpty ? "0" : limitdebet.text.replaceAll(",", "")}",
-          "limit_kredit":
-              "${limitkredit.text.isEmpty ? "0" : limitkredit.text.replaceAll(",", "")}",
-          "akun_perantara":
-              "${jnsAcc == "Sub Buku Besar" ? bukuBesar!.akunPerantara : perantara ? "Y" : "N"}",
-          "hutang":
-              "${jnsAcc == "Sub Buku Besar" ? bukuBesar!.hutang : hutangPiutang == null ? "N" : hutangPiutang == "HUTANG" ? "Y" : "N"}",
-          "piutang":
-              "${jnsAcc == "Sub Buku Besar" ? bukuBesar!.piutang : hutangPiutang == null ? "N" : hutangPiutang == "PIUTANG" ? "Y" : "N"}",
+          "limit_debet": limitdebet.text.isEmpty ? "0" : limitdebet.text.replaceAll(",", ""),
+          "limit_kredit": limitkredit.text.isEmpty ? "0" : limitkredit.text.replaceAll(",", ""),
+          "akun_perantara": jnsAcc == "Sub Buku Besar"
+              ? bukuBesar!.akunPerantara
+              : perantara
+                  ? "Y"
+                  : "N",
+          "hutang": jnsAcc == "Sub Buku Besar"
+              ? bukuBesar!.hutang
+              : hutangPiutang == null
+                  ? "N"
+                  : hutangPiutang == "HUTANG"
+                      ? "Y"
+                      : "N",
+          "piutang": jnsAcc == "Sub Buku Besar"
+              ? bukuBesar!.piutang
+              : hutangPiutang == null
+                  ? "N"
+                  : hutangPiutang == "PIUTANG"
+                      ? "Y"
+                      : "N",
         };
-        Setuprepository.setup(token, NetworkURL.addMasterGl(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.addMasterGl(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);
@@ -559,10 +601,22 @@ class CoaNotifier extends ChangeNotifier {
     // confirm();
     dialog = true;
     editData = true;
-    golongan =
-        "${coaModel!.golAcc == "1" ? "Aktiva" : coaModel!.golAcc == "2" ? "Pasiva" : coaModel!.golAcc == "3" ? "Pendapatan" : coaModel!.golAcc == "4" ? "Biaya" : "Pos Administrative"}";
-    jnsAcc =
-        "${coaModel!.jnsAcc == "A" ? "Header" : coaModel!.jnsAcc == "B" ? "Buku Besar" : coaModel!.jnsAcc == "C" ? "Sub Buku Besar" : "Sub Buku Besar"}";
+    golongan = coaModel!.golAcc == "1"
+        ? "Aktiva"
+        : coaModel!.golAcc == "2"
+            ? "Pasiva"
+            : coaModel!.golAcc == "3"
+                ? "Pendapatan"
+                : coaModel!.golAcc == "4"
+                    ? "Biaya"
+                    : "Pos Administrative";
+    jnsAcc = coaModel!.jnsAcc == "A"
+        ? "Header"
+        : coaModel!.jnsAcc == "B"
+            ? "Buku Besar"
+            : coaModel!.jnsAcc == "C"
+                ? "Sub Buku Besar"
+                : "Sub Buku Besar";
     if (coaModel!.jnsAcc == "A") {
       noHeader.text = coaModel!.nosbb.substring(0, 3);
       resulttext.text = coaModel!.nosbb;

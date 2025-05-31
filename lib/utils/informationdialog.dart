@@ -18,13 +18,9 @@ void informationDialog(BuildContext context, String label, String content) {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(label,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text(label, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 16),
-                  Text(content,
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w400)),
+                  Text(content, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
                 ],
               ),
               const SizedBox(height: 16),
@@ -42,7 +38,7 @@ void informationDialog(BuildContext context, String label, String content) {
                           color: colorPrimary,
                           border: Border.all(width: 2, color: colorPrimary),
                         ),
-                        child: Text(
+                        child: const Text(
                           'Close',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white),

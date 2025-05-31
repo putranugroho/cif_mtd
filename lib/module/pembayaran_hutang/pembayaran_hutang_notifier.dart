@@ -5,7 +5,6 @@ import 'package:accounting/network/network.dart';
 import 'package:accounting/repository/SetupRepository.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 
 class PembayaranHutangNotifier extends ChangeNotifier {
@@ -24,13 +23,14 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   }
 
   List<CustomerSupplierModel> listCs = [];
-  Future<List<CustomerSupplierModel>> getCustomerSupplierQuery(
-      String query) async {
+  Future<List<CustomerSupplierModel>> getCustomerSupplierQuery(String query) async {
     if (query.isNotEmpty && query.length > 2) {
       listCs.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -44,14 +44,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
           for (Map<String, dynamic> i in response['data']) {
             listCs.add(CustomerSupplierModel.fromJson(i));
           }
-          return listCs
-              .where((model) => jenis == 1
-                  ? (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
-                      (model.golCust == "1" || model.golCust == "3"))
-                  : (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
-                          model.golCust == "2" ||
-                      model.golCust == "3"))
-              .toList();
+          return listCs.where((model) => jenis == 1 ? (model.nmSif.toLowerCase().contains(query.toLowerCase()) && (model.golCust == "1" || model.golCust == "3")) : (model.nmSif.toLowerCase().contains(query.toLowerCase()) && model.golCust == "2" || model.golCust == "3")).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -69,14 +62,13 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        list =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        list = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         notifyListeners();
       }
     });
@@ -127,7 +119,9 @@ class PembayaranHutangNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -137,14 +131,8 @@ class PembayaranHutangNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
         }
         notifyListeners();
       } catch (e) {

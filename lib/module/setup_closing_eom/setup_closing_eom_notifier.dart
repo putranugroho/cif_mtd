@@ -25,9 +25,10 @@ class SetupClosingEomNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getClosingEom(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getClosingEom(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(ClosingEomSetupModel.fromJson(i));
@@ -40,8 +41,7 @@ class SetupClosingEomNotifier extends ChangeNotifier {
             notifyListeners();
           } else {
             jenisTrans = false;
-            DateTime futureDate =
-                getDateMonthsAgo(int.parse(closingEomSetupModel!.bulan));
+            DateTime futureDate = getDateMonthsAgo(int.parse(closingEomSetupModel!.bulan));
             closingDate.text = DateFormat('MMMM').format(futureDate);
             backdatemundur.text = closingEomSetupModel!.bulan;
             notifyListeners();
@@ -76,32 +76,27 @@ class SetupClosingEomNotifier extends ChangeNotifier {
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
             return Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               child: Container(
                 width: 500,
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    const Text(
                       "Pilih Periode",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
-                    Container(
+                    SizedBox(
                       height: 100,
                       child: ScrollDatePicker(
-                          maximumDate: DateTime(int.parse(
-                                  DateFormat('y').format(DateTime.now())) +
-                              1),
-                          options:
-                              DatePickerOptions(backgroundColor: Colors.white),
-                          viewType: [
+                          maximumDate: DateTime(int.parse(DateFormat('y').format(DateTime.now())) + 1),
+                          options: const DatePickerOptions(backgroundColor: Colors.white),
+                          viewType: const [
                             DatePickerViewType.month,
                           ],
                           selectedDate: now,
@@ -113,25 +108,21 @@ class SetupClosingEomNotifier extends ChangeNotifier {
                             });
                           }),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     InkWell(
                       onTap: () {
                         Navigator.pop(context);
-                        final int selisihBulan =
-                            monthDifference(now, DateTime.now());
+                        final int selisihBulan = monthDifference(now, DateTime.now());
                         print('Bulan ke belakang: $selisihBulan bulan');
                         backdatemundur.text = selisihBulan.toString();
                         notifyListeners();
                       },
                       child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                        decoration: BoxDecoration(
-                            color: colorPrimary,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Text(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                        decoration: BoxDecoration(color: colorPrimary, borderRadius: BorderRadius.circular(8)),
+                        child: const Text(
                           "Simpan",
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -156,11 +147,9 @@ class SetupClosingEomNotifier extends ChangeNotifier {
         var data = {
           "kode_pt": "001",
           "number": jenisTrans ? "N" : "Y",
-          "bulan": "${backdatemundur.text}",
+          "bulan": backdatemundur.text,
         };
-        Setuprepository.setup(
-                token, NetworkURL.addClosingEom(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.addClosingEom(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getClosingEom();
@@ -173,14 +162,12 @@ class SetupClosingEomNotifier extends ChangeNotifier {
       } else {
         DialogCustom().showLoading(context);
         var data = {
-          "id": closingEomSetupModel == null ? null : closingEomSetupModel!.id,
+          "id": closingEomSetupModel?.id,
           "kode_pt": "001",
           "number": jenisTrans ? "N" : "Y",
-          "bulan": jenisTrans ? closingDate.text : "${backdatemundur.text}",
+          "bulan": jenisTrans ? closingDate.text : backdatemundur.text,
         };
-        Setuprepository.setup(
-                token, NetworkURL.editClosingEom(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.editClosingEom(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getClosingEom();

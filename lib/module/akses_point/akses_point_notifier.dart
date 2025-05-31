@@ -29,25 +29,20 @@ class AksesPointNotifier extends ChangeNotifier {
         var data = {
           "id": aksesPointModel!.id,
           "kode_pt": "001",
-          "no_akses": "${noAkses.text}",
-          "akses_id": "${aksesId.text}",
-          "kode_kantor": "${kantor!.kodeKantor}",
-          "nama_kantor": "${kantor!.namaKantor}",
-          "lokasi": "${lokasi}",
-          "type": "${akses}",
-          "alamat": "${alamat.text}",
-          "keterangan": "${keterangan.text}",
+          "no_akses": noAkses.text,
+          "akses_id": aksesId.text,
+          "kode_kantor": kantor!.kodeKantor,
+          "nama_kantor": kantor!.namaKantor,
+          "lokasi": "$lokasi",
+          "type": "$akses",
+          "alamat": alamat.text,
+          "keterangan": keterangan.text,
         };
-        Setuprepository.updatesetup(
-                token,
-                NetworkURL.editAksesPoint(aksesPointModel!.id),
-                jsonEncode(data))
-            .then((value) {
+        Setuprepository.updatesetup(token, NetworkURL.editAksesPoint(aksesPointModel!.id), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getAksesPoint();
-            informationDialog(
-                context, "Information", "Akses Point created Successfully");
+            informationDialog(context, "Information", "Akses Point created Successfully");
             clear();
             notifyListeners();
           } else {
@@ -59,23 +54,20 @@ class AksesPointNotifier extends ChangeNotifier {
         DialogCustom().showLoading(context);
         var data = {
           "kode_pt": "001",
-          "no_akses": "${noAkses.text}",
-          "akses_id": "${aksesId.text}",
-          "kode_kantor": "${kantor!.kodeKantor}",
-          "nama_kantor": "${kantor!.namaKantor}",
-          "lokasi": "${lokasi}",
-          "type": "${akses}",
-          "alamat": "${alamat.text}",
-          "keterangan": "${keterangan.text}",
+          "no_akses": noAkses.text,
+          "akses_id": aksesId.text,
+          "kode_kantor": kantor!.kodeKantor,
+          "nama_kantor": kantor!.namaKantor,
+          "lokasi": "$lokasi",
+          "type": "$akses",
+          "alamat": alamat.text,
+          "keterangan": keterangan.text,
         };
-        Setuprepository.setup(
-                token, NetworkURL.insertAksesPoint(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.insertAksesPoint(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getAksesPoint();
-            informationDialog(
-                context, "Information", "Akses Point created Successfully");
+            informationDialog(context, "Information", "Akses Point created Successfully");
             clear();
             notifyListeners();
           } else {
@@ -110,8 +102,7 @@ class AksesPointNotifier extends ChangeNotifier {
     print(aksesPointModel!.kodeKantor);
     print(aksesPointModel!.id);
 
-    kantor =
-        list.where((e) => e.kodeKantor == aksesPointModel!.kodeKantor).first;
+    kantor = list.where((e) => e.kodeKantor == aksesPointModel!.kodeKantor).first;
     lokasi = aksesPointModel!.lokasi;
     akses = aksesPointModel!.type;
     alamat.text = aksesPointModel!.alamat;
@@ -125,9 +116,10 @@ class AksesPointNotifier extends ChangeNotifier {
     listData.clear();
     isLoading = true;
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getAksesPoint(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getAksesPoint(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listData.add(AksesPointModel.fromJson(i));
@@ -150,8 +142,7 @@ class AksesPointNotifier extends ChangeNotifier {
       "kode_pt": "001",
     };
     notifyListeners();
-    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data)).then((value) {
       if (value['status'] == "Success") {
         for (Map<String, dynamic> i in value['data']) {
           list.add(KantorModel.fromJson(i));

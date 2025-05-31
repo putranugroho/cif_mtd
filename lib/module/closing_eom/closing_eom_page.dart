@@ -40,7 +40,7 @@ class ClosingEomPage extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   height: MediaQuery.of(context).size.height,
                   child: SfDataGrid(
                     headerRowHeight: 40,
@@ -58,10 +58,10 @@ class ClosingEomPage extends StatelessWidget {
                           width: 100,
                           columnName: 'status',
                           label: Container(
-                              padding: EdgeInsets.all(6),
+                              padding: const EdgeInsets.all(6),
                               color: colorPrimary,
                               alignment: Alignment.center,
-                              child: Text('Status',
+                              child: const Text('Status',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w300,
                                     fontSize: 12,
@@ -70,10 +70,10 @@ class ClosingEomPage extends StatelessWidget {
                       GridColumn(
                           columnName: 'userid',
                           label: Container(
-                              padding: EdgeInsets.all(6),
+                              padding: const EdgeInsets.all(6),
                               color: colorPrimary,
                               alignment: Alignment.center,
-                              child: Text('User ID',
+                              child: const Text('User ID',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w300,
                                     color: Colors.white,
@@ -84,8 +84,8 @@ class ClosingEomPage extends StatelessWidget {
                           label: Container(
                               color: colorPrimary,
                               alignment: Alignment.center,
-                              padding: EdgeInsets.all(6),
-                              child: Text('Nama User',
+                              padding: const EdgeInsets.all(6),
+                              child: const Text('Nama User',
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w300,
@@ -96,8 +96,8 @@ class ClosingEomPage extends StatelessWidget {
                           label: Container(
                               color: colorPrimary,
                               alignment: Alignment.center,
-                              padding: EdgeInsets.all(6),
-                              child: Text('Tanggal Kadaluarsa',
+                              padding: const EdgeInsets.all(6),
+                              child: const Text('Tanggal Kadaluarsa',
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w300,
@@ -108,8 +108,8 @@ class ClosingEomPage extends StatelessWidget {
                           label: Container(
                               color: colorPrimary,
                               alignment: Alignment.center,
-                              padding: EdgeInsets.all(6),
-                              child: Text('Level User',
+                              padding: const EdgeInsets.all(6),
+                              child: const Text('Level User',
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w300,
@@ -120,8 +120,8 @@ class ClosingEomPage extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(20),
+                decoration: const BoxDecoration(
                     border: Border(
                         top: BorderSide(
                   width: 1,
@@ -129,7 +129,7 @@ class ClosingEomPage extends StatelessWidget {
                 ))),
                 child: Row(
                   children: [
-                    Expanded(child: SizedBox()),
+                    const Expanded(child: SizedBox()),
                     ButtonPrimary(
                       onTap: () {
                         value.konfirmasi();
@@ -189,7 +189,7 @@ class DetailDataSource extends DataGridSource {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               width: 300,
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: colorPrimary,
@@ -198,10 +198,10 @@ class DetailDataSource extends DataGridSource {
                   color: colorPrimary,
                 ),
               ),
-              child: Text(
+              child: const Text(
                 "Aktifkan",
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
                 ),
               ),
@@ -211,7 +211,7 @@ class DetailDataSource extends DataGridSource {
           return Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
-            child: Container(
+            child: SizedBox(
                 width: 100,
                 child: int.parse(e.value) % 2 == 0
                     ? Container(

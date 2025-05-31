@@ -6,9 +6,7 @@ class ProShimmer extends StatelessWidget {
   final double height;
   final double width;
   final double radius;
-  const ProShimmer(
-      {Key? key, required this.height, required this.width, this.radius = 0})
-      : super(key: key);
+  const ProShimmer({super.key, required this.height, required this.width, this.radius = 0});
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -18,8 +16,7 @@ class ProShimmer extends StatelessWidget {
         highlightColor: Colors.white,
         baseColor: Colors.grey,
         child: Container(
-          decoration: BoxDecoration(
-              color: Colors.grey, borderRadius: BorderRadius.circular(radius)),
+          decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(radius)),
         ),
       ),
     );

@@ -31,8 +31,8 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(20),
-                      child: Row(
+                      padding: const EdgeInsets.all(20),
+                      child: const Row(
                         children: [
                           Expanded(
                             child: Text(
@@ -48,7 +48,7 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         height: MediaQuery.of(context).size.height,
                         child: SfDataGrid(
                           headerRowHeight: 40,
@@ -66,10 +66,10 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 width: 80,
                                 columnName: 'aksi',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Aksi',
+                                    child: const Text('Aksi',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           fontSize: 12,
@@ -79,10 +79,10 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 width: 100,
                                 columnName: 'status',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Status',
+                                    child: const Text('Status',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -92,10 +92,10 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 width: 100,
                                 columnName: 'tgl_val',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Tanggal Valuta',
+                                    child: const Text('Tanggal Valuta',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -105,10 +105,10 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 width: 100,
                                 columnName: 'tgl_trans',
                                 label: Container(
-                                    padding: EdgeInsets.all(6),
+                                    padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: Text('Tanggal Input',
+                                    child: const Text('Tanggal Input',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           color: Colors.white,
@@ -120,8 +120,8 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nomor Dokumen',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nomor Dokumen',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -133,8 +133,8 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nomor Referensi',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nomor Referensi',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -146,8 +146,8 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Modul',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Modul',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -159,8 +159,8 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Keterangan Otorisasi',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Keterangan Otorisasi',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -172,8 +172,8 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nominal',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nominal',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -185,8 +185,8 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama Akun Debet',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nama Akun Debet',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -198,8 +198,8 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Nama Akun Kredit',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Nama Akun Kredit',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -211,8 +211,8 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Keterangan',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Keterangan',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -224,8 +224,8 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Akun Debet',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Akun Debet',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -237,8 +237,8 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 label: Container(
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    padding: EdgeInsets.all(6),
-                                    child: Text('Akun Kredit',
+                                    padding: const EdgeInsets.all(6),
+                                    child: const Text('Akun Kredit',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -260,7 +260,7 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                     ? Container(
                         color: Colors.black.withOpacity(0.5),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               Positioned(
                 top: 0,
@@ -269,8 +269,8 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                 child: value.dialog
                     ? Container(
                         width: 600,
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
+                        padding: const EdgeInsets.all(20),
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                         ),
                         child: Column(
@@ -278,7 +278,7 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   child: Text(
                                     "Otorisasi Detail",
                                     style: TextStyle(
@@ -292,111 +292,103 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                   child: Container(
                                     width: 40,
                                     height: 40,
-                                    padding: EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey[200],
-                                        shape: BoxShape.circle),
-                                    child: Icon(Icons.close),
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                    child: const Icon(Icons.close),
                                   ),
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 32,
                             ),
                             Expanded(
                                 child: ListView(
                               children: [
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Tanggal",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
+                                    SizedBox(width: 5),
                                   ],
                                 ),
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                Text(
-                                    "${value.transaksiPendModel!.inputtgljam}"),
+                                Text(value.transaksiPendModel!.inputtgljam),
                                 const SizedBox(height: 16),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Modul",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
+                                    SizedBox(width: 5),
                                   ],
                                 ),
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                Text("${value.transaksiPendModel!.modul}"),
+                                Text(value.transaksiPendModel!.modul),
                                 const SizedBox(height: 16),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "User",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
+                                    SizedBox(width: 5),
                                   ],
                                 ),
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                Text("${value.transaksiPendModel!.userinput}"),
+                                Text(value.transaksiPendModel!.userinput),
                                 const SizedBox(height: 16),
-                                Row(
+                                const Row(
                                   children: [
                                     Text(
                                       "Otorisasi",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
+                                    SizedBox(width: 5),
                                   ],
                                 ),
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                Text(
-                                    "${value.transaksiPendModel!.keteranganOtor}"),
+                                Text(value.transaksiPendModel!.keteranganOtor),
                                 const SizedBox(height: 16),
-                                value.transaksiPendModel!.keteranganOtor
-                                        .contains("Pembatalan")
+                                value.transaksiPendModel!.keteranganOtor.contains("Pembatalan")
                                     ? Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
-                                          Row(
+                                          const Row(
                                             children: [
                                               Text(
                                                 "Alasan Pembatalan",
-                                                style: const TextStyle(
-                                                    fontSize: 12),
+                                                style: TextStyle(fontSize: 12),
                                               ),
-                                              const SizedBox(width: 5),
+                                              SizedBox(width: 5),
                                             ],
                                           ),
                                           const SizedBox(
                                             height: 8,
                                           ),
-                                          Text(
-                                              "${value.transaksiPendModel!.alasan}"),
+                                          Text(value.transaksiPendModel!.alasan),
                                           const SizedBox(height: 16),
                                         ],
                                       )
-                                    : SizedBox(),
-                                Row(
+                                    : const SizedBox(),
+                                const Row(
                                   children: [
                                     Text(
                                       "Data",
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
-                                    const SizedBox(width: 5),
+                                    SizedBox(width: 5),
                                   ],
                                 ),
                                 const SizedBox(
@@ -404,25 +396,25 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                 ),
                                 Text(
                                   "Nomor Dokumen : ${value.transaksiPendModel!.noDokumen}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 12,
                                   ),
                                 ),
                                 Text(
                                   "Nomor Referensi : ${value.transaksiPendModel!.noRef}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 12,
                                   ),
                                 ),
                                 Text(
                                   "Nominal : ${FormatCurrency.oCcyDecimal.format(double.parse(value.transaksiPendModel!.nominal))}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 12,
                                   ),
                                 ),
                                 Text(
                                   "Keterangan : ${value.transaksiPendModel!.keterangan}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 12,
                                   ),
                                 ),
@@ -435,7 +427,7 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                                       },
                                       name: "Setujui",
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 16,
                                     ),
                                     ButtonPrimary(
@@ -449,7 +441,7 @@ class OtorisasiTransaksiPage extends StatelessWidget {
                           ],
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),
@@ -482,8 +474,7 @@ class DetailDataSource extends DataGridSource {
         return tglA.compareTo(tglB); // urut berdasarkan tanggal dulu
       }
 
-      return a.noDokumen
-          .compareTo(b.noDokumen); // lalu urut berdasarkan nomor dokumen
+      return a.noDokumen.compareTo(b.noDokumen); // lalu urut berdasarkan nomor dokumen
     });
 
     // 🧱 Bangun data grid setelah data diurutkan
@@ -497,12 +488,8 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'nomor_dok', value: data.noDokumen),
                 DataGridCell(columnName: 'nomor_ref', value: data.noRef),
                 DataGridCell(columnName: 'modul', value: data.modul),
-                DataGridCell(
-                    columnName: 'keterangan_otor', value: data.keteranganOtor),
-                DataGridCell(
-                    columnName: 'nominal',
-                    value: FormatCurrency.oCcyDecimal
-                        .format(double.parse(data.nominal))),
+                DataGridCell(columnName: 'keterangan_otor', value: data.keteranganOtor),
+                DataGridCell(columnName: 'nominal', value: FormatCurrency.oCcyDecimal.format(double.parse(data.nominal))),
                 DataGridCell(columnName: 'nama_debet', value: data.namaDr),
                 DataGridCell(columnName: 'nama_credit', value: data.namaCr),
                 DataGridCell(columnName: 'keterangan', value: data.keterangan),
@@ -537,7 +524,7 @@ class DetailDataSource extends DataGridSource {
               },
               child: Container(
                 width: 300,
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: colorPrimary,
@@ -546,10 +533,10 @@ class DetailDataSource extends DataGridSource {
                     color: colorPrimary,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Aksi",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                   ),
                 ),
@@ -559,9 +546,9 @@ class DetailDataSource extends DataGridSource {
         } else if (e.columnName == 'status') {
           return Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.all(4),
+            padding: const EdgeInsets.all(4),
             child: Container(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(32),
                   color: e.value == "PENDING"
@@ -572,7 +559,7 @@ class DetailDataSource extends DataGridSource {
               child: Text(
                 e.value,
                 maxLines: 1,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,

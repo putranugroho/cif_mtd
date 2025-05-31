@@ -48,8 +48,7 @@ class AksesPointPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -220,9 +219,7 @@ class AksesPointPage extends StatelessWidget {
                                         width: 40,
                                         height: 40,
                                         padding: const EdgeInsets.all(4),
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey[200],
-                                            shape: BoxShape.circle),
+                                        decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
                                         child: const Icon(Icons.close),
                                       ),
                                     )
@@ -255,8 +252,7 @@ class AksesPointPage extends StatelessWidget {
                                       controller: value.noAkses,
                                       maxLines: 1,
                                       inputFormatters: [
-                                        FilteringTextInputFormatter.allow(
-                                            RegExp(r'[a-zA-Z0-9]'))
+                                        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]'))
                                       ],
                                       validator: (e) {
                                         if (e!.isEmpty) {
@@ -268,8 +264,7 @@ class AksesPointPage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         hintText: "Nomor Akses",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -309,8 +304,7 @@ class AksesPointPage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         hintText: "Akses ID",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -381,15 +375,13 @@ class AksesPointPage extends StatelessWidget {
                                     ),
                                     value.lokasi
                                         ? Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
                                               const Row(
                                                 children: [
                                                   Text(
                                                     "Kantor",
-                                                    style:
-                                                        TextStyle(fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
                                                   SizedBox(width: 5),
                                                 ],
@@ -398,37 +390,23 @@ class AksesPointPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               DropdownSearch<AoModel>(
-                                                popupProps:
-                                                    const PopupPropsMultiSelection
-                                                        .menu(
-                                                  showSearchBox:
-                                                      true, // Aktifkan fitur pencarian
+                                                popupProps: const PopupPropsMultiSelection.menu(
+                                                  showSearchBox: true, // Aktifkan fitur pencarian
                                                 ),
                                                 selectedItem: value.aoModel,
-                                                items: value.listAoModel
-                                                    .where(
-                                                        (e) => e.golCust == "3")
-                                                    .toList(),
-                                                itemAsString: (e) =>
-                                                    "${e.nama}",
+                                                items: value.listAoModel.where((e) => e.golCust == "3").toList(),
+                                                itemAsString: (e) => e.nama,
                                                 onChanged: (e) {
                                                   value.pilihAoModelDebet(e!);
                                                 },
-                                                dropdownDecoratorProps:
-                                                    DropDownDecoratorProps(
-                                                  baseStyle: const TextStyle(
-                                                      fontSize: 16),
-                                                  textAlignVertical:
-                                                      TextAlignVertical.center,
-                                                  dropdownSearchDecoration:
-                                                      InputDecoration(
+                                                dropdownDecoratorProps: DropDownDecoratorProps(
+                                                  baseStyle: const TextStyle(fontSize: 16),
+                                                  textAlignVertical: TextAlignVertical.center,
+                                                  dropdownSearchDecoration: InputDecoration(
                                                     hintText: "Cari Kantor",
                                                     border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                      borderSide:
-                                                          const BorderSide(
+                                                      borderRadius: BorderRadius.circular(8),
+                                                      borderSide: const BorderSide(
                                                         width: 1,
                                                         color: Colors.grey,
                                                       ),
@@ -459,8 +437,7 @@ class AksesPointPage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         hintText: "Alamat",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -488,8 +465,7 @@ class AksesPointPage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         hintText: "Keterangan",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -550,8 +526,7 @@ class AksesPointPage extends StatelessWidget {
                                     ),
                                     value.editData
                                         ? Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
                                               const SizedBox(height: 16),
                                               ButtonDanger(
@@ -588,7 +563,7 @@ class DetailDataSource extends DataGridSource {
 
   AksesPointNotifier? tindakanNotifier;
 
-  List<DataGridRow> _laporanData = [];
+  final List<DataGridRow> _laporanData = [];
   @override
   List<DataGridRow> get rows => _laporanData;
   void buildRowData(List<CustomerSupplierModel> list) {}

@@ -2,15 +2,11 @@ import 'dart:convert';
 
 import 'package:accounting/models/index.dart';
 import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/format_currency.dart';
-import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:collection/collection.dart';
 
 import '../../../network/network.dart';
-import '../../../utils/button_custom.dart';
 
 class BankTransaksiNotifier extends ChangeNotifier {
   final BuildContext context;
@@ -25,14 +21,13 @@ class BankTransaksiNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     listGl.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        listGl =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         notifyListeners();
       }
     });
@@ -45,10 +40,8 @@ class BankTransaksiNotifier extends ChangeNotifier {
   }
 
   onChangeTotal(int index) {
-    int total = int.parse(listAmount[index].text.replaceAll(',', '')) -
-        int.parse(listSaldo[index].text.replaceAll(',', ''));
-    listSelisih[index].text =
-        FormatCurrency.oCcy.format(total).replaceAll(".", ',');
+    int total = int.parse(listAmount[index].text.replaceAll(',', '')) - int.parse(listSaldo[index].text.replaceAll(',', ''));
+    listSelisih[index].text = FormatCurrency.oCcy.format(total).replaceAll(".", ',');
     notifyListeners();
   }
 
@@ -83,8 +76,7 @@ class BankTransaksiNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglBuka = pickedendDate;
-      tglBukaRekening.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglBukaRekening.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -112,8 +104,7 @@ class BankTransaksiNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglJatuhTempo = pickedendDate;
-      tglJatuhTempoRekening.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglJatuhTempoRekening.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -204,7 +195,9 @@ class BankTransaksiNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -214,14 +207,8 @@ class BankTransaksiNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -263,9 +250,10 @@ class BankTransaksiNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getBank(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getBank(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(BankModel.fromJson(i));

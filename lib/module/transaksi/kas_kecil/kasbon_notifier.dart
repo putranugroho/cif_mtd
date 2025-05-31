@@ -50,14 +50,13 @@ class KasbonNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     list.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        list =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        list = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         notifyListeners();
       }
     });
@@ -97,7 +96,9 @@ class KasbonNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {"kode_pt": "001"};
+      var data = {
+        "kode_pt": "001"
+      };
 
       try {
         final response = await Setuprepository.setup(
@@ -107,14 +108,8 @@ class KasbonNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
-          listGl = jnsAccBItems
-              .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
-              .toList();
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
+          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -135,9 +130,10 @@ class KasbonNotifier extends ChangeNotifier {
     isLoading = true;
     listData.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getSetupTrans(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getSetupTrans(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listData.add(SetupTransModel.fromJson(i));
@@ -167,7 +163,7 @@ class KasbonNotifier extends ChangeNotifier {
     showDialog(
         context: context,
         builder: (context) {
-          return Dialog();
+          return const Dialog();
         });
   }
 
@@ -204,8 +200,7 @@ class KasbonNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglBackDate = pickedendDate;
-      tglBackDatetext.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglBackDatetext.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -214,20 +209,8 @@ class KasbonNotifier extends ChangeNotifier {
   Future pilihTanggalPenyelesaian() async {
     var pickedendDate = (await showDatePicker(
       context: context,
-      initialDate: DateTime(
-          int.parse(
-              DateFormat('y').format(DateTime.parse(tglTransaksiText.text))),
-          int.parse(
-              DateFormat('MM').format(DateTime.parse(tglTransaksiText.text))),
-          int.parse(
-              DateFormat('dd').format(DateTime.parse(tglTransaksiText.text)))),
-      firstDate: DateTime(
-          int.parse(
-              DateFormat('y').format(DateTime.parse(tglTransaksiText.text))),
-          int.parse(
-              DateFormat('MM').format(DateTime.parse(tglTransaksiText.text))),
-          int.parse(
-              DateFormat('dd').format(DateTime.parse(tglTransaksiText.text)))),
+      initialDate: DateTime(int.parse(DateFormat('y').format(DateTime.parse(tglTransaksiText.text))), int.parse(DateFormat('MM').format(DateTime.parse(tglTransaksiText.text))), int.parse(DateFormat('dd').format(DateTime.parse(tglTransaksiText.text)))),
+      firstDate: DateTime(int.parse(DateFormat('y').format(DateTime.parse(tglTransaksiText.text))), int.parse(DateFormat('MM').format(DateTime.parse(tglTransaksiText.text))), int.parse(DateFormat('dd').format(DateTime.parse(tglTransaksiText.text)))),
       lastDate: DateTime(
           int.parse(DateFormat('y').format(DateTime.now())),
           int.parse(DateFormat('MM').format(
@@ -239,8 +222,7 @@ class KasbonNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglPenyelesaian = pickedendDate;
-      tglPenyelesaianText.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglPenyelesaianText.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -286,19 +268,19 @@ class KasbonNotifier extends ChangeNotifier {
         builder: (context) {
           return Dialog(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: 500,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
+                  const Text(
                     "Apakah data sudah benar ?",
                     style: TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -310,7 +292,7 @@ class KasbonNotifier extends ChangeNotifier {
                         },
                         name: "Tidak",
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Expanded(
@@ -350,20 +332,15 @@ class KasbonNotifier extends ChangeNotifier {
     listTransaksiAdd.clear();
     notifyListeners();
     var data = {
-      "kode_pt": "${users!.kodePt}",
+      "kode_pt": users!.kodePt,
     };
-    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksi.add(TransaksiPendModel.fromJson(i));
         }
         if (listTransaksi.isNotEmpty) {
-          listTransaksiAdd = listTransaksi
-              .where((e) =>
-                  e.dracc == kasKecilModel!.nosbbKasBon ||
-                  e.cracc == kasKecilModel!.nosbbKasBon)
-              .toList();
+          listTransaksiAdd = listTransaksi.where((e) => e.dracc == kasKecilModel!.nosbbKasBon || e.cracc == kasKecilModel!.nosbbKasBon).toList();
         }
         isLoadingData = false;
         notifyListeners();
@@ -381,10 +358,10 @@ class KasbonNotifier extends ChangeNotifier {
     isLoading = true;
     listkas.clear();
     notifyListeners();
-    var data = {"kode_pt": "001"};
-    Setuprepository.setup(
-            token, NetworkURL.getSetupKasKecil(), jsonEncode(data))
-        .then((value) {
+    var data = {
+      "kode_pt": "001"
+    };
+    Setuprepository.setup(token, NetworkURL.getSetupKasKecil(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listkas.add(KasKecilModel.fromJson(i));
@@ -409,47 +386,37 @@ class KasbonNotifier extends ChangeNotifier {
   penyelesaian() {
     if (keyForm.currentState!.validate()) {
       if (users!.limitAkses == "Y") {
-        if (double.parse(users!.maksimalTransaksi) <
-            double.parse(nominal.text
-                .replaceAll("Rp ", "")
-                .replaceAll(".", "")
-                .replaceAll(",", "."))) {
+        if (double.parse(users!.maksimalTransaksi) < double.parse(nominal.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))) {
           DialogCustom().showLoading(context);
           var invoice = DateTime.now().millisecondsSinceEpoch.toString();
           var data = {
-            "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
-            "tgl_valuta":
-                "${backDate ? DateFormat('y-MM-dd').format(tglBackDate!) : DateFormat('y-MM-dd').format(DateTime.now())}",
-            "batch": "${users!.batch}",
+            "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
+            "tgl_valuta": backDate ? DateFormat('y-MM-dd').format(tglBackDate!) : DateFormat('y-MM-dd').format(DateTime.now()),
+            "batch": users!.batch,
             "trx_type": "TRX",
-            "trx_code": "${backDate ? "110" : "100"}",
+            "trx_code": backDate ? "110" : "100",
             "otor": "0",
-            "kode_trn":
-                "${setupTransModel == null ? "" : setupTransModel!.kdTrans}",
-            "nama_dr": "${inqueryGlModelPenyelesaian!.namaSbb}",
-            "dracc": "${inqueryGlModelPenyelesaian!.nosbb}",
-            "nama_cr": "${nosbbdeb.text}",
-            "cracc": "${namaSbbDeb.text}",
-            "rrn": "$invoice",
-            "no_dokumen": "${nomorDokBaru.text}",
-            "no_ref": "${transaksiPendModel!.noRef}",
-            "nominal": double.parse(nilaiTrans.text
-                .replaceAll("Rp ", "")
-                .replaceAll(".", "")
-                .replaceAll(",", ".")),
-            "keterangan": "${keteranganBaru.text}",
-            "kode_pt": "${users!.kodePt}",
-            "kode_kantor": "${users!.kodeKantor}",
-            "kode_induk": "${users!.kodeInduk}",
+            "kode_trn": setupTransModel == null ? "" : setupTransModel!.kdTrans,
+            "nama_dr": inqueryGlModelPenyelesaian!.namaSbb,
+            "dracc": inqueryGlModelPenyelesaian!.nosbb,
+            "nama_cr": nosbbdeb.text,
+            "cracc": namaSbbDeb.text,
+            "rrn": invoice,
+            "no_dokumen": nomorDokBaru.text,
+            "no_ref": transaksiPendModel!.noRef,
+            "nominal": double.parse(nilaiTrans.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")),
+            "keterangan": keteranganBaru.text,
+            "kode_pt": users!.kodePt,
+            "kode_kantor": users!.kodeKantor,
+            "kode_induk": users!.kodeInduk,
             "sts_validasi": "N",
             "kode_ao_dr": "",
             "kode_coll": "",
             "kode_ao_cr": "",
-            "userinput": "${users!.namauser}",
+            "userinput": users!.namauser,
             "userterm": "114.80.90.54",
             "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-            "inputtgljam":
-                "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+            "inputtgljam": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
             "otoruser": "",
             "otorterm": "",
             "otortgljam": "",
@@ -459,8 +426,7 @@ class KasbonNotifier extends ChangeNotifier {
             "status": "PENDING",
             "modul": "PENYELESAIAN KASBON",
           };
-          Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
-              .then((value) {
+          Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data)).then((value) {
             Navigator.pop(context);
             if (value['status'] == "success") {
               getTransaksi();
@@ -479,40 +445,32 @@ class KasbonNotifier extends ChangeNotifier {
           DialogCustom().showLoading(context);
           var invoice = DateTime.now().millisecondsSinceEpoch.toString();
           var data = {
-            "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
-            "tgl_valuta":
-                "${backDate ? DateFormat('y-MM-dd').format(tglPenyelesaian!) : DateFormat('y-MM-dd').format(DateTime.now())}",
-            "batch": "${users!.batch}",
+            "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
+            "tgl_valuta": backDate ? DateFormat('y-MM-dd').format(tglPenyelesaian!) : DateFormat('y-MM-dd').format(DateTime.now()),
+            "batch": users!.batch,
             "trx_type": "TRX",
-            "trx_code": "${backDate ? "110" : "100"}",
+            "trx_code": backDate ? "110" : "100",
             "otor": "0",
-            "kode_trn":
-                "${setupTransModel == null ? "" : setupTransModel!.kdTrans}",
-            "nama_dr": "${inqueryGlModelPenyelesaian!.namaSbb}",
-            "dracc": "${inqueryGlModelPenyelesaian!.nosbb}",
-            "nama_cr": "${nosbbdeb.text}",
-            "cracc": "${namaSbbDeb.text}",
-            "rrn": "$invoice",
-            "no_dokumen": "${nomorDokBaru.text}",
-            "no_ref": "${transaksiPendModel!.noRef}",
-            "nominal": (nilaiselisih < 0)
-                ? double.parse(transaksiPendModel!.nominal)
-                : double.parse(nilaiTrans.text
-                    .replaceAll("Rp ", "")
-                    .replaceAll(".", "")
-                    .replaceAll(",", ".")),
-            "keterangan": "${keteranganBaru.text}",
-            "kode_pt": "${users!.kodePt}",
-            "kode_kantor": "${users!.kodeKantor}",
-            "kode_induk": "${users!.kodeInduk}",
+            "kode_trn": setupTransModel == null ? "" : setupTransModel!.kdTrans,
+            "nama_dr": inqueryGlModelPenyelesaian!.namaSbb,
+            "dracc": inqueryGlModelPenyelesaian!.nosbb,
+            "nama_cr": nosbbdeb.text,
+            "cracc": namaSbbDeb.text,
+            "rrn": invoice,
+            "no_dokumen": nomorDokBaru.text,
+            "no_ref": transaksiPendModel!.noRef,
+            "nominal": (nilaiselisih < 0) ? double.parse(transaksiPendModel!.nominal) : double.parse(nilaiTrans.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")),
+            "keterangan": keteranganBaru.text,
+            "kode_pt": users!.kodePt,
+            "kode_kantor": users!.kodeKantor,
+            "kode_induk": users!.kodeInduk,
             "sts_validasi": "N",
             "kode_ao_dr": "",
             "kode_coll": "",
             "kode_ao_cr": "",
-            "userinput": "${users!.namauser}",
+            "userinput": users!.namauser,
             "userterm": "114.80.90.54",
-            "inputtgljam":
-                "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+            "inputtgljam": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
             "otoruser": "",
             "otorterm": "",
             "otortgljam": "",
@@ -522,42 +480,36 @@ class KasbonNotifier extends ChangeNotifier {
             "status": "COMPLETED",
             "modul": "PENYELESAIAN KASBON",
           };
-          Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
-              .then((value) {
+          Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data)).then((value) {
             if (nilaiselisih < 0) {
               var invoice = DateTime.now().millisecondsSinceEpoch.toString();
               var data = {
-                "tgl_transaksi":
-                    "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                "tgl_valuta":
-                    "${backDate ? DateFormat('y-MM-dd').format(tglPenyelesaian!) : DateFormat('y-MM-dd').format(DateTime.now())}",
-                "batch": "${users!.batch}",
+                "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
+                "tgl_valuta": backDate ? DateFormat('y-MM-dd').format(tglPenyelesaian!) : DateFormat('y-MM-dd').format(DateTime.now()),
+                "batch": users!.batch,
                 "trx_type": "TRX",
-                "trx_code": "${backDate ? "110" : "100"}",
+                "trx_code": backDate ? "110" : "100",
                 "otor": "0",
-                "kode_trn":
-                    "${setupTransModel == null ? "" : setupTransModel!.kdTrans}",
-                "nama_dr": "${inqueryGlModelPenyelesaian!.namaSbb}",
-                "dracc": "${inqueryGlModelPenyelesaian!.nosbb}",
-                "nama_cr": "${nossbcre.text}",
-                "cracc": "${namaSbbCre.text}",
-                "rrn": "$invoice",
-                "no_dokumen": "${nomorDokBaru.text}",
-                "no_ref": "${transaksiPendModel!.noRef}",
-                "nominal":
-                    double.parse(nilaiselisih.toString().replaceAll("-", "")),
-                "keterangan": "${keteranganBaru.text}",
-                "kode_pt": "${users!.kodePt}",
-                "kode_kantor": "${users!.kodeKantor}",
-                "kode_induk": "${users!.kodeInduk}",
+                "kode_trn": setupTransModel == null ? "" : setupTransModel!.kdTrans,
+                "nama_dr": inqueryGlModelPenyelesaian!.namaSbb,
+                "dracc": inqueryGlModelPenyelesaian!.nosbb,
+                "nama_cr": nossbcre.text,
+                "cracc": namaSbbCre.text,
+                "rrn": invoice,
+                "no_dokumen": nomorDokBaru.text,
+                "no_ref": transaksiPendModel!.noRef,
+                "nominal": double.parse(nilaiselisih.toString().replaceAll("-", "")),
+                "keterangan": keteranganBaru.text,
+                "kode_pt": users!.kodePt,
+                "kode_kantor": users!.kodeKantor,
+                "kode_induk": users!.kodeInduk,
                 "sts_validasi": "N",
                 "kode_ao_dr": "",
                 "kode_coll": "",
                 "kode_ao_cr": "",
-                "userinput": "${users!.namauser}",
+                "userinput": users!.namauser,
                 "userterm": "114.80.90.54",
-                "inputtgljam":
-                    "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                "inputtgljam": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
                 "otoruser": "",
                 "otorterm": "",
                 "otortgljam": "",
@@ -567,42 +519,36 @@ class KasbonNotifier extends ChangeNotifier {
                 "status": "COMPLETED",
                 "modul": "SISA KASBON",
               };
-              Setuprepository.setup(
-                  token, NetworkURL.transaksi(), jsonEncode(data));
+              Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
             } else if (nilaiselisih > 0) {
               var invoice = DateTime.now().millisecondsSinceEpoch.toString();
               var data = {
-                "tgl_transaksi":
-                    "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                "tgl_valuta":
-                    "${backDate ? DateFormat('y-MM-dd').format(tglPenyelesaian!) : DateFormat('y-MM-dd').format(DateTime.now())}",
-                "batch": "${users!.batch}",
+                "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
+                "tgl_valuta": backDate ? DateFormat('y-MM-dd').format(tglPenyelesaian!) : DateFormat('y-MM-dd').format(DateTime.now()),
+                "batch": users!.batch,
                 "trx_type": "TRX",
-                "trx_code": "${backDate ? "110" : "100"}",
+                "trx_code": backDate ? "110" : "100",
                 "otor": "0",
-                "kode_trn":
-                    "${setupTransModel == null ? "" : setupTransModel!.kdTrans}",
-                "nama_dr": "${nossbcre.text}",
-                "dracc": "${namaSbbCre.text}",
-                "nama_cr": "${nosbbdeb.text}",
-                "cracc": "${namaSbbDeb.text}",
-                "rrn": "$invoice",
-                "no_dokumen": "${nomorDokBaru.text}",
-                "no_ref": "${transaksiPendModel!.noRef}",
-                "nominal":
-                    double.parse(nilaiselisih.toString().replaceAll("-", "")),
-                "keterangan": "${keteranganBaru.text}",
-                "kode_pt": "${users!.kodePt}",
-                "kode_kantor": "${users!.kodeKantor}",
-                "kode_induk": "${users!.kodeInduk}",
+                "kode_trn": setupTransModel == null ? "" : setupTransModel!.kdTrans,
+                "nama_dr": nossbcre.text,
+                "dracc": namaSbbCre.text,
+                "nama_cr": nosbbdeb.text,
+                "cracc": namaSbbDeb.text,
+                "rrn": invoice,
+                "no_dokumen": nomorDokBaru.text,
+                "no_ref": transaksiPendModel!.noRef,
+                "nominal": double.parse(nilaiselisih.toString().replaceAll("-", "")),
+                "keterangan": keteranganBaru.text,
+                "kode_pt": users!.kodePt,
+                "kode_kantor": users!.kodeKantor,
+                "kode_induk": users!.kodeInduk,
                 "sts_validasi": "N",
                 "kode_ao_dr": "",
                 "kode_coll": "",
                 "kode_ao_cr": "",
-                "userinput": "${users!.namauser}",
+                "userinput": users!.namauser,
                 "userterm": "114.80.90.54",
-                "inputtgljam":
-                    "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                "inputtgljam": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
                 "otoruser": "",
                 "otorterm": "",
                 "otortgljam": "",
@@ -612,8 +558,7 @@ class KasbonNotifier extends ChangeNotifier {
                 "status": "COMPLETED",
                 "modul": "SISA KASBON",
               };
-              Setuprepository.setup(
-                  token, NetworkURL.transaksi(), jsonEncode(data));
+              Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
             }
             Navigator.pop(context);
             if (value['status'] == "success") {
@@ -634,47 +579,37 @@ class KasbonNotifier extends ChangeNotifier {
   cek() {
     if (keyForm.currentState!.validate()) {
       if (users!.limitAkses == "Y") {
-        if (double.parse(users!.maksimalTransaksi) <
-            double.parse(nominal.text
-                .replaceAll("Rp ", "")
-                .replaceAll(".", "")
-                .replaceAll(",", "."))) {
+        if (double.parse(users!.maksimalTransaksi) < double.parse(nominal.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))) {
           DialogCustom().showLoading(context);
           var invoice = DateTime.now().millisecondsSinceEpoch.toString();
           var data = {
-            "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
-            "tgl_valuta":
-                "${backDate ? DateFormat('y-MM-dd').format(tglBackDate!) : DateFormat('y-MM-dd').format(DateTime.now())}",
-            "batch": "${users!.batch}",
+            "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
+            "tgl_valuta": backDate ? DateFormat('y-MM-dd').format(tglBackDate!) : DateFormat('y-MM-dd').format(DateTime.now()),
+            "batch": users!.batch,
             "trx_type": "TRX",
-            "trx_code": "${backDate ? "110" : "100"}",
+            "trx_code": backDate ? "110" : "100",
             "otor": "0",
-            "kode_trn":
-                "${setupTransModel == null ? "" : setupTransModel!.kdTrans}",
-            "nama_dr": "${nosbbdeb.text}",
-            "dracc": "${namaSbbDeb.text}",
-            "nama_cr": "${nossbcre.text}",
-            "cracc": "${namaSbbCre.text}",
-            "rrn": "$invoice",
-            "no_dokumen": "${nomorDok.text}",
-            "no_ref": "${nomorRef.text}",
-            "nominal": double.parse(nominal.text
-                .replaceAll("Rp ", "")
-                .replaceAll(".", "")
-                .replaceAll(",", ".")),
-            "keterangan": "${keterangan.text}",
-            "kode_pt": "${users!.kodePt}",
-            "kode_kantor": "${users!.kodeKantor}",
-            "kode_induk": "${users!.kodeInduk}",
+            "kode_trn": setupTransModel == null ? "" : setupTransModel!.kdTrans,
+            "nama_dr": nosbbdeb.text,
+            "dracc": namaSbbDeb.text,
+            "nama_cr": nossbcre.text,
+            "cracc": namaSbbCre.text,
+            "rrn": invoice,
+            "no_dokumen": nomorDok.text,
+            "no_ref": nomorRef.text,
+            "nominal": double.parse(nominal.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")),
+            "keterangan": keterangan.text,
+            "kode_pt": users!.kodePt,
+            "kode_kantor": users!.kodeKantor,
+            "kode_induk": users!.kodeInduk,
             "sts_validasi": "N",
             "kode_ao_dr": "",
             "kode_coll": "",
             "kode_ao_cr": "",
-            "userinput": "${users!.namauser}",
+            "userinput": users!.namauser,
             "userterm": "114.80.90.54",
             "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-            "inputtgljam":
-                "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+            "inputtgljam": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
             "otoruser": "",
             "otorterm": "",
             "otortgljam": "",
@@ -684,8 +619,7 @@ class KasbonNotifier extends ChangeNotifier {
             "status": "PENDING",
             "modul": "KASBON",
           };
-          Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
-              .then((value) {
+          Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data)).then((value) {
             Navigator.pop(context);
             if (value['status'] == "success") {
               getTransaksi();
@@ -699,38 +633,32 @@ class KasbonNotifier extends ChangeNotifier {
           DialogCustom().showLoading(context);
           var invoice = DateTime.now().millisecondsSinceEpoch.toString();
           var data = {
-            "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
-            "tgl_valuta":
-                "${backDate ? DateFormat('y-MM-dd').format(tglBackDate!) : DateFormat('y-MM-dd').format(DateTime.now())}",
-            "batch": "${users!.batch}",
+            "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
+            "tgl_valuta": backDate ? DateFormat('y-MM-dd').format(tglBackDate!) : DateFormat('y-MM-dd').format(DateTime.now()),
+            "batch": users!.batch,
             "trx_type": "TRX",
-            "trx_code": "${backDate ? "110" : "100"}",
+            "trx_code": backDate ? "110" : "100",
             "otor": "0",
-            "kode_trn":
-                "${setupTransModel == null ? "" : setupTransModel!.kdTrans}",
-            "nama_dr": "${nosbbdeb.text}",
-            "dracc": "${namaSbbDeb.text}",
-            "nama_cr": "${nossbcre.text}",
-            "cracc": "${namaSbbCre.text}",
-            "rrn": "$invoice",
-            "no_dokumen": "${nomorDok.text}",
-            "no_ref": "${nomorRef.text}",
-            "nominal": double.parse(nominal.text
-                .replaceAll("Rp ", "")
-                .replaceAll(".", "")
-                .replaceAll(",", ".")),
-            "keterangan": "${keterangan.text}",
-            "kode_pt": "${users!.kodePt}",
-            "kode_kantor": "${users!.kodeKantor}",
-            "kode_induk": "${users!.kodeInduk}",
+            "kode_trn": setupTransModel == null ? "" : setupTransModel!.kdTrans,
+            "nama_dr": nosbbdeb.text,
+            "dracc": namaSbbDeb.text,
+            "nama_cr": nossbcre.text,
+            "cracc": namaSbbCre.text,
+            "rrn": invoice,
+            "no_dokumen": nomorDok.text,
+            "no_ref": nomorRef.text,
+            "nominal": double.parse(nominal.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")),
+            "keterangan": keterangan.text,
+            "kode_pt": users!.kodePt,
+            "kode_kantor": users!.kodeKantor,
+            "kode_induk": users!.kodeInduk,
             "sts_validasi": "N",
             "kode_ao_dr": "",
             "kode_coll": "",
             "kode_ao_cr": "",
-            "userinput": "${users!.namauser}",
+            "userinput": users!.namauser,
             "userterm": "114.80.90.54",
-            "inputtgljam":
-                "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+            "inputtgljam": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
             "otoruser": "",
             "otorterm": "",
             "otortgljam": "",
@@ -740,8 +668,7 @@ class KasbonNotifier extends ChangeNotifier {
             "status": "CREATED",
             "modul": "KASBON",
           };
-          Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
-              .then((value) {
+          Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data)).then((value) {
             Navigator.pop(context);
             if (value['status'] == "success") {
               getTransaksi();
@@ -760,11 +687,7 @@ class KasbonNotifier extends ChangeNotifier {
 
   updateSelisih() {
     // FormatCurrency.oCcy.format(int.parse(nominal.text)).replaceAll(".", ",");
-    nilaiselisih = double.parse(nominal.text.replaceAll(",", "")) -
-        double.parse(nilaiTrans.text
-            .replaceAll(".", "")
-            .replaceAll("Rp ", "")
-            .replaceAll(",", "."));
+    nilaiselisih = double.parse(nominal.text.replaceAll(",", "")) - double.parse(nilaiTrans.text.replaceAll(".", "").replaceAll("Rp ", "").replaceAll(",", "."));
     selisih.text = FormatCurrency.oCcy.format(nilaiselisih);
     notifyListeners();
   }
@@ -774,8 +697,7 @@ class KasbonNotifier extends ChangeNotifier {
   edit(String rrn) {
     transaksiPendModel = listTransaksi.where((e) => e.rrn == rrn).first;
     if (transaksiPendModel!.status == "COMPLETED") {
-      informationDialog(
-          context, "Warning", "Kas Bon tidak bisa ditransaksikan");
+      informationDialog(context, "Warning", "Kas Bon tidak bisa ditransaksikan");
     } else {
       nomorDok.text = transaksiPendModel!.noDokumen;
       nomorRef.text = transaksiPendModel!.noRef;
@@ -785,10 +707,7 @@ class KasbonNotifier extends ChangeNotifier {
       tglTransaksiText.text = transaksiPendModel!.tglTransaksi;
       nominal.text = transaksiPendModel!.nominal;
       nilaiTrans.text = "0";
-      tglPenyelesaianText.text = DateFormat('y-MM-dd').format(DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())),
-          int.parse(DateFormat('MM').format(DateTime.now())),
-          int.parse(DateFormat('dd').format(DateTime.now()))));
+      tglPenyelesaianText.text = DateFormat('y-MM-dd').format(DateTime(int.parse(DateFormat('y').format(DateTime.now())), int.parse(DateFormat('MM').format(DateTime.now())), int.parse(DateFormat('dd').format(DateTime.now()))));
       updateSelisih();
       notifyListeners();
     }
@@ -824,14 +743,8 @@ class KasbonNotifier extends ChangeNotifier {
   pilihTransModel(SetupTransModel value) {
     setupTransModel = value;
     namaTransaksi.text = setupTransModel!.kdTrans;
-    inqueryGlModeldeb =
-        listGl.where((e) => e.nosbb == setupTransModel!.glDeb).isEmpty
-            ? null
-            : listGl.where((e) => e.nosbb == setupTransModel!.glDeb).first;
-    inqueryGlModelcre =
-        listGl.where((e) => e.nosbb == setupTransModel!.glKre).isEmpty
-            ? null
-            : listGl.where((e) => e.nosbb == setupTransModel!.glKre).first;
+    inqueryGlModeldeb = listGl.where((e) => e.nosbb == setupTransModel!.glDeb).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glDeb).first;
+    inqueryGlModelcre = listGl.where((e) => e.nosbb == setupTransModel!.glKre).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glKre).first;
     nosbbdeb.text = setupTransModel!.glDeb;
     namaSbbDeb.text = setupTransModel!.namaDeb;
     nossbcre.text = setupTransModel!.glKre;
