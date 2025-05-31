@@ -191,7 +191,7 @@ class HutangPiutangPage extends StatelessWidget {
                                           padding: const EdgeInsets.all(6),
                                           color: colorPrimary,
                                           alignment: Alignment.center,
-                                          child: const Text('Customer/Supplier',
+                                          child: Text('Nama ${value.jenisTrans ? "Supplier" : "Customer"}',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w300,
                                                 color: Colors.white,
@@ -775,6 +775,17 @@ class HutangPiutangPage extends StatelessWidget {
                                                                     child: InkWell(
                                                                       onTap: () => value.pilihJatuhTempo(),
                                                                       child: TextFormField(
+                                                                        validator: (e) {
+                                                                          if (value.caraPembayaran == "BERTAHAP") {
+                                                                            return null;
+                                                                          } else {
+                                                                            if (e!.isEmpty) {
+                                                                              return "Wajib diisi";
+                                                                            } else {
+                                                                              return null;
+                                                                            }
+                                                                          }
+                                                                        },
                                                                         enabled: value.caraPembayaran == "BERTAHAP" ? true : false,
                                                                         textInputAction: TextInputAction.done,
                                                                         controller: value.tanggalJatuhTempoText,
@@ -1133,17 +1144,28 @@ class HutangPiutangPage extends StatelessWidget {
                                           ))
                                         ],
                                       ),
-                                      Row(
-                                        children: [
-                                          ButtonPrimary(
-                                            onTap: () {
-                                              value.hitungPembayaran();
-                                            },
-                                            name: "Bentuk Jadwal Pembayaran",
-                                          )
-                                        ],
-                                      ),
-                                      const SizedBox(
+                                      value.caraPembayaran == "BERTAHAP"
+                                          ? Row(
+                                              children: [
+                                                ButtonPrimary(
+                                                  onTap: () {
+                                                    value.hitungPembayaran();
+                                                  },
+                                                  name: "Bentuk Jadwal Pembayaran",
+                                                )
+                                              ],
+                                            )
+                                          : Row(
+                                              children: [
+                                                ButtonPrimary(
+                                                  onTap: () {
+                                                    value.cek();
+                                                  },
+                                                  name: "Simpan",
+                                                )
+                                              ],
+                                            ),
+                                      SizedBox(
                                         height: 32,
                                       ),
                                       value.listNilaiTransaksi.isEmpty
@@ -1250,16 +1272,15 @@ class HutangPiutangPage extends StatelessWidget {
                                                     ),
                                                     Expanded(
                                                       child: TextFormField(
+                                                        readOnly: true,
                                                         controller: value.listOutstanding[i],
-                                                        textAlign: TextAlign.right,
-                                                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                                        keyboardType: TextInputType.numberWithOptions(decimal: true),
                                                         inputFormatters: [
                                                           a.CurrencyInputFormatter(
                                                             leadingSymbol: '',
                                                             useSymbolPadding: true,
                                                             thousandSeparator: a.ThousandSeparator.Period,
-                                                            mantissaLength: 2, // jumlah angka desimal
-                                                            // decimalSeparator: DecimalSeparator.Comma,
+                                                            mantissaLength: 2,
                                                           ),
                                                         ],
                                                         // readOnly:
@@ -1269,17 +1290,13 @@ class HutangPiutangPage extends StatelessWidget {
                                                         decoration: InputDecoration(
                                                             border: OutlineInputBorder(
                                                               borderRadius: BorderRadius.circular(8),
-                                                              borderSide: const BorderSide(
+                                                              borderSide: BorderSide(
                                                                 width: 1,
                                                                 color: Colors.grey,
                                                               ),
                                                             ),
-                                                            // filled:
-                                                            //     value.tagihanbulanan
-                                                            //         ? true
-                                                            //         : false,
-                                                            // fillColor:
-                                                            //     Colors.grey[200],
+                                                            filled: true,
+                                                            fillColor: Colors.grey[200],
                                                             hintText: "Outstanding"),
                                                       ),
                                                     ),
@@ -1288,9 +1305,14 @@ class HutangPiutangPage extends StatelessWidget {
                                                     ),
                                                     Expanded(
                                                       child: TextFormField(
+                                                        readOnly: !value.tagihanbulanan ? false : true,
                                                         controller: value.listNilaiTransaksi[i],
-                                                        textAlign: TextAlign.right,
-                                                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                                        onChanged: (e) {
+                                                          if (!value.tagihanbulanan) {
+                                                            value.onNilaiTransaksiChanged(i, e);
+                                                          }
+                                                        },
+                                                        keyboardType: TextInputType.numberWithOptions(decimal: true),
                                                         inputFormatters: [
                                                           a.CurrencyInputFormatter(
                                                             leadingSymbol: '',
@@ -1307,18 +1329,14 @@ class HutangPiutangPage extends StatelessWidget {
                                                         decoration: InputDecoration(
                                                             border: OutlineInputBorder(
                                                               borderRadius: BorderRadius.circular(8),
-                                                              borderSide: const BorderSide(
+                                                              borderSide: BorderSide(
                                                                 width: 1,
                                                                 color: Colors.grey,
                                                               ),
                                                             ),
-                                                            // filled:
-                                                            //     value.tagihanbulanan
-                                                            //         ? true
-                                                            //         : false,
-                                                            // fillColor:
-                                                            //     Colors.grey[200],
-                                                            hintText: "Nominal"),
+                                                            filled: value.tagihanbulanan ? true : false,
+                                                            fillColor: Colors.grey[200],
+                                                            hintText: "Nilai Transaksi"),
                                                       ),
                                                     ),
                                                     const SizedBox(
@@ -1326,9 +1344,10 @@ class HutangPiutangPage extends StatelessWidget {
                                                     ),
                                                     Expanded(
                                                       child: TextFormField(
+                                                        readOnly: true,
                                                         controller: value.listNilaiPPN[i],
-                                                        textAlign: TextAlign.right,
-                                                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+
+                                                        keyboardType: TextInputType.numberWithOptions(decimal: true),
                                                         inputFormatters: [
                                                           a.CurrencyInputFormatter(
                                                             leadingSymbol: '',
@@ -1345,17 +1364,13 @@ class HutangPiutangPage extends StatelessWidget {
                                                         decoration: InputDecoration(
                                                             border: OutlineInputBorder(
                                                               borderRadius: BorderRadius.circular(8),
-                                                              borderSide: const BorderSide(
+                                                              borderSide: BorderSide(
                                                                 width: 1,
                                                                 color: Colors.grey,
                                                               ),
                                                             ),
-                                                            // filled:
-                                                            //     value.tagihanbulanan
-                                                            //         ? true
-                                                            //         : false,
-                                                            // fillColor:
-                                                            //     Colors.grey[200],
+                                                            filled: true,
+                                                            fillColor: Colors.grey[200],
                                                             hintText: "Nilai PPN"),
                                                       ),
                                                     ),
@@ -1364,9 +1379,9 @@ class HutangPiutangPage extends StatelessWidget {
                                                     ),
                                                     Expanded(
                                                       child: TextFormField(
+                                                        readOnly: true,
                                                         controller: value.listNilaiPPH[i],
-                                                        textAlign: TextAlign.right,
-                                                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                                        keyboardType: TextInputType.numberWithOptions(decimal: true),
                                                         inputFormatters: [
                                                           a.CurrencyInputFormatter(
                                                             leadingSymbol: '',
@@ -1383,17 +1398,13 @@ class HutangPiutangPage extends StatelessWidget {
                                                         decoration: InputDecoration(
                                                             border: OutlineInputBorder(
                                                               borderRadius: BorderRadius.circular(8),
-                                                              borderSide: const BorderSide(
+                                                              borderSide: BorderSide(
                                                                 width: 1,
                                                                 color: Colors.grey,
                                                               ),
                                                             ),
-                                                            // filled:
-                                                            //     value.tagihanbulanan
-                                                            //         ? true
-                                                            //         : false,
-                                                            // fillColor:
-                                                            //     Colors.grey[200],
+                                                            filled: true,
+                                                            fillColor: Colors.grey[200],
                                                             hintText: "Nilai PPH"),
                                                       ),
                                                     ),
@@ -1455,9 +1466,9 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'cussup', value: data.namaSif),
                 DataGridCell(columnName: 'kontrak', value: data.nokontrak),
                 DataGridCell(columnName: 'tgl_kontrak', value: data.tglKontrak),
-                DataGridCell(columnName: 'transaksi', value: FormatCurrency.oCcy.format(double.parse(data.totalTagPokok))),
-                DataGridCell(columnName: 'os', value: FormatCurrency.oCcy.format((double.parse(data.totalTagPokok) - int.parse(data.totalByrPokok)))),
-                DataGridCell(columnName: 'carapenagihan', value: data.noinv == null ? "Tagihan" : "Auto"),
+                DataGridCell(columnName: 'transaksi', value: FormatCurrency.oCcyDecimal.format(double.parse(data.totalTagPokok))),
+                DataGridCell(columnName: 'os', value: FormatCurrency.oCcyDecimal.format((double.parse(data.totalTagPokok) - double.parse(data.totalByrPokok)))),
+                DataGridCell(columnName: 'carabayar', value: data.noinv == null ? "Tagihan" : "Auto"),
                 DataGridCell(columnName: 'jangkawaktu', value: data.jangkawaktu),
                 DataGridCell(columnName: 'action', value: data.nokontrak.toString()),
               ],

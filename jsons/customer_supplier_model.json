@@ -27,6 +27,8 @@
     "hp3": "",
     "email3": "",
     "keterangan3": "",
-    "kode_ao_customer": "",
-    "kode_ao_supplier": ""
+    "kode_ao_customer": null,
+    "kode_ao_supplier": null,
+    "nama_ao_customer": null,
+    "nama_ao_supplier": null
 }
