@@ -328,7 +328,7 @@ class HutangPiutangPage extends StatelessWidget {
                                     onTap: () => value.tutup(),
                                     child: Container(
                                       width: 40,
-                                      height: 40,
+                                      height: 50,
                                       padding: const EdgeInsets.all(4),
                                       decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
                                       child: const Icon(Icons.close),
@@ -354,7 +354,7 @@ class HutangPiutangPage extends StatelessWidget {
                                               crossAxisAlignment: CrossAxisAlignment.stretch,
                                               children: [
                                                 Container(
-                                                  height: 40,
+                                                  height: 50,
                                                   alignment: Alignment.centerLeft,
                                                   child: const Text("Pilih Tipe Transaksi"),
                                                 ),
@@ -362,7 +362,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                   height: 8,
                                                 ),
                                                 Container(
-                                                  height: 40,
+                                                  height: 50,
                                                   alignment: Alignment.centerLeft,
                                                   child: Text("Pilih ${value.jenis == 1 ? "Customer" : "Supplier"}"),
                                                 ),
@@ -370,7 +370,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                   height: 8,
                                                 ),
                                                 Container(
-                                                  height: 40,
+                                                  height: 50,
                                                   alignment: Alignment.centerLeft,
                                                   child: const Text("Alamat"),
                                                 ),
@@ -378,7 +378,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                   height: 8,
                                                 ),
                                                 Container(
-                                                  height: 40,
+                                                  height: 50,
                                                   alignment: Alignment.centerLeft,
                                                   child: const Text("Jenis Transaksi"),
                                                 ),
@@ -390,7 +390,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                         crossAxisAlignment: CrossAxisAlignment.stretch,
                                                         children: [
                                                           Container(
-                                                            height: 40,
+                                                            height: 50,
                                                             alignment: Alignment.centerLeft,
                                                             child: const Text("Nilai HPP Produk"),
                                                           ),
@@ -401,7 +401,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                       )
                                                     : const SizedBox(),
                                                 Container(
-                                                  height: 40,
+                                                  height: 50,
                                                   alignment: Alignment.centerLeft,
                                                   child: const Text("Cara Pembayaran"),
                                                 ),
@@ -412,7 +412,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                     ? Column(
                                                         children: [
                                                           Container(
-                                                            height: 40,
+                                                            height: 50,
                                                             alignment: Alignment.centerLeft,
                                                             child: const Text("Cara Penagihan"),
                                                           ),
@@ -423,7 +423,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                   height: 8,
                                                 ),
                                                 Container(
-                                                  height: 40,
+                                                  height: 50,
                                                   alignment: Alignment.centerLeft,
                                                   child: const Text("Kontrak / Invoice"),
                                                 ),
@@ -431,7 +431,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                   height: 8,
                                                 ),
                                                 Container(
-                                                  height: 40,
+                                                  height: 50,
                                                   alignment: Alignment.centerLeft,
                                                   child: const Text("Nominal"),
                                                 ),
@@ -450,7 +450,7 @@ class HutangPiutangPage extends StatelessWidget {
                                               crossAxisAlignment: CrossAxisAlignment.stretch,
                                               children: [
                                                 Container(
-                                                    height: 40,
+                                                    height: 50,
                                                     alignment: Alignment.centerLeft,
                                                     child: Row(
                                                       children: [
@@ -479,7 +479,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                   height: 8,
                                                 ),
                                                 Container(
-                                                    height: 40,
+                                                    height: 50,
                                                     alignment: Alignment.centerLeft,
                                                     child: Row(
                                                       children: [
@@ -536,7 +536,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                   height: 8,
                                                 ),
                                                 Container(
-                                                    height: 40,
+                                                    height: 50,
                                                     alignment: Alignment.centerLeft,
                                                     child: Row(
                                                       children: [
@@ -564,7 +564,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                   height: 8,
                                                 ),
                                                 Container(
-                                                    height: 40,
+                                                    height: 50,
                                                     alignment: Alignment.centerLeft,
                                                     child: Row(
                                                       children: [
@@ -608,6 +608,13 @@ class HutangPiutangPage extends StatelessWidget {
                                                         Expanded(
                                                           child: TextFormField(
                                                             controller: value.noreferensi,
+                                                            validator: (e) {
+                                                              if (e!.isEmpty) {
+                                                                return "Wajib diisi";
+                                                              } else {
+                                                                return null;
+                                                              }
+                                                            },
                                                             decoration: InputDecoration(
                                                               border: OutlineInputBorder(
                                                                 borderRadius: BorderRadius.circular(8),
@@ -629,6 +636,13 @@ class HutangPiutangPage extends StatelessWidget {
                                                         Expanded(
                                                           child: TextFormField(
                                                             controller: value.keterangan,
+                                                            validator: (e) {
+                                                              if (e!.isEmpty) {
+                                                                return "Wajib diisi";
+                                                              } else {
+                                                                return null;
+                                                              }
+                                                            },
                                                             decoration: InputDecoration(
                                                               border: OutlineInputBorder(
                                                                 borderRadius: BorderRadius.circular(8),
@@ -681,7 +695,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                 // ambil SBB
 
                                                 Container(
-                                                    height: 40,
+                                                    height: 50,
                                                     alignment: Alignment.centerLeft,
                                                     child: Row(
                                                       children: [
@@ -711,6 +725,17 @@ class HutangPiutangPage extends StatelessWidget {
                                                                   SizedBox(
                                                                     width: 50,
                                                                     child: TextFormField(
+                                                                      validator: (e) {
+                                                                        if (value.caraPembayaran == "SELURUHNYA") {
+                                                                          return null;
+                                                                        } else {
+                                                                          if (e!.isEmpty) {
+                                                                            return "Wajib diisi";
+                                                                          } else {
+                                                                            return null;
+                                                                          }
+                                                                        }
+                                                                      },
                                                                       enabled: value.caraPembayaran == "BERTAHAP" ? true : false,
                                                                       controller: value.jangkawaktu,
                                                                       readOnly: value.caraPembayaran == "BERTAHAP" ? false : true,
@@ -730,6 +755,17 @@ class HutangPiutangPage extends StatelessWidget {
                                                                   // Tanggal Jatuh Tempo Pertama
                                                                   Expanded(
                                                                     child: TextFormField(
+                                                                      validator: (e) {
+                                                                        if (value.caraPembayaran == "SELURUHNYA") {
+                                                                          return null;
+                                                                        } else {
+                                                                          if (e!.isEmpty) {
+                                                                            return "Wajib diisi";
+                                                                          } else {
+                                                                            return null;
+                                                                          }
+                                                                        }
+                                                                      },
                                                                       controller: value.tglJatuhTempoPertama,
                                                                       enabled: value.caraPembayaran == "BERTAHAP" ? true : false,
                                                                       readOnly: value.caraPembayaran == "BERTAHAP" ? true : false,
@@ -829,7 +865,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                         children: [
                                                           // Baris pertama: radio-radio
                                                           Container(
-                                                            height: 40,
+                                                            height: 50,
                                                             alignment: Alignment.centerLeft,
                                                             child: Row(
                                                               children: [
@@ -892,7 +928,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                   height: 8,
                                                 ),
                                                 Container(
-                                                    height: 40,
+                                                    height: 50,
                                                     alignment: Alignment.centerLeft,
                                                     child: Row(
                                                       children: [
@@ -901,6 +937,17 @@ class HutangPiutangPage extends StatelessWidget {
                                                                 width: 250,
                                                                 child: TextFormField(
                                                                   controller: value.nokontrak,
+                                                                  validator: (e) {
+                                                                    if (value.caraPembayaran == "BERTAHAP") {
+                                                                      return null;
+                                                                    } else {
+                                                                      if (e!.isEmpty) {
+                                                                        return "Wajib diisi";
+                                                                      } else {
+                                                                        return null;
+                                                                      }
+                                                                    }
+                                                                  },
                                                                   decoration: InputDecoration(
                                                                     hintText: "No Kontrak",
                                                                     border: OutlineInputBorder(
@@ -927,6 +974,17 @@ class HutangPiutangPage extends StatelessWidget {
                                                                       width: 250,
                                                                       child: TextFormField(
                                                                         controller: value.noinvoice,
+                                                                        validator: (e) {
+                                                                          if (!value.carabayar && value.caraPembayaran == "BERTAHAP") {
+                                                                            return null;
+                                                                          } else {
+                                                                            if (e!.isEmpty) {
+                                                                              return "Wajib diisi";
+                                                                            } else {
+                                                                              return null;
+                                                                            }
+                                                                          }
+                                                                        },
                                                                         decoration: InputDecoration(
                                                                           hintText: "No Invoice",
                                                                           border: OutlineInputBorder(
@@ -948,6 +1006,13 @@ class HutangPiutangPage extends StatelessWidget {
                                                                 child: InkWell(
                                                                   onTap: () => value.pilihTanggalKontrak(),
                                                                   child: TextFormField(
+                                                                    validator: (e) {
+                                                                      if (e!.isEmpty) {
+                                                                        return "Wajib diisi";
+                                                                      } else {
+                                                                        return null;
+                                                                      }
+                                                                    },
                                                                     enabled: false,
                                                                     textInputAction: TextInputAction.done,
                                                                     controller: value.tanggalKontrak,
@@ -980,12 +1045,19 @@ class HutangPiutangPage extends StatelessWidget {
                                                   height: 8,
                                                 ),
                                                 Container(
-                                                  height: 40,
+                                                  height: 50,
                                                   alignment: Alignment.centerLeft,
                                                   child: Row(
                                                     children: [
                                                       Expanded(
                                                         child: TextFormField(
+                                                          validator: (e) {
+                                                            if (e!.isEmpty) {
+                                                              return "Wajib diisi";
+                                                            } else {
+                                                              return null;
+                                                            }
+                                                          },
                                                           onChanged: (e) {
                                                             value.changeTotal();
                                                           },
@@ -1033,6 +1105,17 @@ class HutangPiutangPage extends StatelessWidget {
                                                       Container(
                                                         width: 200,
                                                         child: TextFormField(
+                                                          validator: (e) {
+                                                            if (!value.ppn) {
+                                                              return null;
+                                                            } else {
+                                                              if (e!.isEmpty) {
+                                                                return "Wajib diisi";
+                                                              } else {
+                                                                return null;
+                                                              }
+                                                            }
+                                                          },
                                                           controller: value.nilaippn,
                                                           textAlign: TextAlign.right,
                                                           keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -1046,6 +1129,8 @@ class HutangPiutangPage extends StatelessWidget {
                                                             ),
                                                           ],
                                                           decoration: InputDecoration(
+                                                            filled: !value.ppn,
+                                                            fillColor: Colors.grey[200],
                                                             hintText: "PPN",
                                                             border: OutlineInputBorder(
                                                               borderRadius: BorderRadius.circular(8),
@@ -1077,6 +1162,17 @@ class HutangPiutangPage extends StatelessWidget {
                                                       Container(
                                                         width: 200,
                                                         child: TextFormField(
+                                                          validator: (e) {
+                                                            if (!value.pph) {
+                                                              return null;
+                                                            } else {
+                                                              if (e!.isEmpty) {
+                                                                return "Wajib diisi";
+                                                              } else {
+                                                                return null;
+                                                              }
+                                                            }
+                                                          },
                                                           controller: value.nilaipph,
                                                           textAlign: TextAlign.right,
                                                           keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -1090,6 +1186,8 @@ class HutangPiutangPage extends StatelessWidget {
                                                             ),
                                                           ],
                                                           decoration: InputDecoration(
+                                                            filled: !value.pph,
+                                                            fillColor: Colors.grey[200],
                                                             hintText: "PPH",
                                                             border: OutlineInputBorder(
                                                               borderRadius: BorderRadius.circular(8),

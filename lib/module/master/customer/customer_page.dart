@@ -747,8 +747,12 @@ class CustomerPage extends StatelessWidget {
                                         FilteringTextInputFormatter.digitsOnly
                                       ],
                                       validator: (e) {
-                                        if (e!.isEmpty) {
-                                          return "Wajib diisi";
+                                        if (value.pkp) {
+                                          if (e!.isEmpty) {
+                                            return "Wajib diisi";
+                                          } else {
+                                            return null;
+                                          }
                                         } else {
                                           return null;
                                         }
@@ -852,6 +856,131 @@ class CustomerPage extends StatelessWidget {
                                         )),
                                       ],
                                     ),
+                                    value.golCust != "Customer dan Supplier"
+                                        ? Column(
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "AO ${value.golCust}",
+                                                    style: const TextStyle(fontSize: 12),
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              DropdownSearch<AoModel>(
+                                                popupProps: const PopupPropsMultiSelection.menu(
+                                                  showSearchBox: true, // Aktifkan fitur pencarian
+                                                ),
+                                                selectedItem: value.golCust == "Customer" ? value.aoModel : value.aoModelKRedit,
+                                                items: value.listAoModel.where((e) => e.golCust == (value.golCust == "Customer" ? "1" : "2") || e.golCust == "3").toList(),
+                                                itemAsString: (e) => e.nama,
+                                                onChanged: (e) {
+                                                  value.golCust == "Customer" ? value.pilihAoModelDebet(e!) : value.pilihAoModelKredit(e!);
+                                                },
+                                                dropdownDecoratorProps: DropDownDecoratorProps(
+                                                  baseStyle: const TextStyle(fontSize: 16),
+                                                  textAlignVertical: TextAlignVertical.center,
+                                                  dropdownSearchDecoration: InputDecoration(
+                                                    hintText: "Pilih AO ${value.golCust}",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius: BorderRadius.circular(8),
+                                                      borderSide: const BorderSide(
+                                                        width: 1,
+                                                        color: Colors.grey,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 16),
+                                            ],
+                                          )
+                                        : Column(
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                                            children: [
+                                              const Row(
+                                                children: [
+                                                  Text(
+                                                    "AO Customer",
+                                                    style: TextStyle(fontSize: 12),
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              DropdownSearch<AoModel>(
+                                                popupProps: const PopupPropsMultiSelection.menu(
+                                                  showSearchBox: true, // Aktifkan fitur pencarian
+                                                ),
+                                                selectedItem: value.aoModel,
+                                                items: value.listAoModel.where((e) => e.golCust == "1" || e.golCust == "3").toList(),
+                                                itemAsString: (e) => e.nama,
+                                                onChanged: (e) {
+                                                  value.pilihAoModelDebet(e!);
+                                                },
+                                                dropdownDecoratorProps: DropDownDecoratorProps(
+                                                  baseStyle: const TextStyle(fontSize: 16),
+                                                  textAlignVertical: TextAlignVertical.center,
+                                                  dropdownSearchDecoration: InputDecoration(
+                                                    hintText: "Pilih AO Customer",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius: BorderRadius.circular(8),
+                                                      borderSide: const BorderSide(
+                                                        width: 1,
+                                                        color: Colors.grey,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 16),
+                                              const Row(
+                                                children: [
+                                                  Text(
+                                                    "AO Supplier",
+                                                    style: TextStyle(fontSize: 12),
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              DropdownSearch<AoModel>(
+                                                popupProps: const PopupPropsMultiSelection.menu(
+                                                  showSearchBox: true, // Aktifkan fitur pencarian
+                                                ),
+                                                selectedItem: value.aoModelKRedit,
+                                                items: value.listAoModel.where((e) => e.golCust == "2" || e.golCust == "3").toList(),
+                                                itemAsString: (e) => e.nama,
+                                                onChanged: (e) {
+                                                  value.pilihAoModelKredit(e!);
+                                                },
+                                                dropdownDecoratorProps: DropDownDecoratorProps(
+                                                  baseStyle: const TextStyle(fontSize: 16),
+                                                  textAlignVertical: TextAlignVertical.center,
+                                                  dropdownSearchDecoration: InputDecoration(
+                                                    hintText: "Pilih AO Supplier",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius: BorderRadius.circular(8),
+                                                      borderSide: const BorderSide(
+                                                        width: 1,
+                                                        color: Colors.grey,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 16),
+                                            ],
+                                          ),
                                     Container(
                                       margin: const EdgeInsets.symmetric(vertical: 16),
                                       height: 1,
@@ -1316,131 +1445,6 @@ class CustomerPage extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(height: 16),
-                                    value.golCust != "Customer dan Supplier"
-                                        ? Column(
-                                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "AO ${value.golCust}",
-                                                    style: const TextStyle(fontSize: 12),
-                                                  ),
-                                                  const SizedBox(width: 5),
-                                                ],
-                                              ),
-                                              const SizedBox(
-                                                height: 8,
-                                              ),
-                                              DropdownSearch<AoModel>(
-                                                popupProps: const PopupPropsMultiSelection.menu(
-                                                  showSearchBox: true, // Aktifkan fitur pencarian
-                                                ),
-                                                selectedItem: value.golCust == "Customer" ? value.aoModel : value.aoModelKRedit,
-                                                items: value.listAoModel.where((e) => e.golCust == (value.golCust == "Customer" ? "1" : "2") || e.golCust == "3").toList(),
-                                                itemAsString: (e) => e.nama,
-                                                onChanged: (e) {
-                                                  value.golCust == "Customer" ? value.pilihAoModelDebet(e!) : value.pilihAoModelKredit(e!);
-                                                },
-                                                dropdownDecoratorProps: DropDownDecoratorProps(
-                                                  baseStyle: const TextStyle(fontSize: 16),
-                                                  textAlignVertical: TextAlignVertical.center,
-                                                  dropdownSearchDecoration: InputDecoration(
-                                                    hintText: "Pilih AO ${value.golCust}",
-                                                    border: OutlineInputBorder(
-                                                      borderRadius: BorderRadius.circular(8),
-                                                      borderSide: const BorderSide(
-                                                        width: 1,
-                                                        color: Colors.grey,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(height: 16),
-                                            ],
-                                          )
-                                        : Column(
-                                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                                            children: [
-                                              const Row(
-                                                children: [
-                                                  Text(
-                                                    "AO Customer",
-                                                    style: TextStyle(fontSize: 12),
-                                                  ),
-                                                  SizedBox(width: 5),
-                                                ],
-                                              ),
-                                              const SizedBox(
-                                                height: 8,
-                                              ),
-                                              DropdownSearch<AoModel>(
-                                                popupProps: const PopupPropsMultiSelection.menu(
-                                                  showSearchBox: true, // Aktifkan fitur pencarian
-                                                ),
-                                                selectedItem: value.aoModel,
-                                                items: value.listAoModel.where((e) => e.golCust == "1" || e.golCust == "3").toList(),
-                                                itemAsString: (e) => e.nama,
-                                                onChanged: (e) {
-                                                  value.pilihAoModelDebet(e!);
-                                                },
-                                                dropdownDecoratorProps: DropDownDecoratorProps(
-                                                  baseStyle: const TextStyle(fontSize: 16),
-                                                  textAlignVertical: TextAlignVertical.center,
-                                                  dropdownSearchDecoration: InputDecoration(
-                                                    hintText: "Pilih AO Customer",
-                                                    border: OutlineInputBorder(
-                                                      borderRadius: BorderRadius.circular(8),
-                                                      borderSide: const BorderSide(
-                                                        width: 1,
-                                                        color: Colors.grey,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(height: 16),
-                                              const Row(
-                                                children: [
-                                                  Text(
-                                                    "AO Supplier",
-                                                    style: TextStyle(fontSize: 12),
-                                                  ),
-                                                  SizedBox(width: 5),
-                                                ],
-                                              ),
-                                              const SizedBox(
-                                                height: 8,
-                                              ),
-                                              DropdownSearch<AoModel>(
-                                                popupProps: const PopupPropsMultiSelection.menu(
-                                                  showSearchBox: true, // Aktifkan fitur pencarian
-                                                ),
-                                                selectedItem: value.aoModelKRedit,
-                                                items: value.listAoModel.where((e) => e.golCust == "2" || e.golCust == "3").toList(),
-                                                itemAsString: (e) => e.nama,
-                                                onChanged: (e) {
-                                                  value.pilihAoModelKredit(e!);
-                                                },
-                                                dropdownDecoratorProps: DropDownDecoratorProps(
-                                                  baseStyle: const TextStyle(fontSize: 16),
-                                                  textAlignVertical: TextAlignVertical.center,
-                                                  dropdownSearchDecoration: InputDecoration(
-                                                    hintText: "Pilih AO Supplier",
-                                                    border: OutlineInputBorder(
-                                                      borderRadius: BorderRadius.circular(8),
-                                                      borderSide: const BorderSide(
-                                                        width: 1,
-                                                        color: Colors.grey,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(height: 16),
-                                            ],
-                                          ),
                                     ButtonPrimary(
                                       onTap: () {
                                         value.cek();

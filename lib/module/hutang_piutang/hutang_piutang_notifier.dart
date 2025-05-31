@@ -1075,10 +1075,14 @@ class HutangPiutangNotifier extends ChangeNotifier {
   }
 
   void changeTotal() {
-    double ppn = (double.parse(nilaitransaksi.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")) * double.parse(setupPajakModel!.ppn) / 100);
-    double pph = (double.parse(nilaitransaksi.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")) * double.parse(setupPajakModel!.pph23) / 100);
-    nilaippn.text = "Rp ${FormatCurrency.oCcyDecimal.format(ppn)}";
-    nilaipph.text = "Rp ${FormatCurrency.oCcyDecimal.format(pph)}";
+    if (ppn) {
+      double cekppn = (double.parse(nilaitransaksi.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")) * double.parse(setupPajakModel!.ppn) / 100);
+      nilaippn.text = "Rp ${FormatCurrency.oCcyDecimal.format(cekppn)}";
+    }
+    if (pph) {
+      double cekpph = (double.parse(nilaitransaksi.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")) * double.parse(setupPajakModel!.pph23) / 100);
+      nilaipph.text = "Rp ${FormatCurrency.oCcyDecimal.format(cekpph)}";
+    }
     notifyListeners();
   }
 
@@ -1217,6 +1221,9 @@ class HutangPiutangNotifier extends ChangeNotifier {
       tglJthTempoPertama = pickedendDate;
       tglJatuhTempoPertama.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
+    } else {
+      tglJatuhTempoPertama.text = DateFormat("dd-MMM-yyyy").format(DateTime.now());
+      notifyListeners();
     }
   }
 
@@ -1247,20 +1254,20 @@ class HutangPiutangNotifier extends ChangeNotifier {
 
   gantippn() {
     ppn = !ppn;
-    if (ppn) {
+    if (ppn && nilaitransaksi.text != "") {
       changeTotal();
     } else {
-      nilaippn.clear();
+      nilaippn.text = "Rp 0,00";
     }
     notifyListeners();
   }
 
   gantipph() {
     pph = !pph;
-    if (pph) {
+    if (pph && nilaitransaksi.text != "") {
       changeTotal();
     } else {
-      nilaipph.clear();
+      nilaipph.text = "Rp 0,00";
     }
     notifyListeners();
   }
