@@ -119,11 +119,11 @@ class NeracaBerjalanPage extends StatelessWidget {
                     children: [
                       Expanded(
                           child: ListView.builder(
-                              itemCount: value.listNeraca.where((e) => e.typePosting == "AKTIVA").length,
+                              itemCount: value.listNeraca.where((e) => e.golAcc == "1").length,
                               shrinkWrap: true,
                               physics: const ClampingScrollPhysics(),
                               itemBuilder: (context, i) {
-                                final data = value.listNeraca.where((e) => e.typePosting == "AKTIVA").toList()[i];
+                                final data = value.listNeraca.where((e) => e.golAcc == "1").toList()[i];
                                 return Column(
                                   crossAxisAlignment: CrossAxisAlignment.stretch,
                                   children: [
@@ -206,11 +206,11 @@ class NeracaBerjalanPage extends StatelessWidget {
                       ),
                       Expanded(
                           child: ListView.builder(
-                              itemCount: value.listNeraca.where((e) => e.typePosting == "PASIVA").length,
+                              itemCount: value.listNeraca.where((e) => e.golAcc == "2").length,
                               shrinkWrap: true,
                               physics: const ClampingScrollPhysics(),
                               itemBuilder: (context, i) {
-                                final data = value.listNeraca.where((e) => e.typePosting == "PASIVA").toList()[i];
+                                final data = value.listNeraca.where((e) => e.golAcc == "2").toList()[i];
                                 return Column(
                                   crossAxisAlignment: CrossAxisAlignment.stretch,
                                   children: [

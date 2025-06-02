@@ -1,7 +1,11 @@
 import 'package:flutter/foundation.dart';
+import 'package:quiver/core.dart';
+
+import 'index.dart';
 
 @immutable
 class AoModel {
+
   const AoModel({
     required this.id,
     required this.kode,
@@ -24,36 +28,68 @@ class AoModel {
   final String namaKantor;
   final String kodeInduk;
 
-  factory AoModel.fromJson(Map<String, dynamic> json) => AoModel(id: json['id'] as int, kode: json['kode'].toString(), nama: json['nama'].toString(), golCust: json['gol_cust'].toString(), kodePt: json['kode_pt'].toString(), kodeKantor: json['kode_kantor'].toString(), nonaktif: json['nonaktif'].toString(), namaKantor: json['nama_kantor'].toString(), kodeInduk: json['kode_induk'].toString());
-
+  factory AoModel.fromJson(Map<String,dynamic> json) => AoModel(
+    id: json['id'] as int,
+    kode: json['kode'].toString(),
+    nama: json['nama'].toString(),
+    golCust: json['gol_cust'].toString(),
+    kodePt: json['kode_pt'].toString(),
+    kodeKantor: json['kode_kantor'].toString(),
+    nonaktif: json['nonaktif'].toString(),
+    namaKantor: json['nama_kantor'].toString(),
+    kodeInduk: json['kode_induk'].toString()
+  );
+  
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'kode': kode,
-        'nama': nama,
-        'gol_cust': golCust,
-        'kode_pt': kodePt,
-        'kode_kantor': kodeKantor,
-        'nonaktif': nonaktif,
-        'nama_kantor': namaKantor,
-        'kode_induk': kodeInduk
-      };
+    'id': id,
+    'kode': kode,
+    'nama': nama,
+    'gol_cust': golCust,
+    'kode_pt': kodePt,
+    'kode_kantor': kodeKantor,
+    'nonaktif': nonaktif,
+    'nama_kantor': namaKantor,
+    'kode_induk': kodeInduk
+  };
 
-  AoModel clone() => AoModel(id: id, kode: kode, nama: nama, golCust: golCust, kodePt: kodePt, kodeKantor: kodeKantor, nonaktif: nonaktif, namaKantor: namaKantor, kodeInduk: kodeInduk);
+  AoModel clone() => AoModel(
+    id: id,
+    kode: kode,
+    nama: nama,
+    golCust: golCust,
+    kodePt: kodePt,
+    kodeKantor: kodeKantor,
+    nonaktif: nonaktif,
+    namaKantor: namaKantor,
+    kodeInduk: kodeInduk
+  );
 
-  AoModel copyWith({int? id, String? kode, String? nama, String? golCust, String? kodePt, String? kodeKantor, String? nonaktif, String? namaKantor, String? kodeInduk}) => AoModel(
-        id: id ?? this.id,
-        kode: kode ?? this.kode,
-        nama: nama ?? this.nama,
-        golCust: golCust ?? this.golCust,
-        kodePt: kodePt ?? this.kodePt,
-        kodeKantor: kodeKantor ?? this.kodeKantor,
-        nonaktif: nonaktif ?? this.nonaktif,
-        namaKantor: namaKantor ?? this.namaKantor,
-        kodeInduk: kodeInduk ?? this.kodeInduk,
-      );
+
+  AoModel copyWith({
+    int? id,
+    String? kode,
+    String? nama,
+    String? golCust,
+    String? kodePt,
+    String? kodeKantor,
+    String? nonaktif,
+    String? namaKantor,
+    String? kodeInduk
+  }) => AoModel(
+    id: id ?? this.id,
+    kode: kode ?? this.kode,
+    nama: nama ?? this.nama,
+    golCust: golCust ?? this.golCust,
+    kodePt: kodePt ?? this.kodePt,
+    kodeKantor: kodeKantor ?? this.kodeKantor,
+    nonaktif: nonaktif ?? this.nonaktif,
+    namaKantor: namaKantor ?? this.namaKantor,
+    kodeInduk: kodeInduk ?? this.kodeInduk,
+  );
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is AoModel && id == other.id && kode == other.kode && nama == other.nama && golCust == other.golCust && kodePt == other.kodePt && kodeKantor == other.kodeKantor && nonaktif == other.nonaktif && namaKantor == other.namaKantor && kodeInduk == other.kodeInduk;
+  bool operator ==(Object other) => identical(this, other)
+    || other is AoModel && id == other.id && kode == other.kode && nama == other.nama && golCust == other.golCust && kodePt == other.kodePt && kodeKantor == other.kodeKantor && nonaktif == other.nonaktif && namaKantor == other.namaKantor && kodeInduk == other.kodeInduk;
 
   @override
   int get hashCode => id.hashCode ^ kode.hashCode ^ nama.hashCode ^ golCust.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ nonaktif.hashCode ^ namaKantor.hashCode ^ kodeInduk.hashCode;

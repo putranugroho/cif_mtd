@@ -47,11 +47,27 @@ class NeracaBerjalanNotiifer extends ChangeNotifier {
       "userterm": "PC accounting"
     };
     notifyListeners();
-    Setuprepository.setup(token, NetworkURL.neracaBerjalan(), jsonEncode(data)).then((value) {
+    Setuprepository.setup(token, NetworkURL.neracaBerjalan(), jsonEncode(data))
+        .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listNeraca.add(NeracaModel.fromJson(i));
         }
+        for (var item in value['data']) {
+          String typePosting = item['gol_acc'];
+          List<Map<String, dynamic>> sbbItems =
+              List<Map<String, dynamic>>.from(item['sbb_item']);
+
+          double subtotal =
+              sbbItems.fold(0, (sum, sbb) => sum + (sbb['saldo'] ?? 0));
+
+          if (typePosting == '1') {
+            totalAktiva += subtotal;
+          } else if (typePosting == '2') {
+            totalPasiva += subtotal;
+          }
+        }
+
         print(listNeraca);
         notifyListeners();
       }
@@ -65,9 +81,11 @@ class NeracaBerjalanNotiifer extends ChangeNotifier {
       for (var item in items) {
         if (item is Map<String, dynamic>) {
           String typePosting = item['type_posting'];
-          List<Map<String, dynamic>> sbbItems = List<Map<String, dynamic>>.from(item['sbb_item']);
+          List<Map<String, dynamic>> sbbItems =
+              List<Map<String, dynamic>>.from(item['sbb_item']);
 
-          double subtotal = sbbItems.fold(0, (sum, sbb) => sum + (sbb['saldo'] ?? 0));
+          double subtotal =
+              sbbItems.fold(0, (sum, sbb) => sum + (sbb['saldo'] ?? 0));
 
           if (typePosting == 'AKTIVA') {
             totalAktiva += subtotal;
