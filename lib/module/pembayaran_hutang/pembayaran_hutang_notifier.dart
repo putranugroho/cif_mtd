@@ -2,7 +2,10 @@ import 'dart:convert';
 
 import 'package:accounting/models/index.dart';
 import 'package:accounting/network/network.dart';
+import 'package:accounting/pref/pref.dart';
 import 'package:accounting/repository/SetupRepository.dart';
+import 'package:accounting/utils/dialog_loading.dart';
+import 'package:accounting/utils/format_currency.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,7 +14,65 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   final BuildContext context;
 
   PembayaranHutangNotifier({required this.context}) {
-    getInqueryAll();
+    getProfile();
+  }
+
+  UserModel? users;
+  getProfile() async {
+    Pref().getUsers().then((value) {
+      users = value;
+      getInqueryAll();
+      getHutangPiutang();
+      notifyListeners();
+    });
+  }
+
+  TextEditingController tglKontrak = TextEditingController();
+  TextEditingController keterangan = TextEditingController();
+  TextEditingController noref = TextEditingController();
+
+  pilihTagihan(String value) {
+    hutangPiutangTransaksiModel =
+        listTransaksiAdd.where((e) => e.nokontrak == value).first;
+    nilaitagihan.text = FormatCurrency.oCcyDecimal
+        .format(double.parse(hutangPiutangTransaksiModel!.totalTagPokok));
+    tglKontrak.text = hutangPiutangTransaksiModel!.tglKontrak;
+    noref.text = hutangPiutangTransaksiModel!.noRef;
+    keterangan.text = hutangPiutangTransaksiModel!.keterangan;
+    caritransaksi.text = hutangPiutangTransaksiModel!.nokontrak;
+    dialog = false;
+    notifyListeners();
+  }
+
+  HutangPiutangTransaksiModel? hutangPiutangTransaksiModel;
+
+  List<HutangPiutangTransaksiModel> listTransaksi = [];
+  List<HutangPiutangTransaksiModel> listTransaksiAdd = [];
+  Future getHutangPiutang() async {
+    isLoading = true;
+    listTransaksi.clear();
+    listTransaksiAdd.clear();
+    notifyListeners();
+    var data = {"kode_pt": users!.kodePt};
+    Setuprepository.setup(
+            token, NetworkURL.getHutangPiutang(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listTransaksi.add(HutangPiutangTransaksiModel.fromJson(i));
+        }
+        if (listTransaksi.isNotEmpty) {
+          listTransaksiAdd = jenis == 2
+              ? listTransaksi.where((e) => e.tipeTransaksi == "2").toList()
+              : listTransaksi.where((e) => e.tipeTransaksi == "1").toList();
+        }
+        isLoading = false;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
   }
 
   CustomerSupplierModel? customerSupplierModel;
@@ -23,14 +84,13 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   }
 
   List<CustomerSupplierModel> listCs = [];
-  Future<List<CustomerSupplierModel>> getCustomerSupplierQuery(String query) async {
+  Future<List<CustomerSupplierModel>> getCustomerSupplierQuery(
+      String query) async {
     if (query.isNotEmpty && query.length > 2) {
       listCs.clear();
       notifyListeners();
 
-      var data = {
-        "kode_pt": "001"
-      };
+      var data = {"kode_pt": "001"};
 
       try {
         final response = await Setuprepository.setup(
@@ -44,7 +104,14 @@ class PembayaranHutangNotifier extends ChangeNotifier {
           for (Map<String, dynamic> i in response['data']) {
             listCs.add(CustomerSupplierModel.fromJson(i));
           }
-          return listCs.where((model) => jenis == 1 ? (model.nmSif.toLowerCase().contains(query.toLowerCase()) && (model.golCust == "1" || model.golCust == "3")) : (model.nmSif.toLowerCase().contains(query.toLowerCase()) && model.golCust == "2" || model.golCust == "3")).toList();
+          return listCs
+              .where((model) => jenis == 1
+                  ? (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
+                      (model.golCust == "1" || model.golCust == "3"))
+                  : (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
+                          model.golCust == "2" ||
+                      model.golCust == "3"))
+              .toList();
         }
         notifyListeners();
       } catch (e) {
@@ -62,13 +129,14 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     list.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
+        .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
-        list = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems =
+            extractJnsAccB(value['data']);
+        list =
+            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         notifyListeners();
       }
     });
@@ -119,9 +187,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {
-        "kode_pt": "001"
-      };
+      var data = {"kode_pt": "001"};
 
       try {
         final response = await Setuprepository.setup(
@@ -131,8 +197,14 @@ class PembayaranHutangNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
-          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
+          final List<Map<String, dynamic>> jnsAccBItems =
+              extractJnsAccB(response['data']);
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .toList();
         }
         notifyListeners();
       } catch (e) {
@@ -163,26 +235,28 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   List<TextEditingController> listAmount = [];
 
   tambahTransaksi() {
-    if (noSbb.text.isEmpty && nmSbb.text.isEmpty) {
-      informationDialog(context, "Warning", "Pilih SBB Transaksi");
-    } else if (nilaipembayaran.text.isEmpty) {
-      informationDialog(context, "Warning", "Pilih Transaksi");
-    } else if (nilaitagihan.text.isEmpty) {
-      informationDialog(context, "Warning", "Pilih Tagihan");
-    } else if (nodokumen.text.isEmpty) {
-      informationDialog(context, "Warning", "Masukan Nomor Dokumen");
-    } else {
-      informationDialog(context, "Success", "Success");
-      // transaksi++;
-      // listAmount.add(TextEditingController(text: "0"));
-      // notifyListeners();
-    }
+    // if (noSbb.text.isEmpty && nmSbb.text.isEmpty) {
+    //   informationDialog(context, "Warning", "Pilih SBB Transaksi");
+    // } else if (nilaipembayaran.text.isEmpty) {
+    //   informationDialog(context, "Warning", "Pilih Transaksi");
+    // } else if (nilaitagihan.text.isEmpty) {
+    //   informationDialog(context, "Warning", "Pilih Tagihan");
+    // } else if (nodokumen.text.isEmpty) {
+    //   informationDialog(context, "Warning", "Masukan Nomor Dokumen");
+    // } else {
+
+    //   // transaksi++;
+    //   // listAmount.add(TextEditingController(text: "0"));
+    //   // notifyListeners();
+    // }
+    DialogCustom().showLoading(context);
   }
 
   int jenis = 1;
 
   gantijenis(int value) {
     jenis = value;
+    getHutangPiutang();
     notifyListeners();
   }
 

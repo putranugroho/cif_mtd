@@ -8,11 +8,9 @@ import 'package:accounting/utils/format_currency.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../models/inquery_gl_model.dart';
+
 import 'adjusted_rounding.dart';
 
-import '../../models/customer_supplier_model.dart';
-import '../../models/setup_pajak_model.dart';
 import '../../network/network.dart';
 import '../../repository/SetupRepository.dart';
 
