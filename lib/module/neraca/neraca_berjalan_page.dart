@@ -1,4 +1,4 @@
-import 'package:accounting/module/neraca/neraca_berjalan_notiifer.dart';
+import 'package:accounting/module/neraca/neraca_berjalan_notifer.dart';
 import 'package:accounting/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -119,11 +119,11 @@ class NeracaBerjalanPage extends StatelessWidget {
                     children: [
                       Expanded(
                           child: ListView.builder(
-                              itemCount: value.list.where((e) => e.typePosting == "AKTIVA").length,
+                              itemCount: value.listNeraca.where((e) => e.typePosting == "AKTIVA").length,
                               shrinkWrap: true,
                               physics: const ClampingScrollPhysics(),
                               itemBuilder: (context, i) {
-                                final data = value.list.where((e) => e.typePosting == "AKTIVA").toList()[i];
+                                final data = value.listNeraca.where((e) => e.typePosting == "AKTIVA").toList()[i];
                                 return Column(
                                   crossAxisAlignment: CrossAxisAlignment.stretch,
                                   children: [
@@ -206,11 +206,11 @@ class NeracaBerjalanPage extends StatelessWidget {
                       ),
                       Expanded(
                           child: ListView.builder(
-                              itemCount: value.list.where((e) => e.typePosting == "PASIVA").length,
+                              itemCount: value.listNeraca.where((e) => e.typePosting == "PASIVA").length,
                               shrinkWrap: true,
                               physics: const ClampingScrollPhysics(),
                               itemBuilder: (context, i) {
-                                final data = value.list.where((e) => e.typePosting == "PASIVA").toList()[i];
+                                final data = value.listNeraca.where((e) => e.typePosting == "PASIVA").toList()[i];
                                 return Column(
                                   crossAxisAlignment: CrossAxisAlignment.stretch,
                                   children: [
