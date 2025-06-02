@@ -96,6 +96,7 @@ class NetworkURL {
   static String jual() {
     return "$url/inventaris/jual";
   }
+
   static String hapusaset() {
     return "$url/inventaris/hapusaset";
   }
@@ -426,6 +427,10 @@ class NetworkURL {
 
   static String otorisasi() {
     return "$url/General-ledger/otorisasi";
+  }
+
+  static String neracaBerjalan() {
+    return "$url/report";
   }
 
   static String transaksi() {
