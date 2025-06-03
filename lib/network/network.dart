@@ -349,6 +349,10 @@ class NetworkURL {
     return "$url/hutangpiutang/deleted";
   }
 
+  static String searchHutangPiutang() {
+    return "$url/hutangpiutangdetail/search";
+  }
+
   static String getBank() {
     return "$url/bank";
   }

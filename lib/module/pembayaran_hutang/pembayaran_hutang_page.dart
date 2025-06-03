@@ -1,3 +1,4 @@
+import 'package:accounting/models/hutang_piutang_item_model.dart';
 import 'package:accounting/models/index.dart';
 import 'package:accounting/module/pembayaran_hutang/pembayaran_hutang_notifier.dart';
 import 'package:accounting/utils/currency_formatted.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart' as a;
 import 'package:provider/provider.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
@@ -352,7 +354,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                               enabled: false,
                                               textInputAction:
                                                   TextInputAction.done,
-                                              controller: value.caritransaksi,
+                                              controller: value.caritransaksis,
                                               decoration: InputDecoration(
                                                 hintText: "Cari Transaksi",
                                                 border: OutlineInputBorder(
@@ -456,6 +458,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                         SizedBox(
                                           height: 40,
                                           child: TextFormField(
+                                            controller: value.tglValuta,
                                             textInputAction:
                                                 TextInputAction.done,
                                             maxLines: 1,
@@ -505,6 +508,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                         SizedBox(
                                           height: 40,
                                           child: TextFormField(
+                                            controller: value.nodokumen,
                                             textInputAction:
                                                 TextInputAction.done,
                                             maxLines: 1,
@@ -963,15 +967,12 @@ class PembayaranHutangPage extends StatelessWidget {
                                     headerRowHeight: 40,
                                     defaultColumnWidth: 180,
                                     frozenColumnsCount: 2,
-
-                                    // controller: value.dataGridController,
                                     gridLinesVisibility:
                                         GridLinesVisibility.both,
                                     headerGridLinesVisibility:
                                         GridLinesVisibility.both,
                                     selectionMode: SelectionMode.single,
-
-                                    source: EmptyDataGridSource(value),
+                                    source: DetailDataPembayaranSource(value),
                                     columns: <GridColumn>[
                                       GridColumn(
                                           width: 50,
@@ -1013,7 +1014,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                                     color: Colors.white,
                                                   )))),
                                       GridColumn(
-                                          width: 100,
+                                          width: 200,
                                           columnName: 'bayartagihan',
                                           label: Container(
                                               color: colorPrimary,
@@ -1026,7 +1027,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                                     color: Colors.white,
                                                   )))),
                                       GridColumn(
-                                          width: 150,
+                                          width: 200,
                                           columnName: 'tagppn',
                                           label: Container(
                                               color: colorPrimary,
@@ -1039,7 +1040,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                                     color: Colors.white,
                                                   )))),
                                       GridColumn(
-                                          width: 150,
+                                          width: 200,
                                           columnName: 'bayarppn',
                                           label: Container(
                                               color: colorPrimary,
@@ -1051,9 +1052,8 @@ class PembayaranHutangPage extends StatelessWidget {
                                                     fontWeight: FontWeight.w300,
                                                     color: Colors.white,
                                                   )))),
-                                      // Cust/Supp	No Kontrak	No Invoice	Nilai Transaksi	Sisa Kewajiban	cara bayar	Jk Waktu
                                       GridColumn(
-                                          width: 150,
+                                          width: 200,
                                           columnName: 'tagpph',
                                           label: Container(
                                               color: colorPrimary,
@@ -1066,7 +1066,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                                     color: Colors.white,
                                                   )))),
                                       GridColumn(
-                                          width: 150,
+                                          width: 200,
                                           columnName: 'bayarpph',
                                           label: Container(
                                               color: colorPrimary,
@@ -1079,7 +1079,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                                     color: Colors.white,
                                                   )))),
                                       GridColumn(
-                                          width: 200,
+                                          width: 300,
                                           columnName: 'keterangan',
                                           label: Container(
                                               color: colorPrimary,
@@ -1258,16 +1258,28 @@ class PembayaranHutangPage extends StatelessWidget {
                                       headerRowHeight: 40,
                                       defaultColumnWidth: 180,
                                       frozenColumnsCount: 2,
-
-                                      // controller: value.dataGridController,
                                       gridLinesVisibility:
                                           GridLinesVisibility.both,
                                       headerGridLinesVisibility:
                                           GridLinesVisibility.both,
                                       selectionMode: SelectionMode.single,
-
-                                      source: EmptyDataGridSource(value),
+                                      source: DetailDataTransaksi(value),
                                       columns: <GridColumn>[
+                                        GridColumn(
+                                            width: 80,
+                                            columnName: 'action',
+                                            label: Container(
+                                                color: colorPrimary,
+                                                alignment: Alignment.center,
+                                                padding:
+                                                    const EdgeInsets.all(6),
+                                                child: const Text('Aksi',
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      color: Colors.white,
+                                                    )))),
                                         GridColumn(
                                             width: 150,
                                             columnName: 'tgltranstrans',
@@ -1339,14 +1351,11 @@ class PembayaranHutangPage extends StatelessWidget {
                                       headerRowHeight: 40,
                                       defaultColumnWidth: 180,
                                       frozenColumnsCount: 1,
-
-                                      // controller: value.dataGridController,
                                       gridLinesVisibility:
                                           GridLinesVisibility.both,
                                       headerGridLinesVisibility:
                                           GridLinesVisibility.both,
                                       selectionMode: SelectionMode.single,
-
                                       source: DetailDataTagihanSource(value),
                                       columns: <GridColumn>[
                                         GridColumn(
@@ -1464,6 +1473,232 @@ class EmptyDataGridSource extends DataGridSource {
   @override
   DataGridRowAdapter? buildRow(DataGridRow row) {
     return null;
+  }
+}
+
+class DetailDataPembayaranSource extends DataGridSource {
+  DetailDataPembayaranSource(PembayaranHutangNotifier value) {
+    tindakanNotifier = value;
+    buildRowData(value.listPembayaran);
+  }
+
+  PembayaranHutangNotifier? tindakanNotifier;
+
+  List<DataGridRow> _laporanData = [];
+  @override
+  List<DataGridRow> get rows => _laporanData;
+  void buildRowData(List<HutangPiutangItemModel> list) {
+    var no = 1;
+    _laporanData = list
+        .map<DataGridRow>((data) => DataGridRow(
+              cells: [
+                DataGridCell(columnName: 'no', value: (no++).toString()),
+                DataGridCell(
+                    columnName: 'invoice',
+                    value: data.noinv == null ? "" : data.noinv),
+                DataGridCell(
+                    columnName: 'tagihan',
+                    value: FormatCurrency.oCcyDecimal
+                        .format(double.parse(data.tagPokok))),
+                DataGridCell(
+                    columnName: 'bayartagihan', value: (no - 1).toString()),
+                DataGridCell(columnName: 'tagppn', value: (no - 1).toString()),
+                DataGridCell(
+                    columnName: 'bayarppn', value: (no - 1).toString()),
+                DataGridCell(columnName: 'tagpph', value: (no - 1).toString()),
+                DataGridCell(
+                    columnName: 'bayarpph', value: (no - 1).toString()),
+                DataGridCell(
+                    columnName: 'keterangantagihan', value: data.keterangan),
+              ],
+            ))
+        .toList();
+  }
+
+  @override
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    return DataGridRowAdapter(
+      cells: row.getCells().map<Widget>((e) {
+        if (e.columnName == 'action') {
+          return Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+              onTap: () {
+                tindakanNotifier!.pilihTagihan(e.value);
+              },
+              child: Container(
+                width: 300,
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: colorPrimary,
+                  border: Border.all(
+                    width: 2,
+                    color: colorPrimary,
+                  ),
+                ),
+                child: const Text(
+                  "Pilih",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          );
+        } else if (e.columnName == 'bayartagihan' ||
+            e.columnName == 'tagppn' ||
+            e.columnName == 'bayarppn' ||
+            e.columnName == 'tagpph' ||
+            e.columnName == 'bayarpph') {
+          return Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(6.0),
+            child: Container(
+                width: 300,
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                child: TextFormField(
+                  onChanged: (e) {},
+                  controller: e.columnName == 'bayartagihan'
+                      ? tindakanNotifier!
+                          .listBayarTagihan[int.parse(e.value) - 1]
+                      : e.columnName == 'tagppn'
+                          ? tindakanNotifier!.listPPN[int.parse(e.value) - 1]
+                          : e.columnName == 'tagpph'
+                              ? tindakanNotifier!
+                                  .listPPH[int.parse(e.value) - 1]
+                              : e.columnName == 'bayarppn'
+                                  ? tindakanNotifier!
+                                      .listBayarPPN[int.parse(e.value) - 1]
+                                  : tindakanNotifier!
+                                      .listBayarPPH[int.parse(e.value) - 1],
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                  maxLines: 1,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
+                  inputFormatters: [
+                    a.CurrencyInputFormatter(
+                      leadingSymbol: 'Rp ',
+                      useSymbolPadding: true,
+                      thousandSeparator: a.ThousandSeparator.Period,
+                      mantissaLength: 2, // jumlah angka desimal
+                      // decimalSeparator: DecimalSeparator.Comma,
+                    ),
+                  ],
+                )),
+          );
+        } else {
+          return Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          );
+        }
+      }).toList(),
+    );
+  }
+
+  String formatStringData(String data) {
+    int numericData = int.tryParse(data) ?? 0;
+    final formatter = NumberFormat("#,###");
+    return formatter.format(numericData);
+  }
+}
+
+class DetailDataTransaksi extends DataGridSource {
+  DetailDataTransaksi(PembayaranHutangNotifier value) {
+    tindakanNotifier = value;
+    buildRowData(value.listTransaksiPendingAdd);
+  }
+
+  PembayaranHutangNotifier? tindakanNotifier;
+
+  List<DataGridRow> _laporanData = [];
+  @override
+  List<DataGridRow> get rows => _laporanData;
+  void buildRowData(List<TransaksiPendModel> list) {
+    var no = 1;
+    _laporanData = list
+        .map<DataGridRow>((data) => DataGridRow(
+              cells: [
+                DataGridCell(columnName: 'action', value: data.rrn),
+                DataGridCell(
+                    columnName: 'tgltranstrans', value: data.tglValuta),
+                DataGridCell(
+                    columnName: 'nilaitrans',
+                    value: FormatCurrency.oCcy.format(int.parse(data.nominal))),
+                DataGridCell(columnName: 'nodoktrans', value: data.noDokumen),
+                DataGridCell(columnName: 'keterangan', value: data.keterangan),
+              ],
+            ))
+        .toList();
+  }
+
+  @override
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    return DataGridRowAdapter(
+      cells: row.getCells().map<Widget>((e) {
+        if (e.columnName == 'action') {
+          return Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+              onTap: () {
+                tindakanNotifier!.pilihTransaksi(e.value);
+              },
+              child: Container(
+                width: 300,
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: colorPrimary,
+                  border: Border.all(
+                    width: 2,
+                    color: colorPrimary,
+                  ),
+                ),
+                child: const Text(
+                  "Pilih",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          );
+        } else {
+          return Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          );
+        }
+      }).toList(),
+    );
+  }
+
+  String formatStringData(String data) {
+    int numericData = int.tryParse(data) ?? 0;
+    final formatter = NumberFormat("#,###");
+    return formatter.format(numericData);
   }
 }
 

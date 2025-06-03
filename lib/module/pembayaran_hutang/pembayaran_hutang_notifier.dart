@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:accounting/models/hutang_piutang_item_model.dart';
 import 'package:accounting/models/index.dart';
 import 'package:accounting/network/network.dart';
 import 'package:accounting/pref/pref.dart';
@@ -23,7 +24,39 @@ class PembayaranHutangNotifier extends ChangeNotifier {
       users = value;
       getInqueryAll();
       getHutangPiutang();
+      getTransaksi();
       notifyListeners();
+    });
+  }
+
+  var isLoadingData = true;
+  List<TransaksiPendModel> listTransaksiPending = [];
+  List<TransaksiPendModel> listTransaksiPendingAdd = [];
+  Future getTransaksi() async {
+    isLoadingData = true;
+    listTransaksiPending.clear();
+    listTransaksiPendingAdd.clear();
+    notifyListeners();
+    var data = {
+      "kode_pt": users!.kodePt,
+    };
+    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listTransaksiPending.add(TransaksiPendModel.fromJson(i));
+        }
+        if (listTransaksiPending.isNotEmpty) {
+          listTransaksiPendingAdd = listTransaksiPending
+              .where((e) => e.status == "COMPLETED")
+              .toList();
+        }
+        isLoadingData = false;
+        notifyListeners();
+      } else {
+        isLoadingData = false;
+        notifyListeners();
+      }
     });
   }
 
@@ -49,7 +82,6 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   List<HutangPiutangTransaksiModel> listTransaksi = [];
   List<HutangPiutangTransaksiModel> listTransaksiAdd = [];
   Future getHutangPiutang() async {
-    isLoading = true;
     listTransaksi.clear();
     listTransaksiAdd.clear();
     notifyListeners();
@@ -63,13 +95,20 @@ class PembayaranHutangNotifier extends ChangeNotifier {
         }
         if (listTransaksi.isNotEmpty) {
           listTransaksiAdd = jenis == 2
-              ? listTransaksi.where((e) => e.tipeTransaksi == "2").toList()
-              : listTransaksi.where((e) => e.tipeTransaksi == "1").toList();
+              ? listTransaksi
+                  .where((e) =>
+                      e.tipeTransaksi == "2" &&
+                      e.custsupp == customerSupplierModel!.noSif)
+                  .toList()
+              : listTransaksi
+                  .where((e) =>
+                      e.tipeTransaksi == "1" &&
+                      e.custsupp == customerSupplierModel!.noSif)
+                  .toList();
         }
-        isLoading = false;
+
         notifyListeners();
       } else {
-        isLoading = false;
         notifyListeners();
       }
     });
@@ -80,6 +119,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
     customerSupplierModel = value;
     customersupplier.text = customerSupplierModel!.nmSif;
     alamat.text = customerSupplierModel!.alamat;
+    getHutangPiutang();
     notifyListeners();
   }
 
@@ -168,6 +208,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   TextEditingController nmSbb = TextEditingController();
   TextEditingController noSbb = TextEditingController();
   TextEditingController caritransaksi = TextEditingController();
+  TextEditingController caritransaksis = TextEditingController();
   TextEditingController nilaipembayaran = TextEditingController();
   TextEditingController nilaitagihan = TextEditingController();
   TextEditingController nodokumen = TextEditingController();
@@ -220,6 +261,26 @@ class PembayaranHutangNotifier extends ChangeNotifier {
     return listGl;
   }
 
+  TextEditingController tglValuta = TextEditingController();
+
+  TransaksiPendModel? transaksiPendModel;
+  pilihTransaksi(String value) {
+    transaksiPendModel =
+        listTransaksiPendingAdd.where((e) => e.rrn == value).first;
+    nilaipembayaran.text = FormatCurrency.oCcyDecimal
+        .format(double.parse(transaksiPendModel!.nominal).toInt());
+    tglValuta.text = transaksiPendModel!.tglValuta;
+    nodokumen.text = transaksiPendModel!.noDokumen;
+    dialog = false;
+    notifyListeners();
+  }
+
+  List<TextEditingController> listTagihan = [];
+  List<TextEditingController> listPPH = [];
+  List<TextEditingController> listPPN = [];
+  List<TextEditingController> listBayarTagihan = [];
+  List<TextEditingController> listBayarPPN = [];
+  List<TextEditingController> listBayarPPH = [];
   pilihTransHutang(InqueryGlModel value) {
     inqueryGlModeldeb = value;
     nmSbb.text = value.namaSbb;
@@ -233,23 +294,59 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   int transaksi = 1;
 
   List<TextEditingController> listAmount = [];
-
+  List<HutangPiutangItemModel> listPembayaran = [];
   tambahTransaksi() {
-    // if (noSbb.text.isEmpty && nmSbb.text.isEmpty) {
-    //   informationDialog(context, "Warning", "Pilih SBB Transaksi");
-    // } else if (nilaipembayaran.text.isEmpty) {
-    //   informationDialog(context, "Warning", "Pilih Transaksi");
-    // } else if (nilaitagihan.text.isEmpty) {
-    //   informationDialog(context, "Warning", "Pilih Tagihan");
-    // } else if (nodokumen.text.isEmpty) {
-    //   informationDialog(context, "Warning", "Masukan Nomor Dokumen");
-    // } else {
+    listTagihan.clear();
+    listPPH.clear();
+    listPPN.clear();
+    listBayarTagihan.clear();
+    listBayarPPN.clear();
+    listBayarPPH.clear();
+    listPembayaran.clear();
 
-    //   // transaksi++;
-    //   // listAmount.add(TextEditingController(text: "0"));
-    //   // notifyListeners();
-    // }
+    notifyListeners();
     DialogCustom().showLoading(context);
+    var ddata = {
+      "kode_pt": users!.kodePt,
+      "no_kontrak": hutangPiutangTransaksiModel!.nokontrak,
+    };
+    Setuprepository.setup(
+            token, NetworkURL.searchHutangPiutang(), jsonEncode(ddata))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listPembayaran.add(HutangPiutangItemModel.fromJson(i));
+        }
+        if (listPembayaran.isNotEmpty) {
+          for (var i = 0; i < listPembayaran.length; i++) {
+            listTagihan.add(TextEditingController(
+                text: FormatCurrency.oCcyDecimal
+                    .format(double.parse(listPembayaran[i].tagPokok).toInt())));
+            listPPH.add(TextEditingController(
+                text: FormatCurrency.oCcyDecimal
+                    .format(double.parse(listPembayaran[i].tagPph).toInt())));
+            listPPN.add(TextEditingController(
+                text: FormatCurrency.oCcyDecimal
+                    .format(double.parse(listPembayaran[i].tagPpn).toInt())));
+            listBayarTagihan.add(TextEditingController(
+                text: FormatCurrency.oCcyDecimal
+                    .format(double.parse(listPembayaran[i].byrPokok).toInt())));
+            listBayarPPN.add(TextEditingController(
+                text: FormatCurrency.oCcyDecimal
+                    .format(double.parse(listPembayaran[i].byrPpn).toInt())));
+            listBayarPPH.add(TextEditingController(
+                text: FormatCurrency.oCcyDecimal
+                    .format(double.parse(listPembayaran[i].byrPph).toInt())));
+          }
+        }
+
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
   }
 
   int jenis = 1;

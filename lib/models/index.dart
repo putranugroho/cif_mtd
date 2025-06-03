@@ -55,6 +55,7 @@ export 'inquery_gl_model.dart';
 export 'item_category_modul_model.dart';
 export 'customer_supplier_model.dart';
 export 'sbb_khusus_model.dart';
+export 'hutang_piutang_item_model.dart';
 export 'user_akses_point_model.dart';
 export 'hutang_piutang_transaksi_model.dart';
 export 'menu_model.dart';
