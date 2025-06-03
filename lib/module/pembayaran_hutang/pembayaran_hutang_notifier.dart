@@ -261,20 +261,116 @@ class PembayaranHutangNotifier extends ChangeNotifier {
     return listGl;
   }
 
+  List<InqueryGlModel> listGlPembayaran = [];
+  Future<List<InqueryGlModel>> getInqueryKelebihan(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      isLoadingInquery = true;
+      listGlPembayaran.clear();
+      notifyListeners();
+
+      var data = {"kode_pt": "001"};
+
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.getInqueryGL(),
+          jsonEncode(data),
+        );
+
+        if (response['status'].toString().toLowerCase().contains("success")) {
+          final List<Map<String, dynamic>> jnsAccBItems =
+              extractJnsAccB(response['data']);
+          listGlPembayaran = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .toList();
+        }
+        notifyListeners();
+      } catch (e) {
+        print("Error: $e");
+      } finally {
+        isLoadingInquery = false;
+        notifyListeners();
+      }
+    } else {
+      listGlPembayaran.clear(); // clear on short query
+    }
+
+    return listGlPembayaran;
+  }
+
+  TextEditingController nosbbkelebihan = TextEditingController();
   TextEditingController tglValuta = TextEditingController();
+
+  InqueryGlModel? inqueryGlModelKelebihan;
+  pilihSbbKelebihan(InqueryGlModel value) {
+    inqueryGlModelKelebihan = value;
+    nosbbkelebihan.text = value.namaSbb;
+    notifyListeners();
+  }
+
+  bayar() {}
+
+  onchange(int value) {
+    print(double.parse(listBayarTagihan[value]
+        .text
+        .replaceAll("Rp ", "")
+        .replaceAll(".", "")
+        .replaceAll(",", ".")));
+    notifyListeners();
+    if (double.parse(listTagihan[value]
+            .text
+            .replaceAll("Rp ", "")
+            .replaceAll(".", "")
+            .replaceAll(",", ".")) <
+        double.parse(listBayarTagihan[value]
+            .text
+            .replaceAll("Rp ", "")
+            .replaceAll(".", "")
+            .replaceAll(",", "."))) {
+      informationDialog(context, "Warning",
+          "Nominal tagihan tidak boleh lebih besar dari tagihan pokok");
+    } else {
+      var sel = double.parse(nilaipembayaran.text
+              .replaceAll("Rp ", "")
+              .replaceAll(".", "")
+              .replaceAll(",", ".")) -
+          (listBayarTagihan
+                  .map((e) => double.parse(e.text
+                      .replaceAll("Rp ", "")
+                      .replaceAll(".", "")
+                      .replaceAll(",", ".")))
+                  .reduce((a, b) => a + b) +
+              listBayarPPN.map((e) => double.parse(e.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))).reduce(
+                  (a, b) => a + b) +
+              listBayarPPH
+                  .map((e) => double.parse(e.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")))
+                  .reduce((a, b) => a + b));
+      if (sel < 0) {
+        informationDialog(context, "Warning", "Nominal pembayaran kurang");
+      } else {
+        selisih.text = "Rp ${FormatCurrency.oCcyDecimal.format(sel)}";
+      }
+    }
+
+    notifyListeners();
+  }
 
   TransaksiPendModel? transaksiPendModel;
   pilihTransaksi(String value) {
     transaksiPendModel =
         listTransaksiPendingAdd.where((e) => e.rrn == value).first;
-    nilaipembayaran.text = FormatCurrency.oCcyDecimal
-        .format(double.parse(transaksiPendModel!.nominal).toInt());
+    nilaipembayaran.text =
+        "Rp ${FormatCurrency.oCcyDecimal.format(double.parse(transaksiPendModel!.nominal).toInt())}";
     tglValuta.text = transaksiPendModel!.tglValuta;
     nodokumen.text = transaksiPendModel!.noDokumen;
     dialog = false;
     notifyListeners();
   }
 
+  List<TextEditingController> listInvoice = [];
   List<TextEditingController> listTagihan = [];
   List<TextEditingController> listPPH = [];
   List<TextEditingController> listPPN = [];
@@ -295,6 +391,9 @@ class PembayaranHutangNotifier extends ChangeNotifier {
 
   List<TextEditingController> listAmount = [];
   List<HutangPiutangItemModel> listPembayaran = [];
+  List<int> listTagihanNilai = [];
+  List<int> listPPNNilai = [];
+  List<int> listPPHNilai = [];
   tambahTransaksi() {
     listTagihan.clear();
     listPPH.clear();
@@ -303,6 +402,9 @@ class PembayaranHutangNotifier extends ChangeNotifier {
     listBayarPPN.clear();
     listBayarPPH.clear();
     listPembayaran.clear();
+    listTagihanNilai.clear();
+    listPPNNilai.clear();
+    listPPHNilai.clear();
 
     notifyListeners();
     DialogCustom().showLoading(context);
@@ -320,6 +422,19 @@ class PembayaranHutangNotifier extends ChangeNotifier {
         }
         if (listPembayaran.isNotEmpty) {
           for (var i = 0; i < listPembayaran.length; i++) {
+            listInvoice.add(TextEditingController(
+                text: listPembayaran[i].noinv == null
+                    ? ""
+                    : listPembayaran[i].noinv));
+            listTagihanNilai = listPembayaran
+                .map((e) => double.parse(e.tagPokok).toInt())
+                .toList();
+            listPPNNilai = listPembayaran
+                .map((e) => double.parse(e.tagPpn).toInt())
+                .toList();
+            listPPHNilai = listPembayaran
+                .map((e) => double.parse(e.tagPph).toInt())
+                .toList();
             listTagihan.add(TextEditingController(
                 text: FormatCurrency.oCcyDecimal
                     .format(double.parse(listPembayaran[i].tagPokok).toInt())));
@@ -329,16 +444,46 @@ class PembayaranHutangNotifier extends ChangeNotifier {
             listPPN.add(TextEditingController(
                 text: FormatCurrency.oCcyDecimal
                     .format(double.parse(listPembayaran[i].tagPpn).toInt())));
-            listBayarTagihan.add(TextEditingController(
-                text: FormatCurrency.oCcyDecimal
-                    .format(double.parse(listPembayaran[i].byrPokok).toInt())));
-            listBayarPPN.add(TextEditingController(
-                text: FormatCurrency.oCcyDecimal
-                    .format(double.parse(listPembayaran[i].byrPpn).toInt())));
-            listBayarPPH.add(TextEditingController(
-                text: FormatCurrency.oCcyDecimal
-                    .format(double.parse(listPembayaran[i].byrPph).toInt())));
           }
+          int totalTransaksi = double.parse(nilaipembayaran.text
+                  .replaceAll("Rp ", "")
+                  .replaceAll(".", '')
+                  .replaceAll(",", "."))
+              .toInt();
+
+          var hasil = distribusiPembayaran(
+            totalTransaksi: totalTransaksi,
+            listTagihan: listTagihanNilai,
+            listPPN: listPPNNilai,
+            listPPH: listPPHNilai,
+          );
+          if (listTagihanNilai.isNotEmpty) {
+            for (var i = 0; i < listTagihanNilai.length; i++) {
+              listBayarTagihan.add(TextEditingController(
+                  text: FormatCurrency.oCcy
+                      .format(hasil['listBayarTagihan']![i])));
+              listBayarPPN.add(TextEditingController(
+                  text: FormatCurrency.oCcy.format(hasil['listBayarPPN']![i])));
+              listBayarPPH.add(TextEditingController(
+                  text: FormatCurrency.oCcy.format(hasil['listBayarPPH']![i])));
+            }
+          }
+          var sel = double.parse(nilaipembayaran.text
+                  .replaceAll("Rp ", "")
+                  .replaceAll(".", "")
+                  .replaceAll(",", ".")) -
+              (listBayarTagihan
+                      .map((e) => double.parse(e.text
+                          .replaceAll("Rp ", "")
+                          .replaceAll(".", "")
+                          .replaceAll(",", ".")))
+                      .reduce((a, b) => a + b) +
+                  listBayarPPN.map((e) => double.parse(e.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))).reduce(
+                      (a, b) => a + b) +
+                  listBayarPPH
+                      .map((e) => double.parse(e.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")))
+                      .reduce((a, b) => a + b));
+          selisih.text = "Rp ${FormatCurrency.oCcyDecimal.format(sel)}";
         }
 
         notifyListeners();
@@ -348,6 +493,8 @@ class PembayaranHutangNotifier extends ChangeNotifier {
       }
     });
   }
+
+  TextEditingController selisih = TextEditingController();
 
   int jenis = 1;
 
@@ -402,4 +549,44 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   }
 
   cek() {}
+}
+
+Map<String, List<int>> distribusiPembayaran({
+  required int totalTransaksi,
+  required List<int> listTagihan,
+  required List<int> listPPN,
+  required List<int> listPPH,
+}) {
+  List<int> bayarTagihan = List.filled(listTagihan.length, 0);
+  List<int> bayarPPN = List.filled(listPPN.length, 0);
+  List<int> bayarPPH = List.filled(listPPH.length, 0);
+
+  int sisa = totalTransaksi;
+
+  for (int i = 0; i < listTagihan.length; i++) {
+    // Bayar Tagihan
+    int bayar = listTagihan[i] <= sisa ? listTagihan[i] : sisa;
+    bayarTagihan[i] = bayar;
+    sisa -= bayar;
+
+    // Bayar PPN (jika ada)
+    if (sisa > 0 && listPPN[i] > 0) {
+      int bayar = listPPN[i] <= sisa ? listPPN[i] : sisa;
+      bayarPPN[i] = bayar;
+      sisa -= bayar;
+    }
+
+    // Bayar PPH
+    if (sisa > 0 && listPPH[i] > 0) {
+      int bayar = listPPH[i] <= sisa ? listPPH[i] : sisa;
+      bayarPPH[i] = bayar;
+      sisa -= bayar;
+    }
+  }
+
+  return {
+    "listBayarTagihan": bayarTagihan,
+    "listBayarPPN": bayarPPN,
+    "listBayarPPH": bayarPPH,
+  };
 }

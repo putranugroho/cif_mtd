@@ -1114,11 +1114,21 @@ class PembayaranHutangPage extends StatelessWidget {
                                     SizedBox(
                                       width: 200,
                                       child: TextFormField(
+                                        readOnly: true,
                                         textInputAction: TextInputAction.done,
-                                        // controller: value.namaSbbAset,
+                                        controller: value.selisih,
                                         maxLines: 1,
+                                        keyboardType: const TextInputType
+                                            .numberWithOptions(decimal: true),
                                         inputFormatters: [
-                                          FilteringTextInputFormatter.digitsOnly
+                                          a.CurrencyInputFormatter(
+                                            useSymbolPadding: true,
+                                            thousandSeparator:
+                                                a.ThousandSeparator.Period,
+                                            mantissaLength:
+                                                2, // jumlah angka desimal
+                                            // decimalSeparator: DecimalSeparator.Comma,
+                                          ),
                                         ],
                                         validator: (e) {
                                           if (e!.isEmpty) {
@@ -1129,6 +1139,8 @@ class PembayaranHutangPage extends StatelessWidget {
                                         },
                                         decoration: InputDecoration(
                                           hintText: "Selisih",
+                                          filled: true,
+                                          fillColor: Colors.grey[200],
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(6),
@@ -1158,33 +1170,59 @@ class PembayaranHutangPage extends StatelessWidget {
                                     const SizedBox(width: 16),
                                     SizedBox(
                                       width: 200,
-                                      child: TextFormField(
-                                        // enabled: false,
-                                        readOnly: true,
-                                        textInputAction: TextInputAction.done,
-                                        // controller: value.namaSbbAset,
-                                        maxLines: 1,
-                                        // inputFormatters: [
-                                        //   FilteringTextInputFormatter.digitsOnly
-                                        // ],
-                                        validator: (e) {
-                                          if (e!.isEmpty) {
-                                            return "Wajib diisi";
-                                          } else {
-                                            return null;
-                                          }
+                                      child: TypeAheadField<InqueryGlModel>(
+                                        controller: value.nosbbkelebihan,
+                                        suggestionsCallback: (search) =>
+                                            value.getInqueryKelebihan(search),
+                                        builder:
+                                            (context, controller, focusNode) {
+                                          return TextField(
+                                              controller: controller,
+                                              focusNode: focusNode,
+                                              enabled: value.kelebihan
+                                                  ? true
+                                                  : false,
+                                              autofocus: true,
+                                              decoration: const InputDecoration(
+                                                border: OutlineInputBorder(),
+                                                labelText: 'Cari Akun',
+                                              ));
                                         },
-                                        decoration: InputDecoration(
-                                          filled: true,
-                                          fillColor: Colors.grey[200],
-                                          hintText: "SBB",
-                                          border: OutlineInputBorder(
+                                        itemBuilder: (context, city) {
+                                          return ListTile(
+                                            title: Text(city.nosbb),
+                                            subtitle: Text(city.namaSbb),
+                                          );
+                                        },
+                                        onSelected: (city) {
+                                          // value.selectInvoice(city);
+                                          value.pilihSbbKelebihan(city);
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 24,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        value.bayar();
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24, vertical: 8),
+                                        decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(6),
+                                                BorderRadius.circular(32),
+                                            color: colorPrimary),
+                                        child: Text(
+                                          "Bayar",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white,
                                           ),
                                         ),
                                       ),
-                                    ),
+                                    )
                                   ],
                                 ),
                               ],
@@ -1493,9 +1531,7 @@ class DetailDataPembayaranSource extends DataGridSource {
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (no++).toString()),
-                DataGridCell(
-                    columnName: 'invoice',
-                    value: data.noinv == null ? "" : data.noinv),
+                DataGridCell(columnName: 'invoice', value: (no - 1).toString()),
                 DataGridCell(
                     columnName: 'tagihan',
                     value: FormatCurrency.oCcyDecimal
@@ -1548,6 +1584,26 @@ class DetailDataPembayaranSource extends DataGridSource {
               ),
             ),
           );
+        } else if (e.columnName == 'invoice') {
+          return Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+                width: 300,
+                child: TextFormField(
+                  controller:
+                      tindakanNotifier!.listInvoice[int.parse(e.value) - 1],
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                  maxLines: 1,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                )),
+          );
         } else if (e.columnName == 'bayartagihan' ||
             e.columnName == 'tagppn' ||
             e.columnName == 'bayarppn' ||
@@ -1558,9 +1614,10 @@ class DetailDataPembayaranSource extends DataGridSource {
             padding: const EdgeInsets.all(6.0),
             child: Container(
                 width: 300,
-                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 child: TextFormField(
-                  onChanged: (e) {},
+                  onChanged: (f) {
+                    tindakanNotifier!.onchange(int.parse(e.value) - 1);
+                  },
                   controller: e.columnName == 'bayartagihan'
                       ? tindakanNotifier!
                           .listBayarTagihan[int.parse(e.value) - 1]
