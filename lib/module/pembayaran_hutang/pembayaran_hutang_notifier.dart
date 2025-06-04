@@ -562,7 +562,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                 "otoruser": "",
                 "otorterm": "",
                 "otortgljam": "",
-                "flag_trn": "0",
+                "flag_trn": "1",
                 "merchant": "",
                 "source_trx": "",
                 "status": "PENDING",
@@ -612,7 +612,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                 "otoruser": "",
                 "otorterm": "",
                 "otortgljam": "",
-                "flag_trn": "0",
+                "flag_trn": "1",
                 "merchant": "",
                 "source_trx": "",
                 "status": "COMPLETED",
@@ -685,7 +685,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "batch": "${users!.batch}",
                   "trx_type": "TRX",
                   "trx_code":
-                      "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                      "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                   "otor": "0",
                   "kode_trn": "",
                   "nama_dr": transaksiPendModel!.namaCr,
@@ -745,7 +745,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                 "batch": "${users!.batch}",
                 "trx_type": "TRX",
                 "trx_code":
-                    "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                    "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                 "otor": "0",
                 "kode_trn": "",
                 "nama_dr": inqueryGlModelKelebihan!.namaSbb,
@@ -795,7 +795,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                 "batch": "${users!.batch}",
                 "trx_type": "TRX",
                 "trx_code":
-                    "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                    "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                 "otor": "0",
                 "kode_trn": "",
                 "nama_dr": inqueryGlModelKelebihan!.namaSbb,
@@ -853,7 +853,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "batch": "${users!.batch}",
                   "trx_type": "TRX",
                   "trx_code":
-                      "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                      "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                   "otor": "0",
                   "kode_trn": "",
                   "nama_dr": setupHutangPiutangModel!.namasbbtransaksihutang,
@@ -900,7 +900,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "batch": "${users!.batch}",
                   "trx_type": "TRX",
                   "trx_code":
-                      "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                      "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                   "otor": "0",
                   "kode_trn": "",
                   "nama_dr": setupHutangPiutangModel!.namasbbtransaksihutang,
