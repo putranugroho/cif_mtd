@@ -981,7 +981,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                         children: [
                                           const Expanded(
                                             child: Text(
-                                              "Tambah Transaksi",
+                                              "Penyelesaian Transaksi",
                                               style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold,
@@ -1457,7 +1457,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                         children: [
                                           const Expanded(
                                             child: Text(
-                                              "Tambah Transaksi",
+                                              "Penyelesaian Transaksi",
                                               style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold,
@@ -1547,109 +1547,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               ],
                                             ),
                                             const SizedBox(height: 16),
-                                            Row(
-                                              children: [
-                                                Expanded(
-                                                    child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .stretch,
-                                                  children: [
-                                                    const Row(
-                                                      children: [
-                                                        Text(
-                                                          "Nomor Dokumen",
-                                                          style: TextStyle(
-                                                              fontSize: 12),
-                                                        ),
-                                                        SizedBox(width: 5),
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 8,
-                                                    ),
-                                                    TextFormField(
-                                                      textInputAction:
-                                                          TextInputAction.done,
-                                                      controller:
-                                                          value.nomorDok,
-                                                      maxLines: 1,
-                                                      readOnly: true,
-                                                      validator: (e) {
-                                                        if (e!.isEmpty) {
-                                                          return "Wajib diisi";
-                                                        } else {
-                                                          return null;
-                                                        }
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        hintText: "Nomor Dok",
-                                                        filled: true,
-                                                        fillColor:
-                                                            Colors.grey[300],
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )),
-                                                const SizedBox(
-                                                  width: 16,
-                                                ),
-                                                Expanded(
-                                                    child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .stretch,
-                                                  children: [
-                                                    const Row(
-                                                      children: [
-                                                        Text(
-                                                          "Nomor Reference",
-                                                          style: TextStyle(
-                                                              fontSize: 12),
-                                                        ),
-                                                        SizedBox(width: 5),
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 8,
-                                                    ),
-                                                    TextFormField(
-                                                      textInputAction:
-                                                          TextInputAction.done,
-                                                      controller:
-                                                          value.nomorRef,
-                                                      maxLines: 1,
-                                                      validator: (e) {
-                                                        if (e!.isEmpty) {
-                                                          return "Wajib diisi";
-                                                        } else {
-                                                          return null;
-                                                        }
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        hintText:
-                                                            "Nomor Referensi",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )),
-                                              ],
-                                            ),
-                                            const SizedBox(height: 16),
+                                            
                                             const Row(
                                               children: [
                                                 Text(
@@ -1960,6 +1858,109 @@ class PerantaraAktivaPage extends StatelessWidget {
                                             const SizedBox(
                                               height: 16,
                                             ),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                    child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .stretch,
+                                                  children: [
+                                                    const Row(
+                                                      children: [
+                                                        Text(
+                                                          "Nomor Dokumen",
+                                                          style: TextStyle(
+                                                              fontSize: 12),
+                                                        ),
+                                                        SizedBox(width: 5),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    TextFormField(
+                                                      textInputAction:
+                                                          TextInputAction.done,
+                                                      controller:
+                                                          value.nomorDok,
+                                                      maxLines: 1,
+                                                      readOnly: true,
+                                                      validator: (e) {
+                                                        if (e!.isEmpty) {
+                                                          return "Wajib diisi";
+                                                        } else {
+                                                          return null;
+                                                        }
+                                                      },
+                                                      decoration:
+                                                          InputDecoration(
+                                                        hintText: "Nomor Dok",
+                                                        filled: true,
+                                                        fillColor:
+                                                            Colors.grey[300],
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(6),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )),
+                                                const SizedBox(
+                                                  width: 16,
+                                                ),
+                                                Expanded(
+                                                    child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .stretch,
+                                                  children: [
+                                                    const Row(
+                                                      children: [
+                                                        Text(
+                                                          "Nomor Reference",
+                                                          style: TextStyle(
+                                                              fontSize: 12),
+                                                        ),
+                                                        SizedBox(width: 5),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    TextFormField(
+                                                      textInputAction:
+                                                          TextInputAction.done,
+                                                      controller:
+                                                          value.nomorRef,
+                                                      maxLines: 1,
+                                                      validator: (e) {
+                                                        if (e!.isEmpty) {
+                                                          return "Wajib diisi";
+                                                        } else {
+                                                          return null;
+                                                        }
+                                                      },
+                                                      decoration:
+                                                          InputDecoration(
+                                                        hintText:
+                                                            "Nomor Referensi",
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(6),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 16),
                                             const Row(
                                               children: [
                                                 Text(
