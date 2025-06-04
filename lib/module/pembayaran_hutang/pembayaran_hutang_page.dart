@@ -1294,6 +1294,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                                 height: 40,
                                                 width: 180,
                                                 child: TextFormField(
+                                                  readOnly: true,
                                                   textInputAction:
                                                       TextInputAction.done,
                                                   maxLines: 1,
@@ -1310,6 +1311,8 @@ class PembayaranHutangPage extends StatelessWidget {
                                                   },
                                                   decoration: InputDecoration(
                                                     hintText: "No. Dokumen",
+                                                    fillColor: Colors.grey[200],
+                                                    filled: true,
                                                     border: OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -1398,14 +1401,11 @@ class PembayaranHutangPage extends StatelessWidget {
                                                     maxLines: 1,
                                                     controller:
                                                         value.noRefTRansaksi,
-                                                    readOnly: true,
                                                     style: const TextStyle(
                                                         fontSize: 12),
                                                     decoration: InputDecoration(
-                                                      hintText: "Keterangan",
-                                                      filled: true,
-                                                      fillColor:
-                                                          Colors.grey[200],
+                                                      hintText:
+                                                          "Referensi Selisih",
                                                       border:
                                                           OutlineInputBorder(
                                                         borderRadius:

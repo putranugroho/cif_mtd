@@ -204,6 +204,9 @@ class NetworkURL {
   static String getSbbKhusus() {
     return "$url/sbbkhusus";
   }
+  static String perantara() {
+    return "$url/perantara";
+  }
 
   static String addSbbKhusus() {
     return "$url/sbbkhusus/add";

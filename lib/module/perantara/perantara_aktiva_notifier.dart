@@ -1,10 +1,15 @@
 import 'dart:convert';
 
 import 'package:accounting/models/index.dart';
+import 'package:accounting/models/perantara_model.dart';
 import 'package:accounting/models_manual/rekon_perantara_item_model.dart';
 import 'package:accounting/models_manual/rekon_perantara_model.dart';
+import 'package:accounting/pref/pref.dart';
+import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/format_currency.dart';
+import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../network/network.dart';
 import '../../repository/SetupRepository.dart';
@@ -13,33 +18,194 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
   final BuildContext context;
 
   PerantaraAktivaNotifier({required this.context}) {
-    // for (Map<String, dynamic> i in data) {
-    //   list.add(RekonPerantaraModel.fromJson(i));
-    // }
-    // for (Map<String, dynamic> i in dataPasiva) {
-    //   listPasive.add(RekonPerantaraModel.fromJson(i));
-    // }
-    // for (Map<String, dynamic> i in coa) {
-    //   listCoa.add(CoaModel.fromJson(i));
-    // }
-    // for (Map<String, dynamic> i in coaDebet) {
-    //   listCoaDebet.add(CoaModel.fromJson(i));
-    // }
+    getProfile();
 
-    // for (var bb in data) {
-    //   for (var sbb in bb['sbb_item']) {
-    //     double saldoAwal = sbb['saldo'] ?? 0.0;
-    //     List transaksi = sbb['item_transaksi'];
+    notifyListeners();
+  }
 
-    //     for (var trx in transaksi) {
-    //       double nominal = trx['nominal'] ?? 0.0;
-    //       saldoAwal -= nominal;
+  UserModel? users;
+  getProfile() async {
+    Pref().getUsers().then((value) {
+      users = value;
+      getInqueryAll();
+      notifyListeners();
+    });
+  }
 
-    //       trx['sisaSaldo'] = saldoAwal;
-    //     }
-    //   }
-    // }
+  List<Map<String, dynamic>> extractJnsAccBb(List<dynamic> rawData) {
+    List<Map<String, dynamic>> result = [];
 
+    void traverse(List<dynamic> items) {
+      for (var item in items) {
+        if (item is Map<String, dynamic>) {
+          if (item['jns_acc'] == 'C' &&
+              item['type_posting'] == "Y" &&
+              item['akun_perantara'] == "Y") {
+            result.add(item);
+          }
+
+          if (item.containsKey('items') && item['items'] is List) {
+            traverse(item['items']);
+          }
+        }
+      }
+    }
+
+    traverse(rawData);
+    return result;
+  }
+
+  List<InqueryGlModel> listGlAll = [];
+  Future getInqueryAll() async {
+    listGlAll.clear();
+    notifyListeners();
+    var data = {"kode_pt": users!.kodePt};
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        final List<Map<String, dynamic>> jnsAccBItems =
+            extractJnsAccBb(value['data']);
+        listGlAll =
+            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        print("AKUN PERANTARA ${listGlAll.length}");
+        print("AKUN PERANTARA ${jsonEncode(listGlAll)}");
+        if (listGlAll.isNotEmpty) {
+          getTransaksiAll();
+        }
+        notifyListeners();
+      }
+    });
+  }
+
+  var isLoadingData = true;
+  List<PerantaraModel> listTransaksi = [];
+  List<PerantaraModel> listTransaksiAdd = [];
+  Future getTransaksi() async {
+    isLoadingData = true;
+    listTransaksi.clear();
+    listTransaksiAdd.clear();
+    notifyListeners();
+    var data = {
+      "kode_pt": users!.kodePt,
+      "jenis": jenis,
+    };
+    Setuprepository.setup(token, NetworkURL.perantara(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listTransaksi.add(PerantaraModel.fromJson(i));
+        }
+        if (listTransaksi.isNotEmpty) {
+          listTransaksiAdd = jenis == "AKTIVA"
+              ? listTransaksi
+                  .where((e) =>
+                      e.status == "COMPLETED" &&
+                      e.dracc == inqueryGlModelcre!.nosbb)
+                  .toList()
+              : listTransaksi
+                  .where((e) =>
+                      e.status == "COMPLETED" &&
+                      e.cracc == inqueryGlModelcre!.nosbb)
+                  .toList();
+          listTransaksiAdd.sort((a, b) => DateTime.parse(b.createddate)
+              .compareTo(DateTime.parse(a.createddate)));
+        }
+        isLoadingData = false;
+        notifyListeners();
+      } else {
+        isLoadingData = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  var isLoading = true;
+  List<PerantaraModel> listTransaksiAll = [];
+  List<PerantaraModel> listTransaksiAllAdd = [];
+  Future getTransaksiAll() async {
+    isLoadingData = true;
+    listTransaksiAll.clear();
+    listTransaksiAllAdd.clear();
+    notifyListeners();
+    var data = {
+      "kode_pt": users!.kodePt,
+      "jenis": jenis,
+    };
+    Setuprepository.setup(token, NetworkURL.perantara(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listTransaksiAll.add(PerantaraModel.fromJson(i));
+        }
+        if (listTransaksiAll.isNotEmpty) {
+          if (jenis == "AKTIVA") {
+            for (var i = 0; i < listGlAll.length; i++) {
+              var matched = listTransaksiAll
+                  .where(
+                    (e) =>
+                        e.status == "COMPLETED" &&
+                        e.dracc == listGlAll[i].nosbb,
+                  )
+                  .toList();
+              if (matched.isNotEmpty) {
+                listTransaksiAllAdd.addAll(matched);
+                print("RESULT : ${listTransaksiAllAdd.length}");
+                print("RESULT JSON : ${jsonEncode(listTransaksiAllAdd)}");
+              }
+            }
+          } else {
+            for (var i = 0; i < listGlAll.length; i++) {
+              var matched = listTransaksiAll
+                  .where(
+                    (e) =>
+                        e.status == "COMPLETED" &&
+                        e.cracc == listGlAll[i].nosbb,
+                  )
+                  .toList();
+              if (matched.isNotEmpty) {
+                listTransaksiAllAdd.addAll(matched);
+                print("RESULT : ${listTransaksiAllAdd.length}");
+                print("RESULT JSON : ${jsonEncode(listTransaksiAllAdd)}");
+              }
+            }
+          }
+          // for (var bb in value['data']) {
+          //   for (var sbb in bb['sbb_item']) {
+          //     double saldoAwal = sbb['saldo'] ?? 0.0;
+          //     List transaksi = sbb['item_transaksi'];
+
+          //     for (var trx in transaksi) {
+          //       double nominal = trx['nominal'] ?? 0.0;
+          //       saldoAwal -= nominal;
+
+          //       trx['sisaSaldo'] = saldoAwal;
+          //     }
+          //   }
+          // }
+
+          // listTransaksiAllAdd.sort((a, b) => DateTime.parse(b.createddate)
+          //     .compareTo(DateTime.parse(a.createddate)));
+          listTransaksiAllAdd.sort((a, b) {
+            final craccCompare = b.cracc.compareTo(a.cracc); // descending
+            if (craccCompare != 0) return craccCompare;
+
+            // Jika cracc sama, bandingkan createddate secara descending
+            return DateTime.parse(b.createddate)
+                .compareTo(DateTime.parse(a.createddate));
+          });
+        }
+        isLoadingData = false;
+        notifyListeners();
+      } else {
+        isLoadingData = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  cari() {
+    dialogtrans = true;
+    getTransaksi();
     notifyListeners();
   }
 
@@ -64,11 +230,35 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
     return result;
   }
 
+  PerantaraModel? transaksiPendModel;
+  pilihTransaksi(String value) {
+    transaksiPendModel = listTransaksiAdd.where((e) => e.rrn == value).first;
+    dialogtrans = false;
+    dialog = true;
+    // nomorRef.text = transaksiPendModel!.noRef;
+    nomorDok.text = transaksiPendModel!.noDokumen;
+    keterangan.text = transaksiPendModel!.keterangan;
+    namaSbbAset.text = transaksiPendModel!.cracc;
+    sisaSaldo.text =
+        "Rp ${FormatCurrency.oCcyDecimal.format(transaksiPendModel!.sisaSaldo)}";
+    namaSbbDebit.text = transaksiPendModel!.namaCr;
+    tglBackDatetext.text = transaksiPendModel!.tglValuta;
+    notifyListeners();
+  }
+
+  tutupTransaksi() {
+    dialogtrans = false;
+    notifyListeners();
+  }
+
   InqueryGlModel? inqueryGlModelcre;
+  InqueryGlModel? inqueryGlModelcreTrans;
   var isLoadingInquery = true;
   List<InqueryGlModel> listGl = [];
   TextEditingController nosbbdeb = TextEditingController();
   TextEditingController nossbcre = TextEditingController();
+  TextEditingController nossbcretrans = TextEditingController();
+  TextEditingController namaSbbCreTrans = TextEditingController();
   Future<List<InqueryGlModel>> getInquery(String query) async {
     if (query.isNotEmpty && query.length > 2) {
       isLoadingInquery = true;
@@ -115,6 +305,15 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
     inqueryGlModelcre = value;
     nossbcre.text = value.namaSbb;
     namaSbbCre.text = value.nosbb;
+    getTransaksi();
+    notifyListeners();
+  }
+
+  pilihAkunCreTrans(InqueryGlModel value) {
+    inqueryGlModelcreTrans = value;
+    nossbcretrans.text = value.namaSbb;
+    namaSbbCreTrans.text = value.nosbb;
+
     notifyListeners();
   }
 
@@ -122,21 +321,25 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
   String? jenis = "AKTIVA";
   gantijenis(String value) {
     jenis = value;
+
+    getTransaksiAll();
     notifyListeners();
   }
 
   var dialog = false;
 
-  tambah(RekonPerantaraItemModel value) {
+  tambah(PerantaraModel value) {
+    transaksiPendModel = value;
+    dialogtrans = false;
     dialog = true;
-    nomorRef.text = "8902989844i9491";
-    namaSbbpenyusutan.text = value.nosbb;
-    namaSbbKredit.text = value.namaSbb;
-    keterangan.text = value.typePosting;
-    sisaSaldo.text = FormatCurrency.oCcy
-        .format(
-            double.parse(value.itemTransaksi.last.sisaSaldo.toString()).toInt())
-        .replaceAll(".", ",");
+    // nomorRef.text = transaksiPendModel!.noRef;
+    nomorDok.text = transaksiPendModel!.noDokumen;
+    keterangan.text = transaksiPendModel!.keterangan;
+    namaSbbAset.text = transaksiPendModel!.cracc;
+    sisaSaldo.text =
+        "Rp ${FormatCurrency.oCcyDecimal.format(transaksiPendModel!.sisaSaldo)}";
+    namaSbbDebit.text = transaksiPendModel!.namaCr;
+    tglBackDatetext.text = transaksiPendModel!.tglValuta;
 
     notifyListeners();
   }
@@ -151,6 +354,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
   TextEditingController nomorDok = TextEditingController();
   TextEditingController namaSbbDebit = TextEditingController();
   TextEditingController keterangan = TextEditingController();
+  TextEditingController keteranganTrans = TextEditingController();
   TextEditingController namaSbbKredit = TextEditingController();
   TextEditingController nomorRef = TextEditingController();
   TextEditingController namaSbbAset = TextEditingController();
@@ -163,6 +367,210 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
     namaSbbAset.text = value.nosbb;
     notifyListeners();
   }
+
+  bool backDate = false;
+  gantibackDate() {
+    backDate = !backDate;
+    notifyListeners();
+  }
+
+  DateTime? tglBackDate = DateTime.now();
+  Future tanggalBackDate() async {
+    var pickedendDate = (await showDatePicker(
+      context: context,
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+                DateTime.now(),
+              )) -
+              1),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) - 10,
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+            DateTime.now(),
+          ))),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(
+            DateTime.now(),
+          )),
+          int.parse(DateFormat('dd').format(
+                DateTime.now(),
+              )) -
+              1),
+    ));
+    if (pickedendDate != null) {
+      tglBackDate = pickedendDate;
+      tglBackDatetext.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
+      notifyListeners();
+    }
+  }
+
+  TextEditingController tglBackDatetext = TextEditingController();
+
+  final keyForm = GlobalKey<FormState>();
+  cek() async {
+    if (keyForm.currentState!.validate()) {
+      if (users!.limitAkses == "Y") {
+        if (transaksiPendModel!.sisaSaldo <
+            double.parse(nominal.text
+                .replaceAll("Rp ", "")
+                .replaceAll(".", "")
+                .replaceAll(",", "."))) {
+          informationDialog(context, "Warning",
+              "Sisa saldo hanya Rp. ${FormatCurrency.oCcyDecimal.format(transaksiPendModel!.sisaSaldo)}");
+        } else {
+          if (double.parse(users!.maksimalTransaksi) <
+              double.parse(nominal.text
+                  .replaceAll("Rp ", "")
+                  .replaceAll(".", "")
+                  .replaceAll(",", "."))) {
+            DialogCustom().showLoading(context);
+            var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+            var data = {
+              "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
+              "tgl_valuta": tglBackDatetext.text,
+              "batch": users!.batch,
+              "trx_type": "TRX",
+              "trx_code":
+                  DateTime.parse(tglBackDatetext.text).isBefore(DateTime.now())
+                      ? "110"
+                      : "100",
+              "otor": "0",
+              "kode_trn": "",
+              "nama_dr": namaSbbDebit.text,
+              "dracc": namaSbbAset.text,
+              "nama_cr": nossbcretrans.text,
+              "cracc": namaSbbCreTrans.text,
+              "rrn": invoice,
+              "no_dokumen": nomorDok.text,
+              "no_ref": nomorRef.text,
+              "nominal": double.parse(nominal.text
+                  .replaceAll("Rp ", "")
+                  .replaceAll(".", "")
+                  .replaceAll(",", ".")),
+              "keterangan": keteranganTrans.text,
+              "kode_pt": users!.kodePt,
+              "kode_kantor": users!.kodeKantor,
+              "kode_induk": users!.kodeInduk,
+              "sts_validasi": "N",
+              "kode_ao_dr": "",
+              "kode_coll": "",
+              "kode_ao_cr": "",
+              "userinput": users!.namauser,
+              "userterm": "114.80.90.54",
+              "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+              "inputtgljam":
+                  DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
+              "otoruser": "",
+              "otorterm": "",
+              "otortgljam": "",
+              "flag_trn": "0",
+              "merchant": "",
+              "source_trx": "",
+              "status": "PENDING",
+              "modul": "PERANTARA",
+            };
+            Setuprepository.setup(
+                    token, NetworkURL.transaksi(), jsonEncode(data))
+                .then((value) {
+              Navigator.pop(context);
+              if (value['status'] == "success") {
+                getTransaksiAll();
+                clear();
+                informationDialog(context, "Information", value['message']);
+              } else {
+                informationDialog(context, "Warning", value['message']);
+              }
+            });
+          } else {
+            DialogCustom().showLoading(context);
+            var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+            var data = {
+              "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
+              "tgl_valuta": tglBackDatetext.text,
+              "batch": users!.batch,
+              "trx_type": "TRX",
+              "trx_code":
+                  DateTime.parse(tglBackDatetext.text).isBefore(DateTime.now())
+                      ? "110"
+                      : "100",
+              "otor": "0",
+              "kode_trn": "",
+              "nama_dr": namaSbbDebit.text,
+              "dracc": namaSbbAset.text,
+              "nama_cr": nossbcretrans.text,
+              "cracc": namaSbbCreTrans.text,
+              "rrn": invoice,
+              "no_dokumen": nomorDok.text,
+              "no_ref": nomorRef.text,
+              "nominal": double.parse(nominal.text
+                  .replaceAll("Rp ", "")
+                  .replaceAll(".", "")
+                  .replaceAll(",", ".")),
+              "keterangan": keteranganTrans.text,
+              "kode_pt": users!.kodePt,
+              "kode_kantor": users!.kodeKantor,
+              "kode_induk": users!.kodeInduk,
+              "sts_validasi": "N",
+              "kode_ao_dr": "",
+              "kode_coll": "",
+              "kode_ao_cr": "",
+              "userinput": users!.namauser,
+              "userterm": "114.80.90.54",
+              "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+              "inputtgljam":
+                  DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
+              "otoruser": "",
+              "otorterm": "",
+              "otortgljam": "",
+              "flag_trn": "0",
+              "merchant": "",
+              "source_trx": "",
+              "status": "COMPLETED",
+              "modul": "PERANTARA",
+            };
+            Setuprepository.setup(
+                    token, NetworkURL.transaksi(), jsonEncode(data))
+                .then((value) {
+              Navigator.pop(context);
+              if (value['status'] == "success") {
+                getTransaksiAll();
+                clear();
+                informationDialog(context, "Information", value['message']);
+              } else {
+                informationDialog(context, "Warning", value['message']);
+              }
+            });
+          }
+        }
+      } else {
+        informationDialog(context, "Warning", "Tidak bisa melakukan transaksi");
+      }
+    }
+  }
+
+  clear() {
+    dialogtrans = false;
+    dialog = false;
+    nomorRef.clear();
+    nominal.clear();
+    keteranganTrans.clear();
+    namaSbbDebit.clear();
+    namaSbbAset.clear();
+    nossbcretrans.clear();
+    namaSbbCreTrans.clear();
+    notifyListeners();
+  }
+
+  var dialogtrans = false;
 
   TextEditingController masasusut = TextEditingController();
   TextEditingController namaSbbpenyusutan = TextEditingController();

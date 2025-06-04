@@ -449,7 +449,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
     tglValuta.text = transaksiPendModel!.tglValuta;
     nodokumen.text = transaksiPendModel!.noDokumen;
     keteranganTrans.text = transaksiPendModel!.keterangan;
-    noRefTRansaksi.text  = transaksiPendModel!.noRef;
+    nodokumenselisih.text  = transaksiPendModel!.noDokumen;
     dialog = false;
     notifyListeners();
   }
