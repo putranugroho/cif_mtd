@@ -585,6 +585,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                                 return null;
                                               }
                                             },
+                                            controller: value.keteranganTrans,
                                             decoration: InputDecoration(
                                               filled: true,
                                               fillColor: Colors.grey[200],
@@ -921,6 +922,53 @@ class PembayaranHutangPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
+                                    SizedBox(
+                                      width: 32,
+                                    ),
+                                    Container(
+                                      height: 40,
+                                      alignment: Alignment.center,
+                                      child: const Row(
+                                        children: [
+                                          Text(
+                                            "No. Invoice",
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            "*",
+                                            style: TextStyle(fontSize: 8),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 16,
+                                    ),
+                                    SizedBox(
+                                      height: 40,
+                                      width: 250,
+                                      child: TextFormField(
+                                        textInputAction: TextInputAction.done,
+                                        maxLines: 1,
+                                        controller: value.noinv,
+                                        style: const TextStyle(fontSize: 12),
+                                        validator: (e) {
+                                          if (e!.isEmpty) {
+                                            return "Wajib diisi";
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                        decoration: InputDecoration(
+                                          hintText: "No. Invoice",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                     const SizedBox(height: 16),
                                   ],
                                 ),
@@ -986,19 +1034,6 @@ class PembayaranHutangPage extends StatelessWidget {
                                                     fontWeight: FontWeight.w300,
                                                     fontSize: 12,
                                                     color: Colors.white,
-                                                  )))),
-                                      GridColumn(
-                                          width: 200,
-                                          columnName: 'invoice',
-                                          label: Container(
-                                              padding: const EdgeInsets.all(6),
-                                              color: colorPrimary,
-                                              alignment: Alignment.center,
-                                              child: const Text('No. Invoice',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w300,
-                                                    color: Colors.white,
-                                                    fontSize: 12,
                                                   )))),
                                       GridColumn(
                                           width: 150,
@@ -1156,9 +1191,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                           CupertinoSwitch(
                                               activeTrackColor: colorPrimary,
                                               value: value.kelebihan,
-                                              onChanged: (e) {
-                                                value.gantikelebihan();
-                                              }),
+                                              onChanged: (e) => null),
                                           const SizedBox(width: 10),
                                           const Text(
                                             "Kekurangan / Kelebihan Bayar",
@@ -1205,7 +1238,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                     ),
                                     InkWell(
                                       onTap: () {
-                                        value.bayar();
+                                        value.loadData();
                                       },
                                       child: Container(
                                         padding: EdgeInsets.symmetric(
@@ -1225,6 +1258,176 @@ class PembayaranHutangPage extends StatelessWidget {
                                     )
                                   ],
                                 ),
+                                value.kelebihan
+                                    ? Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          SizedBox(
+                                            height: 16,
+                                          ),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                height: 40,
+                                                width: 180,
+                                                alignment: Alignment.center,
+                                                child: const Row(
+                                                  children: [
+                                                    Text(
+                                                      "No. Dokumen Selisih",
+                                                      style: TextStyle(
+                                                          fontSize: 16),
+                                                    ),
+                                                    SizedBox(width: 5),
+                                                    Text(
+                                                      "*",
+                                                      style: TextStyle(
+                                                          fontSize: 8),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 40,
+                                                width: 180,
+                                                child: TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  maxLines: 1,
+                                                  controller:
+                                                      value.nodokumenselisih,
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                  validator: (e) {
+                                                    if (e!.isEmpty) {
+                                                      return "Wajib diisi";
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "No. Dokumen",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 32,
+                                              ),
+                                              Container(
+                                                height: 40,
+                                                alignment: Alignment.center,
+                                                child: const Row(
+                                                  children: [
+                                                    Text(
+                                                      "Keterangan Selisih",
+                                                      style: TextStyle(
+                                                          fontSize: 16),
+                                                    ),
+                                                    SizedBox(width: 5),
+                                                    Text(
+                                                      "*",
+                                                      style: TextStyle(
+                                                          fontSize: 8),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 16,
+                                              ),
+                                              SizedBox(
+                                                height: 40,
+                                                width: 180,
+                                                child: TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  maxLines: 1,
+                                                  controller:
+                                                      value.keteranganSelisih,
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                  decoration: InputDecoration(
+                                                    hintText: "Keterangan",
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 32,
+                                              ),
+                                              Container(
+                                                height: 40,
+                                                alignment: Alignment.center,
+                                                child: const Row(
+                                                  children: [
+                                                    Text(
+                                                      "Ref. Selisih",
+                                                      style: TextStyle(
+                                                          fontSize: 16),
+                                                    ),
+                                                    SizedBox(width: 5),
+                                                    Text(
+                                                      "*",
+                                                      style: TextStyle(
+                                                          fontSize: 8),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 16,
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  height: 40,
+                                                  child: TextFormField(
+                                                    textInputAction:
+                                                        TextInputAction.done,
+                                                    maxLines: 1,
+                                                    controller:
+                                                        value.noRefTRansaksi,
+                                                    readOnly: true,
+                                                    style: const TextStyle(
+                                                        fontSize: 12),
+                                                    decoration: InputDecoration(
+                                                      hintText: "Keterangan",
+                                                      filled: true,
+                                                      fillColor:
+                                                          Colors.grey[200],
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 16),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                        ],
+                                      )
+                                    : SizedBox(),
+                                SizedBox(
+                                  height: 100,
+                                )
                               ],
                             ),
                           ),
@@ -1295,7 +1498,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                     child: SfDataGrid(
                                       headerRowHeight: 40,
                                       defaultColumnWidth: 180,
-                                      frozenColumnsCount: 2,
+                                      frozenColumnsCount: 1,
                                       gridLinesVisibility:
                                           GridLinesVisibility.both,
                                       headerGridLinesVisibility:
@@ -1365,7 +1568,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                                       color: Colors.white,
                                                     )))),
                                         GridColumn(
-                                            width: 80,
+                                            width: 200,
                                             columnName: 'keterangan',
                                             label: Container(
                                                 color: colorPrimary,
@@ -1531,11 +1734,11 @@ class DetailDataPembayaranSource extends DataGridSource {
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'no', value: (no++).toString()),
-                DataGridCell(columnName: 'invoice', value: (no - 1).toString()),
                 DataGridCell(
                     columnName: 'tagihan',
-                    value: FormatCurrency.oCcyDecimal
-                        .format(double.parse(data.tagPokok))),
+                    value: FormatCurrency.oCcyDecimal.format(
+                        double.parse(data.tagPokok) -
+                            double.parse(data.byrPokok))),
                 DataGridCell(
                     columnName: 'bayartagihan', value: (no - 1).toString()),
                 DataGridCell(columnName: 'tagppn', value: (no - 1).toString()),

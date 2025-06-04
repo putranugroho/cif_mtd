@@ -22,10 +22,9 @@ class JabatanNotifier extends ChangeNotifier {
     list.clear();
     isLoading = true;
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
-    Setuprepository.setup(token, NetworkURL.getLevelJabatan(), jsonEncode(data)).then((value) {
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getLevelJabatan(), jsonEncode(data))
+        .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(LevelModel.fromJson(i));
@@ -42,10 +41,9 @@ class JabatanNotifier extends ChangeNotifier {
     isLoading = true;
     listJabatan.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
-    Setuprepository.setup(token, NetworkURL.getjabatan(), jsonEncode(data)).then((value) {
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getjabatan(), jsonEncode(data))
+        .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listJabatan.add(JabatanModel.fromJson(i));
@@ -127,7 +125,8 @@ class JabatanNotifier extends ChangeNotifier {
     var data = {
       "id": jabatanModel!.id,
     };
-    Setuprepository.setup(token, NetworkURL.deletedJabatan(), jsonEncode(data)).then((value) {
+    Setuprepository.setup(token, NetworkURL.deletedJabatan(), jsonEncode(data))
+        .then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getLevel();
@@ -172,7 +171,9 @@ class JabatanNotifier extends ChangeNotifier {
           "nama_jabatan": nama.text.trim(),
         };
         print(jsonEncode(data));
-        Setuprepository.setup(token, NetworkURL.updatedJabatan(), jsonEncode(data)).then((value) {
+        Setuprepository.setup(
+                token, NetworkURL.updatedJabatan(), jsonEncode(data))
+            .then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);
@@ -192,7 +193,8 @@ class JabatanNotifier extends ChangeNotifier {
           "kode_jabatan": kode.text.trim(),
           "nama_jabatan": nama.text.trim(),
         };
-        Setuprepository.setup(token, NetworkURL.addJabatan(), jsonEncode(data)).then((value) {
+        Setuprepository.setup(token, NetworkURL.addJabatan(), jsonEncode(data))
+            .then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             informationDialog(context, "Information", value['message']);

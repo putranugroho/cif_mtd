@@ -257,6 +257,10 @@ class NetworkURL {
     return "$url/setupkaskecil/add";
   }
 
+  static String bayarHutangPiutang() {
+    return "$url/hutangpiutangdetail/bayar";
+  }
+
   static String getSetupHutangPiutang() {
     return "$url/setuphutangpiutang";
   }
