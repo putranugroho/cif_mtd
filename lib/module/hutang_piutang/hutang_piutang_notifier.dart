@@ -36,6 +36,84 @@ class HutangPiutangNotifier extends ChangeNotifier {
     });
   }
 
+  HutangPiutangTransaksiModel? hutangPiutangTransaksiModel;
+  pilihTransaksi(String value) {
+    hutangPiutangTransaksiModel =
+        listTransaksi.where((e) => e.nokontrak == value).first;
+
+    tambahTransaksi();
+    notifyListeners();
+  }
+
+  double parseCurrency(String value) {
+    return double.parse(value.replaceAll('.', '').replaceAll(',', '.'));
+  }
+
+  var detail = false;
+  List<HutangPiutangItemModel> listJadwal = [];
+  tambahTransaksi() {
+    listJadwal.clear();
+
+    notifyListeners();
+    DialogCustom().showLoading(context);
+    var ddata = {
+      "kode_pt": users!.kodePt,
+      "no_kontrak": hutangPiutangTransaksiModel!.nokontrak,
+    };
+    Setuprepository.setup(
+            token, NetworkURL.searchHutangPiutang(), jsonEncode(ddata))
+        .then((value) {
+      Navigator.pop(context);
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listJadwal.add(HutangPiutangItemModel.fromJson(i));
+        }
+        listJadwal
+            .sort((a, b) => parseCurrency(b.os).compareTo(parseCurrency(a.os)));
+        getTransaksiPiutang();
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  var isLoadingData = true;
+  List<TransaksiPendModel> listTransaksiPending = [];
+  List<TransaksiPendModel> listTransaksiPendingAdd = [];
+  Future getTransaksiPiutang() async {
+    var data = {
+      "kode_pt": users!.kodePt,
+      "no_dokumen": hutangPiutangTransaksiModel!.noDok,
+      "no_ref": hutangPiutangTransaksiModel!.noRef,
+      "keterangan": hutangPiutangTransaksiModel!.keterangan,
+    };
+    print(jsonEncode(data));
+    Setuprepository.setup(
+            token, NetworkURL.transaksiHutangPiutang(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listTransaksiPending.add(TransaksiPendModel.fromJson(i));
+        }
+        if (listTransaksiPending.isNotEmpty) {
+          if (jenis == 1) {
+            listTransaksiPendingAdd = listTransaksiPending
+                .where((e) => e.status == "COMPLETED")
+                .toList();
+          } else {
+            listTransaksiPendingAdd = listTransaksiPending
+                .where((e) => e.status == "COMPLETED")
+                .toList();
+          }
+        }
+        detail = true;
+        notifyListeners();
+      } else {}
+    });
+  }
+
   List<SetupHutangPiutangModel> listData = [];
   SetupHutangPiutangModel? setupHutangPiutangModel;
   Future getSetupkaskecil() async {
@@ -1926,6 +2004,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
   tutup() {
     dialog = false;
     editData = false;
+    detail = false;
     notifyListeners();
   }
 }

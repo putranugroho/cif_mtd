@@ -204,8 +204,13 @@ class NetworkURL {
   static String getSbbKhusus() {
     return "$url/sbbkhusus";
   }
+
   static String perantara() {
     return "$url/perantara";
+  }
+
+  static String transaksiHutangPiutang() {
+    return "$url/transaksiHutangPiutang";
   }
 
   static String addSbbKhusus() {
