@@ -54,7 +54,8 @@ class SatuTransaksiPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -294,7 +295,9 @@ class SatuTransaksiPage extends StatelessWidget {
                                     width: 40,
                                     height: 40,
                                     padding: const EdgeInsets.all(4),
-                                    decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey[200],
+                                        shape: BoxShape.circle),
                                     child: const Icon(Icons.close),
                                   ),
                                 )
@@ -324,16 +327,20 @@ class SatuTransaksiPage extends StatelessWidget {
                                           Checkbox(
                                             activeColor: colorPrimary,
                                             value: value.backDate,
-                                            onChanged: (e) => value.gantibackDate(),
+                                            onChanged: (e) =>
+                                                value.gantibackDate(),
                                           ),
                                           const SizedBox(width: 8),
                                           Expanded(
                                             child: InkWell(
-                                              onTap: () => value.tanggalBackDate(),
+                                              onTap: () =>
+                                                  value.tanggalBackDate(),
                                               child: TextFormField(
                                                 enabled: !value.backDate,
-                                                textInputAction: TextInputAction.done,
-                                                controller: value.tglBackDatetext,
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller:
+                                                    value.tglBackDatetext,
                                                 maxLines: 1,
                                                 readOnly: !value.backDate,
                                                 style: const TextStyle(
@@ -343,7 +350,8 @@ class SatuTransaksiPage extends StatelessWidget {
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                                 validator: (e) {
-                                                  if (e!.isEmpty && value.backDate) {
+                                                  if (e!.isEmpty &&
+                                                      value.backDate) {
                                                     return "Wajib diisi";
                                                   } else {
                                                     return null;
@@ -353,13 +361,21 @@ class SatuTransaksiPage extends StatelessWidget {
                                                   filled: !value.backDate,
                                                   fillColor: Colors.grey[200],
                                                   hintText: "Tanggal Valuta",
-                                                  hintStyle: const TextStyle(color: Colors.grey),
+                                                  hintStyle: const TextStyle(
+                                                      color: Colors.grey),
                                                   border: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(6),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
                                                   ),
-                                                  disabledBorder: OutlineInputBorder(
-                                                    borderSide: BorderSide(color: Colors.grey.shade600),
-                                                    borderRadius: BorderRadius.circular(6),
+                                                  disabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors
+                                                            .grey.shade600),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
                                                   ),
                                                 ),
                                               ),
@@ -385,24 +401,37 @@ class SatuTransaksiPage extends StatelessWidget {
                                       Row(
                                         children: [
                                           Expanded(
-                                            child: DropdownSearch<SetupTransModel>(
-                                              popupProps: const PopupPropsMultiSelection.menu(
-                                                showSearchBox: true, // Aktifkan fitur pencarian
+                                            child:
+                                                DropdownSearch<SetupTransModel>(
+                                              popupProps:
+                                                  const PopupPropsMultiSelection
+                                                      .menu(
+                                                showSearchBox:
+                                                    true, // Aktifkan fitur pencarian
                                               ),
-                                              selectedItem: value.setupTransModel,
+                                              selectedItem:
+                                                  value.setupTransModel,
                                               items: value.listData,
                                               itemAsString: (e) => e.namaTrans,
                                               onChanged: (e) {
                                                 value.pilihTransModel(e!);
                                               },
-                                              dropdownDecoratorProps: DropDownDecoratorProps(
-                                                baseStyle: const TextStyle(fontSize: 16),
-                                                textAlignVertical: TextAlignVertical.center,
-                                                dropdownSearchDecoration: InputDecoration(
-                                                  hintText: "Pilih Kode Transaksi",
+                                              dropdownDecoratorProps:
+                                                  DropDownDecoratorProps(
+                                                baseStyle: const TextStyle(
+                                                    fontSize: 16),
+                                                textAlignVertical:
+                                                    TextAlignVertical.center,
+                                                dropdownSearchDecoration:
+                                                    InputDecoration(
+                                                  hintText:
+                                                      "Pilih Kode Transaksi",
                                                   border: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(8),
-                                                    borderSide: const BorderSide(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    borderSide:
+                                                        const BorderSide(
                                                       width: 1,
                                                       color: Colors.grey,
                                                     ),
@@ -419,7 +448,8 @@ class SatuTransaksiPage extends StatelessWidget {
                                             child: TextFormField(
                                               // enabled: false,
                                               readOnly: true,
-                                              textInputAction: TextInputAction.done,
+                                              textInputAction:
+                                                  TextInputAction.done,
                                               controller: value.namaTransaksi,
                                               maxLines: 1,
                                               // inputFormatters: [
@@ -431,7 +461,8 @@ class SatuTransaksiPage extends StatelessWidget {
                                                 fillColor: Colors.grey[200],
                                                 hintText: "Kode Transaksi",
                                                 border: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(6),
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -446,7 +477,9 @@ class SatuTransaksiPage extends StatelessWidget {
                                             child: Container(
                                               width: 30,
                                               height: 30,
-                                              decoration: const BoxDecoration(shape: BoxShape.circle, color: colorPrimary),
+                                              decoration: const BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: colorPrimary),
                                               child: const Icon(
                                                 Icons.close,
                                                 color: Colors.white,
@@ -460,13 +493,15 @@ class SatuTransaksiPage extends StatelessWidget {
                                         children: [
                                           Expanded(
                                               child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
                                             children: [
                                               const Row(
                                                 children: [
                                                   Text(
                                                     "Nomor Dokumen",
-                                                    style: TextStyle(fontSize: 12),
+                                                    style:
+                                                        TextStyle(fontSize: 12),
                                                   ),
                                                   SizedBox(width: 5),
                                                 ],
@@ -475,7 +510,8 @@ class SatuTransaksiPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               TextFormField(
-                                                textInputAction: TextInputAction.done,
+                                                textInputAction:
+                                                    TextInputAction.done,
                                                 controller: value.nomorDok,
                                                 maxLines: 1,
                                                 validator: (e) {
@@ -488,7 +524,9 @@ class SatuTransaksiPage extends StatelessWidget {
                                                 decoration: InputDecoration(
                                                   hintText: "Nomor Dok",
                                                   border: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(6),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
                                                   ),
                                                 ),
                                               ),
@@ -499,13 +537,15 @@ class SatuTransaksiPage extends StatelessWidget {
                                           ),
                                           Expanded(
                                               child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
                                             children: [
                                               const Row(
                                                 children: [
                                                   Text(
                                                     "Nomor Reference",
-                                                    style: TextStyle(fontSize: 12),
+                                                    style:
+                                                        TextStyle(fontSize: 12),
                                                   ),
                                                   SizedBox(width: 5),
                                                 ],
@@ -514,7 +554,8 @@ class SatuTransaksiPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               TextFormField(
-                                                textInputAction: TextInputAction.done,
+                                                textInputAction:
+                                                    TextInputAction.done,
                                                 controller: value.nomorRef,
                                                 maxLines: 1,
                                                 validator: (e) {
@@ -527,7 +568,9 @@ class SatuTransaksiPage extends StatelessWidget {
                                                 decoration: InputDecoration(
                                                   hintText: "Nomor Referensi",
                                                   border: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(6),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
                                                   ),
                                                 ),
                                               ),
@@ -555,17 +598,24 @@ class SatuTransaksiPage extends StatelessWidget {
                                       Row(
                                         children: [
                                           Expanded(
-                                            child: TypeAheadField<InqueryGlModel>(
+                                            child:
+                                                TypeAheadField<InqueryGlModel>(
                                               controller: value.nosbbdeb,
-                                              suggestionsCallback: (search) => value.getInquery(search),
-                                              builder: (context, controller, focusNode) {
+                                              suggestionsCallback: (search) =>
+                                                  value.getInquery(search),
+                                              builder: (context, controller,
+                                                  focusNode) {
                                                 return TextField(
                                                     controller: controller,
                                                     focusNode: focusNode,
-                                                    enabled: value.setupTransModel == null,
+                                                    enabled:
+                                                        value.setupTransModel ==
+                                                            null,
                                                     autofocus: true,
-                                                    decoration: const InputDecoration(
-                                                      border: OutlineInputBorder(),
+                                                    decoration:
+                                                        const InputDecoration(
+                                                      border:
+                                                          OutlineInputBorder(),
                                                       labelText: 'Cari Akun',
                                                     ));
                                               },
@@ -589,7 +639,8 @@ class SatuTransaksiPage extends StatelessWidget {
                                             child: TextFormField(
                                               // enabled: false,
                                               readOnly: true,
-                                              textInputAction: TextInputAction.done,
+                                              textInputAction:
+                                                  TextInputAction.done,
                                               controller: value.namaSbbDeb,
                                               maxLines: 1,
                                               // inputFormatters: [
@@ -607,7 +658,8 @@ class SatuTransaksiPage extends StatelessWidget {
                                                 fillColor: Colors.grey[200],
                                                 hintText: "Nomor Debet",
                                                 border: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(6),
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -636,17 +688,24 @@ class SatuTransaksiPage extends StatelessWidget {
                                       Row(
                                         children: [
                                           Expanded(
-                                            child: TypeAheadField<InqueryGlModel>(
+                                            child:
+                                                TypeAheadField<InqueryGlModel>(
                                               controller: value.nossbcre,
-                                              suggestionsCallback: (search) => value.getInquery(search),
-                                              builder: (context, controller, focusNode) {
+                                              suggestionsCallback: (search) =>
+                                                  value.getInquery(search),
+                                              builder: (context, controller,
+                                                  focusNode) {
                                                 return TextField(
                                                     controller: controller,
                                                     focusNode: focusNode,
-                                                    enabled: value.setupTransModel == null,
+                                                    enabled:
+                                                        value.setupTransModel ==
+                                                            null,
                                                     autofocus: true,
-                                                    decoration: const InputDecoration(
-                                                      border: OutlineInputBorder(),
+                                                    decoration:
+                                                        const InputDecoration(
+                                                      border:
+                                                          OutlineInputBorder(),
                                                       labelText: 'Cari Akun',
                                                     ));
                                               },
@@ -670,7 +729,8 @@ class SatuTransaksiPage extends StatelessWidget {
                                             child: TextFormField(
                                               // enabled: false,
                                               readOnly: true,
-                                              textInputAction: TextInputAction.done,
+                                              textInputAction:
+                                                  TextInputAction.done,
                                               controller: value.namaSbbCre,
                                               maxLines: 1,
                                               // inputFormatters: [
@@ -688,7 +748,8 @@ class SatuTransaksiPage extends StatelessWidget {
                                                 fillColor: Colors.grey[200],
                                                 hintText: "Nomor Kredit",
                                                 border: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(6),
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -719,13 +780,16 @@ class SatuTransaksiPage extends StatelessWidget {
                                         textInputAction: TextInputAction.done,
                                         controller: value.nominal,
                                         maxLines: 1,
-                                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                        keyboardType: const TextInputType
+                                            .numberWithOptions(decimal: true),
                                         inputFormatters: [
                                           a.CurrencyInputFormatter(
                                             leadingSymbol: 'Rp ',
                                             useSymbolPadding: true,
-                                            thousandSeparator: a.ThousandSeparator.Period,
-                                            mantissaLength: 2, // jumlah angka desimal
+                                            thousandSeparator:
+                                                a.ThousandSeparator.Period,
+                                            mantissaLength:
+                                                2, // jumlah angka desimal
                                             // decimalSeparator: DecimalSeparator.Comma,
                                           ),
                                         ],
@@ -739,7 +803,8 @@ class SatuTransaksiPage extends StatelessWidget {
                                         decoration: InputDecoration(
                                           hintText: "Nilai Transaksi",
                                           border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(6),
+                                            borderRadius:
+                                                BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),
@@ -764,18 +829,21 @@ class SatuTransaksiPage extends StatelessWidget {
                                         decoration: InputDecoration(
                                           hintText: "Keterangan Transaksi",
                                           border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(6),
+                                            borderRadius:
+                                                BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),
                                       Container(
-                                        margin: const EdgeInsets.symmetric(vertical: 16),
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 16),
                                         height: 1,
                                         color: Colors.grey[300],
                                       ),
                                       const Text("AO / Marketing"),
                                       Container(
-                                        margin: const EdgeInsets.symmetric(vertical: 16),
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 16),
                                         height: 1,
                                         color: Colors.grey[300],
                                       ),
@@ -792,8 +860,10 @@ class SatuTransaksiPage extends StatelessWidget {
                                         height: 8,
                                       ),
                                       DropdownSearch<AoModel>(
-                                        popupProps: const PopupPropsMultiSelection.menu(
-                                          showSearchBox: true, // Aktifkan fitur pencarian
+                                        popupProps:
+                                            const PopupPropsMultiSelection.menu(
+                                          showSearchBox:
+                                              true, // Aktifkan fitur pencarian
                                         ),
                                         selectedItem: value.aoModel,
                                         items: value.listAoAdd,
@@ -801,13 +871,18 @@ class SatuTransaksiPage extends StatelessWidget {
                                         onChanged: (e) {
                                           value.pilihAoModelDebet(e!);
                                         },
-                                        dropdownDecoratorProps: DropDownDecoratorProps(
-                                          baseStyle: const TextStyle(fontSize: 16),
-                                          textAlignVertical: TextAlignVertical.center,
-                                          dropdownSearchDecoration: InputDecoration(
+                                        dropdownDecoratorProps:
+                                            DropDownDecoratorProps(
+                                          baseStyle:
+                                              const TextStyle(fontSize: 16),
+                                          textAlignVertical:
+                                              TextAlignVertical.center,
+                                          dropdownSearchDecoration:
+                                              InputDecoration(
                                             hintText: "Pilih AO / Marketing",
                                             border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(8),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
                                               borderSide: const BorderSide(
                                                 width: 1,
                                                 color: Colors.grey,
@@ -830,8 +905,10 @@ class SatuTransaksiPage extends StatelessWidget {
                                         height: 8,
                                       ),
                                       DropdownSearch<AoModel>(
-                                        popupProps: const PopupPropsMultiSelection.menu(
-                                          showSearchBox: true, // Aktifkan fitur pencarian
+                                        popupProps:
+                                            const PopupPropsMultiSelection.menu(
+                                          showSearchBox:
+                                              true, // Aktifkan fitur pencarian
                                         ),
                                         selectedItem: value.aoModelKRedit,
                                         items: value.listAoAdd,
@@ -839,13 +916,18 @@ class SatuTransaksiPage extends StatelessWidget {
                                         onChanged: (e) {
                                           value.pilihAoModelKredit(e!);
                                         },
-                                        dropdownDecoratorProps: DropDownDecoratorProps(
-                                          baseStyle: const TextStyle(fontSize: 16),
-                                          textAlignVertical: TextAlignVertical.center,
-                                          dropdownSearchDecoration: InputDecoration(
+                                        dropdownDecoratorProps:
+                                            DropDownDecoratorProps(
+                                          baseStyle:
+                                              const TextStyle(fontSize: 16),
+                                          textAlignVertical:
+                                              TextAlignVertical.center,
+                                          dropdownSearchDecoration:
+                                              InputDecoration(
                                             hintText: "Pilih AO / Marketing",
                                             border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(8),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
                                               borderSide: const BorderSide(
                                                 width: 1,
                                                 color: Colors.grey,
@@ -857,7 +939,7 @@ class SatuTransaksiPage extends StatelessWidget {
                                       const SizedBox(height: 16),
                                       ButtonPrimary(
                                         onTap: () {
-                                          value.cek();
+                                          value.confirmSimpan();
                                         },
                                         name: "Simpan",
                                       )
@@ -905,7 +987,10 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'tgl_trans', value: data.createddate),
                 DataGridCell(columnName: 'nomor_dok', value: data.noDokumen),
                 DataGridCell(columnName: 'nomor_ref', value: data.noRef),
-                DataGridCell(columnName: 'nominal', value: FormatCurrency.oCcyDecimal.format(double.parse(data.nominal))),
+                DataGridCell(
+                    columnName: 'nominal',
+                    value: FormatCurrency.oCcyDecimal
+                        .format(double.parse(data.nominal))),
                 DataGridCell(columnName: 'nama_debet', value: data.namaDr),
                 DataGridCell(columnName: 'nama_credit', value: data.namaCr),
                 DataGridCell(columnName: 'keterangan', value: data.keterangan),

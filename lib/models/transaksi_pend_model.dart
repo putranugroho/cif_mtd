@@ -64,11 +64,11 @@ class TransaksiPendModel {
   final String rrn;
   final String noDokumen;
   final String modul;
-  final String keteranganOtor;
-  final String alasan;
+  final dynamic keteranganOtor;
+  final dynamic alasan;
   final String noRef;
   final String nominal;
-  final String keterangan;
+  final dynamic keterangan;
   final String kodePt;
   final String kodeKantor;
   final String kodeInduk;
@@ -79,9 +79,9 @@ class TransaksiPendModel {
   final String userinput;
   final String userterm;
   final String inputtgljam;
-  final String otoruser;
-  final String otorterm;
-  final String otortgljam;
+  final dynamic otoruser;
+  final dynamic otorterm;
+  final dynamic otortgljam;
   final String flagTrn;
   final String merchant;
   final String sourceTrx;
@@ -106,11 +106,11 @@ class TransaksiPendModel {
     rrn: json['rrn'].toString(),
     noDokumen: json['no_dokumen'].toString(),
     modul: json['modul'].toString(),
-    keteranganOtor: json['keterangan_otor'].toString(),
-    alasan: json['alasan'].toString(),
+    keteranganOtor: json['keterangan_otor'] as dynamic,
+    alasan: json['alasan'] as dynamic,
     noRef: json['no_ref'].toString(),
     nominal: json['nominal'].toString(),
-    keterangan: json['keterangan'].toString(),
+    keterangan: json['keterangan'] as dynamic,
     kodePt: json['kode_pt'].toString(),
     kodeKantor: json['kode_kantor'].toString(),
     kodeInduk: json['kode_induk'].toString(),
@@ -121,9 +121,9 @@ class TransaksiPendModel {
     userinput: json['userinput'].toString(),
     userterm: json['userterm'].toString(),
     inputtgljam: json['inputtgljam'].toString(),
-    otoruser: json['otoruser'].toString(),
-    otorterm: json['otorterm'].toString(),
-    otortgljam: json['otortgljam'].toString(),
+    otoruser: json['otoruser'] as dynamic,
+    otorterm: json['otorterm'] as dynamic,
+    otortgljam: json['otortgljam'] as dynamic,
     flagTrn: json['flag_trn'].toString(),
     merchant: json['merchant'].toString(),
     sourceTrx: json['source_trx'].toString(),
@@ -236,11 +236,11 @@ class TransaksiPendModel {
     String? rrn,
     String? noDokumen,
     String? modul,
-    String? keteranganOtor,
-    String? alasan,
+    dynamic? keteranganOtor,
+    dynamic? alasan,
     String? noRef,
     String? nominal,
-    String? keterangan,
+    dynamic? keterangan,
     String? kodePt,
     String? kodeKantor,
     String? kodeInduk,
@@ -251,9 +251,9 @@ class TransaksiPendModel {
     String? userinput,
     String? userterm,
     String? inputtgljam,
-    String? otoruser,
-    String? otorterm,
-    String? otortgljam,
+    dynamic? otoruser,
+    dynamic? otorterm,
+    dynamic? otortgljam,
     String? flagTrn,
     String? merchant,
     String? sourceTrx,

@@ -223,14 +223,24 @@ class PembayaranHutangNotifier extends ChangeNotifier {
           for (Map<String, dynamic> i in response['data']) {
             listCs.add(CustomerSupplierModel.fromJson(i));
           }
-          return listCs
-              .where((model) => jenis == 1
-                  ? (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
-                      (model.golCust == "1" || model.golCust == "3"))
-                  : (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
-                          model.golCust == "2" ||
-                      model.golCust == "3"))
-              .toList();
+          final seen = <String>{};
+          return listCs.where((model) {
+            final match = jenis == 1
+                ? ((model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
+                        model.golCust == "1") ||
+                    (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
+                        model.golCust == "3"))
+                : ((model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
+                    (model.golCust == "2" || model.golCust == "3")));
+
+            final key = '${model.nmSif.toLowerCase()}|${model.golCust}';
+
+            // hanya tambahkan kalau belum pernah muncul
+            if (match && seen.add(key)) {
+              return true;
+            }
+            return false;
+          }).toList();
         }
         notifyListeners();
       } catch (e) {
@@ -1283,7 +1293,8 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "kode_trn": "",
                     "nama_dr": setupHutangPiutangModel!.namasbbpphhutang,
                     "dracc": setupHutangPiutangModel!.sbbpphhutang,
-                    "nama_cr": setupHutangPiutangModel!.namasbbpotonganpphhutang,
+                    "nama_cr":
+                        setupHutangPiutangModel!.namasbbpotonganpphhutang,
                     "cracc": setupHutangPiutangModel!.sbbpotonganpphhutang,
                     "rrn": "$invoice",
                     "no_dokumen": "${nodokumen.text.trim()}",
@@ -1329,9 +1340,10 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                         "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                     "otor": "0",
                     "kode_trn": "",
-                   "nama_dr": setupHutangPiutangModel!.namasbbpphhutang,
+                    "nama_dr": setupHutangPiutangModel!.namasbbpphhutang,
                     "dracc": setupHutangPiutangModel!.sbbpphhutang,
-                    "nama_cr": setupHutangPiutangModel!.namasbbpotonganpphhutang,
+                    "nama_cr":
+                        setupHutangPiutangModel!.namasbbpotonganpphhutang,
                     "cracc": setupHutangPiutangModel!.sbbpotonganpphhutang,
                     "rrn": "$invoice",
                     "no_dokumen": "${nodokumen.text.trim()}",

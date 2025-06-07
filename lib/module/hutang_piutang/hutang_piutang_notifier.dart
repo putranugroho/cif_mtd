@@ -1627,14 +1627,24 @@ class HutangPiutangNotifier extends ChangeNotifier {
           for (Map<String, dynamic> i in response['data']) {
             listCs.add(CustomerSupplierModel.fromJson(i));
           }
-          return listCs
-              .where((model) => jenis == 1
-                  ? (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
-                      (model.golCust == "1" || model.golCust == "3"))
-                  : (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
-                          model.golCust == "2" ||
-                      model.golCust == "3"))
-              .toList();
+          final seen = <String>{};
+          return listCs.where((model) {
+            final match = jenis == 1
+                ? ((model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
+                        model.golCust == "1") ||
+                    (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
+                        model.golCust == "3"))
+                : ((model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
+                    (model.golCust == "2" || model.golCust == "3")));
+
+            final key = '${model.nmSif.toLowerCase()}|${model.golCust}';
+
+            // hanya tambahkan kalau belum pernah muncul
+            if (match && seen.add(key)) {
+              return true;
+            }
+            return false;
+          }).toList();
         }
         notifyListeners();
       } catch (e) {

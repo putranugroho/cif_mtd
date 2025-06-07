@@ -1623,7 +1623,19 @@ class LaporanHutangPiutangNotifier extends ChangeNotifier {
           for (Map<String, dynamic> i in response['data']) {
             listCs.add(CustomerSupplierModel.fromJson(i));
           }
-          return listCs.toList();
+          final seen = <String>{};
+          return listCs.where((model) {
+            final match =
+                (model.nmSif.toLowerCase().contains(query.toLowerCase()));
+
+            final key = '${model.nmSif.toLowerCase()}|${model.golCust}';
+
+            // hanya tambahkan kalau belum pernah muncul
+            if (match && seen.add(key)) {
+              return true;
+            }
+            return false;
+          }).toList();
         }
         notifyListeners();
       } catch (e) {

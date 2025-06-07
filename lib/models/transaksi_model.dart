@@ -11,9 +11,7 @@ class TransaksiModel {
     required this.tglTrans,
     required this.tglVal,
     required this.transUser,
-    required this.trxCode,
     required this.batch,
-    required this.otor,
     required this.noTrans,
     required this.kodeTrans,
     required this.debetAcc,
@@ -46,25 +44,22 @@ class TransaksiModel {
     required this.autterm,
     required this.flagTrn,
     required this.autrevuser,
-    required this.userterm,
-    required this.userinput,
-    required this.inputtgljam,
     required this.autrevtgljam,
     required this.autrevterm,
     required this.kodeColl,
-    required this.otoruser,
-    required this.otorterm,
-    required this.otortgljam,
+    required this.trxCode,
+    required this.otor,
+    required this.alasan,
+    required this.noKontrak,
+    required this.noInvoice,
   });
 
   final int id;
   final String tglTrans;
   final String tglVal;
   final String transUser;
-  final String trxCode;
   final String batch;
-  final String otor;
-  final dynamic noTrans;
+  final int noTrans;
   final String kodeTrans;
   final String debetAcc;
   final String namaDebet;
@@ -93,28 +88,25 @@ class TransaksiModel {
   final dynamic chgterm;
   final String autuser;
   final dynamic auttgljam;
-  final dynamic autterm;
+  final String autterm;
   final String flagTrn;
   final dynamic autrevuser;
-  final dynamic userterm;
-  final dynamic userinput;
-  final dynamic inputtgljam;
   final dynamic autrevtgljam;
-  final String autrevterm;
+  final dynamic autrevterm;
   final String kodeColl;
-  final String otoruser;
-  final String otorterm;
-  final String otortgljam;
+  final String trxCode;
+  final String otor;
+  final dynamic alasan;
+  final String noKontrak;
+  final String noInvoice;
 
   factory TransaksiModel.fromJson(Map<String,dynamic> json) => TransaksiModel(
     id: json['id'] as int,
     tglTrans: json['tgl_trans'].toString(),
     tglVal: json['tgl_val'].toString(),
     transUser: json['trans_user'].toString(),
-    trxCode: json['trx_code'].toString(),
     batch: json['batch'].toString(),
-    otor: json['otor'].toString(),
-    noTrans: json['no_trans'] as dynamic,
+    noTrans: json['no_trans'] as int,
     kodeTrans: json['kode_trans'].toString(),
     debetAcc: json['debet_acc'].toString(),
     namaDebet: json['nama_debet'].toString(),
@@ -143,18 +135,17 @@ class TransaksiModel {
     chgterm: json['chgterm'] as dynamic,
     autuser: json['autuser'].toString(),
     auttgljam: json['auttgljam'] as dynamic,
-    autterm: json['autterm'] as dynamic,
+    autterm: json['autterm'].toString(),
     flagTrn: json['flag_trn'].toString(),
     autrevuser: json['autrevuser'] as dynamic,
-    userterm: json['userterm'] as dynamic,
-    userinput: json['userinput'] as dynamic,
-    inputtgljam: json['inputtgljam'] as dynamic,
     autrevtgljam: json['autrevtgljam'] as dynamic,
-    autrevterm: json['autrevterm'].toString(),
+    autrevterm: json['autrevterm'] as dynamic,
     kodeColl: json['kode_coll'].toString(),
-    otoruser: json['otoruser'].toString(),
-    otorterm: json['otorterm'].toString(),
-    otortgljam: json['otortgljam'].toString()
+    trxCode: json['trx_code'].toString(),
+    otor: json['otor'].toString(),
+    alasan: json['alasan'] as dynamic,
+    noKontrak: json['no_kontrak'].toString(),
+    noInvoice: json['no_invoice'].toString()
   );
   
   Map<String, dynamic> toJson() => {
@@ -162,9 +153,7 @@ class TransaksiModel {
     'tgl_trans': tglTrans,
     'tgl_val': tglVal,
     'trans_user': transUser,
-    'trx_code': trxCode,
     'batch': batch,
-    'otor': otor,
     'no_trans': noTrans,
     'kode_trans': kodeTrans,
     'debet_acc': debetAcc,
@@ -197,15 +186,14 @@ class TransaksiModel {
     'autterm': autterm,
     'flag_trn': flagTrn,
     'autrevuser': autrevuser,
-    'userterm': userterm,
-    'userinput': userinput,
-    'inputtgljam': inputtgljam,
     'autrevtgljam': autrevtgljam,
     'autrevterm': autrevterm,
     'kode_coll': kodeColl,
-    'otoruser': otoruser,
-    'otorterm': otorterm,
-    'otortgljam': otortgljam
+    'trx_code': trxCode,
+    'otor': otor,
+    'alasan': alasan,
+    'no_kontrak': noKontrak,
+    'no_invoice': noInvoice
   };
 
   TransaksiModel clone() => TransaksiModel(
@@ -213,9 +201,7 @@ class TransaksiModel {
     tglTrans: tglTrans,
     tglVal: tglVal,
     transUser: transUser,
-    trxCode: trxCode,
     batch: batch,
-    otor: otor,
     noTrans: noTrans,
     kodeTrans: kodeTrans,
     debetAcc: debetAcc,
@@ -248,15 +234,14 @@ class TransaksiModel {
     autterm: autterm,
     flagTrn: flagTrn,
     autrevuser: autrevuser,
-    userterm: userterm,
-    userinput: userinput,
-    inputtgljam: inputtgljam,
     autrevtgljam: autrevtgljam,
     autrevterm: autrevterm,
     kodeColl: kodeColl,
-    otoruser: otoruser,
-    otorterm: otorterm,
-    otortgljam: otortgljam
+    trxCode: trxCode,
+    otor: otor,
+    alasan: alasan,
+    noKontrak: noKontrak,
+    noInvoice: noInvoice
   );
 
 
@@ -265,10 +250,8 @@ class TransaksiModel {
     String? tglTrans,
     String? tglVal,
     String? transUser,
-    String? trxCode,
     String? batch,
-    String? otor,
-    dynamic? noTrans,
+    int? noTrans,
     String? kodeTrans,
     String? debetAcc,
     String? namaDebet,
@@ -297,26 +280,23 @@ class TransaksiModel {
     dynamic? chgterm,
     String? autuser,
     dynamic? auttgljam,
-    dynamic? autterm,
+    String? autterm,
     String? flagTrn,
     dynamic? autrevuser,
-    dynamic? userterm,
-    dynamic? userinput,
-    dynamic? inputtgljam,
     dynamic? autrevtgljam,
-    String? autrevterm,
+    dynamic? autrevterm,
     String? kodeColl,
-    String? otoruser,
-    String? otorterm,
-    String? otortgljam
+    String? trxCode,
+    String? otor,
+    dynamic? alasan,
+    String? noKontrak,
+    String? noInvoice
   }) => TransaksiModel(
     id: id ?? this.id,
     tglTrans: tglTrans ?? this.tglTrans,
     tglVal: tglVal ?? this.tglVal,
     transUser: transUser ?? this.transUser,
-    trxCode: trxCode ?? this.trxCode,
     batch: batch ?? this.batch,
-    otor: otor ?? this.otor,
     noTrans: noTrans ?? this.noTrans,
     kodeTrans: kodeTrans ?? this.kodeTrans,
     debetAcc: debetAcc ?? this.debetAcc,
@@ -349,21 +329,20 @@ class TransaksiModel {
     autterm: autterm ?? this.autterm,
     flagTrn: flagTrn ?? this.flagTrn,
     autrevuser: autrevuser ?? this.autrevuser,
-    userterm: userterm ?? this.userterm,
-    userinput: userinput ?? this.userinput,
-    inputtgljam: inputtgljam ?? this.inputtgljam,
     autrevtgljam: autrevtgljam ?? this.autrevtgljam,
     autrevterm: autrevterm ?? this.autrevterm,
     kodeColl: kodeColl ?? this.kodeColl,
-    otoruser: otoruser ?? this.otoruser,
-    otorterm: otorterm ?? this.otorterm,
-    otortgljam: otortgljam ?? this.otortgljam,
+    trxCode: trxCode ?? this.trxCode,
+    otor: otor ?? this.otor,
+    alasan: alasan ?? this.alasan,
+    noKontrak: noKontrak ?? this.noKontrak,
+    noInvoice: noInvoice ?? this.noInvoice,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is TransaksiModel && id == other.id && tglTrans == other.tglTrans && tglVal == other.tglVal && transUser == other.transUser && trxCode == other.trxCode && batch == other.batch && otor == other.otor && noTrans == other.noTrans && kodeTrans == other.kodeTrans && debetAcc == other.debetAcc && namaDebet == other.namaDebet && creditAcc == other.creditAcc && namaCredit == other.namaCredit && rrn == other.rrn && nomorDok == other.nomorDok && nomorRef == other.nomorRef && nominal == other.nominal && keterangan == other.keterangan && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && statusValidasi == other.statusValidasi && kodeAoDebet == other.kodeAoDebet && kodeAoCredit == other.kodeAoCredit && statusTransaksi == other.statusTransaksi && transid == other.transid && merchant == other.merchant && sourceTrx == other.sourceTrx && inpuser == other.inpuser && inptgljam == other.inptgljam && inpterm == other.inpterm && chguser == other.chguser && chgtgljam == other.chgtgljam && chgterm == other.chgterm && autuser == other.autuser && auttgljam == other.auttgljam && autterm == other.autterm && flagTrn == other.flagTrn && autrevuser == other.autrevuser && userterm == other.userterm && userinput == other.userinput && inputtgljam == other.inputtgljam && autrevtgljam == other.autrevtgljam && autrevterm == other.autrevterm && kodeColl == other.kodeColl && otoruser == other.otoruser && otorterm == other.otorterm && otortgljam == other.otortgljam;
+    || other is TransaksiModel && id == other.id && tglTrans == other.tglTrans && tglVal == other.tglVal && transUser == other.transUser && batch == other.batch && noTrans == other.noTrans && kodeTrans == other.kodeTrans && debetAcc == other.debetAcc && namaDebet == other.namaDebet && creditAcc == other.creditAcc && namaCredit == other.namaCredit && rrn == other.rrn && nomorDok == other.nomorDok && nomorRef == other.nomorRef && nominal == other.nominal && keterangan == other.keterangan && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && statusValidasi == other.statusValidasi && kodeAoDebet == other.kodeAoDebet && kodeAoCredit == other.kodeAoCredit && statusTransaksi == other.statusTransaksi && transid == other.transid && merchant == other.merchant && sourceTrx == other.sourceTrx && inpuser == other.inpuser && inptgljam == other.inptgljam && inpterm == other.inpterm && chguser == other.chguser && chgtgljam == other.chgtgljam && chgterm == other.chgterm && autuser == other.autuser && auttgljam == other.auttgljam && autterm == other.autterm && flagTrn == other.flagTrn && autrevuser == other.autrevuser && autrevtgljam == other.autrevtgljam && autrevterm == other.autrevterm && kodeColl == other.kodeColl && trxCode == other.trxCode && otor == other.otor && alasan == other.alasan && noKontrak == other.noKontrak && noInvoice == other.noInvoice;
 
   @override
-  int get hashCode => id.hashCode ^ tglTrans.hashCode ^ tglVal.hashCode ^ transUser.hashCode ^ trxCode.hashCode ^ batch.hashCode ^ otor.hashCode ^ noTrans.hashCode ^ kodeTrans.hashCode ^ debetAcc.hashCode ^ namaDebet.hashCode ^ creditAcc.hashCode ^ namaCredit.hashCode ^ rrn.hashCode ^ nomorDok.hashCode ^ nomorRef.hashCode ^ nominal.hashCode ^ keterangan.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ statusValidasi.hashCode ^ kodeAoDebet.hashCode ^ kodeAoCredit.hashCode ^ statusTransaksi.hashCode ^ transid.hashCode ^ merchant.hashCode ^ sourceTrx.hashCode ^ inpuser.hashCode ^ inptgljam.hashCode ^ inpterm.hashCode ^ chguser.hashCode ^ chgtgljam.hashCode ^ chgterm.hashCode ^ autuser.hashCode ^ auttgljam.hashCode ^ autterm.hashCode ^ flagTrn.hashCode ^ autrevuser.hashCode ^ userterm.hashCode ^ userinput.hashCode ^ inputtgljam.hashCode ^ autrevtgljam.hashCode ^ autrevterm.hashCode ^ kodeColl.hashCode ^ otoruser.hashCode ^ otorterm.hashCode ^ otortgljam.hashCode;
+  int get hashCode => id.hashCode ^ tglTrans.hashCode ^ tglVal.hashCode ^ transUser.hashCode ^ batch.hashCode ^ noTrans.hashCode ^ kodeTrans.hashCode ^ debetAcc.hashCode ^ namaDebet.hashCode ^ creditAcc.hashCode ^ namaCredit.hashCode ^ rrn.hashCode ^ nomorDok.hashCode ^ nomorRef.hashCode ^ nominal.hashCode ^ keterangan.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ statusValidasi.hashCode ^ kodeAoDebet.hashCode ^ kodeAoCredit.hashCode ^ statusTransaksi.hashCode ^ transid.hashCode ^ merchant.hashCode ^ sourceTrx.hashCode ^ inpuser.hashCode ^ inptgljam.hashCode ^ inpterm.hashCode ^ chguser.hashCode ^ chgtgljam.hashCode ^ chgterm.hashCode ^ autuser.hashCode ^ auttgljam.hashCode ^ autterm.hashCode ^ flagTrn.hashCode ^ autrevuser.hashCode ^ autrevtgljam.hashCode ^ autrevterm.hashCode ^ kodeColl.hashCode ^ trxCode.hashCode ^ otor.hashCode ^ alasan.hashCode ^ noKontrak.hashCode ^ noInvoice.hashCode;
 }

@@ -4,6 +4,7 @@ import 'package:accounting/models/index.dart';
 import 'package:accounting/network/network.dart';
 import 'package:accounting/pref/pref.dart';
 import 'package:accounting/repository/SetupRepository.dart';
+import 'package:accounting/utils/button_custom.dart';
 import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/format_currency.dart';
 import 'package:accounting/utils/informationdialog.dart';
@@ -31,6 +32,61 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     });
   }
 
+  confirmSimpan() async {
+    if (keyForm.currentState!.validate()) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                width: 500,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text("Simpan Transaksi?",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    Text(
+                      "Apakah Anda yakin ingin menyimpan transaksi ini?",
+                      style: const TextStyle(),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                            child: ButtonSecondary(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          name: "Tidak",
+                        )),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Expanded(
+                            child: ButtonPrimary(
+                          onTap: () {
+                            Navigator.pop(context);
+                            cek();
+                          },
+                          name: "Ya",
+                        )),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            );
+          });
+    }
+  }
+
   var isLoadingData = true;
   List<TransaksiPendModel> listTransaksi = [];
   List<TransaksiPendModel> listTransaksiAdd = [];
@@ -49,13 +105,124 @@ class SatuTransaksiNotifier extends ChangeNotifier {
           listTransaksi.add(TransaksiPendModel.fromJson(i));
         }
         if (listTransaksi.isNotEmpty) {
-          listTransaksiAdd = listTransaksi
-              .where((e) =>
-                  e.userinput == users!.namauser && e.modul == "Satu Transaksi")
-              .toList();
+          for (var i = 0;
+              i <
+                  listTransaksi
+                      .where((e) =>
+                          e.userinput == users!.namauser &&
+                          e.modul == "Satu Transaksi" &&
+                          e.status == "PENDING")
+                      .length;
+              i++) {
+            final data = listTransaksi
+                .where((e) =>
+                    e.userinput == users!.namauser &&
+                    e.modul == "Satu Transaksi" &&
+                    e.status == "PENDING")
+                .toList()[i];
+            listTransaksiAdd.add(data);
+          }
+          print("PENDING : ${listTransaksi.length}");
+          print("PENDING RESULT: ${listTransaksiAdd.length}");
 
           listTransaksiAdd.sort((a, b) => DateTime.parse(b.createddate)
               .compareTo(DateTime.parse(a.createddate)));
+        }
+        getTransaksiBackend();
+
+        notifyListeners();
+      } else {
+        isLoadingData = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  List<TransaksiModel> listTransaksiBack = [];
+  getTransaksiBackend() async {
+    isLoadingData = true;
+    listTransaksiBack.clear();
+    notifyListeners();
+    var data = {
+      "filter": {
+        "general": {
+          "batch": null,
+          "userinput": "${users!.namauser}",
+          "userotor": "",
+          "otorrev": "",
+          "chguser": "",
+          "status_transaksi": "all",
+          "kode_pt": "${users!.kodePt}",
+          "kode_kantor": "${users!.kodeKantor}",
+          "kode_induk": "${users!.kodeInduk}",
+          "rrn": null,
+          "no_dokumen": null,
+          "no_reff": null,
+          // "flag_trn": "0"
+        },
+        "range_tanggal": {
+          "from": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+          "to": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+        },
+        "range_tanggal_valuta": {"from": "", "to": ""},
+        "akun": {"dracc": null, "cracc": null},
+        "range_nominal": {"min": null, "max": null}
+      },
+      "pagination": {"page": 1},
+      "sort": {"by": "tgl_transaksi", "order": "desc"}
+    };
+    Setuprepository.setup(token, NetworkURL.search(), jsonEncode(data))
+        .then((value) {
+      if (value['code'] == "000") {
+        for (Map<String, dynamic> i in value['data']) {
+          listTransaksiBack.add(TransaksiModel.fromJson(i));
+        }
+        if (listTransaksi.isNotEmpty) {
+          for (var i = 0; i < listTransaksiBack.length; i++) {
+            final data = listTransaksiBack[i];
+            listTransaksiAdd.add(TransaksiPendModel(
+                id: data.id,
+                tglTransaksi: data.tglTrans,
+                tglValuta: data.tglVal,
+                batch: data.batch,
+                trxType: "",
+                trxCode: data.trxCode,
+                otor: data.otor,
+                kodeTrn: data.kodeTrans,
+                dracc: data.debetAcc,
+                namaDr: data.namaDebet,
+                cracc: data.creditAcc,
+                namaCr: data.namaCredit,
+                rrn: data.rrn,
+                noDokumen: data.nomorDok,
+                modul: "",
+                keteranganOtor: data.keterangan,
+                alasan: data.alasan,
+                noRef: data.nomorRef,
+                nominal: data.nominal,
+                keterangan: data.keterangan,
+                kodePt: data.kodePt,
+                kodeKantor: data.kodeKantor,
+                kodeInduk: data.kodeInduk,
+                stsValidasi: data.statusValidasi,
+                kodeAoDr: data.kodeAoDebet,
+                kodeColl: data.kodeColl,
+                kodeAoCr: data.kodeAoCredit,
+                userinput: data.inpuser,
+                userterm: data.inpterm,
+                inputtgljam: data.inptgljam,
+                otoruser: data.autrevuser,
+                otorterm: data.autrevterm,
+                otortgljam: data.autrevtgljam,
+                flagTrn: data.flagTrn,
+                merchant: data.merchant,
+                sourceTrx: data.sourceTrx,
+                noKontrak: data.noKontrak,
+                noInvoice: data.noInvoice,
+                createddate: data.inptgljam,
+                status:
+                    "${data.statusTransaksi == "1" ? "COMPLETED" : "CANCEL"}"));
+          }
         }
         isLoadingData = false;
         notifyListeners();
@@ -393,129 +560,125 @@ class SatuTransaksiNotifier extends ChangeNotifier {
   final keyForm = GlobalKey<FormState>();
 
   cek() {
-    if (keyForm.currentState!.validate()) {
-      if (users!.limitAkses == "Y") {
-        if (double.parse(users!.maksimalTransaksi) <
-            double.parse(nominal.text
-                .replaceAll("Rp ", "")
-                .replaceAll(".", "")
-                .replaceAll(",", "."))) {
-          DialogCustom().showLoading(context);
-          var invoice = DateTime.now().millisecondsSinceEpoch.toString();
-          var data = {
-            "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
-            "tgl_valuta": backDate
-                ? DateFormat('y-MM-dd').format(tglBackDate!)
-                : DateFormat('y-MM-dd').format(DateTime.now()),
-            "batch": users!.batch,
-            "trx_type": "TRX",
-            "trx_code": backDate ? "110" : "100",
-            "otor": "0",
-            "kode_trn": setupTransModel == null ? "" : setupTransModel!.kdTrans,
-            "nama_dr": nosbbdeb.text,
-            "dracc": namaSbbDeb.text,
-            "nama_cr": nossbcre.text,
-            "cracc": namaSbbCre.text,
-            "rrn": invoice,
-            "no_dokumen": nomorDok.text,
-            "no_ref": nomorRef.text,
-            "nominal": double.parse(nominal.text
-                .replaceAll("Rp ", "")
-                .replaceAll(".", "")
-                .replaceAll(",", ".")),
-            "keterangan": keterangan.text,
-            "kode_pt": users!.kodePt,
-            "kode_kantor": users!.kodeKantor,
-            "kode_induk": users!.kodeInduk,
-            "sts_validasi": "N",
-            "kode_ao_dr": aoModel == null ? "" : aoModel!.kode,
-            "kode_coll": "",
-            "kode_ao_cr": aoModelKRedit == null ? "" : aoModelKRedit!.kode,
-            "userinput": users!.namauser,
-            "userterm": "114.80.90.54",
-            "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-            "inputtgljam":
-                DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
-            "otoruser": "",
-            "otorterm": "",
-            "otortgljam": "",
-            "flag_trn": "0",
-            "merchant": "",
-            "source_trx": "",
-            "status": "PENDING",
-            "modul": "Satu Transaksi",
-          };
-          Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
-              .then((value) {
-            Navigator.pop(context);
-            if (value['status'] == "success") {
-              getTransaksi();
-              clear();
-              informationDialog(context, "Information", value['message']);
-            } else {
-              informationDialog(context, "Warning", value['message']);
-            }
-          });
-        } else {
-          DialogCustom().showLoading(context);
-          var invoice = DateTime.now().millisecondsSinceEpoch.toString();
-          var data = {
-            "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
-            "tgl_valuta": backDate
-                ? DateFormat('y-MM-dd').format(tglBackDate!)
-                : DateFormat('y-MM-dd').format(DateTime.now()),
-            "batch": users!.batch,
-            "trx_type": "TRX",
-            "trx_code": backDate ? "110" : "100",
-            "otor": "0",
-            "kode_trn": setupTransModel == null ? "" : setupTransModel!.kdTrans,
-            "nama_dr": nosbbdeb.text,
-            "dracc": namaSbbDeb.text,
-            "nama_cr": nossbcre.text,
-            "cracc": namaSbbCre.text,
-            "rrn": invoice,
-            "no_dokumen": nomorDok.text,
-            "no_ref": nomorRef.text,
-            "nominal": double.parse(nominal.text
-                .replaceAll("Rp ", "")
-                .replaceAll(".", "")
-                .replaceAll(",", ".")),
-            "keterangan": keterangan.text,
-            "kode_pt": users!.kodePt,
-            "kode_kantor": users!.kodeKantor,
-            "kode_induk": users!.kodeInduk,
-            "sts_validasi": "N",
-            "kode_ao_dr": aoModel == null ? "" : aoModel!.kode,
-            "kode_coll": "",
-            "kode_ao_cr": aoModelKRedit == null ? "" : aoModelKRedit!.kode,
-            "userinput": users!.namauser,
-            "userterm": "114.80.90.54",
-            "inputtgljam":
-                DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
-            "otoruser": "",
-            "otorterm": "",
-            "otortgljam": "",
-            "flag_trn": "0",
-            "merchant": "",
-            "source_trx": "",
-            "status": "COMPLETED",
-            "modul": "Satu Transaksi",
-          };
-          Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
-              .then((value) {
-            Navigator.pop(context);
-            if (value['status'] == "success") {
-              getTransaksi();
-              clear();
-              informationDialog(context, "Information", value['message']);
-            } else {
-              informationDialog(context, "Warning", value['message']);
-            }
-          });
-        }
+    if (users!.limitAkses == "Y") {
+      if (double.parse(users!.maksimalTransaksi) <
+          double.parse(nominal.text
+              .replaceAll("Rp ", "")
+              .replaceAll(".", "")
+              .replaceAll(",", "."))) {
+        DialogCustom().showLoading(context);
+        var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+        var data = {
+          "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
+          "tgl_valuta": backDate
+              ? DateFormat('y-MM-dd').format(tglBackDate!)
+              : DateFormat('y-MM-dd').format(DateTime.now()),
+          "batch": users!.batch,
+          "trx_type": "TRX",
+          "trx_code": backDate ? "110" : "100",
+          "otor": "0",
+          "kode_trn": setupTransModel == null ? "" : setupTransModel!.kdTrans,
+          "nama_dr": nosbbdeb.text,
+          "dracc": namaSbbDeb.text,
+          "nama_cr": nossbcre.text,
+          "cracc": namaSbbCre.text,
+          "rrn": invoice,
+          "no_dokumen": nomorDok.text,
+          "no_ref": nomorRef.text,
+          "nominal": double.parse(nominal.text
+              .replaceAll("Rp ", "")
+              .replaceAll(".", "")
+              .replaceAll(",", ".")),
+          "keterangan": keterangan.text,
+          "kode_pt": users!.kodePt,
+          "kode_kantor": users!.kodeKantor,
+          "kode_induk": users!.kodeInduk,
+          "sts_validasi": "N",
+          "kode_ao_dr": aoModel == null ? "" : aoModel!.kode,
+          "kode_coll": "",
+          "kode_ao_cr": aoModelKRedit == null ? "" : aoModelKRedit!.kode,
+          "userinput": users!.namauser,
+          "userterm": "114.80.90.54",
+          "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+          "inputtgljam": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
+          "otoruser": "",
+          "otorterm": "",
+          "otortgljam": "",
+          "flag_trn": "0",
+          "merchant": "",
+          "source_trx": "",
+          "status": "PENDING",
+          "modul": "Satu Transaksi",
+        };
+        Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'] == "success") {
+            getTransaksi();
+            clear();
+            informationDialog(context, "Information", value['message']);
+          } else {
+            informationDialog(context, "Warning", value['message']);
+          }
+        });
       } else {
-        informationDialog(context, "Warning", "Tidak bisa melakukan transaksi");
+        DialogCustom().showLoading(context);
+        var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+        var data = {
+          "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
+          "tgl_valuta": backDate
+              ? DateFormat('y-MM-dd').format(tglBackDate!)
+              : DateFormat('y-MM-dd').format(DateTime.now()),
+          "batch": users!.batch,
+          "trx_type": "TRX",
+          "trx_code": backDate ? "110" : "100",
+          "otor": "0",
+          "kode_trn": setupTransModel == null ? "" : setupTransModel!.kdTrans,
+          "nama_dr": nosbbdeb.text,
+          "dracc": namaSbbDeb.text,
+          "nama_cr": nossbcre.text,
+          "cracc": namaSbbCre.text,
+          "rrn": invoice,
+          "no_dokumen": nomorDok.text,
+          "no_ref": nomorRef.text,
+          "nominal": double.parse(nominal.text
+              .replaceAll("Rp ", "")
+              .replaceAll(".", "")
+              .replaceAll(",", ".")),
+          "keterangan": keterangan.text,
+          "kode_pt": users!.kodePt,
+          "kode_kantor": users!.kodeKantor,
+          "kode_induk": users!.kodeInduk,
+          "sts_validasi": "N",
+          "kode_ao_dr": aoModel == null ? "" : aoModel!.kode,
+          "kode_coll": "",
+          "kode_ao_cr": aoModelKRedit == null ? "" : aoModelKRedit!.kode,
+          "userinput": users!.namauser,
+          "userterm": "114.80.90.54",
+          "inputtgljam": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
+          "otoruser": "",
+          "otorterm": "",
+          "otortgljam": "",
+          "flag_trn": "0",
+          "merchant": "",
+          "source_trx": "",
+          "status": "COMPLETED",
+          "modul": "Satu Transaksi",
+        };
+        Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
+            .then((value) {
+          Navigator.pop(context);
+          if (value['status'] == "success") {
+            getTransaksi();
+            clear();
+            informationDialog(context, "Information", value['message']);
+          } else {
+            informationDialog(context, "Warning", value['message']);
+          }
+        });
       }
+    } else {
+      informationDialog(context, "Warning", "Tidak bisa melakukan transaksi");
     }
   }
 
