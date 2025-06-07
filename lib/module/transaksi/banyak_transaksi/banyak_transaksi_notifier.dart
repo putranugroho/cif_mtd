@@ -55,14 +55,128 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
           listTransaksi.add(TransaksiPendModel.fromJson(i));
         }
         if (listTransaksi.isNotEmpty) {
-          listTransaksiAdd = listTransaksi
-              .where((e) =>
-                  e.userinput == users!.namauser &&
-                  e.modul.contains("BANYAK"))
-              .toList();
+          for (var i = 0;
+              i <
+                  listTransaksi
+                      .where((e) =>
+                          e.userinput == users!.namauser &&
+                          e.modul.contains("BANYAK") &&
+                          e.status == "PENDING")
+                      .length;
+              i++) {
+            final data = listTransaksi
+                .where((e) =>
+                    e.userinput == users!.namauser &&
+                    e.modul.contains("BANYAK") &&
+                    e.status == "PENDING")
+                .toList()[i];
+            listTransaksiAdd.add(data);
+          }
+          print("PENDING : ${listTransaksi.length}");
+          print("PENDING RESULT: ${listTransaksiAdd.length}");
 
           listTransaksiAdd.sort((a, b) => DateTime.parse(b.createddate)
               .compareTo(DateTime.parse(a.createddate)));
+        }
+        getTransaksiBackend();
+        isLoadingData = false;
+        notifyListeners();
+      } else {
+        isLoadingData = false;
+        notifyListeners();
+      }
+    });
+  }
+
+  List<TransaksiModel> listTransaksiBack = [];
+  getTransaksiBackend() async {
+    isLoadingData = true;
+    listTransaksiBack.clear();
+    notifyListeners();
+    var data = {
+      "filter": {
+        "general": {
+          "batch": null,
+          "userinput": "${users!.namauser}",
+          "userotor": "",
+          "otorrev": "",
+          "chguser": "",
+          "status_transaksi": "all",
+          "kode_pt": "${users!.kodePt}",
+          "kode_kantor": "${users!.kodeKantor}",
+          "kode_induk": "${users!.kodeInduk}",
+          "rrn": null,
+          "no_dokumen": null,
+          "no_reff": null,
+          // "flag_trn": "0"
+        },
+        "range_tanggal": {
+          "from": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+          "to": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+        },
+        "range_tanggal_valuta": {"from": "", "to": ""},
+        "akun": {"dracc": null, "cracc": null},
+        "range_nominal": {"min": null, "max": null}
+      },
+      "pagination": {"page": 1},
+      "sort": {"by": "tgl_transaksi", "order": "desc"}
+    };
+    Setuprepository.setup(token, NetworkURL.search(), jsonEncode(data))
+        .then((value) {
+      if (value['code'] == "000") {
+        for (Map<String, dynamic> i in value['data']) {
+          listTransaksiBack.add(TransaksiModel.fromJson(i));
+        }
+        if (listTransaksi.isNotEmpty) {
+          for (var i = 0;
+              i < listTransaksiBack.where((e) => e.kodeTrans == "9998").length;
+              i++) {
+            final data = listTransaksiBack
+                .where((e) => e.kodeTrans == "9998")
+                .toList()[i];
+            listTransaksiAdd.add(TransaksiPendModel(
+                id: data.id,
+                tglTransaksi: data.tglTrans,
+                tglValuta: data.tglVal,
+                batch: data.batch,
+                trxType: "",
+                trxCode: data.trxCode,
+                otor: data.otor,
+                kodeTrn: data.kodeTrans,
+                dracc: data.debetAcc,
+                namaDr: data.namaDebet,
+                cracc: data.creditAcc,
+                namaCr: data.namaCredit,
+                rrn: data.rrn,
+                noDokumen: data.nomorDok,
+                modul: "",
+                keteranganOtor: data.keterangan,
+                alasan: data.alasan,
+                noRef: data.nomorRef,
+                nominal: data.nominal,
+                keterangan: data.keterangan,
+                kodePt: data.kodePt,
+                kodeKantor: data.kodeKantor,
+                kodeInduk: data.kodeInduk,
+                stsValidasi: data.statusValidasi,
+                kodeAoDr: data.kodeAoDebet,
+                kodeColl: data.kodeColl,
+                kodeAoCr: data.kodeAoCredit,
+                userinput: data.inpuser,
+                userterm: data.inpterm,
+                inputtgljam: data.inptgljam,
+                otoruser: data.autrevuser,
+                otorterm: data.autrevterm,
+                otortgljam: data.autrevtgljam,
+                flagTrn: data.flagTrn,
+                merchant: data.merchant,
+                sourceTrx: data.sourceTrx,
+                noKontrak: data.noKontrak,
+                noInvoice: data.noInvoice,
+                createddate: data.inptgljam,
+                status:
+                    "${data.statusTransaksi == "1" ? "COMPLETED" : "CANCEL"}"));
+          }
         }
         isLoadingData = false;
         notifyListeners();
@@ -384,7 +498,7 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
                 "trx_code":
                     "${tglBackDate!.isBefore(DateTime.now()) ? "110" : "100"}",
                 "otor": "0",
-                "kode_trn": "",
+                "kode_trn": "9998",
                 "nama_dr":
                     !akun ? inqueryGlModeldeb!.namaSbb : listGlItems[i].namaSbb,
                 "dracc":
@@ -440,7 +554,7 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
                 "trx_code":
                     "${tglBackDate!.isBefore(DateTime.now()) ? "110" : "100"}",
                 "otor": "0",
-                "kode_trn": "",
+                "kode_trn": "9998",
                 "nama_dr":
                     !akun ? inqueryGlModeldeb!.namaSbb : listGlItems[i].namaSbb,
                 "dracc":

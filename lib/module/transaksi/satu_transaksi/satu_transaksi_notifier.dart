@@ -178,8 +178,12 @@ class SatuTransaksiNotifier extends ChangeNotifier {
           listTransaksiBack.add(TransaksiModel.fromJson(i));
         }
         if (listTransaksi.isNotEmpty) {
-          for (var i = 0; i < listTransaksiBack.length; i++) {
-            final data = listTransaksiBack[i];
+          for (var i = 0;
+              i < listTransaksiBack.where((e) => e.kodeTrans != "9998").length;
+              i++) {
+            final data = listTransaksiBack
+                .where((e) => e.kodeTrans != "9998")
+                .toList()[i];
             listTransaksiAdd.add(TransaksiPendModel(
                 id: data.id,
                 tglTransaksi: data.tglTrans,
