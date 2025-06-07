@@ -52,7 +52,8 @@ class UsersPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -105,7 +106,8 @@ class UsersPage extends StatelessWidget {
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
-                                headerGridLinesVisibility: GridLinesVisibility.both,
+                                headerGridLinesVisibility:
+                                    GridLinesVisibility.both,
                                 selectionMode: SelectionMode.single,
 
                                 source: DetailDataSource(value),
@@ -271,12 +273,13 @@ class UsersPage extends StatelessWidget {
                                           color: colorPrimary,
                                           alignment: Alignment.center,
                                           padding: const EdgeInsets.all(6),
-                                          child: const Text('Maksimal Otorisasi',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.white,
-                                              )))),
+                                          child:
+                                              const Text('Maksimal Otorisasi',
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Colors.white,
+                                                  )))),
                                   GridColumn(
                                       columnName: 'aktivasi',
                                       width: 65,
@@ -297,12 +300,13 @@ class UsersPage extends StatelessWidget {
                                           color: colorPrimary,
                                           alignment: Alignment.center,
                                           padding: const EdgeInsets.all(6),
-                                          child: const Text('Tanggal Kadaluarsa',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.white,
-                                              )))),
+                                          child:
+                                              const Text('Tanggal Kadaluarsa',
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Colors.white,
+                                                  )))),
                                   GridColumn(
                                       columnName: 'action',
                                       width: 80,
@@ -353,7 +357,9 @@ class UsersPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        value.editData ? "Ubah / Hapus Users" : "Tambah User",
+                                        value.editData
+                                            ? "Ubah / Hapus Users"
+                                            : "Tambah User",
                                         style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -366,7 +372,9 @@ class UsersPage extends StatelessWidget {
                                         width: 40,
                                         height: 40,
                                         padding: const EdgeInsets.all(4),
-                                        decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey[200],
+                                            shape: BoxShape.circle),
                                         child: const Icon(Icons.close),
                                       ),
                                     )
@@ -392,8 +400,10 @@ class UsersPage extends StatelessWidget {
                                         }
                                         return null;
                                       },
-                                      popupProps: const PopupPropsMultiSelection.menu(
-                                        showSearchBox: true, // Aktifkan fitur pencarian
+                                      popupProps:
+                                          const PopupPropsMultiSelection.menu(
+                                        showSearchBox:
+                                            true, // Aktifkan fitur pencarian
                                       ),
                                       selectedItem: value.kantorModel,
                                       items: value.listKantor,
@@ -401,13 +411,18 @@ class UsersPage extends StatelessWidget {
                                       onChanged: (e) {
                                         value.pilihKantor(e!);
                                       },
-                                      dropdownDecoratorProps: DropDownDecoratorProps(
-                                        baseStyle: const TextStyle(fontSize: 16),
-                                        textAlignVertical: TextAlignVertical.center,
-                                        dropdownSearchDecoration: InputDecoration(
+                                      dropdownDecoratorProps:
+                                          DropDownDecoratorProps(
+                                        baseStyle:
+                                            const TextStyle(fontSize: 16),
+                                        textAlignVertical:
+                                            TextAlignVertical.center,
+                                        dropdownSearchDecoration:
+                                            InputDecoration(
                                           hintText: "Pilih Kantor",
                                           border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(8),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
                                             borderSide: const BorderSide(
                                               width: 1,
                                               color: Colors.grey,
@@ -431,8 +446,10 @@ class UsersPage extends StatelessWidget {
                                         Expanded(
                                           child: TypeAheadField<KaryawanModel>(
                                             controller: value.namaKaryawan,
-                                            suggestionsCallback: (search) => value.getInqKaryawan(search),
-                                            builder: (context, controller, focusNode) {
+                                            suggestionsCallback: (search) =>
+                                                value.getInqKaryawan(search),
+                                            builder: (context, controller,
+                                                focusNode) {
                                               return TextField(
                                                   controller: controller,
                                                   focusNode: focusNode,
@@ -441,7 +458,8 @@ class UsersPage extends StatelessWidget {
                                                   decoration: InputDecoration(
                                                     filled: value.editData,
                                                     fillColor: Colors.grey[200],
-                                                    border: const OutlineInputBorder(),
+                                                    border:
+                                                        const OutlineInputBorder(),
                                                     labelText: 'Cari Akun',
                                                   ));
                                             },
@@ -463,7 +481,8 @@ class UsersPage extends StatelessWidget {
                                         SizedBox(
                                           width: 160,
                                           child: TextFormField(
-                                            textInputAction: TextInputAction.done,
+                                            textInputAction:
+                                                TextInputAction.done,
                                             maxLines: 1,
                                             readOnly: true,
                                             controller: value.nikKaryawan,
@@ -482,7 +501,8 @@ class UsersPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "NIP Karyawan",
                                               border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(6),
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -525,7 +545,8 @@ class UsersPage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         hintText: "User ID  ",
                                         border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(6),
+                                          borderRadius:
+                                              BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -566,7 +587,8 @@ class UsersPage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         hintText: "Password",
                                         border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(6),
+                                          borderRadius:
+                                              BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -577,18 +599,21 @@ class UsersPage extends StatelessWidget {
                                       children: [
                                         Expanded(
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
                                             children: [
                                               const Row(
                                                 children: [
                                                   Text(
                                                     "Tanggal Masa Berlaku",
-                                                    style: TextStyle(fontSize: 12),
+                                                    style:
+                                                        TextStyle(fontSize: 12),
                                                   ),
                                                   SizedBox(width: 5),
                                                   Text(
                                                     "*",
-                                                    style: TextStyle(fontSize: 8),
+                                                    style:
+                                                        TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -596,10 +621,12 @@ class UsersPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               InkWell(
-                                                onTap: () => value.pilihTanggalBuka(),
+                                                onTap: () =>
+                                                    value.pilihTanggalBuka(),
                                                 child: TextFormField(
                                                   enabled: false,
-                                                  textInputAction: TextInputAction.done,
+                                                  textInputAction:
+                                                      TextInputAction.done,
                                                   controller: value.tglexp,
                                                   maxLines: 1,
                                                   style: const TextStyle(
@@ -616,14 +643,23 @@ class UsersPage extends StatelessWidget {
                                                     }
                                                   },
                                                   decoration: InputDecoration(
-                                                    hintText: "Tanggal Masa Berlaku",
-                                                    hintStyle: const TextStyle(color: Colors.grey),
+                                                    hintText:
+                                                        "Tanggal Masa Berlaku",
+                                                    hintStyle: const TextStyle(
+                                                        color: Colors.grey),
                                                     border: OutlineInputBorder(
-                                                      borderRadius: BorderRadius.circular(6),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
                                                     ),
-                                                    disabledBorder: OutlineInputBorder(
-                                                      borderSide: BorderSide(color: Colors.grey.shade600),
-                                                      borderRadius: BorderRadius.circular(6),
+                                                    disabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .grey.shade600),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
                                                     ),
                                                   ),
                                                 ),
@@ -645,7 +681,8 @@ class UsersPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               CupertinoSwitch(
-                                                  activeTrackColor: colorPrimary,
+                                                  activeTrackColor:
+                                                      colorPrimary,
                                                   value: value.aktivasilogin,
                                                   onChanged: (e) {
                                                     value.gantiAktivasi();
@@ -679,42 +716,56 @@ class UsersPage extends StatelessWidget {
                                         itemBuilder: (context, i) {
                                           final data = value.listHariKerja[i];
                                           return Column(
-                                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
                                             children: [
                                               Row(
                                                 children: [
                                                   Checkbox(
                                                       activeColor: colorPrimary,
-                                                      value: value.listAddHariKerja.isEmpty
+                                                      value: value
+                                                              .listAddHariKerja
+                                                              .isEmpty
                                                           ? false
-                                                          : value.listAddHariKerja.where((e) => e == data).isNotEmpty
+                                                          : value.listAddHariKerja
+                                                                  .where((e) =>
+                                                                      e == data)
+                                                                  .isNotEmpty
                                                               ? true
                                                               : false,
                                                       onChanged: (e) {
-                                                        value.addHariKerja(data);
+                                                        value
+                                                            .addHariKerja(data);
                                                       }),
                                                   const SizedBox(
                                                     width: 8,
                                                   ),
                                                   Expanded(
                                                       child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .stretch,
                                                     children: [
                                                       Text(
                                                         "(${data.kdAktivasi}) ${data.nmAktivasi}",
                                                         style: const TextStyle(
-                                                          fontWeight: FontWeight.bold,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                       ),
                                                       Text(
-                                                        data.hari.replaceAll("[", "").replaceAll("]", ""),
+                                                        data.hari
+                                                            .replaceAll("[", "")
+                                                            .replaceAll(
+                                                                "]", ""),
                                                         style: const TextStyle(
                                                           fontSize: 12,
                                                         ),
                                                       ),
                                                     ],
                                                   )),
-                                                  Text("${data.jamMulai} - ${data.jamSelesai}")
+                                                  Text(
+                                                      "${data.jamMulai} - ${data.jamSelesai}")
                                                 ],
                                               ),
                                               const SizedBox(
@@ -749,8 +800,10 @@ class UsersPage extends StatelessWidget {
                                         }
                                         return null;
                                       },
-                                      popupProps: const PopupPropsMultiSelection.menu(
-                                        showSearchBox: true, // Aktifkan fitur pencarian
+                                      popupProps:
+                                          const PopupPropsMultiSelection.menu(
+                                        showSearchBox:
+                                            true, // Aktifkan fitur pencarian
                                       ),
                                       selectedItem: value.levelUser,
                                       items: value.listUsers,
@@ -758,13 +811,18 @@ class UsersPage extends StatelessWidget {
                                       onChanged: (e) {
                                         value.pilihLevel(e!);
                                       },
-                                      dropdownDecoratorProps: DropDownDecoratorProps(
-                                        baseStyle: const TextStyle(fontSize: 16),
-                                        textAlignVertical: TextAlignVertical.center,
-                                        dropdownSearchDecoration: InputDecoration(
+                                      dropdownDecoratorProps:
+                                          DropDownDecoratorProps(
+                                        baseStyle:
+                                            const TextStyle(fontSize: 16),
+                                        textAlignVertical:
+                                            TextAlignVertical.center,
+                                        dropdownSearchDecoration:
+                                            InputDecoration(
                                           hintText: "Pilih Level User",
                                           border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(8),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
                                             borderSide: const BorderSide(
                                               width: 1,
                                               color: Colors.grey,
@@ -799,18 +857,21 @@ class UsersPage extends StatelessWidget {
                                     ),
                                     value.limitAkses
                                         ? Column(
-                                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
                                             children: [
                                               const Row(
                                                 children: [
                                                   Text(
                                                     "Maksimal Transaksi",
-                                                    style: TextStyle(fontSize: 12),
+                                                    style:
+                                                        TextStyle(fontSize: 12),
                                                   ),
                                                   SizedBox(width: 5),
                                                   Text(
                                                     "*",
-                                                    style: TextStyle(fontSize: 8),
+                                                    style:
+                                                        TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -818,16 +879,23 @@ class UsersPage extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               TextFormField(
-                                                textInputAction: TextInputAction.done,
+                                                textInputAction:
+                                                    TextInputAction.done,
                                                 controller: value.maksimalTrans,
                                                 maxLines: 1,
-                                                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                                keyboardType:
+                                                    const TextInputType
+                                                        .numberWithOptions(
+                                                        decimal: true),
                                                 inputFormatters: [
                                                   a.CurrencyInputFormatter(
                                                     leadingSymbol: 'Rp ',
                                                     useSymbolPadding: true,
-                                                    thousandSeparator: a.ThousandSeparator.Period,
-                                                    mantissaLength: 2, // jumlah angka desimal
+                                                    thousandSeparator: a
+                                                        .ThousandSeparator
+                                                        .Period,
+                                                    mantissaLength:
+                                                        2, // jumlah angka desimal
                                                     // decimalSeparator: DecimalSeparator.Comma,
                                                   ),
                                                 ],
@@ -839,9 +907,12 @@ class UsersPage extends StatelessWidget {
                                                   }
                                                 },
                                                 decoration: InputDecoration(
-                                                  hintText: "Maksimal Transaksi",
+                                                  hintText:
+                                                      "Maksimal Transaksi",
                                                   border: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(6),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
                                                   ),
                                                 ),
                                               ),
@@ -857,20 +928,23 @@ class UsersPage extends StatelessWidget {
                                       children: [
                                         Expanded(
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
                                             children: [
                                               Row(
                                                 children: [
                                                   const Text(
                                                     "Akses Otorisasi",
-                                                    style: TextStyle(fontSize: 12),
+                                                    style:
+                                                        TextStyle(fontSize: 12),
                                                   ),
                                                   // Spacer(),
                                                   const SizedBox(
                                                     width: 64,
                                                   ),
                                                   CupertinoSwitch(
-                                                      activeTrackColor: colorPrimary,
+                                                      activeTrackColor:
+                                                          colorPrimary,
                                                       value: value.otorisasi,
                                                       onChanged: (e) {
                                                         value.gantiotorisasi();
@@ -889,18 +963,21 @@ class UsersPage extends StatelessWidget {
                                         value.otorisasi
                                             ? Expanded(
                                                 child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
                                                 children: [
                                                   const Row(
                                                     children: [
                                                       Text(
                                                         "Level Otorisasi",
-                                                        style: TextStyle(fontSize: 12),
+                                                        style: TextStyle(
+                                                            fontSize: 12),
                                                       ),
                                                       SizedBox(width: 5),
                                                       Text(
                                                         "*",
-                                                        style: TextStyle(fontSize: 8),
+                                                        style: TextStyle(
+                                                            fontSize: 8),
                                                       ),
                                                     ],
                                                   ),
@@ -909,31 +986,50 @@ class UsersPage extends StatelessWidget {
                                                   ),
                                                   DropdownSearch<String>(
                                                     key: value.dropdownKey,
-                                                    popupProps: const PopupProps.menu(
+                                                    popupProps:
+                                                        const PopupProps.menu(
                                                       showSearchBox: true,
                                                     ),
-                                                    selectedItem: value.levelSelected ? value.levelOtor : null,
+                                                    selectedItem:
+                                                        value.levelSelected
+                                                            ? value.levelOtor
+                                                            : null,
                                                     items: value.listLevelOtor,
                                                     itemAsString: (e) => e,
                                                     onChanged: (e) {
                                                       value.pilihLevelOtor(e!);
                                                     },
-                                                    dropdownDecoratorProps: DropDownDecoratorProps(
-                                                      baseStyle: const TextStyle(fontSize: 16),
-                                                      textAlignVertical: TextAlignVertical.center,
-                                                      dropdownSearchDecoration: InputDecoration(
-                                                        hintText: "Pilih Level Otorisasi",
-                                                        suffixIcon: value.levelSelected
+                                                    dropdownDecoratorProps:
+                                                        DropDownDecoratorProps(
+                                                      baseStyle:
+                                                          const TextStyle(
+                                                              fontSize: 16),
+                                                      textAlignVertical:
+                                                          TextAlignVertical
+                                                              .center,
+                                                      dropdownSearchDecoration:
+                                                          InputDecoration(
+                                                        hintText:
+                                                            "Pilih Level Otorisasi",
+                                                        suffixIcon: value
+                                                                .levelSelected
                                                             ? IconButton(
                                                                 onPressed: () {
-                                                                  value.clearOtor();
+                                                                  value
+                                                                      .clearOtor();
                                                                 },
-                                                                icon: const Icon(Icons.close),
+                                                                icon: const Icon(
+                                                                    Icons
+                                                                        .close),
                                                               )
                                                             : const SizedBox(),
-                                                        border: OutlineInputBorder(
-                                                          borderRadius: BorderRadius.circular(8),
-                                                          borderSide: const BorderSide(
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                          borderSide:
+                                                              const BorderSide(
                                                             width: 1,
                                                             color: Colors.grey,
                                                           ),
@@ -954,18 +1050,21 @@ class UsersPage extends StatelessWidget {
                                             children: [
                                               Expanded(
                                                   child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
                                                 children: [
                                                   const Row(
                                                     children: [
                                                       Text(
                                                         "Minimal Otorisasi",
-                                                        style: TextStyle(fontSize: 12),
+                                                        style: TextStyle(
+                                                            fontSize: 12),
                                                       ),
                                                       SizedBox(width: 5),
                                                       Text(
                                                         "*",
-                                                        style: TextStyle(fontSize: 8),
+                                                        style: TextStyle(
+                                                            fontSize: 8),
                                                       ),
                                                     ],
                                                   ),
@@ -973,12 +1072,15 @@ class UsersPage extends StatelessWidget {
                                                     height: 8,
                                                   ),
                                                   TextFormField(
-                                                    textInputAction: TextInputAction.done,
+                                                    textInputAction:
+                                                        TextInputAction.done,
                                                     maxLines: 1,
-                                                    readOnly: !value.levelSelected,
+                                                    readOnly:
+                                                        !value.levelSelected,
                                                     controller: value.minotor,
                                                     inputFormatters: [
-                                                      FilteringTextInputFormatter.digitsOnly,
+                                                      FilteringTextInputFormatter
+                                                          .digitsOnly,
                                                       CurrencyInputFormatter(),
                                                     ],
                                                     validator: (e) {
@@ -989,11 +1091,19 @@ class UsersPage extends StatelessWidget {
                                                       }
                                                     },
                                                     decoration: InputDecoration(
-                                                      filled: !value.levelSelected ? true : false,
-                                                      fillColor: Colors.grey[200],
-                                                      hintText: "Minimal Otorisasi",
-                                                      border: OutlineInputBorder(
-                                                        borderRadius: BorderRadius.circular(6),
+                                                      filled:
+                                                          !value.levelSelected
+                                                              ? true
+                                                              : false,
+                                                      fillColor:
+                                                          Colors.grey[200],
+                                                      hintText:
+                                                          "Minimal Otorisasi",
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1005,18 +1115,21 @@ class UsersPage extends StatelessWidget {
                                               ),
                                               Expanded(
                                                   child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
                                                 children: [
                                                   const Row(
                                                     children: [
                                                       Text(
                                                         "Maksimal Otorisasi",
-                                                        style: TextStyle(fontSize: 12),
+                                                        style: TextStyle(
+                                                            fontSize: 12),
                                                       ),
                                                       SizedBox(width: 5),
                                                       Text(
                                                         "*",
-                                                        style: TextStyle(fontSize: 8),
+                                                        style: TextStyle(
+                                                            fontSize: 8),
                                                       ),
                                                     ],
                                                   ),
@@ -1024,19 +1137,28 @@ class UsersPage extends StatelessWidget {
                                                     height: 8,
                                                   ),
                                                   TextFormField(
-                                                    textInputAction: TextInputAction.done,
+                                                    textInputAction:
+                                                        TextInputAction.done,
                                                     maxLines: 1,
-                                                    readOnly: !value.levelSelected,
+                                                    readOnly:
+                                                        !value.levelSelected,
                                                     controller: value.maxotor,
                                                     inputFormatters: [
-                                                      FilteringTextInputFormatter.digitsOnly,
+                                                      FilteringTextInputFormatter
+                                                          .digitsOnly,
                                                       CurrencyInputFormatter(),
                                                     ],
                                                     validator: (e) {
                                                       if (e!.isEmpty) {
                                                         return "Wajib diisi";
                                                       } else {
-                                                        if (int.parse(e.replaceAll(",", "")) <= int.parse(value.minotor.text.replaceAll(",", ""))) {
+                                                        if (int.parse(
+                                                                e.replaceAll(
+                                                                    ",", "")) <=
+                                                            int.parse(value
+                                                                .minotor.text
+                                                                .replaceAll(
+                                                                    ",", ""))) {
                                                           return "Harus lebih besar dari minimal otorisasi";
                                                         } else {
                                                           return null;
@@ -1044,11 +1166,19 @@ class UsersPage extends StatelessWidget {
                                                       }
                                                     },
                                                     decoration: InputDecoration(
-                                                      filled: !value.levelSelected ? true : false,
-                                                      fillColor: Colors.grey[200],
-                                                      hintText: "Maksimal Otorisasi",
-                                                      border: OutlineInputBorder(
-                                                        borderRadius: BorderRadius.circular(6),
+                                                      filled:
+                                                          !value.levelSelected
+                                                              ? true
+                                                              : false,
+                                                      fillColor:
+                                                          Colors.grey[200],
+                                                      hintText:
+                                                          "Maksimal Otorisasi",
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1063,18 +1193,22 @@ class UsersPage extends StatelessWidget {
                                         value.otorisasi
                                             ? Expanded(
                                                 child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .stretch,
                                                   children: [
                                                     const Row(
                                                       children: [
                                                         Text(
                                                           "Akses Beda Kantor",
-                                                          style: TextStyle(fontSize: 12),
+                                                          style: TextStyle(
+                                                              fontSize: 12),
                                                         ),
                                                         SizedBox(width: 5),
                                                         Text(
                                                           "*",
-                                                          style: TextStyle(fontSize: 8),
+                                                          style: TextStyle(
+                                                              fontSize: 8),
                                                         ),
                                                       ],
                                                     ),
@@ -1083,7 +1217,15 @@ class UsersPage extends StatelessWidget {
                                                     ),
                                                     Row(
                                                       children: [
-                                                        Radio(value: false, activeColor: colorPrimary, groupValue: value.bedaKantor, onChanged: (e) => value.pilihBedaKantor(false)),
+                                                        Radio(
+                                                            value: false,
+                                                            activeColor:
+                                                                colorPrimary,
+                                                            groupValue: value
+                                                                .bedaKantor,
+                                                            onChanged: (e) => value
+                                                                .pilihBedaKantor(
+                                                                    false)),
                                                         const SizedBox(
                                                           width: 8,
                                                         ),
@@ -1091,7 +1233,15 @@ class UsersPage extends StatelessWidget {
                                                         const SizedBox(
                                                           width: 24,
                                                         ),
-                                                        Radio(value: true, activeColor: colorPrimary, groupValue: value.bedaKantor, onChanged: (e) => value.pilihBedaKantor(true)),
+                                                        Radio(
+                                                            value: true,
+                                                            activeColor:
+                                                                colorPrimary,
+                                                            groupValue: value
+                                                                .bedaKantor,
+                                                            onChanged: (e) => value
+                                                                .pilihBedaKantor(
+                                                                    true)),
                                                         const SizedBox(
                                                           width: 8,
                                                         ),
@@ -1110,13 +1260,15 @@ class UsersPage extends StatelessWidget {
                                         ),
                                         Expanded(
                                             child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
                                           children: [
                                             const Row(
                                               children: [
                                                 Text(
                                                   "Bisa Back date ",
-                                                  style: TextStyle(fontSize: 12),
+                                                  style:
+                                                      TextStyle(fontSize: 12),
                                                 ),
                                                 SizedBox(width: 5),
                                                 Text(
@@ -1130,7 +1282,12 @@ class UsersPage extends StatelessWidget {
                                             ),
                                             Row(
                                               children: [
-                                                Radio(value: false, activeColor: colorPrimary, groupValue: value.backdate, onChanged: (e) => value.gantiBackdate()),
+                                                Radio(
+                                                    value: false,
+                                                    activeColor: colorPrimary,
+                                                    groupValue: value.backdate,
+                                                    onChanged: (e) =>
+                                                        value.gantiBackdate()),
                                                 const SizedBox(
                                                   width: 8,
                                                 ),
@@ -1138,7 +1295,12 @@ class UsersPage extends StatelessWidget {
                                                 const SizedBox(
                                                   width: 24,
                                                 ),
-                                                Radio(value: true, activeColor: colorPrimary, groupValue: value.backdate, onChanged: (e) => value.gantiBackdate()),
+                                                Radio(
+                                                    value: true,
+                                                    activeColor: colorPrimary,
+                                                    groupValue: value.backdate,
+                                                    onChanged: (e) =>
+                                                        value.gantiBackdate()),
                                                 const SizedBox(
                                                   width: 8,
                                                 ),
@@ -1154,18 +1316,21 @@ class UsersPage extends StatelessWidget {
                                     ),
                                     value.aksesKasir
                                         ? Column(
-                                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
                                             children: [
                                               const Row(
                                                 children: [
                                                   Text(
                                                     "Pilih SBB ",
-                                                    style: TextStyle(fontSize: 12),
+                                                    style:
+                                                        TextStyle(fontSize: 12),
                                                   ),
                                                   SizedBox(width: 5),
                                                   Text(
                                                     "*",
-                                                    style: TextStyle(fontSize: 8),
+                                                    style:
+                                                        TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -1175,28 +1340,43 @@ class UsersPage extends StatelessWidget {
                                               Row(
                                                 children: [
                                                   Expanded(
-                                                    child: TypeAheadField<InqueryGlModel>(
+                                                    child: TypeAheadField<
+                                                        InqueryGlModel>(
                                                       controller: value.nossbb,
-                                                      suggestionsCallback: (search) => value.getInquery(search),
-                                                      builder: (context, controller, focusNode) {
+                                                      suggestionsCallback:
+                                                          (search) =>
+                                                              value.getInquery(
+                                                                  search),
+                                                      builder: (context,
+                                                          controller,
+                                                          focusNode) {
                                                         return TextField(
-                                                            controller: controller,
-                                                            focusNode: focusNode,
+                                                            controller:
+                                                                controller,
+                                                            focusNode:
+                                                                focusNode,
                                                             autofocus: true,
-                                                            decoration: const InputDecoration(
-                                                              border: OutlineInputBorder(),
-                                                              labelText: 'Cari Akun',
+                                                            decoration:
+                                                                const InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(),
+                                                              labelText:
+                                                                  'Cari Akun',
                                                             ));
                                                       },
-                                                      itemBuilder: (context, city) {
+                                                      itemBuilder:
+                                                          (context, city) {
                                                         return ListTile(
-                                                          title: Text(city.nosbb),
-                                                          subtitle: Text(city.namaSbb),
+                                                          title:
+                                                              Text(city.nosbb),
+                                                          subtitle: Text(
+                                                              city.namaSbb),
                                                         );
                                                       },
                                                       onSelected: (city) {
                                                         // value.selectInvoice(city);
-                                                        value.pilihSbbAset(city);
+                                                        value
+                                                            .pilihSbbAset(city);
                                                       },
                                                     ),
                                                   ),
@@ -1208,7 +1388,8 @@ class UsersPage extends StatelessWidget {
                                                     child: TextFormField(
                                                       // enabled: false,
                                                       readOnly: true,
-                                                      textInputAction: TextInputAction.done,
+                                                      textInputAction:
+                                                          TextInputAction.done,
                                                       controller: value.namasbb,
                                                       maxLines: 1,
                                                       // inputFormatters: [
@@ -1221,12 +1402,17 @@ class UsersPage extends StatelessWidget {
                                                           return null;
                                                         }
                                                       },
-                                                      decoration: InputDecoration(
+                                                      decoration:
+                                                          InputDecoration(
                                                         filled: true,
-                                                        fillColor: Colors.grey[200],
+                                                        fillColor:
+                                                            Colors.grey[200],
                                                         hintText: "Nomor Akun",
-                                                        border: OutlineInputBorder(
-                                                          borderRadius: BorderRadius.circular(6),
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(6),
                                                         ),
                                                       ),
                                                     ),
@@ -1247,7 +1433,8 @@ class UsersPage extends StatelessWidget {
                                     ),
                                     value.editData
                                         ? Column(
-                                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
                                             children: [
                                               const SizedBox(height: 16),
                                               ButtonDanger(
@@ -1297,14 +1484,32 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'userid', value: data.userid),
                 DataGridCell(columnName: 'batch', value: data.batch),
                 DataGridCell(columnName: 'kantor', value: data.kodeKantor),
-                DataGridCell(columnName: 'lvluser', value: tindakanNotifier!.listUsers.where((e) => e.idLevel == data.lvluser).first.levelUser),
+                DataGridCell(
+                    columnName: 'lvluser',
+                    value: tindakanNotifier!.listUsers
+                        .where((e) => e.idLevel == data.lvluser)
+                        .first
+                        .levelUser),
                 DataGridCell(columnName: 'akses_kasir', value: data.aksesKasir),
                 DataGridCell(columnName: 'back_date', value: data.backDate),
                 DataGridCell(columnName: 'beda_kantor', value: data.bedaKantor),
-                const DataGridCell(columnName: 'limit_transaksi', value: "data.limitTransaksi"),
-                DataGridCell(columnName: 'level_otor', value: data.levelOtor == "null" ? "" : data.levelOtor),
-                DataGridCell(columnName: 'min_otor', value: data.minOtor == "" ? "" : FormatCurrency.oCcy.format(int.parse(data.minOtor))),
-                DataGridCell(columnName: 'max_otor', value: data.maxOtor == "" ? "" : FormatCurrency.oCcy.format(int.parse(data.maxOtor))),
+                DataGridCell(
+                    columnName: 'limit_transaksi',
+                    value:
+                        "${data.limitAkses == "Y" ? FormatCurrency.oCcy.format(double.parse(data.maksimalTransaksi).toInt()) : ""}"),
+                DataGridCell(
+                    columnName: 'level_otor',
+                    value: data.levelOtor == "null" ? "" : data.levelOtor),
+                DataGridCell(
+                    columnName: 'min_otor',
+                    value: data.minOtor == ""
+                        ? ""
+                        : FormatCurrency.oCcy.format(int.parse(data.minOtor))),
+                DataGridCell(
+                    columnName: 'max_otor',
+                    value: data.maxOtor == ""
+                        ? ""
+                        : FormatCurrency.oCcy.format(int.parse(data.maxOtor))),
                 DataGridCell(columnName: 'aktivasi', value: data.aktivasi),
                 DataGridCell(columnName: 'tglexp', value: data.tglexp),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
@@ -1346,7 +1551,11 @@ class DetailDataSource extends DataGridSource {
               ),
             ),
           );
-        } else if (e.columnName == 'aktivasi' || e.columnName == 'level_otor' || e.columnName == 'beda_kantor' || e.columnName == 'akses_kasir' || e.columnName == 'back_date') {
+        } else if (e.columnName == 'aktivasi' ||
+            e.columnName == 'level_otor' ||
+            e.columnName == 'beda_kantor' ||
+            e.columnName == 'akses_kasir' ||
+            e.columnName == 'back_date') {
           return Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
