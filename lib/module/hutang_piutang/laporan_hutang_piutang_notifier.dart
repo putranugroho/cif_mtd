@@ -14,11 +14,11 @@ import 'adjusted_rounding.dart';
 import '../../network/network.dart';
 import '../../repository/SetupRepository.dart';
 
-class HutangPiutangNotifier extends ChangeNotifier {
+class LaporanHutangPiutangNotifier extends ChangeNotifier {
   final BuildContext context;
   final int tipe;
 
-  HutangPiutangNotifier({
+  LaporanHutangPiutangNotifier({
     required this.context,
     required this.tipe,
   }) {
@@ -41,7 +41,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
     hutangPiutangTransaksiModel =
         listTransaksi.where((e) => e.nokontrak == value).first;
 
-    tambahTransaksi();
+    getTransaksiPiutang();
     notifyListeners();
   }
 
@@ -50,66 +50,33 @@ class HutangPiutangNotifier extends ChangeNotifier {
   }
 
   var detail = false;
-  List<HutangPiutangItemModel> listJadwal = [];
-  tambahTransaksi() {
-    listJadwal.clear();
 
-    notifyListeners();
-    DialogCustom().showLoading(context);
-    var ddata = {
-      "kode_pt": users!.kodePt,
-      "no_kontrak": hutangPiutangTransaksiModel!.nokontrak,
-    };
-    Setuprepository.setup(
-            token, NetworkURL.searchHutangPiutang(), jsonEncode(ddata))
-        .then((value) {
-      Navigator.pop(context);
-      if (value['status'].toString().toLowerCase().contains("success")) {
-        for (Map<String, dynamic> i in value['data']) {
-          listJadwal.add(HutangPiutangItemModel.fromJson(i));
-        }
-        listJadwal
-            .sort((a, b) => parseCurrency(b.os).compareTo(parseCurrency(a.os)));
-        getTransaksiPiutang();
-        notifyListeners();
-      } else {
-        isLoading = false;
-        notifyListeners();
-      }
-    });
+  cariSekarang() {
+    getHutangPiutang();
   }
 
   var isLoadingData = true;
   List<TransaksiPendModel> listTransaksiPending = [];
   List<TransaksiPendModel> listTransaksiPendingAdd = [];
   Future getTransaksiPiutang() async {
+    DialogCustom().showLoading(context);
     listTransaksiPending.clear();
     listTransaksiPendingAdd.clear();
     var data = {
       "kode_pt": users!.kodePt,
-      "no_dokumen": hutangPiutangTransaksiModel!.noDok,
-      "no_ref": hutangPiutangTransaksiModel!.noRef,
-      "keterangan": hutangPiutangTransaksiModel!.keterangan,
+      "no_kontrak": hutangPiutangTransaksiModel!.nokontrak,
     };
     print(jsonEncode(data));
-    Setuprepository.setup(
-            token, NetworkURL.transaksiHutangPiutang(), jsonEncode(data))
+    Setuprepository.setup(token, NetworkURL.viewnokontrak(), jsonEncode(data))
         .then((value) {
+      Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
-          listTransaksiPending.add(TransaksiPendModel.fromJson(i));
+          listTransaksiPendingAdd.add(TransaksiPendModel.fromJson(i));
         }
-        if (listTransaksiPending.isNotEmpty) {
-          if (jenis == 1) {
-            listTransaksiPendingAdd = listTransaksiPending
-                .where((e) => e.status == "COMPLETED")
-                .toList();
-          } else {
-            listTransaksiPendingAdd = listTransaksiPending
-                .where((e) => e.status == "COMPLETED")
-                .toList();
-          }
-        }
+        listTransaksiPendingAdd
+            .sort((a, b) => a.createddate.compareTo(b.createddate));
+        print(listTransaksiPendingAdd.length);
         detail = true;
         notifyListeners();
       } else {}
@@ -158,9 +125,37 @@ class HutangPiutangNotifier extends ChangeNotifier {
           listTransaksi.add(HutangPiutangTransaksiModel.fromJson(i));
         }
         if (listTransaksi.isNotEmpty) {
-          listTransaksiAdd = jenisTrans
-              ? listTransaksi.where((e) => e.tipeTransaksi == "2").toList()
-              : listTransaksi.where((e) => e.tipeTransaksi == "1").toList();
+          if (customerSupplierModel != null) {
+            listTransaksiAdd = jenisTrans
+                ? listTransaksi
+                    .where((e) =>
+                        ((double.parse(e.totalTagPokok) -
+                                double.parse(e.totalByrPokok))) ==
+                            0 &&
+                        e.custsupp == customerSupplierModel!.noSif)
+                    .toList()
+                : listTransaksi
+                    .where((e) =>
+                        ((double.parse(e.totalTagPokok) -
+                                double.parse(e.totalByrPokok))) !=
+                            0 &&
+                        e.custsupp == customerSupplierModel!.noSif)
+                    .toList();
+          } else {
+            listTransaksiAdd = jenisTrans
+                ? listTransaksi
+                    .where((e) =>
+                        ((double.parse(e.totalTagPokok) -
+                            double.parse(e.totalByrPokok))) ==
+                        0)
+                    .toList()
+                : listTransaksi
+                    .where((e) =>
+                        ((double.parse(e.totalTagPokok) -
+                            double.parse(e.totalByrPokok))) !=
+                        0)
+                    .toList();
+          }
         }
         isLoading = false;
         notifyListeners();
@@ -1603,6 +1598,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
         ? customerSupplierModel!.namaAoCustomer
         : customerSupplierModel!.namaAoSupplier;
     alamat.text = customerSupplierModel!.alamat;
+
     notifyListeners();
   }
 
@@ -1627,14 +1623,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
           for (Map<String, dynamic> i in response['data']) {
             listCs.add(CustomerSupplierModel.fromJson(i));
           }
-          return listCs
-              .where((model) => jenis == 1
-                  ? (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
-                      (model.golCust == "1" || model.golCust == "3"))
-                  : (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
-                          model.golCust == "2" ||
-                      model.golCust == "3"))
-              .toList();
+          return listCs.toList();
         }
         notifyListeners();
       } catch (e) {

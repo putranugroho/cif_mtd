@@ -17,7 +17,6 @@ class HutangPiutangTransaksiModel {
     required this.custsupp,
     required this.noDok,
     required this.tipeTransaksi,
-    required this.noinv,
     required this.jangkawaktu,
     required this.totalTagPokok,
     required this.totalTagPpn,
@@ -37,7 +36,6 @@ class HutangPiutangTransaksiModel {
   final String custsupp;
   final dynamic noDok;
   final String tipeTransaksi;
-  final dynamic noinv;
   final String jangkawaktu;
   final String totalTagPokok;
   final String totalTagPpn;
@@ -57,7 +55,6 @@ class HutangPiutangTransaksiModel {
     custsupp: json['custsupp'].toString(),
     noDok: json['no_dok'] as dynamic,
     tipeTransaksi: json['tipe_transaksi'].toString(),
-    noinv: json['noinv'] as dynamic,
     jangkawaktu: json['jangkawaktu'].toString(),
     totalTagPokok: json['total_tag_pokok'].toString(),
     totalTagPpn: json['total_tag_ppn'].toString(),
@@ -78,7 +75,6 @@ class HutangPiutangTransaksiModel {
     'custsupp': custsupp,
     'no_dok': noDok,
     'tipe_transaksi': tipeTransaksi,
-    'noinv': noinv,
     'jangkawaktu': jangkawaktu,
     'total_tag_pokok': totalTagPokok,
     'total_tag_ppn': totalTagPpn,
@@ -99,7 +95,6 @@ class HutangPiutangTransaksiModel {
     custsupp: custsupp,
     noDok: noDok,
     tipeTransaksi: tipeTransaksi,
-    noinv: noinv,
     jangkawaktu: jangkawaktu,
     totalTagPokok: totalTagPokok,
     totalTagPpn: totalTagPpn,
@@ -121,7 +116,6 @@ class HutangPiutangTransaksiModel {
     String? custsupp,
     dynamic? noDok,
     String? tipeTransaksi,
-    dynamic? noinv,
     String? jangkawaktu,
     String? totalTagPokok,
     String? totalTagPpn,
@@ -140,7 +134,6 @@ class HutangPiutangTransaksiModel {
     custsupp: custsupp ?? this.custsupp,
     noDok: noDok ?? this.noDok,
     tipeTransaksi: tipeTransaksi ?? this.tipeTransaksi,
-    noinv: noinv ?? this.noinv,
     jangkawaktu: jangkawaktu ?? this.jangkawaktu,
     totalTagPokok: totalTagPokok ?? this.totalTagPokok,
     totalTagPpn: totalTagPpn ?? this.totalTagPpn,
@@ -152,8 +145,8 @@ class HutangPiutangTransaksiModel {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is HutangPiutangTransaksiModel && nokontrak == other.nokontrak && namaSif == other.namaSif && alamat == other.alamat && tglKontrak == other.tglKontrak && jenisTransaksi == other.jenisTransaksi && keterangan == other.keterangan && noRef == other.noRef && custsupp == other.custsupp && noDok == other.noDok && tipeTransaksi == other.tipeTransaksi && noinv == other.noinv && jangkawaktu == other.jangkawaktu && totalTagPokok == other.totalTagPokok && totalTagPpn == other.totalTagPpn && totalTagPph == other.totalTagPph && totalByrPokok == other.totalByrPokok && totalByrPpn == other.totalByrPpn && totalByrPph == other.totalByrPph;
+    || other is HutangPiutangTransaksiModel && nokontrak == other.nokontrak && namaSif == other.namaSif && alamat == other.alamat && tglKontrak == other.tglKontrak && jenisTransaksi == other.jenisTransaksi && keterangan == other.keterangan && noRef == other.noRef && custsupp == other.custsupp && noDok == other.noDok && tipeTransaksi == other.tipeTransaksi && jangkawaktu == other.jangkawaktu && totalTagPokok == other.totalTagPokok && totalTagPpn == other.totalTagPpn && totalTagPph == other.totalTagPph && totalByrPokok == other.totalByrPokok && totalByrPpn == other.totalByrPpn && totalByrPph == other.totalByrPph;
 
   @override
-  int get hashCode => nokontrak.hashCode ^ namaSif.hashCode ^ alamat.hashCode ^ tglKontrak.hashCode ^ jenisTransaksi.hashCode ^ keterangan.hashCode ^ noRef.hashCode ^ custsupp.hashCode ^ noDok.hashCode ^ tipeTransaksi.hashCode ^ noinv.hashCode ^ jangkawaktu.hashCode ^ totalTagPokok.hashCode ^ totalTagPpn.hashCode ^ totalTagPph.hashCode ^ totalByrPokok.hashCode ^ totalByrPpn.hashCode ^ totalByrPph.hashCode;
+  int get hashCode => nokontrak.hashCode ^ namaSif.hashCode ^ alamat.hashCode ^ tglKontrak.hashCode ^ jenisTransaksi.hashCode ^ keterangan.hashCode ^ noRef.hashCode ^ custsupp.hashCode ^ noDok.hashCode ^ tipeTransaksi.hashCode ^ jangkawaktu.hashCode ^ totalTagPokok.hashCode ^ totalTagPpn.hashCode ^ totalTagPph.hashCode ^ totalByrPokok.hashCode ^ totalByrPpn.hashCode ^ totalByrPph.hashCode;
 }

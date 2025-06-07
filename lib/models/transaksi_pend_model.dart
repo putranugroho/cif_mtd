@@ -43,6 +43,8 @@ class TransaksiPendModel {
     required this.flagTrn,
     required this.merchant,
     required this.sourceTrx,
+    required this.noKontrak,
+    required this.noInvoice,
     required this.createddate,
     required this.status,
   });
@@ -83,6 +85,8 @@ class TransaksiPendModel {
   final String flagTrn;
   final String merchant;
   final String sourceTrx;
+  final dynamic noKontrak;
+  final dynamic noInvoice;
   final String createddate;
   final String status;
 
@@ -123,6 +127,8 @@ class TransaksiPendModel {
     flagTrn: json['flag_trn'].toString(),
     merchant: json['merchant'].toString(),
     sourceTrx: json['source_trx'].toString(),
+    noKontrak: json['no_kontrak'] as dynamic,
+    noInvoice: json['no_invoice'] as dynamic,
     createddate: json['createddate'].toString(),
     status: json['status'].toString()
   );
@@ -164,6 +170,8 @@ class TransaksiPendModel {
     'flag_trn': flagTrn,
     'merchant': merchant,
     'source_trx': sourceTrx,
+    'no_kontrak': noKontrak,
+    'no_invoice': noInvoice,
     'createddate': createddate,
     'status': status
   };
@@ -205,6 +213,8 @@ class TransaksiPendModel {
     flagTrn: flagTrn,
     merchant: merchant,
     sourceTrx: sourceTrx,
+    noKontrak: noKontrak,
+    noInvoice: noInvoice,
     createddate: createddate,
     status: status
   );
@@ -247,6 +257,8 @@ class TransaksiPendModel {
     String? flagTrn,
     String? merchant,
     String? sourceTrx,
+    dynamic? noKontrak,
+    dynamic? noInvoice,
     String? createddate,
     String? status
   }) => TransaksiPendModel(
@@ -286,14 +298,16 @@ class TransaksiPendModel {
     flagTrn: flagTrn ?? this.flagTrn,
     merchant: merchant ?? this.merchant,
     sourceTrx: sourceTrx ?? this.sourceTrx,
+    noKontrak: noKontrak ?? this.noKontrak,
+    noInvoice: noInvoice ?? this.noInvoice,
     createddate: createddate ?? this.createddate,
     status: status ?? this.status,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is TransaksiPendModel && id == other.id && tglTransaksi == other.tglTransaksi && tglValuta == other.tglValuta && batch == other.batch && trxType == other.trxType && trxCode == other.trxCode && otor == other.otor && kodeTrn == other.kodeTrn && dracc == other.dracc && namaDr == other.namaDr && cracc == other.cracc && namaCr == other.namaCr && rrn == other.rrn && noDokumen == other.noDokumen && modul == other.modul && keteranganOtor == other.keteranganOtor && alasan == other.alasan && noRef == other.noRef && nominal == other.nominal && keterangan == other.keterangan && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && stsValidasi == other.stsValidasi && kodeAoDr == other.kodeAoDr && kodeColl == other.kodeColl && kodeAoCr == other.kodeAoCr && userinput == other.userinput && userterm == other.userterm && inputtgljam == other.inputtgljam && otoruser == other.otoruser && otorterm == other.otorterm && otortgljam == other.otortgljam && flagTrn == other.flagTrn && merchant == other.merchant && sourceTrx == other.sourceTrx && createddate == other.createddate && status == other.status;
+    || other is TransaksiPendModel && id == other.id && tglTransaksi == other.tglTransaksi && tglValuta == other.tglValuta && batch == other.batch && trxType == other.trxType && trxCode == other.trxCode && otor == other.otor && kodeTrn == other.kodeTrn && dracc == other.dracc && namaDr == other.namaDr && cracc == other.cracc && namaCr == other.namaCr && rrn == other.rrn && noDokumen == other.noDokumen && modul == other.modul && keteranganOtor == other.keteranganOtor && alasan == other.alasan && noRef == other.noRef && nominal == other.nominal && keterangan == other.keterangan && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && stsValidasi == other.stsValidasi && kodeAoDr == other.kodeAoDr && kodeColl == other.kodeColl && kodeAoCr == other.kodeAoCr && userinput == other.userinput && userterm == other.userterm && inputtgljam == other.inputtgljam && otoruser == other.otoruser && otorterm == other.otorterm && otortgljam == other.otortgljam && flagTrn == other.flagTrn && merchant == other.merchant && sourceTrx == other.sourceTrx && noKontrak == other.noKontrak && noInvoice == other.noInvoice && createddate == other.createddate && status == other.status;
 
   @override
-  int get hashCode => id.hashCode ^ tglTransaksi.hashCode ^ tglValuta.hashCode ^ batch.hashCode ^ trxType.hashCode ^ trxCode.hashCode ^ otor.hashCode ^ kodeTrn.hashCode ^ dracc.hashCode ^ namaDr.hashCode ^ cracc.hashCode ^ namaCr.hashCode ^ rrn.hashCode ^ noDokumen.hashCode ^ modul.hashCode ^ keteranganOtor.hashCode ^ alasan.hashCode ^ noRef.hashCode ^ nominal.hashCode ^ keterangan.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ stsValidasi.hashCode ^ kodeAoDr.hashCode ^ kodeColl.hashCode ^ kodeAoCr.hashCode ^ userinput.hashCode ^ userterm.hashCode ^ inputtgljam.hashCode ^ otoruser.hashCode ^ otorterm.hashCode ^ otortgljam.hashCode ^ flagTrn.hashCode ^ merchant.hashCode ^ sourceTrx.hashCode ^ createddate.hashCode ^ status.hashCode;
+  int get hashCode => id.hashCode ^ tglTransaksi.hashCode ^ tglValuta.hashCode ^ batch.hashCode ^ trxType.hashCode ^ trxCode.hashCode ^ otor.hashCode ^ kodeTrn.hashCode ^ dracc.hashCode ^ namaDr.hashCode ^ cracc.hashCode ^ namaCr.hashCode ^ rrn.hashCode ^ noDokumen.hashCode ^ modul.hashCode ^ keteranganOtor.hashCode ^ alasan.hashCode ^ noRef.hashCode ^ nominal.hashCode ^ keterangan.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ stsValidasi.hashCode ^ kodeAoDr.hashCode ^ kodeColl.hashCode ^ kodeAoCr.hashCode ^ userinput.hashCode ^ userterm.hashCode ^ inputtgljam.hashCode ^ otoruser.hashCode ^ otorterm.hashCode ^ otortgljam.hashCode ^ flagTrn.hashCode ^ merchant.hashCode ^ sourceTrx.hashCode ^ noKontrak.hashCode ^ noInvoice.hashCode ^ createddate.hashCode ^ status.hashCode;
 }

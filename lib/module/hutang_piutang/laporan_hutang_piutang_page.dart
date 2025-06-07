@@ -1,5 +1,6 @@
 import 'package:accounting/models/index.dart';
 import 'package:accounting/module/hutang_piutang/hutang_piutang_notifier.dart';
+import 'package:accounting/module/hutang_piutang/laporan_hutang_piutang_notifier.dart';
 import 'package:accounting/utils/button_custom.dart';
 import 'package:accounting/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -14,10 +15,10 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import '../../utils/colors.dart';
 import '../../utils/pro_shimmer.dart';
 
-class HutangPiutangPage extends StatelessWidget {
+class LaporanHutangPiutangPage extends StatelessWidget {
   final int tipe;
 
-  const HutangPiutangPage({
+  const LaporanHutangPiutangPage({
     super.key,
     required this.tipe,
   });
@@ -25,11 +26,11 @@ class HutangPiutangPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => HutangPiutangNotifier(
+      create: (_) => LaporanHutangPiutangNotifier(
         context: context,
         tipe: tipe,
       ),
-      child: Consumer<HutangPiutangNotifier>(
+      child: Consumer<LaporanHutangPiutangNotifier>(
         builder: (context, value, child) => SafeArea(
             child: Scaffold(
           body: Stack(
@@ -61,28 +62,6 @@ class HutangPiutangPage extends StatelessWidget {
                               ),
                             ],
                           )),
-                          InkWell(
-                            onTap: () => value.tambah(),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: colorPrimary,
-                                border: Border.all(
-                                  width: 2,
-                                  color: colorPrimary,
-                                ),
-                              ),
-                              child: const Text(
-                                "Tambah Hutang/Piutang",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -95,45 +74,100 @@ class HutangPiutangPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             // Label + Radio Buttons
+                            Row(
+                              children: [
+                                const Text(
+                                  "Status Transaksi",
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                const SizedBox(width: 16),
+                                Row(
+                                  children: [
+                                    Radio(
+                                      value: true,
+                                      groupValue: value.jenisTrans,
+                                      activeColor: colorPrimary,
+                                      onChanged: (e) =>
+                                          value.pilihJenisTransaksi(true),
+                                    ),
+                                    const Text(
+                                      "Lunas",
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    Radio(
+                                      value: false,
+                                      groupValue: value.jenisTrans,
+                                      activeColor: colorPrimary,
+                                      onChanged: (e) =>
+                                          value.pilihJenisTransaksi(false),
+                                    ),
+                                    const Text(
+                                      "Belum Lunas",
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 32,
+                            ),
+                            const Text(
+                              "Customer / Supplier",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            const SizedBox(width: 16),
                             Expanded(
-                              flex: 5,
-                              child: Row(
-                                children: [
-                                  const Text(
-                                    "Tipe Transaksi",
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                  const SizedBox(width: 16),
-                                  Row(
-                                    children: [
-                                      Radio(
-                                        value: true,
-                                        groupValue: value.jenisTrans,
-                                        activeColor: colorPrimary,
-                                        onChanged: (e) =>
-                                            value.pilihJenisTransaksi(true),
-                                      ),
-                                      const Text(
-                                        "Hutang",
-                                        style: TextStyle(fontSize: 14),
-                                      ),
-                                      const SizedBox(width: 16),
-                                      Radio(
-                                        value: false,
-                                        groupValue: value.jenisTrans,
-                                        activeColor: colorPrimary,
-                                        onChanged: (e) =>
-                                            value.pilihJenisTransaksi(false),
-                                      ),
-                                      const Text(
-                                        "Piutang",
-                                        style: TextStyle(fontSize: 14),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                              child: TypeAheadField<CustomerSupplierModel>(
+                                controller: value.customersupplier,
+                                suggestionsCallback: (search) =>
+                                    value.getCustomerSupplierQuery(search),
+                                builder: (context, controller, focusNode) {
+                                  return TextField(
+                                      controller: controller,
+                                      focusNode: focusNode,
+                                      autofocus: true,
+                                      decoration: InputDecoration(
+                                        border: const OutlineInputBorder(),
+                                        labelText:
+                                            'Cari ${value.jenis == 1 ? "Customer" : "Supplier"}',
+                                      ));
+                                },
+                                itemBuilder: (context, city) {
+                                  return ListTile(
+                                    title: Text(city.nmSif),
+                                    subtitle: Text(city.noSif),
+                                  );
+                                },
+                                onSelected: (city) {
+                                  // value.selectInvoice(city);
+                                  value.pilihCustomerSupplier(city);
+                                },
                               ),
                             ),
+                            const SizedBox(width: 24),
+                            InkWell(
+                              onTap: () {
+                                value.cariSekarang();
+                              },
+                              child: Container(
+                                height: 40,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 8),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(32),
+                                  color: colorPrimary,
+                                ),
+                                child: Text(
+                                  "Cari",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            )
                           ],
                         ),
                       ),
@@ -276,7 +310,7 @@ class HutangPiutangPage extends StatelessWidget {
                                                 color: Colors.white,
                                               )))),
                                   GridColumn(
-                                      width: 80,
+                                      width: 150,
                                       columnName: 'action',
                                       label: Container(
                                           color: colorPrimary,
@@ -347,287 +381,187 @@ class HutangPiutangPage extends StatelessWidget {
                                 height: 32,
                               ),
                               Expanded(
-                                  child: ListView(
-                                children: [
-                                  Text(
-                                    "Rincinan Jadwal ",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                child: Container(
+                                  padding: const EdgeInsets.all(20),
+                                  height: MediaQuery.of(context).size.height,
+                                  child: SfDataGrid(
+                                    headerRowHeight: 40,
+                                    defaultColumnWidth: 180,
+                                    frozenColumnsCount: 2,
+
+                                    // controller: value.dataGridController,
+                                    gridLinesVisibility:
+                                        GridLinesVisibility.both,
+                                    headerGridLinesVisibility:
+                                        GridLinesVisibility.both,
+                                    selectionMode: SelectionMode.single,
+
+                                    source: DetailDataTransaksiSource(value),
+                                    columns: <GridColumn>[
+                                      GridColumn(
+                                          width: 50,
+                                          columnName: 'no',
+                                          label: Container(
+                                              padding: const EdgeInsets.all(6),
+                                              color: colorPrimary,
+                                              alignment: Alignment.center,
+                                              child: const Text('No',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w300,
+                                                    fontSize: 12,
+                                                    color: Colors.white,
+                                                  )))),
+                                      GridColumn(
+                                          width: 100,
+                                          columnName: 'status',
+                                          label: Container(
+                                              padding: const EdgeInsets.all(6),
+                                              color: colorPrimary,
+                                              alignment: Alignment.center,
+                                              child: const Text('Status',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Colors.white,
+                                                    fontSize: 12,
+                                                  )))),
+                                      GridColumn(
+                                          width: 100,
+                                          columnName: 'tgl_val',
+                                          label: Container(
+                                              padding: const EdgeInsets.all(6),
+                                              color: colorPrimary,
+                                              alignment: Alignment.center,
+                                              child: const Text(
+                                                  'Tanggal Valuta',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Colors.white,
+                                                    fontSize: 12,
+                                                  )))),
+                                      GridColumn(
+                                          width: 150,
+                                          columnName: 'tgl_trans',
+                                          label: Container(
+                                              padding: const EdgeInsets.all(6),
+                                              color: colorPrimary,
+                                              alignment: Alignment.center,
+                                              child: const Text('Tanggal Input',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Colors.white,
+                                                    fontSize: 12,
+                                                  )))),
+                                      GridColumn(
+                                          width: 120,
+                                          columnName: 'nomor_dok',
+                                          label: Container(
+                                              color: colorPrimary,
+                                              alignment: Alignment.center,
+                                              padding: const EdgeInsets.all(6),
+                                              child: const Text('Nomor Dokumen',
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Colors.white,
+                                                  )))),
+                                      GridColumn(
+                                          width: 120,
+                                          columnName: 'nomor_ref',
+                                          label: Container(
+                                              color: colorPrimary,
+                                              alignment: Alignment.center,
+                                              padding: const EdgeInsets.all(6),
+                                              child: const Text(
+                                                  'Nomor Referensi',
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Colors.white,
+                                                  )))),
+                                      GridColumn(
+                                          width: 150,
+                                          columnName: 'nominal',
+                                          label: Container(
+                                              color: colorPrimary,
+                                              alignment: Alignment.center,
+                                              padding: const EdgeInsets.all(6),
+                                              child: const Text('Nominal',
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Colors.white,
+                                                  )))),
+                                      GridColumn(
+                                          width: 200,
+                                          columnName: 'nama_debet',
+                                          label: Container(
+                                              color: colorPrimary,
+                                              alignment: Alignment.center,
+                                              padding: const EdgeInsets.all(6),
+                                              child: const Text(
+                                                  'Nama Akun Debet',
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Colors.white,
+                                                  )))),
+                                      GridColumn(
+                                          width: 200,
+                                          columnName: 'nama_credit',
+                                          label: Container(
+                                              color: colorPrimary,
+                                              alignment: Alignment.center,
+                                              padding: const EdgeInsets.all(6),
+                                              child: const Text(
+                                                  'Nama Akun Kredit',
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Colors.white,
+                                                  )))),
+                                      GridColumn(
+                                          width: 200,
+                                          columnName: 'keterangan',
+                                          label: Container(
+                                              color: colorPrimary,
+                                              alignment: Alignment.center,
+                                              padding: const EdgeInsets.all(6),
+                                              child: const Text('Keterangan',
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Colors.white,
+                                                  )))),
+                                      GridColumn(
+                                          width: 120,
+                                          columnName: 'debet_acc',
+                                          label: Container(
+                                              color: colorPrimary,
+                                              alignment: Alignment.center,
+                                              padding: const EdgeInsets.all(6),
+                                              child: const Text('Akun Debet',
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Colors.white,
+                                                  )))),
+                                      GridColumn(
+                                          width: 120,
+                                          columnName: 'credit_acc',
+                                          label: Container(
+                                              color: colorPrimary,
+                                              alignment: Alignment.center,
+                                              padding: const EdgeInsets.all(6),
+                                              child: const Text('Akun Kredit',
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Colors.white,
+                                                  )))),
+                                    ],
                                   ),
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  Container(
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 30,
-                                          child: Text("No. "),
-                                        ),
-                                        Container(
-                                            width: 130,
-                                            child: Text("Oustanding")),
-                                        SizedBox(
-                                          width: 16,
-                                        ),
-                                        Container(
-                                            width: 130,
-                                            child: Text("Tagihan Pokok")),
-                                        SizedBox(
-                                          width: 16,
-                                        ),
-                                        Container(
-                                            width: 130,
-                                            child: Text("Bayar Pokok")),
-                                        SizedBox(
-                                          width: 16,
-                                        ),
-                                        Container(
-                                            width: 130,
-                                            child: Text("Tagihan PPN")),
-                                        SizedBox(
-                                          width: 16,
-                                        ),
-                                        Container(
-                                            width: 130,
-                                            child: Text("Bayar PPN")),
-                                        SizedBox(
-                                          width: 16,
-                                        ),
-                                        Container(
-                                            width: 130,
-                                            child: Text("Tagihan PPH")),
-                                        SizedBox(
-                                          width: 16,
-                                        ),
-                                        Container(
-                                            width: 130,
-                                            child: Text("Bayar PPH")),
-                                        SizedBox(
-                                          width: 16,
-                                        ),
-                                        Container(
-                                            width: 80, child: Text("Status")),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 1,
-                                    margin: EdgeInsets.symmetric(vertical: 16),
-                                    color: Colors.grey[300],
-                                  ),
-                                  ListView.builder(
-                                      itemCount: value.listJadwal.length,
-                                      shrinkWrap: true,
-                                      physics: ClampingScrollPhysics(),
-                                      itemBuilder: (context, i) {
-                                        final data = value.listJadwal[i];
-                                        var no = i + 1;
-                                        return Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  width: 30,
-                                                  child: Text("$no. "),
-                                                ),
-                                                Container(
-                                                    width: 130,
-                                                    child: Text(
-                                                      "${FormatCurrency.oCcyDecimal.format(double.parse(data.os).toInt())}",
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                      ),
-                                                    )),
-                                                SizedBox(
-                                                  width: 16,
-                                                ),
-                                                Container(
-                                                    width: 130,
-                                                    child: Text(
-                                                      "${FormatCurrency.oCcyDecimal.format(double.parse(data.tagPokok).toInt())}",
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                      ),
-                                                    )),
-                                                SizedBox(
-                                                  width: 16,
-                                                ),
-                                                Container(
-                                                    width: 130,
-                                                    child: Text(
-                                                      "${FormatCurrency.oCcyDecimal.format(double.parse(data.byrPokok).toInt())}",
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                      ),
-                                                    )),
-                                                SizedBox(
-                                                  width: 16,
-                                                ),
-                                                Container(
-                                                    width: 130,
-                                                    child: Text(
-                                                      "${FormatCurrency.oCcyDecimal.format(double.parse(data.tagPpn).toInt())}",
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                      ),
-                                                    )),
-                                                SizedBox(
-                                                  width: 16,
-                                                ),
-                                                Container(
-                                                    width: 130,
-                                                    child: Text(
-                                                      "${FormatCurrency.oCcyDecimal.format(double.parse(data.byrPpn).toInt())}",
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                      ),
-                                                    )),
-                                                SizedBox(
-                                                  width: 16,
-                                                ),
-                                                Container(
-                                                    width: 130,
-                                                    child: Text(
-                                                      "${FormatCurrency.oCcyDecimal.format(double.parse(data.tagPph).toInt())}",
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                      ),
-                                                    )),
-                                                SizedBox(
-                                                  width: 16,
-                                                ),
-                                                Container(
-                                                    width: 130,
-                                                    child: Text(
-                                                      "${FormatCurrency.oCcyDecimal.format(double.parse(data.byrPph).toInt())}",
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                      ),
-                                                    )),
-                                                SizedBox(
-                                                  width: 16,
-                                                ),
-                                                Container(
-                                                    width: 80,
-                                                    child: Text(
-                                                      "${(double.parse(data.byrPph).toInt() == double.parse(data.tagPph).toInt()) && (double.parse(data.byrPpn).toInt() == double.parse(data.tagPpn).toInt()) && (double.parse(data.tagPokok).toInt() == double.parse(data.byrPokok).toInt()) ? "Lunas" : "Pending"}",
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                      ),
-                                                    )),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                          ],
-                                        );
-                                      }),
-                                  SizedBox(
-                                    height: 32,
-                                  ),
-                                  Text(
-                                    "Rincinan Transaksi ",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  Container(
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 30,
-                                          child: Text("No."),
-                                        ),
-                                        SizedBox(
-                                          width: 16,
-                                        ),
-                                        Container(
-                                          width: 350,
-                                          child: Text("Akun Debet"),
-                                        ),
-                                        SizedBox(
-                                          width: 16,
-                                        ),
-                                        Container(
-                                          width: 350,
-                                          child: Text("Akun Kredit"),
-                                        ),
-                                        SizedBox(
-                                          width: 16,
-                                        ),
-                                        Container(
-                                          width: 250,
-                                          child: Text("Nominal"),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 1,
-                                    margin: EdgeInsets.symmetric(vertical: 16),
-                                    color: Colors.grey[300],
-                                  ),
-                                  ListView.builder(
-                                      itemCount:
-                                          value.listTransaksiPendingAdd.length,
-                                      shrinkWrap: true,
-                                      physics: ClampingScrollPhysics(),
-                                      itemBuilder: (context, i) {
-                                        final data =
-                                            value.listTransaksiPendingAdd[i];
-                                        var no = i + 1;
-                                        return Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  width: 30,
-                                                  child: Text("$no. "),
-                                                ),
-                                                SizedBox(
-                                                  width: 16,
-                                                ),
-                                                Container(
-                                                  width: 350,
-                                                  child: Text(
-                                                      "(${data.dracc}) ${data.namaDr}"),
-                                                ),
-                                                SizedBox(
-                                                  width: 16,
-                                                ),
-                                                Container(
-                                                  width: 350,
-                                                  child: Text(
-                                                      "(${data.cracc}) ${data.namaCr}"),
-                                                ),
-                                                SizedBox(
-                                                  width: 16,
-                                                ),
-                                                Container(
-                                                  width: 250,
-                                                  child: Text(
-                                                      " ${FormatCurrency.oCcyDecimal.format(double.parse(data.nominal).toInt())}"),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 8,
-                                            )
-                                          ],
-                                        );
-                                      })
-                                ],
-                              ))
+                                ),
+                              )
                             ],
                           ),
                         )
@@ -2435,12 +2369,12 @@ class HutangPiutangPage extends StatelessWidget {
 }
 
 class DetailDataSource extends DataGridSource {
-  DetailDataSource(HutangPiutangNotifier value) {
+  DetailDataSource(LaporanHutangPiutangNotifier value) {
     tindakanNotifier = value;
     buildRowData(value.listTransaksiAdd);
   }
 
-  HutangPiutangNotifier? tindakanNotifier;
+  LaporanHutangPiutangNotifier? tindakanNotifier;
 
   List<DataGridRow> _laporanData = [];
   @override
@@ -2497,12 +2431,111 @@ class DetailDataSource extends DataGridSource {
                   ),
                 ),
                 child: const Text(
-                  "Aksi",
+                  "Lihat Transaksi",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
                   ),
                 ),
+              ),
+            ),
+          );
+        } else {
+          return Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          );
+        }
+      }).toList(),
+    );
+  }
+
+  String formatStringData(String data) {
+    int numericData = int.tryParse(data) ?? 0;
+    final formatter = NumberFormat("#,###");
+    return formatter.format(numericData);
+  }
+}
+
+class DetailDataTransaksiSource extends DataGridSource {
+  DetailDataTransaksiSource(LaporanHutangPiutangNotifier value) {
+    tindakanNotifier = value;
+    buildRowData(value.listTransaksiPendingAdd);
+  }
+
+  LaporanHutangPiutangNotifier? tindakanNotifier;
+
+  List<DataGridRow> _laporanData = [];
+  @override
+  List<DataGridRow> get rows => _laporanData;
+  void buildRowData(List<TransaksiPendModel> list) {
+    int index = 1;
+
+    // 🔽 Sort data terlebih dahulu
+
+    // 🧱 Bangun data grid setelah data diurutkan
+    _laporanData = list
+        .map<DataGridRow>((data) => DataGridRow(
+              cells: [
+                DataGridCell(columnName: 'no', value: (index++).toString()),
+                DataGridCell(columnName: 'status', value: data.status),
+                DataGridCell(columnName: 'tgl_val', value: data.tglValuta),
+                DataGridCell(columnName: 'tgl_trans', value: data.createddate),
+                DataGridCell(columnName: 'nomor_dok', value: data.noDokumen),
+                DataGridCell(columnName: 'nomor_ref', value: data.noRef),
+                DataGridCell(
+                    columnName: 'nominal',
+                    value: FormatCurrency.oCcyDecimal
+                        .format(double.parse(data.nominal))),
+                DataGridCell(columnName: 'nama_debet', value: data.namaDr),
+                DataGridCell(columnName: 'nama_credit', value: data.namaCr),
+                DataGridCell(columnName: 'keterangan', value: data.keterangan),
+                DataGridCell(columnName: 'debet_acc', value: data.dracc),
+                DataGridCell(columnName: 'credit_acc', value: data.cracc),
+              ],
+            ))
+        .toList();
+  }
+
+  @override
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    return DataGridRowAdapter(
+      cells: row.getCells().map<Widget>((e) {
+        if (e.columnName == 'nominal') {
+          return Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              e.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          );
+        } else if (e.columnName == 'status') {
+          return Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(4),
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  color: e.value == "PENDING"
+                      ? Colors.orange
+                      : e.value == "CANCEL"
+                          ? Colors.red
+                          : Colors.green),
+              child: Text(
+                e.value,
+                maxLines: 1,
+                style: const TextStyle(
+                  fontSize: 12,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           );

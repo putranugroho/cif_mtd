@@ -4,6 +4,7 @@ import 'package:accounting/module/closing_eom/closing_eom_page.dart';
 import 'package:accounting/module/dashboard/dashboard_page.dart';
 import 'package:accounting/module/gl/gl_page.dart';
 import 'package:accounting/module/hutang_piutang/hutang_piutang_page.dart';
+import 'package:accounting/module/hutang_piutang/laporan_hutang_piutang_page.dart';
 import 'package:accounting/module/inventaris/jual_beli/jual_beli_page.dart';
 import 'package:accounting/module/inventaris/laporan/laporan_inventaris_page.dart';
 import 'package:accounting/module/inventaris/otorisasi/otorisasi_inventaris_page.dart';
@@ -395,6 +396,10 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                                                                                   ? const SetupSbbPage()
                                                                                                                                                                                                                                                                                   : value.page == 70
                                                                                                                                                                                                                                                                                       ? const LaporanKasKecilPage()
+                                                                                                                                                                                                                                                                                      :value.page == 71
+                                                                                                                                                                                                                                                                                      ? const LaporanHutangPiutangPage(
+                                                                                                                                                                                                                                                                                        tipe: 1,
+                                                                                                                                                                                                                                                                                      )
                                                                                                                                                                                                                                                                                       : Container())
             ],
           ),

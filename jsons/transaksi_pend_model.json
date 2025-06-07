@@ -35,6 +35,8 @@
     "flag_trn": "0",
     "merchant": "",
     "source_trx": "",
+    "no_kontrak": null,
+    "no_invoice": null,
     "createddate": "2025-05-26 17:57:08",
     "status": "PENDING"
 }

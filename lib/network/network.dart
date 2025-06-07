@@ -477,6 +477,10 @@ class NetworkURL {
     return "$url/transaksi/view";
   }
 
+  static String viewnokontrak() {
+    return "$url/viewnokontrak";
+  }
+
   static String otorisasiTransaksi() {
     return "$url/transaksi/otorisasi";
   }

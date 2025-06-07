@@ -1579,6 +1579,38 @@ class _MenuHutangPiutangWidgetState extends State<MenuHutangPiutangWidget> {
             ),
           ),
         ),
+         InkWell(
+          onTap: () => widget.value.gantimenu(71),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color:
+                  widget.value.page == 71 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.rupiahs,
+                  height: 30,
+                  color: widget.value.page == 71 ? Colors.black : Colors.white,
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Laporan",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color:
+                        widget.value.page == 71 ? Colors.black : Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
