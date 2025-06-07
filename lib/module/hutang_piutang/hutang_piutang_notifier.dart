@@ -83,6 +83,8 @@ class HutangPiutangNotifier extends ChangeNotifier {
   List<TransaksiPendModel> listTransaksiPending = [];
   List<TransaksiPendModel> listTransaksiPendingAdd = [];
   Future getTransaksiPiutang() async {
+    listTransaksiPending.clear();
+    listTransaksiPendingAdd.clear();
     var data = {
       "kode_pt": users!.kodePt,
       "no_dokumen": hutangPiutangTransaksiModel!.noDok,
@@ -377,17 +379,17 @@ class HutangPiutangNotifier extends ChangeNotifier {
                   "otor": "0",
                   "kode_trn": "",
                   "nama_dr": jenis == 1
-                      ? setupHutangPiutangModel!.namasbblawanpiutang
-                      : setupHutangPiutangModel!.namasbbtransaksihutang,
-                  "dracc": jenis == 1
-                      ? setupHutangPiutangModel!.sbblawanpiutang
-                      : setupHutangPiutangModel!.sbbtransaksihutang,
-                  "nama_cr": jenis == 1
                       ? setupHutangPiutangModel!.namasbbtransaksipiutang
                       : setupHutangPiutangModel!.namasbblawanhutang,
-                  "cracc": jenis == 1
+                  "dracc": jenis == 1
                       ? setupHutangPiutangModel!.sbbtransaksipiutang
                       : setupHutangPiutangModel!.sbblawanhutang,
+                  "nama_cr": jenis == 1
+                      ? setupHutangPiutangModel!.namasbblawanpiutang
+                      : setupHutangPiutangModel!.namasbbtransaksihutang,
+                  "cracc": jenis == 1
+                      ? setupHutangPiutangModel!.sbblawanpiutang
+                      : setupHutangPiutangModel!.sbbtransaksihutang,
                   "rrn": "$invoice",
                   "no_dokumen": "${nodok.text.trim()}",
                   "no_ref": "${noreferensi.text}",
@@ -432,17 +434,17 @@ class HutangPiutangNotifier extends ChangeNotifier {
                   "otor": "0",
                   "kode_trn": "",
                   "nama_dr": jenis == 1
-                      ? setupHutangPiutangModel!.namasbblawanpiutang
-                      : setupHutangPiutangModel!.namasbbtransaksihutang,
-                  "dracc": jenis == 1
-                      ? setupHutangPiutangModel!.sbblawanpiutang
-                      : setupHutangPiutangModel!.sbbtransaksihutang,
-                  "nama_cr": jenis == 1
                       ? setupHutangPiutangModel!.namasbbtransaksipiutang
                       : setupHutangPiutangModel!.namasbblawanhutang,
-                  "cracc": jenis == 1
+                  "dracc": jenis == 1
                       ? setupHutangPiutangModel!.sbbtransaksipiutang
                       : setupHutangPiutangModel!.sbblawanhutang,
+                  "nama_cr": jenis == 1
+                      ? setupHutangPiutangModel!.namasbblawanpiutang
+                      : setupHutangPiutangModel!.namasbbtransaksihutang,
+                  "cracc": jenis == 1
+                      ? setupHutangPiutangModel!.sbblawanpiutang
+                      : setupHutangPiutangModel!.sbbtransaksihutang,
                   "rrn": "$invoice",
                   "no_dokumen": "${nodok.text.trim()}",
                   "no_ref": "${noreferensi.text}",
@@ -497,17 +499,17 @@ class HutangPiutangNotifier extends ChangeNotifier {
                     "otor": "0",
                     "kode_trn": "",
                     "nama_dr": jenis == 1
-                        ? setupHutangPiutangModel!.namasbblawanpiutang
+                        ? setupHutangPiutangModel!.namasbbtransaksipiutang
                         : setupHutangPiutangModel!.namasbbppnhutang,
                     "dracc": jenis == 1
-                        ? setupHutangPiutangModel!.sbblawanpiutang
+                        ? setupHutangPiutangModel!.sbbtransaksipiutang
                         : setupHutangPiutangModel!.sbbppnhutang,
                     "nama_cr": jenis == 1
                         ? setupHutangPiutangModel!.namasbbppnpiutang
-                        : setupHutangPiutangModel!.namasbblawanhutang,
+                        : setupHutangPiutangModel!.namasbbtransaksihutang,
                     "cracc": jenis == 1
                         ? setupHutangPiutangModel!.sbbppnpiutang
-                        : setupHutangPiutangModel!.sbblawanhutang,
+                        : setupHutangPiutangModel!.sbbtransaksihutang,
                     "rrn": "$invoice",
                     "no_dokumen": "${nodok.text.trim()}",
                     "no_ref": "${noreferensi.text}",
@@ -554,17 +556,17 @@ class HutangPiutangNotifier extends ChangeNotifier {
                     "otor": "0",
                     "kode_trn": "",
                     "nama_dr": jenis == 1
-                        ? setupHutangPiutangModel!.namasbblawanpiutang
+                        ? setupHutangPiutangModel!.namasbbtransaksipiutang
                         : setupHutangPiutangModel!.namasbbppnhutang,
                     "dracc": jenis == 1
-                        ? setupHutangPiutangModel!.sbblawanpiutang
+                        ? setupHutangPiutangModel!.sbbtransaksipiutang
                         : setupHutangPiutangModel!.sbbppnhutang,
                     "nama_cr": jenis == 1
                         ? setupHutangPiutangModel!.namasbbppnpiutang
-                        : setupHutangPiutangModel!.namasbblawanhutang,
+                        : setupHutangPiutangModel!.namasbbtransaksihutang,
                     "cracc": jenis == 1
                         ? setupHutangPiutangModel!.sbbppnpiutang
-                        : setupHutangPiutangModel!.sbblawanhutang,
+                        : setupHutangPiutangModel!.sbbtransaksihutang,
                     "rrn": "$invoice",
                     "no_dokumen": "${nodok.text.trim()}",
                     "no_ref": "${noreferensi.text}",
@@ -621,15 +623,15 @@ class HutangPiutangNotifier extends ChangeNotifier {
                     "kode_trn": "",
                     "nama_dr": jenis == 1
                         ? setupHutangPiutangModel!.namasbbpphpiutang
-                        : setupHutangPiutangModel!.namasbblawanhutang,
+                        : setupHutangPiutangModel!.namasbbtransaksihutang,
                     "dracc": jenis == 1
                         ? setupHutangPiutangModel!.sbbpphpiutang
-                        : setupHutangPiutangModel!.sbblawanhutang,
+                        : setupHutangPiutangModel!.sbbtransaksihutang,
                     "nama_cr": jenis == 1
-                        ? setupHutangPiutangModel!.namasbblawanpiutang
+                        ? setupHutangPiutangModel!.namasbbtransaksipiutang
                         : setupHutangPiutangModel!.namasbbpphhutang,
                     "cracc": jenis == 1
-                        ? setupHutangPiutangModel!.sbblawanpiutang
+                        ? setupHutangPiutangModel!.sbbtransaksipiutang
                         : setupHutangPiutangModel!.sbbpphhutang,
                     "rrn": "$invoice",
                     "no_dokumen": "${nodok.text.trim()}",
@@ -678,15 +680,15 @@ class HutangPiutangNotifier extends ChangeNotifier {
                     "kode_trn": "",
                     "nama_dr": jenis == 1
                         ? setupHutangPiutangModel!.namasbbpphpiutang
-                        : setupHutangPiutangModel!.namasbblawanhutang,
+                        : setupHutangPiutangModel!.namasbbtransaksihutang,
                     "dracc": jenis == 1
                         ? setupHutangPiutangModel!.sbbpphpiutang
-                        : setupHutangPiutangModel!.sbblawanhutang,
+                        : setupHutangPiutangModel!.sbbtransaksihutang,
                     "nama_cr": jenis == 1
-                        ? setupHutangPiutangModel!.namasbblawanpiutang
+                        ? setupHutangPiutangModel!.namasbbtransaksipiutang
                         : setupHutangPiutangModel!.namasbbpphhutang,
                     "cracc": jenis == 1
-                        ? setupHutangPiutangModel!.sbblawanpiutang
+                        ? setupHutangPiutangModel!.sbbtransaksipiutang
                         : setupHutangPiutangModel!.sbbpphhutang,
                     "rrn": "$invoice",
                     "no_dokumen": "${nodok.text.trim()}",

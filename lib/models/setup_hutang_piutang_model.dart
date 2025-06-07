@@ -28,7 +28,15 @@ class SetupHutangPiutangModel {
     required this.namasbblawanhutang,
     required this.namasbblawanpiutang,
     required this.namasbbhpppiutang,
+    required this.sbbrrpppnpiutang,
+    required this.namasbbrrpppnpiutang,
+    required this.sbbpotonganpph,
+    required this.namasbbpotonganpph,
     required this.namasbbpersedianpiutang,
+    required this.sbbrrpppnhutang,
+    required this.namasbbrrpppnhutang,
+    required this.sbbpotonganpphhutang,
+    required this.namasbbpotonganpphhutang,
   });
 
   final int id;
@@ -52,7 +60,15 @@ class SetupHutangPiutangModel {
   final String namasbblawanhutang;
   final String namasbblawanpiutang;
   final String namasbbhpppiutang;
+  final String sbbrrpppnpiutang;
+  final String namasbbrrpppnpiutang;
+  final String sbbpotonganpph;
+  final String namasbbpotonganpph;
   final String namasbbpersedianpiutang;
+  final String sbbrrpppnhutang;
+  final String namasbbrrpppnhutang;
+  final String sbbpotonganpphhutang;
+  final String namasbbpotonganpphhutang;
 
   factory SetupHutangPiutangModel.fromJson(Map<String,dynamic> json) => SetupHutangPiutangModel(
     id: json['id'] as int,
@@ -76,7 +92,15 @@ class SetupHutangPiutangModel {
     namasbblawanhutang: json['namasbblawanhutang'].toString(),
     namasbblawanpiutang: json['namasbblawanpiutang'].toString(),
     namasbbhpppiutang: json['namasbbhpppiutang'].toString(),
-    namasbbpersedianpiutang: json['namasbbpersedianpiutang'].toString()
+    sbbrrpppnpiutang: json['sbbrrpppnpiutang'].toString(),
+    namasbbrrpppnpiutang: json['namasbbrrpppnpiutang'].toString(),
+    sbbpotonganpph: json['sbbpotonganpph'].toString(),
+    namasbbpotonganpph: json['namasbbpotonganpph'].toString(),
+    namasbbpersedianpiutang: json['namasbbpersedianpiutang'].toString(),
+    sbbrrpppnhutang: json['sbbrrpppnhutang'].toString(),
+    namasbbrrpppnhutang: json['namasbbrrpppnhutang'].toString(),
+    sbbpotonganpphhutang: json['sbbpotonganpphhutang'].toString(),
+    namasbbpotonganpphhutang: json['namasbbpotonganpphhutang'].toString()
   );
   
   Map<String, dynamic> toJson() => {
@@ -101,7 +125,15 @@ class SetupHutangPiutangModel {
     'namasbblawanhutang': namasbblawanhutang,
     'namasbblawanpiutang': namasbblawanpiutang,
     'namasbbhpppiutang': namasbbhpppiutang,
-    'namasbbpersedianpiutang': namasbbpersedianpiutang
+    'sbbrrpppnpiutang': sbbrrpppnpiutang,
+    'namasbbrrpppnpiutang': namasbbrrpppnpiutang,
+    'sbbpotonganpph': sbbpotonganpph,
+    'namasbbpotonganpph': namasbbpotonganpph,
+    'namasbbpersedianpiutang': namasbbpersedianpiutang,
+    'sbbrrpppnhutang': sbbrrpppnhutang,
+    'namasbbrrpppnhutang': namasbbrrpppnhutang,
+    'sbbpotonganpphhutang': sbbpotonganpphhutang,
+    'namasbbpotonganpphhutang': namasbbpotonganpphhutang
   };
 
   SetupHutangPiutangModel clone() => SetupHutangPiutangModel(
@@ -126,7 +158,15 @@ class SetupHutangPiutangModel {
     namasbblawanhutang: namasbblawanhutang,
     namasbblawanpiutang: namasbblawanpiutang,
     namasbbhpppiutang: namasbbhpppiutang,
-    namasbbpersedianpiutang: namasbbpersedianpiutang
+    sbbrrpppnpiutang: sbbrrpppnpiutang,
+    namasbbrrpppnpiutang: namasbbrrpppnpiutang,
+    sbbpotonganpph: sbbpotonganpph,
+    namasbbpotonganpph: namasbbpotonganpph,
+    namasbbpersedianpiutang: namasbbpersedianpiutang,
+    sbbrrpppnhutang: sbbrrpppnhutang,
+    namasbbrrpppnhutang: namasbbrrpppnhutang,
+    sbbpotonganpphhutang: sbbpotonganpphhutang,
+    namasbbpotonganpphhutang: namasbbpotonganpphhutang
   );
 
 
@@ -152,7 +192,15 @@ class SetupHutangPiutangModel {
     String? namasbblawanhutang,
     String? namasbblawanpiutang,
     String? namasbbhpppiutang,
-    String? namasbbpersedianpiutang
+    String? sbbrrpppnpiutang,
+    String? namasbbrrpppnpiutang,
+    String? sbbpotonganpph,
+    String? namasbbpotonganpph,
+    String? namasbbpersedianpiutang,
+    String? sbbrrpppnhutang,
+    String? namasbbrrpppnhutang,
+    String? sbbpotonganpphhutang,
+    String? namasbbpotonganpphhutang
   }) => SetupHutangPiutangModel(
     id: id ?? this.id,
     kodePt: kodePt ?? this.kodePt,
@@ -175,13 +223,21 @@ class SetupHutangPiutangModel {
     namasbblawanhutang: namasbblawanhutang ?? this.namasbblawanhutang,
     namasbblawanpiutang: namasbblawanpiutang ?? this.namasbblawanpiutang,
     namasbbhpppiutang: namasbbhpppiutang ?? this.namasbbhpppiutang,
+    sbbrrpppnpiutang: sbbrrpppnpiutang ?? this.sbbrrpppnpiutang,
+    namasbbrrpppnpiutang: namasbbrrpppnpiutang ?? this.namasbbrrpppnpiutang,
+    sbbpotonganpph: sbbpotonganpph ?? this.sbbpotonganpph,
+    namasbbpotonganpph: namasbbpotonganpph ?? this.namasbbpotonganpph,
     namasbbpersedianpiutang: namasbbpersedianpiutang ?? this.namasbbpersedianpiutang,
+    sbbrrpppnhutang: sbbrrpppnhutang ?? this.sbbrrpppnhutang,
+    namasbbrrpppnhutang: namasbbrrpppnhutang ?? this.namasbbrrpppnhutang,
+    sbbpotonganpphhutang: sbbpotonganpphhutang ?? this.sbbpotonganpphhutang,
+    namasbbpotonganpphhutang: namasbbpotonganpphhutang ?? this.namasbbpotonganpphhutang,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is SetupHutangPiutangModel && id == other.id && kodePt == other.kodePt && sbbtransaksihutang == other.sbbtransaksihutang && sbbpphhutang == other.sbbpphhutang && sbbppnhutang == other.sbbppnhutang && sbbtransaksipiutang == other.sbbtransaksipiutang && sbbppnpiutang == other.sbbppnpiutang && sbbpphpiutang == other.sbbpphpiutang && sbblawanhutang == other.sbblawanhutang && sbblawanpiutang == other.sbblawanpiutang && sbbhpppiutang == other.sbbhpppiutang && sbbpersedianpiutang == other.sbbpersedianpiutang && namasbbtransaksihutang == other.namasbbtransaksihutang && namasbbpphhutang == other.namasbbpphhutang && namasbbppnhutang == other.namasbbppnhutang && namasbbtransaksipiutang == other.namasbbtransaksipiutang && namasbbpphpiutang == other.namasbbpphpiutang && namasbbppnpiutang == other.namasbbppnpiutang && namasbblawanhutang == other.namasbblawanhutang && namasbblawanpiutang == other.namasbblawanpiutang && namasbbhpppiutang == other.namasbbhpppiutang && namasbbpersedianpiutang == other.namasbbpersedianpiutang;
+    || other is SetupHutangPiutangModel && id == other.id && kodePt == other.kodePt && sbbtransaksihutang == other.sbbtransaksihutang && sbbpphhutang == other.sbbpphhutang && sbbppnhutang == other.sbbppnhutang && sbbtransaksipiutang == other.sbbtransaksipiutang && sbbppnpiutang == other.sbbppnpiutang && sbbpphpiutang == other.sbbpphpiutang && sbblawanhutang == other.sbblawanhutang && sbblawanpiutang == other.sbblawanpiutang && sbbhpppiutang == other.sbbhpppiutang && sbbpersedianpiutang == other.sbbpersedianpiutang && namasbbtransaksihutang == other.namasbbtransaksihutang && namasbbpphhutang == other.namasbbpphhutang && namasbbppnhutang == other.namasbbppnhutang && namasbbtransaksipiutang == other.namasbbtransaksipiutang && namasbbpphpiutang == other.namasbbpphpiutang && namasbbppnpiutang == other.namasbbppnpiutang && namasbblawanhutang == other.namasbblawanhutang && namasbblawanpiutang == other.namasbblawanpiutang && namasbbhpppiutang == other.namasbbhpppiutang && sbbrrpppnpiutang == other.sbbrrpppnpiutang && namasbbrrpppnpiutang == other.namasbbrrpppnpiutang && sbbpotonganpph == other.sbbpotonganpph && namasbbpotonganpph == other.namasbbpotonganpph && namasbbpersedianpiutang == other.namasbbpersedianpiutang && sbbrrpppnhutang == other.sbbrrpppnhutang && namasbbrrpppnhutang == other.namasbbrrpppnhutang && sbbpotonganpphhutang == other.sbbpotonganpphhutang && namasbbpotonganpphhutang == other.namasbbpotonganpphhutang;
 
   @override
-  int get hashCode => id.hashCode ^ kodePt.hashCode ^ sbbtransaksihutang.hashCode ^ sbbpphhutang.hashCode ^ sbbppnhutang.hashCode ^ sbbtransaksipiutang.hashCode ^ sbbppnpiutang.hashCode ^ sbbpphpiutang.hashCode ^ sbblawanhutang.hashCode ^ sbblawanpiutang.hashCode ^ sbbhpppiutang.hashCode ^ sbbpersedianpiutang.hashCode ^ namasbbtransaksihutang.hashCode ^ namasbbpphhutang.hashCode ^ namasbbppnhutang.hashCode ^ namasbbtransaksipiutang.hashCode ^ namasbbpphpiutang.hashCode ^ namasbbppnpiutang.hashCode ^ namasbblawanhutang.hashCode ^ namasbblawanpiutang.hashCode ^ namasbbhpppiutang.hashCode ^ namasbbpersedianpiutang.hashCode;
+  int get hashCode => id.hashCode ^ kodePt.hashCode ^ sbbtransaksihutang.hashCode ^ sbbpphhutang.hashCode ^ sbbppnhutang.hashCode ^ sbbtransaksipiutang.hashCode ^ sbbppnpiutang.hashCode ^ sbbpphpiutang.hashCode ^ sbblawanhutang.hashCode ^ sbblawanpiutang.hashCode ^ sbbhpppiutang.hashCode ^ sbbpersedianpiutang.hashCode ^ namasbbtransaksihutang.hashCode ^ namasbbpphhutang.hashCode ^ namasbbppnhutang.hashCode ^ namasbbtransaksipiutang.hashCode ^ namasbbpphpiutang.hashCode ^ namasbbppnpiutang.hashCode ^ namasbblawanhutang.hashCode ^ namasbblawanpiutang.hashCode ^ namasbbhpppiutang.hashCode ^ sbbrrpppnpiutang.hashCode ^ namasbbrrpppnpiutang.hashCode ^ sbbpotonganpph.hashCode ^ namasbbpotonganpph.hashCode ^ namasbbpersedianpiutang.hashCode ^ sbbrrpppnhutang.hashCode ^ namasbbrrpppnhutang.hashCode ^ sbbpotonganpphhutang.hashCode ^ namasbbpotonganpphhutang.hashCode;
 }
