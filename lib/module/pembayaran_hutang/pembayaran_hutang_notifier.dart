@@ -449,7 +449,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
     tglValuta.text = transaksiPendModel!.tglValuta;
     nodokumen.text = transaksiPendModel!.noDokumen;
     keteranganTrans.text = transaksiPendModel!.keterangan;
-    nodokumenselisih.text  = transaksiPendModel!.noDokumen;
+    nodokumenselisih.text = transaksiPendModel!.noDokumen;
     dialog = false;
     notifyListeners();
   }
@@ -510,120 +510,12 @@ class PembayaranHutangNotifier extends ChangeNotifier {
           .then((value) {
         Navigator.pop(context);
         if (value['status'].toString().toLowerCase().contains("success")) {
-         if (jenis == 1) {
+          if (jenis == 1) {
             if (double.parse(selisih.text
-                  .replaceAll("Rp ", "")
-                  .replaceAll(".", "")
-                  .replaceAll(",", ".")) >
-              0) {
-            if (double.parse(users!.maksimalTransaksi) <
-                double.parse(nilaipembayaran.text
                     .replaceAll("Rp ", "")
                     .replaceAll(".", "")
-                    .replaceAll(",", "."))) {
-              var invoice = DateTime.now().millisecondsSinceEpoch.toString();
-              var data = {
-                "tgl_transaksi":
-                    "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                "tgl_valuta":
-                    "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
-                "batch": "${users!.batch}",
-                "trx_type": "TRX",
-                "trx_code":
-                    "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
-                "otor": "0",
-                "kode_trn": "",
-                "nama_dr": transaksiPendModel!.namaCr,
-                "dracc": transaksiPendModel!.cracc,
-                "nama_cr": inqueryGlModelKelebihan!.namaSbb,
-                "cracc": inqueryGlModelKelebihan!.nobb,
-                "rrn": "$invoice",
-                "no_dokumen": "${nodokumenselisih.text.trim()}",
-                "no_ref": "${transaksiPendModel!.noRef}",
-                "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
-                "no_invoice": "${noinv.text}",
-                "nominal": double.parse(selisih.text
-                    .replaceAll("Rp ", "")
-                    .replaceAll(".", "")
-                    .replaceAll(",", ".")),
-                "keterangan": "${keteranganSelisih.text}",
-                "kode_pt": "${users!.kodePt}",
-                "kode_kantor": "${users!.kodeKantor}",
-                "kode_induk": "${users!.kodeInduk}",
-                "sts_validasi": "N",
-                "kode_ao_dr": "",
-                "kode_coll": "",
-                "kode_ao_cr": "",
-                "userinput": "${users!.namauser}",
-                "userterm": "114.80.90.54",
-                "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                "inputtgljam":
-                    "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
-                "otoruser": "",
-                "otorterm": "",
-                "otortgljam": "",
-                "flag_trn": "1",
-                "merchant": "",
-                "source_trx": "",
-                "status": "PENDING",
-                "modul": "SELISIH HUTANG PIUTANG",
-              };
-              Setuprepository.setup(
-                  token, NetworkURL.transaksi(), jsonEncode(data));
-            } else {
-              var invoice = DateTime.now().millisecondsSinceEpoch.toString();
-              var data = {
-                "tgl_transaksi":
-                    "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                "tgl_valuta":
-                    "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
-                "batch": "${users!.batch}",
-                "trx_type": "TRX",
-                "trx_code":
-                    "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
-                "otor": "0",
-                "kode_trn": "",
-                "nama_dr": transaksiPendModel!.namaCr,
-                "dracc": transaksiPendModel!.cracc,
-                "nama_cr": inqueryGlModelKelebihan!.namaSbb,
-                "cracc": inqueryGlModelKelebihan!.nobb,
-                "rrn": "$invoice",
-                "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
-                "no_invoice": "${noinv.text}",
-                "no_dokumen": "${nodokumenselisih.text.trim()}",
-                "no_ref": "${transaksiPendModel!.noRef}",
-                "nominal": double.parse(selisih.text
-                    .replaceAll("Rp ", "")
-                    .replaceAll(".", "")
-                    .replaceAll(",", ".")),
-                "keterangan": "${keteranganSelisih.text}",
-                "kode_pt": "${users!.kodePt}",
-                "kode_kantor": "${users!.kodeKantor}",
-                "kode_induk": "${users!.kodeInduk}",
-                "sts_validasi": "N",
-                "kode_ao_dr": "",
-                "kode_coll": "",
-                "kode_ao_cr": "",
-                "userinput": "${users!.namauser}",
-                "userterm": "114.80.90.54",
-                "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                "inputtgljam":
-                    "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
-                "otoruser": "",
-                "otorterm": "",
-                "otortgljam": "",
-                "flag_trn": "1",
-                "merchant": "",
-                "source_trx": "",
-                "status": "COMPLETED",
-                "modul": "SELISIH HUTANG PIUTANG",
-              };
-              Setuprepository.setup(
-                  token, NetworkURL.transaksi(), jsonEncode(data));
-            }
-          }
-          for (var i = 0; i < hasil!['listBayarTagihan']!.length; i++) {
-            if (hasil!['listBayarTagihan']![i] > 0) {
+                    .replaceAll(",", ".")) >
+                0) {
               if (double.parse(users!.maksimalTransaksi) <
                   double.parse(nilaipembayaran.text
                       .replaceAll("Rp ", "")
@@ -643,15 +535,18 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "kode_trn": "",
                   "nama_dr": transaksiPendModel!.namaCr,
                   "dracc": transaksiPendModel!.cracc,
-                  "nama_cr": setupHutangPiutangModel!.namasbbtransaksipiutang,
-                  "cracc": setupHutangPiutangModel!.sbbtransaksipiutang,
+                  "nama_cr": inqueryGlModelKelebihan!.namaSbb,
+                  "cracc": inqueryGlModelKelebihan!.nobb,
                   "rrn": "$invoice",
-                  "no_dokumen": "${nodokumen.text.trim()}",
-                  "no_ref": "${noref.text}",
+                  "no_dokumen": "${nodokumenselisih.text.trim()}",
+                  "no_ref": "${transaksiPendModel!.noRef}",
                   "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
                   "no_invoice": "${noinv.text}",
-                  "nominal": hasil!['listBayarTagihan']![i],
-                  "keterangan": "${keterangan.text}",
+                  "nominal": double.parse(selisih.text
+                      .replaceAll("Rp ", "")
+                      .replaceAll(".", "")
+                      .replaceAll(",", ".")),
+                  "keterangan": "${keteranganSelisih.text}",
                   "kode_pt": "${users!.kodePt}",
                   "kode_kantor": "${users!.kodeKantor}",
                   "kode_induk": "${users!.kodeInduk}",
@@ -667,11 +562,11 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "otoruser": "",
                   "otorterm": "",
                   "otortgljam": "",
-                  "flag_trn": "0",
+                  "flag_trn": "1",
                   "merchant": "",
                   "source_trx": "",
                   "status": "PENDING",
-                  "modul": "BAYAR HUTANG PIUTANG",
+                  "modul": "SELISIH HUTANG PIUTANG",
                 };
                 Setuprepository.setup(
                     token, NetworkURL.transaksi(), jsonEncode(data));
@@ -685,20 +580,23 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "batch": "${users!.batch}",
                   "trx_type": "TRX",
                   "trx_code":
-                      "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                      "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
                   "otor": "0",
                   "kode_trn": "",
                   "nama_dr": transaksiPendModel!.namaCr,
                   "dracc": transaksiPendModel!.cracc,
-                  "nama_cr": setupHutangPiutangModel!.namasbbtransaksipiutang,
-                  "cracc": setupHutangPiutangModel!.sbbtransaksipiutang,
+                  "nama_cr": inqueryGlModelKelebihan!.namaSbb,
+                  "cracc": inqueryGlModelKelebihan!.nobb,
                   "rrn": "$invoice",
                   "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
                   "no_invoice": "${noinv.text}",
-                  "no_dokumen": "${nodokumen.text.trim()}",
-                  "no_ref": "${noref.text}",
-                  "nominal": hasil!['listBayarTagihan']![i],
-                  "keterangan": "${keterangan.text}",
+                  "no_dokumen": "${nodokumenselisih.text.trim()}",
+                  "no_ref": "${transaksiPendModel!.noRef}",
+                  "nominal": double.parse(selisih.text
+                      .replaceAll("Rp ", "")
+                      .replaceAll(".", "")
+                      .replaceAll(",", ".")),
+                  "keterangan": "${keteranganSelisih.text}",
                   "kode_pt": "${users!.kodePt}",
                   "kode_kantor": "${users!.kodeKantor}",
                   "kode_induk": "${users!.kodeInduk}",
@@ -714,131 +612,338 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "otoruser": "",
                   "otorterm": "",
                   "otortgljam": "",
-                  "flag_trn": "0",
+                  "flag_trn": "1",
                   "merchant": "",
                   "source_trx": "",
                   "status": "COMPLETED",
-                  "modul": "BAYAR HUTANG PIUTANG",
+                  "modul": "SELISIH HUTANG PIUTANG",
                 };
                 Setuprepository.setup(
                     token, NetworkURL.transaksi(), jsonEncode(data));
               }
             }
-          }
-         } else {
-            if (double.parse(selisih.text
-                  .replaceAll("Rp ", "")
-                  .replaceAll(".", "")
-                  .replaceAll(",", ".")) >
-              0) {
-            if (double.parse(users!.maksimalTransaksi) <
-                double.parse(nilaipembayaran.text
-                    .replaceAll("Rp ", "")
-                    .replaceAll(".", "")
-                    .replaceAll(",", "."))) {
-              var invoice = DateTime.now().millisecondsSinceEpoch.toString();
-              var data = {
-                "tgl_transaksi":
-                    "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                "tgl_valuta":
-                    "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
-                "batch": "${users!.batch}",
-                "trx_type": "TRX",
-                "trx_code":
-                    "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
-                "otor": "0",
-                "kode_trn": "",
-                "nama_dr": inqueryGlModelKelebihan!.namaSbb,
-                "dracc": inqueryGlModelKelebihan!.nobb,
-                "nama_cr": transaksiPendModel!.namaDr,
-                "cracc": transaksiPendModel!.dracc,
-                "rrn": "$invoice",
-                "no_dokumen": "${nodokumenselisih.text.trim()}",
-                "no_ref": "${transaksiPendModel!.noRef}",
-                "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
-                "no_invoice": "${noinv.text}",
-                "nominal": double.parse(selisih.text
-                    .replaceAll("Rp ", "")
-                    .replaceAll(".", "")
-                    .replaceAll(",", ".")),
-                "keterangan": "${keteranganSelisih.text}",
-                "kode_pt": "${users!.kodePt}",
-                "kode_kantor": "${users!.kodeKantor}",
-                "kode_induk": "${users!.kodeInduk}",
-                "sts_validasi": "N",
-                "kode_ao_dr": "",
-                "kode_coll": "",
-                "kode_ao_cr": "",
-                "userinput": "${users!.namauser}",
-                "userterm": "114.80.90.54",
-                "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                "inputtgljam":
-                    "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
-                "otoruser": "",
-                "otorterm": "",
-                "otortgljam": "",
-                "flag_trn": "0",
-                "merchant": "",
-                "source_trx": "",
-                "status": "PENDING",
-                "modul": "SELISIH HUTANG PIUTANG",
-              };
-              Setuprepository.setup(
-                  token, NetworkURL.transaksi(), jsonEncode(data));
-            } else {
-              var invoice = DateTime.now().millisecondsSinceEpoch.toString();
-              var data = {
-                "tgl_transaksi":
-                    "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                "tgl_valuta":
-                    "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
-                "batch": "${users!.batch}",
-                "trx_type": "TRX",
-                "trx_code":
-                    "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
-                "otor": "0",
-                "kode_trn": "",
-                "nama_dr": inqueryGlModelKelebihan!.namaSbb,
-                "dracc": inqueryGlModelKelebihan!.nobb,
-                "nama_cr": transaksiPendModel!.namaDr,
-                "cracc": transaksiPendModel!.dracc,
-                "rrn": "$invoice",
-                "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
-                "no_invoice": "${noinv.text}",
-                "no_dokumen": "${nodokumenselisih.text.trim()}",
-                "no_ref": "${transaksiPendModel!.noRef}",
-                "nominal": double.parse(selisih.text
-                    .replaceAll("Rp ", "")
-                    .replaceAll(".", "")
-                    .replaceAll(",", ".")),
-                "keterangan": "${keteranganSelisih.text}",
-                "kode_pt": "${users!.kodePt}",
-                "kode_kantor": "${users!.kodeKantor}",
-                "kode_induk": "${users!.kodeInduk}",
-                "sts_validasi": "N",
-                "kode_ao_dr": "",
-                "kode_coll": "",
-                "kode_ao_cr": "",
-                "userinput": "${users!.namauser}",
-                "userterm": "114.80.90.54",
-                "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                "inputtgljam":
-                    "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
-                "otoruser": "",
-                "otorterm": "",
-                "otortgljam": "",
-                "flag_trn": "0",
-                "merchant": "",
-                "source_trx": "",
-                "status": "COMPLETED",
-                "modul": "SELISIH HUTANG PIUTANG",
-              };
-              Setuprepository.setup(
-                  token, NetworkURL.transaksi(), jsonEncode(data));
+            for (var i = 0; i < hasil!['listBayarTagihan']!.length; i++) {
+              if (hasil!['listBayarTagihan']![i] > 0) {
+                if (double.parse(users!.maksimalTransaksi) <
+                    double.parse(nilaipembayaran.text
+                        .replaceAll("Rp ", "")
+                        .replaceAll(".", "")
+                        .replaceAll(",", "."))) {
+                  var invoice =
+                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var data = {
+                    "tgl_transaksi":
+                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta":
+                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "batch": "${users!.batch}",
+                    "trx_type": "TRX",
+                    "trx_code":
+                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                    "otor": "0",
+                    "kode_trn": "",
+                    "nama_dr": transaksiPendModel!.namaCr,
+                    "dracc": transaksiPendModel!.cracc,
+                    "nama_cr": setupHutangPiutangModel!.namasbbtransaksipiutang,
+                    "cracc": setupHutangPiutangModel!.sbbtransaksipiutang,
+                    "rrn": "$invoice",
+                    "no_dokumen": "${nodokumen.text.trim()}",
+                    "no_ref": "${noref.text}",
+                    "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
+                    "no_invoice": "${noinv.text}",
+                    "nominal": hasil!['listBayarTagihan']![i],
+                    "keterangan": "${keterangan.text}",
+                    "kode_pt": "${users!.kodePt}",
+                    "kode_kantor": "${users!.kodeKantor}",
+                    "kode_induk": "${users!.kodeInduk}",
+                    "sts_validasi": "N",
+                    "kode_ao_dr": "",
+                    "kode_coll": "",
+                    "kode_ao_cr": "",
+                    "userinput": "${users!.namauser}",
+                    "userterm": "114.80.90.54",
+                    "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+                    "inputtgljam":
+                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "otoruser": "",
+                    "otorterm": "",
+                    "otortgljam": "",
+                    "flag_trn": "1",
+                    "merchant": "",
+                    "source_trx": "",
+                    "status": "PENDING",
+                    "modul": "BAYAR HUTANG PIUTANG",
+                  };
+                  Setuprepository.setup(
+                      token, NetworkURL.transaksi(), jsonEncode(data));
+                } else {
+                  var invoice =
+                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var data = {
+                    "tgl_transaksi":
+                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta":
+                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "batch": "${users!.batch}",
+                    "trx_type": "TRX",
+                    "trx_code":
+                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                    "otor": "0",
+                    "kode_trn": "",
+                    "nama_dr": transaksiPendModel!.namaCr,
+                    "dracc": transaksiPendModel!.cracc,
+                    "nama_cr": setupHutangPiutangModel!.namasbbtransaksipiutang,
+                    "cracc": setupHutangPiutangModel!.sbbtransaksipiutang,
+                    "rrn": "$invoice",
+                    "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
+                    "no_invoice": "${noinv.text}",
+                    "no_dokumen": "${nodokumen.text.trim()}",
+                    "no_ref": "${noref.text}",
+                    "nominal": hasil!['listBayarTagihan']![i],
+                    "keterangan": "${keterangan.text}",
+                    "kode_pt": "${users!.kodePt}",
+                    "kode_kantor": "${users!.kodeKantor}",
+                    "kode_induk": "${users!.kodeInduk}",
+                    "sts_validasi": "N",
+                    "kode_ao_dr": "",
+                    "kode_coll": "",
+                    "kode_ao_cr": "",
+                    "userinput": "${users!.namauser}",
+                    "userterm": "114.80.90.54",
+                    "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+                    "inputtgljam":
+                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "otoruser": "",
+                    "otorterm": "",
+                    "otortgljam": "",
+                    "flag_trn": "1",
+                    "merchant": "",
+                    "source_trx": "",
+                    "status": "COMPLETED",
+                    "modul": "BAYAR HUTANG PIUTANG",
+                  };
+                  Setuprepository.setup(
+                      token, NetworkURL.transaksi(), jsonEncode(data));
+                }
+              }
             }
-          }
-          for (var i = 0; i < hasil!['listBayarTagihan']!.length; i++) {
-            if (hasil!['listBayarTagihan']![i] > 0) {
+            for (var i = 0; i < hasil!['listBayarPPN']!.length; i++) {
+              if (hasil!['listBayarPPN']![i] > 0) {
+                if (double.parse(users!.maksimalTransaksi) <
+                    double.parse(nilaipembayaran.text
+                        .replaceAll("Rp ", "")
+                        .replaceAll(".", "")
+                        .replaceAll(",", "."))) {
+                  var invoice =
+                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var data = {
+                    "tgl_transaksi":
+                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta":
+                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "batch": "${users!.batch}",
+                    "trx_type": "TRX",
+                    "trx_code":
+                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                    "otor": "0",
+                    "kode_trn": "",
+                    "nama_dr": setupHutangPiutangModel!.namasbbppnpiutang,
+                    "dracc": setupHutangPiutangModel!.sbbppnpiutang,
+                    "nama_cr": setupHutangPiutangModel!.namasbbrrpppnpiutang,
+                    "cracc": setupHutangPiutangModel!.sbbrrpppnpiutang,
+                    "rrn": "$invoice",
+                    "no_dokumen": "${nodokumen.text.trim()}",
+                    "no_ref": "${noref.text}",
+                    "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
+                    "no_invoice": "${noinv.text}",
+                    "nominal": hasil!['listBayarPPN']![i],
+                    "keterangan": "${keterangan.text}",
+                    "kode_pt": "${users!.kodePt}",
+                    "kode_kantor": "${users!.kodeKantor}",
+                    "kode_induk": "${users!.kodeInduk}",
+                    "sts_validasi": "N",
+                    "kode_ao_dr": "",
+                    "kode_coll": "",
+                    "kode_ao_cr": "",
+                    "userinput": "${users!.namauser}",
+                    "userterm": "114.80.90.54",
+                    "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+                    "inputtgljam":
+                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "otoruser": "",
+                    "otorterm": "",
+                    "otortgljam": "",
+                    "flag_trn": "0",
+                    "merchant": "",
+                    "source_trx": "",
+                    "status": "PENDING",
+                    "modul": "BAYAR PPN HUTANG PIUTANG",
+                  };
+                  Setuprepository.setup(
+                      token, NetworkURL.transaksi(), jsonEncode(data));
+                } else {
+                  var invoice =
+                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var data = {
+                    "tgl_transaksi":
+                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta":
+                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "batch": "${users!.batch}",
+                    "trx_type": "TRX",
+                    "trx_code":
+                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                    "otor": "0",
+                    "kode_trn": "",
+                    "nama_dr": setupHutangPiutangModel!.namasbbppnpiutang,
+                    "dracc": setupHutangPiutangModel!.sbbppnpiutang,
+                    "nama_cr": setupHutangPiutangModel!.namasbbrrpppnpiutang,
+                    "cracc": setupHutangPiutangModel!.sbbrrpppnpiutang,
+                    "rrn": "$invoice",
+                    "no_dokumen": "${nodokumen.text.trim()}",
+                    "no_ref": "${noref.text}",
+                    "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
+                    "no_invoice": "${noinv.text}",
+                    "nominal": hasil!['listBayarPPN']![i],
+                    "keterangan": "${keterangan.text}",
+                    "kode_pt": "${users!.kodePt}",
+                    "kode_kantor": "${users!.kodeKantor}",
+                    "kode_induk": "${users!.kodeInduk}",
+                    "sts_validasi": "N",
+                    "kode_ao_dr": "",
+                    "kode_coll": "",
+                    "kode_ao_cr": "",
+                    "userinput": "${users!.namauser}",
+                    "userterm": "114.80.90.54",
+                    "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+                    "inputtgljam":
+                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "otoruser": "",
+                    "otorterm": "",
+                    "otortgljam": "",
+                    "flag_trn": "0",
+                    "merchant": "",
+                    "source_trx": "",
+                    "status": "COMPLETED",
+                    "modul": "BAYAR PPN HUTANG PIUTANG",
+                  };
+                  Setuprepository.setup(
+                      token, NetworkURL.transaksi(), jsonEncode(data));
+                }
+              }
+            }
+
+            for (var i = 0; i < hasil!['listBayarPPH']!.length; i++) {
+              if (hasil!['listBayarPPH']![i] > 0) {
+                if (double.parse(users!.maksimalTransaksi) <
+                    double.parse(nilaipembayaran.text
+                        .replaceAll("Rp ", "")
+                        .replaceAll(".", "")
+                        .replaceAll(",", "."))) {
+                  var invoice =
+                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var data = {
+                    "tgl_transaksi":
+                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta":
+                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "batch": "${users!.batch}",
+                    "trx_type": "TRX",
+                    "trx_code":
+                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                    "otor": "0",
+                    "kode_trn": "",
+                    "nama_dr": setupHutangPiutangModel!.namasbbpotonganpph,
+                    "dracc": setupHutangPiutangModel!.sbbpotonganpph,
+                    "nama_cr": setupHutangPiutangModel!.namasbbpphpiutang,
+                    "cracc": setupHutangPiutangModel!.sbbpphpiutang,
+                    "rrn": "$invoice",
+                    "no_dokumen": "${nodokumen.text.trim()}",
+                    "no_ref": "${noref.text}",
+                    "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
+                    "no_invoice": "${noinv.text}",
+                    "nominal": hasil!['listBayarPPH']![i],
+                    "keterangan": "${keterangan.text}",
+                    "kode_pt": "${users!.kodePt}",
+                    "kode_kantor": "${users!.kodeKantor}",
+                    "kode_induk": "${users!.kodeInduk}",
+                    "sts_validasi": "N",
+                    "kode_ao_dr": "",
+                    "kode_coll": "",
+                    "kode_ao_cr": "",
+                    "userinput": "${users!.namauser}",
+                    "userterm": "114.80.90.54",
+                    "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+                    "inputtgljam":
+                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "otoruser": "",
+                    "otorterm": "",
+                    "otortgljam": "",
+                    "flag_trn": "0",
+                    "merchant": "",
+                    "source_trx": "",
+                    "status": "PENDING",
+                    "modul": "BAYAR PPH HUTANG PIUTANG",
+                  };
+                  Setuprepository.setup(
+                      token, NetworkURL.transaksi(), jsonEncode(data));
+                } else {
+                  var invoice =
+                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var data = {
+                    "tgl_transaksi":
+                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta":
+                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "batch": "${users!.batch}",
+                    "trx_type": "TRX",
+                    "trx_code":
+                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                    "otor": "0",
+                    "kode_trn": "",
+                    "nama_dr": setupHutangPiutangModel!.namasbbpotonganpph,
+                    "dracc": setupHutangPiutangModel!.sbbpotonganpph,
+                    "nama_cr": setupHutangPiutangModel!.namasbbpphpiutang,
+                    "cracc": setupHutangPiutangModel!.sbbpphpiutang,
+                    "rrn": "$invoice",
+                    "no_dokumen": "${nodokumen.text.trim()}",
+                    "no_ref": "${noref.text}",
+                    "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
+                    "no_invoice": "${noinv.text}",
+                    "nominal": hasil!['listBayarPPH']![i],
+                    "keterangan": "${keterangan.text}",
+                    "kode_pt": "${users!.kodePt}",
+                    "kode_kantor": "${users!.kodeKantor}",
+                    "kode_induk": "${users!.kodeInduk}",
+                    "sts_validasi": "N",
+                    "kode_ao_dr": "",
+                    "kode_coll": "",
+                    "kode_ao_cr": "",
+                    "userinput": "${users!.namauser}",
+                    "userterm": "114.80.90.54",
+                    "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+                    "inputtgljam":
+                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "otoruser": "",
+                    "otorterm": "",
+                    "otortgljam": "",
+                    "flag_trn": "0",
+                    "merchant": "",
+                    "source_trx": "",
+                    "status": "COMPLETED",
+                    "modul": "BAYAR PPH HUTANG PIUTANG",
+                  };
+                  Setuprepository.setup(
+                      token, NetworkURL.transaksi(), jsonEncode(data));
+                }
+              }
+            }
+          } else {
+            if (double.parse(selisih.text
+                    .replaceAll("Rp ", "")
+                    .replaceAll(".", "")
+                    .replaceAll(",", ".")) >
+                0) {
               if (double.parse(users!.maksimalTransaksi) <
                   double.parse(nilaipembayaran.text
                       .replaceAll("Rp ", "")
@@ -856,17 +961,20 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                       "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                   "otor": "0",
                   "kode_trn": "",
-                  "nama_dr": setupHutangPiutangModel!.namasbbtransaksihutang,
-                  "dracc": setupHutangPiutangModel!.sbbtransaksihutang,
-                  "nama_cr": transaksiPendModel!.namaDr ,
+                  "nama_dr": inqueryGlModelKelebihan!.namaSbb,
+                  "dracc": inqueryGlModelKelebihan!.nobb,
+                  "nama_cr": transaksiPendModel!.namaDr,
                   "cracc": transaksiPendModel!.dracc,
                   "rrn": "$invoice",
-                  "no_dokumen": "${nodokumen.text.trim()}",
-                  "no_ref": "${noref.text}",
+                  "no_dokumen": "${nodokumenselisih.text.trim()}",
+                  "no_ref": "${transaksiPendModel!.noRef}",
                   "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
                   "no_invoice": "${noinv.text}",
-                  "nominal": hasil!['listBayarTagihan']![i],
-                  "keterangan": "${keterangan.text}",
+                  "nominal": double.parse(selisih.text
+                      .replaceAll("Rp ", "")
+                      .replaceAll(".", "")
+                      .replaceAll(",", ".")),
+                  "keterangan": "${keteranganSelisih.text}",
                   "kode_pt": "${users!.kodePt}",
                   "kode_kantor": "${users!.kodeKantor}",
                   "kode_induk": "${users!.kodeInduk}",
@@ -886,7 +994,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "merchant": "",
                   "source_trx": "",
                   "status": "PENDING",
-                  "modul": "BAYAR HUTANG PIUTANG",
+                  "modul": "SELISIH HUTANG PIUTANG",
                 };
                 Setuprepository.setup(
                     token, NetworkURL.transaksi(), jsonEncode(data));
@@ -903,17 +1011,20 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                       "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                   "otor": "0",
                   "kode_trn": "",
-                  "nama_dr": setupHutangPiutangModel!.namasbbtransaksihutang,
-                  "dracc": setupHutangPiutangModel!.sbbtransaksihutang,
-                  "nama_cr": transaksiPendModel!.namaDr ,
+                  "nama_dr": inqueryGlModelKelebihan!.namaSbb,
+                  "dracc": inqueryGlModelKelebihan!.nobb,
+                  "nama_cr": transaksiPendModel!.namaDr,
                   "cracc": transaksiPendModel!.dracc,
                   "rrn": "$invoice",
                   "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
                   "no_invoice": "${noinv.text}",
-                  "no_dokumen": "${nodokumen.text.trim()}",
-                  "no_ref": "${noref.text}",
-                  "nominal": hasil!['listBayarTagihan']![i],
-                  "keterangan": "${keterangan.text}",
+                  "no_dokumen": "${nodokumenselisih.text.trim()}",
+                  "no_ref": "${transaksiPendModel!.noRef}",
+                  "nominal": double.parse(selisih.text
+                      .replaceAll("Rp ", "")
+                      .replaceAll(".", "")
+                      .replaceAll(",", ".")),
+                  "keterangan": "${keteranganSelisih.text}",
                   "kode_pt": "${users!.kodePt}",
                   "kode_kantor": "${users!.kodeKantor}",
                   "kode_induk": "${users!.kodeInduk}",
@@ -933,14 +1044,329 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "merchant": "",
                   "source_trx": "",
                   "status": "COMPLETED",
-                  "modul": "BAYAR HUTANG PIUTANG",
+                  "modul": "SELISIH HUTANG PIUTANG",
                 };
                 Setuprepository.setup(
                     token, NetworkURL.transaksi(), jsonEncode(data));
               }
             }
+            for (var i = 0; i < hasil!['listBayarTagihan']!.length; i++) {
+              if (hasil!['listBayarTagihan']![i] > 0) {
+                if (double.parse(users!.maksimalTransaksi) <
+                    double.parse(nilaipembayaran.text
+                        .replaceAll("Rp ", "")
+                        .replaceAll(".", "")
+                        .replaceAll(",", "."))) {
+                  var invoice =
+                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var data = {
+                    "tgl_transaksi":
+                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta":
+                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "batch": "${users!.batch}",
+                    "trx_type": "TRX",
+                    "trx_code":
+                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                    "otor": "0",
+                    "kode_trn": "",
+                    "nama_dr": setupHutangPiutangModel!.namasbbtransaksihutang,
+                    "dracc": setupHutangPiutangModel!.sbbtransaksihutang,
+                    "nama_cr": transaksiPendModel!.namaDr,
+                    "cracc": transaksiPendModel!.dracc,
+                    "rrn": "$invoice",
+                    "no_dokumen": "${nodokumen.text.trim()}",
+                    "no_ref": "${noref.text}",
+                    "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
+                    "no_invoice": "${noinv.text}",
+                    "nominal": hasil!['listBayarTagihan']![i],
+                    "keterangan": "${keterangan.text}",
+                    "kode_pt": "${users!.kodePt}",
+                    "kode_kantor": "${users!.kodeKantor}",
+                    "kode_induk": "${users!.kodeInduk}",
+                    "sts_validasi": "N",
+                    "kode_ao_dr": "",
+                    "kode_coll": "",
+                    "kode_ao_cr": "",
+                    "userinput": "${users!.namauser}",
+                    "userterm": "114.80.90.54",
+                    "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+                    "inputtgljam":
+                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "otoruser": "",
+                    "otorterm": "",
+                    "otortgljam": "",
+                    "flag_trn": "1",
+                    "merchant": "",
+                    "source_trx": "",
+                    "status": "PENDING",
+                    "modul": "BAYAR HUTANG PIUTANG",
+                  };
+                  Setuprepository.setup(
+                      token, NetworkURL.transaksi(), jsonEncode(data));
+                } else {
+                  var invoice =
+                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var data = {
+                    "tgl_transaksi":
+                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta":
+                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "batch": "${users!.batch}",
+                    "trx_type": "TRX",
+                    "trx_code":
+                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                    "otor": "0",
+                    "kode_trn": "",
+                    "nama_dr": setupHutangPiutangModel!.namasbbtransaksihutang,
+                    "dracc": setupHutangPiutangModel!.sbbtransaksihutang,
+                    "nama_cr": transaksiPendModel!.namaDr,
+                    "cracc": transaksiPendModel!.dracc,
+                    "rrn": "$invoice",
+                    "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
+                    "no_invoice": "${noinv.text}",
+                    "no_dokumen": "${nodokumen.text.trim()}",
+                    "no_ref": "${noref.text}",
+                    "nominal": hasil!['listBayarTagihan']![i],
+                    "keterangan": "${keterangan.text}",
+                    "kode_pt": "${users!.kodePt}",
+                    "kode_kantor": "${users!.kodeKantor}",
+                    "kode_induk": "${users!.kodeInduk}",
+                    "sts_validasi": "N",
+                    "kode_ao_dr": "",
+                    "kode_coll": "",
+                    "kode_ao_cr": "",
+                    "userinput": "${users!.namauser}",
+                    "userterm": "114.80.90.54",
+                    "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+                    "inputtgljam":
+                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "otoruser": "",
+                    "otorterm": "",
+                    "otortgljam": "",
+                    "flag_trn": "1",
+                    "merchant": "",
+                    "source_trx": "",
+                    "status": "COMPLETED",
+                    "modul": "BAYAR HUTANG PIUTANG",
+                  };
+                  Setuprepository.setup(
+                      token, NetworkURL.transaksi(), jsonEncode(data));
+                }
+              }
+            }
+            for (var i = 0; i < hasil!['listBayarPPN']!.length; i++) {
+              if (hasil!['listBayarPPN']![i] > 0) {
+                if (double.parse(users!.maksimalTransaksi) <
+                    double.parse(nilaipembayaran.text
+                        .replaceAll("Rp ", "")
+                        .replaceAll(".", "")
+                        .replaceAll(",", "."))) {
+                  var invoice =
+                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var data = {
+                    "tgl_transaksi":
+                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta":
+                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "batch": "${users!.batch}",
+                    "trx_type": "TRX",
+                    "trx_code":
+                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                    "otor": "0",
+                    "kode_trn": "",
+                    "nama_dr": setupHutangPiutangModel!.namasbbrrpppnhutang,
+                    "dracc": setupHutangPiutangModel!.sbbrrpppnhutang,
+                    "nama_cr": setupHutangPiutangModel!.namasbbppnhutang,
+                    "cracc": setupHutangPiutangModel!.sbbppnhutang,
+                    "rrn": "$invoice",
+                    "no_dokumen": "${nodokumen.text.trim()}",
+                    "no_ref": "${noref.text}",
+                    "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
+                    "no_invoice": "${noinv.text}",
+                    "nominal": hasil!['listBayarPPN']![i],
+                    "keterangan": "${keterangan.text}",
+                    "kode_pt": "${users!.kodePt}",
+                    "kode_kantor": "${users!.kodeKantor}",
+                    "kode_induk": "${users!.kodeInduk}",
+                    "sts_validasi": "N",
+                    "kode_ao_dr": "",
+                    "kode_coll": "",
+                    "kode_ao_cr": "",
+                    "userinput": "${users!.namauser}",
+                    "userterm": "114.80.90.54",
+                    "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+                    "inputtgljam":
+                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "otoruser": "",
+                    "otorterm": "",
+                    "otortgljam": "",
+                    "flag_trn": "0",
+                    "merchant": "",
+                    "source_trx": "",
+                    "status": "PENDING",
+                    "modul": "BAYAR PPN HUTANG PIUTANG",
+                  };
+                  Setuprepository.setup(
+                      token, NetworkURL.transaksi(), jsonEncode(data));
+                } else {
+                  var invoice =
+                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var data = {
+                    "tgl_transaksi":
+                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta":
+                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "batch": "${users!.batch}",
+                    "trx_type": "TRX",
+                    "trx_code":
+                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                    "otor": "0",
+                    "kode_trn": "",
+                    "nama_dr": setupHutangPiutangModel!.namasbbrrpppnhutang,
+                    "dracc": setupHutangPiutangModel!.sbbrrpppnhutang,
+                    "nama_cr": setupHutangPiutangModel!.namasbbppnhutang,
+                    "cracc": setupHutangPiutangModel!.sbbppnhutang,
+                    "rrn": "$invoice",
+                    "no_dokumen": "${nodokumen.text.trim()}",
+                    "no_ref": "${noref.text}",
+                    "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
+                    "no_invoice": "${noinv.text}",
+                    "nominal": hasil!['listBayarPPN']![i],
+                    "keterangan": "${keterangan.text}",
+                    "kode_pt": "${users!.kodePt}",
+                    "kode_kantor": "${users!.kodeKantor}",
+                    "kode_induk": "${users!.kodeInduk}",
+                    "sts_validasi": "N",
+                    "kode_ao_dr": "",
+                    "kode_coll": "",
+                    "kode_ao_cr": "",
+                    "userinput": "${users!.namauser}",
+                    "userterm": "114.80.90.54",
+                    "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+                    "inputtgljam":
+                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "otoruser": "",
+                    "otorterm": "",
+                    "otortgljam": "",
+                    "flag_trn": "0",
+                    "merchant": "",
+                    "source_trx": "",
+                    "status": "COMPLETED",
+                    "modul": "BAYAR PPN HUTANG PIUTANG",
+                  };
+                  Setuprepository.setup(
+                      token, NetworkURL.transaksi(), jsonEncode(data));
+                }
+              }
+            }
+
+            for (var i = 0; i < hasil!['listBayarPPH']!.length; i++) {
+              if (hasil!['listBayarPPH']![i] > 0) {
+                if (double.parse(users!.maksimalTransaksi) <
+                    double.parse(nilaipembayaran.text
+                        .replaceAll("Rp ", "")
+                        .replaceAll(".", "")
+                        .replaceAll(",", "."))) {
+                  var invoice =
+                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var data = {
+                    "tgl_transaksi":
+                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta":
+                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "batch": "${users!.batch}",
+                    "trx_type": "TRX",
+                    "trx_code":
+                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                    "otor": "0",
+                    "kode_trn": "",
+                    "nama_dr": setupHutangPiutangModel!.namasbbpphhutang,
+                    "dracc": setupHutangPiutangModel!.sbbpphhutang,
+                    "nama_cr": setupHutangPiutangModel!.namasbbpotonganpphhutang,
+                    "cracc": setupHutangPiutangModel!.sbbpotonganpphhutang,
+                    "rrn": "$invoice",
+                    "no_dokumen": "${nodokumen.text.trim()}",
+                    "no_ref": "${noref.text}",
+                    "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
+                    "no_invoice": "${noinv.text}",
+                    "nominal": hasil!['listBayarPPH']![i],
+                    "keterangan": "${keterangan.text}",
+                    "kode_pt": "${users!.kodePt}",
+                    "kode_kantor": "${users!.kodeKantor}",
+                    "kode_induk": "${users!.kodeInduk}",
+                    "sts_validasi": "N",
+                    "kode_ao_dr": "",
+                    "kode_coll": "",
+                    "kode_ao_cr": "",
+                    "userinput": "${users!.namauser}",
+                    "userterm": "114.80.90.54",
+                    "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+                    "inputtgljam":
+                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "otoruser": "",
+                    "otorterm": "",
+                    "otortgljam": "",
+                    "flag_trn": "0",
+                    "merchant": "",
+                    "source_trx": "",
+                    "status": "PENDING",
+                    "modul": "BAYAR PPH HUTANG PIUTANG",
+                  };
+                  Setuprepository.setup(
+                      token, NetworkURL.transaksi(), jsonEncode(data));
+                } else {
+                  var invoice =
+                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var data = {
+                    "tgl_transaksi":
+                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta":
+                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "batch": "${users!.batch}",
+                    "trx_type": "TRX",
+                    "trx_code":
+                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                    "otor": "0",
+                    "kode_trn": "",
+                   "nama_dr": setupHutangPiutangModel!.namasbbpphhutang,
+                    "dracc": setupHutangPiutangModel!.sbbpphhutang,
+                    "nama_cr": setupHutangPiutangModel!.namasbbpotonganpphhutang,
+                    "cracc": setupHutangPiutangModel!.sbbpotonganpphhutang,
+                    "rrn": "$invoice",
+                    "no_dokumen": "${nodokumen.text.trim()}",
+                    "no_ref": "${noref.text}",
+                    "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
+                    "no_invoice": "${noinv.text}",
+                    "nominal": hasil!['listBayarPPH']![i],
+                    "keterangan": "${keterangan.text}",
+                    "kode_pt": "${users!.kodePt}",
+                    "kode_kantor": "${users!.kodeKantor}",
+                    "kode_induk": "${users!.kodeInduk}",
+                    "sts_validasi": "N",
+                    "kode_ao_dr": "",
+                    "kode_coll": "",
+                    "kode_ao_cr": "",
+                    "userinput": "${users!.namauser}",
+                    "userterm": "114.80.90.54",
+                    "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+                    "inputtgljam":
+                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "otoruser": "",
+                    "otorterm": "",
+                    "otortgljam": "",
+                    "flag_trn": "0",
+                    "merchant": "",
+                    "source_trx": "",
+                    "status": "COMPLETED",
+                    "modul": "BAYAR PPH HUTANG PIUTANG",
+                  };
+                  Setuprepository.setup(
+                      token, NetworkURL.transaksi(), jsonEncode(data));
+                }
+              }
+            }
           }
-         }
 
           clear();
 
