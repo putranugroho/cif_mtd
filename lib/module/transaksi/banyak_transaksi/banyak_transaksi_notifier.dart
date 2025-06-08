@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:accounting/models/index.dart';
 import 'package:accounting/network/network.dart';
 import 'package:accounting/pref/pref.dart';
+import 'package:accounting/utils/button_custom.dart';
 import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
@@ -127,7 +128,7 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksiBack.add(TransaksiModel.fromJson(i));
         }
-        if (listTransaksi.isNotEmpty) {
+        if (listTransaksiBack.isNotEmpty) {
           for (var i = 0;
               i < listTransaksiBack.where((e) => e.kodeTrans == "9998").length;
               i++) {
@@ -481,142 +482,194 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
         if (total > 0 || total < 0) {
           informationDialog(context, "Warning", "Selisih harus 0");
         } else {
-          DialogCustom().showLoading(context);
-          if (double.parse(users!.maksimalTransaksi) <
-              double.parse(nominal.text
-                  .replaceAll("Rp ", "")
-                  .replaceAll(".", "")
-                  .replaceAll(",", "."))) {
-            for (var i = 0; i < listGlItems.length; i++) {
-              var invoice = DateTime.now().millisecondsSinceEpoch.toString();
-              var data = {
-                "tgl_transaksi":
-                    "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                "batch": "${users!.batch}",
-                "trx_type": "TRX",
-                "trx_code":
-                    "${tglBackDate!.isBefore(DateTime.now()) ? "110" : "100"}",
-                "otor": "0",
-                "kode_trn": "9998",
-                "nama_dr":
-                    !akun ? inqueryGlModeldeb!.namaSbb : listGlItems[i].namaSbb,
-                "dracc":
-                    !akun ? inqueryGlModeldeb!.nosbb : listGlItems[i].nosbb,
-                "nama_cr":
-                    !akun ? listGlItems[i].namaSbb : inqueryGlModeldeb!.namaSbb,
-                "cracc":
-                    !akun ? listGlItems[i].nosbb : inqueryGlModeldeb!.nosbb,
-                "rrn": "$invoice",
-                "no_kontrak": "",
-                "no_invoice": "",
-                "no_dokumen": "${listNoDok[i].text.trim()}",
-                "no_ref": "${nomorRef.text}",
-                "nominal": double.parse(listAmount[i]
-                    .text
-                    .replaceAll("Rp ", "")
-                    .replaceAll(".", "")
-                    .replaceAll(",", ".")),
-                "keterangan": "${listKeterangan[i].text}",
-                "kode_pt": "${users!.kodePt}",
-                "kode_kantor": "${users!.kodeKantor}",
-                "kode_induk": "${users!.kodeInduk}",
-                "sts_validasi": "N",
-                "kode_ao_dr": "",
-                "kode_coll": "",
-                "kode_ao_cr": "",
-                "userinput": "${users!.namauser}",
-                "userterm": "114.80.90.54",
-                "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                "inputtgljam":
-                    "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
-                "otoruser": "",
-                "otorterm": "",
-                "otortgljam": "",
-                "flag_trn": "1",
-                "merchant": "",
-                "source_trx": "",
-                "status": "PENDING",
-                "modul": "BANYAK TRANSAKSI",
-              };
-              Setuprepository.setup(
-                  token, NetworkURL.transaksi(), jsonEncode(data));
-            }
-          } else {
-            for (var i = 0; i < listGlItems.length; i++) {
-              var invoice = DateTime.now().millisecondsSinceEpoch.toString();
-              var data = {
-                "tgl_transaksi":
-                    "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                "batch": "${users!.batch}",
-                "trx_type": "TRX",
-                "trx_code":
-                    "${tglBackDate!.isBefore(DateTime.now()) ? "110" : "100"}",
-                "otor": "0",
-                "kode_trn": "9998",
-                "nama_dr":
-                    !akun ? inqueryGlModeldeb!.namaSbb : listGlItems[i].namaSbb,
-                "dracc":
-                    !akun ? inqueryGlModeldeb!.nosbb : listGlItems[i].nosbb,
-                "nama_cr":
-                    !akun ? listGlItems[i].namaSbb : inqueryGlModeldeb!.namaSbb,
-                "cracc":
-                    !akun ? listGlItems[i].nosbb : inqueryGlModeldeb!.nosbb,
-                "rrn": "$invoice",
-                "no_kontrak": "",
-                "no_invoice": "",
-                "no_dokumen": "${listNoDok[i].text.trim()}",
-                "no_ref": "${nomorRef.text}",
-                "nominal": double.parse(listAmount[i]
-                    .text
-                    .replaceAll("Rp ", "")
-                    .replaceAll(".", "")
-                    .replaceAll(",", ".")),
-                "keterangan": "${listKeterangan[i].text}",
-                "kode_pt": "${users!.kodePt}",
-                "kode_kantor": "${users!.kodeKantor}",
-                "kode_induk": "${users!.kodeInduk}",
-                "sts_validasi": "N",
-                "kode_ao_dr": "",
-                "kode_coll": "",
-                "kode_ao_cr": "",
-                "userinput": "${users!.namauser}",
-                "userterm": "114.80.90.54",
-                "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                "inputtgljam":
-                    "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
-                "otoruser": "",
-                "otorterm": "",
-                "otortgljam": "",
-                "flag_trn": "1",
-                "merchant": "",
-                "source_trx": "",
-                "status": "COMPLETED",
-                "modul": "BANYAK TRANSAKSI˝",
-              };
-              Setuprepository.setup(
-                  token, NetworkURL.transaksi(), jsonEncode(data));
-            }
-          }
+          showDialog(
+              context: context,
+              builder: (context) {
+                return Dialog(
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    width: 500,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text("Simpan Transaksi?",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        Text(
+                          "Apakah Anda yakin ingin menyimpan transaksi ini?",
+                          style: const TextStyle(),
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                                child: ButtonSecondary(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              name: "Tidak",
+                            )),
+                            const SizedBox(
+                              width: 16,
+                            ),
+                            Expanded(
+                                child: ButtonPrimary(
+                              onTap: () {
+                                Navigator.pop(context);
+                                simpan();
+                              },
+                              name: "Ya",
+                            )),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              });
         }
-        Navigator.pop(context);
-        inqueryGlModeldeb = null;
-        nosbbdeb.clear();
-        namaSbbDeb.clear();
-        nominal.clear();
-        listNoDok.clear();
-        listGlItems.clear();
-        listAmount.clear();
-        listAoitems.clear();
-        listKeterangan.clear();
-        nomorRef.clear();
-        informationDialog(context, "Information", "Berhasil");
       } else {
         informationDialog(context, "Warning", "Tidak memiliki akses");
       }
     }
   }
+
+  simpan() async {
+    DialogCustom().showLoading(context);
+    List<Map<String, dynamic>> listTmp = [];
+    if (double.parse(users!.maksimalTransaksi) <
+        double.parse(nominal.text
+            .replaceAll("Rp ", "")
+            .replaceAll(".", "")
+            .replaceAll(",", "."))) {
+      for (var i = 0; i < listGlItems.length; i++) {
+        var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+        listTmp.add({
+          "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+          "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+          "batch": "${users!.batch}",
+          "trx_type": "TRX",
+          "trx_code":
+              "${tglBackDate!.isBefore(DateTime.now()) ? "110" : "100"}",
+          "otor": "0",
+          "kode_trn": "9998",
+          "nama_dr":
+              !akun ? inqueryGlModeldeb!.namaSbb : listGlItems[i].namaSbb,
+          "dracc": !akun ? inqueryGlModeldeb!.nosbb : listGlItems[i].nosbb,
+          "nama_cr":
+              !akun ? listGlItems[i].namaSbb : inqueryGlModeldeb!.namaSbb,
+          "cracc": !akun ? listGlItems[i].nosbb : inqueryGlModeldeb!.nosbb,
+          "rrn": "$invoice",
+          "no_kontrak": "",
+          "no_invoice": "",
+          "no_dokumen": "${listNoDok[i].text.trim()}",
+          "no_ref": "${nomorRef.text}",
+          "nominal": double.parse(listAmount[i]
+              .text
+              .replaceAll("Rp ", "")
+              .replaceAll(".", "")
+              .replaceAll(",", ".")),
+          "keterangan": "${listKeterangan[i].text}",
+          "kode_pt": "${users!.kodePt}",
+          "kode_kantor": "${users!.kodeKantor}",
+          "kode_induk": "${users!.kodeInduk}",
+          "sts_validasi": "N",
+          "kode_ao_dr": !akun ? "" : "${listAoitems[i]!.kode}",
+          "kode_coll": "",
+          "kode_ao_cr": !akun ? "${listAoitems[i]!.kode}" : "",
+          "userinput": "${users!.namauser}",
+          "userterm": "114.80.90.54",
+          "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+          "inputtgljam":
+              "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+          "otoruser": "",
+          "otorterm": "",
+          "otortgljam": "",
+          "flag_trn": "1",
+          "merchant": "",
+          "source_trx": "",
+          "status": "PENDING",
+          "modul": "BANYAK TRANSAKSI",
+        });
+      }
+      Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
+    } else {
+      for (var i = 0; i < listGlItems.length; i++) {
+        var invoice = DateTime.now().millisecondsSinceEpoch.toString();
+        var data = {
+          "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+          "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+          "batch": "${users!.batch}",
+          "trx_type": "TRX",
+          "trx_code":
+              "${tglBackDate!.isBefore(DateTime.now()) ? "110" : "100"}",
+          "otor": "0",
+          "kode_trn": "9998",
+          "nama_dr":
+              !akun ? inqueryGlModeldeb!.namaSbb : listGlItems[i].namaSbb,
+          "dracc": !akun ? inqueryGlModeldeb!.nosbb : listGlItems[i].nosbb,
+          "nama_cr":
+              !akun ? listGlItems[i].namaSbb : inqueryGlModeldeb!.namaSbb,
+          "cracc": !akun ? listGlItems[i].nosbb : inqueryGlModeldeb!.nosbb,
+          "rrn": "$invoice",
+          "no_kontrak": "",
+          "no_invoice": "",
+          "no_dokumen": "${listNoDok[i].text.trim()}",
+          "no_ref": "${nomorRef.text}",
+          "nominal": double.parse(listAmount[i]
+              .text
+              .replaceAll("Rp ", "")
+              .replaceAll(".", "")
+              .replaceAll(",", ".")),
+          "keterangan": "${listKeterangan[i].text}",
+          "kode_pt": "${users!.kodePt}",
+          "kode_kantor": "${users!.kodeKantor}",
+          "kode_induk": "${users!.kodeInduk}",
+          "sts_validasi": "N",
+          "kode_ao_dr": !akun ? "" : "${listAoitems[i]!.kode}",
+          "kode_coll": "",
+          "kode_ao_cr": !akun ? "${listAoitems[i]!.kode}" : "",
+          "userinput": "${users!.namauser}",
+          "userterm": "114.80.90.54",
+          "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
+          "inputtgljam":
+              "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+          "otoruser": "",
+          "otorterm": "",
+          "otortgljam": "",
+          "flag_trn": "1",
+          "merchant": "",
+          "source_trx": "",
+          "status": "COMPLETED",
+          "modul": "BANYAK TRANSAKSI˝",
+        };
+        Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
+      }
+    }
+    Future.delayed(Duration(milliseconds: 500)).then((e) {
+      Navigator.pop(context);
+      dialog = false;
+      inqueryGlModeldeb = null;
+      nosbbdeb.clear();
+      namaSbbDeb.clear();
+      nominal.clear();
+      listNoDok.clear();
+      listGlItems.clear();
+      listAmount.clear();
+      listAoitems.clear();
+      listKeterangan.clear();
+      nomorRef.clear();
+      notifyListeners();
+      informationDialog(context, "Information", "Berhasil");
+    });
+  }
+
+  confirmSimpan() async {}
 
   tutup() {
     dialog = false;

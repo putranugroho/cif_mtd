@@ -38,8 +38,10 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
     void traverse(List<dynamic> items) {
       for (var item in items) {
         if (item is Map<String, dynamic>) {
-          if (item['jns_acc'] == 'C' &&
-              item['type_posting'] == "Y" &&
+          if ((jenis == "AKTIVA"
+                  ? item['gol_acc'] == "1"
+                  : item['gol_acc'] == "2") &&
+              item['jns_acc'] == 'C' &&
               item['akun_perantara'] == "Y") {
             result.add(item);
           }
@@ -235,14 +237,22 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
     transaksiPendModel = listTransaksiAdd.where((e) => e.rrn == value).first;
     dialogtrans = false;
     dialog = true;
-    // nomorRef.text = transaksiPendModel!.noRef;
+    selisih = 0;
+    selisihText.text = "Rp ${FormatCurrency.oCcyDecimal.format(selisih)}";
+    nominal.clear();
     nomorDok.text = transaksiPendModel!.noDokumen;
     keterangan.text = transaksiPendModel!.keterangan;
-    namaSbbAset.text = transaksiPendModel!.cracc;
     sisaSaldo.text =
         "Rp ${FormatCurrency.oCcyDecimal.format(transaksiPendModel!.sisaSaldo)}";
-    namaSbbDebit.text = transaksiPendModel!.namaCr;
+    if (jenis == "PASIVA") {
+      namaSbbAset.text = transaksiPendModel!.cracc;
+      namaSbbDebit.text = transaksiPendModel!.namaCr;
+    } else {
+      nossbcretrans.text = transaksiPendModel!.namaDr;
+      namaSbbCreTrans.text = transaksiPendModel!.dracc;
+    }
     tglBackDatetext.text = transaksiPendModel!.tglValuta;
+
     notifyListeners();
   }
 
@@ -260,6 +270,45 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
   TextEditingController nossbcretrans = TextEditingController();
   TextEditingController namaSbbCreTrans = TextEditingController();
   Future<List<InqueryGlModel>> getInquery(String query) async {
+    if (query.isNotEmpty && query.length > 2) {
+      isLoadingInquery = true;
+      listGl.clear();
+      notifyListeners();
+
+      var data = {"kode_pt": "001"};
+
+      try {
+        final response = await Setuprepository.setup(
+          token,
+          NetworkURL.getInqueryGL(),
+          jsonEncode(data),
+        );
+
+        if (response['status'].toString().toLowerCase().contains("success")) {
+          final List<Map<String, dynamic>> jnsAccBItems =
+              extractJnsAccBb(response['data']);
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .toList();
+        }
+        notifyListeners();
+      } catch (e) {
+        print("Error: $e");
+      } finally {
+        isLoadingInquery = false;
+        notifyListeners();
+      }
+    } else {
+      listGl.clear(); // clear on short query
+    }
+
+    return listGl;
+  }
+
+  Future<List<InqueryGlModel>> getInqueryTrans(String query) async {
     if (query.isNotEmpty && query.length > 2) {
       isLoadingInquery = true;
       listGl.clear();
@@ -317,12 +366,20 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  pilihAkunDebTrans(InqueryGlModel value) {
+    inqueryGlModelcreTrans = value;
+    namaSbbDebit.text = value.namaSbb;
+    namaSbbAset.text = value.nosbb;
+
+    notifyListeners();
+  }
+
   List<String> listJenis = [];
   String? jenis = "AKTIVA";
   gantijenis(String value) {
     jenis = value;
 
-    getTransaksiAll();
+    getInqueryAll();
     notifyListeners();
   }
 
@@ -333,12 +390,20 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
     dialogtrans = false;
     dialog = true;
     // nomorRef.text = transaksiPendModel!.noRef;
+    selisih = 0;
+    selisihText.text = "Rp ${FormatCurrency.oCcyDecimal.format(selisih)}";
+    nominal.clear();
     nomorDok.text = transaksiPendModel!.noDokumen;
     keterangan.text = transaksiPendModel!.keterangan;
-    namaSbbAset.text = transaksiPendModel!.cracc;
     sisaSaldo.text =
         "Rp ${FormatCurrency.oCcyDecimal.format(transaksiPendModel!.sisaSaldo)}";
-    namaSbbDebit.text = transaksiPendModel!.namaCr;
+    if (jenis == "PASIVA") {
+      namaSbbAset.text = transaksiPendModel!.cracc;
+      namaSbbDebit.text = transaksiPendModel!.namaCr;
+    } else {
+      nossbcretrans.text = transaksiPendModel!.namaDr;
+      namaSbbCreTrans.text = transaksiPendModel!.dracc;
+    }
     tglBackDatetext.text = transaksiPendModel!.tglValuta;
 
     notifyListeners();
@@ -411,6 +476,13 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
           .format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
+  }
+
+  tomboltidak() {
+    selisih = 0;
+    selisihText.text = "Rp ${FormatCurrency.oCcyDecimal.format(selisih)}";
+    nominal.clear();
+    notifyListeners;
   }
 
   TextEditingController tglBackDatetext = TextEditingController();
@@ -578,6 +650,15 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
   pilihSbbpenyusutan(CoaModel value) {
     sbbpenyusutan = value;
     namaSbbpenyusutan.text = value.nosbb;
+    notifyListeners();
+  }
+
+  double selisih = 0;
+  TextEditingController selisihText = TextEditingController();
+  onchange() {
+    selisih = transaksiPendModel!.sisaSaldo -
+        double.parse(nominal.text.replaceAll(".", "").replaceAll(",", "."));
+    selisihText.text = "Rp ${FormatCurrency.oCcyDecimal.format(selisih)}";
     notifyListeners();
   }
 

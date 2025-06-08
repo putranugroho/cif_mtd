@@ -4,6 +4,8 @@
     "nama_golongan": "",
     "masa_susut": "",
     "nilai_declining": "",
+    "metode": "",
+    "nilai_akhir": "",
     "sbb_aset": null,
     "sbb_penyusutan": null,
     "sbb_biaya_penyusutan": null,

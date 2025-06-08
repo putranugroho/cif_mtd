@@ -46,7 +46,9 @@ class PengadaanNotifier extends ChangeNotifier {
     void traverse(List<dynamic> items) {
       for (var item in items) {
         if (item is Map<String, dynamic>) {
-          if (item['jns_acc'] == 'C' && item['type_posting'] == "Y" && item['akun_perantara'] == "Y") {
+          if (item['jns_acc'] == 'C' &&
+              item['type_posting'] == "Y" &&
+              item['akun_perantara'] == "Y") {
             result.add(item);
           }
 
@@ -65,13 +67,14 @@ class PengadaanNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     listGlAll.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": users!.kodePt
-    };
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
+    var data = {"kode_pt": users!.kodePt};
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
+        .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccBb(value['data']);
-        listGlAll = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems =
+            extractJnsAccBb(value['data']);
+        listGlAll =
+            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         print("GL : ${jsonEncode(listGlAll)}");
         getTransaksi();
         notifyListeners();
@@ -83,10 +86,9 @@ class PengadaanNotifier extends ChangeNotifier {
     isLoading = true;
     listPajak.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
-    Setuprepository.setup(token, NetworkURL.getSetupPajak(), jsonEncode(data)).then((value) {
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getSetupPajak(), jsonEncode(data))
+        .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listPajak.add(SetupPajakModel.fromJson(i));
@@ -110,7 +112,8 @@ class PengadaanNotifier extends ChangeNotifier {
       "kode_pt": "001",
     };
     notifyListeners();
-    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data)).then((value) {
+    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data))
+        .then((value) {
       if (value['status'] == "Success") {
         for (Map<String, dynamic> i in value['data']) {
           listKantor.add(KantorModel.fromJson(i));
@@ -129,10 +132,9 @@ class PengadaanNotifier extends ChangeNotifier {
   Future getGolonganAset() async {
     isLoading = true;
     listGolongan.clear();
-    var data = {
-      "kode_pt": "001"
-    };
-    Setuprepository.setup(token, NetworkURL.getGolonganAset(), jsonEncode(data)).then((value) {
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getGolonganAset(), jsonEncode(data))
+        .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listGolongan.add(GolonganAsetModel.fromJson(i));
@@ -152,10 +154,9 @@ class PengadaanNotifier extends ChangeNotifier {
     isLoading = true;
     listKelompok.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
-    Setuprepository.setup(token, NetworkURL.getKelompokAset(), jsonEncode(data)).then((value) {
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getKelompokAset(), jsonEncode(data))
+        .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listKelompok.add(KelompokAsetModel.fromJson(i));
@@ -182,7 +183,8 @@ class PengadaanNotifier extends ChangeNotifier {
     var data = {
       "kode_pt": users!.kodePt,
     };
-    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data)).then((value) {
+    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data))
+        .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksi.add(TransaksiPendModel.fromJson(i));
@@ -190,9 +192,20 @@ class PengadaanNotifier extends ChangeNotifier {
         if (listTransaksi.isNotEmpty) {
           for (var i = 0; i < listGlAll.length; i++) {
             if (noDokTrans.text.isNotEmpty) {
-              listTransaksiAdd.addAll(listTransaksi.where((e) => (e.dracc == listGlAll[i].nosbb) && e.status == "COMPLETED" && e.noDokumen == noDokTrans.text.trim() && e.tglValuta == DateFormat('y-MM-dd').format(tglValuta)).toList());
+              listTransaksiAdd.addAll(listTransaksi
+                  .where((e) =>
+                      (e.dracc == listGlAll[i].nosbb) &&
+                      e.status == "COMPLETED" &&
+                      e.noDokumen == noDokTrans.text.trim() &&
+                      e.tglValuta == DateFormat('y-MM-dd').format(tglValuta))
+                  .toList());
             } else {
-              listTransaksiAdd.addAll(listTransaksi.where((e) => (e.dracc == listGlAll[i].nosbb) && e.status == "COMPLETED" && e.tglValuta == DateFormat('y-MM-dd').format(tglValuta)).toList());
+              listTransaksiAdd.addAll(listTransaksi
+                  .where((e) =>
+                      (e.dracc == listGlAll[i].nosbb) &&
+                      e.status == "COMPLETED" &&
+                      e.tglValuta == DateFormat('y-MM-dd').format(tglValuta))
+                  .toList());
             }
           }
         }
@@ -210,7 +223,8 @@ class PengadaanNotifier extends ChangeNotifier {
     transaksiPendModel = value;
     noDok.text = transaksiPendModel!.noDokumen;
     noRef.text = transaksiPendModel!.noRef;
-    nilaiTrans.text = FormatCurrency.oCcy.format(int.parse(transaksiPendModel!.nominal));
+    nilaiTrans.text =
+        FormatCurrency.oCcy.format(int.parse(transaksiPendModel!.nominal));
     keteranganTrans.text = transaksiPendModel!.keterangan;
     dialog = true;
     dialogTransaksi = false;
@@ -228,7 +242,9 @@ class PengadaanNotifier extends ChangeNotifier {
       "kode_pt": "001",
     };
     notifyListeners();
-    Setuprepository.setup(token, NetworkURL.getMetodePenyusutan(), jsonEncode(data)).then((value) {
+    Setuprepository.setup(
+            token, NetworkURL.getMetodePenyusutan(), jsonEncode(data))
+        .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listPenyusutan.add(MetodePenyusutanModel.fromJson(i));
@@ -274,9 +290,7 @@ class PengadaanNotifier extends ChangeNotifier {
     if (query.isNotEmpty && query.length > 2) {
       listKaryawan.clear();
       notifyListeners();
-      var data = {
-        "nama": query
-      };
+      var data = {"nama": query};
       try {
         final response = await Setuprepository.setup(
           token,
@@ -383,11 +397,18 @@ class PengadaanNotifier extends ChangeNotifier {
   int total = 0;
   onChange() {
     if (pajak) {
-      subtotal = int.parse(hargaBeli.text.replaceAll(",", "")) - int.parse(discount.text.replaceAll(",", "")) + int.parse(biaya.text.replaceAll(",", ""));
-      total = (subtotal + int.parse(ppn.text.replaceAll(",", ""))) - int.parse(pph.text.replaceAll(",", ""));
+      subtotal = int.parse(hargaBeli.text.replaceAll(",", "")) -
+          int.parse(discount.text.replaceAll(",", "")) +
+          int.parse(biaya.text.replaceAll(",", ""));
+      total = (subtotal + int.parse(ppn.text.replaceAll(",", ""))) -
+          int.parse(pph.text.replaceAll(",", ""));
     } else {
-      subtotal = int.parse(hargaBeli.text.replaceAll(",", "")) - int.parse(discount.text.replaceAll(",", "")) + int.parse(biaya.text.replaceAll(",", ""));
-      total = int.parse(hargaBeli.text.replaceAll(",", "")) - int.parse(discount.text.replaceAll(",", "")) + int.parse(biaya.text.replaceAll(",", ""));
+      subtotal = int.parse(hargaBeli.text.replaceAll(",", "")) -
+          int.parse(discount.text.replaceAll(",", "")) +
+          int.parse(biaya.text.replaceAll(",", ""));
+      total = int.parse(hargaBeli.text.replaceAll(",", "")) -
+          int.parse(discount.text.replaceAll(",", "")) +
+          int.parse(biaya.text.replaceAll(",", ""));
     }
 
     notifyListeners();
@@ -398,15 +419,35 @@ class PengadaanNotifier extends ChangeNotifier {
   gantipajak(bool value) {
     pajak = value;
     if (pajak) {
-      ppn.text = (((int.parse(hargaBeli.text.replaceAll(",", "")) - int.parse(discount.text.replaceAll(",", "")) + int.parse(biaya.text.replaceAll(",", ""))) * double.parse(setupPajakModel!.ppn)) / 100).toInt().toString();
-      pph.text = (((int.parse(hargaBeli.text.replaceAll(",", "")) - int.parse(discount.text.replaceAll(",", "")) + int.parse(biaya.text.replaceAll(",", ""))) * double.parse(setupPajakModel!.pph23)) / 100).toInt().toString();
-      subtotal = int.parse(hargaBeli.text.replaceAll(",", "")) - int.parse(discount.text.replaceAll(",", "")) + int.parse(biaya.text.replaceAll(",", ""));
-      total = (int.parse(hargaBeli.text.replaceAll(",", "")) - int.parse(discount.text.replaceAll(",", "")) + int.parse(biaya.text.replaceAll(",", "")) + (int.parse(ppn.text.replaceAll(",", "")))) - int.parse(pph.text.replaceAll(",", ""));
+      ppn.text = (((int.parse(hargaBeli.text.replaceAll(",", "")) -
+                      int.parse(discount.text.replaceAll(",", "")) +
+                      int.parse(biaya.text.replaceAll(",", ""))) *
+                  double.parse(setupPajakModel!.ppn)) /
+              100)
+          .toInt()
+          .toString();
+      pph.text = (((int.parse(hargaBeli.text.replaceAll(",", "")) -
+                      int.parse(discount.text.replaceAll(",", "")) +
+                      int.parse(biaya.text.replaceAll(",", ""))) *
+                  double.parse(setupPajakModel!.pph23)) /
+              100)
+          .toInt()
+          .toString();
+      subtotal = int.parse(hargaBeli.text.replaceAll(",", "")) -
+          int.parse(discount.text.replaceAll(",", "")) +
+          int.parse(biaya.text.replaceAll(",", ""));
+      total = (int.parse(hargaBeli.text.replaceAll(",", "")) -
+              int.parse(discount.text.replaceAll(",", "")) +
+              int.parse(biaya.text.replaceAll(",", "")) +
+              (int.parse(ppn.text.replaceAll(",", "")))) -
+          int.parse(pph.text.replaceAll(",", ""));
       notifyListeners();
     } else {
       ppn.text = "0";
       pph.text = "0";
-      total = int.parse(hargaBeli.text.replaceAll(",", "")) - int.parse(discount.text.replaceAll(",", "")) + int.parse(biaya.text.replaceAll(",", ""));
+      total = int.parse(hargaBeli.text.replaceAll(",", "")) -
+          int.parse(discount.text.replaceAll(",", "")) +
+          int.parse(biaya.text.replaceAll(",", ""));
     }
     notifyListeners();
   }
@@ -425,21 +466,14 @@ class PengadaanNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<String> listPenempatan = [
-    "Kantor",
-    "Karyawan"
-  ];
+  List<String> listPenempatan = ["Kantor", "Karyawan"];
   String? penempatanModel = "Kantor";
   pilihPenempatan(String value) {
     penempatanModel = value;
     notifyListeners();
   }
 
-  List<String> listSatuan = [
-    "Pcs",
-    "Unit",
-    "Set"
-  ];
+  List<String> listSatuan = ["Pcs", "Unit", "Set"];
   String? satuanModel = "Pcs";
   pilihSatuan(String value) {
     satuanModel = value;
@@ -486,7 +520,8 @@ class PengadaanNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTransaksi = pickedendDate;
-      tglbeli.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
+      tglbeli.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -522,7 +557,8 @@ class PengadaanNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglValuta = pickedendDate;
-      tglTrans.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
+      tglTrans.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -560,7 +596,8 @@ class PengadaanNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTransaksi = pickedendDate;
-      tglbeli.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
+      tglbeli.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -618,7 +655,8 @@ class PengadaanNotifier extends ChangeNotifier {
           "nopolis": "",
           "nilai_revaluasi": "",
           "nik": karyawanModel == null ? "" : karyawanModel!.nik,
-          "nama_pejabat": karyawanModel == null ? "" : karyawanModel!.namaLengkap,
+          "nama_pejabat":
+              karyawanModel == null ? "" : karyawanModel!.namaLengkap,
           "sbb_aset": golonganAsetModel!.sbbAset,
           "sbb_penyusutan": golonganAsetModel!.sbbPenyusutan,
           "sbb_biaya_penyusutan": golonganAsetModel!.sbbBiayaPenyusutan,
@@ -630,7 +668,9 @@ class PengadaanNotifier extends ChangeNotifier {
           "sbb_pph": golonganAsetModel!.sbbPph,
           "sbb_biaya_perbaikan": golonganAsetModel!.sbbBiayaPerbaikan,
         };
-        Setuprepository.setup(token, NetworkURL.editInventaris(), jsonEncode(data)).then((value) {
+        Setuprepository.setup(
+                token, NetworkURL.editInventaris(), jsonEncode(data))
+            .then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             clear();
@@ -699,7 +739,8 @@ class PengadaanNotifier extends ChangeNotifier {
           "nopolis": "",
           "nilai_revaluasi": "",
           "nik": karyawanModel == null ? "" : karyawanModel!.nik,
-          "nama_pejabat": karyawanModel == null ? "" : karyawanModel!.namaLengkap,
+          "nama_pejabat":
+              karyawanModel == null ? "" : karyawanModel!.namaLengkap,
           "sbb_aset": golonganAsetModel!.sbbAset,
           "sbb_penyusutan": golonganAsetModel!.sbbPenyusutan,
           "sbb_biaya_penyusutan": golonganAsetModel!.sbbBiayaPenyusutan,
@@ -710,10 +751,16 @@ class PengadaanNotifier extends ChangeNotifier {
           "sbb_biaya_perbaikan": golonganAsetModel!.sbbBiayaPerbaikan,
           "sbb_ppn": golonganAsetModel!.sbbPpn,
           "sbb_pph": golonganAsetModel!.sbbPph,
-          "sbb_aset_data": golonganAsetModel!.sbbAset.toString().substring(1, 13),
-          "sbb_penyusutan_data": golonganAsetModel!.sbbPenyusutan.toString().substring(1, 13),
+          "sbb_aset_data":
+              golonganAsetModel!.sbbAset.toString().substring(1, 13),
+          "sbb_penyusutan_data":
+              golonganAsetModel!.sbbPenyusutan.toString().substring(1, 13),
+          "sbb_biaya_penyusutan_data":
+              golonganAsetModel!.sbbBiayaPenyusutan.toString().substring(1, 13),
         };
-        Setuprepository.setup(token, NetworkURL.addInventaris(), jsonEncode(data)).then((value) {
+        Setuprepository.setup(
+                token, NetworkURL.addInventaris(), jsonEncode(data))
+            .then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             if (pajak) {
@@ -727,8 +774,10 @@ class PengadaanNotifier extends ChangeNotifier {
                   "trx_code": transaksiPendModel!.trxCode,
                   "otor": "0",
                   "kode_trn": "",
-                  "nama_dr": golonganAsetModel!.sbbPpn.toString().substring(14, golonganAsetModel!.sbbPpn.toString().length),
-                  "dracc": golonganAsetModel!.sbbPpn.toString().substring(1, 13),
+                  "nama_dr": golonganAsetModel!.sbbPpn.toString().substring(
+                      14, golonganAsetModel!.sbbPpn.toString().length),
+                  "dracc":
+                      golonganAsetModel!.sbbPpn.toString().substring(1, 13),
                   "nama_cr": transaksiPendModel!.namaDr,
                   "cracc": transaksiPendModel!.dracc,
                   "rrn": invoice,
@@ -746,7 +795,8 @@ class PengadaanNotifier extends ChangeNotifier {
                   "userinput": users!.namauser,
                   "userterm": "114.80.90.54",
                   "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                  "inputtgljam": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
+                  "inputtgljam":
+                      DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
                   "otoruser": "",
                   "otorterm": "",
                   "otortgljam": "",
@@ -756,7 +806,8 @@ class PengadaanNotifier extends ChangeNotifier {
                   "status": "PENDING",
                   "modul": "PAJAK PENGADAAN INVENTARIS",
                 };
-                Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
+                Setuprepository.setup(
+                    token, NetworkURL.transaksi(), jsonEncode(data));
               } else {
                 var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                 var data = {
@@ -767,8 +818,10 @@ class PengadaanNotifier extends ChangeNotifier {
                   "trx_code": transaksiPendModel!.trxCode,
                   "otor": "0",
                   "kode_trn": "",
-                  "nama_dr": golonganAsetModel!.sbbPpn.toString().substring(14, golonganAsetModel!.sbbPpn.toString().length),
-                  "dracc": golonganAsetModel!.sbbPpn.toString().substring(1, 13),
+                  "nama_dr": golonganAsetModel!.sbbPpn.toString().substring(
+                      14, golonganAsetModel!.sbbPpn.toString().length),
+                  "dracc":
+                      golonganAsetModel!.sbbPpn.toString().substring(1, 13),
                   "nama_cr": transaksiPendModel!.namaDr,
                   "cracc": transaksiPendModel!.dracc,
                   "rrn": invoice,
@@ -786,7 +839,8 @@ class PengadaanNotifier extends ChangeNotifier {
                   "userinput": users!.namauser,
                   "userterm": "114.80.90.54",
                   "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                  "inputtgljam": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
+                  "inputtgljam":
+                      DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
                   "otoruser": "",
                   "otorterm": "",
                   "otortgljam": "",
@@ -796,7 +850,8 @@ class PengadaanNotifier extends ChangeNotifier {
                   "status": "COMPLETED",
                   "modul": "PAJAK PENGADAAN INVENTARIS",
                 };
-                Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
+                Setuprepository.setup(
+                    token, NetworkURL.transaksi(), jsonEncode(data));
               }
 
               if (double.parse(pph.text.replaceAll(",", "")) < total) {
@@ -809,8 +864,10 @@ class PengadaanNotifier extends ChangeNotifier {
                   "trx_code": transaksiPendModel!.trxCode,
                   "otor": "0",
                   "kode_trn": "",
-                  "nama_cr": golonganAsetModel!.sbbPph.toString().substring(14, golonganAsetModel!.sbbPph.toString().length),
-                  "cracc": golonganAsetModel!.sbbPph.toString().substring(1, 13),
+                  "nama_cr": golonganAsetModel!.sbbPph.toString().substring(
+                      14, golonganAsetModel!.sbbPph.toString().length),
+                  "cracc":
+                      golonganAsetModel!.sbbPph.toString().substring(1, 13),
                   "nama_dr": transaksiPendModel!.namaDr,
                   "dracc": transaksiPendModel!.dracc,
                   "rrn": invoice,
@@ -828,7 +885,8 @@ class PengadaanNotifier extends ChangeNotifier {
                   "userinput": users!.namauser,
                   "userterm": "114.80.90.54",
                   "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                  "inputtgljam": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
+                  "inputtgljam":
+                      DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
                   "otoruser": "",
                   "otorterm": "",
                   "otortgljam": "",
@@ -838,7 +896,8 @@ class PengadaanNotifier extends ChangeNotifier {
                   "status": "PENDING",
                   "modul": "PAJAK PPH PENGADAAN INVENTARIS",
                 };
-                Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
+                Setuprepository.setup(
+                    token, NetworkURL.transaksi(), jsonEncode(data));
               } else {
                 var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                 var data = {
@@ -849,8 +908,10 @@ class PengadaanNotifier extends ChangeNotifier {
                   "trx_code": transaksiPendModel!.trxCode,
                   "otor": "0",
                   "kode_trn": "",
-                  "nama_cr": golonganAsetModel!.sbbPph.toString().substring(14, golonganAsetModel!.sbbPph.toString().length),
-                  "cracc": golonganAsetModel!.sbbPph.toString().substring(1, 13),
+                  "nama_cr": golonganAsetModel!.sbbPph.toString().substring(
+                      14, golonganAsetModel!.sbbPph.toString().length),
+                  "cracc":
+                      golonganAsetModel!.sbbPph.toString().substring(1, 13),
                   "nama_dr": transaksiPendModel!.namaDr,
                   "dracc": transaksiPendModel!.dracc,
                   "rrn": invoice,
@@ -868,7 +929,8 @@ class PengadaanNotifier extends ChangeNotifier {
                   "userinput": users!.namauser,
                   "userterm": "114.80.90.54",
                   "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                  "inputtgljam": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
+                  "inputtgljam":
+                      DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
                   "otoruser": "",
                   "otorterm": "",
                   "otortgljam": "",
@@ -878,7 +940,8 @@ class PengadaanNotifier extends ChangeNotifier {
                   "status": "COMPLETED",
                   "modul": "PAJAK PENGADAAN INVENTARIS",
                 };
-                Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
+                Setuprepository.setup(
+                    token, NetworkURL.transaksi(), jsonEncode(data));
               }
             }
             if (double.parse(users!.maksimalTransaksi) < total) {
@@ -891,7 +954,8 @@ class PengadaanNotifier extends ChangeNotifier {
                 "trx_code": transaksiPendModel!.trxCode,
                 "otor": "0",
                 "kode_trn": "",
-                "nama_dr": golonganAsetModel!.sbbAset.toString().substring(14, golonganAsetModel!.sbbAset.toString().length),
+                "nama_dr": golonganAsetModel!.sbbAset.toString().substring(
+                    14, golonganAsetModel!.sbbAset.toString().length),
                 "dracc": golonganAsetModel!.sbbAset.toString().substring(1, 13),
                 "nama_cr": transaksiPendModel!.namaDr,
                 "cracc": transaksiPendModel!.dracc,
@@ -910,7 +974,8 @@ class PengadaanNotifier extends ChangeNotifier {
                 "userinput": users!.namauser,
                 "userterm": "114.80.90.54",
                 "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                "inputtgljam": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
+                "inputtgljam":
+                    DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
                 "otoruser": "",
                 "otorterm": "",
                 "otortgljam": "",
@@ -920,7 +985,8 @@ class PengadaanNotifier extends ChangeNotifier {
                 "status": "PENDING",
                 "modul": "PENGADAAN INVENTARIS",
               };
-              Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
+              Setuprepository.setup(
+                  token, NetworkURL.transaksi(), jsonEncode(data));
             } else {
               var invoice = DateTime.now().millisecondsSinceEpoch.toString();
               var data = {
@@ -931,7 +997,8 @@ class PengadaanNotifier extends ChangeNotifier {
                 "trx_code": transaksiPendModel!.trxCode,
                 "otor": "0",
                 "kode_trn": "",
-                "nama_dr": golonganAsetModel!.sbbAset.toString().substring(14, golonganAsetModel!.sbbAset.toString().length),
+                "nama_dr": golonganAsetModel!.sbbAset.toString().substring(
+                    14, golonganAsetModel!.sbbAset.toString().length),
                 "dracc": golonganAsetModel!.sbbAset.toString().substring(1, 13),
                 "nama_cr": transaksiPendModel!.namaDr,
                 "cracc": transaksiPendModel!.dracc,
@@ -950,7 +1017,8 @@ class PengadaanNotifier extends ChangeNotifier {
                 "userinput": users!.namauser,
                 "userterm": "114.80.90.54",
                 "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                "inputtgljam": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
+                "inputtgljam":
+                    DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
                 "otoruser": "",
                 "otorterm": "",
                 "otortgljam": "",
@@ -960,7 +1028,8 @@ class PengadaanNotifier extends ChangeNotifier {
                 "status": "COMPLETED",
                 "modul": "PENGADAAN INVENTARIS",
               };
-              Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
+              Setuprepository.setup(
+                  token, NetworkURL.transaksi(), jsonEncode(data));
             }
             clear();
             dialog = false;
@@ -977,15 +1046,15 @@ class PengadaanNotifier extends ChangeNotifier {
   List<InventarisModel> list = [];
 
 //contoh decimal sparator currency
-  final currencyFormatter = NumberFormat.currency(symbol: 'Rp ', decimalDigits: 2);
+  final currencyFormatter =
+      NumberFormat.currency(symbol: 'Rp ', decimalDigits: 2);
   getInventaris() async {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
-    Setuprepository.setup(token, NetworkURL.getInventaris(), jsonEncode(data)).then((value) {
+    var data = {"kode_pt": "001"};
+    Setuprepository.setup(token, NetworkURL.getInventaris(), jsonEncode(data))
+        .then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(InventarisModel.fromJson(i));
@@ -1012,9 +1081,17 @@ class PengadaanNotifier extends ChangeNotifier {
     pajak = inventarisModel!.ppnBeli != "0" ? true : false;
 
     satuan = listSatuan.where((e) => e == inventarisModel!.satuanAset).first;
-    kantor = listKantor.where((e) => e.kodePt == inventarisModel!.kodePt && e.kodeKantor == inventarisModel!.kodeKantor).first;
-    kelompokAsetModel = listKelompok.where((e) => e.kodeKelompok == inventarisModel!.kodeKelompok).first;
-    golonganAsetModel = listGolongan.where((e) => e.kodeGolongan == inventarisModel!.kodeGolongan).first;
+    kantor = listKantor
+        .where((e) =>
+            e.kodePt == inventarisModel!.kodePt &&
+            e.kodeKantor == inventarisModel!.kodeKantor)
+        .first;
+    kelompokAsetModel = listKelompok
+        .where((e) => e.kodeKelompok == inventarisModel!.kodeKelompok)
+        .first;
+    golonganAsetModel = listGolongan
+        .where((e) => e.kodeGolongan == inventarisModel!.kodeGolongan)
+        .first;
     lokasi.text = inventarisModel!.lokasi;
     kota.text = inventarisModel!.kota;
     noDok.text = inventarisModel!.nodokBeli;
@@ -1024,14 +1101,27 @@ class PengadaanNotifier extends ChangeNotifier {
     blnPenyusutan.text = inventarisModel!.blnMulaiSusut;
     tglTransaksi = DateTime.parse(inventarisModel!.tglBeli);
     tglTransaksis = DateTime.parse(inventarisModel!.tglTerima);
-    hargaBeli.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.habeli)).replaceAll(".", ",");
-    discount.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.disc)).replaceAll(".", ",");
-    biaya.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.biaya)).replaceAll(".", ",");
+    hargaBeli.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.habeli))
+        .replaceAll(".", ",");
+    discount.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.disc))
+        .replaceAll(".", ",");
+    biaya.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.biaya))
+        .replaceAll(".", ",");
     subtotal = int.parse(inventarisModel!.haper);
-    nilaiPenyusutan.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.nilaiResidu)).replaceAll(".", ",");
-    ppn.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.ppnBeli)).replaceAll(".", ",");
-    pph.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.pph)).replaceAll(".", ",");
-    total = (subtotal + int.parse(ppn.text.replaceAll(",", ""))) - int.parse(pph.text.replaceAll(",", ""));
+    nilaiPenyusutan.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.nilaiResidu))
+        .replaceAll(".", ",");
+    ppn.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.ppnBeli))
+        .replaceAll(".", ",");
+    pph.text = FormatCurrency.oCcy
+        .format(int.parse(inventarisModel!.pph))
+        .replaceAll(".", ",");
+    total = (subtotal + int.parse(ppn.text.replaceAll(",", ""))) -
+        int.parse(pph.text.replaceAll(",", ""));
     notifyListeners();
   }
 
@@ -1105,7 +1195,8 @@ class PengadaanNotifier extends ChangeNotifier {
                         tglTransaksi!.month,
                       ),
                       maximumDate: DateTime(DateTime.now().year + 50),
-                      options: const DatePickerOptions(backgroundColor: Colors.white),
+                      options: const DatePickerOptions(
+                          backgroundColor: Colors.white),
                       viewType: const [
                         DatePickerViewType.month,
                         DatePickerViewType.year,
@@ -1128,7 +1219,8 @@ class PengadaanNotifier extends ChangeNotifier {
                       notifyListeners(); // if ChangeNotifier is needed
                     },
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 16),
                       decoration: BoxDecoration(
                         color: Colors.blue, // replace with your colorPrimary
                         borderRadius: BorderRadius.circular(8),
@@ -1163,12 +1255,19 @@ class PengadaanNotifier extends ChangeNotifier {
           int.parse(DateFormat('dd').format(
             tglTransaksi!,
           ))),
-      firstDate: DateTime(int.parse(DateFormat('y').format(tglTransaksi!)), int.parse(DateFormat('MM').format(tglTransaksi!)), int.parse(DateFormat('dd').format(tglTransaksi!))),
-      lastDate: DateTime(int.parse(DateFormat('y').format(DateTime.now())) + 10, int.parse(DateFormat('MM').format(tglTransaksi!)), int.parse(DateFormat('dd').format(tglTransaksi!))),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(tglTransaksi!)),
+          int.parse(DateFormat('MM').format(tglTransaksi!)),
+          int.parse(DateFormat('dd').format(tglTransaksi!))),
+      lastDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.now())) + 10,
+          int.parse(DateFormat('MM').format(tglTransaksi!)),
+          int.parse(DateFormat('dd').format(tglTransaksi!))),
     ));
     if (pickedendDate != null) {
       tglTransaksis = pickedendDate;
-      tglterima.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
+      tglterima.text = DateFormat("dd-MMM-yyyy")
+          .format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }

@@ -177,7 +177,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksiBack.add(TransaksiModel.fromJson(i));
         }
-        if (listTransaksi.isNotEmpty) {
+        if (listTransaksiBack.isNotEmpty) {
           for (var i = 0;
               i < listTransaksiBack.where((e) => e.kodeTrans != "9998").length;
               i++) {

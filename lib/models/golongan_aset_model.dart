@@ -12,6 +12,8 @@ class GolonganAsetModel {
     required this.namaGolongan,
     required this.masaSusut,
     required this.nilaiDeclining,
+    required this.metode,
+    required this.nilaiAkhir,
     required this.sbbAset,
     required this.sbbPenyusutan,
     required this.sbbBiayaPenyusutan,
@@ -29,6 +31,8 @@ class GolonganAsetModel {
   final String namaGolongan;
   final String masaSusut;
   final String nilaiDeclining;
+  final String metode;
+  final String nilaiAkhir;
   final dynamic sbbAset;
   final dynamic sbbPenyusutan;
   final dynamic sbbBiayaPenyusutan;
@@ -46,6 +50,8 @@ class GolonganAsetModel {
     namaGolongan: json['nama_golongan'].toString(),
     masaSusut: json['masa_susut'].toString(),
     nilaiDeclining: json['nilai_declining'].toString(),
+    metode: json['metode'].toString(),
+    nilaiAkhir: json['nilai_akhir'].toString(),
     sbbAset: json['sbb_aset'] as dynamic,
     sbbPenyusutan: json['sbb_penyusutan'] as dynamic,
     sbbBiayaPenyusutan: json['sbb_biaya_penyusutan'] as dynamic,
@@ -64,6 +70,8 @@ class GolonganAsetModel {
     'nama_golongan': namaGolongan,
     'masa_susut': masaSusut,
     'nilai_declining': nilaiDeclining,
+    'metode': metode,
+    'nilai_akhir': nilaiAkhir,
     'sbb_aset': sbbAset,
     'sbb_penyusutan': sbbPenyusutan,
     'sbb_biaya_penyusutan': sbbBiayaPenyusutan,
@@ -82,6 +90,8 @@ class GolonganAsetModel {
     namaGolongan: namaGolongan,
     masaSusut: masaSusut,
     nilaiDeclining: nilaiDeclining,
+    metode: metode,
+    nilaiAkhir: nilaiAkhir,
     sbbAset: sbbAset,
     sbbPenyusutan: sbbPenyusutan,
     sbbBiayaPenyusutan: sbbBiayaPenyusutan,
@@ -101,6 +111,8 @@ class GolonganAsetModel {
     String? namaGolongan,
     String? masaSusut,
     String? nilaiDeclining,
+    String? metode,
+    String? nilaiAkhir,
     dynamic? sbbAset,
     dynamic? sbbPenyusutan,
     dynamic? sbbBiayaPenyusutan,
@@ -117,6 +129,8 @@ class GolonganAsetModel {
     namaGolongan: namaGolongan ?? this.namaGolongan,
     masaSusut: masaSusut ?? this.masaSusut,
     nilaiDeclining: nilaiDeclining ?? this.nilaiDeclining,
+    metode: metode ?? this.metode,
+    nilaiAkhir: nilaiAkhir ?? this.nilaiAkhir,
     sbbAset: sbbAset ?? this.sbbAset,
     sbbPenyusutan: sbbPenyusutan ?? this.sbbPenyusutan,
     sbbBiayaPenyusutan: sbbBiayaPenyusutan ?? this.sbbBiayaPenyusutan,
@@ -131,8 +145,8 @@ class GolonganAsetModel {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is GolonganAsetModel && id == other.id && kodeGolongan == other.kodeGolongan && namaGolongan == other.namaGolongan && masaSusut == other.masaSusut && nilaiDeclining == other.nilaiDeclining && sbbAset == other.sbbAset && sbbPenyusutan == other.sbbPenyusutan && sbbBiayaPenyusutan == other.sbbBiayaPenyusutan && sbbRugiRevaluasi == other.sbbRugiRevaluasi && sbbLabaRevaluasi == other.sbbLabaRevaluasi && sbbRugiJual == other.sbbRugiJual && sbbLabaJual == other.sbbLabaJual && sbbPpn == other.sbbPpn && sbbPph == other.sbbPph && sbbBiayaPerbaikan == other.sbbBiayaPerbaikan;
+    || other is GolonganAsetModel && id == other.id && kodeGolongan == other.kodeGolongan && namaGolongan == other.namaGolongan && masaSusut == other.masaSusut && nilaiDeclining == other.nilaiDeclining && metode == other.metode && nilaiAkhir == other.nilaiAkhir && sbbAset == other.sbbAset && sbbPenyusutan == other.sbbPenyusutan && sbbBiayaPenyusutan == other.sbbBiayaPenyusutan && sbbRugiRevaluasi == other.sbbRugiRevaluasi && sbbLabaRevaluasi == other.sbbLabaRevaluasi && sbbRugiJual == other.sbbRugiJual && sbbLabaJual == other.sbbLabaJual && sbbPpn == other.sbbPpn && sbbPph == other.sbbPph && sbbBiayaPerbaikan == other.sbbBiayaPerbaikan;
 
   @override
-  int get hashCode => id.hashCode ^ kodeGolongan.hashCode ^ namaGolongan.hashCode ^ masaSusut.hashCode ^ nilaiDeclining.hashCode ^ sbbAset.hashCode ^ sbbPenyusutan.hashCode ^ sbbBiayaPenyusutan.hashCode ^ sbbRugiRevaluasi.hashCode ^ sbbLabaRevaluasi.hashCode ^ sbbRugiJual.hashCode ^ sbbLabaJual.hashCode ^ sbbPpn.hashCode ^ sbbPph.hashCode ^ sbbBiayaPerbaikan.hashCode;
+  int get hashCode => id.hashCode ^ kodeGolongan.hashCode ^ namaGolongan.hashCode ^ masaSusut.hashCode ^ nilaiDeclining.hashCode ^ metode.hashCode ^ nilaiAkhir.hashCode ^ sbbAset.hashCode ^ sbbPenyusutan.hashCode ^ sbbBiayaPenyusutan.hashCode ^ sbbRugiRevaluasi.hashCode ^ sbbLabaRevaluasi.hashCode ^ sbbRugiJual.hashCode ^ sbbLabaJual.hashCode ^ sbbPpn.hashCode ^ sbbPph.hashCode ^ sbbBiayaPerbaikan.hashCode;
 }
