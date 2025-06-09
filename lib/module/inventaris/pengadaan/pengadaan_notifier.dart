@@ -377,6 +377,7 @@ class PengadaanNotifier extends ChangeNotifier {
     currentStep = 0;
     dialog = true;
     editData = false;
+    editBlnsusut = false;
     penempatanModel = "Kantor";
     kelompokAsetModel = null;
     golonganAsetModel = null;
@@ -1174,7 +1175,7 @@ class PengadaanNotifier extends ChangeNotifier {
   InventarisModel? inventarisModel;
   var editData = false;
   DateTime? blnSusutparseDate;
-  var editBlnsusut = true;
+  var editBlnsusut = false;
   TransaksiPendModel? editSetupTrans;
   edit(String id) async {
     inventarisModel = list.where((e) => e.id == int.parse(id)).first;
