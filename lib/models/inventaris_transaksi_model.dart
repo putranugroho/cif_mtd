@@ -63,6 +63,7 @@ class InventarisTransaksiModel {
     required this.nilaiRevaluasi,
     required this.pihakRevaluasi,
     required this.tglRevaluasi,
+    required this.hargaPerolehan,
   });
 
   final int id;
@@ -103,9 +104,9 @@ class InventarisTransaksiModel {
   final dynamic chguser;
   final dynamic chgtgljam;
   final dynamic chgterm;
-  final String autuser;
-  final String auttgljam;
-  final String autterm;
+  final dynamic autuser;
+  final dynamic auttgljam;
+  final dynamic autterm;
   final String persentasePenyusutan;
   final String totalSusut;
   final dynamic deluser;
@@ -113,14 +114,15 @@ class InventarisTransaksiModel {
   final dynamic delterm;
   final String sbbAset;
   final String sbbPenyusutan;
-  final String tglJual;
-  final String alasan;
+  final dynamic tglJual;
+  final dynamic alasan;
   final String nilaiBuku;
   final String susutKe;
   final dynamic susutTerakhir;
   final String nilaiRevaluasi;
   final dynamic pihakRevaluasi;
   final dynamic tglRevaluasi;
+  final String hargaPerolehan;
 
   factory InventarisTransaksiModel.fromJson(Map<String,dynamic> json) => InventarisTransaksiModel(
     id: json['id'] as int,
@@ -161,9 +163,9 @@ class InventarisTransaksiModel {
     chguser: json['chguser'] as dynamic,
     chgtgljam: json['chgtgljam'] as dynamic,
     chgterm: json['chgterm'] as dynamic,
-    autuser: json['autuser'].toString(),
-    auttgljam: json['auttgljam'].toString(),
-    autterm: json['autterm'].toString(),
+    autuser: json['autuser'] as dynamic,
+    auttgljam: json['auttgljam'] as dynamic,
+    autterm: json['autterm'] as dynamic,
     persentasePenyusutan: json['persentase_penyusutan'].toString(),
     totalSusut: json['total_susut'].toString(),
     deluser: json['deluser'] as dynamic,
@@ -171,14 +173,15 @@ class InventarisTransaksiModel {
     delterm: json['delterm'] as dynamic,
     sbbAset: json['sbb_aset'].toString(),
     sbbPenyusutan: json['sbb_penyusutan'].toString(),
-    tglJual: json['tgl_jual'].toString(),
-    alasan: json['alasan'].toString(),
+    tglJual: json['tgl_jual'] as dynamic,
+    alasan: json['alasan'] as dynamic,
     nilaiBuku: json['nilai_buku'].toString(),
     susutKe: json['susut_ke'].toString(),
     susutTerakhir: json['susut_terakhir'] as dynamic,
     nilaiRevaluasi: json['nilai_revaluasi'].toString(),
     pihakRevaluasi: json['pihak_revaluasi'] as dynamic,
-    tglRevaluasi: json['tgl_revaluasi'] as dynamic
+    tglRevaluasi: json['tgl_revaluasi'] as dynamic,
+    hargaPerolehan: json['harga_perolehan'].toString()
   );
   
   Map<String, dynamic> toJson() => {
@@ -237,7 +240,8 @@ class InventarisTransaksiModel {
     'susut_terakhir': susutTerakhir,
     'nilai_revaluasi': nilaiRevaluasi,
     'pihak_revaluasi': pihakRevaluasi,
-    'tgl_revaluasi': tglRevaluasi
+    'tgl_revaluasi': tglRevaluasi,
+    'harga_perolehan': hargaPerolehan
   };
 
   InventarisTransaksiModel clone() => InventarisTransaksiModel(
@@ -296,7 +300,8 @@ class InventarisTransaksiModel {
     susutTerakhir: susutTerakhir,
     nilaiRevaluasi: nilaiRevaluasi,
     pihakRevaluasi: pihakRevaluasi,
-    tglRevaluasi: tglRevaluasi
+    tglRevaluasi: tglRevaluasi,
+    hargaPerolehan: hargaPerolehan
   );
 
 
@@ -339,9 +344,9 @@ class InventarisTransaksiModel {
     dynamic? chguser,
     dynamic? chgtgljam,
     dynamic? chgterm,
-    String? autuser,
-    String? auttgljam,
-    String? autterm,
+    dynamic? autuser,
+    dynamic? auttgljam,
+    dynamic? autterm,
     String? persentasePenyusutan,
     String? totalSusut,
     dynamic? deluser,
@@ -349,14 +354,15 @@ class InventarisTransaksiModel {
     dynamic? delterm,
     String? sbbAset,
     String? sbbPenyusutan,
-    String? tglJual,
-    String? alasan,
+    dynamic? tglJual,
+    dynamic? alasan,
     String? nilaiBuku,
     String? susutKe,
     dynamic? susutTerakhir,
     String? nilaiRevaluasi,
     dynamic? pihakRevaluasi,
-    dynamic? tglRevaluasi
+    dynamic? tglRevaluasi,
+    String? hargaPerolehan
   }) => InventarisTransaksiModel(
     id: id ?? this.id,
     kelompokAset: kelompokAset ?? this.kelompokAset,
@@ -414,12 +420,13 @@ class InventarisTransaksiModel {
     nilaiRevaluasi: nilaiRevaluasi ?? this.nilaiRevaluasi,
     pihakRevaluasi: pihakRevaluasi ?? this.pihakRevaluasi,
     tglRevaluasi: tglRevaluasi ?? this.tglRevaluasi,
+    hargaPerolehan: hargaPerolehan ?? this.hargaPerolehan,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is InventarisTransaksiModel && id == other.id && kelompokAset == other.kelompokAset && golonganAset == other.golonganAset && nomorAset == other.nomorAset && satuan == other.satuan && namaAset == other.namaAset && keterangan == other.keterangan && noDokumenPembelian == other.noDokumenPembelian && tanggalBeli == other.tanggalBeli && tanggalTerima == other.tanggalTerima && jenisPenempatan == other.jenisPenempatan && namaKantor == other.namaKantor && lokasi == other.lokasi && kota == other.kota && nilaiAkhir == other.nilaiAkhir && masaSusut == other.masaSusut && bulanMulaiSusut == other.bulanMulaiSusut && tanggalValuta == other.tanggalValuta && noDokumenTransaksi == other.noDokumenTransaksi && nilaiTransaksi == other.nilaiTransaksi && keteranganTransaksi == other.keteranganTransaksi && hargaBeli == other.hargaBeli && diskon == other.diskon && biaya == other.biaya && pajak == other.pajak && metodePenyusutan == other.metodePenyusutan && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && namaPegawai == other.namaPegawai && nipPegawai == other.nipPegawai && statusRec == other.statusRec && inpuser == other.inpuser && inptgljam == other.inptgljam && inpterm == other.inpterm && chguser == other.chguser && chgtgljam == other.chgtgljam && chgterm == other.chgterm && autuser == other.autuser && auttgljam == other.auttgljam && autterm == other.autterm && persentasePenyusutan == other.persentasePenyusutan && totalSusut == other.totalSusut && deluser == other.deluser && deltgljam == other.deltgljam && delterm == other.delterm && sbbAset == other.sbbAset && sbbPenyusutan == other.sbbPenyusutan && tglJual == other.tglJual && alasan == other.alasan && nilaiBuku == other.nilaiBuku && susutKe == other.susutKe && susutTerakhir == other.susutTerakhir && nilaiRevaluasi == other.nilaiRevaluasi && pihakRevaluasi == other.pihakRevaluasi && tglRevaluasi == other.tglRevaluasi;
+    || other is InventarisTransaksiModel && id == other.id && kelompokAset == other.kelompokAset && golonganAset == other.golonganAset && nomorAset == other.nomorAset && satuan == other.satuan && namaAset == other.namaAset && keterangan == other.keterangan && noDokumenPembelian == other.noDokumenPembelian && tanggalBeli == other.tanggalBeli && tanggalTerima == other.tanggalTerima && jenisPenempatan == other.jenisPenempatan && namaKantor == other.namaKantor && lokasi == other.lokasi && kota == other.kota && nilaiAkhir == other.nilaiAkhir && masaSusut == other.masaSusut && bulanMulaiSusut == other.bulanMulaiSusut && tanggalValuta == other.tanggalValuta && noDokumenTransaksi == other.noDokumenTransaksi && nilaiTransaksi == other.nilaiTransaksi && keteranganTransaksi == other.keteranganTransaksi && hargaBeli == other.hargaBeli && diskon == other.diskon && biaya == other.biaya && pajak == other.pajak && metodePenyusutan == other.metodePenyusutan && kodePt == other.kodePt && kodeKantor == other.kodeKantor && kodeInduk == other.kodeInduk && namaPegawai == other.namaPegawai && nipPegawai == other.nipPegawai && statusRec == other.statusRec && inpuser == other.inpuser && inptgljam == other.inptgljam && inpterm == other.inpterm && chguser == other.chguser && chgtgljam == other.chgtgljam && chgterm == other.chgterm && autuser == other.autuser && auttgljam == other.auttgljam && autterm == other.autterm && persentasePenyusutan == other.persentasePenyusutan && totalSusut == other.totalSusut && deluser == other.deluser && deltgljam == other.deltgljam && delterm == other.delterm && sbbAset == other.sbbAset && sbbPenyusutan == other.sbbPenyusutan && tglJual == other.tglJual && alasan == other.alasan && nilaiBuku == other.nilaiBuku && susutKe == other.susutKe && susutTerakhir == other.susutTerakhir && nilaiRevaluasi == other.nilaiRevaluasi && pihakRevaluasi == other.pihakRevaluasi && tglRevaluasi == other.tglRevaluasi && hargaPerolehan == other.hargaPerolehan;
 
   @override
-  int get hashCode => id.hashCode ^ kelompokAset.hashCode ^ golonganAset.hashCode ^ nomorAset.hashCode ^ satuan.hashCode ^ namaAset.hashCode ^ keterangan.hashCode ^ noDokumenPembelian.hashCode ^ tanggalBeli.hashCode ^ tanggalTerima.hashCode ^ jenisPenempatan.hashCode ^ namaKantor.hashCode ^ lokasi.hashCode ^ kota.hashCode ^ nilaiAkhir.hashCode ^ masaSusut.hashCode ^ bulanMulaiSusut.hashCode ^ tanggalValuta.hashCode ^ noDokumenTransaksi.hashCode ^ nilaiTransaksi.hashCode ^ keteranganTransaksi.hashCode ^ hargaBeli.hashCode ^ diskon.hashCode ^ biaya.hashCode ^ pajak.hashCode ^ metodePenyusutan.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ namaPegawai.hashCode ^ nipPegawai.hashCode ^ statusRec.hashCode ^ inpuser.hashCode ^ inptgljam.hashCode ^ inpterm.hashCode ^ chguser.hashCode ^ chgtgljam.hashCode ^ chgterm.hashCode ^ autuser.hashCode ^ auttgljam.hashCode ^ autterm.hashCode ^ persentasePenyusutan.hashCode ^ totalSusut.hashCode ^ deluser.hashCode ^ deltgljam.hashCode ^ delterm.hashCode ^ sbbAset.hashCode ^ sbbPenyusutan.hashCode ^ tglJual.hashCode ^ alasan.hashCode ^ nilaiBuku.hashCode ^ susutKe.hashCode ^ susutTerakhir.hashCode ^ nilaiRevaluasi.hashCode ^ pihakRevaluasi.hashCode ^ tglRevaluasi.hashCode;
+  int get hashCode => id.hashCode ^ kelompokAset.hashCode ^ golonganAset.hashCode ^ nomorAset.hashCode ^ satuan.hashCode ^ namaAset.hashCode ^ keterangan.hashCode ^ noDokumenPembelian.hashCode ^ tanggalBeli.hashCode ^ tanggalTerima.hashCode ^ jenisPenempatan.hashCode ^ namaKantor.hashCode ^ lokasi.hashCode ^ kota.hashCode ^ nilaiAkhir.hashCode ^ masaSusut.hashCode ^ bulanMulaiSusut.hashCode ^ tanggalValuta.hashCode ^ noDokumenTransaksi.hashCode ^ nilaiTransaksi.hashCode ^ keteranganTransaksi.hashCode ^ hargaBeli.hashCode ^ diskon.hashCode ^ biaya.hashCode ^ pajak.hashCode ^ metodePenyusutan.hashCode ^ kodePt.hashCode ^ kodeKantor.hashCode ^ kodeInduk.hashCode ^ namaPegawai.hashCode ^ nipPegawai.hashCode ^ statusRec.hashCode ^ inpuser.hashCode ^ inptgljam.hashCode ^ inpterm.hashCode ^ chguser.hashCode ^ chgtgljam.hashCode ^ chgterm.hashCode ^ autuser.hashCode ^ auttgljam.hashCode ^ autterm.hashCode ^ persentasePenyusutan.hashCode ^ totalSusut.hashCode ^ deluser.hashCode ^ deltgljam.hashCode ^ delterm.hashCode ^ sbbAset.hashCode ^ sbbPenyusutan.hashCode ^ tglJual.hashCode ^ alasan.hashCode ^ nilaiBuku.hashCode ^ susutKe.hashCode ^ susutTerakhir.hashCode ^ nilaiRevaluasi.hashCode ^ pihakRevaluasi.hashCode ^ tglRevaluasi.hashCode ^ hargaPerolehan.hashCode;
 }

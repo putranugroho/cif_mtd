@@ -150,7 +150,7 @@ class PenempatanPage extends StatelessWidget {
                                                       ),
                                                       selectedItem: value.inventarisModel,
                                                       items: value.list,
-                                                      itemAsString: (e) => e.ket,
+                                                      itemAsString: (e) => e.namaaset,
                                                       onChanged: (e) {
                                                         value.pilihInventory(e!);
                                                       },

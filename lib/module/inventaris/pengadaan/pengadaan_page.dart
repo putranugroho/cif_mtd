@@ -1302,6 +1302,10 @@ class PengadaanPage extends StatelessWidget {
                                                                   itemAsString:
                                                                       (e) => e
                                                                           .namaKantor,
+                                                                  enabled: value
+                                                                          .editData
+                                                                      ? false
+                                                                      : true,
                                                                   onChanged:
                                                                       (e) {
                                                                     value
@@ -1362,6 +1366,9 @@ class PengadaanPage extends StatelessWidget {
                                                                         TextFormField(
                                                                           textInputAction:
                                                                               TextInputAction.done,
+                                                                          enabled: value.editData
+                                                                              ? false
+                                                                              : true,
                                                                           maxLines:
                                                                               1,
                                                                           validator:
@@ -1409,6 +1416,9 @@ class PengadaanPage extends StatelessWidget {
                                                                               8,
                                                                         ),
                                                                         TextFormField(
+                                                                          enabled: value.editData
+                                                                              ? false
+                                                                              : true,
                                                                           textInputAction:
                                                                               TextInputAction.done,
                                                                           maxLines:
@@ -1468,6 +1478,9 @@ class PengadaanPage extends StatelessWidget {
                                                                       controller,
                                                                       focusNode) {
                                                                     return TextField(
+                                                                        enabled: value.editData
+                                                                            ? false
+                                                                            : true,
                                                                         controller:
                                                                             controller,
                                                                         focusNode:
@@ -1525,6 +1538,10 @@ class PengadaanPage extends StatelessWidget {
                                                                   height: 8,
                                                                 ),
                                                                 TextFormField(
+                                                                  enabled: value
+                                                                          .editData
+                                                                      ? false
+                                                                      : true,
                                                                   textInputAction:
                                                                       TextInputAction
                                                                           .done,

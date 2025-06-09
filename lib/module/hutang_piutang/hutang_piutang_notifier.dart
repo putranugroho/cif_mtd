@@ -1553,7 +1553,12 @@ class HutangPiutangNotifier extends ChangeNotifier {
         for (Map<String, dynamic> i in value['data']) {
           listPajak.add(SetupPajakModel.fromJson(i));
         }
-        setupPajakModel = listPajak[0];
+        ppnModel = listPajak.where((e) => e.tipe == "N").isNotEmpty
+            ? listPajak.where((e) => e.tipe == "N").first
+            : null;
+        pphModel = listPajak.where((e) => e.tipe == "Y").isNotEmpty
+            ? listPajak.where((e) => e.tipe == "Y").first
+            : null;
         isLoading = false;
         notifyListeners();
       } else {
@@ -1570,13 +1575,21 @@ class HutangPiutangNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  SetupPajakModel? ppnModel;
+  SetupPajakModel? pphModel;
   void changeTotal() {
+    ppnModel = listPajak.where((e) => e.tipe == "N").isNotEmpty
+        ? listPajak.where((e) => e.tipe == "N").first
+        : null;
+    pphModel = listPajak.where((e) => e.tipe == "Y").isNotEmpty
+        ? listPajak.where((e) => e.tipe == "Y").first
+        : null;
     if (ppn) {
       double cekppn = (double.parse(nilaitransaksi.text
               .replaceAll("Rp ", "")
               .replaceAll(".", "")
               .replaceAll(",", ".")) *
-          double.parse(setupPajakModel!.ppn) /
+          double.parse(ppnModel!.ppn) /
           100);
       nilaippn.text = "Rp ${FormatCurrency.oCcyDecimal.format(cekppn)}";
     }
@@ -1585,7 +1598,7 @@ class HutangPiutangNotifier extends ChangeNotifier {
               .replaceAll("Rp ", "")
               .replaceAll(".", "")
               .replaceAll(",", ".")) *
-          double.parse(setupPajakModel!.pph23) /
+          double.parse(pphModel!.pph23) /
           100);
       nilaipph.text = "Rp ${FormatCurrency.oCcyDecimal.format(cekpph)}";
     }
@@ -1870,15 +1883,15 @@ class HutangPiutangNotifier extends ChangeNotifier {
         listOutstanding[index].text =
             FormatCurrency.oCcyDecimal.format(newOutstanding);
         if (ppn) {
-          listNilaiPPN[index].text = FormatCurrency.oCcyDecimal.format(
-              (transaksiValue * double.parse(setupPajakModel!.ppn)) / 100);
+          listNilaiPPN[index].text = FormatCurrency.oCcyDecimal
+              .format((transaksiValue * double.parse(ppnModel!.ppn)) / 100);
         } else {
           listNilaiPPN[index].text = FormatCurrency.oCcyDecimal.format(0);
         }
 
         if (pph) {
-          listNilaiPPH[index].text = FormatCurrency.oCcyDecimal.format(
-              (transaksiValue * double.parse(setupPajakModel!.pph23)) / 100);
+          listNilaiPPH[index].text = FormatCurrency.oCcyDecimal
+              .format((transaksiValue * double.parse(pphModel!.pph23)) / 100);
         } else {
           listNilaiPPH[index].text = FormatCurrency.oCcyDecimal.format(0);
         }
@@ -1907,15 +1920,15 @@ class HutangPiutangNotifier extends ChangeNotifier {
           listOutstanding[index].text =
               FormatCurrency.oCcyDecimal.format(newOutstanding);
           if (ppn) {
-            listNilaiPPN[index].text = FormatCurrency.oCcyDecimal.format(
-                (transaksiValue * double.parse(setupPajakModel!.ppn)) / 100);
+            listNilaiPPN[index].text = FormatCurrency.oCcyDecimal
+                .format((transaksiValue * double.parse(ppnModel!.ppn)) / 100);
           } else {
             listNilaiPPN[index].text = FormatCurrency.oCcyDecimal.format(0);
           }
 
           if (pph) {
-            listNilaiPPH[index].text = FormatCurrency.oCcyDecimal.format(
-                (transaksiValue * double.parse(setupPajakModel!.pph23)) / 100);
+            listNilaiPPH[index].text = FormatCurrency.oCcyDecimal
+                .format((transaksiValue * double.parse(pphModel!.pph23)) / 100);
           } else {
             listNilaiPPH[index].text = FormatCurrency.oCcyDecimal.format(0);
           }

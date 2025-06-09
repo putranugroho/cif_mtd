@@ -1285,43 +1285,50 @@ class HutangPiutangPage extends StatelessWidget {
                                                                           onTap: () =>
                                                                               value.pilihJatuhTempo(),
                                                                           child:
-                                                                              Expanded(
-                                                                            child:
-                                                                                TextFormField(
-                                                                              validator: (e) {
-                                                                                if (value.caraPembayaran == "BERTAHAP") {
-                                                                                  return null;
+                                                                              TextFormField(
+                                                                            validator:
+                                                                                (e) {
+                                                                              if (value.caraPembayaran == "BERTAHAP") {
+                                                                                return null;
+                                                                              } else {
+                                                                                if (e!.isEmpty) {
+                                                                                  return "Wajib diisi";
                                                                                 } else {
-                                                                                  if (e!.isEmpty) {
-                                                                                    return "Wajib diisi";
-                                                                                  } else {
-                                                                                    return null;
-                                                                                  }
+                                                                                  return null;
                                                                                 }
-                                                                              },
-                                                                              enabled: value.caraPembayaran == "BERTAHAP" ? true : false,
-                                                                              textInputAction: TextInputAction.done,
-                                                                              controller: value.tanggalJatuhTempoText,
-                                                                              maxLines: 1,
-                                                                              readOnly: value.caraPembayaran == "BERTAHAP" ? true : false,
-                                                                              style: const TextStyle(
-                                                                                // Make text bigger and black
-                                                                                color: Colors.black,
-                                                                                fontSize: 16,
-                                                                                fontWeight: FontWeight.w500,
+                                                                              }
+                                                                            },
+                                                                            enabled: value.caraPembayaran == "BERTAHAP"
+                                                                                ? true
+                                                                                : false,
+                                                                            textInputAction:
+                                                                                TextInputAction.done,
+                                                                            controller:
+                                                                                value.tanggalJatuhTempoText,
+                                                                            maxLines:
+                                                                                1,
+                                                                            readOnly: value.caraPembayaran == "BERTAHAP"
+                                                                                ? true
+                                                                                : false,
+                                                                            style:
+                                                                                const TextStyle(
+                                                                              // Make text bigger and black
+                                                                              color: Colors.black,
+                                                                              fontSize: 16,
+                                                                              fontWeight: FontWeight.w500,
+                                                                            ),
+                                                                            decoration:
+                                                                                InputDecoration(
+                                                                              filled: value.caraPembayaran == "SELURUHNYA" ? false : true,
+                                                                              fillColor: Colors.grey[200],
+                                                                              hintText: "Tanggal Jatuh Tempo",
+                                                                              hintStyle: const TextStyle(color: Colors.grey),
+                                                                              border: OutlineInputBorder(
+                                                                                borderRadius: BorderRadius.circular(6),
                                                                               ),
-                                                                              decoration: InputDecoration(
-                                                                                filled: value.caraPembayaran == "SELURUHNYA" ? false : true,
-                                                                                fillColor: Colors.grey[200],
-                                                                                hintText: "Tanggal Jatuh Tempo",
-                                                                                hintStyle: const TextStyle(color: Colors.grey),
-                                                                                border: OutlineInputBorder(
-                                                                                  borderRadius: BorderRadius.circular(6),
-                                                                                ),
-                                                                                disabledBorder: OutlineInputBorder(
-                                                                                  borderSide: BorderSide(color: Colors.grey.shade600),
-                                                                                  borderRadius: BorderRadius.circular(6),
-                                                                                ),
+                                                                              disabledBorder: OutlineInputBorder(
+                                                                                borderSide: BorderSide(color: Colors.grey.shade600),
+                                                                                borderRadius: BorderRadius.circular(6),
                                                                               ),
                                                                             ),
                                                                           ),
