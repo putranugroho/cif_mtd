@@ -809,13 +809,13 @@ class JualBeliNotifier extends ChangeNotifier {
               "trx_code": "100",
               "otor": "0",
               "kode_trn": "",
-              "nama_dr": inventarisModel!.sbbAset
+              "nama_cr": inventarisModel!.sbbAset
                   .toString()
                   .substring(14, inventarisModel!.sbbAset.toString().length),
-              "dracc": inventarisModel!.sbbAset.toString().substring(1, 13),
-              "nama_cr": inventarisModel!.sbbPenyusutan.toString().substring(
+              "cracc": inventarisModel!.sbbAset.toString().substring(1, 13),
+              "nama_dr": inventarisModel!.sbbPenyusutan.toString().substring(
                   14, inventarisModel!.sbbPenyusutan.toString().length),
-              "cracc":
+              "dracc":
                   inventarisModel!.sbbPenyusutan.toString().substring(1, 13),
               "rrn": invoice,
               "no_dokumen": nodokjual.text,
@@ -855,13 +855,13 @@ class JualBeliNotifier extends ChangeNotifier {
               "trx_code": "100",
               "otor": "0",
               "kode_trn": "",
-              "nama_dr": inventarisModel!.sbbAset
+              "nama_cr": inventarisModel!.sbbAset
                   .toString()
                   .substring(14, inventarisModel!.sbbAset.toString().length),
-              "dracc": inventarisModel!.sbbAset.toString().substring(1, 13),
-              "nama_cr": inventarisModel!.sbbPenyusutan.toString().substring(
+              "cracc": inventarisModel!.sbbAset.toString().substring(1, 13),
+              "nama_dr": inventarisModel!.sbbPenyusutan.toString().substring(
                   14, inventarisModel!.sbbPenyusutan.toString().length),
-              "cracc":
+              "dracc":
                   inventarisModel!.sbbPenyusutan.toString().substring(1, 13),
               "rrn": invoice,
               "no_dokumen": nodokjual.text,
