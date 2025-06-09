@@ -332,7 +332,7 @@ class JualBeliNotifier extends ChangeNotifier {
         "alasan_jual": "$rrn ${alasanjualhapus.text.trim()}",
         "bln_susut": DateFormat('y-MM-dd').format(parseDate),
         "tgl_valuta": transaksiPendModel!.tglValuta,
-        "nomor_dok": transaksiPendModel!.noDokumen,
+        "nomor_dok": nodokjual.text,
         "keterangan_transaksi": transaksiPendModel!.keterangan,
         "habeli": nilaiTrans.text.replaceAll(",", ""),
         "persentase_penyusutan": nilaiPenyusutan.text.replaceAll(",", ""),
@@ -372,7 +372,7 @@ class JualBeliNotifier extends ChangeNotifier {
               "cracc": inventarisModel!.sbbAset.toString().substring(1, 13),
 
               "rrn": invoice,
-              "no_dokumen": transaksiPendModel!.noDokumen,
+              "no_dokumen": nodokjual.text,
               "no_ref": transaksiPendModel!.noRef,
               "nominal": inventarisModel!.habeli,
               "keterangan": keteranganTrans.text,
@@ -418,7 +418,7 @@ class JualBeliNotifier extends ChangeNotifier {
                   .substring(14, inventarisModel!.sbbAset.toString().length),
               "cracc": inventarisModel!.sbbAset.toString().substring(1, 13),
               "rrn": invoice,
-              "no_dokumen": transaksiPendModel!.noDokumen,
+              "no_dokumen": nodokjual.text,
               "no_ref": transaksiPendModel!.noRef,
               "nominal": inventarisModel!.habeli,
               "keterangan": keteranganTrans.text,
@@ -730,6 +730,7 @@ class JualBeliNotifier extends ChangeNotifier {
   TextEditingController nodok = TextEditingController();
   TextEditingController tglbeli = TextEditingController();
   TextEditingController tgljualhapus = TextEditingController();
+  TextEditingController nodokjual = TextEditingController();
   TextEditingController nilaijual = TextEditingController();
   TextEditingController alasanjualhapus = TextEditingController();
   TextEditingController tglterima = TextEditingController();
