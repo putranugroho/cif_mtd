@@ -721,6 +721,7 @@ class JualBeliNotifier extends ChangeNotifier {
     dialog = false;
     transaksiPendModel = value;
     keteranganTrans.text = transaksiPendModel!.keterangan;
+    noDokTrans.text = transaksiPendModel!.noDokumen;
     nilaijual.text = FormatCurrency.oCcy
         .format(int.parse(transaksiPendModel!.nominal))
         .replaceAll(".", ",");
@@ -814,7 +815,7 @@ class JualBeliNotifier extends ChangeNotifier {
     }
   }
 
-  DateTime? tanggalJual;
+  DateTime? tanggalJual = DateTime.now();
   Future piihTanggalJualHapus() async {
     var pickedendDate = (await showDatePicker(
       context: context,
@@ -1075,6 +1076,31 @@ class JualBeliNotifier extends ChangeNotifier {
           hargaBuku.text = FormatCurrency.oCcy
               .format(int.parse(inventarisTransaksiModel!.nilaiBuku))
               .replaceAll(".", ",");
+          var jenisPenempatan =
+              inventarisModel!.nik != '' ? "Karyawan" : "Kantor";
+          var format = DateFormat('MMMM y');
+          DateTime parseDate = format.parse(inventarisModel!.blnMulaiSusut);
+          var data = {
+            "kode_pt": users!.kodePt,
+            "kdaset": inventarisModel!.kdaset,
+            "kode_induk": users!.kodeInduk,
+            "jenis_penempatan": jenisPenempatan,
+            "nama_kantor": kantor!.namaKantor,
+            "kode_kantor": users!.kodeKantor,
+            "userinput": users!.namauser,
+            "userterm": "114.80.90.54",
+            "nilai_jual": nilaijual.text.replaceAll(",", ""),
+            "tgl_jual": DateFormat('y-MM-dd').format(tanggalJual!),
+            // "alasan_jual": "$rrn ${alasanjualhapus.text.trim()}",
+            "bln_susut": DateFormat('y-MM-dd').format(parseDate),
+            // "tgl_valuta": transaksiPendModel!.tglValuta,
+            "nomor_dok": nodokjual.text,
+            // "keterangan_transaksi": transaksiPendModel!.keterangan,
+            "habeli": nilaiTrans.text.replaceAll(",", ""),
+            "persentase_penyusutan": nilaiPenyusutan.text.replaceAll(",", ""),
+            "metode_penyusutan": metode.toString(),
+          };
+          print("Data Payload ${jsonEncode(data)}");
           getTransaksi();
           notifyListeners();
         } else {
