@@ -549,7 +549,7 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
             .replaceAll(",", "."))) {
       for (var i = 0; i < listGlItems.length; i++) {
         var invoice = DateTime.now().millisecondsSinceEpoch.toString();
-        listTmp.add({
+        var data = {
           "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
           "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.now())}",
           "batch": "${users!.batch}",
@@ -594,10 +594,10 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
           "merchant": "",
           "source_trx": "",
           "status": "PENDING",
-          "modul": "BANYAK TRANSAKSI",
-        });
+          "modul": "BANYAK TRANSAKSI˝",
+        };
+        Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
       }
-      Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
     } else {
       for (var i = 0; i < listGlItems.length; i++) {
         var invoice = DateTime.now().millisecondsSinceEpoch.toString();
