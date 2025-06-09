@@ -832,16 +832,130 @@ class JualBeliPage extends StatelessWidget {
                                                     ),
                                                   ),
                                                   const SizedBox(width: 16),
-                                                  const Expanded(
-                                                    child: Column(
-                                                      children: [],
-                                                    ),
+                                                  Expanded(
+                                                    child: value.pilihModel ==
+                                                            "Hapus"
+                                                        ? Column(
+                                                            children: [
+                                                              const Row(
+                                                                children: [
+                                                                  Text(
+                                                                    "No. Dokumen",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            12),
+                                                                  ),
+                                                                  SizedBox(
+                                                                      width: 5),
+                                                                  Text(
+                                                                    "*",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            8),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              const SizedBox(
+                                                                height: 8,
+                                                              ),
+                                                              TextFormField(
+                                                                textInputAction:
+                                                                    TextInputAction
+                                                                        .done,
+                                                                controller: value
+                                                                    .nodokjual,
+                                                                maxLines: 1,
+                                                                inputFormatters: [
+                                                                  FilteringTextInputFormatter
+                                                                      .digitsOnly,
+                                                                  CurrencyInputFormatter(),
+                                                                ],
+                                                                validator: (e) {
+                                                                  if (e!
+                                                                      .isEmpty) {
+                                                                    return "Wajib diisi";
+                                                                  } else {
+                                                                    return null;
+                                                                  }
+                                                                },
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  hintText:
+                                                                      "No. Dokumen",
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(6),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          )
+                                                        : SizedBox(),
                                                   ),
                                                   const SizedBox(width: 16),
-                                                  const Expanded(
-                                                    child: Column(
-                                                      children: [],
-                                                    ),
+                                                  Expanded(
+                                                    child: value.pilihModel ==
+                                                            "Hapus"
+                                                        ? Column(
+                                                            children: [
+                                                              const Row(
+                                                                children: [
+                                                                  Text(
+                                                                    "No. Referensi",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            12),
+                                                                  ),
+                                                                  SizedBox(
+                                                                      width: 5),
+                                                                  Text(
+                                                                    "*",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            8),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              const SizedBox(
+                                                                height: 8,
+                                                              ),
+                                                              TextFormField(
+                                                                textInputAction:
+                                                                    TextInputAction
+                                                                        .done,
+                                                                controller: value
+                                                                    .norefjual,
+                                                                maxLines: 1,
+                                                                inputFormatters: [
+                                                                  FilteringTextInputFormatter
+                                                                      .digitsOnly,
+                                                                  CurrencyInputFormatter(),
+                                                                ],
+                                                                validator: (e) {
+                                                                  if (e!
+                                                                      .isEmpty) {
+                                                                    return "Wajib diisi";
+                                                                  } else {
+                                                                    return null;
+                                                                  }
+                                                                },
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  hintText:
+                                                                      "No. Ref",
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(6),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          )
+                                                        : SizedBox(),
                                                   ),
                                                 ],
                                               ),
@@ -1193,7 +1307,9 @@ class JualBeliPage extends StatelessWidget {
                                                             SizedBox(
                                                               width: 16,
                                                             ),
-                                                            Expanded(child: SizedBox())
+                                                            Expanded(
+                                                                child:
+                                                                    SizedBox())
                                                           ],
                                                         ),
                                                         const SizedBox(
