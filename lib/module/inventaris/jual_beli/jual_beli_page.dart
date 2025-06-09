@@ -865,11 +865,6 @@ class JualBeliPage extends StatelessWidget {
                                                                 controller: value
                                                                     .nodokjual,
                                                                 maxLines: 1,
-                                                                inputFormatters: [
-                                                                  FilteringTextInputFormatter
-                                                                      .digitsOnly,
-                                                                  CurrencyInputFormatter(),
-                                                                ],
                                                                 validator: (e) {
                                                                   if (e!
                                                                       .isEmpty) {
@@ -928,11 +923,6 @@ class JualBeliPage extends StatelessWidget {
                                                                 controller: value
                                                                     .norefjual,
                                                                 maxLines: 1,
-                                                                inputFormatters: [
-                                                                  FilteringTextInputFormatter
-                                                                      .digitsOnly,
-                                                                  CurrencyInputFormatter(),
-                                                                ],
                                                                 validator: (e) {
                                                                   if (e!
                                                                       .isEmpty) {
