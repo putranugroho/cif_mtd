@@ -2057,7 +2057,7 @@ class JualBeliPage extends StatelessWidget {
                                               const SizedBox(height: 16),
                                               ButtonPrimary(
                                                 onTap: () {
-                                                  value.cek();
+                                                  value.confirmSimpan();
                                                 },
                                                 name: "Simpan",
                                               )

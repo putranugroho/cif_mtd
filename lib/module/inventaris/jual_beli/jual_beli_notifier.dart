@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:accounting/models/index.dart';
 import 'package:accounting/pref/pref.dart';
+import 'package:accounting/utils/button_custom.dart';
 import 'package:accounting/utils/colors.dart';
 import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/informationdialog.dart';
@@ -690,10 +691,10 @@ class JualBeliNotifier extends ChangeNotifier {
             var invoice = DateTime.now().millisecondsSinceEpoch.toString();
             var data = {
               "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
-              "tgl_valuta": transaksiPendModel!.tglValuta,
+              "tgl_valuta": inventarisTransaksiModel!.tanggalValuta,
               "batch": users!.batch,
               "trx_type": "TRX",
-              "trx_code": transaksiPendModel!.trxCode,
+              "trx_code": "100",
               "otor": "0",
               "kode_trn": "",
               // "nama_dr": inventarisModel!.sbbAset
@@ -750,10 +751,10 @@ class JualBeliNotifier extends ChangeNotifier {
             var invoice = DateTime.now().millisecondsSinceEpoch.toString();
             var data = {
               "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
-              "tgl_valuta": transaksiPendModel!.tglValuta,
+              "tgl_valuta": inventarisTransaksiModel!.tanggalValuta,
               "batch": users!.batch,
               "trx_type": "TRX",
-              "trx_code": transaksiPendModel!.trxCode,
+              "trx_code": "100",
               "otor": "0",
               "kode_trn": "",
               "nama_dr": inventarisModel!.sbbBiayaPenyusutan
@@ -848,10 +849,10 @@ class JualBeliNotifier extends ChangeNotifier {
             var invoice = DateTime.now().millisecondsSinceEpoch.toString();
             var data = {
               "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
-              "tgl_valuta": transaksiPendModel!.tglValuta,
+              "tgl_valuta": inventarisTransaksiModel!.tanggalValuta,
               "batch": users!.batch,
               "trx_type": "TRX",
-              "trx_code": transaksiPendModel!.trxCode,
+              "trx_code": "100",
               "otor": "0",
               "kode_trn": "",
               "nama_dr": inventarisModel!.sbbAset
@@ -903,6 +904,59 @@ class JualBeliNotifier extends ChangeNotifier {
         }
       });
     }
+  }
+
+  confirmSimpan() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              width: 500,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text("$pilihModel Inventaris?",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  Text(
+                    "Apakah Anda yakin ingin $pilihModel inventaris ini?",
+                    style: const TextStyle(),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ButtonSecondary(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        name: "Tidak",
+                      )),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                          child: ButtonPrimary(
+                        onTap: () {
+                          Navigator.pop(context);
+                          cek();
+                        },
+                        name: "Ya",
+                      )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
   }
 
   clear() {
