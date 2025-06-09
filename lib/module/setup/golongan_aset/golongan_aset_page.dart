@@ -373,11 +373,10 @@ class GolonganAsetPage extends StatelessWidget {
                                         FilteringTextInputFormatter.digitsOnly
                                       ],
                                       validator: (e) {
-                                        if (e!.isEmpty) {
+                                        if (e == null || e.isEmpty) {
                                           return "Wajib diisi";
-                                        } else {
-                                          return null;
                                         }
+                                        return null;
                                       },
                                       decoration: InputDecoration(
                                         hintText: "Kode Golongan",
@@ -453,6 +452,13 @@ class GolonganAsetPage extends StatelessWidget {
                                                     TextInputAction.done,
                                                 controller: value.masasusut,
                                                 maxLines: 1,
+                                                validator: (e) {
+                                                  if (e!.isEmpty) {
+                                                    return "Wajib diisi";
+                                                  } else {
+                                                    return null;
+                                                  }
+                                                },
                                                 inputFormatters: [
                                                   FilteringTextInputFormatter
                                                       .digitsOnly

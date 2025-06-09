@@ -37,11 +37,12 @@ class GolonganAsetNotifier extends ChangeNotifier {
     dialog = false;
     kode.clear();
     nama.clear();
-    sbbAset = null;
-    sbbpenyusutan = null;
-    sbbrugijual = null;
-    sbblabajual = null;
-    sbbbiayapenyusutan = null;
+    // sbbAset = null;
+    // sbbpenyusutan = null;
+    // sbbrugijual = null;
+    // sbblabajual = null;
+    // sbbbiayapenyusutan = null;
+    // golonganAsetModel = null;
     nosbbaset.clear();
     nosbbppn.clear();
     nosbbpph.clear();
@@ -189,7 +190,8 @@ class GolonganAsetNotifier extends ChangeNotifier {
     var data = {
       "id": golonganAsetModel!.id,
     };
-    Setuprepository.setup(token, NetworkURL.deletedJabatan(), jsonEncode(data))
+    Setuprepository.setup(
+            token, NetworkURL.deleteGolonganAset(), jsonEncode(data))
         .then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
@@ -401,8 +403,9 @@ class GolonganAsetNotifier extends ChangeNotifier {
     return listGl;
   }
 
+  List<InqueryGlModel> listGlAll = [];
   Future getInqueryAll() async {
-    listGl.clear();
+    listGlAll.clear();
     notifyListeners();
     var data = {"kode_pt": users!.kodePt};
     Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
@@ -410,7 +413,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
       if (value['status'].toString().toLowerCase().contains("success")) {
         final List<Map<String, dynamic>> jnsAccBItems =
             extractJnsAccB(value['data']);
-        listGl =
+        listGlAll =
             jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         notifyListeners();
       }
@@ -458,6 +461,8 @@ class GolonganAsetNotifier extends ChangeNotifier {
         metode = int.parse(metodePenyusutanModel!.metodePenyusutan);
         // nilai.text = metodePenyusutanModel!.nilaiAkhir.toString();
         print(metodePenyusutanModel!.declining.toString());
+        print("METODE : $metode");
+        print("METODE : ${metodePenyusutanModel!.nilaiAkhir}");
         nilai.text = metodePenyusutanModel!.declining.toString();
         isLoading = false;
         notifyListeners();
@@ -594,86 +599,104 @@ class GolonganAsetNotifier extends ChangeNotifier {
     nilai.text = golonganAsetModel!.nilaiDeclining;
     masasusut.text = golonganAsetModel!.masaSusut;
     // print(golonganAsetModel!.sbbAset.substring(1, 13));
-    sbbAset = listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbAset.toString().substring(1, 13))
-            .isNotEmpty
-        ? listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbAset.toString().substring(1, 13))
-            .first
+    sbbAset = golonganAsetModel!.sbbAset != null
+        ? listGlAll
+                .where((e) =>
+                    e.nosbb ==
+                    golonganAsetModel!.sbbAset.toString().substring(1, 13))
+                .isNotEmpty
+            ? listGlAll
+                .where((e) =>
+                    e.nosbb ==
+                    golonganAsetModel!.sbbAset.toString().substring(1, 13))
+                .first
+            : null
         : null;
-    sbbbiayapenyusutan = listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbBiayaPenyusutan
-                    .toString()
-                    .substring(1, 13))
-            .isNotEmpty
-        ? listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbBiayaPenyusutan
-                    .toString()
-                    .substring(1, 13))
-            .first
+    sbbbiayapenyusutan = golonganAsetModel!.sbbBiayaPenyusutan != null
+        ? listGlAll
+                .where((e) =>
+                    e.nosbb ==
+                    golonganAsetModel!.sbbBiayaPenyusutan
+                        .toString()
+                        .substring(1, 13))
+                .isNotEmpty
+            ? listGlAll
+                .where((e) =>
+                    e.nosbb ==
+                    golonganAsetModel!.sbbBiayaPenyusutan
+                        .toString()
+                        .substring(1, 13))
+                .first
+            : null
         : null;
-    sbbpenyusutan = listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbPenyusutan.toString().substring(1, 13))
-            .isNotEmpty
-        ? listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbPenyusutan.toString().substring(1, 13))
-            .first
+    sbbpenyusutan = golonganAsetModel!.sbbPenyusutan != null
+        ? listGlAll
+                .where((e) =>
+                    e.nosbb ==
+                    golonganAsetModel!.sbbPenyusutan
+                        .toString()
+                        .substring(1, 13))
+                .isNotEmpty
+            ? listGlAll
+                .where((e) =>
+                    e.nosbb ==
+                    golonganAsetModel!.sbbPenyusutan
+                        .toString()
+                        .substring(1, 13))
+                .first
+            : null
         : null;
-    sbbrugijual = listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbRugiJual.toString().substring(1, 13))
-            .isNotEmpty
-        ? listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbRugiJual.toString().substring(1, 13))
-            .first
+    sbbrugijual = golonganAsetModel!.sbbRugiJual != null
+        ? listGlAll
+                .where((e) =>
+                    e.nosbb ==
+                    golonganAsetModel!.sbbRugiJual.toString().substring(1, 13))
+                .isNotEmpty
+            ? listGlAll
+                .where((e) =>
+                    e.nosbb ==
+                    golonganAsetModel!.sbbRugiJual.toString().substring(1, 13))
+                .first
+            : null
         : null;
-    sbblabajual = listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbLabaJual.toString().substring(1, 13))
-            .isNotEmpty
-        ? listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbLabaJual.toString().substring(1, 13))
-            .first
+    sbblabajual = golonganAsetModel!.sbbLabaJual != null
+        ? listGlAll
+                .where((e) =>
+                    e.nosbb ==
+                    golonganAsetModel!.sbbLabaJual.toString().substring(1, 13))
+                .isNotEmpty
+            ? listGlAll
+                .where((e) =>
+                    e.nosbb ==
+                    golonganAsetModel!.sbbLabaJual.toString().substring(1, 13))
+                .first
+            : null
         : null;
-    sbbppn = listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbPpn.toString().substring(1, 13))
-            .isNotEmpty
-        ? listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbPpn.toString().substring(1, 13))
-            .first
+    sbbppn = golonganAsetModel!.sbbPpn != null
+        ? listGlAll
+                .where((e) =>
+                    e.nosbb ==
+                    golonganAsetModel!.sbbPpn.toString().substring(1, 13))
+                .isNotEmpty
+            ? listGlAll
+                .where((e) =>
+                    e.nosbb ==
+                    golonganAsetModel!.sbbPpn.toString().substring(1, 13))
+                .first
+            : null
         : null;
-    sbbpph = listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbPph.toString().substring(1, 13))
-            .isNotEmpty
-        ? listGl
-            .where((e) =>
-                e.nosbb ==
-                golonganAsetModel!.sbbPph.toString().substring(1, 13))
-            .first
+    sbbpph = golonganAsetModel!.sbbPph != null
+        ? listGlAll
+                .where((e) =>
+                    e.nosbb ==
+                    golonganAsetModel!.sbbPph.toString().substring(1, 13))
+                .isNotEmpty
+            ? listGlAll
+                .where((e) =>
+                    e.nosbb ==
+                    golonganAsetModel!.sbbPph.toString().substring(1, 13))
+                .first
+            : null
         : null;
     namasbbaset.text = sbbAset == null ? "" : sbbAset!.namaSbb;
     namasbbppn.text = sbbppn == null ? "" : sbbppn!.namaSbb;

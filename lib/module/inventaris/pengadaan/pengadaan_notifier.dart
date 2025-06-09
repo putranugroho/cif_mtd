@@ -34,6 +34,7 @@ class PengadaanNotifier extends ChangeNotifier {
       getKantor();
       getSetupPajak();
       getInventaris();
+      getTransaksiAll();
 
       getInqueryAll();
       notifyListeners();
@@ -172,6 +173,38 @@ class PengadaanNotifier extends ChangeNotifier {
     });
   }
 
+  List<TransaksiPendModel> listTransaksiAll = [];
+  List<TransaksiPendModel> listTransaksiAllAdd = [];
+  Future getTransaksiAll() async {
+    isLoadingData = true;
+    listTransaksiAll.clear();
+    listTransaksiAllAdd.clear();
+    notifyListeners();
+    var data = {
+      "kode_pt": users!.kodePt,
+    };
+    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listTransaksiAll.add(TransaksiPendModel.fromJson(i));
+        }
+        if (listTransaksiAll.isNotEmpty) {
+          for (var i = 0; i < listGlAll.length; i++) {
+            listTransaksiAllAdd.addAll(listTransaksiAll
+                .where((e) => e.status == "COMPLETED")
+                .toList());
+          }
+        }
+        isLoadingData = false;
+        notifyListeners();
+      } else {
+        isLoadingData = false;
+        notifyListeners();
+      }
+    });
+  }
+
   var isLoadingData = true;
   List<TransaksiPendModel> listTransaksi = [];
   List<TransaksiPendModel> listTransaksiAdd = [];
@@ -196,7 +229,8 @@ class PengadaanNotifier extends ChangeNotifier {
                   .where((e) =>
                       (e.dracc == listGlAll[i].nosbb) &&
                       e.status == "COMPLETED" &&
-                      e.noDokumen == noDokTrans.text.trim() &&
+                      e.flagTrn == "0" &&
+                      e.noDokumen.contains(noDokTrans.text) &&
                       e.tglValuta == DateFormat('y-MM-dd').format(tglValuta))
                   .toList());
             } else {
@@ -204,6 +238,7 @@ class PengadaanNotifier extends ChangeNotifier {
                   .where((e) =>
                       (e.dracc == listGlAll[i].nosbb) &&
                       e.status == "COMPLETED" &&
+                      e.flagTrn == "0" &&
                       e.tglValuta == DateFormat('y-MM-dd').format(tglValuta))
                   .toList());
             }
@@ -221,8 +256,7 @@ class PengadaanNotifier extends ChangeNotifier {
   TransaksiPendModel? transaksiPendModel;
   pilihTransaksi(TransaksiPendModel value) async {
     transaksiPendModel = value;
-    noDok.text = transaksiPendModel!.noDokumen;
-    noRef.text = transaksiPendModel!.noRef;
+    noRef.text = transaksiPendModel!.noDokumen;
     nilaiTrans.text =
         FormatCurrency.oCcy.format(int.parse(transaksiPendModel!.nominal));
     keteranganTrans.text = transaksiPendModel!.keterangan;
@@ -417,19 +451,25 @@ class PengadaanNotifier extends ChangeNotifier {
   bool pajak = false;
   int subtotal = 0;
   gantipajak(bool value) {
+    SetupPajakModel? ppnModel = listPajak.where((e) => e.tipe == "N").isNotEmpty
+        ? listPajak.where((e) => e.tipe == "N").first
+        : null;
+    SetupPajakModel? pphModel = listPajak.where((e) => e.tipe == "Y").isNotEmpty
+        ? listPajak.where((e) => e.tipe == "Y").first
+        : null;
     pajak = value;
     if (pajak) {
       ppn.text = (((int.parse(hargaBeli.text.replaceAll(",", "")) -
                       int.parse(discount.text.replaceAll(",", "")) +
                       int.parse(biaya.text.replaceAll(",", ""))) *
-                  double.parse(setupPajakModel!.ppn)) /
+                  double.parse(ppnModel!.ppn)) /
               100)
           .toInt()
           .toString();
       pph.text = (((int.parse(hargaBeli.text.replaceAll(",", "")) -
                       int.parse(discount.text.replaceAll(",", "")) +
                       int.parse(biaya.text.replaceAll(",", ""))) *
-                  double.parse(setupPajakModel!.pph23)) /
+                  double.parse(pphModel!.pph23)) /
               100)
           .toInt()
           .toString();
@@ -484,6 +524,7 @@ class PengadaanNotifier extends ChangeNotifier {
   GolonganAsetModel? golonganAsetModel;
   pilihGolongan(GolonganAsetModel value) {
     golonganAsetModel = value;
+    masasusut.text = golonganAsetModel!.masaSusut;
 
     notifyListeners();
   }
@@ -639,11 +680,12 @@ class PengadaanNotifier extends ChangeNotifier {
           "nilai_buku": "0",
           "total_susut": "0",
           "susut_ke": "0",
-          "kode_pt": kantor!.kodePt,
-          "kode_kantor": kantor!.kodeKantor,
-          "kode_induk": kantor!.kodeInduk,
-          "lokasi": lokasi.text.trim(),
-          "kota": kota.text,
+          "kode_pt": users!.kodePt,
+          "kode_kantor": users!.kodeKantor,
+          "kode_induk": users!.kodeInduk,
+          "nama_kantor": kantor == null ? "" : kantor!.namaKantor,
+          "lokasi": lokasi.text.isEmpty ? "" : lokasi.text.trim(),
+          "kota": kota.text.isEmpty ? "" : kota.text,
           "masasusut": masasusut.text,
           "bln_mulai_susut": blnPenyusutan.text,
           "kdkondisi": "",
@@ -686,9 +728,9 @@ class PengadaanNotifier extends ChangeNotifier {
 
         var data = {
           "kdaset": noaset.text,
-          "kode_pt": kantor!.kodePt,
-          "kode_kantor": kantor!.kodeKantor,
-          "kode_induk": kantor!.kodeInduk,
+          "kode_pt": users!.kodePt,
+          "kode_kantor": users!.kodeKantor,
+          "kode_induk": users!.kodeInduk,
           "userinput": users!.namauser,
           "userterm": "114.80.90.54",
           "ket": keterangan.text,
@@ -720,9 +762,9 @@ class PengadaanNotifier extends ChangeNotifier {
           "nilai_buku": "0",
           "total_susut": "0",
           "susut_ke": "0",
-          "nama_kantor": kantor!.namaKantor,
-          "lokasi": lokasi.text.trim(),
-          "kota": kota.text,
+          "nama_kantor": kantor == null ? "" : kantor!.namaKantor,
+          "lokasi": lokasi.text.isEmpty ? "" : lokasi.text.trim(),
+          "kota": kota.text.isEmpty ? "" : kota.text,
           "masasusut": masasusut.text,
           "keterangan_transaksi": keteranganTrans.text,
           "jenis_penempatan": penempatanModel,
@@ -764,7 +806,7 @@ class PengadaanNotifier extends ChangeNotifier {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             if (pajak) {
-              if (double.parse(ppn.text.replaceAll(",", "")) < total) {
+              if (double.parse(users!.maksimalTransaksi) < total) {
                 var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                 var data = {
                   "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
@@ -781,10 +823,10 @@ class PengadaanNotifier extends ChangeNotifier {
                   "nama_cr": transaksiPendModel!.namaDr,
                   "cracc": transaksiPendModel!.dracc,
                   "rrn": invoice,
-                  "no_dokumen": transaksiPendModel!.noDokumen,
-                  "no_ref": transaksiPendModel!.noRef,
+                  "no_dokumen": noDok.text,
+                  "no_ref": noRef.text,
                   "nominal": double.parse(ppn.text.replaceAll(",", "")),
-                  "keterangan": keteranganTrans.text,
+                  "keterangan": keterangan.text,
                   "kode_pt": users!.kodePt,
                   "kode_kantor": users!.kodeKantor,
                   "kode_induk": users!.kodeInduk,
@@ -800,7 +842,7 @@ class PengadaanNotifier extends ChangeNotifier {
                   "otoruser": "",
                   "otorterm": "",
                   "otortgljam": "",
-                  "flag_trn": "0",
+                  "flag_trn": "1",
                   "merchant": "",
                   "source_trx": "",
                   "status": "PENDING",
@@ -825,10 +867,10 @@ class PengadaanNotifier extends ChangeNotifier {
                   "nama_cr": transaksiPendModel!.namaDr,
                   "cracc": transaksiPendModel!.dracc,
                   "rrn": invoice,
-                  "no_dokumen": transaksiPendModel!.noDokumen,
-                  "no_ref": transaksiPendModel!.noRef,
-                  "nominal": subtotal,
-                  "keterangan": keteranganTrans.text,
+                  "no_dokumen": noDok.text,
+                  "no_ref": noRef.text,
+                  "nominal": double.parse(ppn.text.replaceAll(",", "")),
+                  "keterangan": keterangan.text,
                   "kode_pt": users!.kodePt,
                   "kode_kantor": users!.kodeKantor,
                   "kode_induk": users!.kodeInduk,
@@ -844,7 +886,7 @@ class PengadaanNotifier extends ChangeNotifier {
                   "otoruser": "",
                   "otorterm": "",
                   "otortgljam": "",
-                  "flag_trn": "0",
+                  "flag_trn": "1",
                   "merchant": "",
                   "source_trx": "",
                   "status": "COMPLETED",
@@ -854,7 +896,7 @@ class PengadaanNotifier extends ChangeNotifier {
                     token, NetworkURL.transaksi(), jsonEncode(data));
               }
 
-              if (double.parse(pph.text.replaceAll(",", "")) < total) {
+              if (double.parse(users!.maksimalTransaksi) < total) {
                 var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                 var data = {
                   "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
@@ -871,10 +913,10 @@ class PengadaanNotifier extends ChangeNotifier {
                   "nama_dr": transaksiPendModel!.namaDr,
                   "dracc": transaksiPendModel!.dracc,
                   "rrn": invoice,
-                  "no_dokumen": transaksiPendModel!.noDokumen,
-                  "no_ref": transaksiPendModel!.noRef,
+                  "no_dokumen": noDok.text,
+                  "no_ref": noRef.text,
                   "nominal": double.parse(pph.text.replaceAll(",", "")),
-                  "keterangan": keteranganTrans.text,
+                  "keterangan": keterangan.text,
                   "kode_pt": users!.kodePt,
                   "kode_kantor": users!.kodeKantor,
                   "kode_induk": users!.kodeInduk,
@@ -890,7 +932,7 @@ class PengadaanNotifier extends ChangeNotifier {
                   "otoruser": "",
                   "otorterm": "",
                   "otortgljam": "",
-                  "flag_trn": "0",
+                  "flag_trn": "1",
                   "merchant": "",
                   "source_trx": "",
                   "status": "PENDING",
@@ -915,10 +957,10 @@ class PengadaanNotifier extends ChangeNotifier {
                   "nama_dr": transaksiPendModel!.namaDr,
                   "dracc": transaksiPendModel!.dracc,
                   "rrn": invoice,
-                  "no_dokumen": transaksiPendModel!.noDokumen,
-                  "no_ref": transaksiPendModel!.noRef,
+                  "no_dokumen": noDok.text,
+                  "no_ref": noRef.text,
                   "nominal": double.parse(pph.text.replaceAll(",", "")),
-                  "keterangan": keteranganTrans.text,
+                  "keterangan": keterangan.text,
                   "kode_pt": users!.kodePt,
                   "kode_kantor": users!.kodeKantor,
                   "kode_induk": users!.kodeInduk,
@@ -934,7 +976,7 @@ class PengadaanNotifier extends ChangeNotifier {
                   "otoruser": "",
                   "otorterm": "",
                   "otortgljam": "",
-                  "flag_trn": "0",
+                  "flag_trn": "1",
                   "merchant": "",
                   "source_trx": "",
                   "status": "COMPLETED",
@@ -960,10 +1002,10 @@ class PengadaanNotifier extends ChangeNotifier {
                 "nama_cr": transaksiPendModel!.namaDr,
                 "cracc": transaksiPendModel!.dracc,
                 "rrn": invoice,
-                "no_dokumen": transaksiPendModel!.noDokumen,
-                "no_ref": transaksiPendModel!.noRef,
+                "no_dokumen": noDok.text,
+                "no_ref": noRef.text,
                 "nominal": subtotal,
-                "keterangan": keteranganTrans.text,
+                "keterangan": keterangan.text,
                 "kode_pt": users!.kodePt,
                 "kode_kantor": users!.kodeKantor,
                 "kode_induk": users!.kodeInduk,
@@ -979,7 +1021,7 @@ class PengadaanNotifier extends ChangeNotifier {
                 "otoruser": "",
                 "otorterm": "",
                 "otortgljam": "",
-                "flag_trn": "0",
+                "flag_trn": "1",
                 "merchant": "",
                 "source_trx": "",
                 "status": "PENDING",
@@ -1003,10 +1045,10 @@ class PengadaanNotifier extends ChangeNotifier {
                 "nama_cr": transaksiPendModel!.namaDr,
                 "cracc": transaksiPendModel!.dracc,
                 "rrn": invoice,
-                "no_dokumen": transaksiPendModel!.noDokumen,
-                "no_ref": transaksiPendModel!.noRef,
+                "no_dokumen": noDok.text,
+                "no_ref": noRef.text,
                 "nominal": subtotal,
-                "keterangan": keteranganTrans.text,
+                "keterangan": keterangan.text,
                 "kode_pt": users!.kodePt,
                 "kode_kantor": users!.kodeKantor,
                 "kode_induk": users!.kodeInduk,
@@ -1022,7 +1064,7 @@ class PengadaanNotifier extends ChangeNotifier {
                 "otoruser": "",
                 "otorterm": "",
                 "otortgljam": "",
-                "flag_trn": "0",
+                "flag_trn": "1",
                 "merchant": "",
                 "source_trx": "",
                 "status": "COMPLETED",
@@ -1033,6 +1075,7 @@ class PengadaanNotifier extends ChangeNotifier {
             }
             clear();
             dialog = false;
+            getTransaksi();
             informationDialog(context, "Information", value['message']);
             notifyListeners();
           } else {
@@ -1070,8 +1113,22 @@ class PengadaanNotifier extends ChangeNotifier {
 
   InventarisModel? inventarisModel;
   var editData = false;
+  DateTime? blnSusutparseDate;
+  var editBlnsusut = true;
+  TransaksiPendModel? editSetupTrans;
   edit(String id) async {
     inventarisModel = list.where((e) => e.id == int.parse(id)).first;
+    var format = DateFormat('MMMM y');
+    blnSusutparseDate = format.parse(inventarisModel!.blnMulaiSusut);
+    final now = DateTime.now();
+    editBlnsusut = (blnSusutparseDate!.year < now.year) ||
+        (blnSusutparseDate!.year == now.year &&
+            blnSusutparseDate!.month <= now.month);
+
+    editSetupTrans = listTransaksiAll
+        .where((e) => e.noDokumen == inventarisModel!.nodokBeli)
+        .first;
+    noRef.text = editSetupTrans!.noRef;
     currentStep = 0;
     dialog = true;
     editData = true;
@@ -1092,10 +1149,14 @@ class PengadaanNotifier extends ChangeNotifier {
     golonganAsetModel = listGolongan
         .where((e) => e.kodeGolongan == inventarisModel!.kodeGolongan)
         .first;
+    golongan.text = golonganAsetModel!.namaGolongan;
     lokasi.text = inventarisModel!.lokasi;
     kota.text = inventarisModel!.kota;
     noDok.text = inventarisModel!.nodokBeli;
     tglbeli.text = inventarisModel!.tglBeli;
+    penempatanModel = inventarisModel!.nik != "" ? "Karyawan" : "Kantor";
+    namaKaryawan.text = inventarisModel!.namaPejabat;
+    nikKaryawan.text = inventarisModel!.nik;
     tglterima.text = inventarisModel!.tglTerima;
     masasusut.text = inventarisModel!.masasusut;
     blnPenyusutan.text = inventarisModel!.blnMulaiSusut;
@@ -1151,6 +1212,7 @@ class PengadaanNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  TextEditingController golongan = TextEditingController();
   TextEditingController cariTrans = TextEditingController();
   TextEditingController tglTrans = TextEditingController();
   TextEditingController noDokTrans = TextEditingController();
@@ -1260,9 +1322,9 @@ class PengadaanNotifier extends ChangeNotifier {
           int.parse(DateFormat('MM').format(tglTransaksi!)),
           int.parse(DateFormat('dd').format(tglTransaksi!))),
       lastDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) + 10,
-          int.parse(DateFormat('MM').format(tglTransaksi!)),
-          int.parse(DateFormat('dd').format(tglTransaksi!))),
+          int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(DateTime.now())),
+          int.parse(DateFormat('dd').format(DateTime.now()))),
     ));
     if (pickedendDate != null) {
       tglTransaksis = pickedendDate;
