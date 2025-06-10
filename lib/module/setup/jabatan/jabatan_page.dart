@@ -48,7 +48,8 @@ class JabatanPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -101,7 +102,8 @@ class JabatanPage extends StatelessWidget {
 
                                 // controller: value.dataGridController,
                                 gridLinesVisibility: GridLinesVisibility.both,
-                                headerGridLinesVisibility: GridLinesVisibility.both,
+                                headerGridLinesVisibility:
+                                    GridLinesVisibility.both,
                                 selectionMode: SelectionMode.single,
 
                                 source: DetailDataSource(value),
@@ -207,7 +209,9 @@ class JabatanPage extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      value.editData ? "Ubah / Hapus Jabatan" : "Tambah  Jabatan",
+                                      value.editData
+                                          ? "Ubah / Hapus Jabatan"
+                                          : "Tambah  Jabatan",
                                       style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -220,7 +224,9 @@ class JabatanPage extends StatelessWidget {
                                       width: 40,
                                       height: 40,
                                       padding: const EdgeInsets.all(4),
-                                      decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey[200],
+                                          shape: BoxShape.circle),
                                       child: const Icon(Icons.close),
                                     ),
                                   )
@@ -247,7 +253,8 @@ class JabatanPage extends StatelessWidget {
                               ),
                               DropdownSearch<LevelModel>(
                                 popupProps: const PopupPropsMultiSelection.menu(
-                                  showSearchBox: true, // Aktifkan fitur pencarian
+                                  showSearchBox:
+                                      true, // Aktifkan fitur pencarian
                                 ),
                                 selectedItem: value.levelModel,
                                 items: value.list,
@@ -292,7 +299,8 @@ class JabatanPage extends StatelessWidget {
                                 controller: value.kode,
                                 maxLines: 1,
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]'))
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[a-zA-Z0-9]'))
                                 ],
                                 validator: (e) {
                                   if (e!.isEmpty) {
@@ -355,7 +363,8 @@ class JabatanPage extends StatelessWidget {
                               ),
                               value.editData
                                   ? Column(
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
                                       children: [
                                         const SizedBox(height: 16),
                                         ButtonDanger(

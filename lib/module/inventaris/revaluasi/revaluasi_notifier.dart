@@ -342,6 +342,8 @@ class RevaluasiNotifier extends ChangeNotifier {
   InventarisTransaksiModel? inventarisTransaksiModel;
   pilihInventory(InventarisModel value) {
     inventarisModel = value;
+    listInventarisTranskasi.clear();
+    notifyListeners();
     DialogCustom().showLoading(context);
     var data = {
       "kode_pt": inventarisModel!.kodePt,

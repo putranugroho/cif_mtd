@@ -1075,7 +1075,7 @@ class JualBeliNotifier extends ChangeNotifier {
             DateTime.now(),
           ))),
       lastDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) + 10,
+          int.parse(DateFormat('y').format(DateTime.now())),
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
@@ -1115,7 +1115,7 @@ class JualBeliNotifier extends ChangeNotifier {
             DateTime.now(),
           ))),
       lastDate: DateTime(
-          int.parse(DateFormat('y').format(DateTime.now())) + 10,
+          int.parse(DateFormat('y').format(DateTime.now())),
           int.parse(DateFormat('MM').format(
             DateTime.now(),
           )),
@@ -1307,6 +1307,8 @@ class JualBeliNotifier extends ChangeNotifier {
   InventarisTransaksiModel? inventarisTransaksiModel;
   pilihInventory(InventarisModel value) {
     inventarisModel = value;
+    listInventarisTranskasi.clear();
+    notifyListeners();
     DialogCustom().showLoading(context);
     var data = {
       "kode_pt": inventarisModel!.kodePt,
