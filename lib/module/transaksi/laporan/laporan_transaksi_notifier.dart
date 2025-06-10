@@ -66,8 +66,48 @@ class LaporanTransaksiNotifier extends ChangeNotifier {
       namaKaryawan.text = users!.namauser;
       tglawal.text = DateFormat("dd-MMM-yyyy").format(DateTime.now());
       tglakhir.text = DateFormat("dd-MMM-yyyy").format(DateTime.now());
-      getTransaksiBackend();
+      getTransaksi();
       notifyListeners();
+    });
+  }
+
+  var isLoadingData = true;
+  List<TransaksiPendModel> listTransaksi = [];
+  List<TransaksiPendModel> listTransaksiAdd = [];
+  Future getTransaksi() async {
+    isLoadingData = true;
+    listTransaksi.clear();
+    listTransaksiAdd.clear();
+    notifyListeners();
+    var data = {
+      "kode_pt": users!.kodePt,
+    };
+    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data))
+        .then((value) {
+      if (value['status'].toString().toLowerCase().contains("success")) {
+        for (Map<String, dynamic> i in value['data']) {
+          listTransaksi.add(TransaksiPendModel.fromJson(i));
+        }
+        if (listTransaksi.isNotEmpty) {
+          final filtered = listTransaksi.where((e) {
+            final tgl =
+                DateTime.parse(cariTglTrans ? e.tglTransaksi : e.tglValuta);
+            return tgl.isAfter(tglTransAwal!.subtract(Duration(days: 1))) &&
+                tgl.isBefore(tglTransAkhir!.add(Duration(days: 1))) &&
+                e.userinput == users!.namauser &&
+                e.status == "PENDING";
+          }).toList();
+          listTransaksiAdd.addAll(filtered);
+          print("PENDING : ${listTransaksi.length}");
+          print("PENDING RESULT: ${listTransaksiAdd.length}");
+        }
+        getTransaksiBackend();
+
+        notifyListeners();
+      } else {
+        isLoadingData = false;
+        notifyListeners();
+      }
     });
   }
 
@@ -93,7 +133,7 @@ class LaporanTransaksiNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  String cariTrans = "SUCCESS";
+  String cariTrans = "all";
   pilihCariTransaksi(String value) {
     cariTrans = value;
     notifyListeners();
@@ -246,13 +286,14 @@ class LaporanTransaksiNotifier extends ChangeNotifier {
   final searchForm = GlobalKey<FormState>();
   final keyForm = GlobalKey<FormState>();
   final keyForm2 = GlobalKey<FormState>();
-  var isLoadingData = false;
+
   List<TransaksiModel> listTransaksiBack = [];
-  List<TransaksiPendModel> listTransaksiAdd = [];
+  List<TransaksiPendModel> listTransAll = [];
   getTransaksiBackend() async {
     isLoadingData = true;
     listTransaksiBack.clear();
-    listTransaksiAdd.clear();
+    listTransAll.clear();
+
     notifyListeners();
     var data = {
       "filter": {
@@ -299,17 +340,8 @@ class LaporanTransaksiNotifier extends ChangeNotifier {
           listTransaksiBack.add(TransaksiModel.fromJson(i));
         }
         if (listTransaksiBack.isNotEmpty) {
-          for (var i = 0;
-              i <
-                  (cariTrans == "BACKDATE"
-                      ? listTransaksiBack
-                          .where((e) => e.trxCode == "110")
-                          .length
-                      : listTransaksiBack.length);
-              i++) {
-            final data = cariTrans == "BACKDATE"
-                ? listTransaksiBack.where((e) => e.trxCode == "110").toList()[i]
-                : listTransaksiBack[i];
+          for (var i = 0; i < (listTransaksiBack.length); i++) {
+            final data = listTransaksiBack[i];
             listTransaksiAdd.add(TransaksiPendModel(
                 id: data.id,
                 tglTransaksi: data.tglTrans,
@@ -353,6 +385,31 @@ class LaporanTransaksiNotifier extends ChangeNotifier {
                 status:
                     "${data.statusTransaksi == "1" ? "COMPLETED" : "CANCEL"}"));
           }
+        }
+
+        if (cariTrans == "1") {
+          listTransAll =
+              listTransaksiAdd.where((e) => e.status == "COMPLETED").toList();
+        } else if (cariTrans == "BACKDATE") {
+          listTransAll =
+              listTransaksiAdd.where((e) => e.trxCode == "110").toList();
+        } else if (cariTrans == "4") {
+          listTransAll =
+              listTransaksiAdd.where((e) => e.status == "CANCEL").toList();
+        } else if (cariTrans == "2") {
+          listTransAll =
+              listTransaksiAdd.where((e) => e.status == "PENDING").toList();
+          print(listTransaksiAdd.where((e) => e.status == "PENDING").toList());
+        } else {
+          listTransAll = listTransaksiAdd.toList();
+        }
+
+        if (cariTglTrans) {
+          listTransAll.sort((a, b) => DateTime.parse(b.createddate)
+              .compareTo(DateTime.parse(a.createddate)));
+        } else {
+          listTransAll.sort((a, b) => DateTime.parse(b.tglValuta)
+              .compareTo(DateTime.parse(a.tglValuta)));
         }
         isLoadingData = false;
         notifyListeners();

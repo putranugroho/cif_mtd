@@ -139,38 +139,20 @@ class LaporanTransaksiPage extends StatelessWidget {
                                   const SizedBox(width: 16),
                                   SizedBox(
                                     width: 250,
-                                    child: TypeAheadField<UsersModel>(
+                                    child: TextField(
                                       controller: value.namaKaryawan,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
-                                        return TextField(
-                                            controller: controller,
-                                            focusNode: focusNode,
-                                            autofocus: true,
-                                            decoration: const InputDecoration(
-                                              border: OutlineInputBorder(),
-                                              labelText: 'Cari Akun',
-                                            ));
-                                      },
-                                      itemBuilder: (context, city) {
-                                        return ListTile(
-                                          title: Text(city.namauser),
-                                          subtitle: Text(city.userid),
-                                        );
-                                      },
-                                      onSelected: (city) {
-                                        // value.selectInvoice(city);
-                                        value.piliAkunKaryawan(city);
-                                      },
+                                      readOnly: true,
+                                      decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor: Colors.grey[200],
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              borderSide: BorderSide(
+                                                  width: 1,
+                                                  color: Colors.grey))),
                                     ),
                                   ),
-                                  Checkbox(
-                                      value: value.pilihSemuaMenu,
-                                      onChanged: (e) =>
-                                          value.togglePilihSemua()),
-                                  const Text("Semua"),
                                 ],
                               ),
                             ),
@@ -267,7 +249,7 @@ class LaporanTransaksiPage extends StatelessWidget {
                             ),
                             // Tombol Cari
                             ElevatedButton(
-                              onPressed: () => value.getTransaksiBackend(),
+                              onPressed: () => value.getTransaksi(),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: colorPrimary,
                                 padding: const EdgeInsets.symmetric(
@@ -1023,7 +1005,7 @@ class LaporanTransaksiPage extends StatelessWidget {
 class DetailDataSource extends DataGridSource {
   DetailDataSource(LaporanTransaksiNotifier value) {
     tindakanNotifier = value;
-    buildRowData(value.listTransaksiAdd);
+    buildRowData(value.listTransAll);
   }
 
   LaporanTransaksiNotifier? tindakanNotifier;
