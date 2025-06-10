@@ -298,8 +298,17 @@ class LaporanTransaksiNotifier extends ChangeNotifier {
           listTransaksiBack.add(TransaksiModel.fromJson(i));
         }
         if (listTransaksiBack.isNotEmpty) {
-          for (var i = 0; i < listTransaksiBack.length; i++) {
-            final data = listTransaksiBack[i];
+          for (var i = 0;
+              i <
+                  (cariTrans == "BACKDATE"
+                      ? listTransaksiBack
+                          .where((e) => e.trxCode == "110")
+                          .length
+                      : listTransaksiBack.length);
+              i++) {
+            final data = cariTrans == "BACKDATE"
+                ? listTransaksiBack.where((e) => e.trxCode == "110").toList()[i]
+                : listTransaksiBack[i];
             listTransaksiAdd.add(TransaksiPendModel(
                 id: data.id,
                 tglTransaksi: data.tglTrans,
