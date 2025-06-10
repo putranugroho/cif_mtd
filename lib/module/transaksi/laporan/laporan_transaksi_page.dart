@@ -306,7 +306,19 @@ class LaporanTransaksiPage extends StatelessWidget {
                                     padding: const EdgeInsets.all(6),
                                     color: colorPrimary,
                                     alignment: Alignment.center,
-                                    child: const Text('Tanggal',
+                                    child: const Text('Tanggal Trans.',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 12,
+                                          color: Colors.white,
+                                        )))),
+                            GridColumn(
+                                columnName: 'tgl_valuta',
+                                label: Container(
+                                    padding: const EdgeInsets.all(6),
+                                    color: colorPrimary,
+                                    alignment: Alignment.center,
+                                    child: const Text('Tanggal Valuta',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w300,
                                           fontSize: 12,
@@ -460,37 +472,93 @@ class LaporanTransaksiPage extends StatelessWidget {
                                 Expanded(
                                     child: ListView(
                                   children: [
-                                    const Row(
+                                    Row(
                                       children: [
-                                        Text(
-                                          "Tanggal Valuta",
-                                          style: TextStyle(fontSize: 12),
+                                        Expanded(
+                                            child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            const Row(
+                                              children: [
+                                                Text(
+                                                  "Tanggal Transaksi",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                                SizedBox(width: 5),
+                                                Text(
+                                                  "*",
+                                                  style: TextStyle(fontSize: 8),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            TextFormField(
+                                              textInputAction:
+                                                  TextInputAction.done,
+                                              readOnly: true,
+                                              controller: value.tglTransaksi,
+                                              decoration: InputDecoration(
+                                                hintText: "Tgl Valuta",
+                                                filled: true,
+                                                fillColor: Colors.grey[200],
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 16),
+                                          ],
+                                        )),
+                                        SizedBox(
+                                          width: 16,
                                         ),
-                                        SizedBox(width: 5),
-                                        Text(
-                                          "*",
-                                          style: TextStyle(fontSize: 8),
-                                        ),
+                                        Expanded(
+                                            child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            const Row(
+                                              children: [
+                                                Text(
+                                                  "Tanggal Valuta",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                                SizedBox(width: 5),
+                                                Text(
+                                                  "*",
+                                                  style: TextStyle(fontSize: 8),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            TextFormField(
+                                              textInputAction:
+                                                  TextInputAction.done,
+                                              readOnly: true,
+                                              controller: value.tglValuta,
+                                              decoration: InputDecoration(
+                                                hintText: "Tgl Valuta",
+                                                filled: true,
+                                                fillColor: Colors.grey[200],
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 16),
+                                          ],
+                                        )),
                                       ],
                                     ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    TextFormField(
-                                      textInputAction: TextInputAction.done,
-                                      readOnly: true,
-                                      controller: value.tglValuta,
-                                      decoration: InputDecoration(
-                                        hintText: "Tgl Valuta",
-                                        filled: true,
-                                        fillColor: Colors.grey[200],
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 16),
                                     Row(
                                       children: [
                                         Expanded(
@@ -972,7 +1040,11 @@ class DetailDataSource extends DataGridSource {
     _laporanData = list
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
-                DataGridCell(columnName: 'tgl_trans', value: data.createddate),
+                DataGridCell(
+                    columnName: 'tgl_trans',
+                    value: DateFormat('y-MM-dd')
+                        .format(DateTime.parse(data.createddate))),
+                DataGridCell(columnName: 'tgl_valuta', value: data.tglValuta),
                 DataGridCell(columnName: 'nomor_dok', value: data.noDokumen),
                 DataGridCell(columnName: 'nomor_ref', value: data.noRef),
                 DataGridCell(

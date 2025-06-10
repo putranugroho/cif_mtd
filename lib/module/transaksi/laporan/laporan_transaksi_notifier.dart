@@ -81,6 +81,7 @@ class LaporanTransaksiNotifier extends ChangeNotifier {
     dialog = true;
     noDok.text = transaksiPendModel!.noDokumen;
     tglValuta.text = transaksiPendModel!.tglValuta;
+    tglTransaksi.text = transaksiPendModel!.createddate;
     noRef.text = transaksiPendModel!.noRef;
     nosbbdebet.text = transaksiPendModel!.dracc;
     nosbbkredit.text = transaksiPendModel!.cracc;
