@@ -1579,7 +1579,7 @@ class _MenuHutangPiutangWidgetState extends State<MenuHutangPiutangWidget> {
             ),
           ),
         ),
-         InkWell(
+        InkWell(
           onTap: () => widget.value.gantimenu(71),
           child: Container(
             width: MediaQuery.of(context).size.width,
@@ -1662,6 +1662,38 @@ class _MenuTransaksiWidgetState extends State<MenuTransaksiWidget> {
         ),
       ),
       children: [
+        InkWell(
+          onTap: () => widget.value.gantimenu(72),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color:
+                  widget.value.page == 72 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.report,
+                  height: 30,
+                  color: widget.value.page == 72 ? Colors.black : Colors.white,
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Penerimaan",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color:
+                        widget.value.page == 72 ? Colors.black : Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
         InkWell(
           onTap: () => widget.value.gantimenu(17),
           child: Container(

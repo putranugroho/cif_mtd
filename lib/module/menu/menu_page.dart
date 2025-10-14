@@ -68,6 +68,7 @@ import 'package:accounting/module/transaksi/otorisasi/otorisasi_transaksi_page.d
 import 'package:accounting/module/transaksi/pembatalan_transaksi/pembatalan_transaksi_page.dart';
 import 'package:accounting/module/transaksi/piutang/piutang_page.dart';
 import 'package:accounting/module/transaksi/satu_transaksi/satu_transaksi_page.dart';
+import 'package:accounting/module/transaksi/penerimaan/penerimaan_page.dart';
 import 'package:accounting/module/transaksi/transaksi_hutang/transaksi_hutang_page.dart';
 import 'package:accounting/module/user_akses_point/user_akses_point_page.dart';
 import 'package:accounting/utils/colors.dart';
@@ -103,13 +104,16 @@ class MenuPage extends StatelessWidget {
                             onTap: () => value.gantimenu(0),
                             child: Container(
                               width: double.infinity,
-                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 16),
                               child: Row(
                                 children: [
                                   Image.asset(
                                     ImageAssets.dashboard,
                                     height: 30,
-                                    color: value.page == 0 ? Colors.white : Colors.white70,
+                                    color: value.page == 0
+                                        ? Colors.white
+                                        : Colors.white70,
                                   ),
                                   const SizedBox(
                                     width: 16,
@@ -118,7 +122,9 @@ class MenuPage extends StatelessWidget {
                                     "Dashboard",
                                     style: TextStyle(
                                       fontSize: 16,
-                                      color: value.page == 0 ? Colors.white : Colors.white70,
+                                      color: value.page == 0
+                                          ? Colors.white
+                                          : Colors.white70,
                                     ),
                                   )
                                 ],
@@ -158,16 +164,21 @@ class MenuPage extends StatelessWidget {
                             onTap: () => value.gantimenu(26),
                             child: Container(
                               width: double.infinity,
-                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 16),
                               decoration: BoxDecoration(
-                                color: value.page == 26 ? Colors.white : Colors.transparent,
+                                color: value.page == 26
+                                    ? Colors.white
+                                    : Colors.transparent,
                               ),
                               child: Row(
                                 children: [
                                   Image.asset(
                                     ImageAssets.user,
                                     height: 30,
-                                    color: value.page == 26 ? Colors.black : Colors.white,
+                                    color: value.page == 26
+                                        ? Colors.black
+                                        : Colors.white,
                                   ),
                                   const SizedBox(
                                     width: 16,
@@ -176,7 +187,9 @@ class MenuPage extends StatelessWidget {
                                     "AKTIVASI USER",
                                     style: TextStyle(
                                       fontSize: 16,
-                                      color: value.page == 26 ? Colors.black : Colors.white,
+                                      color: value.page == 26
+                                          ? Colors.black
+                                          : Colors.white,
                                     ),
                                   )
                                 ],
@@ -187,16 +200,21 @@ class MenuPage extends StatelessWidget {
                             onTap: () => value.gantimenu(28),
                             child: Container(
                               width: double.infinity,
-                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 16),
                               decoration: BoxDecoration(
-                                color: value.page == 28 ? Colors.white : Colors.transparent,
+                                color: value.page == 28
+                                    ? Colors.white
+                                    : Colors.transparent,
                               ),
                               child: Row(
                                 children: [
                                   Image.asset(
                                     ImageAssets.settings,
                                     height: 30,
-                                    color: value.page == 28 ? Colors.black : Colors.white,
+                                    color: value.page == 28
+                                        ? Colors.black
+                                        : Colors.white,
                                   ),
                                   const SizedBox(
                                     width: 16,
@@ -205,7 +223,9 @@ class MenuPage extends StatelessWidget {
                                     "SETINGS",
                                     style: TextStyle(
                                       fontSize: 16,
-                                      color: value.page == 28 ? Colors.black : Colors.white,
+                                      color: value.page == 28
+                                          ? Colors.black
+                                          : Colors.white,
                                     ),
                                   )
                                 ],
@@ -217,7 +237,8 @@ class MenuPage extends StatelessWidget {
                     ),
                     Container(
                       padding: const EdgeInsets.all(20),
-                      decoration: const BoxDecoration(color: Color.fromARGB(255, 0, 125, 228)),
+                      decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 0, 125, 228)),
                       child: Row(
                         children: [
                           Expanded(
@@ -246,7 +267,9 @@ class MenuPage extends StatelessWidget {
                                   child: Image.asset(
                                     ImageAssets.logout,
                                     height: 30,
-                                    color: value.page == 30 ? Colors.black : Colors.white,
+                                    color: value.page == 30
+                                        ? Colors.black
+                                        : Colors.white,
                                   ),
                                 ),
                                 const SizedBox(
@@ -254,7 +277,8 @@ class MenuPage extends StatelessWidget {
                                 ),
                                 const Text(
                                   "SIGN OUT",
-                                  style: TextStyle(fontSize: 12, color: Colors.white),
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.white),
                                 )
                               ],
                             ),
@@ -290,9 +314,11 @@ class MenuPage extends StatelessWidget {
                                                               ? const LaporanMasterPage()
                                                               : value.page == 11
                                                                   ? const PengadaanPage()
-                                                                  : value.page == 12
+                                                                  : value.page ==
+                                                                          12
                                                                       ? const PenempatanPage()
-                                                                      : value.page == 13
+                                                                      : value.page ==
+                                                                              13
                                                                           ? const RevaluasiPage()
                                                                           : value.page == 14
                                                                               ? const JualBeliPage()
@@ -396,11 +422,13 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                                                                                   ? const SetupSbbPage()
                                                                                                                                                                                                                                                                                   : value.page == 70
                                                                                                                                                                                                                                                                                       ? const LaporanKasKecilPage()
-                                                                                                                                                                                                                                                                                      :value.page == 71
-                                                                                                                                                                                                                                                                                      ? const LaporanHutangPiutangPage(
-                                                                                                                                                                                                                                                                                        tipe: 1,
-                                                                                                                                                                                                                                                                                      )
-                                                                                                                                                                                                                                                                                      : Container())
+                                                                                                                                                                                                                                                                                      : value.page == 71
+                                                                                                                                                                                                                                                                                          ? const LaporanHutangPiutangPage(
+                                                                                                                                                                                                                                                                                              tipe: 1,
+                                                                                                                                                                                                                                                                                            )
+                                                                                                                                                                                                                                                                                          : value.page == 72
+                                                                                                                                                                                                                                                                                              ? const PenerimaanPage()
+                                                                                                                                                                                                                                                                                              : Container())
             ],
           ),
         )),
