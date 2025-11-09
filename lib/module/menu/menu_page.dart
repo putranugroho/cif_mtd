@@ -19,6 +19,10 @@ import 'package:accounting/module/master/ao/ao_page.dart';
 import 'package:accounting/module/master/bank/bank_page.dart';
 import 'package:accounting/module/master/customer/customer_page.dart';
 import 'package:accounting/module/master/laporan/laporan_master_page.dart';
+import 'package:accounting/module/master/master_barang/master_barang_page.dart';
+import 'package:accounting/module/master/master_barcode/master_barcode_page.dart';
+import 'package:accounting/module/master/master_mover/master_mover_page.dart';
+import 'package:accounting/module/master/master_user/master_user_page.dart';
 import 'package:accounting/module/master/otorisasi/otorisasi_master_page.dart';
 // import 'package:accounting/module/master/terminal/akses_point_page.dart';
 import 'package:accounting/module/master/terminal/user_akses_page.dart';
@@ -39,20 +43,26 @@ import 'package:accounting/module/rekonsiliasi/rekonsiliasi_piutang_page.dart';
 import 'package:accounting/module/rekonsiliasi/rekonsiliasi_transaksi_pending_page.dart';
 import 'package:accounting/module/setup/aktivasi/aktivasi_page.dart';
 import 'package:accounting/module/setup/coa/coa_page.dart';
+import 'package:accounting/module/setup/gol_barang/golongan_barang_page.dart';
 import 'package:accounting/module/setup/golongan_aset/golongan_aset_page.dart';
 import 'package:accounting/module/setup/jabatan/jabatan_page.dart';
+import 'package:accounting/module/setup/jenis_barang/jenis_barang_page.dart';
 import 'package:accounting/module/setup/kantor/kantor_page.dart';
+import 'package:accounting/module/setup/kategori_barang/kategori_barang_page.dart';
+import 'package:accounting/module/setup/kel_barang/kelompok_barang_page.dart';
 import 'package:accounting/module/setup/kelompok_aset/kelompok_aset_page.dart';
 import 'package:accounting/module/setup/laporan/laporan_setup_page.dart';
 import 'package:accounting/module/setup/level/level_page.dart';
 import 'package:accounting/module/setup/pajak/setup_pajak_page.dart';
 import 'package:accounting/module/setup/penyusutan/penyusutan_page.dart';
 import 'package:accounting/module/setup/perusahaan/perusahaan_page.dart';
+import 'package:accounting/module/setup/satuan_barang/satuan_barang_page.dart';
 import 'package:accounting/module/setup/sbb_hutang_piutang/sbb_hutang_piutang_page.dart';
 import 'package:accounting/module/setup/sbb_kas/setup_sbb_page.dart';
 import 'package:accounting/module/setup/sbb_khsus/sbb_khusus_page.dart';
 import 'package:accounting/module/setup/sbb_khsus/tambah_kelompok_sbb_khusus_page.dart';
 import 'package:accounting/module/setup/setup_transaksi/setup_transaksi_page.dart';
+import 'package:accounting/module/setup/status_pengiriman/status_pengiriman_page.dart';
 import 'package:accounting/module/setup_closing_eom/setup_closing_eom_page.dart';
 import 'package:accounting/module/setup_otorisasi/setup_otorisasi_page.dart';
 import 'package:accounting/module/transaksi/back_date/back_date_page.dart';
@@ -63,12 +73,16 @@ import 'package:accounting/module/transaksi/hutang/hutang_page.dart';
 import 'package:accounting/module/transaksi/kas_kecil/kas_kecil_page.dart';
 import 'package:accounting/module/transaksi/kas_kecil/kasbon_page.dart';
 import 'package:accounting/module/transaksi/kas_kecil/laporan_kas_kecil_page.dart';
+import 'package:accounting/module/transaksi/koreksi_barang/koreksi_barang_page.dart';
 import 'package:accounting/module/transaksi/laporan/laporan_transaksi_page.dart';
+import 'package:accounting/module/transaksi/mutasi_barang/mutasi_barang_page.dart';
 import 'package:accounting/module/transaksi/otorisasi/otorisasi_transaksi_page.dart';
 import 'package:accounting/module/transaksi/pembatalan_transaksi/pembatalan_transaksi_page.dart';
 import 'package:accounting/module/transaksi/piutang/piutang_page.dart';
 import 'package:accounting/module/transaksi/satu_transaksi/satu_transaksi_page.dart';
 import 'package:accounting/module/transaksi/penerimaan/penerimaan_page.dart';
+import 'package:accounting/module/transaksi/pengeluaran/pengeluaran_page.dart';
+import 'package:accounting/module/transaksi/tracking_pengiriman/tracking_pengiriman_page.dart';
 import 'package:accounting/module/transaksi/transaksi_hutang/transaksi_hutang_page.dart';
 import 'package:accounting/module/user_akses_point/user_akses_point_page.dart';
 import 'package:accounting/utils/colors.dart';
@@ -104,16 +118,13 @@ class MenuPage extends StatelessWidget {
                             onTap: () => value.gantimenu(0),
                             child: Container(
                               width: double.infinity,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 16),
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                               child: Row(
                                 children: [
                                   Image.asset(
                                     ImageAssets.dashboard,
                                     height: 30,
-                                    color: value.page == 0
-                                        ? Colors.white
-                                        : Colors.white70,
+                                    color: value.page == 0 ? Colors.white : Colors.white70,
                                   ),
                                   const SizedBox(
                                     width: 16,
@@ -122,9 +133,7 @@ class MenuPage extends StatelessWidget {
                                     "Dashboard",
                                     style: TextStyle(
                                       fontSize: 16,
-                                      color: value.page == 0
-                                          ? Colors.white
-                                          : Colors.white70,
+                                      color: value.page == 0 ? Colors.white : Colors.white70,
                                     ),
                                   )
                                 ],
@@ -148,97 +157,82 @@ class MenuPage extends StatelessWidget {
                           const SizedBox(
                             height: 24,
                           ),
-                          MenuHutangPiutangWidget(value: value),
-                          const SizedBox(
-                            height: 24,
-                          ),
-                          MenuInventarisWidget(value: value),
-                          const SizedBox(
-                            height: 24,
-                          ),
-                          MenuLaporanWidget(value: value),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          InkWell(
-                            onTap: () => value.gantimenu(26),
-                            child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 16),
-                              decoration: BoxDecoration(
-                                color: value.page == 26
-                                    ? Colors.white
-                                    : Colors.transparent,
-                              ),
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    ImageAssets.user,
-                                    height: 30,
-                                    color: value.page == 26
-                                        ? Colors.black
-                                        : Colors.white,
-                                  ),
-                                  const SizedBox(
-                                    width: 16,
-                                  ),
-                                  Text(
-                                    "AKTIVASI USER",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: value.page == 26
-                                          ? Colors.black
-                                          : Colors.white,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () => value.gantimenu(28),
-                            child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 16),
-                              decoration: BoxDecoration(
-                                color: value.page == 28
-                                    ? Colors.white
-                                    : Colors.transparent,
-                              ),
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    ImageAssets.settings,
-                                    height: 30,
-                                    color: value.page == 28
-                                        ? Colors.black
-                                        : Colors.white,
-                                  ),
-                                  const SizedBox(
-                                    width: 16,
-                                  ),
-                                  Text(
-                                    "SETINGS",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: value.page == 28
-                                          ? Colors.black
-                                          : Colors.white,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
+                          // MenuHutangPiutangWidget(value: value),
+                          // const SizedBox(
+                          //   height: 24,
+                          // ),
+                          // MenuInventarisWidget(value: value),
+                          // const SizedBox(
+                          //   height: 24,
+                          // ),
+                          // MenuLaporanWidget(value: value),
+                          // const SizedBox(
+                          //   height: 16,
+                          // ),
+                          // InkWell(
+                          //   onTap: () => value.gantimenu(26),
+                          //   child: Container(
+                          //     width: double.infinity,
+                          //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                          //     decoration: BoxDecoration(
+                          //       color: value.page == 26 ? Colors.white : Colors.transparent,
+                          //     ),
+                          //     child: Row(
+                          //       children: [
+                          //         Image.asset(
+                          //           ImageAssets.user,
+                          //           height: 30,
+                          //           color: value.page == 26 ? Colors.black : Colors.white,
+                          //         ),
+                          //         const SizedBox(
+                          //           width: 16,
+                          //         ),
+                          //         Text(
+                          //           "AKTIVASI USER",
+                          //           style: TextStyle(
+                          //             fontSize: 16,
+                          //             color: value.page == 26 ? Colors.black : Colors.white,
+                          //           ),
+                          //         )
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
+                          // InkWell(
+                          //   onTap: () => value.gantimenu(28),
+                          //   child: Container(
+                          //     width: double.infinity,
+                          //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                          //     decoration: BoxDecoration(
+                          //       color: value.page == 28 ? Colors.white : Colors.transparent,
+                          //     ),
+                          //     child: Row(
+                          //       children: [
+                          //         Image.asset(
+                          //           ImageAssets.settings,
+                          //           height: 30,
+                          //           color: value.page == 28 ? Colors.black : Colors.white,
+                          //         ),
+                          //         const SizedBox(
+                          //           width: 16,
+                          //         ),
+                          //         Text(
+                          //           "SETINGS",
+                          //           style: TextStyle(
+                          //             fontSize: 16,
+                          //             color: value.page == 28 ? Colors.black : Colors.white,
+                          //           ),
+                          //         )
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.all(20),
-                      decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 0, 125, 228)),
+                      decoration: const BoxDecoration(color: Color.fromARGB(255, 0, 125, 228)),
                       child: Row(
                         children: [
                           Expanded(
@@ -267,9 +261,7 @@ class MenuPage extends StatelessWidget {
                                   child: Image.asset(
                                     ImageAssets.logout,
                                     height: 30,
-                                    color: value.page == 30
-                                        ? Colors.black
-                                        : Colors.white,
+                                    color: value.page == 30 ? Colors.black : Colors.white,
                                   ),
                                 ),
                                 const SizedBox(
@@ -277,8 +269,7 @@ class MenuPage extends StatelessWidget {
                                 ),
                                 const Text(
                                   "SIGN OUT",
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.white),
+                                  style: TextStyle(fontSize: 12, color: Colors.white),
                                 )
                               ],
                             ),
@@ -314,11 +305,9 @@ class MenuPage extends StatelessWidget {
                                                               ? const LaporanMasterPage()
                                                               : value.page == 11
                                                                   ? const PengadaanPage()
-                                                                  : value.page ==
-                                                                          12
+                                                                  : value.page == 12
                                                                       ? const PenempatanPage()
-                                                                      : value.page ==
-                                                                              13
+                                                                      : value.page == 13
                                                                           ? const RevaluasiPage()
                                                                           : value.page == 14
                                                                               ? const JualBeliPage()
@@ -350,11 +339,14 @@ class MenuPage extends StatelessWidget {
                                                                                                                                   ? const ClosingEomPage()
                                                                                                                                   : value.page == 28
                                                                                                                                       ? const PerusahaanPage()
-                                                                                                                                      : value.page == 29
+                                                                                                                                      : value.page ==
+                                                                                                                                              29
                                                                                                                                           ? const JabatanPage()
-                                                                                                                                          : value.page == 30
+                                                                                                                                          : value.page ==
+                                                                                                                                                  30
                                                                                                                                               ? const PejabatPage()
-                                                                                                                                              : value.page == 31
+                                                                                                                                              : value.page ==
+                                                                                                                                                      31
                                                                                                                                                   ? const LevelPage()
                                                                                                                                                   : value.page == 32
                                                                                                                                                       ? const SetupPajakPage()
@@ -428,7 +420,35 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                                                                                             )
                                                                                                                                                                                                                                                                                           : value.page == 72
                                                                                                                                                                                                                                                                                               ? const PenerimaanPage()
-                                                                                                                                                                                                                                                                                              : Container())
+                                                                                                                                                                                                                                                                                              : value.page == 73
+                                                                                                                                                                                                                                                                                                  ? const PengeluaranPage()
+                                                                                                                                                                                                                                                                                                  : value.page == 74
+                                                                                                                                                                                                                                                                                                      ? const GolonganBarangPage()
+                                                                                                                                                                                                                                                                                                      : value.page == 75
+                                                                                                                                                                                                                                                                                                          ? const KelompokBarangPage()
+                                                                                                                                                                                                                                                                                                          : value.page == 76
+                                                                                                                                                                                                                                                                                                              ? const JenisBarangPage()
+                                                                                                                                                                                                                                                                                                              : value.page == 77
+                                                                                                                                                                                                                                                                                                                  ? const KategoriBarangPage()
+                                                                                                                                                                                                                                                                                                                  : value.page == 78
+                                                                                                                                                                                                                                                                                                                      ? const StatusPengirimanPage()
+                                                                                                                                                                                                                                                                                                                      : value.page == 79
+                                                                                                                                                                                                                                                                                                                          ? const MasterUserPage()
+                                                                                                                                                                                                                                                                                                                          : value.page == 80
+                                                                                                                                                                                                                                                                                                                              ? const MasterBarangPage()
+                                                                                                                                                                                                                                                                                                                              : value.page == 81
+                                                                                                                                                                                                                                                                                                                                  ? const MasterMoverPage()
+                                                                                                                                                                                                                                                                                                                                  : value.page == 82
+                                                                                                                                                                                                                                                                                                                                      ? const MutasiBarangPage()
+                                                                                                                                                                                                                                                                                                                                      : value.page == 83
+                                                                                                                                                                                                                                                                                                                                          ? const TrackingPengirimanPage()
+                                                                                                                                                                                                                                                                                                                                          : value.page == 84
+                                                                                                                                                                                                                                                                                                                                              ? const MasterBarcodePage()
+                                                                                                                                                                                                                                                                                                                                              : value.page == 85
+                                                                                                                                                                                                                                                                                                                                                  ? const SatuanBarangPage()
+                                                                                                                                                                                                                                                                                                                                                  : value.page == 86
+                                                                                                                                                                                                                                                                                                                                                      ? const KoreksiBarangPage()
+                                                                                                                                                                                                                                                                                                                                                      : Container())
             ],
           ),
         )),

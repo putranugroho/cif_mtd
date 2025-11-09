@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'penerimaan_notifier.dart';
+import 'package:intl/intl.dart';
 
 class PenerimaanPage extends StatelessWidget {
   const PenerimaanPage({super.key});
@@ -9,198 +10,355 @@ class PenerimaanPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => PenerimaanNotifier(),
-      child: Consumer<PenerimaanNotifier>(
-        builder: (context, notifier, _) {
-          return Scaffold(
-            backgroundColor: Colors.grey[100],
-            appBar: AppBar(
-              title: const Text('Penerimaan Barang'),
-              backgroundColor: Colors.blueAccent,
-              elevation: 0,
-            ),
-            body: Row(
-              children: [
-                // MAIN CONTENT: TABLE
-                Expanded(
-                  flex: notifier.isSidebarOpen ? 2 : 3,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ElevatedButton.icon(
-                          onPressed: notifier.toggleSidebar,
-                          icon: const Icon(Icons.add),
-                          label: const Text("Tambah Penerimaan"),
-                        ),
-                        const SizedBox(height: 16),
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: DataTable(
-                              border: TableBorder.all(color: Colors.grey),
-                              columns: const [
-                                DataColumn(label: Text('Nomor Order')),
-                                DataColumn(label: Text('Tanggal Masuk')),
-                                DataColumn(label: Text('Nama Barang')),
-                                DataColumn(label: Text('Golongan')),
-                                DataColumn(label: Text('Kelompok')),
-                                DataColumn(label: Text('Jenis')),
-                                DataColumn(label: Text('Kategori')),
-                                DataColumn(label: Text('Jumlah')),
-                              ],
-                              rows: notifier.dataPenerimaan.map((data) {
-                                return DataRow(cells: [
-                                  DataCell(Text(data['nomorOrder'] ?? '')),
-                                  DataCell(Text(data['tanggalMasuk'] ?? '')),
-                                  DataCell(Text(data['namaBarang'] ?? '')),
-                                  DataCell(Text(data['golongan'] ?? '')),
-                                  DataCell(Text(data['kelompok'] ?? '')),
-                                  DataCell(Text(data['jenis'] ?? '')),
-                                  DataCell(Text(data['kategori'] ?? '')),
-                                  DataCell(Text(data['jumlahBarang'] ?? '')),
-                                ]);
-                              }).toList(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+      child: const _PenerimaanView(),
+    );
+  }
+}
 
-                // SIDEBAR FORM
-                if (notifier.isSidebarOpen)
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      color: Colors.white,
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Form Input Penerimaan',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                ),
+class _PenerimaanView extends StatefulWidget {
+  const _PenerimaanView();
+
+  @override
+  State<_PenerimaanView> createState() => _PenerimaanViewState();
+}
+
+class _PenerimaanViewState extends State<_PenerimaanView> {
+  final cariPOController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    final model = context.watch<PenerimaanNotifier>();
+    final dateFmt = DateFormat('dd-MM-yyyy');
+
+    return Scaffold(
+      appBar: AppBar(title: const Text("Transaksi - Penerimaan Barang")),
+      body: Stack(
+        children: [
+          // ========================
+          // HISTORY LIST
+          // ========================
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    DropdownButton<String>(
+                      value: model.filterStatus,
+                      items: ["Semua", "Belum Diterima", "Sudah Diterima"].map((s) => DropdownMenuItem(value: s, child: Text("Filter: $s"))).toList(),
+                      onChanged: (v) => model.setFilter(v!),
+                    ),
+                    const SizedBox(width: 12),
+                    DropdownButton<String>(
+                      value: model.sortBy,
+                      items: ["Nomor PO", "Tanggal PO", "Tanggal Input"].map((s) => DropdownMenuItem(value: s, child: Text("Sort: $s"))).toList(),
+                      onChanged: (v) => model.setSort(v!),
+                    ),
+                    const SizedBox(width: 12),
+                    ElevatedButton.icon(
+                      onPressed: () => model.resetFilter(),
+                      icon: const Icon(Icons.refresh),
+                      label: const Text("Reset"),
+                    ),
+                    const Spacer(),
+                    ElevatedButton.icon(
+                      onPressed: () async {
+                        await showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            title: const Text("Cari Nomor Purchase Order"),
+                            content: TextField(
+                              controller: cariPOController,
+                              decoration: const InputDecoration(
+                                labelText: "Masukkan Nomor PO",
+                                border: OutlineInputBorder(),
                               ),
-                              IconButton(
-                                icon: const Icon(Icons.close),
-                                onPressed: notifier.toggleSidebar,
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text("Batal"),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  final po = model.purchaseOrders.firstWhere(
+                                    (x) => x['nomorPO'].toString().toLowerCase() == cariPOController.text.trim().toLowerCase(),
+                                    orElse: () => {},
+                                  );
+                                  Navigator.pop(context);
+                                  if (po.isNotEmpty) {
+                                    model.openSidebar(po);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(content: Text("Nomor PO tidak ditemukan")),
+                                    );
+                                  }
+                                },
+                                child: const Text("Cari"),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 16),
-                          Expanded(
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  _buildTextField(notifier.nomorOrderController,
-                                      'Nomor Order'),
-                                  _buildTextField(
-                                      notifier.tanggalMasukController,
-                                      'Tanggal Masuk'),
-                                  _buildTextField(notifier.namaBarangController,
-                                      'Nama Barang'),
-                                  _buildDropdown(
-                                    'Golongan Barang',
-                                    notifier.selectedGolongan,
-                                    notifier.golonganList,
-                                    (val) {
-                                      notifier.selectedGolongan = val;
-                                      notifier.notifyListeners();
-                                    },
-                                  ),
-                                  _buildDropdown(
-                                    'Kelompok Barang',
-                                    notifier.selectedKelompok,
-                                    notifier.kelompokList,
-                                    (val) {
-                                      notifier.selectedKelompok = val;
-                                      notifier.notifyListeners();
-                                    },
-                                  ),
-                                  _buildDropdown(
-                                    'Jenis Barang',
-                                    notifier.selectedJenis,
-                                    notifier.jenisList,
-                                    (val) {
-                                      notifier.selectedJenis = val;
-                                      notifier.notifyListeners();
-                                    },
-                                  ),
-                                  _buildDropdown(
-                                    'Kategori Barang',
-                                    notifier.selectedKategori,
-                                    notifier.kategoriList,
-                                    (val) {
-                                      notifier.selectedKategori = val;
-                                      notifier.notifyListeners();
-                                    },
-                                  ),
-                                  _buildTextField(
-                                      notifier.jumlahBarangController,
-                                      'Jumlah Barang'),
-                                ],
-                              ),
-                            ),
+                        );
+                      },
+                      icon: const Icon(Icons.search),
+                      label: const Text("Cari PO"),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: model.filteredPOs.length,
+                    itemBuilder: (context, i) {
+                      final po = model.filteredPOs[i];
+                      return Card(
+                        child: ListTile(
+                          title: Text(po['nomorPO']),
+                          subtitle: Text(
+                            "Tanggal PO: ${dateFmt.format(po['tanggalPO'])}\n"
+                            "Tanggal Input: ${po['tanggalDiterima'] != null ? dateFmt.format(po['tanggalDiterima']) : '-'}\n"
+                            "Status: ${po['status']}",
                           ),
-                          const SizedBox(height: 16),
-                          ElevatedButton.icon(
-                            onPressed: notifier.tambahData,
-                            icon: const Icon(Icons.save),
-                            label: const Text("Simpan"),
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: const Size.fromHeight(45),
-                            ),
+                          trailing: ElevatedButton(
+                            onPressed: () => model.openSidebar(po),
+                            child: Text(po['status'] == "Sudah Diterima" ? "Lihat Detail" : "Input Penerimaan"),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // ========================
+          // SIDEBAR PENERIMAAN
+          // ========================
+          if (model.sidebarOpen)
+            AnimatedPositioned(
+              right: 0,
+              top: 0,
+              bottom: 0,
+              width: MediaQuery.of(context).size.width * 0.6,
+              duration: const Duration(milliseconds: 300),
+              child: Material(
+                elevation: 10,
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const Text("Input Penerimaan", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                          const Spacer(),
+                          IconButton(
+                            icon: const Icon(Icons.close),
+                            onPressed: () => model.closeSidebar(),
                           ),
                         ],
                       ),
+                      const Divider(),
+                      Text(
+                        "Nomor PO: ${model.selectedPO?['nomorPO']}",
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        "Tanggal PO Dibuat: ${DateFormat('dd-MM-yyyy').format(model.selectedPO?['tanggalPO'] ?? DateTime.now())}",
+                      ),
+                      const SizedBox(height: 8),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: model.selectedPO?['barang'].length ?? 0,
+                          itemBuilder: (context, i) {
+                            final brg = model.selectedPO!['barang'][i];
+                            final sudahInput = model.selectedPO?['status'] == "Sudah Diterima";
+                            return Card(
+                              child: ListTile(
+                                title: Text(brg['nama']),
+                                subtitle: Text(
+                                  "Jumlah Beli: ${brg['jumlahBeli']}\n"
+                                  "Jumlah Terima: ${brg['jumlahTerima'] ?? '-'}\n"
+                                  "Status: ${brg['statusBarang'] ?? '-'}",
+                                ),
+                                trailing: ElevatedButton(
+                                  onPressed:
+                                      sudahInput ? () => _showDetailBarang(context, brg, readOnly: true) : () => _showDetailBarang(context, brg),
+                                  child: Text(sudahInput ? "Lihat" : "Input Detail"),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: model.selectedPO?['status'] == "Sudah Diterima" ? null : model.savePenerimaan,
+                            child: const Text("Save Penerimaan"),
+                          ),
+                          const SizedBox(width: 12),
+                          OutlinedButton(
+                            onPressed: model.cancelPenerimaan,
+                            child: const Text("Cancel"),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _showDetailBarang(BuildContext context, Map<String, dynamic> barang, {bool readOnly = false}) async {
+    final model = context.read<PenerimaanNotifier>();
+    final jumlahCtrl = TextEditingController(text: barang['jumlahTerima']?.toString() ?? '');
+    final rusakCtrl = TextEditingController(text: barang['rusak']?.toString() ?? '');
+    final ketCtrl = TextEditingController(text: barang['keterangan'] ?? '');
+    DateTime? selectedDate = barang['tanggalTerima'];
+    String statusBarang = barang['statusBarang'] ?? '';
+    String tindakan = barang['tindakan'] ?? '';
+
+    int jumlahBeli = barang['jumlahBeli'];
+    int jumlahTerima = int.tryParse(jumlahCtrl.text) ?? 0;
+    int selisih = jumlahBeli - jumlahTerima;
+
+    await showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text("Detail Barang - ${barang['nama']}"),
+        content: StatefulBuilder(
+          builder: (context, setState) {
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Jumlah Beli: $jumlahBeli", style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  TextField(
+                    controller: jumlahCtrl,
+                    enabled: !readOnly,
+                    decoration: const InputDecoration(
+                      labelText: "Jumlah Terima",
+                      border: OutlineInputBorder(),
+                    ),
+                    keyboardType: TextInputType.number,
+                    onChanged: (v) => setState(() {
+                      jumlahTerima = int.tryParse(v) ?? 0;
+                      selisih = jumlahBeli - jumlahTerima;
+                    }),
+                  ),
+                  const SizedBox(height: 8),
+                  TextField(
+                    enabled: false,
+                    controller: TextEditingController(text: selisih.toString()),
+                    decoration: const InputDecoration(
+                      labelText: "Selisih Barang",
+                      border: OutlineInputBorder(),
                     ),
                   ),
-              ],
+                  const SizedBox(height: 8),
+                  DropdownButtonFormField<String>(
+                    value: statusBarang.isEmpty ? null : statusBarang,
+                    decoration: const InputDecoration(labelText: "Status Barang"),
+                    items: ['Lengkap', 'Tidak Lengkap'].map((s) => DropdownMenuItem(value: s, child: Text(s))).toList(),
+                    onChanged: readOnly ? null : (v) => setState(() => statusBarang = v ?? ''),
+                  ),
+                  const SizedBox(height: 8),
+                  if (statusBarang == 'Tidak Lengkap') ...[
+                    TextField(
+                      controller: rusakCtrl,
+                      enabled: !readOnly,
+                      decoration: const InputDecoration(
+                        labelText: "Jumlah Rusak",
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                    const SizedBox(height: 8),
+                    if (selisih != 0) ...[
+                      TextField(
+                        controller: rusakCtrl,
+                        enabled: !readOnly,
+                        decoration: const InputDecoration(
+                          labelText: "Jumlah Kurang",
+                          border: OutlineInputBorder(),
+                        ),
+                        keyboardType: TextInputType.number,
+                      ),
+                      const SizedBox(height: 8),
+                    ],
+                    DropdownButtonFormField<String>(
+                      value: tindakan.isEmpty ? null : tindakan,
+                      decoration: const InputDecoration(labelText: "Tindakan"),
+                      items: ['Retur Langsung', 'Akan Diretur', 'Diterima', 'Akan Dikirim']
+                          .map((s) => DropdownMenuItem(value: s, child: Text(s)))
+                          .toList(),
+                      onChanged: readOnly ? null : (v) => setState(() => tindakan = v ?? ''),
+                    ),
+                  ],
+                  const SizedBox(height: 8),
+                  TextField(
+                    controller: ketCtrl,
+                    enabled: !readOnly,
+                    decoration: const InputDecoration(
+                      labelText: "Keterangan",
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Text(selectedDate == null ? "Belum pilih tanggal" : "Tanggal diterima: ${DateFormat('dd-MM-yyyy').format(selectedDate!)}"),
+                      const Spacer(),
+                      if (!readOnly)
+                        TextButton(
+                          onPressed: () async {
+                            final now = DateTime.now();
+                            final picked = await showDatePicker(
+                              context: context,
+                              initialDate: now,
+                              firstDate: DateTime(now.year - 1),
+                              lastDate: now,
+                            );
+                            if (picked != null) {
+                              setState(() => selectedDate = picked);
+                            }
+                          },
+                          child: const Text("Pilih Tanggal"),
+                        ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text("Tutup")),
+          if (!readOnly)
+            ElevatedButton(
+              onPressed: () {
+                model.updateBarang(
+                  jumlahTerima: int.tryParse(jumlahCtrl.text) ?? 0,
+                  statusBarang: statusBarang,
+                  rusak: int.tryParse(rusakCtrl.text) ?? 0,
+                  tindakan: tindakan,
+                  keterangan: ketCtrl.text,
+                  tanggalTerima: selectedDate ?? DateTime.now(),
+                );
+                Navigator.pop(context);
+              },
+              child: const Text("Save"),
             ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildTextField(TextEditingController controller, String label) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: TextField(
-        controller: controller,
-        decoration: InputDecoration(
-          labelText: label,
-          border: const OutlineInputBorder(),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDropdown(
-    String label,
-    String? selectedValue,
-    List<String> items,
-    Function(String?) onChanged,
-  ) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: DropdownButtonFormField<String>(
-        decoration: InputDecoration(
-          labelText: label,
-          border: const OutlineInputBorder(),
-        ),
-        value: selectedValue,
-        items: items.map((item) {
-          return DropdownMenuItem(value: item, child: Text(item));
-        }).toList(),
-        onChanged: onChanged,
+        ],
       ),
     );
   }
