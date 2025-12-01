@@ -46,15 +46,30 @@ class KategoriBarangPage extends StatelessWidget {
                                 DataColumn(label: Text('NAMA KATEGORI')),
                                 DataColumn(label: Text('DESKRIPSI')),
                                 DataColumn(label: Text('STATUS')),
+                                DataColumn(label: Text('ACTION')),
                               ],
-                              rows: notifier.dataList.map((item) {
+                              rows: notifier.list.map((item) {
                                 return DataRow(
                                   cells: [
-                                    DataCell(Text(item.id.toString())),
-                                    DataCell(Text(item.kodeKategori)),
-                                    DataCell(Text(item.kategoriBarang)),
-                                    DataCell(Text(item.deskripsi)),
-                                    DataCell(Text(item.status)),
+                                    DataCell(Text(item['id'].toString())),
+                                    DataCell(Text(item['kode_kategori'])),
+                                    DataCell(Text(item['nama_kategori'])),
+                                    DataCell(Text(item['nama_kategori'])),
+                                    DataCell(Text(item['status'])),
+                                    DataCell(Row(
+                                      children: [
+                                        IconButton(
+                                            tooltip: "Edit",
+                                            onPressed: () {
+                                              notifier.onEdit(item);
+                                            },
+                                            icon: Icon(Icons.edit)),
+                                        IconButton(
+                                            tooltip: "Delete",
+                                            onPressed: () {},
+                                            icon: Icon(Icons.delete))
+                                      ],
+                                    )),
                                   ],
                                 );
                               }).toList(),
@@ -79,7 +94,8 @@ class KategoriBarangPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSidebarForm(BuildContext context, KategoriBarangNotifier notifier) {
+  Widget _buildSidebarForm(
+      BuildContext context, KategoriBarangNotifier notifier) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

@@ -1,5 +1,7 @@
 // kategori_barang_notifier.dart
 import 'dart:convert';
+import 'package:accounting/network/network_aset.dart';
+import 'package:accounting/repository/master_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -42,20 +44,25 @@ class KategoriBarangNotifier extends ChangeNotifier {
   TextEditingController deskripsiController = TextEditingController();
   String? selectedStatus;
 
-  // ===== GET DATA =====
+  List<Map<String, dynamic>> list = [];
+  Map<String, dynamic> kategoriModel = {};
+
+  onEdit(Map<String, dynamic> value) {
+    kategoriModel = value;
+    print("${kategoriModel['id']}, ${kategoriModel['kode_kategori']}");
+    notifyListeners();
+  }
+
   Future<void> fetchKategori() async {
+    list.clear();
+    notifyListeners();
     try {
       isLoading = true;
       notifyListeners();
 
-      final res = await http.get(Uri.parse(baseUrl));
-      if (res.statusCode == 200) {
-        List jsonData = jsonDecode(res.body);
-        dataList = jsonData.map((item) => KategoriBarang.fromJson(item)).toList();
-      } else {
-        // handle non-200 jika perlu
-        debugPrint('fetchKategori failed: ${res.statusCode} ${res.body}');
-      }
+      MasterRepository.kategori(NetworkAset.kategori()).then((value) {
+        list = List<Map<String, dynamic>>.from(value ?? []);
+      });
     } catch (e) {
       debugPrint("Fetch error: $e");
     }

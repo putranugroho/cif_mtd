@@ -86,7 +86,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
           });
     }
   }
-
+  
   var isLoadingData = true;
   List<TransaksiPendModel> listTransaksi = [];
   List<TransaksiPendModel> listTransaksiAdd = [];
