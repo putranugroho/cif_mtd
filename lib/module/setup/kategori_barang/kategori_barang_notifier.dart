@@ -56,19 +56,19 @@ class KategoriBarangNotifier extends ChangeNotifier {
 
   onDelete(Map<String, dynamic> value) {
     kategoriModel = value;
-    confirmationDialog(context, "Peringatan",
-        "Anda yakin ingin menghapus ${kategoriModel['nama_kategori']} ?",
-        no: () {
+    confirmationDialog(context, "Peringatan", "Anda yakin ingin menghapus ${kategoriModel['nama_kategori']} ?", no: () {
       Navigator.pop(context);
     }, yes: () async {
       Navigator.pop(context);
-      remove();
+      DialogCustom().showLoading(context);
+      MasterRepository.deletekategori(NetworkAset.kategoriupdate(kategoriModel['id'])).then((value) {
+        Navigator.pop(context);
+        fetchKategori();
+        clearForm();
+        informationDialog(context, "Informasi", value['message']);
+      });
     });
     notifyListeners();
-  }
-
-  remove() async {
-    DialogCustom().showLoading(context);
   }
 
   // ===== ADD DATA =====
@@ -81,9 +81,7 @@ class KategoriBarangNotifier extends ChangeNotifier {
           "deskripsi": deskripsiController.text,
           "status": selectedStatus ?? "Aktif",
         };
-        MasterRepository.updatekategori(
-                NetworkAset.kategoriupdate(kategoriModel['id']), body)
-            .then((value) {
+        MasterRepository.updatekategori(NetworkAset.kategoriupdate(kategoriModel['id']), body).then((value) {
           fetchKategori();
           clearForm();
           informationDialog(context, "Informasi", value['message']);
@@ -100,8 +98,7 @@ class KategoriBarangNotifier extends ChangeNotifier {
           "deskripsi": deskripsiController.text,
           "status": selectedStatus ?? "Aktif",
         };
-        MasterRepository.addkategori(NetworkAset.kategori(), body)
-            .then((value) {
+        MasterRepository.addkategori(NetworkAset.kategori(), body).then((value) {
           fetchKategori();
           clearForm();
           informationDialog(context, "Informasi", value['message']);

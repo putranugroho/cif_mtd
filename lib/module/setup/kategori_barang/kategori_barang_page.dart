@@ -65,7 +65,9 @@ class KategoriBarangPage extends StatelessWidget {
                                             icon: Icon(Icons.edit)),
                                         IconButton(
                                             tooltip: "Delete",
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              notifier.onDelete(item);
+                                            },
                                             icon: Icon(Icons.delete))
                                       ],
                                     )),
@@ -93,8 +95,7 @@ class KategoriBarangPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSidebarForm(
-      BuildContext context, KategoriBarangNotifier notifier) {
+  Widget _buildSidebarForm(BuildContext context, KategoriBarangNotifier notifier) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
