@@ -23,6 +23,10 @@ class KategoriBarangNotifier extends ChangeNotifier {
 
   onEdit(Map<String, dynamic> value) {
     kategoriModel = value;
+    kodeKategoriController.text = kategoriModel['kode_kategori'];
+    kategoriController.text = kategoriModel['nama_kategori'];
+    deskripsiController.text = kategoriModel['deskripsi'];
+    showForm = true;
     print("${kategoriModel['id']}, ${kategoriModel['kode_kategori']}");
     notifyListeners();
   }

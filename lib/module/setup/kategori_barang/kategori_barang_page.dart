@@ -53,7 +53,7 @@ class KategoriBarangPage extends StatelessWidget {
                                     DataCell(Text(item['id'].toString())),
                                     DataCell(Text(item['kode_kategori'])),
                                     DataCell(Text(item['nama_kategori'])),
-                                    DataCell(Text(item['nama_kategori'])),
+                                    DataCell(Text(item['deskripsi'])),
                                     DataCell(Text(item['status'])),
                                     DataCell(Row(
                                       children: [
