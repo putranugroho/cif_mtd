@@ -67,13 +67,15 @@ class KategoriBarangNotifier extends ChangeNotifier {
 
       MasterRepository.kategori(NetworkAset.kategori()).then((value) {
         list = List<Map<String, dynamic>>.from(value ?? []);
+        isLoading = false;
+        notifyListeners();
       });
     } catch (e) {
       debugPrint("Fetch error: $e");
+      SnackBar(content: Text("Fetch error: $e"));
+      isLoading = false;
+      notifyListeners();
     }
-
-    isLoading = false;
-    notifyListeners();
   }
 
   // ===== ADD DATA =====
