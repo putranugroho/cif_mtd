@@ -8,7 +8,7 @@ class GolonganBarangPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => GolonganBarangNotifier(),
+      create: (_) => GolonganBarangNotifier()..fetchData(),
       child: Consumer<GolonganBarangNotifier>(
         builder: (context, notifier, _) {
           return Scaffold(
@@ -34,29 +34,31 @@ class GolonganBarangPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                         Expanded(
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: DataTable(
-                              columns: const [
-                                DataColumn(label: Text('ID')),
-                                DataColumn(label: Text('KODE GOLONGAN')),
-                                DataColumn(label: Text('NAMA GOLONGAN')),
-                                DataColumn(label: Text('DESKRIPSI')),
-                                DataColumn(label: Text('STATUS')),
-                                DataColumn(label: Text('TANGGAL DIBUAT')),
-                              ],
-                              rows: notifier.data.map((item) {
-                                return DataRow(cells: [
-                                  DataCell(Text(item['id'].toString())),
-                                  DataCell(Text(item['kodeGolongan'] ?? '')),
-                                  DataCell(Text(item['namaGolongan'] ?? '')),
-                                  DataCell(Text(item['deskripsi'] ?? '')),
-                                  DataCell(Text(item['status'] ?? '')),
-                                  DataCell(Text(item['tanggalDibuat'] ?? '')),
-                                ]);
-                              }).toList(),
-                            ),
-                          ),
+                          child: notifier.isLoading
+                              ? const Center(child: CircularProgressIndicator())
+                              : SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: DataTable(
+                                    columns: const [
+                                      DataColumn(label: Text('ID')),
+                                      DataColumn(label: Text('KODE GOLONGAN')),
+                                      DataColumn(label: Text('NAMA GOLONGAN')),
+                                      DataColumn(label: Text('DESKRIPSI')),
+                                      DataColumn(label: Text('STATUS')),
+                                      DataColumn(label: Text('TANGGAL DIBUAT')),
+                                    ],
+                                    rows: notifier.data.map((item) {
+                                      return DataRow(cells: [
+                                        DataCell(Text(item['id'].toString())),
+                                        DataCell(Text(item['kode_golongan'] ?? '')),
+                                        DataCell(Text(item['nama_golongan'] ?? '')),
+                                        DataCell(Text(item['deskripsi'] ?? '')),
+                                        DataCell(Text(item['status'] ?? '')),
+                                        DataCell(Text(item['created_at'] != null ? (item['created_at'] as String).split('T')[0] : '')),
+                                      ]);
+                                    }).toList(),
+                                  ),
+                                ),
                         ),
                       ],
                     ),
@@ -80,14 +82,16 @@ class GolonganBarangPage extends StatelessWidget {
                           ),
                         ),
                         const Divider(),
+                        // Kode Golongan
                         TextField(
-                          controller: notifier.namaGolonganController,
+                          controller: notifier.kodeGolonganController,
                           decoration: const InputDecoration(
                             labelText: 'Kode Golongan',
                             border: OutlineInputBorder(),
                           ),
                         ),
                         const SizedBox(height: 16),
+                        // Nama Golongan
                         TextField(
                           controller: notifier.namaGolonganController,
                           decoration: const InputDecoration(
@@ -118,7 +122,7 @@ class GolonganBarangPage extends StatelessWidget {
                                   ))
                               .toList(),
                           onChanged: (value) {
-                            notifier.selectedStatus = value;
+                            notifier.setSelectedStatus(value);
                           },
                         ),
                         const Spacer(),
@@ -126,11 +130,17 @@ class GolonganBarangPage extends StatelessWidget {
                           children: [
                             Expanded(
                               child: ElevatedButton(
-                                onPressed: notifier.tambahData,
+                                onPressed: notifier.isSubmitting
+                                    ? null
+                                    : () async {
+                                        await notifier.tambahDataToApi();
+                                      },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.green,
                                 ),
-                                child: const Text('Simpan'),
+                                child: notifier.isSubmitting
+                                    ? const SizedBox(height: 16, width: 16, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                                    : const Text('Simpan'),
                               ),
                             ),
                             const SizedBox(width: 8),

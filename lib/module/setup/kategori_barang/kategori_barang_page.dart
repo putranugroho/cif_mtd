@@ -1,3 +1,4 @@
+// kategori_barang_page.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'kategori_barang_notifier.dart';
@@ -7,8 +8,9 @@ class KategoriBarangPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Provider dibuat DI SINI dan langsung memanggil fetchKategori()
     return ChangeNotifierProvider(
-      create: (_) => KategoriBarangNotifier(),
+      create: (_) => KategoriBarangNotifier()..fetchKategori(),
       child: Consumer<KategoriBarangNotifier>(
         builder: (context, notifier, _) {
           return Row(
@@ -31,33 +33,34 @@ class KategoriBarangPage extends StatelessWidget {
                       )
                     ],
                   ),
-                  body: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: DataTable(
-                        headingRowColor: WidgetStateProperty.all(Colors.grey[200]),
-                        columns: const [
-                          DataColumn(label: Text('ID')),
-                          DataColumn(label: Text('KODE KATEGORI')),
-                          DataColumn(label: Text('NAMA KATEGORI')),
-                          DataColumn(label: Text('DESKRIPSI')),
-                          DataColumn(label: Text('STATUS')),
-                        ],
-                        rows: notifier.dataList.map((item) {
-                          return DataRow(
-                            cells: [
-                              DataCell(Text(item['id'].toString())),
-                              DataCell(Text(item['kodeKategori'] ?? '-')),
-                              DataCell(Text(item['kategoriBarang'] ?? '-')),
-                              DataCell(Text(item['deskripsi'] ?? '-')),
-                              DataCell(Text(item['status'] ?? '-')),
-                            ],
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ),
+                  body: notifier.isLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: DataTable(
+                              columns: const [
+                                DataColumn(label: Text('ID')),
+                                DataColumn(label: Text('KODE KATEGORI')),
+                                DataColumn(label: Text('NAMA KATEGORI')),
+                                DataColumn(label: Text('DESKRIPSI')),
+                                DataColumn(label: Text('STATUS')),
+                              ],
+                              rows: notifier.dataList.map((item) {
+                                return DataRow(
+                                  cells: [
+                                    DataCell(Text(item.id.toString())),
+                                    DataCell(Text(item.kodeKategori)),
+                                    DataCell(Text(item.kategoriBarang)),
+                                    DataCell(Text(item.deskripsi)),
+                                    DataCell(Text(item.status)),
+                                  ],
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ),
                 ),
               ),
 
@@ -86,7 +89,7 @@ class KategoriBarangPage extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         TextField(
-          controller: notifier.kategoriController,
+          controller: notifier.kodeKategoriController,
           decoration: const InputDecoration(
             labelText: "Kode Kategori",
             border: OutlineInputBorder(),
@@ -102,28 +105,27 @@ class KategoriBarangPage extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         TextField(
+          controller: notifier.deskripsiController,
           decoration: const InputDecoration(
             labelText: "Deskripsi",
             border: OutlineInputBorder(),
           ),
           maxLines: 3,
-          onChanged: (val) {
-            // optional: bisa disimpan sementara di model
-          },
         ),
         const SizedBox(height: 16),
         DropdownButtonFormField<String>(
+          value: notifier.selectedStatus,
           decoration: const InputDecoration(
             labelText: "Status",
             border: OutlineInputBorder(),
           ),
-          value: notifier.selectedStatus,
           items: const [
             DropdownMenuItem(value: "Aktif", child: Text("Aktif")),
             DropdownMenuItem(value: "Tidak Aktif", child: Text("Tidak Aktif")),
           ],
           onChanged: (val) {
             notifier.selectedStatus = val;
+            notifier.notifyListeners();
           },
         ),
         const Spacer(),
@@ -135,8 +137,8 @@ class KategoriBarangPage extends StatelessWidget {
               child: const Text("Batal"),
             ),
             ElevatedButton(
-              onPressed: () {
-                notifier.addData();
+              onPressed: () async {
+                await notifier.addKategori();
                 notifier.toggleForm();
               },
               child: const Text("Simpan"),
