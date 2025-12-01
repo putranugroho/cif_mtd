@@ -1,6 +1,7 @@
+// File: lib/pages/penerimaan_page.dart
+import 'package:accounting/module/transaksi/penerimaan/penerimaan_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'penerimaan_notifier.dart';
 import 'package:intl/intl.dart';
 
 class PenerimaanPage extends StatelessWidget {
@@ -26,6 +27,23 @@ class _PenerimaanViewState extends State<_PenerimaanView> {
   final cariPOController = TextEditingController();
 
   @override
+  void dispose() {
+    cariPOController.dispose();
+    super.dispose();
+  }
+
+  String formatDate(dynamic dt) {
+    final dateFmt = DateFormat('dd-MM-yyyy');
+    if (dt == null) return '-';
+    if (dt is DateTime) return dateFmt.format(dt);
+    try {
+      return dateFmt.format(DateTime.parse(dt.toString()));
+    } catch (e) {
+      return '-';
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final model = context.watch<PenerimaanNotifier>();
     final dateFmt = DateFormat('dd-MM-yyyy');
@@ -45,7 +63,7 @@ class _PenerimaanViewState extends State<_PenerimaanView> {
                   children: [
                     DropdownButton<String>(
                       value: model.filterStatus,
-                      items: ["Semua", "Belum Diterima", "Sudah Diterima"].map((s) => DropdownMenuItem(value: s, child: Text("Filter: $s"))).toList(),
+                      items: ["Semua", "Belum Diterima", "Sudah Diterima"].map((f) => DropdownMenuItem(value: f, child: Text("Filter: $f"))).toList(),
                       onChanged: (v) => model.setFilter(v!),
                     ),
                     const SizedBox(width: 12),
@@ -76,16 +94,23 @@ class _PenerimaanViewState extends State<_PenerimaanView> {
                             ),
                             actions: [
                               TextButton(
-                                onPressed: () => Navigator.pop(context),
+                                onPressed: () {
+                                  cariPOController.clear();
+                                  Navigator.pop(context);
+                                },
                                 child: const Text("Batal"),
                               ),
                               ElevatedButton(
                                 onPressed: () {
+                                  final query = cariPOController.text.trim().toLowerCase();
                                   final po = model.purchaseOrders.firstWhere(
-                                    (x) => x['nomorPO'].toString().toLowerCase() == cariPOController.text.trim().toLowerCase(),
-                                    orElse: () => {},
+                                    (x) => (x['nomorPO']?.toString().toLowerCase() ?? '') == query,
+                                    orElse: () => <String, dynamic>{},
                                   );
+
+                                  cariPOController.clear();
                                   Navigator.pop(context);
+
                                   if (po.isNotEmpty) {
                                     model.openSidebar(po);
                                   } else {
@@ -113,11 +138,11 @@ class _PenerimaanViewState extends State<_PenerimaanView> {
                       final po = model.filteredPOs[i];
                       return Card(
                         child: ListTile(
-                          title: Text(po['nomorPO']),
+                          title: Text(po['nomorPO'] ?? '-'),
                           subtitle: Text(
-                            "Tanggal PO: ${dateFmt.format(po['tanggalPO'])}\n"
-                            "Tanggal Input: ${po['tanggalDiterima'] != null ? dateFmt.format(po['tanggalDiterima']) : '-'}\n"
-                            "Status: ${po['status']}",
+                            "Tanggal PO: ${formatDate(po['tanggalPO'])}\n"
+                            "Tanggal Input: ${po['tanggalDiterima'] != null ? formatDate(po['tanggalDiterima']) : '-'}\n"
+                            "Status: ${po['status'] ?? '-'}",
                           ),
                           trailing: ElevatedButton(
                             onPressed: () => model.openSidebar(po),
@@ -162,37 +187,42 @@ class _PenerimaanViewState extends State<_PenerimaanView> {
                       ),
                       const Divider(),
                       Text(
-                        "Nomor PO: ${model.selectedPO?['nomorPO']}",
+                        "Nomor PO: ${model.selectedPO?['nomorPO'] ?? '-'}",
                         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        "Tanggal PO Dibuat: ${DateFormat('dd-MM-yyyy').format(model.selectedPO?['tanggalPO'] ?? DateTime.now())}",
+                        "Tanggal PO Dibuat: ${formatDate(model.selectedPO?['tanggalPO'])}",
                       ),
                       const SizedBox(height: 8),
                       Expanded(
-                        child: ListView.builder(
-                          itemCount: model.selectedPO?['barang'].length ?? 0,
-                          itemBuilder: (context, i) {
-                            final brg = model.selectedPO!['barang'][i];
-                            final sudahInput = model.selectedPO?['status'] == "Sudah Diterima";
-                            return Card(
-                              child: ListTile(
-                                title: Text(brg['nama']),
-                                subtitle: Text(
-                                  "Jumlah Beli: ${brg['jumlahBeli']}\n"
-                                  "Jumlah Terima: ${brg['jumlahTerima'] ?? '-'}\n"
-                                  "Status: ${brg['statusBarang'] ?? '-'}",
+                        child: Builder(builder: (context) {
+                          final barangList = (model.selectedPO?['barang'] as List<dynamic>?) ?? [];
+                          return ListView.builder(
+                            itemCount: barangList.length,
+                            itemBuilder: (context, i) {
+                              final brg = barangList[i] as Map<String, dynamic>;
+                              final sudahInput = (model.selectedPO?['status'] ?? '') == "Sudah Diterima";
+                              return Card(
+                                child: ListTile(
+                                  title: Text(brg['nama'] ?? '-'),
+                                  subtitle: Text(
+                                    "Jumlah Beli: ${brg['jumlahBeli']}\n"
+                                    "Jumlah Terima: ${brg['jumlahTerima'] ?? '-'}\n"
+                                    "Status: ${brg['statusBarang'] ?? '-'}",
+                                  ),
+                                  trailing: ElevatedButton(
+                                    onPressed: () {
+                                      model.selectBarang(brg);
+                                      sudahInput ? _showDetailBarang(context, brg, readOnly: true) : _showDetailBarang(context, brg);
+                                    },
+                                    child: Text(sudahInput ? "Lihat" : "Input Detail"),
+                                  ),
                                 ),
-                                trailing: ElevatedButton(
-                                  onPressed:
-                                      sudahInput ? () => _showDetailBarang(context, brg, readOnly: true) : () => _showDetailBarang(context, brg),
-                                  child: Text(sudahInput ? "Lihat" : "Input Detail"),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
+                              );
+                            },
+                          );
+                        }),
                       ),
                       Row(
                         children: [
@@ -219,6 +249,9 @@ class _PenerimaanViewState extends State<_PenerimaanView> {
 
   Future<void> _showDetailBarang(BuildContext context, Map<String, dynamic> barang, {bool readOnly = false}) async {
     final model = context.read<PenerimaanNotifier>();
+    // ensure selectedBarang is set
+    model.selectBarang(barang);
+
     final jumlahCtrl = TextEditingController(text: barang['jumlahTerima']?.toString() ?? '');
     final rusakCtrl = TextEditingController(text: barang['rusak']?.toString() ?? '');
     final ketCtrl = TextEditingController(text: barang['keterangan'] ?? '');
@@ -226,14 +259,14 @@ class _PenerimaanViewState extends State<_PenerimaanView> {
     String statusBarang = barang['statusBarang'] ?? '';
     String tindakan = barang['tindakan'] ?? '';
 
-    int jumlahBeli = barang['jumlahBeli'];
+    int jumlahBeli = barang['jumlahBeli'] ?? 0;
     int jumlahTerima = int.tryParse(jumlahCtrl.text) ?? 0;
     int selisih = jumlahBeli - jumlahTerima;
 
     await showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text("Detail Barang - ${barang['nama']}"),
+        title: Text("Detail Barang - ${barang['nama'] ?? '-'}"),
         content: StatefulBuilder(
           builder: (context, setState) {
             return SingleChildScrollView(
@@ -361,5 +394,10 @@ class _PenerimaanViewState extends State<_PenerimaanView> {
         ],
       ),
     );
+
+    // dispose controllers created inside this function
+    jumlahCtrl.dispose();
+    rusakCtrl.dispose();
+    ketCtrl.dispose();
   }
 }

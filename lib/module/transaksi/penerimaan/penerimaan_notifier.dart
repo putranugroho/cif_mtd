@@ -1,3 +1,4 @@
+// File: lib/notifiers/penerimaan_notifier.dart
 import 'package:flutter/material.dart';
 
 class PenerimaanNotifier extends ChangeNotifier {
@@ -16,7 +17,7 @@ class PenerimaanNotifier extends ChangeNotifier {
           'nama': 'Laptop Asus',
           'jumlahBeli': 10,
           'jumlahTerima': 10,
-          'statusBarang': 'Baik',
+          'statusBarang': 'Lengkap', // normalized
           'rusak': 0,
           'tindakan': '',
           'perbedaan': 0,
@@ -27,7 +28,7 @@ class PenerimaanNotifier extends ChangeNotifier {
           'nama': 'Mouse Logitech',
           'jumlahBeli': 50,
           'jumlahTerima': 45,
-          'statusBarang': 'Ada Rusak',
+          'statusBarang': 'Tidak Lengkap', // normalized
           'rusak': 5,
           'tindakan': 'Akan Diretur',
           'perbedaan': 5,
@@ -82,14 +83,14 @@ class PenerimaanNotifier extends ChangeNotifier {
 
     // Sort
     if (sortBy == "Nomor PO") {
-      result.sort((a, b) => a['nomorPO'].compareTo(b['nomorPO']));
+      result.sort((a, b) => (a['nomorPO'] ?? '').compareTo(b['nomorPO'] ?? ''));
     } else if (sortBy == "Tanggal PO") {
-      result.sort((a, b) => a['tanggalPO'].compareTo(b['tanggalPO']));
+      result.sort((a, b) => (a['tanggalPO'] as DateTime).compareTo(b['tanggalPO'] as DateTime));
     } else if (sortBy == "Tanggal Input") {
       result.sort((a, b) {
         final tglA = a['tanggalInput'] ?? DateTime(1900);
         final tglB = b['tanggalInput'] ?? DateTime(1900);
-        return tglA.compareTo(tglB);
+        return (tglA as DateTime).compareTo(tglB as DateTime);
       });
     }
 
@@ -163,7 +164,7 @@ class PenerimaanNotifier extends ChangeNotifier {
       ..['tanggalTerima'] = tanggalTerima;
 
     // Update list barang dalam selectedPO agar sinkron
-    final idx = selectedPO!['barang'].indexWhere((b) => b['nama'] == selectedBarang!['nama']);
+    final idx = (selectedPO!['barang'] as List).indexWhere((b) => b['nama'] == selectedBarang!['nama']);
     if (idx != -1) {
       selectedPO!['barang'][idx] = selectedBarang!;
     }
