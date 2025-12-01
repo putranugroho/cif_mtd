@@ -1,5 +1,6 @@
 import 'package:accounting/network/network_aset.dart';
 import 'package:accounting/repository/master_repository.dart';
+import 'package:accounting/utils/dialog_loading.dart';
 import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
@@ -51,6 +52,23 @@ class KategoriBarangNotifier extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
     }
+  }
+
+  onDelete(Map<String, dynamic> value) {
+    kategoriModel = value;
+    confirmationDialog(context, "Peringatan",
+        "Anda yakin ingin menghapus ${kategoriModel['nama_kategori']} ?",
+        no: () {
+      Navigator.pop(context);
+    }, yes: () async {
+      Navigator.pop(context);
+      remove();
+    });
+    notifyListeners();
+  }
+
+  remove() async {
+    DialogCustom().showLoading(context);
   }
 
   // ===== ADD DATA =====
