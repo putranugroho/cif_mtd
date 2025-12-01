@@ -26,6 +26,7 @@ class KategoriBarangNotifier extends ChangeNotifier {
     kodeKategoriController.text = kategoriModel['kode_kategori'];
     kategoriController.text = kategoriModel['nama_kategori'];
     deskripsiController.text = kategoriModel['deskripsi'];
+    selectedStatus = kategoriModel['status'];
     showForm = true;
     edit = true;
     print("${kategoriModel['id']}, ${kategoriModel['kode_kategori']}");

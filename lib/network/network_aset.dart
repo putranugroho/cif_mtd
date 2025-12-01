@@ -5,7 +5,7 @@ class NetworkAset {
     return "$urlAset/kategori";
   }
 
-  static String kategoriupdate(String id) {
+  static String kategoriupdate(int id) {
     return "$urlAset/kategori/$id";
   }
 }
