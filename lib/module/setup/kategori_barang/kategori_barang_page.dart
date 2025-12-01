@@ -8,9 +8,8 @@ class KategoriBarangPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Provider dibuat DI SINI dan langsung memanggil fetchKategori()
     return ChangeNotifierProvider(
-      create: (_) => KategoriBarangNotifier()..fetchKategori(),
+      create: (_) => KategoriBarangNotifier(context: context),
       child: Consumer<KategoriBarangNotifier>(
         builder: (context, notifier, _) {
           return Row(

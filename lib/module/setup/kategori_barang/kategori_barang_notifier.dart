@@ -32,6 +32,11 @@ class KategoriBarang {
 }
 
 class KategoriBarangNotifier extends ChangeNotifier {
+  final BuildContext context;
+  KategoriBarangNotifier({required this.context}) {
+    fetchKategori();
+  }
+
   final String baseUrl = "http://localhost:8080/api/kategori"; // sesuaikan
 
   List<KategoriBarang> dataList = [];
