@@ -1,35 +1,7 @@
-// kategori_barang_notifier.dart
-import 'dart:convert';
 import 'package:accounting/network/network_aset.dart';
 import 'package:accounting/repository/master_repository.dart';
+import 'package:accounting/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
-class KategoriBarang {
-  final int id;
-  final String kodeKategori;
-  final String kategoriBarang;
-  final String deskripsi;
-  final String status;
-
-  KategoriBarang({
-    required this.id,
-    required this.kodeKategori,
-    required this.kategoriBarang,
-    required this.deskripsi,
-    required this.status,
-  });
-
-  factory KategoriBarang.fromJson(Map<String, dynamic> json) {
-    return KategoriBarang(
-      id: json['id'],
-      kodeKategori: json['kode_kategori'] ?? json['kodeKategori'] ?? '-',
-      kategoriBarang: json['nama_kategori'] ?? json['kategoriBarang'] ?? '-',
-      deskripsi: json['deskripsi'] ?? '-',
-      status: json['status'] ?? '-',
-    );
-  }
-}
 
 class KategoriBarangNotifier extends ChangeNotifier {
   final BuildContext context;
@@ -37,9 +9,6 @@ class KategoriBarangNotifier extends ChangeNotifier {
     fetchKategori();
   }
 
-  final String baseUrl = "http://localhost:8080/api/kategori"; // sesuaikan
-
-  List<KategoriBarang> dataList = [];
   bool isLoading = false;
 
   bool showForm = false;
@@ -87,20 +56,14 @@ class KategoriBarangNotifier extends ChangeNotifier {
         "deskripsi": deskripsiController.text,
         "status": selectedStatus ?? "Aktif",
       };
-
-      final res = await http.post(
-        Uri.parse(baseUrl),
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode(body),
-      );
-
-      if (res.statusCode == 201 || res.statusCode == 200) {
-        await fetchKategori(); // refresh table
-      } else {
-        debugPrint('addKategori failed: ${res.statusCode} ${res.body}');
-      }
+      MasterRepository.addkategori(NetworkAset.kategori(), body).then((value) {
+        fetchKategori();
+        clearForm();
+        informationDialog(context, "Informasi", value['message']);
+      });
     } catch (e) {
       debugPrint("Add error: $e");
+      informationDialog(context, "Peringatan", "$e");
     }
 
     clearForm();
