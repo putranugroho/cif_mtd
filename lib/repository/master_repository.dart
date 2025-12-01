@@ -85,4 +85,41 @@ class MasterRepository {
       rethrow;
     }
   }
+
+  static Future<dynamic> updatekategori(
+      String url, Map<String, dynamic> body) async {
+    Dio dio = Dio(
+      BaseOptions(
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+      ),
+    );
+
+    try {
+      if (kDebugMode) {
+        print("ENDPOINT URL : $url");
+      }
+
+      final response = await dio.put(url, data: body);
+
+      if (kDebugMode) {
+        print("RESPONSE STATUS CODE : ${response.statusCode}");
+      }
+
+      return jsonDecode(jsonEncode(response.data));
+    } on DioException catch (e) {
+      print("ERROR STATUS: ${e.response?.statusCode}");
+      print("ERROR DATA: ${e.response?.data}");
+
+      // ⬇⬇ IF SERVER KIRIM 422 + PESAN ERROR → RETURN DATA-NYA
+      if (e.response != null) {
+        return e.response!.data;
+      }
+
+      // kalau memang tidak ada response, baru lempar ulang
+      rethrow;
+    }
+  }
 }

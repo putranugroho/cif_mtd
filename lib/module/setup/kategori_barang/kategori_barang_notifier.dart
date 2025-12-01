@@ -12,7 +12,7 @@ class KategoriBarangNotifier extends ChangeNotifier {
   bool isLoading = false;
 
   bool showForm = false;
-
+  bool edit = false;
   TextEditingController kodeKategoriController = TextEditingController();
   TextEditingController kategoriController = TextEditingController();
   TextEditingController deskripsiController = TextEditingController();
@@ -27,6 +27,7 @@ class KategoriBarangNotifier extends ChangeNotifier {
     kategoriController.text = kategoriModel['nama_kategori'];
     deskripsiController.text = kategoriModel['deskripsi'];
     showForm = true;
+    edit = true;
     print("${kategoriModel['id']}, ${kategoriModel['kode_kategori']}");
     notifyListeners();
   }
@@ -53,21 +54,43 @@ class KategoriBarangNotifier extends ChangeNotifier {
 
   // ===== ADD DATA =====
   Future<void> addKategori() async {
-    try {
-      final body = {
-        "kode_kategori": kodeKategoriController.text,
-        "nama_kategori": kategoriController.text,
-        "deskripsi": deskripsiController.text,
-        "status": selectedStatus ?? "Aktif",
-      };
-      MasterRepository.addkategori(NetworkAset.kategori(), body).then((value) {
-        fetchKategori();
-        clearForm();
-        informationDialog(context, "Informasi", value['message']);
-      });
-    } catch (e) {
-      debugPrint("Add error: $e");
-      informationDialog(context, "Peringatan", "$e");
+    if (edit) {
+      try {
+        final body = {
+          "kode_kategori": kodeKategoriController.text,
+          "nama_kategori": kategoriController.text,
+          "deskripsi": deskripsiController.text,
+          "status": selectedStatus ?? "Aktif",
+        };
+        MasterRepository.updatekategori(
+                NetworkAset.kategoriupdate(kategoriModel['id']), body)
+            .then((value) {
+          fetchKategori();
+          clearForm();
+          informationDialog(context, "Informasi", value['message']);
+        });
+      } catch (e) {
+        debugPrint("Add error: $e");
+        informationDialog(context, "Peringatan", "$e");
+      }
+    } else {
+      try {
+        final body = {
+          "kode_kategori": kodeKategoriController.text,
+          "nama_kategori": kategoriController.text,
+          "deskripsi": deskripsiController.text,
+          "status": selectedStatus ?? "Aktif",
+        };
+        MasterRepository.addkategori(NetworkAset.kategori(), body)
+            .then((value) {
+          fetchKategori();
+          clearForm();
+          informationDialog(context, "Informasi", value['message']);
+        });
+      } catch (e) {
+        debugPrint("Add error: $e");
+        informationDialog(context, "Peringatan", "$e");
+      }
     }
 
     clearForm();
@@ -82,6 +105,7 @@ class KategoriBarangNotifier extends ChangeNotifier {
 
   void toggleForm() {
     showForm = !showForm;
+    edit = false;
     notifyListeners();
   }
 

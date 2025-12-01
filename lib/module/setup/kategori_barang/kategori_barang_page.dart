@@ -98,8 +98,8 @@ class KategoriBarangPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          "Tambah Kategori Barang",
+        Text(
+          notifier.edit ? "Edit Kategori Barang" : "Tambah Kategori Barang",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
