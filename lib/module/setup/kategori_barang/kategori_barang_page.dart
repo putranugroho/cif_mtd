@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'kategori_barang_notifier.dart';
+import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class KategoriBarangPage extends StatelessWidget {
   const KategoriBarangPage({super.key});
@@ -36,44 +38,29 @@ class KategoriBarangPage extends StatelessWidget {
                       ? const Center(child: CircularProgressIndicator())
                       : Padding(
                           padding: const EdgeInsets.all(16),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            child: DataTable(
-                              columns: const [
-                                DataColumn(label: Text('ID')),
-                                DataColumn(label: Text('KODE KATEGORI')),
-                                DataColumn(label: Text('NAMA KATEGORI')),
-                                DataColumn(label: Text('DESKRIPSI')),
-                                DataColumn(label: Text('STATUS')),
-                                DataColumn(label: Text('ACTION')),
-                              ],
-                              rows: notifier.list.map((item) {
-                                return DataRow(
-                                  cells: [
-                                    DataCell(Text(item['id'].toString())),
-                                    DataCell(Text(item['kode_kategori'])),
-                                    DataCell(Text(item['nama_kategori'])),
-                                    DataCell(Text(item['deskripsi'])),
-                                    DataCell(Text(item['status'])),
-                                    DataCell(Row(
-                                      children: [
-                                        IconButton(
-                                            tooltip: "Edit",
-                                            onPressed: () {
-                                              notifier.onEdit(item);
-                                            },
-                                            icon: Icon(Icons.edit)),
-                                        IconButton(
-                                            tooltip: "Delete",
-                                            onPressed: () {
-                                              notifier.onDelete(item);
-                                            },
-                                            icon: Icon(Icons.delete))
-                                      ],
-                                    )),
-                                  ],
-                                );
-                              }).toList(),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                            ),
+                            child: SfDataGridTheme(
+                              data: SfDataGridThemeData(
+                                headerColor: Colors.white,
+                                sortIconColor: Colors.black,
+                              ),
+                              child: SfDataGrid(
+                                source: notifier.kategoriBarangDataSource,
+                                columns: notifier.columns,
+                                gridLinesVisibility:
+                                    GridLinesVisibility.horizontal,
+                                headerGridLinesVisibility:
+                                    GridLinesVisibility.horizontal,
+                                columnWidthMode: ColumnWidthMode.fill,
+                                rowHeight: 44,
+                                headerRowHeight: 42,
+                                frozenColumnsCount: 1,
+                                allowSorting: true,
+                                // onCellTap: (details) {},
+                              ),
                             ),
                           ),
                         ),
@@ -95,7 +82,8 @@ class KategoriBarangPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSidebarForm(BuildContext context, KategoriBarangNotifier notifier) {
+  Widget _buildSidebarForm(
+      BuildContext context, KategoriBarangNotifier notifier) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
