@@ -1,435 +1,433 @@
 import 'dart:convert';
-import 'dart:math';
-
-import 'package:cif/models/index.dart';
-import 'package:cif/network/network.dart';
-import 'package:cif/repository/SetupRepository.dart';
-import 'package:cif/utils/dialog_loading.dart';
-import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-import '../../../repository/wilayah_repository.dart';
-import '../../../utils/button_custom.dart';
+/// =====================
+/// MODE HALAMAN
+/// =====================
+enum PeroranganMode { initial, search, create }
 
+/// =====================
+/// ENUM TIPE FIELD
+/// =====================
+enum FieldType { text, date, yn, dropdown }
+
+/// =====================
+/// MODEL FIELD
+/// =====================
+class ExcelField {
+  final String table;
+  final String key;
+  final String label;
+  final FieldType type;
+  final bool required;
+  final Map<String, String>? options;
+
+  final bool onlyForSearch;
+  final bool readOnly;
+
+  const ExcelField({
+    required this.table,
+    required this.key,
+    required this.label,
+    required this.type,
+    this.required = false,
+    this.options,
+    this.onlyForSearch = false,
+    this.readOnly = false,
+  });
+}
+
+/// =====================
+/// MODEL STEP
+/// =====================
+class ExcelStep {
+  final String label;
+  final List<String> tables;
+
+  const ExcelStep({required this.label, required this.tables});
+}
+
+/// =====================
+/// NOTIFIER
+/// =====================
 class SandiBiNotifier extends ChangeNotifier {
-  final BuildContext context;
+  PeroranganMode mode = PeroranganMode.initial;
+  bool isLoading = false;
+  String? errorMessage;
 
-  SandiBiNotifier({required this.context}) {
-    getPerusahaan();
-    getProvinsi();
-  }
+  String searchNoCif = '';
+  String searchNamaCif = '';
 
-  List<ProvinsiModel> listProvinsi = [];
-  ProvinsiModel? provinsiModel;
-  List<KotaModel> listKota = [];
-  KotaModel? kotaModal;
-  List<KecamatanModel> listKecamatan = [];
-  KecamatanModel? kecamatanModel;
-  List<KelurahanModel> listKelurahan = [];
-  KelurahanModel? kelurahanModel;
-  Future getProvinsi() async {
-    WilayahRepository.getProvinsi(NetworkURL.getProvinsi()).then((value) {
-      for (var i = 0; i < value.length; i++) {
-        listProvinsi.add(ProvinsiModel(id: value[i]['id'].toString(), name: value[i]['name']));
-      }
-      notifyListeners();
-    });
-  }
+  int currentStep = 0;
 
-  pilihProvinsi(ProvinsiModel value) {
-    provinsiModel = value;
-    kotaModal = null;
-    kecamatanModel = null;
-    kelurahanModel = null;
-    listKota.clear();
-    listKecamatan.clear();
-    listKelurahan.clear();
-    getKota();
-    notifyListeners();
-  }
+  final Map<String, dynamic> values = {};
 
-  getKota() async {
-    listKota.clear();
-    notifyListeners();
-    WilayahRepository.getKota(NetworkURL.getKota(provinsiModel!.id.toString())).then((value) {
-      for (var i = 0; i < value.length; i++) {
-        listKota.add(KotaModel(id: value[i]['id'], name: value[i]['name'], provinceId: provinsiModel!.id));
-      }
-
-      notifyListeners();
-    });
-  }
-
-  pilihKota(KotaModel value) {
-    kotaModal = value;
-    kecamatanModel = null;
-    kelurahanModel = null;
-    listKecamatan.clear();
-    listKelurahan.clear();
-    getKecamatan();
-    notifyListeners();
-  }
-
-  getKecamatan() async {
-    listKecamatan.clear();
-    notifyListeners();
-    WilayahRepository.getKota(NetworkURL.getKecamatan(kotaModal!.id.toString())).then((value) {
-      for (var i = 0; i < value.length; i++) {
-        listKecamatan.add(KecamatanModel(id: value[i]['id'], name: value[i]['name'], regencyId: kotaModal!.id));
-      }
-
-      notifyListeners();
-    });
-  }
-
-  pilihKecamatan(KecamatanModel value) {
-    kecamatanModel = value;
-    kelurahanModel = null;
-    listKelurahan.clear();
-    getKelurahan();
-    notifyListeners();
-  }
-
-  getKelurahan() async {
-    listKelurahan.clear();
-    notifyListeners();
-    WilayahRepository.getKelurahan(NetworkURL.getKelurahan(kecamatanModel!.id)).then((value) {
-      for (var i = 0; i < value.length; i++) {
-        listKelurahan.add(KelurahanModel(id: value[i]['id'], name: value[i]['name'], districtId: kecamatanModel!.id));
-      }
-      notifyListeners();
-    });
-  }
-
-  pilihKelurahan(KelurahanModel value) async {
-    kelurahanModel = value;
-    notifyListeners();
-  }
-
-  List<PerusahaanModel> listPerusahaan = [];
-  PerusahaanModel? perusahaanModel;
-  Future getPerusahaan() async {
-    isLoading = true;
-    listPerusahaan.clear();
-
-    var data = {
-      "kode_pt": "001",
-    };
-    notifyListeners();
-    Setuprepository.getPerusahaan(token, NetworkURL.gerPerusahaan(), jsonEncode(data)).then((value) {
-      if (value['status'] == "Success") {
-        for (Map<String, dynamic> i in value['data']) {
-          listPerusahaan.add(PerusahaanModel.fromJson(i));
-        }
-        perusahaanModel = listPerusahaan[0];
-        getKantor();
-      } else {
-        isLoading = false;
-        notifyListeners();
-      }
-
-      notifyListeners();
-    });
-  }
-
-  Future getKantor() async {
-    list.clear();
-    isLoading = true;
-    var data = {
-      "kode_pt": "001",
-    };
-    notifyListeners();
-    Setuprepository.getKantor(token, NetworkURL.getKantor(), jsonEncode(data)).then((value) {
-      if (value['status'] == "Success") {
-        for (Map<String, dynamic> i in value['data']) {
-          list.add(KantorModel.fromJson(i));
-        }
-        isLoading = false;
-        notifyListeners();
-      } else {
-        isLoading = false;
-        notifyListeners();
-      }
-    });
-  }
-
-  KantorModel? kantor;
-
-  edit(String id) {
-    DialogCustom().showLoading(context);
-    kantor = list.where((e) => e.id == int.parse(id)).first;
-    provinsiModel = listProvinsi.where((e) => e.name == kantor!.provinsi).first;
-    listKota.clear();
-    notifyListeners();
-    WilayahRepository.getKota(NetworkURL.getKota(provinsiModel!.id.toString())).then((value) {
-      for (var i = 0; i < value.length; i++) {
-        listKota.add(KotaModel(id: value[i]['id'], name: value[i]['name'], provinceId: provinsiModel!.id));
-      }
-      kotaModal = listKota.where((e) => e.name == kantor!.kota).first;
-      listKecamatan.clear();
-      notifyListeners();
-      WilayahRepository.getKota(NetworkURL.getKecamatan(kotaModal!.id.toString())).then((valuess) {
-        for (var i = 0; i < valuess.length; i++) {
-          listKecamatan.add(KecamatanModel(id: valuess[i]['id'], name: valuess[i]['name'], regencyId: kotaModal!.id));
-        }
-        kecamatanModel = listKecamatan.where((e) => e.name == kantor!.kecamatan).first;
-        listKelurahan.clear();
-        notifyListeners();
-        WilayahRepository.getKelurahan(NetworkURL.getKelurahan(kecamatanModel!.id)).then((e) {
-          Navigator.pop(context);
-          for (var i = 0; i < e.length; i++) {
-            listKelurahan.add(KelurahanModel(id: e[i]['id'], name: e[i]['name'], districtId: kecamatanModel!.id));
-          }
-          kelurahanModel = listKelurahan.where((e) => e.name == kantor!.kelurahan).first;
-          dialog = true;
-          editData = true;
-          notifyListeners();
-        });
-      });
-
-      notifyListeners();
-    });
-
-    kode.text = kantor!.kodeKantor;
-    alamat.text = kantor!.alamat;
-    kodepos.text = kantor!.kodePos;
-    status = kantor!.statusKantor == "P"
-        ? "Pusat"
-        : kantor!.statusKantor == "C"
-            ? "Cabang"
-            : kantor!.statusKantor == "D"
-                ? "Anak Cabang"
-                : "Outlet/Gudang";
-    kantorModel = list.where((e) => e.kodeKantor == kantor!.kodeInduk).isNotEmpty ? list.where((e) => e.kodeKantor == kantor!.kodeInduk).first : null;
-    noKantor.text = kantorModel!.kodeKantor;
-    nama.text = kantor!.namaKantor;
-    notelp.text = kantor!.telp;
-    fax.text = kantor!.fax;
-    kode.text = kantor!.kodeKantor;
-    kodepos.text = kantor!.kodePos;
-    notifyListeners();
-  }
-
-  var isLoading = true;
-  bool dialog = false;
-  tambah() {
-    clear();
-    dialog = true;
-    notifyListeners();
-  }
-
-  tutup() {
-    dialog = false;
-    notifyListeners();
-  }
-
-  KantorModel? kantorModel;
-
-  pilihKantor(KantorModel value) {
-    kantorModel = value;
-    noKantor.text = value.kodeKantor;
-    notifyListeners();
-  }
-
-  pilihPerusahaan(PerusahaanModel value) {
-    perusahaanModel = value;
-    notifyListeners();
-  }
-
-  TextEditingController kode = TextEditingController();
-  TextEditingController noKantor = TextEditingController();
-  TextEditingController nama = TextEditingController();
-  TextEditingController alamat = TextEditingController();
-  TextEditingController provinsi = TextEditingController();
-  TextEditingController kota = TextEditingController();
-  TextEditingController kecamatan = TextEditingController();
-  TextEditingController kelurahan = TextEditingController();
-  TextEditingController kodepos = TextEditingController();
-  TextEditingController notelp = TextEditingController();
-  TextEditingController fax = TextEditingController();
-  final keyForm = GlobalKey<FormState>();
-
-  List<String> listStatus = [
-    "Cabang",
-    "Anak Cabang",
-    "Outlet/Gudang",
+  /// =====================
+  /// STEP FLOW
+  /// =====================
+  final List<ExcelStep> steps = const [
+    ExcelStep(label: 'Data Customer', tables: ['customer']),
+    ExcelStep(label: 'Data Identitas', tables: ['identity']),
+    ExcelStep(label: 'Data Kontak', tables: ['contact']),
+    ExcelStep(label: 'Data AO', tables: ['ao']),
+    ExcelStep(label: 'Data Kepatuhan & Pelaporan', tables: ['compliance']),
+    ExcelStep(label: 'Data Petugas', tables: ['petugas']),
+    ExcelStep(label: 'Data Ahli Waris', tables: ['heir']),
+    ExcelStep(label: 'Data Sistem', tables: ['system']),
   ];
 
-  String? status;
-  pilihStatus(String value) {
-    status = value;
-    kantorModel = null;
+  /// =====================
+  /// FIELD CONFIG (MASTER)
+  /// =====================
+  final List<ExcelField> fields = [
+    // =====================
+    // DATA CUSTOMER
+    // =====================
+    ExcelField(
+      table: 'customer',
+      key: 'no_cif',
+      label: 'Nomer CIF',
+      type: FieldType.text,
+      onlyForSearch: true,
+      readOnly: true,
+    ),
+    ExcelField(table: 'customer', key: 'gol_cust', label: 'Golongan Customer', type: FieldType.dropdown, required: true, options: {
+      '1': 'Perorangan',
+      '2': 'Perusahaan',
+    }),
+    ExcelField(table: 'customer', key: 'nama_cif', label: 'Nama CIF', type: FieldType.text, required: true),
+    ExcelField(table: 'customer', key: 'tgl_lahir', label: 'Tanggal Lahir', type: FieldType.date),
+    ExcelField(table: 'customer', key: 'tempat_lahir', label: 'Tempat Lahir', type: FieldType.text),
+    ExcelField(table: 'customer', key: 'kelamin', label: 'Jenis Kelamin', type: FieldType.dropdown, options: {
+      'L': 'Laki-laki',
+      'P': 'Perempuan',
+    }),
+    ExcelField(table: 'customer', key: 'agama', label: 'Agama', type: FieldType.dropdown, options: {
+      '1': 'Islam',
+      '2': 'Kristen',
+      '3': 'Katolik',
+      '4': 'Hindu',
+      '5': 'Budha',
+      '6': 'Konghucu',
+    }),
+    ExcelField(table: 'customer', key: 'status_kawin', label: 'Status Perkawinan', type: FieldType.dropdown, options: {
+      '1': 'Lajang',
+      '2': 'Kawin',
+      '3': 'Cerai Hidup',
+      '4': 'Cerai Mati',
+    }),
+    ExcelField(table: 'customer', key: 'warganegara', label: 'Kewarganegaraan', type: FieldType.dropdown, options: {
+      '1': 'WNI',
+      '2': 'WNA',
+    }),
+    ExcelField(table: 'customer', key: 'nama_ibu', label: 'Nama Ibu Kandung', type: FieldType.text),
+    ExcelField(table: 'customer', key: 'npwp', label: 'NPWP', type: FieldType.text),
+    ExcelField(table: 'customer', key: 'pendidikan', label: 'Pendidikan Terakhir', type: FieldType.dropdown, options: {
+      '1': 'SD',
+      '2': 'SMP',
+      '3': 'SMA',
+      '4': 'D1',
+      '5': 'D2',
+      '6': 'D3',
+      '7': 'D4',
+      '8': 'S1',
+      '9': 'S2',
+      '10': 'S3',
+    }),
+    ExcelField(table: 'customer', key: 'vip', label: 'Nasabah VIP', type: FieldType.yn),
+    ExcelField(table: 'customer', key: 'terkait', label: 'Pihak Terkait', type: FieldType.yn),
+
+    // =====================
+    // DATA IDENTITAS
+    // =====================
+    ExcelField(
+      table: 'identity',
+      key: 'jns_id',
+      label: 'Jenis Identitas',
+      type: FieldType.dropdown,
+      required: true,
+      options: {
+        '1': 'KTP',
+        '2': 'SIM',
+        '3': 'PASSPORT',
+        '4': 'KIMS / KITAS / KITAP',
+        '5': 'SIUP',
+        '6': 'TDP',
+        '99': 'LAINNYA',
+      },
+    ),
+    ExcelField(
+      table: 'identity',
+      key: 'no_id',
+      label: 'Nomor Identitas',
+      type: FieldType.text,
+      required: true,
+    ),
+    ExcelField(
+      table: 'identity',
+      key: 'alamat',
+      label: 'Alamat Sesuai Identitas',
+      type: FieldType.text,
+    ),
+    ExcelField(
+      table: 'identity',
+      key: 'kelurahan',
+      label: 'Kelurahan',
+      type: FieldType.text,
+    ),
+    ExcelField(
+      table: 'identity',
+      key: 'kecamatan',
+      label: 'Kecamatan',
+      type: FieldType.text,
+    ),
+    ExcelField(
+      table: 'identity',
+      key: 'kota',
+      label: 'Kota',
+      type: FieldType.text,
+    ),
+    ExcelField(
+      table: 'identity',
+      key: 'provinsi',
+      label: 'Provinsi',
+      type: FieldType.text,
+    ),
+    ExcelField(
+      table: 'identity',
+      key: 'kode_pos',
+      label: 'Kode Pos',
+      type: FieldType.text,
+    ),
+    ExcelField(
+      table: 'identity',
+      key: 'negara_penerbit',
+      label: 'Negara Penerbit',
+      type: FieldType.text,
+    ),
+    ExcelField(
+      table: 'identity',
+      key: 'tempat_terbit',
+      label: 'Instansi Penerbit',
+      type: FieldType.text,
+    ),
+    ExcelField(
+      table: 'identity',
+      key: 'tanggal_terbit',
+      label: 'Tanggal Terbit Identitas',
+      type: FieldType.date,
+    ),
+    ExcelField(
+      table: 'identity',
+      key: 'tanggal_exp',
+      label: 'Tanggal Kadaluarsa',
+      type: FieldType.date,
+    ),
+    ExcelField(
+      table: 'identity',
+      key: 'fhoto_id',
+      label: 'Nama File Foto Identitas',
+      type: FieldType.text,
+    ),
+    ExcelField(
+      table: 'identity',
+      key: 'keterangan',
+      label: 'Keterangan Tambahan',
+      type: FieldType.text,
+    ),
+
+    // =====================
+    // DATA KONTAK
+    // =====================
+    ExcelField(table: 'contact', key: 'no_hp1', label: 'Nomer Handphone 1', type: FieldType.text),
+    ExcelField(table: 'contact', key: 'no_hp2', label: 'Nomer Handphone 2', type: FieldType.text),
+    ExcelField(table: 'contact', key: 'email', label: 'Email', type: FieldType.text),
+    ExcelField(table: 'contact', key: 'telepon', label: 'Telepon', type: FieldType.text),
+
+    // =====================
+    // DATA AO
+    // =====================
+    ExcelField(table: 'ao', key: 'ao_ref', label: 'Kode AO', type: FieldType.text),
+    // ExcelField(table: 'ao', key: 'nama_ao', label: 'Nama AO', type: FieldType.text),
+
+    // =====================
+    // DATA KEPATUHAN
+    // =====================
+    ExcelField(table: 'compliance', key: 'gol_cust_apolo', label: 'Golongan Customer Apolo', type: FieldType.text),
+    ExcelField(table: 'compliance', key: 'gol_cust_slik', label: 'Golongan Customer SLIK', type: FieldType.text),
+    ExcelField(table: 'compliance', key: 'sandi_bank', label: 'Sandi Bank', type: FieldType.text),
+    ExcelField(table: 'compliance', key: 'sandi_pekerja', label: 'Sandi Pekerjaan', type: FieldType.text),
+    ExcelField(table: 'compliance', key: 'sandi_usaha', label: 'Sandi Usaha', type: FieldType.text),
+    ExcelField(table: 'compliance', key: 'segmen_bisnis', label: 'Segmen Bisnis', type: FieldType.text),
+    ExcelField(table: 'compliance', key: 'pendapatan_bulan', label: 'Pendapatan Bulan', type: FieldType.text),
+
+    // =====================
+    // DATA PETUGAS
+    // =====================
+    ExcelField(table: 'petugas', key: 'id_petugas', label: 'ID Petugas', type: FieldType.text),
+    ExcelField(table: 'petugas', key: 'nama_petugas', label: 'Nama Petugas', type: FieldType.text),
+    ExcelField(table: 'petugas', key: 'hp_petugas', label: 'Handphone Petugas', type: FieldType.text),
+
+    // =====================
+    // DATA AHLI WARIS
+    // =====================
+    ExcelField(table: 'heir', key: 'nama_waris', label: 'Nama Ahli Waris', type: FieldType.text),
+    ExcelField(table: 'heir', key: 'no_id_waris', label: 'ID Ahli Waris', type: FieldType.text),
+    ExcelField(table: 'heir', key: 'tgl_lahir_waris', label: 'Tanggal Lahir Ahli Waris', type: FieldType.text),
+    ExcelField(table: 'heir', key: 'hubungan', label: 'Hubungan', type: FieldType.dropdown, options: {
+      '1': 'Suami',
+      '2': 'Istri',
+      '3': 'Anak',
+      '4': 'Orang Tua',
+      '5': 'Saudara',
+    }),
+
+    // =====================
+    // BADAN HUKUM / PENGURUS
+    // =====================
+    ExcelField(table: 'legal', key: 'jenis_badan_hukum', label: 'Jenis Badan Hukum', type: FieldType.text),
+    ExcelField(table: 'legal', key: 'nama_pengurus', label: 'Nama Pengurus', type: FieldType.text),
+    ExcelField(table: 'legal', key: 'no_id_pengurus', label: 'ID Pengurus', type: FieldType.text),
+    ExcelField(table: 'legal', key: 'jabatan_pengurus', label: 'Jabatan Pengurus', type: FieldType.text),
+    ExcelField(table: 'legal', key: 'nama_pengurus_2', label: 'Nama Pengurus 2', type: FieldType.text),
+    ExcelField(table: 'legal', key: 'no_id_pengurus_2', label: 'ID Pengurus 2', type: FieldType.text),
+    ExcelField(table: 'legal', key: 'jabatan_pengurus_2', label: 'Jabatan Pengurus 2', type: FieldType.text),
+    ExcelField(table: 'legal', key: 'keterangan_kuasa', label: 'Keterangan Kuasa', type: FieldType.text),
+    ExcelField(table: 'legal', key: 'otorisasi_pengurus', label: 'Otorisasi Pengurus', type: FieldType.text),
+
+    // =====================
+    // DATA SISTEM
+    // =====================
+    ExcelField(table: 'system', key: 'input_user', label: 'Dibuat Oleh', type: FieldType.text),
+    ExcelField(table: 'system', key: 'input_term', label: 'Tanggal Dibuat', type: FieldType.date),
+    ExcelField(table: 'system', key: 'kode_kantor', label: 'Kode Kantor', type: FieldType.date),
+  ];
+
+  /// =====================
+  /// DERIVED
+  /// =====================
+  List<ExcelField> get currentFields {
+    final step = steps[currentStep];
+
+    return fields.where((f) {
+      // 🔑 no_cif selalu muncul saat search
+      if (f.key == 'no_cif' && mode == PeroranganMode.search) {
+        return true;
+      }
+
+      // normal step-based rendering
+      if (!step.tables.contains(f.table)) return false;
+
+      // sembunyikan field search-only saat create
+      if (mode == PeroranganMode.create && f.onlyForSearch) return false;
+
+      return true;
+    }).toList();
+  }
+
+  /// =====================
+  /// MODE CONTROL
+  /// =====================
+  void startCreate() {
+    reset();
+    mode = PeroranganMode.create;
     notifyListeners();
   }
 
-  List<KantorModel> list = [];
-
-  clear() {
-    editData = false;
-    kantorModel = null;
-    status = null;
-    kode.clear();
-    nama.clear();
-    noKantor.clear();
-    alamat.clear();
-    provinsi.clear();
-    kota.clear();
-    kecamatan.clear();
-    kelurahan.clear();
-    kodepos.clear();
-    notelp.clear();
-    fax.clear();
+  void startSearch() {
+    reset();
+    mode = PeroranganMode.search;
     notifyListeners();
   }
 
-  var editData = false;
+  /// =====================
+  /// SEARCH API
+  /// =====================
+  Future<void> submitSearch() async {
+    isLoading = true;
+    notifyListeners();
 
-  confirm() async {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return Dialog(
-            child: Container(
-              padding: const EdgeInsets.all(20),
-              width: 500,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "Anda yakin menghapus ${kantor!.namaKantor}?",
-                    style: const TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                          child: ButtonSecondary(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        name: "Tidak",
-                      )),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Expanded(
-                          child: ButtonPrimary(
-                        onTap: () {
-                          Navigator.pop(context);
-                          remove();
-                        },
-                        name: "Ya",
-                      )),
-                    ],
-                  )
-                ],
-              ),
-            ),
-          );
-        });
-  }
+    try {
+      final res = await http.post(
+        Uri.parse('http://103.96.147.187:7006/cari-cif'),
+        headers: {'Content-Type': 'application/json', 'api-key': '123'},
+        body: jsonEncode({
+          "filter": {
+            "general": {
+              "no_cif": searchNoCif,
+              "nama_cif": searchNamaCif,
+            }
+          },
+          "pagination": {"page": 1, "limit": 1}
+        }),
+      );
 
-  remove() {
-    DialogCustom().showLoading(context);
-    var json = {
-      "id": kantor!.id,
-    };
-    Setuprepository.deleteKantor(token, NetworkURL.deletedKantor(), jsonEncode(json)).then((value) {
-      Navigator.pop(context);
-      if (value['status'] == "success") {
-        getKantor();
-        clear();
-        dialog = false;
-        informationDialog(context, "Information", value['message']);
-        notifyListeners();
-      } else {
-        informationDialog(context, "Warning", value['message']);
+      final json = jsonDecode(res.body);
+      final data = json['data'][0];
+
+      values.clear();
+
+      for (final f in fields) {
+        final raw = data[f.key];
+
+        if (raw == null || raw.toString().isEmpty) {
+          values[f.key] = null; // <-- KOSONGKAN SAJA
+          continue;
+        }
+
+        switch (f.type) {
+          case FieldType.date:
+            values[f.key] = DateTime.tryParse(raw.toString());
+            break;
+
+          case FieldType.yn:
+          case FieldType.dropdown:
+          case FieldType.text:
+            values[f.key] = raw.toString();
+            break;
+        }
       }
-    });
-  }
 
-  cek() {
-    if (keyForm.currentState!.validate()) {
-      final random = Random();
-      int randomNumber = 1000 + random.nextInt(9000);
-      if (editData) {
-        DialogCustom().showLoading(context);
-        var json = {
-          "id": kantor!.id,
-          "kode_pt": perusahaanModel!.kodePt,
-          "kode_kantor": kode.text,
-          "kode_induk": kantorModel == null ? "" : kantorModel!.kodeKantor,
-          "nama_kantor": nama.text,
-          "status_kantor": status == "Pusat"
-              ? "P"
-              : status == "Cabang"
-                  ? "C"
-                  : status == "Anak Cabang"
-                      ? "D"
-                      : "E",
-          "alamat": alamat.text,
-          "kelurahan": kelurahanModel!.name,
-          "kecamatan": kecamatanModel!.name,
-          "kota": kotaModal!.name,
-          "provinsi": provinsiModel!.name,
-          "kode_pos": kodepos.text,
-          "telp": notelp.text.isEmpty ? "" : notelp.text,
-          "fax": fax.text.isEmpty ? "" : fax.text,
-        };
-        print(jsonEncode(json));
-        Setuprepository.insertKantor(token, NetworkURL.updateKantor(), jsonEncode(json)).then((value) {
-          Navigator.pop(context);
-          if (value['status'] == "success") {
-            getKantor();
-            clear();
-            dialog = false;
-            informationDialog(context, "Information", value['message']);
-            notifyListeners();
-          } else {
-            informationDialog(context, "Warning", value['message']);
-          }
-        });
-      } else {
-        DialogCustom().showLoading(context);
-        var json = {
-          "kode_pt": perusahaanModel!.kodePt,
-          "kode_kantor": kode.text,
-          "kode_induk": kantorModel == null ? "" : kantorModel!.kodeKantor,
-          "nama_kantor": nama.text,
-          "status_kantor": status == "Pusat"
-              ? "P"
-              : status == "Cabang"
-                  ? "C"
-                  : status == "Anak Cabang"
-                      ? "D"
-                      : "E",
-          "alamat": alamat.text,
-          "kelurahan": kelurahanModel!.name,
-          "kecamatan": kecamatanModel!.name,
-          "kota": kotaModal!.name,
-          "provinsi": provinsiModel!.name,
-          "kode_pos": kodepos.text,
-          "telp": notelp.text.isEmpty ? "" : notelp.text,
-          "fax": fax.text.isEmpty ? "" : fax.text,
-        };
-        Setuprepository.insertKantor(token, NetworkURL.addKantor(), jsonEncode(json)).then((value) {
-          Navigator.pop(context);
-          if (value['status'] == "success") {
-            informationDialog(context, "Information", value['message']);
-            getKantor();
-            clear();
-            dialog = false;
-            notifyListeners();
-          } else {
-            informationDialog(context, "Warning", value['message'][0]);
-          }
-        });
-      }
+      mode = PeroranganMode.search;
+      currentStep = 0;
+    } catch (e) {
+      errorMessage = e.toString();
+    } finally {
+      isLoading = false;
+      notifyListeners();
     }
+  }
+
+  /// =====================
+  /// VALUE HANDLER
+  /// =====================
+  void setValue(String key, dynamic value) {
+    values[key] = value;
+    notifyListeners();
+  }
+
+  dynamic getValue(String key) => values[key];
+
+  /// =====================
+  /// STEP CONTROL
+  /// =====================
+  void nextStep() {
+    if (currentStep < steps.length - 1) {
+      currentStep++;
+      notifyListeners();
+    }
+  }
+
+  void prevStep() {
+    if (currentStep > 0) {
+      currentStep--;
+      notifyListeners();
+    }
+  }
+
+  void reset() {
+    values.clear();
+    currentStep = 0;
   }
 }
