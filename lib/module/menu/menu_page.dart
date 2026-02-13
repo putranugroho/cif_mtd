@@ -56,6 +56,7 @@ import 'package:cif/module/setup/level/level_page.dart';
 import 'package:cif/module/setup/pajak/setup_pajak_page.dart';
 import 'package:cif/module/setup/penyusutan/penyusutan_page.dart';
 import 'package:cif/module/setup/perusahaan/perusahaan_page.dart';
+import 'package:cif/module/setup/sandi_bi/sandi_bi_page.dart';
 import 'package:cif/module/setup/satuan_barang/satuan_barang_page.dart';
 import 'package:cif/module/setup/sbb_hutang_piutang/sbb_hutang_piutang_page.dart';
 import 'package:cif/module/setup/sbb_kas/setup_sbb_page.dart';
@@ -448,7 +449,9 @@ class MenuPage extends StatelessWidget {
                                                                                                                                                                                                                                                                                                                                                   ? const SatuanBarangPage()
                                                                                                                                                                                                                                                                                                                                                   : value.page == 86
                                                                                                                                                                                                                                                                                                                                                       ? const KoreksiBarangPage()
-                                                                                                                                                                                                                                                                                                                                                      : Container())
+                                                                                                                                                                                                                                                                                                                                                      : value.page == 87
+                                                                                                                                                                                                                                                                                                                                                          ? const SandiBiPage()
+                                                                                                                                                                                                                                                                                                                                                          : Container())
             ],
           ),
         )),

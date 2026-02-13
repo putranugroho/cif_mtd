@@ -78,6 +78,36 @@ class _MenuSetupWidgetState extends State<MenuSetupWidget> {
           ),
         ),
         InkWell(
+          onTap: () => widget.value.gantimenu(87),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color: widget.value.page == 87 ? Colors.white : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                Image.asset(
+                  ImageAssets.setting,
+                  height: 30,
+                  color: widget.value.page == 87 ? Colors.black : Colors.white,
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  "Sandi BI",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: widget.value.page == 87 ? Colors.black : Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
           onTap: () => widget.value.gantimenu(74),
           child: Container(
             width: MediaQuery.of(context).size.width,
@@ -704,7 +734,7 @@ class _MenuCustomerWidgetState extends State<MenuCustomerWidget> {
                   width: 16,
                 ),
                 Text(
-                  "Perorangan",
+                  "CIF Perorangan",
                   style: TextStyle(
                     fontSize: 16,
                     color: widget.value.page == 11 ? Colors.black : Colors.white,
@@ -734,7 +764,7 @@ class _MenuCustomerWidgetState extends State<MenuCustomerWidget> {
                   width: 16,
                 ),
                 Text(
-                  "PT",
+                  "CIF PT",
                   style: TextStyle(
                     fontSize: 16,
                     color: widget.value.page == 12 ? Colors.black : Colors.white,
