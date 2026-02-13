@@ -1,5 +1,5 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 import 'package:intl/intl.dart';

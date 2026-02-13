@@ -1,8 +1,8 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/transaksi/transaksi_hutang/transaksi_hutang_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
-import 'package:accounting/utils/colors.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/transaksi/transaksi_hutang/transaksi_hutang_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
+import 'package:cif/utils/colors.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -689,9 +689,17 @@ class TransaksiHutangPage extends StatelessWidget {
                                         ListView.builder(
                                             shrinkWrap: true,
                                             physics: const ClampingScrollPhysics(),
-                                            itemCount: value.list.where((e) => e.nmSif.toLowerCase().contains(value.customerSupplierModel!.nmSif.toLowerCase()) && e.jnsInvoice == "1").length,
+                                            itemCount: value.list
+                                                .where((e) =>
+                                                    e.nmSif.toLowerCase().contains(value.customerSupplierModel!.nmSif.toLowerCase()) &&
+                                                    e.jnsInvoice == "1")
+                                                .length,
                                             itemBuilder: (context, b) {
-                                              final data = value.list.where((e) => e.nmSif.toLowerCase().contains(value.customerSupplierModel!.nmSif.toLowerCase()) && e.jnsInvoice == "1").toList()[b];
+                                              final data = value.list
+                                                  .where((e) =>
+                                                      e.nmSif.toLowerCase().contains(value.customerSupplierModel!.nmSif.toLowerCase()) &&
+                                                      e.jnsInvoice == "1")
+                                                  .toList()[b];
                                               var no = b + 1;
                                               return Column(
                                                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -935,9 +943,17 @@ class TransaksiHutangPage extends StatelessWidget {
                                         ListView.builder(
                                             shrinkWrap: true,
                                             physics: const ClampingScrollPhysics(),
-                                            itemCount: value.list.where((e) => e.nmSif.toLowerCase().contains(value.customerSupplierModel!.nmSif.toLowerCase()) && e.jnsInvoice == "2").length,
+                                            itemCount: value.list
+                                                .where((e) =>
+                                                    e.nmSif.toLowerCase().contains(value.customerSupplierModel!.nmSif.toLowerCase()) &&
+                                                    e.jnsInvoice == "2")
+                                                .length,
                                             itemBuilder: (context, b) {
-                                              final data = value.list.where((e) => e.nmSif.toLowerCase().contains(value.customerSupplierModel!.nmSif.toLowerCase()) && e.jnsInvoice == "2").toList()[b];
+                                              final data = value.list
+                                                  .where((e) =>
+                                                      e.nmSif.toLowerCase().contains(value.customerSupplierModel!.nmSif.toLowerCase()) &&
+                                                      e.jnsInvoice == "2")
+                                                  .toList()[b];
                                               var no = b + 1;
                                               return Column(
                                                 crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -1,4 +1,4 @@
-import 'package:accounting/module/splash_screen_notifier.dart';
+import 'package:cif/module/splash_screen_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

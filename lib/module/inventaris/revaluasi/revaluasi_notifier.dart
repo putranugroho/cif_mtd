@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/pref/pref.dart';
-import 'package:accounting/utils/colors.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/informationdialog.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/pref/pref.dart';
+import 'package:cif/utils/colors.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/informationdialog.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -34,15 +34,13 @@ class RevaluasiNotifier extends ChangeNotifier {
 
   TextEditingController nominal = TextEditingController();
   var isLoading = true;
-  final currencyFormatter =
-      NumberFormat.currency(symbol: 'Rp ', decimalDigits: 2);
+  final currencyFormatter = NumberFormat.currency(symbol: 'Rp ', decimalDigits: 2);
   getInventaris() async {
     isLoading = true;
     list.clear();
     notifyListeners();
     var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getInventaris(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getInventaris(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(InventarisModel.fromJson(i));
@@ -111,9 +109,7 @@ class RevaluasiNotifier extends ChangeNotifier {
   TextEditingController pph = TextEditingController(text: "0");
   int total = 0;
   onChange() {
-    total = int.parse(hargaBeli.text.replaceAll(",", "")) -
-        int.parse(discount.text.replaceAll(",", "")) +
-        int.parse(biaya.text.replaceAll(",", ""));
+    total = int.parse(hargaBeli.text.replaceAll(",", "")) - int.parse(discount.text.replaceAll(",", "")) + int.parse(biaya.text.replaceAll(",", ""));
     notifyListeners();
   }
 
@@ -161,8 +157,7 @@ class RevaluasiNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTransaksi = pickedendDate;
-      tglbeli.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglbeli.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -182,8 +177,7 @@ class RevaluasiNotifier extends ChangeNotifier {
       "userinput": users!.namauser,
       "userterm": "114.80.90.54",
     };
-    Setuprepository.setup(token, NetworkURL.revaluasi(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.revaluasi(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         getInventaris();
@@ -224,8 +218,7 @@ class RevaluasiNotifier extends ChangeNotifier {
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
             return Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               child: Container(
                 width: 500,
                 padding: const EdgeInsets.all(20),
@@ -235,8 +228,7 @@ class RevaluasiNotifier extends ChangeNotifier {
                   children: [
                     const Text(
                       "Pilih Periode",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 16,
@@ -244,11 +236,8 @@ class RevaluasiNotifier extends ChangeNotifier {
                     SizedBox(
                       height: 100,
                       child: ScrollDatePicker(
-                          maximumDate: DateTime(int.parse(
-                                  DateFormat('y').format(DateTime.now())) +
-                              50),
-                          options: const DatePickerOptions(
-                              backgroundColor: Colors.white),
+                          maximumDate: DateTime(int.parse(DateFormat('y').format(DateTime.now())) + 50),
+                          options: const DatePickerOptions(backgroundColor: Colors.white),
                           viewType: const [
                             DatePickerViewType.month,
                             DatePickerViewType.year,
@@ -257,8 +246,7 @@ class RevaluasiNotifier extends ChangeNotifier {
                           onDateTimeChanged: (e) {
                             setState(() {
                               now = e;
-                              blnPenyusutan.text =
-                                  DateFormat('MMMM y').format(now);
+                              blnPenyusutan.text = DateFormat('MMMM y').format(now);
                               notifyListeners();
                             });
                           }),
@@ -273,11 +261,8 @@ class RevaluasiNotifier extends ChangeNotifier {
                         notifyListeners();
                       },
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 16),
-                        decoration: BoxDecoration(
-                            color: colorPrimary,
-                            borderRadius: BorderRadius.circular(8)),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                        decoration: BoxDecoration(color: colorPrimary, borderRadius: BorderRadius.circular(8)),
                         child: const Text(
                           "Simpan",
                           textAlign: TextAlign.center,
@@ -353,8 +338,7 @@ class RevaluasiNotifier extends ChangeNotifier {
       "kode_golongan": inventarisModel!.kodeGolongan,
       "kdaset": inventarisModel!.kdaset,
     };
-    Setuprepository.setup(token, NetworkURL.cariInventaris(), jsonEncode(data))
-        .then((values) {
+    Setuprepository.setup(token, NetworkURL.cariInventaris(), jsonEncode(data)).then((values) {
       Navigator.pop(context);
       if (values['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in values['data']) {
@@ -372,38 +356,20 @@ class RevaluasiNotifier extends ChangeNotifier {
           golongan.text = inventarisModel!.namaGolongan;
           satuans.text = inventarisModel!.satuanAset;
           tglbeli.text = inventarisModel!.tglBeli;
-          nominal.text = FormatCurrency.oCcy
-              .format(int.parse(inventarisTransaksiModel!.nilaiRevaluasi))
-              .replaceAll(".", ",");
+          nominal.text = FormatCurrency.oCcy.format(int.parse(inventarisTransaksiModel!.nilaiRevaluasi)).replaceAll(".", ",");
           picReval.text = inventarisModel!.picRevaluasi;
           tglterima.text = inventarisTransaksiModel!.tanggalTerima;
-          biaya.text = FormatCurrency.oCcy
-              .format(int.parse(inventarisModel!.biaya))
-              .replaceAll(".", ",");
-          hargaBeli.text = FormatCurrency.oCcy
-              .format(int.parse(inventarisModel!.habeli))
-              .replaceAll(".", ",");
-          hargaBuku.text = FormatCurrency.oCcy
-              .format(int.parse(inventarisTransaksiModel!.nilaiBuku))
-              .replaceAll(".", ",");
-          haper.text = FormatCurrency.oCcy
-              .format(int.parse(inventarisModel!.haper))
-              .replaceAll(".", ",");
-          nilaiPenyusutan.text = FormatCurrency.oCcy
-              .format(int.parse(inventarisTransaksiModel!.persentasePenyusutan))
-              .replaceAll(".", ",");
-          ppn.text = FormatCurrency.oCcy
-              .format(int.parse(inventarisModel!.ppnBeli))
-              .replaceAll(".", ",");
-          pph.text = FormatCurrency.oCcy
-              .format(int.parse(inventarisModel!.pph))
-              .replaceAll(".", ",");
-          total = (subtotal + int.parse(ppn.text.replaceAll(",", ""))) -
-              int.parse(pph.text.replaceAll(",", ""));
+          biaya.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.biaya)).replaceAll(".", ",");
+          hargaBeli.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.habeli)).replaceAll(".", ",");
+          hargaBuku.text = FormatCurrency.oCcy.format(int.parse(inventarisTransaksiModel!.nilaiBuku)).replaceAll(".", ",");
+          haper.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.haper)).replaceAll(".", ",");
+          nilaiPenyusutan.text = FormatCurrency.oCcy.format(int.parse(inventarisTransaksiModel!.persentasePenyusutan)).replaceAll(".", ",");
+          ppn.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.ppnBeli)).replaceAll(".", ",");
+          pph.text = FormatCurrency.oCcy.format(int.parse(inventarisModel!.pph)).replaceAll(".", ",");
+          total = (subtotal + int.parse(ppn.text.replaceAll(",", ""))) - int.parse(pph.text.replaceAll(",", ""));
           notifyListeners();
         } else {
-          informationDialog(
-              context, "Warning", "Inventaris tidak ditemukan di transaksi");
+          informationDialog(context, "Warning", "Inventaris tidak ditemukan di transaksi");
         }
       }
     });

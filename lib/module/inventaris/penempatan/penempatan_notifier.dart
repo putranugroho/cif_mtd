@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/utils/colors.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/utils/colors.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -61,9 +61,7 @@ class PenempatanNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getInventaris(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -194,10 +192,7 @@ class PenempatanNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<String> listPenempatan = [
-    "Kantor",
-    "Karyawan"
-  ];
+  List<String> listPenempatan = ["Kantor", "Karyawan"];
   String? penempatanModel = "Kantor";
   pilihPenempatan(String value) {
     penempatanModel = value;
@@ -368,8 +363,10 @@ class PenempatanNotifier extends ChangeNotifier {
           int.parse(DateFormat('dd').format(
             tglTransaksi!,
           ))),
-      firstDate: DateTime(int.parse(DateFormat('y').format(tglTransaksi!)), int.parse(DateFormat('MM').format(tglTransaksi!)), int.parse(DateFormat('dd').format(tglTransaksi!))),
-      lastDate: DateTime(int.parse(DateFormat('y').format(DateTime.now())) + 10, int.parse(DateFormat('MM').format(tglTransaksi!)), int.parse(DateFormat('dd').format(tglTransaksi!))),
+      firstDate: DateTime(int.parse(DateFormat('y').format(tglTransaksi!)), int.parse(DateFormat('MM').format(tglTransaksi!)),
+          int.parse(DateFormat('dd').format(tglTransaksi!))),
+      lastDate: DateTime(int.parse(DateFormat('y').format(DateTime.now())) + 10, int.parse(DateFormat('MM').format(tglTransaksi!)),
+          int.parse(DateFormat('dd').format(tglTransaksi!))),
     ));
     if (pickedendDate != null) {
       tglTransaksis = pickedendDate;
@@ -384,9 +381,7 @@ class PenempatanNotifier extends ChangeNotifier {
     if (query.isNotEmpty && query.length > 2) {
       listKaryawan.clear();
       notifyListeners();
-      var data = {
-        "nama": query
-      };
+      var data = {"nama": query};
       try {
         final response = await Setuprepository.setup(
           token,

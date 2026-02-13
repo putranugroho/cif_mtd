@@ -1,6 +1,6 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/setup/setup_transaksi/setup_transaksi_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/setup/setup_transaksi/setup_transaksi_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -292,9 +292,7 @@ class SetupTransaksiPage extends StatelessWidget {
                                     controller: value.kodeTransaksi,
                                     maxLines: 1,
                                     maxLength: 4,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly
-                                    ],
+                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                     validator: (e) {
                                       if (e!.isEmpty) {
                                         return "Wajib diisi";
@@ -588,7 +586,10 @@ class SetupTransaksiPage extends StatelessWidget {
                                                         width: 16,
                                                         height: 16,
                                                         padding: const EdgeInsets.all(2),
-                                                        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white, border: Border.all(width: 2, color: Colors.grey)),
+                                                        decoration: BoxDecoration(
+                                                            shape: BoxShape.circle,
+                                                            color: Colors.white,
+                                                            border: Border.all(width: 2, color: Colors.grey)),
                                                         child: value.hutangPiutang == "HUTANG"
                                                             ? Container(
                                                                 decoration: const BoxDecoration(shape: BoxShape.circle, color: colorPrimary),
@@ -615,7 +616,10 @@ class SetupTransaksiPage extends StatelessWidget {
                                                         width: 16,
                                                         height: 16,
                                                         padding: const EdgeInsets.all(2),
-                                                        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white, border: Border.all(width: 2, color: Colors.grey)),
+                                                        decoration: BoxDecoration(
+                                                            shape: BoxShape.circle,
+                                                            color: Colors.white,
+                                                            border: Border.all(width: 2, color: Colors.grey)),
                                                         child: value.hutangPiutang == "PIUTANG"
                                                             ? Container(
                                                                 decoration: const BoxDecoration(shape: BoxShape.circle, color: colorPrimary),
@@ -784,7 +788,8 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'gl_deb', value: "${data.glDeb} - ${data.namaDeb}"),
                 DataGridCell(columnName: 'gl_kre', value: "${data.glKre} - ${data.namaKre}"),
                 DataGridCell(columnName: 'modul', value: data.modul),
-                DataGridCell(columnName: 'hutangpiutang', value: data.hutangPiutang == null || data.hutangPiutang == "null" ? "" : data.hutangPiutang),
+                DataGridCell(
+                    columnName: 'hutangpiutang', value: data.hutangPiutang == null || data.hutangPiutang == "null" ? "" : data.hutangPiutang),
                 DataGridCell(columnName: 'action', value: data.id.toString()),
               ],
             ))

@@ -1,4 +1,4 @@
-import 'package:accounting/models/index.dart';
+import 'package:cif/models/index.dart';
 import 'package:flutter/material.dart';
 
 import '../../models_manual/rekon_perantara_item_model.dart';
@@ -100,15 +100,7 @@ class PerantaraPasivaNotifier extends ChangeNotifier {
 
   List<CoaModel> listCoaDebet = [];
   List<Map<String, dynamic>> coaDebet = [
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "0110101",
-      "nama_sbb": "Kas Kantor",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "0110101", "nama_sbb": "Kas Kantor", "type_posting": "Y", "sbb_khusus": "kas"},
     {
       "gol_acc": "1",
       "jns_acc": "C",
@@ -118,33 +110,9 @@ class PerantaraPasivaNotifier extends ChangeNotifier {
       "type_posting": "Y",
       "sbb_khusus": "kas"
     },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "0130109",
-      "nama_sbb": "Giro Bank BNI",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "0130111",
-      "nama_sbb": "Giro Bank BSI",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "0130231",
-      "nama_sbb": "DEP. Bank BNI",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "0130109", "nama_sbb": "Giro Bank BNI", "type_posting": "Y", "sbb_khusus": "kas"},
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "0130111", "nama_sbb": "Giro Bank BSI", "type_posting": "Y", "sbb_khusus": "kas"},
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "0130231", "nama_sbb": "DEP. Bank BNI", "type_posting": "Y", "sbb_khusus": "kas"},
   ];
 
   int totalActive = 0;

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -200,9 +200,7 @@ class PejabatNotifier extends ChangeNotifier {
 
   remove() {
     DialogCustom().showLoading(context);
-    var data = {
-      "id": pejabatModel!.id
-    };
+    var data = {"id": pejabatModel!.id};
     Setuprepository.setup(token, NetworkURL.deletedPejabat(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
@@ -253,9 +251,7 @@ class PejabatNotifier extends ChangeNotifier {
     if (query.isNotEmpty && query.length > 2 && editData == false) {
       listKaryawan.clear();
       notifyListeners();
-      var data = {
-        "nama": query
-      };
+      var data = {"nama": query};
       try {
         final response = await Setuprepository.setup(
           token,

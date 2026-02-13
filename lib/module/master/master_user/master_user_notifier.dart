@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

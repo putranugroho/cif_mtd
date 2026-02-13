@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/network/network.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/dialog_loading.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/network/network.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/dialog_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -22,9 +22,7 @@ class SetupSbbNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getSetupKasKecil(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -61,9 +59,7 @@ class SetupSbbNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {
-        "kode_pt": "001"
-      };
+      var data = {"kode_pt": "001"};
 
       try {
         final response = await Setuprepository.setup(
@@ -74,7 +70,10 @@ class SetupSbbNotifier extends ChangeNotifier {
 
         if (response['status'].toString().toLowerCase().contains("success")) {
           final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
-          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .toList();
         }
         notifyListeners();
       } catch (e) {
@@ -99,8 +98,10 @@ class SetupSbbNotifier extends ChangeNotifier {
   pilihTransModel(SetupTransModel value) {
     setupTransModel = value;
     namaTransaksi.text = setupTransModel!.kdTrans;
-    inqueryGlModeldeb = listGl.where((e) => e.nosbb == setupTransModel!.glDeb).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glDeb).first;
-    inqueryGlModelcre = listGl.where((e) => e.nosbb == setupTransModel!.glKre).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glKre).first;
+    inqueryGlModeldeb =
+        listGl.where((e) => e.nosbb == setupTransModel!.glDeb).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glDeb).first;
+    inqueryGlModelcre =
+        listGl.where((e) => e.nosbb == setupTransModel!.glKre).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glKre).first;
     nosbbdeb.text = setupTransModel!.namaDeb;
     namaSbbDeb.text = setupTransModel!.glDeb;
     nossbcre.text = setupTransModel!.namaKre;
@@ -111,9 +112,7 @@ class SetupSbbNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     listGl.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);

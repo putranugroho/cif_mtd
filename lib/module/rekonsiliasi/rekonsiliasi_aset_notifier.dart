@@ -1,4 +1,4 @@
-import 'package:accounting/models/index.dart';
+import 'package:cif/models/index.dart';
 import 'package:flutter/material.dart';
 
 class RekonsiliasiAsetNotifier extends ChangeNotifier {
@@ -10,11 +10,9 @@ class RekonsiliasiAsetNotifier extends ChangeNotifier {
     }
     for (var item in data) {
       String typePosting = item['kode_kelompok'];
-      List<Map<String, dynamic>> sbbItems =
-          List<Map<String, dynamic>>.from(item['item']);
+      List<Map<String, dynamic>> sbbItems = List<Map<String, dynamic>>.from(item['item']);
 
-      double subtotal = sbbItems.fold(
-          0, (sum, sbb) => sum + double.parse((sbb['haper'] ?? 0)));
+      double subtotal = sbbItems.fold(0, (sum, sbb) => sum + double.parse((sbb['haper'] ?? 0)));
 
       // if (typePosting == 'AKTIVA') {
       //   totalAktiva += subtotal;

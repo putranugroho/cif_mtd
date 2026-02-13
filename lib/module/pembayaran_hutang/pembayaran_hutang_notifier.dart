@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:accounting/models/hutang_piutang_item_model.dart';
-import 'package:accounting/models/index.dart';
-import 'package:accounting/network/network.dart';
-import 'package:accounting/pref/pref.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/format_currency.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/hutang_piutang_item_model.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/network/network.dart';
+import 'package:cif/pref/pref.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/format_currency.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
@@ -39,9 +39,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
     listData.clear();
     notifyListeners();
     var data = {"kode_pt": "001"};
-    Setuprepository.setup(
-            token, NetworkURL.getSetupHutangPiutang(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getSetupHutangPiutang(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listData.add(SetupHutangPiutangModel.fromJson(i));
@@ -84,13 +82,10 @@ class PembayaranHutangNotifier extends ChangeNotifier {
     listGlAll.clear();
     notifyListeners();
     var data = {"kode_pt": users!.kodePt};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccBb(value['data']);
-        listGlAll =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccBb(value['data']);
+        listGlAll = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         getTransaksi();
         notifyListeners();
       }
@@ -108,25 +103,16 @@ class PembayaranHutangNotifier extends ChangeNotifier {
     var data = {
       "kode_pt": users!.kodePt,
     };
-    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksiPending.add(TransaksiPendModel.fromJson(i));
         }
         if (listTransaksiPending.isNotEmpty) {
           if (jenis == 1) {
-            listTransaksiPendingAdd = listTransaksiPending
-                .where((e) =>
-                    e.cracc == inqueryGlModeldeb!.nosbb &&
-                    e.status == "COMPLETED")
-                .toList();
+            listTransaksiPendingAdd = listTransaksiPending.where((e) => e.cracc == inqueryGlModeldeb!.nosbb && e.status == "COMPLETED").toList();
           } else {
-            listTransaksiPendingAdd = listTransaksiPending
-                .where((e) =>
-                    e.dracc == inqueryGlModeldeb!.nosbb &&
-                    e.status == "COMPLETED")
-                .toList();
+            listTransaksiPendingAdd = listTransaksiPending.where((e) => e.dracc == inqueryGlModeldeb!.nosbb && e.status == "COMPLETED").toList();
           }
         }
         isLoadingData = false;
@@ -144,10 +130,8 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   TextEditingController noref = TextEditingController();
 
   pilihTagihan(String value) {
-    hutangPiutangTransaksiModel =
-        listTransaksiAdd.where((e) => e.nokontrak == value).first;
-    nilaitagihan.text = FormatCurrency.oCcyDecimal
-        .format(double.parse(hutangPiutangTransaksiModel!.totalTagPokok));
+    hutangPiutangTransaksiModel = listTransaksiAdd.where((e) => e.nokontrak == value).first;
+    nilaitagihan.text = FormatCurrency.oCcyDecimal.format(double.parse(hutangPiutangTransaksiModel!.totalTagPokok));
     tglKontrak.text = hutangPiutangTransaksiModel!.tglKontrak;
     noref.text = hutangPiutangTransaksiModel!.noRef;
     keterangan.text = hutangPiutangTransaksiModel!.keterangan;
@@ -165,25 +149,15 @@ class PembayaranHutangNotifier extends ChangeNotifier {
     listTransaksiAdd.clear();
     notifyListeners();
     var data = {"kode_pt": users!.kodePt};
-    Setuprepository.setup(
-            token, NetworkURL.getHutangPiutang(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getHutangPiutang(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksi.add(HutangPiutangTransaksiModel.fromJson(i));
         }
         if (listTransaksi.isNotEmpty) {
           listTransaksiAdd = jenis == 2
-              ? listTransaksi
-                  .where((e) =>
-                      e.tipeTransaksi == "2" &&
-                      e.custsupp == customerSupplierModel!.noSif)
-                  .toList()
-              : listTransaksi
-                  .where((e) =>
-                      e.tipeTransaksi == "1" &&
-                      e.custsupp == customerSupplierModel!.noSif)
-                  .toList();
+              ? listTransaksi.where((e) => e.tipeTransaksi == "2" && e.custsupp == customerSupplierModel!.noSif).toList()
+              : listTransaksi.where((e) => e.tipeTransaksi == "1" && e.custsupp == customerSupplierModel!.noSif).toList();
         }
 
         notifyListeners();
@@ -203,8 +177,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   }
 
   List<CustomerSupplierModel> listCs = [];
-  Future<List<CustomerSupplierModel>> getCustomerSupplierQuery(
-      String query) async {
+  Future<List<CustomerSupplierModel>> getCustomerSupplierQuery(String query) async {
     if (query.isNotEmpty && query.length > 2) {
       listCs.clear();
       notifyListeners();
@@ -226,12 +199,9 @@ class PembayaranHutangNotifier extends ChangeNotifier {
           final seen = <String>{};
           return listCs.where((model) {
             final match = jenis == 1
-                ? ((model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
-                        model.golCust == "1") ||
-                    (model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
-                        model.golCust == "3"))
-                : ((model.nmSif.toLowerCase().contains(query.toLowerCase()) &&
-                    (model.golCust == "2" || model.golCust == "3")));
+                ? ((model.nmSif.toLowerCase().contains(query.toLowerCase()) && model.golCust == "1") ||
+                    (model.nmSif.toLowerCase().contains(query.toLowerCase()) && model.golCust == "3"))
+                : ((model.nmSif.toLowerCase().contains(query.toLowerCase()) && (model.golCust == "2" || model.golCust == "3")));
 
             final key = '${model.nmSif.toLowerCase()}|${model.golCust}';
 
@@ -259,13 +229,10 @@ class PembayaranHutangNotifier extends ChangeNotifier {
     list.clear();
     notifyListeners();
     var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        list =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        list = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         notifyListeners();
       }
     });
@@ -330,13 +297,10 @@ class PembayaranHutangNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
           listGl = jnsAccBItems
               .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))
               .toList();
         }
         notifyListeners();
@@ -370,13 +334,10 @@ class PembayaranHutangNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
           listGlPembayaran = jnsAccBItems
               .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))
               .toList();
         }
         notifyListeners();
@@ -406,40 +367,16 @@ class PembayaranHutangNotifier extends ChangeNotifier {
   bayar() {}
 
   onchange(int value) {
-    print(double.parse(listBayarTagihan[value]
-        .text
-        .replaceAll("Rp ", "")
-        .replaceAll(".", "")
-        .replaceAll(",", ".")));
+    print(double.parse(listBayarTagihan[value].text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")));
     notifyListeners();
-    if (double.parse(listTagihan[value]
-            .text
-            .replaceAll("Rp ", "")
-            .replaceAll(".", "")
-            .replaceAll(",", ".")) <
-        double.parse(listBayarTagihan[value]
-            .text
-            .replaceAll("Rp ", "")
-            .replaceAll(".", "")
-            .replaceAll(",", "."))) {
-      informationDialog(context, "Warning",
-          "Nominal tagihan tidak boleh lebih besar dari tagihan pokok");
+    if (double.parse(listTagihan[value].text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")) <
+        double.parse(listBayarTagihan[value].text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))) {
+      informationDialog(context, "Warning", "Nominal tagihan tidak boleh lebih besar dari tagihan pokok");
     } else {
-      var sel = double.parse(nilaipembayaran.text
-              .replaceAll("Rp ", "")
-              .replaceAll(".", "")
-              .replaceAll(",", ".")) -
-          (listBayarTagihan
-                  .map((e) => double.parse(e.text
-                      .replaceAll("Rp ", "")
-                      .replaceAll(".", "")
-                      .replaceAll(",", ".")))
-                  .reduce((a, b) => a + b) +
-              listBayarPPN.map((e) => double.parse(e.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))).reduce(
-                  (a, b) => a + b) +
-              listBayarPPH
-                  .map((e) => double.parse(e.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")))
-                  .reduce((a, b) => a + b));
+      var sel = double.parse(nilaipembayaran.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")) -
+          (listBayarTagihan.map((e) => double.parse(e.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))).reduce((a, b) => a + b) +
+              listBayarPPN.map((e) => double.parse(e.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))).reduce((a, b) => a + b) +
+              listBayarPPH.map((e) => double.parse(e.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))).reduce((a, b) => a + b));
       if (sel < 0) {
         informationDialog(context, "Warning", "Nominal pembayaran kurang");
       } else {
@@ -452,10 +389,8 @@ class PembayaranHutangNotifier extends ChangeNotifier {
 
   TransaksiPendModel? transaksiPendModel;
   pilihTransaksi(String value) {
-    transaksiPendModel =
-        listTransaksiPendingAdd.where((e) => e.rrn == value).first;
-    nilaipembayaran.text =
-        "Rp ${FormatCurrency.oCcyDecimal.format(double.parse(transaksiPendModel!.nominal).toInt())}";
+    transaksiPendModel = listTransaksiPendingAdd.where((e) => e.rrn == value).first;
+    nilaipembayaran.text = "Rp ${FormatCurrency.oCcyDecimal.format(double.parse(transaksiPendModel!.nominal).toInt())}";
     tglValuta.text = transaksiPendModel!.tglValuta;
     nodokumen.text = transaksiPendModel!.noDokumen;
     keteranganTrans.text = transaksiPendModel!.keterangan;
@@ -515,32 +450,20 @@ class PembayaranHutangNotifier extends ChangeNotifier {
         "data": listtmp,
       };
 
-      Setuprepository.setup(
-              token, NetworkURL.bayarHutangPiutang(), jsonEncode(data))
-          .then((value) {
+      Setuprepository.setup(token, NetworkURL.bayarHutangPiutang(), jsonEncode(data)).then((value) {
         Navigator.pop(context);
         if (value['status'].toString().toLowerCase().contains("success")) {
           if (jenis == 1) {
-            if (double.parse(selisih.text
-                    .replaceAll("Rp ", "")
-                    .replaceAll(".", "")
-                    .replaceAll(",", ".")) >
-                0) {
+            if (double.parse(selisih.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")) > 0) {
               if (double.parse(users!.maksimalTransaksi) <
-                  double.parse(nilaipembayaran.text
-                      .replaceAll("Rp ", "")
-                      .replaceAll(".", "")
-                      .replaceAll(",", "."))) {
+                  double.parse(nilaipembayaran.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))) {
                 var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                 var data = {
-                  "tgl_transaksi":
-                      "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                  "tgl_valuta":
-                      "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                  "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                  "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
                   "batch": "${users!.batch}",
                   "trx_type": "TRX",
-                  "trx_code":
-                      "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                  "trx_code": "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
                   "otor": "0",
                   "kode_trn": "",
                   "nama_dr": transaksiPendModel!.namaCr,
@@ -552,10 +475,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "no_ref": "${transaksiPendModel!.noRef}",
                   "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
                   "no_invoice": "${noinv.text}",
-                  "nominal": double.parse(selisih.text
-                      .replaceAll("Rp ", "")
-                      .replaceAll(".", "")
-                      .replaceAll(",", ".")),
+                  "nominal": double.parse(selisih.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")),
                   "keterangan": "${keteranganSelisih.text}",
                   "kode_pt": "${users!.kodePt}",
                   "kode_kantor": "${users!.kodeKantor}",
@@ -567,8 +487,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "userinput": "${users!.namauser}",
                   "userterm": "114.80.90.54",
                   "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                  "inputtgljam":
-                      "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                  "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
                   "otoruser": "",
                   "otorterm": "",
                   "otortgljam": "",
@@ -578,19 +497,15 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "status": "PENDING",
                   "modul": "SELISIH HUTANG PIUTANG",
                 };
-                Setuprepository.setup(
-                    token, NetworkURL.transaksi(), jsonEncode(data));
+                Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
               } else {
                 var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                 var data = {
-                  "tgl_transaksi":
-                      "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                  "tgl_valuta":
-                      "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                  "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                  "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
                   "batch": "${users!.batch}",
                   "trx_type": "TRX",
-                  "trx_code":
-                      "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                  "trx_code": "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
                   "otor": "0",
                   "kode_trn": "",
                   "nama_dr": transaksiPendModel!.namaCr,
@@ -602,10 +517,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "no_invoice": "${noinv.text}",
                   "no_dokumen": "${nodokumenselisih.text.trim()}",
                   "no_ref": "${transaksiPendModel!.noRef}",
-                  "nominal": double.parse(selisih.text
-                      .replaceAll("Rp ", "")
-                      .replaceAll(".", "")
-                      .replaceAll(",", ".")),
+                  "nominal": double.parse(selisih.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")),
                   "keterangan": "${keteranganSelisih.text}",
                   "kode_pt": "${users!.kodePt}",
                   "kode_kantor": "${users!.kodeKantor}",
@@ -617,8 +529,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "userinput": "${users!.namauser}",
                   "userterm": "114.80.90.54",
                   "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                  "inputtgljam":
-                      "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                  "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
                   "otoruser": "",
                   "otorterm": "",
                   "otortgljam": "",
@@ -628,28 +539,20 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "status": "COMPLETED",
                   "modul": "SELISIH HUTANG PIUTANG",
                 };
-                Setuprepository.setup(
-                    token, NetworkURL.transaksi(), jsonEncode(data));
+                Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
               }
             }
             for (var i = 0; i < hasil!['listBayarTagihan']!.length; i++) {
               if (hasil!['listBayarTagihan']![i] > 0) {
                 if (double.parse(users!.maksimalTransaksi) <
-                    double.parse(nilaipembayaran.text
-                        .replaceAll("Rp ", "")
-                        .replaceAll(".", "")
-                        .replaceAll(",", "."))) {
-                  var invoice =
-                      DateTime.now().millisecondsSinceEpoch.toString();
+                    double.parse(nilaipembayaran.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))) {
+                  var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                   var data = {
-                    "tgl_transaksi":
-                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                    "tgl_valuta":
-                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
                     "batch": "${users!.batch}",
                     "trx_type": "TRX",
-                    "trx_code":
-                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                    "trx_code": "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
                     "otor": "0",
                     "kode_trn": "",
                     "nama_dr": transaksiPendModel!.namaCr,
@@ -673,8 +576,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "userinput": "${users!.namauser}",
                     "userterm": "114.80.90.54",
                     "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                    "inputtgljam":
-                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
                     "otoruser": "",
                     "otorterm": "",
                     "otortgljam": "",
@@ -684,20 +586,15 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "status": "PENDING",
                     "modul": "BAYAR HUTANG PIUTANG",
                   };
-                  Setuprepository.setup(
-                      token, NetworkURL.transaksi(), jsonEncode(data));
+                  Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
                 } else {
-                  var invoice =
-                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                   var data = {
-                    "tgl_transaksi":
-                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                    "tgl_valuta":
-                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
                     "batch": "${users!.batch}",
                     "trx_type": "TRX",
-                    "trx_code":
-                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                    "trx_code": "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                     "otor": "0",
                     "kode_trn": "",
                     "nama_dr": transaksiPendModel!.namaCr,
@@ -721,8 +618,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "userinput": "${users!.namauser}",
                     "userterm": "114.80.90.54",
                     "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                    "inputtgljam":
-                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
                     "otoruser": "",
                     "otorterm": "",
                     "otortgljam": "",
@@ -732,29 +628,21 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "status": "COMPLETED",
                     "modul": "BAYAR HUTANG PIUTANG",
                   };
-                  Setuprepository.setup(
-                      token, NetworkURL.transaksi(), jsonEncode(data));
+                  Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
                 }
               }
             }
             for (var i = 0; i < hasil!['listBayarPPN']!.length; i++) {
               if (hasil!['listBayarPPN']![i] > 0) {
                 if (double.parse(users!.maksimalTransaksi) <
-                    double.parse(nilaipembayaran.text
-                        .replaceAll("Rp ", "")
-                        .replaceAll(".", "")
-                        .replaceAll(",", "."))) {
-                  var invoice =
-                      DateTime.now().millisecondsSinceEpoch.toString();
+                    double.parse(nilaipembayaran.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))) {
+                  var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                   var data = {
-                    "tgl_transaksi":
-                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                    "tgl_valuta":
-                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
                     "batch": "${users!.batch}",
                     "trx_type": "TRX",
-                    "trx_code":
-                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                    "trx_code": "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
                     "otor": "0",
                     "kode_trn": "",
                     "nama_dr": setupHutangPiutangModel!.namasbbppnpiutang,
@@ -778,8 +666,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "userinput": "${users!.namauser}",
                     "userterm": "114.80.90.54",
                     "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                    "inputtgljam":
-                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
                     "otoruser": "",
                     "otorterm": "",
                     "otortgljam": "",
@@ -789,20 +676,15 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "status": "PENDING",
                     "modul": "BAYAR PPN HUTANG PIUTANG",
                   };
-                  Setuprepository.setup(
-                      token, NetworkURL.transaksi(), jsonEncode(data));
+                  Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
                 } else {
-                  var invoice =
-                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                   var data = {
-                    "tgl_transaksi":
-                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                    "tgl_valuta":
-                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
                     "batch": "${users!.batch}",
                     "trx_type": "TRX",
-                    "trx_code":
-                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                    "trx_code": "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                     "otor": "0",
                     "kode_trn": "",
                     "nama_dr": setupHutangPiutangModel!.namasbbppnpiutang,
@@ -826,8 +708,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "userinput": "${users!.namauser}",
                     "userterm": "114.80.90.54",
                     "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                    "inputtgljam":
-                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
                     "otoruser": "",
                     "otorterm": "",
                     "otortgljam": "",
@@ -837,8 +718,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "status": "COMPLETED",
                     "modul": "BAYAR PPN HUTANG PIUTANG",
                   };
-                  Setuprepository.setup(
-                      token, NetworkURL.transaksi(), jsonEncode(data));
+                  Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
                 }
               }
             }
@@ -846,21 +726,14 @@ class PembayaranHutangNotifier extends ChangeNotifier {
             for (var i = 0; i < hasil!['listBayarPPH']!.length; i++) {
               if (hasil!['listBayarPPH']![i] > 0) {
                 if (double.parse(users!.maksimalTransaksi) <
-                    double.parse(nilaipembayaran.text
-                        .replaceAll("Rp ", "")
-                        .replaceAll(".", "")
-                        .replaceAll(",", "."))) {
-                  var invoice =
-                      DateTime.now().millisecondsSinceEpoch.toString();
+                    double.parse(nilaipembayaran.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))) {
+                  var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                   var data = {
-                    "tgl_transaksi":
-                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                    "tgl_valuta":
-                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
                     "batch": "${users!.batch}",
                     "trx_type": "TRX",
-                    "trx_code":
-                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                    "trx_code": "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
                     "otor": "0",
                     "kode_trn": "",
                     "nama_dr": setupHutangPiutangModel!.namasbbpotonganpph,
@@ -884,8 +757,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "userinput": "${users!.namauser}",
                     "userterm": "114.80.90.54",
                     "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                    "inputtgljam":
-                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
                     "otoruser": "",
                     "otorterm": "",
                     "otortgljam": "",
@@ -895,20 +767,15 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "status": "PENDING",
                     "modul": "BAYAR PPH HUTANG PIUTANG",
                   };
-                  Setuprepository.setup(
-                      token, NetworkURL.transaksi(), jsonEncode(data));
+                  Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
                 } else {
-                  var invoice =
-                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                   var data = {
-                    "tgl_transaksi":
-                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                    "tgl_valuta":
-                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
                     "batch": "${users!.batch}",
                     "trx_type": "TRX",
-                    "trx_code":
-                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                    "trx_code": "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                     "otor": "0",
                     "kode_trn": "",
                     "nama_dr": setupHutangPiutangModel!.namasbbpotonganpph,
@@ -932,8 +799,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "userinput": "${users!.namauser}",
                     "userterm": "114.80.90.54",
                     "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                    "inputtgljam":
-                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
                     "otoruser": "",
                     "otorterm": "",
                     "otortgljam": "",
@@ -943,32 +809,21 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "status": "COMPLETED",
                     "modul": "BAYAR PPH HUTANG PIUTANG",
                   };
-                  Setuprepository.setup(
-                      token, NetworkURL.transaksi(), jsonEncode(data));
+                  Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
                 }
               }
             }
           } else {
-            if (double.parse(selisih.text
-                    .replaceAll("Rp ", "")
-                    .replaceAll(".", "")
-                    .replaceAll(",", ".")) >
-                0) {
+            if (double.parse(selisih.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")) > 0) {
               if (double.parse(users!.maksimalTransaksi) <
-                  double.parse(nilaipembayaran.text
-                      .replaceAll("Rp ", "")
-                      .replaceAll(".", "")
-                      .replaceAll(",", "."))) {
+                  double.parse(nilaipembayaran.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))) {
                 var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                 var data = {
-                  "tgl_transaksi":
-                      "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                  "tgl_valuta":
-                      "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                  "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                  "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
                   "batch": "${users!.batch}",
                   "trx_type": "TRX",
-                  "trx_code":
-                      "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                  "trx_code": "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                   "otor": "0",
                   "kode_trn": "",
                   "nama_dr": inqueryGlModelKelebihan!.namaSbb,
@@ -980,10 +835,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "no_ref": "${transaksiPendModel!.noRef}",
                   "no_kontrak": "${hutangPiutangTransaksiModel!.nokontrak}",
                   "no_invoice": "${noinv.text}",
-                  "nominal": double.parse(selisih.text
-                      .replaceAll("Rp ", "")
-                      .replaceAll(".", "")
-                      .replaceAll(",", ".")),
+                  "nominal": double.parse(selisih.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")),
                   "keterangan": "${keteranganSelisih.text}",
                   "kode_pt": "${users!.kodePt}",
                   "kode_kantor": "${users!.kodeKantor}",
@@ -995,8 +847,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "userinput": "${users!.namauser}",
                   "userterm": "114.80.90.54",
                   "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                  "inputtgljam":
-                      "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                  "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
                   "otoruser": "",
                   "otorterm": "",
                   "otortgljam": "",
@@ -1006,19 +857,15 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "status": "PENDING",
                   "modul": "SELISIH HUTANG PIUTANG",
                 };
-                Setuprepository.setup(
-                    token, NetworkURL.transaksi(), jsonEncode(data));
+                Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
               } else {
                 var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                 var data = {
-                  "tgl_transaksi":
-                      "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                  "tgl_valuta":
-                      "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                  "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                  "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
                   "batch": "${users!.batch}",
                   "trx_type": "TRX",
-                  "trx_code":
-                      "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                  "trx_code": "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                   "otor": "0",
                   "kode_trn": "",
                   "nama_dr": inqueryGlModelKelebihan!.namaSbb,
@@ -1030,10 +877,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "no_invoice": "${noinv.text}",
                   "no_dokumen": "${nodokumenselisih.text.trim()}",
                   "no_ref": "${transaksiPendModel!.noRef}",
-                  "nominal": double.parse(selisih.text
-                      .replaceAll("Rp ", "")
-                      .replaceAll(".", "")
-                      .replaceAll(",", ".")),
+                  "nominal": double.parse(selisih.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")),
                   "keterangan": "${keteranganSelisih.text}",
                   "kode_pt": "${users!.kodePt}",
                   "kode_kantor": "${users!.kodeKantor}",
@@ -1045,8 +889,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "userinput": "${users!.namauser}",
                   "userterm": "114.80.90.54",
                   "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                  "inputtgljam":
-                      "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                  "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
                   "otoruser": "",
                   "otorterm": "",
                   "otortgljam": "",
@@ -1056,28 +899,20 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                   "status": "COMPLETED",
                   "modul": "SELISIH HUTANG PIUTANG",
                 };
-                Setuprepository.setup(
-                    token, NetworkURL.transaksi(), jsonEncode(data));
+                Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
               }
             }
             for (var i = 0; i < hasil!['listBayarTagihan']!.length; i++) {
               if (hasil!['listBayarTagihan']![i] > 0) {
                 if (double.parse(users!.maksimalTransaksi) <
-                    double.parse(nilaipembayaran.text
-                        .replaceAll("Rp ", "")
-                        .replaceAll(".", "")
-                        .replaceAll(",", "."))) {
-                  var invoice =
-                      DateTime.now().millisecondsSinceEpoch.toString();
+                    double.parse(nilaipembayaran.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))) {
+                  var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                   var data = {
-                    "tgl_transaksi":
-                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                    "tgl_valuta":
-                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
                     "batch": "${users!.batch}",
                     "trx_type": "TRX",
-                    "trx_code":
-                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                    "trx_code": "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                     "otor": "0",
                     "kode_trn": "",
                     "nama_dr": setupHutangPiutangModel!.namasbbtransaksihutang,
@@ -1101,8 +936,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "userinput": "${users!.namauser}",
                     "userterm": "114.80.90.54",
                     "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                    "inputtgljam":
-                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
                     "otoruser": "",
                     "otorterm": "",
                     "otortgljam": "",
@@ -1112,20 +946,15 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "status": "PENDING",
                     "modul": "BAYAR HUTANG PIUTANG",
                   };
-                  Setuprepository.setup(
-                      token, NetworkURL.transaksi(), jsonEncode(data));
+                  Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
                 } else {
-                  var invoice =
-                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                   var data = {
-                    "tgl_transaksi":
-                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                    "tgl_valuta":
-                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
                     "batch": "${users!.batch}",
                     "trx_type": "TRX",
-                    "trx_code":
-                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                    "trx_code": "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                     "otor": "0",
                     "kode_trn": "",
                     "nama_dr": setupHutangPiutangModel!.namasbbtransaksihutang,
@@ -1149,8 +978,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "userinput": "${users!.namauser}",
                     "userterm": "114.80.90.54",
                     "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                    "inputtgljam":
-                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
                     "otoruser": "",
                     "otorterm": "",
                     "otortgljam": "",
@@ -1160,29 +988,21 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "status": "COMPLETED",
                     "modul": "BAYAR HUTANG PIUTANG",
                   };
-                  Setuprepository.setup(
-                      token, NetworkURL.transaksi(), jsonEncode(data));
+                  Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
                 }
               }
             }
             for (var i = 0; i < hasil!['listBayarPPN']!.length; i++) {
               if (hasil!['listBayarPPN']![i] > 0) {
                 if (double.parse(users!.maksimalTransaksi) <
-                    double.parse(nilaipembayaran.text
-                        .replaceAll("Rp ", "")
-                        .replaceAll(".", "")
-                        .replaceAll(",", "."))) {
-                  var invoice =
-                      DateTime.now().millisecondsSinceEpoch.toString();
+                    double.parse(nilaipembayaran.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))) {
+                  var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                   var data = {
-                    "tgl_transaksi":
-                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                    "tgl_valuta":
-                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
                     "batch": "${users!.batch}",
                     "trx_type": "TRX",
-                    "trx_code":
-                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                    "trx_code": "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
                     "otor": "0",
                     "kode_trn": "",
                     "nama_dr": setupHutangPiutangModel!.namasbbrrpppnhutang,
@@ -1206,8 +1026,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "userinput": "${users!.namauser}",
                     "userterm": "114.80.90.54",
                     "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                    "inputtgljam":
-                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
                     "otoruser": "",
                     "otorterm": "",
                     "otortgljam": "",
@@ -1217,20 +1036,15 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "status": "PENDING",
                     "modul": "BAYAR PPN HUTANG PIUTANG",
                   };
-                  Setuprepository.setup(
-                      token, NetworkURL.transaksi(), jsonEncode(data));
+                  Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
                 } else {
-                  var invoice =
-                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                   var data = {
-                    "tgl_transaksi":
-                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                    "tgl_valuta":
-                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
                     "batch": "${users!.batch}",
                     "trx_type": "TRX",
-                    "trx_code":
-                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                    "trx_code": "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                     "otor": "0",
                     "kode_trn": "",
                     "nama_dr": setupHutangPiutangModel!.namasbbrrpppnhutang,
@@ -1254,8 +1068,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "userinput": "${users!.namauser}",
                     "userterm": "114.80.90.54",
                     "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                    "inputtgljam":
-                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
                     "otoruser": "",
                     "otorterm": "",
                     "otortgljam": "",
@@ -1265,8 +1078,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "status": "COMPLETED",
                     "modul": "BAYAR PPN HUTANG PIUTANG",
                   };
-                  Setuprepository.setup(
-                      token, NetworkURL.transaksi(), jsonEncode(data));
+                  Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
                 }
               }
             }
@@ -1274,27 +1086,19 @@ class PembayaranHutangNotifier extends ChangeNotifier {
             for (var i = 0; i < hasil!['listBayarPPH']!.length; i++) {
               if (hasil!['listBayarPPH']![i] > 0) {
                 if (double.parse(users!.maksimalTransaksi) <
-                    double.parse(nilaipembayaran.text
-                        .replaceAll("Rp ", "")
-                        .replaceAll(".", "")
-                        .replaceAll(",", "."))) {
-                  var invoice =
-                      DateTime.now().millisecondsSinceEpoch.toString();
+                    double.parse(nilaipembayaran.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))) {
+                  var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                   var data = {
-                    "tgl_transaksi":
-                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                    "tgl_valuta":
-                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
                     "batch": "${users!.batch}",
                     "trx_type": "TRX",
-                    "trx_code":
-                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
+                    "trx_code": "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "100"}",
                     "otor": "0",
                     "kode_trn": "",
                     "nama_dr": setupHutangPiutangModel!.namasbbpphhutang,
                     "dracc": setupHutangPiutangModel!.sbbpphhutang,
-                    "nama_cr":
-                        setupHutangPiutangModel!.namasbbpotonganpphhutang,
+                    "nama_cr": setupHutangPiutangModel!.namasbbpotonganpphhutang,
                     "cracc": setupHutangPiutangModel!.sbbpotonganpphhutang,
                     "rrn": "$invoice",
                     "no_dokumen": "${nodokumen.text.trim()}",
@@ -1313,8 +1117,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "userinput": "${users!.namauser}",
                     "userterm": "114.80.90.54",
                     "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                    "inputtgljam":
-                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
                     "otoruser": "",
                     "otorterm": "",
                     "otortgljam": "",
@@ -1324,26 +1127,20 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "status": "PENDING",
                     "modul": "BAYAR PPH HUTANG PIUTANG",
                   };
-                  Setuprepository.setup(
-                      token, NetworkURL.transaksi(), jsonEncode(data));
+                  Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
                 } else {
-                  var invoice =
-                      DateTime.now().millisecondsSinceEpoch.toString();
+                  var invoice = DateTime.now().millisecondsSinceEpoch.toString();
                   var data = {
-                    "tgl_transaksi":
-                        "${DateFormat('y-MM-dd').format(DateTime.now())}",
-                    "tgl_valuta":
-                        "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
+                    "tgl_transaksi": "${DateFormat('y-MM-dd').format(DateTime.now())}",
+                    "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.parse(transaksiPendModel!.tglValuta))}",
                     "batch": "${users!.batch}",
                     "trx_type": "TRX",
-                    "trx_code":
-                        "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
+                    "trx_code": "${DateTime.parse(transaksiPendModel!.tglValuta).isBefore(DateTime.now()) ? "110" : "120"}",
                     "otor": "0",
                     "kode_trn": "",
                     "nama_dr": setupHutangPiutangModel!.namasbbpphhutang,
                     "dracc": setupHutangPiutangModel!.sbbpphhutang,
-                    "nama_cr":
-                        setupHutangPiutangModel!.namasbbpotonganpphhutang,
+                    "nama_cr": setupHutangPiutangModel!.namasbbpotonganpphhutang,
                     "cracc": setupHutangPiutangModel!.sbbpotonganpphhutang,
                     "rrn": "$invoice",
                     "no_dokumen": "${nodokumen.text.trim()}",
@@ -1362,8 +1159,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "userinput": "${users!.namauser}",
                     "userterm": "114.80.90.54",
                     "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-                    "inputtgljam":
-                        "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+                    "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
                     "otoruser": "",
                     "otorterm": "",
                     "otortgljam": "",
@@ -1373,8 +1169,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
                     "status": "COMPLETED",
                     "modul": "BAYAR PPH HUTANG PIUTANG",
                   };
-                  Setuprepository.setup(
-                      token, NetworkURL.transaksi(), jsonEncode(data));
+                  Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data));
                 }
               }
             }
@@ -1441,9 +1236,7 @@ class PembayaranHutangNotifier extends ChangeNotifier {
       "kode_pt": users!.kodePt,
       "no_kontrak": hutangPiutangTransaksiModel!.nokontrak,
     };
-    Setuprepository.setup(
-            token, NetworkURL.searchHutangPiutang(), jsonEncode(ddata))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.searchHutangPiutang(), jsonEncode(ddata)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -1452,43 +1245,21 @@ class PembayaranHutangNotifier extends ChangeNotifier {
         listPembayaran.sort((a, b) => a.ke.compareTo(b.ke));
         if (listPembayaran.isNotEmpty) {
           for (var i = 0; i < listPembayaran.length; i++) {
-            listInvoice.add(TextEditingController(
-                text: listPembayaran[i].noinv == null
-                    ? ""
-                    : listPembayaran[i].noinv));
-            listTagihanNilai = listPembayaran
-                .map((e) =>
-                    double.parse(e.tagPokok).toInt() -
-                    double.parse(e.byrPokok).toInt())
-                .toList();
-            listPPNNilai = listPembayaran
-                .map((e) =>
-                    double.parse(e.tagPpn).toInt() -
-                    double.parse(e.byrPpn).toInt())
-                .toList();
-            listPPHNilai = listPembayaran
-                .map((e) =>
-                    double.parse(e.tagPph).toInt() -
-                    double.parse(e.byrPph).toInt())
-                .toList();
+            listInvoice.add(TextEditingController(text: listPembayaran[i].noinv == null ? "" : listPembayaran[i].noinv));
+            listTagihanNilai = listPembayaran.map((e) => double.parse(e.tagPokok).toInt() - double.parse(e.byrPokok).toInt()).toList();
+            listPPNNilai = listPembayaran.map((e) => double.parse(e.tagPpn).toInt() - double.parse(e.byrPpn).toInt()).toList();
+            listPPHNilai = listPembayaran.map((e) => double.parse(e.tagPph).toInt() - double.parse(e.byrPph).toInt()).toList();
             listTagihan.add(TextEditingController(
-                text: FormatCurrency.oCcyDecimal.format(
-                    double.parse(listPembayaran[i].tagPokok).toInt() -
-                        double.parse(listPembayaran[i].byrPokok).toInt())));
+                text: FormatCurrency.oCcyDecimal
+                    .format(double.parse(listPembayaran[i].tagPokok).toInt() - double.parse(listPembayaran[i].byrPokok).toInt())));
             listPPH.add(TextEditingController(
-                text: FormatCurrency.oCcyDecimal.format(
-                    double.parse(listPembayaran[i].tagPph).toInt() -
-                        double.parse(listPembayaran[i].byrPph).toInt())));
+                text: FormatCurrency.oCcyDecimal
+                    .format(double.parse(listPembayaran[i].tagPph).toInt() - double.parse(listPembayaran[i].byrPph).toInt())));
             listPPN.add(TextEditingController(
-                text: FormatCurrency.oCcyDecimal.format(
-                    double.parse(listPembayaran[i].tagPpn).toInt() -
-                        double.parse(listPembayaran[i].byrPpn).toInt())));
+                text: FormatCurrency.oCcyDecimal
+                    .format(double.parse(listPembayaran[i].tagPpn).toInt() - double.parse(listPembayaran[i].byrPpn).toInt())));
           }
-          totalTransaksi = double.parse(nilaipembayaran.text
-                  .replaceAll("Rp ", "")
-                  .replaceAll(".", '')
-                  .replaceAll(",", "."))
-              .toInt();
+          totalTransaksi = double.parse(nilaipembayaran.text.replaceAll("Rp ", "").replaceAll(".", '').replaceAll(",", ".")).toInt();
 
           hasil = distribusiPembayaran(
             totalTransaksi: totalTransaksi,
@@ -1498,29 +1269,18 @@ class PembayaranHutangNotifier extends ChangeNotifier {
           );
           if (listTagihanNilai.isNotEmpty) {
             for (var i = 0; i < listTagihanNilai.length; i++) {
-              listBayarTagihan.add(TextEditingController(
-                  text: FormatCurrency.oCcy
-                      .format(hasil!['listBayarTagihan']![i])));
-              listBayarPPN.add(TextEditingController(
-                  text:
-                      FormatCurrency.oCcy.format(hasil!['listBayarPPN']![i])));
-              listBayarPPH.add(TextEditingController(
-                  text:
-                      FormatCurrency.oCcy.format(hasil!['listBayarPPH']![i])));
+              listBayarTagihan.add(TextEditingController(text: FormatCurrency.oCcy.format(hasil!['listBayarTagihan']![i])));
+              listBayarPPN.add(TextEditingController(text: FormatCurrency.oCcy.format(hasil!['listBayarPPN']![i])));
+              listBayarPPH.add(TextEditingController(text: FormatCurrency.oCcy.format(hasil!['listBayarPPH']![i])));
             }
           }
-          var sel = double.parse(nilaipembayaran.text
-                  .replaceAll("Rp ", "")
-                  .replaceAll(".", "")
-                  .replaceAll(",", ".")) -
+          var sel = double.parse(nilaipembayaran.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")) -
               (listBayarTagihan
-                      .map((e) => double.parse(e.text
-                          .replaceAll("Rp ", "")
-                          .replaceAll(".", "")
-                          .replaceAll(",", ".")))
+                      .map((e) => double.parse(e.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")))
                       .reduce((a, b) => a + b) +
-                  listBayarPPN.map((e) => double.parse(e.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))).reduce(
-                      (a, b) => a + b) +
+                  listBayarPPN
+                      .map((e) => double.parse(e.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")))
+                      .reduce((a, b) => a + b) +
                   listBayarPPH
                       .map((e) => double.parse(e.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")))
                       .reduce((a, b) => a + b));

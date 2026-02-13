@@ -1,8 +1,8 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/master/bank/bank_notifier.dart';
-import 'package:accounting/module/master/customer/customer_notifier.dart';
-import 'package:accounting/module/master/users/users_notifier.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/master/bank/bank_notifier.dart';
+import 'package:cif/module/master/customer/customer_notifier.dart';
+import 'package:cif/module/master/users/users_notifier.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -256,9 +256,7 @@ class CustomerPage extends StatelessWidget {
                                       textInputAction: TextInputAction.done,
                                       controller: value.noSif,
                                       maxLines: 1,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]'))
-                                      ],
+                                      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]'))],
                                       validator: (e) {
                                         if (e!.isEmpty) {
                                           return "Wajib diisi";
@@ -612,9 +610,7 @@ class CustomerPage extends StatelessWidget {
                                                   height: 8,
                                                 ),
                                                 TextFormField(
-                                                  inputFormatters: [
-                                                    FilteringTextInputFormatter.digitsOnly
-                                                  ],
+                                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                   maxLength: 5,
                                                   controller: value.kodepos,
                                                   validator: (e) {
@@ -743,9 +739,7 @@ class CustomerPage extends StatelessWidget {
                                       textInputAction: TextInputAction.done,
                                       controller: value.npwp,
                                       maxLines: 1,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.digitsOnly
-                                      ],
+                                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                       validator: (e) {
                                         if (value.pkp) {
                                           if (e!.isEmpty) {
@@ -791,9 +785,7 @@ class CustomerPage extends StatelessWidget {
                                               textInputAction: TextInputAction.done,
                                               controller: value.notelp,
                                               maxLines: 1,
-                                              inputFormatters: [
-                                                FilteringTextInputFormatter.digitsOnly
-                                              ],
+                                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                               validator: (e) {
                                                 if (e!.isEmpty) {
                                                   return "Wajib diisi";
@@ -877,7 +869,9 @@ class CustomerPage extends StatelessWidget {
                                                   showSearchBox: true, // Aktifkan fitur pencarian
                                                 ),
                                                 selectedItem: value.golCust == "Customer" ? value.aoModel : value.aoModelKRedit,
-                                                items: value.listAoModel.where((e) => e.golCust == (value.golCust == "Customer" ? "1" : "2") || e.golCust == "3").toList(),
+                                                items: value.listAoModel
+                                                    .where((e) => e.golCust == (value.golCust == "Customer" ? "1" : "2") || e.golCust == "3")
+                                                    .toList(),
                                                 itemAsString: (e) => e.nama,
                                                 onChanged: (e) {
                                                   value.golCust == "Customer" ? value.pilihAoModelDebet(e!) : value.pilihAoModelKredit(e!);
@@ -1060,9 +1054,7 @@ class CustomerPage extends StatelessWidget {
                                               textInputAction: TextInputAction.done,
                                               controller: value.hp1,
                                               maxLines: 1,
-                                              inputFormatters: [
-                                                FilteringTextInputFormatter.digitsOnly
-                                              ],
+                                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                               validator: (e) {
                                                 if (e!.isEmpty) {
                                                   return "Wajib diisi";
@@ -1228,9 +1220,7 @@ class CustomerPage extends StatelessWidget {
                                               textInputAction: TextInputAction.done,
                                               controller: value.hp2,
                                               maxLines: 1,
-                                              inputFormatters: [
-                                                FilteringTextInputFormatter.digitsOnly
-                                              ],
+                                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                               decoration: InputDecoration(
                                                 hintText: "HP Kontak 2",
                                                 border: OutlineInputBorder(
@@ -1365,9 +1355,7 @@ class CustomerPage extends StatelessWidget {
                                               textInputAction: TextInputAction.done,
                                               controller: value.hp3,
                                               maxLines: 1,
-                                              inputFormatters: [
-                                                FilteringTextInputFormatter.digitsOnly
-                                              ],
+                                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                               decoration: InputDecoration(
                                                 hintText: "HP Kontak 3",
                                                 border: OutlineInputBorder(

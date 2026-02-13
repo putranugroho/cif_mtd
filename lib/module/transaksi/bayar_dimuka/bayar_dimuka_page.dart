@@ -1,11 +1,11 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/transaksi/bayar_dimuka/bayar_dimuka_notifier.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/transaksi/bayar_dimuka/bayar_dimuka_notifier.dart';
 
-import 'package:accounting/utils/button_custom.dart';
-import 'package:accounting/utils/currency_formatted.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/utils/button_custom.dart';
+import 'package:cif/utils/currency_formatted.dart';
+import 'package:cif/utils/format_currency.dart';
 
-import 'package:accounting/utils/images_path.dart';
+import 'package:cif/utils/images_path.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 
 import 'package:flutter/material.dart';
@@ -324,7 +324,9 @@ class BayarDimukaPage extends StatelessWidget {
                                                         width: 150,
                                                         margin: const EdgeInsets.only(right: 16),
                                                         child: Text(
-                                                          value.jenis == "BAYAR DIMUKA" ? "(${data.cracc}) ${data.namaCr}" : "(${data.dracc}) ${data.namaDr}",
+                                                          value.jenis == "BAYAR DIMUKA"
+                                                              ? "(${data.cracc}) ${data.namaCr}"
+                                                              : "(${data.dracc}) ${data.namaDr}",
                                                           style: const TextStyle(
                                                             fontSize: 12,
                                                           ),
@@ -569,9 +571,7 @@ class BayarDimukaPage extends StatelessWidget {
                                                   textInputAction: TextInputAction.done,
                                                   controller: value.berapakali,
                                                   maxLines: 1,
-                                                  inputFormatters: [
-                                                    FilteringTextInputFormatter.digitsOnly
-                                                  ],
+                                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                   validator: (e) {
                                                     if (e!.isEmpty) {
                                                       return "Wajib diisi";
@@ -1580,9 +1580,7 @@ class BayarDimukaPage extends StatelessWidget {
                                                                 textInputAction: TextInputAction.done,
                                                                 controller: value.berapakali,
                                                                 maxLines: 1,
-                                                                inputFormatters: [
-                                                                  FilteringTextInputFormatter.digitsOnly
-                                                                ],
+                                                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                                 validator: (e) {
                                                                   if (e!.isEmpty) {
                                                                     return "Wajib diisi";

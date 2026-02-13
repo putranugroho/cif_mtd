@@ -1,8 +1,8 @@
-import 'package:accounting/network/network_aset.dart';
-import 'package:accounting/repository/master_repository.dart';
-import 'package:accounting/utils/dialog_loading.dart';
+import 'package:cif/network/network_aset.dart';
+import 'package:cif/repository/master_repository.dart';
+import 'package:cif/utils/dialog_loading.dart';
 
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
@@ -10,8 +10,7 @@ class KategoriBarangNotifier extends ChangeNotifier {
   final BuildContext context;
   late KategoriBarangDataSource kategoriBarangDataSource;
   KategoriBarangNotifier({required this.context}) {
-    kategoriBarangDataSource =
-        KategoriBarangDataSource(onEdit: onEdit, onDelete: onDelete);
+    kategoriBarangDataSource = KategoriBarangDataSource(onEdit: onEdit, onDelete: onDelete);
     fetchKategori();
   }
 
@@ -23,10 +22,7 @@ class KategoriBarangNotifier extends ChangeNotifier {
           width: 200,
           label: Hdr('Nama Kategori'),
         ),
-        GridColumn(
-            columnName: 'deskripsi',
-            columnWidthMode: ColumnWidthMode.fill,
-            label: Hdr('Deskripsi')),
+        GridColumn(columnName: 'deskripsi', columnWidthMode: ColumnWidthMode.fill, label: Hdr('Deskripsi')),
         GridColumn(
           columnName: 'status',
           width: 140,
@@ -86,9 +82,7 @@ class KategoriBarangNotifier extends ChangeNotifier {
 
   onDelete(String value) {
     kategoriModel = list.where((e) => e['id'] == int.parse(value)).first;
-    confirmationDialog(context, "Peringatan",
-        "Anda yakin ingin menghapus ${kategoriModel['nama_kategori']} ?",
-        no: () {
+    confirmationDialog(context, "Peringatan", "Anda yakin ingin menghapus ${kategoriModel['nama_kategori']} ?", no: () {
       Navigator.pop(context);
     }, yes: () {
       Navigator.pop(context);
@@ -99,9 +93,7 @@ class KategoriBarangNotifier extends ChangeNotifier {
 
   remove() async {
     DialogCustom().showLoading(context);
-    MasterRepository.deletekategori(
-            NetworkAset.kategoriupdate(kategoriModel['id']))
-        .then((value) {
+    MasterRepository.deletekategori(NetworkAset.kategoriupdate(kategoriModel['id'])).then((value) {
       Navigator.pop(context);
       fetchKategori();
       clearForm();
@@ -119,9 +111,7 @@ class KategoriBarangNotifier extends ChangeNotifier {
           "deskripsi": deskripsiController.text,
           "status": selectedStatus ?? "Aktif",
         };
-        MasterRepository.updatekategori(
-                NetworkAset.kategoriupdate(kategoriModel['id']), body)
-            .then((value) {
+        MasterRepository.updatekategori(NetworkAset.kategoriupdate(kategoriModel['id']), body).then((value) {
           fetchKategori();
           clearForm();
           informationDialog(context, "Informasi", value['message']);
@@ -138,8 +128,7 @@ class KategoriBarangNotifier extends ChangeNotifier {
           "deskripsi": deskripsiController.text,
           "status": selectedStatus ?? "Aktif",
         };
-        MasterRepository.addkategori(NetworkAset.kategori(), body)
-            .then((value) {
+        MasterRepository.addkategori(NetworkAset.kategori(), body).then((value) {
           fetchKategori();
           clearForm();
           informationDialog(context, "Informasi", value['message']);
@@ -190,8 +179,8 @@ class KategoriBarangDataSource extends DataGridSource {
       return DataGridRow(
         cells: [
           DataGridCell(columnName: 'id', value: fmt(m['id'])),
-          DataGridCell(columnName: 'nama', value: fmt(m['nama_kategori'])),
           DataGridCell(columnName: 'kode', value: fmt(m['kode_kategori'])),
+          DataGridCell(columnName: 'nama', value: fmt(m['nama_kategori'])),
           DataGridCell(columnName: 'deskripsi', value: fmt(m['deskripsi'])),
           DataGridCell(columnName: 'status', value: fmt(m['status'])),
           DataGridCell(columnName: 'id', value: fmt(m['id'])),
@@ -206,9 +195,7 @@ class KategoriBarangDataSource extends DataGridSource {
 
   @override
   DataGridRowAdapter buildRow(DataGridRow row) {
-    String get(String name) =>
-        (row.getCells().firstWhere((c) => c.columnName == name).value ?? '')
-            .toString();
+    String get(String name) => (row.getCells().firstWhere((c) => c.columnName == name).value ?? '').toString();
 
     Widget cell(String name, {Alignment align = Alignment.centerLeft}) {
       final v = get(name);

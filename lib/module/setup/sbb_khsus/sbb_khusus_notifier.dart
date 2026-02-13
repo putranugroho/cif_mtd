@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../../network/network.dart';
@@ -31,9 +31,7 @@ class SbbKhususNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getSbbKhusus(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -52,9 +50,7 @@ class SbbKhususNotifier extends ChangeNotifier {
     isLoading = true;
     listGolongan.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getGolonganSbb(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -90,9 +86,7 @@ class SbbKhususNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     listGl.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
@@ -215,9 +209,7 @@ class SbbKhususNotifier extends ChangeNotifier {
         });
       }
 
-      var data = {
-        "data": json
-      };
+      var data = {"data": json};
       print(jsonEncode(data));
       Setuprepository.setup(token, NetworkURL.addSbbKhusus(), jsonEncode(data)).then((value) {
         Navigator.pop(context);

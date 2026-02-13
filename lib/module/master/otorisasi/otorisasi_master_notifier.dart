@@ -1,4 +1,4 @@
-import 'package:accounting/models/index.dart';
+import 'package:cif/models/index.dart';
 import 'package:flutter/material.dart';
 
 class OtorisasiMasterNotifier extends ChangeNotifier {
@@ -30,8 +30,7 @@ class OtorisasiMasterNotifier extends ChangeNotifier {
       "modul": "Input - Customer",
       "user": "Edi Kurniawan",
       "tanggal": "6 April 2025, 11:22",
-      "data":
-          "No Sif : 100000021\nNama Sif : Rio Abdi Perkasa\nGolongan Customer : Customer\nBidang Usaha : Logistik",
+      "data": "No Sif : 100000021\nNama Sif : Rio Abdi Perkasa\nGolongan Customer : Customer\nBidang Usaha : Logistik",
       "status": "PENDING"
     },
   ];

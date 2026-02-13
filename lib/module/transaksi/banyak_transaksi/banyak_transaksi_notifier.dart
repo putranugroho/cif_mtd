@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/network/network.dart';
-import 'package:accounting/pref/pref.dart';
-import 'package:accounting/utils/button_custom.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/network/network.dart';
+import 'package:cif/pref/pref.dart';
+import 'package:cif/utils/button_custom.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -49,35 +49,23 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
     var data = {
       "kode_pt": users!.kodePt,
     };
-    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksi.add(TransaksiPendModel.fromJson(i));
         }
         if (listTransaksi.isNotEmpty) {
           for (var i = 0;
-              i <
-                  listTransaksi
-                      .where((e) =>
-                          e.userinput == users!.namauser &&
-                          e.modul.contains("BANYAK") &&
-                          e.status == "PENDING")
-                      .length;
+              i < listTransaksi.where((e) => e.userinput == users!.namauser && e.modul.contains("BANYAK") && e.status == "PENDING").length;
               i++) {
-            final data = listTransaksi
-                .where((e) =>
-                    e.userinput == users!.namauser &&
-                    e.modul.contains("BANYAK") &&
-                    e.status == "PENDING")
-                .toList()[i];
+            final data =
+                listTransaksi.where((e) => e.userinput == users!.namauser && e.modul.contains("BANYAK") && e.status == "PENDING").toList()[i];
             listTransaksiAdd.add(data);
           }
           print("PENDING : ${listTransaksi.length}");
           print("PENDING RESULT: ${listTransaksiAdd.length}");
 
-          listTransaksiAdd.sort((a, b) => DateTime.parse(b.createddate)
-              .compareTo(DateTime.parse(a.createddate)));
+          listTransaksiAdd.sort((a, b) => DateTime.parse(b.createddate).compareTo(DateTime.parse(a.createddate)));
         }
         getTransaksiBackend();
         isLoadingData = false;
@@ -122,19 +110,14 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
       "pagination": {"page": 1},
       "sort": {"by": "tgl_transaksi", "order": "desc"}
     };
-    Setuprepository.setup(token, NetworkURL.search(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.search(), jsonEncode(data)).then((value) {
       if (value['code'] == "000") {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksiBack.add(TransaksiModel.fromJson(i));
         }
         if (listTransaksiBack.isNotEmpty) {
-          for (var i = 0;
-              i < listTransaksiBack.where((e) => e.kodeTrans == "9998").length;
-              i++) {
-            final data = listTransaksiBack
-                .where((e) => e.kodeTrans == "9998")
-                .toList()[i];
+          for (var i = 0; i < listTransaksiBack.where((e) => e.kodeTrans == "9998").length; i++) {
+            final data = listTransaksiBack.where((e) => e.kodeTrans == "9998").toList()[i];
             listTransaksiAdd.add(TransaksiPendModel(
                 id: data.id,
                 tglTransaksi: data.tglTrans,
@@ -175,8 +158,7 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
                 noKontrak: data.noKontrak,
                 noInvoice: data.noInvoice,
                 createddate: data.inptgljam,
-                status:
-                    "${data.statusTransaksi == "1" ? "COMPLETED" : "CANCEL"}"));
+                status: "${data.statusTransaksi == "1" ? "COMPLETED" : "CANCEL"}"));
           }
         }
         isLoadingData = false;
@@ -193,8 +175,7 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
     listAo.clear();
     notifyListeners();
     var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listAo.add(AoModel.fromJson(i));
@@ -252,13 +233,10 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
           listGl = jnsAccBItems
               .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))
               .toList();
         }
         notifyListeners();
@@ -295,13 +273,10 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     var data = {"kode_pt": "001"};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        list =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        list = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         // inqueryGlModeldeb = listGl[0];
         tambahTransaksi();
         isLoading = false;
@@ -350,25 +325,14 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
   }
 
   changeMaster() {
-    total = double.parse(nominal.text
-        .replaceAll(".", '')
-        .replaceAll("Rp ", '')
-        .replaceAll(",", "."));
+    total = double.parse(nominal.text.replaceAll(".", '').replaceAll("Rp ", '').replaceAll(",", "."));
     notifyListeners();
   }
 
   double total = 0;
   changeTotal() {
-    total = double.parse(nominal.text
-            .replaceAll(".", '')
-            .replaceAll("Rp ", '')
-            .replaceAll(",", ".")) -
-        listAmount
-            .map((e) => double.parse(e.text
-                .replaceAll(".", "")
-                .replaceAll("Rp ", '')
-                .replaceAll(",", ".")))
-            .reduce((a, b) => a + b);
+    total = double.parse(nominal.text.replaceAll(".", '').replaceAll("Rp ", '').replaceAll(",", ".")) -
+        listAmount.map((e) => double.parse(e.text.replaceAll(".", "").replaceAll("Rp ", '').replaceAll(",", "."))).reduce((a, b) => a + b);
     notifyListeners();
   }
 
@@ -411,8 +375,7 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTransaksi = pickedendDate;
-      tglTransaksiText.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglTransaksiText.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -450,8 +413,7 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglBackDate = pickedendDate;
-      tglBackDatetext.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglBackDatetext.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -542,11 +504,7 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
   simpan() async {
     DialogCustom().showLoading(context);
     List<Map<String, dynamic>> listTmp = [];
-    if (double.parse(users!.maksimalTransaksi) <
-        double.parse(nominal.text
-            .replaceAll("Rp ", "")
-            .replaceAll(".", "")
-            .replaceAll(",", "."))) {
+    if (double.parse(users!.maksimalTransaksi) < double.parse(nominal.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))) {
       for (var i = 0; i < listGlItems.length; i++) {
         var invoice = DateTime.now().millisecondsSinceEpoch.toString();
         var data = {
@@ -554,26 +512,19 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
           "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.now())}",
           "batch": "${users!.batch}",
           "trx_type": "TRX",
-          "trx_code":
-              "${tglBackDate!.isBefore(DateTime.now()) ? "110" : "100"}",
+          "trx_code": "${tglBackDate!.isBefore(DateTime.now()) ? "110" : "100"}",
           "otor": "0",
           "kode_trn": "9998",
-          "nama_dr":
-              !akun ? inqueryGlModeldeb!.namaSbb : listGlItems[i].namaSbb,
+          "nama_dr": !akun ? inqueryGlModeldeb!.namaSbb : listGlItems[i].namaSbb,
           "dracc": !akun ? inqueryGlModeldeb!.nosbb : listGlItems[i].nosbb,
-          "nama_cr":
-              !akun ? listGlItems[i].namaSbb : inqueryGlModeldeb!.namaSbb,
+          "nama_cr": !akun ? listGlItems[i].namaSbb : inqueryGlModeldeb!.namaSbb,
           "cracc": !akun ? listGlItems[i].nosbb : inqueryGlModeldeb!.nosbb,
           "rrn": "$invoice",
           "no_kontrak": "",
           "no_invoice": "",
           "no_dokumen": "${listNoDok[i].text.trim()}",
           "no_ref": "${nomorRef.text}",
-          "nominal": double.parse(listAmount[i]
-              .text
-              .replaceAll("Rp ", "")
-              .replaceAll(".", "")
-              .replaceAll(",", ".")),
+          "nominal": double.parse(listAmount[i].text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")),
           "keterangan": "${listKeterangan[i].text}",
           "kode_pt": "${users!.kodePt}",
           "kode_kantor": "${users!.kodeKantor}",
@@ -585,8 +536,7 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
           "userinput": "${users!.namauser}",
           "userterm": "114.80.90.54",
           "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-          "inputtgljam":
-              "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+          "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
           "otoruser": "",
           "otorterm": "",
           "otortgljam": "",
@@ -606,26 +556,19 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
           "tgl_valuta": "${DateFormat('y-MM-dd').format(DateTime.now())}",
           "batch": "${users!.batch}",
           "trx_type": "TRX",
-          "trx_code":
-              "${tglBackDate!.isBefore(DateTime.now()) ? "110" : "100"}",
+          "trx_code": "${tglBackDate!.isBefore(DateTime.now()) ? "110" : "100"}",
           "otor": "0",
           "kode_trn": "9998",
-          "nama_dr":
-              !akun ? inqueryGlModeldeb!.namaSbb : listGlItems[i].namaSbb,
+          "nama_dr": !akun ? inqueryGlModeldeb!.namaSbb : listGlItems[i].namaSbb,
           "dracc": !akun ? inqueryGlModeldeb!.nosbb : listGlItems[i].nosbb,
-          "nama_cr":
-              !akun ? listGlItems[i].namaSbb : inqueryGlModeldeb!.namaSbb,
+          "nama_cr": !akun ? listGlItems[i].namaSbb : inqueryGlModeldeb!.namaSbb,
           "cracc": !akun ? listGlItems[i].nosbb : inqueryGlModeldeb!.nosbb,
           "rrn": "$invoice",
           "no_kontrak": "",
           "no_invoice": "",
           "no_dokumen": "${listNoDok[i].text.trim()}",
           "no_ref": "${nomorRef.text}",
-          "nominal": double.parse(listAmount[i]
-              .text
-              .replaceAll("Rp ", "")
-              .replaceAll(".", "")
-              .replaceAll(",", ".")),
+          "nominal": double.parse(listAmount[i].text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")),
           "keterangan": "${listKeterangan[i].text}",
           "kode_pt": "${users!.kodePt}",
           "kode_kantor": "${users!.kodeKantor}",
@@ -637,8 +580,7 @@ class BanyakTransaksiNotifier extends ChangeNotifier {
           "userinput": "${users!.namauser}",
           "userterm": "114.80.90.54",
           "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-          "inputtgljam":
-              "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
+          "inputtgljam": "${DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now())}",
           "otoruser": "",
           "otorterm": "",
           "otortgljam": "",

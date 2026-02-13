@@ -1,6 +1,6 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/auth/login_page.dart';
-import 'package:accounting/pref/pref.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/auth/login_page.dart';
+import 'package:cif/pref/pref.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/button_custom.dart';

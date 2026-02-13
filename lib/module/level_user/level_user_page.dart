@@ -1,8 +1,8 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/level_user/level_user_notifier.dart';
-import 'package:accounting/module/setup/jabatan/jabatan_notifier.dart';
-import 'package:accounting/module/setup/level/level_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/level_user/level_user_notifier.dart';
+import 'package:cif/module/setup/jabatan/jabatan_notifier.dart';
+import 'package:cif/module/setup/level/level_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -507,8 +507,10 @@ class LevelUserPage extends StatelessWidget {
                                                       itemBuilder: (context, i) {
                                                         final data = value.modulModel!.menu[i];
                                                         final menuAccess = value.menuAccessList.firstWhere(
-                                                          (e) => e.modul == value.modulModel!.modul && e.menu == data.menu && e.submenu == data.submenu,
-                                                          orElse: () => MenuAccess(modul: value.modulModel!.modul, menu: data.menu, submenu: data.submenu),
+                                                          (e) =>
+                                                              e.modul == value.modulModel!.modul && e.menu == data.menu && e.submenu == data.submenu,
+                                                          orElse: () =>
+                                                              MenuAccess(modul: value.modulModel!.modul, menu: data.menu, submenu: data.submenu),
                                                         );
 
                                                         return Column(

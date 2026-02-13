@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/button_custom.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/button_custom.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -46,7 +46,14 @@ class AktivasiNotifier extends ChangeNotifier {
     jamMulai.text = aktivasiModel!.jamMulai;
     jamSelesai.text = aktivasiModel!.jamSelesai;
 
-    List<String> hariList = jsonEncode(aktivasiModel!.hari).toString().replaceAll('[', '').replaceAll("\"", "").replaceAll(']', '').split(',').map((e) => e.trim()).toList();
+    List<String> hariList = jsonEncode(aktivasiModel!.hari)
+        .toString()
+        .replaceAll('[', '')
+        .replaceAll("\"", "")
+        .replaceAll(']', '')
+        .split(',')
+        .map((e) => e.trim())
+        .toList();
     print(hariList.length);
     for (var i = 0; i < hariList.length; i++) {
       listHariAdd.add(hariList[i]);
@@ -150,9 +157,7 @@ class AktivasiNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getAktivasi(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {

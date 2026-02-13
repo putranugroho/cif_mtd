@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/menu/menu_page.dart';
-import 'package:accounting/pref/pref.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/menu/menu_page.dart';
+import 'package:cif/pref/pref.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../network/network.dart';

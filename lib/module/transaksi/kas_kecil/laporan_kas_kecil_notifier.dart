@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/pref/pref.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/pref/pref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -50,9 +50,7 @@ class LaporanKasKecilNotifier extends ChangeNotifier {
     isLoading = true;
     listkas.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getSetupKasKecil(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -94,9 +92,7 @@ class LaporanKasKecilNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     list.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
@@ -141,9 +137,7 @@ class LaporanKasKecilNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {
-        "kode_pt": "001"
-      };
+      var data = {"kode_pt": "001"};
 
       try {
         final response = await Setuprepository.setup(
@@ -154,7 +148,10 @@ class LaporanKasKecilNotifier extends ChangeNotifier {
 
         if (response['status'].toString().toLowerCase().contains("success")) {
           final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
-          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .toList();
         }
         notifyListeners();
       } catch (e) {
@@ -176,9 +173,7 @@ class LaporanKasKecilNotifier extends ChangeNotifier {
     listData.clear();
     listDataTrans.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getSetupTrans(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -498,8 +493,10 @@ class LaporanKasKecilNotifier extends ChangeNotifier {
   pilihTransModel(SetupTransModel value) {
     setupTransModel = value;
     namaTransaksi.text = setupTransModel!.kdTrans;
-    inqueryGlModeldeb = listGl.where((e) => e.nosbb == setupTransModel!.glDeb).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glDeb).first;
-    inqueryGlModelcre = listGl.where((e) => e.nosbb == setupTransModel!.glKre).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glKre).first;
+    inqueryGlModeldeb =
+        listGl.where((e) => e.nosbb == setupTransModel!.glDeb).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glDeb).first;
+    inqueryGlModelcre =
+        listGl.where((e) => e.nosbb == setupTransModel!.glKre).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glKre).first;
     nosbbdeb.text = setupTransModel!.namaDeb;
     namaSbbDeb.text = setupTransModel!.glDeb;
     nossbcre.text = setupTransModel!.namaKre;
@@ -523,9 +520,7 @@ class LaporanKasKecilNotifier extends ChangeNotifier {
     if (query.isNotEmpty && query.length > 2 && editData == false) {
       listKaryawan.clear();
       notifyListeners();
-      var data = {
-        "nama": query
-      };
+      var data = {"nama": query};
       try {
         final response = await Setuprepository.setup(
           token,
@@ -557,8 +552,10 @@ class LaporanKasKecilNotifier extends ChangeNotifier {
   Future pilihTanggal() async {
     var pickedendDate = (await showDatePicker(
       context: context,
-      initialDate: DateTime(int.parse(DateFormat('y').format(DateTime.now())), int.parse(DateFormat('MM').format(DateTime.now())), int.parse(DateFormat('dd').format(DateTime.now()))),
-      firstDate: DateTime(int.parse(DateFormat('y').format(DateTime.now())), int.parse(DateFormat('MM').format(DateTime.now())), int.parse(DateFormat('dd').format(DateTime.now()))),
+      initialDate: DateTime(int.parse(DateFormat('y').format(DateTime.now())), int.parse(DateFormat('MM').format(DateTime.now())),
+          int.parse(DateFormat('dd').format(DateTime.now()))),
+      firstDate: DateTime(int.parse(DateFormat('y').format(DateTime.now())), int.parse(DateFormat('MM').format(DateTime.now())),
+          int.parse(DateFormat('dd').format(DateTime.now()))),
       lastDate: DateTime(
           int.parse(DateFormat('y').format(DateTime.now())),
           int.parse(DateFormat('MM').format(

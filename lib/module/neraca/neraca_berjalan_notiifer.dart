@@ -1,4 +1,4 @@
-import 'package:accounting/models/index.dart';
+import 'package:cif/models/index.dart';
 import 'package:flutter/material.dart';
 
 class NeracaBerjalanNotiifer extends ChangeNotifier {
@@ -44,7 +44,7 @@ class NeracaBerjalanNotiifer extends ChangeNotifier {
     {
       "nobb": "200000000001",
       "nama_bb": "BL - GIRO",
-      "type_posting": "AKTIVA", 
+      "type_posting": "AKTIVA",
       "sbb_item": [
         {
           "nosbb": "0130103",

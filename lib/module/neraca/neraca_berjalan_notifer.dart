@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/pref/pref.dart';
-import 'package:accounting/utils/colors.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/pref/pref.dart';
+import 'package:cif/utils/colors.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -47,19 +47,16 @@ class NeracaBerjalanNotiifer extends ChangeNotifier {
       "userterm": "PC accounting"
     };
     notifyListeners();
-    Setuprepository.setup(token, NetworkURL.neracaBerjalan(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.neracaBerjalan(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listNeraca.add(NeracaModel.fromJson(i));
         }
         for (var item in value['data']) {
           String typePosting = item['gol_acc'];
-          List<Map<String, dynamic>> sbbItems =
-              List<Map<String, dynamic>>.from(item['sbb_item']);
+          List<Map<String, dynamic>> sbbItems = List<Map<String, dynamic>>.from(item['sbb_item']);
 
-          double subtotal =
-              sbbItems.fold(0, (sum, sbb) => sum + (sbb['saldo'] ?? 0));
+          double subtotal = sbbItems.fold(0, (sum, sbb) => sum + (sbb['saldo'] ?? 0));
 
           if (typePosting == '1') {
             totalAktiva += subtotal;
@@ -81,11 +78,9 @@ class NeracaBerjalanNotiifer extends ChangeNotifier {
       for (var item in items) {
         if (item is Map<String, dynamic>) {
           String typePosting = item['type_posting'];
-          List<Map<String, dynamic>> sbbItems =
-              List<Map<String, dynamic>>.from(item['sbb_item']);
+          List<Map<String, dynamic>> sbbItems = List<Map<String, dynamic>>.from(item['sbb_item']);
 
-          double subtotal =
-              sbbItems.fold(0, (sum, sbb) => sum + (sbb['saldo'] ?? 0));
+          double subtotal = sbbItems.fold(0, (sum, sbb) => sum + (sbb['saldo'] ?? 0));
 
           if (typePosting == 'AKTIVA') {
             totalAktiva += subtotal;

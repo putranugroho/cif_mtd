@@ -1,5 +1,5 @@
-import 'package:accounting/module/neraca/neraca_berjalan_notiifer.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/module/neraca/neraca_berjalan_notiifer.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

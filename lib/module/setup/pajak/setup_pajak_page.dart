@@ -1,7 +1,7 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/setup/pajak/setup_pajak_notifier.dart';
-import 'package:accounting/utils/currency_formatted.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/setup/pajak/setup_pajak_notifier.dart';
+import 'package:cif/utils/currency_formatted.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';

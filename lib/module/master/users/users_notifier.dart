@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -38,9 +38,7 @@ class UsersNotifier extends ChangeNotifier {
     if (query.isNotEmpty && query.length > 2 && editData == false) {
       listKaryawan.clear();
       notifyListeners();
-      var data = {
-        "nama": query
-      };
+      var data = {"nama": query};
       try {
         final response = await Setuprepository.setup(
           token,
@@ -254,9 +252,7 @@ class UsersNotifier extends ChangeNotifier {
     isLoading = true;
     listUsers.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getLevelUsers(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -317,9 +313,7 @@ class UsersNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     listGl.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
@@ -334,9 +328,7 @@ class UsersNotifier extends ChangeNotifier {
     isLoading = true;
     listHariKerja.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getAktivasi(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -355,9 +347,7 @@ class UsersNotifier extends ChangeNotifier {
     isLoading = true;
     listData.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getusers(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -435,9 +425,7 @@ class UsersNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {
-        "kode_pt": "001"
-      };
+      var data = {"kode_pt": "001"};
 
       try {
         final response = await Setuprepository.setup(
@@ -448,7 +436,10 @@ class UsersNotifier extends ChangeNotifier {
 
         if (response['status'].toString().toLowerCase().contains("success")) {
           final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
-          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .toList();
         }
         notifyListeners();
       } catch (e) {

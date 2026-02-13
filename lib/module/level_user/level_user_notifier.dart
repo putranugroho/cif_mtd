@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/network/network.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/network/network.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
 class LevelUserNotifier extends ChangeNotifier {
@@ -88,7 +88,8 @@ class LevelUserNotifier extends ChangeNotifier {
     if (modulModel == null) return;
 
     for (var menuItem in modulModel!.menu) {
-      final existingIndex = menuAccessList.indexWhere((e) => e.modul == modulModel!.modul && e.menu == menuItem.menu && e.submenu == menuItem.submenu);
+      final existingIndex =
+          menuAccessList.indexWhere((e) => e.modul == modulModel!.modul && e.menu == menuItem.menu && e.submenu == menuItem.submenu);
 
       if (existingIndex == -1) {
         // Belum ada, tambahkan dengan view = true
@@ -121,7 +122,8 @@ class LevelUserNotifier extends ChangeNotifier {
     if (modulModel == null) return;
 
     for (var menuItem in modulModel!.menu) {
-      final existingIndex = menuAccessList.indexWhere((e) => e.modul == modulModel!.modul && e.menu == menuItem.menu && e.submenu == menuItem.submenu);
+      final existingIndex =
+          menuAccessList.indexWhere((e) => e.modul == modulModel!.modul && e.menu == menuItem.menu && e.submenu == menuItem.submenu);
 
       if (existingIndex == -1) {
         // Belum ada, tambahkan dengan view = true
@@ -154,7 +156,8 @@ class LevelUserNotifier extends ChangeNotifier {
     if (modulModel == null) return;
 
     for (var menuItem in modulModel!.menu) {
-      final existingIndex = menuAccessList.indexWhere((e) => e.modul == modulModel!.modul && e.menu == menuItem.menu && e.submenu == menuItem.submenu);
+      final existingIndex =
+          menuAccessList.indexWhere((e) => e.modul == modulModel!.modul && e.menu == menuItem.menu && e.submenu == menuItem.submenu);
 
       if (existingIndex == -1) {
         // Belum ada, tambahkan dengan view = true
@@ -187,7 +190,8 @@ class LevelUserNotifier extends ChangeNotifier {
     if (modulModel == null) return;
 
     for (var menuItem in modulModel!.menu) {
-      final existingIndex = menuAccessList.indexWhere((e) => e.modul == modulModel!.modul && e.menu == menuItem.menu && e.submenu == menuItem.submenu);
+      final existingIndex =
+          menuAccessList.indexWhere((e) => e.modul == modulModel!.modul && e.menu == menuItem.menu && e.submenu == menuItem.submenu);
 
       if (existingIndex == -1) {
         // Belum ada, tambahkan dengan view = true
@@ -335,13 +339,17 @@ class LevelUserNotifier extends ChangeNotifier {
       DialogCustom().showLoading(context);
       List<LevelUserModul> listtmp = [];
       for (var i = 0; i < menuAccessList.length; i++) {
-        listtmp.add(LevelUserModul(modul: menuAccessList[i].modul, menu: menuAccessList[i].menu, submenu: menuAccessList[i].submenu, view: menuAccessList[i].view ? "Y" : "N", input: menuAccessList[i].input ? "Y" : "N", edit: menuAccessList[i].edit ? "Y" : "N", delete: menuAccessList[i].delete ? "Y" : "N"));
+        listtmp.add(LevelUserModul(
+            modul: menuAccessList[i].modul,
+            menu: menuAccessList[i].menu,
+            submenu: menuAccessList[i].submenu,
+            view: menuAccessList[i].view ? "Y" : "N",
+            input: menuAccessList[i].input ? "Y" : "N",
+            edit: menuAccessList[i].edit ? "Y" : "N",
+            delete: menuAccessList[i].delete ? "Y" : "N"));
       }
       notifyListeners();
-      var data = {
-        "id": levelUser!.idLevel,
-        "modul": listtmp
-      };
+      var data = {"id": levelUser!.idLevel, "modul": listtmp};
       print(jsonEncode(data));
       Setuprepository.setup(token, NetworkURL.editLevelUsersModul(), jsonEncode(data)).then((value) {
         Navigator.pop(context);
@@ -665,9 +673,7 @@ class LevelUserNotifier extends ChangeNotifier {
     isLoading = true;
     listModul.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getModul(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -686,9 +692,7 @@ class LevelUserNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getLevelUsers(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {

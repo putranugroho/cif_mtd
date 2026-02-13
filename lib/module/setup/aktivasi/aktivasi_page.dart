@@ -1,6 +1,6 @@
-import 'package:accounting/models/index.dart';
+import 'package:cif/models/index.dart';
 
-import 'package:accounting/utils/button_custom.dart';
+import 'package:cif/utils/button_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -255,9 +255,7 @@ class AktivasiPage extends StatelessWidget {
                                     controller: value.kode,
                                     maxLines: 1,
                                     maxLength: 4,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly
-                                    ],
+                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                     validator: (e) {
                                       if (e!.isEmpty) {
                                         return "Wajib diisi";

@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/models/perantara_model.dart';
-import 'package:accounting/models_manual/rekon_perantara_item_model.dart';
-import 'package:accounting/models_manual/rekon_perantara_model.dart';
-import 'package:accounting/pref/pref.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/format_currency.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/models/perantara_model.dart';
+import 'package:cif/models_manual/rekon_perantara_item_model.dart';
+import 'package:cif/models_manual/rekon_perantara_model.dart';
+import 'package:cif/pref/pref.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/format_currency.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -38,11 +38,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
     void traverse(List<dynamic> items) {
       for (var item in items) {
         if (item is Map<String, dynamic>) {
-          if ((jenis == "AKTIVA"
-                  ? item['gol_acc'] == "1"
-                  : item['gol_acc'] == "2") &&
-              item['jns_acc'] == 'C' &&
-              item['akun_perantara'] == "Y") {
+          if ((jenis == "AKTIVA" ? item['gol_acc'] == "1" : item['gol_acc'] == "2") && item['jns_acc'] == 'C' && item['akun_perantara'] == "Y") {
             result.add(item);
           }
 
@@ -62,13 +58,10 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
     listGlAll.clear();
     notifyListeners();
     var data = {"kode_pt": users!.kodePt};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccBb(value['data']);
-        listGlAll =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccBb(value['data']);
+        listGlAll = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         print("AKUN PERANTARA ${listGlAll.length}");
         print("AKUN PERANTARA ${jsonEncode(listGlAll)}");
         if (listGlAll.isNotEmpty) {
@@ -91,26 +84,16 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
       "kode_pt": users!.kodePt,
       "jenis": jenis,
     };
-    Setuprepository.setup(token, NetworkURL.perantara(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.perantara(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksi.add(PerantaraModel.fromJson(i));
         }
         if (listTransaksi.isNotEmpty) {
           listTransaksiAdd = jenis == "AKTIVA"
-              ? listTransaksi
-                  .where((e) =>
-                      e.status == "COMPLETED" &&
-                      e.dracc == inqueryGlModelcre!.nosbb)
-                  .toList()
-              : listTransaksi
-                  .where((e) =>
-                      e.status == "COMPLETED" &&
-                      e.cracc == inqueryGlModelcre!.nosbb)
-                  .toList();
-          listTransaksiAdd.sort((a, b) => DateTime.parse(b.createddate)
-              .compareTo(DateTime.parse(a.createddate)));
+              ? listTransaksi.where((e) => e.status == "COMPLETED" && e.dracc == inqueryGlModelcre!.nosbb).toList()
+              : listTransaksi.where((e) => e.status == "COMPLETED" && e.cracc == inqueryGlModelcre!.nosbb).toList();
+          listTransaksiAdd.sort((a, b) => DateTime.parse(b.createddate).compareTo(DateTime.parse(a.createddate)));
         }
         isLoadingData = false;
         notifyListeners();
@@ -133,8 +116,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
       "kode_pt": users!.kodePt,
       "jenis": jenis,
     };
-    Setuprepository.setup(token, NetworkURL.perantara(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.perantara(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksiAll.add(PerantaraModel.fromJson(i));
@@ -144,9 +126,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
             for (var i = 0; i < listGlAll.length; i++) {
               var matched = listTransaksiAll
                   .where(
-                    (e) =>
-                        e.status == "COMPLETED" &&
-                        e.dracc == listGlAll[i].nosbb,
+                    (e) => e.status == "COMPLETED" && e.dracc == listGlAll[i].nosbb,
                   )
                   .toList();
               if (matched.isNotEmpty) {
@@ -159,9 +139,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
             for (var i = 0; i < listGlAll.length; i++) {
               var matched = listTransaksiAll
                   .where(
-                    (e) =>
-                        e.status == "COMPLETED" &&
-                        e.cracc == listGlAll[i].nosbb,
+                    (e) => e.status == "COMPLETED" && e.cracc == listGlAll[i].nosbb,
                   )
                   .toList();
               if (matched.isNotEmpty) {
@@ -192,8 +170,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
             if (craccCompare != 0) return craccCompare;
 
             // Jika cracc sama, bandingkan createddate secara descending
-            return DateTime.parse(b.createddate)
-                .compareTo(DateTime.parse(a.createddate));
+            return DateTime.parse(b.createddate).compareTo(DateTime.parse(a.createddate));
           });
         }
         isLoadingData = false;
@@ -242,8 +219,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
     nominal.clear();
     nomorDok.text = transaksiPendModel!.noDokumen;
     keterangan.text = transaksiPendModel!.keterangan;
-    sisaSaldo.text =
-        "Rp ${FormatCurrency.oCcyDecimal.format(transaksiPendModel!.sisaSaldo)}";
+    sisaSaldo.text = "Rp ${FormatCurrency.oCcyDecimal.format(transaksiPendModel!.sisaSaldo)}";
     if (jenis == "PASIVA") {
       namaSbbAset.text = transaksiPendModel!.cracc;
       namaSbbDebit.text = transaksiPendModel!.namaCr;
@@ -285,13 +261,10 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccBb(response['data']);
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccBb(response['data']);
           listGl = jnsAccBItems
               .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))
               .toList();
         }
         notifyListeners();
@@ -324,13 +297,10 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
           listGl = jnsAccBItems
               .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) =>
-                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))
               .toList();
         }
         notifyListeners();
@@ -395,8 +365,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
     nominal.clear();
     nomorDok.text = transaksiPendModel!.noDokumen;
     keterangan.text = transaksiPendModel!.keterangan;
-    sisaSaldo.text =
-        "Rp ${FormatCurrency.oCcyDecimal.format(transaksiPendModel!.sisaSaldo)}";
+    sisaSaldo.text = "Rp ${FormatCurrency.oCcyDecimal.format(transaksiPendModel!.sisaSaldo)}";
     if (jenis == "PASIVA") {
       namaSbbAset.text = transaksiPendModel!.cracc;
       namaSbbDebit.text = transaksiPendModel!.namaCr;
@@ -472,8 +441,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglBackDate = pickedendDate;
-      tglBackDatetext.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglBackDatetext.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -491,19 +459,10 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
   cek() async {
     if (keyForm.currentState!.validate()) {
       if (users!.limitAkses == "Y") {
-        if (transaksiPendModel!.sisaSaldo <
-            double.parse(nominal.text
-                .replaceAll("Rp ", "")
-                .replaceAll(".", "")
-                .replaceAll(",", "."))) {
-          informationDialog(context, "Warning",
-              "Sisa saldo hanya Rp. ${FormatCurrency.oCcyDecimal.format(transaksiPendModel!.sisaSaldo)}");
+        if (transaksiPendModel!.sisaSaldo < double.parse(nominal.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))) {
+          informationDialog(context, "Warning", "Sisa saldo hanya Rp. ${FormatCurrency.oCcyDecimal.format(transaksiPendModel!.sisaSaldo)}");
         } else {
-          if (double.parse(users!.maksimalTransaksi) <
-              double.parse(nominal.text
-                  .replaceAll("Rp ", "")
-                  .replaceAll(".", "")
-                  .replaceAll(",", "."))) {
+          if (double.parse(users!.maksimalTransaksi) < double.parse(nominal.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))) {
             DialogCustom().showLoading(context);
             var invoice = DateTime.now().millisecondsSinceEpoch.toString();
             var data = {
@@ -511,10 +470,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
               "tgl_valuta": tglBackDatetext.text,
               "batch": users!.batch,
               "trx_type": "TRX",
-              "trx_code":
-                  DateTime.parse(tglBackDatetext.text).isBefore(DateTime.now())
-                      ? "110"
-                      : "100",
+              "trx_code": DateTime.parse(tglBackDatetext.text).isBefore(DateTime.now()) ? "110" : "100",
               "otor": "0",
               "kode_trn": "",
               "nama_dr": namaSbbDebit.text,
@@ -524,10 +480,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
               "rrn": invoice,
               "no_dokumen": nomorDok.text,
               "no_ref": nomorRef.text,
-              "nominal": double.parse(nominal.text
-                  .replaceAll("Rp ", "")
-                  .replaceAll(".", "")
-                  .replaceAll(",", ".")),
+              "nominal": double.parse(nominal.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")),
               "keterangan": keteranganTrans.text,
               "kode_pt": users!.kodePt,
               "kode_kantor": users!.kodeKantor,
@@ -539,8 +492,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
               "userinput": users!.namauser,
               "userterm": "114.80.90.54",
               "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-              "inputtgljam":
-                  DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
+              "inputtgljam": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
               "otoruser": "",
               "otorterm": "",
               "otortgljam": "",
@@ -550,9 +502,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
               "status": "PENDING",
               "modul": "PERANTARA",
             };
-            Setuprepository.setup(
-                    token, NetworkURL.transaksi(), jsonEncode(data))
-                .then((value) {
+            Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data)).then((value) {
               Navigator.pop(context);
               if (value['status'] == "success") {
                 getTransaksiAll();
@@ -570,10 +520,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
               "tgl_valuta": tglBackDatetext.text,
               "batch": users!.batch,
               "trx_type": "TRX",
-              "trx_code":
-                  DateTime.parse(tglBackDatetext.text).isBefore(DateTime.now())
-                      ? "110"
-                      : "100",
+              "trx_code": DateTime.parse(tglBackDatetext.text).isBefore(DateTime.now()) ? "110" : "100",
               "otor": "0",
               "kode_trn": "",
               "nama_dr": namaSbbDebit.text,
@@ -583,10 +530,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
               "rrn": invoice,
               "no_dokumen": nomorDok.text,
               "no_ref": nomorRef.text,
-              "nominal": double.parse(nominal.text
-                  .replaceAll("Rp ", "")
-                  .replaceAll(".", "")
-                  .replaceAll(",", ".")),
+              "nominal": double.parse(nominal.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")),
               "keterangan": keteranganTrans.text,
               "kode_pt": users!.kodePt,
               "kode_kantor": users!.kodeKantor,
@@ -598,8 +542,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
               "userinput": users!.namauser,
               "userterm": "114.80.90.54",
               "keterangan_otorisasi": "Melebihi Maksimal Limit Transaksi",
-              "inputtgljam":
-                  DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
+              "inputtgljam": DateFormat('y-MM-dd HH:mm:ss').format(DateTime.now()),
               "otoruser": "",
               "otorterm": "",
               "otortgljam": "",
@@ -609,9 +552,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
               "status": "COMPLETED",
               "modul": "PERANTARA",
             };
-            Setuprepository.setup(
-                    token, NetworkURL.transaksi(), jsonEncode(data))
-                .then((value) {
+            Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data)).then((value) {
               Navigator.pop(context);
               if (value['status'] == "success") {
                 getTransaksiAll();
@@ -656,8 +597,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
   double selisih = 0;
   TextEditingController selisihText = TextEditingController();
   onchange() {
-    selisih = transaksiPendModel!.sisaSaldo -
-        double.parse(nominal.text.replaceAll(".", "").replaceAll(",", "."));
+    selisih = transaksiPendModel!.sisaSaldo - double.parse(nominal.text.replaceAll(".", "").replaceAll(",", "."));
     selisihText.text = "Rp ${FormatCurrency.oCcyDecimal.format(selisih)}";
     notifyListeners();
   }
@@ -686,15 +626,7 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
 
   List<CoaModel> listCoaDebet = [];
   List<Map<String, dynamic>> coaDebet = [
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "0110101",
-      "nama_sbb": "Kas Kantor",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "0110101", "nama_sbb": "Kas Kantor", "type_posting": "Y", "sbb_khusus": "kas"},
     {
       "gol_acc": "1",
       "jns_acc": "C",
@@ -704,33 +636,9 @@ class PerantaraAktivaNotifier extends ChangeNotifier {
       "type_posting": "Y",
       "sbb_khusus": "kas"
     },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "0130109",
-      "nama_sbb": "Giro Bank BNI",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "0130111",
-      "nama_sbb": "Giro Bank BSI",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "0130231",
-      "nama_sbb": "DEP. Bank BNI",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "0130109", "nama_sbb": "Giro Bank BNI", "type_posting": "Y", "sbb_khusus": "kas"},
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "0130111", "nama_sbb": "Giro Bank BSI", "type_posting": "Y", "sbb_khusus": "kas"},
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "0130231", "nama_sbb": "DEP. Bank BNI", "type_posting": "Y", "sbb_khusus": "kas"},
   ];
 
   int totalActive = 0;

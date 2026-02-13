@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/network/network.dart';
-import 'package:accounting/pref/pref.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/dialog_loading.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/network/network.dart';
+import 'package:cif/pref/pref.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/dialog_loading.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/informationdialog.dart';
@@ -30,13 +30,10 @@ class PenyusutanNotifier extends ChangeNotifier {
     listGlAll.clear();
     notifyListeners();
     var data = {"kode_pt": users!.kodePt};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        listGlAll =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        listGlAll = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         getMetodePenyusutan();
         notifyListeners();
       }
@@ -56,9 +53,7 @@ class PenyusutanNotifier extends ChangeNotifier {
       "kode_pt": "001",
     };
     notifyListeners();
-    Setuprepository.setup(
-            token, NetworkURL.getMetodePenyusutan(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getMetodePenyusutan(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           list.add(MetodePenyusutanModel.fromJson(i));
@@ -67,12 +62,8 @@ class PenyusutanNotifier extends ChangeNotifier {
         metode = int.parse(metodePenyusutanModel!.metodePenyusutan);
         nilai.text = metodePenyusutanModel!.nilaiAkhir.toString();
         declining.text = metodePenyusutanModel!.declining.toString();
-        sbbAset = listGlAll
-                .where((e) => e.nosbb == metodePenyusutanModel!.sbbPendapatan)
-                .isNotEmpty
-            ? listGlAll
-                .where((e) => e.nosbb == metodePenyusutanModel!.sbbPendapatan)
-                .first
+        sbbAset = listGlAll.where((e) => e.nosbb == metodePenyusutanModel!.sbbPendapatan).isNotEmpty
+            ? listGlAll.where((e) => e.nosbb == metodePenyusutanModel!.sbbPendapatan).first
             : null;
         namasbbaset.text = sbbAset == null ? "" : sbbAset!.namaSbb;
         nosbbaset.text = sbbAset == null ? "" : sbbAset!.nosbb;
@@ -137,14 +128,11 @@ class PenyusutanNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
           listGl = jnsAccBItems
               .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) => (model.nosbb
-                      .toLowerCase()
-                      .contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase())))
+              .where(
+                  (model) => (model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())))
               .toList();
         }
         notifyListeners();
@@ -179,9 +167,7 @@ class PenyusutanNotifier extends ChangeNotifier {
         "nama_sbb_pendapatan": sbbAset!.namaSbb,
         "declining": "${metode == 2 ? declining.text : 0}",
       };
-      Setuprepository.setup(
-              token, NetworkURL.editMetodePenyusutan(), jsonEncode(data))
-          .then((value) {
+      Setuprepository.setup(token, NetworkURL.editMetodePenyusutan(), jsonEncode(data)).then((value) {
         Navigator.pop(context);
         if (value['status'].toString().toLowerCase().contains("success")) {
           informationDialog(context, "Information", value['message']);

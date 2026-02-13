@@ -1,0 +1,295 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'perorangan_notifier.dart';
+
+enum CifMode { none, add, search }
+
+class PeroranganPage extends StatelessWidget {
+  const PeroranganPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => PeroranganNotifier(),
+      child: const _PeroranganView(),
+    );
+  }
+}
+
+class _PeroranganView extends StatefulWidget {
+  const _PeroranganView();
+
+  @override
+  State<_PeroranganView> createState() => _PeroranganViewState();
+}
+
+class _PeroranganViewState extends State<_PeroranganView> {
+  CifMode mode = CifMode.none;
+
+  @override
+  Widget build(BuildContext context) {
+    final notifier = context.watch<PeroranganNotifier>();
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Data CIF')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: mode == CifMode.none
+            ? _SelectMode(onSelect: (m) => setState(() => mode = m))
+            : mode == CifMode.search
+                ? _SearchCifForm(onBack: () => setState(() => mode = CifMode.none))
+                : _AddCifForm(onBack: () => setState(() => mode = CifMode.none), notifier: notifier),
+      ),
+    );
+  }
+}
+
+class _SelectMode extends StatelessWidget {
+  final ValueChanged<CifMode> onSelect;
+
+  const _SelectMode({required this.onSelect});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ElevatedButton.icon(
+          icon: const Icon(Icons.add),
+          label: const Text('Tambah CIF'),
+          onPressed: () => onSelect(CifMode.add),
+          style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(48)),
+        ),
+        const SizedBox(height: 16),
+        OutlinedButton.icon(
+          icon: const Icon(Icons.search),
+          label: const Text('Cari CIF'),
+          onPressed: () => onSelect(CifMode.search),
+          style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(48)),
+        ),
+      ],
+    );
+  }
+}
+
+class _SearchCifForm extends StatelessWidget {
+  final VoidCallback onBack;
+
+  const _SearchCifForm({required this.onBack});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Cari CIF', style: Theme.of(context).textTheme.titleLarge),
+        const SizedBox(height: 16),
+        TextFormField(decoration: const InputDecoration(labelText: 'Nomor CIF')),
+        const SizedBox(height: 12),
+        TextFormField(decoration: const InputDecoration(labelText: 'Nama CIF')),
+        const SizedBox(height: 24),
+        Row(
+          children: [
+            Expanded(
+              child: OutlinedButton(onPressed: onBack, child: const Text('Kembali')),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: ElevatedButton(onPressed: () {}, child: const Text('Cari')),
+            ),
+          ],
+        )
+      ],
+    );
+  }
+}
+
+class _AddCifForm extends StatelessWidget {
+  final VoidCallback onBack;
+  final PeroranganNotifier notifier;
+
+  const _AddCifForm({required this.onBack, required this.notifier});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        _ProgressBar(),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              children: notifier.currentFields.map((f) => _FieldRenderer(field: f)).toList(),
+            ),
+          ),
+        ),
+        _NavigationBar(onCancel: onBack),
+      ],
+    );
+  }
+}
+
+class _ProgressBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final notifier = context.watch<PeroranganNotifier>();
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Row(
+        children: List.generate(notifier.steps.length, (i) {
+          final active = i <= notifier.currentStep;
+          return Expanded(
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 4),
+              height: 6,
+              decoration: BoxDecoration(
+                color: active ? Colors.blue : Colors.grey.shade300,
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+          );
+        }),
+      ),
+    );
+  }
+}
+
+class _FieldRenderer extends StatelessWidget {
+  final ExcelField field;
+
+  const _FieldRenderer({required this.field});
+
+  @override
+  Widget build(BuildContext context) {
+    final notifier = context.watch<PeroranganNotifier>();
+
+    final isReadOnly = notifier.mode == PeroranganMode.search && (field.readOnly || field.key == 'nama_cif');
+
+    Widget input;
+
+    switch (field.type) {
+      case FieldType.text:
+        input = TextFormField(
+          key: ValueKey('${notifier.currentStep}_${field.key}'),
+          initialValue: notifier.getValue(field.key),
+          readOnly: isReadOnly,
+          decoration: InputDecoration(
+            labelText: field.label,
+            filled: isReadOnly,
+            fillColor: isReadOnly ? Colors.grey.shade200 : null,
+          ),
+          onChanged: isReadOnly ? null : (v) => notifier.setValue(field.key, v),
+        );
+        break;
+
+      case FieldType.date:
+        final value = notifier.getValue(field.key) as DateTime?;
+        input = InkWell(
+          key: ValueKey('${notifier.currentStep}_${field.key}'),
+          onTap: isReadOnly
+              ? null
+              : () async {
+                  final picked = await showDatePicker(
+                    context: context,
+                    initialDate: value ?? DateTime.now(),
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime(2100),
+                  );
+                  if (picked != null) {
+                    notifier.setValue(field.key, picked);
+                  }
+                },
+          child: InputDecorator(
+            decoration: InputDecoration(
+              labelText: field.label,
+              filled: isReadOnly,
+              fillColor: isReadOnly ? Colors.grey.shade200 : null,
+            ),
+            child: Text(
+              value == null ? '' : value.toIso8601String().substring(0, 10),
+            ),
+          ),
+        );
+        break;
+
+      case FieldType.yn:
+        input = Column(
+          key: ValueKey('${notifier.currentStep}_${field.key}'),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(field.label),
+            Row(
+              children: ['Y', 'N']
+                  .map(
+                    (e) => Expanded(
+                      child: RadioListTile(
+                        title: Text(e),
+                        value: e,
+                        groupValue: notifier.getValue(field.key),
+                        onChanged: isReadOnly ? null : (v) => notifier.setValue(field.key, v),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            )
+          ],
+        );
+        break;
+
+      case FieldType.dropdown:
+        input = DropdownButtonFormField<String>(
+          key: ValueKey('${notifier.currentStep}_${field.key}'),
+          value: notifier.getValue(field.key),
+          decoration: InputDecoration(
+            labelText: field.label,
+            filled: isReadOnly,
+            fillColor: isReadOnly ? Colors.grey.shade200 : null,
+          ),
+          items: field.options?.entries
+              .map(
+                (e) => DropdownMenuItem(
+                  value: e.key,
+                  child: Text('${e.key} - ${e.value}'),
+                ),
+              )
+              .toList(),
+          onChanged: isReadOnly ? null : (v) => notifier.setValue(field.key, v),
+        );
+        break;
+    }
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: input,
+    );
+  }
+}
+
+class _NavigationBar extends StatelessWidget {
+  final VoidCallback onCancel;
+
+  const _NavigationBar({required this.onCancel});
+
+  @override
+  Widget build(BuildContext context) {
+    final notifier = context.watch<PeroranganNotifier>();
+
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: Row(
+        children: [
+          Expanded(
+            child: OutlinedButton(onPressed: onCancel, child: const Text('Batal')),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: ElevatedButton(
+              onPressed: notifier.currentStep == notifier.steps.length - 1 ? () => debugPrint(notifier.values.toString()) : notifier.nextStep,
+              child: Text(notifier.currentStep == notifier.steps.length - 1 ? 'Simpan' : 'Selanjutnya'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

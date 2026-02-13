@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/network/network.dart';
-import 'package:accounting/pref/pref.dart';
-import 'package:accounting/repository/SetupRepository.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/network/network.dart';
+import 'package:cif/pref/pref.dart';
+import 'package:cif/repository/SetupRepository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -41,9 +41,7 @@ class AoNotifier extends ChangeNotifier {
     if (query.isNotEmpty && query.length > 2 && editData == false) {
       listKaryawan.clear();
       notifyListeners();
-      var data = {
-        "nama": query
-      };
+      var data = {"nama": query};
       try {
         final response = await Setuprepository.setup(
           token,
@@ -102,9 +100,7 @@ class AoNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -354,11 +350,7 @@ class AoNotifier extends ChangeNotifier {
     });
   }
 
-  List<String> listPenempatan = [
-    "Customer",
-    "Supplier",
-    "Customer / Supplier"
-  ];
+  List<String> listPenempatan = ["Customer", "Supplier", "Customer / Supplier"];
   String? penempatanModel = "Customer";
   pilihPenempatan(String value) {
     penempatanModel = value;

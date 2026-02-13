@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/pref/pref.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/pref/pref.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../../network/network.dart';
@@ -86,9 +86,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
           "sbb_ppn": sbbppn == null ? null : sbbppn?.nosbb,
           "sbb_pph": sbbpph == null ? null : sbbpph?.nosbb,
         };
-        Setuprepository.setup(
-                token, NetworkURL.editGolonganAset(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.editGolonganAset(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             clear();
@@ -118,9 +116,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
           "sbb_pph": sbbpph == null ? null : sbbpph?.nosbb,
         };
         print(jsonEncode(data));
-        Setuprepository.setup(
-                token, NetworkURL.addGolonganAset(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.addGolonganAset(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             clear();
@@ -190,9 +186,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
     var data = {
       "id": golonganAsetModel!.id,
     };
-    Setuprepository.setup(
-            token, NetworkURL.deleteGolonganAset(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.deleteGolonganAset(), jsonEncode(data)).then((value) {
       Navigator.pop(context);
       if (value['status'].toString().toLowerCase().contains("success")) {
         clear();
@@ -219,14 +213,11 @@ class GolonganAsetNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
           listGl = jnsAccBItems
               .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) => (model.nosbb
-                      .toLowerCase()
-                      .contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase())))
+              .where(
+                  (model) => (model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())))
               .toList();
         }
         notifyListeners();
@@ -259,14 +250,11 @@ class GolonganAsetNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
           listGl = jnsAccBItems
               .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) => (model.nosbb
-                      .toLowerCase()
-                      .contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase())))
+              .where(
+                  (model) => (model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())))
               .toList();
         }
         notifyListeners();
@@ -299,14 +287,11 @@ class GolonganAsetNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
           listGl = jnsAccBItems
               .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) => (model.nosbb
-                      .toLowerCase()
-                      .contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase())))
+              .where(
+                  (model) => (model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())))
               .toList();
         }
         notifyListeners();
@@ -339,14 +324,11 @@ class GolonganAsetNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
           listGl = jnsAccBItems
               .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) => (model.nosbb
-                      .toLowerCase()
-                      .contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase())))
+              .where(
+                  (model) => (model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())))
               .toList();
         }
         notifyListeners();
@@ -379,14 +361,11 @@ class GolonganAsetNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
           listGl = jnsAccBItems
               .map((item) => InqueryGlModel.fromJson(item))
-              .where((model) => (model.nosbb
-                      .toLowerCase()
-                      .contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase())))
+              .where(
+                  (model) => (model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())))
               .toList();
         }
         notifyListeners();
@@ -408,13 +387,10 @@ class GolonganAsetNotifier extends ChangeNotifier {
     listGlAll.clear();
     notifyListeners();
     var data = {"kode_pt": users!.kodePt};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        listGlAll =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        listGlAll = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         notifyListeners();
       }
     });
@@ -450,9 +426,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
       "kode_pt": users!.kodePt,
     };
     notifyListeners();
-    Setuprepository.setup(
-            token, NetworkURL.getMetodePenyusutan(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getMetodePenyusutan(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listPenyusutan.add(MetodePenyusutanModel.fromJson(i));
@@ -556,8 +530,7 @@ class GolonganAsetNotifier extends ChangeNotifier {
     isLoading = true;
     listData.clear();
     var data = {"kode_pt": users!.kodePt};
-    Setuprepository.setup(token, NetworkURL.getGolonganAset(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getGolonganAset(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listData.add(GolonganAsetModel.fromJson(i));
@@ -600,118 +573,51 @@ class GolonganAsetNotifier extends ChangeNotifier {
     masasusut.text = golonganAsetModel!.masaSusut;
     // print(golonganAsetModel!.sbbAset.substring(1, 13));
     sbbAset = golonganAsetModel!.sbbAset != null
-        ? listGlAll
-                .where((e) =>
-                    e.nosbb ==
-                    golonganAsetModel!.sbbAset.toString().substring(1, 13))
-                .isNotEmpty
-            ? listGlAll
-                .where((e) =>
-                    e.nosbb ==
-                    golonganAsetModel!.sbbAset.toString().substring(1, 13))
-                .first
+        ? listGlAll.where((e) => e.nosbb == golonganAsetModel!.sbbAset.toString().substring(1, 13)).isNotEmpty
+            ? listGlAll.where((e) => e.nosbb == golonganAsetModel!.sbbAset.toString().substring(1, 13)).first
             : null
         : null;
     sbbbiayapenyusutan = golonganAsetModel!.sbbBiayaPenyusutan != null
-        ? listGlAll
-                .where((e) =>
-                    e.nosbb ==
-                    golonganAsetModel!.sbbBiayaPenyusutan
-                        .toString()
-                        .substring(1, 13))
-                .isNotEmpty
-            ? listGlAll
-                .where((e) =>
-                    e.nosbb ==
-                    golonganAsetModel!.sbbBiayaPenyusutan
-                        .toString()
-                        .substring(1, 13))
-                .first
+        ? listGlAll.where((e) => e.nosbb == golonganAsetModel!.sbbBiayaPenyusutan.toString().substring(1, 13)).isNotEmpty
+            ? listGlAll.where((e) => e.nosbb == golonganAsetModel!.sbbBiayaPenyusutan.toString().substring(1, 13)).first
             : null
         : null;
     sbbpenyusutan = golonganAsetModel!.sbbPenyusutan != null
-        ? listGlAll
-                .where((e) =>
-                    e.nosbb ==
-                    golonganAsetModel!.sbbPenyusutan
-                        .toString()
-                        .substring(1, 13))
-                .isNotEmpty
-            ? listGlAll
-                .where((e) =>
-                    e.nosbb ==
-                    golonganAsetModel!.sbbPenyusutan
-                        .toString()
-                        .substring(1, 13))
-                .first
+        ? listGlAll.where((e) => e.nosbb == golonganAsetModel!.sbbPenyusutan.toString().substring(1, 13)).isNotEmpty
+            ? listGlAll.where((e) => e.nosbb == golonganAsetModel!.sbbPenyusutan.toString().substring(1, 13)).first
             : null
         : null;
     sbbrugijual = golonganAsetModel!.sbbRugiJual != null
-        ? listGlAll
-                .where((e) =>
-                    e.nosbb ==
-                    golonganAsetModel!.sbbRugiJual.toString().substring(1, 13))
-                .isNotEmpty
-            ? listGlAll
-                .where((e) =>
-                    e.nosbb ==
-                    golonganAsetModel!.sbbRugiJual.toString().substring(1, 13))
-                .first
+        ? listGlAll.where((e) => e.nosbb == golonganAsetModel!.sbbRugiJual.toString().substring(1, 13)).isNotEmpty
+            ? listGlAll.where((e) => e.nosbb == golonganAsetModel!.sbbRugiJual.toString().substring(1, 13)).first
             : null
         : null;
     sbblabajual = golonganAsetModel!.sbbLabaJual != null
-        ? listGlAll
-                .where((e) =>
-                    e.nosbb ==
-                    golonganAsetModel!.sbbLabaJual.toString().substring(1, 13))
-                .isNotEmpty
-            ? listGlAll
-                .where((e) =>
-                    e.nosbb ==
-                    golonganAsetModel!.sbbLabaJual.toString().substring(1, 13))
-                .first
+        ? listGlAll.where((e) => e.nosbb == golonganAsetModel!.sbbLabaJual.toString().substring(1, 13)).isNotEmpty
+            ? listGlAll.where((e) => e.nosbb == golonganAsetModel!.sbbLabaJual.toString().substring(1, 13)).first
             : null
         : null;
     sbbppn = golonganAsetModel!.sbbPpn != null
-        ? listGlAll
-                .where((e) =>
-                    e.nosbb ==
-                    golonganAsetModel!.sbbPpn.toString().substring(1, 13))
-                .isNotEmpty
-            ? listGlAll
-                .where((e) =>
-                    e.nosbb ==
-                    golonganAsetModel!.sbbPpn.toString().substring(1, 13))
-                .first
+        ? listGlAll.where((e) => e.nosbb == golonganAsetModel!.sbbPpn.toString().substring(1, 13)).isNotEmpty
+            ? listGlAll.where((e) => e.nosbb == golonganAsetModel!.sbbPpn.toString().substring(1, 13)).first
             : null
         : null;
     sbbpph = golonganAsetModel!.sbbPph != null
-        ? listGlAll
-                .where((e) =>
-                    e.nosbb ==
-                    golonganAsetModel!.sbbPph.toString().substring(1, 13))
-                .isNotEmpty
-            ? listGlAll
-                .where((e) =>
-                    e.nosbb ==
-                    golonganAsetModel!.sbbPph.toString().substring(1, 13))
-                .first
+        ? listGlAll.where((e) => e.nosbb == golonganAsetModel!.sbbPph.toString().substring(1, 13)).isNotEmpty
+            ? listGlAll.where((e) => e.nosbb == golonganAsetModel!.sbbPph.toString().substring(1, 13)).first
             : null
         : null;
     namasbbaset.text = sbbAset == null ? "" : sbbAset!.namaSbb;
     namasbbppn.text = sbbppn == null ? "" : sbbppn!.namaSbb;
     nosbbppn.text = sbbppn == null ? "" : sbbppn!.nosbb;
 
-    namasbbbiayapenyusutan.text =
-        sbbbiayapenyusutan == null ? "" : sbbbiayapenyusutan!.namaSbb;
-    nosbbbiayapenyusutan.text =
-        sbbbiayapenyusutan == null ? "" : sbbbiayapenyusutan!.nosbb;
+    namasbbbiayapenyusutan.text = sbbbiayapenyusutan == null ? "" : sbbbiayapenyusutan!.namaSbb;
+    nosbbbiayapenyusutan.text = sbbbiayapenyusutan == null ? "" : sbbbiayapenyusutan!.nosbb;
 
     namasbbpph.text = sbbpph == null ? "" : sbbpph!.namaSbb;
     nosbbpph.text = sbbpph == null ? "" : sbbpph!.nosbb;
     nosbbaset.text = sbbAset == null ? "" : sbbAset!.nosbb;
-    namasbbpenyusutan.text =
-        sbbpenyusutan == null ? "" : sbbpenyusutan!.namaSbb;
+    namasbbpenyusutan.text = sbbpenyusutan == null ? "" : sbbpenyusutan!.namaSbb;
     nossbpenyusutan.text = sbbpenyusutan == null ? "" : sbbpenyusutan!.nosbb;
     namasbbrugijual.text = sbbrugijual == null ? "" : sbbrugijual!.namaSbb;
     nosbbrugijual.text = sbbrugijual == null ? "" : sbbrugijual!.nosbb;

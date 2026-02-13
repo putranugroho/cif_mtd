@@ -1,7 +1,7 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/setup/sbb_hutang_piutang/sbb_hutang_piutang_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
-import 'package:accounting/utils/colors.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/setup/sbb_hutang_piutang/sbb_hutang_piutang_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
+import 'package:cif/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -90,10 +90,8 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.nmSbbTransHutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
@@ -121,18 +119,15 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.namasbblawanhutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
                                             autofocus: true,
                                             decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
-                                              labelText:
-                                                  'Cari Akun Lawan Hutang',
+                                              labelText: 'Cari Akun Lawan Hutang',
                                             ));
                                       },
                                       itemBuilder: (context, city) {
@@ -153,10 +148,8 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.nmSbbPpnHutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
@@ -184,10 +177,8 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.nmSbbPphHutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
@@ -238,8 +229,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -269,8 +259,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -300,8 +289,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -331,8 +319,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -347,10 +334,8 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.namasbbrrpppnhutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
@@ -377,20 +362,16 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   ),
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
-                                      controller:
-                                          value.namasbbpotonganpphhutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      controller: value.namasbbpotonganpphhutang,
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
                                             autofocus: true,
                                             decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
-                                              labelText:
-                                                  'Cari Akun PPH Setor Pajak',
+                                              labelText: 'Cari Akun PPH Setor Pajak',
                                             ));
                                       },
                                       itemBuilder: (context, city) {
@@ -442,8 +423,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -473,8 +453,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -511,10 +490,8 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.nmSbbTransPiutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
@@ -542,18 +519,15 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.namasbblawanpiutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
                                             autofocus: true,
                                             decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
-                                              labelText:
-                                                  'Cari Akun Lawan Piutang',
+                                              labelText: 'Cari Akun Lawan Piutang',
                                             ));
                                       },
                                       itemBuilder: (context, city) {
@@ -574,10 +548,8 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.nmSbbPpnPiutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
@@ -605,10 +577,8 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.nmSbbPphPiutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
@@ -659,8 +629,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -690,8 +659,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -721,8 +689,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -752,8 +719,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -768,18 +734,15 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.namasbbhpppiutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
                                             autofocus: true,
                                             decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
-                                              labelText:
-                                                  'Cari Akun HPP Piutang',
+                                              labelText: 'Cari Akun HPP Piutang',
                                             ));
                                       },
                                       itemBuilder: (context, city) {
@@ -800,18 +763,15 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.namasbbpersedianpiutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
                                             autofocus: true,
                                             decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
-                                              labelText:
-                                                  'Cari Akun Persedian Piutang',
+                                              labelText: 'Cari Akun Persedian Piutang',
                                             ));
                                       },
                                       itemBuilder: (context, city) {
@@ -832,10 +792,8 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.namasbbrrpppnpiutang,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
@@ -863,18 +821,15 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                   Expanded(
                                     child: TypeAheadField<InqueryGlModel>(
                                       controller: value.namasbbpotonganpph,
-                                      suggestionsCallback: (search) =>
-                                          value.getInquery(search),
-                                      builder:
-                                          (context, controller, focusNode) {
+                                      suggestionsCallback: (search) => value.getInquery(search),
+                                      builder: (context, controller, focusNode) {
                                         return TextField(
                                             controller: controller,
                                             focusNode: focusNode,
                                             autofocus: true,
                                             decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
-                                              labelText:
-                                                  'Cari Akun PPH Lapor Pajak',
+                                              labelText: 'Cari Akun PPH Lapor Pajak',
                                             ));
                                       },
                                       itemBuilder: (context, city) {
@@ -918,8 +873,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -949,8 +903,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -980,8 +933,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),
@@ -1011,8 +963,7 @@ class SbbHutangPiutangPage extends StatelessWidget {
                                         fillColor: Colors.grey[200],
                                         hintText: "No SBB",
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                         ),
                                       ),
                                     ),

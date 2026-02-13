@@ -1,7 +1,7 @@
-import 'package:accounting/models/index.dart';
+import 'package:cif/models/index.dart';
 
-import 'package:accounting/module/transaksi/otorisasi/otorisasi_transaksi_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
+import 'package:cif/module/transaksi/otorisasi/otorisasi_transaksi_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

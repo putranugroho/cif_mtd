@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/network/network.dart';
-import 'package:accounting/pref/pref.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/network/network.dart';
+import 'package:cif/pref/pref.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/button_custom.dart';
@@ -43,9 +43,7 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     isLoading = true;
     listkas.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": users!.kodePt
-    };
+    var data = {"kode_pt": users!.kodePt};
     Setuprepository.setup(token, NetworkURL.getSetupKasKecil(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -66,9 +64,7 @@ class SetupTransaksiNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     list.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": users!.kodePt
-    };
+    var data = {"kode_pt": users!.kodePt};
     Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
@@ -124,8 +120,10 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     namaTransaksi.text = setupTransModel!.namaTrans;
     nosbbdeb.text = setupTransModel!.namaDeb;
     nossbcre.text = setupTransModel!.namaKre;
-    inqueryGlModeldeb = list.where((e) => e.nosbb == setupTransModel!.glDeb).isNotEmpty ? list.where((e) => e.nosbb == setupTransModel!.glDeb).first : null;
-    inqueryGlModelcre = list.where((e) => e.nosbb == setupTransModel!.glKre).isNotEmpty ? list.where((e) => e.nosbb == setupTransModel!.glKre).first : null;
+    inqueryGlModeldeb =
+        list.where((e) => e.nosbb == setupTransModel!.glDeb).isNotEmpty ? list.where((e) => e.nosbb == setupTransModel!.glDeb).first : null;
+    inqueryGlModelcre =
+        list.where((e) => e.nosbb == setupTransModel!.glKre).isNotEmpty ? list.where((e) => e.nosbb == setupTransModel!.glKre).first : null;
     namaSbbDeb.text = setupTransModel!.glDeb;
     namaSbbCre.text = setupTransModel!.glKre;
     modul = setupTransModel!.modul;
@@ -139,7 +137,10 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     if (keyForm.currentState!.validate()) {
       if (modul == "KAS KECIL") {
         if (listkas.isNotEmpty) {
-          if (namaSbbCre.text == kasKecilModel!.nosbbKasKecil || namaSbbCre.text == kasKecilModel!.nosbbKasBon || namaSbbDeb.text == kasKecilModel!.nosbbKasKecil || namaSbbDeb.text == kasKecilModel!.nosbbKasBon) {
+          if (namaSbbCre.text == kasKecilModel!.nosbbKasKecil ||
+              namaSbbCre.text == kasKecilModel!.nosbbKasBon ||
+              namaSbbDeb.text == kasKecilModel!.nosbbKasKecil ||
+              namaSbbDeb.text == kasKecilModel!.nosbbKasBon) {
             if (editData) {
               DialogCustom().showLoading(context);
               var data = {
@@ -187,7 +188,8 @@ class SetupTransaksiNotifier extends ChangeNotifier {
               });
             }
           } else {
-            informationDialog(context, "Warning", "Akun setup kas kecil tidak digunakan, tidak bisa melakukan simpan setup trans. pada modul Kas Kecil");
+            informationDialog(
+                context, "Warning", "Akun setup kas kecil tidak digunakan, tidak bisa melakukan simpan setup trans. pada modul Kas Kecil");
           }
         } else {
           informationDialog(context, "Warning", "Tidak ada akun setup kas kecil, silahkan cek akun setup kas kecil");
@@ -364,7 +366,10 @@ class SetupTransaksiNotifier extends ChangeNotifier {
 
         if (response['status'].toString().toLowerCase().contains("success")) {
           final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
-          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .toList();
         }
         notifyListeners();
       } catch (e) {
@@ -385,9 +390,7 @@ class SetupTransaksiNotifier extends ChangeNotifier {
     isLoading = true;
     listData.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getSetupTrans(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {

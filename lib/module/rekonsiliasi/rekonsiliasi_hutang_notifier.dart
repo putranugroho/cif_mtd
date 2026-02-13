@@ -1,4 +1,4 @@
-import 'package:accounting/models/index.dart';
+import 'package:cif/models/index.dart';
 import 'package:flutter/material.dart';
 
 class RekonsiliasiHutangNotifier extends ChangeNotifier {
@@ -12,14 +12,8 @@ class RekonsiliasiHutangNotifier extends ChangeNotifier {
       listPiutang.add(RekonsiliasiPiutangHutangModel.fromJson(i));
     }
     if (list.isNotEmpty) {
-      totalActive = list
-          .where((f) => f.statusInvoice == "A")
-          .map((e) => int.parse(e.nilaiInvoice))
-          .reduce((a, b) => a + b);
-      totalMacet = list
-          .where((f) => f.statusInvoice == "M")
-          .map((e) => int.parse(e.nilaiInvoice))
-          .reduce((a, b) => a + b);
+      totalActive = list.where((f) => f.statusInvoice == "A").map((e) => int.parse(e.nilaiInvoice)).reduce((a, b) => a + b);
+      totalMacet = list.where((f) => f.statusInvoice == "M").map((e) => int.parse(e.nilaiInvoice)).reduce((a, b) => a + b);
     }
     notifyListeners();
   }

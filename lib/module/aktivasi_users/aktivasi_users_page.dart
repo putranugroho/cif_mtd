@@ -1,4 +1,4 @@
-import 'package:accounting/module/aktivasi_users/aktivasi_users_notifier.dart';
+import 'package:cif/module/aktivasi_users/aktivasi_users_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

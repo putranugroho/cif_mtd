@@ -1,7 +1,7 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/setup/sbb_kas/setup_sbb_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
-import 'package:accounting/utils/colors.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/setup/sbb_kas/setup_sbb_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
+import 'package:cif/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';

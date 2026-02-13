@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/pref/pref.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/pref/pref.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -50,9 +50,7 @@ class KasbonNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     list.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
@@ -96,9 +94,7 @@ class KasbonNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {
-        "kode_pt": "001"
-      };
+      var data = {"kode_pt": "001"};
 
       try {
         final response = await Setuprepository.setup(
@@ -109,7 +105,10 @@ class KasbonNotifier extends ChangeNotifier {
 
         if (response['status'].toString().toLowerCase().contains("success")) {
           final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
-          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .toList();
         }
         notifyListeners();
       } catch (e) {
@@ -130,9 +129,7 @@ class KasbonNotifier extends ChangeNotifier {
     isLoading = true;
     listData.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getSetupTrans(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -209,8 +206,14 @@ class KasbonNotifier extends ChangeNotifier {
   Future pilihTanggalPenyelesaian() async {
     var pickedendDate = (await showDatePicker(
       context: context,
-      initialDate: DateTime(int.parse(DateFormat('y').format(DateTime.parse(tglTransaksiText.text))), int.parse(DateFormat('MM').format(DateTime.parse(tglTransaksiText.text))), int.parse(DateFormat('dd').format(DateTime.parse(tglTransaksiText.text)))),
-      firstDate: DateTime(int.parse(DateFormat('y').format(DateTime.parse(tglTransaksiText.text))), int.parse(DateFormat('MM').format(DateTime.parse(tglTransaksiText.text))), int.parse(DateFormat('dd').format(DateTime.parse(tglTransaksiText.text)))),
+      initialDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.parse(tglTransaksiText.text))),
+          int.parse(DateFormat('MM').format(DateTime.parse(tglTransaksiText.text))),
+          int.parse(DateFormat('dd').format(DateTime.parse(tglTransaksiText.text)))),
+      firstDate: DateTime(
+          int.parse(DateFormat('y').format(DateTime.parse(tglTransaksiText.text))),
+          int.parse(DateFormat('MM').format(DateTime.parse(tglTransaksiText.text))),
+          int.parse(DateFormat('dd').format(DateTime.parse(tglTransaksiText.text)))),
       lastDate: DateTime(
           int.parse(DateFormat('y').format(DateTime.now())),
           int.parse(DateFormat('MM').format(
@@ -358,9 +361,7 @@ class KasbonNotifier extends ChangeNotifier {
     isLoading = true;
     listkas.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getSetupKasKecil(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -459,7 +460,9 @@ class KasbonNotifier extends ChangeNotifier {
             "rrn": invoice,
             "no_dokumen": nomorDokBaru.text,
             "no_ref": transaksiPendModel!.noRef,
-            "nominal": (nilaiselisih < 0) ? double.parse(transaksiPendModel!.nominal) : double.parse(nilaiTrans.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")),
+            "nominal": (nilaiselisih < 0)
+                ? double.parse(transaksiPendModel!.nominal)
+                : double.parse(nilaiTrans.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")),
             "keterangan": keteranganBaru.text,
             "kode_pt": users!.kodePt,
             "kode_kantor": users!.kodeKantor,
@@ -687,7 +690,8 @@ class KasbonNotifier extends ChangeNotifier {
 
   updateSelisih() {
     // FormatCurrency.oCcy.format(int.parse(nominal.text)).replaceAll(".", ",");
-    nilaiselisih = double.parse(nominal.text.replaceAll(",", "")) - double.parse(nilaiTrans.text.replaceAll(".", "").replaceAll("Rp ", "").replaceAll(",", "."));
+    nilaiselisih =
+        double.parse(nominal.text.replaceAll(",", "")) - double.parse(nilaiTrans.text.replaceAll(".", "").replaceAll("Rp ", "").replaceAll(",", "."));
     selisih.text = FormatCurrency.oCcy.format(nilaiselisih);
     notifyListeners();
   }
@@ -707,7 +711,8 @@ class KasbonNotifier extends ChangeNotifier {
       tglTransaksiText.text = transaksiPendModel!.tglTransaksi;
       nominal.text = transaksiPendModel!.nominal;
       nilaiTrans.text = "0";
-      tglPenyelesaianText.text = DateFormat('y-MM-dd').format(DateTime(int.parse(DateFormat('y').format(DateTime.now())), int.parse(DateFormat('MM').format(DateTime.now())), int.parse(DateFormat('dd').format(DateTime.now()))));
+      tglPenyelesaianText.text = DateFormat('y-MM-dd').format(DateTime(int.parse(DateFormat('y').format(DateTime.now())),
+          int.parse(DateFormat('MM').format(DateTime.now())), int.parse(DateFormat('dd').format(DateTime.now()))));
       updateSelisih();
       notifyListeners();
     }
@@ -743,8 +748,10 @@ class KasbonNotifier extends ChangeNotifier {
   pilihTransModel(SetupTransModel value) {
     setupTransModel = value;
     namaTransaksi.text = setupTransModel!.kdTrans;
-    inqueryGlModeldeb = listGl.where((e) => e.nosbb == setupTransModel!.glDeb).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glDeb).first;
-    inqueryGlModelcre = listGl.where((e) => e.nosbb == setupTransModel!.glKre).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glKre).first;
+    inqueryGlModeldeb =
+        listGl.where((e) => e.nosbb == setupTransModel!.glDeb).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glDeb).first;
+    inqueryGlModelcre =
+        listGl.where((e) => e.nosbb == setupTransModel!.glKre).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glKre).first;
     nosbbdeb.text = setupTransModel!.glDeb;
     namaSbbDeb.text = setupTransModel!.namaDeb;
     nossbcre.text = setupTransModel!.glKre;

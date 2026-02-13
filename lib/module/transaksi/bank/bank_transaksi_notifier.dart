@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -21,9 +21,7 @@ class BankTransaksiNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     listGl.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
@@ -141,51 +139,11 @@ class BankTransaksiNotifier extends ChangeNotifier {
   }
 
   List<Map<String, dynamic>> coa = [
-    {
-      "gol_acc": "1",
-      "jns_acc": "A",
-      "nobb": "10000000",
-      "nosbb": "10000000",
-      "nama_sbb": "Kas",
-      "type_posting": "N",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "B",
-      "nobb": "10000000",
-      "nosbb": "10001000",
-      "nama_sbb": "Kas",
-      "type_posting": "N",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001001",
-      "nama_sbb": "Kas Besar",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001002",
-      "nama_sbb": "Kas Kecil",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001003",
-      "nama_sbb": "Kas Transaksi",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
+    {"gol_acc": "1", "jns_acc": "A", "nobb": "10000000", "nosbb": "10000000", "nama_sbb": "Kas", "type_posting": "N", "sbb_khusus": "kas"},
+    {"gol_acc": "1", "jns_acc": "B", "nobb": "10000000", "nosbb": "10001000", "nama_sbb": "Kas", "type_posting": "N", "sbb_khusus": "kas"},
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "10001001", "nama_sbb": "Kas Besar", "type_posting": "Y", "sbb_khusus": "kas"},
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "10001002", "nama_sbb": "Kas Kecil", "type_posting": "Y", "sbb_khusus": "kas"},
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "10001003", "nama_sbb": "Kas Transaksi", "type_posting": "Y", "sbb_khusus": "kas"},
   ];
 
   var isLoadingInquery = false;
@@ -195,9 +153,7 @@ class BankTransaksiNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {
-        "kode_pt": "001"
-      };
+      var data = {"kode_pt": "001"};
 
       try {
         final response = await Setuprepository.setup(
@@ -208,7 +164,10 @@ class BankTransaksiNotifier extends ChangeNotifier {
 
         if (response['status'].toString().toLowerCase().contains("success")) {
           final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
-          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .toList();
         }
         notifyListeners();
       } catch (e) {
@@ -250,9 +209,7 @@ class BankTransaksiNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getBank(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {

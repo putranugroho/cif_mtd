@@ -1,6 +1,6 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/setup/level/level_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/setup/level/level_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -234,9 +234,7 @@ class LevelPage extends StatelessWidget {
                                 textInputAction: TextInputAction.done,
                                 controller: value.level,
                                 maxLines: 1,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 validator: (e) {
                                   if (e!.isEmpty) {
                                     return "Wajib diisi";

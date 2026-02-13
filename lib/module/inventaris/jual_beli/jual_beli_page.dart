@@ -1,9 +1,9 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/inventaris/jual_beli/jual_beli_notifier.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/inventaris/jual_beli/jual_beli_notifier.dart';
 
-import 'package:accounting/utils/button_custom.dart';
+import 'package:cif/utils/button_custom.dart';
 
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -56,8 +56,7 @@ class JualBeliPage extends StatelessWidget {
                               child: ListView(
                             children: [
                               Stepper(
-                                  connectorColor: const WidgetStatePropertyAll(
-                                      colorPrimary),
+                                  connectorColor: const WidgetStatePropertyAll(colorPrimary),
                                   currentStep: value.currentStep,
                                   onStepContinue: () {
                                     value.onStepContinue();
@@ -65,104 +64,80 @@ class JualBeliPage extends StatelessWidget {
                                   onStepCancel: () {
                                     value.onStepBack();
                                   },
-                                  controlsBuilder: (context, detail) =>
-                                      Container(
-                                          margin:
-                                              const EdgeInsets.only(top: 16.0),
-                                          child: value.currentStep == 1
+                                  controlsBuilder: (context, detail) => Container(
+                                      margin: const EdgeInsets.only(top: 16.0),
+                                      child: value.currentStep == 1
+                                          ? Row(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              children: [
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    value.onStepBack();
+                                                  },
+                                                  child: const Text('Kembali'),
+                                                ),
+                                              ],
+                                            )
+                                          : value.currentStep == 0
                                               ? Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
+                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                                  children: [
+                                                    ElevatedButton(
+                                                      onPressed: () {
+                                                        value.onStepContinue();
+                                                      },
+                                                      style: ButtonStyle(
+                                                        backgroundColor: WidgetStateProperty.all<Color>(colorPrimary),
+                                                      ),
+                                                      child: const Text(
+                                                        'Lanjut',
+                                                        style: TextStyle(color: Colors.white),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              : Row(
+                                                  mainAxisAlignment: MainAxisAlignment.end,
                                                   children: [
                                                     ElevatedButton(
                                                       onPressed: () {
                                                         value.onStepBack();
                                                       },
-                                                      child:
-                                                          const Text('Kembali'),
+                                                      child: const Text('Kembali'),
+                                                    ),
+                                                    const SizedBox(width: 10),
+                                                    ElevatedButton(
+                                                      onPressed: () {
+                                                        value.onStepContinue();
+                                                      },
+                                                      style: ButtonStyle(
+                                                        backgroundColor: WidgetStateProperty.all<Color>(colorPrimary),
+                                                      ),
+                                                      child: const Text(
+                                                        'Lanjut',
+                                                        style: TextStyle(color: Colors.white),
+                                                      ),
                                                     ),
                                                   ],
-                                                )
-                                              : value.currentStep == 0
-                                                  ? Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment.end,
-                                                      children: [
-                                                        ElevatedButton(
-                                                          onPressed: () {
-                                                            value
-                                                                .onStepContinue();
-                                                          },
-                                                          style: ButtonStyle(
-                                                            backgroundColor:
-                                                                WidgetStateProperty
-                                                                    .all<Color>(
-                                                                        colorPrimary),
-                                                          ),
-                                                          child: const Text(
-                                                            'Lanjut',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    )
-                                                  : Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment.end,
-                                                      children: [
-                                                        ElevatedButton(
-                                                          onPressed: () {
-                                                            value.onStepBack();
-                                                          },
-                                                          child: const Text(
-                                                              'Kembali'),
-                                                        ),
-                                                        const SizedBox(
-                                                            width: 10),
-                                                        ElevatedButton(
-                                                          onPressed: () {
-                                                            value
-                                                                .onStepContinue();
-                                                          },
-                                                          style: ButtonStyle(
-                                                            backgroundColor:
-                                                                WidgetStateProperty
-                                                                    .all<Color>(
-                                                                        colorPrimary),
-                                                          ),
-                                                          child: const Text(
-                                                            'Lanjut',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    )),
+                                                )),
                                   steps: [
                                     Step(
-                                        title: const Text(
-                                            "Inquery Data Inventaris"),
+                                        title: const Text("Inquery Data Inventaris"),
                                         content: Form(
                                             key: value.formStep[0],
                                             child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.stretch,
+                                              crossAxisAlignment: CrossAxisAlignment.stretch,
                                               children: [
                                                 const Row(
                                                   children: [
                                                     Text(
                                                       "Pilih Aset / Inventaris",
-                                                      style: TextStyle(
-                                                          fontSize: 12),
+                                                      style: TextStyle(fontSize: 12),
                                                     ),
                                                     SizedBox(width: 5),
                                                     Text(
                                                       "*",
-                                                      style: TextStyle(
-                                                          fontSize: 8),
+                                                      style: TextStyle(fontSize: 8),
                                                     ),
                                                   ],
                                                 ),
@@ -170,50 +145,29 @@ class JualBeliPage extends StatelessWidget {
                                                   height: 8,
                                                 ),
                                                 Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Expanded(
-                                                      child: DropdownSearch<
-                                                          InventarisModel>(
-                                                        popupProps:
-                                                            const PopupPropsMultiSelection
-                                                                .menu(
-                                                          showSearchBox:
-                                                              true, // Aktifkan fitur pencarian
+                                                      child: DropdownSearch<InventarisModel>(
+                                                        popupProps: const PopupPropsMultiSelection.menu(
+                                                          showSearchBox: true, // Aktifkan fitur pencarian
                                                         ),
-                                                        selectedItem: value
-                                                            .inventarisModel,
+                                                        selectedItem: value.inventarisModel,
                                                         items: value.list,
-                                                        itemAsString: (e) =>
-                                                            e.namaaset,
+                                                        itemAsString: (e) => e.namaaset,
                                                         onChanged: (e) {
-                                                          value.pilihInventory(
-                                                              e!);
+                                                          value.pilihInventory(e!);
                                                         },
-                                                        dropdownDecoratorProps:
-                                                            DropDownDecoratorProps(
-                                                          baseStyle:
-                                                              const TextStyle(
-                                                                  fontSize: 16),
-                                                          textAlignVertical:
-                                                              TextAlignVertical
-                                                                  .center,
-                                                          dropdownSearchDecoration:
-                                                              InputDecoration(
-                                                            hintText:
-                                                                "Pilih Inventaris",
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8),
-                                                              borderSide:
-                                                                  const BorderSide(
+                                                        dropdownDecoratorProps: DropDownDecoratorProps(
+                                                          baseStyle: const TextStyle(fontSize: 16),
+                                                          textAlignVertical: TextAlignVertical.center,
+                                                          dropdownSearchDecoration: InputDecoration(
+                                                            hintText: "Pilih Inventaris",
+                                                            border: OutlineInputBorder(
+                                                              borderRadius: BorderRadius.circular(8),
+                                                              borderSide: const BorderSide(
                                                                 width: 1,
-                                                                color:
-                                                                    Colors.grey,
+                                                                color: Colors.grey,
                                                               ),
                                                             ),
                                                           ),
@@ -227,19 +181,12 @@ class JualBeliPage extends StatelessWidget {
                                                       width: 370,
                                                       child: TextFormField(
                                                         readOnly: true,
-                                                        controller:
-                                                            value.kdAset,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          fillColor:
-                                                              Colors.grey[200],
+                                                        controller: value.kdAset,
+                                                        decoration: InputDecoration(
+                                                          fillColor: Colors.grey[200],
                                                           filled: true,
-                                                          border:
-                                                              OutlineInputBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        6),
+                                                          border: OutlineInputBorder(
+                                                            borderRadius: BorderRadius.circular(6),
                                                           ),
                                                         ),
                                                       ),
@@ -251,32 +198,24 @@ class JualBeliPage extends StatelessWidget {
                                                 ),
                                                 value.inventarisModel != null
                                                     ? Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .stretch,
+                                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                                         children: [
                                                           Row(
                                                             children: [
                                                               Expanded(
                                                                 child: Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .stretch,
+                                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                                                   children: [
                                                                     const Row(
                                                                       children: [
                                                                         Text(
                                                                           "Kelompok",
-                                                                          style:
-                                                                              TextStyle(fontSize: 12),
+                                                                          style: TextStyle(fontSize: 12),
                                                                         ),
-                                                                        SizedBox(
-                                                                            width:
-                                                                                5),
+                                                                        SizedBox(width: 5),
                                                                         Text(
                                                                           "*",
-                                                                          style:
-                                                                              TextStyle(fontSize: 8),
+                                                                          style: TextStyle(fontSize: 8),
                                                                         ),
                                                                       ],
                                                                     ),
@@ -284,37 +223,23 @@ class JualBeliPage extends StatelessWidget {
                                                                       height: 8,
                                                                     ),
                                                                     TextFormField(
-                                                                      controller:
-                                                                          value
-                                                                              .kelompok,
-                                                                      textInputAction:
-                                                                          TextInputAction
-                                                                              .done,
-                                                                      maxLines:
-                                                                          1,
-                                                                      readOnly:
-                                                                          true,
-                                                                      validator:
-                                                                          (e) {
-                                                                        if (e!
-                                                                            .isEmpty) {
+                                                                      controller: value.kelompok,
+                                                                      textInputAction: TextInputAction.done,
+                                                                      maxLines: 1,
+                                                                      readOnly: true,
+                                                                      validator: (e) {
+                                                                        if (e!.isEmpty) {
                                                                           return "Wajib diisi";
                                                                         } else {
                                                                           return null;
                                                                         }
                                                                       },
-                                                                      decoration:
-                                                                          InputDecoration(
-                                                                        filled:
-                                                                            true,
-                                                                        fillColor:
-                                                                            Colors.grey[200],
-                                                                        hintText:
-                                                                            "Kelompok Aset",
-                                                                        border:
-                                                                            OutlineInputBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(6),
+                                                                      decoration: InputDecoration(
+                                                                        filled: true,
+                                                                        fillColor: Colors.grey[200],
+                                                                        hintText: "Kelompok Aset",
+                                                                        border: OutlineInputBorder(
+                                                                          borderRadius: BorderRadius.circular(6),
                                                                         ),
                                                                       ),
                                                                     ),
@@ -326,24 +251,18 @@ class JualBeliPage extends StatelessWidget {
                                                               ),
                                                               Expanded(
                                                                 child: Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .stretch,
+                                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                                                   children: [
                                                                     const Row(
                                                                       children: [
                                                                         Text(
                                                                           "Golongan",
-                                                                          style:
-                                                                              TextStyle(fontSize: 12),
+                                                                          style: TextStyle(fontSize: 12),
                                                                         ),
-                                                                        SizedBox(
-                                                                            width:
-                                                                                5),
+                                                                        SizedBox(width: 5),
                                                                         Text(
                                                                           "*",
-                                                                          style:
-                                                                              TextStyle(fontSize: 8),
+                                                                          style: TextStyle(fontSize: 8),
                                                                         ),
                                                                       ],
                                                                     ),
@@ -351,37 +270,23 @@ class JualBeliPage extends StatelessWidget {
                                                                       height: 8,
                                                                     ),
                                                                     TextFormField(
-                                                                      controller:
-                                                                          value
-                                                                              .golongan,
-                                                                      textInputAction:
-                                                                          TextInputAction
-                                                                              .done,
-                                                                      maxLines:
-                                                                          1,
-                                                                      readOnly:
-                                                                          true,
-                                                                      validator:
-                                                                          (e) {
-                                                                        if (e!
-                                                                            .isEmpty) {
+                                                                      controller: value.golongan,
+                                                                      textInputAction: TextInputAction.done,
+                                                                      maxLines: 1,
+                                                                      readOnly: true,
+                                                                      validator: (e) {
+                                                                        if (e!.isEmpty) {
                                                                           return "Wajib diisi";
                                                                         } else {
                                                                           return null;
                                                                         }
                                                                       },
-                                                                      decoration:
-                                                                          InputDecoration(
-                                                                        filled:
-                                                                            true,
-                                                                        fillColor:
-                                                                            Colors.grey[200],
-                                                                        hintText:
-                                                                            "Golongan Aset",
-                                                                        border:
-                                                                            OutlineInputBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(6),
+                                                                      decoration: InputDecoration(
+                                                                        filled: true,
+                                                                        fillColor: Colors.grey[200],
+                                                                        hintText: "Golongan Aset",
+                                                                        border: OutlineInputBorder(
+                                                                          borderRadius: BorderRadius.circular(6),
                                                                         ),
                                                                       ),
                                                                     ),
@@ -393,26 +298,18 @@ class JualBeliPage extends StatelessWidget {
                                                               ),
                                                               Expanded(
                                                                   child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .stretch,
+                                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                                 children: [
                                                                   const Row(
                                                                     children: [
                                                                       Text(
                                                                         "Satuan",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12),
+                                                                        style: TextStyle(fontSize: 12),
                                                                       ),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              5),
+                                                                      SizedBox(width: 5),
                                                                       Text(
                                                                         "*",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8),
+                                                                        style: TextStyle(fontSize: 8),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -420,37 +317,23 @@ class JualBeliPage extends StatelessWidget {
                                                                     height: 8,
                                                                   ),
                                                                   TextFormField(
-                                                                    controller:
-                                                                        value
-                                                                            .satuans,
-                                                                    textInputAction:
-                                                                        TextInputAction
-                                                                            .done,
+                                                                    controller: value.satuans,
+                                                                    textInputAction: TextInputAction.done,
                                                                     maxLines: 1,
-                                                                    readOnly:
-                                                                        true,
-                                                                    validator:
-                                                                        (e) {
-                                                                      if (e!
-                                                                          .isEmpty) {
+                                                                    readOnly: true,
+                                                                    validator: (e) {
+                                                                      if (e!.isEmpty) {
                                                                         return "Wajib diisi";
                                                                       } else {
                                                                         return null;
                                                                       }
                                                                     },
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      filled:
-                                                                          true,
-                                                                      fillColor:
-                                                                          Colors
-                                                                              .grey[200],
-                                                                      hintText:
-                                                                          "Satuan",
-                                                                      border:
-                                                                          OutlineInputBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(6),
+                                                                    decoration: InputDecoration(
+                                                                      filled: true,
+                                                                      fillColor: Colors.grey[200],
+                                                                      hintText: "Satuan",
+                                                                      border: OutlineInputBorder(
+                                                                        borderRadius: BorderRadius.circular(6),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -458,33 +341,24 @@ class JualBeliPage extends StatelessWidget {
                                                               )),
                                                             ],
                                                           ),
-                                                          const SizedBox(
-                                                              height: 16),
+                                                          const SizedBox(height: 16),
                                                           Row(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
                                                             children: [
                                                               Expanded(
                                                                 child: Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .stretch,
+                                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                                                   children: [
                                                                     const Row(
                                                                       children: [
                                                                         Text(
                                                                           "Nomor Dokumen Pembelian",
-                                                                          style:
-                                                                              TextStyle(fontSize: 12),
+                                                                          style: TextStyle(fontSize: 12),
                                                                         ),
-                                                                        SizedBox(
-                                                                            width:
-                                                                                5),
+                                                                        SizedBox(width: 5),
                                                                         Text(
                                                                           "*",
-                                                                          style:
-                                                                              TextStyle(fontSize: 8),
+                                                                          style: TextStyle(fontSize: 8),
                                                                         ),
                                                                       ],
                                                                     ),
@@ -492,67 +366,44 @@ class JualBeliPage extends StatelessWidget {
                                                                       height: 8,
                                                                     ),
                                                                     TextFormField(
-                                                                      controller:
-                                                                          value
-                                                                              .noDok,
-                                                                      textInputAction:
-                                                                          TextInputAction
-                                                                              .done,
-                                                                      maxLines:
-                                                                          1,
-                                                                      readOnly:
-                                                                          true,
-                                                                      validator:
-                                                                          (e) {
-                                                                        if (e!
-                                                                            .isEmpty) {
+                                                                      controller: value.noDok,
+                                                                      textInputAction: TextInputAction.done,
+                                                                      maxLines: 1,
+                                                                      readOnly: true,
+                                                                      validator: (e) {
+                                                                        if (e!.isEmpty) {
                                                                           return "Wajib diisi";
                                                                         } else {
                                                                           return null;
                                                                         }
                                                                       },
-                                                                      decoration:
-                                                                          InputDecoration(
-                                                                        filled:
-                                                                            true,
-                                                                        fillColor:
-                                                                            Colors.grey[200],
-                                                                        hintText:
-                                                                            "Nomor Dokumen Pembelian",
-                                                                        border:
-                                                                            OutlineInputBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(6),
+                                                                      decoration: InputDecoration(
+                                                                        filled: true,
+                                                                        fillColor: Colors.grey[200],
+                                                                        hintText: "Nomor Dokumen Pembelian",
+                                                                        border: OutlineInputBorder(
+                                                                          borderRadius: BorderRadius.circular(6),
                                                                         ),
                                                                       ),
                                                                     ),
                                                                   ],
                                                                 ),
                                                               ),
-                                                              const SizedBox(
-                                                                  width: 16),
+                                                              const SizedBox(width: 16),
                                                               Expanded(
                                                                   child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .stretch,
+                                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                                 children: [
                                                                   const Row(
                                                                     children: [
                                                                       Text(
                                                                         "Tanggal Beli",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12),
+                                                                        style: TextStyle(fontSize: 12),
                                                                       ),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              5),
+                                                                      SizedBox(width: 5),
                                                                       Text(
                                                                         "*",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8),
+                                                                        style: TextStyle(fontSize: 8),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -560,37 +411,23 @@ class JualBeliPage extends StatelessWidget {
                                                                     height: 8,
                                                                   ),
                                                                   TextFormField(
-                                                                    textInputAction:
-                                                                        TextInputAction
-                                                                            .done,
-                                                                    controller:
-                                                                        value
-                                                                            .tglbeli,
+                                                                    textInputAction: TextInputAction.done,
+                                                                    controller: value.tglbeli,
                                                                     maxLines: 1,
-                                                                    readOnly:
-                                                                        true,
-                                                                    validator:
-                                                                        (e) {
-                                                                      if (e!
-                                                                          .isEmpty) {
+                                                                    readOnly: true,
+                                                                    validator: (e) {
+                                                                      if (e!.isEmpty) {
                                                                         return "Wajib diisi";
                                                                       } else {
                                                                         return null;
                                                                       }
                                                                     },
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      filled:
-                                                                          true,
-                                                                      fillColor:
-                                                                          Colors
-                                                                              .grey[200],
-                                                                      hintText:
-                                                                          "Tanggal Beli",
-                                                                      border:
-                                                                          OutlineInputBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(6),
+                                                                    decoration: InputDecoration(
+                                                                      filled: true,
+                                                                      fillColor: Colors.grey[200],
+                                                                      hintText: "Tanggal Beli",
+                                                                      border: OutlineInputBorder(
+                                                                        borderRadius: BorderRadius.circular(6),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -601,26 +438,18 @@ class JualBeliPage extends StatelessWidget {
                                                               ),
                                                               Expanded(
                                                                   child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .stretch,
+                                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                                 children: [
                                                                   const Row(
                                                                     children: [
                                                                       Text(
                                                                         "Tanggal Terima",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12),
+                                                                        style: TextStyle(fontSize: 12),
                                                                       ),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              5),
+                                                                      SizedBox(width: 5),
                                                                       Text(
                                                                         "*",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8),
+                                                                        style: TextStyle(fontSize: 8),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -628,37 +457,23 @@ class JualBeliPage extends StatelessWidget {
                                                                     height: 8,
                                                                   ),
                                                                   TextFormField(
-                                                                    textInputAction:
-                                                                        TextInputAction
-                                                                            .done,
-                                                                    controller:
-                                                                        value
-                                                                            .tglterima,
+                                                                    textInputAction: TextInputAction.done,
+                                                                    controller: value.tglterima,
                                                                     maxLines: 1,
-                                                                    readOnly:
-                                                                        true,
-                                                                    validator:
-                                                                        (e) {
-                                                                      if (e!
-                                                                          .isEmpty) {
+                                                                    readOnly: true,
+                                                                    validator: (e) {
+                                                                      if (e!.isEmpty) {
                                                                         return "Wajib diisi";
                                                                       } else {
                                                                         return null;
                                                                       }
                                                                     },
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      filled:
-                                                                          true,
-                                                                      fillColor:
-                                                                          Colors
-                                                                              .grey[200],
-                                                                      hintText:
-                                                                          "Tanggal Terima",
-                                                                      border:
-                                                                          OutlineInputBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(6),
+                                                                    decoration: InputDecoration(
+                                                                      filled: true,
+                                                                      fillColor: Colors.grey[200],
+                                                                      hintText: "Tanggal Terima",
+                                                                      border: OutlineInputBorder(
+                                                                        borderRadius: BorderRadius.circular(6),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -666,28 +481,20 @@ class JualBeliPage extends StatelessWidget {
                                                               )),
                                                             ],
                                                           ),
-                                                          const SizedBox(
-                                                              height: 16),
+                                                          const SizedBox(height: 16),
                                                           Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .stretch,
+                                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                                             children: [
                                                               const Row(
                                                                 children: [
                                                                   Text(
                                                                     "Keterangan",
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            12),
+                                                                    style: TextStyle(fontSize: 12),
                                                                   ),
-                                                                  SizedBox(
-                                                                      width: 5),
+                                                                  SizedBox(width: 5),
                                                                   Text(
                                                                     "*",
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            8),
+                                                                    style: TextStyle(fontSize: 8),
                                                                   ),
                                                                 ],
                                                               ),
@@ -695,34 +502,23 @@ class JualBeliPage extends StatelessWidget {
                                                                 height: 8,
                                                               ),
                                                               TextFormField(
-                                                                textInputAction:
-                                                                    TextInputAction
-                                                                        .done,
-                                                                controller: value
-                                                                    .keterangan,
+                                                                textInputAction: TextInputAction.done,
+                                                                controller: value.keterangan,
                                                                 maxLines: 1,
                                                                 readOnly: true,
                                                                 validator: (e) {
-                                                                  if (e!
-                                                                      .isEmpty) {
+                                                                  if (e!.isEmpty) {
                                                                     return "Wajib diisi";
                                                                   } else {
                                                                     return null;
                                                                   }
                                                                 },
-                                                                decoration:
-                                                                    InputDecoration(
+                                                                decoration: InputDecoration(
                                                                   filled: true,
-                                                                  fillColor:
-                                                                      Colors.grey[
-                                                                          200],
-                                                                  hintText:
-                                                                      "Keterangan",
-                                                                  border:
-                                                                      OutlineInputBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(6),
+                                                                  fillColor: Colors.grey[200],
+                                                                  hintText: "Keterangan",
+                                                                  border: OutlineInputBorder(
+                                                                    borderRadius: BorderRadius.circular(6),
                                                                   ),
                                                                 ),
                                                               ),
@@ -744,32 +540,25 @@ class JualBeliPage extends StatelessWidget {
                                         content: Form(
                                           key: value.formStep[1],
                                           child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
                                               Row(
                                                 children: [
                                                   Expanded(
                                                     child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .stretch,
+                                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                                       children: [
                                                         const Row(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
                                                           children: [
                                                             Text(
                                                               "Jual / Hapus",
-                                                              style: TextStyle(
-                                                                  fontSize: 12),
+                                                              style: TextStyle(fontSize: 12),
                                                             ),
                                                             SizedBox(width: 5),
                                                             Text(
                                                               "*",
-                                                              style: TextStyle(
-                                                                  fontSize: 8),
+                                                              style: TextStyle(fontSize: 8),
                                                             ),
                                                           ],
                                                         ),
@@ -783,46 +572,25 @@ class JualBeliPage extends StatelessWidget {
                                                             }
                                                             return null;
                                                           },
-                                                          popupProps:
-                                                              const PopupPropsMultiSelection
-                                                                  .menu(
-                                                            showSearchBox:
-                                                                true, // Aktifkan fitur pencarian
+                                                          popupProps: const PopupPropsMultiSelection.menu(
+                                                            showSearchBox: true, // Aktifkan fitur pencarian
                                                           ),
-                                                          selectedItem:
-                                                              value.pilihModel,
-                                                          items:
-                                                              value.listPilih,
-                                                          itemAsString: (e) =>
-                                                              e,
+                                                          selectedItem: value.pilihModel,
+                                                          items: value.listPilih,
+                                                          itemAsString: (e) => e,
                                                           onChanged: (e) {
-                                                            value
-                                                                .pilihPilih(e!);
+                                                            value.pilihPilih(e!);
                                                           },
-                                                          dropdownDecoratorProps:
-                                                              DropDownDecoratorProps(
-                                                            baseStyle:
-                                                                const TextStyle(
-                                                                    fontSize:
-                                                                        16),
-                                                            textAlignVertical:
-                                                                TextAlignVertical
-                                                                    .center,
-                                                            dropdownSearchDecoration:
-                                                                InputDecoration(
-                                                              hintText:
-                                                                  "Pilih Jual / Hapus",
-                                                              border:
-                                                                  OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8),
-                                                                borderSide:
-                                                                    const BorderSide(
+                                                          dropdownDecoratorProps: DropDownDecoratorProps(
+                                                            baseStyle: const TextStyle(fontSize: 16),
+                                                            textAlignVertical: TextAlignVertical.center,
+                                                            dropdownSearchDecoration: InputDecoration(
+                                                              hintText: "Pilih Jual / Hapus",
+                                                              border: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(8),
+                                                                borderSide: const BorderSide(
                                                                   width: 1,
-                                                                  color: Colors
-                                                                      .grey,
+                                                                  color: Colors.grey,
                                                                 ),
                                                               ),
                                                             ),
@@ -833,25 +601,19 @@ class JualBeliPage extends StatelessWidget {
                                                   ),
                                                   const SizedBox(width: 16),
                                                   Expanded(
-                                                    child: value.pilihModel ==
-                                                            "Hapus"
+                                                    child: value.pilihModel == "Hapus"
                                                         ? Column(
                                                             children: [
                                                               const Row(
                                                                 children: [
                                                                   Text(
                                                                     "No. Dokumen",
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            12),
+                                                                    style: TextStyle(fontSize: 12),
                                                                   ),
-                                                                  SizedBox(
-                                                                      width: 5),
+                                                                  SizedBox(width: 5),
                                                                   Text(
                                                                     "*",
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            8),
+                                                                    style: TextStyle(fontSize: 8),
                                                                   ),
                                                                 ],
                                                               ),
@@ -859,29 +621,20 @@ class JualBeliPage extends StatelessWidget {
                                                                 height: 8,
                                                               ),
                                                               TextFormField(
-                                                                textInputAction:
-                                                                    TextInputAction
-                                                                        .done,
-                                                                controller: value
-                                                                    .nodokjual,
+                                                                textInputAction: TextInputAction.done,
+                                                                controller: value.nodokjual,
                                                                 maxLines: 1,
                                                                 validator: (e) {
-                                                                  if (e!
-                                                                      .isEmpty) {
+                                                                  if (e!.isEmpty) {
                                                                     return "Wajib diisi";
                                                                   } else {
                                                                     return null;
                                                                   }
                                                                 },
-                                                                decoration:
-                                                                    InputDecoration(
-                                                                  hintText:
-                                                                      "No. Dokumen",
-                                                                  border:
-                                                                      OutlineInputBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(6),
+                                                                decoration: InputDecoration(
+                                                                  hintText: "No. Dokumen",
+                                                                  border: OutlineInputBorder(
+                                                                    borderRadius: BorderRadius.circular(6),
                                                                   ),
                                                                 ),
                                                               ),
@@ -891,25 +644,19 @@ class JualBeliPage extends StatelessWidget {
                                                   ),
                                                   const SizedBox(width: 16),
                                                   Expanded(
-                                                    child: value.pilihModel ==
-                                                            "Hapus"
+                                                    child: value.pilihModel == "Hapus"
                                                         ? Column(
                                                             children: [
                                                               const Row(
                                                                 children: [
                                                                   Text(
                                                                     "No. Referensi",
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            12),
+                                                                    style: TextStyle(fontSize: 12),
                                                                   ),
-                                                                  SizedBox(
-                                                                      width: 5),
+                                                                  SizedBox(width: 5),
                                                                   Text(
                                                                     "*",
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            8),
+                                                                    style: TextStyle(fontSize: 8),
                                                                   ),
                                                                 ],
                                                               ),
@@ -917,29 +664,20 @@ class JualBeliPage extends StatelessWidget {
                                                                 height: 8,
                                                               ),
                                                               TextFormField(
-                                                                textInputAction:
-                                                                    TextInputAction
-                                                                        .done,
-                                                                controller: value
-                                                                    .norefjual,
+                                                                textInputAction: TextInputAction.done,
+                                                                controller: value.norefjual,
                                                                 maxLines: 1,
                                                                 validator: (e) {
-                                                                  if (e!
-                                                                      .isEmpty) {
+                                                                  if (e!.isEmpty) {
                                                                     return "Wajib diisi";
                                                                   } else {
                                                                     return null;
                                                                   }
                                                                 },
-                                                                decoration:
-                                                                    InputDecoration(
-                                                                  hintText:
-                                                                      "No. Ref",
-                                                                  border:
-                                                                      OutlineInputBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(6),
+                                                                decoration: InputDecoration(
+                                                                  hintText: "No. Ref",
+                                                                  border: OutlineInputBorder(
+                                                                    borderRadius: BorderRadius.circular(6),
                                                                   ),
                                                                 ),
                                                               ),
@@ -954,9 +692,7 @@ class JualBeliPage extends StatelessWidget {
                                               ),
                                               value.pilihModel == "Jual"
                                                   ? Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .stretch,
+                                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                                       children: [
                                                         Row(
                                                           children: [
@@ -967,18 +703,12 @@ class JualBeliPage extends StatelessWidget {
                                                                     children: [
                                                                       Text(
                                                                         "Tanggal Valuta",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12),
+                                                                        style: TextStyle(fontSize: 12),
                                                                       ),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              5),
+                                                                      SizedBox(width: 5),
                                                                       Text(
                                                                         "*",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8),
+                                                                        style: TextStyle(fontSize: 8),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -986,43 +716,27 @@ class JualBeliPage extends StatelessWidget {
                                                                     height: 8,
                                                                   ),
                                                                   InkWell(
-                                                                    onTap: () =>
-                                                                        value
-                                                                            .piihTanggalBeli(),
-                                                                    child:
-                                                                        TextFormField(
-                                                                      enabled:
-                                                                          false,
-                                                                      textInputAction:
-                                                                          TextInputAction
-                                                                              .done,
-                                                                      controller:
-                                                                          value
-                                                                              .tglTrans,
-                                                                      maxLines:
-                                                                          1,
+                                                                    onTap: () => value.piihTanggalBeli(),
+                                                                    child: TextFormField(
+                                                                      enabled: false,
+                                                                      textInputAction: TextInputAction.done,
+                                                                      controller: value.tglTrans,
+                                                                      maxLines: 1,
                                                                       inputFormatters: [
-                                                                        FilteringTextInputFormatter
-                                                                            .digitsOnly,
+                                                                        FilteringTextInputFormatter.digitsOnly,
                                                                         CurrencyInputFormatter(),
                                                                       ],
-                                                                      validator:
-                                                                          (e) {
-                                                                        if (e!
-                                                                            .isEmpty) {
+                                                                      validator: (e) {
+                                                                        if (e!.isEmpty) {
                                                                           return "Wajib diisi";
                                                                         } else {
                                                                           return null;
                                                                         }
                                                                       },
-                                                                      decoration:
-                                                                          InputDecoration(
-                                                                        hintText:
-                                                                            "Tanggal Valuta",
-                                                                        border:
-                                                                            OutlineInputBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(6),
+                                                                      decoration: InputDecoration(
+                                                                        hintText: "Tanggal Valuta",
+                                                                        border: OutlineInputBorder(
+                                                                          borderRadius: BorderRadius.circular(6),
                                                                         ),
                                                                       ),
                                                                     ),
@@ -1030,8 +744,7 @@ class JualBeliPage extends StatelessWidget {
                                                                 ],
                                                               ),
                                                             ),
-                                                            const SizedBox(
-                                                                width: 16),
+                                                            const SizedBox(width: 16),
                                                             Expanded(
                                                               child: Column(
                                                                 children: [
@@ -1039,18 +752,12 @@ class JualBeliPage extends StatelessWidget {
                                                                     children: [
                                                                       Text(
                                                                         "No. Dokumen",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12),
+                                                                        style: TextStyle(fontSize: 12),
                                                                       ),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              5),
+                                                                      SizedBox(width: 5),
                                                                       Text(
                                                                         "*",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8),
+                                                                        style: TextStyle(fontSize: 8),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -1058,88 +765,56 @@ class JualBeliPage extends StatelessWidget {
                                                                     height: 8,
                                                                   ),
                                                                   TextFormField(
-                                                                    textInputAction:
-                                                                        TextInputAction
-                                                                            .done,
-                                                                    controller:
-                                                                        value
-                                                                            .noDokTrans,
+                                                                    textInputAction: TextInputAction.done,
+                                                                    controller: value.noDokTrans,
                                                                     maxLines: 1,
-                                                                    onChanged:
-                                                                        (e) => value
-                                                                            .onChange(),
+                                                                    onChanged: (e) => value.onChange(),
                                                                     inputFormatters: [
-                                                                      FilteringTextInputFormatter
-                                                                          .digitsOnly,
+                                                                      FilteringTextInputFormatter.digitsOnly,
                                                                       CurrencyInputFormatter(),
                                                                     ],
-                                                                    validator:
-                                                                        (e) {
-                                                                      if (e!
-                                                                          .isEmpty) {
+                                                                    validator: (e) {
+                                                                      if (e!.isEmpty) {
                                                                         return "Wajib diisi";
                                                                       } else {
                                                                         return null;
                                                                       }
                                                                     },
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      hintText:
-                                                                          "No. Dokumen",
-                                                                      border:
-                                                                          OutlineInputBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(6),
+                                                                    decoration: InputDecoration(
+                                                                      hintText: "No. Dokumen",
+                                                                      border: OutlineInputBorder(
+                                                                        borderRadius: BorderRadius.circular(6),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ],
                                                               ),
                                                             ),
-                                                            const SizedBox(
-                                                                width: 16),
+                                                            const SizedBox(width: 16),
                                                             InkWell(
                                                               onTap: () {
-                                                                value
-                                                                    .bukaTransaksi();
+                                                                value.bukaTransaksi();
                                                               },
                                                               child: Container(
                                                                 height: 50,
-                                                                alignment:
-                                                                    Alignment
-                                                                        .center,
-                                                                padding: const EdgeInsets
-                                                                    .symmetric(
-                                                                    horizontal:
-                                                                        16,
-                                                                    vertical:
-                                                                        4),
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color:
-                                                                      colorPrimary,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              16),
+                                                                alignment: Alignment.center,
+                                                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                                                                decoration: BoxDecoration(
+                                                                  color: colorPrimary,
+                                                                  borderRadius: BorderRadius.circular(16),
                                                                 ),
-                                                                child:
-                                                                    const Text(
+                                                                child: const Text(
                                                                   "Cari",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    color: Colors
-                                                                        .white,
+                                                                  style: TextStyle(
+                                                                    fontSize: 12,
+                                                                    color: Colors.white,
                                                                   ),
                                                                 ),
                                                               ),
                                                             ),
                                                           ],
                                                         ),
-                                                        const SizedBox(
-                                                            height: 16),
+                                                        const SizedBox(height: 16),
                                                         Row(
                                                           children: [
                                                             Expanded(
@@ -1149,18 +824,12 @@ class JualBeliPage extends StatelessWidget {
                                                                     children: [
                                                                       Text(
                                                                         "Nilai Beli",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12),
+                                                                        style: TextStyle(fontSize: 12),
                                                                       ),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              5),
+                                                                      SizedBox(width: 5),
                                                                       Text(
                                                                         "*",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8),
+                                                                        style: TextStyle(fontSize: 8),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -1168,57 +837,38 @@ class JualBeliPage extends StatelessWidget {
                                                                     height: 8,
                                                                   ),
                                                                   TextFormField(
-                                                                    textInputAction:
-                                                                        TextInputAction
-                                                                            .done,
-                                                                    controller:
-                                                                        value
-                                                                            .nilaiTrans,
+                                                                    textInputAction: TextInputAction.done,
+                                                                    controller: value.nilaiTrans,
                                                                     maxLines: 1,
-                                                                    readOnly:
-                                                                        true,
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .right,
+                                                                    readOnly: true,
+                                                                    textAlign: TextAlign.right,
                                                                     inputFormatters: [
-                                                                      FilteringTextInputFormatter
-                                                                          .digitsOnly,
+                                                                      FilteringTextInputFormatter.digitsOnly,
                                                                       CurrencyInputFormatter(),
                                                                     ],
-                                                                    validator:
-                                                                        (e) {
-                                                                      if (e!
-                                                                          .isEmpty) {
+                                                                    validator: (e) {
+                                                                      if (e!.isEmpty) {
                                                                         return "Wajib diisi";
                                                                       } else {
-                                                                        if (int.tryParse(e) ==
-                                                                            0) {
+                                                                        if (int.tryParse(e) == 0) {
                                                                           return "Wajib diisi";
                                                                         }
                                                                         return null;
                                                                       }
                                                                     },
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      filled:
-                                                                          true,
-                                                                      fillColor:
-                                                                          Colors
-                                                                              .grey[200],
-                                                                      hintText:
-                                                                          "Nilai Transaksi",
-                                                                      border:
-                                                                          OutlineInputBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(6),
+                                                                    decoration: InputDecoration(
+                                                                      filled: true,
+                                                                      fillColor: Colors.grey[200],
+                                                                      hintText: "Nilai Transaksi",
+                                                                      border: OutlineInputBorder(
+                                                                        borderRadius: BorderRadius.circular(6),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ],
                                                               ),
                                                             ),
-                                                            const SizedBox(
-                                                                width: 16),
+                                                            const SizedBox(width: 16),
                                                             Expanded(
                                                               child: Column(
                                                                 children: [
@@ -1226,18 +876,12 @@ class JualBeliPage extends StatelessWidget {
                                                                     children: [
                                                                       Text(
                                                                         "Keterangan Transaksi",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12),
+                                                                        style: TextStyle(fontSize: 12),
                                                                       ),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              5),
+                                                                      SizedBox(width: 5),
                                                                       Text(
                                                                         "*",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8),
+                                                                        style: TextStyle(fontSize: 8),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -1245,49 +889,31 @@ class JualBeliPage extends StatelessWidget {
                                                                     height: 8,
                                                                   ),
                                                                   TextFormField(
-                                                                    textInputAction:
-                                                                        TextInputAction
-                                                                            .done,
-                                                                    controller:
-                                                                        value
-                                                                            .keteranganTrans,
+                                                                    textInputAction: TextInputAction.done,
+                                                                    controller: value.keteranganTrans,
                                                                     maxLines: 1,
-                                                                    readOnly:
-                                                                        true,
-                                                                    onChanged:
-                                                                        (e) => value
-                                                                            .onChange(),
+                                                                    readOnly: true,
+                                                                    onChanged: (e) => value.onChange(),
                                                                     inputFormatters: [
-                                                                      FilteringTextInputFormatter
-                                                                          .digitsOnly,
+                                                                      FilteringTextInputFormatter.digitsOnly,
                                                                       CurrencyInputFormatter(),
                                                                     ],
-                                                                    validator:
-                                                                        (e) {
-                                                                      if (e!
-                                                                          .isEmpty) {
+                                                                    validator: (e) {
+                                                                      if (e!.isEmpty) {
                                                                         return "Wajib diisi";
                                                                       } else {
-                                                                        if (int.tryParse(e) ==
-                                                                            0) {
+                                                                        if (int.tryParse(e) == 0) {
                                                                           return "Wajib diisi";
                                                                         }
                                                                         return null;
                                                                       }
                                                                     },
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      filled:
-                                                                          true,
-                                                                      fillColor:
-                                                                          Colors
-                                                                              .grey[200],
-                                                                      hintText:
-                                                                          "Keterangan Transaksi",
-                                                                      border:
-                                                                          OutlineInputBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(6),
+                                                                    decoration: InputDecoration(
+                                                                      filled: true,
+                                                                      fillColor: Colors.grey[200],
+                                                                      hintText: "Keterangan Transaksi",
+                                                                      border: OutlineInputBorder(
+                                                                        borderRadius: BorderRadius.circular(6),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -1297,68 +923,43 @@ class JualBeliPage extends StatelessWidget {
                                                             SizedBox(
                                                               width: 16,
                                                             ),
-                                                            Expanded(
-                                                                child:
-                                                                    SizedBox())
+                                                            Expanded(child: SizedBox())
                                                           ],
                                                         ),
-                                                        const SizedBox(
-                                                            height: 16),
+                                                        const SizedBox(height: 16),
                                                         Row(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
                                                           children: [
                                                             Expanded(
                                                                 child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .stretch,
+                                                              crossAxisAlignment: CrossAxisAlignment.stretch,
                                                               children: [
                                                                 const Text(
                                                                   "Nilai Buku",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          12),
+                                                                  style: TextStyle(fontSize: 12),
                                                                 ),
                                                                 const SizedBox(
                                                                   height: 8,
                                                                 ),
                                                                 TextFormField(
-                                                                  textInputAction:
-                                                                      TextInputAction
-                                                                          .done,
+                                                                  textInputAction: TextInputAction.done,
                                                                   maxLines: 1,
-                                                                  readOnly:
-                                                                      true,
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .right,
-                                                                  validator:
-                                                                      (e) {
-                                                                    if (e!
-                                                                        .isEmpty) {
+                                                                  readOnly: true,
+                                                                  textAlign: TextAlign.right,
+                                                                  validator: (e) {
+                                                                    if (e!.isEmpty) {
                                                                       return "Wajib diisi";
                                                                     } else {
                                                                       return null;
                                                                     }
                                                                   },
-                                                                  controller: value
-                                                                      .hargaBuku,
-                                                                  decoration:
-                                                                      InputDecoration(
-                                                                    fillColor:
-                                                                        Colors.grey[
-                                                                            200],
-                                                                    filled:
-                                                                        true,
-                                                                    hintText:
-                                                                        "Nilai Buku",
-                                                                    border:
-                                                                        OutlineInputBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              6),
+                                                                  controller: value.hargaBuku,
+                                                                  decoration: InputDecoration(
+                                                                    fillColor: Colors.grey[200],
+                                                                    filled: true,
+                                                                    hintText: "Nilai Buku",
+                                                                    border: OutlineInputBorder(
+                                                                      borderRadius: BorderRadius.circular(6),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -1369,26 +970,18 @@ class JualBeliPage extends StatelessWidget {
                                                             ),
                                                             Expanded(
                                                               child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .stretch,
+                                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                                 children: [
                                                                   const Row(
                                                                     children: [
                                                                       Text(
                                                                         "Tanggal Beli",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12),
+                                                                        style: TextStyle(fontSize: 12),
                                                                       ),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              5),
+                                                                      SizedBox(width: 5),
                                                                       Text(
                                                                         "*",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8),
+                                                                        style: TextStyle(fontSize: 8),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -1396,67 +989,44 @@ class JualBeliPage extends StatelessWidget {
                                                                     height: 8,
                                                                   ),
                                                                   TextFormField(
-                                                                    textInputAction:
-                                                                        TextInputAction
-                                                                            .done,
-                                                                    controller:
-                                                                        value
-                                                                            .tglbeli,
+                                                                    textInputAction: TextInputAction.done,
+                                                                    controller: value.tglbeli,
                                                                     maxLines: 1,
-                                                                    readOnly:
-                                                                        true,
-                                                                    validator:
-                                                                        (e) {
-                                                                      if (e!
-                                                                          .isEmpty) {
+                                                                    readOnly: true,
+                                                                    validator: (e) {
+                                                                      if (e!.isEmpty) {
                                                                         return "Wajib diisi";
                                                                       } else {
                                                                         return null;
                                                                       }
                                                                     },
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      filled:
-                                                                          true,
-                                                                      fillColor:
-                                                                          Colors
-                                                                              .grey[200],
-                                                                      hintText:
-                                                                          "Tanggal Beli",
-                                                                      border:
-                                                                          OutlineInputBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(6),
+                                                                    decoration: InputDecoration(
+                                                                      filled: true,
+                                                                      fillColor: Colors.grey[200],
+                                                                      hintText: "Tanggal Beli",
+                                                                      border: OutlineInputBorder(
+                                                                        borderRadius: BorderRadius.circular(6),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ],
                                                               ),
                                                             ),
-                                                            const SizedBox(
-                                                                width: 16),
+                                                            const SizedBox(width: 16),
                                                             Expanded(
                                                               child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .stretch,
+                                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                                 children: [
                                                                   const Row(
                                                                     children: [
                                                                       Text(
                                                                         "Tanggal Jual",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12),
+                                                                        style: TextStyle(fontSize: 12),
                                                                       ),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              5),
+                                                                      SizedBox(width: 5),
                                                                       Text(
                                                                         "*",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8),
+                                                                        style: TextStyle(fontSize: 8),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -1464,57 +1034,34 @@ class JualBeliPage extends StatelessWidget {
                                                                     height: 8,
                                                                   ),
                                                                   InkWell(
-                                                                    onTap: () =>
-                                                                        value
-                                                                            .piihTanggalJualHapus(),
-                                                                    child:
-                                                                        TextFormField(
-                                                                      textInputAction:
-                                                                          TextInputAction
-                                                                              .done,
-                                                                      controller:
-                                                                          value
-                                                                              .tgljualhapus,
-                                                                      enabled:
-                                                                          false,
-                                                                      maxLines:
-                                                                          1,
-                                                                      style:
-                                                                          const TextStyle(
+                                                                    onTap: () => value.piihTanggalJualHapus(),
+                                                                    child: TextFormField(
+                                                                      textInputAction: TextInputAction.done,
+                                                                      controller: value.tgljualhapus,
+                                                                      enabled: false,
+                                                                      maxLines: 1,
+                                                                      style: const TextStyle(
                                                                         // Make text bigger and black
-                                                                        color: Colors
-                                                                            .black,
-                                                                        fontSize:
-                                                                            16,
-                                                                        fontWeight:
-                                                                            FontWeight.w500,
+                                                                        color: Colors.black,
+                                                                        fontSize: 16,
+                                                                        fontWeight: FontWeight.w500,
                                                                       ),
-                                                                      validator:
-                                                                          (e) {
-                                                                        if (e!
-                                                                            .isEmpty) {
+                                                                      validator: (e) {
+                                                                        if (e!.isEmpty) {
                                                                           return "Wajib diisi";
                                                                         } else {
                                                                           return null;
                                                                         }
                                                                       },
-                                                                      decoration:
-                                                                          InputDecoration(
-                                                                        hintText:
-                                                                            "Tanggal Jual",
-                                                                        hintStyle:
-                                                                            const TextStyle(color: Colors.grey),
-                                                                        border:
-                                                                            OutlineInputBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(6),
+                                                                      decoration: InputDecoration(
+                                                                        hintText: "Tanggal Jual",
+                                                                        hintStyle: const TextStyle(color: Colors.grey),
+                                                                        border: OutlineInputBorder(
+                                                                          borderRadius: BorderRadius.circular(6),
                                                                         ),
-                                                                        disabledBorder:
-                                                                            OutlineInputBorder(
-                                                                          borderSide:
-                                                                              BorderSide(color: Colors.grey.shade600),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(6),
+                                                                        disabledBorder: OutlineInputBorder(
+                                                                          borderSide: BorderSide(color: Colors.grey.shade600),
+                                                                          borderRadius: BorderRadius.circular(6),
                                                                         ),
                                                                       ),
                                                                     ),
@@ -1524,8 +1071,7 @@ class JualBeliPage extends StatelessWidget {
                                                             ),
                                                           ],
                                                         ),
-                                                        const SizedBox(
-                                                            height: 16),
+                                                        const SizedBox(height: 16),
                                                         Row(
                                                           children: [
                                                             Expanded(
@@ -1535,18 +1081,12 @@ class JualBeliPage extends StatelessWidget {
                                                                     children: [
                                                                       Text(
                                                                         "Nilai Jual",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12),
+                                                                        style: TextStyle(fontSize: 12),
                                                                       ),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              5),
+                                                                      SizedBox(width: 5),
                                                                       Text(
                                                                         "*",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8),
+                                                                        style: TextStyle(fontSize: 8),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -1554,40 +1094,24 @@ class JualBeliPage extends StatelessWidget {
                                                                     height: 8,
                                                                   ),
                                                                   TextFormField(
-                                                                    readOnly:
-                                                                        true,
-                                                                    textInputAction:
-                                                                        TextInputAction
-                                                                            .done,
+                                                                    readOnly: true,
+                                                                    textInputAction: TextInputAction.done,
                                                                     maxLines: 1,
-                                                                    controller:
-                                                                        value
-                                                                            .nilaijual,
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .right,
-                                                                    validator:
-                                                                        (e) {
-                                                                      if (e!
-                                                                          .isEmpty) {
+                                                                    controller: value.nilaijual,
+                                                                    textAlign: TextAlign.right,
+                                                                    validator: (e) {
+                                                                      if (e!.isEmpty) {
                                                                         return "Wajib diisi";
                                                                       } else {
                                                                         return null;
                                                                       }
                                                                     },
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      fillColor:
-                                                                          Colors
-                                                                              .grey[200],
-                                                                      filled:
-                                                                          true,
-                                                                      hintText:
-                                                                          "Nilai Jual",
-                                                                      border:
-                                                                          OutlineInputBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(6),
+                                                                    decoration: InputDecoration(
+                                                                      fillColor: Colors.grey[200],
+                                                                      filled: true,
+                                                                      hintText: "Nilai Jual",
+                                                                      border: OutlineInputBorder(
+                                                                        borderRadius: BorderRadius.circular(6),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -1599,26 +1123,18 @@ class JualBeliPage extends StatelessWidget {
                                                             ),
                                                             Expanded(
                                                               child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .stretch,
+                                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                                 children: [
                                                                   const Row(
                                                                     children: [
                                                                       Text(
                                                                         "Nomor Dokumen Jual / Hapus",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12),
+                                                                        style: TextStyle(fontSize: 12),
                                                                       ),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              5),
+                                                                      SizedBox(width: 5),
                                                                       Text(
                                                                         "*",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8),
+                                                                        style: TextStyle(fontSize: 8),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -1626,59 +1142,38 @@ class JualBeliPage extends StatelessWidget {
                                                                     height: 8,
                                                                   ),
                                                                   TextFormField(
-                                                                    textInputAction:
-                                                                        TextInputAction
-                                                                            .done,
-                                                                    controller:
-                                                                        value
-                                                                            .nodokjual,
+                                                                    textInputAction: TextInputAction.done,
+                                                                    controller: value.nodokjual,
                                                                     maxLines: 1,
-                                                                    style:
-                                                                        const TextStyle(
+                                                                    style: const TextStyle(
                                                                       // Make text bigger and black
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontSize:
-                                                                          16,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
+                                                                      color: Colors.black,
+                                                                      fontSize: 16,
+                                                                      fontWeight: FontWeight.w500,
                                                                     ),
-                                                                    validator:
-                                                                        (e) {
-                                                                      if (e!
-                                                                          .isEmpty) {
+                                                                    validator: (e) {
+                                                                      if (e!.isEmpty) {
                                                                         return "Wajib diisi";
                                                                       } else {
                                                                         return null;
                                                                       }
                                                                     },
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      hintText:
-                                                                          "No. Dokumen",
-                                                                      hintStyle:
-                                                                          const TextStyle(
-                                                                              color: Colors.grey),
-                                                                      border:
-                                                                          OutlineInputBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(6),
+                                                                    decoration: InputDecoration(
+                                                                      hintText: "No. Dokumen",
+                                                                      hintStyle: const TextStyle(color: Colors.grey),
+                                                                      border: OutlineInputBorder(
+                                                                        borderRadius: BorderRadius.circular(6),
                                                                       ),
-                                                                      disabledBorder:
-                                                                          OutlineInputBorder(
-                                                                        borderSide:
-                                                                            BorderSide(color: Colors.grey.shade600),
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(6),
+                                                                      disabledBorder: OutlineInputBorder(
+                                                                        borderSide: BorderSide(color: Colors.grey.shade600),
+                                                                        borderRadius: BorderRadius.circular(6),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ],
                                                               ),
                                                             ),
-                                                            const SizedBox(
-                                                                width: 16),
+                                                            const SizedBox(width: 16),
                                                             Expanded(
                                                               child: Column(
                                                                 children: [
@@ -1686,18 +1181,12 @@ class JualBeliPage extends StatelessWidget {
                                                                     children: [
                                                                       Text(
                                                                         "Alasan Jual",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12),
+                                                                        style: TextStyle(fontSize: 12),
                                                                       ),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              5),
+                                                                      SizedBox(width: 5),
                                                                       Text(
                                                                         "*",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8),
+                                                                        style: TextStyle(fontSize: 8),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -1705,31 +1194,20 @@ class JualBeliPage extends StatelessWidget {
                                                                     height: 8,
                                                                   ),
                                                                   TextFormField(
-                                                                    textInputAction:
-                                                                        TextInputAction
-                                                                            .done,
+                                                                    textInputAction: TextInputAction.done,
                                                                     maxLines: 1,
-                                                                    controller:
-                                                                        value
-                                                                            .alasanjualhapus,
-                                                                    validator:
-                                                                        (e) {
-                                                                      if (e ==
-                                                                              null ||
-                                                                          e.isEmpty) {
+                                                                    controller: value.alasanjualhapus,
+                                                                    validator: (e) {
+                                                                      if (e == null || e.isEmpty) {
                                                                         return "Wajib diisi";
                                                                       } else {
                                                                         return null;
                                                                       }
                                                                     },
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      hintText:
-                                                                          "Alasan Jual",
-                                                                      border:
-                                                                          OutlineInputBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(6),
+                                                                    decoration: InputDecoration(
+                                                                      hintText: "Alasan Jual",
+                                                                      border: OutlineInputBorder(
+                                                                        borderRadius: BorderRadius.circular(6),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -1738,20 +1216,17 @@ class JualBeliPage extends StatelessWidget {
                                                             ),
                                                           ],
                                                         ),
-                                                        const SizedBox(
-                                                            height: 16),
+                                                        const SizedBox(height: 16),
                                                         const Row(
                                                           children: [
                                                             Text(
                                                               "Pendapatan Akun ",
-                                                              style: TextStyle(
-                                                                  fontSize: 12),
+                                                              style: TextStyle(fontSize: 12),
                                                             ),
                                                             SizedBox(width: 5),
                                                             Text(
                                                               "*",
-                                                              style: TextStyle(
-                                                                  fontSize: 8),
+                                                              style: TextStyle(fontSize: 8),
                                                             ),
                                                           ],
                                                         ),
@@ -1761,64 +1236,45 @@ class JualBeliPage extends StatelessWidget {
                                                         Row(
                                                           children: [
                                                             Expanded(
-                                                                child:
-                                                                    TextField(
-                                                                        controller:
-                                                                            value
-                                                                                .nosbbdeb,
-                                                                        readOnly:
-                                                                            true,
-                                                                        decoration:
-                                                                            InputDecoration(
-                                                                          fillColor:
-                                                                              Colors.grey[200],
-                                                                          filled:
-                                                                              true,
-                                                                          border: OutlineInputBorder(
-                                                                              borderRadius: BorderRadius.circular(8),
-                                                                              borderSide: BorderSide(width: 1, color: Colors.grey[200] ?? Colors.transparent)),
-                                                                          labelText:
-                                                                              'Cari Akun',
-                                                                        ))),
+                                                                child: TextField(
+                                                                    controller: value.nosbbdeb,
+                                                                    readOnly: true,
+                                                                    decoration: InputDecoration(
+                                                                      fillColor: Colors.grey[200],
+                                                                      filled: true,
+                                                                      border: OutlineInputBorder(
+                                                                          borderRadius: BorderRadius.circular(8),
+                                                                          borderSide:
+                                                                              BorderSide(width: 1, color: Colors.grey[200] ?? Colors.transparent)),
+                                                                      labelText: 'Cari Akun',
+                                                                    ))),
                                                             const SizedBox(
                                                               width: 16,
                                                             ),
                                                             SizedBox(
                                                               width: 150,
-                                                              child:
-                                                                  TextFormField(
+                                                              child: TextFormField(
                                                                 // enabled: false,
                                                                 readOnly: true,
-                                                                textInputAction:
-                                                                    TextInputAction
-                                                                        .done,
-                                                                controller: value
-                                                                    .namaSbbDeb,
+                                                                textInputAction: TextInputAction.done,
+                                                                controller: value.namaSbbDeb,
                                                                 maxLines: 1,
                                                                 // inputFormatters: [
                                                                 //   FilteringTextInputFormatter.digitsOnly
                                                                 // ],
                                                                 validator: (e) {
-                                                                  if (e!
-                                                                      .isEmpty) {
+                                                                  if (e!.isEmpty) {
                                                                     return "Wajib diisi";
                                                                   } else {
                                                                     return null;
                                                                   }
                                                                 },
-                                                                decoration:
-                                                                    InputDecoration(
+                                                                decoration: InputDecoration(
                                                                   filled: true,
-                                                                  fillColor:
-                                                                      Colors.grey[
-                                                                          200],
-                                                                  hintText:
-                                                                      "Nomor Pendapatan",
-                                                                  border:
-                                                                      OutlineInputBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(6),
+                                                                  fillColor: Colors.grey[200],
+                                                                  hintText: "Nomor Pendapatan",
+                                                                  border: OutlineInputBorder(
+                                                                    borderRadius: BorderRadius.circular(6),
                                                                   ),
                                                                 ),
                                                               ),
@@ -1831,14 +1287,10 @@ class JualBeliPage extends StatelessWidget {
                                                       ],
                                                     )
                                                   : Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .stretch,
+                                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                                       children: [
                                                         Row(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
                                                           children: [
                                                             Expanded(
                                                               child: Column(
@@ -1847,18 +1299,12 @@ class JualBeliPage extends StatelessWidget {
                                                                     children: [
                                                                       Text(
                                                                         "Nilai Buku",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12),
+                                                                        style: TextStyle(fontSize: 12),
                                                                       ),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              5),
+                                                                      SizedBox(width: 5),
                                                                       Text(
                                                                         "*",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8),
+                                                                        style: TextStyle(fontSize: 8),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -1866,48 +1312,31 @@ class JualBeliPage extends StatelessWidget {
                                                                     height: 8,
                                                                   ),
                                                                   TextFormField(
-                                                                    textInputAction:
-                                                                        TextInputAction
-                                                                            .done,
+                                                                    textInputAction: TextInputAction.done,
                                                                     maxLines: 1,
-                                                                    readOnly:
-                                                                        true,
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .right,
-                                                                    validator:
-                                                                        (e) {
-                                                                      if (e!
-                                                                          .isEmpty) {
+                                                                    readOnly: true,
+                                                                    textAlign: TextAlign.right,
+                                                                    validator: (e) {
+                                                                      if (e!.isEmpty) {
                                                                         return "Wajib diisi";
                                                                       } else {
                                                                         return null;
                                                                       }
                                                                     },
-                                                                    controller:
-                                                                        value
-                                                                            .hargaBuku,
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      fillColor:
-                                                                          Colors
-                                                                              .grey[200],
-                                                                      filled:
-                                                                          true,
-                                                                      hintText:
-                                                                          "Nilai Buku",
-                                                                      border:
-                                                                          OutlineInputBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(6),
+                                                                    controller: value.hargaBuku,
+                                                                    decoration: InputDecoration(
+                                                                      fillColor: Colors.grey[200],
+                                                                      filled: true,
+                                                                      hintText: "Nilai Buku",
+                                                                      border: OutlineInputBorder(
+                                                                        borderRadius: BorderRadius.circular(6),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ],
                                                               ),
                                                             ),
-                                                            const SizedBox(
-                                                                width: 16),
+                                                            const SizedBox(width: 16),
                                                             Expanded(
                                                               child: Column(
                                                                 children: [
@@ -1915,18 +1344,12 @@ class JualBeliPage extends StatelessWidget {
                                                                     children: [
                                                                       Text(
                                                                         "Tanggal Hapus",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12),
+                                                                        style: TextStyle(fontSize: 12),
                                                                       ),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              5),
+                                                                      SizedBox(width: 5),
                                                                       Text(
                                                                         "*",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8),
+                                                                        style: TextStyle(fontSize: 8),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -1934,57 +1357,34 @@ class JualBeliPage extends StatelessWidget {
                                                                     height: 8,
                                                                   ),
                                                                   InkWell(
-                                                                    onTap: () =>
-                                                                        value
-                                                                            .piihTanggalJualHapus(),
-                                                                    child:
-                                                                        TextFormField(
-                                                                      textInputAction:
-                                                                          TextInputAction
-                                                                              .done,
-                                                                      controller:
-                                                                          value
-                                                                              .tgljualhapus,
-                                                                      enabled:
-                                                                          false,
-                                                                      maxLines:
-                                                                          1,
-                                                                      style:
-                                                                          const TextStyle(
+                                                                    onTap: () => value.piihTanggalJualHapus(),
+                                                                    child: TextFormField(
+                                                                      textInputAction: TextInputAction.done,
+                                                                      controller: value.tgljualhapus,
+                                                                      enabled: false,
+                                                                      maxLines: 1,
+                                                                      style: const TextStyle(
                                                                         // Make text bigger and black
-                                                                        color: Colors
-                                                                            .black,
-                                                                        fontSize:
-                                                                            16,
-                                                                        fontWeight:
-                                                                            FontWeight.w500,
+                                                                        color: Colors.black,
+                                                                        fontSize: 16,
+                                                                        fontWeight: FontWeight.w500,
                                                                       ),
-                                                                      validator:
-                                                                          (e) {
-                                                                        if (e!
-                                                                            .isEmpty) {
+                                                                      validator: (e) {
+                                                                        if (e!.isEmpty) {
                                                                           return "Wajib diisi";
                                                                         } else {
                                                                           return null;
                                                                         }
                                                                       },
-                                                                      decoration:
-                                                                          InputDecoration(
-                                                                        hintText:
-                                                                            "Tanggal Hapus",
-                                                                        hintStyle:
-                                                                            const TextStyle(color: Colors.grey),
-                                                                        border:
-                                                                            OutlineInputBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(6),
+                                                                      decoration: InputDecoration(
+                                                                        hintText: "Tanggal Hapus",
+                                                                        hintStyle: const TextStyle(color: Colors.grey),
+                                                                        border: OutlineInputBorder(
+                                                                          borderRadius: BorderRadius.circular(6),
                                                                         ),
-                                                                        disabledBorder:
-                                                                            OutlineInputBorder(
-                                                                          borderSide:
-                                                                              BorderSide(color: Colors.grey.shade600),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(6),
+                                                                        disabledBorder: OutlineInputBorder(
+                                                                          borderSide: BorderSide(color: Colors.grey.shade600),
+                                                                          borderRadius: BorderRadius.circular(6),
                                                                         ),
                                                                       ),
                                                                     ),
@@ -1992,8 +1392,7 @@ class JualBeliPage extends StatelessWidget {
                                                                 ],
                                                               ),
                                                             ),
-                                                            const SizedBox(
-                                                                width: 16),
+                                                            const SizedBox(width: 16),
                                                             Expanded(
                                                               child: Column(
                                                                 children: [
@@ -2001,18 +1400,12 @@ class JualBeliPage extends StatelessWidget {
                                                                     children: [
                                                                       Text(
                                                                         "Alasan Hapus",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12),
+                                                                        style: TextStyle(fontSize: 12),
                                                                       ),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              5),
+                                                                      SizedBox(width: 5),
                                                                       Text(
                                                                         "*",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                8),
+                                                                        style: TextStyle(fontSize: 8),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -2020,30 +1413,20 @@ class JualBeliPage extends StatelessWidget {
                                                                     height: 8,
                                                                   ),
                                                                   TextFormField(
-                                                                    textInputAction:
-                                                                        TextInputAction
-                                                                            .done,
+                                                                    textInputAction: TextInputAction.done,
                                                                     maxLines: 1,
-                                                                    validator:
-                                                                        (e) {
-                                                                      if (e!
-                                                                          .isEmpty) {
+                                                                    validator: (e) {
+                                                                      if (e!.isEmpty) {
                                                                         return "Wajib diisi";
                                                                       } else {
                                                                         return null;
                                                                       }
                                                                     },
-                                                                    controller:
-                                                                        value
-                                                                            .alasanjualhapus,
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      hintText:
-                                                                          "Alasan Hapus",
-                                                                      border:
-                                                                          OutlineInputBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(6),
+                                                                    controller: value.alasanjualhapus,
+                                                                    decoration: InputDecoration(
+                                                                      hintText: "Alasan Hapus",
+                                                                      border: OutlineInputBorder(
+                                                                        borderRadius: BorderRadius.circular(6),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -2089,11 +1472,9 @@ class JualBeliPage extends StatelessWidget {
                             ? Container(
                                 width: 600,
                                 padding: const EdgeInsets.all(20),
-                                decoration:
-                                    const BoxDecoration(color: Colors.white),
+                                decoration: const BoxDecoration(color: Colors.white),
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                   children: [
                                     Row(
                                       children: [
@@ -2112,9 +1493,7 @@ class JualBeliPage extends StatelessWidget {
                                           child: Container(
                                             width: 40,
                                             height: 40,
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Colors.grey[300]),
+                                            decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.grey[300]),
                                             child: const Icon(
                                               Icons.close,
                                               size: 20,
@@ -2131,22 +1510,17 @@ class JualBeliPage extends StatelessWidget {
                                       children: [
                                         ListView.builder(
                                             shrinkWrap: true,
-                                            physics:
-                                                const ClampingScrollPhysics(),
-                                            itemCount:
-                                                value.listTransaksiAdd.length,
+                                            physics: const ClampingScrollPhysics(),
+                                            itemCount: value.listTransaksiAdd.length,
                                             itemBuilder: (context, i) {
-                                              final data =
-                                                  value.listTransaksiAdd[i];
+                                              final data = value.listTransaksiAdd[i];
                                               var no = i + 1;
                                               return Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
                                                   InkWell(
                                                     onTap: () {
-                                                      value
-                                                          .pilihTransaksi(data);
+                                                      value.pilihTransaksi(data);
                                                     },
                                                     child: Row(
                                                       children: [
@@ -2154,43 +1528,34 @@ class JualBeliPage extends StatelessWidget {
                                                           width: 30,
                                                           child: Text(
                                                             "$no. ",
-                                                            style:
-                                                                const TextStyle(
+                                                            style: const TextStyle(
                                                               fontSize: 12,
                                                             ),
                                                           ),
                                                         ),
                                                         Expanded(
                                                             child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .stretch,
+                                                          crossAxisAlignment: CrossAxisAlignment.stretch,
                                                           children: [
                                                             Text(
                                                               "(${data.cracc}) ${data.namaCr}",
-                                                              style:
-                                                                  const TextStyle(
+                                                              style: const TextStyle(
                                                                 fontSize: 12,
                                                               ),
                                                             ),
                                                             Text(
                                                               data.keterangan,
-                                                              style:
-                                                                  const TextStyle(
+                                                              style: const TextStyle(
                                                                 fontSize: 12,
                                                               ),
                                                             )
                                                           ],
                                                         )),
                                                         Text(
-                                                          FormatCurrency.oCcy
-                                                              .format(int.parse(
-                                                                  data.nominal)),
-                                                          style:
-                                                              const TextStyle(
+                                                          FormatCurrency.oCcy.format(int.parse(data.nominal)),
+                                                          style: const TextStyle(
                                                             fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight.bold,
+                                                            fontWeight: FontWeight.bold,
                                                           ),
                                                         )
                                                       ],
@@ -2236,21 +1601,11 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'Keterangan', value: data.ket),
                 DataGridCell(columnName: 'kelompok', value: data.namaKelompok),
                 DataGridCell(columnName: 'golongan', value: data.namaGolongan),
-                DataGridCell(
-                    columnName: 'harga',
-                    value: FormatCurrency.oCcy.format(int.parse(data.habeli))),
-                DataGridCell(
-                    columnName: 'diskon',
-                    value: FormatCurrency.oCcy.format(int.parse(data.disc))),
-                DataGridCell(
-                    columnName: 'biaya',
-                    value: FormatCurrency.oCcy.format(int.parse(data.habeli))),
-                DataGridCell(
-                    columnName: 'ppn',
-                    value: FormatCurrency.oCcy.format(int.parse(data.ppnBeli))),
-                DataGridCell(
-                    columnName: 'total',
-                    value: FormatCurrency.oCcy.format(int.parse(data.haper))),
+                DataGridCell(columnName: 'harga', value: FormatCurrency.oCcy.format(int.parse(data.habeli))),
+                DataGridCell(columnName: 'diskon', value: FormatCurrency.oCcy.format(int.parse(data.disc))),
+                DataGridCell(columnName: 'biaya', value: FormatCurrency.oCcy.format(int.parse(data.habeli))),
+                DataGridCell(columnName: 'ppn', value: FormatCurrency.oCcy.format(int.parse(data.ppnBeli))),
+                DataGridCell(columnName: 'total', value: FormatCurrency.oCcy.format(int.parse(data.haper))),
                 DataGridCell(columnName: 'action', value: data.kdaset),
               ],
             ))

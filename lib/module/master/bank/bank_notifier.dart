@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/format_currency.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/format_currency.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
@@ -27,9 +27,7 @@ class BankNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     listGl.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
@@ -44,9 +42,7 @@ class BankNotifier extends ChangeNotifier {
     listSandiAll.clear();
     notifyListeners();
 
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
 
     try {
       final response = await Setuprepository.setup(
@@ -90,9 +86,7 @@ class BankNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {
-        "kode_pt": "001"
-      };
+      var data = {"kode_pt": "001"};
 
       try {
         final response = await Setuprepository.setup(
@@ -103,7 +97,10 @@ class BankNotifier extends ChangeNotifier {
 
         if (response['status'].toString().toLowerCase().contains("success")) {
           final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
-          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase())).toList();
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()))
+              .toList();
         }
         notifyListeners();
       } catch (e) {
@@ -128,9 +125,7 @@ class BankNotifier extends ChangeNotifier {
       listSandi.clear();
       notifyListeners();
 
-      var data = {
-        "kode_pt": "001"
-      };
+      var data = {"kode_pt": "001"};
 
       try {
         final response = await Setuprepository.setup(
@@ -187,9 +182,7 @@ class BankNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getBank(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -258,9 +251,12 @@ class BankNotifier extends ChangeNotifier {
   Future pilihTanggalJatuhTempo() async {
     var pickedendDate = (await showDatePicker(
       context: context,
-      initialDate: DateTime(int.parse(DateFormat('y').format(tglBuka!)), int.parse(DateFormat('MM').format(tglBuka!)), int.parse(DateFormat('dd').format(tglBuka!)) + 10),
-      firstDate: DateTime(int.parse(DateFormat('y').format(tglBuka!)), int.parse(DateFormat('MM').format(tglBuka!)), int.parse(DateFormat('dd').format(tglBuka!)) + 10),
-      lastDate: DateTime(int.parse(DateFormat('y').format(tglBuka!)) + 10, int.parse(DateFormat('MM').format(tglBuka!)), int.parse(DateFormat('dd').format(tglBuka!))),
+      initialDate: DateTime(int.parse(DateFormat('y').format(tglBuka!)), int.parse(DateFormat('MM').format(tglBuka!)),
+          int.parse(DateFormat('dd').format(tglBuka!)) + 10),
+      firstDate: DateTime(int.parse(DateFormat('y').format(tglBuka!)), int.parse(DateFormat('MM').format(tglBuka!)),
+          int.parse(DateFormat('dd').format(tglBuka!)) + 10),
+      lastDate: DateTime(int.parse(DateFormat('y').format(tglBuka!)) + 10, int.parse(DateFormat('MM').format(tglBuka!)),
+          int.parse(DateFormat('dd').format(tglBuka!))),
     ));
     if (pickedendDate != null) {
       tglJatuhTempo = pickedendDate;

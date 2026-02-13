@@ -1,7 +1,7 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/models/perantara_model.dart';
-import 'package:accounting/module/perantara/perantara_aktiva_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/models/perantara_model.dart';
+import 'package:cif/module/perantara/perantara_aktiva_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -93,30 +93,23 @@ class PerantaraAktivaPage extends StatelessWidget {
                                           child: Row(
                                             children: [
                                               Expanded(
-                                                child: TypeAheadField<
-                                                    InqueryGlModel>(
+                                                child: TypeAheadField<InqueryGlModel>(
                                                   controller: value.nossbcre,
-                                                  suggestionsCallback:
-                                                      (search) => value
-                                                          .getInquery(search),
-                                                  builder: (context, controller,
-                                                      focusNode) {
+                                                  suggestionsCallback: (search) => value.getInquery(search),
+                                                  builder: (context, controller, focusNode) {
                                                     return TextField(
                                                         controller: controller,
                                                         focusNode: focusNode,
                                                         autofocus: true,
-                                                        decoration:
-                                                            const InputDecoration(
-                                                          border:
-                                                              OutlineInputBorder(),
+                                                        decoration: const InputDecoration(
+                                                          border: OutlineInputBorder(),
                                                           labelText: 'Cari SBB',
                                                         ));
                                                   },
                                                   itemBuilder: (context, city) {
                                                     return ListTile(
                                                       title: Text(city.nosbb),
-                                                      subtitle:
-                                                          Text(city.namaSbb),
+                                                      subtitle: Text(city.namaSbb),
                                                     );
                                                   },
                                                   onSelected: (city) {
@@ -133,8 +126,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                 child: TextFormField(
                                                   // enabled: false,
                                                   readOnly: true,
-                                                  textInputAction:
-                                                      TextInputAction.done,
+                                                  textInputAction: TextInputAction.done,
                                                   controller: value.namaSbbCre,
                                                   maxLines: 1,
                                                   // inputFormatters: [
@@ -152,9 +144,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                     fillColor: Colors.grey[200],
                                                     hintText: "No. SBB",
                                                     border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
+                                                      borderRadius: BorderRadius.circular(6),
                                                     ),
                                                   ),
                                                 ),
@@ -173,13 +163,9 @@ class PerantaraAktivaPage extends StatelessWidget {
                                             child: Container(
                                               height: 50,
                                               alignment: Alignment.center,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 16,
-                                                      vertical: 8),
+                                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                                               decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
+                                                borderRadius: BorderRadius.circular(8),
                                                 color: colorPrimary,
                                                 border: Border.all(
                                                   width: 2,
@@ -225,8 +211,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                 final data = value.list[i];
                                 return Column(
                                   children: [
-                                    SizedBox(
-                                        width: 50, child: Text("${i + 1}")),
+                                    SizedBox(width: 50, child: Text("${i + 1}")),
                                     SizedBox(width: 180, child: const Text("")),
                                   ],
                                 );
@@ -287,18 +272,15 @@ class PerantaraAktivaPage extends StatelessWidget {
                                     final a = value.listTransaksiAllAdd[i];
                                     var saldoAwal = double.parse(a.nominal);
                                     return Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20),
+                                          padding: const EdgeInsets.symmetric(horizontal: 20),
                                           child: Row(
                                             children: [
                                               Container(
                                                 width: 360,
-                                                margin: const EdgeInsets.only(
-                                                    right: 16),
+                                                margin: const EdgeInsets.only(right: 16),
                                                 child: Text(
                                                   "(${a.dracc}) - ${a.namaDr}",
                                                   textAlign: TextAlign.end,
@@ -309,8 +291,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               ),
                                               Expanded(
                                                 child: Container(
-                                                  margin: const EdgeInsets.only(
-                                                      right: 16),
+                                                  margin: const EdgeInsets.only(right: 16),
                                                   child: Text(
                                                     "",
                                                     textAlign: TextAlign.start,
@@ -322,8 +303,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               ),
                                               Container(
                                                 width: 150,
-                                                margin: const EdgeInsets.only(
-                                                    right: 16),
+                                                margin: const EdgeInsets.only(right: 16),
                                                 child: const Text(
                                                   "",
                                                   textAlign: TextAlign.end,
@@ -334,13 +314,9 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               ),
                                               Container(
                                                 width: 150,
-                                                margin: const EdgeInsets.only(
-                                                    right: 16),
+                                                margin: const EdgeInsets.only(right: 16),
                                                 child: Text(
-                                                  FormatCurrency.oCcyDecimal
-                                                      .format(double.parse(
-                                                              a.nominal)
-                                                          .toInt()),
+                                                  FormatCurrency.oCcyDecimal.format(double.parse(a.nominal).toInt()),
                                                   textAlign: TextAlign.end,
                                                   style: const TextStyle(
                                                     fontSize: 12,
@@ -349,13 +325,9 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               ),
                                               Container(
                                                 width: 120,
-                                                margin: const EdgeInsets.only(
-                                                    right: 16),
+                                                margin: const EdgeInsets.only(right: 16),
                                                 child: Text(
-                                                  FormatCurrency.oCcyDecimal
-                                                      .format(double.parse(
-                                                              a.nominal)
-                                                          .toInt()),
+                                                  FormatCurrency.oCcyDecimal.format(double.parse(a.nominal).toInt()),
                                                   textAlign: TextAlign.end,
                                                   style: const TextStyle(
                                                     fontSize: 12,
@@ -368,19 +340,12 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                 },
                                                 child: Container(
                                                     width: 120,
-                                                    margin:
-                                                        const EdgeInsets.only(
-                                                            right: 16),
+                                                    margin: const EdgeInsets.only(right: 16),
                                                     child: Container(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 16,
-                                                          vertical: 4),
+                                                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                                                       decoration: BoxDecoration(
                                                         color: colorPrimary,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
+                                                        borderRadius: BorderRadius.circular(16),
                                                       ),
                                                       child: const Text(
                                                         "Tambah Trans.",
@@ -398,116 +363,68 @@ class PerantaraAktivaPage extends StatelessWidget {
                                             ? ListView.builder(
                                                 itemCount: a.transaksi.length,
                                                 shrinkWrap: true,
-                                                physics:
-                                                    const ClampingScrollPhysics(),
+                                                physics: const ClampingScrollPhysics(),
                                                 itemBuilder: (context, c) {
                                                   final d = a.transaksi[c];
 
                                                   return Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .stretch,
+                                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                                     children: [
                                                       Container(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal: 20),
+                                                        padding: const EdgeInsets.symmetric(horizontal: 20),
                                                         child: Row(
                                                           children: [
                                                             Container(
                                                               width: 360,
-                                                              margin:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      right:
-                                                                          16),
+                                                              margin: const EdgeInsets.only(right: 16),
                                                               child: Text(
                                                                 "(${d.cracc}) - ${d.namaCr}",
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .start,
-                                                                style:
-                                                                    const TextStyle(
+                                                                textAlign: TextAlign.start,
+                                                                style: const TextStyle(
                                                                   fontSize: 12,
                                                                 ),
                                                               ),
                                                             ),
                                                             Expanded(
                                                               child: Container(
-                                                                margin:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                        right:
-                                                                            16),
-                                                                child:
-                                                                    const Text(
+                                                                margin: const EdgeInsets.only(right: 16),
+                                                                child: const Text(
                                                                   "",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        12,
+                                                                  style: TextStyle(
+                                                                    fontSize: 12,
                                                                   ),
                                                                 ),
                                                               ),
                                                             ),
                                                             Container(
                                                               width: 150,
-                                                              margin:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      right:
-                                                                          16),
+                                                              margin: const EdgeInsets.only(right: 16),
                                                               child: Text(
-                                                                FormatCurrency
-                                                                    .oCcyDecimal
-                                                                    .format(double.parse(
-                                                                            d.nominal)
-                                                                        .toInt()),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .end,
-                                                                style:
-                                                                    const TextStyle(
+                                                                FormatCurrency.oCcyDecimal.format(double.parse(d.nominal).toInt()),
+                                                                textAlign: TextAlign.end,
+                                                                style: const TextStyle(
                                                                   fontSize: 12,
                                                                 ),
                                                               ),
                                                             ),
                                                             Container(
                                                               width: 150,
-                                                              margin:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      right:
-                                                                          16),
+                                                              margin: const EdgeInsets.only(right: 16),
                                                               child: const Text(
                                                                 "",
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .end,
-                                                                style:
-                                                                    TextStyle(
+                                                                textAlign: TextAlign.end,
+                                                                style: TextStyle(
                                                                   fontSize: 12,
                                                                 ),
                                                               ),
                                                             ),
                                                             Container(
                                                               width: 120,
-                                                              margin:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      right:
-                                                                          16),
+                                                              margin: const EdgeInsets.only(right: 16),
                                                               child: Text(
-                                                                FormatCurrency
-                                                                    .oCcyDecimal
-                                                                    .format(d
-                                                                        .sisaSaldo),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .end,
-                                                                style:
-                                                                    const TextStyle(
+                                                                FormatCurrency.oCcyDecimal.format(d.sisaSaldo),
+                                                                textAlign: TextAlign.end,
+                                                                style: const TextStyle(
                                                                   fontSize: 12,
                                                                 ),
                                                               ),
@@ -538,18 +455,15 @@ class PerantaraAktivaPage extends StatelessWidget {
                                     final a = value.listTransaksiAllAdd[i];
                                     var saldoAwal = double.parse(a.nominal);
                                     return Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20),
+                                          padding: const EdgeInsets.symmetric(horizontal: 20),
                                           child: Row(
                                             children: [
                                               Container(
                                                 width: 360,
-                                                margin: const EdgeInsets.only(
-                                                    right: 16),
+                                                margin: const EdgeInsets.only(right: 16),
                                                 child: Text(
                                                   "(${a.cracc}) - ${a.namaCr}",
                                                   textAlign: TextAlign.end,
@@ -560,8 +474,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               ),
                                               Expanded(
                                                 child: Container(
-                                                  margin: const EdgeInsets.only(
-                                                      right: 16),
+                                                  margin: const EdgeInsets.only(right: 16),
                                                   child: Text(
                                                     "",
                                                     textAlign: TextAlign.start,
@@ -573,8 +486,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               ),
                                               Container(
                                                 width: 150,
-                                                margin: const EdgeInsets.only(
-                                                    right: 16),
+                                                margin: const EdgeInsets.only(right: 16),
                                                 child: const Text(
                                                   "",
                                                   textAlign: TextAlign.end,
@@ -585,13 +497,9 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               ),
                                               Container(
                                                 width: 150,
-                                                margin: const EdgeInsets.only(
-                                                    right: 16),
+                                                margin: const EdgeInsets.only(right: 16),
                                                 child: Text(
-                                                  FormatCurrency.oCcyDecimal
-                                                      .format(double.parse(
-                                                              a.nominal)
-                                                          .toInt()),
+                                                  FormatCurrency.oCcyDecimal.format(double.parse(a.nominal).toInt()),
                                                   textAlign: TextAlign.end,
                                                   style: const TextStyle(
                                                     fontSize: 12,
@@ -600,13 +508,9 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               ),
                                               Container(
                                                 width: 120,
-                                                margin: const EdgeInsets.only(
-                                                    right: 16),
+                                                margin: const EdgeInsets.only(right: 16),
                                                 child: Text(
-                                                  FormatCurrency.oCcyDecimal
-                                                      .format(double.parse(
-                                                              a.nominal)
-                                                          .toInt()),
+                                                  FormatCurrency.oCcyDecimal.format(double.parse(a.nominal).toInt()),
                                                   textAlign: TextAlign.end,
                                                   style: const TextStyle(
                                                     fontSize: 12,
@@ -619,19 +523,12 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                 },
                                                 child: Container(
                                                     width: 120,
-                                                    margin:
-                                                        const EdgeInsets.only(
-                                                            right: 16),
+                                                    margin: const EdgeInsets.only(right: 16),
                                                     child: Container(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 16,
-                                                          vertical: 4),
+                                                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                                                       decoration: BoxDecoration(
                                                         color: colorPrimary,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
+                                                        borderRadius: BorderRadius.circular(16),
                                                       ),
                                                       child: const Text(
                                                         "Tambah Trans.",
@@ -649,116 +546,68 @@ class PerantaraAktivaPage extends StatelessWidget {
                                             ? ListView.builder(
                                                 itemCount: a.transaksi.length,
                                                 shrinkWrap: true,
-                                                physics:
-                                                    const ClampingScrollPhysics(),
+                                                physics: const ClampingScrollPhysics(),
                                                 itemBuilder: (context, c) {
                                                   final d = a.transaksi[c];
 
                                                   return Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .stretch,
+                                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                                     children: [
                                                       Container(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal: 20),
+                                                        padding: const EdgeInsets.symmetric(horizontal: 20),
                                                         child: Row(
                                                           children: [
                                                             Container(
                                                               width: 360,
-                                                              margin:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      right:
-                                                                          16),
+                                                              margin: const EdgeInsets.only(right: 16),
                                                               child: Text(
                                                                 "(${d.cracc}) - ${d.namaCr}",
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .start,
-                                                                style:
-                                                                    const TextStyle(
+                                                                textAlign: TextAlign.start,
+                                                                style: const TextStyle(
                                                                   fontSize: 12,
                                                                 ),
                                                               ),
                                                             ),
                                                             Expanded(
                                                               child: Container(
-                                                                margin:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                        right:
-                                                                            16),
-                                                                child:
-                                                                    const Text(
+                                                                margin: const EdgeInsets.only(right: 16),
+                                                                child: const Text(
                                                                   "",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        12,
+                                                                  style: TextStyle(
+                                                                    fontSize: 12,
                                                                   ),
                                                                 ),
                                                               ),
                                                             ),
                                                             Container(
                                                               width: 150,
-                                                              margin:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      right:
-                                                                          16),
+                                                              margin: const EdgeInsets.only(right: 16),
                                                               child: Text(
-                                                                FormatCurrency
-                                                                    .oCcyDecimal
-                                                                    .format(double.parse(
-                                                                            d.nominal)
-                                                                        .toInt()),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .end,
-                                                                style:
-                                                                    const TextStyle(
+                                                                FormatCurrency.oCcyDecimal.format(double.parse(d.nominal).toInt()),
+                                                                textAlign: TextAlign.end,
+                                                                style: const TextStyle(
                                                                   fontSize: 12,
                                                                 ),
                                                               ),
                                                             ),
                                                             Container(
                                                               width: 150,
-                                                              margin:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      right:
-                                                                          16),
+                                                              margin: const EdgeInsets.only(right: 16),
                                                               child: const Text(
                                                                 "",
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .end,
-                                                                style:
-                                                                    TextStyle(
+                                                                textAlign: TextAlign.end,
+                                                                style: TextStyle(
                                                                   fontSize: 12,
                                                                 ),
                                                               ),
                                                             ),
                                                             Container(
                                                               width: 120,
-                                                              margin:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      right:
-                                                                          16),
+                                                              margin: const EdgeInsets.only(right: 16),
                                                               child: Text(
-                                                                FormatCurrency
-                                                                    .oCcyDecimal
-                                                                    .format(d
-                                                                        .sisaSaldo),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .end,
-                                                                style:
-                                                                    const TextStyle(
+                                                                FormatCurrency.oCcyDecimal.format(d.sisaSaldo),
+                                                                textAlign: TextAlign.end,
+                                                                style: const TextStyle(
                                                                   fontSize: 12,
                                                                 ),
                                                               ),
@@ -828,9 +677,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                     child: Container(
                                       width: 40,
                                       height: 40,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.grey[300]),
+                                      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.grey[300]),
                                       child: Icon(Icons.close),
                                     ),
                                   )
@@ -847,10 +694,8 @@ class PerantaraAktivaPage extends StatelessWidget {
                                     headerRowHeight: 40,
                                     defaultColumnWidth: 180,
                                     frozenColumnsCount: 1,
-                                    gridLinesVisibility:
-                                        GridLinesVisibility.both,
-                                    headerGridLinesVisibility:
-                                        GridLinesVisibility.both,
+                                    gridLinesVisibility: GridLinesVisibility.both,
+                                    headerGridLinesVisibility: GridLinesVisibility.both,
                                     selectionMode: SelectionMode.single,
                                     source: DetailDataTransaksi(value),
                                     columns: <GridColumn>[
@@ -874,8 +719,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               color: colorPrimary,
                                               alignment: Alignment.center,
                                               padding: const EdgeInsets.all(6),
-                                              child: const Text(
-                                                  'Tanggal Valuta',
+                                              child: const Text('Tanggal Valuta',
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     fontWeight: FontWeight.w300,
@@ -949,8 +793,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                   ),
                                   padding: const EdgeInsets.all(20),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                     children: [
                                       Row(
                                         children: [
@@ -969,9 +812,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               width: 40,
                                               height: 40,
                                               padding: const EdgeInsets.all(4),
-                                              decoration: BoxDecoration(
-                                                  color: Colors.grey[200],
-                                                  shape: BoxShape.circle),
+                                              decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
                                               child: const Icon(Icons.close),
                                             ),
                                           )
@@ -989,27 +830,22 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               children: [
                                                 const Text(
                                                   "Tanggal Valuta",
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
                                                 const SizedBox(width: 16),
                                                 Expanded(
                                                   child: TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
-                                                    controller:
-                                                        value.tglBackDatetext,
+                                                    textInputAction: TextInputAction.done,
+                                                    controller: value.tglBackDatetext,
                                                     maxLines: 1,
                                                     style: const TextStyle(
                                                       // Make text bigger and black
                                                       color: Colors.black,
                                                       fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w500,
+                                                      fontWeight: FontWeight.w500,
                                                     ),
                                                     validator: (e) {
-                                                      if (e!.isEmpty &&
-                                                          value.backDate) {
+                                                      if (e!.isEmpty && value.backDate) {
                                                         return "Wajib diisi";
                                                       } else {
                                                         return null;
@@ -1017,28 +853,15 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                     },
                                                     decoration: InputDecoration(
                                                       filled: !value.backDate,
-                                                      fillColor:
-                                                          Colors.grey[200],
-                                                      hintText:
-                                                          "Tanggal Valuta",
-                                                      hintStyle:
-                                                          const TextStyle(
-                                                              color:
-                                                                  Colors.grey),
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      fillColor: Colors.grey[200],
+                                                      hintText: "Tanggal Valuta",
+                                                      hintStyle: const TextStyle(color: Colors.grey),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
-                                                      disabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: Colors
-                                                                .grey.shade600),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      disabledBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(color: Colors.grey.shade600),
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1050,8 +873,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   "Pilih Kredit Akun",
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
                                                 SizedBox(width: 5),
                                                 Text(
@@ -1069,10 +891,8 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                   child: TextFormField(
                                                     // enabled: false,
                                                     readOnly: true,
-                                                    textInputAction:
-                                                        TextInputAction.done,
-                                                    controller:
-                                                        value.nossbcretrans,
+                                                    textInputAction: TextInputAction.done,
+                                                    controller: value.nossbcretrans,
                                                     maxLines: 1,
                                                     // inputFormatters: [
                                                     //   FilteringTextInputFormatter.digitsOnly
@@ -1086,14 +906,10 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                     },
                                                     decoration: InputDecoration(
                                                       filled: true,
-                                                      fillColor:
-                                                          Colors.grey[200],
+                                                      fillColor: Colors.grey[200],
                                                       hintText: "Nama SBB",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1106,10 +922,8 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                   child: TextFormField(
                                                     // enabled: false,
                                                     readOnly: true,
-                                                    textInputAction:
-                                                        TextInputAction.done,
-                                                    controller:
-                                                        value.namaSbbCreTrans,
+                                                    textInputAction: TextInputAction.done,
+                                                    controller: value.namaSbbCreTrans,
                                                     maxLines: 1,
                                                     // inputFormatters: [
                                                     //   FilteringTextInputFormatter.digitsOnly
@@ -1123,14 +937,10 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                     },
                                                     decoration: InputDecoration(
                                                       filled: true,
-                                                      fillColor:
-                                                          Colors.grey[200],
+                                                      fillColor: Colors.grey[200],
                                                       hintText: "Nomor SBB",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1141,15 +951,13 @@ class PerantaraAktivaPage extends StatelessWidget {
                                             TextFormField(
                                               readOnly: true,
                                               controller: value.keterangan,
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              textInputAction: TextInputAction.done,
                                               decoration: InputDecoration(
                                                 fillColor: Colors.grey[200],
                                                 filled: true,
                                                 hintText: "Sumber Keterangan",
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -1160,8 +968,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   "Nilai Transaksi",
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
                                                 SizedBox(width: 5),
                                                 Text(
@@ -1175,13 +982,11 @@ class PerantaraAktivaPage extends StatelessWidget {
                                             ),
                                             TextFormField(
                                               readOnly: true,
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              textInputAction: TextInputAction.done,
                                               controller: value.sisaSaldo,
                                               maxLines: 1,
                                               inputFormatters: [
-                                                FilteringTextInputFormatter
-                                                    .digitsOnly,
+                                                FilteringTextInputFormatter.digitsOnly,
                                                 CurrencyInputFormatter(),
                                               ],
                                               validator: (e) {
@@ -1196,8 +1001,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                 filled: true,
                                                 fillColor: Colors.grey[200],
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -1208,8 +1012,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   "Pilih Debet Akun",
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
                                                 SizedBox(width: 5),
                                                 Text(
@@ -1224,41 +1027,28 @@ class PerantaraAktivaPage extends StatelessWidget {
                                             Row(
                                               children: [
                                                 Expanded(
-                                                  child: TypeAheadField<
-                                                      InqueryGlModel>(
-                                                    controller:
-                                                        value.namaSbbDebit,
-                                                    suggestionsCallback:
-                                                        (search) => value
-                                                            .getInqueryTrans(
-                                                                search),
-                                                    builder: (context,
-                                                        controller, focusNode) {
+                                                  child: TypeAheadField<InqueryGlModel>(
+                                                    controller: value.namaSbbDebit,
+                                                    suggestionsCallback: (search) => value.getInqueryTrans(search),
+                                                    builder: (context, controller, focusNode) {
                                                       return TextField(
-                                                          controller:
-                                                              controller,
+                                                          controller: controller,
                                                           focusNode: focusNode,
                                                           autofocus: true,
-                                                          decoration:
-                                                              const InputDecoration(
-                                                            border:
-                                                                OutlineInputBorder(),
-                                                            labelText:
-                                                                'Cari Akun',
+                                                          decoration: const InputDecoration(
+                                                            border: OutlineInputBorder(),
+                                                            labelText: 'Cari Akun',
                                                           ));
                                                     },
-                                                    itemBuilder:
-                                                        (context, city) {
+                                                    itemBuilder: (context, city) {
                                                       return ListTile(
                                                         title: Text(city.nosbb),
-                                                        subtitle:
-                                                            Text(city.namaSbb),
+                                                        subtitle: Text(city.namaSbb),
                                                       );
                                                     },
                                                     onSelected: (city) {
                                                       // value.selectInvoice(city);
-                                                      value.pilihAkunDebTrans(
-                                                          city);
+                                                      value.pilihAkunDebTrans(city);
                                                     },
                                                   ),
                                                 ),
@@ -1270,10 +1060,8 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                   child: TextFormField(
                                                     // enabled: false,
                                                     readOnly: true,
-                                                    textInputAction:
-                                                        TextInputAction.done,
-                                                    controller:
-                                                        value.namaSbbAset,
+                                                    textInputAction: TextInputAction.done,
+                                                    controller: value.namaSbbAset,
                                                     maxLines: 1,
                                                     // inputFormatters: [
                                                     //   FilteringTextInputFormatter.digitsOnly
@@ -1287,14 +1075,10 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                     },
                                                     decoration: InputDecoration(
                                                       filled: true,
-                                                      fillColor:
-                                                          Colors.grey[200],
+                                                      fillColor: Colors.grey[200],
                                                       hintText: "Nomor Kredit",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1308,8 +1092,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   "Nominal",
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
                                                 SizedBox(width: 5),
                                                 Text(
@@ -1322,22 +1105,16 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               height: 8,
                                             ),
                                             TextFormField(
-                                              onChanged: (e) =>
-                                                  value.onchange(),
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              onChanged: (e) => value.onchange(),
+                                              textInputAction: TextInputAction.done,
                                               controller: value.nominal,
                                               maxLines: 1,
-                                              keyboardType: const TextInputType
-                                                  .numberWithOptions(
-                                                  decimal: true),
+                                              keyboardType: const TextInputType.numberWithOptions(decimal: true),
                                               inputFormatters: [
                                                 a.CurrencyInputFormatter(
                                                   useSymbolPadding: true,
-                                                  thousandSeparator: a
-                                                      .ThousandSeparator.Period,
-                                                  mantissaLength:
-                                                      2, // jumlah angka desimal
+                                                  thousandSeparator: a.ThousandSeparator.Period,
+                                                  mantissaLength: 2, // jumlah angka desimal
                                                   // decimalSeparator: DecimalSeparator.Comma,
                                                 ),
                                               ],
@@ -1351,8 +1128,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               decoration: InputDecoration(
                                                 hintText: "Nilai Transaksi",
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -1363,8 +1139,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   "Selisih",
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
                                                 SizedBox(width: 5),
                                                 Text(
@@ -1378,20 +1153,15 @@ class PerantaraAktivaPage extends StatelessWidget {
                                             ),
                                             TextFormField(
                                               readOnly: true,
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              textInputAction: TextInputAction.done,
                                               controller: value.selisihText,
                                               maxLines: 1,
-                                              keyboardType: const TextInputType
-                                                  .numberWithOptions(
-                                                  decimal: true),
+                                              keyboardType: const TextInputType.numberWithOptions(decimal: true),
                                               inputFormatters: [
                                                 a.CurrencyInputFormatter(
                                                   useSymbolPadding: true,
-                                                  thousandSeparator: a
-                                                      .ThousandSeparator.Period,
-                                                  mantissaLength:
-                                                      2, // jumlah angka desimal
+                                                  thousandSeparator: a.ThousandSeparator.Period,
+                                                  mantissaLength: 2, // jumlah angka desimal
                                                   // decimalSeparator: DecimalSeparator.Comma,
                                                 ),
                                               ],
@@ -1407,8 +1177,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                 filled: true,
                                                 hintText: "Selisih Transaksi",
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -1419,16 +1188,13 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               children: [
                                                 Expanded(
                                                     child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .stretch,
+                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                                   children: [
                                                     const Row(
                                                       children: [
                                                         Text(
                                                           "Nomor Dokumen",
-                                                          style: TextStyle(
-                                                              fontSize: 12),
+                                                          style: TextStyle(fontSize: 12),
                                                         ),
                                                         SizedBox(width: 5),
                                                       ],
@@ -1437,10 +1203,8 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                       height: 8,
                                                     ),
                                                     TextFormField(
-                                                      textInputAction:
-                                                          TextInputAction.done,
-                                                      controller:
-                                                          value.nomorDok,
+                                                      textInputAction: TextInputAction.done,
+                                                      controller: value.nomorDok,
                                                       maxLines: 1,
                                                       readOnly: true,
                                                       validator: (e) {
@@ -1450,17 +1214,12 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                           return null;
                                                         }
                                                       },
-                                                      decoration:
-                                                          InputDecoration(
+                                                      decoration: InputDecoration(
                                                         hintText: "Nomor Dok",
                                                         filled: true,
-                                                        fillColor:
-                                                            Colors.grey[300],
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                        fillColor: Colors.grey[300],
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
@@ -1471,16 +1230,13 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                 ),
                                                 Expanded(
                                                     child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .stretch,
+                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                                   children: [
                                                     const Row(
                                                       children: [
                                                         Text(
                                                           "Nomor Reference",
-                                                          style: TextStyle(
-                                                              fontSize: 12),
+                                                          style: TextStyle(fontSize: 12),
                                                         ),
                                                         SizedBox(width: 5),
                                                       ],
@@ -1489,10 +1245,8 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                       height: 8,
                                                     ),
                                                     TextFormField(
-                                                      textInputAction:
-                                                          TextInputAction.done,
-                                                      controller:
-                                                          value.nomorRef,
+                                                      textInputAction: TextInputAction.done,
+                                                      controller: value.nomorRef,
                                                       maxLines: 1,
                                                       validator: (e) {
                                                         if (e!.isEmpty) {
@@ -1501,15 +1255,10 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                           return null;
                                                         }
                                                       },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        hintText:
-                                                            "Nomor Referensi",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                      decoration: InputDecoration(
+                                                        hintText: "Nomor Referensi",
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
@@ -1522,8 +1271,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   "Keterangan",
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
                                                 SizedBox(width: 5),
                                               ],
@@ -1540,14 +1288,11 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                   return null;
                                                 }
                                               },
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              textInputAction: TextInputAction.done,
                                               decoration: InputDecoration(
-                                                hintText:
-                                                    "Keterangan Transaksi",
+                                                hintText: "Keterangan Transaksi",
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -1556,12 +1301,9 @@ class PerantaraAktivaPage extends StatelessWidget {
                                             ),
                                             value.selisih > 0
                                                 ? Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .stretch,
+                                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                                     children: [
-                                                      Text(
-                                                          "Terjadi selisih transaksi, apakah yakin akan menlanjutkan transaksi ini?"),
+                                                      Text("Terjadi selisih transaksi, apakah yakin akan menlanjutkan transaksi ini?"),
                                                       SizedBox(
                                                         height: 8,
                                                       ),
@@ -1571,15 +1313,13 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                               child: ButtonDanger(
                                                                   name: "Tidak",
                                                                   onTap: () {
-                                                                    value
-                                                                        .tomboltidak();
+                                                                    value.tomboltidak();
                                                                   })),
                                                           SizedBox(
                                                             width: 16,
                                                           ),
                                                           Expanded(
-                                                              child:
-                                                                  ButtonPrimary(
+                                                              child: ButtonPrimary(
                                                             onTap: () {
                                                               value.cek();
                                                             },
@@ -1608,8 +1348,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                   ),
                                   padding: const EdgeInsets.all(20),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                     children: [
                                       Row(
                                         children: [
@@ -1628,9 +1367,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               width: 40,
                                               height: 40,
                                               padding: const EdgeInsets.all(4),
-                                              decoration: BoxDecoration(
-                                                  color: Colors.grey[200],
-                                                  shape: BoxShape.circle),
+                                              decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
                                               child: const Icon(Icons.close),
                                             ),
                                           )
@@ -1648,27 +1385,22 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               children: [
                                                 const Text(
                                                   "Tanggal Valuta",
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
                                                 const SizedBox(width: 16),
                                                 Expanded(
                                                   child: TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
-                                                    controller:
-                                                        value.tglBackDatetext,
+                                                    textInputAction: TextInputAction.done,
+                                                    controller: value.tglBackDatetext,
                                                     maxLines: 1,
                                                     style: const TextStyle(
                                                       // Make text bigger and black
                                                       color: Colors.black,
                                                       fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w500,
+                                                      fontWeight: FontWeight.w500,
                                                     ),
                                                     validator: (e) {
-                                                      if (e!.isEmpty &&
-                                                          value.backDate) {
+                                                      if (e!.isEmpty && value.backDate) {
                                                         return "Wajib diisi";
                                                       } else {
                                                         return null;
@@ -1676,28 +1408,15 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                     },
                                                     decoration: InputDecoration(
                                                       filled: !value.backDate,
-                                                      fillColor:
-                                                          Colors.grey[200],
-                                                      hintText:
-                                                          "Tanggal Valuta",
-                                                      hintStyle:
-                                                          const TextStyle(
-                                                              color:
-                                                                  Colors.grey),
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      fillColor: Colors.grey[200],
+                                                      hintText: "Tanggal Valuta",
+                                                      hintStyle: const TextStyle(color: Colors.grey),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
-                                                      disabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: Colors
-                                                                .grey.shade600),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      disabledBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(color: Colors.grey.shade600),
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1709,8 +1428,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   "Pilih Debet Akun",
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
                                                 SizedBox(width: 5),
                                                 Text(
@@ -1728,10 +1446,8 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                   child: TextFormField(
                                                     // enabled: false,
                                                     readOnly: true,
-                                                    textInputAction:
-                                                        TextInputAction.done,
-                                                    controller:
-                                                        value.namaSbbDebit,
+                                                    textInputAction: TextInputAction.done,
+                                                    controller: value.namaSbbDebit,
                                                     maxLines: 1,
                                                     // inputFormatters: [
                                                     //   FilteringTextInputFormatter.digitsOnly
@@ -1745,14 +1461,10 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                     },
                                                     decoration: InputDecoration(
                                                       filled: true,
-                                                      fillColor:
-                                                          Colors.grey[200],
+                                                      fillColor: Colors.grey[200],
                                                       hintText: "Nama SBB",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1765,10 +1477,8 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                   child: TextFormField(
                                                     // enabled: false,
                                                     readOnly: true,
-                                                    textInputAction:
-                                                        TextInputAction.done,
-                                                    controller:
-                                                        value.namaSbbAset,
+                                                    textInputAction: TextInputAction.done,
+                                                    controller: value.namaSbbAset,
                                                     maxLines: 1,
                                                     // inputFormatters: [
                                                     //   FilteringTextInputFormatter.digitsOnly
@@ -1782,14 +1492,10 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                     },
                                                     decoration: InputDecoration(
                                                       filled: true,
-                                                      fillColor:
-                                                          Colors.grey[200],
+                                                      fillColor: Colors.grey[200],
                                                       hintText: "Nomor SBB",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1800,15 +1506,13 @@ class PerantaraAktivaPage extends StatelessWidget {
                                             TextFormField(
                                               readOnly: true,
                                               controller: value.keterangan,
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              textInputAction: TextInputAction.done,
                                               decoration: InputDecoration(
                                                 fillColor: Colors.grey[200],
                                                 filled: true,
                                                 hintText: "Sumber Keterangan",
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -1819,8 +1523,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   "Nilai Transaksi",
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
                                                 SizedBox(width: 5),
                                                 Text(
@@ -1834,13 +1537,11 @@ class PerantaraAktivaPage extends StatelessWidget {
                                             ),
                                             TextFormField(
                                               readOnly: true,
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              textInputAction: TextInputAction.done,
                                               controller: value.sisaSaldo,
                                               maxLines: 1,
                                               inputFormatters: [
-                                                FilteringTextInputFormatter
-                                                    .digitsOnly,
+                                                FilteringTextInputFormatter.digitsOnly,
                                                 CurrencyInputFormatter(),
                                               ],
                                               validator: (e) {
@@ -1855,8 +1556,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                 filled: true,
                                                 fillColor: Colors.grey[200],
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -1867,8 +1567,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   "Pilih Kredit Akun",
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
                                                 SizedBox(width: 5),
                                                 Text(
@@ -1883,41 +1582,28 @@ class PerantaraAktivaPage extends StatelessWidget {
                                             Row(
                                               children: [
                                                 Expanded(
-                                                  child: TypeAheadField<
-                                                      InqueryGlModel>(
-                                                    controller:
-                                                        value.nossbcretrans,
-                                                    suggestionsCallback:
-                                                        (search) => value
-                                                            .getInqueryTrans(
-                                                                search),
-                                                    builder: (context,
-                                                        controller, focusNode) {
+                                                  child: TypeAheadField<InqueryGlModel>(
+                                                    controller: value.nossbcretrans,
+                                                    suggestionsCallback: (search) => value.getInqueryTrans(search),
+                                                    builder: (context, controller, focusNode) {
                                                       return TextField(
-                                                          controller:
-                                                              controller,
+                                                          controller: controller,
                                                           focusNode: focusNode,
                                                           autofocus: true,
-                                                          decoration:
-                                                              const InputDecoration(
-                                                            border:
-                                                                OutlineInputBorder(),
-                                                            labelText:
-                                                                'Cari Akun',
+                                                          decoration: const InputDecoration(
+                                                            border: OutlineInputBorder(),
+                                                            labelText: 'Cari Akun',
                                                           ));
                                                     },
-                                                    itemBuilder:
-                                                        (context, city) {
+                                                    itemBuilder: (context, city) {
                                                       return ListTile(
                                                         title: Text(city.nosbb),
-                                                        subtitle:
-                                                            Text(city.namaSbb),
+                                                        subtitle: Text(city.namaSbb),
                                                       );
                                                     },
                                                     onSelected: (city) {
                                                       // value.selectInvoice(city);
-                                                      value.pilihAkunCreTrans(
-                                                          city);
+                                                      value.pilihAkunCreTrans(city);
                                                     },
                                                   ),
                                                 ),
@@ -1929,10 +1615,8 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                   child: TextFormField(
                                                     // enabled: false,
                                                     readOnly: true,
-                                                    textInputAction:
-                                                        TextInputAction.done,
-                                                    controller:
-                                                        value.namaSbbCreTrans,
+                                                    textInputAction: TextInputAction.done,
+                                                    controller: value.namaSbbCreTrans,
                                                     maxLines: 1,
                                                     // inputFormatters: [
                                                     //   FilteringTextInputFormatter.digitsOnly
@@ -1946,14 +1630,10 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                     },
                                                     decoration: InputDecoration(
                                                       filled: true,
-                                                      fillColor:
-                                                          Colors.grey[200],
+                                                      fillColor: Colors.grey[200],
                                                       hintText: "Nomor Kredit",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1967,8 +1647,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   "Nominal",
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
                                                 SizedBox(width: 5),
                                                 Text(
@@ -1981,22 +1660,16 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               height: 8,
                                             ),
                                             TextFormField(
-                                              onChanged: (e) =>
-                                                  value.onchange(),
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              onChanged: (e) => value.onchange(),
+                                              textInputAction: TextInputAction.done,
                                               controller: value.nominal,
                                               maxLines: 1,
-                                              keyboardType: const TextInputType
-                                                  .numberWithOptions(
-                                                  decimal: true),
+                                              keyboardType: const TextInputType.numberWithOptions(decimal: true),
                                               inputFormatters: [
                                                 a.CurrencyInputFormatter(
                                                   useSymbolPadding: true,
-                                                  thousandSeparator: a
-                                                      .ThousandSeparator.Period,
-                                                  mantissaLength:
-                                                      2, // jumlah angka desimal
+                                                  thousandSeparator: a.ThousandSeparator.Period,
+                                                  mantissaLength: 2, // jumlah angka desimal
                                                   // decimalSeparator: DecimalSeparator.Comma,
                                                 ),
                                               ],
@@ -2010,8 +1683,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               decoration: InputDecoration(
                                                 hintText: "Nilai Transaksi",
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -2022,8 +1694,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   "Selisih",
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
                                                 SizedBox(width: 5),
                                                 Text(
@@ -2037,20 +1708,15 @@ class PerantaraAktivaPage extends StatelessWidget {
                                             ),
                                             TextFormField(
                                               readOnly: true,
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              textInputAction: TextInputAction.done,
                                               controller: value.selisihText,
                                               maxLines: 1,
-                                              keyboardType: const TextInputType
-                                                  .numberWithOptions(
-                                                  decimal: true),
+                                              keyboardType: const TextInputType.numberWithOptions(decimal: true),
                                               inputFormatters: [
                                                 a.CurrencyInputFormatter(
                                                   useSymbolPadding: true,
-                                                  thousandSeparator: a
-                                                      .ThousandSeparator.Period,
-                                                  mantissaLength:
-                                                      2, // jumlah angka desimal
+                                                  thousandSeparator: a.ThousandSeparator.Period,
+                                                  mantissaLength: 2, // jumlah angka desimal
                                                   // decimalSeparator: DecimalSeparator.Comma,
                                                 ),
                                               ],
@@ -2066,8 +1732,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                 filled: true,
                                                 hintText: "Selisih Transaksi",
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -2078,16 +1743,13 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               children: [
                                                 Expanded(
                                                     child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .stretch,
+                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                                   children: [
                                                     const Row(
                                                       children: [
                                                         Text(
                                                           "Nomor Dokumen",
-                                                          style: TextStyle(
-                                                              fontSize: 12),
+                                                          style: TextStyle(fontSize: 12),
                                                         ),
                                                         SizedBox(width: 5),
                                                       ],
@@ -2096,10 +1758,8 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                       height: 8,
                                                     ),
                                                     TextFormField(
-                                                      textInputAction:
-                                                          TextInputAction.done,
-                                                      controller:
-                                                          value.nomorDok,
+                                                      textInputAction: TextInputAction.done,
+                                                      controller: value.nomorDok,
                                                       maxLines: 1,
                                                       readOnly: true,
                                                       validator: (e) {
@@ -2109,17 +1769,12 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                           return null;
                                                         }
                                                       },
-                                                      decoration:
-                                                          InputDecoration(
+                                                      decoration: InputDecoration(
                                                         hintText: "Nomor Dok",
                                                         filled: true,
-                                                        fillColor:
-                                                            Colors.grey[300],
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                        fillColor: Colors.grey[300],
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
@@ -2130,16 +1785,13 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                 ),
                                                 Expanded(
                                                     child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .stretch,
+                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                                   children: [
                                                     const Row(
                                                       children: [
                                                         Text(
                                                           "Nomor Reference",
-                                                          style: TextStyle(
-                                                              fontSize: 12),
+                                                          style: TextStyle(fontSize: 12),
                                                         ),
                                                         SizedBox(width: 5),
                                                       ],
@@ -2148,10 +1800,8 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                       height: 8,
                                                     ),
                                                     TextFormField(
-                                                      textInputAction:
-                                                          TextInputAction.done,
-                                                      controller:
-                                                          value.nomorRef,
+                                                      textInputAction: TextInputAction.done,
+                                                      controller: value.nomorRef,
                                                       maxLines: 1,
                                                       validator: (e) {
                                                         if (e!.isEmpty) {
@@ -2160,15 +1810,10 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                           return null;
                                                         }
                                                       },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        hintText:
-                                                            "Nomor Referensi",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                      decoration: InputDecoration(
+                                                        hintText: "Nomor Referensi",
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
@@ -2181,8 +1826,7 @@ class PerantaraAktivaPage extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   "Keterangan",
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(fontSize: 12),
                                                 ),
                                                 SizedBox(width: 5),
                                               ],
@@ -2199,14 +1843,11 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                   return null;
                                                 }
                                               },
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              textInputAction: TextInputAction.done,
                                               decoration: InputDecoration(
-                                                hintText:
-                                                    "Keterangan Transaksi",
+                                                hintText: "Keterangan Transaksi",
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
                                               ),
                                             ),
@@ -2215,12 +1856,9 @@ class PerantaraAktivaPage extends StatelessWidget {
                                             ),
                                             value.selisih > 0
                                                 ? Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .stretch,
+                                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                                     children: [
-                                                      Text(
-                                                          "Terjadi selisih transaksi, apakah yakin akan menlanjutkan transaksi ini?"),
+                                                      Text("Terjadi selisih transaksi, apakah yakin akan menlanjutkan transaksi ini?"),
                                                       SizedBox(
                                                         height: 8,
                                                       ),
@@ -2230,15 +1868,13 @@ class PerantaraAktivaPage extends StatelessWidget {
                                                               child: ButtonDanger(
                                                                   name: "Tidak",
                                                                   onTap: () {
-                                                                    value
-                                                                        .tomboltidak();
+                                                                    value.tomboltidak();
                                                                   })),
                                                           SizedBox(
                                                             width: 16,
                                                           ),
                                                           Expanded(
-                                                              child:
-                                                                  ButtonPrimary(
+                                                              child: ButtonPrimary(
                                                             onTap: () {
                                                               value.cek();
                                                             },
@@ -2272,16 +1908,14 @@ class PerantaraAktivaPage extends StatelessWidget {
 Widget headerText(String label) => Container(
       padding: const EdgeInsets.all(8),
       color: colorPrimary,
-      child: Text(label,
-          style: const TextStyle(fontSize: 12, color: Colors.white)),
+      child: Text(label, style: const TextStyle(fontSize: 12, color: Colors.white)),
     );
 
 Widget headerCell(String label, double width) => Container(
       width: width,
       padding: const EdgeInsets.all(8),
       color: colorPrimary,
-      child: Text(label,
-          style: const TextStyle(fontSize: 12, color: Colors.white)),
+      child: Text(label, style: const TextStyle(fontSize: 12, color: Colors.white)),
     );
 
 Widget cell(String content, double width) => Container(
@@ -2307,14 +1941,9 @@ class DetailDataTransaksi extends DataGridSource {
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'action', value: data.rrn),
-                DataGridCell(
-                    columnName: 'tgltranstrans', value: data.tglValuta),
-                DataGridCell(
-                    columnName: 'nilaitrans',
-                    value: FormatCurrency.oCcy.format(int.parse(data.nominal))),
-                DataGridCell(
-                    columnName: 'sisa',
-                    value: FormatCurrency.oCcy.format(data.sisaSaldo)),
+                DataGridCell(columnName: 'tgltranstrans', value: data.tglValuta),
+                DataGridCell(columnName: 'nilaitrans', value: FormatCurrency.oCcy.format(int.parse(data.nominal))),
+                DataGridCell(columnName: 'sisa', value: FormatCurrency.oCcy.format(data.sisaSaldo)),
                 DataGridCell(columnName: 'nodoktrans', value: data.noDokumen),
                 DataGridCell(columnName: 'keterangan', value: data.keterangan),
               ],

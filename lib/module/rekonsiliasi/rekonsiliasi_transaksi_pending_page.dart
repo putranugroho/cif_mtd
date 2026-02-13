@@ -1,10 +1,10 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/setup/golongan_aset/golongan_aset_notifier.dart';
-import 'package:accounting/module/transaksi/satu_transaksi/satu_transaksi_notifier.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/setup/golongan_aset/golongan_aset_notifier.dart';
+import 'package:cif/module/transaksi/satu_transaksi/satu_transaksi_notifier.dart';
 
-import 'package:accounting/utils/button_custom.dart';
-import 'package:accounting/utils/currency_formatted.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/utils/button_custom.dart';
+import 'package:cif/utils/currency_formatted.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -392,9 +392,7 @@ class RekonsiliasiTransaksiPendingPage extends StatelessWidget {
                                           textInputAction: TextInputAction.done,
                                           controller: value.nomorDok,
                                           maxLines: 1,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter.digitsOnly
-                                          ],
+                                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                           validator: (e) {
                                             if (e!.isEmpty) {
                                               return "Wajib diisi";
@@ -434,9 +432,7 @@ class RekonsiliasiTransaksiPendingPage extends StatelessWidget {
                                           textInputAction: TextInputAction.done,
                                           controller: value.nomorRef,
                                           maxLines: 1,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter.digitsOnly
-                                          ],
+                                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                           validator: (e) {
                                             if (e!.isEmpty) {
                                               return "Wajib diisi";

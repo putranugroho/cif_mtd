@@ -1,6 +1,6 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/setup/kantor/kantor_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/setup/kantor/kantor_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -331,7 +331,9 @@ class KantorPage extends StatelessWidget {
                                                       ? value.list.where((e) => e.statusKantor == "P").toList()
                                                       : value.status == "Anak Cabang"
                                                           ? value.list.where((e) => e.statusKantor == "C" || e.statusKantor == "P").toList()
-                                                          : value.list.where((e) => e.statusKantor == "D" || e.statusKantor == "C" || e.statusKantor == "P").toList(),
+                                                          : value.list
+                                                              .where((e) => e.statusKantor == "D" || e.statusKantor == "C" || e.statusKantor == "P")
+                                                              .toList(),
                                               itemAsString: (e) => e.namaKantor,
                                               onChanged: (e) {
                                                 value.pilihKantor(e!);
@@ -408,9 +410,7 @@ class KantorPage extends StatelessWidget {
                                                       : value.status == "Anak Cabang"
                                                           ? 4
                                                           : 4,
-                                                  inputFormatters: [
-                                                    FilteringTextInputFormatter.digitsOnly
-                                                  ],
+                                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                   validator: (e) {
                                                     if (e!.isEmpty) {
                                                       return "Wajib diisi";
@@ -671,9 +671,7 @@ class KantorPage extends StatelessWidget {
                                                     height: 8,
                                                   ),
                                                   TextFormField(
-                                                    inputFormatters: [
-                                                      FilteringTextInputFormatter.digitsOnly
-                                                    ],
+                                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                     maxLength: 5,
                                                     controller: value.kodepos,
                                                     validator: (e) {
@@ -763,9 +761,7 @@ class KantorPage extends StatelessWidget {
                                                 textInputAction: TextInputAction.done,
                                                 controller: value.notelp,
                                                 maxLines: 1,
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter.digitsOnly
-                                                ],
+                                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                 validator: (e) {
                                                   if (e!.isEmpty) {
                                                     return "Wajib diisi";
@@ -805,9 +801,7 @@ class KantorPage extends StatelessWidget {
                                                 textInputAction: TextInputAction.done,
                                                 controller: value.fax,
                                                 maxLines: 1,
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter.digitsOnly
-                                                ],
+                                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                 decoration: InputDecoration(
                                                   hintText: "No. Fax",
                                                   border: OutlineInputBorder(

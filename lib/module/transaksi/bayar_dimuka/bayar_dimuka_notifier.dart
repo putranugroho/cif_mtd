@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/pref/pref.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/format_currency.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/pref/pref.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/format_currency.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
@@ -45,9 +45,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": users!.kodePt
-    };
+    var data = {"kode_pt": users!.kodePt};
     Setuprepository.setup(token, NetworkURL.viewbayardimuka(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -129,10 +127,14 @@ class BayarDimukaNotifier extends ChangeNotifier {
     keteranganBaru.text = transaksiBayarDimukaModel!.keterangan;
     nilaiPengakuan.text = FormatCurrency.oCcy.format(int.parse(transaksiBayarDimukaModel!.nilaiPengakuan)).replaceAll(".", ",");
 
-    inqueryGlModelcre = listGlAll.where((e) => e.nosbb == transaksiBayarDimukaModel!.debetSbb).isNotEmpty ? listGlAll.where((e) => e.nosbb == transaksiBayarDimukaModel!.debetSbb).first : null;
+    inqueryGlModelcre = listGlAll.where((e) => e.nosbb == transaksiBayarDimukaModel!.debetSbb).isNotEmpty
+        ? listGlAll.where((e) => e.nosbb == transaksiBayarDimukaModel!.debetSbb).first
+        : null;
     noakun.text = inqueryGlModelcre!.nosbb;
     namaakun.text = inqueryGlModelcre!.namaSbb;
-    inqueryGlModeldeb = listGlAll.where((e) => e.nosbb == transaksiBayarDimukaModel!.creditSbb).isNotEmpty ? listGlAll.where((e) => e.nosbb == transaksiBayarDimukaModel!.creditSbb).first : null;
+    inqueryGlModeldeb = listGlAll.where((e) => e.nosbb == transaksiBayarDimukaModel!.creditSbb).isNotEmpty
+        ? listGlAll.where((e) => e.nosbb == transaksiBayarDimukaModel!.creditSbb).first
+        : null;
     nosbbdeb.text = inqueryGlModeldeb!.namaSbb;
     namaSbbDeb.text = inqueryGlModeldeb!.nosbb;
     notifyListeners();
@@ -290,9 +292,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
   Future getInqueryAll() async {
     listGlAll.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": users!.kodePt
-    };
+    var data = {"kode_pt": users!.kodePt};
     Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccBb(value['data']);
@@ -316,9 +316,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {
-        "kode_pt": "001"
-      };
+      var data = {"kode_pt": "001"};
 
       try {
         final response = await Setuprepository.setup(
@@ -329,7 +327,12 @@ class BayarDimukaNotifier extends ChangeNotifier {
 
         if (response['status'].toString().toLowerCase().contains("success")) {
           final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
-          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()) && model.typePosting == "Y").toList();
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                  model.namaSbb.toLowerCase().contains(query.toLowerCase()) && model.typePosting == "Y")
+              .toList();
         }
         notifyListeners();
       } catch (e) {
@@ -353,9 +356,7 @@ class BayarDimukaNotifier extends ChangeNotifier {
       listGl.clear();
       notifyListeners();
 
-      var data = {
-        "kode_pt": "001"
-      };
+      var data = {"kode_pt": "001"};
 
       try {
         final response = await Setuprepository.setup(
@@ -366,7 +367,12 @@ class BayarDimukaNotifier extends ChangeNotifier {
 
         if (response['status'].toString().toLowerCase().contains("success")) {
           final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccBb(response['data']);
-          listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).where((model) => model.nosbb.toLowerCase().contains(query.toLowerCase()) || model.namaSbb.toLowerCase().contains(query.toLowerCase()) && model.typePosting == "Y").toList();
+          listGl = jnsAccBItems
+              .map((item) => InqueryGlModel.fromJson(item))
+              .where((model) =>
+                  model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
+                  model.namaSbb.toLowerCase().contains(query.toLowerCase()) && model.typePosting == "Y")
+              .toList();
         }
         notifyListeners();
       } catch (e) {
@@ -681,7 +687,8 @@ class BayarDimukaNotifier extends ChangeNotifier {
   // DateTime tglAwal = DateTime.now();
   // DateTime tglAkhir = DateTime.now();
   changeDate() async {
-    final picked = await showDateRangePicker(context: context, firstDate: DateTime(2000), lastDate: DateTime(int.parse(DateFormat('yyyy').format(DateTime.now())) + 2));
+    final picked = await showDateRangePicker(
+        context: context, firstDate: DateTime(2000), lastDate: DateTime(int.parse(DateFormat('yyyy').format(DateTime.now())) + 2));
 
     var tglSplit = picked.toString().split(" - ");
 
@@ -726,7 +733,8 @@ class BayarDimukaNotifier extends ChangeNotifier {
   }
 
   onchange() {
-    nilaiPengakuan.text = FormatCurrency.oCcy.format((double.parse(nominal.text.replaceAll(",", "")) / int.parse(berapakali.text)).toInt()).replaceAll(".", ',');
+    nilaiPengakuan.text =
+        FormatCurrency.oCcy.format((double.parse(nominal.text.replaceAll(",", "")) / int.parse(berapakali.text)).toInt()).replaceAll(".", ',');
     notifyListeners();
   }
 

@@ -1,5 +1,5 @@
-import 'package:accounting/module/splash_screen_page.dart';
-import 'package:accounting/utils/custom_scroll.dart';
+import 'package:cif/module/splash_screen_page.dart';
+import 'package:cif/utils/custom_scroll.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 

@@ -1,4 +1,4 @@
-import 'package:accounting/models/index.dart';
+import 'package:cif/models/index.dart';
 import 'package:flutter/material.dart';
 
 class OtorisasiInventarisNotifier extends ChangeNotifier {
@@ -30,8 +30,7 @@ class OtorisasiInventarisNotifier extends ChangeNotifier {
       "modul": "Input - Pengadaan",
       "user": "Edi Kurniawan",
       "tanggal": "6 April 2025, 12:04",
-      "data":
-          "No Aset : 100002\nNama Aset : Avanza\nKelompok : TRANSPORTASI\nGolongan : Kendaraan\nHarga : 140.000.000\nTotal : 140.000.000",
+      "data": "No Aset : 100002\nNama Aset : Avanza\nKelompok : TRANSPORTASI\nGolongan : Kendaraan\nHarga : 140.000.000\nTotal : 140.000.000",
       "status": "PENDING"
     },
   ];

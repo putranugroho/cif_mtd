@@ -1,4 +1,4 @@
-import 'package:accounting/models_manual/rekon_perantara_transaksi_model.dart';
+import 'package:cif/models_manual/rekon_perantara_transaksi_model.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
@@ -47,9 +47,12 @@ class RekonPerantaraItemModel {
         'item_transaksi': itemTransaksi.map((e) => e.toJson()).toList()
       };
 
-  RekonPerantaraItemModel clone() => RekonPerantaraItemModel(nosbb: nosbb, namaSbb: namaSbb, typePosting: typePosting, saldo: saldo, itemTransaksi: itemTransaksi.map((e) => e.clone()).toList());
+  RekonPerantaraItemModel clone() => RekonPerantaraItemModel(
+      nosbb: nosbb, namaSbb: namaSbb, typePosting: typePosting, saldo: saldo, itemTransaksi: itemTransaksi.map((e) => e.clone()).toList());
 
-  RekonPerantaraItemModel copyWith({String? nosbb, String? namaSbb, String? typePosting, double? saldo, List<RekonPerantaraTransaksiModel>? itemTransaksi}) => RekonPerantaraItemModel(
+  RekonPerantaraItemModel copyWith(
+          {String? nosbb, String? namaSbb, String? typePosting, double? saldo, List<RekonPerantaraTransaksiModel>? itemTransaksi}) =>
+      RekonPerantaraItemModel(
         nosbb: nosbb ?? this.nosbb,
         namaSbb: namaSbb ?? this.namaSbb,
         typePosting: typePosting ?? this.typePosting,
@@ -58,7 +61,14 @@ class RekonPerantaraItemModel {
       );
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is RekonPerantaraItemModel && nosbb == other.nosbb && namaSbb == other.namaSbb && typePosting == other.typePosting && saldo == other.saldo && itemTransaksi == other.itemTransaksi;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is RekonPerantaraItemModel &&
+          nosbb == other.nosbb &&
+          namaSbb == other.namaSbb &&
+          typePosting == other.typePosting &&
+          saldo == other.saldo &&
+          itemTransaksi == other.itemTransaksi;
 
   @override
   int get hashCode => nosbb.hashCode ^ namaSbb.hashCode ^ typePosting.hashCode ^ saldo.hashCode ^ itemTransaksi.hashCode;

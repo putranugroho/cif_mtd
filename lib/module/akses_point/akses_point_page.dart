@@ -1,5 +1,5 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/akses_point/akses_point_notifier.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/akses_point/akses_point_notifier.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

@@ -1,7 +1,7 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/perantara/perantara_aktiva_notifier.dart';
-import 'package:accounting/module/perantara/perantara_pasiva_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/perantara/perantara_aktiva_notifier.dart';
+import 'package:cif/module/perantara/perantara_pasiva_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -433,9 +433,7 @@ class PerantaraPasivaPage extends StatelessWidget {
                                         textInputAction: TextInputAction.done,
                                         controller: value.nomorDok,
                                         maxLines: 1,
-                                        inputFormatters: [
-                                          FilteringTextInputFormatter.digitsOnly
-                                        ],
+                                        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                         validator: (e) {
                                           if (e!.isEmpty) {
                                             return "Wajib diisi";
@@ -476,9 +474,7 @@ class PerantaraPasivaPage extends StatelessWidget {
                                         controller: value.nomorRef,
                                         readOnly: true,
                                         maxLines: 1,
-                                        inputFormatters: [
-                                          FilteringTextInputFormatter.digitsOnly
-                                        ],
+                                        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                         validator: (e) {
                                           if (e!.isEmpty) {
                                             return "Wajib diisi";

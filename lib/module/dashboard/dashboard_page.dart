@@ -1,4 +1,4 @@
-import 'package:accounting/module/dashboard/dashboard_notifier.dart';
+import 'package:cif/module/dashboard/dashboard_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

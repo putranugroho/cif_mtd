@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/pref/pref.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/pref/pref.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -217,26 +217,12 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
                 "no_reff": null,
                 "flag_trn": "0"
               },
-              "range_tanggal": {
-                "from": DateFormat('y-MM-dd').format(DateTime.now()),
-                "to": DateFormat('y-MM-dd').format(DateTime.now())
-              },
-              "akun": {
-                "dracc": null,
-                "cracc": null
-              },
-              "range_nominal": {
-                "min": null,
-                "max": null
-              }
+              "range_tanggal": {"from": DateFormat('y-MM-dd').format(DateTime.now()), "to": DateFormat('y-MM-dd').format(DateTime.now())},
+              "akun": {"dracc": null, "cracc": null},
+              "range_nominal": {"min": null, "max": null}
             },
-            "pagination": {
-              "page": 1
-            },
-            "sort": {
-              "by": "tgl_val",
-              "order": "desc"
-            }
+            "pagination": {"page": 1},
+            "sort": {"by": "tgl_val", "order": "desc"}
           }
         : {
             "filter": {
@@ -251,26 +237,12 @@ class PembatalanTransaksiNotifier extends ChangeNotifier {
                 "no_reff": null,
                 "flag_trn": "0"
               },
-              "range_tanggal_valuta": {
-                "from": DateFormat('y-MM-dd').format(tglVal!),
-                "to": DateFormat('y-MM-dd').format(tglVal!)
-              },
-              "akun": {
-                "dracc": null,
-                "cracc": null
-              },
-              "range_nominal": {
-                "min": null,
-                "max": null
-              }
+              "range_tanggal_valuta": {"from": DateFormat('y-MM-dd').format(tglVal!), "to": DateFormat('y-MM-dd').format(tglVal!)},
+              "akun": {"dracc": null, "cracc": null},
+              "range_nominal": {"min": null, "max": null}
             },
-            "pagination": {
-              "page": 1
-            },
-            "sort": {
-              "by": "tgl_val",
-              "order": "desc"
-            }
+            "pagination": {"page": 1},
+            "sort": {"by": "tgl_val", "order": "desc"}
           };
     Setuprepository.setup(token, NetworkURL.search(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {

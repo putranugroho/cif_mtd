@@ -1,5 +1,5 @@
 // File: lib/pages/penerimaan_page.dart
-import 'package:accounting/module/transaksi/penerimaan/penerimaan_notifier.dart';
+import 'package:cif/module/transaksi/penerimaan/penerimaan_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';

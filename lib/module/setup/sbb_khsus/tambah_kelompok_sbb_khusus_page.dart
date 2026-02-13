@@ -1,7 +1,7 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/setup/sbb_khsus/sbb_khusus_notifier.dart';
-import 'package:accounting/module/setup/sbb_khsus/tambah_kelompok_sbb_khusus_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/setup/sbb_khsus/sbb_khusus_notifier.dart';
+import 'package:cif/module/setup/sbb_khsus/tambah_kelompok_sbb_khusus_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -256,9 +256,7 @@ class TambahKelompokSbbKhususPage extends StatelessWidget {
                                 readOnly: value.editData,
                                 maxLines: 1,
                                 maxLength: 3,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]'))
-                                ],
+                                inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]'))],
                                 validator: (e) {
                                   if (e!.isEmpty) {
                                     return "Wajib diisi";
@@ -433,7 +431,10 @@ class DetailDataSource extends DataGridSource {
             ),
           );
         } else if (e.columnName == 'lebih') {
-          return Container(alignment: Alignment.center, padding: const EdgeInsets.all(8.0), child: Checkbox(activeColor: colorPrimary, value: e.value == "Y" ? true : false, onChanged: (e) {}));
+          return Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(8.0),
+              child: Checkbox(activeColor: colorPrimary, value: e.value == "Y" ? true : false, onChanged: (e) {}));
         } else {
           return Container(
             alignment: Alignment.centerLeft,

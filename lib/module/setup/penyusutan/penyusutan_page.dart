@@ -1,7 +1,7 @@
-import 'package:accounting/models/inquery_gl_model.dart';
-import 'package:accounting/module/setup/penyusutan/penyusutan_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
-import 'package:accounting/utils/colors.dart';
+import 'package:cif/models/inquery_gl_model.dart';
+import 'package:cif/module/setup/penyusutan/penyusutan_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
+import 'package:cif/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -72,8 +72,7 @@ class PenyusutanPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 16),
+                                  margin: const EdgeInsets.symmetric(vertical: 16),
                                   height: 1,
                                   color: Colors.grey,
                                 ),
@@ -141,8 +140,7 @@ class PenyusutanPage extends StatelessWidget {
                                         controller: value.nilai,
                                         maxLines: 1,
                                         inputFormatters: [
-                                          FilteringTextInputFormatter
-                                              .digitsOnly,
+                                          FilteringTextInputFormatter.digitsOnly,
                                           CurrencyInputFormatter(),
                                         ],
                                         validator: (e) {
@@ -155,8 +153,7 @@ class PenyusutanPage extends StatelessWidget {
                                         decoration: InputDecoration(
                                           hintText: "Nilai Akhir",
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),
@@ -188,48 +185,36 @@ class PenyusutanPage extends StatelessWidget {
                                               SizedBox(
                                                 width: 180,
                                                 child: TextFormField(
-                                                  textInputAction:
-                                                      TextInputAction.done,
+                                                  textInputAction: TextInputAction.done,
                                                   controller: value.declining,
                                                   maxLines: 1,
                                                   inputFormatters: [
-                                                    FilteringTextInputFormatter
-                                                        .allow(
-                                                      RegExp(
-                                                          r'^(100(\.00?)?|([1-9]\d?|0)(\.\d{0,2})?)$'),
+                                                    FilteringTextInputFormatter.allow(
+                                                      RegExp(r'^(100(\.00?)?|([1-9]\d?|0)(\.\d{0,2})?)$'),
                                                     ),
                                                   ],
-                                                  keyboardType:
-                                                      const TextInputType
-                                                          .numberWithOptions(
+                                                  keyboardType: const TextInputType.numberWithOptions(
                                                     decimal: true,
                                                     signed: false,
                                                   ),
                                                   validator: (e) {
-                                                    if (e == null ||
-                                                        e.isEmpty) {
+                                                    if (e == null || e.isEmpty) {
                                                       return "Wajib diisi";
                                                     }
 
-                                                    final valueAsDouble =
-                                                        double.tryParse(
-                                                            e.replaceAll(
-                                                                ",", "."));
+                                                    final valueAsDouble = double.tryParse(e.replaceAll(",", "."));
                                                     if (valueAsDouble == null) {
                                                       return "Format tidak valid";
                                                     }
 
-                                                    if (valueAsDouble < 0 ||
-                                                        valueAsDouble > 100) {
+                                                    if (valueAsDouble < 0 || valueAsDouble > 100) {
                                                       return "Nilai harus antara 0 dan 100";
                                                     }
 
                                                     // Ensure only 2 decimal places max
                                                     if (e.contains(".")) {
-                                                      final decimalPart =
-                                                          e.split(".")[1];
-                                                      if (decimalPart.length >
-                                                          2) {
+                                                      final decimalPart = e.split(".")[1];
+                                                      if (decimalPart.length > 2) {
                                                         return "Maksimal 2 angka di belakang koma";
                                                       }
                                                     }
@@ -239,9 +224,7 @@ class PenyusutanPage extends StatelessWidget {
                                                   decoration: InputDecoration(
                                                     hintText: "Penurunan",
                                                     border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
+                                                      borderRadius: BorderRadius.circular(6),
                                                     ),
                                                   ),
                                                 ),
@@ -250,8 +233,7 @@ class PenyusutanPage extends StatelessWidget {
                                           ),
                                           const SizedBox(height: 8),
                                           const Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 "Berdampak apabila metode penyusutan Menurun",
@@ -286,10 +268,8 @@ class PenyusutanPage extends StatelessWidget {
                                     Expanded(
                                       child: TypeAheadField<InqueryGlModel>(
                                         controller: value.namasbbaset,
-                                        suggestionsCallback: (search) =>
-                                            value.getInquerySbbAset(search),
-                                        builder:
-                                            (context, controller, focusNode) {
+                                        suggestionsCallback: (search) => value.getInquerySbbAset(search),
+                                        builder: (context, controller, focusNode) {
                                           return TextFormField(
                                               validator: (value) {
                                                 if (value!.isEmpty) {
@@ -343,8 +323,7 @@ class PenyusutanPage extends StatelessWidget {
                                           fillColor: Colors.grey[200],
                                           hintText: "Nomor Debet",
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),

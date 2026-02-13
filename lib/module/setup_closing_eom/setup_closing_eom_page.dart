@@ -1,5 +1,5 @@
-import 'package:accounting/module/setup_closing_eom/setup_closing_eom_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
+import 'package:cif/module/setup_closing_eom/setup_closing_eom_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -82,9 +82,7 @@ class SetupClosingEomPage extends StatelessWidget {
                                               controller: value.closingDate,
                                               maxLines: 1,
                                               onTap: () => value.showDate(),
-                                              inputFormatters: [
-                                                FilteringTextInputFormatter.digitsOnly
-                                              ],
+                                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                               style: TextStyle(
                                                 // Make text bigger and black
                                                 color: value.jenisTrans ? Colors.black : Colors.grey,

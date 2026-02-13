@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/repository/SetupRepository.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/repository/SetupRepository.dart';
 import 'package:flutter/material.dart';
 
 import '../../../network/network.dart';
@@ -25,9 +25,7 @@ class CustomerNotifier extends ChangeNotifier {
     isLoading = true;
     listAoModel.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -47,9 +45,7 @@ class CustomerNotifier extends ChangeNotifier {
     isLoading = true;
     list.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getCustomer(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -108,8 +104,7 @@ class CustomerNotifier extends ChangeNotifier {
           "kode_pt": "${customerSupplierModel!.kodePt}",
           "no_sif": "${noSif.text.trim()}",
           "nm_sif": "${namaSif.text.trim()}",
-          "gol_cust":
-              "${golCust == "Customer" ? 1 : golCust == "Supplier" ? 2 : 3}",
+          "gol_cust": "${golCust == "Customer" ? 1 : golCust == "Supplier" ? 2 : 3}",
           "bidang_usaha": "${bidangUsaha.text}",
           "alamat": "${alamat.text.trim()}",
           "kelurahan": "${kelurahanModel!.name}",
@@ -134,13 +129,10 @@ class CustomerNotifier extends ChangeNotifier {
           "email3": "${email3.text.trim()}",
           "keterangan3": "${keterangan3.text.trim()}",
           "kode_ao_customer": "${aoModel == null ? null : aoModel!.kode}",
-          "kode_ao_supplier":
-              "${aoModelKRedit == null ? null : aoModelKRedit!.kode}",
+          "kode_ao_supplier": "${aoModelKRedit == null ? null : aoModelKRedit!.kode}",
         };
         // print(jsonEncode(data));
-        Setuprepository.setup(
-                token, NetworkURL.editCustomer(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.editCustomer(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getCustomers();
@@ -156,8 +148,7 @@ class CustomerNotifier extends ChangeNotifier {
           "kode_pt": "001",
           "no_sif": "${noSif.text.trim()}",
           "nm_sif": "${namaSif.text.trim()}",
-          "gol_cust":
-              "${golCust == "Customer" ? 1 : golCust == "Supplier" ? 2 : 3}",
+          "gol_cust": "${golCust == "Customer" ? 1 : golCust == "Supplier" ? 2 : 3}",
           "bidang_usaha": "${bidangUsaha.text}",
           "alamat": "${alamat.text.trim()}",
           "kelurahan": "${kelurahanModel!.name}",
@@ -182,11 +173,9 @@ class CustomerNotifier extends ChangeNotifier {
           "email3": "${email3.text.trim()}",
           "keterangan3": "${keterangan3.text.trim()}",
           "kode_ao_customer": "${aoModel == null ? null : aoModel!.kode}",
-          "kode_ao_supplier":
-              "${aoModelKRedit == null ? null : aoModelKRedit!.kode}",
+          "kode_ao_supplier": "${aoModelKRedit == null ? null : aoModelKRedit!.kode}",
         };
-        Setuprepository.setup(token, NetworkURL.addCustomer(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.addCustomer(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'].toString().toLowerCase().contains("success")) {
             getCustomers();
@@ -273,8 +262,12 @@ class CustomerNotifier extends ChangeNotifier {
     DialogCustom().showLoading(context);
 
     customerSupplierModel = list.where((e) => e.id == int.parse(id)).first;
-    aoModel = listAoModel.where((e) => e.kode == customerSupplierModel!.kodeAoCustomer).isNotEmpty ? listAoModel.where((e) => e.kode == customerSupplierModel!.kodeAoCustomer).first : null;
-    aoModelKRedit = listAoModel.where((e) => e.kode == customerSupplierModel!.kodeAoSupplier).isNotEmpty ? listAoModel.where((e) => e.kode == customerSupplierModel!.kodeAoSupplier).first : null;
+    aoModel = listAoModel.where((e) => e.kode == customerSupplierModel!.kodeAoCustomer).isNotEmpty
+        ? listAoModel.where((e) => e.kode == customerSupplierModel!.kodeAoCustomer).first
+        : null;
+    aoModelKRedit = listAoModel.where((e) => e.kode == customerSupplierModel!.kodeAoSupplier).isNotEmpty
+        ? listAoModel.where((e) => e.kode == customerSupplierModel!.kodeAoSupplier).first
+        : null;
     noSif.text = customerSupplierModel!.noSif;
     namaSif.text = customerSupplierModel!.nmSif;
     golCust = customerSupplierModel!.golCust == "1"

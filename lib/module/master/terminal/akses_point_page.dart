@@ -1,6 +1,6 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/master/terminal/akses_point_notifier.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/master/terminal/akses_point_notifier.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -251,9 +251,7 @@ class AksesPointPage extends StatelessWidget {
                                       textInputAction: TextInputAction.done,
                                       controller: value.noAkses,
                                       maxLines: 1,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]'))
-                                      ],
+                                      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]'))],
                                       validator: (e) {
                                         if (e!.isEmpty) {
                                           return "Wajib diisi";

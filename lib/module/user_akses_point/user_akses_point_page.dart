@@ -1,5 +1,5 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/user_akses_point/user_akses_point_notifier.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/user_akses_point/user_akses_point_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
@@ -104,7 +104,11 @@ class UserAksesPointPage extends StatelessWidget {
                                       child: TextFormField(
                                         controller: value.nikKaryawan,
                                         readOnly: true,
-                                        decoration: InputDecoration(hintText: "User ID", filled: true, fillColor: Colors.grey[200], border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
+                                        decoration: InputDecoration(
+                                            hintText: "User ID",
+                                            filled: true,
+                                            fillColor: Colors.grey[200],
+                                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
                                       ),
                                     ),
                                     const SizedBox(
@@ -115,7 +119,11 @@ class UserAksesPointPage extends StatelessWidget {
                                       child: TextFormField(
                                         controller: value.namaKantor,
                                         readOnly: true,
-                                        decoration: InputDecoration(hintText: "Kantor", filled: true, fillColor: Colors.grey[200], border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
+                                        decoration: InputDecoration(
+                                            hintText: "Kantor",
+                                            filled: true,
+                                            fillColor: Colors.grey[200],
+                                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
                                       ),
                                     ),
                                   ],
@@ -279,9 +287,7 @@ class UserAksesPointPage extends StatelessWidget {
                                               decoration: BoxDecoration(color: Colors.grey[200]),
                                               child: const Column(
                                                 mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Text("Belum ada akses point ditambahkan")
-                                                ],
+                                                children: [Text("Belum ada akses point ditambahkan")],
                                               ),
                                             )
                                           : const SizedBox()

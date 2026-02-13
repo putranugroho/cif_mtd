@@ -1,5 +1,5 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -61,7 +61,10 @@ class TransaksiHutangNotifier extends ChangeNotifier {
   }
 
   gantinominal() {
-    sisa.text = piutangHutangModel!.bertahap == "Y" ? FormatCurrency.oCcy.format(int.parse(nominal.text.replaceAll(",", "")) - (int.parse(piutangHutangModel!.nilaiInvoice) / int.parse(piutangHutangModel!.jumlahTahap))) : FormatCurrency.oCcy.format(int.parse(nominal.text.replaceAll(",", "")) - int.parse(piutangHutangModel!.nilaiInvoice)).replaceAll(".", ",");
+    sisa.text = piutangHutangModel!.bertahap == "Y"
+        ? FormatCurrency.oCcy.format(
+            int.parse(nominal.text.replaceAll(",", "")) - (int.parse(piutangHutangModel!.nilaiInvoice) / int.parse(piutangHutangModel!.jumlahTahap)))
+        : FormatCurrency.oCcy.format(int.parse(nominal.text.replaceAll(",", "")) - int.parse(piutangHutangModel!.nilaiInvoice)).replaceAll(".", ",");
     notifyListeners();
   }
 
@@ -95,7 +98,9 @@ class TransaksiHutangNotifier extends ChangeNotifier {
     tglInvoice.text = piutangHutangModel!.tglInvoice;
     customer.text = piutangHutangModel!.nmSif;
     tahap.text = ((piutangHutangModel!.itemPembayaran.length) + 1).toString();
-    tagihan.text = piutangHutangModel!.bertahap == "Y" ? FormatCurrency.oCcy.format(int.parse(piutangHutangModel!.nilaiInvoice) / int.parse(piutangHutangModel!.jumlahTahap)).replaceAll(".", ",") : FormatCurrency.oCcy.format(int.parse(piutangHutangModel!.nilaiInvoice)).replaceAll(".", ",");
+    tagihan.text = piutangHutangModel!.bertahap == "Y"
+        ? FormatCurrency.oCcy.format(int.parse(piutangHutangModel!.nilaiInvoice) / int.parse(piutangHutangModel!.jumlahTahap)).replaceAll(".", ",")
+        : FormatCurrency.oCcy.format(int.parse(piutangHutangModel!.nilaiInvoice)).replaceAll(".", ",");
     notifyListeners();
   }
 
@@ -388,233 +393,43 @@ class TransaksiHutangNotifier extends ChangeNotifier {
       "type_posting": "",
       "saldo": 1800000.00,
     },
-    {
-      "nosbb": "0130301",
-      "nama_sbb": "Tab BCA 823",
-      "type_posting": "",
-      "saldo": 5561022.55
-    },
-    {
-      "nosbb": "0130304",
-      "nama_sbb": "Tab Bank Jateng 303",
-      "type_posting": "",
-      "saldo": 560147.03
-    },
-    {
-      "nosbb": "0130305",
-      "nama_sbb": "Tab Bank Jateng 304",
-      "type_posting": "",
-      "saldo": 3403847.55
-    },
-    {
-      "nosbb": "0130307",
-      "nama_sbb": "Tab Bank Jateng 305",
-      "type_posting": "",
-      "saldo": 515.66
-    },
-    {
-      "nosbb": "0130308",
-      "nama_sbb": "Tab Bank Jateng 306",
-      "type_posting": "",
-      "saldo": 333685.81
-    },
-    {
-      "nosbb": "0130309",
-      "nama_sbb": "Tab Bank Jateng 307",
-      "type_posting": "",
-      "saldo": 438481.91
-    },
-    {
-      "nosbb": "0130324",
-      "nama_sbb": "Tab Bank Jateng 308",
-      "type_posting": "",
-      "saldo": 299375.5
-    },
-    {
-      "nosbb": "0130327",
-      "nama_sbb": "Tab Bank Jateng 309",
-      "type_posting": "",
-      "saldo": 10409338.94
-    },
-    {
-      "nosbb": "0130332",
-      "nama_sbb": "Tab Bank Jateng 310",
-      "type_posting": "",
-      "saldo": 10008423.9
-    },
-    {
-      "nosbb": "0130338",
-      "nama_sbb": "Tab Bank Jateng 311",
-      "type_posting": "",
-      "saldo": 87366.07
-    },
-    {
-      "nosbb": "0130340",
-      "nama_sbb": "TAB. Bank Mandiri 723",
-      "type_posting": "",
-      "saldo": 87714.79
-    },
-    {
-      "nosbb": "0130341",
-      "nama_sbb": "TAB. Bank Mandiri 724",
-      "type_posting": "",
-      "saldo": 4940.39
-    },
-    {
-      "nosbb": "0130342",
-      "nama_sbb": "TAB. Bank Mandiri 725",
-      "type_posting": "",
-      "saldo": 1649.94
-    },
-    {
-      "nosbb": "0130343",
-      "nama_sbb": "TAB. Bank Mandiri 726",
-      "type_posting": "",
-      "saldo": 181.72
-    },
-    {
-      "nosbb": "0130344",
-      "nama_sbb": "TAB. Bank Mandiri 727",
-      "type_posting": "",
-      "saldo": 1803.14
-    },
-    {
-      "nosbb": "0130345",
-      "nama_sbb": "TAB. Bank Mandiri 728",
-      "type_posting": "",
-      "saldo": 185.55
-    },
-    {
-      "nosbb": "0130346",
-      "nama_sbb": "TAB. Bank Mandiri 729",
-      "type_posting": "",
-      "saldo": 298869.06
-    },
-    {
-      "nosbb": "0130347",
-      "nama_sbb": "TAB. Bank Mandiri 730",
-      "type_posting": "",
-      "saldo": 219213.91
-    },
-    {
-      "nosbb": "0130348",
-      "nama_sbb": "TAB. Bank Mandiri 731",
-      "type_posting": "",
-      "saldo": 270565.35
-    },
-    {
-      "nosbb": "0130349",
-      "nama_sbb": "TAB. BNI 424",
-      "type_posting": "",
-      "saldo": 466.62
-    },
-    {
-      "nosbb": "0130350",
-      "nama_sbb": "TAB. BNI 425",
-      "type_posting": "",
-      "saldo": 3048.88
-    },
-    {
-      "nosbb": "0130351",
-      "nama_sbb": "TAB. BNI 426",
-      "type_posting": "",
-      "saldo": 167.91
-    },
-    {
-      "nosbb": "0130352",
-      "nama_sbb": "TAB. BNI 427",
-      "type_posting": "",
-      "saldo": 3000030.5
-    },
-    {
-      "nosbb": "0130353",
-      "nama_sbb": "TAB. BNI 428",
-      "type_posting": "",
-      "saldo": 688268.64
-    },
-    {
-      "nosbb": "0130354",
-      "nama_sbb": "TAB. BNI 429",
-      "type_posting": "",
-      "saldo": 76657.5
-    },
-    {
-      "nosbb": "0130356",
-      "nama_sbb": "TAB. BNI 430",
-      "type_posting": "",
-      "saldo": 1168.31
-    },
-    {
-      "nosbb": "0130357",
-      "nama_sbb": "TAB. BNI 431",
-      "type_posting": "",
-      "saldo": 24265431.54
-    },
-    {
-      "nosbb": "0130358",
-      "nama_sbb": "TAB. BNI 432",
-      "type_posting": "",
-      "saldo": 14778.86
-    },
-    {
-      "nosbb": "0130359",
-      "nama_sbb": "Tab. Bank Muamalat 245",
-      "type_posting": "",
-      "saldo": 16459.22
-    },
-    {
-      "nosbb": "0130362",
-      "nama_sbb": "TAB. BANK BSI 345",
-      "type_posting": "",
-      "saldo": 652.54
-    },
-    {
-      "nosbb": "0130363",
-      "nama_sbb": "TAB. BANK BSI 346",
-      "type_posting": "",
-      "saldo": 53468.1
-    },
-    {
-      "nosbb": "0130364",
-      "nama_sbb": "TAB. BANK BSI 347",
-      "type_posting": "",
-      "saldo": 2701.8
-    },
-    {
-      "nosbb": "0140101",
-      "type_posting": "",
-      "nama_sbb": "Kredit Angsuran Bulanan",
-      "saldo": 11511966.67
-    },
-    {
-      "nosbb": "0140102",
-      "type_posting": "",
-      "nama_sbb": "Kredit Angsuran Musiman",
-      "saldo": 902882.68
-    },
-    {
-      "nosbb": "0140201",
-      "type_posting": "",
-      "nama_sbb": "Kredit Rekening Koran",
-      "saldo": 5427813.63
-    },
-    {
-      "nosbb": "0140301",
-      "nama_sbb": "Kredit Bunga Bulanan",
-      "type_posting": "",
-      "saldo": 7172340
-    },
-    {
-      "nosbb": "0140302",
-      "nama_sbb": "Kredit Bunga Sekaligus",
-      "type_posting": "",
-      "saldo": 930900
-    },
-    {
-      "nosbb": "0140304",
-      "nama_sbb": "Kredit Bunga Di Belakang",
-      "type_posting": "",
-      "saldo": 5700000
-    },
+    {"nosbb": "0130301", "nama_sbb": "Tab BCA 823", "type_posting": "", "saldo": 5561022.55},
+    {"nosbb": "0130304", "nama_sbb": "Tab Bank Jateng 303", "type_posting": "", "saldo": 560147.03},
+    {"nosbb": "0130305", "nama_sbb": "Tab Bank Jateng 304", "type_posting": "", "saldo": 3403847.55},
+    {"nosbb": "0130307", "nama_sbb": "Tab Bank Jateng 305", "type_posting": "", "saldo": 515.66},
+    {"nosbb": "0130308", "nama_sbb": "Tab Bank Jateng 306", "type_posting": "", "saldo": 333685.81},
+    {"nosbb": "0130309", "nama_sbb": "Tab Bank Jateng 307", "type_posting": "", "saldo": 438481.91},
+    {"nosbb": "0130324", "nama_sbb": "Tab Bank Jateng 308", "type_posting": "", "saldo": 299375.5},
+    {"nosbb": "0130327", "nama_sbb": "Tab Bank Jateng 309", "type_posting": "", "saldo": 10409338.94},
+    {"nosbb": "0130332", "nama_sbb": "Tab Bank Jateng 310", "type_posting": "", "saldo": 10008423.9},
+    {"nosbb": "0130338", "nama_sbb": "Tab Bank Jateng 311", "type_posting": "", "saldo": 87366.07},
+    {"nosbb": "0130340", "nama_sbb": "TAB. Bank Mandiri 723", "type_posting": "", "saldo": 87714.79},
+    {"nosbb": "0130341", "nama_sbb": "TAB. Bank Mandiri 724", "type_posting": "", "saldo": 4940.39},
+    {"nosbb": "0130342", "nama_sbb": "TAB. Bank Mandiri 725", "type_posting": "", "saldo": 1649.94},
+    {"nosbb": "0130343", "nama_sbb": "TAB. Bank Mandiri 726", "type_posting": "", "saldo": 181.72},
+    {"nosbb": "0130344", "nama_sbb": "TAB. Bank Mandiri 727", "type_posting": "", "saldo": 1803.14},
+    {"nosbb": "0130345", "nama_sbb": "TAB. Bank Mandiri 728", "type_posting": "", "saldo": 185.55},
+    {"nosbb": "0130346", "nama_sbb": "TAB. Bank Mandiri 729", "type_posting": "", "saldo": 298869.06},
+    {"nosbb": "0130347", "nama_sbb": "TAB. Bank Mandiri 730", "type_posting": "", "saldo": 219213.91},
+    {"nosbb": "0130348", "nama_sbb": "TAB. Bank Mandiri 731", "type_posting": "", "saldo": 270565.35},
+    {"nosbb": "0130349", "nama_sbb": "TAB. BNI 424", "type_posting": "", "saldo": 466.62},
+    {"nosbb": "0130350", "nama_sbb": "TAB. BNI 425", "type_posting": "", "saldo": 3048.88},
+    {"nosbb": "0130351", "nama_sbb": "TAB. BNI 426", "type_posting": "", "saldo": 167.91},
+    {"nosbb": "0130352", "nama_sbb": "TAB. BNI 427", "type_posting": "", "saldo": 3000030.5},
+    {"nosbb": "0130353", "nama_sbb": "TAB. BNI 428", "type_posting": "", "saldo": 688268.64},
+    {"nosbb": "0130354", "nama_sbb": "TAB. BNI 429", "type_posting": "", "saldo": 76657.5},
+    {"nosbb": "0130356", "nama_sbb": "TAB. BNI 430", "type_posting": "", "saldo": 1168.31},
+    {"nosbb": "0130357", "nama_sbb": "TAB. BNI 431", "type_posting": "", "saldo": 24265431.54},
+    {"nosbb": "0130358", "nama_sbb": "TAB. BNI 432", "type_posting": "", "saldo": 14778.86},
+    {"nosbb": "0130359", "nama_sbb": "Tab. Bank Muamalat 245", "type_posting": "", "saldo": 16459.22},
+    {"nosbb": "0130362", "nama_sbb": "TAB. BANK BSI 345", "type_posting": "", "saldo": 652.54},
+    {"nosbb": "0130363", "nama_sbb": "TAB. BANK BSI 346", "type_posting": "", "saldo": 53468.1},
+    {"nosbb": "0130364", "nama_sbb": "TAB. BANK BSI 347", "type_posting": "", "saldo": 2701.8},
+    {"nosbb": "0140101", "type_posting": "", "nama_sbb": "Kredit Angsuran Bulanan", "saldo": 11511966.67},
+    {"nosbb": "0140102", "type_posting": "", "nama_sbb": "Kredit Angsuran Musiman", "saldo": 902882.68},
+    {"nosbb": "0140201", "type_posting": "", "nama_sbb": "Kredit Rekening Koran", "saldo": 5427813.63},
+    {"nosbb": "0140301", "nama_sbb": "Kredit Bunga Bulanan", "type_posting": "", "saldo": 7172340},
+    {"nosbb": "0140302", "nama_sbb": "Kredit Bunga Sekaligus", "type_posting": "", "saldo": 930900},
+    {"nosbb": "0140304", "nama_sbb": "Kredit Bunga Di Belakang", "type_posting": "", "saldo": 5700000},
   ];
 }

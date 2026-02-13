@@ -1,11 +1,11 @@
-import 'package:accounting/models/index.dart';
+import 'package:cif/models/index.dart';
 
-import 'package:accounting/module/transaksi/kas_kecil/kasbon_notifier.dart';
+import 'package:cif/module/transaksi/kas_kecil/kasbon_notifier.dart';
 
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart' as a;
-import 'package:accounting/utils/button_custom.dart';
-import 'package:accounting/utils/currency_formatted.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/utils/button_custom.dart';
+import 'package:cif/utils/currency_formatted.dart';
+import 'package:cif/utils/format_currency.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -52,8 +52,7 @@ class KasbonPage extends StatelessWidget {
                           InkWell(
                             onTap: () => value.tambah(),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: colorPrimary,
@@ -289,8 +288,7 @@ class KasbonPage extends StatelessWidget {
                         ? Container(
                             padding: const EdgeInsets.all(20),
                             width: 600,
-                            decoration:
-                                const BoxDecoration(color: Colors.white),
+                            decoration: const BoxDecoration(color: Colors.white),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
@@ -311,9 +309,7 @@ class KasbonPage extends StatelessWidget {
                                         width: 40,
                                         height: 40,
                                         padding: const EdgeInsets.all(4),
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey[200],
-                                            shape: BoxShape.circle),
+                                        decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
                                         child: const Icon(Icons.close),
                                       ),
                                     )
@@ -329,8 +325,7 @@ class KasbonPage extends StatelessWidget {
                                       child: ListView(
                                         children: [
                                           Container(
-                                            margin: const EdgeInsets.symmetric(
-                                                vertical: 16),
+                                            margin: const EdgeInsets.symmetric(vertical: 16),
                                             height: 1,
                                             color: Colors.grey,
                                           ),
@@ -346,15 +341,13 @@ class KasbonPage extends StatelessWidget {
                                             children: [
                                               Expanded(
                                                   child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
                                                   const Row(
                                                     children: [
                                                       Text(
                                                         "Nomor Dokumen",
-                                                        style: TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
                                                       SizedBox(width: 5),
                                                     ],
@@ -363,25 +356,17 @@ class KasbonPage extends StatelessWidget {
                                                     height: 8,
                                                   ),
                                                   TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
+                                                    textInputAction: TextInputAction.done,
                                                     controller: value.nomorDok,
                                                     maxLines: 1,
                                                     readOnly: true,
-                                                    inputFormatters: [
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly
-                                                    ],
+                                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                     decoration: InputDecoration(
                                                       filled: true,
-                                                      fillColor:
-                                                          Colors.grey[200],
+                                                      fillColor: Colors.grey[200],
                                                       hintText: "Nomor Dok",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -392,15 +377,13 @@ class KasbonPage extends StatelessWidget {
                                               ),
                                               Expanded(
                                                   child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
                                                   const Row(
                                                     children: [
                                                       Text(
                                                         "Nomor Reference",
-                                                        style: TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
                                                       SizedBox(width: 5),
                                                     ],
@@ -409,26 +392,17 @@ class KasbonPage extends StatelessWidget {
                                                     height: 8,
                                                   ),
                                                   TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
+                                                    textInputAction: TextInputAction.done,
                                                     controller: value.nomorRef,
                                                     maxLines: 1,
                                                     readOnly: true,
-                                                    inputFormatters: [
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly
-                                                    ],
+                                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                     decoration: InputDecoration(
                                                       filled: true,
-                                                      fillColor:
-                                                          Colors.grey[200],
-                                                      hintText:
-                                                          "Nomor Referensi",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      fillColor: Colors.grey[200],
+                                                      hintText: "Nomor Referensi",
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -455,16 +429,14 @@ class KasbonPage extends StatelessWidget {
                                           ),
                                           TextFormField(
                                             controller: value.keterangan,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             readOnly: true,
                                             decoration: InputDecoration(
                                               filled: true,
                                               fillColor: Colors.grey[200],
                                               hintText: "Keterangan Transaksi",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -472,21 +444,18 @@ class KasbonPage extends StatelessWidget {
                                             height: 16,
                                           ),
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
                                               const Row(
                                                 children: [
                                                   Text(
                                                     "Debet Akun",
-                                                    style:
-                                                        TextStyle(fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
                                                   SizedBox(width: 5),
                                                   Text(
                                                     "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
+                                                    style: TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -496,45 +465,29 @@ class KasbonPage extends StatelessWidget {
                                               Row(
                                                 children: [
                                                   Expanded(
-                                                    child: TypeAheadField<
-                                                        InqueryGlModel>(
-                                                      controller:
-                                                          value.namaSbbDeb,
-                                                      suggestionsCallback:
-                                                          (search) =>
-                                                              value.getInquery(
-                                                                  search),
-                                                      builder: (context,
-                                                          controller,
-                                                          focusNode) {
+                                                    child: TypeAheadField<InqueryGlModel>(
+                                                      controller: value.namaSbbDeb,
+                                                      suggestionsCallback: (search) => value.getInquery(search),
+                                                      builder: (context, controller, focusNode) {
                                                         return TextField(
-                                                            controller:
-                                                                controller,
-                                                            focusNode:
-                                                                focusNode,
+                                                            controller: controller,
+                                                            focusNode: focusNode,
                                                             enabled: false,
                                                             autofocus: true,
-                                                            decoration:
-                                                                const InputDecoration(
-                                                              border:
-                                                                  OutlineInputBorder(),
-                                                              labelText:
-                                                                  'Cari Akun',
+                                                            decoration: const InputDecoration(
+                                                              border: OutlineInputBorder(),
+                                                              labelText: 'Cari Akun',
                                                             ));
                                                       },
-                                                      itemBuilder:
-                                                          (context, city) {
+                                                      itemBuilder: (context, city) {
                                                         return ListTile(
-                                                          title:
-                                                              Text(city.nosbb),
-                                                          subtitle: Text(
-                                                              city.namaSbb),
+                                                          title: Text(city.nosbb),
+                                                          subtitle: Text(city.namaSbb),
                                                         );
                                                       },
                                                       onSelected: (city) {
                                                         // value.selectInvoice(city);
-                                                        value
-                                                            .pilihAkunDeb(city);
+                                                        value.pilihAkunDeb(city);
                                                       },
                                                     ),
                                                   ),
@@ -546,10 +499,8 @@ class KasbonPage extends StatelessWidget {
                                                     child: TextFormField(
                                                       // enabled: false,
                                                       readOnly: true,
-                                                      textInputAction:
-                                                          TextInputAction.done,
-                                                      controller:
-                                                          value.nosbbdeb,
+                                                      textInputAction: TextInputAction.done,
+                                                      controller: value.nosbbdeb,
                                                       maxLines: 1,
                                                       // inputFormatters: [
                                                       //   FilteringTextInputFormatter.digitsOnly
@@ -561,17 +512,12 @@ class KasbonPage extends StatelessWidget {
                                                           return null;
                                                         }
                                                       },
-                                                      decoration:
-                                                          InputDecoration(
+                                                      decoration: InputDecoration(
                                                         filled: true,
-                                                        fillColor:
-                                                            Colors.grey[200],
+                                                        fillColor: Colors.grey[200],
                                                         hintText: "Nomor Debet",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
@@ -582,21 +528,18 @@ class KasbonPage extends StatelessWidget {
                                             ],
                                           ),
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
                                               const Row(
                                                 children: [
                                                   Text(
                                                     "Kredit Akun",
-                                                    style:
-                                                        TextStyle(fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
                                                   SizedBox(width: 5),
                                                   Text(
                                                     "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
+                                                    style: TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -606,45 +549,29 @@ class KasbonPage extends StatelessWidget {
                                               Row(
                                                 children: [
                                                   Expanded(
-                                                    child: TypeAheadField<
-                                                        InqueryGlModel>(
-                                                      controller:
-                                                          value.namaSbbCre,
-                                                      suggestionsCallback:
-                                                          (search) =>
-                                                              value.getInquery(
-                                                                  search),
-                                                      builder: (context,
-                                                          controller,
-                                                          focusNode) {
+                                                    child: TypeAheadField<InqueryGlModel>(
+                                                      controller: value.namaSbbCre,
+                                                      suggestionsCallback: (search) => value.getInquery(search),
+                                                      builder: (context, controller, focusNode) {
                                                         return TextField(
-                                                            controller:
-                                                                controller,
-                                                            focusNode:
-                                                                focusNode,
+                                                            controller: controller,
+                                                            focusNode: focusNode,
                                                             enabled: false,
                                                             autofocus: true,
-                                                            decoration:
-                                                                const InputDecoration(
-                                                              border:
-                                                                  OutlineInputBorder(),
-                                                              labelText:
-                                                                  'Cari Akun',
+                                                            decoration: const InputDecoration(
+                                                              border: OutlineInputBorder(),
+                                                              labelText: 'Cari Akun',
                                                             ));
                                                       },
-                                                      itemBuilder:
-                                                          (context, city) {
+                                                      itemBuilder: (context, city) {
                                                         return ListTile(
-                                                          title:
-                                                              Text(city.nosbb),
-                                                          subtitle: Text(
-                                                              city.namaSbb),
+                                                          title: Text(city.nosbb),
+                                                          subtitle: Text(city.namaSbb),
                                                         );
                                                       },
                                                       onSelected: (city) {
                                                         // value.selectInvoice(city);
-                                                        value
-                                                            .pilihAkunCre(city);
+                                                        value.pilihAkunCre(city);
                                                       },
                                                     ),
                                                   ),
@@ -656,10 +583,8 @@ class KasbonPage extends StatelessWidget {
                                                     child: TextFormField(
                                                       // enabled: false,
                                                       readOnly: true,
-                                                      textInputAction:
-                                                          TextInputAction.done,
-                                                      controller:
-                                                          value.nossbcre,
+                                                      textInputAction: TextInputAction.done,
+                                                      controller: value.nossbcre,
                                                       maxLines: 1,
                                                       // inputFormatters: [
                                                       //   FilteringTextInputFormatter.digitsOnly
@@ -671,18 +596,12 @@ class KasbonPage extends StatelessWidget {
                                                           return null;
                                                         }
                                                       },
-                                                      decoration:
-                                                          InputDecoration(
+                                                      decoration: InputDecoration(
                                                         filled: true,
-                                                        fillColor:
-                                                            Colors.grey[200],
-                                                        hintText:
-                                                            "Nomor Kredit",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                        fillColor: Colors.grey[200],
+                                                        hintText: "Nomor Kredit",
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
@@ -701,14 +620,12 @@ class KasbonPage extends StatelessWidget {
                                                       children: [
                                                         Text(
                                                           "Nominal",
-                                                          style: TextStyle(
-                                                              fontSize: 12),
+                                                          style: TextStyle(fontSize: 12),
                                                         ),
                                                         SizedBox(width: 5),
                                                         Text(
                                                           "*",
-                                                          style: TextStyle(
-                                                              fontSize: 8),
+                                                          style: TextStyle(fontSize: 8),
                                                         ),
                                                       ],
                                                     ),
@@ -716,24 +633,16 @@ class KasbonPage extends StatelessWidget {
                                                       height: 8,
                                                     ),
                                                     TextFormField(
-                                                      textInputAction:
-                                                          TextInputAction.done,
+                                                      textInputAction: TextInputAction.done,
                                                       controller: value.nominal,
                                                       maxLines: 1,
-                                                      keyboardType:
-                                                          const TextInputType
-                                                              .numberWithOptions(
-                                                              decimal: true),
+                                                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
                                                       inputFormatters: [
                                                         a.CurrencyInputFormatter(
                                                           leadingSymbol: 'Rp ',
-                                                          useSymbolPadding:
-                                                              true,
-                                                          thousandSeparator: a
-                                                              .ThousandSeparator
-                                                              .Period,
-                                                          mantissaLength:
-                                                              2, // jumlah angka desimal
+                                                          useSymbolPadding: true,
+                                                          thousandSeparator: a.ThousandSeparator.Period,
+                                                          mantissaLength: 2, // jumlah angka desimal
                                                           // decimalSeparator: DecimalSeparator.Comma,
                                                         ),
                                                       ],
@@ -744,15 +653,10 @@ class KasbonPage extends StatelessWidget {
                                                           return null;
                                                         }
                                                       },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        hintText:
-                                                            "Nilai Transaksi",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                      decoration: InputDecoration(
+                                                        hintText: "Nilai Transaksi",
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
@@ -769,14 +673,12 @@ class KasbonPage extends StatelessWidget {
                                                       children: [
                                                         Text(
                                                           "Tanggal Kas Bon",
-                                                          style: TextStyle(
-                                                              fontSize: 12),
+                                                          style: TextStyle(fontSize: 12),
                                                         ),
                                                         SizedBox(width: 5),
                                                         Text(
                                                           "*",
-                                                          style: TextStyle(
-                                                              fontSize: 8),
+                                                          style: TextStyle(fontSize: 8),
                                                         ),
                                                       ],
                                                     ),
@@ -784,29 +686,20 @@ class KasbonPage extends StatelessWidget {
                                                       height: 8,
                                                     ),
                                                     TextFormField(
-                                                      textInputAction:
-                                                          TextInputAction.done,
-                                                      controller: value
-                                                          .tglTransaksiText,
+                                                      textInputAction: TextInputAction.done,
+                                                      controller: value.tglTransaksiText,
                                                       maxLines: 1,
                                                       readOnly: true,
                                                       inputFormatters: [
-                                                        FilteringTextInputFormatter
-                                                            .digitsOnly,
+                                                        FilteringTextInputFormatter.digitsOnly,
                                                         CurrencyInputFormatter(),
                                                       ],
-                                                      decoration:
-                                                          InputDecoration(
+                                                      decoration: InputDecoration(
                                                         filled: true,
-                                                        fillColor:
-                                                            Colors.grey[200],
-                                                        hintText:
-                                                            "Tanggal Valuta",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                        fillColor: Colors.grey[200],
+                                                        hintText: "Tanggal Valuta",
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
@@ -819,8 +712,7 @@ class KasbonPage extends StatelessWidget {
                                             height: 16,
                                           ),
                                           Container(
-                                            margin: const EdgeInsets.symmetric(
-                                                vertical: 16),
+                                            margin: const EdgeInsets.symmetric(vertical: 16),
                                             height: 1,
                                             color: Colors.grey,
                                           ),
@@ -836,15 +728,13 @@ class KasbonPage extends StatelessWidget {
                                             children: [
                                               Expanded(
                                                   child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
                                                   const Row(
                                                     children: [
                                                       Text(
                                                         "Tanggal",
-                                                        style: TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
                                                       SizedBox(width: 5),
                                                     ],
@@ -854,19 +744,16 @@ class KasbonPage extends StatelessWidget {
                                                   ),
                                                   InkWell(
                                                     onTap: () {
-                                                      value
-                                                          .pilihTanggalPenyelesaian();
+                                                      value.pilihTanggalPenyelesaian();
                                                     },
                                                     child: TextFormField(
                                                       enabled: false,
-                                                      controller: value
-                                                          .tglPenyelesaianText,
+                                                      controller: value.tglPenyelesaianText,
                                                       maxLines: 1,
                                                       style: const TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
+                                                        fontWeight: FontWeight.w500,
                                                       ),
                                                       validator: (e) {
                                                         if (e!.isEmpty) {
@@ -875,28 +762,15 @@ class KasbonPage extends StatelessWidget {
                                                           return null;
                                                         }
                                                       },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        hintText:
-                                                            "Pilih Tanggal",
-                                                        hintStyle:
-                                                            const TextStyle(
-                                                                color: Colors
-                                                                    .grey),
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                      decoration: InputDecoration(
+                                                        hintText: "Pilih Tanggal",
+                                                        hintStyle: const TextStyle(color: Colors.grey),
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
-                                                        disabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                              color: Colors.grey
-                                                                  .shade600),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                        disabledBorder: OutlineInputBorder(
+                                                          borderSide: BorderSide(color: Colors.grey.shade600),
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
@@ -908,15 +782,13 @@ class KasbonPage extends StatelessWidget {
                                               ),
                                               Expanded(
                                                   child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
                                                   const Row(
                                                     children: [
                                                       Text(
                                                         "Nomor Dokumen",
-                                                        style: TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
                                                       SizedBox(width: 5),
                                                     ],
@@ -925,15 +797,10 @@ class KasbonPage extends StatelessWidget {
                                                     height: 8,
                                                   ),
                                                   TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
-                                                    controller:
-                                                        value.nomorDokBaru,
+                                                    textInputAction: TextInputAction.done,
+                                                    controller: value.nomorDokBaru,
                                                     maxLines: 1,
-                                                    inputFormatters: [
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly
-                                                    ],
+                                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                     validator: (e) {
                                                       if (e!.isEmpty) {
                                                         return "Wajib diisi";
@@ -943,11 +810,8 @@ class KasbonPage extends StatelessWidget {
                                                     },
                                                     decoration: InputDecoration(
                                                       hintText: "Nomor Dok",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -960,15 +824,13 @@ class KasbonPage extends StatelessWidget {
                                             children: [
                                               Expanded(
                                                   child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
                                                   const Row(
                                                     children: [
                                                       Text(
                                                         "Nilai Transaksi",
-                                                        style: TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
                                                       SizedBox(width: 5),
                                                     ],
@@ -977,24 +839,16 @@ class KasbonPage extends StatelessWidget {
                                                     height: 8,
                                                   ),
                                                   TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
-                                                    controller:
-                                                        value.nilaiTrans,
+                                                    textInputAction: TextInputAction.done,
+                                                    controller: value.nilaiTrans,
                                                     maxLines: 1,
-                                                    keyboardType:
-                                                        const TextInputType
-                                                            .numberWithOptions(
-                                                            decimal: true),
+                                                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
                                                     inputFormatters: [
                                                       a.CurrencyInputFormatter(
                                                         leadingSymbol: 'Rp ',
                                                         useSymbolPadding: true,
-                                                        thousandSeparator: a
-                                                            .ThousandSeparator
-                                                            .Period,
-                                                        mantissaLength:
-                                                            2, // jumlah angka desimal
+                                                        thousandSeparator: a.ThousandSeparator.Period,
+                                                        mantissaLength: 2, // jumlah angka desimal
                                                         // decimalSeparator: DecimalSeparator.Comma,
                                                       ),
                                                     ],
@@ -1010,13 +864,9 @@ class KasbonPage extends StatelessWidget {
                                                       }
                                                     },
                                                     decoration: InputDecoration(
-                                                      hintText:
-                                                          "Nilai Transaksi",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      hintText: "Nilai Transaksi",
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1027,22 +877,18 @@ class KasbonPage extends StatelessWidget {
                                               ),
                                               Expanded(
                                                 child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .stretch,
+                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                                   children: [
                                                     const Row(
                                                       children: [
                                                         Text(
                                                           "Pilih Debet Akun",
-                                                          style: TextStyle(
-                                                              fontSize: 12),
+                                                          style: TextStyle(fontSize: 12),
                                                         ),
                                                         SizedBox(width: 5),
                                                         Text(
                                                           "*",
-                                                          style: TextStyle(
-                                                              fontSize: 8),
+                                                          style: TextStyle(fontSize: 8),
                                                         ),
                                                       ],
                                                     ),
@@ -1052,47 +898,28 @@ class KasbonPage extends StatelessWidget {
                                                     Row(
                                                       children: [
                                                         Expanded(
-                                                          child: TypeAheadField<
-                                                              InqueryGlModel>(
-                                                            controller: value
-                                                                .namaSbbDebPenyelesaian,
-                                                            suggestionsCallback:
-                                                                (search) => value
-                                                                    .getInquery(
-                                                                        search),
-                                                            builder: (context,
-                                                                controller,
-                                                                focusNode) {
+                                                          child: TypeAheadField<InqueryGlModel>(
+                                                            controller: value.namaSbbDebPenyelesaian,
+                                                            suggestionsCallback: (search) => value.getInquery(search),
+                                                            builder: (context, controller, focusNode) {
                                                               return TextField(
-                                                                  controller:
-                                                                      controller,
-                                                                  focusNode:
-                                                                      focusNode,
-                                                                  autofocus:
-                                                                      true,
-                                                                  decoration:
-                                                                      const InputDecoration(
-                                                                    border:
-                                                                        OutlineInputBorder(),
-                                                                    labelText:
-                                                                        'Cari Akun',
+                                                                  controller: controller,
+                                                                  focusNode: focusNode,
+                                                                  autofocus: true,
+                                                                  decoration: const InputDecoration(
+                                                                    border: OutlineInputBorder(),
+                                                                    labelText: 'Cari Akun',
                                                                   ));
                                                             },
-                                                            itemBuilder:
-                                                                (context,
-                                                                    city) {
+                                                            itemBuilder: (context, city) {
                                                               return ListTile(
-                                                                title: Text(
-                                                                    city.nosbb),
-                                                                subtitle: Text(
-                                                                    city.namaSbb),
+                                                                title: Text(city.nosbb),
+                                                                subtitle: Text(city.namaSbb),
                                                               );
                                                             },
                                                             onSelected: (city) {
                                                               // value.selectInvoice(city);
-                                                              value
-                                                                  .pilihAkunKreditPenyelesaian(
-                                                                      city);
+                                                              value.pilihAkunKreditPenyelesaian(city);
                                                             },
                                                           ),
                                                         ),
@@ -1108,15 +935,13 @@ class KasbonPage extends StatelessWidget {
                                             children: [
                                               Expanded(
                                                   child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
                                                   const Row(
                                                     children: [
                                                       Text(
                                                         "Selisih",
-                                                        style: TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
                                                       SizedBox(width: 5),
                                                     ],
@@ -1125,14 +950,12 @@ class KasbonPage extends StatelessWidget {
                                                     height: 8,
                                                   ),
                                                   TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
+                                                    textInputAction: TextInputAction.done,
                                                     controller: value.selisih,
                                                     maxLines: 1,
                                                     readOnly: true,
                                                     inputFormatters: [
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly,
+                                                      FilteringTextInputFormatter.digitsOnly,
                                                       CurrencyInputFormatter(),
                                                     ],
                                                     // validator: (e) {
@@ -1144,22 +967,14 @@ class KasbonPage extends StatelessWidget {
                                                     // },
                                                     textAlign: TextAlign.right,
                                                     style: TextStyle(
-                                                      color:
-                                                          value.nilaiselisih >=
-                                                                  0
-                                                              ? Colors.black
-                                                              : Colors.red,
+                                                      color: value.nilaiselisih >= 0 ? Colors.black : Colors.red,
                                                     ),
                                                     decoration: InputDecoration(
                                                       filled: true,
-                                                      fillColor:
-                                                          Colors.grey[200],
+                                                      fillColor: Colors.grey[200],
                                                       hintText: "Selisih",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1170,26 +985,18 @@ class KasbonPage extends StatelessWidget {
                                               ),
                                               Expanded(
                                                 child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .stretch,
+                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                                   children: [
                                                     Row(
                                                       children: [
                                                         Text(
-                                                          value.nilaiselisih > 0
-                                                              ? "Debet Akun (Terima)"
-                                                              : "Kredit Akun (Bayar)",
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 12),
+                                                          value.nilaiselisih > 0 ? "Debet Akun (Terima)" : "Kredit Akun (Bayar)",
+                                                          style: const TextStyle(fontSize: 12),
                                                         ),
-                                                        const SizedBox(
-                                                            width: 5),
+                                                        const SizedBox(width: 5),
                                                         const Text(
                                                           "*",
-                                                          style: TextStyle(
-                                                              fontSize: 8),
+                                                          style: TextStyle(fontSize: 8),
                                                         ),
                                                       ],
                                                     ),
@@ -1199,49 +1006,29 @@ class KasbonPage extends StatelessWidget {
                                                     Row(
                                                       children: [
                                                         Expanded(
-                                                          child: TypeAheadField<
-                                                              InqueryGlModel>(
-                                                            controller:
-                                                                value.nossbcre,
-                                                            suggestionsCallback:
-                                                                (search) => value
-                                                                    .getInquery(
-                                                                        search),
-                                                            builder: (context,
-                                                                controller,
-                                                                focusNode) {
+                                                          child: TypeAheadField<InqueryGlModel>(
+                                                            controller: value.nossbcre,
+                                                            suggestionsCallback: (search) => value.getInquery(search),
+                                                            builder: (context, controller, focusNode) {
                                                               return TextField(
-                                                                  controller:
-                                                                      controller,
-                                                                  enabled:
-                                                                      false,
-                                                                  focusNode:
-                                                                      focusNode,
-                                                                  autofocus:
-                                                                      true,
-                                                                  decoration:
-                                                                      const InputDecoration(
-                                                                    border:
-                                                                        OutlineInputBorder(),
-                                                                    labelText:
-                                                                        'Cari Akun',
+                                                                  controller: controller,
+                                                                  enabled: false,
+                                                                  focusNode: focusNode,
+                                                                  autofocus: true,
+                                                                  decoration: const InputDecoration(
+                                                                    border: OutlineInputBorder(),
+                                                                    labelText: 'Cari Akun',
                                                                   ));
                                                             },
-                                                            itemBuilder:
-                                                                (context,
-                                                                    city) {
+                                                            itemBuilder: (context, city) {
                                                               return ListTile(
-                                                                title: Text(
-                                                                    city.nosbb),
-                                                                subtitle: Text(
-                                                                    city.namaSbb),
+                                                                title: Text(city.nosbb),
+                                                                subtitle: Text(city.namaSbb),
                                                               );
                                                             },
                                                             onSelected: (city) {
                                                               // value.selectInvoice(city);
-                                                              value
-                                                                  .pilihAkunCre(
-                                                                      city);
+                                                              value.pilihAkunCre(city);
                                                             },
                                                           ),
                                                         ),
@@ -1271,8 +1058,7 @@ class KasbonPage extends StatelessWidget {
                                           ),
                                           TextFormField(
                                             controller: value.keteranganBaru,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             validator: (e) {
                                               if (e!.isEmpty) {
                                                 return "Wajib diisi";
@@ -1283,8 +1069,7 @@ class KasbonPage extends StatelessWidget {
                                             decoration: InputDecoration(
                                               hintText: "Keterangan Transaksi",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -1306,8 +1091,7 @@ class KasbonPage extends StatelessWidget {
                         : Container(
                             padding: const EdgeInsets.all(20),
                             width: 600,
-                            decoration:
-                                const BoxDecoration(color: Colors.white),
+                            decoration: const BoxDecoration(color: Colors.white),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
@@ -1328,9 +1112,7 @@ class KasbonPage extends StatelessWidget {
                                         width: 40,
                                         height: 40,
                                         padding: const EdgeInsets.all(4),
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey[200],
-                                            shape: BoxShape.circle),
+                                        decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
                                         child: const Icon(Icons.close),
                                       ),
                                     )
@@ -1360,32 +1142,26 @@ class KasbonPage extends StatelessWidget {
                                               Checkbox(
                                                 activeColor: colorPrimary,
                                                 value: value.backDate,
-                                                onChanged: (e) =>
-                                                    value.gantibackDate(),
+                                                onChanged: (e) => value.gantibackDate(),
                                               ),
                                               const SizedBox(width: 8),
                                               Expanded(
                                                 child: InkWell(
-                                                  onTap: () =>
-                                                      value.tanggalBackDate(),
+                                                  onTap: () => value.tanggalBackDate(),
                                                   child: TextFormField(
                                                     enabled: !value.backDate,
-                                                    textInputAction:
-                                                        TextInputAction.done,
-                                                    controller:
-                                                        value.tglBackDatetext,
+                                                    textInputAction: TextInputAction.done,
+                                                    controller: value.tglBackDatetext,
                                                     maxLines: 1,
                                                     readOnly: !value.backDate,
                                                     style: const TextStyle(
                                                       // Make text bigger and black
                                                       color: Colors.black,
                                                       fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w500,
+                                                      fontWeight: FontWeight.w500,
                                                     ),
                                                     validator: (e) {
-                                                      if (e!.isEmpty &&
-                                                          value.backDate) {
+                                                      if (e!.isEmpty && value.backDate) {
                                                         return "Wajib diisi";
                                                       } else {
                                                         return null;
@@ -1393,28 +1169,15 @@ class KasbonPage extends StatelessWidget {
                                                     },
                                                     decoration: InputDecoration(
                                                       filled: !value.backDate,
-                                                      fillColor:
-                                                          Colors.grey[200],
-                                                      hintText:
-                                                          "Tanggal Valuta",
-                                                      hintStyle:
-                                                          const TextStyle(
-                                                              color:
-                                                                  Colors.grey),
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      fillColor: Colors.grey[200],
+                                                      hintText: "Tanggal Valuta",
+                                                      hintStyle: const TextStyle(color: Colors.grey),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
-                                                      disabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: Colors
-                                                                .grey.shade600),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      disabledBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(color: Colors.grey.shade600),
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1427,21 +1190,18 @@ class KasbonPage extends StatelessWidget {
                                             children: [
                                               Expanded(
                                                   child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
                                                   const Text(
                                                     "Nomor Dokumen",
-                                                    style:
-                                                        TextStyle(fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
                                                   const SizedBox(width: 5),
                                                   const SizedBox(
                                                     height: 8,
                                                   ),
                                                   TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
+                                                    textInputAction: TextInputAction.done,
                                                     controller: value.nomorDok,
                                                     maxLines: 1,
                                                     validator: (e) {
@@ -1453,11 +1213,8 @@ class KasbonPage extends StatelessWidget {
                                                     },
                                                     decoration: InputDecoration(
                                                       hintText: "Nomor Dok",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1468,15 +1225,13 @@ class KasbonPage extends StatelessWidget {
                                               ),
                                               Expanded(
                                                   child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                                 children: [
                                                   const Row(
                                                     children: [
                                                       Text(
                                                         "Nomor Reference",
-                                                        style: TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
                                                       SizedBox(width: 5),
                                                     ],
@@ -1485,8 +1240,7 @@ class KasbonPage extends StatelessWidget {
                                                     height: 8,
                                                   ),
                                                   TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
+                                                    textInputAction: TextInputAction.done,
                                                     controller: value.nomorRef,
                                                     maxLines: 1,
                                                     validator: (e) {
@@ -1497,13 +1251,9 @@ class KasbonPage extends StatelessWidget {
                                                       }
                                                     },
                                                     decoration: InputDecoration(
-                                                      hintText:
-                                                          "Nomor Referensi",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      hintText: "Nomor Referensi",
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1513,21 +1263,18 @@ class KasbonPage extends StatelessWidget {
                                           ),
                                           const SizedBox(height: 16),
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
                                               const Row(
                                                 children: [
                                                   Text(
                                                     "Pilih Debet Akun",
-                                                    style:
-                                                        TextStyle(fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
                                                   SizedBox(width: 5),
                                                   Text(
                                                     "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
+                                                    style: TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -1537,45 +1284,29 @@ class KasbonPage extends StatelessWidget {
                                               Row(
                                                 children: [
                                                   Expanded(
-                                                    child: TypeAheadField<
-                                                        InqueryGlModel>(
-                                                      controller:
-                                                          value.namaSbbDeb,
-                                                      suggestionsCallback:
-                                                          (search) =>
-                                                              value.getInquery(
-                                                                  search),
-                                                      builder: (context,
-                                                          controller,
-                                                          focusNode) {
+                                                    child: TypeAheadField<InqueryGlModel>(
+                                                      controller: value.namaSbbDeb,
+                                                      suggestionsCallback: (search) => value.getInquery(search),
+                                                      builder: (context, controller, focusNode) {
                                                         return TextField(
-                                                            controller:
-                                                                controller,
-                                                            focusNode:
-                                                                focusNode,
+                                                            controller: controller,
+                                                            focusNode: focusNode,
                                                             enabled: false,
                                                             autofocus: true,
-                                                            decoration:
-                                                                const InputDecoration(
-                                                              border:
-                                                                  OutlineInputBorder(),
-                                                              labelText:
-                                                                  'Cari Akun',
+                                                            decoration: const InputDecoration(
+                                                              border: OutlineInputBorder(),
+                                                              labelText: 'Cari Akun',
                                                             ));
                                                       },
-                                                      itemBuilder:
-                                                          (context, city) {
+                                                      itemBuilder: (context, city) {
                                                         return ListTile(
-                                                          title:
-                                                              Text(city.nosbb),
-                                                          subtitle: Text(
-                                                              city.namaSbb),
+                                                          title: Text(city.nosbb),
+                                                          subtitle: Text(city.namaSbb),
                                                         );
                                                       },
                                                       onSelected: (city) {
                                                         // value.selectInvoice(city);
-                                                        value
-                                                            .pilihAkunDeb(city);
+                                                        value.pilihAkunDeb(city);
                                                       },
                                                     ),
                                                   ),
@@ -1587,25 +1318,18 @@ class KasbonPage extends StatelessWidget {
                                                     child: TextFormField(
                                                       // enabled: false,
                                                       readOnly: true,
-                                                      textInputAction:
-                                                          TextInputAction.done,
-                                                      controller:
-                                                          value.nosbbdeb,
+                                                      textInputAction: TextInputAction.done,
+                                                      controller: value.nosbbdeb,
                                                       maxLines: 1,
                                                       // inputFormatters: [
                                                       //   FilteringTextInputFormatter.digitsOnly
                                                       // ],
-                                                      decoration:
-                                                          InputDecoration(
+                                                      decoration: InputDecoration(
                                                         filled: true,
-                                                        fillColor:
-                                                            Colors.grey[200],
+                                                        fillColor: Colors.grey[200],
                                                         hintText: "Nomor Debet",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
@@ -1616,21 +1340,18 @@ class KasbonPage extends StatelessWidget {
                                             ],
                                           ),
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: [
                                               const Row(
                                                 children: [
                                                   Text(
                                                     "Pilih Kredit Akun",
-                                                    style:
-                                                        TextStyle(fontSize: 12),
+                                                    style: TextStyle(fontSize: 12),
                                                   ),
                                                   SizedBox(width: 5),
                                                   Text(
                                                     "*",
-                                                    style:
-                                                        TextStyle(fontSize: 8),
+                                                    style: TextStyle(fontSize: 8),
                                                   ),
                                                 ],
                                               ),
@@ -1640,45 +1361,29 @@ class KasbonPage extends StatelessWidget {
                                               Row(
                                                 children: [
                                                   Expanded(
-                                                    child: TypeAheadField<
-                                                        InqueryGlModel>(
-                                                      controller:
-                                                          value.namaSbbCre,
-                                                      suggestionsCallback:
-                                                          (search) =>
-                                                              value.getInquery(
-                                                                  search),
-                                                      builder: (context,
-                                                          controller,
-                                                          focusNode) {
+                                                    child: TypeAheadField<InqueryGlModel>(
+                                                      controller: value.namaSbbCre,
+                                                      suggestionsCallback: (search) => value.getInquery(search),
+                                                      builder: (context, controller, focusNode) {
                                                         return TextField(
-                                                            controller:
-                                                                controller,
-                                                            focusNode:
-                                                                focusNode,
+                                                            controller: controller,
+                                                            focusNode: focusNode,
                                                             enabled: false,
                                                             autofocus: true,
-                                                            decoration:
-                                                                const InputDecoration(
-                                                              border:
-                                                                  OutlineInputBorder(),
-                                                              labelText:
-                                                                  'Cari Akun',
+                                                            decoration: const InputDecoration(
+                                                              border: OutlineInputBorder(),
+                                                              labelText: 'Cari Akun',
                                                             ));
                                                       },
-                                                      itemBuilder:
-                                                          (context, city) {
+                                                      itemBuilder: (context, city) {
                                                         return ListTile(
-                                                          title:
-                                                              Text(city.nosbb),
-                                                          subtitle: Text(
-                                                              city.namaSbb),
+                                                          title: Text(city.nosbb),
+                                                          subtitle: Text(city.namaSbb),
                                                         );
                                                       },
                                                       onSelected: (city) {
                                                         // value.selectInvoice(city);
-                                                        value
-                                                            .pilihAkunCre(city);
+                                                        value.pilihAkunCre(city);
                                                       },
                                                     ),
                                                   ),
@@ -1690,26 +1395,18 @@ class KasbonPage extends StatelessWidget {
                                                     child: TextFormField(
                                                       // enabled: false,
                                                       readOnly: true,
-                                                      textInputAction:
-                                                          TextInputAction.done,
-                                                      controller:
-                                                          value.nossbcre,
+                                                      textInputAction: TextInputAction.done,
+                                                      controller: value.nossbcre,
                                                       maxLines: 1,
                                                       // inputFormatters: [
                                                       //   FilteringTextInputFormatter.digitsOnly
                                                       // ],
-                                                      decoration:
-                                                          InputDecoration(
+                                                      decoration: InputDecoration(
                                                         filled: true,
-                                                        fillColor:
-                                                            Colors.grey[200],
-                                                        hintText:
-                                                            "Nomor Kredit",
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
+                                                        fillColor: Colors.grey[200],
+                                                        hintText: "Nomor Kredit",
+                                                        border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(6),
                                                         ),
                                                       ),
                                                     ),
@@ -1736,21 +1433,16 @@ class KasbonPage extends StatelessWidget {
                                             height: 8,
                                           ),
                                           TextFormField(
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             controller: value.nominal,
                                             maxLines: 1,
-                                            keyboardType: const TextInputType
-                                                .numberWithOptions(
-                                                decimal: true),
+                                            keyboardType: const TextInputType.numberWithOptions(decimal: true),
                                             inputFormatters: [
                                               a.CurrencyInputFormatter(
                                                 leadingSymbol: 'Rp ',
                                                 useSymbolPadding: true,
-                                                thousandSeparator:
-                                                    a.ThousandSeparator.Period,
-                                                mantissaLength:
-                                                    2, // jumlah angka desimal
+                                                thousandSeparator: a.ThousandSeparator.Period,
+                                                mantissaLength: 2, // jumlah angka desimal
                                                 // decimalSeparator: DecimalSeparator.Comma,
                                               ),
                                             ],
@@ -1764,8 +1456,7 @@ class KasbonPage extends StatelessWidget {
                                             decoration: InputDecoration(
                                               hintText: "Nilai Transaksi",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -1790,13 +1481,11 @@ class KasbonPage extends StatelessWidget {
                                           ),
                                           TextFormField(
                                             controller: value.keterangan,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             decoration: InputDecoration(
                                               hintText: "Keterangan Transaksi",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -1850,8 +1539,7 @@ class DetailDataSource extends DataGridSource {
         return tglA.compareTo(tglB); // urut berdasarkan tanggal dulu
       }
 
-      return a.noDokumen
-          .compareTo(b.noDokumen); // lalu urut berdasarkan nomor dokumen
+      return a.noDokumen.compareTo(b.noDokumen); // lalu urut berdasarkan nomor dokumen
     });
 
     // 🧱 Bangun data grid setelah data diurutkan
@@ -1865,10 +1553,7 @@ class DetailDataSource extends DataGridSource {
                 DataGridCell(columnName: 'tgl_trans', value: data.tglTransaksi),
                 DataGridCell(columnName: 'nomor_dok', value: data.noDokumen),
                 DataGridCell(columnName: 'nomor_ref', value: data.noRef),
-                DataGridCell(
-                    columnName: 'nominal',
-                    value: FormatCurrency.oCcyDecimal
-                        .format(double.parse(data.nominal))),
+                DataGridCell(columnName: 'nominal', value: FormatCurrency.oCcyDecimal.format(double.parse(data.nominal))),
                 DataGridCell(columnName: 'nama_debet', value: data.namaDr),
                 DataGridCell(columnName: 'nama_credit', value: data.namaCr),
                 DataGridCell(columnName: 'keterangan', value: data.keterangan),

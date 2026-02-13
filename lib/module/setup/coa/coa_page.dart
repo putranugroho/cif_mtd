@@ -1,7 +1,7 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/setup/coa/coa_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/setup/coa/coa_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -987,9 +987,7 @@ class CoaPage extends StatelessWidget {
                                                       controller: value.noHeader,
                                                       maxLines: 1,
                                                       maxLength: 3,
-                                                      inputFormatters: [
-                                                        FilteringTextInputFormatter.digitsOnly
-                                                      ],
+                                                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                       validator: (e) {
                                                         if (e!.isEmpty) {
                                                           return "Wajib diisi";
@@ -1020,9 +1018,7 @@ class CoaPage extends StatelessWidget {
                                                       controller: value.resulttext,
                                                       maxLines: 1,
                                                       readOnly: true,
-                                                      inputFormatters: [
-                                                        FilteringTextInputFormatter.digitsOnly
-                                                      ],
+                                                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                       validator: (e) {
                                                         if (e!.isEmpty) {
                                                           return "Wajib diisi";
@@ -1124,9 +1120,7 @@ class CoaPage extends StatelessWidget {
                                                           textInputAction: TextInputAction.done,
                                                           controller: value.noHeader,
                                                           maxLines: 1,
-                                                          inputFormatters: [
-                                                            FilteringTextInputFormatter.digitsOnly
-                                                          ],
+                                                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                           validator: (e) {
                                                             if (e!.isEmpty) {
                                                               return "Wajib diisi";
@@ -1220,9 +1214,7 @@ class CoaPage extends StatelessWidget {
                                                               value.updatebb();
                                                             }
                                                           },
-                                                          inputFormatters: [
-                                                            FilteringTextInputFormatter.digitsOnly
-                                                          ],
+                                                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                           validator: (e) {
                                                             if (e!.isEmpty) {
                                                               return "Wajib diisi";
@@ -1253,9 +1245,7 @@ class CoaPage extends StatelessWidget {
                                                           controller: value.resulttext,
                                                           readOnly: true,
                                                           maxLines: 1,
-                                                          inputFormatters: [
-                                                            FilteringTextInputFormatter.digitsOnly
-                                                          ],
+                                                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                           validator: (e) {
                                                             if (e!.isEmpty) {
                                                               return "Wajib diisi";
@@ -1330,7 +1320,10 @@ class CoaPage extends StatelessWidget {
                                                               width: 16,
                                                               height: 16,
                                                               padding: const EdgeInsets.all(2),
-                                                              decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white, border: Border.all(width: 2, color: Colors.grey)),
+                                                              decoration: BoxDecoration(
+                                                                  shape: BoxShape.circle,
+                                                                  color: Colors.white,
+                                                                  border: Border.all(width: 2, color: Colors.grey)),
                                                               child: value.hutangPiutang == "HUTANG"
                                                                   ? Container(
                                                                       decoration: const BoxDecoration(shape: BoxShape.circle, color: colorPrimary),
@@ -1357,7 +1350,10 @@ class CoaPage extends StatelessWidget {
                                                               width: 16,
                                                               height: 16,
                                                               padding: const EdgeInsets.all(2),
-                                                              decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white, border: Border.all(width: 2, color: Colors.grey)),
+                                                              decoration: BoxDecoration(
+                                                                  shape: BoxShape.circle,
+                                                                  color: Colors.white,
+                                                                  border: Border.all(width: 2, color: Colors.grey)),
                                                               child: value.hutangPiutang == "PIUTANG"
                                                                   ? Container(
                                                                       decoration: const BoxDecoration(shape: BoxShape.circle, color: colorPrimary),
@@ -1550,9 +1546,7 @@ class CoaPage extends StatelessWidget {
                                                               textInputAction: TextInputAction.done,
                                                               controller: value.noBb,
                                                               maxLines: 1,
-                                                              inputFormatters: [
-                                                                FilteringTextInputFormatter.digitsOnly
-                                                              ],
+                                                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                               validator: (e) {
                                                                 if (e!.isEmpty) {
                                                                   return "Wajib diisi";
@@ -1646,9 +1640,7 @@ class CoaPage extends StatelessWidget {
                                                                 }
                                                               },
                                                               maxLength: 6,
-                                                              inputFormatters: [
-                                                                FilteringTextInputFormatter.digitsOnly
-                                                              ],
+                                                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                               validator: (e) {
                                                                 if (e!.isEmpty) {
                                                                   return "Wajib diisi";
@@ -1679,9 +1671,7 @@ class CoaPage extends StatelessWidget {
                                                               controller: value.resulttext,
                                                               maxLines: 1,
                                                               readOnly: true,
-                                                              inputFormatters: [
-                                                                FilteringTextInputFormatter.digitsOnly
-                                                              ],
+                                                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                                               validator: (e) {
                                                                 if (e!.isEmpty) {
                                                                   return "Wajib diisi";
@@ -1795,7 +1785,10 @@ class CoaPage extends StatelessWidget {
                                                             width: 16,
                                                             height: 16,
                                                             padding: const EdgeInsets.all(2),
-                                                            decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white, border: Border.all(width: 2, color: Colors.grey)),
+                                                            decoration: BoxDecoration(
+                                                                shape: BoxShape.circle,
+                                                                color: Colors.white,
+                                                                border: Border.all(width: 2, color: Colors.grey)),
                                                             child: value.hutangPiutang == "HUTANG"
                                                                 ? Container(
                                                                     decoration: const BoxDecoration(shape: BoxShape.circle, color: colorPrimary),
@@ -1813,7 +1806,10 @@ class CoaPage extends StatelessWidget {
                                                             width: 16,
                                                             height: 16,
                                                             padding: const EdgeInsets.all(2),
-                                                            decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white, border: Border.all(width: 2, color: Colors.grey)),
+                                                            decoration: BoxDecoration(
+                                                                shape: BoxShape.circle,
+                                                                color: Colors.white,
+                                                                border: Border.all(width: 2, color: Colors.grey)),
                                                             child: value.hutangPiutang == "PIUTANG"
                                                                 ? Container(
                                                                     decoration: const BoxDecoration(shape: BoxShape.circle, color: colorPrimary),

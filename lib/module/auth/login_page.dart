@@ -1,6 +1,6 @@
-import 'package:accounting/module/auth/login_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
-import 'package:accounting/utils/colors.dart';
+import 'package:cif/module/auth/login_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
+import 'package:cif/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

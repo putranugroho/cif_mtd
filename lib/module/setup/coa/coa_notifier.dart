@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/network/network.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/format_currency.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/network/network.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/format_currency.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/button_custom.dart';
@@ -47,9 +47,7 @@ class CoaNotifier extends ChangeNotifier {
     isLoading = true;
     listSubtree.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getMasterGlSubtree(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -262,11 +260,7 @@ class CoaNotifier extends ChangeNotifier {
     List<Map<String, dynamic>> listTmp = [];
     for (var i = 0; i < listKantor.length; i++) {
       listTmp.add(
-        {
-          "kode_pt": listKantor[i].kodePt,
-          "kode_kantor": listKantor[i].kodeKantor,
-          "kode_induk": listKantor[i].kodeInduk
-        },
+        {"kode_pt": listKantor[i].kodePt, "kode_kantor": listKantor[i].kodeKantor, "kode_induk": listKantor[i].kodeInduk},
       );
     }
     var data = {
@@ -753,50 +747,10 @@ class CoaNotifier extends ChangeNotifier {
   }
 
   List<Map<String, dynamic>> data = [
-    {
-      "gol_acc": "1",
-      "jns_acc": "A",
-      "nobb": "10000000",
-      "nosbb": "10000000",
-      "nama_sbb": "Kas",
-      "type_posting": "N",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "B",
-      "nobb": "10000000",
-      "nosbb": "10001000",
-      "nama_sbb": "Kas",
-      "type_posting": "N",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001001",
-      "nama_sbb": "Kas Besar",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001002",
-      "nama_sbb": "Kas Kecil",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001003",
-      "nama_sbb": "Kas Transaksi",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
+    {"gol_acc": "1", "jns_acc": "A", "nobb": "10000000", "nosbb": "10000000", "nama_sbb": "Kas", "type_posting": "N", "sbb_khusus": "kas"},
+    {"gol_acc": "1", "jns_acc": "B", "nobb": "10000000", "nosbb": "10001000", "nama_sbb": "Kas", "type_posting": "N", "sbb_khusus": "kas"},
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "10001001", "nama_sbb": "Kas Besar", "type_posting": "Y", "sbb_khusus": "kas"},
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "10001002", "nama_sbb": "Kas Kecil", "type_posting": "Y", "sbb_khusus": "kas"},
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "10001003", "nama_sbb": "Kas Transaksi", "type_posting": "Y", "sbb_khusus": "kas"},
   ];
 }

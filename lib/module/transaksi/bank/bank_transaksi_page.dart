@@ -1,7 +1,7 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/master/bank/bank_notifier.dart';
-import 'package:accounting/module/transaksi/bank/bank_transaksi_notifier.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/master/bank/bank_notifier.dart';
+import 'package:cif/module/transaksi/bank/bank_transaksi_notifier.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

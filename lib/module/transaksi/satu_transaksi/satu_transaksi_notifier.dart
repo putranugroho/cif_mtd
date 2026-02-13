@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/network/network.dart';
-import 'package:accounting/pref/pref.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/button_custom.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/format_currency.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/network/network.dart';
+import 'package:cif/pref/pref.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/button_custom.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/format_currency.dart';
+import 'package:cif/utils/informationdialog.dart';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -86,7 +86,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
           });
     }
   }
-  
+
   var isLoadingData = true;
   List<TransaksiPendModel> listTransaksi = [];
   List<TransaksiPendModel> listTransaksiAdd = [];
@@ -98,35 +98,23 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     var data = {
       "kode_pt": users!.kodePt,
     };
-    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksi.add(TransaksiPendModel.fromJson(i));
         }
         if (listTransaksi.isNotEmpty) {
           for (var i = 0;
-              i <
-                  listTransaksi
-                      .where((e) =>
-                          e.userinput == users!.namauser &&
-                          e.modul == "Satu Transaksi" &&
-                          e.status == "PENDING")
-                      .length;
+              i < listTransaksi.where((e) => e.userinput == users!.namauser && e.modul == "Satu Transaksi" && e.status == "PENDING").length;
               i++) {
-            final data = listTransaksi
-                .where((e) =>
-                    e.userinput == users!.namauser &&
-                    e.modul == "Satu Transaksi" &&
-                    e.status == "PENDING")
-                .toList()[i];
+            final data =
+                listTransaksi.where((e) => e.userinput == users!.namauser && e.modul == "Satu Transaksi" && e.status == "PENDING").toList()[i];
             listTransaksiAdd.add(data);
           }
           print("PENDING : ${listTransaksi.length}");
           print("PENDING RESULT: ${listTransaksiAdd.length}");
 
-          listTransaksiAdd.sort((a, b) => DateTime.parse(b.createddate)
-              .compareTo(DateTime.parse(a.createddate)));
+          listTransaksiAdd.sort((a, b) => DateTime.parse(b.createddate).compareTo(DateTime.parse(a.createddate)));
         }
         getTransaksiBackend();
 
@@ -171,19 +159,14 @@ class SatuTransaksiNotifier extends ChangeNotifier {
       "pagination": {"page": 1},
       "sort": {"by": "tgl_transaksi", "order": "desc"}
     };
-    Setuprepository.setup(token, NetworkURL.search(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.search(), jsonEncode(data)).then((value) {
       if (value['code'] == "000") {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksiBack.add(TransaksiModel.fromJson(i));
         }
         if (listTransaksiBack.isNotEmpty) {
-          for (var i = 0;
-              i < listTransaksiBack.where((e) => e.kodeTrans != "9998").length;
-              i++) {
-            final data = listTransaksiBack
-                .where((e) => e.kodeTrans != "9998")
-                .toList()[i];
+          for (var i = 0; i < listTransaksiBack.where((e) => e.kodeTrans != "9998").length; i++) {
+            final data = listTransaksiBack.where((e) => e.kodeTrans != "9998").toList()[i];
             listTransaksiAdd.add(TransaksiPendModel(
                 id: data.id,
                 tglTransaksi: data.tglTrans,
@@ -224,8 +207,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
                 noKontrak: data.noKontrak,
                 noInvoice: data.noInvoice,
                 createddate: data.inptgljam,
-                status:
-                    "${data.statusTransaksi == "1" ? "COMPLETED" : "CANCEL"}"));
+                status: "${data.statusTransaksi == "1" ? "COMPLETED" : "CANCEL"}"));
           }
         }
         isLoadingData = false;
@@ -246,8 +228,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     listAoAdd.clear();
     notifyListeners();
     var data = {"kode_pt": users!.kodePt};
-    Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getAoMarketing(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listAo.add(AoModel.fromJson(i));
@@ -286,14 +267,12 @@ class SatuTransaksiNotifier extends ChangeNotifier {
         );
 
         if (response['status'].toString().toLowerCase().contains("success")) {
-          final List<Map<String, dynamic>> jnsAccBItems =
-              extractJnsAccB(response['data']);
+          final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(response['data']);
           listGl = jnsAccBItems
               .map((item) => InqueryGlModel.fromJson(item))
               .where((model) =>
                   model.nosbb.toLowerCase().contains(query.toLowerCase()) ||
-                  model.namaSbb.toLowerCase().contains(query.toLowerCase()) &&
-                      model.typePosting == "Y")
+                  model.namaSbb.toLowerCase().contains(query.toLowerCase()) && model.typePosting == "Y")
               .toList();
         }
         notifyListeners();
@@ -318,13 +297,9 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     setupTransModel = value;
     namaTransaksi.text = setupTransModel!.kdTrans;
     inqueryGlModeldeb =
-        listGl.where((e) => e.nosbb == setupTransModel!.glDeb).isEmpty
-            ? null
-            : listGl.where((e) => e.nosbb == setupTransModel!.glDeb).first;
+        listGl.where((e) => e.nosbb == setupTransModel!.glDeb).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glDeb).first;
     inqueryGlModelcre =
-        listGl.where((e) => e.nosbb == setupTransModel!.glKre).isEmpty
-            ? null
-            : listGl.where((e) => e.nosbb == setupTransModel!.glKre).first;
+        listGl.where((e) => e.nosbb == setupTransModel!.glKre).isEmpty ? null : listGl.where((e) => e.nosbb == setupTransModel!.glKre).first;
     nosbbdeb.text = setupTransModel!.namaDeb;
     namaSbbDeb.text = setupTransModel!.glDeb;
     nossbcre.text = setupTransModel!.namaKre;
@@ -350,13 +325,10 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     listGl.clear();
     notifyListeners();
     var data = {"kode_pt": users!.kodePt};
-    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getInqueryGL(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
-        final List<Map<String, dynamic>> jnsAccBItems =
-            extractJnsAccB(value['data']);
-        listGl =
-            jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
+        final List<Map<String, dynamic>> jnsAccBItems = extractJnsAccB(value['data']);
+        listGl = jnsAccBItems.map((item) => InqueryGlModel.fromJson(item)).toList();
         notifyListeners();
       }
     });
@@ -368,8 +340,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     listData.clear();
     notifyListeners();
     var data = {"kode_pt": users!.kodePt};
-    Setuprepository.setup(token, NetworkURL.getSetupTrans(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.getSetupTrans(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listData.add(SetupTransModel.fromJson(i));
@@ -445,8 +416,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglBackDate = pickedendDate;
-      tglBackDatetext.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglBackDatetext.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -482,8 +452,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTransaksi = pickedendDate;
-      tglTransaksiText.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglTransaksiText.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -565,18 +534,12 @@ class SatuTransaksiNotifier extends ChangeNotifier {
 
   cek() {
     if (users!.limitAkses == "Y") {
-      if (double.parse(users!.maksimalTransaksi) <
-          double.parse(nominal.text
-              .replaceAll("Rp ", "")
-              .replaceAll(".", "")
-              .replaceAll(",", "."))) {
+      if (double.parse(users!.maksimalTransaksi) < double.parse(nominal.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", "."))) {
         DialogCustom().showLoading(context);
         var invoice = DateTime.now().millisecondsSinceEpoch.toString();
         var data = {
           "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
-          "tgl_valuta": backDate
-              ? DateFormat('y-MM-dd').format(tglBackDate!)
-              : DateFormat('y-MM-dd').format(DateTime.now()),
+          "tgl_valuta": backDate ? DateFormat('y-MM-dd').format(tglBackDate!) : DateFormat('y-MM-dd').format(DateTime.now()),
           "batch": users!.batch,
           "trx_type": "TRX",
           "trx_code": backDate ? "110" : "100",
@@ -589,10 +552,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
           "rrn": invoice,
           "no_dokumen": nomorDok.text,
           "no_ref": nomorRef.text,
-          "nominal": double.parse(nominal.text
-              .replaceAll("Rp ", "")
-              .replaceAll(".", "")
-              .replaceAll(",", ".")),
+          "nominal": double.parse(nominal.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")),
           "keterangan": keterangan.text,
           "kode_pt": users!.kodePt,
           "kode_kantor": users!.kodeKantor,
@@ -614,8 +574,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
           "status": "PENDING",
           "modul": "Satu Transaksi",
         };
-        Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'] == "success") {
             getTransaksi();
@@ -630,9 +589,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
         var invoice = DateTime.now().millisecondsSinceEpoch.toString();
         var data = {
           "tgl_transaksi": DateFormat('y-MM-dd').format(DateTime.now()),
-          "tgl_valuta": backDate
-              ? DateFormat('y-MM-dd').format(tglBackDate!)
-              : DateFormat('y-MM-dd').format(DateTime.now()),
+          "tgl_valuta": backDate ? DateFormat('y-MM-dd').format(tglBackDate!) : DateFormat('y-MM-dd').format(DateTime.now()),
           "batch": users!.batch,
           "trx_type": "TRX",
           "trx_code": backDate ? "110" : "100",
@@ -645,10 +602,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
           "rrn": invoice,
           "no_dokumen": nomorDok.text,
           "no_ref": nomorRef.text,
-          "nominal": double.parse(nominal.text
-              .replaceAll("Rp ", "")
-              .replaceAll(".", "")
-              .replaceAll(",", ".")),
+          "nominal": double.parse(nominal.text.replaceAll("Rp ", "").replaceAll(".", "").replaceAll(",", ".")),
           "keterangan": keterangan.text,
           "kode_pt": users!.kodePt,
           "kode_kantor": users!.kodeKantor,
@@ -669,8 +623,7 @@ class SatuTransaksiNotifier extends ChangeNotifier {
           "status": "COMPLETED",
           "modul": "Satu Transaksi",
         };
-        Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data))
-            .then((value) {
+        Setuprepository.setup(token, NetworkURL.transaksi(), jsonEncode(data)).then((value) {
           Navigator.pop(context);
           if (value['status'] == "success") {
             getTransaksi();

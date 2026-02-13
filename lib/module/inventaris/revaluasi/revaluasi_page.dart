@@ -1,9 +1,9 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/inventaris/revaluasi/revaluasi_notifier.dart';
-import 'package:accounting/module/inventaris/pengadaan/pengadaan_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/inventaris/revaluasi/revaluasi_notifier.dart';
+import 'package:cif/module/inventaris/pengadaan/pengadaan_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
 
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -971,7 +971,11 @@ class DetailDataSource extends DataGridSource {
               ),
             ),
           );
-        } else if (e.columnName == 'harga' || e.columnName == 'diskon' || e.columnName == 'ppn' || e.columnName == 'biaya' || e.columnName == 'total') {
+        } else if (e.columnName == 'harga' ||
+            e.columnName == 'diskon' ||
+            e.columnName == 'ppn' ||
+            e.columnName == 'biaya' ||
+            e.columnName == 'total') {
           return Container(
             alignment: Alignment.centerRight,
             padding: const EdgeInsets.all(8.0),

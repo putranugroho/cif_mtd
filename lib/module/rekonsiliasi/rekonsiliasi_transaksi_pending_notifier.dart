@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:accounting/models/index.dart';
+import 'package:cif/models/index.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -173,76 +173,18 @@ class RekonsiliasiTransaksiPendingNotifier extends ChangeNotifier {
   }
 
   List<Map<String, dynamic>> ao = [
-    {
-      "kd_ao": "100001",
-      "nm_ao": "Account Officer 1",
-      "kode_pt": "001",
-      "kode_kantor": "1001",
-      "kode_induk": ""
-    },
-    {
-      "kd_ao": "100002",
-      "nm_ao": "Account Officer 2",
-      "kode_pt": "001",
-      "kode_kantor": "1001",
-      "kode_induk": ""
-    },
-    {
-      "kd_ao": "100003",
-      "nm_ao": "Marketing 1",
-      "kode_pt": "001",
-      "kode_kantor": "1001",
-      "kode_induk": ""
-    },
+    {"kd_ao": "100001", "nm_ao": "Account Officer 1", "kode_pt": "001", "kode_kantor": "1001", "kode_induk": ""},
+    {"kd_ao": "100002", "nm_ao": "Account Officer 2", "kode_pt": "001", "kode_kantor": "1001", "kode_induk": ""},
+    {"kd_ao": "100003", "nm_ao": "Marketing 1", "kode_pt": "001", "kode_kantor": "1001", "kode_induk": ""},
   ];
 
   List<CoaModel> listCoa = [];
   List<Map<String, dynamic>> coa = [
-    {
-      "gol_acc": "1",
-      "jns_acc": "A",
-      "nobb": "10000000",
-      "nosbb": "10000000",
-      "nama_sbb": "Kas",
-      "type_posting": "N",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "B",
-      "nobb": "10000000",
-      "nosbb": "10001000",
-      "nama_sbb": "Kas",
-      "type_posting": "N",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001001",
-      "nama_sbb": "Kas Besar",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001002",
-      "nama_sbb": "Kas Kecil",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
-    {
-      "gol_acc": "1",
-      "jns_acc": "C",
-      "nobb": "10001000",
-      "nosbb": "10001003",
-      "nama_sbb": "Kas Transaksi",
-      "type_posting": "Y",
-      "sbb_khusus": "kas"
-    },
+    {"gol_acc": "1", "jns_acc": "A", "nobb": "10000000", "nosbb": "10000000", "nama_sbb": "Kas", "type_posting": "N", "sbb_khusus": "kas"},
+    {"gol_acc": "1", "jns_acc": "B", "nobb": "10000000", "nosbb": "10001000", "nama_sbb": "Kas", "type_posting": "N", "sbb_khusus": "kas"},
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "10001001", "nama_sbb": "Kas Besar", "type_posting": "Y", "sbb_khusus": "kas"},
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "10001002", "nama_sbb": "Kas Kecil", "type_posting": "Y", "sbb_khusus": "kas"},
+    {"gol_acc": "1", "jns_acc": "C", "nobb": "10001000", "nosbb": "10001003", "nama_sbb": "Kas Transaksi", "type_posting": "Y", "sbb_khusus": "kas"},
   ];
 
   List<SetupTransModel> listKodeTransaksi = [];

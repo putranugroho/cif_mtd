@@ -1,6 +1,6 @@
-import 'package:accounting/module/gl/gl_notifier.dart';
+import 'package:cif/module/gl/gl_notifier.dart';
 
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

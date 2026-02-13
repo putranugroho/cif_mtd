@@ -1,92 +1,92 @@
-import 'package:accounting/module/akses_point/akses_point_page.dart';
-import 'package:accounting/module/aktivasi_users/aktivasi_users_page.dart';
-import 'package:accounting/module/closing_eom/closing_eom_page.dart';
-import 'package:accounting/module/dashboard/dashboard_page.dart';
-import 'package:accounting/module/gl/gl_page.dart';
-import 'package:accounting/module/hutang_piutang/hutang_piutang_page.dart';
-import 'package:accounting/module/hutang_piutang/laporan_hutang_piutang_page.dart';
-import 'package:accounting/module/inventaris/jual_beli/jual_beli_page.dart';
-import 'package:accounting/module/inventaris/laporan/laporan_inventaris_page.dart';
-import 'package:accounting/module/inventaris/otorisasi/otorisasi_inventaris_page.dart';
-import 'package:accounting/module/inventaris/penempatan/penempatan_page.dart';
-import 'package:accounting/module/inventaris/pengadaan/pengadaan_page.dart';
-import 'package:accounting/module/inventaris/revaluasi/revaluasi_page.dart';
-import 'package:accounting/module/jurnal/jurnal_page.dart';
-import 'package:accounting/module/laba_rugi/laba_rugi_berjalan_page.dart';
-import 'package:accounting/module/laba_rugi/laba_rugi_periode_page.dart';
-import 'package:accounting/module/level_user/level_user_page.dart';
-import 'package:accounting/module/master/ao/ao_page.dart';
-import 'package:accounting/module/master/bank/bank_page.dart';
-import 'package:accounting/module/master/customer/customer_page.dart';
-import 'package:accounting/module/master/laporan/laporan_master_page.dart';
-import 'package:accounting/module/master/master_barang/master_barang_page.dart';
-import 'package:accounting/module/master/master_barcode/master_barcode_page.dart';
-import 'package:accounting/module/master/master_mover/master_mover_page.dart';
-import 'package:accounting/module/master/master_user/master_user_page.dart';
-import 'package:accounting/module/master/otorisasi/otorisasi_master_page.dart';
-// import 'package:accounting/module/master/terminal/akses_point_page.dart';
-import 'package:accounting/module/master/terminal/user_akses_page.dart';
-import 'package:accounting/module/master/users/users_page.dart';
-import 'package:accounting/module/menu/menu_notifier.dart';
-import 'package:accounting/module/menu/menu_widget.dart';
-import 'package:accounting/module/neraca/neraca_berjalan_page.dart';
-import 'package:accounting/module/pejabat/pejabat_page.dart';
-import 'package:accounting/module/pembayaran_hutang/pembayaran_hutang_page.dart';
-import 'package:accounting/module/perantara/perantara_aktiva_page.dart';
-import 'package:accounting/module/perantara/perantara_pasiva_page.dart';
-import 'package:accounting/module/rekonsiliasi/rekonsiliasi_aset_page.dart';
-import 'package:accounting/module/rekonsiliasi/rekonsiliasi_bank_page.dart';
-import 'package:accounting/module/rekonsiliasi/rekonsiliasi_hutang_page.dart';
-import 'package:accounting/module/rekonsiliasi/rekonsiliasi_perantara_page.dart';
-import 'package:accounting/module/rekonsiliasi/rekonsiliasi_perantara_pasiva_page.dart';
-import 'package:accounting/module/rekonsiliasi/rekonsiliasi_piutang_page.dart';
-import 'package:accounting/module/rekonsiliasi/rekonsiliasi_transaksi_pending_page.dart';
-import 'package:accounting/module/setup/aktivasi/aktivasi_page.dart';
-import 'package:accounting/module/setup/coa/coa_page.dart';
-import 'package:accounting/module/setup/gol_barang/golongan_barang_page.dart';
-import 'package:accounting/module/setup/golongan_aset/golongan_aset_page.dart';
-import 'package:accounting/module/setup/jabatan/jabatan_page.dart';
-import 'package:accounting/module/setup/jenis_barang/jenis_barang_page.dart';
-import 'package:accounting/module/setup/kantor/kantor_page.dart';
-import 'package:accounting/module/setup/kategori_barang/kategori_barang_page.dart';
-import 'package:accounting/module/setup/kel_barang/kelompok_barang_page.dart';
-import 'package:accounting/module/setup/kelompok_aset/kelompok_aset_page.dart';
-import 'package:accounting/module/setup/laporan/laporan_setup_page.dart';
-import 'package:accounting/module/setup/level/level_page.dart';
-import 'package:accounting/module/setup/pajak/setup_pajak_page.dart';
-import 'package:accounting/module/setup/penyusutan/penyusutan_page.dart';
-import 'package:accounting/module/setup/perusahaan/perusahaan_page.dart';
-import 'package:accounting/module/setup/satuan_barang/satuan_barang_page.dart';
-import 'package:accounting/module/setup/sbb_hutang_piutang/sbb_hutang_piutang_page.dart';
-import 'package:accounting/module/setup/sbb_kas/setup_sbb_page.dart';
-import 'package:accounting/module/setup/sbb_khsus/sbb_khusus_page.dart';
-import 'package:accounting/module/setup/sbb_khsus/tambah_kelompok_sbb_khusus_page.dart';
-import 'package:accounting/module/setup/setup_transaksi/setup_transaksi_page.dart';
-import 'package:accounting/module/setup/status_pengiriman/status_pengiriman_page.dart';
-import 'package:accounting/module/setup_closing_eom/setup_closing_eom_page.dart';
-import 'package:accounting/module/setup_otorisasi/setup_otorisasi_page.dart';
-import 'package:accounting/module/transaksi/back_date/back_date_page.dart';
-import 'package:accounting/module/transaksi/bank/bank_transaksi_page.dart';
-import 'package:accounting/module/transaksi/banyak_transaksi/banyak_transaksi_page.dart';
-import 'package:accounting/module/transaksi/bayar_dimuka/bayar_dimuka_page.dart';
-import 'package:accounting/module/transaksi/hutang/hutang_page.dart';
-import 'package:accounting/module/transaksi/kas_kecil/kas_kecil_page.dart';
-import 'package:accounting/module/transaksi/kas_kecil/kasbon_page.dart';
-import 'package:accounting/module/transaksi/kas_kecil/laporan_kas_kecil_page.dart';
-import 'package:accounting/module/transaksi/koreksi_barang/koreksi_barang_page.dart';
-import 'package:accounting/module/transaksi/laporan/laporan_transaksi_page.dart';
-import 'package:accounting/module/transaksi/mutasi_barang/mutasi_barang_page.dart';
-import 'package:accounting/module/transaksi/otorisasi/otorisasi_transaksi_page.dart';
-import 'package:accounting/module/transaksi/pembatalan_transaksi/pembatalan_transaksi_page.dart';
-import 'package:accounting/module/transaksi/piutang/piutang_page.dart';
-import 'package:accounting/module/transaksi/satu_transaksi/satu_transaksi_page.dart';
-import 'package:accounting/module/transaksi/penerimaan/penerimaan_page.dart';
-import 'package:accounting/module/transaksi/pengeluaran/pengeluaran_page.dart';
-import 'package:accounting/module/transaksi/tracking_pengiriman/tracking_pengiriman_page.dart';
-import 'package:accounting/module/transaksi/transaksi_hutang/transaksi_hutang_page.dart';
-import 'package:accounting/module/user_akses_point/user_akses_point_page.dart';
-import 'package:accounting/utils/colors.dart';
-import 'package:accounting/utils/images_path.dart';
+import 'package:cif/module/akses_point/akses_point_page.dart';
+import 'package:cif/module/aktivasi_users/aktivasi_users_page.dart';
+import 'package:cif/module/closing_eom/closing_eom_page.dart';
+import 'package:cif/module/dashboard/dashboard_page.dart';
+import 'package:cif/module/gl/gl_page.dart';
+import 'package:cif/module/hutang_piutang/hutang_piutang_page.dart';
+import 'package:cif/module/hutang_piutang/laporan_hutang_piutang_page.dart';
+import 'package:cif/module/inventaris/jual_beli/jual_beli_page.dart';
+import 'package:cif/module/inventaris/laporan/laporan_inventaris_page.dart';
+import 'package:cif/module/inventaris/otorisasi/otorisasi_inventaris_page.dart';
+import 'package:cif/module/inventaris/penempatan/penempatan_page.dart';
+import 'package:cif/module/customer/perorangan/perorangan_page.dart';
+import 'package:cif/module/inventaris/revaluasi/revaluasi_page.dart';
+import 'package:cif/module/jurnal/jurnal_page.dart';
+import 'package:cif/module/laba_rugi/laba_rugi_berjalan_page.dart';
+import 'package:cif/module/laba_rugi/laba_rugi_periode_page.dart';
+import 'package:cif/module/level_user/level_user_page.dart';
+import 'package:cif/module/master/ao/ao_page.dart';
+import 'package:cif/module/master/bank/bank_page.dart';
+import 'package:cif/module/master/customer/customer_page.dart';
+import 'package:cif/module/master/laporan/laporan_master_page.dart';
+import 'package:cif/module/master/master_barang/master_barang_page.dart';
+import 'package:cif/module/master/master_barcode/master_barcode_page.dart';
+import 'package:cif/module/master/master_mover/master_mover_page.dart';
+import 'package:cif/module/master/master_user/master_user_page.dart';
+import 'package:cif/module/master/otorisasi/otorisasi_master_page.dart';
+// import 'package:cif/module/master/terminal/akses_point_page.dart';
+import 'package:cif/module/master/terminal/user_akses_page.dart';
+import 'package:cif/module/master/users/users_page.dart';
+import 'package:cif/module/menu/menu_notifier.dart';
+import 'package:cif/module/menu/menu_widget.dart';
+import 'package:cif/module/neraca/neraca_berjalan_page.dart';
+import 'package:cif/module/pejabat/pejabat_page.dart';
+import 'package:cif/module/pembayaran_hutang/pembayaran_hutang_page.dart';
+import 'package:cif/module/perantara/perantara_aktiva_page.dart';
+import 'package:cif/module/perantara/perantara_pasiva_page.dart';
+import 'package:cif/module/rekonsiliasi/rekonsiliasi_aset_page.dart';
+import 'package:cif/module/rekonsiliasi/rekonsiliasi_bank_page.dart';
+import 'package:cif/module/rekonsiliasi/rekonsiliasi_hutang_page.dart';
+import 'package:cif/module/rekonsiliasi/rekonsiliasi_perantara_page.dart';
+import 'package:cif/module/rekonsiliasi/rekonsiliasi_perantara_pasiva_page.dart';
+import 'package:cif/module/rekonsiliasi/rekonsiliasi_piutang_page.dart';
+import 'package:cif/module/rekonsiliasi/rekonsiliasi_transaksi_pending_page.dart';
+import 'package:cif/module/setup/aktivasi/aktivasi_page.dart';
+import 'package:cif/module/setup/coa/coa_page.dart';
+import 'package:cif/module/setup/gol_barang/golongan_barang_page.dart';
+import 'package:cif/module/setup/golongan_aset/golongan_aset_page.dart';
+import 'package:cif/module/setup/jabatan/jabatan_page.dart';
+import 'package:cif/module/setup/jenis_barang/jenis_barang_page.dart';
+import 'package:cif/module/setup/kantor/kantor_page.dart';
+import 'package:cif/module/setup/kategori_barang/kategori_barang_page.dart';
+import 'package:cif/module/setup/kel_barang/kelompok_barang_page.dart';
+import 'package:cif/module/setup/kelompok_aset/kelompok_aset_page.dart';
+import 'package:cif/module/setup/laporan/laporan_setup_page.dart';
+import 'package:cif/module/setup/level/level_page.dart';
+import 'package:cif/module/setup/pajak/setup_pajak_page.dart';
+import 'package:cif/module/setup/penyusutan/penyusutan_page.dart';
+import 'package:cif/module/setup/perusahaan/perusahaan_page.dart';
+import 'package:cif/module/setup/satuan_barang/satuan_barang_page.dart';
+import 'package:cif/module/setup/sbb_hutang_piutang/sbb_hutang_piutang_page.dart';
+import 'package:cif/module/setup/sbb_kas/setup_sbb_page.dart';
+import 'package:cif/module/setup/sbb_khsus/sbb_khusus_page.dart';
+import 'package:cif/module/setup/sbb_khsus/tambah_kelompok_sbb_khusus_page.dart';
+import 'package:cif/module/setup/setup_transaksi/setup_transaksi_page.dart';
+import 'package:cif/module/setup/status_pengiriman/status_pengiriman_page.dart';
+import 'package:cif/module/setup_closing_eom/setup_closing_eom_page.dart';
+import 'package:cif/module/setup_otorisasi/setup_otorisasi_page.dart';
+import 'package:cif/module/transaksi/back_date/back_date_page.dart';
+import 'package:cif/module/transaksi/bank/bank_transaksi_page.dart';
+import 'package:cif/module/transaksi/banyak_transaksi/banyak_transaksi_page.dart';
+import 'package:cif/module/transaksi/bayar_dimuka/bayar_dimuka_page.dart';
+import 'package:cif/module/transaksi/hutang/hutang_page.dart';
+import 'package:cif/module/transaksi/kas_kecil/kas_kecil_page.dart';
+import 'package:cif/module/transaksi/kas_kecil/kasbon_page.dart';
+import 'package:cif/module/transaksi/kas_kecil/laporan_kas_kecil_page.dart';
+import 'package:cif/module/transaksi/koreksi_barang/koreksi_barang_page.dart';
+import 'package:cif/module/transaksi/laporan/laporan_transaksi_page.dart';
+import 'package:cif/module/transaksi/mutasi_barang/mutasi_barang_page.dart';
+import 'package:cif/module/transaksi/otorisasi/otorisasi_transaksi_page.dart';
+import 'package:cif/module/transaksi/pembatalan_transaksi/pembatalan_transaksi_page.dart';
+import 'package:cif/module/transaksi/piutang/piutang_page.dart';
+import 'package:cif/module/transaksi/satu_transaksi/satu_transaksi_page.dart';
+import 'package:cif/module/transaksi/penerimaan/penerimaan_page.dart';
+import 'package:cif/module/transaksi/pengeluaran/pengeluaran_page.dart';
+import 'package:cif/module/transaksi/tracking_pengiriman/tracking_pengiriman_page.dart';
+import 'package:cif/module/transaksi/transaksi_hutang/transaksi_hutang_page.dart';
+import 'package:cif/module/user_akses_point/user_akses_point_page.dart';
+import 'package:cif/utils/colors.dart';
+import 'package:cif/utils/images_path.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -153,7 +153,7 @@ class MenuPage extends StatelessWidget {
                           const SizedBox(
                             height: 24,
                           ),
-                          MenuTransaksiWidget(value: value),
+                          MenuCustomerWidget(value: value),
                           const SizedBox(
                             height: 24,
                           ),
@@ -169,64 +169,64 @@ class MenuPage extends StatelessWidget {
                           // const SizedBox(
                           //   height: 16,
                           // ),
-                          // InkWell(
-                          //   onTap: () => value.gantimenu(26),
-                          //   child: Container(
-                          //     width: double.infinity,
-                          //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                          //     decoration: BoxDecoration(
-                          //       color: value.page == 26 ? Colors.white : Colors.transparent,
-                          //     ),
-                          //     child: Row(
-                          //       children: [
-                          //         Image.asset(
-                          //           ImageAssets.user,
-                          //           height: 30,
-                          //           color: value.page == 26 ? Colors.black : Colors.white,
-                          //         ),
-                          //         const SizedBox(
-                          //           width: 16,
-                          //         ),
-                          //         Text(
-                          //           "AKTIVASI USER",
-                          //           style: TextStyle(
-                          //             fontSize: 16,
-                          //             color: value.page == 26 ? Colors.black : Colors.white,
-                          //           ),
-                          //         )
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
-                          // InkWell(
-                          //   onTap: () => value.gantimenu(28),
-                          //   child: Container(
-                          //     width: double.infinity,
-                          //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                          //     decoration: BoxDecoration(
-                          //       color: value.page == 28 ? Colors.white : Colors.transparent,
-                          //     ),
-                          //     child: Row(
-                          //       children: [
-                          //         Image.asset(
-                          //           ImageAssets.settings,
-                          //           height: 30,
-                          //           color: value.page == 28 ? Colors.black : Colors.white,
-                          //         ),
-                          //         const SizedBox(
-                          //           width: 16,
-                          //         ),
-                          //         Text(
-                          //           "SETINGS",
-                          //           style: TextStyle(
-                          //             fontSize: 16,
-                          //             color: value.page == 28 ? Colors.black : Colors.white,
-                          //           ),
-                          //         )
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
+                          InkWell(
+                            onTap: () => value.gantimenu(26),
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                              decoration: BoxDecoration(
+                                color: value.page == 26 ? Colors.white : Colors.transparent,
+                              ),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    ImageAssets.user,
+                                    height: 30,
+                                    color: value.page == 26 ? Colors.black : Colors.white,
+                                  ),
+                                  const SizedBox(
+                                    width: 16,
+                                  ),
+                                  Text(
+                                    "Customer",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: value.page == 26 ? Colors.black : Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () => value.gantimenu(28),
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                              decoration: BoxDecoration(
+                                color: value.page == 28 ? Colors.white : Colors.transparent,
+                              ),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    ImageAssets.settings,
+                                    height: 30,
+                                    color: value.page == 28 ? Colors.black : Colors.white,
+                                  ),
+                                  const SizedBox(
+                                    width: 16,
+                                  ),
+                                  Text(
+                                    "SETINGS",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: value.page == 28 ? Colors.black : Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -304,7 +304,7 @@ class MenuPage extends StatelessWidget {
                                                           : value.page == 10
                                                               ? const LaporanMasterPage()
                                                               : value.page == 11
-                                                                  ? const PengadaanPage()
+                                                                  ? const PeroranganPage()
                                                                   : value.page == 12
                                                                       ? const PenempatanPage()
                                                                       : value.page == 13

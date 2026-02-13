@@ -1,7 +1,7 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/setup/kelompok_aset/kelompok_aset_notifier.dart';
-import 'package:accounting/module/setup/level/level_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/setup/kelompok_aset/kelompok_aset_notifier.dart';
+import 'package:cif/module/setup/level/level_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -237,9 +237,7 @@ class KelompokAsetPage extends StatelessWidget {
                                 controller: value.kode,
                                 maxLines: 1,
                                 maxLength: 6,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]'))
-                                ],
+                                inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]'))],
                                 validator: (e) {
                                   if (e!.isEmpty) {
                                     return "Wajib diisi";

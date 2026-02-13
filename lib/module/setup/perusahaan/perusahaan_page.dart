@@ -1,5 +1,5 @@
-import 'package:accounting/module/setup/perusahaan/perusahaan_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
+import 'package:cif/module/setup/perusahaan/perusahaan_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -322,9 +322,7 @@ class PerusahaanPage extends StatelessWidget {
                                       textInputAction: TextInputAction.done,
                                       controller: value.kodePos,
                                       maxLines: 1,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.digitsOnly
-                                      ],
+                                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                       validator: (e) {
                                         if (e!.isEmpty) {
                                           return "Wajib diisi";

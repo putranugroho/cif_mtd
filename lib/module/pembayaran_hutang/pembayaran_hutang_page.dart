@@ -1,8 +1,8 @@
-import 'package:accounting/models/hutang_piutang_item_model.dart';
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/pembayaran_hutang/pembayaran_hutang_notifier.dart';
-import 'package:accounting/utils/currency_formatted.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/models/hutang_piutang_item_model.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/pembayaran_hutang/pembayaran_hutang_notifier.dart';
+import 'package:cif/utils/currency_formatted.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -53,8 +53,7 @@ class PembayaranHutangPage extends StatelessWidget {
                           ? InkWell(
                               onTap: () => value.rincian(),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 8),
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   color: const Color.fromARGB(255, 255, 0, 0),
@@ -174,22 +173,17 @@ class PembayaranHutangPage extends StatelessWidget {
                                       ),
                                     ),
                                     Expanded(
-                                      child:
-                                          TypeAheadField<CustomerSupplierModel>(
+                                      child: TypeAheadField<CustomerSupplierModel>(
                                         controller: value.customersupplier,
-                                        suggestionsCallback: (search) => value
-                                            .getCustomerSupplierQuery(search),
-                                        builder:
-                                            (context, controller, focusNode) {
+                                        suggestionsCallback: (search) => value.getCustomerSupplierQuery(search),
+                                        builder: (context, controller, focusNode) {
                                           return TextField(
                                               controller: controller,
                                               focusNode: focusNode,
                                               autofocus: true,
                                               decoration: InputDecoration(
-                                                border:
-                                                    const OutlineInputBorder(),
-                                                labelText:
-                                                    'Cari ${value.jenis == 1 ? "Customer" : "Supplier"}',
+                                                border: const OutlineInputBorder(),
+                                                labelText: 'Cari ${value.jenis == 1 ? "Customer" : "Supplier"}',
                                               ));
                                         },
                                         itemBuilder: (context, city) {
@@ -209,19 +203,16 @@ class PembayaranHutangPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         SizedBox(
                                           height: 40,
                                           child: TextFormField(
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             maxLines: 1,
                                             readOnly: true,
                                             controller: value.alamat,
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                             validator: (e) {
                                               if (e!.isEmpty) {
                                                 return "Wajib diisi";
@@ -234,8 +225,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Alamat",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -274,10 +264,8 @@ class PembayaranHutangPage extends StatelessWidget {
                                     Expanded(
                                       child: TypeAheadField<InqueryGlModel>(
                                         controller: value.nmSbb,
-                                        suggestionsCallback: (search) =>
-                                            value.getInquery(search),
-                                        builder:
-                                            (context, controller, focusNode) {
+                                        suggestionsCallback: (search) => value.getInquery(search),
+                                        builder: (context, controller, focusNode) {
                                           return TextField(
                                               controller: controller,
                                               focusNode: focusNode,
@@ -304,19 +292,16 @@ class PembayaranHutangPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         SizedBox(
                                           height: 40,
                                           child: TextFormField(
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             maxLines: 1,
                                             controller: value.noSbb,
                                             readOnly: true,
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                             validator: (e) {
                                               if (e!.isEmpty) {
                                                 return "Wajib diisi";
@@ -329,8 +314,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "No SBB",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -343,8 +327,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         SizedBox(
                                           height: 40,
@@ -352,14 +335,12 @@ class PembayaranHutangPage extends StatelessWidget {
                                             onTap: () => value.cariTrans(),
                                             child: TextFormField(
                                               enabled: false,
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              textInputAction: TextInputAction.done,
                                               controller: value.caritransaksis,
                                               decoration: InputDecoration(
                                                 hintText: "Cari Transaksi",
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
+                                                  borderRadius: BorderRadius.circular(8),
                                                   borderSide: const BorderSide(
                                                     width: 1,
                                                     color: Colors.grey,
@@ -402,19 +383,16 @@ class PembayaranHutangPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         SizedBox(
                                           height: 40,
                                           child: TextFormField(
                                             controller: value.nilaipembayaran,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             maxLines: 1,
                                             readOnly: true,
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                             validator: (e) {
                                               if (e!.isEmpty) {
                                                 return "Wajib diisi";
@@ -427,8 +405,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Nilai Pembayaran",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -452,19 +429,16 @@ class PembayaranHutangPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         SizedBox(
                                           height: 40,
                                           child: TextFormField(
                                             controller: value.tglValuta,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             maxLines: 1,
                                             readOnly: true,
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                             validator: (e) {
                                               if (e!.isEmpty) {
                                                 return "Wajib diisi";
@@ -477,8 +451,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Tanggal Valuta",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -502,19 +475,16 @@ class PembayaranHutangPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         SizedBox(
                                           height: 40,
                                           child: TextFormField(
                                             controller: value.nodokumen,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             maxLines: 1,
                                             readOnly: true,
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                             validator: (e) {
                                               if (e!.isEmpty) {
                                                 return "Wajib diisi";
@@ -527,8 +497,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "No Dok",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -566,18 +535,15 @@ class PembayaranHutangPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         SizedBox(
                                           height: 40,
                                           child: TextFormField(
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             maxLines: 1,
                                             readOnly: true,
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                             validator: (e) {
                                               if (e!.isEmpty) {
                                                 return "Wajib diisi";
@@ -591,8 +557,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Keterangan",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -625,8 +590,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         SizedBox(
                                           height: 40,
@@ -634,14 +598,12 @@ class PembayaranHutangPage extends StatelessWidget {
                                             onTap: () => value.cariTagihan(),
                                             child: TextFormField(
                                               enabled: false,
-                                              textInputAction:
-                                                  TextInputAction.done,
+                                              textInputAction: TextInputAction.done,
                                               controller: value.caritransaksi,
                                               decoration: InputDecoration(
                                                 hintText: "Cari Tagihan",
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
+                                                  borderRadius: BorderRadius.circular(8),
                                                   borderSide: const BorderSide(
                                                     width: 1,
                                                     color: Colors.grey,
@@ -672,19 +634,16 @@ class PembayaranHutangPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         SizedBox(
                                           height: 40,
                                           child: TextFormField(
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             maxLines: 1,
                                             controller: value.nilaitagihan,
                                             readOnly: true,
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                             validator: (e) {
                                               if (e!.isEmpty) {
                                                 return "Wajib diisi";
@@ -697,8 +656,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Nilai",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -722,19 +680,16 @@ class PembayaranHutangPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         SizedBox(
                                           height: 40,
                                           child: TextFormField(
                                             controller: value.tglKontrak,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             maxLines: 1,
                                             readOnly: true,
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                             validator: (e) {
                                               if (e!.isEmpty) {
                                                 return "Wajib diisi";
@@ -747,8 +702,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Tanggal Kontrak",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -774,19 +728,16 @@ class PembayaranHutangPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         SizedBox(
                                           height: 40,
                                           child: TextFormField(
                                             controller: value.noref,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             maxLines: 1,
                                             readOnly: true,
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                             validator: (e) {
                                               if (e!.isEmpty) {
                                                 return "Wajib diisi";
@@ -799,8 +750,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "No. Ref",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -838,19 +788,16 @@ class PembayaranHutangPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         SizedBox(
                                           height: 40,
                                           child: TextFormField(
                                             controller: value.keterangan,
-                                            textInputAction:
-                                                TextInputAction.done,
+                                            textInputAction: TextInputAction.done,
                                             maxLines: 1,
                                             readOnly: true,
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: const TextStyle(fontSize: 12),
                                             validator: (e) {
                                               if (e!.isEmpty) {
                                                 return "Wajib diisi";
@@ -863,8 +810,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                               fillColor: Colors.grey[200],
                                               hintText: "Keterangan",
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                           ),
@@ -916,8 +862,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                         decoration: InputDecoration(
                                           hintText: "No. Dokumen",
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),
@@ -963,8 +908,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                         decoration: InputDecoration(
                                           hintText: "No. Invoice",
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),
@@ -983,12 +927,8 @@ class PembayaranHutangPage extends StatelessWidget {
                                     InkWell(
                                       onTap: () => value.tambahTransaksi(),
                                       child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 16, vertical: 8),
-                                        decoration: BoxDecoration(
-                                            color: colorPrimary,
-                                            borderRadius:
-                                                BorderRadius.circular(16)),
+                                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                        decoration: BoxDecoration(color: colorPrimary, borderRadius: BorderRadius.circular(16)),
                                         child: const Text(
                                           "Hitung Rincian Bayar",
                                           style: TextStyle(
@@ -1015,10 +955,8 @@ class PembayaranHutangPage extends StatelessWidget {
                                     headerRowHeight: 40,
                                     defaultColumnWidth: 180,
                                     frozenColumnsCount: 2,
-                                    gridLinesVisibility:
-                                        GridLinesVisibility.both,
-                                    headerGridLinesVisibility:
-                                        GridLinesVisibility.both,
+                                    gridLinesVisibility: GridLinesVisibility.both,
+                                    headerGridLinesVisibility: GridLinesVisibility.both,
                                     selectionMode: SelectionMode.single,
                                     source: DetailDataPembayaranSource(value),
                                     columns: <GridColumn>[
@@ -1130,8 +1068,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                   ),
                                 ),
                                 Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 16),
+                                  margin: const EdgeInsets.symmetric(vertical: 16),
                                   height: 1,
                                   color: Colors.grey[300],
                                 ),
@@ -1153,15 +1090,12 @@ class PembayaranHutangPage extends StatelessWidget {
                                         textInputAction: TextInputAction.done,
                                         controller: value.selisih,
                                         maxLines: 1,
-                                        keyboardType: const TextInputType
-                                            .numberWithOptions(decimal: true),
+                                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
                                         inputFormatters: [
                                           a.CurrencyInputFormatter(
                                             useSymbolPadding: true,
-                                            thousandSeparator:
-                                                a.ThousandSeparator.Period,
-                                            mantissaLength:
-                                                2, // jumlah angka desimal
+                                            thousandSeparator: a.ThousandSeparator.Period,
+                                            mantissaLength: 2, // jumlah angka desimal
                                             // decimalSeparator: DecimalSeparator.Comma,
                                           ),
                                         ],
@@ -1177,8 +1111,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                           filled: true,
                                           fillColor: Colors.grey[200],
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                            borderRadius: BorderRadius.circular(6),
                                           ),
                                         ),
                                       ),
@@ -1188,10 +1121,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                       width: 300,
                                       child: Row(
                                         children: [
-                                          CupertinoSwitch(
-                                              activeTrackColor: colorPrimary,
-                                              value: value.kelebihan,
-                                              onChanged: (e) => null),
+                                          CupertinoSwitch(activeTrackColor: colorPrimary, value: value.kelebihan, onChanged: (e) => null),
                                           const SizedBox(width: 10),
                                           const Text(
                                             "Kekurangan / Kelebihan Bayar",
@@ -1205,16 +1135,12 @@ class PembayaranHutangPage extends StatelessWidget {
                                       width: 200,
                                       child: TypeAheadField<InqueryGlModel>(
                                         controller: value.nosbbkelebihan,
-                                        suggestionsCallback: (search) =>
-                                            value.getInqueryKelebihan(search),
-                                        builder:
-                                            (context, controller, focusNode) {
+                                        suggestionsCallback: (search) => value.getInqueryKelebihan(search),
+                                        builder: (context, controller, focusNode) {
                                           return TextField(
                                               controller: controller,
                                               focusNode: focusNode,
-                                              enabled: value.kelebihan
-                                                  ? true
-                                                  : false,
+                                              enabled: value.kelebihan ? true : false,
                                               autofocus: true,
                                               decoration: const InputDecoration(
                                                 border: OutlineInputBorder(),
@@ -1241,12 +1167,8 @@ class PembayaranHutangPage extends StatelessWidget {
                                         value.loadData();
                                       },
                                       child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 24, vertical: 8),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(32),
-                                            color: colorPrimary),
+                                        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(32), color: colorPrimary),
                                         child: Text(
                                           "Bayar",
                                           style: TextStyle(
@@ -1260,15 +1182,13 @@ class PembayaranHutangPage extends StatelessWidget {
                                 ),
                                 value.kelebihan
                                     ? Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
                                           SizedBox(
                                             height: 16,
                                           ),
                                           Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Container(
                                                 height: 40,
@@ -1278,14 +1198,12 @@ class PembayaranHutangPage extends StatelessWidget {
                                                   children: [
                                                     Text(
                                                       "No. Dokumen Selisih",
-                                                      style: TextStyle(
-                                                          fontSize: 16),
+                                                      style: TextStyle(fontSize: 16),
                                                     ),
                                                     SizedBox(width: 5),
                                                     Text(
                                                       "*",
-                                                      style: TextStyle(
-                                                          fontSize: 8),
+                                                      style: TextStyle(fontSize: 8),
                                                     ),
                                                   ],
                                                 ),
@@ -1295,13 +1213,10 @@ class PembayaranHutangPage extends StatelessWidget {
                                                 width: 180,
                                                 child: TextFormField(
                                                   readOnly: true,
-                                                  textInputAction:
-                                                      TextInputAction.done,
+                                                  textInputAction: TextInputAction.done,
                                                   maxLines: 1,
-                                                  controller:
-                                                      value.nodokumenselisih,
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
+                                                  controller: value.nodokumenselisih,
+                                                  style: const TextStyle(fontSize: 12),
                                                   validator: (e) {
                                                     if (e!.isEmpty) {
                                                       return "Wajib diisi";
@@ -1314,9 +1229,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                                     fillColor: Colors.grey[200],
                                                     filled: true,
                                                     border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
+                                                      borderRadius: BorderRadius.circular(6),
                                                     ),
                                                   ),
                                                 ),
@@ -1331,14 +1244,12 @@ class PembayaranHutangPage extends StatelessWidget {
                                                   children: [
                                                     Text(
                                                       "Keterangan Selisih",
-                                                      style: TextStyle(
-                                                          fontSize: 16),
+                                                      style: TextStyle(fontSize: 16),
                                                     ),
                                                     SizedBox(width: 5),
                                                     Text(
                                                       "*",
-                                                      style: TextStyle(
-                                                          fontSize: 8),
+                                                      style: TextStyle(fontSize: 8),
                                                     ),
                                                   ],
                                                 ),
@@ -1350,19 +1261,14 @@ class PembayaranHutangPage extends StatelessWidget {
                                                 height: 40,
                                                 width: 180,
                                                 child: TextFormField(
-                                                  textInputAction:
-                                                      TextInputAction.done,
+                                                  textInputAction: TextInputAction.done,
                                                   maxLines: 1,
-                                                  controller:
-                                                      value.keteranganSelisih,
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
+                                                  controller: value.keteranganSelisih,
+                                                  style: const TextStyle(fontSize: 12),
                                                   decoration: InputDecoration(
                                                     hintText: "Keterangan",
                                                     border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
+                                                      borderRadius: BorderRadius.circular(6),
                                                     ),
                                                   ),
                                                 ),
@@ -1377,14 +1283,12 @@ class PembayaranHutangPage extends StatelessWidget {
                                                   children: [
                                                     Text(
                                                       "Ref. Selisih",
-                                                      style: TextStyle(
-                                                          fontSize: 16),
+                                                      style: TextStyle(fontSize: 16),
                                                     ),
                                                     SizedBox(width: 5),
                                                     Text(
                                                       "*",
-                                                      style: TextStyle(
-                                                          fontSize: 8),
+                                                      style: TextStyle(fontSize: 8),
                                                     ),
                                                   ],
                                                 ),
@@ -1396,21 +1300,14 @@ class PembayaranHutangPage extends StatelessWidget {
                                                 child: Container(
                                                   height: 40,
                                                   child: TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.done,
+                                                    textInputAction: TextInputAction.done,
                                                     maxLines: 1,
-                                                    controller:
-                                                        value.noRefTRansaksi,
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
+                                                    controller: value.noRefTRansaksi,
+                                                    style: const TextStyle(fontSize: 12),
                                                     decoration: InputDecoration(
-                                                      hintText:
-                                                          "Referensi Selisih",
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(6),
+                                                      hintText: "Referensi Selisih",
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(6),
                                                       ),
                                                     ),
                                                   ),
@@ -1464,9 +1361,7 @@ class PembayaranHutangPage extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Text(
-                                  value.editData == "caritransaksi"
-                                      ? "Pilih Transaksi"
-                                      : "Pilih Tagihan",
+                                  value.editData == "caritransaksi" ? "Pilih Transaksi" : "Pilih Tagihan",
                                   style: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
@@ -1479,9 +1374,7 @@ class PembayaranHutangPage extends StatelessWidget {
                                   width: 40,
                                   height: 40,
                                   padding: const EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                      color: Colors.grey[200],
-                                      shape: BoxShape.circle),
+                                  decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
                                   child: const Icon(Icons.close),
                                 ),
                               )
@@ -1499,10 +1392,8 @@ class PembayaranHutangPage extends StatelessWidget {
                                       headerRowHeight: 40,
                                       defaultColumnWidth: 180,
                                       frozenColumnsCount: 1,
-                                      gridLinesVisibility:
-                                          GridLinesVisibility.both,
-                                      headerGridLinesVisibility:
-                                          GridLinesVisibility.both,
+                                      gridLinesVisibility: GridLinesVisibility.both,
+                                      headerGridLinesVisibility: GridLinesVisibility.both,
                                       selectionMode: SelectionMode.single,
                                       source: DetailDataTransaksi(value),
                                       columns: <GridColumn>[
@@ -1512,13 +1403,11 @@ class PembayaranHutangPage extends StatelessWidget {
                                             label: Container(
                                                 color: colorPrimary,
                                                 alignment: Alignment.center,
-                                                padding:
-                                                    const EdgeInsets.all(6),
+                                                padding: const EdgeInsets.all(6),
                                                 child: const Text('Aksi',
                                                     style: TextStyle(
                                                       fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w300,
+                                                      fontWeight: FontWeight.w300,
                                                       color: Colors.white,
                                                     )))),
                                         GridColumn(
@@ -1527,29 +1416,24 @@ class PembayaranHutangPage extends StatelessWidget {
                                             label: Container(
                                                 color: colorPrimary,
                                                 alignment: Alignment.center,
-                                                padding:
-                                                    const EdgeInsets.all(6),
-                                                child:
-                                                    const Text('Tanggal Valuta',
-                                                        style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          color: Colors.white,
-                                                        )))),
+                                                padding: const EdgeInsets.all(6),
+                                                child: const Text('Tanggal Valuta',
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight: FontWeight.w300,
+                                                      color: Colors.white,
+                                                    )))),
                                         GridColumn(
                                             width: 150,
                                             columnName: 'nilaitrans',
                                             label: Container(
                                                 color: colorPrimary,
                                                 alignment: Alignment.center,
-                                                padding:
-                                                    const EdgeInsets.all(6),
+                                                padding: const EdgeInsets.all(6),
                                                 child: const Text('Nilai',
                                                     style: TextStyle(
                                                       fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w300,
+                                                      fontWeight: FontWeight.w300,
                                                       color: Colors.white,
                                                     )))),
                                         GridColumn(
@@ -1558,13 +1442,11 @@ class PembayaranHutangPage extends StatelessWidget {
                                             label: Container(
                                                 color: colorPrimary,
                                                 alignment: Alignment.center,
-                                                padding:
-                                                    const EdgeInsets.all(6),
+                                                padding: const EdgeInsets.all(6),
                                                 child: const Text('No. Dokumen',
                                                     style: TextStyle(
                                                       fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w300,
+                                                      fontWeight: FontWeight.w300,
                                                       color: Colors.white,
                                                     )))),
                                         GridColumn(
@@ -1572,14 +1454,12 @@ class PembayaranHutangPage extends StatelessWidget {
                                             columnName: 'keterangan',
                                             label: Container(
                                                 color: colorPrimary,
-                                                padding:
-                                                    const EdgeInsets.all(6),
+                                                padding: const EdgeInsets.all(6),
                                                 alignment: Alignment.center,
                                                 child: const Text('Keterangan',
                                                     style: TextStyle(
                                                       fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w300,
+                                                      fontWeight: FontWeight.w300,
                                                       color: Colors.white,
                                                     )))),
                                       ],
@@ -1592,10 +1472,8 @@ class PembayaranHutangPage extends StatelessWidget {
                                       headerRowHeight: 40,
                                       defaultColumnWidth: 180,
                                       frozenColumnsCount: 1,
-                                      gridLinesVisibility:
-                                          GridLinesVisibility.both,
-                                      headerGridLinesVisibility:
-                                          GridLinesVisibility.both,
+                                      gridLinesVisibility: GridLinesVisibility.both,
+                                      headerGridLinesVisibility: GridLinesVisibility.both,
                                       selectionMode: SelectionMode.single,
                                       source: DetailDataTagihanSource(value),
                                       columns: <GridColumn>[
@@ -1604,14 +1482,12 @@ class PembayaranHutangPage extends StatelessWidget {
                                             width: 80,
                                             label: Container(
                                                 color: colorPrimary,
-                                                padding:
-                                                    const EdgeInsets.all(6),
+                                                padding: const EdgeInsets.all(6),
                                                 alignment: Alignment.center,
                                                 child: const Text('Aksi',
                                                     style: TextStyle(
                                                       fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w300,
+                                                      fontWeight: FontWeight.w300,
                                                       color: Colors.white,
                                                     )))),
                                         GridColumn(
@@ -1620,13 +1496,11 @@ class PembayaranHutangPage extends StatelessWidget {
                                             label: Container(
                                                 color: colorPrimary,
                                                 alignment: Alignment.center,
-                                                padding:
-                                                    const EdgeInsets.all(6),
+                                                padding: const EdgeInsets.all(6),
                                                 child: const Text('No. Kontrak',
                                                     style: TextStyle(
                                                       fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w300,
+                                                      fontWeight: FontWeight.w300,
                                                       color: Colors.white,
                                                     )))),
                                         GridColumn(
@@ -1635,13 +1509,11 @@ class PembayaranHutangPage extends StatelessWidget {
                                             label: Container(
                                                 color: colorPrimary,
                                                 alignment: Alignment.center,
-                                                padding:
-                                                    const EdgeInsets.all(6),
+                                                padding: const EdgeInsets.all(6),
                                                 child: const Text('Nilai',
                                                     style: TextStyle(
                                                       fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w300,
+                                                      fontWeight: FontWeight.w300,
                                                       color: Colors.white,
                                                     )))),
                                         GridColumn(
@@ -1650,30 +1522,24 @@ class PembayaranHutangPage extends StatelessWidget {
                                             label: Container(
                                                 color: colorPrimary,
                                                 alignment: Alignment.center,
-                                                padding:
-                                                    const EdgeInsets.all(6),
-                                                child:
-                                                    const Text('Jangka Waktu',
-                                                        style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          color: Colors.white,
-                                                        )))),
+                                                padding: const EdgeInsets.all(6),
+                                                child: const Text('Jangka Waktu',
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight: FontWeight.w300,
+                                                      color: Colors.white,
+                                                    )))),
                                         GridColumn(
                                             width: 150,
                                             columnName: 'tgltransaksi',
                                             label: Container(
                                                 color: colorPrimary,
                                                 alignment: Alignment.center,
-                                                padding:
-                                                    const EdgeInsets.all(6),
-                                                child: const Text(
-                                                    'Tanggal Kontrak',
+                                                padding: const EdgeInsets.all(6),
+                                                child: const Text('Tanggal Kontrak',
                                                     style: TextStyle(
                                                       fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w300,
+                                                      fontWeight: FontWeight.w300,
                                                       color: Colors.white,
                                                     )))),
                                         GridColumn(
@@ -1681,14 +1547,12 @@ class PembayaranHutangPage extends StatelessWidget {
                                             columnName: 'keterangantagihan',
                                             label: Container(
                                                 color: colorPrimary,
-                                                padding:
-                                                    const EdgeInsets.all(6),
+                                                padding: const EdgeInsets.all(6),
                                                 alignment: Alignment.center,
                                                 child: const Text('Keterangan',
                                                     style: TextStyle(
                                                       fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w300,
+                                                      fontWeight: FontWeight.w300,
                                                       color: Colors.white,
                                                     )))),
                                       ],
@@ -1735,20 +1599,13 @@ class DetailDataPembayaranSource extends DataGridSource {
               cells: [
                 DataGridCell(columnName: 'no', value: (no++).toString()),
                 DataGridCell(
-                    columnName: 'tagihan',
-                    value: FormatCurrency.oCcyDecimal.format(
-                        double.parse(data.tagPokok) -
-                            double.parse(data.byrPokok))),
-                DataGridCell(
-                    columnName: 'bayartagihan', value: (no - 1).toString()),
+                    columnName: 'tagihan', value: FormatCurrency.oCcyDecimal.format(double.parse(data.tagPokok) - double.parse(data.byrPokok))),
+                DataGridCell(columnName: 'bayartagihan', value: (no - 1).toString()),
                 DataGridCell(columnName: 'tagppn', value: (no - 1).toString()),
-                DataGridCell(
-                    columnName: 'bayarppn', value: (no - 1).toString()),
+                DataGridCell(columnName: 'bayarppn', value: (no - 1).toString()),
                 DataGridCell(columnName: 'tagpph', value: (no - 1).toString()),
-                DataGridCell(
-                    columnName: 'bayarpph', value: (no - 1).toString()),
-                DataGridCell(
-                    columnName: 'keterangantagihan', value: data.keterangan),
+                DataGridCell(columnName: 'bayarpph', value: (no - 1).toString()),
+                DataGridCell(columnName: 'keterangantagihan', value: data.keterangan),
               ],
             ))
         .toList();
@@ -1794,8 +1651,7 @@ class DetailDataPembayaranSource extends DataGridSource {
             child: Container(
                 width: 300,
                 child: TextFormField(
-                  controller:
-                      tindakanNotifier!.listInvoice[int.parse(e.value) - 1],
+                  controller: tindakanNotifier!.listInvoice[int.parse(e.value) - 1],
                   style: TextStyle(
                     fontSize: 12,
                   ),
@@ -1822,18 +1678,14 @@ class DetailDataPembayaranSource extends DataGridSource {
                     tindakanNotifier!.onchange(int.parse(e.value) - 1);
                   },
                   controller: e.columnName == 'bayartagihan'
-                      ? tindakanNotifier!
-                          .listBayarTagihan[int.parse(e.value) - 1]
+                      ? tindakanNotifier!.listBayarTagihan[int.parse(e.value) - 1]
                       : e.columnName == 'tagppn'
                           ? tindakanNotifier!.listPPN[int.parse(e.value) - 1]
                           : e.columnName == 'tagpph'
-                              ? tindakanNotifier!
-                                  .listPPH[int.parse(e.value) - 1]
+                              ? tindakanNotifier!.listPPH[int.parse(e.value) - 1]
                               : e.columnName == 'bayarppn'
-                                  ? tindakanNotifier!
-                                      .listBayarPPN[int.parse(e.value) - 1]
-                                  : tindakanNotifier!
-                                      .listBayarPPH[int.parse(e.value) - 1],
+                                  ? tindakanNotifier!.listBayarPPN[int.parse(e.value) - 1]
+                                  : tindakanNotifier!.listBayarPPH[int.parse(e.value) - 1],
                   style: TextStyle(
                     fontSize: 12,
                   ),
@@ -1843,8 +1695,7 @@ class DetailDataPembayaranSource extends DataGridSource {
                       borderRadius: BorderRadius.circular(6),
                     ),
                   ),
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
                   inputFormatters: [
                     a.CurrencyInputFormatter(
                       leadingSymbol: 'Rp ',
@@ -1895,11 +1746,8 @@ class DetailDataTransaksi extends DataGridSource {
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
                 DataGridCell(columnName: 'action', value: data.rrn),
-                DataGridCell(
-                    columnName: 'tgltranstrans', value: data.tglValuta),
-                DataGridCell(
-                    columnName: 'nilaitrans',
-                    value: FormatCurrency.oCcy.format(int.parse(data.nominal))),
+                DataGridCell(columnName: 'tgltranstrans', value: data.tglValuta),
+                DataGridCell(columnName: 'nilaitrans', value: FormatCurrency.oCcy.format(int.parse(data.nominal))),
                 DataGridCell(columnName: 'nodoktrans', value: data.noDokumen),
                 DataGridCell(columnName: 'keterangan', value: data.keterangan),
               ],
@@ -1977,19 +1825,12 @@ class DetailDataTagihanSource extends DataGridSource {
     _laporanData = list
         .map<DataGridRow>((data) => DataGridRow(
               cells: [
-                DataGridCell(
-                    columnName: 'action', value: data.nokontrak.toString()),
+                DataGridCell(columnName: 'action', value: data.nokontrak.toString()),
                 DataGridCell(columnName: 'kontrak', value: data.nokontrak),
-                DataGridCell(
-                    columnName: 'nilaitagihan',
-                    value: FormatCurrency.oCcyDecimal
-                        .format(double.parse(data.totalTagPokok))),
-                DataGridCell(
-                    columnName: 'jangkawaktu', value: data.jangkawaktu),
-                DataGridCell(
-                    columnName: 'tgltransaksi', value: data.tglKontrak),
-                DataGridCell(
-                    columnName: 'keterangantagihan', value: data.keterangan),
+                DataGridCell(columnName: 'nilaitagihan', value: FormatCurrency.oCcyDecimal.format(double.parse(data.totalTagPokok))),
+                DataGridCell(columnName: 'jangkawaktu', value: data.jangkawaktu),
+                DataGridCell(columnName: 'tgltransaksi', value: data.tglKontrak),
+                DataGridCell(columnName: 'keterangantagihan', value: data.keterangan),
               ],
             ))
         .toList();

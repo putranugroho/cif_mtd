@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/models/users_model.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/models/users_model.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -37,9 +37,7 @@ class UserAksesPointNotifier extends ChangeNotifier {
   Future getUsersAkses() async {
     listUsersAkses.clear();
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getUsersAksesPointAll(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("ok")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -135,9 +133,7 @@ class UserAksesPointNotifier extends ChangeNotifier {
     listData.clear();
     isLoading = true;
     notifyListeners();
-    var data = {
-      "kode_pt": "001"
-    };
+    var data = {"kode_pt": "001"};
     Setuprepository.setup(token, NetworkURL.getAksesPoint(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
@@ -291,9 +287,7 @@ class UserAksesPointNotifier extends ChangeNotifier {
     if (query.isNotEmpty && query.length > 2) {
       listKaryawan.clear();
       notifyListeners();
-      var data = {
-        "namauser": query
-      };
+      var data = {"namauser": query};
       try {
         final response = await Setuprepository.setup(
           token,

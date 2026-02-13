@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/pref/pref.dart';
-import 'package:accounting/utils/dialog_loading.dart';
-import 'package:accounting/utils/informationdialog.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/pref/pref.dart';
+import 'package:cif/utils/dialog_loading.dart';
+import 'package:cif/utils/informationdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -46,8 +46,17 @@ class OtorisasiTransaksiNotifier extends ChangeNotifier {
           listTransasiAdd = users!.levelOtor == "null"
               ? []
               : users!.bedaKantor == "Y"
-                  ? listTransaksi.where((e) => e.status == "PENDING" && ((double.parse(e.nominal) > double.parse(users!.minOtor)) && (double.parse(e.nominal) <= double.parse(users!.maxOtor)))).toList()
-                  : listTransaksi.where((e) => (e.status == "PENDING") && ((double.parse(e.nominal) > double.parse(users!.minOtor)) && (double.parse(e.nominal) <= double.parse(users!.maxOtor))) && e.kodeKantor == users!.kodeKantor).toList();
+                  ? listTransaksi
+                      .where((e) =>
+                          e.status == "PENDING" &&
+                          ((double.parse(e.nominal) > double.parse(users!.minOtor)) && (double.parse(e.nominal) <= double.parse(users!.maxOtor))))
+                      .toList()
+                  : listTransaksi
+                      .where((e) =>
+                          (e.status == "PENDING") &&
+                          ((double.parse(e.nominal) > double.parse(users!.minOtor)) && (double.parse(e.nominal) <= double.parse(users!.maxOtor))) &&
+                          e.kodeKantor == users!.kodeKantor)
+                      .toList();
         }
         isLoadingData = false;
         notifyListeners();

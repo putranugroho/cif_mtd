@@ -1,8 +1,8 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/inventaris/otorisasi/otorisasi_inventaris_notifier.dart';
-import 'package:accounting/module/master/otorisasi/otorisasi_master_notifier.dart';
-import 'package:accounting/module/setup_otorisasi/setup_otorisasi_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/inventaris/otorisasi/otorisasi_inventaris_notifier.dart';
+import 'package:cif/module/master/otorisasi/otorisasi_master_notifier.dart';
+import 'package:cif/module/setup_otorisasi/setup_otorisasi_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

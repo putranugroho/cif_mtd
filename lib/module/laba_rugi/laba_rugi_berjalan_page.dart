@@ -1,6 +1,6 @@
-import 'package:accounting/module/laba_rugi/laba_rugi_berjalan_notifier.dart';
+import 'package:cif/module/laba_rugi/laba_rugi_berjalan_notifier.dart';
 
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

@@ -1,4 +1,4 @@
-import 'package:accounting/module/rekonsiliasi/rekonsiliasi_hutang_notifier.dart';
+import 'package:cif/module/rekonsiliasi/rekonsiliasi_hutang_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -282,7 +282,10 @@ class RekonsiliasiHutangPage extends StatelessWidget {
                                     width: 180,
                                     margin: const EdgeInsets.only(right: 16),
                                     child: Text(
-                                      FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "A").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b))),
+                                      FormatCurrency.oCcyDecimal.format((value.list
+                                          .where((e) => e.statusInvoice == "A")
+                                          .map((f) => double.parse(f.nilaiInvoice))
+                                          .reduce((a, b) => a + b))),
                                       textAlign: TextAlign.end,
                                       style: const TextStyle(
                                         fontSize: 12,
@@ -326,7 +329,10 @@ class RekonsiliasiHutangPage extends StatelessWidget {
                                     width: 180,
                                     margin: const EdgeInsets.only(right: 16),
                                     child: Text(
-                                      FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "A").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b))),
+                                      FormatCurrency.oCcyDecimal.format((value.list
+                                          .where((e) => e.statusInvoice == "A")
+                                          .map((f) => double.parse(f.nilaiInvoice))
+                                          .reduce((a, b) => a + b))),
                                       textAlign: TextAlign.end,
                                       style: const TextStyle(
                                         fontSize: 12,
@@ -516,7 +522,10 @@ class RekonsiliasiHutangPage extends StatelessWidget {
                                     width: 180,
                                     margin: const EdgeInsets.only(right: 16),
                                     child: Text(
-                                      FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b))),
+                                      FormatCurrency.oCcyDecimal.format((value.list
+                                          .where((e) => e.statusInvoice == "M")
+                                          .map((f) => double.parse(f.nilaiInvoice))
+                                          .reduce((a, b) => a + b))),
                                       textAlign: TextAlign.end,
                                       style: const TextStyle(
                                         fontSize: 12,
@@ -560,7 +569,11 @@ class RekonsiliasiHutangPage extends StatelessWidget {
                                     width: 180,
                                     margin: const EdgeInsets.only(right: 16),
                                     child: Text(
-                                      FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - 185000),
+                                      FormatCurrency.oCcyDecimal.format((value.list
+                                              .where((e) => e.statusInvoice == "M")
+                                              .map((f) => double.parse(f.nilaiInvoice))
+                                              .reduce((a, b) => a + b)) -
+                                          185000),
                                       textAlign: TextAlign.end,
                                       style: const TextStyle(
                                         fontSize: 12,
@@ -604,7 +617,15 @@ class RekonsiliasiHutangPage extends StatelessWidget {
                                     width: 180,
                                     margin: const EdgeInsets.only(right: 16),
                                     child: Text(
-                                      FormatCurrency.oCcyDecimal.format((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - ((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - 185000)),
+                                      FormatCurrency.oCcyDecimal.format((value.list
+                                              .where((e) => e.statusInvoice == "M")
+                                              .map((f) => double.parse(f.nilaiInvoice))
+                                              .reduce((a, b) => a + b)) -
+                                          ((value.list
+                                                  .where((e) => e.statusInvoice == "M")
+                                                  .map((f) => double.parse(f.nilaiInvoice))
+                                                  .reduce((a, b) => a + b)) -
+                                              185000)),
                                       textAlign: TextAlign.end,
                                       style: const TextStyle(
                                         fontSize: 12,
@@ -754,7 +775,10 @@ class RekonsiliasiHutangPage extends StatelessWidget {
                                     width: 180,
                                     margin: const EdgeInsets.only(right: 16),
                                     child: Text(
-                                      FormatCurrency.oCcyDecimal.format((value.listPiutang.where((e) => e.statusInvoice == "A").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b))),
+                                      FormatCurrency.oCcyDecimal.format((value.listPiutang
+                                          .where((e) => e.statusInvoice == "A")
+                                          .map((f) => double.parse(f.nilaiInvoice))
+                                          .reduce((a, b) => a + b))),
                                       textAlign: TextAlign.end,
                                       style: const TextStyle(
                                         fontSize: 12,
@@ -798,7 +822,10 @@ class RekonsiliasiHutangPage extends StatelessWidget {
                                     width: 180,
                                     margin: const EdgeInsets.only(right: 16),
                                     child: Text(
-                                      FormatCurrency.oCcyDecimal.format((value.listPiutang.where((e) => e.statusInvoice == "A").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b))),
+                                      FormatCurrency.oCcyDecimal.format((value.listPiutang
+                                          .where((e) => e.statusInvoice == "A")
+                                          .map((f) => double.parse(f.nilaiInvoice))
+                                          .reduce((a, b) => a + b))),
                                       textAlign: TextAlign.end,
                                       style: const TextStyle(
                                         fontSize: 12,
@@ -988,7 +1015,10 @@ class RekonsiliasiHutangPage extends StatelessWidget {
                                     width: 180,
                                     margin: const EdgeInsets.only(right: 16),
                                     child: Text(
-                                      FormatCurrency.oCcyDecimal.format((value.listPiutang.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b))),
+                                      FormatCurrency.oCcyDecimal.format((value.listPiutang
+                                          .where((e) => e.statusInvoice == "M")
+                                          .map((f) => double.parse(f.nilaiInvoice))
+                                          .reduce((a, b) => a + b))),
                                       textAlign: TextAlign.end,
                                       style: const TextStyle(
                                         fontSize: 12,
@@ -1032,7 +1062,11 @@ class RekonsiliasiHutangPage extends StatelessWidget {
                                     width: 180,
                                     margin: const EdgeInsets.only(right: 16),
                                     child: Text(
-                                      FormatCurrency.oCcyDecimal.format((value.listPiutang.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - 185000),
+                                      FormatCurrency.oCcyDecimal.format((value.listPiutang
+                                              .where((e) => e.statusInvoice == "M")
+                                              .map((f) => double.parse(f.nilaiInvoice))
+                                              .reduce((a, b) => a + b)) -
+                                          185000),
                                       textAlign: TextAlign.end,
                                       style: const TextStyle(
                                         fontSize: 12,
@@ -1076,7 +1110,15 @@ class RekonsiliasiHutangPage extends StatelessWidget {
                                     width: 180,
                                     margin: const EdgeInsets.only(right: 16),
                                     child: Text(
-                                      FormatCurrency.oCcyDecimal.format((value.listPiutang.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - ((value.list.where((e) => e.statusInvoice == "M").map((f) => double.parse(f.nilaiInvoice)).reduce((a, b) => a + b)) - 185000)),
+                                      FormatCurrency.oCcyDecimal.format((value.listPiutang
+                                              .where((e) => e.statusInvoice == "M")
+                                              .map((f) => double.parse(f.nilaiInvoice))
+                                              .reduce((a, b) => a + b)) -
+                                          ((value.list
+                                                  .where((e) => e.statusInvoice == "M")
+                                                  .map((f) => double.parse(f.nilaiInvoice))
+                                                  .reduce((a, b) => a + b)) -
+                                              185000)),
                                       textAlign: TextAlign.end,
                                       style: const TextStyle(
                                         fontSize: 12,

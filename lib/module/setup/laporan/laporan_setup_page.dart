@@ -1,4 +1,4 @@
-import 'package:accounting/module/setup/laporan/laporan_setup_notifier.dart';
+import 'package:cif/module/setup/laporan/laporan_setup_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

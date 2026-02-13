@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:accounting/models/index.dart';
-import 'package:accounting/network/network.dart';
-import 'package:accounting/pref/pref.dart';
-import 'package:accounting/repository/SetupRepository.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/network/network.dart';
+import 'package:cif/pref/pref.dart';
+import 'package:cif/repository/SetupRepository.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -82,16 +82,14 @@ class LaporanTransaksiNotifier extends ChangeNotifier {
     var data = {
       "kode_pt": users!.kodePt,
     };
-    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.view(), jsonEncode(data)).then((value) {
       if (value['status'].toString().toLowerCase().contains("success")) {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksi.add(TransaksiPendModel.fromJson(i));
         }
         if (listTransaksi.isNotEmpty) {
           final filtered = listTransaksi.where((e) {
-            final tgl =
-                DateTime.parse(cariTglTrans ? e.tglTransaksi : e.tglValuta);
+            final tgl = DateTime.parse(cariTglTrans ? e.tglTransaksi : e.tglValuta);
             return tgl.isAfter(tglTransAwal!.subtract(Duration(days: 1))) &&
                 tgl.isBefore(tglTransAkhir!.add(Duration(days: 1))) &&
                 e.userinput == users!.namauser &&
@@ -128,8 +126,7 @@ class LaporanTransaksiNotifier extends ChangeNotifier {
     namasbbdebet.text = transaksiPendModel!.namaDr;
     namasbbkredit.text = transaksiPendModel!.namaCr;
     keterangan.text = transaksiPendModel!.keterangan;
-    nominal.text = FormatCurrency.oCcyDecimal
-        .format(double.parse(transaksiPendModel!.nominal).toInt());
+    nominal.text = FormatCurrency.oCcyDecimal.format(double.parse(transaksiPendModel!.nominal).toInt());
     notifyListeners();
   }
 
@@ -183,8 +180,7 @@ class LaporanTransaksiNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTransAwal = pickedendDate;
-      tglawal.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglawal.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -219,8 +215,7 @@ class LaporanTransaksiNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglTransAkhir = pickedendDate;
-      tglakhir.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglakhir.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -258,8 +253,7 @@ class LaporanTransaksiNotifier extends ChangeNotifier {
     ));
     if (pickedendDate != null) {
       tglJual = pickedendDate;
-      tglPenjualan.text = DateFormat("dd-MMM-yyyy")
-          .format(DateTime.parse(pickedendDate.toString()));
+      tglPenjualan.text = DateFormat("dd-MMM-yyyy").format(DateTime.parse(pickedendDate.toString()));
       notifyListeners();
     }
   }
@@ -313,28 +307,20 @@ class LaporanTransaksiNotifier extends ChangeNotifier {
           // "flag_trn": "0"
         },
         "range_tanggal": {
-          "from":
-              "${cariTglTrans ? DateFormat('y-MM-dd').format(tglTransAwal!) : ""}",
-          "to":
-              "${cariTglTrans ? DateFormat('y-MM-dd').format(tglTransAkhir!) : ""}",
+          "from": "${cariTglTrans ? DateFormat('y-MM-dd').format(tglTransAwal!) : ""}",
+          "to": "${cariTglTrans ? DateFormat('y-MM-dd').format(tglTransAkhir!) : ""}",
         },
         "range_tanggal_valuta": {
-          "from":
-              "${!cariTglTrans ? DateFormat('y-MM-dd').format(tglTransAwal!) : ""}",
-          "to":
-              "${!cariTglTrans ? DateFormat('y-MM-dd').format(tglTransAkhir!) : ""}",
+          "from": "${!cariTglTrans ? DateFormat('y-MM-dd').format(tglTransAwal!) : ""}",
+          "to": "${!cariTglTrans ? DateFormat('y-MM-dd').format(tglTransAkhir!) : ""}",
         },
         "akun": {"dracc": null, "cracc": null},
         "range_nominal": {"min": null, "max": null}
       },
       "pagination": {"page": 1},
-      "sort": {
-        "by": "${cariTglTrans ? "tgl_transaksi" : "tgl_valuta"}",
-        "order": "desc"
-      }
+      "sort": {"by": "${cariTglTrans ? "tgl_transaksi" : "tgl_valuta"}", "order": "desc"}
     };
-    Setuprepository.setup(token, NetworkURL.search(), jsonEncode(data))
-        .then((value) {
+    Setuprepository.setup(token, NetworkURL.search(), jsonEncode(data)).then((value) {
       if (value['code'] == "000") {
         for (Map<String, dynamic> i in value['data']) {
           listTransaksiBack.add(TransaksiModel.fromJson(i));
@@ -382,34 +368,27 @@ class LaporanTransaksiNotifier extends ChangeNotifier {
                 noKontrak: data.noKontrak,
                 noInvoice: data.noInvoice,
                 createddate: data.inptgljam,
-                status:
-                    "${data.statusTransaksi == "1" ? "COMPLETED" : "CANCEL"}"));
+                status: "${data.statusTransaksi == "1" ? "COMPLETED" : "CANCEL"}"));
           }
         }
 
         if (cariTrans == "1") {
-          listTransAll =
-              listTransaksiAdd.where((e) => e.status == "COMPLETED").toList();
+          listTransAll = listTransaksiAdd.where((e) => e.status == "COMPLETED").toList();
         } else if (cariTrans == "BACKDATE") {
-          listTransAll =
-              listTransaksiAdd.where((e) => e.trxCode == "110").toList();
+          listTransAll = listTransaksiAdd.where((e) => e.trxCode == "110").toList();
         } else if (cariTrans == "4") {
-          listTransAll =
-              listTransaksiAdd.where((e) => e.status == "CANCEL").toList();
+          listTransAll = listTransaksiAdd.where((e) => e.status == "CANCEL").toList();
         } else if (cariTrans == "2") {
-          listTransAll =
-              listTransaksiAdd.where((e) => e.status == "PENDING").toList();
+          listTransAll = listTransaksiAdd.where((e) => e.status == "PENDING").toList();
           print(listTransaksiAdd.where((e) => e.status == "PENDING").toList());
         } else {
           listTransAll = listTransaksiAdd.toList();
         }
 
         if (cariTglTrans) {
-          listTransAll.sort((a, b) => DateTime.parse(b.createddate)
-              .compareTo(DateTime.parse(a.createddate)));
+          listTransAll.sort((a, b) => DateTime.parse(b.createddate).compareTo(DateTime.parse(a.createddate)));
         } else {
-          listTransAll.sort((a, b) => DateTime.parse(b.tglValuta)
-              .compareTo(DateTime.parse(a.tglValuta)));
+          listTransAll.sort((a, b) => DateTime.parse(b.tglValuta).compareTo(DateTime.parse(a.tglValuta)));
         }
         isLoadingData = false;
         notifyListeners();

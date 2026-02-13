@@ -1,7 +1,7 @@
-import 'package:accounting/module/jurnal/jurnal_notifier.dart';
-import 'package:accounting/utils/colors.dart';
-import 'package:accounting/utils/format_currency.dart';
-import 'package:accounting/utils/images_path.dart';
+import 'package:cif/module/jurnal/jurnal_notifier.dart';
+import 'package:cif/utils/colors.dart';
+import 'package:cif/utils/format_currency.dart';
+import 'package:cif/utils/images_path.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

@@ -1,7 +1,7 @@
-import 'package:accounting/models/index.dart';
-import 'package:accounting/module/master/ao/ao_notifier.dart';
-import 'package:accounting/module/setup/level/level_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
+import 'package:cif/models/index.dart';
+import 'package:cif/module/master/ao/ao_notifier.dart';
+import 'package:cif/module/setup/level/level_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -306,9 +306,7 @@ class AoPage extends StatelessWidget {
                                   controller: value.kd,
                                   maxLines: 1,
                                   maxLength: 10,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]'))
-                                  ],
+                                  inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]'))],
                                   validator: (e) {
                                     if (e!.isEmpty) {
                                       return "Wajib diisi";

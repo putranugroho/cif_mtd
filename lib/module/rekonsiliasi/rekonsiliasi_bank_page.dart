@@ -1,6 +1,6 @@
-import 'package:accounting/module/rekonsiliasi/rekonsiliasi_bank_notifier.dart';
-import 'package:accounting/utils/button_custom.dart';
-import 'package:accounting/utils/format_currency.dart';
+import 'package:cif/module/rekonsiliasi/rekonsiliasi_bank_notifier.dart';
+import 'package:cif/utils/button_custom.dart';
+import 'package:cif/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -170,7 +170,9 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                                               width: 80,
                                                               child: Text(
                                                                 a.nosbb,
-                                                                style: TextStyle(color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black, fontSize: 12),
+                                                                style: TextStyle(
+                                                                    color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black,
+                                                                    fontSize: 12),
                                                               ),
                                                             ),
                                                             Expanded(
@@ -178,7 +180,9 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                                                 margin: const EdgeInsets.only(right: 16),
                                                                 child: Text(
                                                                   a.namaSbb,
-                                                                  style: TextStyle(color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black, fontSize: 12),
+                                                                  style: TextStyle(
+                                                                      color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black,
+                                                                      fontSize: 12),
                                                                 ),
                                                               ),
                                                             ),
@@ -188,7 +192,9 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                                               child: Text(
                                                                 FormatCurrency.oCcyDecimal.format(a.saldo),
                                                                 textAlign: TextAlign.end,
-                                                                style: TextStyle(color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black, fontSize: 12),
+                                                                style: TextStyle(
+                                                                    color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black,
+                                                                    fontSize: 12),
                                                               ),
                                                             ),
                                                             Container(
@@ -197,7 +203,9 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                                               child: Text(
                                                                 FormatCurrency.oCcyDecimal.format(a.saldo - a.saldoSistem),
                                                                 textAlign: TextAlign.end,
-                                                                style: TextStyle(color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black, fontSize: 12),
+                                                                style: TextStyle(
+                                                                    color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black,
+                                                                    fontSize: 12),
                                                               ),
                                                             ),
                                                             Container(
@@ -206,7 +214,9 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                                               child: Text(
                                                                 FormatCurrency.oCcyDecimal.format(a.saldoSistem),
                                                                 textAlign: TextAlign.end,
-                                                                style: TextStyle(color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black, fontSize: 12),
+                                                                style: TextStyle(
+                                                                    color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black,
+                                                                    fontSize: 12),
                                                               ),
                                                             ),
                                                             Container(
@@ -215,7 +225,9 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                                               child: Text(
                                                                 DateFormat('dd MMM y HH:mm').format(DateTime.parse(a.tglTransaksi)),
                                                                 textAlign: TextAlign.start,
-                                                                style: TextStyle(color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black, fontSize: 12),
+                                                                style: TextStyle(
+                                                                    color: a.saldo - a.saldoSistem != 0.00 ? Colors.white : Colors.black,
+                                                                    fontSize: 12),
                                                               ),
                                                             ),
                                                           ],
@@ -256,7 +268,8 @@ class RekonsiliasiBankPage extends StatelessWidget {
                                                 width: 150,
                                                 margin: const EdgeInsets.only(right: 16),
                                                 child: Text(
-                                                  FormatCurrency.oCcyDecimal.format(data.sbbItem.map((e) => e.saldo - e.saldoSistem).reduce((a, b) => a + b)),
+                                                  FormatCurrency.oCcyDecimal
+                                                      .format(data.sbbItem.map((e) => e.saldo - e.saldoSistem).reduce((a, b) => a + b)),
                                                   textAlign: TextAlign.end,
                                                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
                                                 ),
